@@ -2027,12 +2027,12 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
         TNoRM.setEditable(false);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.setPreferredSize(new java.awt.Dimension(90, 23));
+        TNoRM.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass1.add(TNoRM);
 
         TPasien.setEditable(false);
         TPasien.setName("TPasien"); // NOI18N
-        TPasien.setPreferredSize(new java.awt.Dimension(330, 23));
+        TPasien.setPreferredSize(new java.awt.Dimension(320, 23));
         panelGlass1.add(TPasien);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
@@ -2057,7 +2057,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2023 07:41:51" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2023 09:23:22" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
