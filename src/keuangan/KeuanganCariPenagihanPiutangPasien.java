@@ -249,6 +249,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
         ppDisetujui = new javax.swing.JMenuItem();
         ppTidakDisetujui = new javax.swing.JMenuItem();
         ppVerifikasi = new javax.swing.JMenuItem();
+        ppCetakInvoice = new javax.swing.JMenuItem();
         Perusahaan = new widget.TextBox();
         AlamatAsuransi = new widget.TextBox();
         NoTelp = new widget.TextBox();
@@ -363,6 +364,22 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppVerifikasi);
+
+        ppCetakInvoice.setBackground(new java.awt.Color(255, 255, 254));
+        ppCetakInvoice.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppCetakInvoice.setForeground(new java.awt.Color(50, 50, 50));
+        ppCetakInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppCetakInvoice.setText("Validasi Tagihan");
+        ppCetakInvoice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppCetakInvoice.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppCetakInvoice.setName("ppCetakInvoice"); // NOI18N
+        ppCetakInvoice.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppCetakInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppCetakInvoiceActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppCetakInvoice);
 
         Perusahaan.setHighlighter(null);
         Perusahaan.setName("Perusahaan"); // NOI18N
@@ -720,7 +737,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
         PanelAccor.setPreferredSize(new java.awt.Dimension(445, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
 
-        ChkAccor.setBackground(new java.awt.Color(255,250,250));
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
         ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
         ChkAccor.setSelected(true);
         ChkAccor.setFocusable(false);
@@ -1051,6 +1068,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }//GEN-LAST:event_tbDokterMouseClicked
 
+    private void ppCetakInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppCetakInvoiceActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1115,6 +1136,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Label label9;
     private widget.TextBox nmpenjab;
     private widget.panelisi panelisi1;
+    private javax.swing.JMenuItem ppCetakInvoice;
     private javax.swing.JMenuItem ppDisetujui;
     private javax.swing.JMenuItem ppHapus;
     private javax.swing.JMenuItem ppTidakDisetujui;
@@ -1317,6 +1339,36 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } 
+        }
+    }
+    
+    private void cetakInvoice() {
+        if (nopenagihan.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Silahkan pilih No. Penagihan yang mau dicetak!");
+            return;
+        }
+        
+        try {
+            ps = koneksi.prepareStatement("select * from penagihan_piutang where no_penagihan = ?");
+            ps.setString(1, nopenagihan);
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+            }
+            
+            if (rs != null) {
+                rs.close();
+            }
+            
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+            
+            JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat memproses cetak penagihan!");
         }
     }
 }
