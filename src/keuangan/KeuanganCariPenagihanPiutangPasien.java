@@ -11,10 +11,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -369,7 +374,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
         ppCetakInvoice.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppCetakInvoice.setForeground(new java.awt.Color(50, 50, 50));
         ppCetakInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppCetakInvoice.setText("Validasi Tagihan");
+        ppCetakInvoice.setText("Cetak Surat Penagihan & Kwitansi");
         ppCetakInvoice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppCetakInvoice.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppCetakInvoice.setName("ppCetakInvoice"); // NOI18N
@@ -1069,7 +1074,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void ppCetakInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakInvoiceActionPerformed
-        // TODO add your handling code here:
+        nopenagihan = tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString();
+        
+        cetakInvoice();
     }//GEN-LAST:event_ppCetakInvoiceActionPerformed
 
     /**
@@ -1348,14 +1355,48 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             return;
         }
         
+        double totalTagihan = 0;
+        
         try {
-            ps = koneksi.prepareStatement("select * from penagihan_piutang where no_penagihan = ?");
+            ps = koneksi.prepareStatement(
+                "select\n" +
+                "  detail_penagihan_piutang.no_rawat,\n" +
+                "  piutang_pasien.tgl_piutang,\n" +
+                "  piutang_pasien.no_rkm_medis,\n" +
+                "  pasien.nm_pasien,\n" +
+                "  reg_periksa.status_lanjut,\n" +
+                "  detail_piutang_pasien.sisapiutang,\n" +
+                "  penjab.png_jawab,\n" +
+                "  pasien.no_peserta,\n" +
+                "  perusahaan_pasien.nama_perusahaan,\n" +
+                "  pasien.nip,\n" +
+                "  if (reg_periksa.status_lanjut = 'Ralan', nota_jalan.no_nota, nota_inap.no_nota) no_nota\n" +
+                "from penagihan_piutang\n" +
+                "join detail_penagihan_piutang on penagihan_piutang.no_tagihan = detail_penagihan_piutang.no_tagihan\n" +
+                "left join detail_piutang_pasien on detail_penagihan_piutang.no_rawat = detail_piutang_pasien.no_rawat and penagihan_piutang.kd_pj = detail_piutang_pasien.kd_pj\n" +
+                "join piutang_pasien on detail_piutang_pasien.no_rawat = piutang_pasien.no_rawat\n" +
+                "left join reg_periksa on detail_penagihan_piutang.no_rawat = reg_periksa.no_rawat\n" +
+                "left join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
+                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj\n" +
+                "left join perusahaan_pasien on pasien.perusahaan_pasien = perusahaan_pasien.kode_perusahaan\n" +
+                "left join nota_jalan on detail_penagihan_piutang.no_rawat = nota_jalan.no_rawat\n" +
+                "left join nota_inap on detail_penagihan_piutang.no_rawat = nota_inap.no_rawat\n" +
+                "where penagihan_piutang.no_tagihan = ?"
+            );
             ps.setString(1, nopenagihan);
             
             rs = ps.executeQuery();
             
+            int i = 0;
+            
+            Sequel.deleteTemporary();
+            
             while (rs.next()) {
+                Sequel.temporary(37, String.valueOf(++i), rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("pasien.nm_pasien"),
+                    rs.getString("status_lanjut"), NumberFormat.getInstance().format(rs.getDouble("sisapiutang")), rs.getString("png_jawab"), rs.getString("no_peserta"),
+                    rs.getString("nama_perusahaan"), rs.getString("nip"), rs.getString("no_nota"));
                 
+                totalTagihan += rs.getDouble("sisapiutang");
             }
             
             if (rs != null) {
@@ -1368,7 +1409,122 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
             
-            JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat memproses cetak penagihan!");
+            JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat memproses cetak invoice!");
         }
+        
+        String namaPerusahaan = "",
+               alamatPerusahaan = "",
+               ditujukanKepada = "",
+               telpPerusahaan = "",
+               tglTagihan = "",
+               tglJatuhTempo = "",
+               hariTempo = "",
+               atasNama = "",
+               namaBank = "",
+               noRekening = "",
+               nipPenagih = "",
+               namaPenagih = "",
+               nipMenyetujui = "",
+               namaMenyetujui = "",
+               catatan = "";
+        
+        try {
+            ps = koneksi.prepareStatement(
+                "select\n" +
+                "  penjab.png_jawab,\n" +
+                "  penjab.alamat_asuransi,\n" +
+                "  penjab.no_telp,\n" +
+                "  penjab.attn,\n" +
+                "  penagihan_piutang.tanggal,\n" +
+                "  penagihan_piutang.tanggaltempo,\n" +
+                "  penagihan_piutang.tempo,\n" +
+                "  penagihan_piutang.kd_rek,\n" +
+                "  penagihan_piutang.catatan,\n" +
+                "  akun_penagihan_piutang.atas_nama,\n" +
+                "  akun_penagihan_piutang.nama_bank,\n" +
+                "  akun_penagihan_piutang.no_rek,\n" +
+                "  penagihan_piutang.nip,\n" +
+                "  p_penagih.nama nama_penagih,\n" +
+                "  penagihan_piutang.nip_menyetujui,\n" +
+                "  p_menyetujui.nama nama_menyetujui\n" +
+                "from penagihan_piutang\n" +
+                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj\n" +
+                "left join akun_penagihan_piutang on penagihan_piutang.kd_rek = akun_penagihan_piutang.kd_rek\n" +
+                "left join pegawai p_penagih on penagihan_piutang.nip = p_penagih.nik\n" +
+                "left join pegawai p_menyetujui on penagihan_piutang.nip_menyetujui = p_menyetujui.nik\n" +
+                "where penagihan_piutang.no_tagihan = ?"
+            );
+            ps.setString(1, nopenagihan);
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                namaPerusahaan = rs.getString("png_jawab");
+                alamatPerusahaan = rs.getString("alamat_asuransi");
+                ditujukanKepada = rs.getString("attn");
+                telpPerusahaan = rs.getString("no_telp");
+                tglTagihan = rs.getString("tanggal");
+                tglJatuhTempo = rs.getString("tanggaltempo");
+                hariTempo = rs.getString("tempo");
+                atasNama = rs.getString("atas_nama");
+                namaBank = rs.getString("nama_bank");
+                noRekening = rs.getString("no_rek");
+                nipPenagih = rs.getString("nip");
+                namaPenagih = rs.getString("nama_penagih");
+                nipMenyetujui = rs.getString("nip_menyetujui");
+                namaMenyetujui = rs.getString("nama_menyetujui");
+                catatan = rs.getString("catatan");
+            }
+            
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+        
+        SimpleDateFormat dfIn = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dfOut = new SimpleDateFormat("dd-MM-yyyy");
+        
+        try {
+            tglTagihan = dfOut.format(dfIn.parse(tglTagihan));
+            tglJatuhTempo = dfOut.format(dfIn.parse(tglJatuhTempo));
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+        
+        Map<String, Object> param = new HashMap<>();    
+        
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("emailrs", akses.getemailrs());
+        param.put("perusahaanasuransi", namaPerusahaan);
+        param.put("alamatasuransi", alamatPerusahaan);
+        param.put("telpasuransi", telpPerusahaan);
+        param.put("tanggal", tglTagihan);
+        param.put("tanggaltempo", tglJatuhTempo);
+        param.put("tempo", hariTempo);
+        param.put("noinvoice", nopenagihan);
+        param.put("penanggungjawabasuransi", ditujukanKepada);
+        param.put("namabank", namaBank);
+        param.put("atasnama", atasNama);
+        param.put("norek", noRekening);
+        param.put("tagihan", Valid.SetAngka(totalTagihan));
+        param.put("terbilang", Valid.terbilang(totalTagihan) + " rupiah");
+        param.put("bagianpenagihan", namaPenagih);
+        param.put("catatan", catatan);
+        param.put("menyetujui", namaMenyetujui);
+        
+        status = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", nipPenagih);
+        param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh " + namaPenagih + "\nID "+(status.equals("")?nipPenagih:status)+"\n"+tglTagihan);
+        
+        status = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", nipMenyetujui);
+        param.put("finger2", "Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh " + namaMenyetujui + "\nID "+(status.equals("")?nipMenyetujui:status)+"\n"+tglTagihan);
+        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+        
+        Valid.MyReportqry("rptSuratPenagihanPiutang.jasper", "report", "::[ Surat Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+        Valid.MyReportqry("rptKwitansiPenagihanPiutang.jasper", "report", "::[ Kwitansi Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
     }
 }
