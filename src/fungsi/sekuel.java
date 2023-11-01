@@ -67,12 +67,26 @@ public final class sekuel {
         super();
     }
     
+    public void deleteTemporary() {
+        try {
+            ps = connect.prepareStatement("delete from temporary where temp37 = ?");
+            ps.setString(1, akses.getalamatip());
+            ps.executeUpdate();
+            
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+    }
+    
     public void temporary(int count, String... values) {
         String query = "insert into temporary values (";
         
         int length = values.length;
         
-        for (int i = 0; i < count + 2; i++) {
+        for (int i = 0; i < count + 1; i++) {
             query = query.concat("?, ");
         }
         
@@ -87,8 +101,7 @@ public final class sekuel {
                 ps.setString(i + 1, (i < length) ? values[i] : "");
             }
             
-            ps.setString(count + 1, akses.getkode());
-            ps.setString(count + 2, akses.getalamatip());
+            ps.setString(count + 1, akses.getalamatip());
             
             ps.executeUpdate();
             
