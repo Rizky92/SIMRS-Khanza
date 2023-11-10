@@ -2938,7 +2938,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                     "inner join kamar_inap on kamar_inap.no_rawat=reg_periksa.no_rawat "+
                     "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                    "where reg_periksa.no_rawat=? order by kamar_inap.tgl_keluar desc,kamar_inap.jam_keluar desc limit 1");
+                    "where reg_periksa.no_rawat=? order by cast(concat(kamar_inap.tgl_masuk, ' ', kamar_inap.jam_masuk) as datetime) desc, cast(concat(if (kamar_inap.tgl_keluar = '0000-00-00', current_date(), kamar_inap.tgl_keluar), ' ', if (kamar_inap.jam_keluar = '00:00:00', current_time(), kamar_inap.jam_keluar)) as datetime) desc limit 1");
             try {
                 ps.setString(1,TNoRw.getText());
                 rs=ps.executeQuery();
