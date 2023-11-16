@@ -470,7 +470,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -484,7 +484,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -605,7 +605,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-03-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1035,7 +1035,7 @@ public final class RMPenilaianLanjutanRisikoJatuhDewasa extends javax.swing.JDia
         KeteranganResiko.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         KeteranganResiko.setName("KeteranganResiko"); // NOI18N
         FormInput.add(KeteranganResiko);
-        KeteranganResiko.setBounds(840, 70, 460, 360);
+        KeteranganResiko.setBounds(840, 90, 460, 340);
 
         scrollInput.setViewportView(FormInput);
 
