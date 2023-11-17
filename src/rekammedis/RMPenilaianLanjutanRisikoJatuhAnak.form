@@ -332,7 +332,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="16-11-2023"/>
+                        <StringItem index="0" value="17-11-2023"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -360,7 +360,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="16-11-2023"/>
+                        <StringItem index="0" value="17-11-2023"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -568,7 +568,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="16-11-2023"/>
+                            <StringItem index="0" value="17-11-2023"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1193,7 +1193,7 @@
                     <Component class="widget.Label" name="TingkatResiko">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="text" type="java.lang.String" value="Tingkat Resiko : Risiko Tinggi (&gt;=12), Tindakan : Intervensi risiko jatuh tinggi(pasang gelang warna kuning)"/>
+                        <Property name="text" type="java.lang.String" value="Tingkat Resiko : Risiko Tinggi (&gt;=12), Tindakan : Intervensi risiko jatuh tinggi (pasang gelang warna kuning)"/>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                         <Property name="name" type="java.lang.String" value="TingkatResiko" noResource="true"/>
                       </Properties>
