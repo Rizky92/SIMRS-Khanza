@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 5.2.0  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f505995-42c1-4cc5-b34d-0896041d3a11">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -412,7 +412,8 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="134" splitType="Stretch">
+		<band height="286" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="85" y="77" width="467" height="11" forecolor="#000000" backcolor="#F0F0DC" uuid="39d654c1-a0e6-4081-be04-e48415c7a484"/>
 				<box>
@@ -452,7 +453,7 @@
 				<textFieldExpression><![CDATA[$F{penilaian_jatuhmorse_nilai1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="Float" x="84" y="0" width="1" height="134" uuid="fe0debe5-13d1-441c-89e8-ed19c7eeecaa">
+				<reportElement positionType="Float" x="84" y="0" width="1" height="285" uuid="fe0debe5-13d1-441c-89e8-ed19c7eeecaa">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -461,7 +462,7 @@
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" x="0" y="0" width="1" height="134" uuid="bee9aaaa-199f-42e0-8828-3cbdf5a8e539">
+				<reportElement positionType="Float" x="0" y="0" width="1" height="285" uuid="bee9aaaa-199f-42e0-8828-3cbdf5a8e539">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -470,7 +471,7 @@
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" x="551" y="0" width="1" height="134" uuid="556b7791-1090-4673-94d9-efe13381d163">
+				<reportElement positionType="Float" x="551" y="0" width="1" height="285" uuid="556b7791-1090-4673-94d9-efe13381d163">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -557,7 +558,7 @@
 				<textFieldExpression><![CDATA[$F{penilaian_jatuhmorse_totalnilai}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="Float" x="0" y="133" width="552" height="1" uuid="3ff6d89e-2612-4e8a-9df4-2fd636eff662">
+				<reportElement positionType="Float" x="0" y="285" width="552" height="1" uuid="3ff6d89e-2612-4e8a-9df4-2fd636eff662">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -651,7 +652,10 @@
 				<textFieldExpression><![CDATA["Hasil Skrining : "+$F{hasil_skrining}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="88" y="113" width="460" height="20" uuid="b67e9aaf-7270-4df2-b506-a25a309555aa"/>
+				<reportElement positionType="Float" x="88" y="258" width="460" height="26" uuid="b67e9aaf-7270-4df2-b506-a25a309555aa">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -666,6 +670,59 @@
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement positionType="Float" x="85" y="255" width="467" height="1" uuid="700fd3b0-2222-430d-ac96-0bdecc1c3ed6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" x="88" y="113" width="460" height="139" uuid="dc72e6cb-a2fc-4630-9a66-5a067be6a05a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{penilaian_jatuhmorse_totalnilai} >= 45) ? (
+    "Saran intervensi :\n" +
+    "1) Orientasikan ruangan pada pasien dan keluarga\n" +
+    "2) Pastikan bel mudah dijangkau\n" +
+    "3) Roda tempat tidur terkunci\n" +
+    "4) Posisikan tempat tidur terendah\n" +
+    "5) pengaman/handrail tempat tidur dinaikkan\n" +
+    "6) Anjurkan menggunakan alas kaki yang tidak licin\n" +
+    "7) Kunjungi pasien minimal 2 (dua) kali setiap shft\n" +
+    "8) Kaji kebutuhan BAB dan BAK terutama sesudah makan, saat pasien bangun atau ganti infuse\n" +
+    "9) Edukasi pasien tentang efek samping obat\n" +
+    "10) Pasangkan gelang risiko jatuh (gelang kuning)\n" +
+    "11) Gantungkan stiker risiko jatuh di sekitar area tempat tidur\n" +
+    "12) Anjurkan memanggil perawat jika membutuhkan bantuan untuk berpindah\n" +
+    "13) Anjurkan melebarkan jarak kedua kaki untuk meningkatkan keseimbangan saat berdiri\n" +
+    "14) Tempatkan pasien di kamar yang paling dekat dengan nurse station (bila memungkinkan)\n" +
+    "15) Informasikan kepada pasien/keluarga, apabila pasien ingin ke kamar mandi wajib didampingi oleh keluarga atau petugas"
+) : (
+    ($F{penilaian_jatuhmorse_totalnilai} >= 25) ? (
+        "Saran intervensi :\n" +
+        "1) Orientasikan ruangan pada pasien dan keluarga\n" +
+        "2) Pastikan bel mudah dijangkau\n" +
+        "3) Roda tempat tidur terkunci\n" +
+        "4) Posisikan tempat tidur terendah\n" +
+        "5) pengaman/handrail tempat tidur dinaikkan\n" +
+        "6) Anjurkan menggunakan alas kaki yang tidak licin\n" +
+        "7) Kunjungi pasien minimal 2 (dua) kali setiap shft\n" +
+        "8) Kaji kebutuhan BAB dan BAK terutama sesudah makan, saat pasien bangun atau ganti infuse\n" +
+        "9) Edukasi pasien tentang efek samping obat"
+    ) : (
+        "Saran intervensi :\n" +
+        "1) Orientasikan ruangan pada pasien dan keluarga\n" +
+        "2) Pastikan bel mudah dijangkau\n" +
+        "3) Roda tempat tidur terkunci\n" +
+        "4) Posisikan tempat tidur terendah\n" +
+        "5) pengaman/handrail tempat tidur dinaikkan"
+    )
+)]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
