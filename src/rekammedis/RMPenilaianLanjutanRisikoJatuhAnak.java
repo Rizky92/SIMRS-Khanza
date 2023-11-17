@@ -275,6 +275,7 @@ public final class RMPenilaianLanjutanRisikoJatuhAnak extends javax.swing.JDialo
         SkalaResiko7 = new widget.ComboBox();
         NilaiResiko7 = new widget.TextBox();
         KeteranganResiko = new widget.Label();
+        jLabel218 = new widget.Label();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -997,7 +998,13 @@ public final class RMPenilaianLanjutanRisikoJatuhAnak extends javax.swing.JDialo
         KeteranganResiko.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         KeteranganResiko.setName("KeteranganResiko"); // NOI18N
         FormInput.add(KeteranganResiko);
-        KeteranganResiko.setBounds(840, 90, 460, 340);
+        KeteranganResiko.setBounds(840, 120, 460, 310);
+
+        jLabel218.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel218.setText("Saran intervensi:");
+        jLabel218.setName("jLabel218"); // NOI18N
+        FormInput.add(jLabel218);
+        jLabel218.setBounds(840, 90, 460, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1515,6 +1522,7 @@ public final class RMPenilaianLanjutanRisikoJatuhAnak extends javax.swing.JDialo
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel217;
+    private widget.Label jLabel218;
     private widget.Label jLabel220;
     private widget.Label jLabel223;
     private widget.Label jLabel226;

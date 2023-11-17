@@ -280,6 +280,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         jLabel236 = new widget.Label();
         jLabel237 = new widget.Label();
         KeteranganResiko = new widget.Label();
+        jLabel235 = new widget.Label();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -470,7 +471,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-11-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -484,7 +485,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-11-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -606,7 +607,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-11-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-11-2023" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1042,7 +1043,13 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         KeteranganResiko.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         KeteranganResiko.setName("KeteranganResiko"); // NOI18N
         FormInput.add(KeteranganResiko);
-        KeteranganResiko.setBounds(840, 90, 460, 340);
+        KeteranganResiko.setBounds(840, 120, 460, 310);
+
+        jLabel235.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel235.setText("Saran intervensi:");
+        jLabel235.setName("jLabel235"); // NOI18N
+        FormInput.add(jLabel235);
+        jLabel235.setBounds(840, 90, 460, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1558,6 +1565,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
     private widget.Label jLabel232;
     private widget.Label jLabel233;
     private widget.Label jLabel234;
+    private widget.Label jLabel235;
     private widget.Label jLabel236;
     private widget.Label jLabel237;
     private widget.Label jLabel30;
