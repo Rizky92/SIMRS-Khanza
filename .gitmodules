@@ -1,0 +1,3 @@
+[submodule "KhanzaHMSAnjunganCustomSMC"]
+	path = KhanzaHMSAnjunganCustomSMC
+	url = git@github.com:rizky92/smc-apm.git
