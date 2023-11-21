@@ -52,7 +52,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
             TableColumn column = tbPemisahan.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
-                    column.setPreferredWidth(100);
+                    column.setPreferredWidth(170);
                 break;
                 case 1:
                     column.setPreferredWidth(65);
@@ -369,12 +369,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         Valid.tabelKosong(tabMode);
         try {
             ps = koneksi.prepareStatement(
-                "select resep_obat.no_resep, resep_obat.nama_template, resep_obat.tgl_peresepan, resep_obat.jam_peresepan, resep_obat.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, resep_obat.kd_dokter, dokter.nm_dokter, if(resep_obat.tgl_perawatan = '0000-00-00', 'Belum Terlayani', 'Sudah Terlayani') as status, resep_obat.status as status_asal\n"
-                + "from resep_obat\n"
-                + "join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat\n"
-                + "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
-                + "join dokter on resep_obat.kd_dokter = dokter.kd_dokter\n"
-                + "where resep_obat.nama_template is not null and resep_obat.nama_template like ?\n"
+                "select resep_obat.no_resep, resep_obat.nama_template, resep_obat.tgl_peresepan, resep_obat.jam_peresepan, resep_obat.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, resep_obat.kd_dokter, dokter.nm_dokter, if(resep_obat.tgl_perawatan = '0000-00-00', 'Belum Terlayani', 'Sudah Terlayani') as status, resep_obat.status as status_asal "
+                + "from resep_obat "
+                + "join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat "
+                + "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "
+                + "join dokter on resep_obat.kd_dokter = dokter.kd_dokter "
+                + "where resep_obat.nama_template is not null and resep_obat.nama_template like ? "
                 + "order by resep_obat.tgl_perawatan, resep_obat.jam desc"
             );
             ps.setString(1, "%" + TCari.getText() + "%");
@@ -406,10 +406,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     });
                     
                     ps2 = koneksi.prepareStatement(
-                        "select databarang.kode_brng,databarang.nama_brng,resep_dokter.jml,"
-                        + "databarang.kode_sat,resep_dokter.aturan_pakai from resep_dokter inner join databarang on "
-                        + "resep_dokter.kode_brng=databarang.kode_brng where resep_dokter.no_resep=? order by databarang.kode_brng"
+                        "select databarang.kode_brng, databarang.nama_brng, resep_dokter.jml, databarang.kode_sat, resep_dokter.aturan_pakai "
+                        + "from resep_dokter "
+                        + "join databarang on resep_dokter.kode_brng = databarang.kode_brng "
+                        + "where resep_dokter.no_resep = ? "
+                        + "order by databarang.kode_brng"
                     );
+                    
                     ps2.setString(1, rs.getString("no_resep"));
                     
                     try {
@@ -433,19 +436,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if (rs2 != null) {
                             rs2.close();
                         }
+                        
                         if (ps2 != null) {
                             ps2.close();
                         }
                     }
                     
                     ps2 = koneksi.prepareStatement(
-                        "select resep_dokter_racikan.no_racik,resep_dokter_racikan.nama_racik,"
-                        + "resep_dokter_racikan.kd_racik,metode_racik.nm_racik as metode,"
-                        + "resep_dokter_racikan.jml_dr,resep_dokter_racikan.aturan_pakai,"
-                        + "resep_dokter_racikan.keterangan from resep_dokter_racikan inner join metode_racik "
-                        + "on resep_dokter_racikan.kd_racik=metode_racik.kd_racik where "
-                        + "resep_dokter_racikan.no_resep=?"
+                        "select resep_dokter_racikan.no_racik, resep_dokter_racikan.nama_racik, resep_dokter_racikan.kd_racik, metode_racik.nm_racik as metode, resep_dokter_racikan.jml_dr, resep_dokter_racikan.aturan_pakai, resep_dokter_racikan.keterangan "
+                        + "from resep_dokter_racikan "
+                        + "join metode_racik on resep_dokter_racikan.kd_racik = metode_racik.kd_racik "
+                        + "where resep_dokter_racikan.no_resep = ?"
                     );
+                    
                     ps2.setString(1, rs.getString("no_resep"));
                     
                     try {
@@ -464,10 +467,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             });
                             
                             ps3 = koneksi.prepareStatement(
-                                "select databarang.kode_brng,databarang.nama_brng,resep_dokter_racikan_detail.jml,databarang.kode_sat "
-                                + "from resep_dokter_racikan_detail inner join databarang on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "
-                                + "where resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.kode_brng"
+                                "select databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, databarang.kode_sat "
+                                + "from resep_dokter_racikan_detail "
+                                + "join databarang on resep_dokter_racikan_detail.kode_brng = databarang.kode_brng "
+                                + "where resep_dokter_racikan_detail.no_resep = ? and resep_dokter_racikan_detail.no_racik = ? "
+                                + "order by databarang.kode_brng"
                             );
+                            
                             ps3.setString(1, rs.getString("no_resep"));
                             ps3.setString(2, rs2.getString("no_racik"));
                             
@@ -492,6 +498,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if (rs3 != null) {
                                     rs3.close();
                                 }
+                                
                                 if (ps3 != null) {
                                     ps3.close();
                                 }
