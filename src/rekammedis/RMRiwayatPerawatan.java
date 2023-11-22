@@ -5353,6 +5353,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
     
     private void tampilTindakanLab() {
+        biayaperawatan = 0;
         try {
             htmlContent = new StringBuilder();
             if (R1.isSelected() == true) {
@@ -5562,13 +5563,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         + "<td valign='top' width='18%'>Biaya & Perawatan</td>"
                         + "<td valign='top' width='1%' align='center'>:</td>"
                         + "<td valign='top' width='79%'>"
-                        + "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
-                        + "<tr>"
-                        + "<td valign='top' width='89%'>Administrasi</td>"
-                        + "<td valign='top' width='1%' align='right'>:</td>"
-                        + "<td valign='top' width='10%' align='right'>" + Valid.SetAngka(rs.getDouble("biaya_reg")) + "</td>"
-                        + "</tr>"
-                        + "</table>"
                     );
 
                     try {
