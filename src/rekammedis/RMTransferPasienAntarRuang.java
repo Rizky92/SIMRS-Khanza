@@ -157,7 +157,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         AsalRuang.setDocument(new batasInput((byte)30).getKata(AsalRuang));
         RuangSelanjutnya.setDocument(new batasInput((byte)30).getKata(RuangSelanjutnya));
-        DiagnosaUtama.setDocument(new batasInput((int)50).getKata(DiagnosaUtama));
+        DiagnosaUtama.setDocument(new batasInput((int)100).getKata(DiagnosaUtama));
         DiagnosaSekunder.setDocument(new batasInput((int)100).getKata(DiagnosaSekunder));
         KeteranganIndikasiPindahRuang.setDocument(new batasInput((int)50).getKata(KeteranganIndikasiPindahRuang));
         ProsedurDilakukan.setDocument(new batasInput((int)800).getKata(ProsedurDilakukan));
