@@ -15,6 +15,7 @@ package bridging;
 import java.awt.Dimension;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.javafx.webkit.WebConsoleListener;
 import fungsi.validasi;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -53,7 +54,7 @@ import org.springframework.http.MediaType;
 public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private ApiICareBPJS api=new ApiICareBPJS();
-    private String link="",utc="",requestJson="";
+    private String link="",utc="",requestJson="", finalUrl = null;
     private HttpHeaders headers ;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -122,6 +123,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
         KdDPJPLayanan = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
+        buttonOpenBrowser = new widget.Button();
         BtnKeluar = new widget.Button();
         PanelContent = new widget.panelisi();
 
@@ -185,6 +187,21 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
         jLabel17.setName("jLabel17"); // NOI18N
         jLabel17.setPreferredSize(new java.awt.Dimension(15, 23));
         panelGlass6.add(jLabel17);
+
+        buttonOpenBrowser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Uparrow2.png"))); // NOI18N
+        buttonOpenBrowser.setMnemonic('B');
+        buttonOpenBrowser.setText("Buka di browser");
+        buttonOpenBrowser.setToolTipText("Alt+K");
+        buttonOpenBrowser.setEnabled(false);
+        buttonOpenBrowser.setFocusable(false);
+        buttonOpenBrowser.setName("buttonOpenBrowser"); // NOI18N
+        buttonOpenBrowser.setPreferredSize(new java.awt.Dimension(135, 30));
+        buttonOpenBrowser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOpenBrowserActionPerformed(evt);
+            }
+        });
+        panelGlass6.add(buttonOpenBrowser);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -254,6 +271,34 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_NoKartuKeyPressed
 
+    private void buttonOpenBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenBrowserActionPerformed
+        
+        String os = System.getProperty("os.name").toLowerCase();
+        Runtime rt = Runtime.getRuntime();
+
+        try {
+            if (os.contains("win")) {
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + finalUrl);
+            } else if (os.contains("mac")) {
+                rt.exec("open " + finalUrl);
+            } else if (os.contains("nix") || os.contains("nux")) {
+                String[] browsers = {"x-www-browser", "epiphany", "firefox", "mozilla", "konqueror", "chrome", "chromium", "netscape", "opera", "links", "lynx", "midori"};
+                // Build a command string which looks like "browser1 "url" || browser2 "url" ||..."
+                StringBuilder cmd = new StringBuilder();
+                for (int i = 0; i < browsers.length; i++) {
+                    cmd.append(i == 0 ? "" : " || ")
+                        .append(browsers[i])
+                        .append(" \"")
+                        .append(finalUrl)
+                        .append("\" ");
+                }
+                rt.exec(new String[]{"sh", "-c", cmd.toString()});
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Browser : " + e);
+        }
+    }//GEN-LAST:event_buttonOpenBrowserActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -277,6 +322,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
     private widget.Label LabelPoli6;
     private widget.TextBox NoKartu;
     private widget.panelisi PanelContent;
+    private widget.Button buttonOpenBrowser;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -304,12 +350,14 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("JSON : "+requestJson+"\n");
 	    requestEntity = new HttpEntity(requestJson,headers);
             requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/api/rs/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
-            System.out.println("URL:"+link+"/validate");
+            System.out.println("URL:"+link+"/api/rs/validate");
             System.out.println("JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                buttonOpenBrowser.setEnabled(true);
+                finalUrl = response.path("url").asText();
                 System.out.println("Response : "+response.path("url"));
                 try {
                     loadURL(response.path("url").asText());
@@ -336,7 +384,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
         Platform.runLater(new Runnable() {
 
             public void run() {
-                WebView view = new WebView();
+                WebView view = new WebView();                
                 
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
