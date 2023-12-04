@@ -1563,10 +1563,19 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                     }
                     
                     if((tabModeObatUmum.getRowCount()>0)||(tabModeObatRacikan.getRowCount()>0)){
-                        nomor = Sequel.cariIsiSmc("select concat(date_format(?, '%Y%m%d'), lpad(ifnull(max(convert(right(no_resep, 4), signed)), 0) + 1, 4, '0')) from resep_obat where no_resep like concat(date_format(now(), '%Y%m%d'), '%')");
-                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
-                                nomor,"0000-00-00","00:00:00",noperawatan,kodedokter,tanggaldilakukan,jamdilakukan,"ralan","0000-00-00","00:00:00"
-                            })==true){
+                        nomor = Sequel.cariIsiSmc("select concat(date_format(?, '%Y%m%d'), lpad(ifnull(max(convert(right(no_resep, 4), signed)), 0) + 1, 4, '0')) from resep_obat where no_resep like concat(date_format(now(), '%Y%m%d'), '%')", tanggaldilakukan);
+                        if (Sequel.menyimpantfSmc("resep_obat", "no_resep, tgl_perawatan, jam, no_rawat, kd_dokter, tgl_peresepan, jam_peresepan, status, tgl_penyerahan, jam_penyerahan",
+                                nomor,
+                                "0000-00-00",
+                                "00:00:00",
+                                noperawatan,
+                                kodedokter,
+                                tanggaldilakukan,
+                                jamdilakukan,
+                                "ralan",
+                                "0000-00-00",
+                                "00:00:00")
+                            ) {
                             for(i=0;i<tbObatNonRacikan.getRowCount();i++){ 
                                 if(Valid.SetAngka(tbObatNonRacikan.getValueAt(i,0).toString())>0){ 
                                     if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
