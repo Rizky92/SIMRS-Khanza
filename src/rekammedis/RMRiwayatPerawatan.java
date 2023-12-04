@@ -57,7 +57,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
     private double biayaperawatan=0;
-    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="";
+    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
@@ -476,6 +476,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         R1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.pink));
         buttonGroup1.add(R1);
+        R1.setSelected(true);
         R1.setText("5 Riwayat Terakhir");
         R1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         R1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -529,7 +530,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         R4.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.pink));
         buttonGroup1.add(R4);
-        R4.setSelected(true);
         R4.setText("Nomor :");
         R4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         R4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2557,7 +2557,17 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     public void setNoRm(String norm, String nama) {
         NoRM.setText(norm);
         NmPasien.setText(nama);
-        R5.setSelected(true);
+        switch (TAMPILANDEFAULTRIWAYATPASIEN) {
+            case "2 riwayat terakhir":
+                R5.setSelected(true);
+            break;
+            case "5 riwayat terakhir":
+                R1.setSelected(true);
+            break;
+            default:
+                R1.setSelected(true);
+            break;
+        }
         isPasien();
         BtnCari1ActionPerformed(null);
         NoRawat.setText("");
@@ -2566,8 +2576,23 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     public void setNoRm(String norawat, String noRM, String nama) {
         NoRM.setText(noRM);
         NmPasien.setText(nama);
-        R4.setSelected(true);
         NoRawat.setText(norawat);
+        
+        switch (TAMPILANDEFAULTRIWAYATPASIEN) {
+            case "2 riwayat terakhir":
+                R5.setSelected(true);
+            break;
+            case "5 riwayat terakhir":
+                R1.setSelected(true);
+            break;
+            case "norawat":
+                R4.setSelected(true);
+            break;
+            default:
+                R1.setSelected(true);
+            break;
+        }
+        
         isPasien();
         BtnCari1ActionPerformed(null);
     }
