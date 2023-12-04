@@ -639,7 +639,7 @@ public final class sekuel {
         }
     }
     
-    public boolean menyimpantfSmc(String table, String kolom, String[] values) {
+    public boolean menyimpantfSmc(String table, String kolom, String... values) {
         
         String sql = "insert into " + table + " (" + kolom + ") values (";
         String bindings = "", track = null;
