@@ -3680,8 +3680,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri where databarang.status='1' order by databarang.nama_brng");
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){
-                    iyem=iyem+"{\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Komposisi\":\""+rs.getString(4)+"\",\"JenisObat\":\""+rs.getString(5)+"\",\"Industri\":\""+rs.getString(6)+"\",\"Kapasitas\":\""+rs.getString(7)+"\"},";
+                while (rs.next()) {
+                    iyem = iyem + "{" +
+                    "\"KodeBarang\": \"" + rs.getString(1) + "\"," +
+                    "\"NamaBarang\": \"" + rs.getString(2).replaceAll("\"", "") + "\"," +
+                    "\"Satuan\": \"" + rs.getString(3) + "\"," +
+                    "\"Komposisi\": \"" + rs.getString(4).replaceAll("\"", "") + "\"," +
+                    "\"JenisObat\": \"" + rs.getString(5) + "\"," +
+                    "\"Industri\": \"" + rs.getString(6) + "\"," +
+                    "\"Kapasitas\": \"" + rs.getString(7) + "\"" +
+                    "},";
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi 1 : "+e);
