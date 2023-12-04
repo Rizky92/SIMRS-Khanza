@@ -1666,6 +1666,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                 }
                 
                 if(sukses==true){
+                    JOptionPane.showMessageDialog(rootPane, "Pemeriksaan berhasil diproses!");
                     Sequel.Commit();
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, pemrosesan dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
