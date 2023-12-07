@@ -78,23 +78,25 @@ public class koneksiDB {
         }
     }
     
-    public static String URL_ERROR_REPORTER() {
+    public static String TAMPILANDEFAULTRIWAYATPASIEN()
+    {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             
-            return prop.getProperty("URL_ERROR_REPORTER");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public static String PORT_ERROR_REPORTER() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            String value = prop.getProperty("TAMPILANDEFAULTRIWAYATPASIEN").toLowerCase().trim();
             
-            return prop.getProperty("PORT_ERROR_REPORTER");
+            switch (value) {
+                case "2 riwayat terakhir":
+                case "5 riwayat terakhir":
+                case "semua riwayat":
+                case "per tanggal":
+                case "norawat":
+                    return value;
+                default:
+                    return "";
+            }
         } catch (Exception e) {
-            return null;
+            return "";
         }
     }
     
