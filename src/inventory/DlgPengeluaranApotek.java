@@ -729,7 +729,56 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
-                sukses=true;
+                
+                sukses = Sequel.menyimpantfSmc("pengeluaran_obat_bhp", null, NoKeluar.getText(), Valid.SetTgl(Tgl.getSelectedItem().toString()), kdptg.getText(), catatan.getText(), kdgudang.getText());
+                
+                if (sukses) {
+                    try {
+                        jml = tbDokter.getRowCount();
+                        
+//                        "Jml","Kode Barang","No.Batch","Nama Barang","Kategori",
+//                        "Satuan","Harga(Rp)","Total(Rp)","Stok","No.Faktur"
+                        for (i = 0; i < jml; i++) {
+                            if (Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()) > 0) {
+                                validasiStok(
+                                    tbDokter.getValueAt(i, 1).toString(),
+                                    Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()),
+                                    tbDokter.getValueAt(i, 3).toString(),
+                                    tbDokter.getValueAt(i, 2).toString(),
+                                    tbDokter.getValueAt(i, 9).toString()
+                                );
+                                
+                                sukses = Sequel.menyimpantfSmc("detail_pengeluaran_obat_bhp", null, 
+                                    NoKeluar.getText(),
+                                    tbDokter.getValueAt(i, 1).toString(),
+                                    tbDokter.getValueAt(i, 5).toString(),
+                                    tbDokter.getValueAt(i, 2).toString(),
+                                    tbDokter.getValueAt(i, 0).toString(),
+                                    tbDokter.getValueAt(i, 6).toString(),
+                                    tbDokter.getValueAt(i, 7).toString(),
+                                    tbDokter.getValueAt(i, 9).toString()
+                                );
+                                
+                                if (aktifkanbatch.equals("yes")) {
+                                    
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                        System.out.println("Notif : " + e);
+                        sukses = false;
+                    }
+                }
+                
+                if (sukses) {
+                    jml = tbDokter.getRowCount();
+                    
+                    for (i = 0; i < jml; i++) {
+                        if (Valid.)
+                    }
+                }
+                
                 if(Sequel.menyimpantf2("pengeluaran_obat_bhp","?,?,?,?,?","No.Keluar",5,new String[]{NoKeluar.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),catatan.getText(),kdgudang.getText()})==true){
                     try {
                         jml=tbDokter.getRowCount();
@@ -1440,5 +1489,27 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Notifikasi : "+e);
         }
         
+    }
+   
+    private void validasiStok(String kodeBarang, double jumlah, String namaBarang, String noBatch, String noFaktur) throws Exception {
+        if (tabMode.getRowCount() < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, tidak ada data yang bisa diproses..!!");
+
+            return;
+        }
+
+        boolean AKTIFKANBATCHOBAT = aktifkanbatch.equals("yes");
+
+        String sql = "select ifnull(stok, 0) from gudangbarang where kode_brng = ? and kd_bangsal = ?";
+
+        if (AKTIFKANBATCHOBAT) {
+            sql = sql + " and no_batch = ? and no_faktur = ?";
+        } else {
+            sql = sql + " and no_batch = '' and no_faktur = ''";
+        }
+        
+        if (Sequel.cariIsiDoubleSmc(sql, 2, AKTIFKANBATCHOBAT, kodeBarang, kdgudang.getText(), noBatch, noFaktur) < jumlah) {
+            throw new Exception("Ditemukan obat dengan jumlah yang lebih dari stok gudang yang ada..!!");
+        }
     }
 }
