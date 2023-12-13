@@ -67,6 +67,14 @@ public final class sekuel {
         super();
     }
     
+    public void mengupdateSmc(String table, String columns, String wheres, String... values) {
+        try {
+            updateSMC(table, columns, wheres, values);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
     public void deleteTemporary() {
         try {
             ps = connect.prepareStatement("delete from temporary where temp37 = ?");
@@ -340,7 +348,7 @@ public final class sekuel {
             
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
-                track = track.replaceFirst("\\?", "'"+values[i]+"'");
+                track = track.replaceFirst("\\?", "'" + values[i] + "'");
             }
             
             ps.executeUpdate();
@@ -353,6 +361,80 @@ public final class sekuel {
             
             JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
         }
+    }
+    
+    public double cariIsiDoubleSmc(String sql, String... values) {
+        double output = 0;
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    output = rs.getDouble(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+        
+        return output;
+    }
+    
+    public double cariIsiDoubleSmc(String sql, int numOfBindings, boolean whenIsTrue, String... values) {
+        double output = 0;
+        
+        int bindingsLength = values.length;
+        
+        if (whenIsTrue && numOfBindings > 0) {
+            bindingsLength = numOfBindings;
+        }
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < bindingsLength; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    output = rs.getDouble(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+        
+        return output;
     }
 
     public double cariIsiDouble(String sql, String bindings)
@@ -639,7 +721,7 @@ public final class sekuel {
         }
     }
     
-    public boolean menyimpantfSmc(String table, String kolom, String[] values) {
+    public boolean menyimpantfSmc(String table, String kolom, String... values) {
         
         String sql = "insert into " + table + " (" + kolom + ") values (";
         String bindings = "", track = null;
