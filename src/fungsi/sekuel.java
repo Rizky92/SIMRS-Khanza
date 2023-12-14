@@ -67,7 +67,8 @@ public final class sekuel {
         super();
     }
     
-    public void mengupdateSmc(String table, String columns, String wheres, String... values) {
+    public void mengupdateSmc(String table, String columns, String wheres, String... values)
+    {
         try {
             updateSMC(table, columns, wheres, values);
         } catch (Exception e) {
