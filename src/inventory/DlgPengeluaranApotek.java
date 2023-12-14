@@ -729,6 +729,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
+                sukses=true;
                 if(Sequel.menyimpantf2("pengeluaran_obat_bhp","?,?,?,?,?","No.Keluar",5,new String[]{NoKeluar.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),catatan.getText(),kdgudang.getText()})==true){
                     try {
                         jml=tbDokter.getRowCount();
@@ -737,7 +738,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 validasiStok(
                                     tbDokter.getValueAt(i, 1).toString(),
                                     Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()),
-                                    tbDokter.getValueAt(i, 3).toString(),
                                     tbDokter.getValueAt(i, 2).toString(),
                                     tbDokter.getValueAt(i, 9).toString()
                                 );
@@ -1448,7 +1448,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         
     }
    
-    private void validasiStok(String kodeBarang, double jumlah, String namaBarang, String noBatch, String noFaktur)
+    private void validasiStok(String kodeBarang, double jumlah, String noBatch, String noFaktur)
     {
         if (tabMode.getRowCount() < 0) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, tidak ada data yang bisa diproses..!!");
