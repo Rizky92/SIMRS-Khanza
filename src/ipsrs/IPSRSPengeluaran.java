@@ -531,7 +531,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){  
                          if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                             validasiStok(tbDokter.getValueAt(i, 1).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()));
+                             validasiStok(tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()));
                             if(Sequel.menyimpantf2("ipsrsdetailpengeluaran","?,?,?,?,?,?","Transaksi Pengeluaran",6,new String[]{
                                 NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
                                 tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
@@ -927,15 +927,17 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         LTotal.setText(Valid.SetAngka(ttl));
     }
     
-    private void validasiStok(String kodeBarang, double jumlah)
+    private void validasiStok(String kodeBarang, String namaBarang, double jumlah)
     {
-        if (tabMode.getRowCount() < 0) {
+        if (tbDokter.getRowCount() < 0) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, tidak ada data yang bisa diproses..!!");
 
             return;
         }
         
         if (Sequel.cariIsiDoubleSmc("select ifnull(stok, 0) from ipsrsbarang where kode_brng = ?", kodeBarang) < jumlah) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, jumlah barang " + namaBarang + " yang dikeluarkan\nmelebihi stok di gudang saat ini..!!");
+
             sukses = false;
         }
     }
