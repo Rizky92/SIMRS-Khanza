@@ -387,29 +387,30 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
+        if(tbJnsPerawatan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(tbJnsPerawatan.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
-                Sequel.menyimpan("temporary","'"+r+"','"+
-                                tabMode.getValueAt(r,0).toString().replaceAll("'","") +"','"+
-                                tabMode.getValueAt(r,1).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,2).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,3).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,4).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,5).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,6).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,7).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,8).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,9).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,10).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,11).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,12).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,13).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,14).toString().replaceAll("'","")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter"); 
+            int row=tbJnsPerawatan.getRowCount();
+            for(int r=0;r<row;r++){
+                Sequel.temporary(
+                    tbJnsPerawatan.getValueAt(r, 0),
+                    tbJnsPerawatan.getValueAt(r, 1),
+                    tbJnsPerawatan.getValueAt(r, 2),
+                    tbJnsPerawatan.getValueAt(r, 3),
+                    tbJnsPerawatan.getValueAt(r, 4),
+                    tbJnsPerawatan.getValueAt(r, 5),
+                    tbJnsPerawatan.getValueAt(r, 6),
+                    tbJnsPerawatan.getValueAt(r, 7),
+                    tbJnsPerawatan.getValueAt(r, 8),
+                    tbJnsPerawatan.getValueAt(r, 9),
+                    tbJnsPerawatan.getValueAt(r, 10),
+                    tbJnsPerawatan.getValueAt(r, 11),
+                    tbJnsPerawatan.getValueAt(r, 12),
+                    tbJnsPerawatan.getValueAt(r, 13),
+                    tbJnsPerawatan.getValueAt(r, 14)
+                );
             }
             
             Map<String, Object> param = new HashMap<>();
