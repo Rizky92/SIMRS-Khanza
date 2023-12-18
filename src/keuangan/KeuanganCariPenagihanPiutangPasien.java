@@ -1392,7 +1392,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             Sequel.deleteTemporary();
             
             while (rs.next()) {
-                Sequel.temporary(37, String.valueOf(++i), rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("pasien.nm_pasien"),
+                Sequel.temporary(rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("pasien.nm_pasien"),
                     rs.getString("status_lanjut"), NumberFormat.getInstance().format(rs.getDouble("sisapiutang")), rs.getString("png_jawab"), rs.getString("no_peserta"),
                     rs.getString("nama_perusahaan"), rs.getString("nip"), rs.getString("no_nota"));
                 
