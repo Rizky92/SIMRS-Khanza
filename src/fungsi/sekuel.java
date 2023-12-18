@@ -81,13 +81,11 @@ public final class sekuel {
         }
     }
     
-    public void temporary(Object... values) {
-        String query = "insert into temporary values (";
+    private void temporary(String table, Object[] values) {
+        String query = "insert into " + table + " values ('1', ";
         
-        for (int i = 0; i < 37; i++) {
-            if (i == 0) {
-                query = query.concat("'1', ");
-            } else if (i < values.length + 1) {
+        for (int i = 0; i < 36; i++) {
+            if (i < values.length) {
                 query = query.concat("?, ");
             } else {
                 query = query.concat("'', ");
@@ -127,82 +125,12 @@ public final class sekuel {
         }
     }
     
-    public void temporary(int count, String... values) {
-        String query = "insert into temporary values (";
-        
-        int length = values.length;
-        
-        for (int i = 0; i < count + 1; i++) {
-            query = query.concat("?, ");
-        }
-        
-        query = query
-            .concat(")")
-            .replaceFirst("\\?, \\)", "?)");
-        
-        try {
-            ps = connect.prepareStatement(query);
-            
-            for (int i = 0; i < count; i++) {
-                ps.setString(i + 1, (i < length) ? values[i] : "");
-            }
-            
-            ps.setString(count + 1, akses.getalamatip());
-            
-            ps.executeUpdate();
-            
-            if (ps != null) {
-                ps.close();
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
-            
-            JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak...!!!");
-        }
+    public void temporary(Object... values) {
+        temporary("temporary", values);
     }
     
-    public void temporaryLab(String[] values, int count) {
-        String query = "insert into temporary_lab values(";
-        String track;
-        
-        int length = values.length;
-        
-        for (int i = 0; i < count + 2; i++) {
-            query = query.concat("?, ");
-        }
-        
-        query = query
-            .concat(")")
-            .replaceFirst("\\?, \\)", "?)");
-        
-        track = query;
-        
-        try {
-            ps = connect.prepareStatement(query);
-        
-            for (int i = 0; i < count; i++) {
-                if (i < length) {
-                    ps.setString(i + 1, values[i]);
-                    track = track.replaceFirst("\\?", "'"+values[i]+"'");
-                } else {
-                    ps.setString(i + 1, "");
-                    track = track.replaceFirst("\\?", "''");
-                }
-            }
-            
-            ps.setString(count + 1, akses.getkode());
-            track = track.replaceFirst("\\?", "'"+akses.getkode()+"'");
-            ps.setString(count + 2, akses.getalamatip());
-            track = track.replaceFirst("\\?", "'"+akses.getalamatip()+"'");
-            
-            ps.executeUpdate();
-            
-            SimpanTrack(track);
-        } catch (Exception e) {
-            System.out.println("Notifikasi temporary_lab: " + e);
-            
-            JOptionPane.showMessageDialog(null, "Gagal memproses cetak hasil lab!");
-        }
+    public void temporaryLab(Object... values) {
+        temporary("temporary_lab", values);
     }
     
     public void insertTampJurnal(String kdRek, String nmRek, double d, double k)
