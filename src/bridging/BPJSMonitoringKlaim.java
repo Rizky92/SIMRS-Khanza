@@ -958,20 +958,47 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 //response = root.path("response");
                 if(response.path("klaim").isArray()){
                     for(JsonNode list:response.path("klaim")){
-                        pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep=?");
+                        pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep = ?");
                         try {
                             pssep.setString(1,list.path("noSEP").asText());
                             rssep=pssep.executeQuery();
                             while(rssep.next()){
                                 tabMode.addRow(new Object[]{
-                                    rssep.getString(1),rssep.getString(2),rssep.getString(3),rssep.getString(4),
-                                    rssep.getString(5),rssep.getString(6),rssep.getString(7),rssep.getString(8),
-                                    rssep.getString(9),rssep.getString(10),rssep.getString(11),rssep.getString(12),
-                                    rssep.getString(13),rssep.getString(14),rssep.getString(14)+" "+rssep.getString(15),rssep.getString(16),
-                                    rssep.getString(17),rssep.getString(18),rssep.getString(19),rssep.getString(20),
-                                    rssep.getString(21),rssep.getString(22),rssep.getString(23),rssep.getString(24),
-                                    rssep.getString(25),rssep.getString(26),rssep.getString(27),rssep.getString(28),
-                                    rssep.getString(29),rssep.getString(30),rssep.getString(31),
+//                                    no_sep, no_rawat, tglsep, tglrujukan, no_rujukan, 
+//                                    kdppkrujukan, nmppkrujukan, kdppkpelayanan, 
+//                                    nmppkpelayanan, jnspelayanan, catatan, diagawal, 
+//                                    nmdiagnosaawal, kdpolitujuan, nmpolitujuan, klsrawat, 
+//                                    klsnaik, pembiayaan, pjnaikkelas, lakalantas, user, nomr, 
+//                                    nama_pasien, tanggal_lahir, peserta, jkel, no_kartu, tglpulang,
+//                                     asal_rujukan, eksekutif, cob, notelep, katarak, tglkkl, 
+//                                     keterangankkl, suplesi, no_sep_suplesi, kdprop, nmprop, 
+//                                     kdkab, nmkab, kdkec, nmkec, noskdp, kddpjp, nmdpdjp, 
+//                                     tujuankunjungan, flagprosedur, penunjang, asesmenpelayanan, 
+//                                     kddpjplayanan, nmdpjplayanan,
+                                    
+//                                    "No.SEP","No.Rawat","No.RM","Nama Pasien","Tanggal SEP","Tanggal Rujukan", 
+//                                    "No.Rujukan","Kode PPK Rujukan","Nama PPK Rujukan","Kode PPK Pelayanan", 
+//                                    "Nama PPK Pelayanan","Jenis Pelayanan","Catatan", "Kode Diagnosa", 
+//                                    "Nama Diagnosa", "Kode Poli", "Nama Poli", "Kelas Rawat", "Laka Lantas", 
+//                                    "Lokasi Laka Lantas", "User Input","Tgl.Lahir","Peserta",
+//                                    "J.Kel","No.Kartu","Tanggal Pulang","Asal Rujukan","Eksekutif",
+//                                    "COB","Penjamin","No.Telp","INACBG","Status","No.FPK","Pengajuan",
+//                                    "Disetujui","Tarif Gruper","Tarif RS","Topup","Untung/Rugi"
+                                    rssep.getString("no_sep"), rssep.getString("no_rawat"), rssep.getString("nomr"), rssep.getString("nama_pasien"),
+                                    rssep.getString("tglsep"), rssep.getString("tglrujukan"), rssep.getString("no_rujukan"), rssep.getString("kdppkrujukan"),
+                                    rssep.getString("nmppkrujukan"), rssep.getString("kdppkpelayanan"), rssep.getString("nmppkpelayanan"), rssep.getString("jnspelayanan").replace("1", "1. Rawat Inap").replace("2", "2. Rawat Jalan"),
+                                    rssep.getString("catatan"), rssep.getString("diagawal"), rssep.getString("nmdiagnosaawal"), rssep.getString("kdpolitujuan"), rssep.getString("nmpolitujuan"), rssep.getString("klsrawat"),
+                                    rssep.getString("lakalantas"), "-", rssep.getString("user"), rssep.getString("tanggal_lahir"), rssep.getString("peserta"), rssep.getString("jkel"), rssep.getString("no_kartu"),
+                                    rssep.getString("tglpulang"), rssep.getString("asal_rujukan"), rssep.getString("eksekutif"), rssep.getString("cob"), "BPJS KESEHATAN", rssep.getString("notelep"),
+                                    
+//                                    rssep.getString(1),rssep.getString(2),rssep.getString(3),rssep.getString(4),
+//                                    rssep.getString(5),rssep.getString(6),rssep.getString(7),rssep.getString(8),
+//                                    rssep.getString(9),rssep.getString(10),rssep.getString(11),rssep.getString(12),
+//                                    rssep.getString(13),rssep.getString(14),rssep.getString(14)+" "+rssep.getString(15),rssep.getString(16),
+//                                    rssep.getString(17),rssep.getString(18),rssep.getString(19),rssep.getString(20),
+//                                    rssep.getString(21),rssep.getString(22),rssep.getString(23),rssep.getString(24),
+//                                    rssep.getString(25),rssep.getString(26),rssep.getString(27),rssep.getString(28),
+//                                    rssep.getString(29),rssep.getString(30),rssep.getString(31),
                                     list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),
                                     list.path("status").asText(),list.path("noFPK").asText(),
                                     Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
@@ -1036,14 +1063,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             rssep=pssep.executeQuery();
                             while(rssep.next()){
                                 tabMode.addRow(new Object[]{
-                                    rssep.getString(1),rssep.getString(2),rssep.getString(3),rssep.getString(4),
-                                    rssep.getString(5),rssep.getString(6),rssep.getString(7),rssep.getString(8),
-                                    rssep.getString(9),rssep.getString(10),rssep.getString(11),rssep.getString(12),
-                                    rssep.getString(13),rssep.getString(14),rssep.getString(14)+" "+rssep.getString(15),rssep.getString(16),
-                                    rssep.getString(17),rssep.getString(18),rssep.getString(19),rssep.getString(20),
-                                    rssep.getString(21),rssep.getString(22),rssep.getString(23),rssep.getString(24),
-                                    rssep.getString(25),rssep.getString(26),rssep.getString(27),rssep.getString(28),
-                                    rssep.getString(29),rssep.getString(30),rssep.getString(31),
+                                    rssep.getString("no_sep"), rssep.getString("no_rawat"), rssep.getString("nomr"), rssep.getString("nama_pasien"),
+                                    rssep.getString("tglsep"), rssep.getString("tglrujukan"), rssep.getString("no_rujukan"), rssep.getString("kdppkrujukan"),
+                                    rssep.getString("nmppkrujukan"), rssep.getString("kdppkpelayanan"), rssep.getString("nmppkpelayanan"), rssep.getString("jnspelayanan").replace("1", "1. Rawat Inap").replace("2", "2. Rawat Jalan"),
+                                    rssep.getString("catatan"), rssep.getString("diagawal"), rssep.getString("nmdiagnosaawal"), rssep.getString("kdpolitujuan"), rssep.getString("nmpolitujuan"), rssep.getString("klsrawat"),
+                                    rssep.getString("lakalantas"), "-", rssep.getString("user"), rssep.getString("tanggal_lahir"), rssep.getString("peserta"), rssep.getString("jkel"), rssep.getString("no_kartu"),
+                                    rssep.getString("tglpulang"), rssep.getString("asal_rujukan"), rssep.getString("eksekutif"), rssep.getString("cob"), "BPJS KESEHATAN", rssep.getString("notelep"),
+//                                    rssep.getString(1),rssep.getString(2),rssep.getString(3),rssep.getString(4),
+//                                    rssep.getString(5),rssep.getString(6),rssep.getString(7),rssep.getString(8),
+//                                    rssep.getString(9),rssep.getString(10),rssep.getString(11),rssep.getString(12),
+//                                    rssep.getString(13),rssep.getString(14),rssep.getString(14)+" "+rssep.getString(15),rssep.getString(16),
+//                                    rssep.getString(17),rssep.getString(18),rssep.getString(19),rssep.getString(20),
+//                                    rssep.getString(21),rssep.getString(22),rssep.getString(23),rssep.getString(24),
+//                                    rssep.getString(25),rssep.getString(26),rssep.getString(27),rssep.getString(28),
+//                                    rssep.getString(29),rssep.getString(30),rssep.getString(31),
                                     list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),
                                     list.path("status").asText(),list.path("noFPK").asText(),
                                     Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
