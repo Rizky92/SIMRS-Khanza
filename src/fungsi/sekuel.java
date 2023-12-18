@@ -83,37 +83,32 @@ public final class sekuel {
     
     public void temporary(Object... values) {
         String query = "insert into temporary values (";
-        String value = "";
         
         for (int i = 0; i < 37; i++) {
             if (i == 0) {
                 query = query.concat("'1', ");
             } else if (i < values.length + 1) {
                 query = query.concat("?, ");
-                System.out.println("parameterized #" + (i + 1));
             } else {
                 query = query.concat("'', ");
-                System.out.println("blanked #" + (i + 1));
             }
         }
         
         query = query.concat("?)");
-        System.out.println("parameterized #38");
-        System.out.println("SQL statement: " + query);
         
         try {
             ps = connect.prepareStatement(query);
             
             try {
                 for (int i = 0; i < values.length; i++) {
-                    value = ((values[i] != null) ? (String) values[i] : "");
-                    ps.setString(i + 1, value);
-                    System.out.println("Parameter #" + (i + 1) + ": " + value);
+                    ps.setString(i + 1, (
+                        (values[i] != null) 
+                            ? (String) values[i] 
+                            : ""
+                    ));
                 }
 
                 ps.setString(values.length + 1, akses.getalamatip());
-                
-                System.out.println("Parameter #" + (values.length + 1) + ": " + akses.getalamatip());
                 
                 ps.executeUpdate();
             } catch (Exception e) {
