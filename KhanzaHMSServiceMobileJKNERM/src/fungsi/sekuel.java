@@ -66,30 +66,18 @@ public final class sekuel {
         super();
     }
     
-    protected void insertSMC(String table, String kolom, String[] values) throws SQLException
+    private void simpanSMC(String table, String columns, String[] values) throws SQLException
     {
-        String sql = "insert into " + table + " (" + kolom + ") values (";
+        String sql = "insert into " + table + " (" + columns + ") values (";
         
-        if (kolom.isBlank()) {
+        if (columns == null) {
             sql = "insert into " + table + " values (";
         }
         
-        for (String value: values) {
-            sql = sql.concat("?, ");
-        }
-        
-        sql = sql
-            .concat(")")
-            .replaceFirst("\\?\\, \\)", "?)");
-        
         ps = connect.prepareStatement(sql);
         
-        int i = 1;
-        
-        for (String value: values) {
-            ps.setString(i, value);
-            
-            i++;
+        for (int i = 0; i < values.length; i++) {
+            ps.setString(i + 1, values[i]);
         }
         
         ps.executeUpdate();
@@ -99,75 +87,176 @@ public final class sekuel {
         }
     }
     
-    public boolean simpanSMC(String table, String kolom, String... values)
+    public void menyimpanSmc(String table, String columns, String... values)
     {
         try {
-            insertSMC(table, kolom, values);
+            simpanSMC(table, columns, values);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public boolean menyimpantfSmc(String table, String columns, String... values)
+    {
+        try {
+            simpanSMC(table, columns, values);
             
             return true;
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
             
             return false;
         }
     }
     
-    protected String cariSMC(String sql, String[] values) throws SQLException
+    private void updateSMC(String table, String columns, String conditions, String[] values) throws SQLException
     {
-        String output = "";
+        String sql = "update " + table + " set " + columns + " where " + conditions;
+        
+        if (conditions == null) {
+            sql = "update " + table + " set " + columns;
+        }
+        
         ps = connect.prepareStatement(sql);
         
-        int i = 1;
-        
-        for (String value: values) {
-            ps.setString(i, value);
-            
-            i++;
+        for (int i = 0; i < values.length; i++) {
+            ps.setString(i + 1, values[i]);
         }
         
-        rs = ps.executeQuery();
-        
-        if (rs.next()) {
-            output = rs.getString(1);
-        }
-        
-        if (rs != null) {
-            rs.close();
-        }
+        ps.executeUpdate();
         
         if (ps != null) {
             ps.close();
         }
-        
-        return output;
     }
     
-    public String cariIsiSMC(String sql, String... values)
+    public void mengupdateSmc(String table, String columns, String conditions, String... values)
     {
-        String output = "";
-        
         try {
-            output = cariSMC(sql, values);
+            updateSMC(table, columns, conditions, values);
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
         }
-        
-        return output;
     }
     
-    public int cariIntSMC(String sql, String... values)
+    public boolean mengupdatetfSmc(String table, String columns, String conditions, String... values)
+    {
+        try {
+            updateSMC(table, columns, conditions, values);
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            
+            return false;
+        }
+    }
+    
+    public int cariIntegerSmc(String sql, String... params)
     {
         int output = 0;
         
         try {
-            output = Integer.parseInt(cariSMC(sql, values));
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < params.length; i++) {
+                    ps.setString(i + 1, params[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    output = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
+            }
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
         }
         
         return output;
     }
-
+    
+    public double cariDoubleSmc(String sql, String... params)
+    {
+        double output = 0;
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < params.length; i++) {
+                    ps.setString(i + 1, params[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    output = rs.getDouble(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
+    public String cariIsiSmc(String sql, String... params)
+    {
+        String output = "";
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < params.length; i++) {
+                    ps.setString(i + 1, params[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    output = rs.getString(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
     public void menyimpan(String table, String value, String sama) {
         try {
             ps = connect.prepareStatement("insert into " + table + " values(" + value + ")");
