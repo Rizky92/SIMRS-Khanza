@@ -104,7 +104,7 @@ public final class sekuel {
             .replaceFirst("\\?, \\)", "?)");
         
         try {
-            ps = connect.prepareStatement(query);
+            ps = connect.prepareStatement(sql);
             
             for (int i = 0; i < count; i++) {
                 ps.setString(i + 1, (i < length) ? values[i] : "");
