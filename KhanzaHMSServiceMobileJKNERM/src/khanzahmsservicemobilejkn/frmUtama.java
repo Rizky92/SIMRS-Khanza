@@ -44,7 +44,7 @@ public class frmUtama extends javax.swing.JFrame {
     private  PreparedStatement ps,ps2,ps3;
     private  ResultSet rs,rs2,rs3;
     private  Calendar cal = Calendar.getInstance();
-    private  int day = cal.get(Calendar.DAY_OF_WEEK);
+    private  int day = cal.get(Calendar.DAY_OF_WEEK), modulus = 0;
     private  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private  SimpleDateFormat tanggalFormat = new SimpleDateFormat("yyyy-MM-dd");
     private  Date parsedDate;
