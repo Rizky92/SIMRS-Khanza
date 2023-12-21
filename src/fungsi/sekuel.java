@@ -81,7 +81,8 @@ public final class sekuel {
         }
     }
     
-    private void temporary(String table, Object[] values) {
+    private void temporary(String table, String[] values)
+    {
         String query = "insert into " + table + " values ('1', ";
         
         for (int i = 0; i < 36; i++) {
@@ -101,7 +102,7 @@ public final class sekuel {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, (
                         (values[i] != null) 
-                            ? (String) values[i] 
+                            ? values[i] 
                             : ""
                     ));
                 }
@@ -125,11 +126,13 @@ public final class sekuel {
         }
     }
     
-    public void temporary(Object... values) {
+    public void temporary(String... values)
+    {
         temporary("temporary", values);
     }
     
-    public void temporaryLab(Object... values) {
+    public void temporaryLab(String... values)
+    {
         temporary("temporary_lab", values);
     }
     
