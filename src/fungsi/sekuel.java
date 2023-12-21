@@ -81,6 +81,43 @@ public final class sekuel {
         }
     }
     
+    public void temporary(String... values)
+    {
+        String sql = "insert into temporary values (";
+        
+        for (int i = 0; i < 37; i++) {
+            if (i < values.length) {
+                sql = sql.concat("?, ");
+            } else {
+                sql = sql.concat("'', ");
+            }
+        }
+        
+        sql = sql.concat("?)");
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                ps.setString(values.length + 1, akses.getalamatip());
+                
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
     public void temporary(int count, String... values) {
         String query = "insert into temporary values (";
         

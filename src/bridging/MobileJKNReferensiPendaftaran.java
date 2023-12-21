@@ -394,22 +394,24 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){  
-                Sequel.menyimpan("temporary","'"+r+"','"+
-                                tabMode.getValueAt(r,0).toString().replaceAll("'","") +"','"+
-                                tabMode.getValueAt(r,1).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,2).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,3).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,4).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,5).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,6).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,7).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,8).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,9).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,10).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,11).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,12).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,13).toString().replaceAll("'","")+"','"+
-                                tabMode.getValueAt(r,14).toString().replaceAll("'","")+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian BulananDokter"); 
+                Sequel.temporary(
+                    String.valueOf(r + 1),
+                    ((tabMode.getValueAt(r, 0) != null) ? tabMode.getValueAt(r, 0).toString() : ""),
+                    ((tabMode.getValueAt(r, 1) != null) ? tabMode.getValueAt(r, 1).toString() : ""),
+                    ((tabMode.getValueAt(r, 2) != null) ? tabMode.getValueAt(r, 2).toString() : ""),
+                    ((tabMode.getValueAt(r, 3) != null) ? tabMode.getValueAt(r, 3).toString() : ""),
+                    ((tabMode.getValueAt(r, 4) != null) ? tabMode.getValueAt(r, 4).toString() : ""),
+                    ((tabMode.getValueAt(r, 5) != null) ? tabMode.getValueAt(r, 5).toString() : ""),
+                    ((tabMode.getValueAt(r, 6) != null) ? tabMode.getValueAt(r, 6).toString() : ""),
+                    ((tabMode.getValueAt(r, 7) != null) ? tabMode.getValueAt(r, 7).toString() : ""),
+                    ((tabMode.getValueAt(r, 8) != null) ? tabMode.getValueAt(r, 8).toString() : ""),
+                    ((tabMode.getValueAt(r, 9) != null) ? tabMode.getValueAt(r, 9).toString() : ""),
+                    ((tabMode.getValueAt(r, 10) != null) ? tabMode.getValueAt(r, 10).toString() : ""),
+                    ((tabMode.getValueAt(r, 11) != null) ? tabMode.getValueAt(r, 11).toString() : ""),
+                    ((tabMode.getValueAt(r, 12) != null) ? tabMode.getValueAt(r, 12).toString() : ""),
+                    ((tabMode.getValueAt(r, 13) != null) ? tabMode.getValueAt(r, 13).toString() : ""),
+                    ((tabMode.getValueAt(r, 14) != null) ? tabMode.getValueAt(r, 14).toString() : "")
+                );
             }
             
             Map<String, Object> param = new HashMap<>();
