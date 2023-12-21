@@ -569,21 +569,25 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
+        String sql = "select " +
+                "no_rawat, norm, pasien.nm_pasien, nohp, nomorkartu, nik, tanggalperiksa, jampraktek, jeniskunjungan, nomorreferensi, " +
+                "validasi, nobooking, referensi_mobilejkn_bpjs.kodepoli, referensi_mobilejkn_bpjs.kodedokter, referensi_mobilejkn_bpjs.status, " +
+                "ifnull(nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(nm_poli_bpjs, '') as nm_poli_bpjs  " +
+            "from referensi_mobilejkn_bpjs " +
+            "join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis " +
+            "left join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
+            "left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
+            "where referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " +
+            (TCari.getText().isBlank() ? ""
+                : "and (no_rawat like ? or norm like ? or pasien.nm_pasien like ? or nohp like ? or nomorkartu like ? or nik like ? or jeniskunjungan like ? or nomorreferensi like ? or status like ? or referensi_mobilejkn_bpjs.kodedokter like ? or referensi_mobilejkn_bpjs.kodepoli like ? or ifnull(nm_dokter_bpjs, '') like ? or ifnull(nm_poli_bpjs, '') like ?) "
+            ) + "order by tanggalperiksa";
+        
         try{
-            ps=koneksi.prepareStatement(
-                   "SELECT referensi_mobilejkn_bpjs.no_rawat,referensi_mobilejkn_bpjs.norm,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
-                   "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,referensi_mobilejkn_bpjs.kodepoli,referensi_mobilejkn_bpjs.kodedokter,referensi_mobilejkn_bpjs.jampraktek,"+
-                   "referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,"+
-                   "referensi_mobilejkn_bpjs.nobooking FROM referensi_mobilejkn_bpjs INNER JOIN pasien ON referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis "+
-                   "WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? "+(TCari.getText().equals("")?"":
-                   "and (referensi_mobilejkn_bpjs.no_rawat LIKE ? OR referensi_mobilejkn_bpjs.norm LIKE ? OR pasien.nm_pasien LIKE ? OR "+
-                   "referensi_mobilejkn_bpjs.nohp LIKE ? OR referensi_mobilejkn_bpjs.nomorkartu LIKE ? OR referensi_mobilejkn_bpjs.nik LIKE ? OR "+
-                   "referensi_mobilejkn_bpjs.jeniskunjungan LIKE ? OR referensi_mobilejkn_bpjs.nomorreferensi LIKE ? OR referensi_mobilejkn_bpjs.status LIKE ?) ")+
-                   "order by referensi_mobilejkn_bpjs.tanggalperiksa");
+            ps=koneksi.prepareStatement(sql);
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                if(!TCari.getText().trim().equals("")){
+                if(! TCari.getText().isBlank()){
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                     ps.setString(5,"%"+TCari.getText()+"%");
@@ -593,17 +597,30 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     ps.setString(9,"%"+TCari.getText()+"%");
                     ps.setString(10,"%"+TCari.getText()+"%");
                     ps.setString(11,"%"+TCari.getText()+"%");
+                    ps.setString(12,"%"+TCari.getText()+"%");
+                    ps.setString(13,"%"+TCari.getText()+"%");
+                    ps.setString(14,"%"+TCari.getText()+"%");
+                    ps.setString(15,"%"+TCari.getText()+"%");
                 }
                     
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        rs.getString("no_rawat"),rs.getString("norm"),rs.getString("nm_pasien"),
-                        rs.getString("nohp"),rs.getString("nomorkartu"),rs.getString("nik"),
-                        rs.getString("tanggalperiksa"),Sequel.cariIsi("select maping_poli_bpjs.nm_poli_bpjs from maping_poli_bpjs where maping_poli_bpjs.kd_poli_bpjs=?",rs.getString("kodepoli")),
-                        Sequel.cariIsi("select maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs=?",rs.getString("kodedokter")),
-                        rs.getString("jampraktek"),rs.getString("jeniskunjungan"),rs.getString("nomorreferensi"),
-                        rs.getString("status"),rs.getString("validasi"),rs.getString("nobooking")
+                        rs.getString("no_rawat"),
+                        rs.getString("norm"),
+                        rs.getString("nm_pasien"),                        
+                        rs.getString("nohp"),
+                        rs.getString("nomorkartu"),
+                        rs.getString("nik"),
+                        rs.getString("tanggalperiksa"),
+                        rs.getString("nm_poli_bpjs"),
+                        rs.getString("nm_dokter_bpjs"),
+                        rs.getString("jampraktek"),
+                        rs.getString("jeniskunjungan"),
+                        rs.getString("nomorreferensi"),
+                        rs.getString("status"),
+                        rs.getString("validasi"),
+                        rs.getString("nobooking")
                     });
                 }
             } catch (Exception e) {
