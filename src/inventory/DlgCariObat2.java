@@ -64,7 +64,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private double h_belicari=0, hargacari=0, sisacari=0,x=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
             tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan,stokbarang,ttlhpp,ttljual;
     private int jml=0,i=0,z=0,row=0;
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
     private String[] no,kodebarang,namabarang,kodesatuan,letakbarang,namajenis,industri,aturan,kategori,golongan,nobatch,nofaktur,kadaluarsa;
     private String signa1="1",signa2="1",kdObatSK="",requestJson="",nokunjungan="",URL="",otorisasi,sql="",no_batchcari="", tgl_kadaluarsacari="", 
@@ -85,7 +85,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true;
+    private boolean sukses=true, lanjut=true;
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -1153,12 +1153,14 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         barang.isCek();
         barang.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         barang.setLocationRelativeTo(internalFrame1);
+        barang.setAlwaysOnTop(false);
         barang.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());           
     }//GEN-LAST:event_BtnTambahActionPerformed
 
 private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(VALIDASIULANGBERIOBAT.equals("yes")){
+            lanjut = true;
             for(i=0;i<tbObat.getRowCount();i++){ 
                 if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){
                     getDataobat(i);
@@ -1169,8 +1171,11 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     getDatadetailobatracikan(i);
                 }
             }
-//            tampil();
-//            return;
+            
+            if (! lanjut) {
+                tampil();
+                return;
+            }
         }
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TCari,"Data");
@@ -2626,6 +2631,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 y=0;
             }
             if(stokbarang<y){
+                lanjut=false;
                 JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
             }
         } catch (Exception e) {
@@ -4265,6 +4271,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             }
 
             if(stokbarang<y){
+                lanjut=false;
                 JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
             }               
         } catch (Exception e) {
