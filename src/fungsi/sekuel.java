@@ -90,6 +90,45 @@ public final class sekuel {
         }
     }
     
+    public void temporary(String... values)
+    {
+        String query = "insert into temporary values (";
+        
+        for (int i = 0; i < 37; i++) {
+            if (i < values.length) {
+                query = query.concat("?, ");
+            } else {
+                query = query.concat("'', ");
+            }
+        }
+        
+        query = query.concat("?)");
+        
+        try {
+            ps = connect.prepareStatement(query);
+            
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                ps.setString(values.length + 1, akses.getalamatip());
+                
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif :" + e);
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            
+            JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak..!!");
+        }
+    }
+    
     public void temporary(int count, String... values) {
         String query = "insert into temporary values (";
         
@@ -104,7 +143,7 @@ public final class sekuel {
             .replaceFirst("\\?, \\)", "?)");
         
         try {
-            ps = connect.prepareStatement(sql);
+            ps = connect.prepareStatement(query);
             
             for (int i = 0; i < count; i++) {
                 ps.setString(i + 1, (i < length) ? values[i] : "");
