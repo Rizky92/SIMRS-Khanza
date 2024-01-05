@@ -854,8 +854,8 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                         double totalDetilReturJual = Sequel.cariDoubleSmc("select sum(subtotal) from detreturjual where no_retur_jual = ?", rs.getString("no_retur_jual"));
 
                         Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Dari_pembeli from set_akun"), "RETUR PENJUALAN", 0, totalDetilReturJual);
-                        Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Dari_pembeli from set_akun"), "KAS DI TANGAN", totalDetilReturJual, 0);
+                        Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Dari_pembeli from set_akun"), "RETUR PENJUALAN", totalDetilReturJual, 0);
+                        Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Dari_pembeli from set_akun"), "KAS DI TANGAN", 0, totalDetilReturJual);
                         sukses=jur.simpanJurnal(rs.getString("no_retur_jual"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
                     }
                 }
