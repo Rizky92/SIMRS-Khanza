@@ -64,6 +64,105 @@ public final class sekuel {
     public sekuel(){
         super();
     }
+    
+    public boolean cariBooleanSmc(String sql, String... values)
+    {
+        boolean output = false;
+        try {
+            ps = connect.prepareStatement(sql);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    output = rs.getBoolean(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return output;
+    }
+    
+    public void menyimpanSmc(String table, String kolom, String... values)
+    {
+        String query = "insert into " + table + " (" + kolom + ") values (";
+        
+        if (kolom == null) {
+            query = "insert into " + table + " values (";
+        }
+        
+        for (int i = 0; i < values.length; i++) {
+            query = query.concat("?, ");
+        }
+        
+        query = query.replaceFirst("\\?\\, \\)", "?)");
+        
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+        }
+    }
+    
+    public void menyimpanIgnoreSmc(String table, String kolom, String... values)
+    {
+        String query = "insert into " + table + " (" + kolom + ") values (";
+        
+        if (kolom == null) {
+            query = "insert into " + table + " values (";
+        }
+        
+        for (int i = 0; i < values.length; i++) {
+            query = query.concat("?, ");
+        }
+        
+        query = query.replaceFirst("\\?\\, \\)", "?)");
+        
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+        }
+    }
 
 
     public void menyimpan(String table,String value,String sama){
