@@ -358,7 +358,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs_batal set statuskirim='Sudah' where nomorreferensi='"+rs.getString("nomorreferensi")+"'");
                                         datajam=rs.getString("tanggalbatal");
                                         if(!datajam.equals("")){
-                                            if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"99",datajam})==true){
+                                            if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat_batal"),"99",datajam})==true){
                                                 parsedDate = dateFormat.parse(datajam);
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid batal pelayanan poli Mobile JKN Pasien BPJS\n");
@@ -381,8 +381,11 @@ public class frmUtama extends javax.swing.JFrame {
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                     nameNode = root.path("metadata");
+                                                    Sequel.menyimpanSmc("referensi_mobilejkn_bpjs_taskid_response", "no_rawat, jenispasien, taskid, code, message, waktu",
+                                                        rs.getString("no_rawat_batal"), "JKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam
+                                                    );
                                                     if(!nameNode.path("code").asText().equals("200")){
-                                                        Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='99' and no_rawat='"+rs.getString("no_rawat")+"'");
+                                                        Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='99' and no_rawat='"+rs.getString("no_rawat_batal")+"'");
                                                     }  
                                                     TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                 }catch (Exception ex) {
