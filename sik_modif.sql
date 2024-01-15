@@ -75,4 +75,17 @@ ALTER TABLE `khanza`.`tokoopname` MODIFY COLUMN `kode_brng` varchar(10) CHARACTE
 
 ALTER TABLE `khanza`.`transfer_pasien_antar_ruang` MODIFY COLUMN `diagnosa_utama` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
 
+CREATE TABLE `referensi_mobilejkn_bpjs_taskid_response` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `no_rawat` varchar(17) DEFAULT NULL,
+  `jenispasien` enum('JKN','NON JKN') DEFAULT NULL,
+  `taskid` char(1) DEFAULT NULL,
+  `code` varchar(5) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `waktu` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX` (`no_rawat`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX` (`waktu`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci;
+
 SET FOREIGN_KEY_CHECKS=1;
