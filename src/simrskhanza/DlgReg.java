@@ -15599,7 +15599,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
-    } 
+    }
+
+    private void MnVerifikasiKYCSatuSehatActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (JOptionPane.showConfirmDialog(rootPane,
+            "Anda akan melakukan proses verifikasi KYC Satu Sehat.\nPastikan bahwa pasien telah menyetujui syarat dan ketentuan\nterkait penggunaan Satu Sehat.\n\nLanjutkan?",
+            "Info Verifikasi KYC Satu Sehat",
+            JOptionPane.YES_NO_OPTION
+        ) == JOptionPane.YES_OPTION) {
+            
+        }
+    }
     
     /**
     * @param args the command line arguments
@@ -16057,7 +16068,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnHasilPemeriksaanUSGGynecologi,
                                  MnHasilPemeriksaanEKG,
                                  MnSudahTerbitSEP,
-                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga;
+                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnVerifikasiKYCSatuSehat,MnHasilEndoskopiTelinga;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
    
     private void tampil() {
@@ -17129,6 +17140,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSudahTerbitSEP.setPreferredSize(new java.awt.Dimension(320, 26));
         MnSudahTerbitSEP.addActionListener(this::MnSudahTerbitSEPActionPerformed);
         
+        MnVerifikasiKYCSatuSehat = new javax.swing.JMenuItem();
+        MnVerifikasiKYCSatuSehat.setBackground(new java.awt.Color(255, 255, 254));
+        MnVerifikasiKYCSatuSehat.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnVerifikasiKYCSatuSehat.setForeground(new java.awt.Color(50, 50, 50));
+        MnVerifikasiKYCSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnVerifikasiKYCSatuSehat.setText("Verifikasi Identitas KYC Satu Sehat");
+        MnVerifikasiKYCSatuSehat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnVerifikasiKYCSatuSehat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnVerifikasiKYCSatuSehat.setName("MnVerifikasiKYCSatuSehat"); 
+        MnVerifikasiKYCSatuSehat.setPreferredSize(new java.awt.Dimension(320, 26));
+        MnVerifikasiKYCSatuSehat.addActionListener(this::MnVerifikasiKYCSatuSehatActionPerformed);
+        
         MnInputNoAntrianRegistrasi = new javax.swing.JMenuItem();
         MnInputNoAntrianRegistrasi.setBackground(new java.awt.Color(255, 255, 254));
         MnInputNoAntrianRegistrasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -17280,5 +17303,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnBridging.add(MnRiwayatPerawatanICareNoKartu);
         MnBridging.add(MnRiwayatPerawatanICareNIK1);
         MnBridging.add(MnRiwayatPerawatanICareNoKartu1);
+        MnBridging.add(MnVerifikasiKYCSatuSehat);
     }
 }
