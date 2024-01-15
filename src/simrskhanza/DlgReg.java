@@ -16068,7 +16068,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnHasilPemeriksaanUSGGynecologi,
                                  MnHasilPemeriksaanEKG,
                                  MnSudahTerbitSEP,
-                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnVerifikasiKYCSatuSehat,MnHasilEndoskopiTelinga;
+                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnVerifikasiKYCSatuSehat,MnVerifikasiKYCSatuSehat,MnHasilEndoskopiTelinga;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
    
     private void tampil() {
