@@ -79,7 +79,7 @@ CREATE TABLE `referensi_mobilejkn_bpjs_taskid_response` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) DEFAULT NULL,
   `jenispasien` enum('JKN','NON JKN') DEFAULT NULL,
-  `taskid` char(1) DEFAULT NULL,
+  `taskid` char(2) DEFAULT NULL,
   `code` varchar(5) DEFAULT NULL,
   `message` varchar(200) DEFAULT NULL,
   `waktu` datetime DEFAULT NULL,
