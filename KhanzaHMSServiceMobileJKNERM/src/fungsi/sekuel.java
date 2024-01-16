@@ -106,7 +106,9 @@ public final class sekuel {
             query = query.concat("?, ");
         }
         
-        query = query.replaceFirst("\\?\\, \\)", "?)");
+        query = query
+            .concat(")")
+            .replaceFirst("\\?, \\)", "?)");
         
         try {
             ps = connect.prepareStatement(query);
@@ -117,7 +119,6 @@ public final class sekuel {
                 ps.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
             } finally {
                 if (ps != null) {
                     ps.close();
@@ -125,45 +126,9 @@ public final class sekuel {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
         }
     }
     
-    public void menyimpanIgnoreSmc(String table, String kolom, String... values)
-    {
-        String query = "insert into " + table + " (" + kolom + ") values (";
-        
-        if (kolom == null) {
-            query = "insert into " + table + " values (";
-        }
-        
-        for (int i = 0; i < values.length; i++) {
-            query = query.concat("?, ");
-        }
-        
-        query = query.replaceFirst("\\?\\, \\)", "?)");
-        
-        try {
-            ps = connect.prepareStatement(query);
-            try {
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }
-                ps.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
-            } finally {
-                if (ps != null) {
-                    ps.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
-        }
-    }
-
 
     public void menyimpan(String table,String value,String sama){
         try {
