@@ -94,29 +94,19 @@ public final class sekuel {
         return output;
     }
     
-    public void menyimpanSmc(String table, String kolom, String... values)
+    public void logTaskid(String noRawat, String jenisKunjungan, String taskid, String code, String message)
     {
-        String query = "insert into " + table + " (" + kolom + ") values (";
-        
-        if (kolom == null) {
-            query = "insert into " + table + " values (";
-        }
-        
-        for (int i = 0; i < values.length; i++) {
-            query = query.concat("?, ");
-        }
-        
-        query = query
-            .concat(")")
-            .replaceFirst("\\?, \\)", "?)");
+        String query = "insert into referensi_mobiljkn_bpjs_taskid_response (no_rawat, jenispasien, taskid, code, message, waktu) values (?, ?, ?, ?, ?, now())";
         
         try {
             ps = connect.prepareStatement(query);
             try {
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }
-                ps.executeUpdate();
+            ps.setString(1, noRawat);
+            ps.setString(2, jenisKunjungan);
+            ps.setString(3, taskid);
+            ps.setString(4, code);
+            ps.setString(5, message);
+            ps.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             } finally {
