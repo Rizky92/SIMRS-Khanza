@@ -96,7 +96,7 @@ public final class sekuel {
     
     public void logTaskid(String noRawat, String jenisKunjungan, String taskid, String code, String message)
     {
-        String query = "insert into referensi_mobiljkn_bpjs_taskid_response (no_rawat, jenispasien, taskid, code, message, waktu) values (?, ?, ?, ?, ?, now())";
+        String query = "insert into referensi_mobilejkn_bpjs_taskid_response (no_rawat, jenispasien, taskid, code, message, waktu) values (?, ?, ?, ?, ?, now())";
         
         try {
             ps = connect.prepareStatement(query);
