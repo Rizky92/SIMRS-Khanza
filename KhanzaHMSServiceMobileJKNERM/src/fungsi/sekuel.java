@@ -65,11 +65,11 @@ public final class sekuel {
         super();
     }
     
-    public boolean cariBooleanSmc(String sql, String... values)
+    public boolean cariBooleanSmc(String query, String... values)
     {
         boolean output = false;
         try {
-            ps = connect.prepareStatement(sql);
+            ps = connect.prepareStatement(query);
             try {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, values[i]);
@@ -77,6 +77,35 @@ public final class sekuel {
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     output = rs.getBoolean(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return output;
+    }
+    
+    public String cariIsiSmc(String query, String... values)
+    {
+        String output = "";
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    output = rs.getString(1);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
