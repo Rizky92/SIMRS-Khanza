@@ -101,12 +101,12 @@ public final class sekuel {
         try {
             ps = connect.prepareStatement(query);
             try {
-            ps.setString(1, noRawat);
-            ps.setString(2, jenisKunjungan);
-            ps.setString(3, taskid);
-            ps.setString(4, code);
-            ps.setString(5, message);
-            ps.executeUpdate();
+                ps.setString(1, noRawat);
+                ps.setString(2, jenisKunjungan);
+                ps.setString(3, taskid);
+                ps.setString(4, code);
+                ps.setString(5, message);
+                ps.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             } finally {
