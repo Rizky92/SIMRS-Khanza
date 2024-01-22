@@ -921,7 +921,8 @@ public final class DlgReg extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnDataRM = new javax.swing.JMenu();
@@ -975,11 +976,21 @@ public final class DlgReg extends javax.swing.JDialog {
         MnChecklistPostOperasi = new javax.swing.JMenuItem();
         MnPenilaianPreOp = new javax.swing.JMenuItem();
         MnPenilaianPreAnastesi = new javax.swing.JMenuItem();
+        MnSkorAldrettePascaAnestesi = new javax.swing.JMenuItem();
+        MnSkorStewardPascaAnestesi = new javax.swing.JMenuItem();
+        MnSkorBromagePascaAnestesi = new javax.swing.JMenuItem();
         MnRMHCU = new javax.swing.JMenu();
         MnCheckListKriteriaMasukHCU = new javax.swing.JMenuItem();
         MnCheckListKriteriaMasukICU = new javax.swing.JMenuItem();
         MnUjiFungsiKFR = new javax.swing.JMenuItem();
         MnRMRisikoJatuh = new javax.swing.JMenu();
+        MnPenilaianRisikoJatuhDewasa = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuhAnak = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuhLansia = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuhNeonatus = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuhGeriatri = new javax.swing.JMenuItem();
+        MnPenilaianRisikoJatuhPsikiatri = new javax.swing.JMenuItem();
+        MnPenilaianLanjutanSkriningFungsional = new javax.swing.JMenuItem();
         MnPenilaianLain = new javax.swing.JMenu();
         MnPenilaianTambahanGeriatri = new javax.swing.JMenuItem();
         MnPenilaianTambahanBunuhDiri = new javax.swing.JMenuItem();
@@ -1259,6 +1270,14 @@ public final class DlgReg extends javax.swing.JDialog {
         kdpnj = new widget.TextBox();
         JK = new widget.TextBox();
         NoTelp = new widget.TextBox();
+        WindowInputNoAntrian = new javax.swing.JDialog();
+        internalFrame8 = new widget.InternalFrame();
+        buttonTutupDialogAntrian = new widget.Button();
+        buttonSimpanAntrian = new widget.Button();
+        textNoRawatAntrian = new widget.TextBox();
+        textNoAntrian = new widget.TextBox();
+        label41 = new widget.Label();
+        label40 = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
@@ -1378,12 +1397,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanRalan.setName("MnPenilaianAwalKeperawatanRalan"); // NOI18N
         MnPenilaianAwalKeperawatanRalan.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanRalanActionPerformed(evt);
             }
         });
-        
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanRalan);
+
         MnPenilaianAwalKeperawatanGigi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanGigi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianAwalKeperawatanGigi.setForeground(new java.awt.Color(50, 50, 50));
@@ -1393,11 +1415,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanGigi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanGigi.setName("MnPenilaianAwalKeperawatanGigi"); // NOI18N
         MnPenilaianAwalKeperawatanGigi.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanGigi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanGigi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanGigiActionPerformed(evt);
             }
         });
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanGigi);
 
         MnPenilaianAwalKeperawatanKebidanan.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanKebidanan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1408,11 +1433,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanKebidanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanKebidanan.setName("MnPenilaianAwalKeperawatanKebidanan"); // NOI18N
         MnPenilaianAwalKeperawatanKebidanan.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanKebidanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanKebidanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanKebidananActionPerformed(evt);
             }
         });
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanKebidanan);
 
         MnPenilaianAwalKeperawatanBayiAnak.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanBayiAnak.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1423,11 +1451,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanBayiAnak.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanBayiAnak.setName("MnPenilaianAwalKeperawatanBayiAnak"); // NOI18N
         MnPenilaianAwalKeperawatanBayiAnak.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanBayiAnak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanBayiAnak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanBayiAnakActionPerformed(evt);
             }
         });
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanBayiAnak);
 
         MnPenilaianAwalKeperawatanPsikiatri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanPsikiatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1438,11 +1469,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanPsikiatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanPsikiatri.setName("MnPenilaianAwalKeperawatanPsikiatri"); // NOI18N
         MnPenilaianAwalKeperawatanPsikiatri.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanPsikiatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanPsikiatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanPsikiatriActionPerformed(evt);
             }
         });
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanPsikiatri);
 
         MnPenilaianAwalKeperawatanRalanGeriatri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalKeperawatanRalanGeriatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1453,12 +1487,17 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanRalanGeriatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanRalanGeriatri.setName("MnPenilaianAwalKeperawatanRalanGeriatri"); // NOI18N
         MnPenilaianAwalKeperawatanRalanGeriatri.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalKeperawatanRalanGeriatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanRalanGeriatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanRalanGeriatriActionPerformed(evt);
             }
         });
-        
+        MnAwalKeperawatan.add(MnPenilaianAwalKeperawatanRalanGeriatri);
+
+        MnRMRawatJalan.add(MnAwalKeperawatan);
+
         MnAwalMedis.setBackground(new java.awt.Color(255, 255, 254));
         MnAwalMedis.setForeground(new java.awt.Color(50, 50, 50));
         MnAwalMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -1478,11 +1517,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalan.setName("MnPenilaianAwalMedisRalan"); // NOI18N
         MnPenilaianAwalMedisRalan.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalan);
 
         MnPenilaianAwalMedisRalanKebidanan.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanKebidanan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1493,11 +1535,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanKebidanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanKebidanan.setName("MnPenilaianAwalMedisRalanKebidanan"); // NOI18N
         MnPenilaianAwalMedisRalanKebidanan.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanKebidanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanKebidanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanKebidananActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanKebidanan);
 
         MnPenilaianAwalMedisRalanBayi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanBayi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1508,11 +1553,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanBayi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanBayi.setName("MnPenilaianAwalMedisRalanBayi"); // NOI18N
         MnPenilaianAwalMedisRalanBayi.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanBayi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanBayi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanBayiActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanBayi);
 
         MnPenilaianAwalMedisRalanTHT.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanTHT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1523,11 +1571,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanTHT.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanTHT.setName("MnPenilaianAwalMedisRalanTHT"); // NOI18N
         MnPenilaianAwalMedisRalanTHT.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanTHT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanTHT.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanTHTActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanTHT);
 
         MnPenilaianAwalMedisRalanPsikiatri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanPsikiatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1538,11 +1589,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanPsikiatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanPsikiatri.setName("MnPenilaianAwalMedisRalanPsikiatri"); // NOI18N
         MnPenilaianAwalMedisRalanPsikiatri.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanPsikiatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanPsikiatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanPsikiatriActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanPsikiatri);
 
         MnPenilaianAwalMedisRalanPenyakitDalam.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanPenyakitDalam.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1553,11 +1607,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanPenyakitDalam.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanPenyakitDalam.setName("MnPenilaianAwalMedisRalanPenyakitDalam"); // NOI18N
         MnPenilaianAwalMedisRalanPenyakitDalam.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanPenyakitDalam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanPenyakitDalam.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanPenyakitDalamActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanPenyakitDalam);
 
         MnPenilaianAwalMedisRalanMata.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanMata.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1568,11 +1625,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanMata.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanMata.setName("MnPenilaianAwalMedisRalanMata"); // NOI18N
         MnPenilaianAwalMedisRalanMata.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanMata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanMata.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanMataActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanMata);
 
         MnPenilaianAwalMedisRalanNeurologi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanNeurologi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1583,11 +1643,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanNeurologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanNeurologi.setName("MnPenilaianAwalMedisRalanNeurologi"); // NOI18N
         MnPenilaianAwalMedisRalanNeurologi.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanNeurologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanNeurologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanNeurologiActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanNeurologi);
 
         MnPenilaianAwalMedisRalanOrthopedi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanOrthopedi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1598,11 +1661,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanOrthopedi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanOrthopedi.setName("MnPenilaianAwalMedisRalanOrthopedi"); // NOI18N
         MnPenilaianAwalMedisRalanOrthopedi.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanOrthopedi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanOrthopedi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanOrthopediActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanOrthopedi);
 
         MnPenilaianAwalMedisRalanBedah.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanBedah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1613,11 +1679,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanBedah.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanBedah.setName("MnPenilaianAwalMedisRalanBedah"); // NOI18N
         MnPenilaianAwalMedisRalanBedah.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanBedah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanBedah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanBedahActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanBedah);
 
         MnPenilaianAwalMedisRalanBedahMulut.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanBedahMulut.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1628,11 +1697,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanBedahMulut.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanBedahMulut.setName("MnPenilaianAwalMedisRalanBedahMulut"); // NOI18N
         MnPenilaianAwalMedisRalanBedahMulut.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanBedahMulut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanBedahMulut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanBedahMulutActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanBedahMulut);
 
         MnPenilaianAwalMedisRalanGeriatri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanGeriatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1643,11 +1715,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanGeriatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanGeriatri.setName("MnPenilaianAwalMedisRalanGeriatri"); // NOI18N
         MnPenilaianAwalMedisRalanGeriatri.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanGeriatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanGeriatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanGeriatriActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanGeriatri);
 
         MnPenilaianAwalMedisRalanKulitKelamin.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanKulitKelamin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1658,11 +1733,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanKulitKelamin.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanKulitKelamin.setName("MnPenilaianAwalMedisRalanKulitKelamin"); // NOI18N
         MnPenilaianAwalMedisRalanKulitKelamin.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanKulitKelamin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanKulitKelamin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanKulitKelaminActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanKulitKelamin);
 
         MnPenilaianAwalMedisRalanParu.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanParu.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1673,11 +1751,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanParu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanParu.setName("MnPenilaianAwalMedisRalanParu"); // NOI18N
         MnPenilaianAwalMedisRalanParu.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanParu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanParu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanParuActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanParu);
 
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1688,11 +1769,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setName("MnPenilaianAwalMedisRalanFisikRehabilitasi"); // NOI18N
         MnPenilaianAwalMedisRalanFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisRalanFisikRehabilitasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisRalanFisikRehabilitasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisRalanFisikRehabilitasiActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanFisikRehabilitasi);
 
         MnPenilaianAwalMedisHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianAwalMedisHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1703,11 +1787,16 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisHemodialisa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisHemodialisa.setName("MnPenilaianAwalMedisHemodialisa"); // NOI18N
         MnPenilaianAwalMedisHemodialisa.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnPenilaianAwalMedisHemodialisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisHemodialisa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisHemodialisaActionPerformed(evt);
             }
         });
+        MnAwalMedis.add(MnPenilaianAwalMedisHemodialisa);
+
+        MnRMRawatJalan.add(MnAwalMedis);
 
         MnHasilPemeriksaanUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSG.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1718,12 +1807,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHasilPemeriksaanUSG.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHasilPemeriksaanUSG.setName("MnHasilPemeriksaanUSG"); // NOI18N
         MnHasilPemeriksaanUSG.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnHasilPemeriksaanUSG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHasilPemeriksaanUSG.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHasilPemeriksaanUSGActionPerformed(evt);
             }
         });
-        
+        MnRMRawatJalan.add(MnHasilPemeriksaanUSG);
+
         MnDokumentasiTindakanESWL.setBackground(new java.awt.Color(255, 255, 254));
         MnDokumentasiTindakanESWL.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnDokumentasiTindakanESWL.setForeground(new java.awt.Color(50, 50, 50));
@@ -1733,12 +1825,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDokumentasiTindakanESWL.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDokumentasiTindakanESWL.setName("MnDokumentasiTindakanESWL"); // NOI18N
         MnDokumentasiTindakanESWL.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnDokumentasiTindakanESWL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDokumentasiTindakanESWL.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDokumentasiTindakanESWLActionPerformed(evt);
             }
         });
-        
+        MnRMRawatJalan.add(MnDokumentasiTindakanESWL);
+
         MnPenilaianFisioterapi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianFisioterapi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianFisioterapi.setForeground(new java.awt.Color(50, 50, 50));
@@ -1748,12 +1843,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianFisioterapi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianFisioterapi.setName("MnPenilaianFisioterapi"); // NOI18N
         MnPenilaianFisioterapi.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianFisioterapi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianFisioterapi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianFisioterapiActionPerformed(evt);
             }
         });
-        
+        MnRMRawatJalan.add(MnPenilaianFisioterapi);
+
         MnPenilaianPsikolog.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPsikolog.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianPsikolog.setForeground(new java.awt.Color(50, 50, 50));
@@ -1763,12 +1861,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPsikolog.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPsikolog.setName("MnPenilaianPsikolog"); // NOI18N
         MnPenilaianPsikolog.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianPsikolog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPsikolog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPsikologActionPerformed(evt);
             }
         });
-        
+        MnRMRawatJalan.add(MnPenilaianPsikolog);
+
         MnPenilaianTerapiWicara.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianTerapiWicara.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianTerapiWicara.setForeground(new java.awt.Color(50, 50, 50));
@@ -1778,12 +1879,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianTerapiWicara.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianTerapiWicara.setName("MnPenilaianTerapiWicara"); // NOI18N
         MnPenilaianTerapiWicara.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianTerapiWicara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianTerapiWicara.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianTerapiWicaraActionPerformed(evt);
             }
         });
-        
+        MnRMRawatJalan.add(MnPenilaianTerapiWicara);
+
         MnDataRM.add(MnRMRawatJalan);
 
         MnRMIGD.setBackground(new java.awt.Color(255, 255, 254));
@@ -1805,8 +1909,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDataTriaseIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDataTriaseIGD.setName("MnDataTriaseIGD"); // NOI18N
         MnDataTriaseIGD.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnDataTriaseIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDataTriaseIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDataTriaseIGDActionPerformed(evt);
             }
         });
@@ -1821,8 +1927,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalKeperawatanIGD.setName("MnPenilaianAwalKeperawatanIGD"); // NOI18N
         MnPenilaianAwalKeperawatanIGD.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPenilaianAwalKeperawatanIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalKeperawatanIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalKeperawatanIGDActionPerformed(evt);
             }
         });
@@ -1837,8 +1945,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisIGD.setName("MnPenilaianAwalMedisIGD"); // NOI18N
         MnPenilaianAwalMedisIGD.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPenilaianAwalMedisIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisIGDActionPerformed(evt);
             }
         });
@@ -1853,8 +1963,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianAwalMedisIGDPsikiatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianAwalMedisIGDPsikiatri.setName("MnPenilaianAwalMedisIGDPsikiatri"); // NOI18N
         MnPenilaianAwalMedisIGDPsikiatri.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPenilaianAwalMedisIGDPsikiatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianAwalMedisIGDPsikiatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianAwalMedisIGDPsikiatriActionPerformed(evt);
             }
         });
@@ -1869,8 +1981,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPasienKeracunan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPasienKeracunan.setName("MnPenilaianPasienKeracunan"); // NOI18N
         MnPenilaianPasienKeracunan.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPenilaianPasienKeracunan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPasienKeracunan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPasienKeracunanActionPerformed(evt);
             }
         });
@@ -1885,8 +1999,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCatatanObservasiIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanObservasiIGD.setName("MnCatatanObservasiIGD"); // NOI18N
         MnCatatanObservasiIGD.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnCatatanObservasiIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCatatanObservasiIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCatatanObservasiIGDActionPerformed(evt);
             }
         });
@@ -1901,8 +2017,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPengkajianRestrain.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPengkajianRestrain.setName("MnPengkajianRestrain"); // NOI18N
         MnPengkajianRestrain.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPengkajianRestrain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPengkajianRestrain.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPengkajianRestrainActionPerformed(evt);
             }
         });
@@ -1917,8 +2035,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemantauanPEWSAnak.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemantauanPEWSAnak.setName("MnPemantauanPEWSAnak"); // NOI18N
         MnPemantauanPEWSAnak.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPemantauanPEWSAnak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemantauanPEWSAnak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemantauanPEWSAnakActionPerformed(evt);
             }
         });
@@ -1933,8 +2053,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemantauanPEWSDewasa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemantauanPEWSDewasa.setName("MnPemantauanPEWSDewasa"); // NOI18N
         MnPemantauanPEWSDewasa.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPemantauanPEWSDewasa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemantauanPEWSDewasa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemantauanPEWSDewasaActionPerformed(evt);
             }
         });
@@ -1949,8 +2071,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemantauanMEOWSObstetri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemantauanMEOWSObstetri.setName("MnPemantauanMEOWSObstetri"); // NOI18N
         MnPemantauanMEOWSObstetri.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPemantauanMEOWSObstetri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemantauanMEOWSObstetri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemantauanMEOWSObstetriActionPerformed(evt);
             }
         });
@@ -1965,8 +2089,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemantauanEWSNeonatus.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemantauanEWSNeonatus.setName("MnPemantauanEWSNeonatus"); // NOI18N
         MnPemantauanEWSNeonatus.setPreferredSize(new java.awt.Dimension(230, 26));
-        MnPemantauanEWSNeonatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemantauanEWSNeonatus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemantauanEWSNeonatusActionPerformed(evt);
             }
         });
@@ -1993,12 +2119,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnChecklistPreOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnChecklistPreOperasi.setName("MnChecklistPreOperasi"); // NOI18N
         MnChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnChecklistPreOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnChecklistPreOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnChecklistPreOperasiActionPerformed(evt);
             }
         });
-        
+        MnRMOperasi.add(MnChecklistPreOperasi);
+
         MnSignInSebelumAnestesi.setBackground(new java.awt.Color(255, 255, 254));
         MnSignInSebelumAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnSignInSebelumAnestesi.setForeground(new java.awt.Color(50, 50, 50));
@@ -2008,12 +2137,15 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSignInSebelumAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSignInSebelumAnestesi.setName("MnSignInSebelumAnestesi"); // NOI18N
         MnSignInSebelumAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnSignInSebelumAnestesi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSignInSebelumAnestesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSignInSebelumAnestesiActionPerformed(evt);
             }
         });
-        
+        MnRMOperasi.add(MnSignInSebelumAnestesi);
+
         MnTimeOutSebelumInsisi.setBackground(new java.awt.Color(255, 255, 254));
         MnTimeOutSebelumInsisi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnTimeOutSebelumInsisi.setForeground(new java.awt.Color(50, 50, 50));
@@ -2023,11 +2155,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnTimeOutSebelumInsisi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnTimeOutSebelumInsisi.setName("MnTimeOutSebelumInsisi"); // NOI18N
         MnTimeOutSebelumInsisi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnTimeOutSebelumInsisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnTimeOutSebelumInsisi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnTimeOutSebelumInsisiActionPerformed(evt);
             }
         });
+        MnRMOperasi.add(MnTimeOutSebelumInsisi);
 
         MnSignOutSebelumMenutupLuka.setBackground(new java.awt.Color(255, 255, 254));
         MnSignOutSebelumMenutupLuka.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2038,11 +2173,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSignOutSebelumMenutupLuka.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSignOutSebelumMenutupLuka.setName("MnSignOutSebelumMenutupLuka"); // NOI18N
         MnSignOutSebelumMenutupLuka.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnSignOutSebelumMenutupLuka.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSignOutSebelumMenutupLuka.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSignOutSebelumMenutupLukaActionPerformed(evt);
             }
         });
+        MnRMOperasi.add(MnSignOutSebelumMenutupLuka);
 
         MnChecklistPostOperasi.setBackground(new java.awt.Color(255, 255, 254));
         MnChecklistPostOperasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2053,11 +2191,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnChecklistPostOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnChecklistPostOperasi.setName("MnChecklistPostOperasi"); // NOI18N
         MnChecklistPostOperasi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnChecklistPostOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnChecklistPostOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnChecklistPostOperasiActionPerformed(evt);
             }
         });
+        MnRMOperasi.add(MnChecklistPostOperasi);
 
         MnPenilaianPreOp.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPreOp.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2068,11 +2209,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPreOp.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPreOp.setName("MnPenilaianPreOp"); // NOI18N
         MnPenilaianPreOp.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnPenilaianPreOp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPreOp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPreOpActionPerformed(evt);
             }
         });
+        MnRMOperasi.add(MnPenilaianPreOp);
 
         MnPenilaianPreAnastesi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPreAnastesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2083,12 +2227,68 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPreAnastesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPreAnastesi.setName("MnPenilaianPreAnastesi"); // NOI18N
         MnPenilaianPreAnastesi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnPenilaianPreAnastesi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPreAnastesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPreAnastesiActionPerformed(evt);
             }
         });
         MnRMOperasi.add(MnPenilaianPreAnastesi);
+
+        MnSkorAldrettePascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkorAldrettePascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSkorAldrettePascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkorAldrettePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSkorAldrettePascaAnestesi.setText("Skor Aldrette Pasca Anestesi");
+        MnSkorAldrettePascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkorAldrettePascaAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkorAldrettePascaAnestesi.setName("MnSkorAldrettePascaAnestesi"); // NOI18N
+        MnSkorAldrettePascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnSkorAldrettePascaAnestesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnSkorAldrettePascaAnestesiActionPerformed(evt);
+            }
+        });
+        MnRMOperasi.add(MnSkorAldrettePascaAnestesi);
+
+        MnSkorStewardPascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkorStewardPascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSkorStewardPascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkorStewardPascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSkorStewardPascaAnestesi.setText("Skor Steward Pasca Anestesi");
+        MnSkorStewardPascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkorStewardPascaAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkorStewardPascaAnestesi.setName("MnSkorStewardPascaAnestesi"); // NOI18N
+        MnSkorStewardPascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnSkorStewardPascaAnestesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnSkorStewardPascaAnestesiActionPerformed(evt);
+            }
+        });
+        MnRMOperasi.add(MnSkorStewardPascaAnestesi);
+
+        MnSkorBromagePascaAnestesi.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkorBromagePascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSkorBromagePascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkorBromagePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSkorBromagePascaAnestesi.setText("Skor Steward Pasca Anestesi");
+        MnSkorBromagePascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkorBromagePascaAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkorBromagePascaAnestesi.setName("MnSkorBromagePascaAnestesi"); // NOI18N
+        MnSkorBromagePascaAnestesi.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnSkorBromagePascaAnestesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnSkorBromagePascaAnestesiActionPerformed(evt);
+            }
+        });
+        MnRMOperasi.add(MnSkorBromagePascaAnestesi);
 
         MnDataRM.add(MnRMOperasi);
 
@@ -2111,8 +2311,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckListKriteriaMasukHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckListKriteriaMasukHCU.setName("MnCheckListKriteriaMasukHCU"); // NOI18N
         MnCheckListKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnCheckListKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckListKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckListKriteriaMasukHCUActionPerformed(evt);
             }
         });
@@ -2127,8 +2329,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckListKriteriaMasukICU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckListKriteriaMasukICU.setName("MnCheckListKriteriaMasukICU"); // NOI18N
         MnCheckListKriteriaMasukICU.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnCheckListKriteriaMasukICU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckListKriteriaMasukICU.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckListKriteriaMasukICUActionPerformed(evt);
             }
         });
@@ -2145,8 +2349,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUjiFungsiKFR.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUjiFungsiKFR.setName("MnUjiFungsiKFR"); // NOI18N
         MnUjiFungsiKFR.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnUjiFungsiKFR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUjiFungsiKFR.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUjiFungsiKFRActionPerformed(evt);
             }
         });
@@ -2161,6 +2367,132 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRMRisikoJatuh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRMRisikoJatuh.setName("MnRMRisikoJatuh"); // NOI18N
         MnRMRisikoJatuh.setPreferredSize(new java.awt.Dimension(220, 26));
+
+        MnPenilaianRisikoJatuhDewasa.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhDewasa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhDewasa.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhDewasa.setText("Penilaian Lanjutan Risiko Jatuh Dewasa");
+        MnPenilaianRisikoJatuhDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhDewasa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhDewasa.setName("MnPenilaianRisikoJatuhDewasa"); // NOI18N
+        MnPenilaianRisikoJatuhDewasa.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhDewasa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhDewasaActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhDewasa);
+
+        MnPenilaianRisikoJatuhAnak.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhAnak.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhAnak.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhAnak.setText("Penilaian Lanjutan Risiko Jatuh Anak");
+        MnPenilaianRisikoJatuhAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhAnak.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhAnak.setName("MnPenilaianRisikoJatuhAnak"); // NOI18N
+        MnPenilaianRisikoJatuhAnak.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhAnak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhAnakActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhAnak);
+
+        MnPenilaianRisikoJatuhLansia.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhLansia.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhLansia.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhLansia.setText("Penilaian Lanjutan Risiko Jatuh Lansia");
+        MnPenilaianRisikoJatuhLansia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhLansia.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhLansia.setName("MnPenilaianRisikoJatuhLansia"); // NOI18N
+        MnPenilaianRisikoJatuhLansia.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhLansia.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhLansiaActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhLansia);
+
+        MnPenilaianRisikoJatuhNeonatus.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhNeonatus.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhNeonatus.setText("Penilaian Lanjutan Risiko Jatuh Neonatus");
+        MnPenilaianRisikoJatuhNeonatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhNeonatus.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhNeonatus.setName("MnPenilaianRisikoJatuhNeonatus"); // NOI18N
+        MnPenilaianRisikoJatuhNeonatus.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhNeonatus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhNeonatusActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhNeonatus);
+
+        MnPenilaianRisikoJatuhGeriatri.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhGeriatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhGeriatri.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhGeriatri.setText("Penilaian Lanjutan Risiko Jatuh Geriatri");
+        MnPenilaianRisikoJatuhGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhGeriatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhGeriatri.setName("MnPenilaianRisikoJatuhGeriatri"); // NOI18N
+        MnPenilaianRisikoJatuhGeriatri.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhGeriatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhGeriatriActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhGeriatri);
+
+        MnPenilaianRisikoJatuhPsikiatri.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianRisikoJatuhPsikiatri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianRisikoJatuhPsikiatri.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianRisikoJatuhPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianRisikoJatuhPsikiatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianRisikoJatuhPsikiatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianRisikoJatuhPsikiatri.setLabel("Penilaian Lanjutan Risiko Jatuh Psikiatri");
+        MnPenilaianRisikoJatuhPsikiatri.setName("MnPenilaianRisikoJatuhPsikiatri"); // NOI18N
+        MnPenilaianRisikoJatuhPsikiatri.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianRisikoJatuhPsikiatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianRisikoJatuhPsikiatriActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianRisikoJatuhPsikiatri);
+
+        MnPenilaianLanjutanSkriningFungsional.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianLanjutanSkriningFungsional.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianLanjutanSkriningFungsional.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianLanjutanSkriningFungsional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianLanjutanSkriningFungsional.setText("Penilaian Lanjutan Risiko Jatuh Psikiatri");
+        MnPenilaianLanjutanSkriningFungsional.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianLanjutanSkriningFungsional.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianLanjutanSkriningFungsional.setName("MnPenilaianLanjutanSkriningFungsional"); // NOI18N
+        MnPenilaianLanjutanSkriningFungsional.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianLanjutanSkriningFungsional.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPenilaianLanjutanSkriningFungsionalActionPerformed(evt);
+            }
+        });
+        MnRMRisikoJatuh.add(MnPenilaianLanjutanSkriningFungsional);
 
         MnDataRM.add(MnRMRisikoJatuh);
 
@@ -2183,8 +2515,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianTambahanGeriatri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianTambahanGeriatri.setName("MnPenilaianTambahanGeriatri"); // NOI18N
         MnPenilaianTambahanGeriatri.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianTambahanGeriatri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianTambahanGeriatri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianTambahanGeriatriActionPerformed(evt);
             }
         });
@@ -2199,8 +2533,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianTambahanBunuhDiri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianTambahanBunuhDiri.setName("MnPenilaianTambahanBunuhDiri"); // NOI18N
         MnPenilaianTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianTambahanBunuhDiriActionPerformed(evt);
             }
         });
@@ -2215,8 +2551,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianTambahanPerilakuKekerasan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianTambahanPerilakuKekerasan.setName("MnPenilaianTambahanPerilakuKekerasan"); // NOI18N
         MnPenilaianTambahanPerilakuKekerasan.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianTambahanPerilakuKekerasan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianTambahanPerilakuKekerasan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianTambahanPerilakuKekerasanActionPerformed(evt);
             }
         });
@@ -2231,8 +2569,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianTambahanMelarikanDiri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianTambahanMelarikanDiri.setName("MnPenilaianTambahanMelarikanDiri"); // NOI18N
         MnPenilaianTambahanMelarikanDiri.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianTambahanMelarikanDiri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianTambahanMelarikanDiri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianTambahanMelarikanDiriActionPerformed(evt);
             }
         });
@@ -2247,8 +2587,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPasienTerminal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPasienTerminal.setName("MnPenilaianPasienTerminal"); // NOI18N
         MnPenilaianPasienTerminal.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianPasienTerminal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPasienTerminal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPasienTerminalActionPerformed(evt);
             }
         });
@@ -2263,8 +2605,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianKorbanKekerasan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianKorbanKekerasan.setName("MnPenilaianKorbanKekerasan"); // NOI18N
         MnPenilaianKorbanKekerasan.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianKorbanKekerasan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianKorbanKekerasan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianKorbanKekerasanActionPerformed(evt);
             }
         });
@@ -2279,8 +2623,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianPasienPenyakitMenular.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianPasienPenyakitMenular.setName("MnPenilaianPasienPenyakitMenular"); // NOI18N
         MnPenilaianPasienPenyakitMenular.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianPasienPenyakitMenular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianPasienPenyakitMenular.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianPasienPenyakitMenularActionPerformed(evt);
             }
         });
@@ -2295,8 +2641,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianMCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianMCU.setName("MnPenilaianMCU"); // NOI18N
         MnPenilaianMCU.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnPenilaianMCU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianMCU.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianMCUActionPerformed(evt);
             }
         });
@@ -2311,8 +2659,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHemodialisa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHemodialisa.setName("MnHemodialisa"); // NOI18N
         MnHemodialisa.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnHemodialisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHemodialisa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHemodialisaActionPerformed(evt);
             }
         });
@@ -2339,8 +2689,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnKonselingFarmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnKonselingFarmasi.setName("MnKonselingFarmasi"); // NOI18N
         MnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnKonselingFarmasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnKonselingFarmasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnKonselingFarmasiActionPerformed(evt);
             }
         });
@@ -2355,8 +2707,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRekonsiliasiObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRekonsiliasiObat.setName("MnRekonsiliasiObat"); // NOI18N
         MnRekonsiliasiObat.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnRekonsiliasiObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekonsiliasiObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekonsiliasiObatActionPerformed(evt);
             }
         });
@@ -2383,8 +2737,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCatatanCekGDS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanCekGDS.setName("MnCatatanCekGDS"); // NOI18N
         MnCatatanCekGDS.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCatatanCekGDS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCatatanCekGDS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCatatanCekGDSActionPerformed(evt);
             }
         });
@@ -2399,8 +2755,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnMonitoringReaksiTranfusi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnMonitoringReaksiTranfusi.setName("MnMonitoringReaksiTranfusi"); // NOI18N
         MnMonitoringReaksiTranfusi.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnMonitoringReaksiTranfusi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnMonitoringReaksiTranfusi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnMonitoringReaksiTranfusiActionPerformed(evt);
             }
         });
@@ -2415,8 +2773,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenilaianUlangNyeri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenilaianUlangNyeri.setName("MnPenilaianUlangNyeri"); // NOI18N
         MnPenilaianUlangNyeri.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnPenilaianUlangNyeri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenilaianUlangNyeri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenilaianUlangNyeriActionPerformed(evt);
             }
         });
@@ -2431,8 +2791,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCatatanKeperawatan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanKeperawatan.setName("MnCatatanKeperawatan"); // NOI18N
         MnCatatanKeperawatan.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCatatanKeperawatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCatatanKeperawatan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCatatanKeperawatanActionPerformed(evt);
             }
         });
@@ -2447,8 +2809,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCatatanPersalinan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanPersalinan.setName("MnCatatanPersalinan"); // NOI18N
         MnCatatanPersalinan.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnCatatanPersalinan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCatatanPersalinan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCatatanPersalinanActionPerformed(evt);
             }
         });
@@ -2465,8 +2829,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDiagnosa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDiagnosa.setName("MnDiagnosa"); // NOI18N
         MnDiagnosa.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDiagnosa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDiagnosaActionPerformed(evt);
             }
         });
@@ -2491,8 +2857,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSkriningNutrisiDewasa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSkriningNutrisiDewasa.setName("ppSkriningNutrisiDewasa"); // NOI18N
         ppSkriningNutrisiDewasa.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppSkriningNutrisiDewasa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSkriningNutrisiDewasa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSkriningNutrisiDewasaBtnPrintActionPerformed(evt);
             }
         });
@@ -2507,8 +2875,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSkriningNutrisiLansia.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSkriningNutrisiLansia.setName("ppSkriningNutrisiLansia"); // NOI18N
         ppSkriningNutrisiLansia.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppSkriningNutrisiLansia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSkriningNutrisiLansia.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSkriningNutrisiLansiaBtnPrintActionPerformed(evt);
             }
         });
@@ -2523,8 +2893,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSkriningNutrisiAnak.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSkriningNutrisiAnak.setName("ppSkriningNutrisiAnak"); // NOI18N
         ppSkriningNutrisiAnak.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppSkriningNutrisiAnak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSkriningNutrisiAnak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSkriningNutrisiAnakBtnPrintActionPerformed(evt);
             }
         });
@@ -2539,8 +2911,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSkriningGizi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSkriningGizi.setName("ppSkriningGizi"); // NOI18N
         ppSkriningGizi.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppSkriningGizi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSkriningGizi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSkriningGiziBtnPrintActionPerformed(evt);
             }
         });
@@ -2555,8 +2929,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppAsuhanGizi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppAsuhanGizi.setName("ppAsuhanGizi"); // NOI18N
         ppAsuhanGizi.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppAsuhanGizi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppAsuhanGiziBtnPrintActionPerformed(evt);
             }
         });
@@ -2571,8 +2947,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppMonitoringAsuhanGizi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppMonitoringAsuhanGizi.setName("ppMonitoringAsuhanGizi"); // NOI18N
         ppMonitoringAsuhanGizi.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppMonitoringAsuhanGizi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppMonitoringAsuhanGizi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppMonitoringAsuhanGiziBtnPrintActionPerformed(evt);
             }
         });
@@ -2587,8 +2965,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppCatatanAdimeGizi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppCatatanAdimeGizi.setName("ppCatatanAdimeGizi"); // NOI18N
         ppCatatanAdimeGizi.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppCatatanAdimeGizi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppCatatanAdimeGizi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppCatatanAdimeGiziBtnPrintActionPerformed(evt);
             }
         });
@@ -2605,8 +2985,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnTransferAntarRuang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnTransferAntarRuang.setName("MnTransferAntarRuang"); // NOI18N
         MnTransferAntarRuang.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnTransferAntarRuang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnTransferAntarRuang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnTransferAntarRuangActionPerformed(evt);
             }
         });
@@ -2621,8 +3003,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnEdukasiPasienKeluarga.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnEdukasiPasienKeluarga.setName("MnEdukasiPasienKeluarga"); // NOI18N
         MnEdukasiPasienKeluarga.setPreferredSize(new java.awt.Dimension(220, 26));
-        MnEdukasiPasienKeluarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnEdukasiPasienKeluarga.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnEdukasiPasienKeluargaActionPerformed(evt);
             }
         });
@@ -2637,8 +3021,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppResume.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppResume.setName("ppResume"); // NOI18N
         ppResume.setPreferredSize(new java.awt.Dimension(220, 26));
-        ppResume.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppResume.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppResumeBtnPrintActionPerformed(evt);
             }
         });
@@ -2653,8 +3039,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppRiwayat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppRiwayat.setName("ppRiwayat"); // NOI18N
         ppRiwayat.setPreferredSize(new java.awt.Dimension(220, 26));
-        ppRiwayat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppRiwayat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppRiwayatBtnPrintActionPerformed(evt);
             }
         });
@@ -2669,8 +3057,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppDeteksiDIniCorona.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDeteksiDIniCorona.setName("ppDeteksiDIniCorona"); // NOI18N
         ppDeteksiDIniCorona.setPreferredSize(new java.awt.Dimension(220, 26));
-        ppDeteksiDIniCorona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppDeteksiDIniCorona.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppDeteksiDIniCoronaBtnPrintActionPerformed(evt);
             }
         });
@@ -2697,8 +3087,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnJadwalOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnJadwalOperasi.setName("MnJadwalOperasi"); // NOI18N
         MnJadwalOperasi.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnJadwalOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnJadwalOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnJadwalOperasiActionPerformed(evt);
             }
         });
@@ -2713,8 +3105,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanLab.setName("MnPermintaanLab"); // NOI18N
         MnPermintaanLab.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnPermintaanLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanLabActionPerformed(evt);
             }
         });
@@ -2729,8 +3123,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanRadiologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanRadiologi.setName("MnPermintaanRadiologi"); // NOI18N
         MnPermintaanRadiologi.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnPermintaanRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanRadiologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanRadiologiActionPerformed(evt);
             }
         });
@@ -2745,8 +3141,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanRanap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanRanap.setName("MnPermintaanRanap"); // NOI18N
         MnPermintaanRanap.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanRanapActionPerformed(evt);
             }
         });
@@ -2761,8 +3159,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanInformasiObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanInformasiObat.setName("MnPermintaanInformasiObat"); // NOI18N
         MnPermintaanInformasiObat.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanInformasiObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanInformasiObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanInformasiObatActionPerformed(evt);
             }
         });
@@ -2779,8 +3179,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnKamarInap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnKamarInap.setName("MnKamarInap"); // NOI18N
         MnKamarInap.setPreferredSize(new java.awt.Dimension(260, 26));
-        MnKamarInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnKamarInap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnKamarInapActionPerformed(evt);
             }
         });
@@ -2805,8 +3207,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRawatJalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRawatJalan.setName("MnRawatJalan"); // NOI18N
         MnRawatJalan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnRawatJalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRawatJalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRawatJalanActionPerformed(evt);
             }
         });
@@ -2821,8 +3225,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLab.setName("MnPeriksaLab"); // NOI18N
         MnPeriksaLab.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabActionPerformed(evt);
             }
         });
@@ -2837,8 +3243,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLabPA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLabPA.setName("MnPeriksaLabPA"); // NOI18N
         MnPeriksaLabPA.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLabPA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLabPA.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabPAActionPerformed(evt);
             }
         });
@@ -2853,8 +3261,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLabMB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLabMB.setName("MnPeriksaLabMB"); // NOI18N
         MnPeriksaLabMB.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLabMB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLabMB.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabMBActionPerformed(evt);
             }
         });
@@ -2869,8 +3279,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaRadiologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaRadiologi.setName("MnPeriksaRadiologi"); // NOI18N
         MnPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaRadiologiActionPerformed(evt);
             }
         });
@@ -2885,8 +3297,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnOperasi.setName("MnOperasi"); // NOI18N
         MnOperasi.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnOperasiActionPerformed(evt);
             }
         });
@@ -2913,8 +3327,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemberianObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemberianObat.setName("MnPemberianObat"); // NOI18N
         MnPemberianObat.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnPemberianObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemberianObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemberianObatActionPerformed(evt);
             }
         });
@@ -2929,8 +3345,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnNoResep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnNoResep.setName("MnNoResep"); // NOI18N
         MnNoResep.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnNoResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnNoResep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnNoResepActionPerformed(evt);
             }
         });
@@ -2945,8 +3363,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnResepDOkter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnResepDOkter.setName("MnResepDOkter"); // NOI18N
         MnResepDOkter.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnResepDOkter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnResepDOkter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnResepDOkterActionPerformed(evt);
             }
         });
@@ -2961,8 +3381,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCopyResep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCopyResep.setName("MnCopyResep"); // NOI18N
         MnCopyResep.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnCopyResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCopyResep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCopyResepActionPerformed(evt);
             }
         });
@@ -2989,8 +3411,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBillingParsial.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBillingParsial.setName("MnBillingParsial"); // NOI18N
         MnBillingParsial.setPreferredSize(new java.awt.Dimension(130, 26));
-        MnBillingParsial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBillingParsial.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBillingParsialActionPerformed(evt);
             }
         });
@@ -3005,8 +3429,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBilling.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBilling.setName("MnBilling"); // NOI18N
         MnBilling.setPreferredSize(new java.awt.Dimension(130, 26));
-        MnBilling.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBilling.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBillingActionPerformed(evt);
             }
         });
@@ -3040,8 +3466,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapKunjunganPoli.setName("MnLaporanRekapKunjunganPoli"); // NOI18N
         MnLaporanRekapKunjunganPoli.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganPoliActionPerformed(evt);
             }
         });
@@ -3056,8 +3484,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganDokter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapKunjunganDokter.setName("MnLaporanRekapKunjunganDokter"); // NOI18N
         MnLaporanRekapKunjunganDokter.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganDokterActionPerformed(evt);
             }
         });
@@ -3072,8 +3502,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapJenisBayar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapJenisBayar.setName("MnLaporanRekapJenisBayar"); // NOI18N
         MnLaporanRekapJenisBayar.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapJenisBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapJenisBayar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapJenisBayarActionPerformed(evt);
             }
         });
@@ -3088,8 +3520,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapRawatDarurat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapRawatDarurat.setName("MnLaporanRekapRawatDarurat"); // NOI18N
         MnLaporanRekapRawatDarurat.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapRawatDarurat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapRawatDarurat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapRawatDaruratActionPerformed(evt);
             }
         });
@@ -3104,8 +3538,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganBulanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapKunjunganBulanan.setName("MnLaporanRekapKunjunganBulanan"); // NOI18N
         MnLaporanRekapKunjunganBulanan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganBulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganBulanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganBulananActionPerformed(evt);
             }
         });
@@ -3120,8 +3556,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganBulananPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapKunjunganBulananPoli.setName("MnLaporanRekapKunjunganBulananPoli"); // NOI18N
         MnLaporanRekapKunjunganBulananPoli.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganBulananPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganBulananPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganBulananPoliActionPerformed(evt);
             }
         });
@@ -3136,8 +3574,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapPenyakitRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapPenyakitRalan.setName("MnLaporanRekapPenyakitRalan"); // NOI18N
         MnLaporanRekapPenyakitRalan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapPenyakitRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapPenyakitRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapPenyakitRalanActionPerformed(evt);
             }
         });
@@ -3152,8 +3592,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapPerujuk.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanRekapPerujuk.setName("MnLaporanRekapPerujuk"); // NOI18N
         MnLaporanRekapPerujuk.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapPerujuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapPerujuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapPerujukActionPerformed(evt);
             }
         });
@@ -3180,8 +3622,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerpoli.setName("ppGrafikPerpoli"); // NOI18N
         ppGrafikPerpoli.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerpoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoliActionPerformed(evt);
             }
         });
@@ -3196,8 +3640,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerpoli1.setName("ppGrafikPerpoli1"); // NOI18N
         ppGrafikPerpoli1.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerpoli1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoli1ActionPerformed(evt);
             }
         });
@@ -3212,8 +3658,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerpoli2.setName("ppGrafikPerpoli2"); // NOI18N
         ppGrafikPerpoli2.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerpoli2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoli2ActionPerformed(evt);
             }
         });
@@ -3228,8 +3676,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerdokter.setName("ppGrafikPerdokter"); // NOI18N
         ppGrafikPerdokter.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerdokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokterActionPerformed(evt);
             }
         });
@@ -3244,8 +3694,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerdokter1.setName("ppGrafikPerdokter1"); // NOI18N
         ppGrafikPerdokter1.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerdokter1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokter1ActionPerformed(evt);
             }
         });
@@ -3260,8 +3712,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerdokter2.setName("ppGrafikPerdokter2"); // NOI18N
         ppGrafikPerdokter2.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerdokter2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokter2ActionPerformed(evt);
             }
         });
@@ -3276,8 +3730,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerJK.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerJK.setName("ppGrafikPerJK"); // NOI18N
         ppGrafikPerJK.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerJK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerJK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerJKActionPerformed(evt);
             }
         });
@@ -3292,8 +3748,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerPekerjaan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerPekerjaan.setName("ppGrafikPerPekerjaan"); // NOI18N
         ppGrafikPerPekerjaan.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerPekerjaan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerPekerjaan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerPekerjaanActionPerformed(evt);
             }
         });
@@ -3308,8 +3766,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerAgama.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerAgama.setName("ppGrafikPerAgama"); // NOI18N
         ppGrafikPerAgama.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerAgama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerAgama.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerAgamaActionPerformed(evt);
             }
         });
@@ -3324,8 +3784,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerTahun.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerTahun.setName("ppGrafikPerTahun"); // NOI18N
         ppGrafikPerTahun.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerTahun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerTahun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerTahunActionPerformed(evt);
             }
         });
@@ -3340,8 +3802,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerBulan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerBulan.setName("ppGrafikPerBulan"); // NOI18N
         ppGrafikPerBulan.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerBulan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerBulan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerBulanActionPerformed(evt);
             }
         });
@@ -3357,8 +3821,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerTanggal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikPerTanggal.setName("ppGrafikPerTanggal"); // NOI18N
         ppGrafikPerTanggal.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikPerTanggal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerTanggal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerTanggalActionPerformed(evt);
             }
         });
@@ -3374,8 +3840,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikDemografi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppGrafikDemografi.setName("ppGrafikDemografi"); // NOI18N
         ppGrafikDemografi.setPreferredSize(new java.awt.Dimension(260, 26));
-        ppGrafikDemografi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikDemografi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikDemografiActionPerformed(evt);
             }
         });
@@ -3402,8 +3870,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSuratKontrol.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSuratKontrol.setName("MnSuratKontrol"); // NOI18N
         MnSuratKontrol.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSuratKontrol.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSuratKontrolActionPerformed(evt);
             }
         });
@@ -3418,8 +3888,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSuratButaWarna.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSuratButaWarna.setName("MnSuratButaWarna"); // NOI18N
         MnSuratButaWarna.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnSuratButaWarna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSuratButaWarna.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSuratButaWarnaActionPerformed(evt);
             }
         });
@@ -3434,8 +3906,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSuratBebasTato.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSuratBebasTato.setName("MnSuratBebasTato"); // NOI18N
         MnSuratBebasTato.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnSuratBebasTato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSuratBebasTato.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSuratBebasTatoActionPerformed(evt);
             }
         });
@@ -3450,8 +3924,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSuratKewaspadaanKesehatan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSuratKewaspadaanKesehatan.setName("MnSuratKewaspadaanKesehatan"); // NOI18N
         MnSuratKewaspadaanKesehatan.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnSuratKewaspadaanKesehatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSuratKewaspadaanKesehatan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSuratKewaspadaanKesehatanActionPerformed(evt);
             }
         });
@@ -3466,8 +3942,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratBebasTBC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratBebasTBC.setName("MnCetakSuratBebasTBC"); // NOI18N
         MnCetakSuratBebasTBC.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratBebasTBC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratBebasTBC.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratBebasTBCActionPerformed(evt);
             }
         });
@@ -3482,8 +3960,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSehat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratSehat.setName("MnCetakSuratSehat"); // NOI18N
         MnCetakSuratSehat.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratSehat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSehat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSehatActionPerformed(evt);
             }
         });
@@ -3498,8 +3978,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSehat1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratSehat1.setName("MnCetakSuratSehat1"); // NOI18N
         MnCetakSuratSehat1.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratSehat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSehat1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSehat1ActionPerformed(evt);
             }
         });
@@ -3514,8 +3996,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSehat2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratSehat2.setName("MnCetakSuratSehat2"); // NOI18N
         MnCetakSuratSehat2.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratSehat2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSehat2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSehat2ActionPerformed(evt);
             }
         });
@@ -3530,8 +4014,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakBebasNarkoba.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakBebasNarkoba.setName("MnCetakBebasNarkoba"); // NOI18N
         MnCetakBebasNarkoba.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakBebasNarkoba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakBebasNarkoba.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakBebasNarkobaActionPerformed(evt);
             }
         });
@@ -3546,8 +4032,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakit.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratSakit.setName("MnCetakSuratSakit"); // NOI18N
         MnCetakSuratSakit.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratSakit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSakit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSakitActionPerformed(evt);
             }
         });
@@ -3562,8 +4050,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakitPihak2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratSakitPihak2.setName("MnCetakSuratSakitPihak2"); // NOI18N
         MnCetakSuratSakitPihak2.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratSakitPihak2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSakitPihak2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSakitPihak2ActionPerformed(evt);
             }
         });
@@ -3578,8 +4068,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratKeteranganRanap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratKeteranganRanap.setName("MnCetakSuratKeteranganRanap"); // NOI18N
         MnCetakSuratKeteranganRanap.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratKeteranganRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratKeteranganRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratKeteranganRanapActionPerformed(evt);
             }
         });
@@ -3594,8 +4086,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratHamil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratHamil.setName("MnCetakSuratHamil"); // NOI18N
         MnCetakSuratHamil.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratHamil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratHamil.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratHamilActionPerformed(evt);
             }
         });
@@ -3610,8 +4104,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratCutiHamil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratCutiHamil.setName("MnCetakSuratCutiHamil"); // NOI18N
         MnCetakSuratCutiHamil.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratCutiHamil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratCutiHamil.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratCutiHamilActionPerformed(evt);
             }
         });
@@ -3626,8 +4122,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratCovid.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakSuratCovid.setName("MnCetakSuratCovid"); // NOI18N
         MnCetakSuratCovid.setPreferredSize(new java.awt.Dimension(250, 26));
-        MnCetakSuratCovid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratCovid.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratCovidActionPerformed(evt);
             }
         });
@@ -3642,8 +4140,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPersetujuanUmum.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPersetujuanUmum.setName("MnPersetujuanUmum"); // NOI18N
         MnPersetujuanUmum.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPersetujuanUmum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPersetujuanUmum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPersetujuanUmumActionPerformed(evt);
             }
         });
@@ -3658,8 +4158,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPersetujuanPenolakanTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPersetujuanPenolakanTindakan.setName("MnPersetujuanPenolakanTindakan"); // NOI18N
         MnPersetujuanPenolakanTindakan.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPersetujuanPenolakanTindakan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPersetujuanPenolakanTindakan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPersetujuanPenolakanTindakanActionPerformed(evt);
             }
         });
@@ -3674,8 +4176,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPulangAtasPermintaanSendiri.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPulangAtasPermintaanSendiri.setName("MnPulangAtasPermintaanSendiri"); // NOI18N
         MnPulangAtasPermintaanSendiri.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPulangAtasPermintaanSendiri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPulangAtasPermintaanSendiri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPulangAtasPermintaanSendiriActionPerformed(evt);
             }
         });
@@ -3690,8 +4194,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPernyataanPasienUmum.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPernyataanPasienUmum.setName("MnPernyataanPasienUmum"); // NOI18N
         MnPernyataanPasienUmum.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPernyataanPasienUmum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPernyataanPasienUmum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPernyataanPasienUmumActionPerformed(evt);
             }
         });
@@ -3706,8 +4212,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPersetujuanRawatInap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPersetujuanRawatInap.setName("MnPersetujuanRawatInap"); // NOI18N
         MnPersetujuanRawatInap.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPersetujuanRawatInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPersetujuanRawatInap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPersetujuanRawatInapActionPerformed(evt);
             }
         });
@@ -3722,8 +4230,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPersetujuanPenundaanPelayanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPersetujuanPenundaanPelayanan.setName("MnPersetujuanPenundaanPelayanan"); // NOI18N
         MnPersetujuanPenundaanPelayanan.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPersetujuanPenundaanPelayanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPersetujuanPenundaanPelayanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPersetujuanPenundaanPelayananActionPerformed(evt);
             }
         });
@@ -3738,8 +4248,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPenolakanAnjuranMedis.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPenolakanAnjuranMedis.setName("MnPenolakanAnjuranMedis"); // NOI18N
         MnPenolakanAnjuranMedis.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPenolakanAnjuranMedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPenolakanAnjuranMedis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPenolakanAnjuranMedisActionPerformed(evt);
             }
         });
@@ -3764,8 +4276,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakRegister.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakRegister.setName("MnCetakRegister"); // NOI18N
         MnCetakRegister.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnCetakRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakRegister.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakRegisterActionPerformed(evt);
             }
         });
@@ -3780,8 +4294,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakRegister1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakRegister1.setName("MnCetakRegister1"); // NOI18N
         MnCetakRegister1.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnCetakRegister1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakRegister1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakRegister1ActionPerformed(evt);
             }
         });
@@ -3796,8 +4312,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakRegister2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakRegister2.setName("MnCetakRegister2"); // NOI18N
         MnCetakRegister2.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakRegister2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakRegister2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakRegister2ActionPerformed(evt);
             }
         });
@@ -3812,8 +4330,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBuktiPelayananRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBuktiPelayananRalan.setName("MnBuktiPelayananRalan"); // NOI18N
         MnBuktiPelayananRalan.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnBuktiPelayananRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBuktiPelayananRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBuktiPelayananRalanActionPerformed(evt);
             }
         });
@@ -3828,8 +4348,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarCasemix.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLembarCasemix.setName("MnLembarCasemix"); // NOI18N
         MnLembarCasemix.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnLembarCasemix.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarCasemix.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarCasemixActionPerformed(evt);
             }
         });
@@ -3844,8 +4366,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarCasemix1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLembarCasemix1.setName("MnLembarCasemix1"); // NOI18N
         MnLembarCasemix1.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnLembarCasemix1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarCasemix1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarCasemix1ActionPerformed(evt);
             }
         });
@@ -3860,8 +4384,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarCasemix2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLembarCasemix2.setName("MnLembarCasemix2"); // NOI18N
         MnLembarCasemix2.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnLembarCasemix2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarCasemix2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarCasemix2ActionPerformed(evt);
             }
         });
@@ -3876,8 +4402,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSPBK.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSPBK.setName("MnSPBK"); // NOI18N
         MnSPBK.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSPBK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSPBK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSPBKActionPerformed(evt);
             }
         });
@@ -3894,8 +4422,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSPBK1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSPBK1.setName("MnSPBK1"); // NOI18N
         MnSPBK1.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSPBK1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSPBK1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSPBK1ActionPerformed(evt);
             }
         });
@@ -3912,8 +4442,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSBT.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSBT.setName("MnSBT"); // NOI18N
         MnSBT.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSBT.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSBTActionPerformed(evt);
             }
         });
@@ -3928,8 +4460,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnJKRA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnJKRA.setName("MnJKRA"); // NOI18N
         MnJKRA.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnJKRA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnJKRA.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnJKRAActionPerformed(evt);
             }
         });
@@ -3946,8 +4480,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLembarRalan.setName("MnLembarRalan"); // NOI18N
         MnLembarRalan.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnLembarRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarRalanActionPerformed(evt);
             }
         });
@@ -3964,8 +4500,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBlangkoResep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBlangkoResep.setName("MnBlangkoResep"); // NOI18N
         MnBlangkoResep.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnBlangkoResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBlangkoResep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBlangkoResepActionPerformed(evt);
             }
         });
@@ -3980,8 +4518,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSuratJaminanPelayanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSuratJaminanPelayanan.setName("MnSuratJaminanPelayanan"); // NOI18N
         MnSuratJaminanPelayanan.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSuratJaminanPelayanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSuratJaminanPelayanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSuratJaminanPelayananActionPerformed(evt);
             }
         });
@@ -3994,8 +4534,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarKeluarMasuk2.setText("Lembar Masuk Keluar");
         MnLembarKeluarMasuk2.setName("MnLembarKeluarMasuk2"); // NOI18N
         MnLembarKeluarMasuk2.setPreferredSize(new java.awt.Dimension(300, 26));
-        MnLembarKeluarMasuk2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarKeluarMasuk2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarKeluarMasuk2ActionPerformed(evt);
             }
         });
@@ -4025,8 +4567,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList.setName("MnCheckList"); // NOI18N
         MnCheckList.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnCheckList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckListActionPerformed(evt);
             }
         });
@@ -4041,8 +4585,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList1.setName("MnCheckList1"); // NOI18N
         MnCheckList1.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnCheckList1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList1ActionPerformed(evt);
             }
         });
@@ -4057,8 +4603,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList2.setName("MnCheckList2"); // NOI18N
         MnCheckList2.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnCheckList2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList2ActionPerformed(evt);
             }
         });
@@ -4073,8 +4621,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList3.setName("MnCheckList3"); // NOI18N
         MnCheckList3.setPreferredSize(new java.awt.Dimension(310, 26));
-        MnCheckList3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList3ActionPerformed(evt);
             }
         });
@@ -4102,8 +4652,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList4.setName("MnCheckList4"); // NOI18N
         MnCheckList4.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList4ActionPerformed(evt);
             }
         });
@@ -4118,8 +4670,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList5.setName("MnCheckList5"); // NOI18N
         MnCheckList5.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList5ActionPerformed(evt);
             }
         });
@@ -4135,8 +4689,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList6.setName("MnCheckList6"); // NOI18N
         MnCheckList6.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList6ActionPerformed(evt);
             }
         });
@@ -4151,8 +4707,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList7.setName("MnCheckList7"); // NOI18N
         MnCheckList7.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList7.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList7ActionPerformed(evt);
             }
         });
@@ -4168,8 +4726,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList8.setName("MnCheckList8"); // NOI18N
         MnCheckList8.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList8.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList8ActionPerformed(evt);
             }
         });
@@ -4184,8 +4744,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCheckList9.setName("MnCheckList9"); // NOI18N
         MnCheckList9.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList9.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList9ActionPerformed(evt);
             }
         });
@@ -4212,8 +4774,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLabelTracker.setName("MnLabelTracker"); // NOI18N
         MnLabelTracker.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTrackerActionPerformed(evt);
             }
         });
@@ -4228,8 +4792,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLabelTracker1.setName("MnLabelTracker1"); // NOI18N
         MnLabelTracker1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker1ActionPerformed(evt);
             }
         });
@@ -4244,8 +4810,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLabelTracker2.setName("MnLabelTracker2"); // NOI18N
         MnLabelTracker2.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker2ActionPerformed(evt);
             }
         });
@@ -4260,8 +4828,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLabelTracker3.setName("MnLabelTracker3"); // NOI18N
         MnLabelTracker3.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker3ActionPerformed(evt);
             }
         });
@@ -4276,8 +4846,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcode.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBarcode.setName("MnBarcode"); // NOI18N
         MnBarcode.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBarcode.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBarcodeActionPerformed(evt);
             }
         });
@@ -4292,8 +4864,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcode1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBarcode1.setName("MnBarcode1"); // NOI18N
         MnBarcode1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcode1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBarcode1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBarcode1ActionPerformed(evt);
             }
         });
@@ -4308,8 +4882,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcode2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBarcode2.setName("MnBarcode2"); // NOI18N
         MnBarcode2.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcode2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBarcode2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBarcode2ActionPerformed(evt);
             }
         });
@@ -4324,8 +4900,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcodeRM9.setToolTipText("L");
         MnBarcodeRM9.setName("MnBarcodeRM9"); // NOI18N
         MnBarcodeRM9.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcodeRM9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBarcodeRM9.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBarcodeRM9ActionPerformed(evt);
             }
         });
@@ -4340,8 +4918,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang1.setName("MnGelang1"); // NOI18N
         MnGelang1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang1ActionPerformed(evt);
             }
         });
@@ -4356,8 +4936,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang2.setName("MnGelang2"); // NOI18N
         MnGelang2.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang2ActionPerformed(evt);
             }
         });
@@ -4372,8 +4954,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang3.setName("MnGelang3"); // NOI18N
         MnGelang3.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang3ActionPerformed(evt);
             }
         });
@@ -4388,8 +4972,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang4.setName("MnGelang4"); // NOI18N
         MnGelang4.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang4ActionPerformed(evt);
             }
         });
@@ -4404,8 +4990,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang5.setName("MnGelang5"); // NOI18N
         MnGelang5.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang5ActionPerformed(evt);
             }
         });
@@ -4420,8 +5008,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang6.setName("MnGelang6"); // NOI18N
         MnGelang6.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang6ActionPerformed(evt);
             }
         });
@@ -4436,8 +5026,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGelang7.setName("MnGelang7"); // NOI18N
         MnGelang7.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang7.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang7ActionPerformed(evt);
             }
         });
@@ -4471,8 +5063,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujukMasuk.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRujukMasuk.setName("MnRujukMasuk"); // NOI18N
         MnRujukMasuk.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnRujukMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRujukMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRujukMasukActionPerformed(evt);
             }
         });
@@ -4487,8 +5081,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujuk.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRujuk.setName("MnRujuk"); // NOI18N
         MnRujuk.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnRujuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRujuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRujukActionPerformed(evt);
             }
         });
@@ -4503,8 +5099,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPoliInternal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPoliInternal.setName("MnPoliInternal"); // NOI18N
         MnPoliInternal.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnPoliInternal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPoliInternal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPoliInternalActionPerformed(evt);
             }
         });
@@ -4531,11 +5129,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSEP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSEP.setName("MnSEP"); // NOI18N
         MnSEP.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSEP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSEPActionPerformed(evt);
             }
         });
+        MnBridging.add(MnSEP);
 
         ppSuratKontrol.setBackground(new java.awt.Color(255, 255, 254));
         ppSuratKontrol.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4546,11 +5147,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSuratKontrol.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuratKontrol.setName("ppSuratKontrol"); // NOI18N
         ppSuratKontrol.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSuratKontrol.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSuratKontrolBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppSuratKontrol);
 
         ppSuratPRI.setBackground(new java.awt.Color(255, 255, 254));
         ppSuratPRI.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4561,11 +5165,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSuratPRI.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuratPRI.setName("ppSuratPRI"); // NOI18N
         ppSuratPRI.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppSuratPRI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSuratPRI.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSuratPRIBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppSuratPRI);
 
         ppProgramPRB.setBackground(new java.awt.Color(255, 255, 254));
         ppProgramPRB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4576,11 +5183,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppProgramPRB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppProgramPRB.setName("ppProgramPRB"); // NOI18N
         ppProgramPRB.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppProgramPRB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppProgramPRB.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppProgramPRBActionPerformed(evt);
             }
         });
+        MnBridging.add(ppProgramPRB);
 
         ppSuplesiJasaRaharja.setBackground(new java.awt.Color(255, 255, 254));
         ppSuplesiJasaRaharja.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4591,11 +5201,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppSuplesiJasaRaharja.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuplesiJasaRaharja.setName("ppSuplesiJasaRaharja"); // NOI18N
         ppSuplesiJasaRaharja.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppSuplesiJasaRaharja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSuplesiJasaRaharja.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSuplesiJasaRaharjaBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppSuplesiJasaRaharja);
 
         ppDataIndukKecelakaan.setBackground(new java.awt.Color(255, 255, 254));
         ppDataIndukKecelakaan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4606,11 +5219,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppDataIndukKecelakaan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDataIndukKecelakaan.setName("ppDataIndukKecelakaan"); // NOI18N
         ppDataIndukKecelakaan.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppDataIndukKecelakaan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppDataIndukKecelakaan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppDataIndukKecelakaanBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppDataIndukKecelakaan);
 
         MnBelumTerbitSEP.setBackground(new java.awt.Color(255, 255, 254));
         MnBelumTerbitSEP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4621,11 +5237,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBelumTerbitSEP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBelumTerbitSEP.setName("MnBelumTerbitSEP"); // NOI18N
         MnBelumTerbitSEP.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnBelumTerbitSEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBelumTerbitSEP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBelumTerbitSEPActionPerformed(evt);
             }
         });
+        MnBridging.add(MnBelumTerbitSEP);
 
         MnSJP.setBackground(new java.awt.Color(255, 255, 254));
         MnSJP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4636,11 +5255,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSJP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSJP.setName("MnSJP"); // NOI18N
         MnSJP.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnSJP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSJP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSJPActionPerformed(evt);
             }
         });
+        MnBridging.add(MnSJP);
 
         MnPCare.setBackground(new java.awt.Color(255, 255, 254));
         MnPCare.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4651,11 +5273,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPCare.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPCare.setName("MnPCare"); // NOI18N
         MnPCare.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnPCare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPCare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPCareActionPerformed(evt);
             }
         });
+        MnBridging.add(MnPCare);
 
         MnRujukSisrute.setBackground(new java.awt.Color(255, 255, 254));
         MnRujukSisrute.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4666,11 +5291,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujukSisrute.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRujukSisrute.setName("MnRujukSisrute"); // NOI18N
         MnRujukSisrute.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnRujukSisrute.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRujukSisrute.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRujukSisruteActionPerformed(evt);
             }
         });
+        MnBridging.add(MnRujukSisrute);
 
         ppPasienCorona.setBackground(new java.awt.Color(255, 255, 254));
         ppPasienCorona.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4681,11 +5309,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppPasienCorona.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPasienCorona.setName("ppPasienCorona"); // NOI18N
         ppPasienCorona.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppPasienCorona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppPasienCorona.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppPasienCoronaBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppPasienCorona);
 
         ppPerawatanCorona.setBackground(new java.awt.Color(255, 255, 254));
         ppPerawatanCorona.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4696,11 +5327,14 @@ public final class DlgReg extends javax.swing.JDialog {
         ppPerawatanCorona.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPerawatanCorona.setName("ppPerawatanCorona"); // NOI18N
         ppPerawatanCorona.setPreferredSize(new java.awt.Dimension(320, 26));
-        ppPerawatanCorona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppPerawatanCorona.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppPerawatanCoronaBtnPrintActionPerformed(evt);
             }
         });
+        MnBridging.add(ppPerawatanCorona);
 
         MnTeridentifikasiTB.setBackground(new java.awt.Color(255, 255, 254));
         MnTeridentifikasiTB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4711,11 +5345,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnTeridentifikasiTB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnTeridentifikasiTB.setName("MnTeridentifikasiTB"); // NOI18N
         MnTeridentifikasiTB.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnTeridentifikasiTB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnTeridentifikasiTB.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnTeridentifikasiTBActionPerformed(evt);
             }
         });
+        MnBridging.add(MnTeridentifikasiTB);
 
         MnRiwayatPerawatanICareNIK.setBackground(new java.awt.Color(255, 255, 254));
         MnRiwayatPerawatanICareNIK.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4726,11 +5363,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRiwayatPerawatanICareNIK.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRiwayatPerawatanICareNIK.setName("MnRiwayatPerawatanICareNIK"); // NOI18N
         MnRiwayatPerawatanICareNIK.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnRiwayatPerawatanICareNIK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRiwayatPerawatanICareNIK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRiwayatPerawatanICareNIKActionPerformed(evt);
             }
         });
+        MnBridging.add(MnRiwayatPerawatanICareNIK);
 
         MnRiwayatPerawatanICareNoKartu.setBackground(new java.awt.Color(255, 255, 254));
         MnRiwayatPerawatanICareNoKartu.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4741,11 +5381,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRiwayatPerawatanICareNoKartu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRiwayatPerawatanICareNoKartu.setName("MnRiwayatPerawatanICareNoKartu"); // NOI18N
         MnRiwayatPerawatanICareNoKartu.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnRiwayatPerawatanICareNoKartu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRiwayatPerawatanICareNoKartu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRiwayatPerawatanICareNoKartuActionPerformed(evt);
             }
         });
+        MnBridging.add(MnRiwayatPerawatanICareNoKartu);
 
         MnRiwayatPerawatanICareNIK1.setBackground(new java.awt.Color(255, 255, 254));
         MnRiwayatPerawatanICareNIK1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4756,11 +5399,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRiwayatPerawatanICareNIK1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRiwayatPerawatanICareNIK1.setName("MnRiwayatPerawatanICareNIK1"); // NOI18N
         MnRiwayatPerawatanICareNIK1.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnRiwayatPerawatanICareNIK1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRiwayatPerawatanICareNIK1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRiwayatPerawatanICareNIK1ActionPerformed(evt);
             }
         });
+        MnBridging.add(MnRiwayatPerawatanICareNIK1);
 
         MnRiwayatPerawatanICareNoKartu1.setBackground(new java.awt.Color(255, 255, 254));
         MnRiwayatPerawatanICareNoKartu1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4771,11 +5417,14 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRiwayatPerawatanICareNoKartu1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRiwayatPerawatanICareNoKartu1.setName("MnRiwayatPerawatanICareNoKartu1"); // NOI18N
         MnRiwayatPerawatanICareNoKartu1.setPreferredSize(new java.awt.Dimension(320, 26));
-        MnRiwayatPerawatanICareNoKartu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRiwayatPerawatanICareNoKartu1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRiwayatPerawatanICareNoKartu1ActionPerformed(evt);
             }
         });
+        MnBridging.add(MnRiwayatPerawatanICareNoKartu1);
 
         jPopupMenu1.add(MnBridging);
 
@@ -4796,8 +5445,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppCatatanPasien.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppCatatanPasien.setName("ppCatatanPasien"); // NOI18N
         ppCatatanPasien.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppCatatanPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppCatatanPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppCatatanPasienBtnPrintActionPerformed(evt);
             }
         });
@@ -4812,8 +5463,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppBerkasDigital.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBerkasDigital.setName("ppBerkasDigital"); // NOI18N
         ppBerkasDigital.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppBerkasDigitalBtnPrintActionPerformed(evt);
             }
         });
@@ -4828,8 +5481,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppIKP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppIKP.setName("ppIKP"); // NOI18N
         ppIKP.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppIKP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppIKP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppIKPBtnPrintActionPerformed(evt);
             }
         });
@@ -4856,8 +5511,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutNoRawatDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutNoRawatDesc.setName("MnUrutNoRawatDesc"); // NOI18N
         MnUrutNoRawatDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutNoRawatDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutNoRawatDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutNoRawatDescActionPerformed(evt);
             }
         });
@@ -4872,8 +5529,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutNoRawatAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutNoRawatAsc.setName("MnUrutNoRawatAsc"); // NOI18N
         MnUrutNoRawatAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutNoRawatAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutNoRawatAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutNoRawatAscActionPerformed(evt);
             }
         });
@@ -4888,8 +5547,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutTanggalDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutTanggalDesc.setName("MnUrutTanggalDesc"); // NOI18N
         MnUrutTanggalDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutTanggalDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutTanggalDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutTanggalDescActionPerformed(evt);
             }
         });
@@ -4904,8 +5565,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutTanggalAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutTanggalAsc.setName("MnUrutTanggalAsc"); // NOI18N
         MnUrutTanggalAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutTanggalAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutTanggalAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutTanggalAscActionPerformed(evt);
             }
         });
@@ -4920,8 +5583,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutDokterDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutDokterDesc.setName("MnUrutDokterDesc"); // NOI18N
         MnUrutDokterDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutDokterDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutDokterDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutDokterDescActionPerformed(evt);
             }
         });
@@ -4936,8 +5601,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutDokterAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutDokterAsc.setName("MnUrutDokterAsc"); // NOI18N
         MnUrutDokterAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutDokterAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutDokterAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutDokterAscActionPerformed(evt);
             }
         });
@@ -4952,8 +5619,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPoliklinikDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPoliklinikDesc.setName("MnUrutPoliklinikDesc"); // NOI18N
         MnUrutPoliklinikDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPoliklinikDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPoliklinikDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPoliklinikDescActionPerformed(evt);
             }
         });
@@ -4968,8 +5637,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPoliklinikAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPoliklinikAsc.setName("MnUrutPoliklinikAsc"); // NOI18N
         MnUrutPoliklinikAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPoliklinikAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPoliklinikAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPoliklinikAscActionPerformed(evt);
             }
         });
@@ -4984,8 +5655,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPenjabDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPenjabDesc.setName("MnUrutPenjabDesc"); // NOI18N
         MnUrutPenjabDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPenjabDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPenjabDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPenjabDescActionPerformed(evt);
             }
         });
@@ -5000,8 +5673,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPenjabAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPenjabAsc.setName("MnUrutPenjabAsc"); // NOI18N
         MnUrutPenjabAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPenjabAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPenjabAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPenjabAscActionPerformed(evt);
             }
         });
@@ -5016,8 +5691,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutStatusDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutStatusDesc.setName("MnUrutStatusDesc"); // NOI18N
         MnUrutStatusDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutStatusDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutStatusDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutStatusDescActionPerformed(evt);
             }
         });
@@ -5032,8 +5709,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutStatusAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutStatusAsc.setName("MnUrutStatusAsc"); // NOI18N
         MnUrutStatusAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutStatusAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutStatusAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutStatusAscActionPerformed(evt);
             }
         });
@@ -5048,8 +5727,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRegDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutRegDesc1.setName("MnUrutRegDesc1"); // NOI18N
         MnUrutRegDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutRegDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutRegDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutRegDesc1ActionPerformed(evt);
             }
         });
@@ -5064,8 +5745,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRegAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutRegAsc1.setName("MnUrutRegAsc1"); // NOI18N
         MnUrutRegAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutRegAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutRegAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutRegAsc1ActionPerformed(evt);
             }
         });
@@ -5080,8 +5763,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRMDesc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutRMDesc.setName("MnUrutRMDesc"); // NOI18N
         MnUrutRMDesc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutRMDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutRMDesc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutRMDescActionPerformed(evt);
             }
         });
@@ -5096,8 +5781,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRMAsc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutRMAsc.setName("MnUrutRMAsc"); // NOI18N
         MnUrutRMAsc.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutRMAsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutRMAsc.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutRMAscActionPerformed(evt);
             }
         });
@@ -5124,8 +5811,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHapusTagihanOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHapusTagihanOperasi.setName("MnHapusTagihanOperasi"); // NOI18N
         MnHapusTagihanOperasi.setPreferredSize(new java.awt.Dimension(190, 26));
-        MnHapusTagihanOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHapusTagihanOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHapusTagihanOperasiActionPerformed(evt);
             }
         });
@@ -5140,8 +5829,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHapusObatOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHapusObatOperasi.setName("MnHapusObatOperasi"); // NOI18N
         MnHapusObatOperasi.setPreferredSize(new java.awt.Dimension(190, 26));
-        MnHapusObatOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHapusObatOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHapusObatOperasiActionPerformed(evt);
             }
         });
@@ -5156,8 +5847,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGabungNoRawat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnGabungNoRawat.setName("MnGabungNoRawat"); // NOI18N
         MnGabungNoRawat.setPreferredSize(new java.awt.Dimension(190, 26));
-        MnGabungNoRawat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGabungNoRawat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGabungNoRawatActionPerformed(evt);
             }
         });
@@ -5182,8 +5875,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppBerkas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBerkas.setName("ppBerkas"); // NOI18N
         ppBerkas.setPreferredSize(new java.awt.Dimension(180, 26));
-        ppBerkas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppBerkas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppBerkasBtnPrintActionPerformed(evt);
             }
         });
@@ -5198,8 +5893,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSudah.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSudah.setName("MnSudah"); // NOI18N
         MnSudah.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnSudah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahActionPerformed(evt);
             }
         });
@@ -5214,8 +5911,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBelum.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBelum.setName("MnBelum"); // NOI18N
         MnBelum.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnBelum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBelum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBelumActionPerformed(evt);
             }
         });
@@ -5230,8 +5929,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBatal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBatal.setName("MnBatal"); // NOI18N
         MnBatal.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBatal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBatalActionPerformed(evt);
             }
         });
@@ -5246,8 +5947,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDirujuk.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDirujuk.setName("MnDirujuk"); // NOI18N
         MnDirujuk.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnDirujuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDirujuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDirujukActionPerformed(evt);
             }
         });
@@ -5262,8 +5965,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDIrawat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDIrawat.setName("MnDIrawat"); // NOI18N
         MnDIrawat.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnDIrawat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDIrawat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDIrawatActionPerformed(evt);
             }
         });
@@ -5278,8 +5983,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnMeninggal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnMeninggal.setName("MnMeninggal"); // NOI18N
         MnMeninggal.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnMeninggal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnMeninggal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnMeninggalActionPerformed(evt);
             }
         });
@@ -5294,8 +6001,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPulangPaksa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPulangPaksa.setName("MnPulangPaksa"); // NOI18N
         MnPulangPaksa.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnPulangPaksa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPulangPaksa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPulangPaksaBtnPrintActionPerformed(evt);
             }
         });
@@ -5320,8 +6029,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnStatusBaru.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnStatusBaru.setName("MnStatusBaru"); // NOI18N
         MnStatusBaru.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnStatusBaru.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnStatusBaru.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnStatusBaruActionPerformed(evt);
             }
         });
@@ -5336,8 +6047,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnStatusLama.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnStatusLama.setName("MnStatusLama"); // NOI18N
         MnStatusLama.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnStatusLama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnStatusLama.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnStatusLamaActionPerformed(evt);
             }
         });
@@ -5370,13 +6083,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint3.setToolTipText("Alt+G");
         BtnPrint3.setName("BtnPrint3"); // NOI18N
         BtnPrint3.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint3ActionPerformed(evt);
             }
         });
-        BtnPrint3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrint3KeyPressed(evt);
             }
         });
@@ -5389,13 +6106,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar3.setToolTipText("Alt+U");
         BtnKeluar3.setName("BtnKeluar3"); // NOI18N
         BtnKeluar3.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar3ActionPerformed(evt);
             }
         });
-        BtnKeluar3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluar3KeyPressed(evt);
             }
         });
@@ -5404,8 +6125,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         Kelurahan2.setHighlighter(null);
         Kelurahan2.setName("Kelurahan2"); // NOI18N
-        Kelurahan2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kelurahan2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kelurahan2KeyPressed(evt);
             }
         });
@@ -5416,8 +6139,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKel.setMnemonic('1');
         btnKel.setToolTipText("ALt+1");
         btnKel.setName("btnKel"); // NOI18N
-        btnKel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKelActionPerformed(evt);
             }
         });
@@ -5426,8 +6151,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         Kecamatan2.setHighlighter(null);
         Kecamatan2.setName("Kecamatan2"); // NOI18N
-        Kecamatan2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kecamatan2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kecamatan2KeyPressed(evt);
             }
         });
@@ -5438,8 +6165,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKec.setMnemonic('1');
         btnKec.setToolTipText("ALt+1");
         btnKec.setName("btnKec"); // NOI18N
-        btnKec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKec.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKecActionPerformed(evt);
             }
         });
@@ -5448,8 +6177,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         Kabupaten2.setHighlighter(null);
         Kabupaten2.setName("Kabupaten2"); // NOI18N
-        Kabupaten2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kabupaten2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kabupaten2KeyPressed(evt);
             }
         });
@@ -5460,8 +6191,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKab.setMnemonic('1');
         btnKab.setToolTipText("ALt+1");
         btnKab.setName("btnKab"); // NOI18N
-        btnKab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKabActionPerformed(evt);
             }
         });
@@ -5489,13 +6222,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint4.setToolTipText("Alt+T");
         BtnPrint4.setName("BtnPrint4"); // NOI18N
         BtnPrint4.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint4ActionPerformed(evt);
             }
         });
-        BtnPrint4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint4.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrint4KeyPressed(evt);
             }
         });
@@ -5529,8 +6266,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint5.setToolTipText("Alt+T");
         BtnPrint5.setName("BtnPrint5"); // NOI18N
         BtnPrint5.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint5ActionPerformed(evt);
             }
         });
@@ -5543,8 +6282,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar4.setToolTipText("Alt+U");
         BtnKeluar4.setName("BtnKeluar4"); // NOI18N
         BtnKeluar4.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar4ActionPerformed(evt);
             }
         });
@@ -5561,8 +6302,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek5.setToolTipText("ALt+6");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek5ActionPerformed(evt);
             }
         });
@@ -5609,8 +6352,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnJadwalOperasi1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnJadwalOperasi1.setName("MnJadwalOperasi1"); // NOI18N
         MnJadwalOperasi1.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnJadwalOperasi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnJadwalOperasi1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnJadwalOperasi1ActionPerformed(evt);
             }
         });
@@ -5625,8 +6370,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanLab1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanLab1.setName("MnPermintaanLab1"); // NOI18N
         MnPermintaanLab1.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanLab1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanLab1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanLab1ActionPerformed(evt);
             }
         });
@@ -5641,8 +6388,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanRadiologi1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanRadiologi1.setName("MnPermintaanRadiologi1"); // NOI18N
         MnPermintaanRadiologi1.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanRadiologi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanRadiologi1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanRadiologi1ActionPerformed(evt);
             }
         });
@@ -5657,8 +6406,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanRanap1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanRanap1.setName("MnPermintaanRanap1"); // NOI18N
         MnPermintaanRanap1.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanRanap1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanRanap1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanRanap1ActionPerformed(evt);
             }
         });
@@ -5673,8 +6424,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPermintaanInformasiObat1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPermintaanInformasiObat1.setName("MnPermintaanInformasiObat1"); // NOI18N
         MnPermintaanInformasiObat1.setPreferredSize(new java.awt.Dimension(170, 26));
-        MnPermintaanInformasiObat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPermintaanInformasiObat1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPermintaanInformasiObat1ActionPerformed(evt);
             }
         });
@@ -5691,8 +6444,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnKamarInap1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnKamarInap1.setName("MnKamarInap1"); // NOI18N
         MnKamarInap1.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnKamarInap1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnKamarInap1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnKamarInap1ActionPerformed(evt);
             }
         });
@@ -5717,8 +6472,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRawatJalan1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRawatJalan1.setName("MnRawatJalan1"); // NOI18N
         MnRawatJalan1.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnRawatJalan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRawatJalan1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRawatJalan1ActionPerformed(evt);
             }
         });
@@ -5733,8 +6490,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLab1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLab1.setName("MnPeriksaLab1"); // NOI18N
         MnPeriksaLab1.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLab1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLab1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLab1ActionPerformed(evt);
             }
         });
@@ -5749,8 +6508,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLabPA2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLabPA2.setName("MnPeriksaLabPA2"); // NOI18N
         MnPeriksaLabPA2.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLabPA2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLabPA2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabPA2ActionPerformed(evt);
             }
         });
@@ -5765,8 +6526,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLabMB2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaLabMB2.setName("MnPeriksaLabMB2"); // NOI18N
         MnPeriksaLabMB2.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLabMB2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLabMB2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabMB2ActionPerformed(evt);
             }
         });
@@ -5781,8 +6544,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaRadiologi1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPeriksaRadiologi1.setName("MnPeriksaRadiologi1"); // NOI18N
         MnPeriksaRadiologi1.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaRadiologi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaRadiologi1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaRadiologi1ActionPerformed(evt);
             }
         });
@@ -5797,8 +6562,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnOperasi1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnOperasi1.setName("MnOperasi1"); // NOI18N
         MnOperasi1.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnOperasi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnOperasi1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnOperasi1ActionPerformed(evt);
             }
         });
@@ -5825,8 +6592,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemberianObat1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPemberianObat1.setName("MnPemberianObat1"); // NOI18N
         MnPemberianObat1.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnPemberianObat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemberianObat1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemberianObat1ActionPerformed(evt);
             }
         });
@@ -5841,8 +6610,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnNoResep1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnNoResep1.setName("MnNoResep1"); // NOI18N
         MnNoResep1.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnNoResep1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnNoResep1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnNoResep1ActionPerformed(evt);
             }
         });
@@ -5857,8 +6628,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnResepDOkter1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnResepDOkter1.setName("MnResepDOkter1"); // NOI18N
         MnResepDOkter1.setPreferredSize(new java.awt.Dimension(160, 26));
-        MnResepDOkter1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnResepDOkter1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnResepDOkter1ActionPerformed(evt);
             }
         });
@@ -5875,8 +6648,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBilling1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBilling1.setName("MnBilling1"); // NOI18N
         MnBilling1.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnBilling1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBilling1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBilling1ActionPerformed(evt);
             }
         });
@@ -5906,8 +6681,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppBerkasDigital1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBerkasDigital1.setName("ppBerkasDigital1"); // NOI18N
         ppBerkasDigital1.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppBerkasDigital1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppBerkasDigital1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppBerkasDigital1BtnPrintActionPerformed(evt);
             }
         });
@@ -5922,8 +6699,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppIKP1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppIKP1.setName("ppIKP1"); // NOI18N
         ppIKP1.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppIKP1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppIKP1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppIKP1BtnPrintActionPerformed(evt);
             }
         });
@@ -5938,8 +6717,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDiagnosa1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnDiagnosa1.setName("MnDiagnosa1"); // NOI18N
         MnDiagnosa1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnDiagnosa1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDiagnosa1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDiagnosa1ActionPerformed(evt);
             }
         });
@@ -5966,8 +6747,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutNoRawatDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutNoRawatDesc1.setName("MnUrutNoRawatDesc1"); // NOI18N
         MnUrutNoRawatDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutNoRawatDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutNoRawatDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutNoRawatDesc1ActionPerformed(evt);
             }
         });
@@ -5982,8 +6765,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutNoRawatAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutNoRawatAsc1.setName("MnUrutNoRawatAsc1"); // NOI18N
         MnUrutNoRawatAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutNoRawatAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutNoRawatAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutNoRawatAsc1ActionPerformed(evt);
             }
         });
@@ -5998,8 +6783,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutTanggalDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutTanggalDesc1.setName("MnUrutTanggalDesc1"); // NOI18N
         MnUrutTanggalDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutTanggalDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutTanggalDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutTanggalDesc1ActionPerformed(evt);
             }
         });
@@ -6014,8 +6801,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutTanggalAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutTanggalAsc1.setName("MnUrutTanggalAsc1"); // NOI18N
         MnUrutTanggalAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutTanggalAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutTanggalAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutTanggalAsc1ActionPerformed(evt);
             }
         });
@@ -6030,8 +6819,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutDokterDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutDokterDesc1.setName("MnUrutDokterDesc1"); // NOI18N
         MnUrutDokterDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutDokterDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutDokterDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutDokterDesc1ActionPerformed(evt);
             }
         });
@@ -6046,8 +6837,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutDokterAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutDokterAsc1.setName("MnUrutDokterAsc1"); // NOI18N
         MnUrutDokterAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutDokterAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutDokterAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutDokterAsc1ActionPerformed(evt);
             }
         });
@@ -6062,8 +6855,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPoliklinikDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPoliklinikDesc1.setName("MnUrutPoliklinikDesc1"); // NOI18N
         MnUrutPoliklinikDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPoliklinikDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPoliklinikDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPoliklinikDesc1ActionPerformed(evt);
             }
         });
@@ -6078,8 +6873,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPoliklinikAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPoliklinikAsc1.setName("MnUrutPoliklinikAsc1"); // NOI18N
         MnUrutPoliklinikAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPoliklinikAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPoliklinikAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPoliklinikAsc1ActionPerformed(evt);
             }
         });
@@ -6094,8 +6891,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPenjabDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPenjabDesc1.setName("MnUrutPenjabDesc1"); // NOI18N
         MnUrutPenjabDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPenjabDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPenjabDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPenjabDesc1ActionPerformed(evt);
             }
         });
@@ -6110,8 +6909,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutPenjabAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutPenjabAsc1.setName("MnUrutPenjabAsc1"); // NOI18N
         MnUrutPenjabAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutPenjabAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutPenjabAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutPenjabAsc1ActionPerformed(evt);
             }
         });
@@ -6126,8 +6927,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutStatusDesc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutStatusDesc1.setName("MnUrutStatusDesc1"); // NOI18N
         MnUrutStatusDesc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutStatusDesc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutStatusDesc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutStatusDesc1ActionPerformed(evt);
             }
         });
@@ -6142,8 +6945,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutStatusAsc1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUrutStatusAsc1.setName("MnUrutStatusAsc1"); // NOI18N
         MnUrutStatusAsc1.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnUrutStatusAsc1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUrutStatusAsc1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUrutStatusAsc1ActionPerformed(evt);
             }
         });
@@ -6160,8 +6965,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppRiwayat1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppRiwayat1.setName("ppRiwayat1"); // NOI18N
         ppRiwayat1.setPreferredSize(new java.awt.Dimension(210, 26));
-        ppRiwayat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppRiwayat1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppRiwayat1BtnPrintActionPerformed(evt);
             }
         });
@@ -6176,8 +6983,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHapusRujukan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHapusRujukan.setName("MnHapusRujukan"); // NOI18N
         MnHapusRujukan.setPreferredSize(new java.awt.Dimension(210, 26));
-        MnHapusRujukan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHapusRujukan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHapusRujukanActionPerformed(evt);
             }
         });
@@ -6192,8 +7001,10 @@ public final class DlgReg extends javax.swing.JDialog {
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setWarnaAtas(new java.awt.Color(100, 100, 10));
         internalFrame6.setWarnaBawah(new java.awt.Color(100, 100, 10));
-        internalFrame6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        internalFrame6.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 internalFrame6MouseClicked(evt);
             }
         });
@@ -6204,8 +7015,10 @@ public final class DlgReg extends javax.swing.JDialog {
         LabelCatatan.setText("Catatan");
         LabelCatatan.setName("LabelCatatan"); // NOI18N
         LabelCatatan.setPreferredSize(new java.awt.Dimension(580, 23));
-        LabelCatatan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        LabelCatatan.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 LabelCatatanMouseClicked(evt);
             }
         });
@@ -6215,8 +7028,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         kdpnj.setHighlighter(null);
         kdpnj.setName("kdpnj"); // NOI18N
-        kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpnj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpnjKeyPressed(evt);
             }
         });
@@ -6227,11 +7042,93 @@ public final class DlgReg extends javax.swing.JDialog {
         NoTelp.setName("NoTelp"); // NOI18N
         NoTelp.setPreferredSize(new java.awt.Dimension(207, 23));
 
+        WindowInputNoAntrian.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowInputNoAntrian.setModal(true);
+        WindowInputNoAntrian.setName("WindowInputNoAntrian"); // NOI18N
+        WindowInputNoAntrian.setUndecorated(true);
+        WindowInputNoAntrian.setResizable(false);
+
+        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Update No. Antrian ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame8.setName("internalFrame8"); // NOI18N
+        internalFrame8.setLayout(null);
+
+        buttonTutupDialogAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        buttonTutupDialogAntrian.setMnemonic('P');
+        buttonTutupDialogAntrian.setText("Tutup");
+        buttonTutupDialogAntrian.setToolTipText("Alt+P");
+        buttonTutupDialogAntrian.setName("buttonTutupDialogAntrian"); // NOI18N
+        buttonTutupDialogAntrian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonTutupDialogAntrianActionPerformed(evt);
+            }
+        });
+        internalFrame8.add(buttonTutupDialogAntrian);
+        buttonTutupDialogAntrian.setBounds(360, 63, 100, 30);
+
+        buttonSimpanAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        buttonSimpanAntrian.setMnemonic('S');
+        buttonSimpanAntrian.setText("Simpan");
+        buttonSimpanAntrian.setToolTipText("Alt+S");
+        buttonSimpanAntrian.setName("buttonSimpanAntrian"); // NOI18N
+        buttonSimpanAntrian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonSimpanAntrianActionPerformed(evt);
+            }
+        });
+        internalFrame8.add(buttonSimpanAntrian);
+        buttonSimpanAntrian.setBounds(484, 63, 100, 30);
+
+        textNoRawatAntrian.setEditable(false);
+        textNoRawatAntrian.setHighlighter(null);
+        textNoRawatAntrian.setName("textNoRawatAntrian"); // NOI18N
+        textNoRawatAntrian.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                textNoRawatAntrianKeyPressed(evt);
+            }
+        });
+        internalFrame8.add(textNoRawatAntrian);
+        textNoRawatAntrian.setBounds(108, 22, 310, 23);
+
+        textNoAntrian.setEditable(false);
+        textNoAntrian.setHighlighter(null);
+        textNoAntrian.setName("textNoAntrian"); // NOI18N
+        textNoAntrian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                textNoAntrianActionPerformed(evt);
+            }
+        });
+        internalFrame8.add(textNoAntrian);
+        textNoAntrian.setBounds(494, 22, 90, 23);
+
+        label41.setText("No. Antrian :");
+        label41.setName("label41"); // NOI18N
+        label41.setPreferredSize(new java.awt.Dimension(35, 23));
+        internalFrame8.add(label41);
+        label41.setBounds(421, 22, 70, 23);
+
+        label40.setText("No. Rawat :");
+        label40.setName("label40"); // NOI18N
+        label40.setPreferredSize(new java.awt.Dimension(35, 23));
+        internalFrame8.add(label40);
+        label40.setBounds(0, 22, 105, 23);
+
+        WindowInputNoAntrian.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -6254,13 +7151,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -6272,13 +7173,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -6290,13 +7195,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnEdit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnEditActionPerformed(evt);
             }
         });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnEditKeyPressed(evt);
             }
         });
@@ -6308,13 +7217,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -6326,13 +7239,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -6344,13 +7261,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -6373,13 +7294,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -6396,7 +7321,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6409,7 +7334,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6423,8 +7348,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(376, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -6435,13 +7362,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+7");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -6468,8 +7399,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek3.setToolTipText("ALt+6");
         BtnSeek3.setName("BtnSeek3"); // NOI18N
         BtnSeek3.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek3ActionPerformed(evt);
             }
         });
@@ -6490,8 +7423,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek4.setToolTipText("ALt+5");
         BtnSeek4.setName("BtnSeek4"); // NOI18N
         BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek4ActionPerformed(evt);
             }
         });
@@ -6527,8 +7462,10 @@ public final class DlgReg extends javax.swing.JDialog {
         TNoRw.setEditable(false);
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
-        TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoRw.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRwKeyPressed(evt);
             }
         });
@@ -6550,17 +7487,21 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
-        DTPReg.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        DTPReg.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 DTPRegItemStateChanged(evt);
             }
         });
-        DTPReg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        DTPReg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 DTPRegKeyPressed(evt);
             }
         });
@@ -6574,8 +7515,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TPngJwb.setHighlighter(null);
         TPngJwb.setName("TPngJwb"); // NOI18N
-        TPngJwb.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TPngJwb.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TPngJwbKeyPressed(evt);
             }
         });
@@ -6584,8 +7527,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoRM.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRMKeyPressed(evt);
             }
         });
@@ -6594,8 +7539,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
-        TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoReg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRegKeyPressed(evt);
             }
         });
@@ -6609,8 +7556,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJam.setName("CmbJam"); // NOI18N
-        CmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbJam.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbJamKeyPressed(evt);
             }
         });
@@ -6619,8 +7568,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenit.setName("CmbMenit"); // NOI18N
-        CmbMenit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbMenit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbMenitKeyPressed(evt);
             }
         });
@@ -6629,8 +7580,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetik.setName("CmbDetik"); // NOI18N
-        CmbDetik.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbDetik.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbDetikKeyPressed(evt);
             }
         });
@@ -6644,8 +7597,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TAlmt.setHighlighter(null);
         TAlmt.setName("TAlmt"); // NOI18N
-        TAlmt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TAlmt.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TAlmtKeyPressed(evt);
             }
         });
@@ -6656,8 +7611,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPasien.setMnemonic('1');
         BtnPasien.setToolTipText("ALt+1");
         BtnPasien.setName("BtnPasien"); // NOI18N
-        BtnPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPasienActionPerformed(evt);
             }
         });
@@ -6677,8 +7634,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         THbngn.setHighlighter(null);
         THbngn.setName("THbngn"); // NOI18N
-        THbngn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        THbngn.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 THbngnKeyPressed(evt);
             }
         });
@@ -6705,8 +7664,10 @@ public final class DlgReg extends javax.swing.JDialog {
         TPoli.setBounds(141, 132, 156, 23);
 
         TBiaya.setName("TBiaya"); // NOI18N
-        TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TBiaya.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TBiayaKeyPressed(evt);
             }
         });
@@ -6715,8 +7676,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
-        KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KdDokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KdDokterKeyPressed(evt);
             }
         });
@@ -6727,8 +7690,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
         BtnDokter.setName("BtnDokter"); // NOI18N
-        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokterActionPerformed(evt);
             }
         });
@@ -6737,8 +7702,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
-        kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpoli.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpoliKeyPressed(evt);
             }
         });
@@ -6749,8 +7716,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnUnit.setMnemonic('4');
         BtnUnit.setToolTipText("ALt+4");
         BtnUnit.setName("BtnUnit"); // NOI18N
-        BtnUnit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnUnit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnUnitActionPerformed(evt);
             }
         });
@@ -6782,8 +7751,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab.setMnemonic('2');
         btnPenjab.setToolTipText("ALt+2");
         btnPenjab.setName("btnPenjab"); // NOI18N
-        btnPenjab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenjab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenjabActionPerformed(evt);
             }
         });
@@ -6796,8 +7767,10 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel23.setBounds(426, 132, 90, 23);
 
         AsalRujukan.setName("AsalRujukan"); // NOI18N
-        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 AsalRujukanKeyPressed(evt);
             }
         });
@@ -6808,8 +7781,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab1.setMnemonic('2');
         btnPenjab1.setToolTipText("ALt+2");
         btnPenjab1.setName("btnPenjab1"); // NOI18N
-        btnPenjab1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenjab1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenjab1ActionPerformed(evt);
             }
         });
@@ -6831,8 +7806,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         NoKa.setHighlighter(null);
         NoKa.setName("NoKa"); // NOI18N
-        NoKa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoKa.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoKaKeyPressed(evt);
             }
         });
@@ -6843,8 +7820,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnCekBridging.setMnemonic('2');
         btnCekBridging.setToolTipText("ALt+2");
         btnCekBridging.setName("btnCekBridging"); // NOI18N
-        btnCekBridging.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBridging.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBridgingActionPerformed(evt);
             }
         });
@@ -6867,8 +7846,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkInput.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -6881,8 +7862,10 @@ public final class DlgReg extends javax.swing.JDialog {
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
-        TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        TabRawat.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 TabRawatMouseClicked(evt);
             }
         });
@@ -6896,16 +7879,21 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas.setComponentPopupMenu(jPopupMenu1);
         tbPetugas.setName("tbPetugas"); // NOI18N
-        tbPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbPetugas.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbPetugasMouseClicked(evt);
             }
         });
-        tbPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbPetugas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbPetugasKeyPressed(evt);
             }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
                 tbPetugasKeyReleased(evt);
             }
         });
@@ -6922,13 +7910,17 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas2.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas2.setComponentPopupMenu(jPopupMenu2);
         tbPetugas2.setName("tbPetugas2"); // NOI18N
-        tbPetugas2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbPetugas2.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbPetugas2MouseClicked(evt);
             }
         });
-        tbPetugas2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbPetugas2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbPetugas2KeyPressed(evt);
             }
         });
@@ -14274,6 +15266,37 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnCatatanPersalinanActionPerformed
 
+    private void buttonTutupDialogAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonTutupDialogAntrianActionPerformed
+    {//GEN-HEADEREND:event_buttonTutupDialogAntrianActionPerformed
+        WindowInputNoAntrian.dispose();
+    }//GEN-LAST:event_buttonTutupDialogAntrianActionPerformed
+
+    private void buttonSimpanAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonSimpanAntrianActionPerformed
+    {//GEN-HEADEREND:event_buttonSimpanAntrianActionPerformed
+        //
+    }//GEN-LAST:event_buttonSimpanAntrianActionPerformed
+
+    private void textNoRawatAntrianKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_textNoRawatAntrianKeyPressed
+    {//GEN-HEADEREND:event_textNoRawatAntrianKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+            if(!textNoRawatAntrian.getText().trim().equals(""))
+            {
+                Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",textNoAntrian,textNoRawatAntrian.getText());
+                if(textNoAntrian.getText().trim().equals(""))
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Data pasien tidak ditemukan..!!");
+                }
+                textNoRawatAntrian.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_textNoRawatAntrianKeyPressed
+
+    private void textNoAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_textNoAntrianActionPerformed
+    {//GEN-HEADEREND:event_textNoAntrianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNoAntrianActionPerformed
+
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -14623,6 +15646,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
+    private void MnInputNoAntrianRegistrasiActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        textNoRawatAntrian.setText(TNoRw.getText());
+        textNoAntrian.setText(Sequel.cariIsiSmc("select ifnull(lpad(cast(max(nomor) as unsigned integer) + 1, 3, '0'), '001') from antriloketcetak_smc where tanggal = ? and waktu_antrian_selesai is null", Valid.SetTgl(DTPReg.getSelectedItem().toString())));
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -14825,6 +15854,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnPenilaianFisioterapi;
     private javax.swing.JMenuItem MnPenilaianKorbanKekerasan;
     private javax.swing.JMenu MnPenilaianLain;
+    private javax.swing.JMenuItem MnPenilaianLanjutanSkriningFungsional;
     private javax.swing.JMenuItem MnPenilaianMCU;
     private javax.swing.JMenuItem MnPenilaianPasienKeracunan;
     private javax.swing.JMenuItem MnPenilaianPasienPenyakitMenular;
@@ -14832,6 +15862,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnPenilaianPreAnastesi;
     private javax.swing.JMenuItem MnPenilaianPreOp;
     private javax.swing.JMenuItem MnPenilaianPsikolog;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhAnak;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhDewasa;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhGeriatri;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhLansia;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhNeonatus;
+    private javax.swing.JMenuItem MnPenilaianRisikoJatuhPsikiatri;
     private javax.swing.JMenuItem MnPenilaianTambahanBunuhDiri;
     private javax.swing.JMenuItem MnPenilaianTambahanGeriatri;
     private javax.swing.JMenuItem MnPenilaianTambahanMelarikanDiri;
@@ -14893,6 +15929,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnSPBK1;
     private javax.swing.JMenuItem MnSignInSebelumAnestesi;
     private javax.swing.JMenuItem MnSignOutSebelumMenutupLuka;
+    private javax.swing.JMenuItem MnSkorAldrettePascaAnestesi;
+    private javax.swing.JMenuItem MnSkorBromagePascaAnestesi;
+    private javax.swing.JMenuItem MnSkorStewardPascaAnestesi;
     private javax.swing.JMenu MnStatus;
     private javax.swing.JMenuItem MnStatusBaru;
     private javax.swing.JMenuItem MnStatusLama;
@@ -14959,16 +15998,20 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox TPoli;
     private widget.TextBox TStatus;
     private javax.swing.JTabbedPane TabRawat;
+    private javax.swing.JDialog WindowInputNoAntrian;
     private widget.Button btnCekBridging;
     private widget.Button btnKab;
     private widget.Button btnKec;
     private widget.Button btnKel;
     private widget.Button btnPenjab;
     private widget.Button btnPenjab1;
+    private widget.Button buttonSimpanAntrian;
+    private widget.Button buttonTutupDialogAntrian;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
+    private widget.InternalFrame internalFrame8;
     private widget.Label jLabel10;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
@@ -15008,6 +16051,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JPopupMenu.Separator jSeparator12;
     private widget.TextBox kdpnj;
     private widget.TextBox kdpoli;
+    private widget.Label label40;
+    private widget.Label label41;
     private widget.TextBox nmpnj;
     private widget.PanelBiasa panelBiasa3;
     private widget.PanelBiasa panelBiasa4;
@@ -15053,6 +16098,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem ppSuratPRI;
     private widget.Table tbPetugas;
     private widget.Table tbPetugas2;
+    private widget.TextBox textNoAntrian;
+    private widget.TextBox textNoRawatAntrian;
     // End of variables declaration//GEN-END:variables
    private javax.swing.JMenuItem MnSkorAldrettePascaAnestesi,
                                  MnSkorBromagePascaAnestesi,
@@ -15064,7 +16111,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnPenilaianRisikoJatuhGeriatri,
                                  MnPenilaianRisikoJatuhPsikiatri,
                                  MnPenilaianLanjutanSkriningFungsional,
-            MnPenilaianPreInduksi,MnHasilPemeriksaanUSGUrologi,MnHasilPemeriksaanUSGGynecologi,MnHasilPemeriksaanEKG,MnSudahTerbitSEP,MnPenatalaksanaanTerapiOkupasi;
+                                 MnPenilaianPreInduksi,
+                                 MnHasilPemeriksaanUSGUrologi,
+                                 MnHasilPemeriksaanUSGGynecologi,
+                                 MnHasilPemeriksaanEKG,
+                                 MnSudahTerbitSEP,
+                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi;
    
     private void tampil() {
         Valid.tabelKosong(tabMode);   
@@ -16118,6 +17170,20 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSudahTerbitSEP.setName("MnSudahTerbitSEP"); 
         MnSudahTerbitSEP.setPreferredSize(new java.awt.Dimension(320, 26));
         MnSudahTerbitSEP.addActionListener(this::MnSudahTerbitSEPActionPerformed);
+        
+        MnInputNoAntrianRegistrasi = new javax.swing.JMenuItem();
+        MnInputNoAntrianRegistrasi.setBackground(new java.awt.Color(255, 255, 254));
+        MnInputNoAntrianRegistrasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnInputNoAntrianRegistrasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnInputNoAntrianRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnInputNoAntrianRegistrasi.setText("Update Waktu No. Antrian");
+        MnInputNoAntrianRegistrasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnInputNoAntrianRegistrasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnInputNoAntrianRegistrasi.setName("MnInputNoAntrianRegistrasi"); 
+        MnInputNoAntrianRegistrasi.setPreferredSize(new java.awt.Dimension(320, 26));
+        MnInputNoAntrianRegistrasi.addActionListener(this::MnInputNoAntrianRegistrasiActionPerformed);
+        
+        jPopupMenu1.add(MnInputNoAntrianRegistrasi, 0);
         
         MnRMOperasi.add(MnPenilaianPreInduksi);
 	MnRMOperasi.add(MnChecklistPreOperasi);
