@@ -131,9 +131,9 @@
 			<staticText>
 				<reportElement x="0" y="170" width="148" height="22" uuid="15551a9d-c404-4db7-9420-0fd16bc28a28"/>
 				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="6" isItalic="true"/>
+					<font fontName="Tahoma" size="7" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Jika nomor antrian terlewat 10 nomor, silahkan mengambil nomor antrian ulang ke customer care]]></text>
+				<text><![CDATA[Jika antrian terlewat 10 nomor, silahkan mengambil antrian ulang ke customer care]]></text>
 			</staticText>
 		</band>
 	</detail>
