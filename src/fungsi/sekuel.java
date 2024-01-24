@@ -37,6 +37,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -157,6 +158,32 @@ public final class sekuel {
             
             if (rs.next()) {
                 output = rs.getString(1);
+            }
+            
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
+    public boolean cariBooleanSmc(String sql, String... values)
+    {
+        boolean output = false;
+        
+        try {
+            ps = connect.prepareStatement("select exists(" + sql + ")");
+            
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]); 
+            }
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                output = rs.getBoolean(1);
             }
             
             rs.close();
@@ -292,8 +319,13 @@ public final class sekuel {
         }
         
         for (String value : values) {
-            query = query.concat("?, ");
-            track = track.concat("'" + value + "', ");
+            if (Arrays.stream(new String[] {"now", "now()", "current_date", "current_date()", "current_time", "current_time()"}).anyMatch(value.toLowerCase()::equals)) {
+                query = query.concat(value + ", ");
+                track = track.concat(value + ", ");
+            } else {
+                query = query.concat("?, ");
+                track = track.concat("'" + value + "', ");
+            }
         }
         
         query = query.replaceFirst("\\?\\, \\)", "?)");
@@ -350,6 +382,57 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
+        }
+    }
+    
+    public boolean mengupdatetfSmc(String table, String columns, String conditions, String... values)
+    {
+        boolean output = false;
+        String query = "update " + table + " set " + columns + " where " + conditions;
+        String track = query;
+        
+        try {
+            ps = connect.prepareStatement("update " + table + " set " + columns + " where " + conditions);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                    track = track.replaceFirst("\\?", "'" + values[i] + "'");
+                }
+                ps.executeUpdate();
+                SimpanTrack(track);
+                output = true;
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
+    public void executeRawSmc(String sql, String... values)
+    {
+        try {
+            ps = connect.prepareStatement(sql);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
     
