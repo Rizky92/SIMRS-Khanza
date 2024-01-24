@@ -1339,6 +1339,8 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel31 = new widget.Label();
         NoKa = new widget.TextBox();
         btnCekBridging = new widget.Button();
+        jLabel5 = new widget.Label();
+        TNoAntrian = new widget.TextBox();
         ChkInput = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
@@ -6874,7 +6876,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         internalFrame8.add(buttonTutupDialogAntrian);
-        buttonTutupDialogAntrian.setBounds(360, 63, 100, 30);
+        buttonTutupDialogAntrian.setBounds(36, 63, 100, 30);
 
         buttonSimpanAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         buttonSimpanAntrian.setMnemonic('S');
@@ -6894,18 +6896,25 @@ public final class DlgReg extends javax.swing.JDialog {
         textNoRawatAntrian.setEditable(false);
         textNoRawatAntrian.setHighlighter(null);
         textNoRawatAntrian.setName("textNoRawatAntrian"); // NOI18N
-        textNoRawatAntrian.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                textNoRawatAntrianKeyPressed(evt);
-            }
-        });
         internalFrame8.add(textNoRawatAntrian);
         textNoRawatAntrian.setBounds(108, 22, 310, 23);
 
         textNoAntrian.setHighlighter(null);
         textNoAntrian.setName("textNoAntrian"); // NOI18N
+        textNoAntrian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                textNoAntrianActionPerformed(evt);
+            }
+        });
+        textNoAntrian.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                textNoAntrianKeyPressed(evt);
+            }
+        });
         internalFrame8.add(textNoAntrian);
         textNoAntrian.setBounds(494, 22, 90, 23);
 
@@ -7122,7 +7131,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-01-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -7135,7 +7144,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-01-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -7288,7 +7297,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2024" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-01-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -7338,6 +7347,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(TNoRM);
         TNoRM.setBounds(520, 12, 110, 23);
 
+        TNoReg.setText("999");
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter()
@@ -7348,7 +7358,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(TNoReg);
-        TNoReg.setBounds(74, 12, 120, 23);
+        TNoReg.setBounds(74, 12, 60, 23);
 
         jLabel21.setText("Alamat P.J. :");
         jLabel21.setName("jLabel21"); // NOI18N
@@ -7598,7 +7608,7 @@ public final class DlgReg extends javax.swing.JDialog {
         ChkTracker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkTracker.setName("ChkTracker"); // NOI18N
         FormInput.add(ChkTracker);
-        ChkTracker.setBounds(196, 12, 23, 23);
+        ChkTracker.setBounds(136, 12, 23, 23);
 
         jLabel31.setText("No. Ka :");
         jLabel31.setName("jLabel31"); // NOI18N
@@ -7630,6 +7640,23 @@ public final class DlgReg extends javax.swing.JDialog {
         });
         FormInput.add(btnCekBridging);
         btnCekBridging.setBounds(852, 102, 28, 23);
+
+        jLabel5.setText("No. Antrian :");
+        jLabel5.setName("jLabel5"); // NOI18N
+        FormInput.add(jLabel5);
+        jLabel5.setBounds(160, 12, 70, 23);
+
+        TNoAntrian.setHighlighter(null);
+        TNoAntrian.setName("TNoAntrian"); // NOI18N
+        TNoAntrian.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                TNoAntrianKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNoAntrian);
+        TNoAntrian.setBounds(234, 12, 60, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -7963,6 +7990,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DlgSakit2.dispose();
         DlgDemografi.dispose();
         DlgCatatan.dispose();
+        WindowInputNoAntrian.dispose();
         akses.setAktif(false);
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -15074,24 +15102,53 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
     private void buttonSimpanAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonSimpanAntrianActionPerformed
     {//GEN-HEADEREND:event_buttonSimpanAntrianActionPerformed
-        //
+        akses.setform("DlgReg");
+        
+        if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where no_rawat = ?", textNoRawatAntrian.getText())) {
+            Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, jam_panggil = null", "no_rawat = ?", textNoRawatAntrian.getText());
+        }
+        
+        Sequel.mengupdateSmc("antriloketcetak_smc",
+            "no_rawat = ?, jam_panggil = current_time()", "nomor = ? and tanggal = current_date()",
+            textNoRawatAntrian.getText(), textNoAntrian.getText()
+        );
+
+        textNoRawatAntrian.setText("");
+        textNoAntrian.setText("");
+
+        WindowInputNoAntrian.dispose();
     }//GEN-LAST:event_buttonSimpanAntrianActionPerformed
 
-    private void textNoRawatAntrianKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_textNoRawatAntrianKeyPressed
-    {//GEN-HEADEREND:event_textNoRawatAntrianKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            if(!textNoRawatAntrian.getText().trim().equals(""))
-            {
-                Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",textNoAntrian,textNoRawatAntrian.getText());
-                if(textNoAntrian.getText().trim().equals(""))
-                {
-                    JOptionPane.showMessageDialog(rootPane,"Data pasien tidak ditemukan..!!");
-                }
-                textNoRawatAntrian.requestFocus();
+    private void TNoAntrianKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TNoAntrianKeyPressed
+    {//GEN-HEADEREND:event_TNoAntrianKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNoAntrianKeyPressed
+
+    private void textNoAntrianKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_textNoAntrianKeyPressed
+    {//GEN-HEADEREND:event_textNoAntrianKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            akses.setform("DlgReg");
+            
+            if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where no_rawat = ?", textNoRawatAntrian.getText())) {
+                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, jam_panggil = null", "no_rawat = ?", textNoRawatAntrian.getText());
             }
+            
+            Sequel.mengupdateSmc("antriloketcetak_smc",
+                "no_rawat = ?, jam_panggil = current_time()", "nomor = ? and tanggal = current_date()",
+                textNoRawatAntrian.getText(), textNoAntrian.getText()
+            );
+            
+            textNoRawatAntrian.setText("");
+            textNoAntrian.setText("");
+
+            WindowInputNoAntrian.dispose();
         }
-    }//GEN-LAST:event_textNoRawatAntrianKeyPressed
+    }//GEN-LAST:event_textNoAntrianKeyPressed
+
+    private void textNoAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_textNoAntrianActionPerformed
+    {//GEN-HEADEREND:event_textNoAntrianActionPerformed
+        
+    }//GEN-LAST:event_textNoAntrianActionPerformed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
@@ -15445,7 +15502,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void MnInputNoAntrianRegistrasiActionPerformed(java.awt.event.ActionEvent evt)
     {
         textNoRawatAntrian.setText(TNoRw.getText());
-        textNoAntrian.setText(Sequel.cariIsiSmc("select ifnull(lpad(cast(max(nomor) as unsigned integer) + 1, 3, '0'), '001') from antriloketcetak_smc where tanggal = ? and waktu_antrian_selesai is null", Valid.SetTgl(DTPReg.getSelectedItem().toString())));
+        textNoAntrian.setText(Sequel.cariIsiSmc("select max(nomor) from antriloketcetak_smc where tanggal = ? and jam_panggil is null", Valid.SetTgl(DTPReg.getSelectedItem().toString())));
         WindowInputNoAntrian.setSize(617, 105);
         WindowInputNoAntrian.setLocationRelativeTo(internalFrame1);
         WindowInputNoAntrian.setAlwaysOnTop(false);
@@ -15780,6 +15837,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox TCari;
     private widget.TextBox TDokter;
     private widget.TextBox THbngn;
+    private widget.TextBox TNoAntrian;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoReg;
     private widget.TextBox TNoRw;
@@ -15823,6 +15881,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Label jLabel36;
     private widget.Label jLabel37;
     private widget.Label jLabel4;
+    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -16064,6 +16123,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoRM.requestFocus();
         kdpnj.setText("");
         nmpnj.setText("");
+        TNoAntrian.setText("");
     }
 
     private void getData() {
@@ -16700,6 +16760,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     THbngn.getText(),Valid.SetAngka(Double.parseDouble(TBiaya.getText())),TStatus.getText(),NoTelp.getText(),"Belum",status,kdpoli.getText(),kdpnj.getText(),"Belum Bayar"
                 });
             } 
+            
+            if (! TNoAntrian.getText().isBlank()) {
+                String jam = CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem();
+                Sequel.mengupdateSmc("antriloketcetak_smc", "jam_panggil = current_time(), no_rawat = ?", "tanggal = current_date() and nomor = ?", TNoRw.getText(), TNoAntrian.getText().trim());
+            }
             emptTeks();                
         }  
     }
