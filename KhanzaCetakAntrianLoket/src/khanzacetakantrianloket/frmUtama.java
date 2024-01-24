@@ -99,8 +99,8 @@ public class frmUtama extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
-        if(Sequel.menyimpantf("antriloketcetak","current_date(),current_time(),'"+LabelNomor.getText()+"'","Nomor Antrian")==true){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -109,13 +109,11 @@ public class frmUtama extends javax.swing.JFrame {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                   "select date_format(antriloketcetak.tanggal,'%d-%m-%Y') as tanggal,antriloketcetak.nomor,antriloketcetak.jam from antriloketcetak where antriloketcetak.tanggal=current_date and antriloketcetak.nomor='"+LabelNomor.getText()+"' ",param);
-            this.setCursor(Cursor.getDefaultCursor());
+                   "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
             autonomer();
-        }else{
+        } else {
             autonomer();
-            if(Sequel.menyimpantf("antriloketcetak","current_date(),current_time(),'"+LabelNomor.getText()+"'","Nomor Antrian")==true){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -124,13 +122,11 @@ public class frmUtama extends javax.swing.JFrame {
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                       "select date_format(antriloketcetak.tanggal,'%d-%m-%Y') as tanggal,antriloketcetak.nomor,antriloketcetak.jam from antriloketcetak where antriloketcetak.tanggal=current_date and antriloketcetak.nomor='"+LabelNomor.getText()+"' ",param);
-                this.setCursor(Cursor.getDefaultCursor());
+                       "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
                 autonomer();
-            }else{
+            } else {
                 autonomer();
-                if(Sequel.menyimpantf("antriloketcetak","current_date(),current_time(),'"+LabelNomor.getText()+"'","Nomor Antrian")==true){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -139,12 +135,12 @@ public class frmUtama extends javax.swing.JFrame {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
                     Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                           "select date_format(antriloketcetak.tanggal,'%d-%m-%Y') as tanggal,antriloketcetak.nomor,antriloketcetak.jam from antriloketcetak where antriloketcetak.tanggal=current_date and antriloketcetak.nomor='"+LabelNomor.getText()+"' ",param);
-                    this.setCursor(Cursor.getDefaultCursor());
+                           "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
                     autonomer();
                 }
             }
         }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCetakActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -264,6 +260,6 @@ public class frmUtama extends javax.swing.JFrame {
     }
     
     private void autonomer(){
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(antriloketcetak.nomor,signed)),0) from antriloketcetak where antriloketcetak.tanggal=current_date()","",3,LabelNomor);
+        Valid.autoNomer3("select ifnull(max(convert(nomor, signed)), 0) from antriloketcetak_smc where tanggal = current_date()", "", 3, LabelNomor);
     }
 }
