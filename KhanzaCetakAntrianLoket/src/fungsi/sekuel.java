@@ -64,6 +64,78 @@ public final class sekuel {
     public sekuel(){
         super();
     }
+    
+    public boolean executeRawSmc(String sql, String... values)
+    {
+        boolean output = false;
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                ps.executeUpdate();
+                output = true;
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                output = false;
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = false;
+        }
+        
+        return output;
+    }
+    
+    public boolean menyimpantfSmc(String table, String kolom, String... values)
+    {
+        boolean output = false;
+        String query = "insert into " + table + " (" + kolom + ") values (";
+        String track = query;
+        
+        if (kolom == null) {
+            track = query = "insert into " + table + " values (";
+        }
+        
+        for (String value : values) {
+            query = query.concat("?, ");
+            track = track.concat("'" + value + "', ");
+        }
+        
+        query = query.replaceFirst("\\?\\, \\)", "?)");
+        track = Utils.replaceLast(track, "', )", "')");
+        
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                ps.executeUpdate();
+                SimpanTrack(track);
+                output = true;
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                output = false;
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = false;
+        }
+        
+        return output;
+    }
 
 
     public void menyimpan(String table,String value,String sama){
