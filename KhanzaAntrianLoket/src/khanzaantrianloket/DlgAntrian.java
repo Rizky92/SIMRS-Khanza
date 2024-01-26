@@ -36,7 +36,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
     private String antri="0",loket="0",nol_detik,detik;
-    private PreparedStatement pshapus,pssimpan,pscari;
+    private PreparedStatement pshapus,pssimpan,pscari,psupdate;
     private ResultSet rs;
     private BackgroundMusic music;
     private int nilai_detik;
@@ -330,6 +330,18 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                     pssimpan.close();
                 }
             } 
+            
+            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
+            try {
+                psupdate.setString(1, Antrian.getText());
+                psupdate.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (psupdate != null) {
+                    psupdate.close();
+                }
+            }
             System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
         } catch (Exception e) {
             System.out.println(e);
