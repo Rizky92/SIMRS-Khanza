@@ -331,7 +331,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 }
             } 
             
-            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
+            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = lpad(?, 3, '0') and tanggal = current_date()");
             try {
                 psupdate.setString(1, Antrian.getText());
                 psupdate.executeUpdate();
