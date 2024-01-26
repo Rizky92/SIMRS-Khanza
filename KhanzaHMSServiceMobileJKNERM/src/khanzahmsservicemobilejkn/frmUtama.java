@@ -757,12 +757,18 @@ public class frmUtama extends javax.swing.JFrame {
                                         kodedokter=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",rs.getString("kd_dokter"));
                                         kodepoli=Sequel.cariIsi("select maping_poli_bpjs.kd_poli_bpjs from maping_poli_bpjs where maping_poli_bpjs.kd_poli_rs=?",rs.getString("kd_poli"));
                                         if((!kodedokter.equals(""))&&(!kodepoli.equals(""))){
-                                            task3="";task4="";task5="";task6="";task7="";task99="";
+                                            task1=""; task2=""; task3="";task4="";task5="";task6="";task7="";task99="";
                                             ps3=koneksi.prepareStatement("select referensi_mobilejkn_bpjs_taskid.taskid from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat=?");
                                             try {
                                                ps3.setString(1,rs.getString("no_rawat"));
                                                rs3=ps3.executeQuery();
                                                while(rs3.next()){
+                                                   if (rs3.getString("taskid").equals("1")) {
+                                                       task1="Sudah";
+                                                   }
+                                                   if (rs3.getString("taskid").equals("2")) {
+                                                       task2="Sudah";
+                                                   }
                                                    if(rs3.getString("taskid").equals("3")){
                                                        task3="Sudah";
                                                    }
@@ -790,6 +796,82 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }
                                                 if(ps3!=null){
                                                     ps3.close();
+                                                }
+                                            }
+                                            
+                                            if (task1.equals("")) {
+                                                datajam=Sequel.cariIsiSmc("select concat(tanggal, ' ', jam) from antriloketcetak_smc where no_rawat = ?", rs.getString("no_rawat"));
+                                                if(!datajam.equals("")){
+                                                    if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"1",datajam})==true){
+                                                        parsedDate = dateFormat.parse(datajam);
+                                                        try {     
+                                                            TeksArea.append("Menjalankan WS taskid mulai tunggu admission Mobile JKN Pasien Non BPJS/BPS Onsite\n");
+                                                            headers = new HttpHeaders();
+                                                            headers.setContentType(MediaType.APPLICATION_JSON);
+                                                            headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
+                                                            utc=String.valueOf(api.GetUTCdatetimeAsString());
+                                                            headers.add("x-timestamp",utc);
+                                                            headers.add("x-signature",api.getHmac(utc));
+                                                            headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                            requestJson ="{" +
+                                                                             "\"kodebooking\": \""+rs.getString("no_rawat")+"\"," +
+                                                                             "\"taskid\": \"1\"," +
+                                                                             "\"waktu\": \""+parsedDate.getTime()+"\"" +
+                                                                          "}";
+                                                            TeksArea.append("JSON : "+requestJson+"\n");
+                                                            requestEntity = new HttpEntity(requestJson,headers);
+                                                            URL = link+"/antrean/updatewaktu";	
+                                                            System.out.println("URL : "+URL);
+                                                            //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                            nameNode = root.path("metadata");
+                                                            Sequel.logTaskid(rs.getString("no_rawat"), "NON JKN", "1", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                                            if(!nameNode.path("code").asText().equals("200")){
+                                                                Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='1' and no_rawat='"+rs.getString("no_rawat")+"'");
+                                                            }  
+                                                            TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
+                                                        }catch (Exception ex) {
+                                                            System.out.println("Notifikasi Bridging : "+ex);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            if (task2.equals("")) {
+                                                datajam=Sequel.cariIsiSmc("select concat(tanggal, ' ', jam_panggil) from antriloketcetak_smc where no_rawat = ?", rs.getString("no_rawat"));
+                                                if(!datajam.equals("")){
+                                                    if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"2",datajam})==true){
+                                                        parsedDate = dateFormat.parse(datajam);
+                                                        try {     
+                                                            TeksArea.append("Menjalankan WS taskid mulai pelayanan admission Mobile JKN Pasien Non BPJS/BPS Onsite\n");
+                                                            headers = new HttpHeaders();
+                                                            headers.setContentType(MediaType.APPLICATION_JSON);
+                                                            headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
+                                                            utc=String.valueOf(api.GetUTCdatetimeAsString());
+                                                            headers.add("x-timestamp",utc);
+                                                            headers.add("x-signature",api.getHmac(utc));
+                                                            headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                            requestJson ="{" +
+                                                                             "\"kodebooking\": \""+rs.getString("no_rawat")+"\"," +
+                                                                             "\"taskid\": \"2\"," +
+                                                                             "\"waktu\": \""+parsedDate.getTime()+"\"" +
+                                                                          "}";
+                                                            TeksArea.append("JSON : "+requestJson+"\n");
+                                                            requestEntity = new HttpEntity(requestJson,headers);
+                                                            URL = link+"/antrean/updatewaktu";	
+                                                            System.out.println("URL : "+URL);
+                                                            //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                            nameNode = root.path("metadata");
+                                                            Sequel.logTaskid(rs.getString("no_rawat"), "NON JKN", "2", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                                            if(!nameNode.path("code").asText().equals("200")){
+                                                                Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='2' and no_rawat='"+rs.getString("no_rawat")+"'");
+                                                            }  
+                                                            TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
+                                                        }catch (Exception ex) {
+                                                            System.out.println("Notifikasi Bridging : "+ex);
+                                                        }
+                                                    }
                                                 }
                                             }
                                             
