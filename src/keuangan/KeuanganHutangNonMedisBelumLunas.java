@@ -833,28 +833,29 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
+            Sequel.deleteTemporary();
             
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
-                    Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','"+
-                                tabMode.getValueAt(i,5).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','"+
-                                tabMode.getValueAt(i,7).toString()+"','"+
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                                tabMode.getValueAt(i,12).toString()+"','"+
-                                tabMode.getValueAt(i,13).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Piutang Pasien"); 
+            for (i = 0; i < tabMode.getRowCount(); i++) {
+                Sequel.temporary(
+                    String.valueOf(i + 1),
+                    tabMode.getValueAt(i, 1).toString(),
+                    tabMode.getValueAt(i, 2).toString(),
+                    tabMode.getValueAt(i, 3).toString(),
+                    tabMode.getValueAt(i, 4).toString(),
+                    tabMode.getValueAt(i, 5).toString(),
+                    tabMode.getValueAt(i, 6).toString(),
+                    tabMode.getValueAt(i, 7).toString(),
+                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 8).toString())),
+                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i, 9).toString())),
+                    tabMode.getValueAt(i, 12).toString(),
+                    tabMode.getValueAt(i, 13).toString()
+                );
             }
-            i++;
-            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter"); 
-            i++;
-            Sequel.menyimpan("temporary","'"+i+"','','','TOTAL HUTANG :','','','','','"+LCount.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Tindakan Dokter"); 
-            
+            Sequel.temporary(String.valueOf(++i));
+            Sequel.temporary(
+                String.valueOf(++i),
+                "", "", "TOTAL HUTANG :", "", "", "", "", LCount.getText()
+            );
             
             Map<String, Object> param = new HashMap<>();                 
             param.put("namars",akses.getnamars());
@@ -1070,6 +1071,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     notagihan="";
                 }
                 Sequel.Commit();
+                BtnPrintActionPerformed(null);
                 tampil();
                 bayar=0;
                 LCount1.setText("0");
