@@ -24,9 +24,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -739,7 +743,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     tampilKunjungan();
                     break;
                 case 1:
-                    tampilSoapi();
+                    tampilBerkasKlaimBPJS();
                     break;
                 default:
                     break;
@@ -838,12 +842,17 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         NmPasien.setText(nama);
         RTanggal.setSelected(true);
         
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatIn = new SimpleDateFormat("yyyy-MM-dd"),
+                         formatOut = new SimpleDateFormat("dd-MM-yyyy");
         
-            Tgl1.setSelectedItem(dateFormat.parse(tanggalDari));
+        try {
+            if (tanggalDari.isBlank() || tanggalDari == null) {
+                Tgl1.setSelectedItem(formatOut.format(new Date()));
+            } else {
+                Tgl1.setSelectedItem(formatOut.format(formatIn.parse(tanggalDari)));
+            }
         } catch (Exception e) {
-            Tgl1.setSelectedItem(new Date());
+            Tgl1.setSelectedItem(formatOut.format(new Date()));
         }
         
         isPasien();
@@ -1083,13 +1092,13 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     htmlContent.append(
                         "<tr class=\"isi\">"
                         + "<td valign=\"top\" width=\"2%\">" + urut + "</td>"
-                        + "<td valign=\"top\" width=\"18%\">No.Rawat</td>"
+                        + "<td valign=\"top\" width=\"18%\">No. Rawat</td>"
                         + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
                         + "<td valign=\"top\" width=\"79%\">" + rs.getString("no_rawat") + "</td>"
                         + "</tr>"
                         + "<tr class=\"isi\">"
                         + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">No.Registrasi</td>"
+                        + "<td valign=\"top\" width=\"18%\">No. Registrasi</td>"
                         + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
                         + "<td valign=\"top\" width=\"79%\">" + rs.getString("no_reg") + "</td>"
                         + "</tr>"
@@ -1120,14 +1129,52 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     );
                     
                     // SEP ralan
+                    htmlContent.append(
+                        "<tr class=\"isi\">"
+                        + "<td valign=\"top\" width=\"2%\">" + urut + "</td>"
+                        + "<td valign=\"top\" width=\"18%\">No.Rawat</td>"
+                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
+                        + "<td valign=\"top\" width=\"79%\">"
+                    );
                     
-                    if (rs.getString("status_lanjut") == "Ranap") {
-                        
+                    // ISI SEP Ralan
+                    StringBuilder contentBuilder = new StringBuilder();
+                    
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("namars", akses.getnamars());
+                    params.put("alamatrs", akses.getalamatrs());
+                    params.put("kotars", akses.getkabupatenrs());
+                    params.put("propinsirs", akses.getpropinsirs());
+                    params.put("kontakrs", akses.getkontakrs());
+                    params.put("prb", Sequel.cariIsiSmc("select bpjs_prb.prb from bridging_sep join bpjs_prb on bridging_sep.no_sep = bpjs_prb.no_sep where bridging_sep.no_rawat = ? and bridging_sep.jnspelayanan = '2'", rs.getString("no_rawat")));
+                    params.put("logo", Sequel.cariGambar("select bpjs from gambar")); 
+                    params.put("parameter", Sequel.cariIsiSmc("select no_sep from bridging_sep where no_rawat = ? and jnspelayanan = '2'", rs.getString("no_rawat")));
+                    
+                    Valid.htmlReport("rptBridgingSEP2.jasper", "report", params);
+                    
+                    try {
+                        try (LineNumberReader in = new LineNumberReader(new FileReader("rptBridgingSEP2.html"))) {
+                            String str;
+                            while ((str = in.readLine()) != null) {
+                                if (in.getLineNumber() < 10) {
+                                    continue;
+                                }
+                                
+                                if (str)
+                                
+                                if (str.contains("img src=\"")) {
+                                    str = str.replace("<img src=\"", "<img src=\"file:");
+                                }
+                                contentBuilder.append(str);
+                            }
+                        }
+                        htmlContent.append(contentBuilder.toString());
+                    } catch (IOException e) {
+                        System.out.println("Notif : " + e);
+                        e.printStackTrace();
                     }
                     
-                    // SEP ranap
-                    
-                    // SPRI
+                    htmlContent.append("</td></tr>");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -1140,7 +1187,11 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     ps.close();
                 }
             }
-            
+            LoadHTMLSOAPI.setText(
+                "<html><table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">" +
+                htmlContent.toString() +
+                "</table></html>"
+            );
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }

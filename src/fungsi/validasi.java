@@ -128,7 +128,7 @@ public final class validasi {
             String namafile = "./" + reportDirName + "/" + reportName;
             
             JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, params, connect);
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, "./" + reportDirName + "/" + reportName.replaceAll("jasper", "html"));
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, "./" + reportName.replaceAll("jasper", "html"));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
