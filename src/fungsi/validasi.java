@@ -52,8 +52,16 @@ import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
 import java.io.File;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import widget.TextBox;
 /**
  *
@@ -93,6 +101,39 @@ public final class validasi {
     {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
+    
+    public void htmlReport(String reportName, String reportDirName, Map params)
+    {
+        Properties systemProp = System.getProperties();
+
+        String currentDir = systemProp.getProperty("user.dir");
+
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) {
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                }
+            }
+        }
+
+        try {
+            File f = new File("./" + reportDirName + "/" + reportName.replaceAll("jasper", "html"));
+            String namafile = "./" + reportDirName + "/" + reportName;
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, params, connect);
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, "./" + reportDirName + "/" + reportName.replaceAll("jasper", "html"));
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
     
     public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
