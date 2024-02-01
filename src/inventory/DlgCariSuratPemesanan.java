@@ -296,7 +296,8 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppHapus = new javax.swing.JMenuItem();
@@ -369,8 +370,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         ppHapus.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppHapus.setName("ppHapus"); // NOI18N
         ppHapus.setPreferredSize(new java.awt.Dimension(165, 25));
-        ppHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppHapusActionPerformed(evt);
             }
         });
@@ -385,8 +388,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         ppDatang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDatang.setName("ppDatang"); // NOI18N
         ppDatang.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppDatang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppDatang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppDatangActionPerformed(evt);
             }
         });
@@ -401,8 +406,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         ppProses.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppProses.setName("ppProses"); // NOI18N
         ppProses.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppProses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppProses.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppProsesActionPerformed(evt);
             }
         });
@@ -412,13 +419,15 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         ppSuratPemesanan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppSuratPemesanan.setForeground(new java.awt.Color(50, 50, 50));
         ppSuratPemesanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppSuratPemesanan.setText("Surat Pemesanan");
+        ppSuratPemesanan.setText("Cetak Surat Pemesanan");
         ppSuratPemesanan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppSuratPemesanan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuratPemesanan.setName("ppSuratPemesanan"); // NOI18N
         ppSuratPemesanan.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppSuratPemesanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppSuratPemesanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppSuratPemesananActionPerformed(evt);
             }
         });
@@ -442,8 +451,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnPrint5.setToolTipText("Alt+T");
         BtnPrint5.setName("BtnPrint5"); // NOI18N
         BtnPrint5.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint5ActionPerformed(evt);
             }
         });
@@ -456,8 +467,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnKeluar4.setToolTipText("Alt+K");
         BtnKeluar4.setName("BtnKeluar4"); // NOI18N
         BtnKeluar4.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar4ActionPerformed(evt);
             }
         });
@@ -469,8 +482,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnSeek5.setToolTipText("ALt+6");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek5ActionPerformed(evt);
             }
         });
@@ -506,8 +521,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnSeek6.setToolTipText("ALt+6");
         BtnSeek6.setName("BtnSeek6"); // NOI18N
         BtnSeek6.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek6ActionPerformed(evt);
             }
         });
@@ -521,8 +538,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -536,13 +555,15 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         scrollPane1.setOpaque(true);
 
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {},
                 {},
                 {},
                 {}
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -569,8 +590,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(170, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -581,13 +604,17 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+5");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -610,13 +637,17 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -628,13 +659,17 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -646,13 +681,17 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -672,8 +711,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         kdbar.setName("kdbar"); // NOI18N
         kdbar.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdbar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdbar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdbarKeyPressed(evt);
             }
         });
@@ -691,8 +732,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         btnBarang.setToolTipText("Alt+4");
         btnBarang.setName("btnBarang"); // NOI18N
         btnBarang.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarangActionPerformed(evt);
             }
         });
@@ -707,8 +750,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         kdsat.setName("kdsat"); // NOI18N
         kdsat.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdsat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdsat.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdsatKeyPressed(evt);
             }
         });
@@ -720,8 +765,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         btnSatuan.setToolTipText("Alt+3");
         btnSatuan.setName("btnSatuan"); // NOI18N
         btnSatuan.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnSatuan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSatuan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSatuanActionPerformed(evt);
             }
         });
@@ -730,8 +777,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         nmsat.setName("nmsat"); // NOI18N
         nmsat.setPreferredSize(new java.awt.Dimension(80, 23));
-        nmsat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        nmsat.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 nmsatKeyPressed(evt);
             }
         });
@@ -754,8 +803,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         NoFaktur.setName("NoFaktur"); // NOI18N
         NoFaktur.setPreferredSize(new java.awt.Dimension(207, 23));
-        NoFaktur.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoFaktur.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoFakturKeyPressed(evt);
             }
         });
@@ -770,8 +821,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         TglBeli1.setDisplayFormat("dd-MM-yyyy");
         TglBeli1.setName("TglBeli1"); // NOI18N
-        TglBeli1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TglBeli1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TglBeli1KeyPressed(evt);
             }
         });
@@ -792,8 +845,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         kdsup.setName("kdsup"); // NOI18N
         kdsup.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdsup.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdsup.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdsupKeyPressed(evt);
             }
         });
@@ -802,8 +857,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         kdptg.setName("kdptg"); // NOI18N
         kdptg.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdptg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdptg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdptgKeyPressed(evt);
             }
         });
@@ -827,8 +884,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         btnSuplier.setToolTipText("Alt+1");
         btnSuplier.setName("btnSuplier"); // NOI18N
         btnSuplier.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnSuplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSuplier.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSuplierActionPerformed(evt);
             }
         });
@@ -840,8 +899,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         btnPetugas.setToolTipText("Alt+2");
         btnPetugas.setName("btnPetugas"); // NOI18N
         btnPetugas.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPetugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPetugas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPetugasActionPerformed(evt);
             }
         });
@@ -857,8 +918,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         TglBeli2.setDisplayFormat("dd-MM-yyyy");
         TglBeli2.setName("TglBeli2"); // NOI18N
-        TglBeli2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TglBeli2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TglBeli2KeyPressed(evt);
             }
         });
@@ -873,8 +936,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
 
         KdIF.setName("KdIF"); // NOI18N
         KdIF.setPreferredSize(new java.awt.Dimension(80, 23));
-        KdIF.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KdIF.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KdIFKeyPressed(evt);
             }
         });
@@ -892,8 +957,10 @@ public class DlgCariSuratPemesanan extends javax.swing.JDialog {
         btnIF.setToolTipText("Alt+2");
         btnIF.setName("btnIF"); // NOI18N
         btnIF.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnIF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnIF.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnIFActionPerformed(evt);
             }
         });
@@ -1550,7 +1617,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     
     public void isCek(){
         BtnPrint.setEnabled(akses.getsurat_pemesanan_medis());
-        ppHapus.setEnabled(akses.getsurat_pemesanan_medis());
+        ppHapus.setEnabled(akses.getedit_hapus_spo_medis());
         ppDatang.setEnabled(akses.getpemesanan_obat());
         ppProses.setEnabled(akses.getsurat_pemesanan_medis());
         ppSuratPemesanan.setEnabled(akses.getsurat_pemesanan_medis());

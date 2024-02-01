@@ -103,7 +103,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/picture/category.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Surat Pemesanan"/>
+            <Property name="text" type="java.lang.String" value="Cetak Surat Pemesanan"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="name" type="java.lang.String" value="ppSuratPemesanan" noResource="true"/>
