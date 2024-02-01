@@ -100,6 +100,10 @@ ALTER TABLE `tokoopname` MODIFY COLUMN `kode_brng` varchar(10) CHARACTER SET lat
 
 ALTER TABLE `transfer_pasien_antar_ruang` MODIFY COLUMN `diagnosa_utama` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
 
+ALTER TABLE `user` ADD COLUMN `edit_hapus_spo_medis` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
+
+ALTER TABLE `user` ADD COLUMN `edit_hapus_spo_nonmedis` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
+
 ALTER TABLE `user` MODIFY COLUMN `grafik_per_perujuk` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL NULL `surat_pemesanan_non_medis`;
 
 ALTER TABLE `user` MODIFY COLUMN `grafik_tb_hasilteshiv` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL NULL AFTER `grafik_tb_hasilakhirpengobatan`;
