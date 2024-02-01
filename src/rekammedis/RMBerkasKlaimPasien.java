@@ -11,12 +11,14 @@
 
 package rekammedis;
 
+import bridging.ICareRiwayatPerawatan;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -38,8 +40,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
+import static javafx.concurrent.Worker.State.FAILED;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.PopupFeatures;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -68,6 +85,8 @@ public final class RMBerkasKlaimPasien extends javax.swing.JDialog {
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
+    private final JFXPanel htmlPanel = new JFXPanel();
+    private WebEngine engine;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -162,24 +181,7 @@ public final class RMBerkasKlaimPasien extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         });
         
-        HTMLEditorKit kit = new HTMLEditorKit();
-        LoadHTMLSOAPI.setEditorKit(kit);
-        StyleSheet styleSheet = kit.getStyleSheet();
-        styleSheet.addRule(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
-        Document doc = kit.createDefaultDocument();
-        
-        LoadHTMLSOAPI.setDocument(doc);
-        LoadHTMLSOAPI.setEditable(false);
-        LoadHTMLSOAPI.addHyperlinkListener(e -> {
-            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
-                Desktop desktop = Desktop.getDesktop();
-                try {
-                   desktop.browse(e.getURL().toURI());
-                } catch (Exception ex) {
-                  ex.printStackTrace();
-                }
-            }
-        });
+        Scroll2.setViewportView(htmlPanel);
         
         isMenu();
     }    
@@ -216,7 +218,6 @@ public final class RMBerkasKlaimPasien extends javax.swing.JDialog {
         Scroll1 = new widget.ScrollPane();
         tbRegistrasi = new widget.Table();
         Scroll2 = new widget.ScrollPane();
-        LoadHTMLSOAPI = new widget.editorpane();
         PanelInput = new javax.swing.JPanel();
         ChkInput = new widget.CekBox();
         FormInput = new widget.panelisi();
@@ -421,11 +422,6 @@ public final class RMBerkasKlaimPasien extends javax.swing.JDialog {
         Scroll2.setBorder(null);
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
-
-        LoadHTMLSOAPI.setBorder(null);
-        LoadHTMLSOAPI.setName("LoadHTMLSOAPI"); // NOI18N
-        Scroll2.setViewportView(LoadHTMLSOAPI);
-
         TabRawat.addTab("Kelengkapan Berkas Klaim", Scroll2);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
@@ -716,7 +712,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     }
                     break;
                 case 1:
-                    panggilLaporan(LoadHTMLSOAPI.getText()); 
+//                    panggilLaporan(LoadHTMLSOAPI.getText()); 
                     break;
                 default:
                     break;
@@ -796,7 +792,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox GD;
     private widget.TextBox IbuKandung;
     private widget.TextBox Jk;
-    private widget.editorpane LoadHTMLSOAPI;
     private widget.TextBox NmPasien;
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
@@ -1089,56 +1084,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 rs = ps.executeQuery();
                 
                 while (rs.next()) {
-                    htmlContent.append(
-                        "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\">" + urut + "</td>"
-                        + "<td valign=\"top\" width=\"18%\">No. Rawat</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("no_rawat") + "</td>"
-                        + "</tr>"
-                        + "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">No. Registrasi</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("no_reg") + "</td>"
-                        + "</tr>"
-                        + "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">Tanggal Registrasi</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("tgl_registrasi") + " " + rs.getString("jam_reg") + "</td>"
-                        + "</tr>"
-                        + "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">Umur Saat Daftar</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("umurdaftar") + " " + rs.getString("sttsumur") + "</td>"
-                        + "</tr>"
-                        + "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">Unit/Poliklinik</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("nm_poli") + polirujukan + "</td>"
-                        + "</tr>"
-                        + "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\"></td>"
-                        + "<td valign=\"top\" width=\"18%\">Dokter Poli</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">" + rs.getString("nm_dokter") + dokterrujukan + "</td>"
-                        + "</tr>"
-                    );
-                    
-                    // SEP ralan
-                    htmlContent.append(
-                        "<tr class=\"isi\">"
-                        + "<td valign=\"top\" width=\"2%\">" + urut + "</td>"
-                        + "<td valign=\"top\" width=\"18%\">No.Rawat</td>"
-                        + "<td valign=\"top\" width=\"1%\" align=\"center\">:</td>"
-                        + "<td valign=\"top\" width=\"79%\">"
-                    );
-                    
                     // ISI SEP Ralan
-                    StringBuilder contentBuilder = new StringBuilder();
                     
                     Map<String, Object> params = new HashMap<>();
                     params.put("namars", akses.getnamars());
@@ -1152,15 +1098,21 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     
                     Valid.htmlReport("rptBridgingSEP2.jasper", "report", params);
                     
+                    StringBuilder contentBuilder = new StringBuilder();
                     try {
+                        int lineNumber, lastLineNumber = 0;
+                        String str;
                         try (LineNumberReader in = new LineNumberReader(new FileReader("rptBridgingSEP2.html"))) {
-                            String str;
                             while ((str = in.readLine()) != null) {
-                                if (in.getLineNumber() < 10) {
+                                lineNumber = in.getLineNumber();
+                                
+                                if (lineNumber < 11 || lastLineNumber > 0) {
                                     continue;
                                 }
                                 
-                                if (str)
+                                if (str.contains("</body>")) {
+                                    lastLineNumber = lineNumber;
+                                }
                                 
                                 if (str.contains("img src=\"")) {
                                     str = str.replace("<img src=\"", "<img src=\"file:");
@@ -1187,11 +1139,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     ps.close();
                 }
             }
-            LoadHTMLSOAPI.setText(
-                "<html><table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">" +
-                htmlContent.toString() +
-                "</table></html>"
-            );
+            
+            
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
@@ -1387,82 +1336,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
     private void panggilLaporan(String teks) {
         try{
-            File g = new File("file.css");            
-            BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-            bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
-            bg.close();
-
             File f = new File("riwayat.html");            
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-            bw.write(
-                 teks.replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
-                      replaceAll("<body>",
-                                 "<body>"+
-                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>No.RM</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+NoRM.getText().trim()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Nama Pasien</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+NmPasien.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Alamat</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+Alamat.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Jenis Kelamin</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+Jk.getText().replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+TempatLahir.getText()+" "+TanggalLahir.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Ibu Kandung</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+IbuKandung.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Golongan Darah</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+GD.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Status Nikah</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+StatusNikah.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Agama</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+Agama.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+Pendidikan.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Bahasa Dipakai</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+Bahasa.getText()+"</td>"+
-                                       "</tr>"+
-                                       "<tr class='isi'>"+ 
-                                         "<td valign='top' width='20%'>Cacat Fisik</td>"+
-                                         "<td valign='top' width='1%' align='center'>:</td>"+
-                                         "<td valign='top' width='79%'>"+CacatFisik.getText()+"</td>"+
-                                       "</tr>"+
-                                    "</table>"            
-                      ).
-                      replaceAll((getClass().getResource("/picture/"))+"","./gambar/")
-            );  
+            bw.write(LoadHTMLSOAPI.getText());
             bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
@@ -1482,5 +1358,46 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             FormInput.setVisible(false);      
             ChkInput.setVisible(true);
         }
+    }
+    
+    private void createScene() {        
+        Platform.runLater(new Runnable() {
+
+            public void run() {
+                WebView view = new WebView();
+                
+                engine = view.getEngine();
+                engine.setJavaScriptEnabled(true);
+                
+                engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
+                    @Override
+                    public WebEngine call(PopupFeatures p) {
+                        Stage stage = new Stage(StageStyle.TRANSPARENT);
+                        return view.getEngine();
+                    }
+                });
+                
+                htmlPanel.setScene(new Scene(view));
+            }
+        });
+    }
+ 
+    public void loadURL(String url) {  
+        try {
+            createScene();
+        } catch (Exception e) {
+        }
+        
+        Platform.runLater(() -> {
+            try {
+                engine.load(url);
+            }catch (Exception exception) {
+                engine.load(url);
+            }
+        });        
+    }    
+    
+    public void CloseScane(){
+        Platform.setImplicitExit(false);
     }
 }
