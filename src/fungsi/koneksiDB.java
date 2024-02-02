@@ -78,6 +78,17 @@ public class koneksiDB {
         }
     }
     
+    public static String DIRRME()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("DIRRME");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static boolean VALIDASIRESEPKRONIS()
     {
         try {

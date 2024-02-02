@@ -78,6 +78,7 @@ import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariCaraBayar;
 import simrskhanza.DlgCariDiet;
 import simrskhanza.DlgCariPeriksaLab;
+import simrskhanza.DlgCariPeriksaRadiologi;
 
 /**
  *
@@ -1139,8 +1140,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }// GEN-LAST:event_tbKompilasiKeyPressed
 
     private void PilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_PilihSemuaActionPerformed
-        int i = 0;
-        for (i = 0; i < tbKompilasi.getRowCount(); i++) {
+        for (int i = 0; i < tbKompilasi.getRowCount(); i++) {
             tbKompilasi.setValueAt(true, i, 0);
         }
     }// GEN-LAST:event_PilihSemuaActionPerformed
@@ -1506,13 +1506,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // skdp_bpjs_new.tanggal_surat='" + tglregis + "' and skdp_bpjs_new.kd_dokter='"
         // + kodedokter + "' and skdp_bpjs_new.kd_poli='" + kodepoli + "'");
         //====================================
-       String nosuratkontrol = Sequel.cariIsi(
-                "select bridging_sep.noskdp from bridging_sep where bridging_sep.no_sep='" + lblNoSEP.getText() + "'");
         if (lblNoRawat.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
-            if (Sequel.cariInteger("select count(no_sep) from bridging_surat_kontrol_bpjs where no_surat='"
-                    + nosuratkontrol + "'") > 0) {
+            String nosuratkontrol = Sequel.cariIsiSmc("select bridging_sep.noskdp from bridging_sep where bridging_sep.no_sep = ?", lblNoSEP.getText());
+            if (Sequel.cariIntegerSmc("select count(*) from bridging_surat_kontrol_bpjs where no_surat = ?", nosuratkontrol) > 0) {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 BPJSSuratKontrol suratkontrol = new BPJSSuratKontrol(null, false);
                 suratkontrol.SuratKontrolKlaim(lblNoRawat.getText(), lblNoSEP.getText(), lblNoRM.getText());
