@@ -1068,10 +1068,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             if(sukses==true){
                 if(!notagihan.equals("")){
                     Sequel.queryu("update ipsrs_titip_faktur set status='Dibayar' where no_tagihan=?",notagihan);
+                    cetakDetailPembayaranHutang();
                     notagihan="";
                 }
                 Sequel.Commit();
-                BtnPrintActionPerformed(null);
                 tampil();
                 bayar=0;
                 LCount1.setText("0");
@@ -1511,5 +1511,38 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    private void cetakDetailPembayaranHutang()
+    {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            return;
+        }
+        
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("emailrs", akses.getemailrs());
+        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+        
+        String sql = "select bayar_pemesanan_non_medis.tgl_bayar, ipsrspemesanan.tgl_faktur, ipsrspemesanan.tgl_pesan, ipsrspemesanan.tgl_tempo, " +
+            "bayar_pemesanan_non_medis.no_faktur, ipsrssuplier.nama_suplier, bayar_pemesanan_non_medis.nama_bayar, bayar_pemesanan_non_medis.no_bukti, " +
+            "bayar_pemesanan_non_medis.besar_bayar, bayar_pemesanan_non_medis.keterangan, bayar_pemesanan_non_medis.nip, petugas.nama " +
+            "from bayar_pemesanan_non_medis " +
+            "join petugas on bayar_pemesanan_non_medis.nip = petugas.nip " +
+            "join ipsrspemesanan on bayar_pemesanan_non_medis.no_faktur = ipsrspemesanan.no_faktur " +
+            "join ipsrssuplier on ipsrspemesanan.kode_suplier = ipsrssuplier.kode_suplier " +
+            "where bayar_pemesanan_non_medis.no_faktur in " +
+            "(select ipsrs_detail_titip_faktur.no_faktur from ipsrs_detail_titip_faktur where ipsrs_detail_titip_faktur.no_tagihan = ?) " +
+            "order by bayar_pemesanan_non_medis.tgl_bayar";
+        
+        Valid.reportQuery("rptBayarPemesananNonMedis.jasper", "report", "::[ Bayar Pemesanan ]::", param, sql, notagihan);
+        
+        this.setCursor(Cursor.getDefaultCursor());
     }
 }

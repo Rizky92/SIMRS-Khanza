@@ -94,6 +94,52 @@ public final class validasi {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
+    public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values)
+    {
+        String currentDir = System.getProperties().getProperty("user.dir");
+
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) {
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                }
+            }
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                String namaFile = reportDirName + File.separatorChar + reportName;
+                
+                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namaFile, reportParams, rsdt);
+
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                jasperViewer.setTitle(judul);
+                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                jasperViewer.setSize(screen.width - 50, screen.height - 50);
+                jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                jasperViewer.setLocationRelativeTo(null);
+                jasperViewer.setVisible(true);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
