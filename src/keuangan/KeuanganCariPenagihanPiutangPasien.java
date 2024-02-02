@@ -1522,9 +1522,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         
         status = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", nipMenyetujui);
         param.put("finger2", "Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh " + namaMenyetujui + "\nID "+(status.equals("")?nipMenyetujui:status)+"\n"+tglTagihan);
-        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         
+        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         Valid.MyReportqry("rptSuratPenagihanPiutang.jasper", "report", "::[ Surat Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         Valid.MyReportqry("rptKwitansiPenagihanPiutang.jasper", "report", "::[ Kwitansi Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
     }
 }
