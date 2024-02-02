@@ -134,7 +134,9 @@
 				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement x="0" y="2" width="48" height="45" uuid="f0e1a7f3-d9bd-4fee-8916-a8992395adab"/>
+				<reportElement x="0" y="0" width="48" height="48" uuid="f0e1a7f3-d9bd-4fee-8916-a8992395adab">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
