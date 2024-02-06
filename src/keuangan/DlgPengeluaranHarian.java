@@ -689,7 +689,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         if(rs.next()){
                             Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), Double.parseDouble(Pengeluaran.getText()), 0);
                             Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, Double.parseDouble(Pengeluaran.getText()));
-                            sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                            sukses=jur.simpanJurnalSmc(Nomor.getText(), "U", "PENGELUARAN HARIAN, OLEH " + akses.getkode());
                         } 
                     } catch (Exception e) {
                         sukses=false;
