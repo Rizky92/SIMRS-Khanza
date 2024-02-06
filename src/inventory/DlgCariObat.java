@@ -1179,6 +1179,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 
                 DTPObatKronisSelanjutnya.setEnabled(cekKolomObatKronis);
                 
+                // stop loop apabila ada obat kronis yang harus disimpan
                 if (cekKolomObatKronis) {
                     break;
                 }
@@ -1632,6 +1633,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         }
                         if((ttljual>0)||(ttlhpp>0)){
                             sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());     
+                        }
+                    }
+                    
+                    if (sukses) {
+                        for (int i = 0; i < tabModeobat.getRowCount(); i++) {
+                            if (Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString())) {
+                                Sequel.executeRawSmc("insert into detail_pemberian_obat_selanjutnya (tgl_perawatan, jam, no_rawat, kode_brng, tgl_pemberian_selanjutnya, total_hari) values (?, ?, ?, ?, ?, datediff(?, ?))",
+                                    Valid.SetTgl(DTPTgl.getSelectedItem().toString()),
+                                    cmbJam.getSelectedItem().toString() + ":" + cmbMnt.getSelectedItem().toString() + ":" + cmbDtk.getSelectedItem().toString(),
+                                    TNoRw.getText(),
+                                    tabModeobat.getValueAt(i, 2).toString(),
+                                    Valid.SetTgl(DTPObatKronisSelanjutnya.getSelectedItem().toString()),
+                                    Valid.SetTgl(DTPObatKronisSelanjutnya.getSelectedItem().toString()),
+                                    Valid.SetTgl(DTPTgl.getSelectedItem().toString())
+                                );
+                            }
                         }
                     }
                     
