@@ -32,6 +32,7 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -59,8 +60,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psobat,pscarikapasitas,psstok,ps2,psbatch,psrekening;
-    private ResultSet rsobat,carikapasitas,rsstok,rs2,rsbatch,rsrekening;
+    private PreparedStatement psobat,pscarikapasitas,psstok,ps2,psbatch,psrekening,psobatkronis;
+    private ResultSet rsobat,carikapasitas,rsstok,rs2,rsbatch,rsrekening,rsobatkronis;
     private double h_belicari=0, hargacari=0, sisacari=0,x=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
                    tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan=0,stokbarang=0,ttl=0,ppnobat=0,ttlhpp,ttljual;
     private int i=0,z=0,row=0,row2,r;
@@ -1639,10 +1640,10 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     if (sukses) {
                         for (int i = 0; i < tabModeobat.getRowCount(); i++) {
                             if (Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString())) {
-                                Sequel.executeRawSmc("insert into detail_pemberian_obat_selanjutnya (tgl_perawatan, jam, no_rawat, kode_brng, tgl_pemberian_selanjutnya, total_hari) values (?, ?, ?, ?, ?, datediff(?, ?))",
+                                Sequel.executeRawSmc("insert into detail_pemberian_obat_selanjutnya (tgl_perawatan, jam, no_rkm_medis, kode_brng, tgl_pemberian_selanjutnya, total_hari) values (?, ?, ?, ?, ?, datediff(?, ?))",
                                     Valid.SetTgl(DTPTgl.getSelectedItem().toString()),
                                     cmbJam.getSelectedItem().toString() + ":" + cmbMnt.getSelectedItem().toString() + ":" + cmbDtk.getSelectedItem().toString(),
-                                    TNoRw.getText(),
+                                    TNoRM.getText(),
                                     tabModeobat.getValueAt(i, 2).toString(),
                                     Valid.SetTgl(DTPObatKronisSelanjutnya.getSelectedItem().toString()),
                                     Valid.SetTgl(DTPObatKronisSelanjutnya.getSelectedItem().toString()),
@@ -2611,6 +2612,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             if(rsobat.getDouble("jml")>sisacari){
                                 JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
                             }
+                            cekObatKronis(rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
@@ -2668,6 +2670,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             if(rsobat.getDouble("jml")>sisacari){
                                 JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
                             }
+                            cekObatKronis(rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
@@ -2746,6 +2749,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             if(rsobat.getDouble("jml")>sisacari){
                                 JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
                             }
+                            cekObatKronis(rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                             tabModeobat.addRow(new Object[] {
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
@@ -2804,6 +2808,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             if(rsobat.getDouble("jml")>sisacari){
                                 JOptionPane.showMessageDialog(rootPane,"Maaf stok " + rsobat.getString("nama_brng") + " tidak mencukupi..!!");
                             }
+                            cekObatKronis(rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                             if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                                 tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
@@ -4453,5 +4458,32 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         } 
+    }
+    
+    private void cekObatKronis(String kodeObat, String namaObat) {
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
+                         mo = new SimpleDateFormat("dd-MM-yyyy");
+        
+        try {
+            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+            
+            try {
+                psobatkronis.setString(1, TNoRM.getText());
+                psobatkronis.setString(2, kodeObat);
+                
+                rsobatkronis = psobatkronis.executeQuery();
+                
+                if (rsobatkronis.next()) {
+                    JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
+                        + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
+                        + "..!!"
+                    );
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 }
