@@ -103,7 +103,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                return (colIndex == 0) || (colIndex == 1) || (colIndex == 8) || (colIndex == 9) || (colIndex == 11) || (colIndex == 16) || (colIndex == 17) || (colIndex == 18);
+                return (colIndex == 0) || (colIndex == 1) || (colIndex == 8) || (colIndex == 9) || (colIndex == 11) || (colIndex == 16) || (colIndex == 17) || (colIndex == 18) || (colIndex == 19);
             }
 
             Class[] types = new Class[] {
@@ -478,8 +478,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
         ppBersihkan = new javax.swing.JMenuItem();
@@ -530,7 +529,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         TNoRM = new widget.TextBox();
         LblNoRawat = new widget.TextBox();
         jLabel9 = new widget.Label();
-        DTPTgl1 = new widget.Tanggal();
+        DTPObatKronisSelanjutnya = new widget.Tanggal();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -550,10 +549,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         ppBersihkan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBersihkan.setName("ppBersihkan"); // NOI18N
         ppBersihkan.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppBersihkan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppBersihkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppBersihkanActionPerformed(evt);
             }
         });
@@ -567,10 +564,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         ppStok.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppStok.setName("ppStok"); // NOI18N
         ppStok.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppStok.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppStok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppStokActionPerformed(evt);
             }
         });
@@ -584,10 +579,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         ppStok1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppStok1.setName("ppStok1"); // NOI18N
         ppStok1.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppStok1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppStok1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppStok1ActionPerformed(evt);
             }
         });
@@ -595,10 +588,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
-        Kd2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 Kd2KeyPressed(evt);
             }
         });
@@ -618,10 +609,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowActivated(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
@@ -643,10 +632,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         TCari.setToolTipText("Alt+C");
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(340, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
             }
         });
@@ -657,17 +644,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -678,17 +661,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAll.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -699,10 +678,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnTambah.setToolTipText("Alt+3");
         BtnTambah.setName("BtnTambah"); // NOI18N
         BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambah.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTambahActionPerformed(evt);
             }
         });
@@ -713,17 +690,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnSeek5.setToolTipText("Alt+4");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSeek5ActionPerformed(evt);
             }
         });
-        BtnSeek5.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnSeek5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnSeek5KeyPressed(evt);
             }
         });
@@ -734,10 +707,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnTambah1.setToolTipText("Alt+3");
         BtnTambah1.setName("BtnTambah1"); // NOI18N
         BtnTambah1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambah1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnTambah1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTambah1ActionPerformed(evt);
             }
         });
@@ -748,10 +719,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpanActionPerformed(evt);
             }
         });
@@ -762,10 +731,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHapusActionPerformed(evt);
             }
         });
@@ -780,10 +747,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
@@ -847,17 +812,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
         Jeniskelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Beli Luar", "Karyawan", "Utama/BPJS" }));
         Jeniskelas.setName("Jeniskelas"); // NOI18N
         Jeniskelas.setPreferredSize(new java.awt.Dimension(100, 23));
-        Jeniskelas.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        Jeniskelas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 JeniskelasItemStateChanged(evt);
             }
         });
-        Jeniskelas.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Jeniskelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 JeniskelasKeyPressed(evt);
             }
         });
@@ -871,10 +832,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         ChkNoResep.setName("ChkNoResep"); // NOI18N
         ChkNoResep.setOpaque(false);
         ChkNoResep.setPreferredSize(new java.awt.Dimension(85, 23));
-        ChkNoResep.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        ChkNoResep.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ChkNoResepItemStateChanged(evt);
             }
         });
@@ -893,10 +852,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
         DTPTgl.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPTgl.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        DTPTgl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 DTPTglKeyPressed(evt);
             }
         });
@@ -906,10 +863,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setName("cmbJam"); // NOI18N
         cmbJam.setPreferredSize(new java.awt.Dimension(50, 23));
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbJamKeyPressed(evt);
             }
         });
@@ -919,10 +874,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setName("cmbMnt"); // NOI18N
         cmbMnt.setPreferredSize(new java.awt.Dimension(50, 23));
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbMntKeyPressed(evt);
             }
         });
@@ -932,10 +885,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setName("cmbDtk"); // NOI18N
         cmbDtk.setPreferredSize(new java.awt.Dimension(50, 23));
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbDtkKeyPressed(evt);
             }
         });
@@ -949,10 +900,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkJln.setName("ChkJln"); // NOI18N
         ChkJln.setPreferredSize(new java.awt.Dimension(22, 23));
-        ChkJln.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkJln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkJlnActionPerformed(evt);
             }
         });
@@ -968,10 +917,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         kdgudang.setEditable(false);
         kdgudang.setName("kdgudang"); // NOI18N
         kdgudang.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdgudang.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        kdgudang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 kdgudangKeyPressed(evt);
             }
         });
@@ -989,10 +936,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnGudang.setToolTipText("Alt+2");
         BtnGudang.setName("BtnGudang"); // NOI18N
         BtnGudang.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnGudang.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnGudang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGudangActionPerformed(evt);
             }
         });
@@ -1041,23 +986,21 @@ public final class DlgCariObat extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(4, 100, 194, 23);
 
-        DTPTgl1.setEditable(false);
-        DTPTgl1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2024" }));
-        DTPTgl1.setDisplayFormat("dd-MM-yyyy");
-        DTPTgl1.setEnabled(false);
-        DTPTgl1.setName("DTPTgl1"); // NOI18N
-        DTPTgl1.setOpaque(false);
-        DTPTgl1.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPTgl1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                DTPTgl1KeyPressed(evt);
+        DTPObatKronisSelanjutnya.setEditable(false);
+        DTPObatKronisSelanjutnya.setForeground(new java.awt.Color(50, 70, 50));
+        DTPObatKronisSelanjutnya.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2024" }));
+        DTPObatKronisSelanjutnya.setDisplayFormat("dd-MM-yyyy");
+        DTPObatKronisSelanjutnya.setEnabled(false);
+        DTPObatKronisSelanjutnya.setName("DTPObatKronisSelanjutnya"); // NOI18N
+        DTPObatKronisSelanjutnya.setOpaque(false);
+        DTPObatKronisSelanjutnya.setPreferredSize(new java.awt.Dimension(100, 23));
+        DTPObatKronisSelanjutnya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPObatKronisSelanjutnyaKeyPressed(evt);
             }
         });
-        FormInput.add(DTPTgl1);
-        DTPTgl1.setBounds(201, 100, 90, 23);
+        FormInput.add(DTPObatKronisSelanjutnya);
+        DTPObatKronisSelanjutnya.setBounds(201, 100, 90, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1066,10 +1009,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
-        TabRawat.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
             }
         });
@@ -1082,24 +1023,18 @@ public final class DlgCariObat extends javax.swing.JDialog {
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(Popup);
         tbObat.setName("tbObat"); // NOI18N
-        tbObat.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbObatMouseClicked(evt);
             }
         });
-        tbObat.addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {
-            public void propertyChange(java.beans.PropertyChangeEvent evt)
-            {
+        tbObat.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tbObatPropertyChange(evt);
             }
         });
-        tbObat.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbObat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatKeyPressed(evt);
             }
         });
@@ -1119,10 +1054,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         tbObatRacikan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObatRacikan.setName("tbObatRacikan"); // NOI18N
-        tbObatRacikan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbObatRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatRacikanKeyPressed(evt);
             }
         });
@@ -1138,24 +1071,18 @@ public final class DlgCariObat extends javax.swing.JDialog {
         tbDetailObatRacikan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDetailObatRacikan.setComponentPopupMenu(Popup);
         tbDetailObatRacikan.setName("tbDetailObatRacikan"); // NOI18N
-        tbDetailObatRacikan.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbDetailObatRacikan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDetailObatRacikanMouseClicked(evt);
             }
         });
-        tbDetailObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {
-            public void propertyChange(java.beans.PropertyChangeEvent evt)
-            {
+        tbDetailObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tbDetailObatRacikanPropertyChange(evt);
             }
         });
-        tbDetailObatRacikan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbDetailObatRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbDetailObatRacikanKeyPressed(evt);
             }
         });
@@ -1242,6 +1169,18 @@ public final class DlgCariObat extends javax.swing.JDialog {
             if(evt.getClickCount()==2){
                 if(akses.getform().equals("DlgPemberianObat")){
                     dispose();
+                }
+            }
+            
+            boolean cekKolomObatKronis = false;
+            
+            for (int i = 0; i < tbObat.getRowCount(); i++) {
+                cekKolomObatKronis = Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString());
+                
+                DTPObatKronisSelanjutnya.setEnabled(cekKolomObatKronis);
+                
+                if (cekKolomObatKronis) {
+                    break;
                 }
             }
         }
@@ -2094,10 +2033,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         this.setCursor(Cursor.getDefaultCursor());  
     }//GEN-LAST:event_ppStok1ActionPerformed
 
-    private void DTPTgl1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_DTPTgl1KeyPressed
-    {//GEN-HEADEREND:event_DTPTgl1KeyPressed
+    private void DTPObatKronisSelanjutnyaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_DTPObatKronisSelanjutnyaKeyPressed
+    {//GEN-HEADEREND:event_DTPObatKronisSelanjutnyaKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DTPTgl1KeyPressed
+    }//GEN-LAST:event_DTPObatKronisSelanjutnyaKeyPressed
 
     /**
     * @param args the command line arguments
@@ -2127,8 +2066,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Button BtnTambah1;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkNoResep;
+    private widget.Tanggal DTPObatKronisSelanjutnya;
     private widget.Tanggal DTPTgl;
-    private widget.Tanggal DTPTgl1;
     private widget.PanelBiasa FormInput;
     private widget.TextBox Jam;
     private widget.ComboBox Jeniskelas;
