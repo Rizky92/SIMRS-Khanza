@@ -86,7 +86,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true, lanjut=true;
+    private boolean sukses=true, lanjut = true, adaObatKronis = false;
     
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1311,6 +1311,12 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             
             if (! lanjut) {
                 tampilobat();
+                return;
+            }
+        }
+        
+        if (adaObatKronis) {
+            if (JOptionPane.showConfirmDialog(rootPane, "Ada obat kronis yang belum diselesaikan, tetap lanjut?", "Konfirmasi Obat Kronis", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                 return;
             }
         }
@@ -3343,7 +3349,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             
     }
     
-    private void getDataobat(int data) {        
+    private void getDataobat(int data) {
         try {            
             stokbarang=0;  
             if(aktifkanbatch.equals("yes")){
@@ -4465,19 +4471,29 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                          mo = new SimpleDateFormat("dd-MM-yyyy");
         
         try {
-            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+            psobatkronis = koneksi.prepareStatement(
+                "select detail_pemberian_obat_selanjutnya.*, "
+                    + "datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) as sisa_hari "
+                    + "from detail_pemberian_obat_selanjutnya "
+                    + "where no_rkm_medis = ? and kode_brng = ? "
+                    + "order by concat(tgl_perawatan, ' ', jam) desc limit 1"
+            );
             
             try {
-                psobatkronis.setString(1, TNoRM.getText());
-                psobatkronis.setString(2, kodeObat);
+                psobatkronis.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(2, TNoRM.getText());
+                psobatkronis.setString(3, kodeObat);
                 
                 rsobatkronis = psobatkronis.executeQuery();
                 
                 if (rsobatkronis.next()) {
-                    JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
-                        + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
-                        + "..!!"
-                    );
+                    if (rsobatkronis.getInt("sisa_hari") > 7) {
+                        JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
+                            + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
+                            + "..!!"
+                        );
+                        adaObatKronis = true;
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
