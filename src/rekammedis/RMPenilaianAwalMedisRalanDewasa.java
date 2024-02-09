@@ -2417,4 +2417,8 @@ public final class RMPenilaianAwalMedisRalanDewasa extends javax.swing.JDialog {
                TabRawat.setSelectedIndex(1);
         }
     }
+    
+    public void AwalMedisRalanPdf(String norawat, String norekammedis) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -1690,6 +1690,30 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
         }
     }
-
-
+    
+    public void CetakSPRIKlaimPDF(String nomorsep, String nomorrawat) {
+        String nomorsurat = Sequel.cariIsi("Select bridging_surat_pri_bpjs.no_surat from bridging_surat_pri_bpjs where bridging_surat_pri_bpjs.no_rawat='" + nomorrawat + "'");
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
+        param.put("parameter", nomorrawat);
+        //param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+        //param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+        Valid.MyReportqrypdfKlaim("rptBridgingSuratPRI2.jasper", "report", "2SPRI",
+            "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"
+            + "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"
+            + "bridging_surat_pri_bpjs.tgl_rencana,bridging_surat_pri_bpjs.kd_dokter_bpjs,bridging_surat_pri_bpjs.nm_dokter_bpjs,"
+            + "bridging_surat_pri_bpjs.kd_poli_bpjs,bridging_surat_pri_bpjs.nm_poli_bpjs from reg_periksa inner join bridging_surat_pri_bpjs "
+            + "on bridging_surat_pri_bpjs.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "
+            + "where bridging_surat_pri_bpjs.no_surat='" + nomorsurat + "'", param, "hasilkompilasiklaim", nomorrawat.replaceAll("/", ""));
+        this.setCursor(Cursor.getDefaultCursor());
+        //}else{
+        //JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data Surat PRI yang mau dicetak...!!!!");
+        //BtnBatal.requestFocus();
+    }
 }

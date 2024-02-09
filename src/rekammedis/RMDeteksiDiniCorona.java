@@ -1959,5 +1959,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Kesimpulan.setSelectedItem("Bukan ketiganya");
         }
     }
-
+        
+    public void cetakSkriningCovidRME(String norawat, String norekammedis) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

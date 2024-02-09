@@ -53,9 +53,6 @@
       <SubComponents>
         <Component class="widget.editorpane" name="LoadHTML">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
             <Property name="name" type="java.lang.String" value="LoadHTML" noResource="true"/>
           </Properties>
         </Component>
@@ -242,7 +239,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-02-2024"/>
+                        <StringItem index="0" value="09-02-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -270,7 +267,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-02-2024"/>
+                        <StringItem index="0" value="09-02-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1037,26 +1034,6 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="laporan.PanelDiagnosa" name="panelDiagnosa1">
-                          <Properties>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="null"/>
-                            </Property>
-                            <Property name="name" type="java.lang.String" value="panelDiagnosa1" noResource="true"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelDiagnosa1MouseClicked"/>
-                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelDiagnosa1MouseEntered"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="DlgRawatJalan_panelDiagnosa1"/>
-                          </AuxValues>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="280" width="500" height="450"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
                         <Component class="widget.Label" name="jLabel20">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Status Rawat : "/>
@@ -1224,6 +1201,26 @@
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="220" y="220" width="23" height="20"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="laporan.PanelDiagnosa" name="panelDiagnosa1">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="null"/>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="panelDiagnosa1" noResource="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelDiagnosa1MouseClicked"/>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="panelDiagnosa1MouseEntered"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="DlgRawatJalan_panelDiagnosa1"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="0" y="280" width="500" height="450"/>
                             </Constraint>
                           </Constraints>
                         </Component>

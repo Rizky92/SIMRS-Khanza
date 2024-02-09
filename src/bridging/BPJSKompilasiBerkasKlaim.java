@@ -1,8 +1,6 @@
 package bridging;
 
-import bridging.BPJSDataSEP;
 import fungsi.WarnaTable;
-import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -10,8 +8,6 @@ import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,18 +22,12 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import bridging.BPJSRujukanKeluar;
-import bridging.BPJSSPRI;
-import bridging.BPJSSuratKontrol;
-import bridging.ICareRiwayatPerawatan;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Properties;
 import javafx.application.Platform;
@@ -56,21 +46,15 @@ import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 //import rekammedis.DlgFormulirPemeriksaan;
 //import rekammedis.RMDataCatatanKeperawatan;
-import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDeteksiDiniCorona;
-import rekammedis.RMTriaseIGD;
-//import rekammedis.RMProgramKFR;
-import rekammedis.RMUjiFungsiKFR;
-import rekammedis.RMPenilaianAwalMedisRalanPsikiatrik;
-import rekammedis.RMPenilaianAwalMedisRalanMata;
 ////import rekammedis.DlgPermintaanAmbulance;
 //import rekammedis.RMAwalMedisGiziKlinis;
 //import rekammedis.RMPenilaianKeperawatanPasienGeriatri;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 //import rekammedis.RMLayananKFR;
+import simrskhanza.DlgPasien;
 import rekammedis.RMDataResumePasien;
 import surat.SuratKontrol;
-import surat.SuratSakit;
 import setting.DlgCariJamDiet;
 import java.io.FileOutputStream;
 import java.util.Base64;
@@ -283,8 +267,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         PilihSemua = new javax.swing.JMenuItem();
@@ -344,7 +327,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel32 = new widget.Label();
         btnPenunjang = new widget.Button();
         lblNoSEP22 = new widget.Label();
-        panelDiagnosa1 = new laporan.PanelDiagnosa();
         jLabel20 = new widget.Label();
         lblStatusRawat = new widget.Label();
         BtnSimpanDiagnosa = new widget.Button();
@@ -352,6 +334,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSEPResume1 = new widget.Button();
         btnSEPResume2 = new widget.Button();
         ChkSuratKontrol = new widget.CekBox();
+        panelDiagnosa1 = new laporan.PanelDiagnosa();
         BtnValidasiQR = new widget.Button();
         jPanel5 = new javax.swing.JPanel();
         PanelContentIcareBPJS = new widget.panelisi();
@@ -365,10 +348,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         PilihSemua.setText("Pilih Semua");
         PilihSemua.setName("PilihSemua"); // NOI18N
         PilihSemua.setPreferredSize(new java.awt.Dimension(150, 28));
-        PilihSemua.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        PilihSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PilihSemuaActionPerformed(evt);
             }
         });
@@ -379,7 +360,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         ScrollHTML.setOpaque(true);
         ScrollHTML.setPreferredSize(new java.awt.Dimension(470, 16));
 
-        LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
         ScrollHTML.setViewportView(LoadHTML);
 
@@ -406,17 +386,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -439,17 +415,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -467,7 +439,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-02-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -481,7 +453,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-02-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -497,10 +469,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setMinimumSize(new java.awt.Dimension(75, 21));
         CmbStts.setName("CmbStts"); // NOI18N
-        CmbStts.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 CmbSttsKeyPressed(evt);
             }
         });
@@ -513,10 +483,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(310, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
             }
         });
@@ -526,17 +494,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnCari.setMnemonic('2');
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -573,17 +537,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         tbKompilasi.setComponentPopupMenu(jPopupMenu1);
         tbKompilasi.setName("tbKompilasi"); // NOI18N
-        tbKompilasi.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbKompilasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbKompilasiMouseClicked(evt);
             }
         });
-        tbKompilasi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbKompilasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbKompilasiKeyPressed(evt);
             }
         });
@@ -681,10 +641,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSEPResume.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSEPResume.setName("btnSEPResume"); // NOI18N
         btnSEPResume.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnSEPResume.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSEPResume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSEPResumeActionPerformed(evt);
             }
         });
@@ -705,10 +663,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnResumeRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnResumeRanap.setName("btnResumeRanap"); // NOI18N
         btnResumeRanap.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnResumeRanap.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnResumeRanap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResumeRanapActionPerformed(evt);
             }
         });
@@ -729,10 +685,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnInvoice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInvoice.setName("btnInvoice"); // NOI18N
         btnInvoice.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnInvoice.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInvoiceActionPerformed(evt);
             }
         });
@@ -753,10 +707,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnAwalMedisIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAwalMedisIGD.setName("btnAwalMedisIGD"); // NOI18N
         btnAwalMedisIGD.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnAwalMedisIGD.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAwalMedisIGD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAwalMedisIGDActionPerformed(evt);
             }
         });
@@ -777,10 +729,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnHasilLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHasilLab.setName("btnHasilLab"); // NOI18N
         btnHasilLab.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnHasilLab.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHasilLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHasilLabActionPerformed(evt);
             }
         });
@@ -801,10 +751,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnHasilRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHasilRad.setName("btnHasilRad"); // NOI18N
         btnHasilRad.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnHasilRad.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHasilRad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHasilRadActionPerformed(evt);
             }
         });
@@ -825,10 +773,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSurkon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSurkon.setName("btnSurkon"); // NOI18N
         btnSurkon.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnSurkon.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSurkon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSurkonActionPerformed(evt);
             }
         });
@@ -849,10 +795,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSPRI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSPRI.setName("btnSPRI"); // NOI18N
         btnSPRI.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnSPRI.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSPRI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSPRIActionPerformed(evt);
             }
         });
@@ -873,10 +817,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnPenunjang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPenunjang.setName("btnPenunjang"); // NOI18N
         btnPenunjang.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnPenunjang.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPenunjang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPenunjangActionPerformed(evt);
             }
         });
@@ -888,22 +830,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         lblNoSEP22.setPreferredSize(new java.awt.Dimension(200, 14));
         FormMenu.add(lblNoSEP22);
         lblNoSEP22.setBounds(590, 250, 200, 14);
-
-        panelDiagnosa1.setBorder(null);
-        panelDiagnosa1.setName("panelDiagnosa1"); // NOI18N
-        panelDiagnosa1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                panelDiagnosa1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
-                panelDiagnosa1MouseEntered(evt);
-            }
-        });
-        FormMenu.add(panelDiagnosa1);
-        panelDiagnosa1.setBounds(0, 280, 500, 450);
 
         jLabel20.setText("Status Rawat : ");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -930,17 +856,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnSimpanDiagnosa.setMargin(new java.awt.Insets(0, 2, 2, 0));
         BtnSimpanDiagnosa.setName("BtnSimpanDiagnosa"); // NOI18N
         BtnSimpanDiagnosa.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpanDiagnosa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpanDiagnosa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpanDiagnosaActionPerformed(evt);
             }
         });
-        BtnSimpanDiagnosa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnSimpanDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnSimpanDiagnosaKeyPressed(evt);
             }
         });
@@ -959,17 +881,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnHapusDiagnosa.setMargin(new java.awt.Insets(0, 2, 2, 0));
         BtnHapusDiagnosa.setName("BtnHapusDiagnosa"); // NOI18N
         BtnHapusDiagnosa.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapusDiagnosa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnHapusDiagnosa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHapusDiagnosaActionPerformed(evt);
             }
         });
-        BtnHapusDiagnosa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnHapusDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnHapusDiagnosaKeyPressed(evt);
             }
         });
@@ -984,10 +902,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSEPResume1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSEPResume1.setName("btnSEPResume1"); // NOI18N
         btnSEPResume1.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnSEPResume1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSEPResume1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSEPResume1ActionPerformed(evt);
             }
         });
@@ -1002,10 +918,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSEPResume2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSEPResume2.setName("btnSEPResume2"); // NOI18N
         btnSEPResume2.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnSEPResume2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSEPResume2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSEPResume2ActionPerformed(evt);
             }
         });
@@ -1019,15 +933,26 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         ChkSuratKontrol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkSuratKontrol.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkSuratKontrol.setName("ChkSuratKontrol"); // NOI18N
-        ChkSuratKontrol.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkSuratKontrolActionPerformed(evt);
             }
         });
         FormMenu.add(ChkSuratKontrol);
         ChkSuratKontrol.setBounds(220, 220, 23, 20);
+
+        panelDiagnosa1.setBorder(null);
+        panelDiagnosa1.setName("panelDiagnosa1"); // NOI18N
+        panelDiagnosa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelDiagnosa1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelDiagnosa1MouseEntered(evt);
+            }
+        });
+        FormMenu.add(panelDiagnosa1);
+        panelDiagnosa1.setBounds(0, 280, 500, 450);
 
         scrollPane9.setViewportView(FormMenu);
 
@@ -1040,10 +965,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnValidasiQR.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnValidasiQR.setName("BtnValidasiQR"); // NOI18N
         BtnValidasiQR.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnValidasiQR.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnValidasiQR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnValidasiQRActionPerformed(evt);
             }
         });
@@ -1070,6 +993,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void panelDiagnosa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDiagnosa1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDiagnosa1MouseClicked
+
+    private void panelDiagnosa1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDiagnosa1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDiagnosa1MouseEntered
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -1569,17 +1500,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void BtnHapusDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_BtnHapusDiagnosaKeyPressed
 
     }// GEN-LAST:event_BtnHapusDiagnosaKeyPressed
-
-    private void panelDiagnosa1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_panelDiagnosa1MouseClicked
-        panelDiagnosa1.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.SetTgl(DTPCari1.getSelectedItem() + ""),
-                Valid.SetTgl(DTPCari2.getSelectedItem() + ""), "Ralan", lblNoRawat.getText().trim());
-        panelDiagnosa1.pilihTab();
-        LCount.setText(panelDiagnosa1.getRecord() + "");
-    }// GEN-LAST:event_panelDiagnosa1MouseClicked
-
-    private void panelDiagnosa1MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_panelDiagnosa1MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_panelDiagnosa1MouseEntered
 
     private void btnSEPResume1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSEPResume1ActionPerformed
         // Valid.panggilUrl("inacbg/login.php?act=login&usere=RsIndriati&passwordte=BoyoLali&page=LihatPDFNCC&nomorsep="

@@ -2474,4 +2474,12 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
+
+    public void ResumePasienPdf(String norawat, String norekammedis) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void ResumePasienPdfNCC(String norawat, String norekammedis) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
