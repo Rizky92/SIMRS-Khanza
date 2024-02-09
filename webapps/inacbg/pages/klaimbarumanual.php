@@ -18,6 +18,7 @@
                 $no_sep         = validTeks4((isset($_GET['no_sep'])?$_GET['no_sep']:NULL),30);
                 $norawat        = validTeks4((isset($_GET['norawat'])?$_GET['norawat']:NULL),20);
                 $codernik       = validTeks4((isset($_GET['codernik'])?$_GET['codernik']:NULL),30);
+                $statusBayar    = validTeks4((isset($_GET['statusbayar'])?$_GET['statusbayar']:'Sudah Bayar'),40);
                 $keyword        = validTeks4((isset($_GET['keyword'])?$_GET['keyword']:NULL),20);
                 echo "<input type=hidden name=codernik  value=$codernik><input type=hidden name=keyword value=$keyword>";
         ?>
@@ -33,7 +34,8 @@
                     $tahunakhir     = validTeks4(trim($_POST['tahunakhir']),4);
                     $bulanakhir     = validTeks4(trim($_POST['bulanakhir']),2);
                     $tanggalakhir   = validTeks4(trim($_POST['tanggalakhir']),2);
-                    $codernik       = validTeks4(trim($_POST['codernik']),30);                
+                    $codernik       = validTeks4(trim($_POST['codernik']),30);
+                    $statusBayar    = validTeks4((isset($_POST['statusbayar'])?trim($_POST['statusbayar']):'Sudah Bayar'),40);
             }
             if(empty($tahunawal)){
                 $tahunawal=date('Y');
@@ -62,11 +64,11 @@
                     if(bridging_sep.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep.user, 
                     bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu,bridging_sep.tglpulang from bridging_sep inner join reg_periksa inner join dokter 
                     on reg_periksa.no_rawat=bridging_sep.no_rawat and reg_periksa.kd_dokter=dokter.kd_dokter where 
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep.no_sep like '%".$keyword."%' or
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep.nomr like '%".$keyword."%' or
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep.nama_pasien like '%".$keyword."%' or
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep.no_rawat like '%".$keyword."%' or
-                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep.no_kartu like '%".$keyword."%' 
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep.no_sep like '%".$keyword."%' or
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep.nomr like '%".$keyword."%' or
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep.nama_pasien like '%".$keyword."%' or
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep.no_rawat like '%".$keyword."%' or
+                    bridging_sep.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep.no_kartu like '%".$keyword."%' 
                     order by bridging_sep.tglsep";
             $hasil=bukaquery($_sql);
             
@@ -79,11 +81,11 @@
                     if(bridging_sep_internal.lakalantas='0','2. Bukan Kasus Kecelakaan','1. Kasus Kecelakaan') as lakalantas,bridging_sep_internal.user, 
                     bridging_sep_internal.tanggal_lahir,bridging_sep_internal.peserta,bridging_sep_internal.jkel,bridging_sep_internal.no_kartu,bridging_sep_internal.tglpulang from bridging_sep_internal inner join reg_periksa inner join dokter 
                     on reg_periksa.no_rawat=bridging_sep_internal.no_rawat and reg_periksa.kd_dokter=dokter.kd_dokter where 
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep_internal.no_sep like '%".$keyword."%' or
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep_internal.nomr like '%".$keyword."%' or
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep_internal.nama_pasien like '%".$keyword."%' or
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep_internal.no_rawat like '%".$keyword."%' or
-                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and bridging_sep_internal.no_kartu like '%".$keyword."%' 
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep_internal.no_sep like '%".$keyword."%' or
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep_internal.nomr like '%".$keyword."%' or
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep_internal.nama_pasien like '%".$keyword."%' or
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep_internal.no_rawat like '%".$keyword."%' or
+                    bridging_sep_internal.tglsep between '".$tahunawal."-".$bulanawal."-".$tanggalawal." 00:00:00' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir." 23:59:59' and reg_periksa.status_bayar like '%{$statusBayar}%' and bridging_sep_internal.no_kartu like '%".$keyword."%' 
                     order by bridging_sep_internal.tglsep";
             $hasilinternal=bukaquery($_sqlinternal);
             
@@ -504,6 +506,12 @@
                                 }                                    
                                 loadThnnow();
                              ?>
+                        </select>
+                        &nbsp;
+                        Status Bayar : 
+                        <select name="statusbayar" class="text4">
+                            <option value="Sudah Bayar" <?= ($statusBayar === 'Sudah Bayar') ? 'selected' : '' ?>>Lunas</option>
+                            <option value="Belum Bayar" <?= ($statusBayar === 'Belum Bayar') ? 'selected' : '' ?>>Belum Lunas</option>
                         </select>
                         &nbsp;
                         Keyword : <input name="keyword" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type=text id="TxtIsi1" value="<?php echo $keyword;?>" size="25" maxlength="20" pattern="[a-zA-Z0-9, ./@_]{1,20}" title=" a-zA-Z0-9, ./@_ (Maksimal 20 karakter)" autocomplete="off" autocomplete="off" autofocus />

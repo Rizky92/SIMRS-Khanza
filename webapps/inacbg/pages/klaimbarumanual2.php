@@ -221,7 +221,7 @@
                         Cara Bayar : 
                         <select name="carabayar" class="text4">
                             <?php
-                                $_sql = "SELECT penjab.png_jawab FROM penjab where status = '1' ORDER BY CASE WHEN penjab.kd_pj = 'BPJ' THEN 1 ELSE 0 END, penjab.png_jawab";
+                                $_sql = "SELECT penjab.png_jawab FROM penjab where status = '1' ORDER BY CASE WHEN penjab.kd_pj = 'BPJ' THEN 1 ELSE 0 END DESC, penjab.png_jawab";
                                 $hasil = bukaquery($_sql);
                             ?>
                             <option value=""></option>
