@@ -1,0 +1,27 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Uncomment variabel dibawah Development ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+client_id = .....
+client_secret = .....
+
+auth_url = https://api-satusehat-dev.dto.kemkes.go.id/oauth2/v1
+api_url = https://api-satusehat-dev.dto.kemkes.go.id/kyc/v1/generate-url
+
+environment = development
+
+;--------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Uncomment variabel dibawah Untuk Production;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;client_id = .....
+;client_secret = .....
+
+;auth_url = https://api-satusehat.kemkes.go.id/oauth2/v1
+;api_url = https://api-satusehat.kemkes.go.id/kyc/v1/generate-url
+
+;environment = production
+
+;--------------------------------------------
