@@ -35,6 +35,7 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -1330,8 +1331,15 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         
         if (adaObatKronis) {
-            if (JOptionPane.showConfirmDialog(rootPane, "Ada obat kronis yang belum diselesaikan, tetap lanjut?", "Konfirmasi Obat Kronis", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                return;
+            for (int i = 0; i < tbObat.getRowCount(); i++) {
+                if (! cekUlangObatKronis(i, tbObat.getValueAt(i, 2).toString(), tbObat.getValueAt(i, 3).toString())) {
+                    return;
+                }
+            }
+            for (int i = 0; i < tbDetailObatRacikan.getRowCount(); i++) {
+                if (! cekUlangObatKronis(i, tbDetailObatRacikan.getValueAt(i, 1).toString(), tbDetailObatRacikan.getValueAt(i, 2).toString())) {
+                    return;
+                }
             }
         }
         
@@ -4509,9 +4517,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 rsobatkronis = psobatkronis.executeQuery();
                 
                 if (rsobatkronis.next()) {
-                    if (rsobatkronis.getInt("sisa_hari") > 7) {
+                    if (rsobatkronis.getInt("sisa_hari") > 0) {
                         JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
-                            + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
+                            + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))) + "(" + rsobatkronis.getString("sisa_hari") + " hari lagi)"
                             + "..!!"
                         );
                         adaObatKronis = true;
@@ -4523,5 +4531,52 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+    }
+    
+    private boolean cekUlangObatKronis(int posisi, String kodeObat, String namaObat) {
+        if (posisi < 0) {
+            return true;
+        }
+        
+        boolean output = true;
+        
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
+                         mo = new SimpleDateFormat("dd MMMM yyyy");
+        
+        try {
+            psobatkronis = koneksi.prepareStatement(
+                "select detail_pemberian_obat_selanjutnya.*, "
+                    + "datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) as sisa_hari "
+                    + "from detail_pemberian_obat_selanjutnya "
+                    + "where no_rkm_medis = ? and kode_brng = ? "
+                    + "order by concat(tgl_perawatan, ' ', jam) desc limit 1"
+            );
+            
+            try {
+                psobatkronis.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(2, TNoRM.getText());
+                psobatkronis.setString(3, kodeObat);
+                
+                rsobatkronis = psobatkronis.executeQuery();
+                
+                if (rsobatkronis.next()) {
+                    if (rsobatkronis.getInt("sisa_hari") > 0) {
+                        if (JOptionPane.showConfirmDialog(rootPane, "Obat " + namaObat + " baru bisa diberikan pada tanggal " + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))) + ", apakah mau diberikan sekarang?", "Konfirmasi pemberian obat kronis", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            output = true;
+                        } else {
+                            output = false;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                output = false;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = false;
+        }
+        
+        return output;
     }
 }
