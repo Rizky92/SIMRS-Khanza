@@ -64,7 +64,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private double h_belicari=0, hargacari=0, sisacari=0,x=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
             tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan,stokbarang,ttlhpp,ttljual;
     private int jml=0,i=0,z=0,row=0;
-    private boolean[] pilih;
+    private boolean[] pilih, kronis;
     private double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
     private String[] no,kodebarang,namabarang,kodesatuan,letakbarang,namajenis,industri,aturan,kategori,golongan,nobatch,nofaktur,kadaluarsa;
     private String signa1="1",signa2="1",kdObatSK="",requestJson="",nokunjungan="",URL="",otorisasi,sql="",no_batchcari="", tgl_kadaluarsacari="", 
@@ -95,101 +95,110 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        tabMode=new DefaultTableModel(null,new Object[]{
-            "K","Jumlah","Kode","Nama Barang","Satuan","Kandungan",
-            "Harga(Rp)","Jenis Obat","Emb","Tslh","Stok","I.F.","H.Beli",
-            "Aturan Pakai","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa"
-        }){
-            @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==0)||(colIndex==1)||(colIndex==8)||(colIndex==9)||(colIndex==13)||(colIndex==16)||(colIndex==17)) {
-                    a=true;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,  
-                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                java.lang.Object.class, java.lang.Double.class,java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "K", "Jumlah", "Kode", "Nama Barang", "Satuan", "Kandungan",
+            "Harga(Rp)", "Jenis Obat", "Emb", "Tslh", "Stok", "I.F.", "H.Beli",
+            "Aturan Pakai", "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa", "Obat Kronis?"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 0
+                    || colIndex == 1
+                    || colIndex == 8
+                    || colIndex == 9
+                    || colIndex == 13
+                    || colIndex == 16
+                    || colIndex == 17
+                    || colIndex == 18;
+            }
+            
+            Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
         };
         tbObat.setModel(tabMode);
-        //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
+        // tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 19; i++) {
+        for (i = 0; i < 20; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
-            if(i==0){
+            if (i == 0) {
                 column.setPreferredWidth(20);
-            }else if(i==1){
+            } else if (i == 1) {
                 column.setPreferredWidth(45);
-            }else if(i==2){
+            } else if (i == 2) {
                 column.setPreferredWidth(70);
-            }else if(i==3){
+            } else if (i == 3) {
                 column.setPreferredWidth(200);
-            }else if(i==4){
+            } else if (i == 4) {
                 column.setPreferredWidth(70);
-            }else if(i==5){
+            } else if (i == 5) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
-            }else if(i==6){
+            } else if (i == 6) {
                 column.setPreferredWidth(70);
-            }else if(i==7){
+            } else if (i == 7) {
                 column.setPreferredWidth(85);
-            }else if(i==8){
+            } else if (i == 8) {
                 column.setPreferredWidth(40);
-            }else if(i==9){
+            } else if (i == 9) {
                 column.setPreferredWidth(40);
-            }else if(i==10){
+            } else if (i == 10) {
                 column.setPreferredWidth(40);
-            }else if(i==11){
+            } else if (i == 11) {
                 column.setPreferredWidth(80);
-            }else if(i==12){
+            } else if (i == 12) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
-            }else if(i==13){
+            } else if (i == 13) {
                 column.setPreferredWidth(100);
-            }else if(i==14){
+            } else if (i == 14) {
                 column.setPreferredWidth(80);
-            }else if(i==15){
+            } else if (i == 15) {
                 column.setPreferredWidth(80);
-            }else if(i==16){
+            } else if (i == 16) {
                 column.setPreferredWidth(70);
-            }else if(i==17){
+            } else if (i == 17) {
                 column.setPreferredWidth(100);
-            }else if(i==18){
+            } else if (i == 18) {
                 column.setPreferredWidth(65);
-            }          
+            } else if (i == 19) {
+                column.setPreferredWidth(70);
+            }
         }
         warna.kolom=1;
         tbObat.setDefaultRenderer(Object.class,warna);
         
-        tabModeObatRacikan=new DefaultTableModel(null,new Object[]{
-                "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik",
-                "Aturan Pakai","Keterangan"
-            }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+        tabModeObatRacikan = new DefaultTableModel(null, new Object[] {
+            "No", "Nama Racikan", "Kode Racik", "Metode Racik", "Jml.Racik",
+            "Aturan Pakai", "Keterangan"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
                 boolean a = true;
-                if ((colIndex==0)||(colIndex==2)||(colIndex==3)) {
-                    a=false;
+                if ((colIndex == 0) || (colIndex == 2) || (colIndex == 3)) {
+                    a = false;
                 }
                 return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+            }
+            Class[] types = new Class[] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
         };
 
         tbObatRacikan.setModel(tabModeObatRacikan);
@@ -511,6 +520,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         kdgudang = new widget.TextBox();
         nmgudang = new widget.TextBox();
         BtnGudang = new widget.Button();
+        jLabel9 = new widget.Label();
+        DTPObatKronisSelanjutnya = new widget.Tanggal();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -761,7 +772,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         jLabel5.setBounds(4, 10, 68, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2021" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-02-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -893,6 +904,28 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         });
         FormInput.add(BtnGudang);
         BtnGudang.setBounds(332, 40, 28, 23);
+
+        jLabel9.setText("Berikan obat kronis selanjutnya pada :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        jLabel9.setPreferredSize(new java.awt.Dimension(45, 23));
+        FormInput.add(jLabel9);
+        jLabel9.setBounds(370, 40, 194, 23);
+
+        DTPObatKronisSelanjutnya.setEditable(false);
+        DTPObatKronisSelanjutnya.setForeground(new java.awt.Color(50, 70, 50));
+        DTPObatKronisSelanjutnya.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-02-2024" }));
+        DTPObatKronisSelanjutnya.setDisplayFormat("dd-MM-yyyy");
+        DTPObatKronisSelanjutnya.setEnabled(false);
+        DTPObatKronisSelanjutnya.setName("DTPObatKronisSelanjutnya"); // NOI18N
+        DTPObatKronisSelanjutnya.setOpaque(false);
+        DTPObatKronisSelanjutnya.setPreferredSize(new java.awt.Dimension(100, 23));
+        DTPObatKronisSelanjutnya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPObatKronisSelanjutnyaKeyPressed(evt);
+            }
+        });
+        FormInput.add(DTPObatKronisSelanjutnya);
+        DTPObatKronisSelanjutnya.setBounds(570, 40, 90, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1887,6 +1920,10 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppStok1ActionPerformed
 
+    private void DTPObatKronisSelanjutnyaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPObatKronisSelanjutnyaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DTPObatKronisSelanjutnyaKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1915,6 +1952,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.Button BtnTambah1;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkNoResep;
+    private widget.Tanggal DTPObatKronisSelanjutnya;
     private widget.Tanggal DTPTgl;
     private widget.PanelBiasa FormInput;
     private widget.ComboBox Jeniskelas;
@@ -1933,6 +1971,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel5;
+    private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
     private widget.TextBox kdgudang;
     private widget.TextBox kelas;
