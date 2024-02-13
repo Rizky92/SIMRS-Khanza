@@ -70,7 +70,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private boolean[] pilih,kronis;
     private double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
-    private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa;
+    private int[] obatKronisSisaHari;
+    private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,obatKronisPemberianSelanjutnya;
     private String signa1="1",signa2="1",nokunjungan="",kdObatSK="",requestJson="",URL="",otorisasi,sql="",aktifpcare="no",no_batchcari="", tgl_kadaluarsacari="", no_fakturcari="", aktifkanbatch="no",kodedokter="",namadokter="",noresep="",bangsal="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),tampilkan_ppnobat_ralan="",
                    Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="", kolomHarga = "ralan";
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
@@ -2240,6 +2241,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         nofaktur=new String[z];
         kadaluarsa=new String[z];
         kronis=new boolean[z];
+        obatKronisSisaHari = new int[z];
+        obatKronisPemberianSelanjutnya = new String[z];
         z=0;        
         for(i=0;i<tbObat.getRowCount();i++){
             if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){
@@ -2291,6 +2294,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     kadaluarsa[z]="0000-00-00";
                 }
                 kronis[z] = Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString());
+                obatKronisSisaHari[z] = Integer.parseInt(tbObat.getValueAt(i, 20).toString());
+                obatKronisPemberianSelanjutnya[z] = tbObat.getValueAt(i, 21).toString();
                 z++;
             }
         }
@@ -2300,7 +2305,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         for(i=0;i<z;i++){
             tabModeobat.addRow(new Object[] {
                 pilih[i],jumlah[i],kodebarang[i],namabarang[i],kodesatuan[i],letakbarang[i],harga[i],namajenis[i],
-                eb[i],ts[i],stok[i],aturan[i],industri[i],beli[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i],kronis[i]
+                eb[i],ts[i],stok[i],aturan[i],industri[i],beli[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i],
+                kronis[i],obatKronisSisaHari[i],obatKronisPemberianSelanjutnya[i]
             });
         }
         
@@ -2600,7 +2606,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }            
     }
     
-    public void tampilobat2(String no_resep) {     
+    public void tampilobat2(String no_resep) {
         this.noresep=no_resep; 
         adaObatKronis = false;
         try {
@@ -2616,15 +2622,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             "industrifarmasi.nama_industri, databarang.h_beli, resep_dokter.jml, " +
                             "resep_dokter.aturan_pakai, " +
                             "kategori_barang.nama as kategori, " +
-                            "golongan_barang.nama as golongan, " +
-                            "(" +
-                                "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                "from detail_pemberian_obat_selanjutnya " +
-                                "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                "limit 1" +
-                            ") as sisa_hari_obat_kronis " +
+                            "golongan_barang.nama as golongan " +
                         "from databarang " +
                         "inner join jenis on databarang.kdjns = jenis.kdjns " +
                         "inner join golongan_barang on databarang.kode_golongan = golongan_barang.kode " +
@@ -2636,14 +2634,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     );
                     try{
                         psobat.setDouble(1, kenaikan);
-                        psobat.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                        psobat.setString(3, TNoRM.getText());
-                        psobat.setString(4, no_resep);
+                        psobat.setString(2, no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
-                            if (! adaObatKronis) {
-                                adaObatKronis = (rsobat.getInt("sisa_hari_obat_kronis") > 0);
-                            }
                             no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
                             psbatch=koneksi.prepareStatement(
                                 "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
@@ -2681,8 +2674,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
                                 rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                 h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,
-                                false, rsobat.getInt("sisa_hari_obat_kronis")
+                                false, 0, ""
                             });
+                            cekObatKronis(tbObat.getRowCount() - 1, rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                         }  
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
@@ -2700,15 +2694,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             "databarang.kode_brng, databarang.nama_brng, jenis.nama, databarang.kode_sat, " +
                             "(databarang.h_beli + (databarang.h_beli * ?)) as harga, databarang.letak_barang, " +
                             "industrifarmasi.nama_industri, databarang.h_beli, databarang. " + hppfarmasi + " as dasar, " +
-                            "resep_dokter.jml, resep_dokter.aturan_pakai, kategori_barang.nama as kategori, golongan_barang.nama as golongan, " +
-                            "(" +
-                                "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                "from detail_pemberian_obat_selanjutnya " +
-                                "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                "limit 1" +
-                            ") as sisa_hari_obat_kronis " +
+                            "resep_dokter.jml, resep_dokter.aturan_pakai, kategori_barang.nama as kategori, golongan_barang.nama as golongan " +
                         "from databarang " +
                         "inner join jenis on databarang.kdjns = jenis.kdjns " +
                         "inner join golongan_barang on databarang.kode_golongan = golongan_barang.kode " +
@@ -2720,14 +2706,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     );
                     try{
                         psobat.setDouble(1, kenaikan);
-                        psobat.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                        psobat.setString(3, TNoRM.getText());
-                        psobat.setString(4, no_resep);
+                        psobat.setString(2, no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
-                            if (! adaObatKronis) {
-                                adaObatKronis = (rsobat.getInt("sisa_hari_obat_kronis") > 0);
-                            }
                             sisacari=0;
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
@@ -2755,8 +2736,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
                                 rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
-                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","", false, rsobat.getInt("sisa_hari_obat_kronis")
+                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","", false, 0, ""
                             });
+                            cekObatKronis(tbObat.getRowCount() - 1, rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                         }  
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
@@ -2776,15 +2758,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             "databarang.kode_brng, databarang.nama_brng, jenis.nama, databarang.kode_sat, " +
                             "databarang.karyawan, databarang.ralan, databarang.beliluar, databarang.letak_barang, " +
                             "databarang.utama, industrifarmasi.nama_industri, databarang.h_beli, resep_dokter.jml, " +
-                            "resep_dokter.aturan_pakai, kategori_barang.nama as kategori, golongan_barang.nama as golongan, " +
-                            "(" +
-                                "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                "from detail_pemberian_obat_selanjutnya  " +
-                                "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng  " +
-                                "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                "limit 1" +
-                            ") as sisa_hari_obat_kronis " +
+                            "resep_dokter.aturan_pakai, kategori_barang.nama as kategori, golongan_barang.nama as golongan " +
                         "from databarang " +
                         "inner join jenis on databarang.kdjns = jenis.kdjns " +
                         "inner join golongan_barang on databarang.kode_golongan = golongan_barang.kode " +
@@ -2795,14 +2769,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "order by databarang.nama_brng"
                     );
                     try{
-                        psobat.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                        psobat.setString(2, TNoRM.getText());
-                        psobat.setString(3, no_resep);
+                        psobat.setString(1, no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
-                            if (! adaObatKronis) {
-                                adaObatKronis = (rsobat.getInt("sisa_hari_obat_kronis") > 0);
-                            }
                             no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
                             psbatch=koneksi.prepareStatement(
                                 "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
@@ -2848,8 +2817,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
                                 rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
-                                h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, rsobat.getInt("sisa_hari_obat_kronis")
+                                h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, 0, ""
                             });
+                            cekObatKronis(tbObat.getRowCount() - 1, rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                         }
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
@@ -2868,15 +2838,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             "databarang.kode_brng, databarang.nama_brng, jenis.nama, databarang.kode_sat, databarang.karyawan, " +
                             "databarang.ralan, databarang.beliluar, databarang.letak_barang, databarang.utama, industrifarmasi.nama_industri, " +
                             "databarang.h_beli, resep_dokter.jml, databarang." + hppfarmasi + " as dasar, resep_dokter.aturan_pakai, " +
-                            "kategori_barang.nama as kategori, golongan_barang.nama as golongan, " +
-                            "(" +
-                                "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                "from detail_pemberian_obat_selanjutnya " +
-                                "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                "limit 1" +
-                            ") as sisa_hari_obat_kronis " +
+                            "kategori_barang.nama as kategori, golongan_barang.nama as golongan " +
                         "from databarang " +
                         "inner join jenis on databarang.kdjns = jenis.kdjns " +
                         "inner join golongan_barang on databarang.kode_golongan = golongan_barang.kode " +
@@ -2887,14 +2849,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "order by databarang.nama_brng"
                     );
                     try{
-                        psobat.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                        psobat.setString(2, TNoRM.getText());
-                        psobat.setString(3, no_resep);
+                        psobat.setString(1, no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
-                            if (! adaObatKronis) {
-                                adaObatKronis = (rsobat.getInt("sisa_hari_obat_kronis") > 0);
-                            }
                             sisacari=0;
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
@@ -2929,8 +2886,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                 rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble(kolomHarga),100),
                                 rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
-                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","", false, rsobat.getInt("sisa_hari_obat_kronis")
+                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","", false, 0, ""
                              });
+                            cekObatKronis(tbObat.getRowCount() - 1, rsobat.getString("kode_brng"), rsobat.getString("nama_brng"));
                         }
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
@@ -2972,15 +2930,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 "select " +
                                     "databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, resep_dokter_racikan_detail.kandungan, " +
                                     "databarang.kode_sat, (databarang.h_beli + (databarang.h_beli * ?)) as harga, databarang.letak_barang, databarang.h_beli, " +
-                                    "kategori_barang.nama as kategori, golongan_barang.nama as golongan, industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas, " +
-                                    "(" +
-                                        "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                        "from detail_pemberian_obat_selanjutnya " +
-                                        "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                        "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                        "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                        "limit 1" +
-                                    ") as sisa_hari_obat_kronis " +
+                                    "kategori_barang.nama as kategori, golongan_barang.nama as golongan, industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas " +
                                 "from resep_dokter_racikan_detail " +
                                 "inner join databarang on resep_dokter_racikan_detail.kode_brng = databarang.kode_brng " +
                                 "inner join jenis on databarang.kdjns = jenis.kdjns " +
@@ -2992,15 +2942,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             );
                             try {
                                 ps2.setDouble(1, kenaikan);
-                                ps2.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                                ps2.setString(3, TNoRM.getText());
-                                ps2.setString(4, no_resep);
-                                ps2.setString(5, rsobat.getString("no_racik"));
+                                ps2.setString(2, no_resep);
+                                ps2.setString(3, rsobat.getString("no_racik"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    if (! adaObatKronis) {
-                                        adaObatKronis = (rs2.getInt("sisa_hari_obat_kronis") > 0);
-                                    }
                                     no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
                                     psbatch=koneksi.prepareStatement(
                                         "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
@@ -3038,8 +2983,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         rs2.getString("kode_sat"), hargacari, h_belicari,
                                         rs2.getString("jenis"), sisacari, rs2.getDouble("kapasitas"), rs2.getString("kandungan"),
                                         rs2.getDouble("jml"), 0, 0, rs2.getString("nama_industri"), rs2.getString("kategori"),
-                                        rs2.getString("golongan"), no_batchcari, no_fakturcari, tgl_kadaluarsacari, false, rs2.getInt("sisa_hari_obat_kronis")
+                                        rs2.getString("golongan"), no_batchcari, no_fakturcari, tgl_kadaluarsacari, false, 0, ""
                                     });
+                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -3057,15 +3003,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                     "databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, resep_dokter_racikan_detail.kandungan, " +
                                     "databarang.kode_sat, (databarang.h_beli + (databarang.h_beli * ?)) as harga, databarang.letak_barang, databarang.h_beli, " +
                                     "kategori_barang.nama as kategori, golongan_barang.nama as golongan, databarang." + hppfarmasi + " as dasar, " +
-                                    "industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas, " +
-                                    "(" +
-                                        "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                        "from detail_pemberian_obat_selanjutnya " +
-                                        "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                        "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                        "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                        "limit 1" +
-                                    ") as sisa_hari_obat_kronis " +
+                                    "industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas " +
                                 "from resep_dokter_racikan_detail " +
                                 "inner join databarang on resep_dokter_racikan_detail.kode_brng = databarang.kode_brng " +
                                 "inner join jenis on databarang.kdjns = jenis.kdjns " +
@@ -3077,15 +3015,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             );
                             try {
                                 ps2.setDouble(1, kenaikan);
-                                ps2.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                                ps2.setString(3, TNoRM.getText());
-                                ps2.setString(4, no_resep);
-                                ps2.setString(5, rsobat.getString("no_racik"));
+                                ps2.setString(2, no_resep);
+                                ps2.setString(3, rsobat.getString("no_racik"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    if (! adaObatKronis) {
-                                        adaObatKronis = (rs2.getInt("sisa_hari_obat_kronis") > 0);
-                                    }
                                     sisacari=0;
                                     psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                     try {
@@ -3114,8 +3047,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         rs2.getString("kode_sat"),rs2.getDouble("harga"),rs2.getDouble("dasar"),
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),"","","", false, rs2.getInt("sisa_hari_obat_kronis")
+                                        rs2.getString("golongan"),"","","", false, 0, ""
                                     });
+                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -3135,15 +3069,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                     "databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, resep_dokter_racikan_detail.kandungan, " +
                                     "databarang.kode_sat, databarang.karyawan, databarang.ralan, databarang.beliluar, databarang.letak_barang, " +
                                     "databarang.utama, databarang.h_beli, kategori_barang.nama as kategori, golongan_barang.nama as golongan, " +
-                                    "industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas, " +
-                                    "(" +
-                                        "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                        "from detail_pemberian_obat_selanjutnya " +
-                                        "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                        "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                        "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                        "limit 1" +
-                                    ") as sisa_hari_obat_kronis " +
+                                    "industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas " +
                                 "from resep_dokter_racikan_detail " +
                                 "inner join databarang on resep_dokter_racikan_detail.kode_brng = databarang.kode_brng " +
                                 "inner join jenis on databarang.kdjns = jenis.kdjns " +
@@ -3154,15 +3080,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 "order by databarang.kode_brng"
                             );
                             try {
-                                ps2.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                                ps2.setString(2, TNoRM.getText());
-                                ps2.setString(3, no_resep);
-                                ps2.setString(4, rsobat.getString("no_racik"));
+                                ps2.setString(1, no_resep);
+                                ps2.setString(2, rsobat.getString("no_racik"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    if (! adaObatKronis) {
-                                        adaObatKronis = (rs2.getInt("sisa_hari_obat_kronis") > 0);
-                                    }
                                     no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
                                     psbatch=koneksi.prepareStatement(
                                         "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
@@ -3208,8 +3129,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         rs2.getString("kode_sat"),hargacari,h_belicari,
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, rs2.getInt("sisa_hari_obat_kronis")
+                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, 0, ""
                                     });
+                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -3227,15 +3149,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                     "databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, resep_dokter_racikan_detail.kandungan, " +
                                     "databarang.kode_sat, databarang.karyawan, databarang.ralan, databarang.beliluar, databarang.letak_barang, " +
                                     "databarang.utama, databarang.h_beli, kategori_barang.nama as kategori, golongan_barang.nama as golongan, " +
-                                    "databarang." + hppfarmasi + " as dasar, industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas, " +
-                                    "(" +
-                                        "select datediff(detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya, ?) " +
-                                        "from detail_pemberian_obat_selanjutnya " +
-                                        "where detail_pemberian_obat_selanjutnya.kode_brng = databarang.kode_brng " +
-                                        "and detail_pemberian_obat_selanjutnya.no_rkm_medis = ? " +
-                                        "order by detail_pemberian_obat_selanjutnya.tgl_pemberian_selanjutnya desc " +
-                                        "limit 1" +
-                                    ") as sisa_hari_obat_kronis " +
+                                    "databarang." + hppfarmasi + " as dasar, industrifarmasi.nama_industri, jenis.nama as jenis, databarang.kapasitas " +
                                 "from resep_dokter_racikan_detail " +
                                 "inner join databarang on resep_dokter_racikan_detail.kode_brng = databarang.kode_brng " +
                                 "inner join jenis on databarang.kdjns = jenis.kdjns " +
@@ -3246,15 +3160,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 "order by databarang.kode_brng"
                             );
                             try {
-                                ps2.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
-                                ps2.setString(2, TNoRM.getText());
-                                ps2.setString(3, no_resep);
-                                ps2.setString(4, rsobat.getString("no_racik"));
+                                ps2.setString(1, no_resep);
+                                ps2.setString(2, rsobat.getString("no_racik"));
                                 rs2=ps2.executeQuery();
                                 while(rs2.next()){
-                                    if (! adaObatKronis) {
-                                        adaObatKronis = (rs2.getInt("sisa_hari_obat_kronis") > 0);
-                                    }
                                     sisacari=0;
                                     psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                                     try {
@@ -3289,8 +3198,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         rs2.getString("kode_sat"),rs2.getDouble(kolomHarga),rs2.getDouble("dasar"),
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),"","","", false, rs2.getInt("sisa_hari_obat_kronis")
+                                        rs2.getString("golongan"),"","","", false, 0, ""
                                     });
+                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -4556,5 +4466,85 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         } 
+    }
+    
+    private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
+                         mo = new SimpleDateFormat("dd MMMM yyyy", new Locale("ind"));
+        
+        try {
+            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+
+            try {
+                psobatkronis.setString(1, TNoRM.getText());
+                psobatkronis.setString(2, kodeObat);
+
+                rsobatkronis = psobatkronis.executeQuery();
+
+                if (rsobatkronis.next()) {
+                    if (! adaObatKronis) {
+                        adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
+                    } else {
+                        tbObat.getColumnModel().getColumn(20).setMaxWidth(54*2);
+                        tbObat.getColumnModel().getColumn(20).setPreferredWidth(54);
+
+                        tbObat.getColumnModel().getColumn(21).setMaxWidth(204*2);
+                        tbObat.getColumnModel().getColumn(21).setPreferredWidth(204);
+                    }
+                    
+                    tbObat.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
+                    tbObat.setValueAt(rsobatkronis.getString("tgl_pemberian_selanjutnya"), posisi, 21);
+                    
+                    // JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
+                    //     + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
+                    //     + "..!!"
+                    // );
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void cekObatKronisRacikan(int posisi, String kodeObat, String namaObat) {
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
+                         mo = new SimpleDateFormat("dd MMMM yyyy", new Locale("ind"));
+        
+        try {
+            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+
+            try {
+                psobatkronis.setString(1, TNoRM.getText());
+                psobatkronis.setString(2, kodeObat);
+
+                rsobatkronis = psobatkronis.executeQuery();
+
+                if (rsobatkronis.next()) {
+                    if (! adaObatKronis) {
+                        adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
+                    } else {
+                        tbDetailObatRacikan.getColumnModel().getColumn(20).setMaxWidth(54*2);
+                        tbDetailObatRacikan.getColumnModel().getColumn(20).setPreferredWidth(54);
+
+                        tbDetailObatRacikan.getColumnModel().getColumn(21).setMaxWidth(204*2);
+                        tbDetailObatRacikan.getColumnModel().getColumn(21).setPreferredWidth(204);
+                    }
+                    
+                    tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
+                    tbDetailObatRacikan.setValueAt(rsobatkronis.getString("tgl_pemberian_selanjutnya"), posisi, 21);
+                    
+                    // JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
+                    //     + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
+                    //     + "..!!"
+                    // );
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 }
