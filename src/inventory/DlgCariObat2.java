@@ -16,6 +16,7 @@ import bridging.ApiPcare;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
+import fungsi.WarnaTableValidasiResep;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -75,6 +76,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
     public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
+    private WarnaTableValidasiResep warnaUmum = new WarnaTableValidasiResep(),
+                                    warnaRacik = new WarnaTableValidasiResep();
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
     private HttpHeaders headers;
@@ -98,7 +101,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tabMode = new DefaultTableModel(null, new Object[] {
             "K", "Jumlah", "Kode", "Nama Barang", "Satuan", "Kandungan",
             "Harga(Rp)", "Jenis Obat", "Emb", "Tslh", "Stok", "I.F.", "H.Beli",
-            "Aturan Pakai", "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa", "Obat Kronis?"
+            "Aturan Pakai", "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa",
+            "Obat Kronis?", "Sisa Hari", "Tgl. Pemberian Selanjutnya"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -109,7 +113,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     || colIndex == 13
                     || colIndex == 16
                     || colIndex == 17
-                    || colIndex == 18;
+                    || colIndex == 18
+                    || colIndex == 19;
             }
             
             Class[] types = new Class[] {
@@ -117,7 +122,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class,
+                java.lang.Integer.class, java.lang.String.class
             };
 
             @Override
@@ -125,11 +131,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 return types[columnIndex];
             }
         };
-        tbObat.setModel(tabMode);
-        // tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
+        tbObat.setModel(tabMode);        
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 22; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -173,10 +178,17 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(65);
             } else if (i == 19) {
                 column.setPreferredWidth(70);
+            } else if (i == 20) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else if (i == 21) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }
         }
-        warna.kolom=1;
-        tbObat.setDefaultRenderer(Object.class,warna);
+        warnaUmum.setWarnaKolom(1);
+        warnaUmum.setWarnaKolomKondisi(20);
+        tbObat.setDefaultRenderer(Object.class, warnaUmum);
         
         tabModeObatRacikan = new DefaultTableModel(null, new Object[] {
             "No", "Nama Racikan", "Kode Racik", "Metode Racik", "Jml.Racik",
@@ -228,83 +240,98 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         warna2.kolom=4;
         tbObatRacikan.setDefaultRenderer(Object.class,warna2);
         
-        tabModeDetailObatRacikan=new DefaultTableModel(null,new Object[]{
-                "No","Kode Barang","Nama Barang","Satuan","Harga(Rp)","H.Beli",
-                "Jenis Obat","Stok","Kps","Kandungan","Jml",
-                "Embal","Tuslah","I.F.","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa"
-            }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==9)||(colIndex==10)||(colIndex==11)||(colIndex==12)||(colIndex==13)||(colIndex==16)||(colIndex==17)) {
-                    a=true;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
+        tabModeDetailObatRacikan = new DefaultTableModel(null, new Object[] {
+            "No", "Kode Barang", "Nama Barang", "Satuan", "Harga(Rp)", "H.Beli",
+            "Jenis Obat", "Stok", "Kps", "Kandungan", "Jml", "Embal", "Tuslah", "I.F.",
+            "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa", "Obat Kronis?",
+            "Sisa Hari", "Tgl. Pemberian Selanjutnya"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 9
+                    || colIndex == 10
+                    || colIndex == 11
+                    || colIndex == 12
+                    || colIndex == 13
+                    || colIndex == 16
+                    || colIndex == 17
+                    || colIndex == 19;
+            }
+            Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+                java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class,
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
         };
 
         tbDetailObatRacikan.setModel(tabModeDetailObatRacikan);
-        tbDetailObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
-        tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
-        
-        for (i = 0; i < 19; i++) {
+        tbDetailObatRacikan.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (i = 0; i < 22; i++) {
             TableColumn column = tbDetailObatRacikan.getColumnModel().getColumn(i);
-            if(i==0){
+            if (i == 0) {
                 column.setPreferredWidth(25);
-            }else if(i==1){
+            } else if (i == 1) {
                 column.setPreferredWidth(75);
-            }else if(i==2){
+            } else if (i == 2) {
                 column.setPreferredWidth(200);
-            }else if(i==3){
+            } else if (i == 3) {
                 column.setPreferredWidth(45);
-            }else if(i==4){
+            } else if (i == 4) {
                 column.setPreferredWidth(85);
-            }else if(i==5){
+            } else if (i == 5) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
-            }else if(i==6){
+            } else if (i == 6) {
                 column.setPreferredWidth(85);
-            }else if(i==7){
+            } else if (i == 7) {
                 column.setPreferredWidth(40);
-            }else if(i==8){
+            } else if (i == 8) {
                 column.setPreferredWidth(40);
-            }else if(i==9){
+            } else if (i == 9) {
                 column.setPreferredWidth(70);
-            }else if(i==10){
+            } else if (i == 10) {
                 column.setPreferredWidth(40);
-            }else if(i==11){
+            } else if (i == 11) {
                 column.setPreferredWidth(40);
-            }else if(i==12){
+            } else if (i == 12) {
                 column.setPreferredWidth(50);
-            }else if(i==13){
+            } else if (i == 13) {
                 column.setPreferredWidth(80);
-            }else if(i==14){
+            } else if (i == 14) {
                 column.setPreferredWidth(80);
-            }else if(i==15){
+            } else if (i == 15) {
                 column.setPreferredWidth(80);
-            }else if(i==16){
+            } else if (i == 16) {
                 column.setPreferredWidth(70);
-            }else if(i==17){
+            } else if (i == 17) {
                 column.setPreferredWidth(100);
-            }else if(i==18){
+            } else if (i == 18) {
                 column.setPreferredWidth(65);
+            } else if (i == 19) {
+                column.setPreferredWidth(70);
+            } else if (i == 20) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else if (i == 21) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }
         }
 
-        warna3.kolom=9;
-        tbDetailObatRacikan.setDefaultRenderer(Object.class,warna3);
-        
+        warnaRacik.setWarnaKolom(9);
+        warnaRacik.setWarnaKolomKondisi(20);
+        tbDetailObatRacikan.setDefaultRenderer(Object.class, warnaRacik);
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));               
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
