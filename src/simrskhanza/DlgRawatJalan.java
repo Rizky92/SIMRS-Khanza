@@ -12,6 +12,8 @@
 
 package simrskhanza;
 
+import bridging.ICareRiwayatPerawatan;
+import bridging.ICareRiwayatPerawatanFKTP;
 import surat.SuratKontrol;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -9174,11 +9176,53 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_BtnSkorStewardPascaAnestesiActionPerformed
 
     private void BtnICareFKTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnICareFKTPActionPerformed
-        // TODO add your handling code here:
+        if (TNoRM.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih data pasien terlebih dahulu...!!!");
+            return;
+        }            
+        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        String kodeDokterBPJS = Sequel.cariIsiSmc("select kd_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter = ?", KdPeg.getText());
+        
+        if (kodeDokterBPJS.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");
+            this.setCursor(Cursor.getDefaultCursor());
+            return;
+        }
+        
+        akses.setform("DlgRawatJalan");
+        ICareRiwayatPerawatanFKTP dlgki = new ICareRiwayatPerawatanFKTP(null, false);
+        dlgki.setSize(internalFrame1.getWidth() - 20,internalFrame1.getHeight() - 20);
+        dlgki.setLocationRelativeTo(internalFrame1);
+        dlgki.setPasien(Sequel.cariIsiSmc("select no_kartu from pasien where no_rkm_medis = ?", TNoRM.getText()), kodeDokterBPJS);
+        dlgki.setVisible(true);
+        
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnICareFKTPActionPerformed
 
     private void BtnICareFKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnICareFKTLActionPerformed
-        // TODO add your handling code here:
+        if (TNoRM.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih data pasien terlebih dahulu...!!!");
+            return;
+        }            
+        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        String kodeDokterBPJS = Sequel.cariIsiSmc("select kd_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter = ?", KdPeg.getText());
+        
+        if (kodeDokterBPJS.isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");
+            this.setCursor(Cursor.getDefaultCursor());
+            return;
+        }
+        
+        akses.setform("DlgRawatJalan");
+        ICareRiwayatPerawatan dlgki = new ICareRiwayatPerawatan(null, false);
+        dlgki.setSize(internalFrame1.getWidth() - 20,internalFrame1.getHeight() - 20);
+        dlgki.setLocationRelativeTo(internalFrame1);
+        dlgki.setPasien(Sequel.cariIsiSmc("select no_kartu from pasien where no_rkm_medis = ?", TNoRM.getText()), kodeDokterBPJS);
+        dlgki.setVisible(true);
     }//GEN-LAST:event_BtnICareFKTLActionPerformed
 
     private void BtnPenilaianPsikologActionPerformed(java.awt.event.ActionEvent evt) {
@@ -10444,6 +10488,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TPegawai.setText(pegawai.tampil3(KdPeg.getText()));
             Jabatan.setText(pegawai.tampilJbatan(KdPeg.getText()));
         }
+        
+        BtnICareFKTP.setVisible(akses.getriwayat_perawatan_icare_bpjs());
+        BtnICareFKTL.setVisible(akses.getriwayat_perawatan_icare_bpjs());
     }
 
     private void tampilPemeriksaan() {
