@@ -37,11 +37,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.Jurnal;
@@ -82,6 +84,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private WarnaTable2 warna3=new WarnaTable2();
     private WarnaTableValidasiResep warnaUmum = new WarnaTableValidasiResep(),
                                     warnaRacik = new WarnaTableValidasiResep();
+    private final SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
+                                   mo = new SimpleDateFormat("dd-MM-yyyy");
+    private DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
     private riwayatobat Trackobat=new riwayatobat();
     private HttpHeaders headers;
     private HttpEntity requestEntity;
@@ -101,6 +106,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,2);
         setSize(656,250);
+        
+        cellRenderer.setHorizontalAlignment(JLabel.RIGHT);
 
         tabModeobat = new DefaultTableModel(null, new Object[] {
             "K", "Jumlah", "Kode Barang", "Nama Barang", "Satuan", "Kandungan",
@@ -189,6 +196,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 21) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
+                
+                column.setCellRenderer(cellRenderer);
             }
         }
         warnaUmum.setWarnaKolom(1);
@@ -329,6 +338,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 21) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
+                column.setCellRenderer(cellRenderer);
             }
         }
 
@@ -4469,9 +4479,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
-        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
-                         mo = new SimpleDateFormat("dd MMMM yyyy", new Locale("ind"));
-        
         try {
             psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
 
@@ -4484,21 +4491,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if (rsobatkronis.next()) {
                     if (! adaObatKronis) {
                         adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
-                    } else {
-                        tbObat.getColumnModel().getColumn(20).setMaxWidth(54*2);
-                        tbObat.getColumnModel().getColumn(20).setPreferredWidth(54);
-
-                        tbObat.getColumnModel().getColumn(21).setMaxWidth(204*2);
-                        tbObat.getColumnModel().getColumn(21).setPreferredWidth(204);
                     }
                     
                     tbObat.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
-                    tbObat.setValueAt(rsobatkronis.getString("tgl_pemberian_selanjutnya"), posisi, 21);
-                    
-                    // JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
-                    //     + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
-                    //     + "..!!"
-                    // );
+                    tbObat.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -4506,12 +4502,17 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+
+        if (adaObatKronis) {
+            tbObat.getColumnModel().getColumn(20).setMaxWidth(54);
+            tbObat.getColumnModel().getColumn(20).setPreferredWidth(54);
+
+            tbObat.getColumnModel().getColumn(21).setMaxWidth(140);
+            tbObat.getColumnModel().getColumn(21).setPreferredWidth(140);
+        }
     }
     
     private void cekObatKronisRacikan(int posisi, String kodeObat, String namaObat) {
-        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
-                         mo = new SimpleDateFormat("dd MMMM yyyy", new Locale("ind"));
-        
         try {
             psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
 
@@ -4524,27 +4525,24 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if (rsobatkronis.next()) {
                     if (! adaObatKronis) {
                         adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
-                    } else {
-                        tbDetailObatRacikan.getColumnModel().getColumn(20).setMaxWidth(54*2);
-                        tbDetailObatRacikan.getColumnModel().getColumn(20).setPreferredWidth(54);
-
-                        tbDetailObatRacikan.getColumnModel().getColumn(21).setMaxWidth(204*2);
-                        tbDetailObatRacikan.getColumnModel().getColumn(21).setPreferredWidth(204);
                     }
                     
                     tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
-                    tbDetailObatRacikan.setValueAt(rsobatkronis.getString("tgl_pemberian_selanjutnya"), posisi, 21);
-                    
-                    // JOptionPane.showMessageDialog(rootPane, "Maaf, Obat " + namaObat + " belum bisa diberikan ke pasien,\nObat baru bisa diberikan pada tanggal "
-                    //     + mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya")))
-                    //     + "..!!"
-                    // );
+                    tbDetailObatRacikan.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        }
+        
+        if (adaObatKronis) {
+            tbDetailObatRacikan.getColumnModel().getColumn(20).setMaxWidth(54);
+            tbDetailObatRacikan.getColumnModel().getColumn(20).setPreferredWidth(54);
+
+            tbDetailObatRacikan.getColumnModel().getColumn(21).setMaxWidth(140);
+            tbDetailObatRacikan.getColumnModel().getColumn(21).setPreferredWidth(140);
         }
     }
 }
