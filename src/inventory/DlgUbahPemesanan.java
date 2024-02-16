@@ -799,15 +799,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                             
                             if(sukses==true){
-                                Sequel.Commit();
-                            }else{
-                                sukses=false;
-                                Sequel.RollBack();
-                            }
-                            Sequel.AutoComitTrue();
-
-                            if(sukses==true){
-                                Sequel.AutoComitFalse();
                                 if(Sequel.queryu2tf("delete from pemesanan where no_faktur=?",1,new String[]{NoFaktur2.getText()})==true){
                                     if(Sequel.menyimpantf2("pemesanan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Faktur",15,new String[]{
                                         NoFaktur.getText(),NoOrder.getText(),kdsup.getText(),kdptg.getText(),Valid.SetTgl(TglPesan.getSelectedItem()+""),
