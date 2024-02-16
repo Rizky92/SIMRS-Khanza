@@ -1451,7 +1451,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TEvaluasi = new widget.TextArea();
         LingkarPerut = new widget.TextBox();
         Btn5Soap = new widget.Button();
-        BtnICareFKTP = new widget.Button();
         BtnTemplatePemeriksaan = new widget.Button();
         BtnICareFKTL = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
@@ -1836,7 +1835,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-02-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-02-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1850,7 +1849,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-02-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-02-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2671,20 +2670,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(Btn5Soap);
         Btn5Soap.setBounds(913, 10, 180, 23);
 
-        BtnICareFKTP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnICareFKTP.setMnemonic('4');
-        BtnICareFKTP.setText("ICare BPJS FKTP");
-        BtnICareFKTP.setToolTipText("ALt+4");
-        BtnICareFKTP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnICareFKTP.setName("BtnICareFKTP"); // NOI18N
-        BtnICareFKTP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnICareFKTPActionPerformed(evt);
-            }
-        });
-        panelGlass12.add(BtnICareFKTP);
-        BtnICareFKTP.setBounds(913, 70, 180, 23);
-
         BtnTemplatePemeriksaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnTemplatePemeriksaan.setMnemonic('4');
         BtnTemplatePemeriksaan.setText("Template Pemeriksaan");
@@ -2701,7 +2686,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnICareFKTL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnICareFKTL.setMnemonic('4');
-        BtnICareFKTL.setText("ICare BPJS FKTL");
+        BtnICareFKTL.setText("ICare BPJS");
         BtnICareFKTL.setToolTipText("ALt+4");
         BtnICareFKTL.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnICareFKTL.setName("BtnICareFKTL"); // NOI18N
@@ -2711,7 +2696,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnICareFKTL);
-        BtnICareFKTL.setBounds(913, 100, 180, 23);
+        BtnICareFKTL.setBounds(913, 70, 180, 23);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3607,7 +3592,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-02-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-02-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -9175,32 +9160,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnSkorStewardPascaAnestesiActionPerformed
 
-    private void BtnICareFKTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnICareFKTPActionPerformed
-        if (TNoRM.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih data pasien terlebih dahulu...!!!");
-            return;
-        }            
-        
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        
-        String kodeDokterBPJS = Sequel.cariIsiSmc("select kd_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter = ?", KdPeg.getText());
-        
-        if (kodeDokterBPJS.isBlank()) {
-            JOptionPane.showMessageDialog(rootPane, "Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");
-            this.setCursor(Cursor.getDefaultCursor());
-            return;
-        }
-        
-        akses.setform("DlgRawatJalan");
-        ICareRiwayatPerawatanFKTP dlgki = new ICareRiwayatPerawatanFKTP(null, false);
-        dlgki.setSize(internalFrame1.getWidth() - 20,internalFrame1.getHeight() - 20);
-        dlgki.setLocationRelativeTo(internalFrame1);
-        dlgki.setPasien(Sequel.cariIsiSmc("select no_kartu from pasien where no_rkm_medis = ?", TNoRM.getText()), kodeDokterBPJS);
-        dlgki.setVisible(true);
-        
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_BtnICareFKTPActionPerformed
-
     private void BtnICareFKTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnICareFKTLActionPerformed
         if (TNoRM.getText().isBlank()) {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih data pasien terlebih dahulu...!!!");
@@ -9221,8 +9180,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         ICareRiwayatPerawatan dlgki = new ICareRiwayatPerawatan(null, false);
         dlgki.setSize(internalFrame1.getWidth() - 20,internalFrame1.getHeight() - 20);
         dlgki.setLocationRelativeTo(internalFrame1);
-        dlgki.setPasien(Sequel.cariIsiSmc("select no_kartu from pasien where no_rkm_medis = ?", TNoRM.getText()), kodeDokterBPJS);
+        dlgki.setPasien(Sequel.cariIsiSmc("select no_ktp from pasien where no_rkm_medis = ?", TNoRM.getText()), kodeDokterBPJS);
         dlgki.setVisible(true);
+        
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnICareFKTLActionPerformed
 
     private void BtnPenilaianPsikologActionPerformed(java.awt.event.ActionEvent evt) {
@@ -9469,7 +9430,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnHapus;
     private widget.Button BtnHasilPemeriksaanUSG;
     private widget.Button BtnICareFKTL;
-    private widget.Button BtnICareFKTP;
     private widget.Button BtnInformasiObat;
     private widget.Button BtnInputObat;
     private widget.Button BtnJadwalOperasi;
@@ -10489,7 +10449,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Jabatan.setText(pegawai.tampilJbatan(KdPeg.getText()));
         }
         
-        BtnICareFKTP.setVisible(akses.getriwayat_perawatan_icare_bpjs());
         BtnICareFKTL.setVisible(akses.getriwayat_perawatan_icare_bpjs());
     }
 
