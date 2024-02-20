@@ -81,6 +81,7 @@ import bridging.BPJSCekTanggalRujukan;
 import bridging.BPJSDataFingerPrintPasien;
 import bridging.BPJSDataSEP;
 import bridging.BPJSHistoriPelayanan;
+import bridging.BPJSKompilasiBerkasKlaim;
 import bridging.BPJSMapingDokterDPJP;
 import bridging.BPJSMapingPoli;
 import bridging.BPJSMonitoringKlaim;
@@ -22196,6 +22197,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnBPJSKompilasiBerkasKlaimActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     private void btnMasterMasalahKeperawatanNeonatusActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23173,6 +23186,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkorBromagePascaAnestesi,btnPenilaianPreInduksi,btnHasilUSGUrologi,btnHasilUSGGynecologi,btnHasilPemeriksaanEKG,btnKirimDietSatuSehat,btnMappingObatSatuSehat,
             btnRingkasanPengadaanDapur,btnKirimMedicationSatuSehat,btnKirimMedicationRequestSatuSehat,btnPenatalaksanaanTerapiOkupasi,btnKirimMedicationDispenseSatuSehat,
             btnHasilUSGNeonatus,btnHasilEndoskopiFaringLaring,btnMappingRadiologiSatuSehat,btnKirimServiceRequestRadiologiSatuSehat,btnHasilEndoskopiHidung,btnKirimSpecimenRadiologiSatuSehat,
+            btnBPJSKompilasiBerkasKlaim,
             btnMasterMasalahKeperawatanNeonatus,btnMasterRencanaKeperawatanNeonatus,btnPenilaianAwalKeperawatanRanapNeonatus,btnKirimObservationRadiologiSatuSehat,
             btnKirimDiagnosticReportSatuSehat,btnHasilEndoskopiTelinga,btnMappingLaboratSatuSehat,btnKirimServiceRequestLabPKSatuSehat,btnKirimServiceRequestLabMBSatuSehat,
             btnKirimSpecimenLabPKSatuSehat,btnKirimSpecimenLabMBSatuSehat,btnKirimObservationLabPKSatuSehat,btnKirimObservationLabMBSatuSehat,btnKirimDiagnosticReportLabPKSatuSehat,
@@ -26282,6 +26296,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsatu_sehat_kirim_specimen_radiologi()==true){
                 Panelmenu.add(btnKirimSpecimenRadiologiSatuSehat);
+                jmlmenu++;
+            }
+            
+            if (akses.getbpjs_kompilasi_berkas_klaim()) {
+                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
                 jmlmenu++;
             }
             
@@ -33563,6 +33582,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnTemplatePersetujuanPenolakanTindakan);
             jmlmenu++;
         }
+        
+        if (akses.getbpjs_kompilasi_berkas_klaim()) {
+            Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+            jmlmenu++;
+        }
     }
     
     private void isCariIsi() {
@@ -40749,6 +40773,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if (akses.getbpjs_kompilasi_berkas_klaim()) {
+            if (btnBPJSKompilasiBerkasKlaim.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+                jmlmenu++;
+            }
+        }
     }
 
     private void initKhanza() {
@@ -45136,6 +45167,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnKirimSpecimenRadiologiSatuSehat.setName("btnKirimSpecimenRadiologiSatuSehat"); 
         btnKirimSpecimenRadiologiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimSpecimenRadiologiSatuSehat.addActionListener(this::btnKirimSpecimenRadiologiSatuSehatActionPerformed);
+        
+        btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
+        btnBPJSKompilasiBerkasKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_x-office-document-template_25011.png")));
+        btnBPJSKompilasiBerkasKlaim.setText("Kompilasi Berkas Klaim BPJS");
+        btnBPJSKompilasiBerkasKlaim.setIconTextGap(0);
+        btnBPJSKompilasiBerkasKlaim.setName("btnBPJSKompilasiBerkasKlaim"); 
+        btnBPJSKompilasiBerkasKlaim.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSKompilasiBerkasKlaim.addActionListener(this::btnBPJSKompilasiBerkasKlaimActionPerformed);
         
         btnKirimSpecimenLabPKSatuSehat = new widget.ButtonBig();
         btnKirimSpecimenLabPKSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
