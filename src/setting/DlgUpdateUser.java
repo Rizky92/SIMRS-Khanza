@@ -1877,6 +1877,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[D]Sirkulasi Obat, Alkes & BHP 6".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[D]Sirkulasi Obat, Alkes & BHP 6",sirkulasi_obat6});
         }
+        
+        if("[D]Edit/Hapus Surat Pemesanan Medis".toLowerCase().contains(TCari.getText().toLowerCase())) {
+            tabMode.addRow(new Object[]{false, "[D]Edit/Hapus Surat Pemesanan Medis", edit_hapus_spo_medis});
+        }
 
         if("[E]Barang Non Medis".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[E]Barang Non Medis",ipsrs_barang});
@@ -2000,6 +2004,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
 
         if("[E]Nilai Penerimaan Vendor Non Medis Per Bulan".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[E]Nilai Penerimaan Vendor Non Medis Per Bulan",nilai_penerimaan_vendor_nonmedis_perbulan});
+        }
+        
+        if("[E]Edit/Hapus Surat Pemesanan Nonmedis".toLowerCase().contains(TCari.getText().toLowerCase())) {
+            tabMode.addRow(new Object[]{false, "[E]Edit/Hapus Surat Pemesanan Nonmedis", edit_hapus_spo_nonmedis});
         }
         
         if("[F]Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -6045,6 +6053,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","sirkulasi_obat6='"+tbUser.getValueAt(i,2).toString()+"'");
             }
             
+            if("[D]Edit/Hapus Surat Pemesanan Medis".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengupdateSmc("user", "edit_hapus_spo_medis = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
+            }
+            
             if("[E]Barang Non Medis".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ipsrs_barang='"+tbUser.getValueAt(i,2).toString()+"'");
             }
@@ -6167,6 +6179,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[E]Nilai Penerimaan Vendor Non Medis Per Bulan".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","nilai_penerimaan_vendor_nonmedis_perbulan='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[E]Edit/Hapus Surat Pemesanan Nonmedis".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengupdateSmc("user", "edit_hapus_spo_nonmedis = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
             }
             
             if("[F]Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
@@ -7783,6 +7799,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[L]Kirim Specimen Radiologi Satu Sehat".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[L]Kompilasi Berkas Klaim BPJS".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengupdateSmc("user", "bpjs_kompilasi_berkas_klaim = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
             }
             
             if("[L]Kirim Observation Radiologi Satu Sehat".equals(tbUser.getValueAt(i,1).toString())){

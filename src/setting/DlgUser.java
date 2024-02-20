@@ -7036,7 +7036,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("satu_sehat_kirim_servicerequest_radiologi"),
                                rs.getBoolean("hasil_endoskopi_hidung"),
                                rs.getBoolean("satu_sehat_kirim_specimen_radiologi"),
-                               rs.getBoolean("bpjs_kompilasi_berkas_klaim_bpjs"),
+                               rs.getBoolean("bpjs_kompilasi_berkas_klaim"),
                                rs.getBoolean("master_masalah_keperawatan_neonatus"),
                                rs.getBoolean("master_rencana_keperawatan_neonatus"),
                                rs.getBoolean("penilaian_awal_keperawatan_ranap_neonatus"),
