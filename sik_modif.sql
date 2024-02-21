@@ -73,6 +73,42 @@ ALTER TABLE `resep_obat` ADD COLUMN `nama_template` varchar(100) CHARACTER SET l
 
 ALTER TABLE `resiko_kerja` MODIFY COLUMN `nama_resiko` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `kode_resiko`;
 
+ALTER TABLE `resume_pasien` MODIFY COLUMN `diagnosa_utama` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `hasil_laborat`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `diagnosa_sekunder` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_utama`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `diagnosa_sekunder2` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `diagnosa_sekunder3` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder2`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `diagnosa_sekunder4` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder3`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `prosedur_utama` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder4`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `prosedur_sekunder` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_utama`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `prosedur_sekunder2` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_sekunder`;
+
+ALTER TABLE `resume_pasien` MODIFY COLUMN `prosedur_sekunder3` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_sekunder2`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `diagnosa_utama` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `obat_di_rs`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `diagnosa_sekunder` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_utama`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `diagnosa_sekunder2` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `diagnosa_sekunder3` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder2`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `diagnosa_sekunder4` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder3`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `prosedur_utama` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_diagnosa_sekunder4`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `prosedur_sekunder` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_utama`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `prosedur_sekunder2` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_sekunder`;
+
+ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN `prosedur_sekunder3` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `kd_prosedur_sekunder2`;
+
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN `terapi` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AFTER `diagnosa`;
 
 CREATE TABLE `tampjurnal_rvpbpjs`  (
