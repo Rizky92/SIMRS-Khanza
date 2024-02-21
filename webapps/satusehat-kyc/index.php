@@ -1,14 +1,21 @@
 <?php
 
+require_once('conf/auth.php');
+require_once('conf/function.php');
+require_once('../conf/conf.php');
+
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
+header("Cache-Control: no-store, no-cache, must-revalidate"); 
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache"); // HTTP/1.0
+
 $init = parse_ini_file("satusehat.ini");
 $client_id = $init["client_id"];
 $client_secret = $init["client_secret"];
 $auth_url = $init["auth_url"];
 $api_url = $init["api_url"];
 $environment = $init["environment"];
-
-include('auth.php');
-include('function.php');
 
 // nama petugas/operator Fasilitas Pelayanan Kesehatan (Fasyankes) yang akan melakukan validasi
 $agent_name = 'Nama Petugas';
@@ -24,7 +31,9 @@ $json = generateUrl($agent_name, $agent_nik , $auth_result, $api_url, $environme
 
 $validation_web = json_decode($json, TRUE);
 
-?><html>
+?>
+
+<html>
 <head>
   <script type="text/javascript">
 
