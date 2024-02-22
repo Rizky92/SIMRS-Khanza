@@ -44,6 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import kepegawaian.DlgCariPetugas;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -57,9 +58,9 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private ApiICareBPJS api=new ApiICareBPJS();
     private String link="", utc="", requestJson="", finalUrl = null;
-    private String CLIENTIDSATUSEHAT = koneksiDB.CLIENTIDSATUSEHAT(),
-                   SECRETKEYSATUSEHAT = koneksiDB.SECRETKEYSATUSEHAT();
     private sekuel Sequel = new sekuel();
+    
+    private final DlgCariPetugas cariPetugas = new DlgCariPetugas(null, false);
     
     private HttpHeaders headers ;
     private HttpEntity requestEntity;
@@ -86,12 +87,11 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         setLocation(10,2);
         setSize(628,674);
         
-        NIK.setDocument(new batasInput((int) 100).getKata(NIK));
+        NIK.setDocument(new batasInput((int) 16).getKata(NIK));
         NamaPetugas.setDocument(new batasInput((int) 100).getKata(NamaPetugas));
-        
     }
     
-    private void cekData()
+    public void isCek()
     {
         if (akses.getadmin()) {
             NIK.setText("");
@@ -157,14 +157,14 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel16.setText("NIK Petugas :");
+        jLabel16.setText("Nama Petugas :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass6.add(jLabel16);
 
         NIK.setEditable(false);
         NIK.setName("NIK"); // NOI18N
-        NIK.setPreferredSize(new java.awt.Dimension(180, 23));
+        NIK.setPreferredSize(new java.awt.Dimension(150, 23));
         panelGlass6.add(NIK);
 
         NamaPetugas.setEditable(false);
@@ -237,7 +237,7 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
 
     private void BtnPilihPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPilihPetugasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnCariActionPerformed(null);
+            //
         }else{
             Valid.pindah(evt,NIK,BtnKeluar);
         }
@@ -292,11 +292,15 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        if (akses.getadmin()) {
-            
-        }
         if (NIK.getText().isBlank()) {
+            JOptionPane.showMessageDialog(rootPane, "NIK petugas belum terisi...!!!");
+            return;
+        }
+        
+        try {
             
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
     
@@ -394,5 +398,4 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
- 
 }
