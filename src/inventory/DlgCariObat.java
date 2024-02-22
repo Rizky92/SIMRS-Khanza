@@ -4501,8 +4501,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         adaObatKronis = (rsobatkronis.getInt("sisa_hari") > 0);
                     }
                     
-                    tbObat.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
-                    tbObat.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
+                    if (rsobatkronis.getInt("sisa_hari") > 0) {
+                        tbObat.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
+                        tbObat.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -4543,8 +4545,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         adaObatKronis = (rsobatkronis.getInt("sisa_hari") > 0);
                     }
                     
-                    tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
-                    tbDetailObatRacikan.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
+                    if (rsobatkronis.getInt("sisa_hari") > 0) {
+                        tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
+                        tbDetailObatRacikan.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
