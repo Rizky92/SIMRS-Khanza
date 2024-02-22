@@ -154,4 +154,6 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_nonmedis` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `satu_sehat_verifikasi_rekam_medis` enum('true','false') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `satu_sehat_kirim_specimen_radiologi`;
+
 SET FOREIGN_KEY_CHECKS=1;
