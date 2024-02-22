@@ -4480,20 +4480,28 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
         try {
-            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+            psobatkronis = koneksi.prepareStatement(
+                "select detail_pemberian_obat_selanjutnya.*, if (datediff(tgl_pemberian_selanjutnya, ?) < 1, 0, datediff(tgl_pemberian_selanjutnya, ?)) as sisa_hari " +
+                "from detail_pemberian_obat_selanjutnya " +
+                "where no_rkm_medis = ? and kode_brng = ? " +
+                "order by concat(tgl_perawatan, ' ', jam) desc " +
+                "limit 1"
+            );
 
             try {
-                psobatkronis.setString(1, TNoRM.getText());
-                psobatkronis.setString(2, kodeObat);
+                psobatkronis.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(3, TNoRM.getText());
+                psobatkronis.setString(4, kodeObat);
 
                 rsobatkronis = psobatkronis.executeQuery();
 
                 if (rsobatkronis.next()) {
                     if (! adaObatKronis) {
-                        adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
+                        adaObatKronis = (rsobatkronis.getInt("sisa_hari") > 0);
                     }
                     
-                    tbObat.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
+                    tbObat.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
                     tbObat.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
                 }
             } catch (Exception e) {
@@ -4514,20 +4522,28 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void cekObatKronisRacikan(int posisi, String kodeObat, String namaObat) {
         try {
-            psobatkronis = koneksi.prepareStatement("select * from detail_pemberian_obat_selanjutnya where no_rkm_medis = ? and kode_brng = ? order by concat(tgl_perawatan, ' ', jam) desc limit 1");
+            psobatkronis = koneksi.prepareStatement(
+                "select detail_pemberian_obat_selanjutnya.*, if (datediff(tgl_pemberian_selanjutnya, ?) < 1, 0, datediff(tgl_pemberian_selanjutnya, ?)) as sisa_hari " +
+                "from detail_pemberian_obat_selanjutnya " +
+                "where no_rkm_medis = ? and kode_brng = ? " +
+                "order by concat(tgl_perawatan, ' ', jam) desc " +
+                "limit 1"
+            );
 
             try {
-                psobatkronis.setString(1, TNoRM.getText());
-                psobatkronis.setString(2, kodeObat);
+                psobatkronis.setString(1, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(2, Valid.SetTgl(DTPTgl.getSelectedItem().toString()));
+                psobatkronis.setString(3, TNoRM.getText());
+                psobatkronis.setString(4, kodeObat);
 
                 rsobatkronis = psobatkronis.executeQuery();
 
                 if (rsobatkronis.next()) {
                     if (! adaObatKronis) {
-                        adaObatKronis = (rsobatkronis.getInt("total_hari") > 0);
+                        adaObatKronis = (rsobatkronis.getInt("sisa_hari") > 0);
                     }
                     
-                    tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("total_hari"), posisi, 20);
+                    tbDetailObatRacikan.setValueAt(rsobatkronis.getInt("sisa_hari"), posisi, 20);
                     tbDetailObatRacikan.setValueAt(mo.format(in.parse(rsobatkronis.getString("tgl_pemberian_selanjutnya"))), posisi, 21);
                 }
             } catch (Exception e) {
