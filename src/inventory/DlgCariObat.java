@@ -1211,25 +1211,16 @@ public final class DlgCariObat extends javax.swing.JDialog {
         if(tbObat.getRowCount()!=0){
             try {
                 getDataobat();
+                cekObatKronis(tbObat.getSelectedRow(), tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString());
+                if (! tbObat.getValueAt(tbObat.getSelectedRow(), 20).toString().isBlank()) {
+                    JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbObat.getValueAt(tbObat.getSelectedRow(), 3) + " baru bisa diberikan pada tanggal " + tbObat.getValueAt(tbObat.getSelectedRow(), 21).toString() + "...!!!");
+                }
             } catch (java.lang.NullPointerException e) {
             }
             
             if(evt.getClickCount()==2){
                 if(akses.getform().equals("DlgPemberianObat")){
                     dispose();
-                }
-            }
-            
-            boolean cekKolomObatKronis = false;
-            
-            for (int i = 0; i < tbObat.getRowCount(); i++) {
-                cekKolomObatKronis = Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString());
-                
-                DTPObatKronisSelanjutnya.setEnabled(cekKolomObatKronis);
-                
-                // stop loop apabila ada obat kronis yang harus disimpan
-                if (cekKolomObatKronis) {
-                    break;
                 }
             }
         }
@@ -1248,7 +1239,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             }
                         } catch (Exception e) {
                             tbObat.setValueAt(0,tbObat.getSelectedRow(),8);
-                        }
+                        }                        
                     }else if(i==9){
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0,0")) {
@@ -3364,7 +3355,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     } catch (Exception e) {
                         tbObat.setValueAt("",row,1);
                         tbObat.setValueAt(0,row,10);
-                    } 
+                    }
                 }
             }
         }
