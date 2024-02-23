@@ -16,7 +16,6 @@ import bridging.ApiPcare;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
-import fungsi.WarnaTableValidasiResep;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -33,7 +32,6 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -77,8 +75,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
     public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
-    private WarnaTableValidasiResep warnaUmum = new WarnaTableValidasiResep(),
-                                    warnaRacik = new WarnaTableValidasiResep();
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
     private HttpHeaders headers;
@@ -176,9 +172,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(65);
             }
         }
-        warnaUmum.setWarnaKolom(1);
-        warnaUmum.setWarnaKolomKondisi(20);
-        tbObat.setDefaultRenderer(Object.class, warnaUmum);
+        warna.kolom=1;
+        tbObat.setDefaultRenderer(Object.class,warna);
         
         tabModeObatRacikan = new DefaultTableModel(null, new Object[] {
             "No", "Nama Racikan", "Kode Racik", "Metode Racik", "Jml.Racik",
@@ -306,10 +301,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(65);
             }
         }
-
-        warnaRacik.setWarnaKolom(9);
-        warnaRacik.setWarnaKolomKondisi(20);
-        tbDetailObatRacikan.setDefaultRenderer(Object.class, warnaRacik);
+        warna3.kolom=9;
+        tbDetailObatRacikan.setDefaultRenderer(Object.class,warna3);
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));               
         if(koneksiDB.CARICEPAT().equals("aktif")){
