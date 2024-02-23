@@ -60,8 +60,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private riwayatobat Trackobat=new riwayatobat();
-    private PreparedStatement psobat,pscarikapasitas,psstok,psrekening,ps2,psbatch,psobatkronis;
-    private ResultSet rsobat,carikapasitas,rsstok,rsrekening,rs2,rsbatch,rsobatkronis;
+    private PreparedStatement psobat,pscarikapasitas,psstok,psrekening,ps2,psbatch;
+    private ResultSet rsobat,carikapasitas,rsstok,rsrekening,rs2,rsbatch;
     private Jurnal jur=new Jurnal();
     private double h_belicari=0, hargacari=0, sisacari=0,x=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
             tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan,stokbarang,ttlhpp,ttljual;
@@ -79,8 +79,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
     private WarnaTableValidasiResep warnaUmum = new WarnaTableValidasiResep(),
                                     warnaRacik = new WarnaTableValidasiResep();
-    private final SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd"),
-                                   mo = new SimpleDateFormat("dd-MM-yyyy");
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
     private HttpHeaders headers;
@@ -91,7 +89,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true, lanjut=true, adaObatKronis=false;
+    private boolean sukses=true, lanjut=true;
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -104,8 +102,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tabMode = new DefaultTableModel(null, new Object[] {
             "K", "Jumlah", "Kode", "Nama Barang", "Satuan", "Kandungan",
             "Harga(Rp)", "Jenis Obat", "Emb", "Tslh", "Stok", "I.F.", "H.Beli",
-            "Aturan Pakai", "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa",
-            "Obat Kronis?", "Sisa Hari", "Tgl. Pemberian Selanjutnya"
+            "Aturan Pakai", "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -116,8 +113,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     || colIndex == 13
                     || colIndex == 16
                     || colIndex == 17
-                    || colIndex == 18
-                    || colIndex == 19;
+                    || colIndex == 18;
             }
             
             Class[] types = new Class[] {
@@ -125,8 +121,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class,
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             @Override
@@ -137,7 +132,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tbObat.setModel(tabMode);        
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 22; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(20);
@@ -179,14 +174,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             } else if (i == 18) {
                 column.setPreferredWidth(65);
-            } else if (i == 19) {
-                column.setPreferredWidth(70);
-            } else if (i == 20) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 21) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
             }
         }
         warnaUmum.setWarnaKolom(1);
@@ -246,8 +233,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tabModeDetailObatRacikan = new DefaultTableModel(null, new Object[] {
             "No", "Kode Barang", "Nama Barang", "Satuan", "Harga(Rp)", "H.Beli",
             "Jenis Obat", "Stok", "Kps", "Kandungan", "Jml", "Embal", "Tuslah", "I.F.",
-            "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa", "Obat Kronis?",
-            "Sisa Hari", "Tgl. Pemberian Selanjutnya"
+            "Kategori", "Golongan", "No.Batch", "No.Faktur", "Kadaluarsa"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -257,16 +243,14 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     || colIndex == 12
                     || colIndex == 13
                     || colIndex == 16
-                    || colIndex == 17
-                    || colIndex == 19;
+                    || colIndex == 17;
             }
             Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class,
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             @Override
@@ -279,7 +263,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         tbDetailObatRacikan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 22; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbDetailObatRacikan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(25);
@@ -320,14 +304,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             } else if (i == 18) {
                 column.setPreferredWidth(65);
-            } else if (i == 19) {
-                column.setPreferredWidth(70);
-            } else if (i == 20) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            } else if (i == 21) {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
             }
         }
 
@@ -550,8 +526,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         kdgudang = new widget.TextBox();
         nmgudang = new widget.TextBox();
         BtnGudang = new widget.Button();
-        jLabel9 = new widget.Label();
-        DTPObatKronisSelanjutnya = new widget.Tanggal();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -802,7 +776,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         jLabel5.setBounds(4, 10, 68, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-02-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-02-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -934,28 +908,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         });
         FormInput.add(BtnGudang);
         BtnGudang.setBounds(332, 40, 28, 23);
-
-        jLabel9.setText("Berikan obat kronis selanjutnya pada :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(45, 23));
-        FormInput.add(jLabel9);
-        jLabel9.setBounds(370, 40, 194, 23);
-
-        DTPObatKronisSelanjutnya.setEditable(false);
-        DTPObatKronisSelanjutnya.setForeground(new java.awt.Color(50, 70, 50));
-        DTPObatKronisSelanjutnya.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-02-2024" }));
-        DTPObatKronisSelanjutnya.setDisplayFormat("dd-MM-yyyy");
-        DTPObatKronisSelanjutnya.setEnabled(false);
-        DTPObatKronisSelanjutnya.setName("DTPObatKronisSelanjutnya"); // NOI18N
-        DTPObatKronisSelanjutnya.setOpaque(false);
-        DTPObatKronisSelanjutnya.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPObatKronisSelanjutnya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPObatKronisSelanjutnyaKeyPressed(evt);
-            }
-        });
-        FormInput.add(DTPObatKronisSelanjutnya);
-        DTPObatKronisSelanjutnya.setBounds(570, 40, 90, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1122,19 +1074,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             if(evt.getClickCount()==2){
                 if(akses.getform().equals("DlgPemberianObat")){
                     dispose();
-                }
-            }
-            
-            boolean cekKolomObatKronis = false;
-            
-            for (int i = 0; i < tbObat.getRowCount(); i++) {
-                cekKolomObatKronis = Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString());
-                
-                DTPObatKronisSelanjutnya.setEnabled(cekKolomObatKronis);
-                
-                // stop loop apabila ada obat kronis yang harus disimpan
-                if (cekKolomObatKronis) {
-                    break;
                 }
             }
         }
@@ -1963,10 +1902,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppStok1ActionPerformed
 
-    private void DTPObatKronisSelanjutnyaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPObatKronisSelanjutnyaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DTPObatKronisSelanjutnyaKeyPressed
-
     /**
     * @param args the command line arguments
     */
@@ -1995,7 +1930,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.Button BtnTambah1;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkNoResep;
-    private widget.Tanggal DTPObatKronisSelanjutnya;
     private widget.Tanggal DTPTgl;
     private widget.PanelBiasa FormInput;
     private widget.ComboBox Jeniskelas;
@@ -2014,7 +1948,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel5;
-    private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
     private widget.TextBox kdgudang;
     private widget.TextBox kelas;
@@ -3857,9 +3790,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                         rs2.getString("kode_sat"),hargacari,h_belicari,
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, 0, ""
+                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari
                                     });
-                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -3920,9 +3852,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                         rs2.getString("kode_sat"),rs2.getDouble("harga"),rs2.getDouble("dasar"),
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),"","","", false, 0, ""
+                                        rs2.getString("golongan"),"","",""
                                     });
-                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -3995,9 +3926,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                         rs2.getString("kode_sat"),hargacari,h_belicari,
                                         rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
                                         rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
-                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, 0, ""
+                                        rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari
                                     });
-                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
@@ -4058,9 +3988,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                         rs2.getString("kode_sat"), rs2.getDouble(kolomHarga()), rs2.getDouble("dasar"),
                                         rs2.getString("jenis"), sisacari, rs2.getDouble("kapasitas"), rs2.getString("kandungan"),
                                         rs2.getDouble("jml"), 0, 0, rs2.getString("nama_industri"), rs2.getString("kategori"),
-                                        rs2.getString("golongan"), "", "", "", false, 0, ""
+                                        rs2.getString("golongan"), "", "", ""
                                     });
-                                    cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi 3 : "+e);
