@@ -146,6 +146,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         tbObat.setModel(tabModeobat);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
         for (i = 0; i < 22; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if (i == 0) {
@@ -1211,10 +1212,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
         if(tbObat.getRowCount()!=0){
             try {
                 getDataobat();
-                cekObatKronis(tbObat.getSelectedRow(), tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString());
-                if (! tbObat.getValueAt(tbObat.getSelectedRow(), 20).toString().isBlank()) {
-                    JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbObat.getValueAt(tbObat.getSelectedRow(), 3) + " baru bisa diberikan pada tanggal " + tbObat.getValueAt(tbObat.getSelectedRow(), 21).toString() + "...!!!");
-                }
             } catch (java.lang.NullPointerException e) {
             }
             
@@ -1232,6 +1229,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 try {
                     getDataobat();
                     i=tbObat.getSelectedColumn();
+                    
                     if(i==8){
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0,0")) {
@@ -3261,6 +3259,13 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else{
             if(tbObat.getSelectedRow()!= -1){
                 row=tbObat.getSelectedRow();
+                if (tbObat.getEditingColumn() == 1) {
+                    cekObatKronis(tbObat.getSelectedRow(), tbObat.getValueAt(tbObat.getSelectedRow(), 2).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 3).toString());
+                    if (! tbObat.getValueAt(tbObat.getSelectedRow(), 20).toString().isBlank()) {
+                        JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbObat.getValueAt(tbObat.getSelectedRow(), 3) + " baru bisa diberikan pada tanggal " + tbObat.getValueAt(tbObat.getSelectedRow(), 21).toString() + "...!!!");
+                    }
+                }
+                
                 if(!tbObat.getValueAt(row,1).toString().equals("")){
                     Kd2.setText("");
                     Kd2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -3355,7 +3360,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     } catch (Exception e) {
                         tbObat.setValueAt("",row,1);
                         tbObat.setValueAt(0,row,10);
-                    }
+                    } 
                 }
             }
         }
