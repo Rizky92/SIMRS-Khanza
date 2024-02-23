@@ -3243,6 +3243,16 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             System.out.println("Notifikasi : "+e);
         }
         
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            c.setTime(df.parse(DTPTgl.getSelectedItem().toString()));
+            c.add(Calendar.DATE, 30);
+            DTPObatKronisSelanjutnya.setDate(c.getTime());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
         if (adaObatKronis) {
             JOptionPane.showMessageDialog(rootPane, "Ditemukan obat kronis diresepkan oleh dokter, silahkan dilakukan review dahulu..!!");
         }
