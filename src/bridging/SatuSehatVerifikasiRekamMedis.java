@@ -12,17 +12,16 @@
 
 package bridging;
 
-import java.awt.Dimension;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.javafx.webkit.WebConsoleListener;
 import fungsi.akses;
-import fungsi.validasi;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javafx.application.Platform;
@@ -46,8 +45,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 
 /**
  *
@@ -126,7 +123,8 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         internalFrame1 = new widget.InternalFrame();
         panelGlass6 = new widget.panelisi();
@@ -143,8 +141,10 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         setIconImages(null);
         setUndecorated(true);
         setResizable(false);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentShown(java.awt.event.ComponentEvent evt)
+            {
                 formComponentShown(evt);
             }
         });
@@ -172,6 +172,13 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         NamaPetugas.setHighlighter(null);
         NamaPetugas.setName("NamaPetugas"); // NOI18N
         NamaPetugas.setPreferredSize(new java.awt.Dimension(300, 23));
+        NamaPetugas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                NamaPetugasActionPerformed(evt);
+            }
+        });
         panelGlass6.add(NamaPetugas);
 
         BtnPilihPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
@@ -179,13 +186,17 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         BtnPilihPetugas.setToolTipText("Alt+6");
         BtnPilihPetugas.setName("BtnPilihPetugas"); // NOI18N
         BtnPilihPetugas.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnPilihPetugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPilihPetugas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPilihPetugasActionPerformed(evt);
             }
         });
-        BtnPilihPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPilihPetugas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPilihPetugasKeyPressed(evt);
             }
         });
@@ -201,13 +212,17 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -237,7 +252,7 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
 
     private void BtnPilihPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPilihPetugasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnCariActionPerformed(null);
+            
         }else{
             Valid.pindah(evt,NIK,BtnKeluar);
         }
@@ -262,6 +277,11 @@ public final class SatuSehatVerifikasiRekamMedis extends javax.swing.JDialog {
         
         tampil();
     }//GEN-LAST:event_formComponentShown
+
+    private void NamaPetugasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_NamaPetugasActionPerformed
+    {//GEN-HEADEREND:event_NamaPetugasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaPetugasActionPerformed
 
     /**
     * @param args the command line arguments
