@@ -190,7 +190,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 18) {
                 column.setPreferredWidth(65);
             } else if (i == 19) {
-                column.setPreferredWidth(70);
+                if (VALIDASIRESEPKRONIS) {
+                    column.setPreferredWidth(70);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             } else if (i == 20) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -338,7 +343,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
             } else if (i == 18) {
                 column.setPreferredWidth(65);
             } else if (i == 19) {
-                column.setPreferredWidth(70);
+                if (VALIDASIRESEPKRONIS) {
+                    column.setPreferredWidth(70);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             } else if (i == 20) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -1683,7 +1693,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         }
                     }
                     
-                    if (sukses) {
+                    if (sukses && VALIDASIRESEPKRONIS) {
                         for (int i = 0; i < tabModeobat.getRowCount(); i++) {
                             if (Boolean.parseBoolean(tbObat.getValueAt(i, 19).toString())) {
                                 Sequel.executeRawSmc("insert ignore into detail_pemberian_obat_selanjutnya (tgl_perawatan, jam, no_rkm_medis, kode_brng, tgl_pemberian_selanjutnya, total_hari) values (?, ?, ?, ?, ?, datediff(?, ?))",
@@ -2002,8 +2012,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                             *Double.parseDouble(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),9).toString()))
                                             /Double.parseDouble(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),8).toString()),1)
                                             ,tbDetailObatRacikan.getSelectedRow(),10);
+                                    System.out.println("tbDetailObatRacikanKeyPressed KeyEvent.VK_ENTER");
                                     getDatadetailobatracikan();
-                                }   
+                                }
                             } catch (Exception e) {
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),10);
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),11);
@@ -2054,7 +2065,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         /Double.parseDouble(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),8).toString()),1)
                                         ,tbDetailObatRacikan.getSelectedRow(),10);
                             } 
-                            
                             try {
                                 if(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0.0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0,0")) {
                                     tbDetailObatRacikan.setValueAt(embalase,tbDetailObatRacikan.getSelectedRow(),11);
@@ -3269,10 +3279,12 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else{
             if(tbObat.getSelectedRow()!= -1){
                 row=tbObat.getSelectedRow();
-                if (tbObat.getEditingColumn() == 1) {
-                    cekObatKronis(row, tbObat.getValueAt(row, 2).toString(), tbObat.getValueAt(row, 3).toString());
-                    if (Valid.SetAngka(tbObat.getValueAt(row, 20).toString()) > 0) {
-                        JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbObat.getValueAt(row, 3) + " baru bisa diberikan pada tanggal " + tbObat.getValueAt(row, 21).toString() + "...!!!");
+                if (VALIDASIRESEPKRONIS) {
+                    if (tbObat.getEditingColumn() == 1) {
+                        cekObatKronis(row, tbObat.getValueAt(row, 2).toString(), tbObat.getValueAt(row, 3).toString());
+                        if (Valid.SetAngka(tbObat.getValueAt(row, 20).toString()) > 0) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbObat.getValueAt(row, 3) + " baru bisa diberikan pada tanggal " + tbObat.getValueAt(row, 21).toString() + "...!!!");
+                        }
                     }
                 }
                 if(!tbObat.getValueAt(row,1).toString().equals("")){
@@ -3632,7 +3644,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         nobatch=new String[z];
         nofaktur=new String[z];
         kadaluarsa=new String[z];
-        kronis = null;
         kronis=new boolean[z];
         obatKronisSisaHari = new int[z];
         obatKronisPemberianSelanjutnya = new String[z];
@@ -4038,10 +4049,14 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private void getDatadetailobatracikan() {
         if(tbDetailObatRacikan.getSelectedRow()!= -1){
             row=tbDetailObatRacikan.getSelectedRow();
-            if (tbDetailObatRacikan.getEditingColumn() == 9 || tbDetailObatRacikan.getEditingColumn() == 10) {
-                cekObatKronisRacikan(row, tbDetailObatRacikan.getValueAt(row, 2).toString(), tbDetailObatRacikan.getValueAt(row, 3).toString());
-                if (Valid.SetAngka(tbDetailObatRacikan.getValueAt(row, 20).toString()) > 0) {
-                    JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbDetailObatRacikan.getValueAt(row, 3) + " baru bisa diberikan pada tanggal " + tbDetailObatRacikan.getValueAt(row, 21).toString() + "...!!!");
+            System.out.println("tbDetailObatRacikan.getEditingColumn() = " + tbDetailObatRacikan.getEditingColumn());
+            if (VALIDASIRESEPKRONIS) {
+                if (tbDetailObatRacikan.getEditingColumn() == 9 || tbDetailObatRacikan.getEditingColumn() == 10) {
+                    System.out.println("called");
+                    cekObatKronisRacikan(row, tbDetailObatRacikan.getValueAt(row, 2).toString(), tbDetailObatRacikan.getValueAt(row, 3).toString());
+                    if (Valid.SetAngka(tbDetailObatRacikan.getValueAt(row, 20).toString()) > 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbDetailObatRacikan.getValueAt(row, 3) + " baru bisa diberikan pada tanggal " + tbDetailObatRacikan.getValueAt(row, 21).toString() + "...!!!");
+                    }
                 }
             }
             try {
@@ -4508,6 +4523,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
+        if (! VALIDASIRESEPKRONIS) {
+            return;
+        }
         try {
             psobatkronis = koneksi.prepareStatement(
                 "select detail_pemberian_obat_selanjutnya.*, if (datediff(tgl_pemberian_selanjutnya, ?) < 1, 0, datediff(tgl_pemberian_selanjutnya, ?)) as sisa_hari " +
@@ -4552,6 +4570,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     private void cekObatKronisRacikan(int posisi, String kodeObat, String namaObat) {
+        if (! VALIDASIRESEPKRONIS) {
+            return;
+        }
         try {
             psobatkronis = koneksi.prepareStatement(
                 "select detail_pemberian_obat_selanjutnya.*, if (datediff(tgl_pemberian_selanjutnya, ?) < 1, 0, datediff(tgl_pemberian_selanjutnya, ?)) as sisa_hari " +
