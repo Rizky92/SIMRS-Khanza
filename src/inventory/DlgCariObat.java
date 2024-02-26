@@ -3360,7 +3360,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     } catch (Exception e) {
                         tbObat.setValueAt("",row,1);
                         tbObat.setValueAt(0,row,10);
-                    } 
+                    }
                 }
             }
         }
