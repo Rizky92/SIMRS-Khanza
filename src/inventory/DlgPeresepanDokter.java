@@ -2457,6 +2457,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     public void tampilkanTemplateObat(String namaTemplate) {
         String noResep = Sequel.cariIsi("select no_resep from resep_obat where nama_template = ?", namaTemplate);
         String hargaKelas = "ralan";
+        boolean templateUmumKosong = false,
+                templateRacikanKosong = false;
 
         switch (Jeniskelas.getSelectedItem().toString().toLowerCase()) {
             case "karyawan":
@@ -2536,7 +2538,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     rsobat = psresepasuransi.executeQuery();
                     
                     if (! rsobat.first()) {
-                        JOptionPane.showMessageDialog(rootPane, "Maaf, semua stok obat pada template yang dipilih tidak mencukupi..!!");
+                        templateUmumKosong = true;
                     } else {
                         rsobat.beforeFirst();
                     }
@@ -2624,8 +2626,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     
                     rsobat = psresep.executeQuery();
                     
-                    if (! rsobat.first()) {
-                        JOptionPane.showMessageDialog(rootPane, "Maaf, semua stok obat pada template yang dipilih tidak mencukupi..!!");
+                    if (! rsobat.first() && STOKKOSONGRESEP.equals("no")) {
+                        templateUmumKosong = true;
                     } else {
                         rsobat.beforeFirst();
                     }
@@ -2757,7 +2759,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             rs2 = ps2.executeQuery();
                             
                             if (! rs2.first()) {
-                                JOptionPane.showMessageDialog(rootPane, "Maaf, semua stok obat pada template yang dipilih tidak mencukupi..!!");
+                                templateRacikanKosong = true;
                             } else {
                                 rs2.beforeFirst();
                             }
@@ -2847,7 +2849,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             rs2 = ps2.executeQuery();
                             
                             if (! rs2.first()) {
-                                JOptionPane.showMessageDialog(rootPane, "Maaf, semua stok obat pada template yang dipilih tidak mencukupi..!!");
+                                templateRacikanKosong = true;
                             } else {
                                 rs2.beforeFirst();
                             }
@@ -2944,6 +2946,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 if (psresep != null) {
                     psresep.close();
                 }
+            }
+            
+            if (templateUmumKosong && templateRacikanKosong) {
+                JOptionPane.showMessageDialog(rootPane, "Maaf, semua stok obat pada template yang dipilih tidak mencukupi..!!");
             }
             
             hitungResep();
