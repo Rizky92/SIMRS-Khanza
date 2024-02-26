@@ -2626,7 +2626,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     
                     rsobat = psresep.executeQuery();
                     
-                    if (! rsobat.first() && STOKKOSONGRESEP.equals("no")) {
+                    if (! rsobat.first()) {
                         templateUmumKosong = true;
                     } else {
                         rsobat.beforeFirst();
