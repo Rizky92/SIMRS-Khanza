@@ -78,6 +78,17 @@ public class koneksiDB {
         }
     }
     
+    public static boolean VALIDASIRESEPKRONIS()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static String TAMPILANDEFAULTRIWAYATPASIEN()
     {
         try {
