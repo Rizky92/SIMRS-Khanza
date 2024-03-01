@@ -538,6 +538,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
         
         tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota"); 
         jam();
+        
+        if (! VALIDASIRESEPKRONIS) {
+            jLabel9.setVisible(false);
+            DTPObatKronisSelanjutnya.setVisible(false);
+            FormInput.setPreferredSize(new Dimension(100, 103));
+        }
     }    
     
 
@@ -4049,10 +4055,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private void getDatadetailobatracikan() {
         if(tbDetailObatRacikan.getSelectedRow()!= -1){
             row=tbDetailObatRacikan.getSelectedRow();
-            System.out.println("tbDetailObatRacikan.getEditingColumn() = " + tbDetailObatRacikan.getEditingColumn());
             if (VALIDASIRESEPKRONIS) {
                 if (tbDetailObatRacikan.getEditingColumn() == 9 || tbDetailObatRacikan.getEditingColumn() == 10) {
-                    System.out.println("called");
                     cekObatKronisRacikan(row, tbDetailObatRacikan.getValueAt(row, 2).toString(), tbDetailObatRacikan.getValueAt(row, 3).toString());
                     if (Valid.SetAngka(tbDetailObatRacikan.getValueAt(row, 20).toString()) > 0) {
                         JOptionPane.showMessageDialog(rootPane, "Maaf, obat " + tbDetailObatRacikan.getValueAt(row, 3) + " baru bisa diberikan pada tanggal " + tbDetailObatRacikan.getValueAt(row, 21).toString() + "...!!!");

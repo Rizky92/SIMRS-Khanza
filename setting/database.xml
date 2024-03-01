@@ -3,7 +3,7 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="TAMPILANDEFAULTRIWAYATPASIEN">5 riwayat terakhir</entry>
-    <entry key="VALIDASIRESEPKRONIS">yes</entry>
+    <entry key="VALIDASIRESEPKRONIS">no</entry>
 
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>                  <!-- localhost -->
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>              <!-- sik -->

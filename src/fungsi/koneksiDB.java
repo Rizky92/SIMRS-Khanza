@@ -83,8 +83,6 @@ public class koneksiDB {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             
-            System.out.println("VALIDASIRESEPKRONIS = " + prop.getProperty("VALIDASIRESEPKRONIS"));
-            
             return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
