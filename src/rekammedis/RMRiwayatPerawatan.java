@@ -192,6 +192,20 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
         
+        LoadHTMLTindakanRadiologi.setEditorKit(kit);
+        LoadHTMLTindakanRadiologi.setDocument(doc);
+        LoadHTMLTindakanRadiologi.setEditable(false);
+        LoadHTMLTindakanRadiologi.addHyperlinkListener(e -> {
+            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
+              Desktop desktop = Desktop.getDesktop();
+              try {
+                desktop.browse(e.getURL().toURI());
+              } catch (Exception ex) {
+                ex.printStackTrace();
+              }
+            }
+        });
+        
         LoadHTMLSOAPI.setDocument(doc);
         LoadHTMLSOAPI.setEditable(false);
         LoadHTMLSOAPI.addHyperlinkListener(e -> {
@@ -418,6 +432,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkPotonganBiaya = new widget.CekBox();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLTindakanLab = new widget.editorpane();
+        Scroll7 = new widget.ScrollPane();
+        LoadHTMLTindakanRadiologi = new widget.editorpane();
         Scroll4 = new widget.ScrollPane();
         LoadHTMLPembelian = new widget.editorpane();
         Scroll5 = new widget.ScrollPane();
@@ -684,7 +700,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
         FormMenu.setPreferredSize(new java.awt.Dimension(255, 3075));
-        FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
+        FormMenu.setLayout(new java.awt.FlowLayout(1, 1, 1));
 
         chkSemua.setSelected(true);
         chkSemua.setText("Semua");
@@ -1773,6 +1789,16 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         TabRawat.addTab("Tindakan Lab", Scroll6);
 
+        Scroll7.setBorder(null);
+        Scroll7.setName("Scroll7"); // NOI18N
+        Scroll7.setOpaque(true);
+
+        LoadHTMLTindakanRadiologi.setBorder(null);
+        LoadHTMLTindakanRadiologi.setName("LoadHTMLTindakanRadiologi"); // NOI18N
+        Scroll7.setViewportView(LoadHTMLTindakanRadiologi);
+
+        TabRawat.addTab("Tindakan Radiologi", Scroll7);
+
         Scroll4.setBorder(null);
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
@@ -2483,6 +2509,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.editorpane LoadHTMLRiwayatPerawatan;
     private widget.editorpane LoadHTMLSOAPI;
     private widget.editorpane LoadHTMLTindakanLab;
+    private widget.editorpane LoadHTMLTindakanRadiologi;
     private widget.TextBox NmPasien;
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
@@ -2502,6 +2529,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.ScrollPane Scroll4;
     private widget.ScrollPane Scroll5;
     private widget.ScrollPane Scroll6;
+    private widget.ScrollPane Scroll7;
     private widget.ScrollPane ScrollMenu;
     private widget.TextBox StatusNikah;
     private javax.swing.JTabbedPane TabRawat;
