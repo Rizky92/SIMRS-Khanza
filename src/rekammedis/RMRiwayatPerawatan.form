@@ -2213,13 +2213,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="widget.panelisi" name="PanelContentBerkasDigital">
+                <Component class="widget.editorpane" name="LoadHTMLBerkasDigital">
                   <Properties>
-                    <Property name="name" type="java.lang.String" value="PanelContentBerkasDigital" noResource="true"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="LoadHTMLBerkasDigital" noResource="true"/>
                   </Properties>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-                </Container>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="widget.ScrollPane" name="Scroll4">

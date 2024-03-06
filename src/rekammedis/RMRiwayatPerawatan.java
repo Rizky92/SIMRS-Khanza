@@ -272,6 +272,19 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
         });
+        LoadHTMLBerkasDigital.setEditorKit(kit);
+        LoadHTMLBerkasDigital.setDocument(doc);
+        LoadHTMLBerkasDigital.setEditable(false);
+        LoadHTMLBerkasDigital.addHyperlinkListener(e -> {
+            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
+                Desktop desktop = Desktop.getDesktop();
+                try {
+                   desktop.browse(e.getURL().toURI());
+                } catch (Exception ex) {
+                  ex.printStackTrace();
+                }
+            }
+        });
         
         ChkAccor.setSelected(false);
         isMenu();
@@ -453,7 +466,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Scroll7 = new widget.ScrollPane();
         LoadHTMLTindakanRadiologi = new widget.editorpane();
         Scroll8 = new widget.ScrollPane();
-        PanelContentBerkasDigital = new widget.panelisi();
+        LoadHTMLBerkasDigital = new widget.editorpane();
         Scroll4 = new widget.ScrollPane();
         LoadHTMLPembelian = new widget.editorpane();
         Scroll5 = new widget.ScrollPane();
@@ -1823,9 +1836,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
-        PanelContentBerkasDigital.setName("PanelContentBerkasDigital"); // NOI18N
-        PanelContentBerkasDigital.setLayout(new java.awt.BorderLayout());
-        Scroll8.setViewportView(PanelContentBerkasDigital);
+        LoadHTMLBerkasDigital.setBorder(null);
+        LoadHTMLBerkasDigital.setName("LoadHTMLBerkasDigital"); // NOI18N
+        Scroll8.setViewportView(LoadHTMLBerkasDigital);
 
         TabRawat.addTab("Berkas Digital Keperawatan", Scroll8);
 
@@ -2151,6 +2164,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     panggilLaporan(LoadHTMLTindakanRadiologi.getText()); 
                     break;
                 case 5:
+                    panggilLaporan(LoadHTMLBerkasDigital.getText()); 
                     break;
                 case 6:
                     panggilLaporan(LoadHTMLPembelian.getText()); 
@@ -2159,8 +2173,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     panggilLaporan(LoadHTMLPiutang.getText()); 
                     break;
                 case 8:
-                    // Tidak bisa dipanggil hasil laporan retensi berkas dengan format saat ini, perlu proses cetak yang berbeda
-                    // panggilLaporan(LoadHTMLRetensi.getText()); 
+                     panggilLaporan(LoadHTMLRetensi.getText()); 
                     break;
                 default:
                     break;
@@ -2545,6 +2558,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox GD;
     private widget.TextBox IbuKandung;
     private widget.TextBox Jk;
+    private widget.editorpane LoadHTMLBerkasDigital;
     private widget.editorpane LoadHTMLPembelian;
     private widget.editorpane LoadHTMLPiutang;
     private widget.editorpane LoadHTMLRetensi;
@@ -2556,7 +2570,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
     private widget.PanelBiasa PanelAccor;
-    private widget.panelisi PanelContentBerkasDigital;
     private javax.swing.JPanel PanelInput;
     private widget.TextBox Pekerjaan;
     private widget.TextBox Pendidikan;
@@ -5185,7 +5198,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     "</html>");
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.prosesCari() 5 : "+e);
-        } 
+        }
     }
 
     private void tampilPembelian() {
@@ -5594,52 +5607,58 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
 
     private void tampilRetensi() {
-        try{
+        try {
             htmlContent = new StringBuilder();
-            try{
-                rs3=koneksi.prepareStatement(
-                     "select * from retensi_pasien where no_rkm_medis='"+NoRM.getText().trim()+"' order by tgl_retensi").executeQuery();
-                if(rs3.next()){                                    
-                    htmlContent.append(  
-                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                        "<tr class='isi'>"+
-                          "<td valign='top' width='2%' align='center' bgcolor='#FFFAF8'>No.</td>"+
-                          "<td valign='top' width='8%' align='center' bgcolor='#FFFAF8'>Tgl.Retensi</td>"+
-                          "<td valign='top' width='90%' align='center' bgcolor='#FFFAF8'>File Retensi</td>"+
-                        "</tr>");
+            try {
+                rs3 = koneksi.prepareStatement(
+                    "select * from retensi_pasien where no_rkm_medis='" + NoRM.getText().trim() + "' order by tgl_retensi").executeQuery();
+                if (rs3.next()) {
+                    htmlContent.append(
+                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        + "<tr class='isi'>"
+                        + "<td valign='top' width='2%' align='center' bgcolor='#FFFAF8'>No.</td>"
+                        + "<td valign='top' width='8%' align='center' bgcolor='#FFFAF8'>Tgl.Retensi</td>"
+                        + "<td valign='top' width='8%' align='center' bgcolor='#fffaf8'>Nama File</td>"
+                        + "<td valign='top' width='90%' align='center' bgcolor='#FFFAF8'>File Retensi</td>"
+                        + "</tr>");
                     rs3.beforeFirst();
-                    w=1;
-                    while(rs3.next()){
+                    w = 1;
+                    while (rs3.next()) {
                         htmlContent.append(
-                             "<tr class='isi'>"+
-                                "<td valign='top' align='center'>"+w+"</td>"+
-                                "<td valign='top'>"+rs3.getString("tgl_retensi")+"</td>"+
-                                "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"'><img alt='Gambar Retensi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"' width='"+(TabRawat.getWidth()-550)+"' height='"+(TabRawat.getWidth()-550)+"'/></a></td>"+
-                             "</tr>"); 
+                            "<tr class='isi'>"
+                            + "<td valign='top' align='center'>" + w + "</td>"
+                            + "<td valign='top'>" + rs3.getString("tgl_retensi") + "</td>"
+                            + "<td valign='top'>" + rs3.getString("lokasi_pdf").replaceAll("pages/upload/", "") + "</td>"    
+                            + "<td valign='top' align='center'>"
+                                + "<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/medrec/" + rs3.getString("lokasi_pdf") + "'>"
+                                    + "<img alt='Gambar Retensi' src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/medrec/" + rs3.getString("lokasi_pdf") + "' width='" + (TabRawat.getWidth() - 550) + "' height='" + (TabRawat.getWidth() - 550) + "'/>"
+                                + "</a>"
+                            + "</td>"
+                            + "</tr>");
                         w++;
                     }
                     htmlContent.append(
-                      "</table>");
-                } else{
-                    htmlContent.append(  
-                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                        "<tr class='isi'>"+
-                          "<td valign='top' width='2%' align='center' bgcolor='#FFFAF8'>No.</td>"+
-                          "<td valign='top' width='8%' align='center' bgcolor='#FFFAF8'>Tgl.Retensi</td>"+
-                          "<td valign='top' width='90%' align='center' bgcolor='#FFFAF8'>File Retensi</td>"+
-                        "</tr>"+
-                      "</table>");
-                }                              
+                        "</table>");
+                } else {
+                    htmlContent.append(
+                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        + "<tr class='isi'>"
+                        + "<td valign='top' width='2%' align='center' bgcolor='#FFFAF8'>No.</td>"
+                        + "<td valign='top' width='8%' align='center' bgcolor='#FFFAF8'>Tgl.Retensi</td>"
+                        + "<td valign='top' width='90%' align='center' bgcolor='#FFFAF8'>File Retensi</td>"
+                        + "</tr>"
+                        + "</table>");
+                }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs3!=null){
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs3 != null) {
                     rs3.close();
                 }
             }
-            LoadHTMLRetensi.setText("<html>"+htmlContent.toString()+"</html>");
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+            LoadHTMLRetensi.setText("<html>" + htmlContent.toString() + "</html>");
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
         }
     }
     
@@ -6610,7 +6629,106 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
     
     private void tampilBerkasDigitalPerawatan() {
-        loadURL();
+        try {
+            htmlContent = new StringBuilder();
+            htmlContent.append(
+                "<tr class='isi'>"
+                + "<td valign='middle' bgcolor='#FFFAF8' align='center' width='8%'>No. Rawat</td>"
+                + "<td valign='middle' bgcolor='#FFFAF8' align='center' width='5%'>Tgl. Regist</td>"
+                + "<td valign='middle' bgcolor='#FFFAF8' align='center' width='3%'>Kategori</td>"
+                + "<td valign='middle' bgcolor='#FFFAF8' align='center' width='84%'>Nama File</td>"
+                + "</tr>"
+            );
+            if (R1.isSelected() == true) {
+                ps = koneksi.prepareStatement(
+                    "select berkas_digital_perawatan.*, master_berkas_digital.nama, reg_periksa.tgl_registrasi " +
+                    "from berkas_digital_perawatan join reg_periksa on berkas_digital_perawatan.no_rawat = reg_periksa.no_rawat " +
+                    "join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+                    "where reg_periksa.stts != 'Batal' and reg_periksa.no_rkm_medis = ? order by reg_periksa.tgl_registrasi desc limit 5"
+                );
+            } else if (R2.isSelected() == true) {
+                ps = koneksi.prepareStatement(
+                    "select berkas_digital_perawatan.*, master_berkas_digital.nama, reg_periksa.tgl_registrasi " +
+                    "from berkas_digital_perawatan join reg_periksa on berkas_digital_perawatan.no_rawat = reg_periksa.no_rawat " +
+                    "join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+                    "where reg_periksa.stts != 'Batal' and reg_periksa.no_rkm_medis = ? order by reg_periksa.tgl_registrasi"
+                );
+            } else if (R3.isSelected() == true) {
+                ps = koneksi.prepareStatement(
+                    "select berkas_digital_perawatan.*, master_berkas_digital.nama, reg_periksa.tgl_registrasi " +
+                    "from berkas_digital_perawatan join reg_periksa on berkas_digital_perawatan.no_rawat = reg_periksa.no_rawat " +
+                    "join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+                    "where reg_periksa.stts != 'Batal' and reg_periksa.no_rkm_medis = ? and reg_periksa.tgl_registrasi between ? and ? " +
+                    "order by reg_periksa.tgl_registrasi desc"
+                );
+            } else if (R4.isSelected() == true) {
+                ps = koneksi.prepareStatement(
+                    "select berkas_digital_perawatan.*, master_berkas_digital.nama, reg_periksa.tgl_registrasi " +
+                    "from berkas_digital_perawatan join reg_periksa on berkas_digital_perawatan.no_rawat = reg_periksa.no_rawat " +
+                    "join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+                    "where reg_periksa.stts != 'Batal' and reg_periksa.no_rkm_medis = ? and berkas_digital_perawatan.no_rawat = ? " +
+                    "order by reg_periksa.tgl_registrasi desc"
+                );
+            } else if (R5.isSelected()) {
+                ps = koneksi.prepareStatement(
+                    "select berkas_digital_perawatan.*, master_berkas_digital.nama, reg_periksa.tgl_registrasi " +
+                    "from berkas_digital_perawatan join reg_periksa on berkas_digital_perawatan.no_rawat = reg_periksa.no_rawat " +
+                    "join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+                    "where reg_periksa.stts != 'Batal' and reg_periksa.no_rkm_medis = ? order by reg_periksa.tgl_registrasi desc limit 2"
+                );
+            }
+            try {
+                if (R1.isSelected() == true) {
+                    ps.setString(1, NoRM.getText().trim());
+                } else if (R2.isSelected() == true) {
+                    ps.setString(1, NoRM.getText().trim());
+                } else if (R3.isSelected() == true) {
+                    ps.setString(1, NoRM.getText().trim());
+                    ps.setString(2, Valid.SetTgl(Tgl1.getSelectedItem() + ""));
+                    ps.setString(3, Valid.SetTgl(Tgl2.getSelectedItem() + ""));
+                } else if (R4.isSelected() == true) {
+                    ps.setString(1, NoRM.getText().trim());
+                    ps.setString(2, NoRawat.getText().trim());
+                } else if (R5.isSelected()) {
+                    ps.setString(1, NoRM.getText().trim());
+                }
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    htmlContent.append(
+                        "<tr class='isi'>"
+                        + "<td valign='top' align='center'>" + rs.getString("no_rawat") + "</td>"
+                        + "<td valign='top' align='center'>" + rs.getString("tgl_registrasi") + "</td>"
+                        + "<td valign='top' align='center'>" + rs.getString("nama") + "</td>"
+                        + "<td valign='top' align='center'>");
+                    
+                    if (rs.getString("lokasi_file").toLowerCase().contains(".jpg") || rs.getString("lokasi_file").toLowerCase().contains(".jpeg")) {
+                        htmlContent.append("<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "'><img alt='Berkas Digital' src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "' width='450' height='450'/></a>");
+                    } else {
+                        htmlContent.append("<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "'>" + rs.getString("nama") + "_" + rs.getString("lokasi_file").replaceAll("pages/upload/", "") + "</a>");
+                    }
+                    htmlContent.append("</td></tr>");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+
+            LoadHTMLBerkasDigital.setText(
+                "<html>"
+                + "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                + htmlContent.toString()
+                + "</table>"
+                + "</html>");
+        } catch (Exception e) {
+            System.out.println("laporan.DlgRL4A.prosesCari() 5 : " + e);
+        }
     }
     
     private void panggilLaporan(String teks) {
@@ -24919,6 +25037,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
     
+    /*
     private void createScene() {
         Platform.runLater(new Runnable() {
             public void run() {
@@ -25011,4 +25130,5 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     public void CloseScane() {
         Platform.setImplicitExit(false);
     }
+    */
 }
