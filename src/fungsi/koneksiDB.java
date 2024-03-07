@@ -78,6 +78,39 @@ public class koneksiDB {
         }
     }
     
+    public static String ADAMLABSAPIURL()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("ADAMLABSAPIURL");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSAPIKEY()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return EnkripsiAES.decrypt(prop.getProperty("ADAMLABSAPIKEY"));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSAPIKODERS()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("ADAMLABSAPIKODERS");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static boolean VALIDASIRESEPKRONIS()
     {
         try {

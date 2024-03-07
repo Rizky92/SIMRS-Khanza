@@ -4,6 +4,9 @@
     <comment>KhanzaHMS</comment>
     <entry key="TAMPILANDEFAULTRIWAYATPASIEN">5 riwayat terakhir</entry>
     <entry key="VALIDASIRESEPKRONIS">yes</entry>
+    <entry key="ADAMLABSAPIURL">http://demo.adamlabs.id:2311/adam-lis/</entry>
+    <entry key="ADAMLABSAPIKEY"></entry>
+    <entry key="ADAMLABSAPIKODERS"></entry>
 
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>                  <!-- localhost -->
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>              <!-- sik -->
