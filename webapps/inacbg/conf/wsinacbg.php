@@ -184,17 +184,15 @@
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole){	
         
-        $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
-                            getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
+        $prosedur_non_bedah = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and nm_perawatan not like '%terapi%' and status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis')");
         if($prosedur_non_bedah==""){
             $prosedur_non_bedah="0";
         }
-        $prosedur_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Operasi'");
+        $prosedur_bedah = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Operasi'");
         if($prosedur_bedah==""){
             $prosedur_bedah="0";
         }
-        $konsultasi=(getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter'")+
-                     getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter'"));
+        $konsultasi = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status in ('Ranap Dokter', 'Ralan Dokter')");
         if($konsultasi==""){
             $konsultasi="0";
         }
@@ -202,48 +200,47 @@
         if($tenaga_ahli==""){
             $tenaga_ahli="0";
         }
-        $keperawatan=(getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Paramedis'")+
-                      getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Paramedis'"));
+        $keperawatan = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status in ('Ranap Paramedis', 'Ralan Paramedis')");
         if($keperawatan==""){
             $keperawatan="0";
         }
-        $radiologi=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Radiologi'");
+        $radiologi=getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Radiologi'");
         if($radiologi==""){
             $radiologi="0";
         }
-        $laboratorium=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Laborat'");
+        $laboratorium=getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Laborat'");
         if($laboratorium==""){
             $laboratorium="0";
         }
-        $kamar=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Kamar'");
+        $kamar=getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Kamar'");
         if($kamar==""){
             $kamar="0";
         }
-        $obat_kronis=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where nm_perawatan like '%kronis%' and no_rawat='".$norawat."' and status='Obat'");
-        $obat_kemoterapi=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where nm_perawatan like '%kemo%' and no_rawat='".$norawat."' and status='Obat'");
-        $obat=(getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Obat'")+
-               getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Retur Obat'")+
-               getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Resep Pulang'")-$obat_kronis-$obat_kemoterapi);
-        if($obat==""){
-            $obat="0";
-        }        
-        if($obat_kemoterapi==""){
-            $obat_kemoterapi="0";
-        }        
+        $obat_kronis = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Obat' and nm_perawatan like '%kronis%'");
         if($obat_kronis==""){
             $obat_kronis="0";
-        }        
-        $bmhp=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Tambahan'");
+        }
+        $obat_kemoterapi = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Obat' and nm_perawatan like '%kemo%'")
+        if($obat_kemoterapi==""){
+            $obat_kemoterapi="0";
+        }
+        $obat = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status in ('Obat', 'Retur Obat', 'Resep Pulang')");
+        if($obat==""){
+            $obat="0";
+        }
+        $obat = $obat - $obat_kronis - $obat_kemoterapi;
+        if ($obat < 0) {
+            $obat = "0";
+        }
+        $bmhp = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status = 'Tambahan'");
         if($bmhp==""){
             $bmhp="0";
         }
-        $sewa_alat=(getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Harian'")+
-                    getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Service'"));
+        $sewa_alat = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat'# and status in ('Harian', 'Service')");
         if($sewa_alat==""){
             $sewa_alat="0";
         }
-        $rehabilitasi=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan like '%terapi%'")+
-                            getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan like '%terapi%'");
+        $rehabilitasi = getOne("select ifnull(round(sum(totalbiaya), 2), 0) from billing where no_rawat = '$norawat' and status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis' and nm_perawatan like '%terapi%'");
         if($rehabilitasi==""){
             $rehabilitasi="0";
         }

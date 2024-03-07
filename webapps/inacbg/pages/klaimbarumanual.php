@@ -294,7 +294,7 @@
                 $sistole="120";
                 $diastole="90";
                 if($baris["jnspelayanan"]=="1"){
-                    $tensi=explode("/", getOne("select pemeriksaan_ranap.tensi from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc"));
+                    $tensi=explode("/", getOne("select trim(pemeriksaan_ranap.tensi) from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc"));
                     if(!empty($tensi[0])){
                         $sistole=$tensi[0];
                     }
@@ -302,7 +302,7 @@
                         $diastole=$tensi[1];
                     }
                 }else{
-                    $tensi=explode("/", getOne("select pemeriksaan_ralan.tensi from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc"));
+                    $tensi=explode("/", getOne("select trim(pemeriksaan_ralan.tensi) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc"));
                     if(!empty($tensi[0])){
                         $sistole=$tensi[0];
                     }
