@@ -6,39 +6,63 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 /**
- *
- * @author USER
+ * @author RS SMC
  */
 public class ApiADAMLABS
 {
-    private final String URL = koneksiDB.ADAMLABSAPIURL(),
-                         KEY = koneksiDB.ADAMLABSAPIKEY(),
-                         KODERS = koneksiDB.ADAMLABSAPIKODERS();
+    private final String APIURL = koneksiDB.ADAMLABSAPIURL(),
+                         APIKEY = koneksiDB.ADAMLABSAPIKEY(),
+                         APIKODERS = koneksiDB.ADAMLABSAPIKODERS();
     
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    private final HttpHeaders headers = new HttpHeaders();
     private final ObjectMapper obj = new ObjectMapper();
     
+    private HttpHeaders headers;
     private HttpEntity requestEntity;
     private JsonNode response;
     private StringBuilder jsonBuilder;
     private PreparedStatement ps, psdetail;
     private ResultSet rs, rsdetail;
+    private SSLContext sslContext;
+    private SSLSocketFactory sslFactory;
+    private SecretKeySpec secretKey;
+    private Scheme scheme;
+    private HttpComponentsClientHttpRequestFactory factory;
+    private String url;
+    
+    private boolean sukses = false;
     
     public void registrasi(String kodeRegistrasi)
     {
+        sukses = false;
         try {
             ps = koneksi.prepareStatement(
                 "select " +
@@ -86,7 +110,7 @@ public class ApiADAMLABS
                                 "\"no_registrasi\": \"" + rs.getString("noorder") + "\"," +
                                 "\"diagnosa_awal\": \"-\"," +
                                 "\"keterangan_klinis\": \"" + rs.getString("diagnosa_klinis") + "\"," +
-                                "\"kode_rs\": \"" + KODERS + "\"" +
+                                "\"kode_rs\": \"" + APIKODERS + "\"" +
                             "}," +
                             "\"pasien\": {" +
                                 "\"nama\": \"" + rs.getString("nm_pasien") + "\"," +
@@ -97,11 +121,11 @@ public class ApiADAMLABS
                                 "\"tanggal_lahir\": \"" + df.format(rs.getDate("tgl_lahir")) + "\"," +
                                 "\"nik\": \"" + rs.getString("no_ktp") +"\"," +
                                 "\"ras\": \"-\"," +
-                                "\"berat_badan\": \"" + rs.getString("bb") + "kg\"," +
+                                "\"berat_badan\": \"" + rs.getString("bb").toLowerCase().trim().replaceAll("kg", "") + "kg\"," +
                                 "\"jenis_registrasi\" : \"" + rs.getString("jenis_registrasi") + "\"," +
-                                "\"m_provinsi_id\": \"Dki Jakarta\"," +
-                                "\"m_kabupaten_id\": \"Kota Jakarta Barat\"," +
-                                "\"m_kecamatan_id\": \"Tambora\"" +
+                                "\"m_provinsi_id\": \"" + rs.getString("nm_prop") + "\"," +
+                                "\"m_kabupaten_id\": \"" + rs.getString("nm_kab") + "\"," +
+                                "\"m_kecamatan_id\": \"" + rs.getString("nm_kec") + "\"" +
                             "}," +
                             "\"kode_dokter_pengirim\": \"" + rs.getString("kd_dokter_perujuk") + "\"," +
                             "\"nama_dokter_pengirim\": \"" + rs.getString("nm_dokter_perujuk") + "\"," +
@@ -113,7 +137,6 @@ public class ApiADAMLABS
                             "\"nama_icdt\": \"-\"," +
                             "\"tindakan\": ["
                     );
-                    
                     try {
                         psdetail = koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan " +
@@ -146,7 +169,6 @@ public class ApiADAMLABS
                     }
                     jsonBuilder.append("]}");
                 }
-                
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             } finally {
@@ -156,6 +178,24 @@ public class ApiADAMLABS
                 if (ps != null) {
                     ps.close();
                 }
+            }
+            url = APIURL + "/bridging_sim_rs/registrasi";
+            System.out.println("URL : " + url);
+            System.out.println("JSON : " + jsonBuilder);
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("x-api-key", APIKEY);
+            requestEntity = new HttpEntity(jsonBuilder, headers);
+            response = obj.readTree(http().exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
+            
+            Sequel.menyimpanSmc(
+                "adamlabs_request_response",
+                "noorder, url, method, request, code, response, user_id",
+                kodeRegistrasi, url, "POST", jsonBuilder.toString(), response.path("code").asText(), response.asText(), akses.getkode()
+            );
+            if (response.path("code").asText().equals("200")) {
+                Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("registrasi").path("no_lab").asText());
+                
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -187,5 +227,27 @@ public class ApiADAMLABS
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+    }
+    
+    private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException
+    {
+        sslContext = SSLContext.getInstance("SSL");
+        TrustManager[] trustManagers = {
+            new X509TrustManager() {
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {return null;}
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
+            }
+        };
+        sslContext.init(null, trustManagers, new SecureRandom());
+        sslFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        scheme = new Scheme("https", 443, sslFactory);
+        factory = new HttpComponentsClientHttpRequestFactory();
+        factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
+        
+        return new RestTemplate(factory);
     }
 }
