@@ -111,12 +111,34 @@ public class koneksiDB {
         }
     }
     
+    public static String LABORATORIUMKIRIMHASIL()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("LABORATORIUMKIRIMHASIL");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String LABORATORIUMTARIKHASIL()
+    {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            
+            return prop.getProperty("LABORATORIUMTARIKHASIL");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static boolean VALIDASIRESEPKRONIS()
     {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             
-            return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
+            return prop.getProperty("VALIDASIRESEPKRONIS").trim().equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
         }
