@@ -195,7 +195,6 @@ public class ApiADAMLABS
             );
             if (response.path("code").asText().equals("200")) {
                 Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("registrasi").path("no_lab").asText());
-                
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
