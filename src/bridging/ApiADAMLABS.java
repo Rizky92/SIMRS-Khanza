@@ -155,7 +155,6 @@ public class ApiADAMLABS
                                 "},";
                             }
                             jsonBuilder = jsonBuilder.substring(0, jsonBuilder.length() - 1);
-                            System.out.println(jsonBuilder);
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
                         } finally {
@@ -188,7 +187,7 @@ public class ApiADAMLABS
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 headers.add("x-api-key", APIKEY);
-                requestEntity = new HttpEntity(jsonBuilder.toString(), headers);
+                requestEntity = new HttpEntity(jsonBuilder, headers);
                 ResponseEntity<String> responseEntity = http().exchange(url, HttpMethod.POST, requestEntity, String.class);
                 System.out.println("Response : " + responseEntity.getBody());
                 System.out.println("Response : " + responseEntity.getStatusCode());
