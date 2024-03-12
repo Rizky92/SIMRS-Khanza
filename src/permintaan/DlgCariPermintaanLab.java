@@ -1,4 +1,5 @@
 package permintaan;
+import bridging.ApiADAMLABS;
 import bridging.ApiLICA;
 import bridging.ApiMEDQLAB;
 import bridging.ApiSOFTMEDIX;
@@ -76,6 +77,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private ApiSOFTMEDIX softmedix=new ApiSOFTMEDIX();
     private ObjectMapper mapper = new ObjectMapper();
     private ApiMEDQLAB medqlab=new ApiMEDQLAB();
+    private final ApiADAMLABS apiAdamlabs = new ApiADAMLABS();
     private WebEngine engine;
     private JsonNode root;
     private JsonNode response;
@@ -562,7 +564,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2023 11:19:24" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-03-2024 12:39:33" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -593,7 +595,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         WindowTerkirim.getContentPane().add(jButton1);
-        jButton1.setBounds(200, 15, 72, 30);
+        jButton1.setBounds(200, 15, 76, 30);
 
         WindowJnsRegistrasi.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowJnsRegistrasi.setName("WindowJnsRegistrasi"); // NOI18N
@@ -651,14 +653,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
             public void windowDeactivated(java.awt.event.WindowEvent evt) {
                 formWindowDeactivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -1000,7 +1002,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
         TabRawatJalan.addTab("Item Permintaan", scrollPane2);
 
-        internalFrame2.add(TabRawatJalan, java.awt.BorderLayout.CENTER);
+        internalFrame2.add(TabRawatJalan, java.awt.BorderLayout.PAGE_START);
 
         TabPilihRawat.addTab("Rawat Jalan", internalFrame2);
 
@@ -3891,6 +3893,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }//GEN-LAST:event_BtnAmbilVanslabActionPerformed
 
     private void BtnKirimAdamLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimAdamLabsActionPerformed
+        /*
         if(TabPilihRawat.getSelectedIndex()==0){
             if(TabRawatJalan.getSelectedIndex()==0){
                 if(!NoRawat.equals("")){
@@ -3934,6 +3937,16 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 TCari.requestFocus();
             }
         } // TODO add your handling code here:
+        */
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tbLabRalan.getSelectedRow() != -1) {
+                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                        apiAdamlabs.registrasi(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_BtnKirimAdamLabsActionPerformed
 
     private void BtnAmbilAdamLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAmbilAdamLabsActionPerformed
