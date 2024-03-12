@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -18,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -28,7 +26,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -48,7 +49,7 @@ public class ApiADAMLABS
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private JsonNode response;
-    private StringBuilder jsonBuilder;
+    private String jsonBuilder;
     private PreparedStatement ps, psdetail;
     private ResultSet rs, rsdetail;
     private SSLContext sslContext;
@@ -62,7 +63,7 @@ public class ApiADAMLABS
     
     public void registrasi(String kodeRegistrasi)
     {
-        sukses = false;
+        System.out.println("No. Order : " + kodeRegistrasi);
         try {
             ps = koneksi.prepareStatement(
                 "select " +
@@ -75,14 +76,16 @@ public class ApiADAMLABS
                     "pasien.no_tlp, " +
                     "pasien.tgl_lahir, " +
                     "pasien.no_ktp, " +
-                    "(select pemeriksaan_ralan.berat from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = permintaan_lab.no_rawat and pemeriksaan_ralan.berat is not null and pemeriksaan_ralan.berat != '') as bb, " +
+                    "(select pemeriksaan_ralan.berat from pemeriksaan_ralan where (pemeriksaan_ralan.berat is not null and pemeriksaan_ralan.berat != '' and pemeriksaan_ralan.berat REGEXP '^[0-9,.]+$') " +
+                    "and pemeriksaan_ralan.no_rawat in (select r2.no_rawat from reg_periksa r2 where r2.no_rkm_medis = reg_periksa.no_rkm_medis) " +
+                    "order by pemeriksaan_ralan.no_rawat desc, pemeriksaan_ralan.tgl_perawatan desc, pemeriksaan_ralan.jam_rawat desc limit 1) as bb, " +
                     "if (permintaan_lab.informasi_tambahan like '%cito%', 'Cito', 'Reguler') as jenis_registrasi, " +
                     "pasien.kd_prop, " +
                     "propinsi.nm_prop, " +
                     "pasien.kd_kab, " +
                     "kabupaten.nm_kab, " +
                     "pasien.kd_kec, " +
-                    "kecamatan.kd_kec, " +
+                    "kecamatan.nm_kec, " +
                     "permintaan_lab.dokter_perujuk as kd_dokter_perujuk, " +
                     "dokter_perujuk.nm_dokter as nm_dokter_perujuk, " +
                     "reg_periksa.kd_poli, " +
@@ -104,8 +107,7 @@ public class ApiADAMLABS
                 ps.setString(1, kodeRegistrasi);
                 rs = ps.executeQuery();
                 if (rs.next()) {
-                    jsonBuilder = new StringBuilder(
-                        "{" +
+                    jsonBuilder = "{" +
                             "\"registrasi\": {" +
                                 "\"no_registrasi\": \"" + rs.getString("noorder") + "\"," +
                                 "\"diagnosa_awal\": \"-\"," +
@@ -121,7 +123,7 @@ public class ApiADAMLABS
                                 "\"tanggal_lahir\": \"" + df.format(rs.getDate("tgl_lahir")) + "\"," +
                                 "\"nik\": \"" + rs.getString("no_ktp") +"\"," +
                                 "\"ras\": \"-\"," +
-                                "\"berat_badan\": \"" + rs.getString("bb").toLowerCase().trim().replaceAll("kg", "") + "kg\"," +
+                                "\"berat_badan\": \"" + rs.getString("bb").toLowerCase().trim() + "kg\"," +
                                 "\"jenis_registrasi\" : \"" + rs.getString("jenis_registrasi") + "\"," +
                                 "\"m_provinsi_id\": \"" + rs.getString("nm_prop") + "\"," +
                                 "\"m_kabupaten_id\": \"" + rs.getString("nm_kab") + "\"," +
@@ -135,8 +137,7 @@ public class ApiADAMLABS
                             "\"nama_penjamin\": \"" + rs.getString("png_jawab") + "\"," +
                             "\"kode_icdt\": \"-\"," +
                             "\"nama_icdt\": \"-\"," +
-                            "\"tindakan\": ["
-                    );
+                            "\"tindakan\": [";
                     try {
                         psdetail = koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan " +
@@ -148,12 +149,13 @@ public class ApiADAMLABS
                             psdetail.setString(1, kodeRegistrasi);
                             rsdetail = psdetail.executeQuery();
                             while (rsdetail.next()) {
-                                jsonBuilder.append("{" +
-                                    "\"kode_tindakan\": \"" + rs.getString("kd_jenis_prw") + "\"," +
-                                    "\"nama_tindakan\": \"" + rs.getString("nm_perawatan") + "\"" +
-                                "},");
+                                jsonBuilder = jsonBuilder + "{" +
+                                    "\"kode_tindakan\": \"" + rsdetail.getString("kd_jenis_prw") + "\"," +
+                                    "\"nama_tindakan\": \"" + rsdetail.getString("nm_perawatan") + "\"" +
+                                "},";
                             }
-                            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+                            jsonBuilder = jsonBuilder.substring(0, jsonBuilder.length() - 1);
+                            System.out.println(jsonBuilder);
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
                         } finally {
@@ -167,7 +169,7 @@ public class ApiADAMLABS
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    jsonBuilder.append("]}");
+                    jsonBuilder = jsonBuilder + "]}";
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -179,22 +181,32 @@ public class ApiADAMLABS
                     ps.close();
                 }
             }
-            url = APIURL + "/bridging_sim_rs/registrasi";
-            System.out.println("URL : " + url);
-            System.out.println("JSON : " + jsonBuilder);
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-api-key", APIKEY);
-            requestEntity = new HttpEntity(jsonBuilder, headers);
-            response = obj.readTree(http().exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
-            
-            Sequel.menyimpanSmc(
-                "adamlabs_request_response",
-                "noorder, url, method, request, code, response, user_id",
-                kodeRegistrasi, url, "POST", jsonBuilder.toString(), response.path("code").asText(), response.asText(), akses.getkode()
-            );
-            if (response.path("code").asText().equals("200")) {
-                Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("registrasi").path("no_lab").asText());
+            try {
+                url = APIURL + "/bridging_sim_rs/registrasi";
+                System.out.println("URL : " + url);
+                System.out.println("JSON : " + jsonBuilder);
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.add("x-api-key", APIKEY);
+                requestEntity = new HttpEntity(jsonBuilder.toString(), headers);
+                ResponseEntity<String> responseEntity = http().exchange(url, HttpMethod.POST, requestEntity, String.class);
+                System.out.println("Response : " + responseEntity.getBody());
+                System.out.println("Response : " + responseEntity.getStatusCode());
+                response = obj.readTree(responseEntity.getBody());
+
+                Sequel.menyimpanSmc(
+                    "adamlabs_request_response",
+                    "noorder, url, method, request, code, response, user_id",
+                    kodeRegistrasi, url, "POST", jsonBuilder, String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
+                );
+                if (response.path("code").asText().equals("200")) {
+                    Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("registrasi").path("no_lab").asText());
+                }
+            } catch (HttpClientErrorException e) {
+                System.out.println(e.getResponseBodyAsString());
+            } catch (IOException | KeyManagementException | NoSuchAlgorithmException | RestClientException e) {
+                System.out.println("Response : " + e.getMessage());
+                System.out.println("Notif : " + e);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
