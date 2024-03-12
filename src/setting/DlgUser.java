@@ -5684,7 +5684,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         "satu_sehat_kirim_servicerequest_radiologi='"+tbUser.getValueAt(barisdicopy,1015).toString()+"',"+
                                         "hasil_endoskopi_hidung='"+tbUser.getValueAt(barisdicopy,1016).toString()+"',"+
                                         "satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(barisdicopy,1017).toString()+"',"+
-                                        "bpjs_kompilasi_berkas_klaim='"+tbUser.getValueAt(barisdicopy,1018).toString()+"'");
+                                        "bpjs_kompilasi_berkas_klaim='"+tbUser.getValueAt(barisdicopy,1018).toString()+"',"+
                                         "master_masalah_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1019).toString()+"',"+
                                         "master_rencana_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1020).toString()+"',"+
                                         "penilaian_awal_keperawatan_ranap_neonatus='"+tbUser.getValueAt(barisdicopy,1021).toString()+"',"+
