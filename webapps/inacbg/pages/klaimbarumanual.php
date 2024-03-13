@@ -271,7 +271,7 @@
                     $nm_dokter    = getOne("select dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat='".$baris["no_rawat"]."'");
                 }
 
-                $naikkelas=getOne("select bridging_sep.klsnaik from bridging_sep where bridging_sep.no_rawat='$norawat'");
+                $naikkelas=getOne("select bridging_sep.klsnaik from bridging_sep where bridging_sep.no_rawat='".$baris["no_rawat"]."'");
                 
                 $upgrade_class_ind="0";
                 if(!empty($naikkelas)){
@@ -293,21 +293,35 @@
         
                 $sistole="120";
                 $diastole="90";
-                if($baris["jnspelayanan"]=="1"){
-                    $tensi=explode("/", getOne("select trim(pemeriksaan_ranap.tensi) from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc"));
-                    if(!empty($tensi[0])){
-                        $sistole=$tensi[0];
+                if ($baris["jnspelayanan"]=="1") {
+                    $tensi = array_filter(explode('/', getOne("
+                        select trim(pemeriksaan_ranap.tensi) from pemeriksaan_ranap
+                        where (pemeriksaan_ranap.tensi is not null and trim(pemeriksaan_ranap.tensi) != '')
+                        and no_rawat = '".$baris["no_rawat"]."'
+                        order by pemeriksaan_ranap.tgl_perawatan desc, pemeriksaan_ranap.jam_rawat desc
+                        limit 1
+                    ")));
+
+                    if (isset($tensi[0]) && ! empty($tensi[0])) {
+                        $sistole = str_replace(['-'], '0', $tensi[0]);
                     }
-                    if(!empty($tensi[1])){
-                        $diastole=$tensi[1];
+                    if (isset($tensi[1]) && ! empty($tensi[1])) {
+                        $diastole = str_replace(['-'], '0', $tensi[1]);
                     }
-                }else{
-                    $tensi=explode("/", getOne("select trim(pemeriksaan_ralan.tensi) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc"));
-                    if(!empty($tensi[0])){
-                        $sistole=$tensi[0];
+                } else {
+                    $tensi = array_filter(explode('/', getOne("
+                        select trim(pemeriksaan_ralan.tensi) from pemeriksaan_ralan
+                        where (pemeriksaan_ralan.tensi is not null and trim(pemeriksaan_ralan.tensi) != '')
+                        and no_rawat = '".$baris["no_rawat"]."'
+                        order by pemeriksaan_ralan.tgl_perawatan desc, pemeriksaan_ralan.jam_rawat desc
+                        limit 1
+                    ")));
+
+                    if (isset($tensi[0]) && ! empty($tensi[0])) {
+                        $sistole = str_replace(['-'], '0', $tensi[0]);
                     }
-                    if(!empty($tensi[1])){
-                        $diastole=$tensi[1];
+                    if (isset($tensi[1]) && ! empty($tensi[1])) {
+                        $diastole = str_replace(['-'], '0', $tensi[1]);
                     }
                 }
 
@@ -418,21 +432,35 @@
                 
                 $sistole="120";
                 $diastole="90";
-                if($baris["jnspelayanan"]=="1"){
-                    $tensi=explode("/", getOne("select pemeriksaan_ranap.tensi from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc"));
-                    if(!empty($tensi[0])){
-                        $sistole=$tensi[0];
+                if ($baris["jnspelayanan"]=="1") {
+                    $tensi = array_filter(explode('/', getOne("
+                        select trim(pemeriksaan_ranap.tensi) from pemeriksaan_ranap
+                        where (pemeriksaan_ranap.tensi is not null and trim(pemeriksaan_ranap.tensi) != '')
+                        and no_rawat = '".$baris["no_rawat"]."'
+                        order by pemeriksaan_ranap.tgl_perawatan desc, pemeriksaan_ranap.jam_rawat desc
+                        limit 1
+                    ")));
+
+                    if (isset($tensi[0]) && ! empty($tensi[0])) {
+                        $sistole = str_replace(['-'], '0', $tensi[0]);
                     }
-                    if(!empty($tensi[1])){
-                        $diastole=$tensi[1];
+                    if (isset($tensi[1]) && ! empty($tensi[1])) {
+                        $diastole = str_replace(['-'], '0', $tensi[1]);
                     }
-                }else{
-                    $tensi=explode("/", getOne("select pemeriksaan_ralan.tensi from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc"));
-                    if(!empty($tensi[0])){
-                        $sistole=$tensi[0];
+                } else {
+                    $tensi = array_filter(explode('/', getOne("
+                        select trim(pemeriksaan_ralan.tensi) from pemeriksaan_ralan
+                        where (pemeriksaan_ralan.tensi is not null and trim(pemeriksaan_ralan.tensi) != '')
+                        and no_rawat = '".$baris["no_rawat"]."'
+                        order by pemeriksaan_ralan.tgl_perawatan desc, pemeriksaan_ralan.jam_rawat desc
+                        limit 1
+                    ")));
+
+                    if (isset($tensi[0]) && ! empty($tensi[0])) {
+                        $sistole = str_replace(['-'], '0', $tensi[0]);
                     }
-                    if(!empty($tensi[1])){
-                        $diastole=$tensi[1];
+                    if (isset($tensi[1]) && ! empty($tensi[1])) {
+                        $diastole = str_replace(['-'], '0', $tensi[1]);
                     }
                 }
 

@@ -1071,6 +1071,13 @@
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
         //echo $hasildecrypt;
         $msg = json_decode($hasildecrypt,true);
+
+        querySmc("insert into inacbg_request_response (request, code, message, response, created_at) value (?, ?, ?, ?, now())", [
+            $request,
+            $msg['metadata']['code'],
+            $msg['metadata']['message'],
+            $msg,
+        ]);
         return $msg;
     }
 ?>

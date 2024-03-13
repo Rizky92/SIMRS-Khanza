@@ -508,9 +508,11 @@
         $conn = bukakoneksi();
 
         $query = $conn->prepare($sql);
+
         if (! is_null($values)) {
             $query->bind_param(str_repeat('s', count((array) $values)), ...$values);
         }
+        
         $query->execute();
 
         if (gettype($result = $query->get_result()) !== 'boolean') {
