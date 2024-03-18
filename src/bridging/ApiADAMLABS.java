@@ -212,33 +212,6 @@ public class ApiADAMLABS
         }
     }
     
-    public void tarikHasilLab()
-    {
-        try {
-            
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
-    public void tarikHasilLab(String kodeRegistrasi)
-    {
-        try {
-            
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
-    public void updateHasilLab()
-    {
-        try {
-            
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
     private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException
     {
         sslContext = SSLContext.getInstance("SSL");
