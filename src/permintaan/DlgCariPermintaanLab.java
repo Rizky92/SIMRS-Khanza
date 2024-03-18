@@ -424,6 +424,22 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         
         ChkAccor.setSelected(false);
         isMenu();
+        BtnKirimLica.setVisible(false);
+        BtnAmbilLica.setVisible(false);
+        BtnKirimSysmex.setVisible(false);
+        BtnAmbilSysmex.setVisible(false);
+        BtnKirimLISELIMS.setVisible(false);
+        BtnAmbilLISELIMS.setVisible(false);
+        BtnKirimLISTeras.setVisible(false);
+        BtnAmbilLISTeras.setVisible(false);
+        BtnKirimLISMADQLAB.setVisible(false);
+        BtnAmbilLISMADQLAB.setVisible(false);
+        BtnKirimLISSMARTLAB.setVisible(false);
+        BtnAmbilLISSMARTLAB.setVisible(false);
+        BtnKirimLISSOFTMEDIX.setVisible(false);
+        BtnAmbilLISSOFTMEDIX.setVisible(false);
+        BtnKirimVansLab.setVisible(false);
+        BtnAmbilVanslab.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -564,7 +580,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-03-2024 12:39:33" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-03-2024 11:40:06" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
