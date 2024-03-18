@@ -5329,14 +5329,6 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[T]Integrasi Khanza Health Services".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[T]Integrasi Khanza Health Services",integrasi_khanza_health_services});
         }
-        
-        if("[D]Edit/Hapus Surat Pemesanan Medis".toLowerCase().contains(TCari.getText().toLowerCase())) {
-            tabMode.addRow(new Object[]{false, "[D]Edit/Hapus Surat Pemesanan Medis", edit_hapus_spo_medis});
-        }
-        
-        if("[E]Edit/Hapus Surat Pemesanan Nonmedis".toLowerCase().contains(TCari.getText().toLowerCase())) {
-            tabMode.addRow(new Object[]{false, "[E]Edit/Hapus Surat Pemesanan Nonmedis", edit_hapus_spo_nonmedis});
-        }
     }
     
     public void isUser(String User,String Nama, String Password){
@@ -9511,14 +9503,6 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[T]Integrasi Khanza Health Services".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","integrasi_khanza_health_services='"+tbUser.getValueAt(i,2).toString()+"'");
-            }
-            
-            if("[D]Edit/Hapus Surat Pemesanan Medis".equals(tbUser.getValueAt(i,1).toString())){
-                Sequel.mengupdateSmc("user", "edit_hapus_spo_medis = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
-            }
-            
-            if("[E]Edit/Hapus Surat Pemesanan Nonmedis".equals(tbUser.getValueAt(i,1).toString())){
-                Sequel.mengupdateSmc("user", "edit_hapus_spo_nonmedis = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
             }
         }
         JOptionPane.showMessageDialog(null,"Proses update hak akses selesai..!!");
