@@ -15,11 +15,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import javax.swing.JOptionPane;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.HttpEntity;
@@ -54,12 +54,9 @@ public class ApiADAMLABS
     private ResultSet rs, rsdetail;
     private SSLContext sslContext;
     private SSLSocketFactory sslFactory;
-    private SecretKeySpec secretKey;
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
     private String url;
-    
-    private boolean sukses = false;
     
     public void registrasi(String kodeRegistrasi)
     {
@@ -203,12 +200,24 @@ public class ApiADAMLABS
                 }
             } catch (HttpClientErrorException e) {
                 System.out.println(e.getResponseBodyAsString());
-            } catch (IOException | KeyManagementException | NoSuchAlgorithmException | RestClientException e) {
-                System.out.println("Response : " + e.getMessage());
+            } catch (Exception e) {
                 System.out.println("Notif : " + e);
+                if (e.getMessage().contains("UnknownHostException")) {
+                    System.out.println("Sambungan ke server ADAMLABS terputus!");
+                }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void registrasiSemua(String tgl1, String tgl2, String namaDokter, String namaPoli)
+    {
+        try {
+            
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Tidak dapat melakukan registrasi, silahkan cek data yang mau dikirim...!!!");
         }
     }
     
