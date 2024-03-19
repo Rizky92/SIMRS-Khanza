@@ -44,6 +44,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -1247,7 +1248,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         isForm4();
         ChkAccor.setSelected(true);
         isMenu(); 
-        jam();
+        jam2();
         
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -10706,6 +10707,25 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             cmbKetuban.setSelectedItem(tbPemeriksaanObstetri.getValueAt(tbPemeriksaanObstetri.getSelectedRow(),24).toString());
             cmbFeto.setSelectedItem(tbPemeriksaanObstetri.getValueAt(tbPemeriksaanObstetri.getSelectedRow(),25).toString());
         }
+    }
+    
+    private void jam2() {
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date now = Calendar.getInstance().getTime();
+                if (ChkJln.isSelected()) {
+                    String jam = new SimpleDateFormat("HH:mm:ss").format(now);
+                    
+                    DTPTgl.setDate(now);
+                    cmbJam.setSelectedItem(jam.substring(0, 2));
+                    cmbMnt.setSelectedItem(jam.substring(3, 5));
+                    cmbDtk.setSelectedItem(jam.substring(6, 8));
+                }
+            }
+        };
+        
+        new Timer(250, taskPerformer).start();
     }
     
     private void jam(){

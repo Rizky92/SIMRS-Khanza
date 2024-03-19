@@ -30,6 +30,7 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -1019,7 +1020,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         isForm3(); 
         ChkAccor.setSelected(true);
         isMenu();
-        jam();
+        jam2();
         
         try {
             psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
@@ -9659,6 +9660,25 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TPegawai.setText(pegawai.tampil3(KdPeg.getText()));
             Jabatan.setText(pegawai.tampilJbatan(KdPeg.getText()));
         }
+    }
+    
+    private void jam2() {
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date now = Calendar.getInstance().getTime();
+                if (ChkJln.isSelected()) {
+                    String jam = new SimpleDateFormat("HH:mm:ss").format(now);
+                    
+                    DTPTgl.setDate(now);
+                    cmbJam.setSelectedItem(jam.substring(0, 2));
+                    cmbMnt.setSelectedItem(jam.substring(3, 5));
+                    cmbDtk.setSelectedItem(jam.substring(6, 8));
+                }
+            }
+        };
+        
+        new Timer(1000, taskPerformer).start();
     }
     
     private void jam(){
