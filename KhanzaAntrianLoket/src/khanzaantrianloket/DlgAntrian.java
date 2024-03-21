@@ -32,11 +32,10 @@ import java.util.Properties;
  * @author perpustakaan
  */
 public class DlgAntrian extends javax.swing.JDialog implements ActionListener{    
-    private final Connection koneksi=koneksiDB.condb();
-    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
+    private final Connection koneksi = koneksiDB.condb();
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0",nol_detik,detik;
-    private PreparedStatement pshapus,pssimpan,pscari,psupdate;
+    private String antri = "0", loket = "0", nol_detik, detik;
+    private PreparedStatement pshapus, pssimpan, pscari, psupdate;
     private ResultSet rs;
     private BackgroundMusic music;
     private int nilai_detik;
@@ -293,9 +292,9 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
-        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         isTampil();
-        DlgDisplay.setSize(screen.width,screen.height);
+        DlgDisplay.setSize(screen.width, screen.height);
         DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
         DlgDisplay.setAlwaysOnTop(false);
         DlgDisplay.setVisible(true);
@@ -307,33 +306,33 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
         try {
-            pshapus=koneksi.prepareStatement("delete from antriloket");
+            pshapus = koneksi.prepareStatement("delete from antriloket");
             try {
                 pshapus.executeUpdate();
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(pshapus!=null){
+                System.out.println("Notif : " + e);
+            } finally {
+                if (pshapus != null) {
                     pshapus.close();
                 }
             }
-            
-            pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?)");
-            try{
-                pssimpan.setString(1,cmbloket.getSelectedItem().toString());
-                pssimpan.setString(2,Antrian.getText());
+
+            pssimpan = koneksi.prepareStatement("insert into antriloket values(?, ?)");
+            try {
+                pssimpan.setString(1, cmbloket.getSelectedItem().toString());
+                pssimpan.setString(2, Antrian.getText().trim());
                 pssimpan.executeUpdate();
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(pssimpan!=null){
+                System.out.println("Notif : " + e);
+            } finally {
+                if (pssimpan != null) {
                     pssimpan.close();
                 }
-            } 
-            
-            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = lpad(?, 3, '0') and tanggal = current_date()");
+            }
+
+            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
             try {
-                psupdate.setString(1, Antrian.getText());
+                psupdate.setString(1, Antrian.getText().trim());
                 psupdate.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -342,10 +341,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                     psupdate.close();
                 }
             }
-            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
+            System.out.println("Loket : " + cmbloket.getSelectedItem().toString() + " Antrian : " + Antrian.getText());
         } catch (Exception e) {
             System.out.println(e);
-        }                          
+        }
     }//GEN-LAST:event_BtnAntri1ActionPerformed
 
     private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
@@ -366,19 +365,19 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnBatal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal2ActionPerformed
         try {
-            pshapus=koneksi.prepareStatement("delete from antriloket");
+            pshapus = koneksi.prepareStatement("delete from antriloket");
             try {
                 pshapus.executeUpdate();
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(pshapus!=null){
+                System.out.println("Notif : " + e);
+            } finally {
+                if (pshapus != null) {
                     pshapus.close();
                 }
             }
         } catch (Exception e) {
             System.out.println(e);
-        }  
+        }
     }//GEN-LAST:event_BtnBatal2ActionPerformed
 
 
@@ -387,18 +386,15 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DlgAntrian dialog = new DlgAntrian(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            DlgAntrian dialog = new DlgAntrian(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

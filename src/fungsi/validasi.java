@@ -94,6 +94,10 @@ public final class validasi {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
+    public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
+        return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
+    }
+    
     public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values)
     {
         String currentDir = System.getProperties().getProperty("user.dir");

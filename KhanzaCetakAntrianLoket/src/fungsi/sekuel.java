@@ -65,6 +65,32 @@ public final class sekuel {
         super();
     }
     
+    public String cariIsiSmc(String sql, String... values)
+    {
+        String output = "";
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]); 
+            }
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                output = rs.getString(1);
+            }
+            
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
     public boolean executeRawSmc(String sql, String... values)
     {
         boolean output = false;

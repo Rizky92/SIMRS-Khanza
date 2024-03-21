@@ -1,15 +1,17 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
-  `nomor` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `nomor` int(10) UNSIGNED CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tanggal` date NOT NULL,
   `jam` time NULL DEFAULT NULL,
   `jam_panggil` time NULL DEFAULT NULL,
   `no_rawat` varchar(17) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `no_rkm_medis` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
   INDEX `antriloketcetak_smc_jam_IDX`(`jam`) USING BTREE,
   INDEX `antriloketcetak_smc_tanggal_IDX`(`tanggal`) USING BTREE,
-  INDEX `antriloketcetak_smc_no_rawat_IDX`(`no_rawat`) USING BTREE
+  INDEX `antriloketcetak_smc_no_rawat_IDX`(`no_rawat`) USING BTREE,
+  INDEX `antriloketcetak_smc_no_rkm_medis_IDX`(`no_rkm_medis`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL AFTER `nama_suplier`;

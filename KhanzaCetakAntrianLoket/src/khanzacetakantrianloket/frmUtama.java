@@ -17,8 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.Timer;
@@ -100,7 +98,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
+        if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", String.valueOf(Integer.parseInt(LabelNomor.getText())))) {
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -108,12 +106,14 @@ public class frmUtama extends javax.swing.JFrame {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                   "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
+            Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+                "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ?",
+                String.valueOf(Integer.parseInt(LabelNomor.getText()))
+            );
             autonomer();
         } else {
             autonomer();
-            if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
+            if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", String.valueOf(Integer.parseInt(LabelNomor.getText())))) {
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -121,12 +121,14 @@ public class frmUtama extends javax.swing.JFrame {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
-                Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                       "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
+                Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+                    "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ?",
+                    String.valueOf(Integer.parseInt(LabelNomor.getText()))
+                );
                 autonomer();
             } else {
                 autonomer();
-                if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", LabelNomor.getText())) {
+                if (Sequel.executeRawSmc("insert into antriloketcetak_smc (nomor, tanggal, jam) values (?, current_date(), current_time())", String.valueOf(Integer.parseInt(LabelNomor.getText())))) {
                     Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
@@ -134,8 +136,10 @@ public class frmUtama extends javax.swing.JFrame {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    Valid.MyReportqry("rptAntriLoket.jasper","report","::[ Antrian Loket ]::",
-                           "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketcetak_smc where tanggal = current_date and nomor = '" + LabelNomor.getText().trim() + "'", param);
+                    Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+                        "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ?",
+                        String.valueOf(Integer.parseInt(LabelNomor.getText()))
+                    );
                     autonomer();
                 }
             }
@@ -214,52 +218,21 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.Label LabelTanggal;
     private widget.InternalFrame internalFrame1;
     // End of variables declaration//GEN-END:variables
-    private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                Date now = Calendar.getInstance().getTime();
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
-                LocalDateTime sekarang = LocalDateTime.now();  
-                LabelTanggal.setText("Antrian Loket Pendaftaran Tanggal : "+dtf.format(sekarang)); 
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                nilai_jam = now.getHours();
-                nilai_menit = now.getMinutes();
-                nilai_detik = now.getSeconds();
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                if(menit.equals("01")&&detik.equals("01")){
-                    autonomer();
-                }
+    private void jam() {
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String dt = dtf.format(LocalDateTime.now());
+            String menit = dt.substring(14, 16),
+                   detik = dt.substring(17, 19);
+            LabelTanggal.setText("Antrian Loket Pendaftaran Tanggal : " + dt);
+            if (menit.equals("01") && detik.equals("01")) {
+                autonomer();
             }
         };
-        // Timer
         new Timer(1000, taskPerformer).start();
     }
     
     private void autonomer(){
-        Valid.autoNomer3("select ifnull(max(convert(nomor, signed)), 0) from antriloketcetak_smc where tanggal = current_date()", "", 3, LabelNomor);
+        LabelNomor.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(nomor), 0) + 1, greatest(length(ifnull(max(nomor), 0) + 1), 3), '0') from antriloketcetak_smc where tanggal = current_date()"));
     }
 }
