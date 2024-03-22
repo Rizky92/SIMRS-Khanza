@@ -1201,12 +1201,17 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         simpandata();
                     }
                 }else if(ubah==true){
-                    Sequel.meghapus("resep_dokter","no_resep",NoResep.getText());
-                    Sequel.meghapus("resep_dokter_racikan","no_resep",NoResep.getText());
-                    Sequel.meghapus("resep_dokter_racikan_detail","no_resep",NoResep.getText());
-                    ubah=false;
-                    simpandata();
-                }                                                      
+                    if (Sequel.cariBooleanSmc("select * from resep_obat where no_resep = ? and tgl_perawatan = '0000-00-00'", NoResep.getText())) {
+                        Sequel.meghapus("resep_dokter","no_resep",NoResep.getText());
+                        Sequel.meghapus("resep_dokter_racikan","no_resep",NoResep.getText());
+                        Sequel.meghapus("resep_dokter_racikan_detail","no_resep",NoResep.getText());
+                        ubah=false;
+                        simpandata();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Maaf, resep obat ini sudah divalidasi...!!!");
+                        sukses = false;
+                    }
+                }
                 
                 if(sukses==true){
                     if(RESEPRAJALKEPLAN.equals("yes")&&status.equals("ralan")&&(ubah==false)){
