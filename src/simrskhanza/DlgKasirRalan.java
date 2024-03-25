@@ -15100,6 +15100,13 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 }
                 
                 if(sukses==true){
+                    System.out.println("ttlpendapatan : " + ttlpendapatan);
+                    System.out.println("ttljmdokter : " + ttljmdokter);
+                    System.out.println("ttljmperawat : " + ttljmperawat);
+                    System.out.println("ttlkso : " + ttlkso);
+                    System.out.println("ttljasasarana : " + ttljasasarana);
+                    System.out.println("ttlbhp : " + ttlbhp);
+                    System.out.println("ttlmenejemen : " + ttlmenejemen);
                     Sequel.deleteTampJurnal();    
                     if(ttlpendapatan>0){
                         Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
