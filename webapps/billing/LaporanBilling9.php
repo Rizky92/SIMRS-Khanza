@@ -14,13 +14,16 @@
             $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
             $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
             if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
-                $petugas       = validTeks4(str_replace("_"," ",$_GET['petugas']),20); 
+                $petugas       = validTeks4(str_replace("_"," ",$_GET['petugas']),20);
                 $tanggal       = validTeks4(str_replace("_"," ",$_GET['tanggal']),20);
+                $tanggal       = explode(' ', $tanggal);
+                $tanggal[1]    = implode(':', str_split($tanggal[1], 2));
+                $tanggal       = implode(' ', $tanggal);
                 $nonota        = str_replace(": ","",getOne("select temporary_bayar_ralan.temp2 from temporary_bayar_ralan where temporary_bayar_ralan.temp9='$petugas' and temporary_bayar_ralan.temp1='No.Nota'"));
                 $norawat       = getOne("select nota_inap.no_rawat from nota_inap where nota_inap.no_nota='$nonota'");
                 $kodecarabayar = getOne("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat='$norawat'");
                 $carabayar     = getOne("select penjab.png_jawab from penjab where penjab.kd_pj='$kodecarabayar'");
-                $_sql          = "select temporary_bayar_ralan.temp1,temporary_bayar_ralan.temp2,temporary_bayar_ralan.temp3,temporary_bayar_ralan.temp4,temporary_bayar_ralan.temp5,temporary_bayar_ralan.temp6,temporary_bayar_ralan.temp7,temporary_bayar_ralan.temp8,temporary_bayar_ralan.temp9,temporary_bayar_ralan.temp10,temporary_bayar_ralan.temp11,temporary_bayar_ralan.temp12,temporary_bayar_ralan.temp13,temporary_bayar_ralan.temp14 from temporary_bayar_ralan where temporary_bayar_ralan.temp9='$petugas' order by temporary_bayar_ralan.no asc";   
+                $_sql          = "select temporary_bayar_ralan.temp1,temporary_bayar_ralan.temp2,temporary_bayar_ralan.temp3,temporary_bayar_ralan.temp4,temporary_bayar_ralan.temp5,temporary_bayar_ralan.temp6,temporary_bayar_ralan.temp7,temporary_bayar_ralan.temp8,temporary_bayar_ralan.temp9,temporary_bayar_ralan.temp10,temporary_bayar_ralan.temp11,temporary_bayar_ralan.temp12,temporary_bayar_ralan.temp13,temporary_bayar_ralan.temp14 from temporary_bayar_ralan where temporary_bayar_ralan.temp9='$petugas' order by temporary_bayar_ralan.no asc";
                 $hasil         = bukaquery($_sql);
                 $PNG_TEMP_DIR  = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
                 $PNG_WEB_DIR   = 'temp/';
