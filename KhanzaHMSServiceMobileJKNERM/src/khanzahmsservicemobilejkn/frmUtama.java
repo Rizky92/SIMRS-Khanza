@@ -734,7 +734,7 @@ public class frmUtama extends javax.swing.JFrame {
                         //pasien Non JKN
                         TeksArea.append("Menjalankan WS tambah antrian Mobile JKN Pasien Non BPJS/BJS Onsite\n");
                         ps=koneksi.prepareStatement(
-                                "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.kd_poli,poliklinik.nm_poli,reg_periksa.stts_daftar,reg_periksa.no_rkm_medis,reg_periksa.kd_pj "+
+                                "select reg_periksa.no_reg, reg_periksa.no_rawat, reg_periksa.tgl_registrasi, reg_periksa.kd_dokter, dokter.nm_dokter, reg_periksa.kd_poli, poliklinik.nm_poli, reg_periksa.stts_daftar, reg_periksa.no_rkm_medis, reg_periksa.kd_pj "+
                                 "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.tgl_registrasi between '"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"' "+
                                 "and reg_periksa.no_rawat not in (select referensi_mobilejkn_bpjs.no_rawat from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.tanggalperiksa between '"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"') "+
                                 "order by concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg)");
@@ -792,7 +792,6 @@ public class frmUtama extends javax.swing.JFrame {
                                                     ps3.close();
                                                 }
                                             }
-                                            /*
                                             if (task1.equals("")) {
                                                 datajam=Sequel.cariIsiSmc("select concat(tanggal, ' ', jam) from antriloketcetak_smc where no_rawat = ?", rs.getString("no_rawat"));
                                                 if(!datajam.equals("")){
@@ -830,7 +829,6 @@ public class frmUtama extends javax.swing.JFrame {
                                                     }
                                                 }
                                             }
-                                            
                                             if (task2.equals("")) {
                                                 datajam=Sequel.cariIsiSmc("select concat(tanggal, ' ', jam_panggil) from antriloketcetak_smc where no_rawat = ?", rs.getString("no_rawat"));
                                                 if(!datajam.equals("")){
@@ -868,7 +866,6 @@ public class frmUtama extends javax.swing.JFrame {
                                                     }
                                                 }
                                             }
-                                            */
                                             if(task3.equals("")){
                                                 try {     
                                                     datajam=Sequel.cariIsi("select DATE_ADD(concat('"+rs.getString("tgl_registrasi")+"',' ','"+rs2.getString("jam_mulai")+"'),INTERVAL "+(Integer.parseInt(rs.getString("no_reg"))*10)+" MINUTE) ");
