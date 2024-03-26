@@ -633,8 +633,8 @@ public final class sekuel {
         
         track = track.replaceFirst("\\?", "'" + kdRek + "'");
         track = track.replaceFirst("\\?", "'" + nmRek + "'");
-        track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_EVEN).toString());
-        track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_EVEN).toString());
+        track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_UP).toString());
+        track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_UP).toString());
         track = track.replaceFirst("\\?", "'" + akses.getkode()+"'");
         track = track.replaceFirst("\\?", "'" + akses.getalamatip()+"'");
         
@@ -690,8 +690,8 @@ public final class sekuel {
             track = insertQuery;
             track = track.replaceFirst("\\?", "'"+kdRek+"'");
             track = track.replaceFirst("\\?", "'"+nmRek+"'");
-            track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_EVEN).toString());
-            track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_EVEN).toString());
+            track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_UP).toString());
+            track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_UP).toString());
             track = track.replaceFirst("\\?", "'"+akses.getkode()+"'");
             track = track.replaceFirst("\\?", "'"+akses.getalamatip()+"'");
             
@@ -716,8 +716,8 @@ public final class sekuel {
                 }
                 
                 track = updateQuery;
-                track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_EVEN).toString());
-                track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_EVEN).toString());
+                track = track.replaceFirst("\\?", new BigDecimal(d).setScale(2, RoundingMode.HALF_UP).toString());
+                track = track.replaceFirst("\\?", new BigDecimal(k).setScale(2, RoundingMode.HALF_UP).toString());
                 track = track.replaceFirst("\\?", "'"+kdRek+"'");
                 track = track.replaceFirst("\\?", "'"+akses.getkode()+"'");
                 track = track.replaceFirst("\\?", "'"+akses.getalamatip()+"'");
