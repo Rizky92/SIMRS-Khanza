@@ -14942,7 +14942,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     psotomatis.setString(1,tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
                     psotomatis.setString(2,Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                     rskasir=psotomatis.executeQuery();
-                    while(rskasir.next()){    
+                    while(rskasir.next()){ 
                         if(Sequel.cariIsiAngka("select count(rawat_jl_dr.no_rawat) from rawat_jl_dr where "+
                            "rawat_jl_dr.no_rawat='"+TNoRw.getText()+"' and rawat_jl_dr.kd_jenis_prw='"+rskasir.getString(1)+"' "+
                            "and rawat_jl_dr.kd_dokter='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString()+"'")==0){
@@ -15100,13 +15100,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 }
                 
                 if(sukses==true){
-                    System.out.println("ttlpendapatan : " + ttlpendapatan);
-                    System.out.println("ttljmdokter : " + ttljmdokter);
-                    System.out.println("ttljmperawat : " + ttljmperawat);
-                    System.out.println("ttlkso : " + ttlkso);
-                    System.out.println("ttljasasarana : " + ttljasasarana);
-                    System.out.println("ttlbhp : " + ttlbhp);
-                    System.out.println("ttlmenejemen : " + ttlmenejemen);
                     Sequel.deleteTampJurnal();    
                     if(ttlpendapatan>0){
                         Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
