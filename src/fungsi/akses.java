@@ -220,7 +220,7 @@ public final class akses {
             catatan_keperawatan_ralan=false,catatan_persalinan=false,skor_aldrette_pasca_anestesi=false,skor_steward_pasca_anestesi=false,skor_bromage_pasca_anestesi=false,
             penilaian_pre_induksi=false,hasil_usg_urologi=false,hasil_usg_gynecologi=false,hasil_pemeriksaan_ekg=false,hapus_edit_sep_bpjs=false,satu_sehat_kirim_diet=false,
             satu_sehat_mapping_obat=false,dapur_ringkasan_pembelian=false,satu_sehat_kirim_medication=false,satu_sehat_kirim_medicationrequest=false,
-            penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,edit_hapus_spo_medis=false,edit_hapus_spo_nonmedis=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=fal
+            penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,edit_hapus_spo_medis=false,edit_hapus_spo_nonmedis=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=false,
             satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,satu_sehat_verifikasi_rekam_medis=false,
             master_masalah_keperawatan_neonatus=false,master_rencana_keperawatan_neonatus=false,penilaian_awal_keperawatan_ranap_neonatus=false,
             satu_sehat_kirim_observation_radiologi=false,satu_sehat_kirim_diagnosticreport_radiologi=false,hasil_endoskopi_telinga=false,satu_sehat_mapping_lab=false,
@@ -5459,7 +5459,7 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_servicerequest_radiologi(){return akses.satu_sehat_kirim_servicerequest_radiologi;}
     public static boolean gethasil_endoskopi_hidung(){return akses.hasil_endoskopi_hidung;}
     public static boolean getsatu_sehat_kirim_specimen_radiologi(){return akses.satu_sehat_kirim_specimen_radiologi;}
-    public static boolean getsatu_sehat_verifikasi_rekam_medis() { return akses.satu_sehat_verifikasi_rekam_medis; )
+    public static boolean getsatu_sehat_verifikasi_rekam_medis() { return akses.satu_sehat_verifikasi_rekam_medis; }
     public static boolean getmaster_masalah_keperawatan_neonatus(){return akses.master_masalah_keperawatan_neonatus;}
     public static boolean getmaster_rencana_keperawatan_neonatus(){return akses.master_rencana_keperawatan_neonatus;}
     public static boolean getpenilaian_awal_keperawatan_ranap_neonatus(){return akses.penilaian_awal_keperawatan_ranap_neonatus;}
