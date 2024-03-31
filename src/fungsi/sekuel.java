@@ -37,7 +37,6 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -455,7 +454,11 @@ public final class sekuel {
         return output;
     }
     
-    public void executeRawSmc(String sql, String... values)
+    public void executeRawSmc(String sql, String... values) {
+        executeRawSmc(true, sql, values);
+    }
+    
+    public void executeRawSmc(boolean simpanTrack, String sql, String... values)
     {
         String track = sql;
         try {

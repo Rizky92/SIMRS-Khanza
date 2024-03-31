@@ -8,7 +8,6 @@ import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,8 +36,8 @@ public class Jurnal {
             try {
                 rscek = pscek.executeQuery();
                 if (rscek.next()) {
-                    if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
-                        if (rscek.getInt("jml") > 0) {
+                    if (rscek.getInt("jml") > 0) {
+                        if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
                             nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                             try {
                                 sukses = true;
@@ -83,7 +82,7 @@ public class Jurnal {
                                 }
 
                                 if (sukses == true) {
-                                    Sequel.executeRawSmc(
+                                    Sequel.executeRawSmc(false
                                         "insert into detailjurnal "
                                             + "select ? as no_jurnal, tampjurnal_rvpbpjs.kd_rek, tampjurnal_rvpbpjs.debet, tampjurnal_rvpbpjs.kredit "
                                             + "from tampjurnal_rvpbpjs",
@@ -95,12 +94,12 @@ public class Jurnal {
                                 sukses = false;
                                 System.out.println("Notifikasi : " + ex);
                             }
+                        } else {
+                            System.out.println("Notif : Debet dan Kredit tidak sama");
+                            System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
+                            System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
+                            sukses = false;
                         }
-                    } else {
-                        System.out.println("Notif : Debet dan Kredit tidak sama");
-                        System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                        System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                        sukses = false;
                     }
                 }
             } catch (Exception e) {
@@ -134,12 +133,12 @@ public class Jurnal {
                 pscek.setString(2, akses.getalamatip());
                 rscek = pscek.executeQuery();
                 if (rscek.next()) {
-                    if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
-                        if (rscek.getInt("jml") > 0) {
+                    if (rscek.getInt("jml") > 0) {
+                        if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
                             nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                             try {
                                 sukses = true;
-                                ps = koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
+                                ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
                                 try {
                                     ps.setString(1, nojur);
                                     ps.setString(2, nobukti);
@@ -160,7 +159,7 @@ public class Jurnal {
                                 if (sukses == false) {
                                     nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                                     sukses = true;
-                                    ps = koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
+                                    ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
                                     try {
                                         ps.setString(1, nojur);
                                         ps.setString(2, nobukti);
@@ -180,7 +179,7 @@ public class Jurnal {
                                 }
 
                                 if (sukses == true) {
-                                    Sequel.executeRawSmc(
+                                    Sequel.executeRawSmc(false,
                                         "insert into detailjurnal "
                                             + "select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, tampjurnal_smc.kredit "
                                             + "from tampjurnal_smc "
@@ -193,12 +192,12 @@ public class Jurnal {
                                 sukses = false;
                                 System.out.println("Notifikasi : " + ex);
                             }
+                        } else {
+                            System.out.println("Notif : Debet dan Kredit tidak sama");
+                            System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
+                            System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
+                            sukses = false;
                         }
-                    }else{
-                        System.out.println("Notif : Debet dan Kredit tidak sama");
-                        System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                        System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                        sukses=false;
                     }
                 }
             } catch (Exception e) {
