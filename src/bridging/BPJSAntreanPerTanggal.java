@@ -9,6 +9,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -18,6 +19,11 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +39,7 @@ import org.springframework.http.MediaType;
  */
 public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private final SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -132,11 +139,10 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         tbJnsPerawatan = new widget.Table();
         jPanel2 = new javax.swing.JPanel();
         panelGlass9 = new widget.panelisi();
-        jLabel12 = new widget.Label();
-        MJknBelum = new widget.Label();
-        MJknCapaian = new widget.Label();
-        jLabel13 = new widget.Label();
-        MJknSelesai = new widget.Label();
+        jLabel8 = new widget.Label();
+        TotBelum = new widget.Label();
+        jLabel9 = new widget.Label();
+        TotSelesai = new widget.Label();
         jLabel19 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
@@ -144,12 +150,9 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
+        BtnPrint = new widget.Button();
         BtnKeluar1 = new widget.Button();
         panelGlass8 = new widget.panelisi();
-        jLabel8 = new widget.Label();
-        TotBelum = new widget.Label();
-        jLabel9 = new widget.Label();
-        TotSelesai = new widget.Label();
         jLabel14 = new widget.Label();
         SEPTerbit = new widget.Label();
         jLabel10 = new widget.Label();
@@ -157,6 +160,11 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         jLabel11 = new widget.Label();
         JknSelesai = new widget.Label();
         JknCapaian = new widget.Label();
+        jLabel12 = new widget.Label();
+        MJknBelum = new widget.Label();
+        MJknCapaian = new widget.Label();
+        jLabel13 = new widget.Label();
+        MJknSelesai = new widget.Label();
         jLabel15 = new widget.Label();
         NonJKNBelum = new widget.Label();
         jLabel16 = new widget.Label();
@@ -207,38 +215,31 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
         panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel12.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel12.setText("MJKN Belum :");
-        jLabel12.setName("jLabel12"); // NOI18N
-        jLabel12.setPreferredSize(new java.awt.Dimension(75, 23));
-        panelGlass9.add(jLabel12);
+        jLabel8.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel8.setText("Total Belum :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        jLabel8.setPreferredSize(new java.awt.Dimension(72, 23));
+        panelGlass9.add(jLabel8);
 
-        MJknBelum.setForeground(new java.awt.Color(0, 153, 0));
-        MJknBelum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MJknBelum.setText("0");
-        MJknBelum.setName("MJknBelum"); // NOI18N
-        MJknBelum.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelGlass9.add(MJknBelum);
+        TotBelum.setForeground(new java.awt.Color(255, 153, 0));
+        TotBelum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TotBelum.setText("0");
+        TotBelum.setName("TotBelum"); // NOI18N
+        TotBelum.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass9.add(TotBelum);
 
-        MJknCapaian.setForeground(new java.awt.Color(0, 153, 0));
-        MJknCapaian.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MJknCapaian.setText("0");
-        MJknCapaian.setName("MJknCapaian"); // NOI18N
-        MJknCapaian.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelGlass9.add(MJknCapaian);
+        jLabel9.setForeground(new java.awt.Color(102, 153, 0));
+        jLabel9.setText("Total Selesai :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        jLabel9.setPreferredSize(new java.awt.Dimension(77, 23));
+        panelGlass9.add(jLabel9);
 
-        jLabel13.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel13.setText("MJKN Selesai :");
-        jLabel13.setName("jLabel13"); // NOI18N
-        jLabel13.setPreferredSize(new java.awt.Dimension(80, 23));
-        panelGlass9.add(jLabel13);
-
-        MJknSelesai.setForeground(new java.awt.Color(0, 153, 0));
-        MJknSelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MJknSelesai.setText("0");
-        MJknSelesai.setName("MJknSelesai"); // NOI18N
-        MJknSelesai.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelGlass9.add(MJknSelesai);
+        TotSelesai.setForeground(new java.awt.Color(102, 153, 0));
+        TotSelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TotSelesai.setText("0");
+        TotSelesai.setName("TotSelesai"); // NOI18N
+        TotSelesai.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass9.add(TotSelesai);
 
         jLabel19.setText("Tanggal :");
         jLabel19.setName("jLabel19"); // NOI18N
@@ -246,7 +247,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-04-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -260,7 +261,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-04-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -295,6 +296,19 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         LCount.setPreferredSize(new java.awt.Dimension(75, 23));
         panelGlass9.add(LCount);
 
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        panelGlass9.add(BtnPrint);
+
         BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar1.setMnemonic('K');
         BtnKeluar1.setText("Keluar");
@@ -318,32 +332,6 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 44));
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
-
-        jLabel8.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel8.setText("Total Belum :");
-        jLabel8.setName("jLabel8"); // NOI18N
-        jLabel8.setPreferredSize(new java.awt.Dimension(72, 23));
-        panelGlass8.add(jLabel8);
-
-        TotBelum.setForeground(new java.awt.Color(255, 153, 0));
-        TotBelum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        TotBelum.setText("0");
-        TotBelum.setName("TotBelum"); // NOI18N
-        TotBelum.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelGlass8.add(TotBelum);
-
-        jLabel9.setForeground(new java.awt.Color(102, 153, 0));
-        jLabel9.setText("Total Selesai :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(77, 23));
-        panelGlass8.add(jLabel9);
-
-        TotSelesai.setForeground(new java.awt.Color(102, 153, 0));
-        TotSelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        TotSelesai.setText("0");
-        TotSelesai.setName("TotSelesai"); // NOI18N
-        TotSelesai.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelGlass8.add(TotSelesai);
 
         jLabel14.setForeground(new java.awt.Color(0, 153, 255));
         jLabel14.setText("SEP Terbit :");
@@ -390,6 +378,39 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         JknCapaian.setName("JknCapaian"); // NOI18N
         JknCapaian.setPreferredSize(new java.awt.Dimension(35, 23));
         panelGlass8.add(JknCapaian);
+
+        jLabel12.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel12.setText("MJKN Belum :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        jLabel12.setPreferredSize(new java.awt.Dimension(75, 23));
+        panelGlass8.add(jLabel12);
+
+        MJknBelum.setForeground(new java.awt.Color(0, 153, 0));
+        MJknBelum.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MJknBelum.setText("0");
+        MJknBelum.setName("MJknBelum"); // NOI18N
+        MJknBelum.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass8.add(MJknBelum);
+
+        MJknCapaian.setForeground(new java.awt.Color(0, 153, 0));
+        MJknCapaian.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MJknCapaian.setText("0");
+        MJknCapaian.setName("MJknCapaian"); // NOI18N
+        MJknCapaian.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass8.add(MJknCapaian);
+
+        jLabel13.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel13.setText("MJKN Selesai :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        jLabel13.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelGlass8.add(jLabel13);
+
+        MJknSelesai.setForeground(new java.awt.Color(0, 153, 0));
+        MJknSelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MJknSelesai.setText("0");
+        MJknSelesai.setName("MJknSelesai"); // NOI18N
+        MJknSelesai.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass8.add(MJknSelesai);
 
         jLabel15.setForeground(new java.awt.Color(0, 153, 153));
         jLabel15.setText("Non JKN Belum :");
@@ -462,6 +483,47 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnCekKodeBookingActionPerformed
 
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+        } else if (tabMode.getRowCount() != 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Sequel.deleteTemporary();
+            for (int i = 0; i < tbJnsPerawatan.getRowCount(); i++) {
+                Sequel.temporary(String.valueOf(i + 1),
+                    (String) tabMode.getValueAt(i, 0),
+                    (String) tabMode.getValueAt(i, 1),
+                    (String) tabMode.getValueAt(i, 2),
+                    (String) tabMode.getValueAt(i, 3),
+                    (String) tabMode.getValueAt(i, 4),
+                    (String) tabMode.getValueAt(i, 5),
+                    (String) tabMode.getValueAt(i, 6),
+                    (String) tabMode.getValueAt(i, 7),
+                    (String) tabMode.getValueAt(i, 8),
+                    (String) tabMode.getValueAt(i, 9),
+                    (String) tabMode.getValueAt(i, 10),
+                    (String) tabMode.getValueAt(i, 11),
+                    (String) tabMode.getValueAt(i, 12),
+                    (String) tabMode.getValueAt(i, 13),
+                    (String) tabMode.getValueAt(i, 14),
+                    (String) tabMode.getValueAt(i, 15),
+                    (String) tabMode.getValueAt(i, 16)
+                );
+            }
+
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptBPJSAntreanPerTanggal.jasper", "report", "[ Antrean BPJS Per Tanggal ]", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -507,6 +569,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
     private widget.Button BtnKeluar1;
+    private widget.Button BtnPrint;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.Label JknBelum;
@@ -572,7 +635,13 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
                                 for(JsonNode list:response){
                                     tabMode.addRow(new Object[]{
                                         list.path("kodebooking").asText(),list.path("tanggal").asText(),list.path("kodepoli").asText(),
-                                        list.path("kodedokter").asText(),list.path("jampraktek").asText(),list.path("nik").asText(),list.path("nokapst").asText(),list.path("nohp").asText(),list.path("norekammedis").asText(),list.path("jeniskunjungan").asText(),list.path("nomorreferensi").asText(),list.path("sumberdata").asText(),list.path("ispeserta").asText().equals("true")?"Ya":"Tidak",list.path("noantrean").asText(),list.path("estimasidilayani").asText(),list.path("createdtime").asText(),list.path("status").asText()
+                                        list.path("kodedokter").asText(),list.path("jampraktek").asText(),list.path("nik").asText(),
+                                        list.path("nokapst").asText(),list.path("nohp").asText(),list.path("norekammedis").asText(),
+                                        list.path("jeniskunjungan").asText(),list.path("nomorreferensi").asText(),list.path("sumberdata").asText(),
+                                        list.path("ispeserta").asText().equals("true")?"Ya":"Tidak",list.path("noantrean").asText(),
+                                        dtf.format((Date) new Timestamp(Long.parseLong(list.path("estimasidilayani").asText()))),
+                                        dtf.format((Date) new Timestamp(Long.parseLong(list.path("createdtime").asText()))),
+                                        list.path("status").asText()
                                     });
                                     if (list.path("status").asText().equals("Belum dilayani")) {
                                         tot_belum += 1;
