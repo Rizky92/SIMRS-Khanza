@@ -8,7 +8,6 @@ import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,15 +28,15 @@ public class Jurnal {
     public boolean simpanJurnalRVPBPJS(String nobukti, String jenis, String keterangan) {
         try {
             pscek = koneksi.prepareStatement(
-                "select count(*) as jml, current_date() as tanggal, current_time() as jam, "
-                    + "sum(debet) as debet, sum(kredit) as kredit "
-                    + "from tampjurnal_rvpbpjs"
+                "select count(*) as jml, current_date() as tanggal, current_time() as jam, " +
+                "sum(debet) - sum(kredit) as selisih " +
+                "from tampjurnal_rvpbpjs"
             );
             try {
                 rscek = pscek.executeQuery();
                 if (rscek.next()) {
                     if (rscek.getInt("jml") > 0) {
-                        if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
+                        if (rscek.getInt("selisih") == 0) {
                             nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                             try {
                                 sukses = true;
@@ -60,8 +59,8 @@ public class Jurnal {
                                 }
 
                                 if (sukses == false) {
-                                    nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                                     sukses = true;
+                                    nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                                     ps = koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
                                     try {
                                         ps.setString(1, nojur);
@@ -96,8 +95,6 @@ public class Jurnal {
                             }
                         } else {
                             System.out.println("Notif : Debet dan Kredit tidak sama");
-                            System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                            System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
                             sukses = false;
                         }
                     }
@@ -123,10 +120,9 @@ public class Jurnal {
     public boolean simpanJurnal(String nobukti, String jenis, String keterangan) {
         try {
             pscek = koneksi.prepareStatement(
-                "select count(*) as jml, current_date() as tanggal, current_time() as jam, "
-                    + "sum(debet) as debet, sum(kredit) as kredit "
-                    + "from tampjurnal_smc "
-                    + "where user_id = ? and ip = ?"
+                "select count(*) as jml, current_date() as tanggal, current_time() as jam, " +
+                "sum(debet) - sum(kredit) as selisih " +
+                "from tampjurnal_smc where user_id = ? and ip = ?"
             );
             try {
                 pscek.setString(1, akses.getkode());
@@ -134,7 +130,7 @@ public class Jurnal {
                 rscek = pscek.executeQuery();
                 if (rscek.next()) {
                     if (rscek.getInt("jml") > 0) {
-                        if (rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).compareTo(rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP)) == 0) {
+                        if (rscek.getInt("selisih") == 0) {
                             nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                             try {
                                 sukses = true;
@@ -157,8 +153,8 @@ public class Jurnal {
                                 }
 
                                 if (sukses == false) {
-                                    nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                                     sukses = true;
+                                    nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
                                     ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
                                     try {
                                         ps.setString(1, nojur);
@@ -183,7 +179,7 @@ public class Jurnal {
                                         "insert into detailjurnal "
                                             + "select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, tampjurnal_smc.kredit "
                                             + "from tampjurnal_smc "
-                                            + "where user_id = ? and ip = ?",
+                                            + "where tampjurnal_smc.user_id = ? and tampjurnal_smc.ip = ?",
                                         nojur, akses.getkode(), akses.getalamatip()
                                     );
                                     Sequel.deleteTampJurnal();
@@ -194,8 +190,6 @@ public class Jurnal {
                             }
                         } else {
                             System.out.println("Notif : Debet dan Kredit tidak sama");
-                            System.out.println("Notif : Total  Debit = " + rscek.getBigDecimal("debet").setScale(0, RoundingMode.HALF_UP).toPlainString());
-                            System.out.println("Notif : Total Kredit = " + rscek.getBigDecimal("kredit").setScale(0, RoundingMode.HALF_UP).toPlainString());
                             sukses = false;
                         }
                     }
