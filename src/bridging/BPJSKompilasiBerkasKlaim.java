@@ -2133,9 +2133,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     public void isCek() {
         tampil();
-        lblCoderNIK.setText(
-            Sequel.cariIsi("select inacbg_coder_nik.no_ik from inacbg_coder_nik where inacbg_coder_nik.nik='"
-                + akses.getkode() + "'"));
+        lblCoderNIK.setText(Sequel.cariIsi("select inacbg_coder_nik.no_ik from inacbg_coder_nik where inacbg_coder_nik.nik='" + akses.getkode() + "'"));
+    }
+    
+    public void isCek(String nik) {
+        lblCoderNIK.setText(nik);
+        tampil();
     }
 
     public void tampilicareBPJS() {
