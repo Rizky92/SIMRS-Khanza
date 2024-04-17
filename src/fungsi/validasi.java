@@ -102,6 +102,10 @@ public final class validasi {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
+    public String setTglSmc(Tanggal tgl) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
+    }
+    
     public void htmlReport(String reportName, String reportDirName, Map params)
     {
         Properties systemProp = System.getProperties();
