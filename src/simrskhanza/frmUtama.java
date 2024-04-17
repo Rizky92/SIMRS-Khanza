@@ -1118,17 +1118,25 @@ public class frmUtama extends javax.swing.JFrame {
                         coder_nik=cariNIK.getTable().getValueAt(cariNIK.getTable().getSelectedRow(),2).toString();
                         isTutup();
                         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        try {
-                            inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);                    
-                        } catch (Exception ex) {
-                            System.out.println("Notifikasi : "+ex);
+                        System.out.println(akses.getform());
+                        if (akses.getform().equals("BPJSKompilasiBerkasKlaim")) {
+                            BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(null, false);
+                            aplikasi.isCek(coder_nik);
+                            aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+                            aplikasi.setLocationRelativeTo(PanelUtama);
+                            aplikasi.setVisible(true);
+                        } else {
+                            try {
+                                inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);                    
+                            } catch (Exception ex) {
+                                System.out.println("Notifikasi : "+ex);
+                            }
+                            inacbgklaim.setJudul(judulform);
+                            inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+                            inacbgklaim.setLocationRelativeTo(PanelUtama);                    
+                            inacbgklaim.setVisible(true);        
+                            DlgHome.dispose();
                         }
-
-                        inacbgklaim.setJudul(judulform);
-                        inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-                        inacbgklaim.setLocationRelativeTo(PanelUtama);                    
-                        inacbgklaim.setVisible(true);        
-                        DlgHome.dispose();
                         setCursor(Cursor.getDefaultCursor());
                     }                         
                 }                
@@ -22198,15 +22206,32 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }
     
     private void btnBPJSKompilasiBerkasKlaimActionPerformed(java.awt.event.ActionEvent evt) {
-        isTutup();
-        DlgHome.dispose();
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(this,false);
-        aplikasi.isCek();
-        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-        aplikasi.setLocationRelativeTo(PanelUtama);
-        aplikasi.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
+        if (akses.getkode().equals("Admin Utama")) {
+            isTutup();
+            akses.setform("BPJSKompilasiBerkasKlaim");
+            DlgHome.dispose();
+            cariNIK.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+            cariNIK.setLocationRelativeTo(PanelUtama);
+            cariNIK.setVisible(true);
+        } else {
+            coder_nik = Sequel.cariIsi("select inacbg_coder_nik.no_ik from inacbg_coder_nik where inacbg_coder_nik.nik=?", akses.getkode());
+            if (! coder_nik.equals("")) {
+                isTutup();
+                akses.setform("BPJSKompilasiBerkasKlaim");
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(this,false);
+                aplikasi.isCek();
+                aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+                aplikasi.setLocationRelativeTo(PanelUtama);
+                aplikasi.setVisible(true);
+                DlgHome.dispose();
+                this.setCursor(Cursor.getDefaultCursor());
+            } else {
+                isTutup();
+                DlgHome.dispose();
+                JOptionPane.showMessageDialog(null, "Coder NIK tidak ditemukan, silahkan hubungi Admin Utama..!!");
+            }
+        }
     }
     
     private void btnMasterMasalahKeperawatanNeonatusActionPerformed(java.awt.event.ActionEvent evt) {
@@ -23232,7 +23257,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
     private void isTutup() {
         FlayMenu.setVisible(false);
-        akses.setform("frmUtama");
+        // akses.setform("frmUtama");
         Window[] wins = Window.getWindows();
         for (Window win : wins) {
             if (win instanceof JDialog) {
