@@ -1,5 +1,6 @@
 package bridging;
 
+import AESsecurity.EnkripsiAES;
 import fungsi.WarnaTable;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -488,9 +489,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         });
         panelGlass10.add(BtnAll);
 
-        lblCoderNIK.setText("coder");
+        lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblCoderNIK.setText("6414051408990003");
         lblCoderNIK.setName("lblCoderNIK"); // NOI18N
-        lblCoderNIK.setPreferredSize(new java.awt.Dimension(100, 23));
+        lblCoderNIK.setPreferredSize(new java.awt.Dimension(150, 23));
         panelGlass10.add(lblCoderNIK);
 
         jPanel3.add(panelGlass10, java.awt.BorderLayout.CENTER);
@@ -2187,7 +2189,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     public void tampilInvoice() {
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/" + "berkasrawat/pages/billingtampil.php?norawat=" + lblNoRawat.getText() + "";
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/berkasrawat/pages/billing.php?iyem=" + EnkripsiAES.encrypt(lblNoRawat.getText());
         // System.out.println(url);
         Platform.runLater(() -> {
             // System.out.println("panel invoice dipanggil : " + url);
@@ -2226,7 +2228,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         });
 
         panelInvoices.add(jfxinvoices, BorderLayout.CENTER);
-
     }
 
     private void gabung(String norawat) {
@@ -2796,7 +2797,46 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void lihatBilling() {
-        //
+        
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/berkasrawat/pages/billing.php?iyem=" + EnkripsiAES.encrypt(lblNoRawat.getText());
+        // System.out.println(url);
+        Platform.runLater(() -> {
+            // System.out.println("panel invoice dipanggil : " + url);
+            WebView view = new WebView();
+            engine = view.getEngine();
+            engine.setJavaScriptEnabled(true);
+            engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
+                @Override
+                public WebEngine call(PopupFeatures p) {
+                    Stage stage = new Stage(StageStyle.TRANSPARENT);
+                    return view.getEngine();
+                }
+            });
+            engine.getLoadWorker().exceptionProperty()
+                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                    if (engine.getLoadWorker().getState() == FAILED) {
+                        SwingUtilities.invokeLater(() -> {
+                            JOptionPane.showMessageDialog(panelInvoices,
+                                (value != null)
+                                    ? engine.getLocation() + "\n" + value.getMessage()
+                                    : engine.getLocation() + "\nUnexpected Catatan.",
+                                "Loading Catatan...",
+                                JOptionPane.ERROR_MESSAGE);
+                        });
+                    }
+                });
+
+            jfxinvoices.setScene(new Scene(view));
+
+            try {
+                engine.load(url);
+                // System.out.println(alamat);
+            } catch (Exception exception) {
+                engine.load(url);
+            }
+        });
+
+        panelInvoices.add(jfxinvoices, BorderLayout.CENTER);
     }
     
     private void lihatPenilaianAwalMedisIGD() {
