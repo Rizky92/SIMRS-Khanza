@@ -2765,8 +2765,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(sukses==true){
                     isReset();
                     emptTeks();
+                    Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 }else{
+                    Sequel.RollBack();
                     JOptionPane.showMessageDialog(null,"Proses simpan gagal...!");
                 }
                 koneksi.setAutoCommit(true);                    
