@@ -29,7 +29,7 @@ public class Jurnal {
         try {
             pscek = koneksi.prepareStatement(
                 "select count(*) as jml, current_date() as tanggal, current_time() as jam, " +
-                "sum(debet) - sum(kredit) as selisih " +
+                "round(sum(debet) - sum(kredit), 0) as selisih " +
                 "from tampjurnal_rvpbpjs"
             );
             try {
@@ -57,11 +57,10 @@ public class Jurnal {
                                         ps.close();
                                     }
                                 }
-
                                 if (sukses == false) {
                                     sukses = true;
                                     nojur = Sequel.autoNomorSmc("JR", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                                    ps = koneksi.prepareStatement("insert into jurnal values(?,?,?,?,?,?)");
+                                    ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
                                     try {
                                         ps.setString(1, nojur);
                                         ps.setString(2, nobukti);
@@ -79,14 +78,24 @@ public class Jurnal {
                                         }
                                     }
                                 }
-
                                 if (sukses == true) {
-                                    Sequel.executeRawSmc(false,
-                                        "insert into detailjurnal "
-                                            + "select ? as no_jurnal, tampjurnal_rvpbpjs.kd_rek, tampjurnal_rvpbpjs.debet, tampjurnal_rvpbpjs.kredit "
-                                            + "from tampjurnal_rvpbpjs",
-                                        nojur
-                                    );
+                                    try (ResultSet rsdetail = koneksi.prepareStatement("select * from tampjurnal_rvpbpjs").executeQuery()) {
+                                        while (rsdetail.next()) {
+                                            try (PreparedStatement psinsert = koneksi.prepareStatement("insert into detailjurnal values (?, ?, ?, ?)")) {
+                                                psinsert.setString(1, nojur);
+                                                psinsert.setString(2, rsdetail.getString(1));
+                                                psinsert.setString(3, rsdetail.getString(3));
+                                                psinsert.setString(4, rsdetail.getString(4));
+                                                psinsert.executeUpdate();
+                                            } catch (Exception e) {
+                                                sukses = false;
+                                                System.out.println("Notif : " + e);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        sukses = false;
+                                        System.out.println("Notif : " + e);
+                                    }
                                     Sequel.queryu2("delete from tampjurnal_rvpbpjs");
                                 }
                             } catch (Exception ex) {
@@ -94,8 +103,8 @@ public class Jurnal {
                                 System.out.println("Notifikasi : " + ex);
                             }
                         } else {
-                            System.out.println("Notif : Debet dan Kredit tidak sama");
                             sukses = false;
+                            System.out.println("Notif : Debet dan Kredit tidak sama");
                         }
                     }
                 }
@@ -121,7 +130,7 @@ public class Jurnal {
         try {
             pscek = koneksi.prepareStatement(
                 "select count(*) as jml, current_date() as tanggal, current_time() as jam, " +
-                "sum(debet) - sum(kredit) as selisih " +
+                "round(sum(debet) - sum(kredit), 0) as selisih " +
                 "from tampjurnal_smc where user_id = ? and ip = ?"
             );
             try {
@@ -175,13 +184,30 @@ public class Jurnal {
                                 }
 
                                 if (sukses == true) {
-                                    Sequel.executeRawSmc(false,
-                                        "insert into detailjurnal "
-                                            + "select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, tampjurnal_smc.kredit "
-                                            + "from tampjurnal_smc "
-                                            + "where tampjurnal_smc.user_id = ? and tampjurnal_smc.ip = ?",
-                                        nojur, akses.getkode(), akses.getalamatip()
-                                    );
+                                    try (PreparedStatement psdetail = koneksi.prepareStatement("select * from tampjurnal_smc where user_id = ? and ip = ?")) {
+                                        psdetail.setString(1, akses.getkode());
+                                        psdetail.setString(2, akses.getalamatip());
+                                        try (ResultSet rsdetail = psdetail.executeQuery()) {
+                                            while (rsdetail.next()) {
+                                                try (PreparedStatement psinsert = koneksi.prepareStatement("insert into detailjurnal values (?, ?, ?, ?)")) {
+                                                    psinsert.setString(1, nojur);
+                                                    psinsert.setString(2, rsdetail.getString(1));
+                                                    psinsert.setString(3, rsdetail.getString(3));
+                                                    psinsert.setString(4, rsdetail.getString(4));
+                                                    psinsert.executeUpdate();
+                                                } catch (Exception e) {
+                                                    sukses = false;
+                                                    System.out.println("Notif : " + e);
+                                                }
+                                            }
+                                        } catch (Exception e) {
+                                            sukses = false;
+                                            System.out.println("Notif : " + e);
+                                        }
+                                    } catch (Exception e) {
+                                        sukses = false;
+                                        System.out.println("Notif : " + e);
+                                    }
                                     Sequel.deleteTampJurnal();
                                 }
                             } catch (Exception ex) {
@@ -189,8 +215,8 @@ public class Jurnal {
                                 System.out.println("Notifikasi : " + ex);
                             }
                         } else {
-                            System.out.println("Notif : Debet dan Kredit tidak sama");
                             sukses = false;
+                            System.out.println("Notif : Debet dan Kredit tidak sama");
                         }
                     }
                 }
