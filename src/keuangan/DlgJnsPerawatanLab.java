@@ -1391,6 +1391,7 @@ private void btnPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         BtnHapus.setEnabled(akses.gettarif_lab());
         BtnEdit.setEnabled(akses.gettarif_lab());
         BtnPrint.setEnabled(akses.gettarif_lab());
+        ppCopyTemplate.setEnabled(akses.getkode().equals("Admin Utama"));
         
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
