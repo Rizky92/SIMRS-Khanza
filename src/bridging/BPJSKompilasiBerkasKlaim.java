@@ -52,6 +52,7 @@ import rekammedis.RMDataResumePasien;
 import surat.SuratKontrol;
 import setting.DlgCariJamDiet;
 import java.io.FileOutputStream;
+import java.net.URLEncoder;
 import java.util.Base64;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariCaraBayar;
@@ -307,8 +308,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSurkon = new widget.Button();
         jLabel31 = new widget.Label();
         btnSPRI = new widget.Button();
-        jLabel32 = new widget.Label();
-        btnPenunjang = new widget.Button();
         lblNoSEP22 = new widget.Label();
         jLabel20 = new widget.Label();
         lblStatusRawat = new widget.Label();
@@ -404,7 +403,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -418,7 +417,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -490,7 +489,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(BtnAll);
 
         lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCoderNIK.setText("6414051408990003");
+        lblCoderNIK.setText("nik");
         lblCoderNIK.setName("lblCoderNIK"); // NOI18N
         lblCoderNIK.setPreferredSize(new java.awt.Dimension(150, 23));
         panelGlass10.add(lblCoderNIK);
@@ -786,28 +785,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         });
         FormMenu.add(btnSPRI);
         btnSPRI.setBounds(120, 240, 100, 14);
-
-        jLabel32.setText("Penunjang: ");
-        jLabel32.setName("jLabel32"); // NOI18N
-        jLabel32.setPreferredSize(new java.awt.Dimension(120, 14));
-        FormMenu.add(jLabel32);
-        jLabel32.setBounds(0, 260, 120, 14);
-
-        btnPenunjang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnPenunjang.setMnemonic('1');
-        btnPenunjang.setText("Lihat");
-        btnPenunjang.setToolTipText("ALt+1");
-        btnPenunjang.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btnPenunjang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnPenunjang.setName("btnPenunjang"); // NOI18N
-        btnPenunjang.setPreferredSize(new java.awt.Dimension(100, 14));
-        btnPenunjang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPenunjangActionPerformed(evt);
-            }
-        });
-        FormMenu.add(btnPenunjang);
-        btnPenunjang.setBounds(120, 260, 100, 14);
 
         lblNoSEP22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNoSEP22.setName("lblNoSEP22"); // NOI18N
@@ -1336,10 +1313,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // reg_periksa where reg_periksa.no_rawat='" + lblNoRawat.getText() + "'");
         // String nomorrm = Sequel.cariIsi("select reg_periksa.no_rkm_medis from
         // reg_periksa where reg_periksa.no_rawat='" + lblNoRawat.getText() + "'");
-        // String nomorrawatkontrol = Sequel.cariIsi("select skdp_bpjs_new.no_rawat from
-        // skdp_bpjs_new where skdp_bpjs_new.no_rkm_medis='" + nomorrm + "' and
-        // skdp_bpjs_new.tanggal_surat='" + tglregis + "' and skdp_bpjs_new.kd_dokter='"
-        // + kodedokter + "' and skdp_bpjs_new.kd_poli='" + kodepoli + "'");
+        // String nomorrawatkontrol = Sequel.cariIsi("select skdp_bpjs.no_rawat from
+        // skdp_bpjs where skdp_bpjs.no_rkm_medis='" + nomorrm + "' and
+        // skdp_bpjs.tanggal_surat='" + tglregis + "' and skdp_bpjs.kd_dokter='"
+        // + kodedokter + "' and skdp_bpjs.kd_poli='" + kodepoli + "'");
         //====================================
         if (lblNoRawat.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
@@ -1350,7 +1327,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 BPJSSuratKontrol suratkontrol = new BPJSSuratKontrol(null, false);
                 suratkontrol.SuratKontrolKlaim(lblNoRawat.getText(), lblNoSEP.getText(), lblNoRM.getText());
                 this.setCursor(Cursor.getDefaultCursor());
-            } else if (Sequel.cariInteger("select count(no_rawat) from skdp_bpjs_new where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            } else if (Sequel.cariInteger("select count(no_rawat) from skdp_bpjs where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
                 String kodedokter = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat='" + lblNoRawat.getText() + "'");
                 String kodepoli = Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat='" + lblNoRawat.getText() + "'");
                 String norawatpilih = Sequel.cariIsi("select reg_periksa.no_rawat from reg_periksa where reg_periksa.kd_dokter='" + kodedokter + "' and reg_periksa.kd_poli='" + kodepoli + "' and reg_periksa.no_rkm_medis='" + lblNoRM.getText() + "' and reg_periksa.no_rawat != '" + lblNoRawat.getText() + "' order by reg_periksa.no_rawat desc limit 1");
@@ -1365,10 +1342,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void btnSPRIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPRIActionPerformed
 
     }//GEN-LAST:event_btnSPRIActionPerformed
-
-    private void btnPenunjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenunjangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPenunjangActionPerformed
 
     private void BtnSimpanDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanDiagnosaActionPerformed
         if (!lblNoRawat.getText().equals("")) {
@@ -1449,7 +1422,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Button btnHasilLab;
     private widget.Button btnHasilRad;
     private widget.Button btnInvoice;
-    private widget.Button btnPenunjang;
     private widget.Button btnResumeRanap;
     private widget.Button btnSEPResume;
     private widget.Button btnSEPResume1;
@@ -1472,7 +1444,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Label jLabel29;
     private widget.Label jLabel30;
     private widget.Label jLabel31;
-    private widget.Label jLabel32;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -1537,56 +1508,22 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         lblNoRM.setText("");
         lblStatusRawat.setText("");
         lblNoSEP.setText("");
-
-        if (Sequel.cariInteger("select count(no_rawat) from bridging_sep where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnSEPResume.setText("Ada");
-        } else {
-            btnSEPResume.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from resume_pasien_ranap where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnResumeRanap.setText("Ada");
-        } else {
-            btnResumeRanap.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from billing where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnInvoice.setText("Ada");
-        } else {
-            btnInvoice.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from penilaian_medis_igd where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnAwalMedisIGD.setText("Ada");
-        } else {
-            btnAwalMedisIGD.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from periksa_lab where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnHasilLab.setText("Ada");
-        } else {
-            btnHasilLab.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from periksa_radiologi where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnHasilRad.setText("Ada");
-        } else {
-            btnHasilRad.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_sep) from bridging_surat_kontrol_bpjs where no_sep='" + lblNoSEP.getText() + "'") > 0) {
-            btnSurkon.setText("Ada");
-        } else if (Sequel.cariInteger("select count(no_rawat) from skdp_bpjs_new where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnSurkon.setText("Ada");
-        } else {
-            btnSurkon.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(no_rawat) from bridging_surat_pri_bpjs where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnSPRI.setText("Ada");
-        } else {
-            btnSPRI.setText("Tidak Ada");
-        }
-        if (Sequel.cariInteger("select count(form_pemeriksaan.no_rawat) from form_pemeriksaan where form_pemeriksaan.no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-            btnPenunjang.setText("Ada");
-        } else {
-            btnPenunjang.setText("Tidak Ada");
-        }
-        tampilicareBPJS();
-
+        btnSEPResume.setText("Tidak Ada");
+        btnSEPResume.setEnabled(false);
+        btnResumeRanap.setText("Tidak Ada");
+        btnResumeRanap.setEnabled(false);
+        btnInvoice.setText("Tidak Ada");
+        btnInvoice.setEnabled(false);
+        btnAwalMedisIGD.setText("Tidak Ada");
+        btnAwalMedisIGD.setEnabled(false);
+        btnHasilLab.setText("Tidak Ada");
+        btnHasilLab.setEnabled(false);
+        btnHasilRad.setText("Tidak Ada");
+        btnHasilRad.setEnabled(false);
+        btnSurkon.setText("Tidak Ada");
+        btnSurkon.setEnabled(false);
+        btnSPRI.setText("Tidak Ada");
+        btnSPRI.setEnabled(false);
     }
 
     private void getData() {
@@ -1595,70 +1532,75 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             lblNoRawat.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 0).toString());
             lblNoRM.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 1).toString());
             lblStatusRawat.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 3).toString());
-            lblNoSEP.setText(Sequel.cariIsi("select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat='" + lblNoRawat.getText() + "'"));
-            String nosuratkontrol = Sequel.cariIsi("select bridging_sep.noskdp from bridging_sep where bridging_sep.no_sep='" + lblNoSEP.getText() + "'");
-            if (Sequel.cariInteger("select count(no_rawat) from bridging_sep where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-                btnSEPResume.setText("Ada");
-            } else {
-                btnSEPResume.setText("Tidak Ada");
-            }
-            if (Sequel.cariInteger("select count(no_rawat) from resume_pasien_ranap where no_rawat='"+ lblNoRawat.getText() + "'") > 0) {
+            lblNoSEP.setText(Sequel.cariIsiSmc("select no_sep from bridging_sep where no_rawat = ?", lblNoRawat.getText()));
+            String nosuratkontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where bridging_sep.no_sep = ?", lblNoSEP.getText());
+            
+            btnSEPResume.setText("Ada");
+            
+            if (Sequel.cariBooleanSmc("select * from resume_pasien_ranap where no_rawat = ?", lblNoRawat.getText())) {
                 btnResumeRanap.setText("Ada");
+                btnResumeRanap.setEnabled(true);
             } else {
                 btnResumeRanap.setText("Tidak Ada");
+                btnResumeRanap.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(no_rawat) from billing where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            
+            if (Sequel.cariBooleanSmc("select * from billing where no_rawat = ?", lblNoRawat.getText())) {
                 btnInvoice.setText("Ada");
+                btnInvoice.setEnabled(true);
             } else {
                 btnInvoice.setText("Tidak Ada");
+                btnInvoice.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(no_rawat) from penilaian_medis_igd where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            
+            if (Sequel.cariBooleanSmc("select * from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText())) {
                 btnAwalMedisIGD.setText("Ada");
+                btnAwalMedisIGD.setEnabled(true);
             } else {
                 btnAwalMedisIGD.setText("Tidak Ada");
+                btnAwalMedisIGD.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(no_rawat) from periksa_lab where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            
+            if (Sequel.cariBooleanSmc("select * from periksa_lab where no_rawat = ?", lblNoRawat.getText())) {
                 btnHasilLab.setText("Ada");
+                btnHasilLab.setEnabled(true);
             } else {
                 btnHasilLab.setText("Tidak Ada");
+                btnHasilLab.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(no_rawat) from periksa_radiologi where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            
+            if (Sequel.cariBooleanSmc("select * from periksa_radiologi where no_rawat = ?", lblNoRawat.getText())) {
                 btnHasilRad.setText("Ada");
+                btnHasilRad.setEnabled(true);
             } else {
                 btnHasilRad.setText("Tidak Ada");
+                btnHasilRad.setEnabled(false);
             }
 
-            String kodedokter = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat='" + lblNoRawat.getText() + "'");
-            String kodepoli = Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat='"+ lblNoRawat.getText() + "'");
-            String norawatpilih = Sequel.cariIsi("select reg_periksa.no_rawat from reg_periksa where reg_periksa.kd_dokter='" + kodedokter + "' and reg_periksa.kd_poli='" + kodepoli + "' and reg_periksa.no_rkm_medis='" + lblNoRM.getText() + "' and reg_periksa.no_rawat != '" + lblNoRawat.getText() + "' order by reg_periksa.no_rawat desc limit 1");
-
-            if (Sequel.cariInteger("select count(no_surat) from bridging_surat_kontrol_bpjs where no_surat='"+ nosuratkontrol + "'") > 0) {
+            if (Sequel.cariBooleanSmc("select * from bridging_surat_kontrol_bpjs where no_surat = ?", nosuratkontrol)) {
                 btnSurkon.setText("Ada");
-            } else if (Sequel.cariInteger("select count(no_rawat) from skdp_bpjs_new where no_rawat='" + norawatpilih + "'") > 0) {
-                btnSurkon.setText("Ada");
+                btnSurkon.setEnabled(true);
             } else {
                 btnSurkon.setText("Tidak Ada");
+                btnSurkon.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(no_rawat) from bridging_surat_pri_bpjs where no_rawat='" + lblNoRawat.getText() + "'") > 0) {
+            
+            if (Sequel.cariBooleanSmc("select * from bridging_surat_pri_bpjs where no_rawat = ", lblNoRawat.getText())) {
                 btnSPRI.setText("Ada");
+                btnSPRI.setEnabled(true);
             } else {
                 btnSPRI.setText("Tidak Ada");
+                btnSPRI.setEnabled(false);
             }
-            if (Sequel.cariInteger("select count(form_pemeriksaan.no_rawat) from form_pemeriksaan where form_pemeriksaan.no_rawat='" + lblNoRawat.getText() + "'") > 0) {
-                btnPenunjang.setText("Ada");
-            } else {
-                btnPenunjang.setText("Tidak Ada");
-            }
-            panelDiagnosa1.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.SetTgl(DTPCari1.getSelectedItem() + ""),
-            Valid.SetTgl(DTPCari2.getSelectedItem() + ""), "Ralan", lblNoRawat.getText().trim());
+            
+            panelDiagnosa1.setRM(
+                lblNoRawat.getText(), lblNoRM.getText(), Valid.SetTgl(DTPCari1.getSelectedItem().toString()),
+                Valid.SetTgl(DTPCari2.getSelectedItem().toString()), "Ralan", lblNoRawat.getText().trim()
+            );
             panelDiagnosa1.pilihTab();
-            tampilicareBPJS();
+            // tampilicareBPJS();
             tampilInvoice();
         }
-    }
-
-    private void isRawat() {
-
     }
 
     private void cetakAsesmenMedisIgd(String norawat) {
@@ -2189,8 +2131,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     public void tampilInvoice() {
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/berkasrawat/pages/billing.php?iyem=" + EnkripsiAES.encrypt(lblNoRawat.getText());
-        // System.out.println(url);
+        String norawat = lblNoRawat.getText();
+        try {
+            norawat = URLEncoder.encode(norawat, "UTF-8");
+        } catch (Exception e) {
+            norawat = lblNoRawat.getText();
+        }
+        
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
+        System.out.println(url);
         Platform.runLater(() -> {
             // System.out.println("panel invoice dipanggil : " + url);
             WebView view = new WebView();
@@ -2287,7 +2236,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 BPJSSuratKontrol suratkontrol = new BPJSSuratKontrol(null, false);
                 suratkontrol.SuratKontrolKlaimPDF(lblNoRawat.getText(), lblNoSEP.getText(), lblNoRM.getText());
             } else if (Sequel.cariInteger(
-                "select count(no_rawat) from skdp_bpjs_new where no_rawat='" + norawatpilih + "'") > 0) {
+                "select count(no_rawat) from skdp_bpjs where no_rawat='" + norawatpilih + "'") > 0) {
                 SuratKontrol suratkontrol = new SuratKontrol(null, false);
                 suratkontrol.SuratKontrolKlaimPDF(norawatpilih, lblNoRM.getText());
             }
@@ -2789,7 +2738,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     
     
     private void lihatSEP() {
-        //
+        if (lblNoSEP.getText().isBlank()) {
+            return;
+        }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        
+        
+        this.setCursor(Cursor.getDefaultCursor());
     }
     
     private void lihatResumePasienRanap() {
@@ -2797,46 +2753,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void lihatBilling() {
-        
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/berkasrawat/pages/billing.php?iyem=" + EnkripsiAES.encrypt(lblNoRawat.getText());
-        // System.out.println(url);
-        Platform.runLater(() -> {
-            // System.out.println("panel invoice dipanggil : " + url);
-            WebView view = new WebView();
-            engine = view.getEngine();
-            engine.setJavaScriptEnabled(true);
-            engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
-                @Override
-                public WebEngine call(PopupFeatures p) {
-                    Stage stage = new Stage(StageStyle.TRANSPARENT);
-                    return view.getEngine();
-                }
-            });
-            engine.getLoadWorker().exceptionProperty()
-                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(panelInvoices,
-                                (value != null)
-                                    ? engine.getLocation() + "\n" + value.getMessage()
-                                    : engine.getLocation() + "\nUnexpected Catatan.",
-                                "Loading Catatan...",
-                                JOptionPane.ERROR_MESSAGE);
-                        });
-                    }
-                });
-
-            jfxinvoices.setScene(new Scene(view));
-
-            try {
-                engine.load(url);
-                // System.out.println(alamat);
-            } catch (Exception exception) {
-                engine.load(url);
-            }
-        });
-
-        panelInvoices.add(jfxinvoices, BorderLayout.CENTER);
+        //
     }
     
     private void lihatPenilaianAwalMedisIGD() {
@@ -2856,10 +2773,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void lihatSPRI() {
-        //
-    }
-    
-    private void lihatPenunjang() {
         //
     }
 }
