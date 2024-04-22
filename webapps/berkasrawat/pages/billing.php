@@ -1,11 +1,11 @@
 <?php
-require_once("../../conf/conf.php");
-session_start();
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
-header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
-header("Cache-Control: no-store, no-cache, must-revalidate"); 
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+    require_once("../../conf/conf.php");
+    session_start();
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+    header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
+    header("Cache-Control: no-store, no-cache, must-revalidate"); 
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
 ?>
 <html>
     <head>
@@ -13,15 +13,6 @@ header("Pragma: no-cache");
         <link href="../css/default.css" rel="stylesheet" type="text/css" />
     </head>
     <body bgcolor='#ffffff'>
-    <?php
-        $noRawat = isset($_GET['iyem']) ? trim($_GET['iyem']) : null;
-        $noRawat = json_decode(encrypt_decrypt($noRawat, 'd'), true);
-        $usere      = isset($_GET['usere']) ? trim($_GET['usere']) : NULL;
-        $passwordte = isset($_GET['passwordte']) ? trim($_GET['passwordte']) : NULL;
-
-        if (! ($usere === USERHYBRIDWEB && $passwordte === PASHYBRIDWEB)) exit(header("Location: ../index.php"));
-    ?>
-    <?php if (isset($noRawat['no_rawat']) && )
 
     <?php
         $norawat      = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
