@@ -67,6 +67,15 @@ public class koneksiDB {
         return connection;        
     }
     
+    public static String PRINTERCETAKANTREAN() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/cetakantrean.xml"));
+            return prop.getProperty("PRINTERCETAKANTREAN");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
