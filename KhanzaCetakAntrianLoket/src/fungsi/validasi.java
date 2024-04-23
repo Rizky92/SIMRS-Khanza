@@ -51,6 +51,16 @@ import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
 import java.io.File;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 /**
  *
  * @author Owner
@@ -79,8 +89,67 @@ public final class validasi {
         super();
     };
     
-    public void reportQuerySmc(String filename, String directory, String title, Map params, String sql, String... values)
-    {
+    public void printReportQuerySmc(String reportName, String reportDirName, String title, Map params, String namaPrinter, int jumlah, String sql, String... values) {
+        String currentDir = System.getProperties().getProperty("user.dir");
+        File dir = new File(currentDir);
+        File report = null;
+        if (dir.isDirectory()) {
+            for (String file: dir.list()) {
+                report = new File(currentDir + File.separatorChar + file + File.separatorChar + reportName);                
+                if (report.isFile()) {
+                    System.out.println("Found report file at: " + report.toString());
+                    break;
+                }
+            }
+        }
+        if (report == null) {
+            JOptionPane.showMessageDialog(null, "File tidak ditemukan!");
+            return;
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }            
+            PrintService printService = null;
+            for (PrintService currentPrintService: PrintServiceLookup.lookupPrintServices(null, null)) {
+                if (currentPrintService.getName().equals(namaPrinter)) {
+                    System.out.println("Printer ditemukan: " + currentPrintService.getName());
+                    printService = currentPrintService;
+                    break;
+                }
+            }
+            JasperPrint jp = JasperFillManager.fillReport((JasperReport) JRLoader.loadObject(report), params, new JRResultSetDataSource(ps.executeQuery()));
+            if (printService == null) {
+                JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
+                JasperViewer jv = new JasperViewer(jp, false);
+                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                jv.setTitle(title);                
+                jv.setSize(screen.width - 50, screen.height - 50);
+                jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                jv.setLocationRelativeTo(null);
+                jv.setVisible(true);
+            } else {
+                PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
+                pra.add(new Copies(jumlah));
+                SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
+                config.setPrintService(printService);
+                config.setPrintRequestAttributeSet(pra);
+                config.setPrintServiceAttributeSet(printService.getAttributes());
+                config.setDisplayPageDialog(false);
+                config.setDisplayPrintDialog(false);
+                JRPrintServiceExporter exporter = new JRPrintServiceExporter();            
+                exporter.setExporterInput(new SimpleExporterInput(jp));
+                exporter.setConfiguration(config);
+                exporter.exportReport();
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Tidak dapat menemukan printer untuk mencetak!");
+        }
+    }
+    
+    public void reportQuerySmc(String filename, String directory, String title, Map params, String sql, String... values) {
         try {
             ps = connect.prepareStatement(sql);
             try {
