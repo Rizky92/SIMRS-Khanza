@@ -37,7 +37,6 @@ public class frmUtama extends javax.swing.JFrame {
     public frmUtama() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        
         jam();
     }
 
@@ -106,7 +105,7 @@ public class frmUtama extends javax.swing.JFrame {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+            Valid.printReportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTERCETAKANTREAN(), 1,
                 "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ? and tanggal = current_date()",
                 String.valueOf(Integer.parseInt(LabelNomor.getText()))
             );
@@ -121,7 +120,7 @@ public class frmUtama extends javax.swing.JFrame {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
-                Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+                Valid.printReportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTERCETAKANTREAN(), 1,
                     "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ? and tanggal = current_date()",
                     String.valueOf(Integer.parseInt(LabelNomor.getText()))
                 );
@@ -136,7 +135,7 @@ public class frmUtama extends javax.swing.JFrame {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("emailrs",akses.getemailrs());
-                    Valid.reportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param,
+                    Valid.printReportQuerySmc("rptAntriLoket.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTERCETAKANTREAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, lpad(nomor, greatest(length(nomor), 3), '0') as nomor, jam from antriloketcetak_smc where nomor = ? and tanggal = current_date()",
                         String.valueOf(Integer.parseInt(LabelNomor.getText()))
                     );
