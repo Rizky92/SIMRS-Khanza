@@ -2277,7 +2277,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             try {
                 ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
                 try {
-                    ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+                    ps.setString(1, tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
                     rs=ps.executeQuery();
                     i=2;
