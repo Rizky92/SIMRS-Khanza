@@ -16,7 +16,9 @@
                 $url = "index.php?act=KlaimBaruManual&action=no&codernik=".$codernik;	
             }else if(($_GET['page']=="KlaimBaruManual2")){
                 $url = "index.php?act=KlaimBaruManual2&action=no&codernik=".$codernik;	
-            }                 		
+            }else if ($_GET['page'] === "DetailKirim") {
+                $url = "index.php?act=DetailKirim&codernik = ".$codernik;
+            }
         }else{
             session_start();
             session_destroy();

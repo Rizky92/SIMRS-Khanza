@@ -106,8 +106,7 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
-    public void htmlReport(String reportName, String reportDirName, Map params)
-    {
+    public void htmlReport(String reportName, String reportDirName, Map params) {
         Properties systemProp = System.getProperties();
 
         String currentDir = systemProp.getProperty("user.dir");
@@ -163,8 +162,7 @@ public final class validasi {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            String namaFile = reportDirName + File.separatorChar + reportName;
-            JasperPrint jasperPrint = JasperFillManager.fillReport(namaFile, reportParams, new JRResultSetDataSource(ps.executeQuery()));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(fullPath, reportParams, new JRResultSetDataSource(ps.executeQuery()));
             JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
             jasperViewer.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -172,6 +170,36 @@ public final class validasi {
             jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
             jasperViewer.setLocationRelativeTo(null);
             jasperViewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
+        }
+    }
+    
+    public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
+        String currentDir = System.getProperties().getProperty("user.dir");
+        File dir = new File(currentDir);
+        File fileRpt;
+        String fullPath = "";
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) {
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                }
+            }
+        }
+        
+        try {
+            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport(fullPath, reportParams), false);
+            jv.setTitle(judul);
+            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+            jv.setSize(screen.width - 50, screen.height - 50);
+            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+            jv.setLocationRelativeTo(null);
+            jv.setVisible(true);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
