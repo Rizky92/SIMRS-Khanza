@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Connection;
@@ -227,7 +228,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-
+        
+        Dimension jpanel4Size = jPanel4.getSize();
+        Dimension ScrollPreferredSize = new Dimension(Scroll.getWidth(), (int) Math.round(jpanel4Size.getHeight() * 0.4));
+        Dimension panelInvoicePreferredSize = new Dimension(panelInvoices.getWidth(), (int) Math.round(jpanel4Size.getHeight() * 0.6));
+        
+        Scroll.setPreferredSize(ScrollPreferredSize);
+        panelInvoices.setPreferredSize(panelInvoicePreferredSize);
+        repaint();
     }
 
     private DlgCariDiet diet = new DlgCariDiet(null, false);
@@ -303,11 +311,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnHapusDiagnosa = new widget.Button();
         btnSEPResume1 = new widget.Button();
         btnSEPResume2 = new widget.Button();
-        ChkSuratKontrol = new widget.CekBox();
         panelDiagnosa1 = new laporan.PanelDiagnosa();
         BtnValidasiQR = new widget.Button();
         jPanel5 = new javax.swing.JPanel();
-        PanelContentIcareBPJS = new widget.panelisi();
+        PanelContentINACBG = new widget.panelisi();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -585,19 +592,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel17.setName("jLabel17"); // NOI18N
         jLabel17.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel17);
-        jLabel17.setBounds(0, 80, 120, 14);
+        jLabel17.setBounds(0, 60, 120, 14);
 
         lblNoSEP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNoSEP.setName("lblNoSEP"); // NOI18N
         lblNoSEP.setPreferredSize(new java.awt.Dimension(300, 14));
         FormMenu.add(lblNoSEP);
-        lblNoSEP.setBounds(120, 80, 300, 14);
+        lblNoSEP.setBounds(120, 60, 300, 14);
 
         jLabel18.setText("Data SEP : ");
         jLabel18.setName("jLabel18"); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel18);
-        jLabel18.setBounds(0, 100, 120, 14);
+        jLabel18.setBounds(0, 80, 120, 14);
 
         btnSEPResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSEPResume.setMnemonic('1');
@@ -613,13 +620,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnSEPResume);
-        btnSEPResume.setBounds(120, 100, 100, 14);
+        btnSEPResume.setBounds(120, 80, 100, 14);
 
         jLabel25.setText("Resume Ranap : ");
         jLabel25.setName("jLabel25"); // NOI18N
         jLabel25.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel25);
-        jLabel25.setBounds(0, 120, 120, 14);
+        jLabel25.setBounds(0, 100, 120, 14);
 
         btnResumeRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnResumeRanap.setMnemonic('1');
@@ -635,13 +642,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnResumeRanap);
-        btnResumeRanap.setBounds(120, 120, 100, 14);
+        btnResumeRanap.setBounds(120, 100, 100, 14);
 
         jLabel26.setText("Invoice : ");
         jLabel26.setName("jLabel26"); // NOI18N
         jLabel26.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel26);
-        jLabel26.setBounds(0, 140, 120, 14);
+        jLabel26.setBounds(0, 120, 120, 14);
 
         btnInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnInvoice.setMnemonic('1');
@@ -657,13 +664,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnInvoice);
-        btnInvoice.setBounds(120, 140, 100, 14);
+        btnInvoice.setBounds(120, 120, 100, 14);
 
         jLabel27.setText("Awal Medis IGD : ");
         jLabel27.setName("jLabel27"); // NOI18N
         jLabel27.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel27);
-        jLabel27.setBounds(0, 160, 120, 14);
+        jLabel27.setBounds(0, 140, 120, 14);
 
         btnAwalMedisIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnAwalMedisIGD.setMnemonic('1');
@@ -679,13 +686,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnAwalMedisIGD);
-        btnAwalMedisIGD.setBounds(120, 160, 100, 14);
+        btnAwalMedisIGD.setBounds(120, 140, 100, 14);
 
         jLabel28.setText("Hasil Lab : ");
         jLabel28.setName("jLabel28"); // NOI18N
         jLabel28.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel28);
-        jLabel28.setBounds(0, 180, 120, 14);
+        jLabel28.setBounds(0, 160, 120, 14);
 
         btnHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnHasilLab.setMnemonic('1');
@@ -701,13 +708,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnHasilLab);
-        btnHasilLab.setBounds(120, 180, 100, 14);
+        btnHasilLab.setBounds(120, 160, 100, 14);
 
         jLabel29.setText("Hasil Radiologi : ");
         jLabel29.setName("jLabel29"); // NOI18N
         jLabel29.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel29);
-        jLabel29.setBounds(0, 200, 120, 14);
+        jLabel29.setBounds(0, 180, 120, 14);
 
         btnHasilRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnHasilRad.setMnemonic('1');
@@ -723,13 +730,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnHasilRad);
-        btnHasilRad.setBounds(120, 200, 100, 14);
+        btnHasilRad.setBounds(120, 180, 100, 14);
 
         jLabel30.setText("Surat Kontrol : ");
         jLabel30.setName("jLabel30"); // NOI18N
         jLabel30.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel30);
-        jLabel30.setBounds(0, 220, 120, 14);
+        jLabel30.setBounds(0, 200, 120, 14);
 
         btnSurkon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSurkon.setMnemonic('1');
@@ -745,13 +752,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnSurkon);
-        btnSurkon.setBounds(120, 220, 100, 14);
+        btnSurkon.setBounds(120, 200, 100, 14);
 
         jLabel31.setText("SPRI : ");
         jLabel31.setName("jLabel31"); // NOI18N
         jLabel31.setPreferredSize(new java.awt.Dimension(120, 14));
         FormMenu.add(jLabel31);
-        jLabel31.setBounds(0, 240, 120, 14);
+        jLabel31.setBounds(0, 220, 120, 14);
 
         btnSPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSPRI.setMnemonic('1');
@@ -767,7 +774,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         FormMenu.add(btnSPRI);
-        btnSPRI.setBounds(120, 240, 100, 14);
+        btnSPRI.setBounds(120, 220, 100, 14);
 
         lblNoSEP22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNoSEP22.setName("lblNoSEP22"); // NOI18N
@@ -870,21 +877,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         FormMenu.add(btnSEPResume2);
         btnSEPResume2.setBounds(230, 140, 110, 14);
 
-        ChkSuratKontrol.setBorder(null);
-        ChkSuratKontrol.setBorderPainted(true);
-        ChkSuratKontrol.setBorderPaintedFlat(true);
-        ChkSuratKontrol.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkSuratKontrol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkSuratKontrol.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkSuratKontrol.setName("ChkSuratKontrol"); // NOI18N
-        ChkSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkSuratKontrolActionPerformed(evt);
-            }
-        });
-        FormMenu.add(ChkSuratKontrol);
-        ChkSuratKontrol.setBounds(220, 220, 23, 20);
-
         panelDiagnosa1.setBorder(null);
         panelDiagnosa1.setName("panelDiagnosa1"); // NOI18N
         panelDiagnosa1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -924,10 +916,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jPanel5.setPreferredSize(new java.awt.Dimension(350, 102));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        PanelContentIcareBPJS.setName("PanelContentIcareBPJS"); // NOI18N
-        PanelContentIcareBPJS.setPreferredSize(new java.awt.Dimension(55, 55));
-        PanelContentIcareBPJS.setLayout(new java.awt.BorderLayout());
-        jPanel5.add(PanelContentIcareBPJS);
+        PanelContentINACBG.setName("PanelContentINACBG"); // NOI18N
+        PanelContentINACBG.setPreferredSize(new java.awt.Dimension(55, 55));
+        PanelContentINACBG.setLayout(new java.awt.BorderLayout());
+        jPanel5.add(PanelContentINACBG);
 
         jPanel1.add(jPanel5);
 
@@ -1028,7 +1020,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampilInvoice();
-            tampilicareBPJS();
+            tampilINACBG();
             gabung(lblNoRawat.getText());
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -1326,8 +1318,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            String kamar = "", namaKamar = "";
-            int i = 0;
+            String kamar = "", namaKamar = "";            
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama, periksa_lab.tgl_periksa, periksa_lab.jam, " +
                 "periksa_lab.nip, periksa_lab.dokter_perujuk, periksa_lab.kd_dokter, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, " +
@@ -1338,6 +1329,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 ps.setString(1, lblNoRawat.getText());
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
+                        int i = 0;
                         kamar = Sequel.cariIsiSmc("select ifnull (kamar_inap.kd_kamar, 'Poli') from kamar_inap where kamar_inap.no_rawat = ? order by kamar_inap.tgl_masuk desc limit 1", lblNoRawat.getText());
                         if (kamar.equals("Poli")) {
                             namaKamar = Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik join reg_periksa on poliklinik.kd_poli = reg_periksa.kd_poli where reg_periksa.no_rawat = ?", lblNoRawat.getText());
@@ -1479,7 +1471,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             panelDiagnosa1.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.SetTgl(DTPCari1.getSelectedItem() + ""),
             Valid.SetTgl(DTPCari2.getSelectedItem() + ""), lblStatusRawat.getText(), TCari.getText().trim());
             panelDiagnosa1.simpan();
-            tampilicareBPJS();
+            tampilINACBG();
         }
     }//GEN-LAST:event_BtnSimpanDiagnosaActionPerformed
 
@@ -1492,7 +1484,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             panelDiagnosa1.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.SetTgl(DTPCari1.getSelectedItem() + ""),
             Valid.SetTgl(DTPCari2.getSelectedItem() + ""), "Ralan", TCari.getText().trim());
             panelDiagnosa1.hapus();
-            tampilicareBPJS();
+            tampilINACBG();
         }
     }//GEN-LAST:event_BtnHapusDiagnosaActionPerformed
 
@@ -1509,10 +1501,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void btnSEPResume2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPResume2ActionPerformed
         Base64ToPDFInvoice(lblNoSEP.getText());
     }//GEN-LAST:event_btnSEPResume2ActionPerformed
-
-    private void ChkSuratKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkSuratKontrolActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChkSuratKontrolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1537,14 +1525,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpanDiagnosa;
     private widget.Button BtnValidasiQR;
-    private widget.CekBox ChkSuratKontrol;
     private widget.ComboBox CmbStts;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormMenu;
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
-    private widget.panelisi PanelContentIcareBPJS;
+    private widget.panelisi PanelContentINACBG;
     private javax.swing.JMenuItem PilihSemua;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane ScrollHTML;
@@ -2188,7 +2175,48 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     public void tampilINACBG() {
-        //
+        String aksi = "BukanCorona";
+        if (Sequel.cariBooleanSmc("select * from perawatan_corona where perawatan_corona.no_rawat = ?", lblNoRawat.getText())) {
+            aksi = "PasienCorona";
+        }
+        
+        String caraBayar = Sequel.cariIsiSmc("select kd_pj from reg_periksa where no_rawat = ?", lblNoRawat.getText());
+        String noRawatUrlEncoded = "";
+        try {
+            noRawatUrlEncoded = URLEncoder.encode(lblNoRawat.getText(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            noRawatUrlEncoded = "";
+        }
+        
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + 
+            "&page=DetailKirimSmc&norawat=" + noRawatUrlEncoded + "&codernik=" + lblCoderNIK.getText() + "&carabayar=" + caraBayar + "&corona=" + aksi;
+        System.out.println(url);
+        
+        Platform.runLater(() -> {
+            WebView view = new WebView();
+            engine = view.getEngine();
+            engine.setJavaScriptEnabled(true);
+            engine.setCreatePopupHandler((PopupFeatures p) -> {
+                return view.getEngine();
+            });
+            engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                if (engine.getLoadWorker().getState() == FAILED) {
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(PanelContentINACBG,
+                            engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
+                            "Loading Catatan...",
+                            JOptionPane.ERROR_MESSAGE);
+                    });
+                }
+            });
+            jfxPanelicare.setScene(new Scene(view));
+            try {
+                engine.load(url);
+            } catch (Exception exception) {
+                engine.load(url);
+            }
+        });
+        PanelContentINACBG.add(jfxPanelicare, BorderLayout.CENTER);
     }
 
     public void tampilicareBPJS() {
@@ -2212,7 +2240,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(PanelContentIcareBPJS,
+                            JOptionPane.showMessageDialog(PanelContentINACBG,
                                 (value != null)
                                     ? engine.getLocation() + "\n" + value.getMessage()
                                     : engine.getLocation() + "\nUnexpected Catatan.",
@@ -2232,7 +2260,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
 
-        PanelContentIcareBPJS.add(jfxPanelicare, BorderLayout.CENTER);
+        PanelContentINACBG.add(jfxPanelicare, BorderLayout.CENTER);
 
     }
 
@@ -2335,18 +2363,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         String kodedokter = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat='"+ lblNoRawat.getText() + "'");
         String kodepoli = Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat='"+ lblNoRawat.getText() + "'");
         String norawatpilih = Sequel.cariIsi("select reg_periksa.no_rawat from reg_periksa where reg_periksa.kd_dokter='" + kodedokter + "' and reg_periksa.kd_poli='" + kodepoli + "' and reg_periksa.no_rkm_medis='" + lblNoRM.getText() + "' and reg_periksa.no_rawat != '" + lblNoRawat.getText() + "' order by reg_periksa.no_rawat desc limit 1");
-
-        if (ChkSuratKontrol.isSelected() == true) {
-            if (Sequel.cariInteger("select count(no_surat) from bridging_surat_kontrol_bpjs where no_surat='"
-                + nosuratkontrol + "'") > 0) {
-                BPJSSuratKontrol suratkontrol = new BPJSSuratKontrol(null, false);
-                suratkontrol.SuratKontrolKlaimPDF(lblNoRawat.getText(), lblNoSEP.getText(), lblNoRM.getText());
-            } else if (Sequel.cariInteger(
-                "select count(no_rawat) from skdp_bpjs where no_rawat='" + norawatpilih + "'") > 0) {
-                SuratKontrol suratkontrol = new SuratKontrol(null, false);
-                suratkontrol.SuratKontrolKlaimPDF(norawatpilih, lblNoRM.getText());
-            }
-        }
 
         // if (Sequel.cariInteger(
         //       "select count(form_pemeriksaan.no_rawat) from form_pemeriksaan where form_pemeriksaan.no_rawat='"
