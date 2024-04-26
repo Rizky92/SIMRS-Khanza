@@ -177,14 +177,13 @@ public final class validasi {
     }
     
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
-        String currentDir = System.getProperties().getProperty("user.dir");
-        File dir = new File(currentDir);
+        String currentWorkingDir = System.getProperties().getProperty("user.dir");
+        File dir = new File(currentWorkingDir);
         File fileRpt;
         String fullPath = "";
         if (dir.isDirectory()) {
-            String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+            for (String currentDir : dir.list()) {
+                fileRpt = new File(currentWorkingDir + File.separatorChar + currentDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
                 if (fileRpt.isFile()) {
                     fullPath = fileRpt.toString();
                     System.out.println("Found Report File at : " + fullPath);
@@ -193,7 +192,7 @@ public final class validasi {
         }
         
         try {
-            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport(fullPath, reportParams), false);
+            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport(fullPath, reportParams, connect), false);
             jv.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             jv.setSize(screen.width - 50, screen.height - 50);
