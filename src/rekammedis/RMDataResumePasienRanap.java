@@ -15,6 +15,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -354,46 +355,17 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         carilaborat.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (carilaborat.getTable().getSelectedRow() != -1) {
-                    HasilLaborat.append(carilaborat.getTable().getValueAt(carilaborat.getTable().getSelectedRow(),3).toString()+", ");
-                    HasilLaborat.requestFocus();
-                }
-            }
-        });
-        
-        carilaborat.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    if(carilaborat.getTable().getSelectedRow()!= -1){
-                        HasilLaborat.append(carilaborat.getTable().getValueAt(carilaborat.getTable().getSelectedRow(),3).toString()+", ");
-                        HasilLaborat.requestFocus();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        
-        carilaborat.BtnKeluar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (i= 0; i < carilaborat.getTable().getRowCount(); i++) {
-                    if(carilaborat.getTable().getValueAt(i,0).toString().equals("true")){
-                        HasilLaborat.append(carilaborat.getTable().getValueAt(i,3).toString()+", ");
+                System.out.println("WindowClosedEvent : " + e);
+                for (i = 0; i < carilaborat.getTable().getRowCount(); i++) {
+                    if (carilaborat.getTable().getValueAt(i, 0).toString().equals("true") || carilaborat.getTable().getSelectedRow() == i) {
+                        HasilLaborat.append(carilaborat.getTable().getValueAt(i, 3).toString() + ", ");
                     }
                 }
                 HasilLaborat.requestFocus();
             }
         });
         
-        caritindakan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
+        caritindakan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(caritindakan.getTable().getSelectedRow()!= -1){
@@ -401,48 +373,14 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                     TindakanSelamaDiRS.requestFocus();
                 }
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
         
         cariobat.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (cariobat.getTable().getSelectedRow() != -1) {
-                    ObatSelamaDiRS.append(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(),3).toString()+", ");
-                    ObatSelamaDiRS.requestFocus();
-                }
-            }
-        });
-        
-        cariobat.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    if(cariobat.getTable().getSelectedRow()!= -1){
-                        ObatSelamaDiRS.append(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(),3).toString()+", ");
-                        ObatSelamaDiRS.requestFocus();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        }); 
-        
-        cariobat.BtnKeluar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (i= 0; i < cariobat.getTable().getRowCount(); i++) {
-                    if(cariobat.getTable().getValueAt(i,0).toString().equals("true")){
-                        ObatSelamaDiRS.append(cariobat.getTable().getValueAt(i,3).toString()+", ");
+                for (i = 0; i < cariobat.getTable().getRowCount(); i++) {
+                    if (cariobat.getTable().getValueAt(i, 0).toString().equals("true") || cariobat.getTable().getSelectedRow() == i) {
+                        ObatSelamaDiRS.append(cariobat.getTable().getValueAt(i, 3).toString() + ", ");
                     }
                 }
                 ObatSelamaDiRS.requestFocus();
