@@ -10,8 +10,8 @@ import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -45,23 +45,14 @@ import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import uz.ncipro.calendar.JDateTimePicker;
 import widget.Button;
 import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
-import java.io.File;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.standard.Copies;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import widget.TextBox;
 /**
  *
@@ -137,33 +128,16 @@ public final class validasi {
         }
     }
     
-    
     public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
     public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
-        String currentDir = System.getProperties().getProperty("user.dir");
-        File dir = new File(currentDir);
-        File fileRpt;
-        String fullPath = "";
-        if (dir.isDirectory()) {
-            String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) {
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                }
-            }
-        }
-        
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            JasperPrint jasperPrint = JasperFillManager.fillReport(fullPath, reportParams, new JRResultSetDataSource(ps.executeQuery()));
-            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
             jasperViewer.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             jasperViewer.setSize(screen.width - 50, screen.height - 50);
@@ -177,22 +151,8 @@ public final class validasi {
     }
     
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
-        String currentWorkingDir = System.getProperties().getProperty("user.dir");
-        File dir = new File(currentWorkingDir);
-        File fileRpt;
-        String fullPath = "";
-        if (dir.isDirectory()) {
-            for (String currentDir : dir.list()) {
-                fileRpt = new File(currentWorkingDir + File.separatorChar + currentDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) {
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                }
-            }
-        }
-        
         try {
-            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport(fullPath, reportParams, connect), false);
+            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect), false);
             jv.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             jv.setSize(screen.width - 50, screen.height - 50);
@@ -229,6 +189,21 @@ public final class validasi {
             File f = new File("./" + reportDirName + "/" + reportName.replaceAll("jasper", "pdf"));
             JasperPrint jasperPrint = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
             JasperExportManager.exportReportToPdfFile(jasperPrint, "./" + reportDirName + "/" + reportName.replaceAll("jasper", "pdf"));
+            Desktop.getDesktop().open(f);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
+        }
+    }
+    
+    public void reportQueryPDF(String reportName, String savedFileName, Map reportParams, String sql, String... values) {
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            File f = new File("./" + savedFileName);
+            JasperPrint jasperPrint = JasperFillManager.fillReport("./" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "./" + savedFileName);
             Desktop.getDesktop().open(f);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
