@@ -2612,7 +2612,20 @@ public final class sekuel {
             
     }
     
-    private void SimpanTrack(String sql){
+    public void simpanTrackerSQL(String sql) {
+        if (AKTIFKANTRACKSQL.equalsIgnoreCase("no")) {
+            return;
+        }
+        try (PreparedStatement ps = connect.prepareStatement("insert into trackersql values (now(), ?, ?)")) {
+            ps.setString(1, sql);
+            ps.setString(2, akses.getkode());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void SimpanTrack(String sql) {
         if(AKTIFKANTRACKSQL.equals("yes")){
             try {
                 ps=connect.prepareStatement("insert into trackersql values(now(),?,?)");
