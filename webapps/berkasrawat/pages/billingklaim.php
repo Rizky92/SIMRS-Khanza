@@ -51,15 +51,15 @@
                         <center><font color="333333" size="1" face="Tahoma">BILLING</font></center>
                     </td>
                 </tr>
-                <?php $total = 0; $j = 0; ?>
+                <?php $total = 0; $row = 0; ?>
                 <?php while($inapdrpasien = mysqli_fetch_array($hasil)): ?>
                     <?php $total += $inapdrpasien[7]; ?>
-                    <?php if ($j < 6): ?>
+                    <?php if ($row++ < 6): ?>
                         <tr class="isi12" padding="0">
-                            <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= str_replace("   ","&nbsp;&nbsp;",$inapdrpasien[0])?></font></td>
-                            <td padding="0" width="40%" colspan="6" align="right"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></td>
+                            <td padding="0" width="30%"><font color="000000" size="1" face="Tahoma"><?= str_replace("  ","&nbsp;&nbsp;",$inapdrpasien[0]) ?></td>
+                            <td padding="0" width="40%" colspan="6"><font color="000000" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></td>
                         </tr>
-                    <?php elseif ($j >= 6 && empty($inapdrpasien[6]) && empty($inapdrpasien[0])): ?>
+                    <?php elseif ($row++ >= 6 && empty($inapdrpasien[6]) && empty($inapdrpasien[0])): ?>
                         <tr class="isi12" padding="0">
                             <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= str_replace("   ", "&nbsp;&nbsp;", $inapdrpasien[0]) ?></font></td>
                             <td padding="0" width="40%" colspan="6" align="right"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></font></td>
