@@ -641,7 +641,7 @@
     }
         
     function formatDuit2($duit){
-        return @number_format($duit,0,",",".")."";
+        return @number_format((float)$duit,0,",",".")."";
     }
         
     function formatDec($duit){
