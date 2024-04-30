@@ -1,6 +1,5 @@
 package bridging;
 
-import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.koneksiDB;
@@ -10,12 +9,11 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -29,13 +27,28 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableSet;
+import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
+import javafx.print.JobSettings;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -45,10 +58,14 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import jxl.format.PaperSize;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
@@ -1493,7 +1510,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB()
             + "&page=DetailKirimSmc&norawat=" + noRawatUrlEncoded + "&codernik=" + lblCoderNIK.getText() + "&carabayar=" + caraBayar + "&corona=" + aksi;
-        System.out.println(url);
         Platform.runLater(() -> {
             WebView view = new WebView();
             engine = view.getEngine();
@@ -1527,7 +1543,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
 
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
-        System.out.println(url);
         Platform.runLater(() -> {
             // System.out.println("panel invoice dipanggil : " + url);
             WebView view = new WebView();
@@ -1680,41 +1695,37 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             norawat = lblNoRawat.getText();
         }
+        
+//        String os = System.getProperty("os.name").toLowerCase();
+//        Runtime rt = Runtime.getRuntime();
+//        try {
+//            if (os.contains("win")) {
+//                rt.exec("rundll32 url.dll, FileProtocolHandler " + "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/" + url);
+//            } else if (os.contains("mac")) {
+//                rt.exec("open " + "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/" + url);
+//            } else if (os.contains("nix") || os.contains("nux")) {
+//                String[] browsers = {"x-www-browser", "epiphany", "firefox", "mozilla", "konqueror", "chrome", "chromium", "netscape", "opera", "links", "lynx", "midori"};
+//                // Build a command string which looks like "browser1 "url" || browser2 "url" ||..."
+//                StringBuilder cmd = new StringBuilder();
+//                for (i = 0; i < browsers.length; i++) {
+//                    cmd.append(i == 0 ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/").append(url).append("\" ");
+//                }
+//                rt.exec(new String[] {"sh", "-c", cmd.toString()});
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Notif Browser : " + e);
+//        }
 
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
         System.out.println(url);
-        Platform.runLater(() -> {
-            WebView view = new WebView();
-            engine = view.getEngine();
-            engine.setJavaScriptEnabled(true);
-            engine.setCreatePopupHandler((PopupFeatures p) -> view.getEngine());
-            engine.getLoadWorker().exceptionProperty()
-                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(panelInvoices,
-                                engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
-                                "Loading Catatan...", JOptionPane.ERROR_MESSAGE);
-                        });
-                    }
-                });
-
-            jfxinvoices.setScene(new Scene(view));
-            try {
-                engine.load(url);
-            } catch (Exception exception) {
-                engine.load(url);
-            }
-            
-            try (OutputStream os = new FileOutputStream("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_Billing.pdf")) {
-                System.out.println(engine.getLocation());
-                PdfRendererBuilder pdfBuilder = new PdfRendererBuilder();
-                pdfBuilder.withUri(engine.getLocation());
-                pdfBuilder.run();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            }
-        });
+        String outputPath = System.getProperties().getProperty("user.dir") + File.pathSeparator + "berkaspdf" + File.pathSeparator + tanggalExport + File.pathSeparator + lblNoSEP.getText() + "_Billing.pdf";
+        System.out.println(outputPath);
+        
+        try {
+            Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start", "chrome", "--headless=chrome", "--enable-logging", "--print-to-pdf=" + outputPath, "--no-pdf-header-footer", url});
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
     private void exportAwalMedisIGD() {
@@ -1992,7 +2003,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (exportSukses) {
             JOptionPane.showMessageDialog(rootPane, "Export PDF berhasil!");
             mergePDF();
-            cleanupAfterMerge(true);
+//            cleanupAfterMerge(true);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
             exportSukses = true;
