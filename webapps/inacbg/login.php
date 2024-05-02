@@ -19,7 +19,7 @@
             }else if ($_GET['page'] === "DetailKirim") {
                 $url = "index.php?act=DetailKirim&codernik=".$codernik;
             } else if ($_GET['page'] === 'DetailKirimSmc') {
-                $url = "index.php?act=DetailKirimSmc&" . http_build_query(array_intersect_key($_GET, array_flip(['norawat', 'codernik', 'carabayar', 'corona'])));
+                $url = "index.php?act=DetailKirimSmc&" . http_build_query(array_intersect_key($_GET, array_flip(['nosep', 'codernik', 'carabayar', 'corona'])));
             }
         }else{
             session_start();

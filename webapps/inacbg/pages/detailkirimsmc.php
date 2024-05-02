@@ -10,17 +10,17 @@
             echo "";
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
             $corona         = validTeks(isset($_GET['corona'])?$_GET['corona']:NULL);
-            $norawat        = validTeks(isset($_GET['norawat'])?$_GET['norawat']:NULL);
+            $nosep        = validTeks(isset($_GET['nosep'])?$_GET['nosep']:NULL);
             $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
             $carabayar      = validTeks(str_replace("_"," ",isset($_GET['carabayar']))?str_replace("_"," ",$_GET['carabayar']):NULL);
-            $_sql         = "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
+            $_sql         = "select bridging_sep.no_sep,reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
                             reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,
                             pasien.umur,pasien.tgl_lahir,poliklinik.nm_poli,reg_periksa.status_lanjut,reg_periksa.umurdaftar,reg_periksa.sttsumur,
                             reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab 
-                            from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab 
-                            on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                            and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='$norawat' ";
+                            from bridging_sep join reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab 
+                            on bridging_sep.no_rawat = reg_periksa.no_rawat and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                            and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where bridging_sep.no_sep='$nosep'";
             $hasil        = bukaquery($_sql);
             $baris        = mysqli_fetch_array($hasil);
             $no_rkm_medis = $baris["no_rkm_medis"];
@@ -817,7 +817,7 @@
                             $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah, 
                             $peti_jenazah,$plastik_erat,$desinfektan_jenazah,$mobil_jenazah,$desinfektan_mobil_jenazah,
                             $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$sistole,$diastole);
-                        echo "<meta http-equiv='refresh' content='1;URL=?act=KlaimBaruManual2&codernik=$codernik'>";
+                        echo "<meta http-equiv='refresh' content='1;URL=?act=DetailKirimSmc&codernik=$codernik&nosep=$nosep&carabayar=$carabayar&corona=$corona'>";
                     }else if ((empty($norawat))||(empty($nosep))||(empty($nokartu))||(empty($nomor_kartu_t))){
                         echo 'Semua field harus isi..!!!';
                     }
@@ -832,16 +832,14 @@
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
                             $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole);
-                        echo "<meta http-equiv='refresh' content='1;URL=?act=KlaimBaruManual2&codernik=$codernik'>";
+                        echo "<meta http-equiv='refresh' content='1;URL=?act=DetailKirimSmc&codernik=$codernik&nosep=$nosep&carabayar=$carabayar&corona=$corona'>";
                     }else if ((empty($norawat))||(empty($nosep))||(empty($nokartu))){
                         echo 'Semua field harus isi..!!!';
                     }
-                }
-                
-                    
+                }                    
             }
         ?>         
     </div>
-    <div align="center" style="padding: 1rem 0 0 1rem"><input name="BtnSimpan" type="submit" class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;"></div>
+    <div align="center" style="padding: 2rem 1rem; font-size: 1.6rem"><input name="BtnSimpan" type="submit" class="button" value="&nbsp;&nbsp;SIMPAN & KIRIM KE INACBG&nbsp;&nbsp;"></div>
     </form>
 </div>
