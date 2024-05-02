@@ -297,8 +297,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         Pekerjaan = new widget.TextBox();
@@ -330,7 +329,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         ScrollMenu = new widget.ScrollPane();
         FormMenu = new widget.PanelBiasa();
         chkSemua = new widget.CekBox();
-        chkBridgingBPJS = new widget.CekBox();
         chkDiagnosaPenyakit = new widget.CekBox();
         chkProsedurTindakan = new widget.CekBox();
         chkTriase = new widget.CekBox();
@@ -532,10 +530,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         R5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         R5.setName("R5"); // NOI18N
         R5.setPreferredSize(new java.awt.Dimension(120, 23));
-        R5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        R5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 R5ActionPerformed(evt);
             }
         });
@@ -572,10 +568,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Tgl1.setDisplayFormat("dd-MM-yyyy");
         Tgl1.setName("Tgl1"); // NOI18N
         Tgl1.setPreferredSize(new java.awt.Dimension(90, 23));
-        Tgl1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Tgl1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 Tgl1KeyPressed(evt);
             }
         });
@@ -590,10 +584,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Tgl2.setDisplayFormat("dd-MM-yyyy");
         Tgl2.setName("Tgl2"); // NOI18N
         Tgl2.setPreferredSize(new java.awt.Dimension(90, 23));
-        Tgl2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Tgl2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 Tgl2KeyPressed(evt);
             }
         });
@@ -606,10 +598,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         R4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         R4.setName("R4"); // NOI18N
         R4.setPreferredSize(new java.awt.Dimension(67, 23));
-        R4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        R4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 R4ActionPerformed(evt);
             }
         });
@@ -617,10 +607,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         NoRawat.setName("NoRawat"); // NOI18N
         NoRawat.setPreferredSize(new java.awt.Dimension(135, 23));
-        NoRawat.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoRawat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoRawatKeyPressed(evt);
             }
         });
@@ -631,10 +619,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnCari1.setToolTipText("Alt+2");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCari1ActionPerformed(evt);
             }
         });
@@ -650,10 +636,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPrintActionPerformed(evt);
             }
         });
@@ -664,17 +648,13 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -687,10 +667,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
-        TabRawat.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
             }
         });
@@ -744,10 +722,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         ChkAccor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         ChkAccor.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
         ChkAccor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
-        ChkAccor.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkAccor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkAccorActionPerformed(evt);
             }
         });
@@ -770,29 +746,12 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkSemua.setName("chkSemua"); // NOI18N
         chkSemua.setOpaque(false);
         chkSemua.setPreferredSize(new java.awt.Dimension(245, 22));
-        chkSemua.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        chkSemua.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chkSemuaItemStateChanged(evt);
             }
         });
         FormMenu.add(chkSemua);
-
-        chkBridgingBPJS.setSelected(true);
-        chkBridgingBPJS.setText("Berkas Pengantar BPJS");
-        chkBridgingBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkBridgingBPJS.setName("chkBridgingBPJS"); // NOI18N
-        chkBridgingBPJS.setOpaque(false);
-        chkBridgingBPJS.setPreferredSize(new java.awt.Dimension(245, 22));
-        chkBridgingBPJS.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
-                chkBridgingBPJSItemStateChanged(evt);
-            }
-        });
-        FormMenu.add(chkBridgingBPJS);
 
         chkDiagnosaPenyakit.setSelected(true);
         chkDiagnosaPenyakit.setText("Diagnosa/Penyakit (ICD 10)");
@@ -1088,10 +1047,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanMedisHemodialisa.setName("chkAsuhanMedisHemodialisa"); // NOI18N
         chkAsuhanMedisHemodialisa.setOpaque(false);
         chkAsuhanMedisHemodialisa.setPreferredSize(new java.awt.Dimension(245, 22));
-        chkAsuhanMedisHemodialisa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        chkAsuhanMedisHemodialisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkAsuhanMedisHemodialisaActionPerformed(evt);
             }
         });
@@ -1986,10 +1943,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -2007,10 +1962,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         NoRM.setName("NoRM"); // NOI18N
         NoRM.setPreferredSize(new java.awt.Dimension(100, 23));
-        NoRM.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoRM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoRMKeyPressed(evt);
             }
         });
@@ -2028,17 +1981,13 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         BtnPasien.setToolTipText("Alt+3");
         BtnPasien.setName("BtnPasien"); // NOI18N
         BtnPasien.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnPasien.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPasienActionPerformed(evt);
             }
         });
-        BtnPasien.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnPasienKeyPressed(evt);
             }
         });
@@ -2637,11 +2586,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         // TODO add your handling code here:
     }//GEN-LAST:event_R5ActionPerformed
 
-    private void chkBridgingBPJSItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_chkBridgingBPJSItemStateChanged
-    {//GEN-HEADEREND:event_chkBridgingBPJSItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkBridgingBPJSItemStateChanged
-
     private void chkAsuhanMedisHemodialisaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_chkAsuhanMedisHemodialisaActionPerformed
     {//GEN-HEADEREND:event_chkAsuhanMedisHemodialisaActionPerformed
         // TODO add your handling code here:
@@ -2766,7 +2710,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkAsuhanTambahanPerilakuKekerasan;
     private widget.CekBox chkAsuhanTerapiWicara;
     private widget.CekBox chkBerkasDigital;
-    private widget.CekBox chkBridgingBPJS;
     private widget.CekBox chkCatatanADIMEGizi;
     private widget.CekBox chkCatatanCekGDS;
     private widget.CekBox chkCatatanDokter;
@@ -2913,6 +2856,17 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             break;
         }
         
+        isPasien();
+        BtnCari1ActionPerformed(null);
+    }
+    
+    public void setNoRMKompilasi(String noRawat, String noRM) {
+        NoRM.setText(noRM);
+        NoRawat.setText(noRawat);
+        R4.setSelected(true);
+        TabRawat.setSelectedIndex(2);
+        chkSemua.setSelected(true);
+        chkSemuaItemStateChanged(null);
         isPasien();
         BtnCari1ActionPerformed(null);
     }
