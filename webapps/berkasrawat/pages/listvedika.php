@@ -84,7 +84,6 @@
                                             <center>
                                                 <a target=_blank href=../berkasrawat/pages/tampilpdf.php?iyem=".encrypt_decrypt("{\"no_rawat\":\"".$baris["no_rawat"]."\"}","e").">[Gabung]</a><br>
                                                 <a target=_blank href=../berkasrawat/pages/billing.php?iyem=".encrypt_decrypt("{\"no_rawat\":\"".$baris["no_rawat"]."\"}","e").">[Billing]</a>
-                                                <a target=_blank href=../berkasrawat/pages/billingklaim.php?iyem=".encrypt_decrypt("{\"no_rawat\":\"".$baris["no_rawat"]."\"}","e").">[Billingklaim]</a>
                                             </center>
                                        </td>
                                        <td bgcolor='#FFFFFF' valign='top'>

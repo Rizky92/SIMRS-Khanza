@@ -6933,29 +6933,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
     
-//    private void menampilkanBerkasPengantarBPJS(String norawat)
-//    {
-//        try {
-//            if (chkBridgingBPJS.isSelected()) {
-//                // SEP BPJS
-//                try {
-//                    ps3 = koneksi.prepareStatement("select bridging_sep.*, if(bridging_sep.jnspelayanan = '1', 'Rawat Inap', 'Rawat Jalan') as jenispelayanan, if(bridging_sep.klsrawat = '1', 'Kelas 1', if(bridging_sep.klsrawat = '2', 'Kelas 2', 'Kelas 3')) as kelasrawat, if(bridging_sep.lakalantas = '0', 'Kasus Kecelakaan', 'Bukan Kasus Kecelakaan') as kasuslaka, concat(bridging_sep.nmkec, ', ', bridging_sep.nmkab, ', ', bridging_sep.nmprop) as lokasilaka, case when bridging_sep.tujuankunjungan = '0' and bridging_sep.asesmenpelayanan in ('', '1') then 'Konsultasi Dokter (Pertama)' when bridging_sep.tujuankunjungan = '2' and bridging_sep.asesmenpelayanan = '5' then 'Kunjungan Kontrol (Ulangan)' else 'Kunjungan Internal' end jeniskunjungan from bridging_sep where bridging_sep.no_rawat = ?");
-//                } catch (Exception e) {
-//                    System.out.println("Notif SEP BPJS : " + e);
-//                }
-//                
-//                // SPRI ranap BPJS
-//                try {
-//                    ps3 = koneksi.prepareStatement();
-//                } catch (Exception e) {
-//                    System.out.println("Notif SPRI BPJS : " + e);
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Notif Berkas Pengantar BPJS : " + e);
-//        }
-//    }
-
     private void menampilkanTriaseIGD(String norawat) {
         try {
             if(chkTriase.isSelected()==true){
