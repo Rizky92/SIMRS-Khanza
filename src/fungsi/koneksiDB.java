@@ -76,10 +76,10 @@ public class koneksiDB {
         }
     }
 
-    public static boolean ICD10EKLAIM() {
+    public static boolean GUNAKANDIAGNOSAEKLAIM() {
         try {
             prop.loadFromXML(new FIleInputStream("setting/database.xml"));
-            return Boolean.parseBoolean(prop.getProperty("ICD10EKLAIM"));
+            return prop.getProperty("GUNAKANDIAGNOSAEKLAIM").equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
         }

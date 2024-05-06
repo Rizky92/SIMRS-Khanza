@@ -39,7 +39,7 @@ public class PanelDiagnosa extends widget.panelisi {
     private int jml=0,i=0,index=0;
     private String[] kode,nama,ciripny,keterangan,kategori,cirium,kode2,panjang,pendek;
     private boolean[] pilih;
-    private boolean ICD10EKLAIM = koneksiDB.ICD10EKLAIM();
+    private boolean GUNAKANDIAGNOSAEKLAIM = koneksiDB.GUNAKANDIAGNOSAEKLAIM();
     public String norawat="",status="",norm="",tanggal1="",tanggal2="",keyword="";
     /**
      * Creates new form panelDiagnosa
@@ -678,7 +678,7 @@ public class PanelDiagnosa extends widget.panelisi {
             for(i=0;i<jml;i++){
                 tabModeDiagnosa.addRow(new Object[] {pilih[i],kode[i],nama[i],ciripny[i],keterangan[i],kategori[i],cirium[i]});
             }
-            if (ICD10EKLAIM) {
+            if (GUNAKANDIAGNOSAEKLAIM) {
                 pspenyakit = koneksi.prepareStatement(
                     "select penyakit.kd_penyakit, penyakit.nm_penyakit, penyakit.ciri_ciri, penyakit.keterangan, " +
                     "kategori_penyakit.nm_kategori, kategori_penyakit.ciri_umum from kategori_penyakit " +
