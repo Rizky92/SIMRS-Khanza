@@ -78,7 +78,7 @@ public class koneksiDB {
 
     public static boolean GUNAKANDIAGNOSAEKLAIM() {
         try {
-            prop.loadFromXML(new FIleInputStream("setting/database.xml"));
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             return prop.getProperty("GUNAKANDIAGNOSAEKLAIM").equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
