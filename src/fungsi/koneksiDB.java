@@ -8,6 +8,7 @@ package fungsi;
 import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
 import javax.swing.JOptionPane;
@@ -78,24 +79,28 @@ public class koneksiDB {
         }
     }
     
-    public static boolean VALIDASIRESEPKRONIS()
-    {
+    public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            
-            return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
-        } catch (Exception e) {
+            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN").toLowerCase().trim().contains(kategori);
+        } catch (IOException e) {
             return false;
         }
     }
     
-    public static String TAMPILANDEFAULTRIWAYATPASIEN()
-    {
+    public static boolean VALIDASIRESEPKRONIS() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            
+            return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    
+    public static String TAMPILANDEFAULTRIWAYATPASIEN() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             String value = prop.getProperty("TAMPILANDEFAULTRIWAYATPASIEN").toLowerCase().trim();
-            
             switch (value) {
                 case "2 riwayat terakhir":
                 case "5 riwayat terakhir":
