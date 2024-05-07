@@ -44,7 +44,7 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
     private DlgCariBangsal ruang=new DlgCariBangsal(null,false);
     private BackgroundMusic music;
     private Date now;
-    private boolean aktif=false,semua;
+    private boolean aktif=false,semua, VALIDASIULANGHASILPERMINTAANLABPA = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpa");
     private String pilihan="",alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",InformasiTambahan,DiagnosaKlinis,
                     tanggalbahan,diperolehdengan,lokasijaringan,diawetkandengan,pernahdilakukandi,tanggalpa,diagnosapa,nomorpa,
                     NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",
@@ -1603,17 +1603,35 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         if(Sampel.equals("")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf, silahkan ambil sampel terlebih dahulu..!!");
                         }else{
-                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            DlgPeriksaLaboratoriumPA dlgro=new DlgPeriksaLaboratoriumPA(null,false);
-                            dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                            dlgro.setLocationRelativeTo(internalFrame1);
-                            dlgro.emptTeks();
-                            dlgro.isCek(); 
-                            dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
-                            dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
-                            TeksKosong();
-                            dlgro.setVisible(true);
-                            this.setCursor(Cursor.getDefaultCursor());
+                            if (VALIDASIULANGHASILPERMINTAANLABPA) {
+                                if (akses.getadmin() || Hasil.isBlank()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratoriumPA dlgro=new DlgPeriksaLaboratoriumPA(null,false);
+                                    dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek(); 
+                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                    dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
+                            } else {
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                DlgPeriksaLaboratoriumPA dlgro=new DlgPeriksaLaboratoriumPA(null,false);
+                                dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                dlgro.setLocationRelativeTo(internalFrame1);
+                                dlgro.emptTeks();
+                                dlgro.isCek(); 
+                                dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                TeksKosong();
+                                dlgro.setVisible(true);
+                                this.setCursor(Cursor.getDefaultCursor());
+                            }
                         }
                     }
                 }else{            
