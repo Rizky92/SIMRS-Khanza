@@ -70,11 +70,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
-    private final validasi valid = new validasi();
-    private int i = 0;
-    private WebEngine engine;
+    private final validasi Valid = new validasi();
     private final JFXPanel jfxPanelicare = new JFXPanel();
     private final JFXPanel jfxinvoices = new JFXPanel();
+    private WebEngine engine;
     private String finger = "", tanggalExport = "";
     private boolean exportSukses = true;
 
@@ -1047,7 +1046,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            valid.pindah(evt, TCari, BtnAll);
+            Valid.pindah(evt, TCari, BtnAll);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -1115,9 +1114,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             param.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
             param.put("parameter", lblNoSEP.getText());
             if (lblStatusRawat.getText().contains("Ranap")) {
-                valid.MyReport("rptBridgingSEP5.jasper", "report", "::[ Cetak SEP ]::", param);
+                Valid.MyReport("rptBridgingSEP5.jasper", "report", "::[ Cetak SEP ]::", param);
             } else {
-                valid.MyReport("rptBridgingSEP6.jasper", "report", "::[ Cetak SEP ]::", param);
+                Valid.MyReport("rptBridgingSEP6.jasper", "report", "::[ Cetak SEP ]::", param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -1146,28 +1145,28 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from resume_pasien_ranap where no_rawat = ?", lblNoRawat.getText());
             String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
             finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", kodeDokter);
-            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.equals("") ? kodeDokter : finger) + "\n" + valid.SetTgl3(tglKeluar));
+            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.equals("") ? kodeDokter : finger) + "\n" + Valid.SetTgl3(tglKeluar));
             param.put("ruang", Sequel.cariIsiSmc(
                 "select concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar "
                 + "join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where kamar_inap.no_rawat = ? and kamar_inap.tgl_keluar = ? and kamar_inap.jam_keluar = ?",
                 lblNoRawat.getText(), tglKeluar, jamKeluar)
             );
-            param.put("tanggalkeluar", valid.SetTgl3(tglKeluar));
+            param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
             param.put("jamkeluar", jamKeluar);
             try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
                 ps.setString(1, lblNoRawat.getText());
                 ps.setString(2, kodeDokter);
                 try (ResultSet rs = ps.executeQuery()) {
-                    i = 2;
+                    int i = 2;
                     while (rs.next()) {
                         if (i == 2) {
                             finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                            param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + valid.SetTgl3(tglKeluar));
+                            param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                             param.put("namadokter2", rs.getString("nm_dokter"));
                         }
                         if (i == 3) {
                             finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                            param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + valid.SetTgl3(tglKeluar));
+                            param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                             param.put("namadokter3", rs.getString("nm_dokter"));
                         }
                         i++;
@@ -1176,7 +1175,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            valid.reportSmc("rptLaporanResumeRanap.jasper", "report", "::[ Laporan Resume Pasien ]::", param);
+            Valid.reportSmc("rptLaporanResumeRanap.jasper", "report", "::[ Laporan Resume Pasien ]::", param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnResumeRanapActionPerformed
@@ -1185,7 +1184,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
-            valid.panggilUrl("berkasrawat/loginlihatbilling.php?act=login&norawat=" + lblNoRawat.getText() + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB());
+            Valid.panggilUrl("berkasrawat/loginlihatbilling.php?act=login&norawat=" + lblNoRawat.getText() + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB());
         }
     }//GEN-LAST:event_btnInvoiceActionPerformed
 
@@ -1211,7 +1210,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
             finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", kodeDokter);
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.equals("") ? kodeDokter : finger) + "\n" + tgl);
-            valid.reportQuery("rptCetakPenilaianAwalMedisIGD.jasper", "report", "::[ Laporan Penilaian Awal Medis IGD ]::", param,
+            Valid.reportQuery("rptCetakPenilaianAwalMedisIGD.jasper", "report", "::[ Laporan Penilaian Awal Medis IGD ]::", param,
                 "select reg_periksa.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, if (pasien.jk = 'L', 'Laki-Laki', 'Perempuan') as jk, pasien.tgl_lahir, penilaian_medis_igd.tanggal, penilaian_medis_igd.kd_dokter, "
                 + "penilaian_medis_igd.anamnesis, penilaian_medis_igd.hubungan, concat_ws(', ', penilaian_medis_igd.anamnesis, nullif(penilaian_medis_igd.hubungan, '')) as hubungan_anemnesis, penilaian_medis_igd.keluhan_utama, "
                 + "penilaian_medis_igd.rps, penilaian_medis_igd.rpk, penilaian_medis_igd.rpd, penilaian_medis_igd.rpo, penilaian_medis_igd.alergi, penilaian_medis_igd.keadaan, penilaian_medis_igd.gcs, penilaian_medis_igd.kesadaran, "
@@ -1318,9 +1317,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                     param.put("nopermintaan", rs2.getString("noorder"));
                                     param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
                                     param.put("jampermintaan", rs2.getString("jam_permintaan"));
-                                    valid.reportSmc("rptPeriksaLab4Permintaan.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                    Valid.reportSmc("rptPeriksaLab4Permintaan.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                 } else {
-                                    valid.reportSmc("rptPeriksaLab4.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                    Valid.reportSmc("rptPeriksaLab4.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                 }
                             }
                         }
@@ -1403,7 +1402,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter_perujuk") + "\nID " + (finger.equals("") ? rs.getString("dokter_perujuk") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                         finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
                         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.equals("") ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
-                        valid.reportSmc("rptPeriksaRadiologi.jasper", "report", "::[ Pemeriksaan Radiologi ]::", param);
+                        Valid.reportSmc("rptPeriksaRadiologi.jasper", "report", "::[ Pemeriksaan Radiologi ]::", param);
                     }
                 }
             } catch (Exception e) {
@@ -1432,7 +1431,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
             param.put("parameter", Sequel.cariIsiSmc("select noskdp from bridging_sep where no_sep = ?", lblNoSEP.getText()));
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + kodeDokter + "\n" + tglSurat);
-            valid.reportQuery(
+            Valid.reportQuery(
                 "rptBridgingSuratKontrol2.jasper", "report", "::[ Data Surat Kontrol VClaim ]::", param,
                 "select bridging_sep.no_rawat, bridging_sep.no_sep, bridging_sep.no_kartu, bridging_sep.nomr, bridging_sep.nama_pasien, bridging_sep.tanggal_lahir, bridging_sep.jkel, bridging_sep.diagawal, bridging_sep.nmdiagnosaawal, bridging_surat_kontrol_bpjs.tgl_surat, "
                 + "bridging_surat_kontrol_bpjs.no_surat, bridging_surat_kontrol_bpjs.tgl_rencana, bridging_surat_kontrol_bpjs.kd_dokter_bpjs, bridging_surat_kontrol_bpjs.nm_dokter_bpjs, bridging_surat_kontrol_bpjs.kd_poli_bpjs, bridging_surat_kontrol_bpjs.nm_poli_bpjs "
@@ -1460,7 +1459,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             String namaDokter = Sequel.cariIsiSmc("select nm_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
             String tglSPRI = Sequel.cariIsiSmc("select date_format(tgl_rencana, '%d-%m-%Y') from bridging_surat_pri_bpjs where no_surat = ?", noSPRI);
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + kodeDokter + "\n" + tglSPRI);
-            valid.reportQuery("rptBridgingSuratPRI2.jasper", "report", "::[ Data Surat PRI VClaim ]::", param,
+            Valid.reportQuery("rptBridgingSuratPRI2.jasper", "report", "::[ Data Surat PRI VClaim ]::", param,
                 "select bridging_surat_pri_bpjs.*, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.tgl_lahir, pasien.jk "
                 + "from reg_periksa join bridging_surat_pri_bpjs on bridging_surat_pri_bpjs.no_rawat = reg_periksa.no_rawat "
                 + "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis where bridging_surat_pri_bpjs.no_surat = ?", noSPRI
@@ -1471,10 +1470,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void BtnSimpanDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanDiagnosaActionPerformed
         if (!lblNoRawat.getText().isBlank()) {
-            panelDiagnosa1.setRM(
-                lblNoRawat.getText(), lblNoRM.getText(), valid.setTglSmc(DTPCari1),
-                valid.setTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim()
-            );
             panelDiagnosa1.simpan();
             tampilINACBG();
         }
@@ -1482,10 +1477,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void BtnHapusDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusDiagnosaActionPerformed
         if (!lblNoRawat.getText().isBlank()) {
-            panelDiagnosa1.setRM(
-                lblNoRawat.getText(), lblNoRM.getText(), valid.setTglSmc(DTPCari1),
-                valid.setTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim()
-            );
             panelDiagnosa1.hapus();
             tampilINACBG();
         }
@@ -1568,8 +1559,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             + "\"noSep\": \"" + TNoSEPRanapPulang.getText() + "\","
             + "\"statusPulang\": \"" + StatusPulang.getSelectedItem().toString().substring(0, 1) + "\","
             + "\"noSuratMeninggal\": \"" + NoSuratKematian.getText().trim() + "\","
-            + "\"tglMeninggal\": \"" + (NoSuratKematian.getText().trim().isBlank() ? "" : valid.SetTgl(TanggalKematian.getSelectedItem().toString())) + "\","
-            + "\"tglPulang\": \"" + valid.SetTgl(TanggalPulang.getSelectedItem().toString()) + "\","
+            + "\"tglMeninggal\": \"" + (NoSuratKematian.getText().trim().isBlank() ? "" : Valid.SetTgl(TanggalKematian.getSelectedItem().toString())) + "\","
+            + "\"tglPulang\": \"" + Valid.SetTgl(TanggalPulang.getSelectedItem().toString()) + "\","
             + "\"noLPManual\": \"" + NoLPManual.getText().trim() + "\","
             + "\"user\": \"" + akses.getkode().trim().substring(0, 9) + "\""
             + "}"
@@ -1585,7 +1576,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             System.out.println("message : " + nameNode.path("message").asText());
             if (nameNode.path("code").asText().equals("200")) {
                 Sequel.mengupdateSmc("bridging_sep", "tglpulang = ?", "no_sep = ?",
-                    valid.SetTgl(TanggalPulang.getSelectedItem().toString()) + " " + TanggalPulang.getSelectedItem().toString().substring(11, 19),
+                    Valid.SetTgl(TanggalPulang.getSelectedItem().toString()) + " " + TanggalPulang.getSelectedItem().toString().substring(11, 19),
                     TNoSEPRanapPulang.getText());
                 JOptionPane.showMessageDialog(rootPane, "Proses update pulang di BPJS selesai!");
                 WindowUpdatePulang.dispose();
@@ -1770,9 +1761,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             "and (reg_periksa.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) like ?) " +
             "order by reg_periksa.no_rawat"
         )) {
-            valid.tabelKosong(tabMode);
-            ps.setString(1, valid.setTglSmc(DTPCari1));
-            ps.setString(2, valid.setTglSmc(DTPCari2));
+            Valid.tabelKosong(tabMode);
+            ps.setString(1, Valid.setTglSmc(DTPCari1));
+            ps.setString(2, Valid.setTglSmc(DTPCari2));
             if (CmbStts.getSelectedIndex() == 0) {
                 ps.setString(3, "%%");
             } else {
@@ -1884,10 +1875,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 btnSPRI.setText("Tidak Ada");
                 btnSPRI.setEnabled(false);
             }
-            panelDiagnosa1.setRM(
-                lblNoRawat.getText(), lblNoRM.getText(), valid.SetTgl(DTPCari1.getSelectedItem().toString()),
-                valid.SetTgl(DTPCari2.getSelectedItem().toString()), "Ralan", lblNoRawat.getText().trim()
-            );
+            panelDiagnosa1.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.setTglSmc(DTPCari1), Valid.setTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim());
             panelDiagnosa1.pilihTab();
             tabPane1.setSelectedIndex(0);
             tampilINACBG();
@@ -1901,8 +1889,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     public void isCek() {
+        lblCoderNIK.setText(Sequel.cariIsiSmc("select no_ik from inacbg_coder_nik where nik = ?", akses.getkode()));
         tampil();
-        lblCoderNIK.setText(Sequel.cariIsi("select inacbg_coder_nik.no_ik from inacbg_coder_nik where inacbg_coder_nik.nik='" + akses.getkode() + "'"));
     }
 
     public void isCek(String nik) {
@@ -1915,7 +1903,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (Sequel.cariBooleanSmc("select * from perawatan_corona where perawatan_corona.no_rawat = ?", lblNoRawat.getText())) {
             aksi = "PasienCorona";
         }
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB()
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
+            + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB()
             + "&page=DetailKirimSmc&nosep=" + lblNoSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + aksi;
         Platform.runLater(() -> {
             WebView view = new WebView();
@@ -1949,7 +1938,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             norawat = lblNoRawat.getText();
         }
 
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
+            + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
         Platform.runLater(() -> {
             WebView view = new WebView();
             engine = view.getEngine();
@@ -2056,31 +2046,31 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from resume_pasien_ranap where no_rawat = ?", lblNoRawat.getText());
         String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
         finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", kodeDokter);
-        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.equals("") ? kodeDokter : finger) + "\n" + valid.SetTgl3(tglKeluar));
+        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.equals("") ? kodeDokter : finger) + "\n" + Valid.SetTgl3(tglKeluar));
         param.put("ruang", Sequel.cariIsiSmc(
             "select concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar "
             + "join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where kamar_inap.no_rawat = ? and kamar_inap.tgl_keluar = ? and kamar_inap.jam_keluar = ?",
             lblNoRawat.getText(), tglKeluar, jamKeluar)
         );
-        param.put("tanggalkeluar", valid.SetTgl3(tglKeluar));
+        param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
         param.put("jamkeluar", jamKeluar);
         try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
             ps.setString(1, lblNoRawat.getText());
             ps.setString(2, kodeDokter);
             try (ResultSet rs = ps.executeQuery()) {
-                i = 2;
+                int i = 2;
                 while (rs.next()) {
                     if (i == 2) {
-                        finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                        param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + valid.SetTgl3(tglKeluar));
+                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                        param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                         param.put("namadokter2", rs.getString("nm_dokter"));
                     }
                     if (i == 3) {
-                        finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                        param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + valid.SetTgl3(tglKeluar));
+                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                        param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.equals("") ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                         param.put("namadokter3", rs.getString("nm_dokter"));
                     }
-                    i++;
+                    ++i;
                 }
             }
         } catch (Exception e) {
@@ -2090,9 +2080,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void exportBilling() {
-        if (! btnInvoice.isEnabled()) {
-            return;
-        }
+        if (! btnInvoice.isEnabled()) return;
         
         String norawat = lblNoRawat.getText();
         try {
@@ -2106,7 +2094,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             URL url = new URL(link);
             org.jsoup.nodes.Document jsoupDoc = Jsoup.parse(url, 30000);
             org.w3c.dom.Document w3cDoc = new W3CDom().fromJsoup(jsoupDoc);
-            
             PdfRendererBuilder builder = new PdfRendererBuilder();
             builder.withW3cDocument(w3cDoc, link);
             builder.toStream(os);
@@ -2118,9 +2105,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void exportAwalMedisIGD() {
-        if (!btnAwalMedisIGD.isEnabled()) {
-            return;
-        }
+        if (!btnAwalMedisIGD.isEnabled()) return;
+        
         String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText());
         String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
         String tgl = Sequel.cariIsiSmc("select date_format(tanggal, '%d-%m-%Y') from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText());
@@ -2150,9 +2136,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void exportHasilLab() {
-        if (!btnHasilLab.isEnabled()) {
-            return;
-        }
+        if (!btnHasilLab.isEnabled()) return;
+        
         String kamar = "", namaKamar = "";
         int i = 0, j = 1;
         try (PreparedStatement ps = koneksi.prepareStatement(

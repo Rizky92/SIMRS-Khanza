@@ -6,11 +6,11 @@
 package laporan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -39,6 +39,7 @@ public class PanelDiagnosa extends widget.panelisi {
     private int jml=0,i=0,index=0;
     private String[] kode,nama,ciripny,keterangan,kategori,cirium,kode2,panjang,pendek;
     private boolean[] pilih;
+    private boolean GUNAKANDIAGNOSAEKLAIM = koneksiDB.GUNAKANDIAGNOSAEKLAIM();
     public String norawat="",status="",norm="",tanggal1="",tanggal2="",keyword="";
     /**
      * Creates new form panelDiagnosa
@@ -676,9 +677,18 @@ public class PanelDiagnosa extends widget.panelisi {
             Valid.tabelKosong(tabModeDiagnosa);
             for(i=0;i<jml;i++){
                 tabModeDiagnosa.addRow(new Object[] {pilih[i],kode[i],nama[i],ciripny[i],keterangan[i],kategori[i],cirium[i]});
-            }       
-
-            pspenyakit=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
+            }
+            if (GUNAKANDIAGNOSAEKLAIM) {
+                pspenyakit = koneksi.prepareStatement(
+                    "select penyakit.kd_penyakit, penyakit.nm_penyakit, penyakit.ciri_ciri, penyakit.keterangan, " +
+                    "kategori_penyakit.nm_kategori, kategori_penyakit.ciri_umum from kategori_penyakit " +
+                    "inner join penyakit on penyakit.kd_ktg = kategori_penyakit.kd_ktg " +
+                    "where exists(select * from eklaim_icd10 where eklaim_icd10.code = penyakit.kd_penyakit and eklaim_icd10.status = '1') and " +
+                    "penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or penyakit.ciri_ciri like ? or " +
+                    "penyakit.keterangan like ? or kategori_penyakit.nm_kategori like ? or kategori_penyakit.ciri_umum like ? " +
+                    "order by penyakit.kd_penyakit LIMIT 1000");
+            } else {
+                pspenyakit=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                     "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum "+
                     "from kategori_penyakit inner join penyakit "+
                     "on penyakit.kd_ktg=kategori_penyakit.kd_ktg where  "+
@@ -689,6 +699,7 @@ public class PanelDiagnosa extends widget.panelisi {
                     " kategori_penyakit.nm_kategori like ? or "+
                     " kategori_penyakit.ciri_umum like ? "+
                     "order by penyakit.kd_penyakit  LIMIT 1000");
+            }
             try {
                 pspenyakit.setString(1,"%"+Diagnosa.getText().trim()+"%");
                 pspenyakit.setString(2,"%"+Diagnosa.getText().trim()+"%");

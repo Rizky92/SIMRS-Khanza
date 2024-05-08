@@ -67,14 +67,21 @@ public class koneksiDB {
         return connection;        
     }
     
-    public static String raw(String propertyName)
-    {
+    public static String raw(String propertyName) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            
             return prop.getProperty(propertyName);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static boolean GUNAKANDIAGNOSAEKLAIM() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("GUNAKANDIAGNOSAEKLAIM").equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
         }
     }
     
@@ -89,13 +96,10 @@ public class koneksiDB {
         }
     }
     
-    public static String TAMPILANDEFAULTRIWAYATPASIEN()
-    {
+    public static String TAMPILANDEFAULTRIWAYATPASIEN() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            
             String value = prop.getProperty("TAMPILANDEFAULTRIWAYATPASIEN").toLowerCase().trim();
-            
             switch (value) {
                 case "2 riwayat terakhir":
                 case "5 riwayat terakhir":
