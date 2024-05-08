@@ -2006,18 +2006,22 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         if(Sampel.equals("")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf, silahkan ambil sampel terlebih dahulu..!!");
                         }else{
-                            if (akses.getadmin() || Hasil.isBlank() || ! VALIDASIULANGHASILPERMINTAANLABPK) {
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
-                                dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                                dlgro.setLocationRelativeTo(internalFrame1);
-                                dlgro.emptTeks();
-                                dlgro.isCek(); 
-                                dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
-                                dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
-                                TeksKosong();
-                                dlgro.setVisible(true);
-                                this.setCursor(Cursor.getDefaultCursor());
+                            if (VALIDASIULANGHASILPERMINTAANLABPK) {
+                                if (Hasil.isBlank() || akses.getadmin()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
+                                    dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek(); 
+                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
+                                    dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
                             } else {
                                 JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
                             }
