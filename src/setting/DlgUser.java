@@ -241,19 +241,19 @@ public class DlgUser extends javax.swing.JDialog {
                 "[M]Catatan Persalinan","[M]Skor Aldrette Pasca Anestesi","[M]Skor Steward Pasca Anestesi","[M]Skor Bromage Pasca Anestesi","[M]Penilaian Pre Induksi","[M]Hasil USG Urologi",
                 "[M]Hasil USG Gynecologi","[M]Hasil Pemeriksaan EKG","[L]Hapus/Edit SEP VClaim","[L]Kirim Diet Satu Sehat","[L]Mapping Obat/Alkes/BHP Satu Sehat","[F]Ringkasan Pengadaan Barang Dapur",
                 "[L]Kirim Medication Satu Sehat","[L]Kirim Medication Request Satu Sehat","[M]Penatalaksanaan Terapi Okupasi","[D]Edit/Hapus Surat Pemesanan Medis","[E]Edit/Hapus Surat Pemesanan Nonmedis","[L]Kirim Medication Dispense Satu Sehat","[M]Hasil USG Neonatus",
-                "[M]Hasil Endoskopi Faring/Laring","[L]Mapping Tindakan Radiologi Satu Sehat","[L]Kirim Service Request Radiologi Satu Sehat","[M]Hasil Endoskopi Hidung",
-                "[L]Kirim Specimen Radiologi Satu Sehat","[L]Kompilasi Berkas Klaim BPJS","[M]Master Masalah Keperawatan Neonatus","[M]Master Rencana Keperawatan Neonatus","[M]Penilaian Awal Keperawatan Ranap Neonatus",
+                "[M]Hasil Endoskopi Faring/Laring","[L]Mapping Tindakan Radiologi Satu Sehat","[L]Kompilasi Berkas Klaim Manual INACBG","[L]Kirim Service Request Radiologi Satu Sehat","[M]Hasil Endoskopi Hidung",
+                "[L]Kirim Specimen Radiologi Satu Sehat","[M]Master Masalah Keperawatan Neonatus","[M]Master Rencana Keperawatan Neonatus","[M]Penilaian Awal Keperawatan Ranap Neonatus",
                 "[L]Kirim Observation Radiologi Satu Sehat","[L]Kirim Diagnostic Report Radiologi Satu Sehat","[M]Hasil Endoskopi Telinga","[L]Mapping Tindakan Lab PK & MB Satu Sehat",
                 "[L]Kirim Service Request Lab PK Satu Sehat","[L]Kirim Service Request Lab MB Satu Sehat","[L]Kirim Specimen Lab PK Satu Sehat","[L]Kirim Specimen Lab MB Satu Sehat",
                 "[L]Kirim Observation Lab PK Satu Sehat","[L]Kirim Observation Lab MB Satu Sehat","[L]Kirim Diagnostic Report Lab PK Satu Sehat","[L]Kirim Diagnostic Report Lab MB Satu Sehat",
                 "[J]Kepatuhan Kelengkapan Keselamatan Bedah","[K]Nilai Piutang Per Cara Bayar Per Bulan","[K]Ringkasan Piutang Per Cara Bayar","[M]Penilaian Pasien Imunitas Rendah",
-                "[M]Keseimbangan Cairan","[M]Catatan Observasi CHBP","[M]Catatan Observasi Induksi Persalinan","[C]Kategori Penilaian SKP","[C]Kriteria Penilaian SKP"
+                "[M]Keseimbangan Cairan","[M]Catatan Observasi CHBP","[M]Catatan Observasi Induksi Persalinan","[C]Kategori Penilaian SKP","[C]Kriteria Penilaian SKP","[C]Penilaian SKP Petugas/Dokter"
         };
         
         tabMode = new DefaultTableModel(null, row) {
-            @Override
+            @Override 
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                return !(colIndex == 0 || colIndex == 1 || colIndex == 2);
+                return ! (colIndex == 0) || (colIndex == 1) || (colIndex == 2);
             }
 
             @Override
@@ -270,7 +270,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 1043;i++) {
+        for (i = 0; i < 1044;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -2746,16 +2746,16 @@ public class DlgUser extends javax.swing.JDialog {
                     column.setPreferredWidth(158);
                     break;
                 case 1007:
-                    column.setPreferredWidth(200);
-                    break;
-                case 1008:
-                    column.setPreferredWidth(183);
-                    break;
-                case 1009:
                     column.setPreferredWidth(198);
                     break;
-                case 1010:
+                case 1008:
+                    column.setPreferredWidth(204);
+                    break;
+                case 1009:
                     column.setPreferredWidth(200);
+                    break;
+                case 1010:
+                    column.setPreferredWidth(183);
                     break;
                 case 1011:
                     column.setPreferredWidth(198);
@@ -2852,6 +2852,9 @@ public class DlgUser extends javax.swing.JDialog {
                     break;
                 case 1042:
                     column.setPreferredWidth(128);
+                    break;
+                case 1043:
+                    column.setPreferredWidth(167);
                     break;
                 default:
                     column.setPreferredWidth(134);
@@ -4468,7 +4471,8 @@ public class DlgUser extends javax.swing.JDialog {
                     "catatan_observasi_chbp='"+tbUser.getValueAt(i,1039).toString()+"',"+
                     "catatan_observasi_induksi_persalinan='"+tbUser.getValueAt(i,1040).toString()+"',"+
                     "skp_kategori_penilaian='"+tbUser.getValueAt(i,1041).toString()+"',"+
-                    "skp_kriteria_penilaian='"+tbUser.getValueAt(i,1042).toString()+"'")==true){
+                    "skp_kriteria_penilaian='"+tbUser.getValueAt(i,1042).toString()+"',"+
+                    "skp_penilaian='"+tbUser.getValueAt(i,1043).toString()+"'")==true){
                     emptTeks();
                 }
             }         
@@ -5709,7 +5713,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         "catatan_observasi_chbp='"+tbUser.getValueAt(barisdicopy,1039).toString()+"',"+
                                         "catatan_observasi_induksi_persalinan='"+tbUser.getValueAt(barisdicopy,1040).toString()+"',"+
                                         "skp_kategori_penilaian='"+tbUser.getValueAt(barisdicopy,1041).toString()+"',"+
-                                        "skp_kriteria_penilaian='"+tbUser.getValueAt(barisdicopy,1042).toString()+"'");
+                                        "skp_kriteria_penilaian='"+tbUser.getValueAt(barisdicopy,1042).toString()+"',"+
+                                        "skp_penilaian='"+tbUser.getValueAt(barisdicopy,1043).toString()+"'");
                                 }
                                 userdicopy="";
                                 copyhakakses="";
@@ -6007,7 +6012,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "user.satu_sehat_kirim_servicerequest_lab,user.satu_sehat_kirim_servicerequest_labmb,user.satu_sehat_kirim_specimen_lab,user.satu_sehat_kirim_specimen_labmb,"+
                 "user.satu_sehat_kirim_observation_lab,user.satu_sehat_kirim_observation_labmb,user.satu_sehat_kirim_diagnosticreport_lab,user.satu_sehat_kirim_diagnosticreport_labmb,"+
                 "user.kepatuhan_kelengkapan_keselamatan_bedah,user.nilai_piutang_perjenis_bayar_per_bulan,user.ringkasan_piutang_jenis_bayar,user.penilaian_pasien_imunitas_rendah,"+
-                "user.balance_cairan,user.catatan_observasi_chbp,user.catatan_observasi_induksi_persalinan,user.skp_kategori_penilaian,user.skp_kriteria_penilaian from user order by AES_DECRYPT(user.id_user,'nur')");
+                "user.balance_cairan,user.catatan_observasi_chbp,user.catatan_observasi_induksi_persalinan,user.skp_kategori_penilaian,user.skp_kriteria_penilaian,"+
+                "user.skp_penilaian from user order by AES_DECRYPT(user.id_user,'nur')");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -7062,7 +7068,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("catatan_observasi_chbp"),
                                rs.getBoolean("catatan_observasi_induksi_persalinan"),
                                rs.getBoolean("skp_kategori_penilaian"),
-                               rs.getBoolean("skp_kriteria_penilaian")
+                               rs.getBoolean("skp_kriteria_penilaian"),
+                               rs.getBoolean("skp_penilaian")
                             });
                         }   
                     } catch (Exception e) {
@@ -8106,7 +8113,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                            rs.getBoolean("catatan_observasi_chbp"),
                            rs.getBoolean("catatan_observasi_induksi_persalinan"),
                            rs.getBoolean("skp_kategori_penilaian"),
-                           rs.getBoolean("skp_kriteria_penilaian")
+                           rs.getBoolean("skp_kriteria_penilaian"),
+                           rs.getBoolean("skp_penilaian")
                         });
                     }                                             
                  }

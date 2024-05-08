@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
+CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
+  `code` varchar(7) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 1
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL DEFAULT NULL AFTER `nama_industri`;
@@ -125,6 +131,8 @@ ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder2` v
 
 ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder3` varchar(200) NOT NULL AFTER `kd_prosedur_sekunder2`;
 
+ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(150) NULL DEFAULT NULL AFTER `obat_system`;
+
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
@@ -148,8 +156,6 @@ CREATE TABLE IF NOT EXISTS `tampjurnal_smc`  (
   PRIMARY KEY (`kd_rek`, `user_id`, `ip`) USING HASH
 ) ENGINE = MEMORY CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Fixed;
 
-ALTER TABLE `tokoopname` MODIFY COLUMN IF EXISTS `kode_brng` varchar(10) NOT NULL FIRST;
-
 ALTER TABLE `transfer_pasien_antar_ruang` MODIFY COLUMN IF EXISTS `diagnosa_utama` varchar(100) NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','false') NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
@@ -157,5 +163,307 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_nonmedis` enum('true','false') NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_specimen_radiologi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `dokter` enum('true','false') NULL DEFAULT NULL AFTER `obat_penyakit`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `jadwal_praktek` enum('true','false') NULL DEFAULT NULL AFTER `dokter`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `petugas` enum('true','false') NULL DEFAULT NULL AFTER `jadwal_praktek`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pasien` enum('true','false') NULL DEFAULT NULL AFTER `petugas`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `registrasi` enum('true','false') NULL DEFAULT NULL AFTER `pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tindakan_ralan` enum('true','false') NULL DEFAULT NULL AFTER `registrasi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kamar_inap` enum('true','false') NULL DEFAULT NULL AFTER `tindakan_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tindakan_ranap` enum('true','false') NULL DEFAULT NULL AFTER `kamar_inap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `operasi` enum('true','false') NULL DEFAULT NULL AFTER `tindakan_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rujukan_keluar` enum('true','false') NULL DEFAULT NULL AFTER `operasi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rujukan_masuk` enum('true','false') NULL DEFAULT NULL AFTER `rujukan_keluar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `beri_obat` enum('true','false') NULL DEFAULT NULL AFTER `rujukan_masuk`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `resep_pulang` enum('true','false') NULL DEFAULT NULL AFTER `beri_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pasien_meninggal` enum('true','false') NULL DEFAULT NULL AFTER `resep_pulang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `diet_pasien` enum('true','false') NULL DEFAULT NULL AFTER `pasien_meninggal`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kelahiran_bayi` enum('true','false') NULL DEFAULT NULL AFTER `diet_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `periksa_lab` enum('true','false') NULL DEFAULT NULL AFTER `kelahiran_bayi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `periksa_radiologi` enum('true','false') NULL DEFAULT NULL AFTER `periksa_lab`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kasir_ralan` enum('true','false') NULL DEFAULT NULL AFTER `periksa_radiologi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `deposit_pasien` enum('true','false') NULL DEFAULT NULL AFTER `kasir_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `piutang_pasien` enum('true','false') NULL DEFAULT NULL AFTER `deposit_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjaman_berkas` enum('true','false') NULL DEFAULT NULL AFTER `piutang_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `barcode` enum('true','false') NULL DEFAULT NULL AFTER `peminjaman_berkas`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `presensi_harian` enum('true','false') NULL DEFAULT NULL AFTER `barcode`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `presensi_bulanan` enum('true','false') NULL DEFAULT NULL AFTER `presensi_harian`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pegawai_admin` enum('true','false') NULL DEFAULT NULL AFTER `presensi_bulanan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pegawai_user` enum('true','false') NULL DEFAULT NULL AFTER `pegawai_admin`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `suplier` enum('true','false') NULL DEFAULT NULL AFTER `pegawai_user`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satuan_barang` enum('true','false') NULL DEFAULT NULL AFTER `suplier`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `konversi_satuan` enum('true','false') NULL DEFAULT NULL AFTER `satuan_barang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `jenis_barang` enum('true','false') NULL DEFAULT NULL AFTER `konversi_satuan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat` enum('true','false') NULL DEFAULT NULL AFTER `jenis_barang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `stok_opname_obat` enum('true','false') NULL DEFAULT NULL AFTER `obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `stok_obat_pasien` enum('true','false') NULL DEFAULT NULL AFTER `stok_opname_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pengadaan_obat` enum('true','false') NULL DEFAULT NULL AFTER `stok_obat_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pemesanan_obat` enum('true','false') NULL DEFAULT NULL AFTER `pengadaan_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penjualan_obat` enum('true','false') NULL DEFAULT NULL AFTER `pemesanan_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `piutang_obat` enum('true','false') NULL DEFAULT NULL AFTER `penjualan_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `retur_ke_suplier` enum('true','false') NULL DEFAULT NULL AFTER `piutang_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `retur_dari_pembeli` enum('true','false') NULL DEFAULT NULL AFTER `retur_ke_suplier`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `retur_obat_ranap` enum('true','false') NULL DEFAULT NULL AFTER `retur_dari_pembeli`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `retur_piutang_pasien` enum('true','false') NULL DEFAULT NULL AFTER `retur_obat_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `keuntungan_penjualan` enum('true','false') NULL DEFAULT NULL AFTER `retur_piutang_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `keuntungan_beri_obat` enum('true','false') NULL DEFAULT NULL AFTER `keuntungan_penjualan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `sirkulasi_obat` enum('true','false') NULL DEFAULT NULL AFTER `keuntungan_beri_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_barang` enum('true','false') NULL DEFAULT NULL AFTER `sirkulasi_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_pengadaan_barang` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_barang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_stok_keluar` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_pengadaan_barang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_rekap_pengadaan` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_stok_keluar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_rekap_stok_keluar` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_rekap_pengadaan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `ipsrs_pengeluaran_harian` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_rekap_stok_keluar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_jenis` enum('true','false') NULL DEFAULT NULL AFTER `ipsrs_pengeluaran_harian`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_kategori` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_jenis`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_merk` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_kategori`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_ruang` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_merk`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_produsen` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_ruang`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_koleksi` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_produsen`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_inventaris` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_koleksi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `inventaris_sirkulasi` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_inventaris`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_jenis` enum('true','false') NULL DEFAULT NULL AFTER `inventaris_sirkulasi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_in` enum('true','false') NULL DEFAULT NULL AFTER `parkir_jenis`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_out` enum('true','false') NULL DEFAULT NULL AFTER `parkir_in`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_rekap_harian` enum('true','false') NULL DEFAULT NULL AFTER `parkir_out`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_rekap_bulanan` enum('true','false') NULL DEFAULT NULL AFTER `parkir_rekap_harian`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `informasi_kamar` enum('true','false') NULL DEFAULT NULL AFTER `parkir_rekap_bulanan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `harian_tindakan_poli` enum('true','false') NULL DEFAULT NULL AFTER `informasi_kamar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_per_poli` enum('true','false') NULL DEFAULT NULL AFTER `harian_tindakan_poli`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_per_kamar` enum('true','false') NULL DEFAULT NULL AFTER `obat_per_poli`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_per_dokter_ralan` enum('true','false') NULL DEFAULT NULL AFTER `obat_per_kamar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_per_dokter_ranap` enum('true','false') NULL DEFAULT NULL AFTER `obat_per_dokter_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `harian_dokter` enum('true','false') NULL DEFAULT NULL AFTER `obat_per_dokter_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `bulanan_dokter` enum('true','false') NULL DEFAULT NULL AFTER `harian_dokter`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `harian_paramedis` enum('true','false') NULL DEFAULT NULL AFTER `bulanan_dokter`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `bulanan_paramedis` enum('true','false') NULL DEFAULT NULL AFTER `harian_paramedis`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pembayaran_ralan` enum('true','false') NULL DEFAULT NULL AFTER `bulanan_paramedis`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pembayaran_ranap` enum('true','false') NULL DEFAULT NULL AFTER `pembayaran_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rekap_pembayaran_ralan` enum('true','false') NULL DEFAULT NULL AFTER `pembayaran_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rekap_pembayaran_ranap` enum('true','false') NULL DEFAULT NULL AFTER `rekap_pembayaran_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tagihan_masuk` enum('true','false') NULL DEFAULT NULL AFTER `rekap_pembayaran_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tambahan_biaya` enum('true','false') NULL DEFAULT NULL AFTER `tagihan_masuk`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `potongan_biaya` enum('true','false') NULL DEFAULT NULL AFTER `tambahan_biaya`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `resep_obat` enum('true','false') NULL DEFAULT NULL AFTER `potongan_biaya`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `resume_pasien` enum('true','false') NULL DEFAULT NULL AFTER `resep_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit_ralan` enum('true','false') NULL DEFAULT NULL AFTER `resume_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit_ranap` enum('true','false') NULL DEFAULT NULL AFTER `penyakit_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kamar` enum('true','false') NULL DEFAULT NULL AFTER `penyakit_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tarif_ralan` enum('true','false') NULL DEFAULT NULL AFTER `kamar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tarif_ranap` enum('true','false') NULL DEFAULT NULL AFTER `tarif_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tarif_lab` enum('true','false') NULL DEFAULT NULL AFTER `tarif_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tarif_radiologi` enum('true','false') NULL DEFAULT NULL AFTER `tarif_lab`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tarif_operasi` enum('true','false') NULL DEFAULT NULL AFTER `tarif_radiologi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `akun_rekening` enum('true','false') NULL DEFAULT NULL AFTER `tarif_operasi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rekening_tahun` enum('true','false') NULL DEFAULT NULL AFTER `akun_rekening`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `posting_jurnal` enum('true','false') NULL DEFAULT NULL AFTER `rekening_tahun`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `buku_besar` enum('true','false') NULL DEFAULT NULL AFTER `posting_jurnal`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `cashflow` enum('true','false') NULL DEFAULT NULL AFTER `buku_besar`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `keuangan` enum('true','false') NULL DEFAULT NULL AFTER `cashflow`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pengeluaran` enum('true','false') NULL DEFAULT NULL AFTER `keuangan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `setup_pjlab` enum('true','false') NULL DEFAULT NULL AFTER `pengeluaran`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `setup_otolokasi` enum('true','false') NULL DEFAULT NULL AFTER `setup_pjlab`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `setup_jam_kamin` enum('true','false') NULL DEFAULT NULL AFTER `setup_otolokasi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `setup_embalase` enum('true','false') NULL DEFAULT NULL AFTER `setup_jam_kamin`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `tracer_login` enum('true','false') NULL DEFAULT NULL AFTER `setup_embalase`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `display` enum('true','false') NULL DEFAULT NULL AFTER `tracer_login`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_harga_obat` enum('true','false') NULL DEFAULT NULL AFTER `display`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_penggunaan_tarif` enum('true','false') NULL DEFAULT NULL AFTER `set_harga_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_oto_ralan` enum('true','false') NULL DEFAULT NULL AFTER `set_penggunaan_tarif`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `biaya_harian` enum('true','false') NULL DEFAULT NULL AFTER `set_oto_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `biaya_masuk_sekali` enum('true','false') NULL DEFAULT NULL AFTER `biaya_harian`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_no_rm` enum('true','false') NULL DEFAULT NULL AFTER `biaya_masuk_sekali`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `billing_ralan` enum('true','false') NULL DEFAULT NULL AFTER `set_no_rm`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `billing_ranap` enum('true','false') NULL DEFAULT NULL AFTER `billing_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `jm_ranap_dokter` enum('true','false') NULL DEFAULT NULL AFTER `billing_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `igd` enum('true','false') NULL DEFAULT NULL AFTER `jm_ranap_dokter`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `barcoderalan` enum('true','false') NULL DEFAULT NULL AFTER `igd`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `barcoderanap` enum('true','false') NULL DEFAULT NULL AFTER `barcoderalan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_harga_obat_ralan` enum('true','false') NULL DEFAULT NULL AFTER `barcoderanap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_harga_obat_ranap` enum('true','false') NULL DEFAULT NULL AFTER `set_harga_obat_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit_pd3i` enum('true','false') NULL DEFAULT NULL AFTER `set_harga_obat_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `surveilans_pd3i` enum('true','false') NULL DEFAULT NULL AFTER `penyakit_pd3i`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `surveilans_ralan` enum('true','false') NULL DEFAULT NULL AFTER `surveilans_pd3i`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `diagnosa_pasien` enum('true','false') NULL DEFAULT NULL AFTER `surveilans_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `surveilans_ranap` enum('true','false') NULL DEFAULT NULL AFTER `diagnosa_pasien`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pny_takmenular_ranap` enum('true','false') NULL DEFAULT NULL AFTER `surveilans_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pny_takmenular_ralan` enum('true','false') NULL DEFAULT NULL AFTER `pny_takmenular_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kunjungan_ralan` enum('true','false') NULL DEFAULT NULL AFTER `pny_takmenular_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rl32` enum('true','false') NULL DEFAULT NULL AFTER `kunjungan_ralan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rl33` enum('true','false') NULL DEFAULT NULL AFTER `rl32`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rl37` enum('true','false') NULL DEFAULT NULL AFTER `rl33`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rl38` enum('true','false') NULL DEFAULT NULL AFTER `rl37`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `harian_tindakan_dokter` enum('true','false') NULL DEFAULT NULL AFTER `rl38`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `sms` enum('true','false') NULL DEFAULT NULL AFTER `harian_tindakan_dokter`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `sidikjari` enum('true','false') NULL DEFAULT NULL AFTER `sms`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `jam_masuk` enum('true','false') NULL DEFAULT NULL AFTER `sidikjari`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `jadwal_pegawai` enum('true','false') NULL DEFAULT NULL AFTER `jam_masuk`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `parkir_barcode` enum('true','false') NULL DEFAULT NULL AFTER `jadwal_pegawai`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `set_nota` enum('true','false') NULL DEFAULT NULL AFTER `parkir_barcode`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `dpjp_ranap` enum('true','false') NULL DEFAULT NULL AFTER `set_nota`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `mutasi_barang` enum('true','false') NULL DEFAULT NULL AFTER `dpjp_ranap`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `rl36` enum('true','false') NULL DEFAULT NULL AFTER `rl34`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `grafik_per_perujuk` enum('true','false') NULL DEFAULT NULL AFTER `surat_pemesanan_non_medis`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `surat_balas` enum('true','false') NULL DEFAULT NULL AFTER `surat_sifat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `pcare_pemberian_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `pcare_pemberian_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kemenkes_sitt` enum('true','false') NULL DEFAULT NULL AFTER `password_asuransi`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `grafik_tb_hasilteshiv` enum('true','false') NULL DEFAULT NULL AFTER `grafik_tb_hasilakhirpengobatan`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `kadaluarsa_batch` enum('true','false') NULL DEFAULT NULL AFTER `grafik_tb_hasilteshiv`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false') NULL DEFAULT NULL AFTER `penilaian_mcu`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
+
+ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
 SET FOREIGN_KEY_CHECKS=1;
