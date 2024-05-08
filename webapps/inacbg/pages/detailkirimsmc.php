@@ -10,33 +10,30 @@
             echo "";
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
             $corona         = validTeks(isset($_GET['corona'])?$_GET['corona']:NULL);
-            $nosep        = validTeks(isset($_GET['nosep'])?$_GET['nosep']:NULL);
+            $nosep          = validTeks(isset($_GET['nosep'])?$_GET['nosep']:NULL);
             $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
             $carabayar      = validTeks(str_replace("_"," ",isset($_GET['carabayar']))?str_replace("_"," ",$_GET['carabayar']):NULL);
-            $_sql         = "select bridging_sep.no_sep,reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
-                            reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,
-                            pasien.umur,pasien.tgl_lahir,poliklinik.nm_poli,reg_periksa.status_lanjut,reg_periksa.umurdaftar,reg_periksa.sttsumur,
-                            reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab 
-                            from bridging_sep join reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab 
-                            on bridging_sep.no_rawat = reg_periksa.no_rawat and reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                            and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where bridging_sep.no_sep='$nosep'";
-            $hasil        = bukaquery($_sql);
-            $baris        = mysqli_fetch_array($hasil);
-            $no_rkm_medis = $baris["no_rkm_medis"];
-            $nm_pasien    = $baris["nm_pasien"];
-            $umurdaftar   = $baris["umurdaftar"];
-            $sttsumur     = $baris["sttsumur"];
-            $tgl_lahir    = $baris["tgl_lahir"];
-            $jk           = $baris["jk"];
-            $almt_pj      = $baris["almt_pj"];
-            $norawat      = $baris["no_rawat"];
+            $_sql           = "select bridging_sep.no_sep, bridging_sep.no_kartu, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab from bridging_sep
+                               join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join dokter on reg_periksa.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
+                               join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'";
+            $hasil          = bukaquery($_sql);
+            $baris          = mysqli_fetch_array($hasil);
+            $no_rkm_medis   = $baris["no_rkm_medis"];
+            $no_kartu       = $baris["no_kartu"];
+            $nm_pasien      = $baris["nm_pasien"];
+            $umurdaftar     = $baris["umurdaftar"];
+            $sttsumur       = $baris["sttsumur"];
+            $tgl_lahir      = $baris["tgl_lahir"];
+            $jk             = $baris["jk"];
+            $almt_pj        = $baris["almt_pj"];
+            $norawat        = $baris["no_rawat"];
             $tgl_registrasi = $baris["tgl_registrasi"];
-            $jam_reg      = $baris["jam_reg"];
-            $nm_poli      = $baris["nm_poli"];
-            $nm_dokter2="";
-            $a=1;
-            $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
+            $jam_reg        = $baris["jam_reg"];
+            $nm_poli        = $baris["nm_poli"];
+            $nm_dokter2     = "";
+            $a              = 1;
+            $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
             while($barisdokter = mysqli_fetch_array($hasildokter)) {
                 if($a==1){
                     $nm_dokter2=$barisdokter["nm_dokter"];
@@ -128,12 +125,20 @@
         <div style="width: 100%; height: 87%; overflow: auto;">
         <table width="100%" align="center">
             <tr class="head">
-                <td width="25%" >No.Rawat</td><td width="">:</td>
+                <td width="25%">No. Rawat</td><td width="">:</td>
                 <td width="75%"><?php echo $norawat;?></td>
             </tr>
             <tr class="head">
-                <td width="25%" >No.RM</td><td width="">:</td>
+                <td width="25%">No. SEP</td><td width="">:</td>
+                <td width="75%"><?= $nosep ?></td>
+            </tr>
+            <tr class="head">
+                <td width="25%">No. RM</td><td width="">:</td>
                 <td width="75%"><?php echo $no_rkm_medis;?></td>
+            </tr>
+            <tr class="head">
+                <td width="25%">No. Kartu Peserta</td><td width="">:</td>
+                <td width="75%"><?= $no_kartu ?></td>
             </tr>
             <tr class="head">
                 <td width="25%">Nama Pasien</td><td width="">:</td>
@@ -148,7 +153,7 @@
                 <td width="75%"><?php echo $almt_pj;?></td>
             </tr>
             <tr class="head">
-                <td width="25%">Tgl.Registrasi</td><td width="">:</td>
+                <td width="25%">Tgl. Registrasi</td><td width="">:</td>
                 <td width="75%"><?php echo $tgl_registrasi." ".$jam_reg;?></td>
             </tr>   
             <tr class="head">
@@ -162,24 +167,11 @@
             <tr class="head">
                 <td width="25%">Status</td><td width="">:</td>
                 <td width="75%"><?php echo $status_lanjut." (".$png_jawab.")";?></td>
-            </tr>   
-            <tr class="head">
-                <td width="41%" >No.SEP</td><td width="">:</td>
-                <td width="57%">
-                    <input name="nosep" class="text inputbox" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type="text" id="TxtIsi1" value="<?php echo $nosep;?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off" required>
-                    <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
-                </td>
-            </tr>
-            <tr class="head">
-                <td width="41%" >No.Kartu</td><td width="">:</td>
-                <td width="57%">
-                    <input name="nokartu" class="text inputbox" type="text" value="<?php echo getOne("select no_peserta from pasien where no_rkm_medis='$no_rkm_medis'");?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off" required>
-                </td>
             </tr>
             <tr class="head">
                 <td width="41%" >Tgl.Keluar</td><td width="">:</td>
                 <td width="57%">
-                    <input name="keluar" class="text inputbox" type="text" 
+                    <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma"
                         value="<?php if($status_lanjut=="Ralan"){
                                          echo $tgl_registrasi;
                                      }else{
@@ -840,6 +832,9 @@
             }
         ?>         
     </div>
-    <div align="center" style="padding: 2rem 1rem; font-size: 1.6rem"><input name="BtnSimpan" type="submit" class="button" value="&nbsp;&nbsp;SIMPAN & KIRIM KE INACBG&nbsp;&nbsp;"></div>
+    <div align="center"><input name="BtnSimpan" type="submit" class="button" style="padding: 1.5rem 0.75rem; font-family: Tahoma; font-size: 0.8rem; font-weight: 500; cursor: pointer" value="&nbsp;&nbsp;SIMPAN & KIRIM KE EKLAIM&nbsp;&nbsp;"></div>
     </form>
 </div>
+<script>
+    
+</script>
