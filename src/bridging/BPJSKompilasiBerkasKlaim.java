@@ -2365,26 +2365,31 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void exportBerkasDigitalPerawatan() {
-        if (! Sequel.cariBooleanSmc("select * from berkas_digital_perawatan where no_rawat = ?", lblNoRawat.getText())) {
-            return;
-        }
+        if (! Sequel.cariBooleanSmc("select * from berkas_digital_perawatan where no_rawat = ?", lblNoRawat.getText())) return;
+        
         int i = 1;
         String filename = "";
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/";
-        String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_BerkasDigital" + String.valueOf(i++) + ".pdf";
         try (PreparedStatement ps = koneksi.prepareStatement("select lokasi_file from berkas_digital_perawatan where no_rawat = ?")) {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     filename = rs.getString("lokasi_file");
+                    String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_BerkasDigital" + String.valueOf(i++) + ".pdf";
                     if (filename.endsWith(".pdf")) {
                         try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
                             fileChannel.transferFrom(Channels.newChannel(new URL(url + rs.getString("lokasi_file")).openStream()), 0, Long.MAX_VALUE);
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        } finally {
+                            System.out.println("Skipping entry : " + url + rs.getString("lokasi_file"));
+                            continue;
                         }
                     }
                 }
             }
         } catch (Exception e) {
+            exportSukses = false;
             System.out.println("Notif : " + e);
         }
     }
