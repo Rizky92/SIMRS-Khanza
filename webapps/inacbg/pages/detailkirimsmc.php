@@ -4,228 +4,229 @@
     }
 ?>
 <div id="post">
-    <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
+    <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
     <div class="entry">        
         <?php
-            echo "";
-            $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
-            $corona         = validTeks(isset($_GET['corona'])?$_GET['corona']:NULL);
-            $nosep          = validTeks(isset($_GET['nosep'])?$_GET['nosep']:NULL);
-            $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
-            $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
-            $carabayar      = validTeks(str_replace("_"," ",isset($_GET['carabayar']))?str_replace("_"," ",$_GET['carabayar']):NULL);
+            $codernik       = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
+            $corona         = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
+            $nosep          = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
+            $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
+            $carabayar      = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
             $_sql           = "select bridging_sep.no_sep, bridging_sep.no_kartu, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab from bridging_sep
                                join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join dokter on reg_periksa.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
                                join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'";
             $hasil          = bukaquery($_sql);
             $baris          = mysqli_fetch_array($hasil);
-            $no_rkm_medis   = $baris["no_rkm_medis"];
-            $no_kartu       = $baris["no_kartu"];
-            $nm_pasien      = $baris["nm_pasien"];
-            $umurdaftar     = $baris["umurdaftar"];
-            $sttsumur       = $baris["sttsumur"];
-            $tgl_lahir      = $baris["tgl_lahir"];
-            $jk             = $baris["jk"];
-            $almt_pj        = $baris["almt_pj"];
-            $norawat        = $baris["no_rawat"];
-            $tgl_registrasi = $baris["tgl_registrasi"];
-            $jam_reg        = $baris["jam_reg"];
-            $nm_poli        = $baris["nm_poli"];
-            $nm_dokter2     = "";
+            $norawat        = $baris['no_rawat'];
+            $no_rkm_medis   = $baris['no_rkm_medis'];
+            $no_kartu       = $baris['no_kartu'];
+            $nm_pasien      = $baris['nm_pasien'];
+            $umurdaftar     = $baris['umurdaftar'];
+            $sttsumur       = $baris['sttsumur'];
+            $tgl_lahir      = $baris['tgl_lahir'];
+            $jk             = $baris['jk'];
+            $almt_pj        = $baris['almt_pj'];
+            $norawat        = $baris['no_rawat'];
+            $tgl_registrasi = $baris['tgl_registrasi'];
+            $jam_reg        = $baris['jam_reg'];
+            $nm_poli        = $baris['nm_poli'];
+            $nm_dokter2     = '';
             $a              = 1;
-            $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
-            while($barisdokter = mysqli_fetch_array($hasildokter)) {
-                if($a==1){
-                    $nm_dokter2=$barisdokter["nm_dokter"];
-                }else{
-                    $nm_dokter2=$nm_dokter2."#".$barisdokter["nm_dokter"];
-                }                
+            $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
+            while ($barisdokter = mysqli_fetch_array($hasildokter)) {
+                if ($a == 1) {
+                    $nm_dokter2 = $barisdokter['nm_dokter'];
+                } else {
+                    $nm_dokter2 = $nm_dokter2 . '#' . $barisdokter['nm_dokter'];
+                }
                 $a++;
             } 
             
-            $nm_dokter    = "";
-            if(!empty($nm_dokter2)){
-                $nm_dokter=$nm_dokter2;
-            }else{
-                $nm_dokter= $baris["nm_dokter"];
+            $nm_dokter = '';
+            if (! empty($nm_dokter2)) {
+                $nm_dokter = $nm_dokter2;
+            } else {
+                $nm_dokter = $baris['nm_dokter'];
             }
-            $status_lanjut  = $baris["status_lanjut"];
-            $png_jawab    = $baris["png_jawab"];
-            $sistole = "120";
-            $diastole = "90";
-            $jnsrawat="1";
-            if($status_lanjut=="Ranap"){
-                $jnsrawat="1";
-                $tensi=explode("/", getOne("select pemeriksaan_ranap.tensi from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc"));
-                if(!empty($tensi[0])){
-                    $sistole=$tensi[0];
+
+            $status_lanjut = $baris['status_lanjut'];
+            $png_jawab = $baris['png_jawab'];
+            $sistole = '120';
+            $diastole = '90';
+            $jnsrawat = '1';
+            if ($status_lanjut == 'Ranap') {
+                $jnsrawat = '1';
+                $tensi = explode('/', getOne("select tensi from pemeriksaan_ranap where no_rawat = '{$baris['no_rawat']}' order by tgl_perawatan desc, jam_rawat desc"));
+                if (! empty($tensi[0])) {
+                    $sistole = $tensi[0];
                 }
-                if(!empty($tensi[1])){
-                    $diastole=$tensi[1];
+                if (! empty($tensi[1])) {
+                    $diastole = $tensi[1];
                 }
-            }else{
-                $jnsrawat="2";
-                $tensi=explode("/", getOne("select pemeriksaan_ralan.tensi from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='".$baris["no_rawat"]."' order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc"));
-                if(!empty($tensi[0])){
-                    $sistole=$tensi[0];
+            } else {
+                $jnsrawat = '2';
+                $tensi = explode('/', getOne("select tensi from pemeriksaan_ralan where no_rawat = '{$baris['no_rawat']}' order by tgl_perawatan desc, jam_rawat desc"));
+                if (! empty($tensi[0])) {
+                    $sistole = $tensi[0];
                 }
-                if(!empty($tensi[1])){
-                    $diastole=$tensi[1];
+                if (! empty($tensi[1])) {
+                    $diastole = $tensi[1];
                 }
             }
 
-            $nosep="";
-            if($corona=="BukanCorona"){
-                $nosep=getOne("select no_sep from inacbg_klaim_baru2 where no_rawat='$norawat'");
-                if(empty($nosep)){
-                    $nosep=getOne("select bridging_sep.no_sep from bridging_sep where no_rawat='$norawat' order by MAX(CONVERT(RIGHT(bridging_sep.no_sep,6),signed)) desc limit 1");
-                    if(empty($nosep)){
-                        $nosep=getOne("select bridging_sep_internal.no_sep from bridging_sep_internal where no_rawat='$norawat' order by MAX(CONVERT(RIGHT(bridging_sep_internal.no_sep,6),signed)) desc limit 1");
-                    }
-                }
-            }else if($corona=="PasienCorona"){
-                $nosep=getOne("select no_klaim from inacbg_noklaim_corona where no_rawat='$norawat'");
-                if(empty($nosep)){
-                    $nosep= GenerateNomorCovid();
-                    Tambah3("inacbg_noklaim_corona","'$norawat','$nosep'");
+            if ($corona == 'PasienCorona') {
+                $nosep = getOne("select no_klaim from inacbg_noklaim_corona where no_rawat = '$norawat'");
+                if (empty($nosep)) {
+                    $nosep = GenerateNomorCovid();
+                    Tambah3('inacbg_noklaim_corona', "'$norawat', '$nosep'");
                 }
             }
             
-            $naikkelas=getOne("select bridging_sep.klsnaik from bridging_sep where bridging_sep.no_rawat='$norawat'");
-            if(empty($naikkelas)){
-                $naikkelas=getOne("select bridging_sep_internal.klsnaik from bridging_sep_internal where bridging_sep_internal.no_rawat='$norawat'");
+            $naikkelas = getOne("select klsnaik from bridging_sep where no_rawat = '$norawat'");
+            if (empty($naikkelas)) {
+                $naikkelas = getOne("select klsnaik from bridging_sep_internal where no_rawat = '$norawat'");
             }
             
-            $upgrade_class_ind="0";
-            if(!empty($naikkelas)){
-                $upgrade_class_ind="1";
-                if($naikkelas=="1"){
-                    $naikkelas="Kelas VVIP";
-                }else if($naikkelas=="2"){
-                    $naikkelas="Kelas VIP";
-                }else if($naikkelas=="3"){
-                    $naikkelas="Kelas 1";
-                }else if($naikkelas=="4"){
-                    $naikkelas="Kelas 2";
-                }else{
-                    $naikkelas="";
-                }   
-            }else{
-                $naikkelas="";
+            $upgrade_class_ind = '0';
+            if (! empty($naikkelas)) {
+                $upgrade_class_ind = '1';
+                if ($naikkelas == '1') {
+                    $naikkelas = 'Kelas VVIP';
+                } else if ($naikkelas == '2') {
+                    $naikkelas = 'Kelas VIP';
+                } else if ($naikkelas == '3') {
+                    $naikkelas = 'Kelas 1';
+                } else if ($naikkelas == '4') {
+                    $naikkelas = 'Kelas 2';
+                } else {
+                    $naikkelas = '';
+                }
+            } else {
+                $naikkelas = '';
             }
-            
-            echo "<input type=hidden name=no_rawat value='$norawat'>
-                  <input type=hidden name=tgl_registrasi value='$tgl_registrasi'>
-                  <input type=hidden name=tgl_lahir value='$tgl_lahir'>
-                  <input type=hidden name=nm_pasien value='$nm_pasien'>
-                  <input type=hidden name=jnsrawat value='$jnsrawat'>
-                  <input type=hidden name=jk value='$jk'>
-                  <input type=hidden name=codernik value='$codernik'>";
         ?>
+        <input type="hidden" name="no_rawat" value="<?= $norawat ?>">
+        <input type="hidden" name="tgl_registrasi" value="<?= $tgl_registrasi ?>">
+        <input type="hidden" name="tgl_lahir" value="<?= $tgl_lahir ?>">
+        <input type="hidden" name="nm_pasien" value="<?= $nm_pasien ?>">
+        <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
+        <input type="hidden" name="jk" value="<?= $jk ?>">
+        <input type="hidden" name="codernik" value="<?= $codernik ?>">
         <div style="width: 100%; height: 87%; overflow: auto;">
         <table width="100%" align="center">
             <tr class="head">
-                <td width="25%">No. Rawat</td><td width="">:</td>
-                <td width="75%"><?php echo $norawat;?></td>
+                <td width="25%">No. Rawat</td>
+                <td>:</td>
+                <td width="75%"><?= $norawat ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">No. SEP</td><td width="">:</td>
+                <td width="25%">No. SEP</td>
+                <td>:</td>
                 <td width="75%"><?= $nosep ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">No. RM</td><td width="">:</td>
-                <td width="75%"><?php echo $no_rkm_medis;?></td>
+                <td width="25%">No. RM</td>
+                <td>:</td>
+                <td width="75%"><?= $no_rkm_medis ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">No. Kartu Peserta</td><td width="">:</td>
+                <td width="25%">No. Kartu Peserta</td>
+                <td>:</td>
                 <td width="75%"><?= $no_kartu ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">Nama Pasien</td><td width="">:</td>
-                <td width="75%"><?php echo $nm_pasien.", ".$umurdaftar." ".$sttsumur;?></td>
+                <td width="25%">Nama Pasien</td>
+                <td>:</td>
+                <td width="75%"><?= $nm_pasien.', '.$umurdaftar.' '.$sttsumur ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">Jenis Kelamin</td><td width="">:</td>
-                <td width="75%"><?php echo $jk;?></td>
+                <td width="25%">Jenis Kelamin</td>
+                <td>:</td>
+                <td width="75%"><?= $jk ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">Alamat</td><td width="">:</td>
-                <td width="75%"><?php echo $almt_pj;?></td>
+                <td width="25%">Alamat</td>
+                <td>:</td>
+                <td width="75%"><?= $almt_pj ?></td>
             </tr>
             <tr class="head">
-                <td width="25%">Tgl. Registrasi</td><td width="">:</td>
-                <td width="75%"><?php echo $tgl_registrasi." ".$jam_reg;?></td>
+                <td width="25%">Tgl. Registrasi</td>
+                <td>:</td>
+                <td width="75%"><?= $tgl_registrasi.' '.$jam_reg ?></td>
             </tr>   
             <tr class="head">
-                <td width="25%">Poliklinik</td><td width="">:</td>
-                <td width="75%"><?php echo $nm_poli;?></td>
+                <td width="25%">Poliklinik</td>
+                <td>:</td>
+                <td width="75%"><?= $nm_poli ?></td>
             </tr> 
             <tr class="head">
-                <td width="25%">Dokter</td><td width="">:</td>
-                <td width="75%"><?php echo $nm_dokter;?></td>
+                <td width="25%">Dokter</td>
+                <td>:</td>
+                <td width="75%"><?= $nm_dokter ?></td>
             </tr> 
             <tr class="head">
-                <td width="25%">Status</td><td width="">:</td>
-                <td width="75%"><?php echo $status_lanjut." (".$png_jawab.")";?></td>
+                <td width="25%">Status</td>
+                <td>:</td>
+                <td width="75%"><?= $status_lanjut.' ('.$png_jawab.')' ?></td>
             </tr>
             <tr class="head">
-                <td width="41%" >Tgl.Keluar</td><td width="">:</td>
+                <td width="41%">Tgl. Keluar</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma"
-                        value="<?php if($status_lanjut=="Ralan"){
-                                         echo $tgl_registrasi;
-                                     }else{
-                                         echo getOne("select kamar_inap.tgl_keluar from kamar_inap where kamar_inap.no_rawat='".$norawat."'order by kamar_inap.tgl_keluar desc limit 1");
-                                     }
-                                ?>" size="15" maxlength="10">
+                    <?php
+                        $tgl_keluar = $tgl_registrasi;
+                        if ($status_lanjut == 'Ranap') {
+                            $tgl_keluar = getOne("select tgl_keluar from kamar_inap where no_rawat = '$norawat' order by tgl_keluar desc limit 1");
+                        }
+                    ?>
+                    <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma" value="<?= $tgl_keluar ?>" size="15" maxlength="10">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Kelas Rawat</td><td width="">:</td>
+                <td width="41%">Kelas Rawat</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="kelas_rawat" class="text3">
-                        <?php if($status_lanjut=="Ralan"){
-                                  echo "<option value='3'>Kelas Reguler</option>
-                                        <option value='1'>Kelas Eksekutif</option>";                            
-                              }else{
-                                  $kelas=getOne("select bridging_sep.klsrawat from bridging_sep where bridging_sep.no_rawat='$norawat'");
-                                  echo "<option value='$kelas'>Kelas $kelas</option>
-                                        <option value='1'>Kelas 1</option>
-                                        <option value='2'>Kelas 2</option>
-                                        <option value='3'>Kelas 3</option>";
-                              }
-                        ?>
+                        <?php if ($status_lanjut == 'Ralan'): ?>
+                            <option value="3">Kelas Reguler</option>
+                            <option value="1">Kelas Eksekutif</option>
+                        <?php else: ?>
+                            <?php $kelas = getOne("select klsrawat from bridging_sep where no_rawat = '$norawat'"); ?>
+                            <option value="<?= $kelas ?>"><?= $kelas ?></option>
+                            <option value="1">Kelas 1</option>
+                            <option value="2">Kelas 2</option>
+                            <option value="3">Kelas 3</option>
+                        <?php endif; ?>
                     </select> 
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >ADL Sub Acute</td><td width="">:</td>
+                <td width="41%">ADL Sub Acute</td>
+                <td>:</td>
                 <td width="57%">
-                    <select name="adl_sub_acute" class="text3">                            
+                    <select name="adl_sub_acute" class="text3">
                         <option value=""></option>
-                        <?php 
-                            for($i=12; $i<=60; $i++){                        
-                               echo "<option value=$i>$i</option>";
-                            }
-                        ?>
+                        <?php for ($i = 12; $i <= 60; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
                     </select> 
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >ADL Chronic</td><td width="">:</td>
+                <td width="41%">ADL Chronic</td>
+                <td>:</td>
                 <td width="57%">
-                    <select name="adl_chronic" class="text3">                            
+                    <select name="adl_chronic" class="text3">
                         <option value=""></option>
-                        <?php 
-                            for($i=12; $i<=60; $i++){                        
-                               echo "<option value=$i>$i</option>";
-                            }
-                        ?>
+                        <?php for ($i = 12; $i <= 60; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
                     </select> 
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >ICU Indikator</td><td width="">:</td>
+                <td width="41%">ICU Indikator</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="icu_indikator" class="text3">
                        <option value="0">0</option>
@@ -234,32 +235,36 @@
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >ICU Los</td><td width="">:</td>
+                <td width="41%">ICU Los</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="icu_los" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title=" 0-9 (Maksimal 5 karakter)" autocomplete="off">
+                    <input name="icu_los" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Jumlah Jam Penggunaan Ventilator di ICU</td><td width="">:</td>
+                <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="ventilator_hour" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title=" 0-9 (Maksimal 5 karakter)" autocomplete="off">
+                    <input name="ventilator_hour" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Indikator Upgrade Kelas</td><td width="">:</td>
+                <td width="41%">Indikator Upgrade Kelas</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="upgrade_class_ind" class="text3">
-                       <option value="<?php echo $upgrade_class_ind;?>"><?php echo $upgrade_class_ind;?></option>
+                       <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
                        <option value="0">0</option>
                        <option value="1">1</option>
                     </select> 
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Naik ke Kelas</td><td width="">:</td>
+                <td width="41%">Naik ke Kelas</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="upgrade_class_class" class="text2">
-                       <option value="<?php echo $naikkelas;?>"><?php echo $naikkelas;?></option>
+                       <option value="<?php= $naikkelas ?>"><?php= $naikkelas ?></option>
                        <option value="kelas_1">Kelas 1</option>
                        <option value="kelas_2">Kelas 2</option>
                        <option value="vip">Kelas VIP</option>
@@ -268,64 +273,68 @@
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Lama Hari Naik Kelas</td><td width="">:</td>
+                <td width="41%">Lama Hari Naik Kelas</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="upgrade_class_los" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title=" 0-9 (Maksimal 5 karakter)" autocomplete="off">
+                    <input name="upgrade_class_los" class="text inputbox" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Tambahan</td><td width="">:</td>
+                <td width="41%">Biaya Tambahan</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="add_payment_pct" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="add_payment_pct" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Berat Saat Lahir</td><td width="">:</td>
+                <td width="41%">Berat Saat Lahir</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="birth_weight" class="text inputbox" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title=" 0-9 (Maksimal 5 karakter)" autocomplete="off">
+                    <input name="birth_weight" class="text inputbox" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Sistole</td><td width="">:</td>
+                <td width="41%">Sistole</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="sistole" class="text inputbox" type="text" value="<?php echo $sistole; ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                    <input name="sistole" class="text inputbox" type="text" value="<?= $sistole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Diastole</td><td width="">:</td>
+                <td width="41%">Diastole</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="diastole" class="text inputbox" type="text" value="<?php echo $diastole; ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                    <input name="diastole" class="text inputbox" type="text" value="<?= $diastole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Status Pulang</td><td width="">:</td>
+                <td width="41%">Status Pulang</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="discharge_status" class="text2">
-                        <?php 
-                            if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sembuh' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='1'>Atas persetujuan dokter</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sehat' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='1'>Atas persetujuan dokter</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Rujuk' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='2'>Dirujuk</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='APS' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='3'>Atas permintaan sendiri</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Pulang Paksa' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='3'>Atas permintaan sendiri</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Meninggal' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='4'>Meninggal</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='+' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='4'>Meninggal</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Atas Persetujuan Dokter' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='1'>Atas persetujuan dokter</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Atas Permintaan Sendiri' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='3'>Atas permintaan sendiri</option>";
-                            }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Lain-lain' and kamar_inap.no_rawat='".$norawat."'")>0){
-                                echo "<option value='5'>Lain-lain</option>";
-                            }else{
-                                echo "<option value='1'>Atas persetujuan dokter</option>";
-                            }
-                        ?>
+                        <?php if (getOne("select count(*) from kamar_inap where stts_pulang = 'Sembuh' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="1">Atas persetujuan dokter</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Sehat' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="1">Atas persetujuan dokter</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Rujuk' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="2">Dirujuk</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'APS' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="3">Atas permintaan sendiri</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Pulang Paksa' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="3">Atas permintaan sendiri</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Meninggal' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="4">Meninggal</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = '+' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="4">Meninggal</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Persetujuan Dokter' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="1">Atas persetujuan dokter</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Permintaan Sendiri' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="3">Atas permintaan sendiri</option>
+                        <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Lain-lain' and no_rawat = '$norawat'") > 0): ?>
+                            <option value="5">Lain-lain</option>
+                        <?php else: ?>
+                            <option value="1">Atas persetujuan dokter</option>
+                        <?php endif; ?>
                         <option value="1">Atas persetujuan dokter</option>
                         <option value="2">Dirujuk</option>
                         <option value="3">Atas permintaan sendiri</option>
@@ -335,43 +344,43 @@
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Diagnosa</td><td width="">:</td>
+                <td width="41%">Diagnosa</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="diagnosa" class="text inputbox" type="text" 
-                           value="<?php  
-                                        $penyakit="";
-                                        $a=1;
-                                        $hasilpenyakit=bukaquery("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.no_rawat='".$norawat."' order by diagnosa_pasien.prioritas asc");
-                                        while($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
-                                            if($a==1){
-                                                $penyakit=$barispenyakit["kd_penyakit"];
-                                            }else{
-                                                $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
-                                            }                
-                                            $a++;
-                                        }
-                                        echo $penyakit;
-                                  ?>" size="60" maxlength="100">
+                    <?php
+                        $penyakit = '';
+                        $a = 1;
+                        $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
+                        while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
+                            if ($a == 1) {
+                                $penyakit = $barispenyakit['kd_penyakit'];
+                            } else {
+                                $penyakit .= '#'.$barispenyakit['kd_penyakit'];
+                            }
+                            $a++;
+                        }
+                    ?>
+                    <input name="diagnosa" class="text inputbox" type="text" value="<?= $penyakit ?>" size="60" maxlength="100">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Prosedur</td><td width="">:</td>
+                <td width="41%">Prosedur</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="procedure" class="text inputbox" type="text" 
-                        value="<?php  
-                                    $prosedur="";
-                                    $a=1;
-                                    $hasilprosedur=bukaquery("select prosedur_pasien.kode from prosedur_pasien where prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
-                                    while($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
-                                        if($a==1){
-                                            $prosedur=$barisprosedur["kode"];
-                                        }else{
-                                            $prosedur=$prosedur."#".$barisprosedur["kode"];
-                                        }                
-                                        $a++;
-                                    } 
-                                    echo $prosedur;
-                              ?>" size="60" maxlength="100">
+                    <?php
+                        $prosedur = '';
+                        $a = 1;
+                        $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
+                        while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
+                            if ($a == 1) {
+                                $prosedur = $barisprosedur['kode'];
+                            } else {
+                                $prosedur .= '#'.$barisprosedur['kode'];
+                            }
+                            $a++;
+                        }
+                    ?>
+                    <input name="procedure" class="text inputbox" type="text" value="<?= $prosedur; ?>" size="60" maxlength="100">
                 </td>
             </tr>
             <?php 
@@ -440,121 +449,141 @@
                 }
             ?>
             <tr class="head">
-                <td width="41%" >Biaya Prosedur Non Bedah</td><td width="">:</td>
+                <td width="41%">Biaya Prosedur Non Bedah</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="prosedur_non_bedah" class="text inputbox" type="text" value="<?php echo $prosedur_non_bedah; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="prosedur_non_bedah" class="text inputbox" type="text" value="<?php echo $prosedur_non_bedah; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Prosedur Bedah</td><td width="">:</td>
+                <td width="41%">Biaya Prosedur Bedah</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="prosedur_bedah" class="text inputbox" type="text" value="<?php echo $prosedur_bedah; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="prosedur_bedah" class="text inputbox" type="text" value="<?php echo $prosedur_bedah; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Konsultasi</td><td width="">:</td>
+                <td width="41%">Biaya Konsultasi</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="konsultasi" class="text inputbox" type="text" value="<?php echo $konsultasi; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="konsultasi" class="text inputbox" type="text" value="<?php echo $konsultasi; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Tenaga Ahli</td><td width="">:</td>
+                <td width="41%">Biaya Tenaga Ahli</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="tenaga_ahli" class="text inputbox" type="text" value="<?php echo $tenaga_ahli; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="tenaga_ahli" class="text inputbox" type="text" value="<?php echo $tenaga_ahli; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Keperawatan</td><td width="">:</td>
+                <td width="41%">Biaya Keperawatan</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="keperawatan" class="text inputbox" type="text" value="<?php echo $keperawatan; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="keperawatan" class="text inputbox" type="text" value="<?php echo $keperawatan; ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Penunjang</td><td width="">:</td>
+                <td width="41%">Biaya Penunjang</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="penunjang" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="penunjang" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Radiologi</td><td width="">:</td>
+                <td width="41%">Biaya Radiologi</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="radiologi" class="text inputbox" type="text" value="<?php echo $radiologi;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="radiologi" class="text inputbox" type="text" value="<?php echo $radiologi;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Laboratorium</td><td width="">:</td>
+                <td width="41%">Biaya Laboratorium</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="laboratorium" class="text inputbox" type="text" value="<?php echo $laboratorium;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="laboratorium" class="text inputbox" type="text" value="<?php echo $laboratorium;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Pelayanan Darah</td><td width="">:</td>
+                <td width="41%">Biaya Pelayanan Darah</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="pelayanan_darah" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="pelayanan_darah" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Rehabilitasi</td><td width="">:</td>
+                <td width="41%">Biaya Rehabilitasi</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="rehabilitasi" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="rehabilitasi" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Kamar</td><td width="">:</td>
+                <td width="41%">Biaya Kamar</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="kamar" class="text inputbox" type="text" value="<?php echo $kamar;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="kamar" class="text inputbox" type="text" value="<?php echo $kamar;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Rawat Intensif</td><td width="">:</td>
+                <td width="41%">Biaya Rawat Intensif</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="rawat_intensif" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="rawat_intensif" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Obat</td><td width="">:</td>
+                <td width="41%">Biaya Obat</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="obat" class="text inputbox" type="text" value="<?php echo $obat;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="obat" class="text inputbox" type="text" value="<?php echo $obat;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Obat Kronis</td><td width="">:</td>
+                <td width="41%">Biaya Obat Kronis</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="obat_kronis" class="text inputbox" type="text" value="<?php echo $obat_kronis;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="obat_kronis" class="text inputbox" type="text" value="<?php echo $obat_kronis;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Obat Kemoterapi</td><td width="">:</td>
+                <td width="41%">Biaya Obat Kemoterapi</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="obat_kemoterapi" class="text inputbox" type="text" value="<?php echo $obat_kemoterapi;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="obat_kemoterapi" class="text inputbox" type="text" value="<?php echo $obat_kemoterapi;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Alkes</td><td width="">:</td>
+                <td width="41%">Biaya Alkes</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="alkes" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="alkes" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya BMHP</td><td width="">:</td>
+                <td width="41%">Biaya BMHP</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="bmhp" class="text inputbox" type="text" value="<?php echo $bmhp;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="bmhp" class="text inputbox" type="text" value="<?php echo $bmhp;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Biaya Sewa Alat</td><td width="">:</td>
+                <td width="41%">Biaya Sewa Alat</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="sewa_alat" class="text inputbox" type="text" value="<?php echo $sewa_alat;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="sewa_alat" class="text inputbox" type="text" value="<?php echo $sewa_alat;?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Tarif Poli Eksekutif</td><td width="">:</td>
+                <td width="41%">Tarif Poli Eksekutif</td>
+                <td>:</td>
                 <td width="57%">
-                    <input name="tarif_poli_eks" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title=" 0-9 (Maksimal 15 karakter)" autocomplete="off">
+                    <input name="tarif_poli_eks" class="text inputbox" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Nama Dokter</td><td width="">:</td>
+                <td width="41%">Nama Dokter</td>
+                <td>:</td>
                 <td width="57%">
                     <select name="nama_dokter" class="text2">
                        <option value="<?php echo $nm_dokter;?>"><?php echo $nm_dokter;?></option>
@@ -724,53 +753,53 @@
         <?php
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
             if (isset($BtnSimpan)) {
-                $norawat           = validTeks(trim($_POST['no_rawat']));
-                $tgl_registrasi    = validTeks(trim($_POST['tgl_registrasi']));
-                $codernik          = validTeks(trim($_POST['codernik']));
-                $nosep             = validTeks(trim($_POST['nosep']));
-                $nokartu           = validTeks(trim($_POST['nokartu']));
-                $nm_pasien         = validTeks(trim($_POST['nm_pasien']));
-                $keluar            = validTeks(trim($_POST['keluar']));
-                $kelas_rawat       = validTeks(trim($_POST['kelas_rawat']));
-                $adl_sub_acute     = validTeks(trim($_POST['adl_sub_acute']));
-                $adl_chronic       = validTeks(trim($_POST['adl_chronic']));
-                $icu_indikator     = validTeks(trim($_POST['icu_indikator']));
-                $icu_los           = validTeks(trim($_POST['icu_los']));
-                $ventilator_hour   = validTeks(trim($_POST['ventilator_hour']));
-                $upgrade_class_ind = validTeks(trim($_POST['upgrade_class_ind']));
+                $norawat             = validTeks(trim($_POST['no_rawat']));
+                $tgl_registrasi      = validTeks(trim($_POST['tgl_registrasi']));
+                $codernik            = validTeks(trim($_POST['codernik']));
+                $nosep               = validTeks(trim($_POST['nosep']));
+                $nokartu             = validTeks(trim($_POST['nokartu']));
+                $nm_pasien           = validTeks(trim($_POST['nm_pasien']));
+                $keluar              = validTeks(trim($_POST['keluar']));
+                $kelas_rawat         = validTeks(trim($_POST['kelas_rawat']));
+                $adl_sub_acute       = validTeks(trim($_POST['adl_sub_acute']));
+                $adl_chronic         = validTeks(trim($_POST['adl_chronic']));
+                $icu_indikator       = validTeks(trim($_POST['icu_indikator']));
+                $icu_los             = validTeks(trim($_POST['icu_los']));
+                $ventilator_hour     = validTeks(trim($_POST['ventilator_hour']));
+                $upgrade_class_ind   = validTeks(trim($_POST['upgrade_class_ind']));
                 $upgrade_class_class = validTeks(trim($_POST['upgrade_class_class']));
-                $upgrade_class_los = validTeks(trim($_POST['upgrade_class_los']));
-                $add_payment_pct   = validTeks(trim($_POST['add_payment_pct']));
-                $birth_weight      = validTeks(trim($_POST['birth_weight']));
-                $discharge_status  = validTeks(trim($_POST['discharge_status']));
-                $diagnosa          = validTeks2(trim($_POST['diagnosa']));
-                $procedure         = validTeks2(trim($_POST['procedure']));
-                $prosedur_non_bedah = validTeks(trim($_POST['prosedur_non_bedah']));
-                $prosedur_bedah    = validTeks(trim($_POST['prosedur_bedah']));
-                $konsultasi        = validTeks(trim($_POST['konsultasi']));
-                $tenaga_ahli       = validTeks(trim($_POST['tenaga_ahli']));
-                $keperawatan       = validTeks(trim($_POST['keperawatan']));
-                $penunjang         = validTeks(trim($_POST['penunjang']));
-                $radiologi         = validTeks(trim($_POST['radiologi']));
-                $laboratorium      = validTeks(trim($_POST['laboratorium']));
-                $pelayanan_darah   = validTeks(trim($_POST['pelayanan_darah']));
-                $rehabilitasi      = validTeks(trim($_POST['rehabilitasi']));
-                $kamar             = validTeks(trim($_POST['kamar']));
-                $rawat_intensif    = validTeks(trim($_POST['rawat_intensif']));
-                $obat              = validTeks(trim($_POST['obat']));
-                $obat_kronis       = validTeks(trim($_POST['obat_kronis']));
-                $obat_kemoterapi   = validTeks(trim($_POST['obat_kemoterapi']));
-                $alkes             = validTeks(trim($_POST['alkes']));
-                $bmhp              = validTeks(trim($_POST['bmhp']));
-                $sewa_alat         = validTeks(trim($_POST['sewa_alat']));
-                $tarif_poli_eks    = validTeks(trim($_POST['tarif_poli_eks']));
-                $nama_dokter       = validTeks(trim($_POST['nama_dokter']));
-                $jk                = validTeks(trim($_POST['jk']));
-                $tgl_lahir         = validTeks(trim($_POST['tgl_lahir']));
-                $jnsrawat          = validTeks(trim($_POST['jnsrawat']));
-                $sistole           = validTeks(trim($_POST['sistole']));
-                $diastole          = validTeks(trim($_POST['diastole']));
-                $gender            = "";
+                $upgrade_class_los   = validTeks(trim($_POST['upgrade_class_los']));
+                $add_payment_pct     = validTeks(trim($_POST['add_payment_pct']));
+                $birth_weight        = validTeks(trim($_POST['birth_weight']));
+                $discharge_status    = validTeks(trim($_POST['discharge_status']));
+                $diagnosa            = validTeks2(trim($_POST['diagnosa']));
+                $procedure           = validTeks2(trim($_POST['procedure']));
+                $prosedur_non_bedah  = validTeks(trim($_POST['prosedur_non_bedah']));
+                $prosedur_bedah      = validTeks(trim($_POST['prosedur_bedah']));
+                $konsultasi          = validTeks(trim($_POST['konsultasi']));
+                $tenaga_ahli         = validTeks(trim($_POST['tenaga_ahli']));
+                $keperawatan         = validTeks(trim($_POST['keperawatan']));
+                $penunjang           = validTeks(trim($_POST['penunjang']));
+                $radiologi           = validTeks(trim($_POST['radiologi']));
+                $laboratorium        = validTeks(trim($_POST['laboratorium']));
+                $pelayanan_darah     = validTeks(trim($_POST['pelayanan_darah']));
+                $rehabilitasi        = validTeks(trim($_POST['rehabilitasi']));
+                $kamar               = validTeks(trim($_POST['kamar']));
+                $rawat_intensif      = validTeks(trim($_POST['rawat_intensif']));
+                $obat                = validTeks(trim($_POST['obat']));
+                $obat_kronis         = validTeks(trim($_POST['obat_kronis']));
+                $obat_kemoterapi     = validTeks(trim($_POST['obat_kemoterapi']));
+                $alkes               = validTeks(trim($_POST['alkes']));
+                $bmhp                = validTeks(trim($_POST['bmhp']));
+                $sewa_alat           = validTeks(trim($_POST['sewa_alat']));
+                $tarif_poli_eks      = validTeks(trim($_POST['tarif_poli_eks']));
+                $nama_dokter         = validTeks(trim($_POST['nama_dokter']));
+                $jk                  = validTeks(trim($_POST['jk']));
+                $tgl_lahir           = validTeks(trim($_POST['tgl_lahir']));
+                $jnsrawat            = validTeks(trim($_POST['jnsrawat']));
+                $sistole             = validTeks(trim($_POST['sistole']));
+                $diastole            = validTeks(trim($_POST['diastole']));
+                $gender              = "";
                 if($jk=="L"){
                     $gender="1";
                 }else{
@@ -832,7 +861,7 @@
             }
         ?>         
     </div>
-    <div align="center"><input name="BtnSimpan" type="submit" class="button" style="padding: 1.5rem 0.75rem; font-family: Tahoma; font-size: 0.8rem; font-weight: 500; cursor: pointer" value="&nbsp;&nbsp;SIMPAN & KIRIM KE EKLAIM&nbsp;&nbsp;"></div>
+    <div align="center"><input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM"></div>
     </form>
 </div>
 <script>

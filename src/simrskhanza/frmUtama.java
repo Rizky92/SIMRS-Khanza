@@ -26306,11 +26306,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
             
-            if (akses.getbpjs_kompilasi_berkas_klaim()) {
-                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
-                jmlmenu++;
-            }
-            
             if(akses.getsatu_sehat_kirim_observation_radiologi()==true){
                 Panelmenu.add(btnKirimObservationRadiologiSatuSehat);
                 jmlmenu++;
@@ -26358,6 +26353,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsatu_sehat_kirim_diagnosticreport_labmb()==true){
                 Panelmenu.add(btnKirimDiagnosticReportLabMBSatuSehat);
+                jmlmenu++;
+            }
+            
+            if (akses.getbpjs_kompilasi_berkas_klaim()) {
+                Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
