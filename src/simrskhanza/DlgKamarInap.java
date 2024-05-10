@@ -47,6 +47,8 @@ import inventory.DlgPermintaanResepPulang;
 import inventory.DlgPermintaanStokPasien;
 import inventory.DlgResepPulang;
 import inventory.DlgReturJual;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Window;
@@ -67,6 +69,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.DlgBilingRanap;
@@ -268,7 +271,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }
         }
-        tbKamIn.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        if (koneksiDB.AKTIFKANWARNARALAN().equals("yes")) {
+            tbKamIn.setDefaultRenderer(Object.class, new WarnaTableKamarRanap());
+        } else {
+            tbKamIn.setDefaultRenderer(Object.class, new WarnaTable());
+        }
 
         norawat.setDocument(new batasInput((byte)17).getKata(norawat));
         kdkamar.setDocument(new batasInput((byte)15).getKata(kdkamar));
@@ -17576,7 +17584,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         } 
     }
     
-    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
@@ -18987,5 +18995,27 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianLain.add(MnPenilaianPsikolog);
         MnPenilaianLain.add(MnHemodialisa);
         MnPenilaianLain.add(MnPengkajianRestrain);
+    }
+    
+    private class WarnaTableKamarRanap extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            
+            if (row % 2 == 1) {
+                component.setBackground(new Color(255, 244, 244));
+                component.setForeground(new Color(50, 50, 50));
+            } else {
+                component.setBackground(new Color(255, 255, 255));
+                component.setForeground(new Color(50, 50, 50));
+            }
+
+            if (table.getValueAt(row, 20).toString().equals("Sudah Bayar")) {
+                component.setBackground(new Color(50, 50, 50));
+                component.setForeground(new Color(255, 255, 255));
+            }
+
+            return component;
+        }
     }
 }

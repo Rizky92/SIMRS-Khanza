@@ -64,7 +64,7 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     private int jml=0,i=0,index=0,jml2=0,i2=0,index2=0,jmlparsial=0;
     private String aktifkanparsial="no",noorder="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",pilihan="",status="",diagnosa="";
     private double ttl=0,item=0;
-    private boolean sukses=false;
+    private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABMB = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labmb");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_KSO_Laborat_Ranap="",Utang_KSO_Laborat_Ranap="",

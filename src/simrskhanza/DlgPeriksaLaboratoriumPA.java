@@ -64,7 +64,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     private int jml=0,i=0,index=0,jml2=0,i2=0,index2=0,jmlparsial=0;
     private String aktifkanparsial="no",noorder="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",pilihan="",status="",diagnosa="",finger="";
     private double ttl=0,item=0;
-    private boolean sukses=false;
+    private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABPA = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpa");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_KSO_Laborat_Ranap="",Utang_KSO_Laborat_Ranap="",
@@ -1898,24 +1898,49 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void simpan() {
-        jml=0;
-        for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(tbPemeriksaan.getValueAt(i,2).toString().equals("")){
-                jml++;
+        if (VALIDASIULANGHASILPERMINTAANLABPA) {
+            if (Sequel.cariBooleanSmc("select * from permintaan_labpa where noorder = ? and tgl_hasil != '0000-00-00'", noorder)) {
+                JOptionPane.showMessageDialog(null, "Maaf, telah dilakukan pengisian hasil lab untuk No. Permintaan " + noorder + ",\nSilahkan cek kembali yang mau disimpan!");
+            } else {
+                jml=0;
+                for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                    if(tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                        jml++;
+                    }
+                }
+
+                if(jml>0){
+                    int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (tanya == JOptionPane.YES_OPTION) {
+                        simpanlab();
+                    }
+                }else{
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        simpanlab();
+                    }
+                }
+            }
+        } else {
+            jml=0;
+            for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                if(tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                    jml++;
+                }
+            }
+
+            if(jml>0){
+                int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (tanya == JOptionPane.YES_OPTION) {
+                    simpanlab();
+                }
+            }else{
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    simpanlab();
+                }
             }
         }
-        
-        if(jml>0){
-            int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (tanya == JOptionPane.YES_OPTION) {
-                simpanlab();
-            }
-        }else{
-            int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {
-                simpanlab();
-            }
-        }     
     }
     
     private void simpanlab() {
@@ -2059,14 +2084,19 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
                 
             if(sukses==true){
-                Sequel.Commit();
-                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                Sequel.Commit();                
                 isReset();
+                emptTeks();
             }else{
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
             }
-            Sequel.AutoComitTrue();  
+            Sequel.AutoComitTrue();
+            
+            if (sukses) {
+                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+            } else {
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            }
         } catch (Exception e) {
             System.out.println(e);
         }    

@@ -8,6 +8,7 @@ package fungsi;
 import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
 import javax.swing.JOptionPane;
@@ -84,14 +85,21 @@ public class koneksiDB {
             return false;
         }
     }
-    
-    public static boolean VALIDASIRESEPKRONIS()
-    {
+
+    public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            
+            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN").toLowerCase().trim().contains(kategori);
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    
+    public static boolean VALIDASIRESEPKRONIS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
-        } catch (Exception e) {
+        } catch (IOException e) {
             return false;
         }
     }

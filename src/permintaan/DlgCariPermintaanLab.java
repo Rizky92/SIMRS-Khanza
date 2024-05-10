@@ -71,7 +71,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private DlgCariBangsal ruang=new DlgCariBangsal(null,false);
     private BackgroundMusic music;
     private Date now;
-    private boolean aktif=false,semua;
+    private boolean aktif=false,semua, VALIDASIULANGHASILPERMINTAANLABPK = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpk");
     private ApiLICA lica=new ApiLICA();
     private ApiSOFTMEDIX softmedix=new ApiSOFTMEDIX();
     private ObjectMapper mapper = new ObjectMapper();
@@ -1957,17 +1957,35 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         if(Sampel.equals("")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf, silahkan ambil sampel terlebih dahulu..!!");
                         }else{
-                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
-                            dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                            dlgro.setLocationRelativeTo(internalFrame1);
-                            dlgro.emptTeks();
-                            dlgro.isCek(); 
-                            dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
-                            dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
-                            TeksKosong();
-                            dlgro.setVisible(true);
-                            this.setCursor(Cursor.getDefaultCursor());
+                            if (VALIDASIULANGHASILPERMINTAANLABPK) {
+                                if (Hasil.isBlank() || akses.getadmin()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
+                                    dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek(); 
+                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                    dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
+                            } else {
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
+                                dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                dlgro.setLocationRelativeTo(internalFrame1);
+                                dlgro.emptTeks();
+                                dlgro.isCek(); 
+                                dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                TeksKosong();
+                                dlgro.setVisible(true);
+                                this.setCursor(Cursor.getDefaultCursor());
+                            }
                         }
                     }
                 }else{            
@@ -1988,17 +2006,25 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         if(Sampel.equals("")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf, silahkan ambil sampel terlebih dahulu..!!");
                         }else{
-                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
-                            dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                            dlgro.setLocationRelativeTo(internalFrame1);
-                            dlgro.emptTeks();
-                            dlgro.isCek(); 
-                            dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
-                            dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
-                            TeksKosong();
-                            dlgro.setVisible(true);
-                            this.setCursor(Cursor.getDefaultCursor());
+                            if (VALIDASIULANGHASILPERMINTAANLABPK) {
+                                if (Hasil.isBlank() || akses.getadmin()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
+                                    dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek(); 
+                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
+                                    dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                            }
                         }
                     }
                 }else{            
@@ -2025,7 +2051,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{ 
                         TanggalPulang.setDate(new Date());
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
                         WindowAmbilSampel.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());

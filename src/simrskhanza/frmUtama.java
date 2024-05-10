@@ -941,6 +941,7 @@ import setting.DlgSetHargaKamar;
 import setting.DlgSetHargaObatRalan;
 import setting.DlgSetHargaObatRanap;
 import setting.DlgSetHargaToko;
+import setting.DlgUserSmc;
 import setting.DlgSetInputParsial;
 import setting.DlgSetKamarInap;
 import setting.DlgSetKeterlambatan;
@@ -16517,6 +16518,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnUserSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgUserSmc user=new DlgUserSmc(this,false);
+        user.emptTeks();
+        user.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        user.setLocationRelativeTo(PanelUtama);
+        user.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     private void btnPengajuanAsetInventarisActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23185,7 +23198,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnKirimDiagnosticReportSatuSehat,btnHasilEndoskopiTelinga,btnMappingLaboratSatuSehat,btnKirimServiceRequestLabPKSatuSehat,btnKirimServiceRequestLabMBSatuSehat,
             btnKirimSpecimenLabPKSatuSehat,btnKirimSpecimenLabMBSatuSehat,btnKirimObservationLabPKSatuSehat,btnKirimObservationLabMBSatuSehat,btnKirimDiagnosticReportLabPKSatuSehat,
             btnKirimDiagnosticReportLabMBSatuSehat,btnKepatuhanKelengkapanKeselamatanBedah,btnNilaiPiutangPerJenisBayarPerBulan,btnRingkasanPiutangPerJenisBayar,
-            btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian;
+            btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,btnUserSmc;
     
     public void isWall(){
         try{            
@@ -28354,6 +28367,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnUser);
                 jmlmenu++;
             }
+            
+            if(akses.getuser()==true){
+                Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }
 
             if(akses.gettracer_login()==true){
                 Panelmenu.add(btnTracker);
@@ -33469,6 +33487,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getuser()==true){
             Panelmenu.add(btnUser);
+            jmlmenu++;
+        }
+        
+        if(akses.getuser()==true){
+            Panelmenu.add(btnUserSmc);
             jmlmenu++;
         }
 
@@ -40620,6 +40643,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }                
         }
+        
+        if(akses.getuser()==true){
+            if(btnUserSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }                
+        }
 
         if(akses.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -41392,6 +41422,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnUser.setName("btnUser"); 
         btnUser.setPreferredSize(new java.awt.Dimension(200, 90));
         btnUser.addActionListener(this::btnUserActionPerformed);
+        
+        btnUserSmc = new widget.ButtonBig();
+        btnUserSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png"))); 
+        btnUserSmc.setText("Set User 2");
+        btnUserSmc.setIconTextGap(0);
+        btnUserSmc.setName("btnUserSmc"); 
+        btnUserSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnUserSmc.addActionListener(this::btnUserSmcActionPerformed);
         
         btnPengajuanAsetInventaris = new widget.ButtonBig();
         btnPengajuanAsetInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png"))); 
