@@ -56,24 +56,26 @@
                     <?php $total += $inapdrpasien[7]; ?>
                     <?php if ($row++ < 6): ?>
                         <tr class="isi12" padding="0">
-                            <td padding="0" width="30%"><font color="000000" size="1" face="Tahoma"><?= str_replace("  ","&nbsp;&nbsp;",$inapdrpasien[0]) ?></td>
+                            <td padding="0" width="30%"><font color="000000" size="1" face="Tahoma"><?= str_replace('  ', '&nbsp;&nbsp;', $inapdrpasien[0]) ?></td>
                             <td padding="0" width="40%" colspan="6"><font color="000000" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></td>
                         </tr>
-                    <?php elseif ($row++ >= 6 && empty($inapdrpasien[6]) && empty($inapdrpasien[0])): ?>
-                        <tr class="isi12" padding="0">
-                            <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= str_replace("   ", "&nbsp;&nbsp;", $inapdrpasien[0]) ?></font></td>
-                            <td padding="0" width="40%" colspan="6" align="right"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></font></td>
-                        </tr>
                     <?php else: ?>
-                        <tr class="isi12" padding="0">
-                            <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[0] ?></font></td>
-                            <td padding="0" width="40%"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></font></td>
-                            <td padding="0" width="2%"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[2] ?></font></td>
-                            <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuit2($inapdrpasien[3]) ?></font></td>
-                            <td padding="0" width="5%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuit2($inapdrpasien[4]) ?></font></td>
-                            <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuit2($inapdrpasien[5]) ?></font></td>
-                            <td padding="0" width="15%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuit2($inapdrpasien[6]) ?></font></td>
-                        </tr>
+                        <?php if (empty($inapdrpasien[6]) && empty($inapdrpasien[0])): ?>
+                            <tr class="isi12" padding="0">
+                                <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= str_replace('   ', '&nbsp;&nbsp;', $inapdrpasien[0]) ?></font></td>
+                                <td padding="0" width="40%" colspan="6" align="right"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[1] ?></font></td>
+                            </tr>
+                        <?php else: ?>
+                            <tr class="isi12" padding="0">
+                                <td padding="0" width="18%"><font color="111111" size="1" face="Tahoma"><?= str_replace('   ', '&nbsp;&nbsp;', $inapdrpasien[0]) ?></font></td>
+                                <td padding="0" width="40%"><font color="111111" size="1" face="Tahoma"><?= str_replace('  ', '&nbsp;&nbsp;', $inapdrpasien[1]) ?></font></td>
+                                <td padding="0" width="2%"><font color="111111" size="1" face="Tahoma"><?= $inapdrpasien[2] ?></font></td>
+                                <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuitSmc($inapdrpasien[3]) ?></font></td>
+                                <td padding="0" width="5%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuitSmc($inapdrpasien[4]) ?></font></td>
+                                <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuitSmc($inapdrpasien[5]) ?></font></td>
+                                <td padding="0" width="15%" align="right"><font color="111111" size="1" face="Tahoma"><?= formatDuitSmc($inapdrpasien[6]) ?></font></td>
+                            </tr>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endwhile; ?>
                 <tr class="isi12" padding="0">
@@ -83,7 +85,7 @@
                     <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"></font></td>
                     <td padding="0" width="5%" align="right"><font color="111111" size="1" face="Tahoma"></font></td>
                     <td padding="0" width="10%" align="right"><font color="111111" size="1" face="Tahoma"></font></td>
-                    <td padding="0" width="15%" align="right"><font color="111111" size="1" face="Tahoma"><b><?= formatDuit2($total) ?></b></font></td>
+                    <td padding="0" width="15%" align="right"><font color="111111" size="1" face="Tahoma"><b><?= formatDuitSmc($total) ?></b></font></td>
                 </tr>
                 <tr class="isi12" padding="0">
                     <td colspan="7" padding="0">

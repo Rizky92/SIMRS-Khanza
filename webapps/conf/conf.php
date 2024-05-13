@@ -643,6 +643,11 @@
     function formatDuit2($duit){
         return @number_format((float)$duit,0,",",".")."";
     }
+
+    function formatDuitSmc($duit) {
+        return (round($duit, 0) <=> 0) === 0 ? ''
+            : @number_format($duit, 0, ',', '.');
+    }
         
     function formatDec($duit){
         return round($duit);
