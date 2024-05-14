@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    require_once('../../conf/conf.php');
+    require_once('../conf/conf.php');
 
     function getKey() {
        $keyRS = "c8527ecb36aa437c912d926bd25f61abc08037e482e8e45fbce9d50f8f997439";   
