@@ -2028,6 +2028,24 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             exportPDF("rptBridgingSEP6.jasper", urutan + "_SEP", params);
         }
     }
+    
+    private void exportKlaimINACBG(String urutan) {
+        String filename = Sequel.cariIsiSmc("select path from inacbg_cetak_klaim where no_sep = ?", lblNoSEP.getText());
+        if (filename.isBlank()) {
+            return;
+        }
+        
+        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/" + filename;
+        String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_KlaimINACBG.pdf";
+        if (filename.endsWith(".pdf")) {
+            try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
+                fileChannel.transferFrom(Channels.newChannel(new URL(url).openStream()), 0, Long.MAX_VALUE);
+            } catch (Exception e) {
+                exportSukses = false;
+                System.out.println("Notif : " + e);
+            }
+        }
+    }
 
     private void exportResumeRanap(String urutan) {
         if (!btnResumeRanap.isEnabled()) {
@@ -2146,11 +2164,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         String kamar = "", namaKamar = "";
         int i = 0, j = 1;
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama, periksa_lab.tgl_periksa, periksa_lab.jam, "
-            + "periksa_lab.nip, periksa_lab.dokter_perujuk, periksa_lab.kd_dokter, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, "
-            + "dokter.nm_dokter, pasien.tgl_lahir from periksa_lab join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "
-            + "join petugas on periksa_lab.nip = petugas.nip join dokter on periksa_lab.kd_dokter = dokter.kd_dokter join kelurahan on pasien.kd_kel = kelurahan.kd_kel join kecamatan on pasien.kd_kec = kecamatan.kd_kec "
-            + "join kabupaten on pasien.kd_kab = kabupaten.kd_kab where periksa_lab.kategori = 'PK' and periksa_lab.no_rawat = ?"
+            "select periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama, periksa_lab.tgl_periksa, periksa_lab.jam, " +
+            "periksa_lab.nip, periksa_lab.dokter_perujuk, periksa_lab.kd_dokter, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, " +
+            "dokter.nm_dokter, pasien.tgl_lahir from periksa_lab join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+            "join petugas on periksa_lab.nip = petugas.nip join dokter on periksa_lab.kd_dokter = dokter.kd_dokter join kelurahan on pasien.kd_kel = kelurahan.kd_kel join kecamatan on pasien.kd_kec = kecamatan.kd_kec " +
+            "join kabupaten on pasien.kd_kab = kabupaten.kd_kab where periksa_lab.kategori = 'PK' and periksa_lab.no_rawat = ?"
         )) {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {

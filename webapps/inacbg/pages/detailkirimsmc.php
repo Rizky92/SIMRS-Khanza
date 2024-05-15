@@ -737,7 +737,7 @@
                             </tr>
                         <?php endwhile; ?>
                     <?php endif; ?>
-                </table>                
+                </table>
             </div>
             <?php
                 $BtnSimpan = $_POST['BtnSimpan'] ?? null;
@@ -823,8 +823,8 @@
                                     $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                     $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
                                     $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
-                                    $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole
-                                );
+                                    $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
+                                CetakKlaim($nosep);
                                 echo <<<HTML
                                     <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
                                 HTML;
@@ -842,6 +842,7 @@
                                     $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                     $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                     $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole);
+                                CetakKlaim($nosep);
                                 echo <<<HTML
                                     <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
                                 HTML;
