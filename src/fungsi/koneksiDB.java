@@ -125,8 +125,8 @@ public class koneksiDB {
     public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN").toLowerCase().trim().equals("yes");
-        } catch (Exception e) {
+            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN").toLowerCase().trim().contains(kategori);
+        } catch (IOException e) {
             return false;
         }
     }
