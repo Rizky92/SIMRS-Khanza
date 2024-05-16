@@ -7515,7 +7515,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgki.setLocationRelativeTo(internalFrame1);
             dlgki.isCek();
-            dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Ralan","IGDK","Unit IGD/UGD");
+            dlgki.setNoRm4(TNoRw.getText(), DTPReg.getDate(), "2. Ralan", "IGDK", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 5).toString());
+            // dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Ralan","IGDK","Unit IGD/UGD");
             dlgki.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -7689,7 +7690,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbPetugas.requestFocus();
         }else{
-            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
+            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
             if(tbPetugas.getSelectedRow()>-1){
                 tabMode.setValueAt("Berkas Diterima",tbPetugas.getSelectedRow(),18);
@@ -10660,7 +10661,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
 
-    private void MnPenilaianLanjutanSkriningFungsionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianLanjutanSkriningFungsionalActionPerformed
+    private void MnPenilaianLanjutanSkriningFungsionalActionPerformed(java.awt.event.ActionEvent evt) {                                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -10681,7 +10682,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
-    }//GEN-LAST:event_MnPeniliaianAwalMedisIGDPsikiatriActionPerformed
+    }                                                                 
 
     private void MnPenilaianUlangNyeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianUlangNyeriActionPerformed
         if(tabMode.getRowCount()==0){
@@ -10991,7 +10992,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();

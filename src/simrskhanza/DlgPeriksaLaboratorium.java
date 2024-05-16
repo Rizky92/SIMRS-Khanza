@@ -73,7 +73,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private String aktifkanparsial="no",noorder="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",pilihan="",status="",diagnosa="",
             hasil="",satuan="",nn="",keterangan="";
     private double ttl=0,item=0;
-    private boolean sukses=false;
+    private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABPK = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpk");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_KSO_Laborat_Ranap="",Utang_KSO_Laborat_Ranap="",
@@ -1136,7 +1136,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
                 if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
                     Sequel.menyimpan("temporary_lab","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                        "0",tbPemeriksaan.getValueAt(i,1).toString(),
+                        ""+i,tbPemeriksaan.getValueAt(i,1).toString(),
                         tbPemeriksaan.getValueAt(i,2).toString().replaceAll("'","`"),
                         tbPemeriksaan.getValueAt(i,3).toString(),
                         tbPemeriksaan.getValueAt(i,4).toString(),
@@ -1396,11 +1396,13 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else {
             Sequel.queryu("delete from temporary_lab");
             ttl=0;
+            i2=0;
             for(i=0;i<tbTarif.getRowCount();i++){
                 if(tbTarif.getValueAt(i,0).toString().equals("true")){                                       
                     item=Double.parseDouble(tbTarif.getValueAt(i,3).toString());
                     ttl=ttl+item;  
-                    Sequel.menyimpan("temporary_lab","'0','"+tbTarif.getValueAt(i,1).toString()+"','"+tbTarif.getValueAt(i,2).toString()+"','"+tbTarif.getValueAt(i,3).toString()+"','Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+                    Sequel.menyimpan("temporary_lab","'"+i2+"','"+tbTarif.getValueAt(i,1).toString()+"','"+tbTarif.getValueAt(i,2).toString()+"','"+tbTarif.getValueAt(i,3).toString()+"','Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+                    i2++;
                 }                
             }
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
@@ -1411,10 +1413,11 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         item=0;
                     }                    
                     ttl=ttl+item;  
-                    Sequel.menyimpan("temporary_lab","'0','"+tbPemeriksaan.getValueAt(i,15).toString()+"','"+tbPemeriksaan.getValueAt(i,1).toString()+"','"+item+"','Detail Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+                    Sequel.menyimpan("temporary_lab","'"+i2+"','"+tbPemeriksaan.getValueAt(i,15).toString()+"','"+tbPemeriksaan.getValueAt(i,1).toString()+"','"+item+"','Detail Pemeriksaan','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+                    i2++;
                 }                
             }
-            Sequel.menyimpan("temporary_lab","'0','','Total Biaya Pemeriksaan Lab','"+ttl+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
+            Sequel.menyimpan("temporary_lab","'"+i2+"','','Total Biaya Pemeriksaan Lab','"+ttl+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
             Valid.panggilUrl("billing/LaporanBiayaLab.php?norm="+TNoRM.getText()+"&pasien="+TPasien.getText().replaceAll(" ","_")+"&tanggal="+Tanggal.getSelectedItem()+"&jam="+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"&pjlab="+NmDokterPj.getText().replaceAll(" ","_")+"&petugas="+NmPtg.getText().replaceAll(" ","_")+"&kasir="+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",akses.getkode())+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -3077,24 +3080,49 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void simpan() {
-        jml=0;
-        for(i=0;i<tbPemeriksaan.getRowCount();i++){
-            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")&&tbPemeriksaan.getValueAt(i,1).toString().substring(0,2).equals("  ")&&tbPemeriksaan.getValueAt(i,2).toString().equals("")){
-                jml++;
+        if (VALIDASIULANGHASILPERMINTAANLABPK) {
+            if (Sequel.cariBooleanSmc("select * from permintaan_lab where noorder = ? and tgl_hasil != '0000-00-00'", noorder)) {
+                JOptionPane.showMessageDialog(null, "Maaf, telah dilakukan pengisian hasil lab untuk No. Permintaan " + noorder + ",\nSilahkan cek kembali yang mau disimpan!");
+            } else {
+                jml=0;
+                for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                    if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")&&tbPemeriksaan.getValueAt(i,1).toString().substring(0,2).equals("  ")&&tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                        jml++;
+                    }
+                }
+
+                if(jml>0){
+                    int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (tanya == JOptionPane.YES_OPTION) {
+                        simpanlab();
+                    }
+                }else{
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        simpanlab();
+                    }
+                }
             }
-        }
-        
-        if(jml>0){
-            int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (tanya == JOptionPane.YES_OPTION) {
-                simpanlab();
+        } else {
+            jml=0;
+            for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")&&tbPemeriksaan.getValueAt(i,1).toString().substring(0,2).equals("  ")&&tbPemeriksaan.getValueAt(i,2).toString().equals("")){
+                    jml++;
+                }
             }
-        }else{
-            int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {
-                simpanlab();
+
+            if(jml>0){
+                int tanya=JOptionPane.showConfirmDialog(rootPane,"Ada hasil lab yang belum diisi, yakin mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (tanya == JOptionPane.YES_OPTION) {
+                    simpanlab();
+                }
+            }else{
+                int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    simpanlab();
+                }
             }
-        }     
+        }  
     }
 
     private void simpanlab() {

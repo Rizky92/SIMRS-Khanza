@@ -5167,8 +5167,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<tr class='isi'>"+
                                         "<td align='center'>"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
                                         "<td align='center'>"+rs2.getString("nip")+"<br>"+rs2.getString("nama")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+
+                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
                                         (rs2.getString("alergi").equals("")?"":"<br>Alergi : "+rs2.getString("alergi"))+
                                         (rs2.getString("suhu_tubuh").equals("")?"":"<br>Suhu(C) : "+rs2.getString("suhu_tubuh"))+
                                         (rs2.getString("tensi").equals("")?"":"<br>Tensi : "+rs2.getString("tensi"))+
@@ -5227,8 +5227,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<tr class='isi'>"+
                                         "<td align='center'>"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
                                         "<td align='center'>"+rs2.getString("nip")+"<br>"+rs2.getString("nama")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+
+                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
                                         (rs2.getString("alergi").equals("")?"":"<br>Alergi : "+rs2.getString("alergi"))+
                                         (rs2.getString("suhu_tubuh").equals("")?"":"<br>Suhu(C) : "+rs2.getString("suhu_tubuh"))+
                                         (rs2.getString("tensi").equals("")?"":"<br>Tensi : "+rs2.getString("tensi"))+
@@ -11024,7 +11024,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' colspan='2'>Subjek</td>"+
-                                        "<td valign='top' colspan='8'> : "+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
+                                        "<td valign='top' colspan='8'> : "+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                      "</tr>");
                             }
 
@@ -11034,7 +11034,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' colspan='2'>Objek</td>"+
-                                        "<td valign='top' colspan='8'> : "+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
+                                        "<td valign='top' colspan='8'> : "+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                      "</tr>");
                             }
 
@@ -14539,7 +14539,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' colspan='2'>Subjek</td>"+
-                                        "<td valign='top' colspan='7'> : "+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
+                                        "<td valign='top' colspan='7'> : "+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                      "</tr>");
                             }
 
@@ -14549,7 +14549,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' align='center'></td>"+
                                         "<td valign='top' colspan='2'>Objek</td>"+
-                                        "<td valign='top' colspan='7'> : "+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("<","&lt;").replaceAll(">","&gt;")+"</td>"+
+                                        "<td valign='top' colspan='7'> : "+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                      "</tr>");
                             }
 
