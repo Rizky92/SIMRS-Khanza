@@ -1767,8 +1767,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             "order by reg_periksa.no_rawat"
         )) {
             Valid.tabelKosong(tabMode);
-            ps.setString(1, Valid.setTglSmc(DTPCari1));
-            ps.setString(2, Valid.setTglSmc(DTPCari2));
+            ps.setString(1, Valid.getTglSmc(DTPCari1));
+            ps.setString(2, Valid.getTglSmc(DTPCari2));
             if (CmbStts.getSelectedIndex() == 0) {
                 ps.setString(3, "%%");
             } else {
@@ -1880,7 +1880,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 btnSPRI.setText("Tidak Ada");
                 btnSPRI.setEnabled(false);
             }
-            panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.setTglSmc(DTPCari1), Valid.setTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim());
+            panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim());
             panelDiagnosaSmc.batal();
             panelDiagnosaSmc.pilihTab(0);
             tabPane1.setSelectedIndex(0);

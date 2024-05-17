@@ -96,14 +96,6 @@ public final class validasi {
     public String getTglSmc(Tanggal tgl) {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
-    
-    public String getTglSmc(Tanggal tgl) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
-    }
-    
-    public String setTglSmc(Tanggal tgl) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
-    }
 
     public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
@@ -138,10 +130,6 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-    }
-    
-    public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
-        return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
     public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
