@@ -101,38 +101,7 @@ public final class validasi {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
-    public void htmlReport(String reportName, String reportDirName, Map params) {
-        Properties systemProp = System.getProperties();
-
-        String currentDir = systemProp.getProperty("user.dir");
-
-        File dir = new File(currentDir);
-
-        File fileRpt;
-        String fullPath = "";
-        if (dir.isDirectory()) {
-            String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) {
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                }
-            }
-        }
-
-        try {
-            File f = new File("./" + reportDirName + "/" + reportName.replaceAll("jasper", "html"));
-            String namafile = "./" + reportDirName + "/" + reportName;
-            
-            JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, params, connect);
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, "./" + reportName.replaceAll("jasper", "html"));
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
-    public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
+    public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
