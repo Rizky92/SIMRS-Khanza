@@ -645,8 +645,7 @@
     }
 
     function formatDuitSmc($duit) {
-        return (round($duit, 0) <=> 0) === 0 ? ''
-            : @number_format($duit, 0, ',', '.');
+        return (round($duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
     }
         
     function formatDec($duit){
@@ -931,32 +930,5 @@
           return Terbilang($x / 1000) . " ribu" . Terbilang($x % 1000);
         elseif ($x < 1000000000)
           return Terbilang($x / 1000000) . " juta" . Terbilang($x % 1000000);
-    }
-
-    function isAssoc($values)
-    {
-        $keys = array_keys($values);
-        return array_keys($keys) !== $keys;
-    }
-
-    function querySmc($sql, $values = null)
-    {
-        if ($values && isAssoc($values)) return;
-
-        $conn = bukakoneksi();
-
-        $query = $conn->prepare($sql);
-
-        if (! is_null($values)) {
-            $query->bind_param(str_repeat('s', count((array) $values)), ...$values);
-        }
-
-        $query->execute();
-
-        if (gettype($result = $query->get_result()) !== 'boolean') {
-            return $result->fetch_assoc();
-        }
-
-        return $result;
     }
 ?>

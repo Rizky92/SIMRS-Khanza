@@ -1946,6 +1946,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
             + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
+        
         Platform.runLater(() -> {
             WebView view = new WebView();
             engine = view.getEngine();
@@ -2111,8 +2112,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             norawat = lblNoRawat.getText();
         }
-        
-        String link = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
+        String link = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
+            + "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
         try (FileOutputStream os = new FileOutputStream("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_Billing.pdf")) {
             URL url = new URL(link);
             org.jsoup.nodes.Document jsoupDoc = Jsoup.parse(url, 30000);
@@ -2418,15 +2419,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void gabung() {
         tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        exportSEP("001");
-        exportAwalMedisIGD("002");
-        exportResumeRanap("003");
-        exportBilling("004");
-        exportHasilLab("005");
-        exportHasilRadiologi("006");
-        exportBerkasDigitalPerawatan("007");
-        // exportSKDP("008");
-        // exportSPRI("009");
+        exportKlaimINACBG("001");
+        exportSEP("002");
+        exportAwalMedisIGD("003");
+        exportResumeRanap("004");
+        exportBilling("005");
+        exportHasilLab("006");
+        exportHasilRadiologi("007");
+        exportBerkasDigitalPerawatan("008");
+        // exportSKDP("009");
+        // exportSPRI("010");
         if (exportSukses) {
             mergePDF();
             cleanupAfterMerge(true);
