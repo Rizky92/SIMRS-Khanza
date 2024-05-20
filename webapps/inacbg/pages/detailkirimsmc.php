@@ -112,6 +112,11 @@
             <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
             <input type="hidden" name="jk" value="<?= $jk ?>">
             <input type="hidden" name="codernik" value="<?= $codernik ?>">
+            <?php if (bukaquery2("select code_cbg from inacbg_grouping_stage1 where no_sep = '$nosep'") == 'X-0-98-X'): ?>
+                <div class="center" style="margin-left: 0.7rem">
+                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR! Cek diagnosa/prosedur yang dimasukkan!</span>
+                </div>
+            <?php endif; ?>
             <div style="width: 100%; height: 90%; overflow: auto;">
                 <table width="100%" align="center">
                     <tr class="head">
@@ -264,7 +269,7 @@
                         <td>:</td>
                         <td width="57%">
                             <select name="upgrade_class_class" class="text2" style="font-family: Tahoma">
-                            <option value="<?php= $naikkelas ?>"><?php= $naikkelas ?></option>
+                            <option value="<?= $naikkelas ?>">Kelas <?= $naikkelas ?></option>
                             <option value="kelas_1">Kelas 1</option>
                             <option value="kelas_2">Kelas 2</option>
                             <option value="vip">Kelas VIP</option>
