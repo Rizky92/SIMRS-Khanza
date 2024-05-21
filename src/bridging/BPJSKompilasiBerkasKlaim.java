@@ -15,8 +15,10 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -31,6 +33,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
@@ -60,6 +63,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.util.HtmlUtils;
 import rekammedis.RMRiwayatPerawatan;
 
 public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
@@ -78,7 +82,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         tabMode = new DefaultTableModel(null, new Object[] {
-            "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Status", "Tgl. Registrasi", "Tgl. Pulang", "Ruangan", "Diagnosa", "Status INACBG", "KirimINACBG"
+            "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Status", "Tgl. Registrasi", "Tgl. Pulang", "Stts. Pulang", "Ruangan", "Diagnosa", "Status INACBG", "KirimINACBG"
         }) {
             @Override
             public Class getColumnClass(int columnIndex) {
@@ -101,11 +105,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tbKompilasi.getColumnModel().getColumn(4).setPreferredWidth(50);
         tbKompilasi.getColumnModel().getColumn(5).setPreferredWidth(80);
         tbKompilasi.getColumnModel().getColumn(6).setPreferredWidth(70);
-        tbKompilasi.getColumnModel().getColumn(7).setPreferredWidth(180);
-        tbKompilasi.getColumnModel().getColumn(8).setPreferredWidth(70);
-        tbKompilasi.getColumnModel().getColumn(9).setPreferredWidth(100);
-        tbKompilasi.getColumnModel().getColumn(10).setMinWidth(0);
-        tbKompilasi.getColumnModel().getColumn(10).setMaxWidth(0);
+        tbKompilasi.getColumnModel().getColumn(7).setPreferredWidth(90);
+        tbKompilasi.getColumnModel().getColumn(8).setPreferredWidth(180);
+        tbKompilasi.getColumnModel().getColumn(9).setPreferredWidth(70);
+        tbKompilasi.getColumnModel().getColumn(10).setPreferredWidth(100);
+        tbKompilasi.getColumnModel().getColumn(11).setMinWidth(0);
+        tbKompilasi.getColumnModel().getColumn(11).setMaxWidth(0);
         
         tbKompilasi.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
@@ -1789,18 +1794,18 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select reg_periksa.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.status_lanjut, reg_periksa.tgl_registrasi, date (bridging_sep.tglpulang) as tglpulang, " +
-            "case when reg_periksa.status_lanjut = 'Ranap' then concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) when reg_periksa.status_lanjut = 'Ralan' then poliklinik.nm_poli end as ruangan, " +
-            "(select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.no_rawat = reg_periksa.no_rawat and diagnosa_pasien.status = reg_periksa.status_lanjut and diagnosa_pasien.prioritas = '1') as diagnosa_utama, " +
+            "select reg_periksa.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.status_lanjut, reg_periksa.tgl_registrasi, date (bridging_sep.tglpulang) as tglpulang, kamar_inap.stts_pulang, " +
+            "case when reg_periksa.status_lanjut = 'Ranap' then concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) when reg_periksa.status_lanjut = 'Ralan' then poliklinik.nm_poli end as ruangan, diagnosa_pasien.kd_penyakit, " +
             "exists(select * from inacbg_data_terkirim2 where inacbg_data_terkirim2.no_sep = bridging_sep.no_sep) as inacbg_terkirim from reg_periksa join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
             "join bridging_sep on reg_periksa.no_rawat = bridging_sep.no_rawat and (if (reg_periksa.status_lanjut = 'Ranap', '1', '2')) = bridging_sep.jnspelayanan join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
+            "join diagnosa_pasien on reg_periksa.no_rawat = diagnosa_pasien.no_rawat and reg_periksa.status_lanjut = diagnosa_pasien.status and diagnosa_pasien.prioritas = '1' " +
             "left join kamar_inap on reg_periksa.no_rawat = kamar_inap.no_rawat and kamar_inap.stts_pulang != 'Pindah Kamar' left join kamar on kamar_inap.kd_kamar = kamar.kd_kamar left join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
             "where reg_periksa.status_bayar = 'Sudah Bayar' and reg_periksa.kd_pj = (select password_asuransi.kd_pj from password_asuransi limit 1) and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.status_lanjut like ? " +
             "and (reg_periksa.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) like ?) " +
-            "order by reg_periksa.no_rawat"
+            "and bridging_sep.no_sep like concat((select setting.kode_ppk from setting limit 1), '%') and length(bridging_sep.no_sep) = 19 group by reg_periksa.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, reg_periksa.status_lanjut order by reg_periksa.no_rawat"
         )) {
-            Valid.tabelKosong(tabMode);
             ps.setString(1, Valid.getTglSmc(DTPCari1));
             ps.setString(2, Valid.getTglSmc(DTPCari2));
             if (CmbStts.getSelectedIndex() == 0) {
@@ -1817,8 +1822,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
-                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), (rs.getBoolean(10) ? "Terkirim" : "Belum Terkirim"), rs.getString(10)
+                        rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("reg_periksa.status_lanjut"),
+                        rs.getString("tgl_registrasi"), rs.getString("tglpulang"), rs.getString("stts_pulang"), rs.getString("ruangan"), rs.getString("kd_penyakit"),
+                        (rs.getBoolean("inacbg_terkirim") ? "Terkirim" : "Belum Terkirim"), rs.getString("inacbg_terkirim")
                     });
                 }
             }
@@ -2172,8 +2178,192 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
+    
+    private void exportSOAP(String urutan) {
+        if (Sequel.cariBooleanSmc("select * from reg_periksa where no_rawat = ? and (kd_poli = 'IGDK' or status_lanjut = 'Ranap')", lblNoRawat.getText())) {
+            return;
+        }
+        
+        try {
+            StringBuilder htmlContent = new StringBuilder();
+            htmlContent
+                .append("<html>")
+                .append("<head>")
+                .append("<style type=\"text/css\">")
+                .append(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}")
+                .append("</style>")
+                .append("</head>")
+                .append("<body>");
+
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tmp_lahir, pasien.tgl_lahir, pasien.agama, bahasa_pasien.nama_bahasa, cacat_fisik.nama_cacat, pasien.gol_darah, " +
+                "pasien.nm_ibu, pasien.stts_nikah, pasien.pnd, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, pasien.pekerjaan from pasien " +
+                "join bahasa_pasien on bahasa_pasien.id = pasien.bahasa_pasien join cacat_fisik on cacat_fisik.id = pasien.cacat_fisik join kelurahan on pasien.kd_kel = kelurahan.kd_kel " +
+                "join kecamatan on pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab where pasien.no_rkm_medis = ?"
+            )) {
+                ps.setString(1, lblNoRM.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        htmlContent
+                            .append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">")
+                            .append("<tbody>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">No.RM</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("no_rkm_medis") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Nama Pasien</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("nm_pasien") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Alamat</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("alamat") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Jenis Kelamin</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Tempat &amp; Tanggal Lahir</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("tmp_lahir") + ", " + new SimpleDateFormat("dd MMMM yyyy", new Locale("id")).format((Date) rs.getDate("tgl_lahir")) + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Ibu Kandung</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("nm_ibu") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Golongan Darah</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("gol_darah") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Status Nikah</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("stts_nikah") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Agama</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("agama") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Pendidikan Terakhir</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("pnd") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Bahasa Dipakai</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("nama_bahasa") + "</td>")
+                            .append("</tr>")
+                            .append("<tr class=\"isi\">")
+                            .append("<td valign=\"top\" width=\"20%\">Cacat Fisik</td>")
+                            .append("<td valign=\"top\" width=\"1%\" align=\"center\">:</td>")
+                            .append("<td valign=\"top\" width=\"79%\">" + rs.getString("nama_cacat") + "</td>")
+                            .append("</tr>")
+                            .append("</tbody>")
+                            .append("</table>");
+                    }
+                }
+            }
+
+            htmlContent
+                .append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">")
+                .append("<tbody>")
+                .append("<tr class=\"isi\">")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFAF8\" align=\"center\" width=\"5%\">Tgl. Reg</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFAF8\" align=\"center\" width=\"8%\">No. Rawat</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFAF8\" align=\"center\" width=\"3%\">Status</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFAF8\" align=\"center\" width=\"84%\">S.O.A.P.I.E</td>")
+                .append("</tr>")
+                .append("<tr class=\"isi\">")
+                .append("<td valign=\"top\" align=\"center\">" + Sequel.cariIsiSmc("select tgl_registrasi from reg_periksa where no_rawat = ?", lblNoRawat.getText()) + "</td>")
+                .append("<td valign=\"top\" align=\"center\">" + lblNoRawat.getText() + "</td>")
+                .append("<td valign=\"top\" align=\"center\">Ralan</td>")
+                .append("<td valign=\"top\" align=\"center\">")
+                .append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"2px\" cellspacing=\"0\">")
+                .append("<tbody>")
+                .append("<tr class=\"isi\">")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"7%\">Tanggal</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"13%\">Dokter/Paramedis</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"14%\">Subjek</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"13%\">Objek</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"13%\">Asesmen</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"14%\">Plan</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"14%\">Instruksi</td>")
+                .append("<td valign=\"middle\" bgcolor=\"#FFFFF8\" align=\"center\" width=\"14%\">Evaluasi</td>")
+                .append("</tr>");
+
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select pemeriksaan_ralan.*, pegawai.nama, pegawai.jbtn from pemeriksaan_ralan join pegawai on pemeriksaan_ralan.nip = pegawai.nik " +
+                "where pemeriksaan_ralan.no_rawat = ? order by concat(pemeriksaan_ralan.tgl_perawatan, ' ', pemeriksaan_ralan.jam_rawat) desc"
+            )) {
+                ps.setString(1, lblNoRawat.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        htmlContent
+                            .append("<tr class=\"isi\">")
+                            .append("<td align=\"center\">" + rs.getString("tgl_perawatan") + "<br>" + rs.getString("jam_rawat") + "</td>")
+                            .append("<td align=\"center\">" + rs.getString("nip") + "<br>" + rs.getString("nama") + "</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("keluhan")).replaceAll("\\R", "<br>") + "</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("pemeriksaan")).replaceAll("\\R", "<br>"))
+                            .append((rs.getString("alergi") == null || rs.getString("alergi").isBlank() ? "" : "<br>Alergi : " + rs.getString("alergi")))
+                            .append((rs.getString("suhu_tubuh") == null || rs.getString("suhu_tubuh").isBlank() ? "" : "<br>Suhu(C) : " + rs.getString("suhu_tubuh")))
+                            .append((rs.getString("tensi") == null || rs.getString("tensi").isBlank() ? "" : "<br>Tensi : " + rs.getString("tensi")))
+                            .append((rs.getString("nadi") == null || rs.getString("nadi").isBlank() ? "" : "<br>Nadi(/menit) : " + rs.getString("nadi")))
+                            .append((rs.getString("respirasi") == null || rs.getString("respirasi").isBlank() ? "" : "<br>Respirasi(/menit) : " + rs.getString("respirasi")))
+                            .append((rs.getString("tinggi") == null || rs.getString("tinggi").isBlank() ? "" : "<br>Tinggi(Cm) : " + rs.getString("tinggi")))
+                            .append((rs.getString("berat") == null || rs.getString("berat").isBlank() ? "" : "<br>Berat(Kg) : " + rs.getString("berat")))
+                            .append((rs.getString("lingkar_perut") == null || rs.getString("lingkar_perut").isBlank() ? "" : "<br>Lingkar Perut(Cm) : " + rs.getString("lingkar_perut")))
+                            .append((rs.getString("spo2") == null || rs.getString("spo2").isBlank() ? "" : "<br>SpO2(%) : " + rs.getString("spo2")))
+                            .append((rs.getString("gcs") == null || rs.getString("gcs").isBlank() ? "" : "<br>GCS(E,V,M) : " + rs.getString("gcs")))
+                            .append((rs.getString("kesadaran") == null || rs.getString("kesadaran").isBlank() ? "" : "<br>Kesadaran : " + rs.getString("kesadaran")))
+                            .append("</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("penilaian")).replaceAll("\\R", "<br>") + "</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("rtl")).replaceAll("\\R", "<br>") + "</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("instruksi")).replaceAll("\\R", "<br>") + "</td>")
+                            .append("<td align=\"left\">" + HtmlUtils.htmlEscape(rs.getString("evaluasi")).replaceAll("\\R", "<br>") + "</td>")
+                            .append("</tr>");
+                    }
+                }
+            }
+
+            htmlContent
+                .append("</tbody>")
+                .append("</table>")
+                .append("</td>")
+                .append("</tr>")
+                .append("</body>")
+                .append("</html>");
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("soap_ralan.html")))) {
+                String html = htmlContent.toString().replaceAll(getClass().getResource("/picture/").toString(), "./gambar/");
+                bw.write(html);
+            }
+
+            try (FileOutputStream os = new FileOutputStream("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_SOAP.pdf")) {
+                org.jsoup.nodes.Document jsoupDoc = Jsoup.parse(new File("soap_ralan.html"));
+                org.w3c.dom.Document w3cDoc = new W3CDom().fromJsoup(jsoupDoc);
+                PdfRendererBuilder builder = new PdfRendererBuilder();
+                builder.withW3cDocument(w3cDoc, null);
+                builder.toStream(os);
+                builder.run();
+            }
+        } catch (Exception e) {
+            exportSukses = false;
+            System.out.println("Notif : " + e);
+        }
+    }
 
     private void exportAwalMedisIGD(String urutan) {
+        if (Sequel.cariBooleanSmc("select * from reg_periksa where no_rawat = ? and kd_poli != 'IGDK'", lblNoRawat.getText())) return;
+        
         if (!btnAwalMedisIGD.isEnabled()) return;
         
         String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText());
@@ -2447,8 +2637,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     if (filename.endsWith(".pdf")) {
                         try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
                             fileChannel.transferFrom(Channels.newChannel(new URL(url + rs.getString("lokasi_file")).openStream()), 0, Long.MAX_VALUE);
-                        } catch (Exception e) {
-                            System.out.println("Notif : " + e);
                         } finally {
                             System.out.println("Skipping entry : " + url + rs.getString("lokasi_file"));
                             continue;
@@ -2467,11 +2655,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         exportKlaimINACBG("001");
         exportSEP("002");
         exportAwalMedisIGD("003");
-        exportResumeRanap("004");
-        exportBilling("005");
-        exportHasilLab("006");
-        exportHasilRadiologi("007");
-        exportBerkasDigitalPerawatan("008");
+        exportSOAP("004");
+        exportResumeRanap("005");
+        exportBilling("006");
+        exportHasilLab("007");
+        exportHasilRadiologi("008");
+        exportBerkasDigitalPerawatan("009");
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {
