@@ -68,7 +68,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private validasi Valid=new validasi();    
     private final sekuel Sequel=new sekuel();
     private final DefaultTableModel tabModeRegistrasi;
-    private PreparedStatement ps,ps2,ps3;
+    private PreparedStatement ps,ps2;
     private ResultSet rs,rs2,rs3,rs4;
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
