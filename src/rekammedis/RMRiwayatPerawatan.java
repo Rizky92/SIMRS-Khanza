@@ -1047,11 +1047,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanMedisHemodialisa.setName("chkAsuhanMedisHemodialisa"); // NOI18N
         chkAsuhanMedisHemodialisa.setOpaque(false);
         chkAsuhanMedisHemodialisa.setPreferredSize(new java.awt.Dimension(245, 22));
-        chkAsuhanMedisHemodialisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAsuhanMedisHemodialisaActionPerformed(evt);
-            }
-        });
         FormMenu.add(chkAsuhanMedisHemodialisa);
 
         chkEdukasiPasienTerintegrasiRawatJalan.setSelected(true);
@@ -2585,11 +2580,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void R5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R5ActionPerformed
-
-    private void chkAsuhanMedisHemodialisaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_chkAsuhanMedisHemodialisaActionPerformed
-    {//GEN-HEADEREND:event_chkAsuhanMedisHemodialisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkAsuhanMedisHemodialisaActionPerformed
 
     /**
     * @param args the command line arguments

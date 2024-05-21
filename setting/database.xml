@@ -36,7 +36,7 @@
     <entry key="ALARMPENGADUANPASIEN">no</entry>
     <entry key="ALARMPERMINTAANRANAP">no</entry>
     <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="TANGGALMUNDUR">no</entry>
+    <entry key="TANGGALMUNDUR">yes</entry>
     <entry key="URLAPIBPJS">https://apijkn.bpjs-kesehatan.go.id/vclaim-rest</entry>
     <entry key="SECRETKEYAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="CONSIDAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
