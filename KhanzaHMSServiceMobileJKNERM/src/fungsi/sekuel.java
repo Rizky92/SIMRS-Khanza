@@ -94,6 +94,17 @@ public final class sekuel {
         return output;
     }
     
+    public void executeRawSmc(String query, String... values) {
+        try (PreparedStatement ps = connect.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
     public String cariIsiSmc(String query, String... values)
     {
         String output = "";

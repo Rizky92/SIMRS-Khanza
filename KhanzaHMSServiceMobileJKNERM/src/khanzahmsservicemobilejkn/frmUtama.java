@@ -16,8 +16,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.Timer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpEntity;
@@ -409,7 +412,103 @@ public class frmUtama extends javax.swing.JFrame {
                                 ps.close();
                             }
                         }
+                        ps = koneksi.prepareStatement(
+                            "select reg_periksa.no_rawat, referensi_mobilejkn_bpjs.norm, now() as tanggalbatal, " +
+                            "referensi_mobilejkn_bpjs.nomorreferensi, referensi_mobilejkn_bpjs.nobooking from reg_periksa " +
+                            "join referensi_mobilejkn_bpjs on reg_periksa.no_rawat = referensi_mobilejkn_bpjs.no_rawat " +
+                            "where reg_periksa.status = 'Batal' and referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " +
+                            "and not exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking)"
+                        );
+                        try {
+                            if (Tanggal1.getText().equals(Tanggal2.getText())) {
+                                LocalDate d1 = LocalDate.parse(Tanggal1.getText(),
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(new Locale("id"))
+                                );
+                                
+                                // Kirim ws batal H+1 untuk pasien dibatalkan dari pelayanan
+                                ps.setDate(1, java.sql.Date.valueOf(d1.minusDays(7l)));
+                                ps.setDate(2, java.sql.Date.valueOf(d1.minusDays(1l)));
+                            } else {
+                                ps.setString(1, Tanggal1.getText());
+                                ps.setString(2, Tanggal2.getText());
+                            }
+                            
+                            rs = ps.executeQuery();
+                            while (rs.next()) {
+                                try {
+                                    headers = new HttpHeaders();
+                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                    headers.add("x-cons-id", koneksiDB.CONSIDAPIMOBILEJKN());
+                                    utc = String.valueOf(api.GetUTCdatetimeAsString());
+                                    headers.add("x-timestamp", utc);
+                                    headers.add("x-signature", api.getHmac(utc));
+                                    headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
+                                    requestJson = "{"
+                                        + "\"kodebooking\": \"" + rs.getString("nobooking") + "\","
+                                        + "\"keterangan\": \"Dibatalkan oleh admin\""
+                                        + "}";
+                                    TeksArea.append("JSON : " + requestJson + "\n");
+                                    requestEntity = new HttpEntity(requestJson, headers);
+                                    URL = link + "/antrean/batal";
+                                    System.out.println("URL : " + URL);
+                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    nameNode = root.path("metadata");
+                                    Sequel.logTaskid(rs.getString("no_rawat"), "JKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                    if (nameNode.path("code").asText().equals("200")) {
+                                        Sequel.executeRawSmc("insert into referensi_mobilejkn_bpjs_batal values (?, ?, ?, ?, 'Dibatalkan oleh admin', 'Sudah', ?)",
+                                            rs.getString("norm"), rs.getString("no_rawat"), rs.getString("nomorreferensi"), rs.getString("tanggalbatal"), rs.getString("nobooking"));
+                                        datajam = rs.getString("tanggalbatal");
+                                        if (!datajam.equals("")) {
+                                            if (Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid", "?,?,?", "task id", 3, new String[] {rs.getString("no_rawat_batal"), "99", datajam}) == true) {
+                                                parsedDate = dateFormat.parse(datajam);
+                                                try {
+                                                    TeksArea.append("Menjalankan WS taskid batal pelayanan poli Mobile JKN Pasien BPJS\n");
+                                                    headers = new HttpHeaders();
+                                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                                    headers.add("x-cons-id", koneksiDB.CONSIDAPIMOBILEJKN());
+                                                    utc = String.valueOf(api.GetUTCdatetimeAsString());
+                                                    headers.add("x-timestamp", utc);
+                                                    headers.add("x-signature", api.getHmac(utc));
+                                                    headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    requestJson = "{"
+                                                        + "\"kodebooking\": \"" + rs.getString("nobooking") + "\","
+                                                        + "\"taskid\": \"99\","
+                                                        + "\"waktu\": \"" + parsedDate.getTime() + "\""
+                                                        + "}";
+                                                    TeksArea.append("JSON : " + requestJson + "\n");
+                                                    requestEntity = new HttpEntity(requestJson, headers);
+                                                    URL = link + "/antrean/updatewaktu";
+                                                    System.out.println("URL : " + URL);
+                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    nameNode = root.path("metadata");
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), "JKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                                    if (!nameNode.path("code").asText().equals("200")) {
+                                                        Sequel.executeRawSmc("delete from referensi_mobilejkn_bpjs_taskid where taskid = '99' and no_rawat = ?", rs.getString("no_rawat"));
+                                                    }
+                                                    TeksArea.append("respon WS BPJS : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
+                                                } catch (Exception ex) {
+                                                    System.out.println("Notifikasi Bridging : " + ex);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    TeksArea.append("respon WS BPJS : " + nameNode.path("code").asText() + " " + nameNode.path("message").asText() + "\n");
+                                } catch (Exception ex) {
+                                    System.out.println("Notifikasi Bridging : " + ex);
+                                }
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("Notif Ketersediaan : " + ex);
+                        } finally {
+                            if (rs != null) {
+                                rs.close();
+                            }
+                            if (ps != null) {
+                                ps.close();
+                            }
+                        }
                         
+                        // TASKID
                         ps=koneksi.prepareStatement(
                                 "SELECT referensi_mobilejkn_bpjs.nobooking,referensi_mobilejkn_bpjs.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
                                 "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,poliklinik.nm_poli,dokter.nm_dokter,referensi_mobilejkn_bpjs.jampraktek,"+
