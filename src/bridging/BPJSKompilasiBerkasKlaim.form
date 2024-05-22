@@ -845,6 +845,9 @@
                 </Property>
                 <Property name="name" type="java.lang.String" value="jPanel2" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[800, 800]"/>
+                </Property>
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -852,6 +855,9 @@
                 <Container class="widget.ScrollPane" name="scrollPane1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="scrollPane1" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[800, 800]"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -865,7 +871,7 @@
                       <Properties>
                         <Property name="name" type="java.lang.String" value="panelBiasa1" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[800, 760]"/>
+                          <Dimension value="[800, 800]"/>
                         </Property>
                       </Properties>
 

@@ -307,7 +307,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<detail>
-		<band height="50">
+		<band height="50" splitType="Prevent">
 			<textField>
 				<reportElement positionType="Float" x="0" y="36" width="555" height="14" uuid="bf7d158e-0e90-415a-aafb-0c77ec300b80"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -351,7 +351,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="55">
+		<band height="55" splitType="Prevent">
 			<textField>
 				<reportElement positionType="Float" x="62" y="41" width="185" height="11" uuid="2ac1e596-0f84-42bd-8dcd-a0df5f10875f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -592,7 +592,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="41">
+		<band height="41" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" x="3" y="2" width="247" height="11" uuid="4d7531d0-4a68-4797-8ad9-c073b18018e7">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -637,7 +637,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="48">
+		<band height="48" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="3" y="3" width="552" height="43" uuid="72e6171c-7a73-453a-ae3d-b3c5385080ff">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -671,7 +671,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="3" y="2" width="273" height="25" uuid="373150fd-3336-4234-9b44-e0666db35824">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -723,7 +723,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="31">
+		<band height="31" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="3" y="3" width="273" height="25" uuid="db4f3b94-8717-4d01-b37b-89761857a2b7">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -775,7 +775,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="43">
+		<band height="43" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" x="3" y="3" width="247" height="11" uuid="ca097108-fb2c-4366-a136-b6825258ed58">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -863,7 +863,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="61">
+		<band height="61" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" x="3" y="3" width="50" height="11" uuid="f014fffb-3aac-4b6a-b3b6-bddbb28aba77">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -1092,7 +1092,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="175">
+		<band height="175" splitType="Prevent">
 			<line>
 				<reportElement positionType="Float" x="0" y="15" width="557" height="1" uuid="5ebbc599-8608-449e-966b-bd99ca38ad37"/>
 				<graphicElement>
@@ -1153,7 +1153,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="44">
+		<band height="44" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" x="3" y="3" width="247" height="11" uuid="e12a27a8-55f5-4eed-b573-7d564c4bd20a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -1240,7 +1240,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="43">
+		<band height="43" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" x="3" y="3" width="247" height="11" uuid="5096a5ba-740b-4cf5-8baa-609dce0f9456">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -1285,7 +1285,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="145">
+		<band height="145" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="3" y="17" width="550" height="124" uuid="1d346b8e-53ea-457f-b6d0-460ee30e034d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -1330,7 +1330,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="60">
+		<band height="60" splitType="Prevent">
 			<line>
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="255" y="-1" width="1" height="59" uuid="9401d158-12aa-4fd8-a873-8c986116a35f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
