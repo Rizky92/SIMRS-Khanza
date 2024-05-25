@@ -6911,7 +6911,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             ChkInput.setVisible(true);
         }
     }
-
+    
     private void menampilkanTriaseIGD(String norawat) {
         try {
             if(chkTriase.isSelected()==true){

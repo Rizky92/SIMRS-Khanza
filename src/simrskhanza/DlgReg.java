@@ -1945,7 +1945,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCatatanObservasiIGD.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCatatanObservasiIGD.setForeground(new java.awt.Color(50, 50, 50));
         MnCatatanObservasiIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCatatanObservasiIGD.setText("Observasi IGD");
+        MnCatatanObservasiIGD.setText("Catatan Observasi IGD");
         MnCatatanObservasiIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnCatatanObservasiIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanObservasiIGD.setName("MnCatatanObservasiIGD"); // NOI18N
@@ -1955,6 +1955,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnCatatanObservasiIGDActionPerformed(evt);
             }
         });
+        MnRMIGD.add(MnCatatanObservasiIGD);
 
         MnPengkajianRestrain.setBackground(new java.awt.Color(255, 255, 254));
         MnPengkajianRestrain.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2257,7 +2258,8 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianTambahanGeriatriActionPerformed(evt);
             }
         });
-        
+        MnPenilaianLain.add(MnPenilaianTambahanGeriatri);
+
         MnPenilaianTambahanBunuhDiri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianTambahanBunuhDiri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianTambahanBunuhDiri.setForeground(new java.awt.Color(50, 50, 50));
@@ -2272,6 +2274,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianTambahanBunuhDiriActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianTambahanBunuhDiri);
 
         MnPenilaianTambahanPerilakuKekerasan.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianTambahanPerilakuKekerasan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2287,6 +2290,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianTambahanPerilakuKekerasanActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianTambahanPerilakuKekerasan);
 
         MnPenilaianTambahanMelarikanDiri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianTambahanMelarikanDiri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2302,6 +2306,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianTambahanMelarikanDiriActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianTambahanMelarikanDiri);
 
         MnPenilaianPasienTerminal.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPasienTerminal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2317,6 +2322,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianPasienTerminalActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianPasienTerminal);
 
         MnPenilaianKorbanKekerasan.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianKorbanKekerasan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2332,6 +2338,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianKorbanKekerasanActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianKorbanKekerasan);
 
         MnPenilaianPasienPenyakitMenular.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPasienPenyakitMenular.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2347,6 +2354,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianPasienPenyakitMenularActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianPasienPenyakitMenular);
 
         MnPenilaianMCU.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianMCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2362,6 +2370,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianMCUActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnPenilaianMCU);
 
         MnHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
         MnHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2377,6 +2386,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnHemodialisaActionPerformed(evt);
             }
         });
+        MnPenilaianLain.add(MnHemodialisa);
 
         MnDataRM.add(MnPenilaianLain);
 
@@ -2448,6 +2458,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnCatatanCekGDSActionPerformed(evt);
             }
         });
+        MnRMCatatanMonitoring.add(MnCatatanCekGDS);
 
         MnMonitoringReaksiTranfusi.setBackground(new java.awt.Color(255, 255, 254));
         MnMonitoringReaksiTranfusi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2463,6 +2474,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnMonitoringReaksiTranfusiActionPerformed(evt);
             }
         });
+        MnRMCatatanMonitoring.add(MnMonitoringReaksiTranfusi);
 
         MnPenilaianUlangNyeri.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianUlangNyeri.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2478,6 +2490,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnPenilaianUlangNyeriActionPerformed(evt);
             }
         });
+        MnRMCatatanMonitoring.add(MnPenilaianUlangNyeri);
 
         MnCatatanKeperawatan.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanKeperawatan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2493,6 +2506,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnCatatanKeperawatanActionPerformed(evt);
             }
         });
+        MnRMCatatanMonitoring.add(MnCatatanKeperawatan);
 
         MnCatatanPersalinan.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanPersalinan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2508,6 +2522,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnCatatanPersalinanActionPerformed(evt);
             }
         });
+        MnRMCatatanMonitoring.add(MnCatatanPersalinan);
 
         MnDataRM.add(MnRMCatatanMonitoring);
 
@@ -6332,6 +6347,11 @@ public final class DlgReg extends javax.swing.JDialog {
                 buttonSimpanAntrianActionPerformed(evt);
             }
         });
+        buttonSimpanAntrian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonSimpanAntrianKeyPressed(evt);
+            }
+        });
         internalFrame8.add(buttonSimpanAntrian);
         buttonSimpanAntrian.setBounds(484, 63, 100, 30);
 
@@ -6343,11 +6363,6 @@ public final class DlgReg extends javax.swing.JDialog {
 
         textNoAntrian.setHighlighter(null);
         textNoAntrian.setName("textNoAntrian"); // NOI18N
-        textNoAntrian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNoAntrianActionPerformed(evt);
-            }
-        });
         textNoAntrian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textNoAntrianKeyPressed(evt);
@@ -6539,7 +6554,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-03-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6552,7 +6567,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-03-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6693,7 +6708,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-03-2024" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -14432,11 +14447,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     {//GEN-HEADEREND:event_buttonSimpanAntrianActionPerformed
         akses.setform("DlgReg");
         
-        if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.SetTgl(DTPReg.getSelectedItem().toString()), textNoRawatAntrian.getText())) {
-            JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
-        } else if (Sequel.cariBooleanSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.SetTgl(DTPReg.getSelectedItem().toString()))) {
-            Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.SetTgl(DTPReg.getSelectedItem().toString()), textNoAntrian.getText().trim());
-            Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "tanggal = ? and nomor = ?", Valid.SetTgl(DTPReg.getSelectedItem().toString()), TNoAntrian.getText());
+        if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
+            JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
+        } else if (Sequel.cariBooleanSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+            Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
+            Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
         }
         
         textNoRawatAntrian.setText("");
@@ -14456,11 +14471,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             akses.setform("DlgReg");
         
-            if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.SetTgl(DTPReg.getSelectedItem().toString()), textNoRawatAntrian.getText())) {
-                JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
-            } else if (Sequel.cariBooleanSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.SetTgl(DTPReg.getSelectedItem().toString()))) {
-                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.SetTgl(DTPReg.getSelectedItem().toString()), textNoAntrian.getText().trim());
-                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "tanggal = ? and nomor = ?", Valid.SetTgl(DTPReg.getSelectedItem().toString()), TNoAntrian.getText());
+            if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
+            } else if (Sequel.cariBooleanSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
+                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
             }
 
             textNoRawatAntrian.setText("");
@@ -14471,10 +14486,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_textNoAntrianKeyPressed
 
-    private void textNoAntrianActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_textNoAntrianActionPerformed
-    {//GEN-HEADEREND:event_textNoAntrianActionPerformed
+    private void buttonSimpanAntrianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSimpanAntrianKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            akses.setform("DlgReg");
         
-    }//GEN-LAST:event_textNoAntrianActionPerformed
+            if (Sequel.cariBooleanSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
+            } else if (Sequel.cariBooleanSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
+                Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
+            }
+
+            textNoRawatAntrian.setText("");
+            textNoAntrian.setText("");
+
+            WindowInputNoAntrian.dispose();
+            emptTeks();
+        }
+    }//GEN-LAST:event_buttonSimpanAntrianKeyPressed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
@@ -14927,7 +14956,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     } 
     
-    private void MnPenilaianPasienImunitasRendahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPasienPenyakitMenularActionPerformed
+    private void MnPenilaianPasienImunitasRendahActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -14949,7 +14978,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnCatatanKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanCekGDSActionPerformed
+    private void MnCatatanKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {                                                
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -14972,7 +15001,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+    private void MnCatatanObservasiCHBPActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -14995,7 +15024,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnCatatanObservasiInduksiPersalinanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+    private void MnCatatanObservasiInduksiPersalinanActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();

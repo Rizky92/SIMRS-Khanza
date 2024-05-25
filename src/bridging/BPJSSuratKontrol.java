@@ -1647,7 +1647,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Valid.SetTgl(TanggalKontrol.getSelectedItem()+"")+" "+TanggalKontrol.getSelectedItem().toString().substring(11,19),"belum"
             });
         }
-            
+
         return status;
     }
 }

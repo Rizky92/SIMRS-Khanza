@@ -6728,7 +6728,4 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     public void setPasien(String pasien){
         NoRawat.setText(pasien);
     }
- 
-
- 
 }
