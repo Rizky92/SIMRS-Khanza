@@ -5912,6 +5912,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tbKamIn.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbKamIn.setComponentPopupMenu(jPopupMenu1);
         tbKamIn.setName("tbKamIn"); // NOI18N
+        tbKamIn.getTableHeader().setReorderingAllowed(false);
         tbKamIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbKamInMouseClicked(evt);
