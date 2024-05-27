@@ -1508,7 +1508,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             "(select detail_titip_faktur.no_faktur from detail_titip_faktur where detail_titip_faktur.no_tagihan = ?) " +
             "order by bayar_pemesanan.tgl_bayar";
         
-        Valid.reportQuery("rptBayarPemesanan.jasper", "report", "::[ Bayar Pemesanan ]::", param, sql, notagihan);
+        Valid.reportSmc("rptBayarPemesanan.jasper", "report", "::[ Bayar Pemesanan ]::", param, sql, notagihan);
             
         this.setCursor(Cursor.getDefaultCursor());
     }

@@ -99,6 +99,7 @@ import rekammedis.RMDataCatatanCekGDS;
 import rekammedis.RMDataCatatanKeperawatanRanap;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import rekammedis.RMDataCatatanObservasiCHBP;
+import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataCatatanObservasiRanap;
 import rekammedis.RMDataCatatanObservasiRanapKebidanan;
 import rekammedis.RMDataCatatanObservasiRanapPostPartum;
@@ -17603,6 +17604,26 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
     }
     
+    private void MnCatatanObservasiInduksiPersalinanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbKamIn.getSelectedRow()>-1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataCatatanObservasiInduksiPersalinan form=new RMDataCatatanObservasiInduksiPersalinan(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -18023,8 +18044,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                   MnBelumTerbitSEP,
                                   MnSudahTerbitSEP,
                                   MnSEPUpdateTanggalPulang,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,
-                                  MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianAwalKeperawatanRanapNeonatus,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP;
-    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
+                                  MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianAwalKeperawatanRanapNeonatus,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan;
+    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi;
     
     private void tampil() {
         if(R1.isSelected()==true){
@@ -18532,6 +18553,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanCekGDS.setEnabled(akses.getcatatan_cek_gds());
         MnChecklistPreOperasi.setEnabled(akses.getchecklist_pre_operasi());
         MnSignInSebelumAnestesi.setEnabled(akses.getsignin_sebelum_anestesi());
+        MnCatatanObservasiInduksiPersalinan.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
         MnTimeOutSebelumInsisi.setEnabled(akses.gettimeout_sebelum_insisi());
         MnSignOutSebelumMenutupLuka.setEnabled(akses.getsignout_sebelum_menutup_luka());
         MnChecklistPostOperasi.setEnabled(akses.getchecklist_post_operasi());
@@ -18758,28 +18780,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSEPUpdateTanggalPulang.setPreferredSize(new java.awt.Dimension(320, 26));
         MnSEPUpdateTanggalPulang.addActionListener(this::MnSEPUpdateTanggalPulangActionPerformed);
         
-        MnHasilUSG = new javax.swing.JMenu();
-        MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
-        MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
-        MnHasilUSG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
-        MnHasilUSG.setText("Hasil USG");
-        MnHasilUSG.setFont(new java.awt.Font("Tahoma", 0, 11)); 
-        MnHasilUSG.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnHasilUSG.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnHasilUSG.setName("MnHasilUSG"); 
-        MnHasilUSG.setPreferredSize(new java.awt.Dimension(230, 26));
-        
-        MnHasilEndoskopi = new javax.swing.JMenu();
-        MnHasilEndoskopi.setBackground(new java.awt.Color(255, 255, 254));
-        MnHasilEndoskopi.setForeground(new java.awt.Color(50, 50, 50));
-        MnHasilEndoskopi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
-        MnHasilEndoskopi.setText("Hasil Endoskopi");
-        MnHasilEndoskopi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
-        MnHasilEndoskopi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnHasilEndoskopi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnHasilEndoskopi.setName("MnHasilEndoskopi"); 
-        MnHasilEndoskopi.setPreferredSize(new java.awt.Dimension(230, 26));
-        
         MnHasilPemeriksaanUSGNeonatus = new javax.swing.JMenuItem();
         MnHasilPemeriksaanUSGNeonatus.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanUSGNeonatus.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -18869,12 +18869,57 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanObservasiCHBP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnCatatanObservasiCHBP.setForeground(new java.awt.Color(50, 50, 50));
         MnCatatanObservasiCHBP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
-        MnCatatanObservasiCHBP.setText("Catatan Observasi CHBP");
+        MnCatatanObservasiCHBP.setText("Observasi CHBP");
         MnCatatanObservasiCHBP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnCatatanObservasiCHBP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCatatanObservasiCHBP.setName("MnCatatanObservasiCHBP");
         MnCatatanObservasiCHBP.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiCHBP.addActionListener(this::MnCatatanObservasiCHBPActionPerformed);
+        
+        MnCatatanObservasiInduksiPersalinan = new javax.swing.JMenuItem();
+        MnCatatanObservasiInduksiPersalinan.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanObservasiInduksiPersalinan.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnCatatanObservasiInduksiPersalinan.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanObservasiInduksiPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCatatanObservasiInduksiPersalinan.setText("Observasi Induksi Persalinan");
+        MnCatatanObservasiInduksiPersalinan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanObservasiInduksiPersalinan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanObservasiInduksiPersalinan.setName("MnCatatanObservasiInduksiPersalinan");
+        MnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnCatatanObservasiInduksiPersalinan.addActionListener(this::MnCatatanObservasiInduksiPersalinanActionPerformed);
+        
+        MnHasilUSG = new javax.swing.JMenu();
+        MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilUSG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnHasilUSG.setText("Hasil USG");
+        MnHasilUSG.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnHasilUSG.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilUSG.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilUSG.setName("MnHasilUSG"); 
+        MnHasilUSG.setPreferredSize(new java.awt.Dimension(230, 26));
+        
+        MnHasilEndoskopi = new javax.swing.JMenu();
+        MnHasilEndoskopi.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilEndoskopi.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilEndoskopi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnHasilEndoskopi.setText("Hasil Endoskopi");
+        MnHasilEndoskopi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnHasilEndoskopi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilEndoskopi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilEndoskopi.setName("MnHasilEndoskopi"); 
+        MnHasilEndoskopi.setPreferredSize(new java.awt.Dimension(230, 26));
+        
+        MnCatatanObservasi = new javax.swing.JMenu();
+        MnCatatanObservasi.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanObservasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanObservasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCatatanObservasi.setText("Observasi");
+        MnCatatanObservasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnCatatanObservasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanObservasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanObservasi.setName("MnCatatanObservasi"); 
+        MnCatatanObservasi.setPreferredSize(new java.awt.Dimension(230, 26));
         
         MnRMOperasi.add(MnPenilaianPreInduksi);
         MnRMOperasi.add(MnChecklistPreOperasi);
@@ -18888,10 +18933,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnRMOperasi.add(MnSkorStewardPascaAnestesi);
         MnRMOperasi.add(MnSkorBromagePascaAnestesi);
         
-        MnObservasi.add(MnCatatanObservasiRanap);
-        MnObservasi.add(MnCatatanObservasiRanapKebidanan);
-        MnObservasi.add(MnCatatanObservasiRanapPostPartum);
-        MnObservasi.add(MnCatatanObservasiCHBP);
+        MnCatatanObservasi.add(MnCatatanObservasiRanap);
+        MnCatatanObservasi.add(MnCatatanObservasiRanapKebidanan);
+        MnCatatanObservasi.add(MnCatatanObservasiRanapPostPartum);
+        MnCatatanObservasi.add(MnCatatanObservasiCHBP);
+        MnCatatanObservasi.add(MnCatatanObservasiInduksiPersalinan);
+        MnObservasi.add(MnCatatanObservasi);
         MnObservasi.add(MnFollowUpDBD);
         MnObservasi.add(MnCatatanKeperawatan);
         MnObservasi.add(MnCatatanCekGDS);

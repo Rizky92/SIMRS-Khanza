@@ -1541,7 +1541,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             "(select ipsrs_detail_titip_faktur.no_faktur from ipsrs_detail_titip_faktur where ipsrs_detail_titip_faktur.no_tagihan = ?) " +
             "order by bayar_pemesanan_non_medis.tgl_bayar";
         
-        Valid.reportQuery("rptBayarPemesananNonMedis.jasper", "report", "::[ Bayar Pemesanan ]::", param, sql, notagihan);
+        Valid.reportSmc("rptBayarPemesananNonMedis.jasper", "report", "::[ Bayar Pemesanan ]::", param, sql, notagihan);
         
         this.setCursor(Cursor.getDefaultCursor());
     }

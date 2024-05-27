@@ -94,53 +94,44 @@ public final class validasi {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
+    public String getTglSmc(Tanggal tgl) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
+    }
+    
     public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
-    public void reportQuery(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values)
-    {
-        String currentDir = System.getProperties().getProperty("user.dir");
-
-        File dir = new File(currentDir);
-
-        File fileRpt;
-        String fullPath = "";
-        if (dir.isDirectory()) {
-            String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) {
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                }
-            }
-        }
-        
+    public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            try (ResultSet rs = ps.executeQuery()) {
-                String namaFile = reportDirName + File.separatorChar + reportName;
-                
-                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
-
-                JasperPrint jasperPrint = JasperFillManager.fillReport(namaFile, reportParams, rsdt);
-
-                JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
-                jasperViewer.setTitle(judul);
-                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                jasperViewer.setSize(screen.width - 50, screen.height - 50);
-                jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                jasperViewer.setLocationRelativeTo(null);
-                jasperViewer.setVisible(true);
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-                JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
-            }
+            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
+            jasperViewer.setTitle(judul);
+            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+            jasperViewer.setSize(screen.width - 50, screen.height - 50);
+            jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+            jasperViewer.setLocationRelativeTo(null);
+            jasperViewer.setVisible(true);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
+        }
+    }
+    
+    public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
+        try {
+            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect), false);
+            jv.setTitle(judul);
+            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+            jv.setSize(screen.width - 50, screen.height - 50);
+            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+            jv.setLocationRelativeTo(null);
+            jv.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
         }
     }
     

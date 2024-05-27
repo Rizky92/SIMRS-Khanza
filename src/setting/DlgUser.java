@@ -57,212 +57,493 @@ public class DlgUser extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        Object[] row = {"ID User", "Nama User", "Jabatan", "Password", "[J]ICD 10", "[J]Obat Penyakit", "[C]Dokter", "[A]Jadwal Praktek", "[C]Petugas", "[M]Pasien", "[A]Registrasi", "[A]Tindakan Ralan",
-            "[A]Rawat Inap", "[A]Tindakan Ranap", "[A]Operasi", "[A]Rujukan Keluar", "[A]Rujukan Masuk", "[A]Beri Obat, Alkes & BHP", "[A]Resep Pulang",
-            "[M]Pasien Meninggal", "[A]Diet Pasien", "[M]Kelahiran Bayi", "[A]Periksa Lab PK", "[A]Periksa Radiologi", "[A]Rawat Jalan",
-            "[K]Deposit Pasien", "[K]Piutang Pasien", "[M]Peminjaman Berkas RM", "[C]Barcode Presensi", "[C]Presensi Harian", "[C]Presensi Bulanan",
-            "[C]Pegawai Admin", "[C]Pegawai User", "[D]Suplier Obat/Alkes/BHP", "[D]Satuan Barang", "[D]Konversi Satuan", "[D]Jenis Obat/Alkes/BHP", "[D]Obat, Alkes & BHP",
-            "[D]Stok Opname Apotek", "[D]Stok Obat Pasien", "[D]Pengadaan Obat, Alkes & BHP", "[D]Penerimaan Obat, Alkes & BHP", "[D]Penjualan Obat, Alkes & BHP", "[D]Piutang Obat, Alkes & BHP",
-            "[D]Retur Ke Suplier", "[D]Retur Dari Pembeli", "[D]Retur Obat, Alkes & BHP Ranap", "[D]Retur Piutang Pembeli", "[D]Keuntungan Penjualan",
-            "[D]Keuntungan Beri Obat, Alkes & BHP", "[D]Sirkulasi Obat, Alkes & BHP", "[E]Barang Non Medis", "[E]Pengadaan Barang Nonmedis", "[E]Stok Keluar Non Medis",
-            "[E]Rekap Pengadaan Non Medis", "[E]Rekap Stok Keluar Non Medis", "[E]Biaya Pengadaan Non Medis", "[G]Jenis Inventaris",
-            "[G]Kategori Inventaris", "[G]Merk Inventaris", "[G]Ruang Inventaris", "[G]Produsen Inventaris", "[G]Koleksi Inventaris",
-            "[G]Inventaris", "[G]Sirkulasi Inventaris", "[H]Jenis Parkir", "[H]Parkir Masuk", "[H]Parkir Keluar", "[H]Rekap Parkir Harian",
-            "[H]Rekap Parkir Bulanan", "[A]Informasi Kamar", "[I]Harian Dokter Poli", "[I]Obat Per Poli", "[I]Obat Per Kamar",
-            "[I]Obat Per Dokter Ralan", "[I]Obat Per Dokter Ranap", "[I]Harian Dokter", "[I]Bulanan Dokter", "[I]Harian Paramedis",
-            "[I]Bulanan Paramedis", "[I]Pembayaran Ralan", "[I]Pembayaran Ranap", "[I]Rekap Pembayaran Ralan", "[I]Rekap Pembayaran Ranap",
-            "[I]Tagihan Masuk", "[I]Tambahan Biaya", "[I]Potongan Biaya", "[A]No.Resep", "[M]Riwayat Perawatan", "[J]Frekuensi Penyakit Ralan", "[J]Frekuensi Penyakit Ranap",
-            "[K]Kamar", "[K]Tarif Ralan", "[K]Tarif Ranap", "[K]Tarif Lab", "[K]Tarif Radiologi", "[K]Tarif Operasi", "[K]Akun Rekening", "[K]Rekening Tahun",
-            "[K]Posting Jurnal", "[K]Buku Besar", "[K]Cash Flow", "[K]Keuangan", "[K]Pengeluaran Harian", "[T]Set P.J. Unit Penunjang", "[T]Set Oto Lokasi", "[T]Set Kamar Inap",
-            "[T]Set Embalase & Tuslah", "[T]Tracer Login", "[T]Display Antrian Registrasi & Poli", "[T]Set Harga Obat", "[T]Set Penggunaan Tarif", "[T]Set Oto Ralan", "[T]Biaya Harian Kamar",
-            "[T]Biaya Masuk Sekali", "[T]Set RM", "[A]Billing Ralan", "[A]Billing Ranap", "[I]Detail JM Dokter", "[A]IGD", "[B]Barcode Ralan", "[B]Barcode Ranap",
-            "[T]Set Harga Obat Ralan", "[T]Set Harga Obat Ranap", "[J]Penyakit AFP & PD3I", "[J]Surveilans AFP & PD3I", "[J]Surveilans Ralan", "[M]Diagnosa Pasien",
-            "[J]Surveilans Ranap", "[J]Pny.Tdk Menular Ranap", "[J]Pny.Tdk Menular Ralan", "[J]Kunjungan Ralan", "[J]RL 3.2 Rawat Darurat", "[J]RL 3.3 Gigi dan Mulut", "[J]RL 3.7 Radiologi", "[J]RL 3.8 Laboratorium", "[I]Harian Dokter Ralan",
-            "[C]SMS Gateway", "[C]Sidik Jari", "[C]Jam Presensi", "[C]Jadwal Pegawai", "[H]Barcode Parkir", "[T]Set Billing", "[A]DPJP Ranap", "[D]Mutasi Obat/Alkes/BHP", "[J]RL 3.4 Kebidanan", "[J]RL 3.6 Pembedahan",
-            "[I]Fee Visit Dokter", "[I]Fee Bacaan EKG", "[I]Fee Rujukan Rontgen", "[I]Fee Rujukan Ranap", "[I]Fee Periksa Ralan", "[K]Akun Bayar", "[K]Bayar Pesan Obat",
-            "[I]Obat Per Dokter Peresep", "[E]Jenis Barang Non Medis", "[K]Pemasukkan Lain-Lain", "[K]Pengaturan Rekening", "[T]Closing Kasir", "[T]Set Keterlambatan Presensi",
-            "[T]Set Harga Kamar", "[I]Rekap Per Shift", "[L]Cek NIK", "[L]Cek No.Kartu", "[L]Riwayat Rujukan PCare di VClaim", "[I]Obat Per Cara Bayar", "[J]Kunjungan Ranap",
-            "[K]Bayar Piutang", "[I]Payment Point", "[L]Cek No.Rujukan PCare di VClaim", "[J]ICD 9", "[D]Darurat Stok", "[M]Retensi Data R.M.", "[C]Temporary Presensi",
-            "[K]Jurnal Harian", "[D]Sirkulasi Obat, Alkes & BHP 2", "[A]Edit Registrasi", "[L]Referensi Diagnosa VClaim", "[L]Referensi Poli VClaim", "[D]Industri Farmasi",
-            "[I]Harian J.S.", "[I]Bulanan J.S.", "[I]Harian BHP Medis/Paket Obat", "[I]Bulanan BHP Medis/Paket Obat", "[K]Piutang Belum Lunas", "[L]Referensi Faskes VClaim",
-            "[L]Data Bridging SEP VClaim", "[D]Pengambilan BHP UTD", "[K]Tarif UTD", "[N]Pengambilan BHP Medis", "[N]BHP Medis Rusak", "[E]Pengambilan UTD", "[N]Pengambilan BHP Non Medis",
-            "[N]BHP Non Medis Rusak", "[E]Suplier Non Medis", "[N]Donor Darah", "[L]Monitoring Verifikasi Klaim", "[N]Cekal Darah", "[N]Komponen Darah", "[N]Stok Darah", "[N]Pemisahan Darah",
-            "[I]Harian Kamar", "[K]Rincian Piutang Pasien", "[D]Keuntungan Beri Obat, Alkes & BHP 2", "[L]Reklasifikasi Ralan", "[L]Reklasifikasi Ranap", "[N]Penyerahan Darah",
-            "[K]Hutang Obat & BHP", "[D]Riwayat Obat, Alkes & BHP", "[J]Sensus Harian Poli", "[J]RL 4A Sebab Morbiditas Ranap", "[L]Referensi Kamar Aplicare", "[L]Ketersediaan Kamar Aplicare",
-            "[L]Klaim Baru Otomatis INACBG", "[L]Klaim Baru Manual INACBG", "[L]Coder NIK INACBG", "[M]Mutasi Berkas RM", "[K]Akun Piutang", "[I]Harian KSO", "[I]Bulanan KSO",
-            "[I]Harian Menejemen", "[I]Bulanan Menejemen", "[L]Cek Eligibilitas Inhealth", "[L]Referensi Ruang Rawat Inhealth", "[L]Referensi Poli Inhealth", "[L]Referensi Faskes Inhealth",
-            "[L]Data Bridging SJP Inhealth", "[I]Piutang Ralan", "[I]Piutang Ranap", "[K]Piutang Per Cara Bayar", "[J]Lama Pelayanan Ralan", "[M]Catatan Pasien", "[J]RL 4B Sebab Morbiditas Ralan",
-            "[J]RL 4A Morbiditas Ralan", "[J]RL 4B Morbiditas Ralan", "[M]Data HAIs", "[J]Harian HAIs", "[J]Bulanan HAIs", "[J]Hitung BOR", "[M]Instansi/Perusahaan Pasien", "[D]Resep Dokter",
-            "[J]Lama Pelayanan Apotek", "[J]Hitung ALOS", "[I]Detail Tindakan", "[A]Rujukan Poli Internal", "[I]Rekap Poli Anak", "[O]Registrasi Per Poli", "[O]Registrasi Per Dokter",
-            "[O]Registrasi Per Pekerjaan", "[O]Registrasi Per Pendidikan", "[O]Registrasi Per Tahun", "[M]Berkas Digital Perawatan", "[J]Pny Menular Ranap", "[J]Pny Menular Ralan",
-            "[O]Registrasi Per Bulan", "[O]Registrasi Per Tanggal", "[O]Demografi Registrasi", "[O]Reg Lama Per Tahun", "[O]Reg Baru Per Tahun", "[O]Reg Lama Per Bulan", "[O]Reg Baru Per Bulan",
-            "[O]Reg Lama Per Tanggal", "[O]Reg Baru Per Tanggal", "[O]Batal Periksa Per Tahun", "[O]Batal Periksa Per Bulan", "[L]Referensi Diagnosa Pcare", "[O]Batal Periksa Per Tanggal",
-            "[D]Kategori Obat/Alkes/BHP", "[D]Golongan Obat/Alkes/BHP", "[D]Obat/Alkes/BHP Per Tanggal", "[D]Penjualan Bebas Per Tanggal", "[L]Referensi Kesadaran Pcare", "[J]Pembatalan Periksa Per Dokter",
-            "[I]Pembayaran Per Unit", "[I]Rekap Pembayaran Per Unit", "[O]Registrasi Per Cara Bayar", "[E]Pengadaan Non Medis Per Tanggal", "[E]Stok Keluar Non Medis Per Tanggal",
-            "[O]Kunjungan Ranap Per Tahun", "[L]Cek Rujukan PCare", "[O]Kunjungan Lab Ralan Per Tahun", "[O]Kunjungan Rad Ralan Per Tahun", "[J]Cek Entry Ralan", "[L]Klaim Baru Manual INACBG 2",
-            "[D]Permintaan Obat & BHP", "[D]Ringkasan Permintaan Obat & BHP", "[D]Surat Pemesanan Obat & BHP", "[E]Permintaan Barang Non Medis", "[E]Ringkasan Permintaan Barang Non Medis",
-            "[E]Surat Pemesanan Barang Non Medis", "[O]Registrasi Per Perujuk", "[L]Referensi Prosedur VClaim", "[L]Referensi Kelas Rawat VClaim", "[L]Referensi Dokter VClaim",
-            "[L]Referensi Spesialistik VClaim", "[L]Referensi Ruang Rawat VClaim", "[L]Referensi Cara Keluar VClaim", "[L]Referensi Pasca Pulang VClaim", "[I]Detail VK/OK", "[A]Billing Parsial",
-            "[L]Cek No.Rujukan RS di VClaim", "[L]Cek Rujukan Kartu PCare di VClaim", "[L]Cek Rujukan Kartu RS di VClaim", "[A]Akses Depo Obat/BHP", "[L]Pembuatan Rujukan VClaim",
-            "[O]Kunjungan Lab Ralan Per Bulan", "[D]Stok Keluar Medis", "[O]Kunjungan Rad Ralan Per Bulan", "[I]Detail JM Dokter 2", "[M]Pengaduan/Chat", "[O]Kunjungan Lab Ralan Per Tanggal",
-            "[O]Kunjungan Rad Ralan Per Tanggal", "[J]Sensus Harian Ralan", "[D]Metode Racik", "[I]Pembayaran Per Akun Bayar", "[D]Pengguna Obat/Alkes/BHP Resep", "[D]Rekap Penerimaan Obat & BHP",
-            "[C]Master Berkas Pegawai", "[C]Berkas Kepegawaian", "[C]Riwayat Jabatan", "[C]Riwayat Pendidikan", "[C]Riwayat Naik Gaji", "[C]Kegiatan Ilmiah & Pelatihan", "[C]Riwayat Penghargaan",
-            "[C]Riwayat Penelitian", "[E]Penerimaan Barang Non Medis", "[K]Bayar Pesan Non Medis", "[K]Hutang Barang Non Medis", "[E]Rekap Penerimaan Non Medis", "[J]Insiden Keselamatan",
-            "[M]Insiden Keselamatan Pasien", "[O]Kejadian IKP Per Tahun", "[O]Kejadian IKP Per Bulan", "[O]Kejadian IKP Per Tanggal", "[D]Riwayat Batch", "[O]Kejadian IKP Per Jenis",
-            "[O]Kejadian IKP Per Dampak", "[I]Piutang Per Akun Piutang", "[O]Registrasi Per Agama", "[O]Registrasi Per Umur", "[M]Suku/Bangsa Pasien", "[M]Bahasa Pasien", "[M]Golongan TNI",
-            "[M]Satuan TNI", "[M]Jabatan TNI", "[M]Pangkat TNI", "[M]Golongan POLRI", "[M]Satuan POLRI", "[M]Jabatan POLRI", "[M]Pangkat POLRI", "[M]Cacat Fisik", "[O]Registrasi Per Suku/Bangsa",
-            "[O]Registrasi Per Bahasa", "[A]Jadwal Operasi", "[L]Mapping Poli VClaim", "[O]Registrasi Per Cacat Fisik", "[G]Barang CSSD", "[P]Surat Kontrol", "[A]Booking Registrasi",
-            "[L]Referensi Propinsi VClaim", "[L]Referensi Kabupaten VClaim", "[L]Referensi Kecamatan VClaim", "[L]Referensi Dokter DPJP VClaim", "[L]Riwayat Rujukan RS di VClaim",
-            "[L]Tanggal Rujukan di VClaim", "[A]Permintaan Lab", "[A]Permintaan Radiologi", "[P]Indeks Surat", "[P]Map Surat", "[P]Almari Surat", "[P]Rak Surat", "[P]Ruang Surat",
-            "[P]Klasifikasi Surat", "[P]Status Surat", "[P]Sifat Surat", "[P]Stts Balas Surat", "[P]Surat Masuk", "[L]Referensi Dokter PCare", "[L]Referensi Poli PCare",
-            "[L]Referensi Provider PCare", "[L]Referensi Stts Pulang PCare", "[L]Referensi Spesialis PCare", "[L]Referensi Subspesialis PCare", "[L]Referensi Sarana PCare",
-            "[L]Referensi Khusus PCare", "[L]Referensi Obat PCare", "[L]Referensi Tindakan PCare", "[L]Faskes Subspesialis PCare", "[L]Faskes Alih Rawat PCare",
-            "[L]Faskes Thalasemia & Hemofili PCare", "[L]Mapping Obat PCare", "[L]Tarif Ralan RS & PCare", "[L]Club Prolanis PCare", "[L]Mapping Poli PCare",
-            "[L]Kegiatan Kelompok PCare", "[L]Tarif Ranap RS & PCare", "[L]Peserta Keg Kelompok PCare", "[D]Sirkulasi Obat, Alkes & BHP 3", "[L]Data Pendafataran PCare",
-            "[L]Mapping Dokter PCare", "[J]Ranap Per Ruang", "[J]Penyakit Ranap Per Cara Bayar", "[J]Anggota TNI Dirawat", "[T]Set Input Parsial",
-            "[J]Lama Pelayanan Radiologi", "[J]Lama Pelayanan Lab", "[L]Cek Nomor SEP", "[A]Catatan Dokter", "[P]Surat Keluar", "[D]Kegiatan Farmasi",
-            "[E]Stok Opname Non Medis", "[E]Sirkulasi Non Medis", "[J]Rekap Lab Per Tahun", "[J]Perujuk Lab Per Tahun", "[J]Rekap Radiologi Per Tahun",
-            "[J]Perujuk Radiologi Per Tahun", "[J]Rekap Bulanan Porsi Diet", "[J]Rekap Bulanan Macam Diet", "[I]Payment Point 2", "[I]Pembayaran Per Akun Bayar 2",
-            "[I]Hapus Nota Salah", "[A]Asesmen Awal Rawat Inap", "[J]HAIs Per Kamar/Bangsal", "[D]PPN Obat", "[K]Saldo Akun Per Bulan", "[T]Display Antrian Apotek",
-            "[L]Referensi Faskes Sisrute", "[L]Referensi Alasan Rujuk Sisrute", "[L]Referensi Diagnosa Sisrute", "[L]Rujukan Masuk Sisrute", "[L]Rujukan Keluar Sisrute",
-            "[L]Cek SKDP VClaim", "[D]Data Batch", "[J]Kunjungan Lab Ralan", "[J]Kunjungan Lab Ranap", "[J]Kunjungan Radiologi Ralan", "[J]Kunjungan Radiologi Ranap",
-            "[L]Pemberian Obat PCare", "[L]Pemberian Tindakan PCare", "[I]Pembayaran Per Akun Bayar 3", "[T]Password BPJS", "[J]Data TB", "[L]Ketersediaan Kamar SIRANAP",
-            "[O]Periode Laporan TB", "[O]Rujukan TB", "[O]Riwayat TB", "[O]Tipe Diagnosis TB", "[O]Status HIV TB", "[O]Skoring Anak TB", "[O]Konfirmasi Skoring 5 TB",
-            "[O]Konfirmasi Skoring 6 TB", "[O]Sumber Obat TB", "[O]Hasil Akhir Pengobatan TB", "[O]Hasil Tes HIV TB", "[D]Kadaluarsa Batch", "[D]Sisa Stok",
-            "[D]Obat Per Resep", "[G]Pemakaian Air PDAM", "[G]Limbah Padat B3 Medis", "[O]Pemakaian Air PDAM Per Tanggal", "[O]Pemakaian Air PDAM Per Bulan",
-            "[O]Limbah B3 Padat Per Tanggal", "[O]Limbah B3 Padat Per Bulan", "[G]Limbah Padat Domestik", "[O]Limbah Padat Domestik Per Tanggal",
-            "[O]Limbah Padat Domestik Per Bulan", "[G]Mutu Air Limbah", "[G]Pest Control", "[Q]Ruang Perpustakaan", "[Q]Kategori Koleksi", "[Q]Jenis Koleksi",
-            "[Q]Pengarang/Penulis", "[Q]Penerbit Koleksi", "[Q]Koleksi Perpustakaan", "[Q]Inventaris Perpustakaan", "[Q]Pengaturan Peminjaman", "[Q]Denda Perpustakaan",
-            "[Q]Anggota Perpustakaan", "[Q]Peminjaman Koleksi Perpustakaan", "[Q]Bayar Denda Perpustakaan", "[Q]Data Koleksi Ebook", "[C]Jenis Cidera K3",
-            "[C]Penyebab Kecelakaan K3", "[C]Jenis Luka K3", "[C]Lokasi Kejadian K3", "[C]Dampak Cidera K3", "[C]Jenis Pekerjaan K3", "[C]Bagian Tubuh K3",
-            "[C]Peristiwa K3", "[O]K3 Per Tahun", "[O]K3 Per Bulan", "[O]K3 Per Tanggal", "[O]K3 Per Jenis Cidera", "[O]K3 Per Penyebab Kecelakaan", "[O]K3 Per Jenis Luka",
-            "[O]K3 Per Lokasi Kejadian", "[O]K3 Per Dampak Cidera", "[O]K3 Per Jenis Pekerjaan", "[O]K3 Per Bagian Tubuh", "[C]Jenis Cidera K3 Per Tahun",
-            "[C]Penyebab Kecelakaan K3 Per Tahun", "[C]Jenis Luka K3 Per Tahun", "[C]Lokasi Kejadian K3 Per Tahun", "[C]Dampak Cidera K3 Per Tahun",
-            "[C]Jenis Pekerjaan K3 Per Tahun", "[C]Bagian Tubuh K3 Per Tahun", "[A]Skrining Rawat Jalan", "[L]Histori Pelayanan BPJS", "[J]Rekap Mutasi Berkas",
-            "[J]Skrining Pernapasan Ralan Per Tahun", "[D]Pengajuan Obat & BHP", "[E]Pengajuan Barang Non Medis", "[O]Kunjungan Ranap Per Bulan", "[O]Kunjungan Ranap Per Tanggal",
-            "[O]Kunjungan Ranap Per Ruang", "[J]Masuk Ruang Per Tahun", "[O]Pegawai Per Jenjang Jabatan", "[O]Pegawai Per Bidang/Bagian", "[O]Pegawai Per Departemen",
-            "[O]Pegawai Per Pendidikan", "[O]Pegawai Per Status WP", "[O]Pegawai Per Status Kerja", "[O]Status Pulang Ranap", "[J]KIP Pasien Ranap", "[J]KIP Pasien Ralan",
-            "[L]Mapping Dokter DPJP VClaim", "[M]Data Triase IGD", "[M]Master Triase Skala 1", "[M]Master Triase Skala 2", "[M]Master Triase Skala 3", "[M]Master Triase Skala 4",
-            "[M]Master Triase Skala 5", "[M]Master Triase Pemeriksaan", "[M]Master Triase Macam Kasus", "[J]Rekap Permintaan Diet", "[J]Daftar Pasien Ranap",
-            "[J]Daftar Pasien Ranap TNI", "[G]Pengajuan Aset/Inventaris", "[O]Item Apotek Per Jenis", "[O]Item Apotek Per Kategori", "[O]Item Apotek Per Golongan",
-            "[O]Item Apotek Per Industri Farmasi", "[D]10 Obat Terbanyak Poli", "[O]Pengajuan Aset Per Urgensi", "[O]Pengajuan Aset Per Status",
-            "[O]Pengajuan Aset Per Departemen", "[G]Rekap Pengajuan Aset Departemen", "[O]Pegawai Per Kelompok Jabatan", "[O]Pegawai Per Risiko Kerja",
-            "[O]Pegawai Per Emergency Index", "[O]Jumlah Inventaris Per Ruang", "[J]Harian HAIs 2", "[O]Jumlah Inventaris Per Jenis", "[M]Resume Pasien",
-            "[A]Perkiraan Biaya Ranap", "[D]Rekap Obat Per Poli", "[D]Rekap Obat Per Pasien", "[G]Permintaan Perbaikan Inventaris", "[O]Pasien HAIs Per Ruang",
-            "[O]Pasien HAIs Per Bulan", "[O]Laju HAIs VAP Per Ruang", "[O]Laju HAIs IAD Per Ruang", "[O]Laju HAIs Plebitis Per Ruang", "[O]Laju HAIs ISK Per Ruang",
-            "[O]Laju HAIs ILO Per Ruang", "[O]Laju HAIs HAP Per Ruang", "[L]Mapping Poli Inhealth", "[L]Mapping Dokter Inhealth", "[L]Tarif Ralan Inhealth",
-            "[L]Tarif Ranap Inhealth", "[L]Tarif Radiologi Inhealth", "[L]Tarif Laborat Inhealth", "[L]Tarif Operasi Inhealth", "[D]Hibah Obat & BHP", "[G]Asal Hibah",
-            "[M]Asuhan Gizi", "[L]Tagihan Inhealth", "[D]Sirkulasi Obat, Alkes & BHP 4", "[D]Sirkulasi Obat, Alkes & BHP 5", "[E]Sirkulasi Non Medis 2",
-            "[M]Monitoring Asuhan Gizi", "[O]Penerimaan Obat, Alkes & BHP Per Bulan", "[J]Rekap Kunjungan", "[P]Surat Keterangan Sakit", "[M]Penilaian Awal Keperawatan Ralan Umum",
-            "[A]Permintaan Diet", "[M]Master Masalah Keperawatan", "[C]Pengajuan Cuti", "[J]Kedatangan Pasien Per Jam", "[N]Data Pendonor", "[R]Suplier Toko",
-            "[R]Jenis Barang Toko", "[T]Set Harga Toko", "[R]Barang Toko", "[K]Penagihan Piutang Pasien", "[K]Akun Penagihan Piutang", "[R]Stok Opname Toko",
-            "[R]Riwayat Barang Toko", "[R]Surat Pemesanan Toko", "[R]Pengajuan Barang Toko", "[R]Penerimaan Barang Toko", "[R]Pengadaan Barang Toko", "[R]Hutang Toko",
-            "[R]Bayar Pesan Toko", "[R]Member Toko", "[R]Penjualan Toko", "[J]Registrasi Poli Per Tanggal", "[R]Piutang Toko", "[R]Retur Ke Suplier Toko",
-            "[E]Retur Ke Suplier Non Medis", "[E]Riwayat Barang Non Medis", "[L]Pasien Corona", "[R]Pendapatan Harian Toko", "[L]Diagnosa Pasien Corona",
-            "[L]Perawatan Pasien Corona", "[M]Penilaian Awal Keperawatan Gigi", "[M]Master Masalah Keperawatan Gigi", "[R]Bayar Piutang Toko", "[R]Piutang Harian Toko",
-            "[R]Penjualan Harian Toko", "[A]Deteksi Dini Corona", "[M]Penilaian Awal Keperawatan Ralan Kebidanan", "[P]Pengumuman E-Pasien", "[P]Surat Hamil", "[K]Set Tarif Online",
-            "[A]Booking Periksa", "[R]Sirkulasi Barang Toko", "[R]Retur Jual Toko", "[R]Retur Jual Piutang", "[R]Sirkulasi Barang Toko 2", "[R]Keuntungan Barang Toko",
-            "[S]Ket Pengeluaran Penerima Dankes", "[S]Ket Penghasilan Penerima Dankes", "[S]Ukuran Rumah Penerima Dankes", "[S]Dinding Rumah Penerima Dankes",
-            "[S]Lantai Rumah Penerima Dankes", "[S]Atap Rumah Penerima Dankes", "[S]Kepemilikan Rumah Penerima Dankes", "[S]Kamar Mandi Penerima Dankes",
-            "[S]Dapur Rumah Penerima Dankes", "[S]Kursi Rumah Penerima Dankes", "[S]Kategori PHBS Penerima Dankes", "[S]Elektronik Penerima Dankes",
-            "[S]Ternak Penerima Dankes", "[S]Jenis Simpanan Penerima Dankes", "[M]Penilaian Awal Keperawatan Ralan Bayi/Anak", "[S]Kategori Asnaf Penerima Dankes",
-            "[M]Master Masalah Keperawatan Bayi/Anak", "[M]Master Imunisasi", "[S]Patologis Penerima Dankes", "[L]Cek No.Kartu PCare", "[P]Surat Bebas Narkoba",
-            "[P]Surat Keterangan Covid", "[G]Pemakaian Air Tanah", "[O]Pemakaian Air Tanah Per Tanggal", "[O]Pemakaian Air Tanah Per Bulan",
-            "[J]Lama Pelayanan Poli", "[M]Hemodialisa", "[J]Laporan Tahunan IRJ", "[O]Hemodialisa Per Tanggal", "[O]Hemodialisa Per Bulan", "[O]Hemodialisa Per Tahun",
-            "[O]Pasien Meninggal Per Bulan", "[G]Perbaikan Inventaris", "[P]Surat Cuti Hamil", "[D]Permintaan Stok Obat Pasien", "[G]Pemeliharaan Inventaris",
-            "[M]Klasifikasi Pasien Ranap", "[J]Bulanan Klasifikasi Pasien Ranap", "[J]Harian Klasifikasi Pasien Ranap", "[J]Klasifikasi Pasien Per Ruang",
-            "[M]SOAP Perawatan", "[K]Klaim Rawat Jalan", "[M]Skrining Gizi Lanjut", "[J]Lama Penyiapan RM", "[J]Dosis Radiologi", "[J]Demografi Umur Kunjungan",
-            "[T]Jam Diet Pasien", "[K]RVP Piutang BPJS", "[D]Verifikasi Penerimaan Obat/Alkes/BHP", "[E]Verifikasi Penerimaan Non Medis", "[A]Periksa Lab PA",
-            "[D]Ringkasan Pengajuan Obat & BHP", "[D]Ringkasan Pemesanan Obat & BHP", "[D]Ringkasan Pengadaan Obat & BHP", "[D]Ringkasan Penerimaan Obat & BHP",
-            "[D]Ringkasan Hibah Obat & BHP", "[D]Ringkasan Penjualan Obat & BHP", "[D]Ringkasan Beri Obat & BHP", "[D]Ringkasan Piutang Obat & BHP",
-            "[D]Ringkasan Stok Keluar Obat & BHP", "[D]Ringkasan Retur Suplier Obat & BHP", "[D]Ringkasan Retur Pembeli Obat & BHP", "[M]Penilaian Awal Keperawatan Ranap Kebidanan",
-            "[E]Ringkasan Pengajuan Non Medis", "[E]Ringkasan Pemesanan Non Medis", "[E]Ringkasan Pengadaan Non Medis", "[E]Ringkasan Penerimaan Non Medis",
-            "[E]Ringkasan Stok Keluar Non Medis", "[E]Ringkasan Retur Suplier Non Medis", "[K]Penerimaan/Omset/Kas Masuk", "[K]Validasi Penagihan Piutang",
-            "[A]Permintaan Rawat Inap", "[L]Referensi Diagnosa PRB VClaim", "[L]Referensi Obat PRB VClaim", "[L]Surat Kontrol VClaim", "[D]Penggunaan BHP OK/VK",
-            "[P]Surat Keterangan Rawat Inap", "[P]Surat Keterangan Sehat", "[K]Pendapatan Per Cara Bayar", "[L]Host To Host Bank Jateng", "[K]Pembayaran Bank Jateng",
-            "[L]Surat PRI VClaim", "[I]Ringkasan Tindakan", "[J]Lama Pelayanan Pasien", "[P]Surat Keterangan Sakit Pihak 2", "[K]Titip Faktur/Tagihan Obat & BHP",
-            "[L]Referensi Pendaftaran Mobile JKN", "[L]Batal Pendaftaran Mobile JKN", "[J]Lama Operasi", "[O]Jumlah Inventaris Per Kategori", "[O]Jumlah Inventaris Per Merk",
-            "[O]Jumlah Inventaris Per Produsen", "[K]Pengembalian Deposit Pasien", "[K]Validasi Titip Faktur/Tagihan Obat & BHP", "[K]Piutang Obat & BHP Belum Lunas",
-            "[L]Integrasi BRI API", "[G]Pengadaan Aset/Inventaris", "[K]Akun Jenis Aset/Inventaris", "[G]Suplier Aset/Inventaris", "[G]Penerimaan Aset/Inventaris",
-            "[K]Bayar Pesan Aset/Inventaris", "[K]Hutang Aset/Inventaris", "[G]Hibah Aset/Inventaris", "[K]Titip Faktur/Tagihan Non Medis", "[K]Validasi Titip Faktur/Tagihan Non Medis",
-            "[K]Titip Faktur/Tagihan Aset/Inventaris", "[K]Validasi Titip Faktur/Tagihan Aset/Inventaris", "[E]Hibah Non Medis", "[L]Referensi TACC PCare", "[D]Resep Luar",
-            "[P]Surat Bebas TBC", "[P]Surat Keterangan Buta Warna", "[P]Surat Bebas Tato", "[P]Surat Kewaspadaan Kesehatan", "[O]Porsi Diet Per Tanggal", "[O]Porsi Diet Per Bulan",
-            "[O]Porsi Diet Per Tahun", "[O]Porsi Diet Per Ruang", "[M]Penilaian Awal Medis Ralan Umum", "[M]Master Masalah Keperawatan Mata", "[M]Penilaian Awal Keperawatan Ralan Mata",
-            "[M]Penilaian Awal Medis Ranap Umum", "[M]Penilaian Awal Medis Ranap Kandungan", "[M]Penilaian Awal Medis Ralan Kandungan", "[M]Penilaian Awal Medis IGD",
-            "[M]Penilaian Awal Medis Ralan Bayi/Anak", "[L]Referensi Poli HFIS", "[L]Referensi Dokter HFIS", "[L]Referensi Jadwal HFIS", "[M]Penilaian Awal Fisioterapi",
-            "[L]Program PRB di VClaim", "[L]Suplesi Jasa Raharja di VClaim", "[L]Data Induk Kecelakaan VClaim", "[L]Data SEP Internal VClaim", "[L]Klaim Jaminan Jasa Raharja VClaim",
-            "[L]Pasien Finger Print VClaim", "[L]Rujukan Khusus VClaim", "[G]Pemeliharaan Gedung", "[O]Perbaikan Inventaris Per Tanggal", "[O]Perbaikan Inventaris Per Bulan",
-            "[O]Perbaikan Inventaris Per Tahun", "[O]Perbaikan Inventaris Per Pelaksana & Status", "[M]Penilaian MCU", "[K]Peminjam Piutang", "[K]Piutang Lain-lain",
-            "[K]Asuransi/Askes/Jenis Bayar", "[C]Audit Kepatuhan APD", "[L]Task ID Mobile JKN", "[K]Bayar Piutang Lain-lain", "[I]Pembayaran Per Akun Bayar 4",
-            "[D]Stok Akhir Farmasi Per Tanggal", "[M]Riwayat Kamar Pasien", "[M]Uji Fungsi/Prosedur KFR", "[M]Hapus Berkas Digital Perawatan", "[K]Kategori Pengeluaran Harian",
-            "[K]Kategori Pemasukan Lain-lain", "[I]Pembayaran Per Akun Bayar 5", "[T]Ruang Operasi", "[D]Telaah Resep & Obat", "[I]Jasa Tindakan Pasien", "[D]Permintaan Resep Pulang",
-            "[I]Rekap JM Dokter", "[J]Status Data RM", "[A]Ubah Petugas Lab PK", "[A]Ubah Petugas Lab PA", "[A]Ubah Petugas Radiologi", "[A]Gabung Nomor Rawat", "[M]Gabungkan Data RM",
-            "[D]Ringkasan Biaya Obat Pasien Per Tanggal", "[M]Master Masalah Keperawatan IGD", "[M]Penilaian Awal Keperawatan IGD", "[L]Referensi DPHO Apotek BPJS",
-            "[L]Referensi Poli Apotek BPJS", "[K]Bayar JM Dokter", "[L]Referensi Faskes Apotek BPJS", "[L]Referensi Spesialistik Apotek BPJS", "[K]Pembayaran BRIVA",
-            "[M]Penilaian Awal Keperawatan Ranap Umum", "[D]Nilai Penerimaan Vendor Farmasi Per Bulan", "[K]Akun Bayar Hutang", "[M]Master Rencana Keperawatan",
-            "[J]Laporan Tahunan IGD", "[D]Obat/Alkes/BHP Tidak Bergerak", "[K]Ringkasan Hutang Vendor Farmasi", "[E]Nilai Penerimaan Vendor Non Medis Per Bulan",
-            "[K]Ringkasan Hutang Vendor Non Medis", "[M]Master Rencana Keperawatan Bayi/Anak", "[J]Anggota POLRI Dirawat", "[J]Daftar Pasien Ranap POLRI", "[M]SOAP Ralan Anggota POLRI",
-            "[M]SOAP Ranap Anggota POLRI", "[J]Laporan Penyakit POLRI", "[J]Jumlah Pengunjung Ralan POLRI", "[M]Catatan Observasi IGD", "[M]Catatan Observasi Ranap",
-            "[M]Catatan Observasi Ranap Kebidanan", "[M]Catatan Observasi Ranap Post Partum", "[M]Penilaian Awal Medis Ralan THT", "[M]Penilaian Psikologi",
-            "[C]Audit Cuci Tangan Medis", "[C]Audit Pembuangan Limbah", "[C]Ruang/Unit Audit Kepatuhan", "[C]Audit Pembuangan Benda Tajam & Jarum",
-            "[C]Audit Penanganan Darah", "[C]Audit Pengelolaan Linen Kotor", "[C]Audit Penempatan Pasien", "[C]Audit Kamar Jenazah", "[C]Audit Bundle IADP",
-            "[C]Audit Bundle IDO", "[C]Audit Fasilitas Kebersihan Tangan", "[C]Audit Fasilitas APD", "[C]Audit Pembuangan Limbah Cair Infeksius", "[C]Audit Sterilisasi Alat",
-            "[M]Penilaian Awal Medis Ralan Psikiatri", "[P]Persetujuan/Penolakan Tindakan", "[C]Audit Bundle ISK", "[C]Audit Bundle PLABSI", "[C]Audit Bundle VAP",
-            "[L]Host To Host Bank Papua", "[K]Pembayaran Bank Papua", "[M]Penilaian Awal Medis Ralan Penyakit Dalam", "[M]Penilaian Awal Medis Ralan Mata",
-            "[M]Penilaian Awal Medis Ralan Neurologi", "[D]Sirkulasi Obat, Alkes & BHP 6", "[M]Penilaian Awal Medis Ralan Orthopedi", "[M]Penilaian Awal Medis Ralan Bedah",
-            "[T]Integrasi Khanza Health Services", "[M]SOAP Ralan Anggota TNI", "[M]SOAP Ranap Anggota TNI", "[J]Jumlah Pengunjung Ralan TNI", "[J]Laporan Penyakit TNI",
-            "[M]Catatan Keperawatan Ranap", "[M]Master Rencana Keperawatan Gigi", "[M]Master Rencana Keperawatan Mata", "[M]Master Rencana Keperawatan IGD",
-            "[M]Master Masalah Keperawatan Psikiatri", "[M]Master Rencana Keperawatan Psikiatri", "[M]Penilaian Awal Keperawatan Ralan Psikiatri", "[M]Pemantauan PEWS Pasien Anak",
-            "[P]Pulang Atas Permintaan Sendiri", "[M]Master Template Hasil Radiologi", "[J]Laporan Bulanan IRJ", "[M]Master Template Pemeriksaan", "[A]Periksa Lab MB",
-            "[A]Ubah Petugas Lab MB", "[M]Penilaian Pre Operasi", "[M]Penilaian Pre Anestesi", "[M]Perencanaan Pemulangan", "[M]Penilaian Lanjutan Risiko Jatuh Dewasa",
-            "[M]Penilaian Lanjutan Risiko Jatuh Anak", "[M]Penilaian Awal Medis Ralan Geriatri", "[M]Penilaian Tambahan Pasien Geriatri", "[M]Skrining Nutrisi Pasien Dewasa",
-            "[M]Skrining Nutrisi Pasien Lansia", "[M]Hasil USG Kandungan", "[M]Skrining Nutrisi Pasien Anak", "[L]Host To Host Bank Jabar", "[K]Pembayaran Bank Jabar",
-            "[P]Pernyataan Pasien Umum", "[M]Konseling Farmasi", "[M]Pelayanan Informasi Obat", "[M]Jawaban PIO Apoteker", "[P]Persetujuan Umum", "[M]Transfer Pasien Antar Ruang",
-            "[L]Referensi Praktisi Satu Sehat", "[L]Referensi Pasien Satu Sehat", "[L]Mapping Organisasi Satu Sehat", "[L]Mapping Lokasi Satu Sehat", "[L]Kirim Encounter Satu Sehat",
-            "[M]Catatan Cek GDS", "[L]Kirim Condition Satu Sehat", "[M]Check List Pre Operasi", "[L]Kirim Observation-TTV Satu Sehat", "[M]Sign-In Sebelum Anestesi",
-            "[L]Kirim Procedure Satu Sehat", "[J]Operasi Per Bulan", "[M]Time-Out Sebelum Insisi", "[M]Sign-Out Sebelum Menutup Luka", "[F]Barang Dapur", "[F]Stok Opname Dapur",
-            "[L]Mapping Vaksin Satu Sehat", "[F]Suplier Dapur", "[L]Kirim Imunisasi Satu Sehat", "[M]Check List Post Operasi", "[F]Pengadaan Barang Dapur", "[F]Stok Keluar Dapur",
-            "[F]Riwayat Barang Dapur", "[F]Permintaan Barang Dapur", "[M]Rekonsiliasi Obat", "[F]Biaya Pengadaan Dapur", "[F]Rekap Pengadaan Dapur", "[G]Limbah Cair B3 Medis",
-            "[O]Limbah B3 Cair Per Tanggal", "[O]Limbah B3 Cair Per Bulan", "[I]Rekap Biaya Registrasi", "[M]Konfirmasi Rekonsiliasi Obat", "[L]Kirim Clinical Impression Satu Sehat",
-            "[M]Penilaian Pasien Terminal", "[P]Persetujuan Rawat Inap", "[M]Monitoring Reaksi Tranfusi", "[M]Penilaian Korban Kekerasan", "[M]Penilaian Lanjutan Risiko Jatuh Lansia",
-            "[M]Penilaian Pasien Penyakit Menular", "[M]Skrining Manajer Pelayanan Pasien", "[M]Edukasi Pasien & Keluarga Rawat Jalan", "[M]Pemantauan EWS Pasien Dewasa",
-            "[M]Penilaian Tambahan Bunuh Diri", "[L]Antrean Per Tanggal Mobile JKN", "[M]Penilaian Tambahan Perilaku Kekerasan", "[M]Penilaian Tambahan Melarikan Diri",
-            "[P]Persetujuan Penundaan Pelayanan", "[J]Sisa Diet Pasien", "[M]Penilaian Awal Medis Ralan Bedah Mulut", "[M]Penilaian Pasien Keracunan", "[M]Pemantauan MEOWS Pasien Obstetri",
-            "[M]Catatan ADIME Gizi", "[K]Pengajuan Biaya", "[M]Penilaian Awal Keperawatan Ralan Geriatri", "[M]Master Masalah Keperawatan Geriatri", "[M]Master Rencana Keperawatan Geriatri",
-            "[M]Check List Kriteria Masuk HCU", "[M]Check List Kriteria Keluar HCU", "[M]Penilaian Risiko Dekubitus", "[P]Master Menolak Anjuran Medis", "[P]Penolakan Anjuran Medis",
-            "[J]Laporan Tahunan Penolakan Anjuran Medis", "[M]Master Template Laporan Operasi", "[M]Dokumentasi Tindakan ESWL", "[M]Check List Kriteria Masuk ICU",
-            "[M]Check List Kriteria Keluar ICU", "[A]Akses Ke Dokter Lain Rawat Jalan", "[M]Follow Up DBD", "[M]Penilaian Lanjutan Risiko Jatuh Neonatus", "[K]Persetujuan Pengajuan Biaya",
-            "[J]Pemeriksaan Fisik Ralan Per Penyakit", "[M]Penilaian Lanjutan Risiko Jatuh Geriatri", "[M]Pemantauan EWS Pasien Neonatus", "[K]Validasi Persetujuan Pengajuan Biaya",
-            "[L]Riwayat Perawatan ICare BPJS", "[K]Rekap Pengajuan Biaya", "[M]Penilaian Awal Medis Ralan Kulit & Kelamin", "[L]Host To Host Bank Mandiri", "[M]Penilaian Awal Medis Pasien Hemodialisa",
-            "[M]Penilaian Level Kecemasan Ranap Anak", "[M]Penilaian Lanjutan Risiko Jatuh Psikiatri", "[M]Penilaian Lanjutan Skrining Fungsional", "[M]Penilaian Awal Medis Ralan Fisik & Rehabilitasi",
-            "[M]Laporan Anestesi", "[P]Template Persetujuan Penolakan Tindakan", "[M]Penilaian Awal Medis IGD Psikiatri", "[L]Referensi Setting PPK Apotek BPJS", "[L]Referensi Obat Apotek BPJS",
-            "[L]Mapping Obat Apotek BPJS", "[K]Pembayaran Bank Mandiri", "[M]Penilaian Ulang Nyeri", "[M]Penilaian Terapi Wicara", "[L]Obat 23 Hari Apotek BPJS", "[M]Pengkajian Restrain",
-            "[L]Pencarian SEP Apotek BPJS", "[L]Monitoring Klaim Apotek BPJS", "[L]Daftar Pelayanan Obat Apotek BPJS", "[M]Penilaian Awal Medis Ralan Paru", "[M]Catatan Keperawatan Ralan",
-            "[M]Catatan Persalinan", "[M]Skor Aldrette Pasca Anestesi", "[M]Skor Steward Pasca Anestesi", "[M]Skor Bromage Pasca Anestesi", "[M]Penilaian Pre Induksi", "[M]Hasil USG Urologi",
-            "[M]Hasil USG Gynecologi", "[M]Hasil Pemeriksaan EKG", "[L]Hapus/Edit SEP VClaim", "[L]Kirim Diet Satu Sehat", "[L]Mapping Obat/Alkes/BHP Satu Sehat", "[F]Ringkasan Pengadaan Barang Dapur",
-            "[L]Kirim Medication Satu Sehat", "[L]Kirim Medication Request Satu Sehat", "[M]Penatalaksanaan Terapi Okupasi", "[L]Kirim Medication Dispense Satu Sehat", "[D]Edit/Hapus Surat Pemesanan Medis", "[E]Edit/Hapus Surat Pemesanan Nonmedis", "[M]Hasil USG Neonatus",
-            "[M]Hasil Endoskopi Faring/Laring", "[L]Mapping Tindakan Radiologi Satu Sehat", "[L]Kirim Service Request Radiologi Satu Sehat", "[M]Hasil Endoskopi Hidung",
-            "[L]Kirim Specimen Radiologi Satu Sehat", "[M]Master Masalah Keperawatan Neonatus", "[M]Master Rencana Keperawatan Neonatus", "[M]Penilaian Awal Keperawatan Ranap Neonatus",
-            "[L]Kirim Observation Radiologi Satu Sehat", "[L]Kirim Diagnostic Report Radiologi Satu Sehat", "[M]Hasil Endoskopi Telinga", "[L]Mapping Tindakan Lab PK & MB Satu Sehat",
+        Object[] row={"ID User","Nama User","Jabatan","Password","[J]ICD 10","[J]Obat Penyakit","[C]Dokter","[A]Jadwal Praktek","[C]Petugas","[M]Pasien","[A]Registrasi","[A]Tindakan Ralan",
+                "[A]Rawat Inap","[A]Tindakan Ranap","[A]Operasi","[A]Rujukan Keluar","[A]Rujukan Masuk","[A]Beri Obat, Alkes & BHP","[A]Resep Pulang",
+                "[M]Pasien Meninggal","[A]Diet Pasien","[M]Kelahiran Bayi","[A]Periksa Lab PK","[A]Periksa Radiologi","[A]Rawat Jalan",
+                "[K]Deposit Pasien","[K]Piutang Pasien","[M]Peminjaman Berkas RM","[C]Barcode Presensi","[C]Presensi Harian","[C]Presensi Bulanan",
+                "[C]Pegawai Admin","[C]Pegawai User","[D]Suplier Obat/Alkes/BHP","[D]Satuan Barang","[D]Konversi Satuan","[D]Jenis Obat/Alkes/BHP","[D]Obat, Alkes & BHP",
+                "[D]Stok Opname Apotek","[D]Stok Obat Pasien","[D]Pengadaan Obat, Alkes & BHP","[D]Penerimaan Obat, Alkes & BHP","[D]Penjualan Obat, Alkes & BHP","[D]Piutang Obat, Alkes & BHP",
+                "[D]Retur Ke Suplier","[D]Retur Dari Pembeli","[D]Retur Obat, Alkes & BHP Ranap","[D]Retur Piutang Pembeli","[D]Keuntungan Penjualan",
+                "[D]Keuntungan Beri Obat, Alkes & BHP","[D]Sirkulasi Obat, Alkes & BHP","[E]Barang Non Medis","[E]Pengadaan Barang Nonmedis","[E]Stok Keluar Non Medis",
+                "[E]Rekap Pengadaan Non Medis","[E]Rekap Stok Keluar Non Medis","[E]Biaya Pengadaan Non Medis","[G]Jenis Inventaris",
+                "[G]Kategori Inventaris","[G]Merk Inventaris","[G]Ruang Inventaris","[G]Produsen Inventaris","[G]Koleksi Inventaris",
+                "[G]Inventaris","[G]Sirkulasi Inventaris","[H]Jenis Parkir","[H]Parkir Masuk","[H]Parkir Keluar","[H]Rekap Parkir Harian",
+                "[H]Rekap Parkir Bulanan","[A]Informasi Kamar","[I]Harian Dokter Poli","[I]Obat Per Poli","[I]Obat Per Kamar",
+                "[I]Obat Per Dokter Ralan","[I]Obat Per Dokter Ranap","[I]Harian Dokter","[I]Bulanan Dokter","[I]Harian Paramedis",
+                "[I]Bulanan Paramedis","[I]Pembayaran Ralan","[I]Pembayaran Ranap","[I]Rekap Pembayaran Ralan","[I]Rekap Pembayaran Ranap",
+                "[I]Tagihan Masuk","[I]Tambahan Biaya","[I]Potongan Biaya","[A]No.Resep","[M]Riwayat Perawatan","[J]Frekuensi Penyakit Ralan","[J]Frekuensi Penyakit Ranap",
+                "[K]Kamar","[K]Tarif Ralan","[K]Tarif Ranap","[K]Tarif Lab","[K]Tarif Radiologi","[K]Tarif Operasi","[K]Akun Rekening","[K]Rekening Tahun",
+                "[K]Posting Jurnal","[K]Buku Besar","[K]Cash Flow","[K]Keuangan","[K]Pengeluaran Harian","[T]Set P.J. Unit Penunjang","[T]Set Oto Lokasi","[T]Set Kamar Inap",
+                "[T]Set Embalase & Tuslah","[T]Tracer Login","[T]Display Antrian Registrasi & Poli","[T]Set Harga Obat","[T]Set Penggunaan Tarif","[T]Set Oto Ralan","[T]Biaya Harian Kamar",
+                "[T]Biaya Masuk Sekali","[T]Set RM","[A]Billing Ralan","[A]Billing Ranap","[I]Detail JM Dokter","[A]IGD","[B]Barcode Ralan","[B]Barcode Ranap",
+                "[T]Set Harga Obat Ralan","[T]Set Harga Obat Ranap","[J]Penyakit AFP & PD3I","[J]Surveilans AFP & PD3I","[J]Surveilans Ralan","[M]Diagnosa Pasien",
+                "[J]Surveilans Ranap","[J]Pny.Tdk Menular Ranap","[J]Pny.Tdk Menular Ralan","[J]Kunjungan Ralan","[J]RL 3.2 Rawat Darurat","[J]RL 3.3 Gigi dan Mulut","[J]RL 3.7 Radiologi","[J]RL 3.8 Laboratorium","[I]Harian Dokter Ralan",
+                "[C]SMS Gateway","[C]Sidik Jari","[C]Jam Presensi","[C]Jadwal Pegawai","[H]Barcode Parkir","[T]Set Billing","[A]DPJP Ranap","[D]Mutasi Obat/Alkes/BHP","[J]RL 3.4 Kebidanan","[J]RL 3.6 Pembedahan",
+                "[I]Fee Visit Dokter","[I]Fee Bacaan EKG","[I]Fee Rujukan Rontgen","[I]Fee Rujukan Ranap","[I]Fee Periksa Ralan","[K]Akun Bayar","[K]Bayar Pesan Obat",
+                "[I]Obat Per Dokter Peresep","[E]Jenis Barang Non Medis","[K]Pemasukkan Lain-Lain","[K]Pengaturan Rekening","[T]Closing Kasir","[T]Set Keterlambatan Presensi",
+                "[T]Set Harga Kamar","[I]Rekap Per Shift","[L]Cek NIK","[L]Cek No.Kartu","[L]Riwayat Rujukan PCare di VClaim","[I]Obat Per Cara Bayar","[J]Kunjungan Ranap",
+                "[K]Bayar Piutang","[I]Payment Point","[L]Cek No.Rujukan PCare di VClaim","[J]ICD 9","[D]Darurat Stok","[M]Retensi Data R.M.","[C]Temporary Presensi",
+                "[K]Jurnal Harian","[D]Sirkulasi Obat, Alkes & BHP 2","[A]Edit Registrasi","[L]Referensi Diagnosa VClaim","[L]Referensi Poli VClaim","[D]Industri Farmasi",
+                "[I]Harian J.S.","[I]Bulanan J.S.","[I]Harian BHP Medis/Paket Obat","[I]Bulanan BHP Medis/Paket Obat","[K]Piutang Belum Lunas","[L]Referensi Faskes VClaim",
+                "[L]Data Bridging SEP VClaim","[D]Pengambilan BHP UTD","[K]Tarif UTD","[N]Pengambilan BHP Medis","[N]BHP Medis Rusak","[E]Pengambilan UTD","[N]Pengambilan BHP Non Medis",
+                "[N]BHP Non Medis Rusak","[E]Suplier Non Medis","[N]Donor Darah","[L]Monitoring Verifikasi Klaim","[N]Cekal Darah","[N]Komponen Darah","[N]Stok Darah","[N]Pemisahan Darah",
+                "[I]Harian Kamar","[K]Rincian Piutang Pasien","[D]Keuntungan Beri Obat, Alkes & BHP 2","[L]Reklasifikasi Ralan","[L]Reklasifikasi Ranap","[N]Penyerahan Darah",
+                "[K]Hutang Obat & BHP","[D]Riwayat Obat, Alkes & BHP","[J]Sensus Harian Poli","[J]RL 4A Sebab Morbiditas Ranap","[L]Referensi Kamar Aplicare","[L]Ketersediaan Kamar Aplicare",
+                "[L]Klaim Baru Otomatis INACBG","[L]Klaim Baru Manual INACBG","[L]Coder NIK INACBG","[M]Mutasi Berkas RM","[K]Akun Piutang","[I]Harian KSO","[I]Bulanan KSO",
+                "[I]Harian Menejemen","[I]Bulanan Menejemen","[L]Cek Eligibilitas Inhealth","[L]Referensi Ruang Rawat Inhealth","[L]Referensi Poli Inhealth","[L]Referensi Faskes Inhealth",
+                "[L]Data Bridging SJP Inhealth","[I]Piutang Ralan","[I]Piutang Ranap","[K]Piutang Per Cara Bayar","[J]Lama Pelayanan Ralan","[M]Catatan Pasien","[J]RL 4B Sebab Morbiditas Ralan",
+                "[J]RL 4A Morbiditas Ralan","[J]RL 4B Morbiditas Ralan","[M]Data HAIs","[J]Harian HAIs","[J]Bulanan HAIs","[J]Hitung BOR","[M]Instansi/Perusahaan Pasien","[D]Resep Dokter",
+                "[J]Lama Pelayanan Apotek","[J]Hitung ALOS","[I]Detail Tindakan","[A]Rujukan Poli Internal","[I]Rekap Poli Anak","[O]Registrasi Per Poli","[O]Registrasi Per Dokter",
+                "[O]Registrasi Per Pekerjaan","[O]Registrasi Per Pendidikan","[O]Registrasi Per Tahun","[M]Berkas Digital Perawatan","[J]Pny Menular Ranap","[J]Pny Menular Ralan",
+                "[O]Registrasi Per Bulan","[O]Registrasi Per Tanggal","[O]Demografi Registrasi","[O]Reg Lama Per Tahun","[O]Reg Baru Per Tahun","[O]Reg Lama Per Bulan","[O]Reg Baru Per Bulan",
+                "[O]Reg Lama Per Tanggal","[O]Reg Baru Per Tanggal","[O]Batal Periksa Per Tahun","[O]Batal Periksa Per Bulan","[L]Referensi Diagnosa Pcare","[O]Batal Periksa Per Tanggal",
+                "[D]Kategori Obat/Alkes/BHP","[D]Golongan Obat/Alkes/BHP","[D]Obat/Alkes/BHP Per Tanggal","[D]Penjualan Bebas Per Tanggal","[L]Referensi Kesadaran Pcare","[J]Pembatalan Periksa Per Dokter",
+                "[I]Pembayaran Per Unit","[I]Rekap Pembayaran Per Unit","[O]Registrasi Per Cara Bayar","[E]Pengadaan Non Medis Per Tanggal","[E]Stok Keluar Non Medis Per Tanggal",
+                "[O]Kunjungan Ranap Per Tahun","[L]Cek Rujukan PCare","[O]Kunjungan Lab Ralan Per Tahun","[O]Kunjungan Rad Ralan Per Tahun","[J]Cek Entry Ralan","[L]Klaim Baru Manual INACBG 2",
+                "[D]Permintaan Obat & BHP","[D]Ringkasan Permintaan Obat & BHP","[D]Surat Pemesanan Obat & BHP","[E]Permintaan Barang Non Medis","[E]Ringkasan Permintaan Barang Non Medis",
+                "[E]Surat Pemesanan Barang Non Medis","[O]Registrasi Per Perujuk","[L]Referensi Prosedur VClaim","[L]Referensi Kelas Rawat VClaim","[L]Referensi Dokter VClaim",
+                "[L]Referensi Spesialistik VClaim","[L]Referensi Ruang Rawat VClaim","[L]Referensi Cara Keluar VClaim","[L]Referensi Pasca Pulang VClaim","[I]Detail VK/OK","[A]Billing Parsial",
+                "[L]Cek No.Rujukan RS di VClaim","[L]Cek Rujukan Kartu PCare di VClaim","[L]Cek Rujukan Kartu RS di VClaim","[A]Akses Depo Obat/BHP","[L]Pembuatan Rujukan VClaim",
+                "[O]Kunjungan Lab Ralan Per Bulan","[D]Stok Keluar Medis","[O]Kunjungan Rad Ralan Per Bulan","[I]Detail JM Dokter 2","[M]Pengaduan/Chat","[O]Kunjungan Lab Ralan Per Tanggal",
+                "[O]Kunjungan Rad Ralan Per Tanggal","[J]Sensus Harian Ralan","[D]Metode Racik","[I]Pembayaran Per Akun Bayar","[D]Pengguna Obat/Alkes/BHP Resep","[D]Rekap Penerimaan Obat & BHP",
+                "[C]Master Berkas Pegawai","[C]Berkas Kepegawaian","[C]Riwayat Jabatan","[C]Riwayat Pendidikan","[C]Riwayat Naik Gaji","[C]Kegiatan Ilmiah & Pelatihan","[C]Riwayat Penghargaan",
+                "[C]Riwayat Penelitian","[E]Penerimaan Barang Non Medis","[K]Bayar Pesan Non Medis","[K]Hutang Barang Non Medis","[E]Rekap Penerimaan Non Medis","[J]Insiden Keselamatan",
+                "[M]Insiden Keselamatan Pasien","[O]Kejadian IKP Per Tahun","[O]Kejadian IKP Per Bulan","[O]Kejadian IKP Per Tanggal","[D]Riwayat Batch","[O]Kejadian IKP Per Jenis",
+                "[O]Kejadian IKP Per Dampak","[I]Piutang Per Akun Piutang","[O]Registrasi Per Agama","[O]Registrasi Per Umur","[M]Suku/Bangsa Pasien","[M]Bahasa Pasien","[M]Golongan TNI",
+                "[M]Satuan TNI","[M]Jabatan TNI","[M]Pangkat TNI","[M]Golongan POLRI","[M]Satuan POLRI","[M]Jabatan POLRI","[M]Pangkat POLRI","[M]Cacat Fisik","[O]Registrasi Per Suku/Bangsa",
+                "[O]Registrasi Per Bahasa","[A]Jadwal Operasi","[L]Mapping Poli VClaim","[O]Registrasi Per Cacat Fisik","[G]Barang CSSD","[P]Surat Kontrol","[A]Booking Registrasi",
+                "[L]Referensi Propinsi VClaim","[L]Referensi Kabupaten VClaim","[L]Referensi Kecamatan VClaim","[L]Referensi Dokter DPJP VClaim","[L]Riwayat Rujukan RS di VClaim",
+                "[L]Tanggal Rujukan di VClaim","[A]Permintaan Lab","[A]Permintaan Radiologi","[P]Indeks Surat","[P]Map Surat","[P]Almari Surat","[P]Rak Surat","[P]Ruang Surat",
+                "[P]Klasifikasi Surat","[P]Status Surat","[P]Sifat Surat","[P]Stts Balas Surat","[P]Surat Masuk","[L]Referensi Dokter PCare","[L]Referensi Poli PCare",
+                "[L]Referensi Provider PCare","[L]Referensi Stts Pulang PCare","[L]Referensi Spesialis PCare","[L]Referensi Subspesialis PCare","[L]Referensi Sarana PCare",
+                "[L]Referensi Khusus PCare","[L]Referensi Obat PCare","[L]Referensi Tindakan PCare","[L]Faskes Subspesialis PCare","[L]Faskes Alih Rawat PCare",
+                "[L]Faskes Thalasemia & Hemofili PCare","[L]Mapping Obat PCare","[L]Tarif Ralan RS & PCare","[L]Club Prolanis PCare","[L]Mapping Poli PCare",
+                "[L]Kegiatan Kelompok PCare","[L]Tarif Ranap RS & PCare","[L]Peserta Keg Kelompok PCare","[D]Sirkulasi Obat, Alkes & BHP 3","[L]Data Pendafataran PCare",
+                "[L]Mapping Dokter PCare","[J]Ranap Per Ruang","[J]Penyakit Ranap Per Cara Bayar","[J]Anggota TNI Dirawat","[T]Set Input Parsial",
+                "[J]Lama Pelayanan Radiologi","[J]Lama Pelayanan Lab","[L]Cek Nomor SEP","[A]Catatan Dokter","[P]Surat Keluar","[D]Kegiatan Farmasi",
+                "[E]Stok Opname Non Medis","[E]Sirkulasi Non Medis","[J]Rekap Lab Per Tahun","[J]Perujuk Lab Per Tahun","[J]Rekap Radiologi Per Tahun",
+                "[J]Perujuk Radiologi Per Tahun","[J]Rekap Bulanan Porsi Diet","[J]Rekap Bulanan Macam Diet","[I]Payment Point 2","[I]Pembayaran Per Akun Bayar 2",
+                "[I]Hapus Nota Salah","[A]Asesmen Awal Rawat Inap","[J]HAIs Per Kamar/Bangsal","[D]PPN Obat","[K]Saldo Akun Per Bulan","[T]Display Antrian Apotek",
+                "[L]Referensi Faskes Sisrute","[L]Referensi Alasan Rujuk Sisrute","[L]Referensi Diagnosa Sisrute","[L]Rujukan Masuk Sisrute","[L]Rujukan Keluar Sisrute",
+                "[L]Cek SKDP VClaim","[D]Data Batch","[J]Kunjungan Lab Ralan","[J]Kunjungan Lab Ranap","[J]Kunjungan Radiologi Ralan","[J]Kunjungan Radiologi Ranap",
+                "[L]Pemberian Obat PCare","[L]Pemberian Tindakan PCare","[I]Pembayaran Per Akun Bayar 3","[T]Password BPJS","[J]Data TB","[L]Ketersediaan Kamar SIRANAP",
+                "[O]Periode Laporan TB","[O]Rujukan TB","[O]Riwayat TB","[O]Tipe Diagnosis TB","[O]Status HIV TB","[O]Skoring Anak TB","[O]Konfirmasi Skoring 5 TB",
+                "[O]Konfirmasi Skoring 6 TB","[O]Sumber Obat TB","[O]Hasil Akhir Pengobatan TB","[O]Hasil Tes HIV TB","[D]Kadaluarsa Batch","[D]Sisa Stok",
+                "[D]Obat Per Resep","[G]Pemakaian Air PDAM","[G]Limbah Padat B3 Medis","[O]Pemakaian Air PDAM Per Tanggal","[O]Pemakaian Air PDAM Per Bulan",
+                "[O]Limbah B3 Padat Per Tanggal","[O]Limbah B3 Padat Per Bulan","[G]Limbah Padat Domestik","[O]Limbah Padat Domestik Per Tanggal",
+                "[O]Limbah Padat Domestik Per Bulan","[G]Mutu Air Limbah","[G]Pest Control","[Q]Ruang Perpustakaan","[Q]Kategori Koleksi","[Q]Jenis Koleksi",
+                "[Q]Pengarang/Penulis","[Q]Penerbit Koleksi","[Q]Koleksi Perpustakaan","[Q]Inventaris Perpustakaan","[Q]Pengaturan Peminjaman","[Q]Denda Perpustakaan",
+                "[Q]Anggota Perpustakaan","[Q]Peminjaman Koleksi Perpustakaan","[Q]Bayar Denda Perpustakaan","[Q]Data Koleksi Ebook","[C]Jenis Cidera K3",
+                "[C]Penyebab Kecelakaan K3","[C]Jenis Luka K3","[C]Lokasi Kejadian K3","[C]Dampak Cidera K3","[C]Jenis Pekerjaan K3","[C]Bagian Tubuh K3",
+                "[C]Peristiwa K3","[O]K3 Per Tahun","[O]K3 Per Bulan","[O]K3 Per Tanggal","[O]K3 Per Jenis Cidera","[O]K3 Per Penyebab Kecelakaan","[O]K3 Per Jenis Luka",
+                "[O]K3 Per Lokasi Kejadian","[O]K3 Per Dampak Cidera","[O]K3 Per Jenis Pekerjaan","[O]K3 Per Bagian Tubuh","[C]Jenis Cidera K3 Per Tahun",
+                "[C]Penyebab Kecelakaan K3 Per Tahun","[C]Jenis Luka K3 Per Tahun","[C]Lokasi Kejadian K3 Per Tahun","[C]Dampak Cidera K3 Per Tahun",
+                "[C]Jenis Pekerjaan K3 Per Tahun","[C]Bagian Tubuh K3 Per Tahun","[A]Skrining Rawat Jalan","[L]Histori Pelayanan BPJS","[J]Rekap Mutasi Berkas",
+                "[J]Skrining Pernapasan Ralan Per Tahun","[D]Pengajuan Obat & BHP","[E]Pengajuan Barang Non Medis","[O]Kunjungan Ranap Per Bulan","[O]Kunjungan Ranap Per Tanggal",
+                "[O]Kunjungan Ranap Per Ruang","[J]Masuk Ruang Per Tahun","[O]Pegawai Per Jenjang Jabatan","[O]Pegawai Per Bidang/Bagian","[O]Pegawai Per Departemen",
+                "[O]Pegawai Per Pendidikan","[O]Pegawai Per Status WP","[O]Pegawai Per Status Kerja","[O]Status Pulang Ranap","[J]KIP Pasien Ranap","[J]KIP Pasien Ralan",
+                "[L]Mapping Dokter DPJP VClaim","[M]Data Triase IGD","[M]Master Triase Skala 1","[M]Master Triase Skala 2","[M]Master Triase Skala 3","[M]Master Triase Skala 4",
+                "[M]Master Triase Skala 5","[M]Master Triase Pemeriksaan","[M]Master Triase Macam Kasus","[J]Rekap Permintaan Diet","[J]Daftar Pasien Ranap",
+                "[J]Daftar Pasien Ranap TNI","[G]Pengajuan Aset/Inventaris","[O]Item Apotek Per Jenis","[O]Item Apotek Per Kategori","[O]Item Apotek Per Golongan",
+                "[O]Item Apotek Per Industri Farmasi","[D]10 Obat Terbanyak Poli","[O]Pengajuan Aset Per Urgensi","[O]Pengajuan Aset Per Status",
+                "[O]Pengajuan Aset Per Departemen","[G]Rekap Pengajuan Aset Departemen","[O]Pegawai Per Kelompok Jabatan","[O]Pegawai Per Risiko Kerja",
+                "[O]Pegawai Per Emergency Index","[O]Jumlah Inventaris Per Ruang","[J]Harian HAIs 2","[O]Jumlah Inventaris Per Jenis","[M]Resume Pasien",
+                "[A]Perkiraan Biaya Ranap","[D]Rekap Obat Per Poli","[D]Rekap Obat Per Pasien","[G]Permintaan Perbaikan Inventaris","[O]Pasien HAIs Per Ruang",
+                "[O]Pasien HAIs Per Bulan","[O]Laju HAIs VAP Per Ruang","[O]Laju HAIs IAD Per Ruang","[O]Laju HAIs Plebitis Per Ruang","[O]Laju HAIs ISK Per Ruang",
+                "[O]Laju HAIs ILO Per Ruang","[O]Laju HAIs HAP Per Ruang","[L]Mapping Poli Inhealth","[L]Mapping Dokter Inhealth","[L]Tarif Ralan Inhealth",
+                "[L]Tarif Ranap Inhealth","[L]Tarif Radiologi Inhealth","[L]Tarif Laborat Inhealth","[L]Tarif Operasi Inhealth","[D]Hibah Obat & BHP","[G]Asal Hibah",
+                "[M]Asuhan Gizi","[L]Tagihan Inhealth","[D]Sirkulasi Obat, Alkes & BHP 4","[D]Sirkulasi Obat, Alkes & BHP 5","[E]Sirkulasi Non Medis 2",
+                "[M]Monitoring Asuhan Gizi","[O]Penerimaan Obat, Alkes & BHP Per Bulan","[J]Rekap Kunjungan","[P]Surat Keterangan Sakit","[M]Penilaian Awal Keperawatan Ralan Umum",
+                "[A]Permintaan Diet","[M]Master Masalah Keperawatan","[C]Pengajuan Cuti","[J]Kedatangan Pasien Per Jam","[N]Data Pendonor","[R]Suplier Toko",
+                "[R]Jenis Barang Toko","[T]Set Harga Toko","[R]Barang Toko","[K]Penagihan Piutang Pasien","[K]Akun Penagihan Piutang","[R]Stok Opname Toko",
+                "[R]Riwayat Barang Toko","[R]Surat Pemesanan Toko","[R]Pengajuan Barang Toko","[R]Penerimaan Barang Toko","[R]Pengadaan Barang Toko","[R]Hutang Toko",
+                "[R]Bayar Pesan Toko","[R]Member Toko","[R]Penjualan Toko","[J]Registrasi Poli Per Tanggal","[R]Piutang Toko","[R]Retur Ke Suplier Toko",
+                "[E]Retur Ke Suplier Non Medis","[E]Riwayat Barang Non Medis","[L]Pasien Corona","[R]Pendapatan Harian Toko","[L]Diagnosa Pasien Corona",
+                "[L]Perawatan Pasien Corona","[M]Penilaian Awal Keperawatan Gigi","[M]Master Masalah Keperawatan Gigi","[R]Bayar Piutang Toko","[R]Piutang Harian Toko",
+                "[R]Penjualan Harian Toko","[A]Deteksi Dini Corona","[M]Penilaian Awal Keperawatan Ralan Kebidanan","[P]Pengumuman E-Pasien","[P]Surat Hamil","[K]Set Tarif Online",
+                "[A]Booking Periksa","[R]Sirkulasi Barang Toko","[R]Retur Jual Toko","[R]Retur Jual Piutang","[R]Sirkulasi Barang Toko 2","[R]Keuntungan Barang Toko",
+                "[S]Ket Pengeluaran Penerima Dankes","[S]Ket Penghasilan Penerima Dankes","[S]Ukuran Rumah Penerima Dankes","[S]Dinding Rumah Penerima Dankes",
+                "[S]Lantai Rumah Penerima Dankes","[S]Atap Rumah Penerima Dankes","[S]Kepemilikan Rumah Penerima Dankes","[S]Kamar Mandi Penerima Dankes",
+                "[S]Dapur Rumah Penerima Dankes","[S]Kursi Rumah Penerima Dankes","[S]Kategori PHBS Penerima Dankes","[S]Elektronik Penerima Dankes",
+                "[S]Ternak Penerima Dankes","[S]Jenis Simpanan Penerima Dankes","[M]Penilaian Awal Keperawatan Ralan Bayi/Anak","[S]Kategori Asnaf Penerima Dankes",
+                "[M]Master Masalah Keperawatan Bayi/Anak","[M]Master Imunisasi","[S]Patologis Penerima Dankes","[L]Cek No.Kartu PCare","[P]Surat Bebas Narkoba",
+                "[P]Surat Keterangan Covid","[G]Pemakaian Air Tanah","[O]Pemakaian Air Tanah Per Tanggal","[O]Pemakaian Air Tanah Per Bulan",
+                "[J]Lama Pelayanan Poli","[M]Hemodialisa","[J]Laporan Tahunan IRJ","[O]Hemodialisa Per Tanggal","[O]Hemodialisa Per Bulan","[O]Hemodialisa Per Tahun",
+                "[O]Pasien Meninggal Per Bulan","[G]Perbaikan Inventaris","[P]Surat Cuti Hamil","[D]Permintaan Stok Obat Pasien","[G]Pemeliharaan Inventaris",
+                "[M]Klasifikasi Pasien Ranap","[J]Bulanan Klasifikasi Pasien Ranap","[J]Harian Klasifikasi Pasien Ranap","[J]Klasifikasi Pasien Per Ruang",
+                "[M]SOAP Perawatan","[K]Klaim Rawat Jalan","[M]Skrining Gizi Lanjut","[J]Lama Penyiapan RM","[J]Dosis Radiologi","[J]Demografi Umur Kunjungan",
+                "[T]Jam Diet Pasien","[K]RVP Piutang BPJS","[D]Verifikasi Penerimaan Obat/Alkes/BHP","[E]Verifikasi Penerimaan Non Medis","[A]Periksa Lab PA",
+                "[D]Ringkasan Pengajuan Obat & BHP","[D]Ringkasan Pemesanan Obat & BHP","[D]Ringkasan Pengadaan Obat & BHP","[D]Ringkasan Penerimaan Obat & BHP",
+                "[D]Ringkasan Hibah Obat & BHP","[D]Ringkasan Penjualan Obat & BHP","[D]Ringkasan Beri Obat & BHP","[D]Ringkasan Piutang Obat & BHP",
+                "[D]Ringkasan Stok Keluar Obat & BHP","[D]Ringkasan Retur Suplier Obat & BHP","[D]Ringkasan Retur Pembeli Obat & BHP","[M]Penilaian Awal Keperawatan Ranap Kebidanan",
+                "[E]Ringkasan Pengajuan Non Medis","[E]Ringkasan Pemesanan Non Medis","[E]Ringkasan Pengadaan Non Medis","[E]Ringkasan Penerimaan Non Medis",
+                "[E]Ringkasan Stok Keluar Non Medis","[E]Ringkasan Retur Suplier Non Medis","[K]Penerimaan/Omset/Kas Masuk","[K]Validasi Penagihan Piutang",
+                "[A]Permintaan Rawat Inap","[L]Referensi Diagnosa PRB VClaim","[L]Referensi Obat PRB VClaim","[L]Surat Kontrol VClaim","[D]Penggunaan BHP OK/VK",
+                "[P]Surat Keterangan Rawat Inap","[P]Surat Keterangan Sehat","[K]Pendapatan Per Cara Bayar","[L]Host To Host Bank Jateng","[K]Pembayaran Bank Jateng",
+                "[L]Surat PRI VClaim","[I]Ringkasan Tindakan","[J]Lama Pelayanan Pasien","[P]Surat Keterangan Sakit Pihak 2","[K]Titip Faktur/Tagihan Obat & BHP",
+                "[L]Referensi Pendaftaran Mobile JKN","[L]Batal Pendaftaran Mobile JKN","[J]Lama Operasi","[O]Jumlah Inventaris Per Kategori","[O]Jumlah Inventaris Per Merk",
+                "[O]Jumlah Inventaris Per Produsen","[K]Pengembalian Deposit Pasien","[K]Validasi Titip Faktur/Tagihan Obat & BHP","[K]Piutang Obat & BHP Belum Lunas",
+                "[L]Integrasi BRI API","[G]Pengadaan Aset/Inventaris","[K]Akun Jenis Aset/Inventaris","[G]Suplier Aset/Inventaris","[G]Penerimaan Aset/Inventaris",
+                "[K]Bayar Pesan Aset/Inventaris","[K]Hutang Aset/Inventaris","[G]Hibah Aset/Inventaris","[K]Titip Faktur/Tagihan Non Medis","[K]Validasi Titip Faktur/Tagihan Non Medis",
+                "[K]Titip Faktur/Tagihan Aset/Inventaris","[K]Validasi Titip Faktur/Tagihan Aset/Inventaris","[E]Hibah Non Medis","[L]Referensi TACC PCare","[D]Resep Luar",
+                "[P]Surat Bebas TBC","[P]Surat Keterangan Buta Warna","[P]Surat Bebas Tato","[P]Surat Kewaspadaan Kesehatan","[O]Porsi Diet Per Tanggal","[O]Porsi Diet Per Bulan",
+                "[O]Porsi Diet Per Tahun","[O]Porsi Diet Per Ruang","[M]Penilaian Awal Medis Ralan Umum","[M]Master Masalah Keperawatan Mata","[M]Penilaian Awal Keperawatan Ralan Mata",
+                "[M]Penilaian Awal Medis Ranap Umum","[M]Penilaian Awal Medis Ranap Kandungan","[M]Penilaian Awal Medis Ralan Kandungan","[M]Penilaian Awal Medis IGD",
+                "[M]Penilaian Awal Medis Ralan Bayi/Anak","[L]Referensi Poli HFIS","[L]Referensi Dokter HFIS","[L]Referensi Jadwal HFIS","[M]Penilaian Awal Fisioterapi",
+                "[L]Program PRB di VClaim","[L]Suplesi Jasa Raharja di VClaim","[L]Data Induk Kecelakaan VClaim","[L]Data SEP Internal VClaim","[L]Klaim Jaminan Jasa Raharja VClaim",
+                "[L]Pasien Finger Print VClaim","[L]Rujukan Khusus VClaim","[G]Pemeliharaan Gedung","[O]Perbaikan Inventaris Per Tanggal","[O]Perbaikan Inventaris Per Bulan",
+                "[O]Perbaikan Inventaris Per Tahun","[O]Perbaikan Inventaris Per Pelaksana & Status","[M]Penilaian MCU","[K]Peminjam Piutang","[K]Piutang Lain-lain",
+                "[K]Asuransi/Askes/Jenis Bayar","[C]Audit Kepatuhan APD","[L]Task ID Mobile JKN","[K]Bayar Piutang Lain-lain","[I]Pembayaran Per Akun Bayar 4",
+                "[D]Stok Akhir Farmasi Per Tanggal","[M]Riwayat Kamar Pasien","[M]Uji Fungsi/Prosedur KFR","[M]Hapus Berkas Digital Perawatan","[K]Kategori Pengeluaran Harian",
+                "[K]Kategori Pemasukan Lain-lain","[I]Pembayaran Per Akun Bayar 5","[T]Ruang Operasi","[D]Telaah Resep & Obat","[I]Jasa Tindakan Pasien","[D]Permintaan Resep Pulang",
+                "[I]Rekap JM Dokter","[J]Status Data RM","[A]Ubah Petugas Lab PK","[A]Ubah Petugas Lab PA","[A]Ubah Petugas Radiologi","[A]Gabung Nomor Rawat","[M]Gabungkan Data RM",
+                "[D]Ringkasan Biaya Obat Pasien Per Tanggal","[M]Master Masalah Keperawatan IGD","[M]Penilaian Awal Keperawatan IGD","[L]Referensi DPHO Apotek BPJS",
+                "[L]Referensi Poli Apotek BPJS","[K]Bayar JM Dokter","[L]Referensi Faskes Apotek BPJS","[L]Referensi Spesialistik Apotek BPJS","[K]Pembayaran BRIVA",
+                "[M]Penilaian Awal Keperawatan Ranap Umum","[D]Nilai Penerimaan Vendor Farmasi Per Bulan","[K]Akun Bayar Hutang","[M]Master Rencana Keperawatan",
+                "[J]Laporan Tahunan IGD","[D]Obat/Alkes/BHP Tidak Bergerak","[K]Ringkasan Hutang Vendor Farmasi","[E]Nilai Penerimaan Vendor Non Medis Per Bulan",
+                "[K]Ringkasan Hutang Vendor Non Medis","[M]Master Rencana Keperawatan Bayi/Anak","[J]Anggota POLRI Dirawat","[J]Daftar Pasien Ranap POLRI","[M]SOAP Ralan Anggota POLRI",
+                "[M]SOAP Ranap Anggota POLRI","[J]Laporan Penyakit POLRI","[J]Jumlah Pengunjung Ralan POLRI","[M]Catatan Observasi IGD","[M]Catatan Observasi Ranap",
+                "[M]Catatan Observasi Ranap Kebidanan","[M]Catatan Observasi Ranap Post Partum","[M]Penilaian Awal Medis Ralan THT","[M]Penilaian Psikologi",
+                "[C]Audit Cuci Tangan Medis","[C]Audit Pembuangan Limbah","[C]Ruang/Unit Audit Kepatuhan","[C]Audit Pembuangan Benda Tajam & Jarum",
+                "[C]Audit Penanganan Darah","[C]Audit Pengelolaan Linen Kotor","[C]Audit Penempatan Pasien","[C]Audit Kamar Jenazah","[C]Audit Bundle IADP",
+                "[C]Audit Bundle IDO","[C]Audit Fasilitas Kebersihan Tangan","[C]Audit Fasilitas APD","[C]Audit Pembuangan Limbah Cair Infeksius","[C]Audit Sterilisasi Alat",
+                "[M]Penilaian Awal Medis Ralan Psikiatri","[P]Persetujuan/Penolakan Tindakan","[C]Audit Bundle ISK","[C]Audit Bundle PLABSI","[C]Audit Bundle VAP",
+                "[L]Host To Host Bank Papua","[K]Pembayaran Bank Papua","[M]Penilaian Awal Medis Ralan Penyakit Dalam","[M]Penilaian Awal Medis Ralan Mata",
+                "[M]Penilaian Awal Medis Ralan Neurologi","[D]Sirkulasi Obat, Alkes & BHP 6","[M]Penilaian Awal Medis Ralan Orthopedi","[M]Penilaian Awal Medis Ralan Bedah",
+                "[T]Integrasi Khanza Health Services","[M]SOAP Ralan Anggota TNI","[M]SOAP Ranap Anggota TNI","[J]Jumlah Pengunjung Ralan TNI","[J]Laporan Penyakit TNI",
+                "[M]Catatan Keperawatan Ranap","[M]Master Rencana Keperawatan Gigi","[M]Master Rencana Keperawatan Mata","[M]Master Rencana Keperawatan IGD",
+                "[M]Master Masalah Keperawatan Psikiatri","[M]Master Rencana Keperawatan Psikiatri","[M]Penilaian Awal Keperawatan Ralan Psikiatri","[M]Pemantauan PEWS Pasien Anak",
+                "[P]Pulang Atas Permintaan Sendiri","[M]Master Template Hasil Radiologi","[J]Laporan Bulanan IRJ","[M]Master Template Pemeriksaan","[A]Periksa Lab MB",
+                "[A]Ubah Petugas Lab MB","[M]Penilaian Pre Operasi","[M]Penilaian Pre Anestesi","[M]Perencanaan Pemulangan","[M]Penilaian Lanjutan Risiko Jatuh Dewasa",
+                "[M]Penilaian Lanjutan Risiko Jatuh Anak","[M]Penilaian Awal Medis Ralan Geriatri","[M]Penilaian Tambahan Pasien Geriatri","[M]Skrining Nutrisi Pasien Dewasa",
+                "[M]Skrining Nutrisi Pasien Lansia","[M]Hasil USG Kandungan","[M]Skrining Nutrisi Pasien Anak","[L]Host To Host Bank Jabar","[K]Pembayaran Bank Jabar",
+                "[P]Pernyataan Pasien Umum","[M]Konseling Farmasi","[M]Pelayanan Informasi Obat","[M]Jawaban PIO Apoteker","[P]Persetujuan Umum","[M]Transfer Pasien Antar Ruang",
+                "[L]Referensi Praktisi Satu Sehat","[L]Referensi Pasien Satu Sehat","[L]Mapping Organisasi Satu Sehat","[L]Mapping Lokasi Satu Sehat","[L]Kirim Encounter Satu Sehat",
+                "[M]Catatan Cek GDS","[L]Kirim Condition Satu Sehat","[M]Check List Pre Operasi","[L]Kirim Observation-TTV Satu Sehat","[M]Sign-In Sebelum Anestesi",
+                "[L]Kirim Procedure Satu Sehat","[J]Operasi Per Bulan","[M]Time-Out Sebelum Insisi","[M]Sign-Out Sebelum Menutup Luka","[F]Barang Dapur","[F]Stok Opname Dapur",
+                "[L]Mapping Vaksin Satu Sehat","[F]Suplier Dapur","[L]Kirim Imunisasi Satu Sehat","[M]Check List Post Operasi","[F]Pengadaan Barang Dapur","[F]Stok Keluar Dapur",
+                "[F]Riwayat Barang Dapur","[F]Permintaan Barang Dapur","[M]Rekonsiliasi Obat","[F]Biaya Pengadaan Dapur","[F]Rekap Pengadaan Dapur","[G]Limbah Cair B3 Medis",
+                "[O]Limbah B3 Cair Per Tanggal","[O]Limbah B3 Cair Per Bulan","[I]Rekap Biaya Registrasi","[M]Konfirmasi Rekonsiliasi Obat","[L]Kirim Clinical Impression Satu Sehat",
+                "[M]Penilaian Pasien Terminal","[P]Persetujuan Rawat Inap","[M]Monitoring Reaksi Tranfusi","[M]Penilaian Korban Kekerasan","[M]Penilaian Lanjutan Risiko Jatuh Lansia",
+                "[M]Penilaian Pasien Penyakit Menular","[M]Skrining Manajer Pelayanan Pasien","[M]Edukasi Pasien & Keluarga Rawat Jalan","[M]Pemantauan EWS Pasien Dewasa",
+                "[M]Penilaian Tambahan Bunuh Diri","[L]Antrean Per Tanggal Mobile JKN","[M]Penilaian Tambahan Perilaku Kekerasan","[M]Penilaian Tambahan Melarikan Diri",
+                "[P]Persetujuan Penundaan Pelayanan","[J]Sisa Diet Pasien","[M]Penilaian Awal Medis Ralan Bedah Mulut","[M]Penilaian Pasien Keracunan","[M]Pemantauan MEOWS Pasien Obstetri",
+                "[M]Catatan ADIME Gizi","[K]Pengajuan Biaya","[M]Penilaian Awal Keperawatan Ralan Geriatri","[M]Master Masalah Keperawatan Geriatri","[M]Master Rencana Keperawatan Geriatri",
+                "[M]Check List Kriteria Masuk HCU","[M]Check List Kriteria Keluar HCU","[M]Penilaian Risiko Dekubitus","[P]Master Menolak Anjuran Medis","[P]Penolakan Anjuran Medis",
+                "[J]Laporan Tahunan Penolakan Anjuran Medis","[M]Master Template Laporan Operasi","[M]Dokumentasi Tindakan ESWL","[M]Check List Kriteria Masuk ICU",
+                "[M]Check List Kriteria Keluar ICU","[A]Akses Ke Dokter Lain Rawat Jalan","[M]Follow Up DBD","[M]Penilaian Lanjutan Risiko Jatuh Neonatus","[K]Persetujuan Pengajuan Biaya",
+                "[J]Pemeriksaan Fisik Ralan Per Penyakit","[M]Penilaian Lanjutan Risiko Jatuh Geriatri","[M]Pemantauan EWS Pasien Neonatus","[K]Validasi Persetujuan Pengajuan Biaya",
+                "[L]Riwayat Perawatan ICare BPJS","[K]Rekap Pengajuan Biaya","[M]Penilaian Awal Medis Ralan Kulit & Kelamin","[L]Host To Host Bank Mandiri","[M]Penilaian Awal Medis Pasien Hemodialisa",
+                "[M]Penilaian Level Kecemasan Ranap Anak","[M]Penilaian Lanjutan Risiko Jatuh Psikiatri","[M]Penilaian Lanjutan Skrining Fungsional","[M]Penilaian Awal Medis Ralan Fisik & Rehabilitasi",
+                "[M]Laporan Anestesi","[P]Template Persetujuan Penolakan Tindakan","[M]Penilaian Awal Medis IGD Psikiatri","[L]Referensi Setting PPK Apotek BPJS","[L]Referensi Obat Apotek BPJS",
+                "[L]Mapping Obat Apotek BPJS","[K]Pembayaran Bank Mandiri","[M]Penilaian Ulang Nyeri","[M]Penilaian Terapi Wicara","[L]Obat 23 Hari Apotek BPJS","[M]Pengkajian Restrain",
+                "[L]Pencarian SEP Apotek BPJS","[L]Monitoring Klaim Apotek BPJS","[L]Daftar Pelayanan Obat Apotek BPJS","[M]Penilaian Awal Medis Ralan Paru","[M]Catatan Keperawatan Ralan",
+                "[M]Catatan Persalinan","[M]Skor Aldrette Pasca Anestesi","[M]Skor Steward Pasca Anestesi","[M]Skor Bromage Pasca Anestesi","[M]Penilaian Pre Induksi","[M]Hasil USG Urologi",
+                "[M]Hasil USG Gynecologi","[M]Hasil Pemeriksaan EKG","[L]Hapus/Edit SEP VClaim","[L]Kirim Diet Satu Sehat","[L]Mapping Obat/Alkes/BHP Satu Sehat","[F]Ringkasan Pengadaan Barang Dapur",
+                "[L]Kirim Medication Satu Sehat","[L]Kirim Medication Request Satu Sehat","[M]Penatalaksanaan Terapi Okupasi","[L]Kirim Medication Dispense Satu Sehat","[M]Hasil USG Neonatus",
+                "[M]Hasil Endoskopi Faring/Laring","[L]Mapping Tindakan Radiologi Satu Sehat","[L]Kirim Service Request Radiologi Satu Sehat","[M]Hasil Endoskopi Hidung",
+                "[L]Kirim Specimen Radiologi Satu Sehat","[M]Master Masalah Keperawatan Neonatus","[M]Master Rencana Keperawatan Neonatus","[M]Penilaian Awal Keperawatan Ranap Neonatus",
+                "[L]Kirim Observation Radiologi Satu Sehat","[L]Kirim Diagnostic Report Radiologi Satu Sehat","[M]Hasil Endoskopi Telinga","[L]Mapping Tindakan Lab PK & MB Satu Sehat",
                 "[L]Kirim Service Request Lab PK Satu Sehat","[L]Kirim Service Request Lab MB Satu Sehat","[L]Kirim Specimen Lab PK Satu Sehat","[L]Kirim Specimen Lab MB Satu Sehat",
                 "[L]Kirim Observation Lab PK Satu Sehat","[L]Kirim Observation Lab MB Satu Sehat","[L]Kirim Diagnostic Report Lab PK Satu Sehat","[L]Kirim Diagnostic Report Lab MB Satu Sehat",
                 "[J]Kepatuhan Kelengkapan Keselamatan Bedah","[K]Nilai Piutang Per Cara Bayar Per Bulan","[K]Ringkasan Piutang Per Cara Bayar","[M]Penilaian Pasien Imunitas Rendah",
-                "[M]Keseimbangan Cairan","[M]Catatan Observasi CHBP"
+                "[M]Keseimbangan Cairan","[M]Catatan Observasi CHBP","[M]Catatan Observasi Induksi Persalinan","[C]Kategori Penilaian SKP","[C]Kriteria Penilaian SKP","[C]Penilaian SKP Petugas/Dokter",
+                "[L]Referensi Poli Mobile JKN FKTP","[L]Referensi Dokter Mobile JKN FKTP","[C]Rekapitulasi Penilaian SKP","[K]Pembayaran Pihak Ke 3 Bank Mandiri","[L]Metode Pembayaran Bank Mandiri",
+                "[L]Bank Tujuan Transfer Bank Mandiri"
         };
         
-        tabMode = new DefaultTableModel(null, row) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return !(colIndex == 0 || colIndex == 1 || colIndex == 2);
-            }
-
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                if (columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex == 3) {
-                    return java.lang.Object.class;
-                }
-                return java.lang.Boolean.class;
-            }
+        tabMode=new DefaultTableModel(null,row){
+              @Override 
+              public boolean isCellEditable(int rowIndex, int colIndex){
+                  boolean a = true;
+                    if ((colIndex==0)||(colIndex==1)||(colIndex==2)) {
+                        a=false;
+                    }
+                    return a;
+              }              
+              Class[] types = new Class[] {
+                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class,java.lang.Boolean.class
+             };
+             @Override
+             public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+             }
         };
 
         tbUser.setModel(tabMode);
@@ -270,7 +551,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 1039;i++) {
+        for (i = 0; i < 1047;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -2755,91 +3036,115 @@ public class DlgUser extends javax.swing.JDialog {
                     column.setPreferredWidth(204);
                     break;
                 case 1010:
-                    column.setPreferredWidth(204);
-                    break;
-                case 1011:
-                    column.setPreferredWidth(204);
-                    break;
-                case 1012:
                     column.setPreferredWidth(120);
                     break;
-                case 1013:
+                case 1011:
                     column.setPreferredWidth(167);
                     break;
-                case 1014:
+                case 1012:
                     column.setPreferredWidth(214);
                     break;
-                case 1015:
+                case 1013:
                     column.setPreferredWidth(231);
                     break;
-                case 1016:
+                case 1014:
                     column.setPreferredWidth(136);
                     break;
-                case 1017:
+                case 1015:
                     column.setPreferredWidth(200);
                     break;
-                case 1018:
+                case 1016:
                     column.setPreferredWidth(215);
                     break;
-                case 1019:
+                case 1017:
                     column.setPreferredWidth(217);
                     break;
-                case 1020:
+                case 1018:
                     column.setPreferredWidth(245);
                     break;
-                case 1021:
+                case 1019:
                     column.setPreferredWidth(212);
                     break;
-                case 1022:
+                case 1020:
                     column.setPreferredWidth(240);
                     break;
-                case 1023:
+                case 1021:
                     column.setPreferredWidth(138);
                     break;
-                case 1024:
+                case 1022:
                     column.setPreferredWidth(226);
                     break;
-                case 1025:
+                case 1023:
                     column.setPreferredWidth(218);
                     break;
-                case 1026:
+                case 1024:
                     column.setPreferredWidth(219);
                     break;
-                case 1027:
+                case 1025:
                     column.setPreferredWidth(187);
                     break;
-                case 1028:
+                case 1026:
                     column.setPreferredWidth(188);
                     break;
-                case 1029:
+                case 1027:
                     column.setPreferredWidth(199);
                     break;
-                case 1030:
+                case 1028:
                     column.setPreferredWidth(200);
                     break;
-                case 1031:
+                case 1029:
                     column.setPreferredWidth(227);
                     break;
-                case 1032:
+                case 1030:
                     column.setPreferredWidth(229);
                     break;
-                case 1033:
+                case 1031:
                     column.setPreferredWidth(237);
                     break;
-                case 1034:
+                case 1032:
                     column.setPreferredWidth(208);
                     break;
-                case 1035:
+                case 1033:
                     column.setPreferredWidth(187);
                     break;
-                case 1036:
+                case 1034:
                     column.setPreferredWidth(190);
                     break;
-                case 1037:
+                case 1035:
                     column.setPreferredWidth(130);
                     break;
-                case 1038:
+                case 1036:
                     column.setPreferredWidth(143);
+                    break;
+                case 1037:
+                    column.setPreferredWidth(206);
+                    break;
+                case 1038:
+                    column.setPreferredWidth(133);
+                    break;
+                case 1039:
+                    column.setPreferredWidth(128);
+                    break;
+                case 1040:
+                    column.setPreferredWidth(167);
+                    break;
+                case 1041:
+                    column.setPreferredWidth(172);
+                    break;
+                case 1042:
+                    column.setPreferredWidth(186);
+                    break;
+                case 1043:
+                    column.setPreferredWidth(152);
+                    break;
+                case 1044:
+                    column.setPreferredWidth(199);
+                    break;
+                case 1045:
+                    column.setPreferredWidth(184);
+                    break;
+                case 1046:
+                    column.setPreferredWidth(189);
                     break;
                 default:
                     column.setPreferredWidth(134);
@@ -3340,7 +3645,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tabMode.addRow(new Object[]{
                     TKd.getText(),TNmUser.getText(),Jabatan.getText(),TPass.getText(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
@@ -3366,7 +3671,8 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
+                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
+                    false,false,false,false
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
@@ -4424,35 +4730,43 @@ public class DlgUser extends javax.swing.JDialog {
                     "satu_sehat_kirim_medicationrequest='"+tbUser.getValueAt(i,1007).toString()+"',"+
                     "penatalaksanaan_terapi_okupasi='"+tbUser.getValueAt(i,1008).toString()+"',"+
                     "satu_sehat_kirim_medicationdispense='"+tbUser.getValueAt(i,1009).toString()+"',"+
-                    "edit_hapus_spo_medis='"+tbUser.getValueAt(i,1010).toString()+"',"+
-                    "edit_hapus_spo_nonmedis='"+tbUser.getValueAt(i,1011).toString()+"',"+
-                    "hasil_usg_neonatus='"+tbUser.getValueAt(i,1012).toString()+"',"+
-                    "hasil_endoskopi_faring_laring='"+tbUser.getValueAt(i,1013).toString()+"',"+
-                    "satu_sehat_mapping_radiologi='"+tbUser.getValueAt(i,1014).toString()+"',"+
-                    "satu_sehat_kirim_servicerequest_radiologi='"+tbUser.getValueAt(i,1015).toString()+"',"+
-                    "hasil_endoskopi_hidung='"+tbUser.getValueAt(i,1016).toString()+"',"+
-                    "satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(i,1017).toString()+"',"+
-                    "master_masalah_keperawatan_neonatus='"+tbUser.getValueAt(i,1018).toString()+"',"+
-                    "master_rencana_keperawatan_neonatus='"+tbUser.getValueAt(i,1019).toString()+"',"+
-                    "penilaian_awal_keperawatan_ranap_neonatus='"+tbUser.getValueAt(i,1020).toString()+"',"+
-                    "satu_sehat_kirim_observation_radiologi='"+tbUser.getValueAt(i,1021).toString()+"',"+
-                    "satu_sehat_kirim_diagnosticreport_radiologi='"+tbUser.getValueAt(i,1022).toString()+"',"+
-                    "hasil_endoskopi_telinga='"+tbUser.getValueAt(i,1023).toString()+"',"+
-                    "satu_sehat_mapping_lab='"+tbUser.getValueAt(i,1024).toString()+"',"+
-                    "satu_sehat_kirim_servicerequest_lab='"+tbUser.getValueAt(i,1025).toString()+"',"+
-                    "satu_sehat_kirim_servicerequest_labmb='"+tbUser.getValueAt(i,1026).toString()+"',"+
-                    "satu_sehat_kirim_specimen_lab='"+tbUser.getValueAt(i,1027).toString()+"',"+
-                    "satu_sehat_kirim_specimen_labmb='"+tbUser.getValueAt(i,1028).toString()+"',"+
-                    "satu_sehat_kirim_observation_lab='"+tbUser.getValueAt(i,1029).toString()+"',"+
-                    "satu_sehat_kirim_observation_labmb='"+tbUser.getValueAt(i,1030).toString()+"',"+
-                    "satu_sehat_kirim_diagnosticreport_lab='"+tbUser.getValueAt(i,1031).toString()+"',"+
-                    "satu_sehat_kirim_diagnosticreport_labmb='"+tbUser.getValueAt(i,1032).toString()+"',"+
-                    "kepatuhan_kelengkapan_keselamatan_bedah='"+tbUser.getValueAt(i,1033).toString()+"',"+
-                    "nilai_piutang_perjenis_bayar_per_bulan='"+tbUser.getValueAt(i,1034).toString()+"',"+
-                    "ringkasan_piutang_jenis_bayar='"+tbUser.getValueAt(i,1035).toString()+"',"+
-                    "penilaian_pasien_imunitas_rendah='"+tbUser.getValueAt(i,1036).toString()+"',"+
-                    "balance_cairan='"+tbUser.getValueAt(i,1037).toString()+"',"+
-                    "catatan_observasi_chbp='"+tbUser.getValueAt(i,1038).toString()+"'")==true){
+                    "hasil_usg_neonatus='"+tbUser.getValueAt(i,1010).toString()+"',"+
+                    "hasil_endoskopi_faring_laring='"+tbUser.getValueAt(i,1011).toString()+"',"+
+                    "satu_sehat_mapping_radiologi='"+tbUser.getValueAt(i,1012).toString()+"',"+
+                    "satu_sehat_kirim_servicerequest_radiologi='"+tbUser.getValueAt(i,1013).toString()+"',"+
+                    "hasil_endoskopi_hidung='"+tbUser.getValueAt(i,1014).toString()+"',"+
+                    "satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(i,1015).toString()+"',"+
+                    "master_masalah_keperawatan_neonatus='"+tbUser.getValueAt(i,1016).toString()+"',"+
+                    "master_rencana_keperawatan_neonatus='"+tbUser.getValueAt(i,1017).toString()+"',"+
+                    "penilaian_awal_keperawatan_ranap_neonatus='"+tbUser.getValueAt(i,1018).toString()+"',"+
+                    "satu_sehat_kirim_observation_radiologi='"+tbUser.getValueAt(i,1019).toString()+"',"+
+                    "satu_sehat_kirim_diagnosticreport_radiologi='"+tbUser.getValueAt(i,1020).toString()+"',"+
+                    "hasil_endoskopi_telinga='"+tbUser.getValueAt(i,1021).toString()+"',"+
+                    "satu_sehat_mapping_lab='"+tbUser.getValueAt(i,1022).toString()+"',"+
+                    "satu_sehat_kirim_servicerequest_lab='"+tbUser.getValueAt(i,1023).toString()+"',"+
+                    "satu_sehat_kirim_servicerequest_labmb='"+tbUser.getValueAt(i,1024).toString()+"',"+
+                    "satu_sehat_kirim_specimen_lab='"+tbUser.getValueAt(i,1025).toString()+"',"+
+                    "satu_sehat_kirim_specimen_labmb='"+tbUser.getValueAt(i,1026).toString()+"',"+
+                    "satu_sehat_kirim_observation_lab='"+tbUser.getValueAt(i,1027).toString()+"',"+
+                    "satu_sehat_kirim_observation_labmb='"+tbUser.getValueAt(i,1028).toString()+"',"+
+                    "satu_sehat_kirim_diagnosticreport_lab='"+tbUser.getValueAt(i,1029).toString()+"',"+
+                    "satu_sehat_kirim_diagnosticreport_labmb='"+tbUser.getValueAt(i,1030).toString()+"',"+
+                    "kepatuhan_kelengkapan_keselamatan_bedah='"+tbUser.getValueAt(i,1031).toString()+"',"+
+                    "nilai_piutang_perjenis_bayar_per_bulan='"+tbUser.getValueAt(i,1032).toString()+"',"+
+                    "ringkasan_piutang_jenis_bayar='"+tbUser.getValueAt(i,1033).toString()+"',"+
+                    "penilaian_pasien_imunitas_rendah='"+tbUser.getValueAt(i,1034).toString()+"',"+
+                    "balance_cairan='"+tbUser.getValueAt(i,1035).toString()+"',"+
+                    "catatan_observasi_chbp='"+tbUser.getValueAt(i,1036).toString()+"',"+
+                    "catatan_observasi_induksi_persalinan='"+tbUser.getValueAt(i,1037).toString()+"',"+
+                    "skp_kategori_penilaian='"+tbUser.getValueAt(i,1038).toString()+"',"+
+                    "skp_kriteria_penilaian='"+tbUser.getValueAt(i,1039).toString()+"',"+
+                    "skp_penilaian='"+tbUser.getValueAt(i,1040).toString()+"',"+
+                    "referensi_poli_mobilejknfktp='"+tbUser.getValueAt(i,1041).toString()+"',"+
+                    "referensi_dokter_mobilejknfktp='"+tbUser.getValueAt(i,1042).toString()+"',"+
+                    "skp_rekapitulasi_penilaian='"+tbUser.getValueAt(i,1043).toString()+"',"+
+                    "pembayaran_pihak_ke3_bankmandiri='"+tbUser.getValueAt(i,1044).toString()+"',"+
+                    "metode_pembayaran_bankmandiri='"+tbUser.getValueAt(i,1045).toString()+"',"+
+                    "bank_tujuan_transfer_bankmandiri='"+tbUser.getValueAt(i,1046).toString()+"'")==true){
                     emptTeks();
                 }
             }         
@@ -5661,35 +5975,43 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         "satu_sehat_kirim_medicationrequest='"+tbUser.getValueAt(barisdicopy,1007).toString()+"',"+
                                         "penatalaksanaan_terapi_okupasi='"+tbUser.getValueAt(barisdicopy,1008).toString()+"',"+
                                         "satu_sehat_kirim_medicationdispense='"+tbUser.getValueAt(barisdicopy,1009).toString()+"',"+
-                                        "edit_hapus_spo_medis='"+tbUser.getValueAt(barisdicopy,1010).toString()+"',"+
-                                        "edit_hapus_spo_nonmedis='"+tbUser.getValueAt(barisdicopy,1011).toString()+"',"+
-                                        "hasil_usg_neonatus='"+tbUser.getValueAt(barisdicopy,1012).toString()+"',"+
-                                        "hasil_endoskopi_faring_laring='"+tbUser.getValueAt(barisdicopy,1013).toString()+"',"+
-                                        "satu_sehat_mapping_radiologi='"+tbUser.getValueAt(barisdicopy,1014).toString()+"',"+
-                                        "satu_sehat_kirim_servicerequest_radiologi='"+tbUser.getValueAt(barisdicopy,1015).toString()+"',"+
-                                        "hasil_endoskopi_hidung='"+tbUser.getValueAt(barisdicopy,1016).toString()+"',"+
-                                        "satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(barisdicopy,1017).toString()+"',"+
-                                        "master_masalah_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1018).toString()+"',"+
-                                        "master_rencana_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1019).toString()+"',"+
-                                        "penilaian_awal_keperawatan_ranap_neonatus='"+tbUser.getValueAt(barisdicopy,1020).toString()+"',"+
-                                        "satu_sehat_kirim_observation_radiologi='"+tbUser.getValueAt(barisdicopy,1021).toString()+"',"+
-                                        "satu_sehat_kirim_diagnosticreport_radiologi='"+tbUser.getValueAt(barisdicopy,1022).toString()+"',"+
-                                        "hasil_endoskopi_telinga='"+tbUser.getValueAt(barisdicopy,1023).toString()+"',"+
-                                        "satu_sehat_mapping_lab='"+tbUser.getValueAt(barisdicopy,1024).toString()+"',"+
-                                        "satu_sehat_kirim_servicerequest_lab='"+tbUser.getValueAt(barisdicopy,1025).toString()+"',"+
-                                        "satu_sehat_kirim_servicerequest_labmb='"+tbUser.getValueAt(barisdicopy,1026).toString()+"',"+
-                                        "satu_sehat_kirim_specimen_lab='"+tbUser.getValueAt(barisdicopy,1027).toString()+"',"+
-                                        "satu_sehat_kirim_specimen_labmb='"+tbUser.getValueAt(barisdicopy,1028).toString()+"',"+
-                                        "satu_sehat_kirim_observation_lab='"+tbUser.getValueAt(barisdicopy,1029).toString()+"',"+
-                                        "satu_sehat_kirim_observation_labmb='"+tbUser.getValueAt(barisdicopy,1030).toString()+"',"+
-                                        "satu_sehat_kirim_diagnosticreport_lab='"+tbUser.getValueAt(barisdicopy,1031).toString()+"',"+
-                                        "satu_sehat_kirim_diagnosticreport_labmb='"+tbUser.getValueAt(barisdicopy,1032).toString()+"',"+
-                                        "kepatuhan_kelengkapan_keselamatan_bedah='"+tbUser.getValueAt(barisdicopy,1033).toString()+"',"+
-                                        "nilai_piutang_perjenis_bayar_per_bulan='"+tbUser.getValueAt(barisdicopy,1034).toString()+"',"+
-                                        "ringkasan_piutang_jenis_bayar='"+tbUser.getValueAt(barisdicopy,1035).toString()+"',"+
-                                        "penilaian_pasien_imunitas_rendah='"+tbUser.getValueAt(barisdicopy,1036).toString()+"',"+
-                                        "balance_cairan='"+tbUser.getValueAt(barisdicopy,1037).toString()+"',"+
-                                        "catatan_observasi_chbp='"+tbUser.getValueAt(barisdicopy,1038).toString()+"'");
+                                        "hasil_usg_neonatus='"+tbUser.getValueAt(barisdicopy,1010).toString()+"',"+
+                                        "hasil_endoskopi_faring_laring='"+tbUser.getValueAt(barisdicopy,1011).toString()+"',"+
+                                        "satu_sehat_mapping_radiologi='"+tbUser.getValueAt(barisdicopy,1012).toString()+"',"+
+                                        "satu_sehat_kirim_servicerequest_radiologi='"+tbUser.getValueAt(barisdicopy,1013).toString()+"',"+
+                                        "hasil_endoskopi_hidung='"+tbUser.getValueAt(barisdicopy,1014).toString()+"',"+
+                                        "satu_sehat_kirim_specimen_radiologi='"+tbUser.getValueAt(barisdicopy,1015).toString()+"',"+
+                                        "master_masalah_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1016).toString()+"',"+
+                                        "master_rencana_keperawatan_neonatus='"+tbUser.getValueAt(barisdicopy,1017).toString()+"',"+
+                                        "penilaian_awal_keperawatan_ranap_neonatus='"+tbUser.getValueAt(barisdicopy,1018).toString()+"',"+
+                                        "satu_sehat_kirim_observation_radiologi='"+tbUser.getValueAt(barisdicopy,1019).toString()+"',"+
+                                        "satu_sehat_kirim_diagnosticreport_radiologi='"+tbUser.getValueAt(barisdicopy,1020).toString()+"',"+
+                                        "hasil_endoskopi_telinga='"+tbUser.getValueAt(barisdicopy,1021).toString()+"',"+
+                                        "satu_sehat_mapping_lab='"+tbUser.getValueAt(barisdicopy,1022).toString()+"',"+
+                                        "satu_sehat_kirim_servicerequest_lab='"+tbUser.getValueAt(barisdicopy,1023).toString()+"',"+
+                                        "satu_sehat_kirim_servicerequest_labmb='"+tbUser.getValueAt(barisdicopy,1024).toString()+"',"+
+                                        "satu_sehat_kirim_specimen_lab='"+tbUser.getValueAt(barisdicopy,1025).toString()+"',"+
+                                        "satu_sehat_kirim_specimen_labmb='"+tbUser.getValueAt(barisdicopy,1026).toString()+"',"+
+                                        "satu_sehat_kirim_observation_lab='"+tbUser.getValueAt(barisdicopy,1027).toString()+"',"+
+                                        "satu_sehat_kirim_observation_labmb='"+tbUser.getValueAt(barisdicopy,1028).toString()+"',"+
+                                        "satu_sehat_kirim_diagnosticreport_lab='"+tbUser.getValueAt(barisdicopy,1029).toString()+"',"+
+                                        "satu_sehat_kirim_diagnosticreport_labmb='"+tbUser.getValueAt(barisdicopy,1030).toString()+"',"+
+                                        "kepatuhan_kelengkapan_keselamatan_bedah='"+tbUser.getValueAt(barisdicopy,1031).toString()+"',"+
+                                        "nilai_piutang_perjenis_bayar_per_bulan='"+tbUser.getValueAt(barisdicopy,1032).toString()+"',"+
+                                        "ringkasan_piutang_jenis_bayar='"+tbUser.getValueAt(barisdicopy,1033).toString()+"',"+
+                                        "penilaian_pasien_imunitas_rendah='"+tbUser.getValueAt(barisdicopy,1034).toString()+"',"+
+                                        "balance_cairan='"+tbUser.getValueAt(barisdicopy,1035).toString()+"',"+
+                                        "catatan_observasi_chbp='"+tbUser.getValueAt(barisdicopy,1036).toString()+"',"+
+                                        "catatan_observasi_induksi_persalinan='"+tbUser.getValueAt(barisdicopy,1037).toString()+"',"+
+                                        "skp_kategori_penilaian='"+tbUser.getValueAt(barisdicopy,1038).toString()+"',"+
+                                        "skp_kriteria_penilaian='"+tbUser.getValueAt(barisdicopy,1039).toString()+"',"+
+                                        "skp_penilaian='"+tbUser.getValueAt(barisdicopy,1040).toString()+"',"+
+                                        "referensi_poli_mobilejknfktp='"+tbUser.getValueAt(barisdicopy,1041).toString()+"',"+
+                                        "referensi_dokter_mobilejknfktp='"+tbUser.getValueAt(barisdicopy,1042).toString()+"',"+
+                                        "skp_rekapitulasi_penilaian='"+tbUser.getValueAt(barisdicopy,1043).toString()+"',"+
+                                        "pembayaran_pihak_ke3_bankmandiri='"+tbUser.getValueAt(barisdicopy,1044).toString()+"',"+
+                                        "metode_pembayaran_bankmandiri='"+tbUser.getValueAt(barisdicopy,1045).toString()+"',"+
+                                        "bank_tujuan_transfer_bankmandiri='"+tbUser.getValueAt(barisdicopy,1046).toString()+"'");
                                 }
                                 userdicopy="";
                                 copyhakakses="";
@@ -5980,14 +6302,16 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "user.bpjs_daftar_pelayanan_obat_apotek,user.penilaian_awal_medis_ralan_paru,user.catatan_keperawatan_ralan,user.catatan_persalinan,user.skor_aldrette_pasca_anestesi,"+
                 "user.skor_steward_pasca_anestesi,user.skor_bromage_pasca_anestesi,user.penilaian_pre_induksi,user.hasil_usg_urologi,user.hasil_usg_gynecologi,user.hasil_pemeriksaan_ekg,"+
                 "user.hapus_edit_sep_bpjs,user.satu_sehat_kirim_diet,user.satu_sehat_mapping_obat,user.dapur_ringkasan_pembelian,user.satu_sehat_kirim_medication,"+
-                "user.satu_sehat_kirim_medicationrequest,user.penatalaksanaan_terapi_okupasi,user.satu_sehat_kirim_medicationdispense,user.edit_hapus_spo_medis,user.edit_hapus_spo_nonmedis,user.hasil_usg_neonatus,"+
+                "user.satu_sehat_kirim_medicationrequest,user.penatalaksanaan_terapi_okupasi,user.satu_sehat_kirim_medicationdispense,user.hasil_usg_neonatus,"+
                 "user.hasil_endoskopi_faring_laring,user.satu_sehat_mapping_radiologi,user.satu_sehat_kirim_servicerequest_radiologi,user.hasil_endoskopi_hidung,"+
                 "user.satu_sehat_kirim_specimen_radiologi,user.master_masalah_keperawatan_neonatus,user.master_rencana_keperawatan_neonatus,user.penilaian_awal_keperawatan_ranap_neonatus,"+
                 "user.satu_sehat_kirim_observation_radiologi,user.satu_sehat_kirim_diagnosticreport_radiologi,user.hasil_endoskopi_telinga,user.satu_sehat_mapping_lab,"+
                 "user.satu_sehat_kirim_servicerequest_lab,user.satu_sehat_kirim_servicerequest_labmb,user.satu_sehat_kirim_specimen_lab,user.satu_sehat_kirim_specimen_labmb,"+
                 "user.satu_sehat_kirim_observation_lab,user.satu_sehat_kirim_observation_labmb,user.satu_sehat_kirim_diagnosticreport_lab,user.satu_sehat_kirim_diagnosticreport_labmb,"+
                 "user.kepatuhan_kelengkapan_keselamatan_bedah,user.nilai_piutang_perjenis_bayar_per_bulan,user.ringkasan_piutang_jenis_bayar,user.penilaian_pasien_imunitas_rendah,"+
-                "user.balance_cairan,user.catatan_observasi_chbp from user order by AES_DECRYPT(user.id_user,'nur')");
+                "user.balance_cairan,user.catatan_observasi_chbp,user.catatan_observasi_induksi_persalinan,user.skp_kategori_penilaian,user.skp_kriteria_penilaian,"+
+                "user.skp_penilaian,user.referensi_poli_mobilejknfktp,user.referensi_dokter_mobilejknfktp,user.skp_rekapitulasi_penilaian,user.pembayaran_pihak_ke3_bankmandiri,"+
+                "user.metode_pembayaran_bankmandiri,user.bank_tujuan_transfer_bankmandiri from user order by AES_DECRYPT(user.id_user,'nur')");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -7010,8 +7334,6 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("satu_sehat_kirim_medicationrequest"),
                                rs.getBoolean("penatalaksanaan_terapi_okupasi"),
                                rs.getBoolean("satu_sehat_kirim_medicationdispense"),
-                               rs.getBoolean("edit_hapus_spo_medis"),
-                               rs.getBoolean("edit_hapus_spo_nonmedis"),
                                rs.getBoolean("hasil_usg_neonatus"),
                                rs.getBoolean("hasil_endoskopi_faring_laring"),
                                rs.getBoolean("satu_sehat_mapping_radiologi"),
@@ -7038,7 +7360,17 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("ringkasan_piutang_jenis_bayar"),
                                rs.getBoolean("penilaian_pasien_imunitas_rendah"),
                                rs.getBoolean("balance_cairan"),
-                               rs.getBoolean("catatan_observasi_chbp")
+                               rs.getBoolean("catatan_observasi_chbp"),
+                               rs.getBoolean("catatan_observasi_induksi_persalinan"),
+                               rs.getBoolean("skp_kategori_penilaian"),
+                               rs.getBoolean("skp_kriteria_penilaian"),
+                               rs.getBoolean("skp_penilaian"),
+                               rs.getBoolean("referensi_poli_mobilejknfktp"),
+                               rs.getBoolean("referensi_dokter_mobilejknfktp"),
+                               rs.getBoolean("skp_rekapitulasi_penilaian"),
+                               rs.getBoolean("pembayaran_pihak_ke3_bankmandiri"),
+                               rs.getBoolean("metode_pembayaran_bankmandiri"),
+                               rs.getBoolean("bank_tujuan_transfer_bankmandiri")
                             });
                         }   
                     } catch (Exception e) {
@@ -8050,8 +8382,6 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                            rs.getBoolean("satu_sehat_kirim_medicationrequest"),
                            rs.getBoolean("penatalaksanaan_terapi_okupasi"),
                            rs.getBoolean("satu_sehat_kirim_medicationdispense"),
-                           rs.getBoolean("edit_hapus_spo_medis"),
-                           rs.getBoolean("edit_hapus_spo_nonmedis"),
                            rs.getBoolean("hasil_usg_neonatus"),
                            rs.getBoolean("hasil_endoskopi_faring_laring"),
                            rs.getBoolean("satu_sehat_mapping_radiologi"),
@@ -8078,7 +8408,17 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                            rs.getBoolean("ringkasan_piutang_jenis_bayar"),
                            rs.getBoolean("penilaian_pasien_imunitas_rendah"),
                            rs.getBoolean("balance_cairan"),
-                           rs.getBoolean("catatan_observasi_chbp")
+                           rs.getBoolean("catatan_observasi_chbp"),
+                           rs.getBoolean("catatan_observasi_induksi_persalinan"),
+                           rs.getBoolean("skp_kategori_penilaian"),
+                           rs.getBoolean("skp_kriteria_penilaian"),
+                           rs.getBoolean("skp_penilaian"),
+                           rs.getBoolean("referensi_poli_mobilejknfktp"),
+                           rs.getBoolean("referensi_dokter_mobilejknfktp"),
+                           rs.getBoolean("skp_rekapitulasi_penilaian"),
+                           rs.getBoolean("pembayaran_pihak_ke3_bankmandiri"),
+                           rs.getBoolean("metode_pembayaran_bankmandiri"),
+                           rs.getBoolean("bank_tujuan_transfer_bankmandiri")
                         });
                     }                                             
                  }
@@ -8114,5 +8454,4 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TPass.setText(tbUser.getValueAt(i,3).toString());            
         }
     }
-
 }

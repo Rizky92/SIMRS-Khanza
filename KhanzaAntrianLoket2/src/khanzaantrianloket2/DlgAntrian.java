@@ -35,7 +35,7 @@ public class DlgAntrian extends javax.swing.JDialog{
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
     private String antri="0",nol_detik,detik,saatini="";
-    private PreparedStatement pshapus,pssimpan,pscari;
+    private PreparedStatement pshapus,pssimpan,psupdate,pscari;
     private ResultSet rs;
     private BackgroundMusic music;
     private int nilai_detik,loket=1;
@@ -300,9 +300,21 @@ public class DlgAntrian extends javax.swing.JDialog{
                 if(pssimpan!=null){
                     pssimpan.close();
                 }
-            } 
+            }
+            
+            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
+            try {
+                psupdate.setInt(1, Integer.parseInt(Antrian.getText().trim()));
+                psupdate.executeUpdate();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (psupdate != null) {
+                    psupdate.close();
+                }
+            }
+            System.out.println("Loket : " + Loket.getText() + " Antrian : " + Antrian.getText());
             saatini=Antrian.getText();
-            System.out.println("Loket : "+Loket.getText()+" Antrian : "+Antrian.getText());
         } catch (Exception e) {
             System.out.println(e);
         }                          
@@ -381,7 +393,18 @@ public class DlgAntrian extends javax.swing.JDialog{
                     if(pssimpan!=null){
                         pssimpan.close();
                     }
-                } 
+                }
+                psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
+                try {
+                    psupdate.setInt(1, Integer.parseInt(Antrian.getText().trim()));
+                    psupdate.executeUpdate();
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                } finally {
+                    if (psupdate != null) {
+                        psupdate.close();
+                    }
+                }
                 System.out.println("Loket : "+Loket.getText()+" Antrian : "+saatini);
             }
                     

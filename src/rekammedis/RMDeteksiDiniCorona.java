@@ -1959,5 +1959,4 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Kesimpulan.setSelectedItem("Bukan ketiganya");
         }
     }
-
 }

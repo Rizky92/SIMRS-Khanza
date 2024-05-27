@@ -1475,10 +1475,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_tbObatResepRacikanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),5).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),6).equals("")){
-            tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
-        }else{
-            JOptionPane.showMessageDialog(null,"Maaf sudah terisi, gak boleh dihapus..!!");
+        if (tbObatResepRacikan.getSelectedRow() != -1) {
+            if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menghapus resep racikan ini?", "Hapus Racikan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                for (int i = tbDetailResepObatRacikan.getRowCount() - 1; i >= 0; i--) {
+                    if (tbDetailResepObatRacikan.getValueAt(i, 0).toString().equals(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(), 0).toString())) {
+                        tabModeDetailResepRacikan.removeRow(i);
+                    }
+                }
+                tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
+            }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 

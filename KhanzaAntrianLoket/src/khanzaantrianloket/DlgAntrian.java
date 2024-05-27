@@ -332,7 +332,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
             psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
             try {
-                psupdate.setString(1, Antrian.getText().trim());
+                psupdate.setInt(1, Integer.parseInt(Antrian.getText().trim()));
                 psupdate.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);

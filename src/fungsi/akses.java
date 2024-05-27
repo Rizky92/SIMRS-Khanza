@@ -227,7 +227,9 @@ public final class akses {
             satu_sehat_kirim_servicerequest_lab=false,satu_sehat_kirim_servicerequest_labmb=false,satu_sehat_kirim_specimen_lab=false,satu_sehat_kirim_specimen_labmb=false,
             satu_sehat_kirim_observation_lab=false,satu_sehat_kirim_observation_labmb=false,satu_sehat_kirim_diagnosticreport_lab=false,satu_sehat_kirim_diagnosticreport_labmb=false,
             kepatuhan_kelengkapan_keselamatan_bedah=false,nilai_piutang_perjenis_bayar_per_bulan=false,ringkasan_piutang_jenis_bayar=false,penilaian_pasien_imunitas_rendah=false,
-            balance_cairan=false,catatan_observasi_chbp=false;
+            balance_cairan=false,catatan_observasi_chbp=false,catatan_observasi_induksi_persalinan=false,skp_kategori_penilaian=false,skp_kriteria_penilaian=false,
+            skp_penilaian=false,referensi_poli_mobilejknfktp=false,referensi_dokter_mobilejknfktp=false,skp_rekapitulasi_penilaian=false,pembayaran_pihak_ke3_bankmandiri=false,
+            metode_pembayaran_bankmandiri=false,bank_tujuan_transfer_bankmandiri=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -1286,6 +1288,16 @@ public final class akses {
                         akses.penilaian_pasien_imunitas_rendah=true;
                         akses.balance_cairan=true;
                         akses.catatan_observasi_chbp=true;
+                        akses.catatan_observasi_induksi_persalinan=true;
+                        akses.skp_kategori_penilaian=true;
+                        akses.skp_kriteria_penilaian=true;
+                        akses.skp_penilaian=true;
+                        akses.referensi_poli_mobilejknfktp=true;
+                        akses.referensi_dokter_mobilejknfktp=true;
+                        akses.skp_rekapitulasi_penilaian=true;
+                        akses.pembayaran_pihak_ke3_bankmandiri=true;
+                        akses.metode_pembayaran_bankmandiri=true;
+                        akses.bank_tujuan_transfer_bankmandiri=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2328,6 +2340,16 @@ public final class akses {
                         akses.penilaian_pasien_imunitas_rendah=rs2.getBoolean("penilaian_pasien_imunitas_rendah");
                         akses.balance_cairan=rs2.getBoolean("balance_cairan");
                         akses.catatan_observasi_chbp=rs2.getBoolean("catatan_observasi_chbp");
+                        akses.catatan_observasi_induksi_persalinan=rs2.getBoolean("catatan_observasi_induksi_persalinan");
+                        akses.skp_kategori_penilaian=rs2.getBoolean("skp_kategori_penilaian");
+                        akses.skp_kriteria_penilaian=rs2.getBoolean("skp_kriteria_penilaian");
+                        akses.skp_penilaian=rs2.getBoolean("skp_penilaian");
+                        akses.referensi_poli_mobilejknfktp=rs2.getBoolean("referensi_poli_mobilejknfktp");
+                        akses.referensi_dokter_mobilejknfktp=rs2.getBoolean("referensi_dokter_mobilejknfktp");
+                        akses.skp_rekapitulasi_penilaian=rs2.getBoolean("skp_rekapitulasi_penilaian");
+                        akses.pembayaran_pihak_ke3_bankmandiri=rs2.getBoolean("pembayaran_pihak_ke3_bankmandiri");
+                        akses.metode_pembayaran_bankmandiri=rs2.getBoolean("metode_pembayaran_bankmandiri");
+                        akses.bank_tujuan_transfer_bankmandiri=rs2.getBoolean("bank_tujuan_transfer_bankmandiri");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3368,6 +3390,16 @@ public final class akses {
                         akses.penilaian_pasien_imunitas_rendah=false;
                         akses.balance_cairan=false;
                         akses.catatan_observasi_chbp=false;
+                        akses.catatan_observasi_induksi_persalinan=false;
+                        akses.skp_kategori_penilaian=false;
+                        akses.skp_kriteria_penilaian=false;
+                        akses.skp_penilaian=false;
+                        akses.referensi_poli_mobilejknfktp=false;
+                        akses.referensi_dokter_mobilejknfktp=false;
+                        akses.skp_rekapitulasi_penilaian=false;
+                        akses.pembayaran_pihak_ke3_bankmandiri=false;
+                        akses.metode_pembayaran_bankmandiri=false;
+                        akses.bank_tujuan_transfer_bankmandiri=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4431,6 +4463,16 @@ public final class akses {
         akses.penilaian_pasien_imunitas_rendah=false;
         akses.balance_cairan=false;
         akses.catatan_observasi_chbp=false;
+        akses.catatan_observasi_induksi_persalinan=false;
+        akses.skp_kategori_penilaian=false;
+        akses.skp_kriteria_penilaian=false;
+        akses.skp_penilaian=false;
+        akses.referensi_poli_mobilejknfktp=false;
+        akses.referensi_dokter_mobilejknfktp=false;
+        akses.skp_rekapitulasi_penilaian=false;
+        akses.pembayaran_pihak_ke3_bankmandiri=false;
+        akses.metode_pembayaran_bankmandiri=false;
+        akses.bank_tujuan_transfer_bankmandiri=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -5510,4 +5552,14 @@ public final class akses {
     public static boolean getpenilaian_pasien_imunitas_rendah(){return akses.penilaian_pasien_imunitas_rendah;}
     public static boolean getbalance_cairan(){return akses.balance_cairan;}
     public static boolean getcatatan_observasi_chbp(){return akses.catatan_observasi_chbp;}
+    public static boolean getcatatan_observasi_induksi_persalinan(){return akses.catatan_observasi_induksi_persalinan;}
+    public static boolean getskp_kategori_penilaian(){return akses.skp_kategori_penilaian;}
+    public static boolean getskp_kriteria_penilaian(){return akses.skp_kriteria_penilaian;}
+    public static boolean getskp_penilaian(){return akses.skp_penilaian;}
+    public static boolean getreferensi_poli_mobilejknfktp(){return akses.referensi_poli_mobilejknfktp;}
+    public static boolean getreferensi_dokter_mobilejknfktp(){return akses.referensi_dokter_mobilejknfktp;}
+    public static boolean getskp_rekapitulasi_penilaian(){return akses.skp_rekapitulasi_penilaian;}
+    public static boolean getpembayaran_pihak_ke3_bankmandiri(){return akses.pembayaran_pihak_ke3_bankmandiri;}
+    public static boolean getmetode_pembayaran_bankmandiri(){return akses.metode_pembayaran_bankmandiri;}
+    public static boolean getbank_tujuan_transfer_bankmandiri(){return akses.bank_tujuan_transfer_bankmandiri;}
 }   
