@@ -98,6 +98,8 @@ import bridging.InhealthTindakanOperasi;
 import bridging.InhealthTindakanRadiologi;
 import bridging.InhealthTindakanRalan;
 import bridging.InhealthTindakanRanap;
+import bridging.MandiriBankTujuanTransfer;
+import bridging.MandiriMetodePembayaran;
 import bridging.MobileJKNFKTPReferensiDokter;
 import bridging.MobileJKNFKTPReferensiPoli;
 import bridging.MobileJKNPembatalanPendaftaran;
