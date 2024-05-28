@@ -2570,7 +2570,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
     
-    private void exportTriase(String urutan) {
+    private void exportTriaseIGD(String urutan) {
         if (! btnTriaseIGD.isEnabled()) {
             return;
         }
