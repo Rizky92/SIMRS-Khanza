@@ -101,6 +101,10 @@ public final class validasi {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
+    public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
+        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
+    }
+    
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
