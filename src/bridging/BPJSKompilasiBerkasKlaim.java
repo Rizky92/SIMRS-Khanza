@@ -3393,13 +3393,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         exportKlaimINACBG("001");
         exportSEP("002");
-        exportAwalMedisIGD("003");
-        exportSOAP("004");
-        exportResumeRanap("005");
-        exportBilling("006");
-        exportHasilLab("007");
-        exportHasilRadiologi("008");
-        exportBerkasDigitalPerawatan("009");
+        exportTriaseIGD("003");
+        exportAwalMedisIGD("004");
+        exportSOAP("005");
+        exportResumeRanap("006");
+        exportBilling("007");
+        exportHasilLab("008");
+        exportHasilRadiologi("009");
+        exportBerkasDigitalPerawatan("010");
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {
