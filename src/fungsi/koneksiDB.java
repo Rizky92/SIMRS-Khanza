@@ -77,6 +77,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean VALIDASIULANGPINDAHKAMAR() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("VALIDASIULANGPINDAHKAMAR").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
