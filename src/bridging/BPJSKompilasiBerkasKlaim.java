@@ -123,7 +123,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     component.setBackground(new Color(255, 255, 255));
                     component.setForeground(new Color(50, 50, 50));
                 }
-                if (table.getValueAt(row, 9).toString().equals("1")) {
+                if (table.getValueAt(row, 11).toString().equals("1")) {
                     component.setBackground(new Color(50, 50, 50));
                     component.setForeground(new Color(255, 255, 255));
                 }
@@ -1501,9 +1501,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
-        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getHeight());
-        panelDiagnosaSmc.setPreferredSize(new Dimension(jPanel2.getWidth() - 32, panelDiagnosaSmc.getHeight()));
-        panelDiagnosaSmc.setSize(new Dimension(jPanel2.getWidth() - 32, panelDiagnosaSmc.getHeight()));
+        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
+        panelDiagnosaSmc.setPreferredSize(new Dimension(jPanel2.getWidth() - 32, panelDiagnosaSmc.getPreferredSize().height));
+        panelDiagnosaSmc.setSize(new Dimension(jPanel2.getWidth() - 32, panelDiagnosaSmc.getPreferredSize().height));
         panelBiasa1.setPreferredSize(newD);
         panelBiasa1.setSize(newD);
         scrollPane1.setPreferredSize(newD);
@@ -1824,9 +1824,18 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
-                        rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("reg_periksa.status_lanjut"),
-                        rs.getString("tgl_registrasi"), rs.getString("tglpulang"), rs.getString("stts_pulang"), rs.getString("ruangan"), rs.getString("kd_penyakit"),
-                        (rs.getBoolean("inacbg_terkirim") ? "Terkirim" : "Belum Terkirim"), rs.getString("inacbg_terkirim")
+                        rs.getString("no_rawat"),
+                        rs.getString("no_sep"),
+                        rs.getString("no_rkm_medis"),
+                        rs.getString("nm_pasien"),
+                        rs.getString("reg_periksa.status_lanjut"),
+                        rs.getString("tgl_registrasi"),
+                        rs.getString("tglpulang"),
+                        rs.getString("stts_pulang"),
+                        rs.getString("ruangan"),
+                        rs.getString("kd_penyakit"),
+                        (rs.getBoolean("inacbg_terkirim") ? "Terkirim" : "Belum Terkirim"),
+                        rs.getString("inacbg_terkirim")
                     });
                 }
             }
@@ -2179,6 +2188,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             exportSukses = false;
             System.out.println("Notif : " + e);
         }
+    }
+    
+    private void exportTriase(String urutan) {
+        if (! Sequel.cariBooleanSmc("select * from data_triase_igd where no_rawat = ?", lblNoRawat.getText())) {
+            return;
+        }
+        
+//        rptLembarTriaseSkala3.jasper
+            
+        
     }
     
     private void exportSOAP(String urutan) {
