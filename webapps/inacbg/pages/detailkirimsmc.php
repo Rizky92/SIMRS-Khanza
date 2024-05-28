@@ -19,7 +19,7 @@
                 $baris          = mysqli_fetch_array($hasil);
                 $norawat        = $baris['no_rawat'];
                 $no_rkm_medis   = $baris['no_rkm_medis'];
-                $no_kartu       = $baris['no_kartu'];
+                $nokartu        = $baris['no_kartu'];
                 $nm_pasien      = $baris['nm_pasien'];
                 $umurdaftar     = $baris['umurdaftar'];
                 $sttsumur       = $baris['sttsumur'];
@@ -137,7 +137,7 @@
                     <tr class="head">
                         <td width="25%">No. Kartu Peserta</td>
                         <td>:</td>
-                        <td width="75%"><?= $no_kartu ?></td>
+                        <td width="75%"><?= $nokartu ?></td>
                     </tr>
                     <tr class="head">
                         <td width="25%">Nama Pasien</td>
@@ -205,54 +205,62 @@
                             </select> 
                         </td>
                     </tr>
-                    <tr class="head">
-                        <td width="41%">ADL Sub Acute</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="adl_sub_acute" class="text3" style="font-family: Tahoma">
-                                <option value=""></option>
-                                <?php for ($i = 12; $i <= 60; $i++): ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
-                                <?php endfor; ?>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">ADL Chronic</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="adl_chronic" class="text3" style="font-family: Tahoma">
-                                <option value=""></option>
-                                <?php for ($i = 12; $i <= 60; $i++): ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
-                                <?php endfor; ?>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">ICU Indikator</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="icu_indikator" class="text3" style="font-family: Tahoma">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">ICU Los</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
+                    <?php if ($status_lanjut == 'Ranap'): ?>
+                        <tr class="head">
+                            <td width="41%">ADL Sub Acute</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="adl_sub_acute" class="text3" style="font-family: Tahoma">
+                                    <option value=""></option>
+                                    <?php for ($i = 12; $i <= 60; $i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endfor; ?>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">ADL Chronic</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="adl_chronic" class="text3" style="font-family: Tahoma">
+                                    <option value=""></option>
+                                    <?php for ($i = 12; $i <= 60; $i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endfor; ?>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">ICU Indikator</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="icu_indikator" class="text3" style="font-family: Tahoma">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">ICU Los</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                    <?php else: ?>
+                        <input type="hidden" name="adl_sub_acute" value="">
+                        <input type="hidden" name="adl_chronic" value="">
+                        <input type="hidden" name="icu_indikator" value="">
+                        <input type="hidden" name="icu_los" value="0">
+                        <input type="hidden" name="ventilator_hour" value="0">
+                    <?php endif; ?>
                     <tr class="head">
                         <td width="41%">Indikator Upgrade Kelas</td>
                         <td>:</td>
@@ -269,7 +277,7 @@
                         <td>:</td>
                         <td width="57%">
                             <select name="upgrade_class_class" class="text2" style="font-family: Tahoma">
-                            <option value="<?= $naikkelas ?>">Kelas <?= $naikkelas ?></option>
+                            <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
                             <option value="kelas_1">Kelas 1</option>
                             <option value="kelas_2">Kelas 2</option>
                             <option value="vip">Kelas VIP</option>
