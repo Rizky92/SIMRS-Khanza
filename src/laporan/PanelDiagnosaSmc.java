@@ -493,23 +493,21 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 + "from diagnosa_pasien inner join reg_periksa on diagnosa_pasien.no_rawat=reg_periksa.no_rawat "
                 + "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "
                 + "inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "
-                + "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis like ? "
+                + "where reg_periksa.no_rawat = ? "
                 + (keyword.trim().equals("") ? "" : "and (diagnosa_pasien.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
                 + "pasien.nm_pasien like ? or diagnosa_pasien.kd_penyakit like ? or penyakit.nm_penyakit like ? or "
                 + "diagnosa_pasien.status_penyakit like ? or diagnosa_pasien.status like ?)")
                 + "order by reg_periksa.tgl_registrasi,diagnosa_pasien.prioritas ");
             try {
-                psdiagnosapasien.setString(1, tanggal1);
-                psdiagnosapasien.setString(2, tanggal2);
-                psdiagnosapasien.setString(3, "%" + norm + "%");
+                psdiagnosapasien.setString(1, norawat);
                 if (!keyword.trim().equals("")) {
+                    psdiagnosapasien.setString(2, "%" + keyword + "%");
+                    psdiagnosapasien.setString(3, "%" + keyword + "%");
                     psdiagnosapasien.setString(4, "%" + keyword + "%");
                     psdiagnosapasien.setString(5, "%" + keyword + "%");
                     psdiagnosapasien.setString(6, "%" + keyword + "%");
                     psdiagnosapasien.setString(7, "%" + keyword + "%");
                     psdiagnosapasien.setString(8, "%" + keyword + "%");
-                    psdiagnosapasien.setString(9, "%" + keyword + "%");
-                    psdiagnosapasien.setString(10, "%" + keyword + "%");
                 }
 
                 rs = psdiagnosapasien.executeQuery();
@@ -708,21 +706,19 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 + "from prosedur_pasien inner join reg_periksa on prosedur_pasien.no_rawat=reg_periksa.no_rawat "
                 + "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "
                 + "inner join icd9 on prosedur_pasien.kode=icd9.kode "
-                + "where reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis like ? "
+                + "where reg_periksa.no_rawat = ? "
                 + (keyword.trim().equals("") ? "" : "and (prosedur_pasien.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
                 + "pasien.nm_pasien like ? or prosedur_pasien.kode like ? or icd9.deskripsi_panjang like ? or "
-                + "prosedur_pasien.status like ?) ") + "order by reg_periksa.tgl_registrasi,prosedur_pasien.prioritas ");
+                + "prosedur_pasien.status like ?) ") + "order by prosedur_pasien.prioritas ");
             try {
-                pstindakanpasien.setString(1, tanggal1);
-                pstindakanpasien.setString(2, tanggal2);
-                pstindakanpasien.setString(3, "%" + norm + "%");
+                pstindakanpasien.setString(1, norawat);
                 if (!keyword.trim().equals("")) {
+                    pstindakanpasien.setString(2, "%" + keyword + "%");
+                    pstindakanpasien.setString(3, "%" + keyword + "%");
                     pstindakanpasien.setString(4, "%" + keyword + "%");
                     pstindakanpasien.setString(5, "%" + keyword + "%");
                     pstindakanpasien.setString(6, "%" + keyword + "%");
                     pstindakanpasien.setString(7, "%" + keyword + "%");
-                    pstindakanpasien.setString(8, "%" + keyword + "%");
-                    pstindakanpasien.setString(9, "%" + keyword + "%");
                 }
 
                 rs = pstindakanpasien.executeQuery();
