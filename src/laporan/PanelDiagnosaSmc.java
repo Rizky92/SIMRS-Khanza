@@ -333,7 +333,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         Scroll1.setViewportView(tbDiagnosa);
 
         FormData.add(Scroll1);
-        Scroll1.setBounds(11, 36, 778, 165);
+        Scroll1.setBounds(0, 36, 790, 165);
 
         jLabel15.setText("Prosedur :");
         FormData.add(jLabel15);
@@ -367,7 +367,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         Scroll2.setViewportView(tbProsedur);
 
         FormData.add(Scroll2);
-        Scroll2.setBounds(11, 237, 778, 165);
+        Scroll2.setBounds(0, 237, 790, 165);
 
         ScrollInput.setViewportView(FormData);
 
@@ -746,13 +746,12 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
     }
 
-    public void setRM(String norawat, String norm, String tanggal1, String tanggal2, String status, String keyword) {
+    public void setRM(String norawat, String norm, String tanggal1, String tanggal2, String status) {
         this.norawat = norawat;
         this.norm = norm;
         this.tanggal1 = tanggal1;
         this.tanggal2 = tanggal2;
         this.status = status;
-        this.keyword = keyword;
     }
 
     public void simpan() {
@@ -1019,5 +1018,23 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    public void revalidate(int width) {
+        tbDiagnosa.setSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
+        tbDiagnosa.setPreferredSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
+        Diagnosa.setSize(new Dimension(width - 42, Diagnosa.getSize().height));
+        Diagnosa.setPreferredSize(new Dimension(width - 42, Diagnosa.getSize().height));
+        BtnCariPenyakit.setLocation(Diagnosa.getSize().width + Diagnosa.getX() + 3, BtnCariPenyakit.getY());
+        Scroll1.setSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
+        Scroll1.setPreferredSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
+        
+        tbProsedur.setSize(new Dimension(width - 10, tbProsedur.getSize().height));
+        tbProsedur.setPreferredSize(new Dimension(width - 10, tbProsedur.getSize().height));
+        Prosedur.setSize(new Dimension(width - 42, Prosedur.getSize().height));
+        Prosedur.setPreferredSize(new Dimension(width - 42, Prosedur.getSize().height));
+        BtnCariProsedur.setLocation(Prosedur.getPreferredSize().width + Prosedur.getX() + 3, BtnCariProsedur.getY());
+        Scroll2.setSize(new Dimension(width - 10, tbProsedur.getSize().height));
+        Scroll2.setPreferredSize(new Dimension(width - 10, tbProsedur.getSize().height));
     }
 }

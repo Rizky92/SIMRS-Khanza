@@ -349,7 +349,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024 11:11:17" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-05-2024 00:58:43" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -390,7 +390,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-05-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -562,7 +562,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-05-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -576,7 +576,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-05-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1533,6 +1533,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         scrollPane1.setPreferredSize(newD);
         scrollPane1.setSize(newD);
         BtnHapusDiagnosa.setLocation(panelBiasa1.getWidth() - BtnHapusDiagnosa.getWidth() - 4, BtnHapusDiagnosa.getY());
+        panelDiagnosaSmc.revalidate(panelBiasa1.getWidth());
         revalidate();
     }//GEN-LAST:event_formWindowOpened
 
@@ -1716,6 +1717,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu!");
             return;
         }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String detailTriase = "";
         int i = 0;
         Map<String, Object> param = new HashMap<>();
@@ -1779,6 +1781,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala1.pengkajian_skala1 from master_triase_skala1 " +
                                                     "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
@@ -1794,7 +1797,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -1842,6 +1845,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala2.pengkajian_skala2 from master_triase_skala2 " +
                                                     "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
@@ -1857,7 +1861,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -1871,7 +1875,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
                             "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
                             "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igdsekunder.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
+                            "join reg_periksa on data_triase_igd.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igdsekunder.no_rawat = ?"
                         )) {
                             ps1.setString(1, lblNoRawat.getText());
                             try (ResultSet rs1 = ps1.executeQuery()) {
@@ -1904,6 +1908,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala3.pengkajian_skala3 from master_triase_skala3 join data_triase_igddetail_skala3 " +
                                                     "on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 where master_triase_skala3.kode_pemeriksaan = ? " +
@@ -1918,7 +1923,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -1965,6 +1970,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala4.pengkajian_skala4 from master_triase_skala4 join data_triase_igddetail_skala4 " +
                                                     "on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 where master_triase_skala4.kode_pemeriksaan = ? " +
@@ -1979,7 +1985,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2026,6 +2032,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala5.pengkajian_skala5 from master_triase_skala5 join data_triase_igddetail_skala5 " +
                                                     "on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 where master_triase_skala5.kode_pemeriksaan = ? " +
@@ -2040,7 +2047,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2056,6 +2063,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnTriaseIGDActionPerformed
 
     /**
@@ -2318,7 +2326,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 btnPDFKlaimINACBG.setText("Tidak Ada");
                 btnPDFKlaimINACBG.setEnabled(false);
             }
-            panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText(), TCari.getText().trim());
+            panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText());
             panelDiagnosaSmc.batal();
             panelDiagnosaSmc.pilihTab(0);
             tabPane1.setSelectedIndex(0);
@@ -2638,6 +2646,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala1.pengkajian_skala1 from master_triase_skala1 " +
                                                     "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
@@ -2653,7 +2662,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2701,6 +2710,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala2.pengkajian_skala2 from master_triase_skala2 " +
                                                     "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
@@ -2716,7 +2726,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2763,12 +2773,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala3.pengkajian_skala3 from master_triase_skala3 join data_triase_igddetail_skala3 " +
                                                     "on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 where master_triase_skala3.kode_pemeriksaan = ? " +
                                                     "and data_triase_igddetail_skala3.no_rawat = ? order by data_triase_igddetail_skala3.kode_skala3"
                                                 )) {
-                                                    ps3.setString(1, rs2.getString(1));
+                                                    ps3.setString(1, rs2.getString("kode_pemeriksaan"));
                                                     ps3.setString(2, lblNoRawat.getText());
                                                     try (ResultSet rs3 = ps3.executeQuery()) {
                                                         while (rs3.next()) {
@@ -2777,7 +2788,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2824,6 +2835,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala4.pengkajian_skala4 from master_triase_skala4 join data_triase_igddetail_skala4 " +
                                                     "on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 where master_triase_skala4.kode_pemeriksaan = ? " +
@@ -2838,7 +2850,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
@@ -2885,6 +2897,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         ps2.setString(1, lblNoRawat.getText());
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
+                                                detailTriase = "";
                                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                                     "select master_triase_skala5.pengkajian_skala5 from master_triase_skala5 join data_triase_igddetail_skala5 " +
                                                     "on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 where master_triase_skala5.kode_pemeriksaan = ? " +
@@ -2899,7 +2912,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                                     }
                                                 }
                                                 detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), detailTriase);
+                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
                                     }
