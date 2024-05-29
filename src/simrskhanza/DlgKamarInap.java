@@ -7607,22 +7607,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
             Valid.textKosong(norawatpindah,"pasien");
         }else if(TKdBngsalpindah.getText().trim().equals("")){
             Valid.textKosong(kdkamarpindah,"kamar");
-        } else if (koneksiDB.VALIDASIULANGPINDAHKAMAR() && Sequel.cariBooleanSmc(
-                "select * from kamar_inap where no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ? and stts_pulang = 'Pindah Kamar'",
-                norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
-            )) {
-            String tglpindah = Sequel.cariIsiSmc(
-                    "select tgl_keluar from kamar_inap where no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ? and stts_pulang = 'Pindah Kamar'",
-                    norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
-                ),
-                jampindah = Sequel.cariIsiSmc(
-                    "select jam_keluar from kamar_inap where no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ? and stts_pulang = 'Pindah Kamar'",
-                    norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
-                );
+        } else if (! bisaPindahKamar()) {
             String kamarTujuan = Sequel.cariIsiSmc(
-                "select concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
-                "where kamar_inap.no_rawat = ? and kamar_inap.tgl_masuk = ? and kamar_inap.jam_masuk = ?", norawatpindah.getText(), tglpindah, jampindah
+                "select concat(k2.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap k1 join kamar_inap k2 " +
+                "on k1.no_rawat = k2.no_rawat and k1.tgl_keluar = k2.tgl_masuk and k1.jam_keluar = k2.jam_masuk " +
+                "and k1.stts_pulang = 'Pindah Kamar' join kamar on k2.kd_kamar = kamar.kd_kamar " +
+                "join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where k1.no_rawat = ? " +
+                "and k1.kd_kamar = ? and k1.tgl_masuk = ? and k1.jam_masuk = ?",
+                norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
             );
+            
             JOptionPane.showMessageDialog(null, "Maaf, pasien ini sudah dipindah ke kamar " + kamarTujuan + "!");
         }else{
             switch (TSttsKamarpindah.getText().trim()) {
@@ -18500,5 +18494,14 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
             return component;
         }
+    }
+    
+    private boolean bisaPindahKamar() {
+        if (! koneksiDB.VALIDASIULANGPINDAHKAMAR()) return true;
+        
+        return Sequel.cariBooleanSmc(
+            "select * from kamar_inap where no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ? and stts_pulang != 'Pindah Kamar'",
+            norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
+        );
     }
 }
