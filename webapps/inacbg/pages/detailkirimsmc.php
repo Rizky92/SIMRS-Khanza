@@ -261,6 +261,9 @@
                         <input type="hidden" name="icu_los" value="0">
                         <input type="hidden" name="ventilator_hour" value="0">
                     <?php endif; ?>
+                    <?php if (mysqli_fetch_assoc(bukaquery2("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%') as data_exists"))['data_exists']): ?>
+                        <input type="hidden" name="dializer_single_use" value="1">
+                    <?php endif; ?>
                     <tr class="head">
                         <td width="41%">Indikator Upgrade Kelas</td>
                         <td>:</td>
@@ -801,6 +804,7 @@
                     $bmhp                = validTeks(trim($_POST['bmhp']));
                     $sewa_alat           = validTeks(trim($_POST['sewa_alat']));
                     $tarif_poli_eks      = validTeks(trim($_POST['tarif_poli_eks']));
+                    $dializer_single_use = validTeks(trim($_POST['dializer_single_use']));
 
                     $validasi = $totalbilling - ($prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli + $keperawatan + $penunjang + $radiologi + $laboratorium + $pelayanan_darah + $rehabilitasi + $kamar + $rawat_intensif + $obat + $obat_kronis + $obat_kemoterapi + $alkes + $bmhp + $sewa_alat + $tarif_poli_eks);
 
@@ -854,7 +858,7 @@
                                     $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
                                     $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                     $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                    $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole);
+                                    $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
                                 CetakKlaim($nosep);
                                 echo <<<HTML
                                     <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">

@@ -643,7 +643,7 @@
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
-                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole){	
+                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole,$dializer_single_use = "0"){	
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -673,6 +673,7 @@
                             "procedure": "'.$procedure.'",
                             "diagnosa_inagrouper": "'.$diagnosa.'",
                             "procedure_inagrouper": "'.$procedure.'",
+                            "dializer_single_use": "'.$dializer_single_use.'",
                             "tarif_rs": {
                                 "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                 "prosedur_bedah": "'.$prosedur_bedah.'",
