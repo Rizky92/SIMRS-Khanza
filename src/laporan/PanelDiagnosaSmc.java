@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -282,13 +283,13 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         });
         jPopupMenu1.add(MnStatusLama);
 
-        setPreferredSize(new java.awt.Dimension(800, 470));
+        setPreferredSize(new java.awt.Dimension(800, 410));
         setLayout(new java.awt.BorderLayout(1, 1));
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        TabRawat.setPreferredSize(new java.awt.Dimension(790, 410));
+        TabRawat.setPreferredSize(new java.awt.Dimension(800, 410));
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
@@ -297,7 +298,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
 
         ScrollInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         ScrollInput.setOpaque(true);
-        ScrollInput.setPreferredSize(new java.awt.Dimension(790, 410));
+        ScrollInput.setPreferredSize(new java.awt.Dimension(800, 410));
 
         FormData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         FormData.setPreferredSize(new java.awt.Dimension(790, 410));
@@ -374,12 +375,12 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         TabRawat.addTab("Input Data", ScrollInput);
 
         internalFrame2.setBorder(null);
-        internalFrame2.setPreferredSize(new java.awt.Dimension(790, 410));
+        internalFrame2.setPreferredSize(new java.awt.Dimension(800, 410));
         internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll.setOpaque(true);
-        Scroll.setPreferredSize(new java.awt.Dimension(800, 455));
+        Scroll.setPreferredSize(new java.awt.Dimension(800, 410));
 
         tbDiagnosaPasien.setAutoCreateRowSorter(true);
         tbDiagnosaPasien.setComponentPopupMenu(jPopupMenu1);
@@ -391,7 +392,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         TabRawat.addTab("Data Diagnosa", internalFrame2);
 
         internalFrame3.setBorder(null);
-        internalFrame3.setPreferredSize(new java.awt.Dimension(790, 410));
+        internalFrame3.setPreferredSize(new java.awt.Dimension(800, 410));
         internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -755,6 +756,10 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     }
 
     public void simpan() {
+        if (TabRawat.getSelectedIndex() > 0) {
+            return;
+        }
+        
         try {
             koneksi.setAutoCommit(false);
             index = 1;
@@ -907,6 +912,10 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         TabRawat.setSelectedIndex(tab);
         pilihTab();
     }
+    
+    public int tabSekarang() {
+        return TabRawat.getSelectedIndex();
+    }
 
     public void pilihTab() {
         if (TabRawat.getSelectedIndex() == 0) {
@@ -931,30 +940,34 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     }
 
     public void hapus() {
-        if (TabRawat.getSelectedIndex() == 1) {
-            if (TabModeDiagnosaPasien.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
-            } else {
-                for (i = 0; i < tbDiagnosaPasien.getRowCount(); i++) {
-                    if (tbDiagnosaPasien.getValueAt(i, 0).toString().equals("true")) {
-                        Sequel.queryu2("delete from diagnosa_pasien where no_rawat=? and kd_penyakit=?", 2, new String[] {
-                            tbDiagnosaPasien.getValueAt(i, 2).toString(), tbDiagnosaPasien.getValueAt(i, 5).toString()
-                        });
+        switch (TabRawat.getSelectedIndex()) {
+            case 0: return;
+            case 1:
+                if (TabModeDiagnosaPasien.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                } else {
+                    for (i = 0; i < tbDiagnosaPasien.getRowCount(); i++) {
+                        if (tbDiagnosaPasien.getValueAt(i, 0).toString().equals("true")) {
+                            Sequel.queryu2("delete from diagnosa_pasien where no_rawat=? and kd_penyakit=?", 2, new String[] {
+                                tbDiagnosaPasien.getValueAt(i, 2).toString(), tbDiagnosaPasien.getValueAt(i, 5).toString()
+                            });
+                        }
                     }
-                }
-            }
-        } else if (TabRawat.getSelectedIndex() == 2) {
-            if (TabModeTindakanPasien.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
-            } else {
-                for (i = 0; i < tbTindakanPasien.getRowCount(); i++) {
-                    if (tbTindakanPasien.getValueAt(i, 0).toString().equals("true")) {
-                        Sequel.queryu2("delete from prosedur_pasien where no_rawat=? and kode=?", 2, new String[] {
-                            tbTindakanPasien.getValueAt(i, 2).toString(), tbTindakanPasien.getValueAt(i, 5).toString()
-                        });
+                }   break;
+            case 2:
+                if (TabModeTindakanPasien.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                } else {
+                    for (i = 0; i < tbTindakanPasien.getRowCount(); i++) {
+                        if (tbTindakanPasien.getValueAt(i, 0).toString().equals("true")) {
+                            Sequel.queryu2("delete from prosedur_pasien where no_rawat=? and kode=?", 2, new String[] {
+                                tbTindakanPasien.getValueAt(i, 2).toString(), tbTindakanPasien.getValueAt(i, 5).toString()
+                            });
+                        }
                     }
-                }
-            }
+                }   break;
+            default:
+                break;
         }
         pilihTab();
     }
@@ -1021,20 +1034,23 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     }
     
     public void revalidate(int width) {
-        tbDiagnosa.setSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
-        tbDiagnosa.setPreferredSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
-        Diagnosa.setSize(new Dimension(width - 42, Diagnosa.getSize().height));
-        Diagnosa.setPreferredSize(new Dimension(width - 42, Diagnosa.getSize().height));
-        BtnCariPenyakit.setLocation(Diagnosa.getSize().width + Diagnosa.getX() + 3, BtnCariPenyakit.getY());
-        Scroll1.setSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
-        Scroll1.setPreferredSize(new Dimension(width - 10, tbDiagnosa.getSize().height));
+        Scroll1.setSize(new Dimension(width - 10, Scroll1.getSize().height));
+        Scroll1.setPreferredSize(new Dimension(width - 10, Scroll1.getSize().height));
+        Diagnosa.setSize(new Dimension(width - Diagnosa.getX() - 39, Diagnosa.getSize().height));
+        Diagnosa.setPreferredSize(new Dimension(width - Diagnosa.getX() - 39, Diagnosa.getSize().height));
+        BtnCariPenyakit.setLocation(width - BtnCariPenyakit.getSize().width - 11, BtnCariPenyakit.getY());
         
-        tbProsedur.setSize(new Dimension(width - 10, tbProsedur.getSize().height));
-        tbProsedur.setPreferredSize(new Dimension(width - 10, tbProsedur.getSize().height));
-        Prosedur.setSize(new Dimension(width - 42, Prosedur.getSize().height));
-        Prosedur.setPreferredSize(new Dimension(width - 42, Prosedur.getSize().height));
-        BtnCariProsedur.setLocation(Prosedur.getPreferredSize().width + Prosedur.getX() + 3, BtnCariProsedur.getY());
-        Scroll2.setSize(new Dimension(width - 10, tbProsedur.getSize().height));
-        Scroll2.setPreferredSize(new Dimension(width - 10, tbProsedur.getSize().height));
+        Scroll2.setSize(new Dimension(width - 10, Scroll2.getSize().height));
+        Scroll2.setPreferredSize(new Dimension(width - 10, Scroll2.getSize().height));
+        Prosedur.setSize(new Dimension(width - Prosedur.getX() - 39, Prosedur.getSize().height));
+        Prosedur.setPreferredSize(new Dimension(width - Prosedur.getX() - 39, Prosedur.getSize().height));
+        BtnCariProsedur.setLocation(width - BtnCariProsedur.getSize().width - 11, BtnCariProsedur.getY());
+        
+        FormData.setSize(new Dimension(width - 10, Scroll2.getHeight() + Scroll2.getY()));
+        FormData.setPreferredSize(new Dimension(width - 10, Scroll2.getHeight() + Scroll2.getY()));
+    }
+    
+    public JTabbedPane getTabbedPane() {
+        return TabRawat;
     }
 }
