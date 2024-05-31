@@ -41,10 +41,18 @@ ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAUL
 CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
   `code` varchar(7) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 1
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
+  PRIMARY KEY (`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
+
+CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
+  `no_sep` varchar(40) NOT NULL,
+  `path` varchar(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL DEFAULT NULL AFTER `nama_industri`;
 

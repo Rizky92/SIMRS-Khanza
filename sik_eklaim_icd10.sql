@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
-  `code` varchar(7) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 1
+  `code` varchar(7) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
+  PRIMARY KEY (`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 INSERT INTO `eklaim_icd10` VALUES ("A00", "Cholera", 1);
