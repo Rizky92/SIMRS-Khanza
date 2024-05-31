@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.channels.Channels;
@@ -363,7 +364,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-05-2024 15:53:00" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2024 10:58:36" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -404,7 +405,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-05-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -576,7 +577,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-05-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -590,7 +591,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-05-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-05-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -737,7 +738,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSEP.setMnemonic('1');
         btnSEP.setText("Lihat");
         btnSEP.setToolTipText("ALt+1");
-        btnSEP.setEnabled(false);
         btnSEP.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnSEP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSEP.setName("btnSEP"); // NOI18N
@@ -971,7 +971,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnRiwayatPasien.setMnemonic('1');
         btnRiwayatPasien.setText("Lihat");
         btnRiwayatPasien.setToolTipText("ALt+1");
-        btnRiwayatPasien.setEnabled(false);
         btnRiwayatPasien.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnRiwayatPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRiwayatPasien.setName("btnRiwayatPasien"); // NOI18N
@@ -2330,6 +2329,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_rawat = ? and noskdp != ''", lblNoRawat.getText());
             }
             btnSEP.setText("Ada");
+            btnSEP.setEnabled(true);
             if (Sequel.cariBooleanSmc("select * from data_triase_igd where no_rawat = ?", lblNoRawat.getText())) {
                 btnTriaseIGD.setText("Ada");
                 btnTriaseIGD.setEnabled(true);
@@ -3488,6 +3488,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         
         int i = 1;
         String filename = "";
+        HttpURLConnection http;
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/";
         try (PreparedStatement ps = koneksi.prepareStatement("select lokasi_file from berkas_digital_perawatan where no_rawat = ?")) {
             ps.setString(1, lblNoRawat.getText());
@@ -3497,7 +3498,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_BerkasDigital" + String.valueOf(i++) + ".pdf";
                     if (filename.endsWith(".pdf")) {
                         try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
-                            fileChannel.transferFrom(Channels.newChannel(new URL(url + rs.getString("lokasi_file")).openStream()), 0, Long.MAX_VALUE);
+                            URL fileUrl = new URL(url + rs.getString("lokasi_file"));
+                            http = (HttpURLConnection) fileUrl.openConnection();
+                            if (http.getResponseCode() == 200) {
+                                http.disconnect();
+                                fileChannel.transferFrom(Channels.newChannel(fileUrl.openStream()), 0, Long.MAX_VALUE);
+                            } else {
+                                System.out.println("File not found : " + url + rs.getString("lokasi_file"));
+                            }
                         } finally {
                             System.out.println("Skipping entry : " + url + rs.getString("lokasi_file"));
                             continue;
