@@ -897,7 +897,10 @@
         InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
         
         if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
-            return $msg['special_cmg_option'];
+            Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
+            foreach ($msg['special_cmg_option'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
+                InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
+            }
         } else {
             FinalisasiKlaim($nomor_sep,$coder_nik);
         }

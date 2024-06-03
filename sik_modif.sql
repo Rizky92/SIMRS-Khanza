@@ -164,6 +164,14 @@ CREATE TABLE IF NOT EXISTS `tampjurnal_smc`  (
   PRIMARY KEY (`kd_rek`, `user_id`, `ip`) USING HASH
 ) ENGINE = MEMORY CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Fixed;
 
+CREATE TABLE IF NOT EXISTS `tempinacbg`  (
+  `coder_nik` varchar(20) NOT NULL,
+  `cmg_code` varchar(10) NOT NULL,
+  `cmg_description` varchar(100) NULL DEFAULT NULL,
+  `cmg_type` varchar(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`coder_nik`, `cmg_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `transfer_pasien_antar_ruang` MODIFY COLUMN IF EXISTS `diagnosa_utama` varchar(100) NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','false') NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
