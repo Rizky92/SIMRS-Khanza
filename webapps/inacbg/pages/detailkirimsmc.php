@@ -574,19 +574,6 @@
                             <span>Rp. </span><span id="totalbilling"><?= $totalbilling ?></span>
                         </td>
                     </tr>
-                    <tr class="head">
-                        <td width="41%">Nama Dokter</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="nama_dokter" class="text2" style="font-family: Tahoma">
-                                <option value="<?= $nm_dokter ?>"><?= $nm_dokter ?></option>
-                                <?php $hasildokter = bukaquery("select nm_dokter from dokter order by nm_dokter asc"); ?>
-                                <?php while ($barisdokter = mysqli_fetch_array($hasildokter)): ?>
-                                    <option value="<?= $barisdokter['nm_dokter'] ?>"><?= $barisdokter['nm_dokter'] ?></option>
-                                <?php endwhile; ?>
-                            </select> 
-                        </td>
-                    </tr>
                     <?php if ($corona == 'PasienCorona'): ?>
                         <?php $hasilcorona = bukaquery("select
                             pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah, 
@@ -777,7 +764,6 @@
                     $discharge_status    = validTeks(trim($_POST['discharge_status']));
                     $diagnosa            = validTeks2(trim($_POST['diagnosa']));
                     $procedure           = validTeks2(trim($_POST['procedure']));
-                    $nama_dokter         = validTeks(trim($_POST['nama_dokter']));
                     $jk                  = validTeks(trim($_POST['jk']));
                     $tgl_lahir           = validTeks(trim($_POST['tgl_lahir']));
                     $jnsrawat            = validTeks(trim($_POST['jnsrawat']));
@@ -859,7 +845,6 @@
                                     $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                     $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                     $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
-                                CetakKlaim($nosep);
                                 echo <<<HTML
                                     <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
                                 HTML;
@@ -868,7 +853,7 @@
                             }
                         }
                     } else {
-                        echo 'Total billing di INACBG tidak sesuai dengan billing ke pasien';
+                        echo 'Total billing tidak sesuai dengan billing pasien!';
                     }
                 }
             ?>         
