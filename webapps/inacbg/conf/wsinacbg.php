@@ -705,11 +705,12 @@
                    }';
         //echo "Data : ".$request;
         $msg= Request($request);
-        if($msg['metadata']['message']=="Ok"){
-            Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-            InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
-            GroupingStage12($nomor_sep,$coder_nik);
+        if ($msg['metadata']['code'] != "200") {
+            return '['.$msg['metadata']['code'].'] method "set_claim_data": '.$msg['metadata']['error_no'].' - '.$msg['metadata']['message'];
         }
+        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
+        InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
+        GroupingStage12($nomor_sep,$coder_nik);
     }
     
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
@@ -884,13 +885,20 @@
                         }
                    }';
         $msg= Request($request);
-        if($msg['metadata']['message']=="Ok"){
-            Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
-            $cbg                = validangka($msg['response']['cbg']['tariff']);
-            $sub_acute          = validangka($msg['response']['sub_acute']['tariff']);
-            $chronic            = validangka($msg['response']['chronic']['tariff']);
-            $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
-            InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
+        if ($msg['metadata']['code'] != '200') {
+            return '['.$msg['metadata']['code'].'] method grouper stage 1: '.$msg['metadata']['error_no'].' - '.$msg['metadata']['message']
+        }
+
+        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
+        $cbg                = validangka($msg['response']['cbg']['tariff']);
+        $sub_acute          = validangka($msg['response']['sub_acute']['tariff']);
+        $chronic            = validangka($msg['response']['chronic']['tariff']);
+        $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
+        InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
+        
+        if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
+            return $msg['special_cmg_option'];
+        } else {
             FinalisasiKlaim($nomor_sep,$coder_nik);
         }
     }
@@ -929,7 +937,18 @@
                         }
                    }';
         $msg= Request($request);
-        echo $msg['metadata']['message']."";
+
+        if ($msg['metadata']['code'] != '200') {
+            return sprinf('[%s] method grouper stage 2: %s - %s', $msg['metadata']['code'], $msg['metadata']['error_no'], $msg['metadata']['message']);
+        }
+
+        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
+        $cbg                = validangka($msg['response']['cbg']['tariff']);
+        $sub_acute          = validangka($msg['response']['sub_acute']['tariff']);
+        $chronic            = validangka($msg['response']['chronic']['tariff']);
+        $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
+        InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
+        FinalisasiKlaim($nomor_sep,$coder_nik);
     }
     
     function FinalisasiKlaim($nomor_sep,$coder_nik){	
@@ -944,7 +963,7 @@
                    }';
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
-            //KirimKlaimIndividualKeDC($nomor_sep);
+            CetakKlaim($nomor_sep);
         }
     }
     
@@ -1062,7 +1081,6 @@
                 InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
             }
         }
-        echo $msg['metadata']['message']."";
     }
     
     function Request($request){
