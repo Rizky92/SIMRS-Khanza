@@ -36,6 +36,7 @@
                 $a              = 1;
                 $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
                 $isError        = mysqli_fetch_assoc(bukaquery2("select code_cbg from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
+                $data_cmg       = [];
                 while ($barisdokter = mysqli_fetch_array($hasildokter)) {
                     if ($a == 1) {
                         $nm_dokter2 = $barisdokter['nm_dokter'];
@@ -77,14 +78,6 @@
                     }
                 }
 
-                if ($corona == 'PasienCorona') {
-                    $nosep = getOne("select no_klaim from inacbg_noklaim_corona where no_rawat = '$norawat'");
-                    if (empty($nosep)) {
-                        $nosep = GenerateNomorCovid();
-                        Tambah3('inacbg_noklaim_corona', "'$norawat', '$nosep'");
-                    }
-                }
-                
                 $naikkelas = getOne("select klsnaik from bridging_sep where no_rawat = '$norawat'");
                 if (empty($naikkelas)) {
                     $naikkelas = getOne("select klsnaik from bridging_sep_internal where no_rawat = '$norawat'");
@@ -191,6 +184,27 @@
                             <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma" value="<?= $tgl_keluar ?>" size="15" maxlength="10">
                         </td>
                     </tr>
+                    <?php if ($stage == '2'): ?>
+                        <?php
+                            while ($code_cmg = mysqli_fetch_array(bukaquery2("select * from tempinacbg where coder_nik = '$codernik'"))) {
+                                $data_cmg[$code_cmg['type']][] = $code_cmg;
+                            }
+                        ?>
+                        <?php foreach ($data_cmg as $type_cmg_name => $detail_cmg): ?>
+                            <tr class="head">
+                                <td width="41%"><?= $type_cmg_name ?></td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="<?= strtolower(preg_replace('/\s+/gm', '_', $type_cmg_name)) ?>" class="text" style="font-family: Tahoma">
+                                        <?php foreach($detail_cmg as ['code' => $code, 'description' => $desc, 'type' => $_]): ?>
+                                            <option value="<?= $code ?>"><?= $code.' - '.$description ?></option>
+                                        <?php endforeach; ?>
+                                    </select> 
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    <?php endif; ?>
                     <tr class="head">
                         <td width="41%">Kelas Rawat</td>
                         <td>:</td>
