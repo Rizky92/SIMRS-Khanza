@@ -192,24 +192,56 @@
                     </tr>
                     <?php if ($action == 'stage2'): ?>
                         <tr class="head"><td colspan="3"><hr></td></tr>
-                        <?php
-                            while ($code_cmg = mysqli_fetch_array(bukaquery2("select * from tempinacbg where coder_nik = '$codernik'"))) {
-                                $data_cmg[$code_cmg['type']][] = $code_cmg;
-                            }
-                        ?>
-                        <?php foreach ($data_cmg as $type_cmg_name => $detail_cmg): ?>
-                            <tr class="head">
-                                <td width="41%"><?= $type_cmg_name ?></td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="<?= strtolower(preg_replace('/\s+/gm', '_', $type_cmg_name)) ?>" class="text" style="font-family: Tahoma">
-                                        <?php foreach($detail_cmg as ['code' => $code, 'description' => $desc, 'type' => $_]): ?>
-                                            <option value="<?= $code ?>"><?= $code.' - '.$description ?></option>
-                                        <?php endforeach; ?>
-                                    </select> 
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <tr class="head"><td colspan="3">
+                            <h5>
+                        <tr class="head">
+                            <td width="41%">Special Procedure</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="special_procedure" class="text" style="font-family: Tahoma">
+                                    <?php while ($bariscmg = mysqli_fetch_array(bukaquery2("select cmg_code, cmg_description from tempinacbg where coder_nik = '$coder_nik' and cmg_type = 'Special Procedure'"))): ?>
+                                        <option value="<?= $bariscmg['cmg_code'] ?>"><?= $bariscmg['cmg_code'].' - '.$bariscmg['cmg_description'] ?></option>
+                                    <?php endwhile; ?>
+                                    <option value=""></option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Special Prosthesis</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="special_prosthesis" class="text" style="font-family: Tahoma">
+                                    <?php while ($bariscmg = mysqli_fetch_array(bukaquery2("select cmg_code, cmg_description from tempinacbg where coder_nik = '$coder_nik' and cmg_type = 'Special Prosthesis'"))): ?>
+                                        <option value="<?= $bariscmg['cmg_code'] ?>"><?= $bariscmg['cmg_code'].' - '.$bariscmg['cmg_description'] ?></option>
+                                    <?php endwhile; ?>
+                                    <option value=""></option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Special Investigation</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="special_investigation" class="text" style="font-family: Tahoma">
+                                    <?php while ($bariscmg = mysqli_fetch_array(bukaquery2("select cmg_code, cmg_description from tempinacbg where coder_nik = '$coder_nik' and cmg_type = 'Special Investigation'"))): ?>
+                                        <option value="<?= $bariscmg['cmg_code'] ?>"><?= $bariscmg['cmg_code'].' - '.$bariscmg['cmg_description'] ?></option>
+                                    <?php endwhile; ?>
+                                    <option value=""></option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Special Drug</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="special_drug" class="text" style="font-family: Tahoma">
+                                    <?php while ($bariscmg = mysqli_fetch_array(bukaquery2("select cmg_code, cmg_description from tempinacbg where coder_nik = '$coder_nik' and cmg_type = 'Special Drug'"))): ?>
+                                        <option value="<?= $bariscmg['cmg_code'] ?>"><?= $bariscmg['cmg_code'].' - '.$bariscmg['cmg_description'] ?></option>
+                                    <?php endwhile; ?>
+                                    <option value=""></option>
+                                </select> 
+                            </td>
+                        </tr>
                         <tr class="head"><td colspan="3"><hr></td></tr>
                     <?php endif; ?>
                     <tr class="head">
@@ -808,26 +840,32 @@
                     $diastole            = validTeks(trim($_POST['diastole']));
                     $gender              = ($jk == 'L') ? '1' : '2';
 
-                    $prosedur_non_bedah  = validTeks(trim($_POST['prosedur_non_bedah']));
-                    $prosedur_bedah      = validTeks(trim($_POST['prosedur_bedah']));
-                    $konsultasi          = validTeks(trim($_POST['konsultasi']));
-                    $tenaga_ahli         = validTeks(trim($_POST['tenaga_ahli']));
-                    $keperawatan         = validTeks(trim($_POST['keperawatan']));
-                    $penunjang           = validTeks(trim($_POST['penunjang']));
-                    $radiologi           = validTeks(trim($_POST['radiologi']));
-                    $laboratorium        = validTeks(trim($_POST['laboratorium']));
-                    $pelayanan_darah     = validTeks(trim($_POST['pelayanan_darah']));
-                    $rehabilitasi        = validTeks(trim($_POST['rehabilitasi']));
-                    $kamar               = validTeks(trim($_POST['kamar']));
-                    $rawat_intensif      = validTeks(trim($_POST['rawat_intensif']));
-                    $obat                = validTeks(trim($_POST['obat']));
-                    $obat_kronis         = validTeks(trim($_POST['obat_kronis']));
-                    $obat_kemoterapi     = validTeks(trim($_POST['obat_kemoterapi']));
-                    $alkes               = validTeks(trim($_POST['alkes']));
-                    $bmhp                = validTeks(trim($_POST['bmhp']));
-                    $sewa_alat           = validTeks(trim($_POST['sewa_alat']));
-                    $tarif_poli_eks      = validTeks(trim($_POST['tarif_poli_eks']));
-                    $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
+                    $prosedur_non_bedah    = validTeks(trim($_POST['prosedur_non_bedah']));
+                    $prosedur_bedah        = validTeks(trim($_POST['prosedur_bedah']));
+                    $konsultasi            = validTeks(trim($_POST['konsultasi']));
+                    $tenaga_ahli           = validTeks(trim($_POST['tenaga_ahli']));
+                    $keperawatan           = validTeks(trim($_POST['keperawatan']));
+                    $penunjang             = validTeks(trim($_POST['penunjang']));
+                    $radiologi             = validTeks(trim($_POST['radiologi']));
+                    $laboratorium          = validTeks(trim($_POST['laboratorium']));
+                    $pelayanan_darah       = validTeks(trim($_POST['pelayanan_darah']));
+                    $rehabilitasi          = validTeks(trim($_POST['rehabilitasi']));
+                    $kamar                 = validTeks(trim($_POST['kamar']));
+                    $rawat_intensif        = validTeks(trim($_POST['rawat_intensif']));
+                    $obat                  = validTeks(trim($_POST['obat']));
+                    $obat_kronis           = validTeks(trim($_POST['obat_kronis']));
+                    $obat_kemoterapi       = validTeks(trim($_POST['obat_kemoterapi']));
+                    $alkes                 = validTeks(trim($_POST['alkes']));
+                    $bmhp                  = validTeks(trim($_POST['bmhp']));
+                    $sewa_alat             = validTeks(trim($_POST['sewa_alat']));
+                    $tarif_poli_eks        = validTeks(trim($_POST['tarif_poli_eks']));
+                    $dializer_single_use   = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
+
+                    // TOP UP CMG
+                    $special_procedure     = validTeks(trim($_POST['special_procedure']) ?? '');
+                    $special_prosthesis    = validTeks(trim($_POST['special_prosthesis']) ?? '');
+                    $special_investigation = validTeks(trim($_POST['special_investigation']) ?? '');
+                    $special_drug          = validTeks(trim($_POST['special_drug']) ?? '');
 
                     $validasi = $totalbilling - ($prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli + $keperawatan + $penunjang + $radiologi + $laboratorium + $pelayanan_darah + $rehabilitasi + $kamar + $rawat_intensif + $obat + $obat_kronis + $obat_kemoterapi + $alkes + $bmhp + $sewa_alat + $tarif_poli_eks);
 
@@ -872,21 +910,32 @@
                                 echo 'Semua field harus isi..!!!';
                             }
                         } else {
-                            if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
-                                BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                EditUlangKlaim($nosep);
-                                UpdateDataKlaim2($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
-                                    $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
-                                    $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
-                                    $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
-                                    $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
-                                    $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                    $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
-                                echo <<<HTML
-                                    <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
-                                HTML;
+                            if ($action == 'stage2') {
+                                $special_cmg = implode('#', [
+                                    $special_procedure,
+                                    $special_prosthesis,
+                                    $special_investigation,
+                                    $special_drug,
+                                ]);
+
+                                $action = GroupingStage2($nomor_sep, $special_cmg);
                             } else {
-                                echo 'Semua field harus isi..!!!';
+                                if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
+                                    BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                    EditUlangKlaim($nosep);
+                                    $action = UpdateDataKlaim2($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                        $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
+                                        $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
+                                        $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
+                                        $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
+                                        $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
+                                        $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
+                                    echo <<<HTML
+                                        <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action={$action}">
+                                    HTML;
+                                } else {
+                                    echo 'Semua field harus isi..!!!';
+                                }
                             }
                         }
                     } else {

@@ -952,7 +952,7 @@
         $chronic            = validangka($msg['response']['chronic']['tariff']);
         $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
         InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
-        FinalisasiKlaim($nomor_sep,$coder_nik);
+        return FinalisasiKlaim($nomor_sep,$coder_nik);
     }
     
     function FinalisasiKlaim($nomor_sep,$coder_nik){	
