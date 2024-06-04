@@ -138,52 +138,6 @@ public final class validasi {
         }
     }
     
-    public void reportQueryPDF(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
-        Properties systemProp = System.getProperties();
-        String currentDir = systemProp.getProperty("user.dir");
-        File dir = new File(currentDir);
-        File fileRpt;
-        String fullPath = "";
-        if (dir.isDirectory()) {
-            String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) {
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                }
-            }
-        }
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            File f = new File("./" + reportDirName + "/" + reportName.replaceAll("jasper", "pdf"));
-            JasperPrint jasperPrint = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "./" + reportDirName + "/" + reportName.replaceAll("jasper", "pdf"));
-            Desktop.getDesktop().open(f);
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
-        }
-    }
-    
-    public void reportQueryPDF(String reportName, String savedFileName, Map reportParams, String sql, String... values) {
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            File f = new File("./" + savedFileName);
-            JasperPrint jasperPrint = JasperFillManager.fillReport("./" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "./" + savedFileName);
-            Desktop.getDesktop().open(f);
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
-        }
-    }
-    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
