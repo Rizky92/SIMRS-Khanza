@@ -710,7 +710,7 @@
         }
         Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
         InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
-        GroupingStage12($nomor_sep,$coder_nik);
+        return GroupingStage12($nomor_sep,$coder_nik);
     }
     
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
@@ -901,8 +901,9 @@
             foreach ($msg['special_cmg_option'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
                 InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
             }
+            return 'stage2';
         } else {
-            FinalisasiKlaim($nomor_sep,$coder_nik);
+            return FinalisasiKlaim($nomor_sep,$coder_nik);
         }
     }
     
@@ -942,7 +943,7 @@
         $msg= Request($request);
 
         if ($msg['metadata']['code'] != '200') {
-            return sprinf('[%s] method grouper stage 2: %s - %s', $msg['metadata']['code'], $msg['metadata']['error_no'], $msg['metadata']['message']);
+            echo sprinf('[%s] method grouper stage 2: %s - %s', $msg['metadata']['code'], $msg['metadata']['error_no'], $msg['metadata']['message']);
         }
 
         Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
@@ -967,6 +968,7 @@
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
             CetakKlaim($nomor_sep);
+            return 'sukses';
         }
     }
     

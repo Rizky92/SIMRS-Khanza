@@ -7,8 +7,7 @@
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
         <div class="entry">        
             <?php
-                $stage          = isset($_GET['stage']) ? validTeks($_GET['stage']) : null;
-                $sukses         = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
+                $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
                 $codernik       = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
                 $corona         = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
                 $nosep          = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
@@ -44,7 +43,7 @@
                         $nm_dokter2 = $nm_dokter2 . '#' . $barisdokter['nm_dokter'];
                     }
                     $a++;
-                } 
+                }
                 
                 $nm_dokter = '';
                 if (! empty($nm_dokter2)) {
@@ -78,6 +77,14 @@
                     }
                 }
 
+                if ($corona == 'PasienCorona') {
+                    $nosep = getOne("select no_klaim from inacbg_noklaim_corona where no_rawat = '$norawat'");
+                    if (empty($nosep)) {
+                        $nosep = GenerateNomorCovid();
+                        Tambah3('inacbg_noklaim_corona', "'$norawat', '$nosep'");
+                    }
+                }
+                
                 $naikkelas = getOne("select klsnaik from bridging_sep where no_rawat = '$norawat'");
                 if (empty($naikkelas)) {
                     $naikkelas = getOne("select klsnaik from bridging_sep_internal where no_rawat = '$norawat'");
@@ -108,7 +115,6 @@
             <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
             <input type="hidden" name="jk" value="<?= $jk ?>">
             <input type="hidden" name="codernik" value="<?= $codernik ?>">
-
             <?php if (isset($isError['code_cbg']) && $isError['code_cbg'] == 'X-0-98-X'): ?>
                 <div class="center" style="margin-left: 0.7rem">
                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR! Cek diagnosa/prosedur yang dimasukkan!</span>
@@ -184,7 +190,8 @@
                             <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma" value="<?= $tgl_keluar ?>" size="15" maxlength="10">
                         </td>
                     </tr>
-                    <?php if ($stage == '2'): ?>
+                    <?php if ($action == 'stage2'): ?>
+                        <tr class="head"><td colspan="3"><hr></td></tr>
                         <?php
                             while ($code_cmg = mysqli_fetch_array(bukaquery2("select * from tempinacbg where coder_nik = '$codernik'"))) {
                                 $data_cmg[$code_cmg['type']][] = $code_cmg;
@@ -203,7 +210,7 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-
+                        <tr class="head"><td colspan="3"><hr></td></tr>
                     <?php endif; ?>
                     <tr class="head">
                         <td width="41%">Kelas Rawat</td>
@@ -214,7 +221,7 @@
                                     <option value="3">Kelas Reguler</option>
                                     <option value="1">Kelas Eksekutif</option>
                                 <?php else: ?>
-                                    <?php $kelas = getOne("select klsrawat from bridging_sep where no_rawat = '$norawat'"); ?>
+                                    <?php $kelas = getOne("select klsrawat from bridging_sep where no_sep = '$nosep'"); ?>
                                     <option value="<?= $kelas ?>">Kelas <?= $kelas ?></option>
                                     <option value="1">Kelas 1</option>
                                     <option value="2">Kelas 2</option>
@@ -229,7 +236,7 @@
                             <td>:</td>
                             <td width="57%">
                                 <select name="adl_sub_acute" class="text3" style="font-family: Tahoma">
-                                    <option value=""></option>
+                                    <option value="0"></option>
                                     <?php for ($i = 12; $i <= 60; $i++): ?>
                                         <option value="<?= $i ?>"><?= $i ?></option>
                                     <?php endfor; ?>
@@ -241,20 +248,21 @@
                             <td>:</td>
                             <td width="57%">
                                 <select name="adl_chronic" class="text3" style="font-family: Tahoma">
-                                    <option value=""></option>
+                                    <option value="0"></option>
                                     <?php for ($i = 12; $i <= 60; $i++): ?>
                                         <option value="<?= $i ?>"><?= $i ?></option>
                                     <?php endfor; ?>
                                 </select> 
                             </td>
                         </tr>
+                        <?php $icu = (int) mysqli_fetch_assoc(bukaquery2("select sum(lama_inap) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"))['total_icu'] ?>
                         <tr class="head">
                             <td width="41%">ICU Indikator</td>
                             <td>:</td>
                             <td width="57%">
                                 <select name="icu_indikator" class="text3" style="font-family: Tahoma">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                    <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
+                                    <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
                                 </select> 
                             </td>
                         </tr>
@@ -262,7 +270,7 @@
                             <td width="41%">ICU Los</td>
                             <td>:</td>
                             <td width="57%">
-                                <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                             </td>
                         </tr>
                         <tr class="head">
@@ -273,14 +281,11 @@
                             </td>
                         </tr>
                     <?php else: ?>
-                        <input type="hidden" name="adl_sub_acute" value="">
-                        <input type="hidden" name="adl_chronic" value="">
-                        <input type="hidden" name="icu_indikator" value="">
+                        <input type="hidden" name="adl_sub_acute" value="0">
+                        <input type="hidden" name="adl_chronic" value="0">
+                        <input type="hidden" name="icu_indikator" value="0">
                         <input type="hidden" name="icu_los" value="0">
                         <input type="hidden" name="ventilator_hour" value="0">
-                    <?php endif; ?>
-                    <?php if (mysqli_fetch_assoc(bukaquery2("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%') as data_exists"))['data_exists']): ?>
-                        <input type="hidden" name="dializer_single_use" value="1">
                     <?php endif; ?>
                     <tr class="head">
                         <td width="41%">Indikator Upgrade Kelas</td>
@@ -592,6 +597,185 @@
                             <span>Rp. </span><span id="totalbilling"><?= $totalbilling ?></span>
                         </td>
                     </tr>
+                    <tr class="head">
+                        <td width="41%">Nama Dokter</td>
+                        <td>:</td>
+                        <td width="57%">
+                            <select name="nama_dokter" class="text2" style="font-family: Tahoma">
+                                <option value="<?= $nm_dokter ?>"><?= $nm_dokter ?></option>
+                                <?php $hasildokter = bukaquery("select nm_dokter from dokter order by nm_dokter asc"); ?>
+                                <?php while ($barisdokter = mysqli_fetch_array($hasildokter)): ?>
+                                    <option value="<?= $barisdokter['nm_dokter'] ?>"><?= $barisdokter['nm_dokter'] ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <?php if ($corona == 'PasienCorona'): ?>
+                        <?php $hasilcorona = bukaquery("select
+                            pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah, 
+                            kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah, 
+                            peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,  
+                            plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,  
+                            desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,   
+                            mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,    
+                            desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,  
+                            covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd, 
+                            nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6, 
+                            covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind 
+                            from perawatan_corona where no_rawat = '$norawat'"
+                        ); ?>
+                        <?php while ($bariscorona = mysqli_fetch_array($hasilcorona)): ?>
+                            <tr class="head">
+                                <td width="41%">Dilakukan Pemulasaran Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="pemulasaraan_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytpemulasaraan_jenazah'] ?>"><?= $bariscorona['pemulasaraan_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Kantong Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="kantong_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytkantong_jenazah'] ?>"><?= $bariscorona['kantong_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Peti Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="peti_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytpeti_jenazah'] ?>"><?= $bariscorona['peti_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Plastik Erat?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="plastik_erat" class="text3">
+                                        <option value="<?= $bariscorona['ytplastik_erat'] ?>"><?= $bariscorona['plastik_erat'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Desinfektan Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="desinfektan_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytdesinfektan_jenazah'] ?>"><?= $bariscorona['desinfektan_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Mobil Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="mobil_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytmobil_jenazah'] ?>"><?= $bariscorona['mobil_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Menggunakan Desinfektan Mobil Jenazah?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="desinfektan_mobil_jenazah" class="text3">
+                                        <option value="<?= $bariscorona['ytdesinfektan_mobil_jenazah'] ?>"><?= $bariscorona['desinfektan_mobil_jenazah'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Status Covid/Corona</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="covid19_status_cd" class="text3">
+                                        <option value="<?= $bariscorona['ytcovid19_status_cd'] ?>"><?= $bariscorona['covid19_status_cd'] ?></option>
+                                        <option value="1">ODP</option>
+                                        <option value="2">PDP</option>
+                                        <option value="3">Positif</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">No. Jaminan/NIK/KITAS/KITAP/PASPOR/JKN</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="nomor_kartu_t" class="text" type="text" class="inputbox" value="<?= $bariscorona['nomor_kartu_t'] ?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang ICU Dengan Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes1" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes1'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang ICU Tanpa Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes2" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes2'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Dengan Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes3" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes3'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Tanpa Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes4" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes4'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Dengan Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes5" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes5'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Tanpa Ventilator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="episodes6" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes6'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Ada Comorbid/Complexity/Penyerta?</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="covid19_cc_ind" class="text3">
+                                        <option value="<?= $bariscorona['ytcovid19_cc_ind'] ?>"><?= $bariscorona['covid19_cc_ind'] ?></option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </table>
             </div>
             <?php
@@ -616,6 +800,7 @@
                     $discharge_status    = validTeks(trim($_POST['discharge_status']));
                     $diagnosa            = validTeks2(trim($_POST['diagnosa']));
                     $procedure           = validTeks2(trim($_POST['procedure']));
+                    $nama_dokter         = validTeks(trim($_POST['nama_dokter']));
                     $jk                  = validTeks(trim($_POST['jk']));
                     $tgl_lahir           = validTeks(trim($_POST['tgl_lahir']));
                     $jnsrawat            = validTeks(trim($_POST['jnsrawat']));
@@ -642,26 +827,67 @@
                     $bmhp                = validTeks(trim($_POST['bmhp']));
                     $sewa_alat           = validTeks(trim($_POST['sewa_alat']));
                     $tarif_poli_eks      = validTeks(trim($_POST['tarif_poli_eks']));
-                    $dializer_single_use = validTeks(trim($_POST['dializer_single_use']));
+                    $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
 
                     $validasi = $totalbilling - ($prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli + $keperawatan + $penunjang + $radiologi + $laboratorium + $pelayanan_darah + $rehabilitasi + $kamar + $rawat_intensif + $obat + $obat_kronis + $obat_kemoterapi + $alkes + $bmhp + $sewa_alat + $tarif_poli_eks);
 
                     if ((int) round($validasi) === 0) {
-                        if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
-                            BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                            EditUlangKlaim($nosep);
-                            UpdateDataKlaim2($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
-                                $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
-                                $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
-                                $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
-                                $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
-                                $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
-                            echo <<<HTML
-                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
-                            HTML;
+                        if ($corona == 'PasienCorona') {
+                            $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
+                            $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
+                            $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
+                            $plastik_erat               = validTeks(trim($_POST['plastik_erat']));
+                            $desinfektan_jenazah        = validTeks(trim($_POST['desinfektan_jenazah']));
+                            $mobil_jenazah              = validTeks(trim($_POST['mobil_jenazah']));
+                            $desinfektan_mobil_jenazah  = validTeks(trim($_POST['desinfektan_mobil_jenazah']));
+                            $covid19_status_cd          = validTeks(trim($_POST['covid19_status_cd']));
+                            $nomor_kartu_t              = validTeks(trim($_POST['nomor_kartu_t']));
+                            $episodes1                  = validTeks(trim($_POST['episodes1']));
+                            $episodes2                  = validTeks(trim($_POST['episodes2']));
+                            $episodes3                  = validTeks(trim($_POST['episodes3']));
+                            $episodes4                  = validTeks(trim($_POST['episodes4']));
+                            $episodes5                  = validTeks(trim($_POST['episodes5']));
+                            $episodes6                  = validTeks(trim($_POST['episodes6']));
+                            $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
+                            $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
+                            $episodes                   = substr($episodes, 0, -1); 
+                            
+                            if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
+                                BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                EditUlangKlaim($nosep);
+                                UpdateDataKlaim3($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                    $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
+                                    $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
+                                    $tarif_poli_eks, $nama_dokter, getKelasRS(), "71", "COVID-19", "#", $codernik,
+                                    $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
+                                    $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
+                                    $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
+                                    $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
+                                    $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
+                                CetakKlaim($nosep);
+                                echo <<<HTML
+                                    <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
+                                HTML;
+                            } else {
+                                echo 'Semua field harus isi..!!!';
+                            }
                         } else {
-                            echo 'Semua field harus isi..!!!';
+                            if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
+                                BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                EditUlangKlaim($nosep);
+                                UpdateDataKlaim2($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                    $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
+                                    $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
+                                    $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
+                                    $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
+                                    $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
+                                    $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
+                                echo <<<HTML
+                                    <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
+                                HTML;
+                            } else {
+                                echo 'Semua field harus isi..!!!';
+                            }
                         }
                     } else {
                         echo 'Total billing tidak sesuai dengan billing pasien!';
