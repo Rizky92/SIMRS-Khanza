@@ -886,7 +886,7 @@
                    }';
         $msg= Request($request);
         if ($msg['metadata']['code'] != '200') {
-            return '['.$msg['metadata']['code'].'] method grouper stage 1: '.$msg['metadata']['error_no'].' - '.$msg['metadata']['message']
+            return '['.$msg['metadata']['code'].'] method grouper stage 1: '.$msg['metadata']['error_no'].' - '.$msg['metadata']['message'];
         }
 
         Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
