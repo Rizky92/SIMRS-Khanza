@@ -1076,4 +1076,272 @@
         $msg = json_decode($hasildecrypt,true);
         return $msg;
     }
+
+    function UpdateDataKlaimSmc(
+        $nomor_sep, $nomor_kartu, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
+        $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure, $tarif_poli_eks,
+        $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
+        $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
+        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
+    ) {
+        $request = [
+            'metadata' => [
+                'method' => 'set_claim_data',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'nomor_sep'            => $nomor_sep,
+                'nomor_kartu'          => $nomor_kartu,
+                'tgl_masuk'            => $tgl_masuk.' 00:00:01',
+                'tgl_pulang'           => $tgl_pulang.' 23:59:59',
+                'jenis_rawat'          => $jenis_rawat,
+                'kelas_rawat'          => $kelas_rawat,
+                'adl_sub_acute'        => $adl_sub_acute,
+                'adl_chronic'          => $adl_chronic,
+                'icu_indikator'        => $icu_indikator,
+                'icu_los'              => $icu_los,
+                'ventilator_hour'      => $ventilator_hour,
+                'upgrade_class_ind'    => $upgrade_class_ind,
+                'upgrade_class_class'  => $upgrade_class_class,
+                'upgrade_class_los'    => $upgrade_class_los,
+                'add_payment_pct'      => $add_payment_pct,
+                'birth_weight'         => $birth_weight,
+                'sistole'              => $sistole,
+                'diastole'             => $diastole,
+                'discharge_status'     => $discharge_status,
+                'diagnosa'             => $diagnosa,
+                'procedure'            => $procedure,
+                'diagnosa_inagrouper'  => $diagnosa,
+                'procedure_inagrouper' => $procedure,
+                'dializer_single_use'  => $dializer_single_use,
+                'tarif_rs'             => [
+                    'prosedur_non_bedah' => $prosedur_non_bedah,
+                    'prosedur_bedah'     => $prosedur_bedah,
+                    'konsultasi'         => $konsultasi,
+                    'tenaga_ahli'        => $tenaga_ahli,
+                    'keperawatan'        => $keperawatan,
+                    'penunjang'          => $penunjang,
+                    'radiologi'          => $radiologi,
+                    'laboratorium'       => $laboratorium,
+                    'pelayanan_darah'    => $pelayanan_darah,
+                    'rehabilitasi'       => $rehabilitasi,
+                    'kamar'              => $kamar,
+                    'rawat_intensif'     => $rawat_intensif,
+                    'obat'               => $obat,
+                    'obat_kronis'        => $obat_kronis,
+                    'obat_kemoterapi'    => $obat_kemoterapi,
+                    'alkes'              => $alkes,
+                    'bmhp'               => $bmhp,
+                    'sewa_alat'          => $sewa_alat,
+                ],
+                'tarif_poli_eks' => $tarif_poli_eks,
+                'nama_dokter'    => $nama_dokter,
+                'kode_tarif'     => $kode_tarif,
+                'payor_id'       => $payor_id,
+                'payor_cd'       => $payor_cd,
+                'cob_cd'         => $cob_cd,
+                'coder_nik'      => $coder_nik,
+            ],
+        ];
+        
+        $msg = Request(json_encode($request));
+    
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "set_claim_data": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+    
+        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
+        InsertData2("inacbg_data_terkirim2", "'".$nomor_sep."','".$coder_nik."'");
+    
+        return GroupingStage1Smc($nomor_sep, $coder_nik);
+    }
+    
+    function GroupingStage1Smc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'grouper',
+                'stage' => '1',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ]
+        ];
+    
+        $msg = Request(json_encode($request));
+    
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "grouper stage 1": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+            
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+    
+        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
+        $cbg             = validangka($msg['response']['cbg']['tariff']);
+        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
+        $chronic         = validangka($msg['response']['chronic']['tariff']);
+        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
+        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+    
+        if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
+            Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
+            foreach ($msg['special_cmg_option'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
+                InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
+            }
+    
+            return [
+                'success' => true,
+                'data' => 'stage2',
+                'error' => null,
+            ];
+        } else {
+            return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
+        }
+    }
+    
+    function GroupingStage2Smc($nomor_sep, $coder_nik, $special_cmg)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'grouper',
+                'stage' => 2,
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'special_cmg' => $special_cmg,
+            ],
+        ];
+    
+        $msg = Request(json_encode($request));
+    
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "grouper stage 2": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+    
+        Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
+        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
+        $cbg             = validangka($msg['response']['cbg']['tariff']);
+        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
+        $chronic         = validangka($msg['response']['chronic']['tariff']);
+        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
+        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+    
+        return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
+    }
+    
+    function FinalisasiKlaimSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'claim_final',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'coder_nik' => $coder_nik,
+            ],
+        ];
+    
+        $msg = Request(json_encode($request));
+    
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "claim_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+    
+        return CetakKlaimSmc($nomor_sep);
+    }
+    
+    function CetakKlaimSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'claim_print',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+    
+        $msg = Request(json_encode($request));
+    
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "claim_print": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error
+            ];
+        }
+    
+        $encodedPDF = $msg['data'];
+    
+        file_put_contents('pages/pdf/'.$nomor_sep.'.pdf', base64_decode($encodedPDF));
+    
+        if (bukaquery2("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')")[0] == '0') {
+            InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
+        }
+    
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil disimpan!',
+            'error' => null,
+        ];
+    }    
 ?>

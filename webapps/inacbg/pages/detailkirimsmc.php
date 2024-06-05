@@ -8,10 +8,10 @@
         <div class="entry">        
             <?php
                 $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
+                $sukses         = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
                 $codernik       = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
                 $corona         = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
                 $nosep          = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
-                $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
                 $carabayar      = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
                 $_sql           = "select bridging_sep.no_sep, bridging_sep.no_kartu, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab from bridging_sep
                                 join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join dokter on reg_periksa.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
@@ -34,8 +34,7 @@
                 $nm_dokter2     = '';
                 $a              = 1;
                 $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
-                $isError        = mysqli_fetch_assoc(bukaquery2("select code_cbg from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
-                $data_cmg       = [];
+                $isError        = getOne("select code_cbg from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1");
                 while ($barisdokter = mysqli_fetch_array($hasildokter)) {
                     if ($a == 1) {
                         $nm_dokter2 = $barisdokter['nm_dokter'];
@@ -115,7 +114,7 @@
             <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
             <input type="hidden" name="jk" value="<?= $jk ?>">
             <input type="hidden" name="codernik" value="<?= $codernik ?>">
-            <?php if (isset($isError['code_cbg']) && $isError['code_cbg'] == 'X-0-98-X'): ?>
+            <?php if ($isError ?? null == 'X-0-98-X'): ?>
                 <div class="center" style="margin-left: 0.7rem">
                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR! Cek diagnosa/prosedur yang dimasukkan!</span>
                 </div>
@@ -192,8 +191,6 @@
                     </tr>
                     <?php if ($action == 'stage2'): ?>
                         <tr class="head"><td colspan="3"><hr></td></tr>
-                        <tr class="head"><td colspan="3">
-                            <h5>
                         <tr class="head">
                             <td width="41%">Special Procedure</td>
                             <td>:</td>
@@ -243,570 +240,571 @@
                             </td>
                         </tr>
                         <tr class="head"><td colspan="3"><hr></td></tr>
-                    <?php endif; ?>
-                    <tr class="head">
-                        <td width="41%">Kelas Rawat</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="kelas_rawat" class="text" style="font-family: Tahoma">
-                                <?php if ($status_lanjut == 'Ralan'): ?>
-                                    <option value="3">Kelas Reguler</option>
-                                    <option value="1">Kelas Eksekutif</option>
-                                <?php else: ?>
-                                    <?php $kelas = getOne("select klsrawat from bridging_sep where no_sep = '$nosep'"); ?>
-                                    <option value="<?= $kelas ?>">Kelas <?= $kelas ?></option>
-                                    <option value="1">Kelas 1</option>
-                                    <option value="2">Kelas 2</option>
-                                    <option value="3">Kelas 3</option>
-                                <?php endif; ?>
-                            </select> 
-                        </td>
-                    </tr>
-                    <?php if ($status_lanjut == 'Ranap'): ?>
-                        <tr class="head">
-                            <td width="41%">ADL Sub Acute</td>
-                            <td>:</td>
-                            <td width="57%">
-                                <select name="adl_sub_acute" class="text3" style="font-family: Tahoma">
-                                    <option value="0"></option>
-                                    <?php for ($i = 12; $i <= 60; $i++): ?>
-                                        <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select> 
-                            </td>
-                        </tr>
-                        <tr class="head">
-                            <td width="41%">ADL Chronic</td>
-                            <td>:</td>
-                            <td width="57%">
-                                <select name="adl_chronic" class="text3" style="font-family: Tahoma">
-                                    <option value="0"></option>
-                                    <?php for ($i = 12; $i <= 60; $i++): ?>
-                                        <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select> 
-                            </td>
-                        </tr>
-                        <?php $icu = (int) mysqli_fetch_assoc(bukaquery2("select sum(lama_inap) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"))['total_icu'] ?>
-                        <tr class="head">
-                            <td width="41%">ICU Indikator</td>
-                            <td>:</td>
-                            <td width="57%">
-                                <select name="icu_indikator" class="text3" style="font-family: Tahoma">
-                                    <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
-                                    <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
-                                </select> 
-                            </td>
-                        </tr>
-                        <tr class="head">
-                            <td width="41%">ICU Los</td>
-                            <td>:</td>
-                            <td width="57%">
-                                <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                            </td>
-                        </tr>
-                        <tr class="head">
-                            <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
-                            <td>:</td>
-                            <td width="57%">
-                                <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                            </td>
-                        </tr>
                     <?php else: ?>
-                        <input type="hidden" name="adl_sub_acute" value="0">
-                        <input type="hidden" name="adl_chronic" value="0">
-                        <input type="hidden" name="icu_indikator" value="0">
-                        <input type="hidden" name="icu_los" value="0">
-                        <input type="hidden" name="ventilator_hour" value="0">
-                    <?php endif; ?>
-                    <tr class="head">
-                        <td width="41%">Indikator Upgrade Kelas</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="upgrade_class_ind" class="text3"style="font-family: Tahoma">
-                                <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Naik ke Kelas</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="upgrade_class_class" class="text2" style="font-family: Tahoma">
-                                <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
-                                <option value="kelas_1">Kelas 1</option>
-                                <option value="kelas_2">Kelas 2</option>
-                                <option value="vip">Kelas VIP</option>
-                                <option value="vvip">Kelas VVIP</option>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Lama Hari Naik Kelas</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Tambahan</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Berat Saat Lahir</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="birth_weight" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Sistole</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="sistole" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $sistole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Diastole</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <input name="diastole" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diastole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Status Pulang</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="discharge_status" class="text2" style="font-family: Tahoma">
-                                <?php if (getOne("select count(*) from kamar_inap where stts_pulang = 'Sembuh' and no_rawat = '$norawat'") > 0): ?>
+                        <tr class="head">
+                            <td width="41%">Kelas Rawat</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="kelas_rawat" class="text" style="font-family: Tahoma">
+                                    <?php if ($status_lanjut == 'Ralan'): ?>
+                                        <option value="3">Kelas Reguler</option>
+                                        <option value="1">Kelas Eksekutif</option>
+                                    <?php else: ?>
+                                        <?php $kelas = getOne("select klsrawat from bridging_sep where no_sep = '$nosep'"); ?>
+                                        <option value="<?= $kelas ?>">Kelas <?= $kelas ?></option>
+                                        <option value="1">Kelas 1</option>
+                                        <option value="2">Kelas 2</option>
+                                        <option value="3">Kelas 3</option>
+                                    <?php endif; ?>
+                                </select> 
+                            </td>
+                        </tr>
+                        <?php if ($status_lanjut == 'Ranap'): ?>
+                            <tr class="head">
+                                <td width="41%">ADL Sub Acute</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="adl_sub_acute" class="text3" style="font-family: Tahoma">
+                                        <option value="0"></option>
+                                        <?php for ($i = 12; $i <= 60; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor; ?>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">ADL Chronic</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="adl_chronic" class="text3" style="font-family: Tahoma">
+                                        <option value="0"></option>
+                                        <?php for ($i = 12; $i <= 60; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor; ?>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <?php $icu = (int) mysqli_fetch_assoc(bukaquery2("select sum(lama_inap) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"))['total_icu'] ?>
+                            <tr class="head">
+                                <td width="41%">ICU Indikator</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <select name="icu_indikator" class="text3" style="font-family: Tahoma">
+                                        <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
+                                        <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
+                                    </select> 
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">ICU Los</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <input type="hidden" name="adl_sub_acute" value="0">
+                            <input type="hidden" name="adl_chronic" value="0">
+                            <input type="hidden" name="icu_indikator" value="0">
+                            <input type="hidden" name="icu_los" value="0">
+                            <input type="hidden" name="ventilator_hour" value="0">
+                        <?php endif; ?>
+                        <tr class="head">
+                            <td width="41%">Indikator Upgrade Kelas</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="upgrade_class_ind" class="text3"style="font-family: Tahoma">
+                                    <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Naik ke Kelas</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="upgrade_class_class" class="text2" style="font-family: Tahoma">
+                                    <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
+                                    <option value="kelas_1">Kelas 1</option>
+                                    <option value="kelas_2">Kelas 2</option>
+                                    <option value="vip">Kelas VIP</option>
+                                    <option value="vvip">Kelas VVIP</option>
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Lama Hari Naik Kelas</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Tambahan</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Berat Saat Lahir</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="birth_weight" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Sistole</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="sistole" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $sistole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Diastole</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <input name="diastole" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diastole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Status Pulang</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="discharge_status" class="text2" style="font-family: Tahoma">
+                                    <?php if (getOne("select count(*) from kamar_inap where stts_pulang = 'Sembuh' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="1">Atas persetujuan dokter</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Sehat' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="1">Atas persetujuan dokter</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Rujuk' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="2">Dirujuk</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'APS' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="3">Atas permintaan sendiri</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Pulang Paksa' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="3">Atas permintaan sendiri</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Meninggal' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="4">Meninggal</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = '+' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="4">Meninggal</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Persetujuan Dokter' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="1">Atas persetujuan dokter</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Permintaan Sendiri' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="3">Atas permintaan sendiri</option>
+                                    <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Lain-lain' and no_rawat = '$norawat'") > 0): ?>
+                                        <option value="5">Lain-lain</option>
+                                    <?php else: ?>
+                                        <option value="1">Atas persetujuan dokter</option>
+                                    <?php endif; ?>
                                     <option value="1">Atas persetujuan dokter</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Sehat' and no_rawat = '$norawat'") > 0): ?>
-                                    <option value="1">Atas persetujuan dokter</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Rujuk' and no_rawat = '$norawat'") > 0): ?>
                                     <option value="2">Dirujuk</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'APS' and no_rawat = '$norawat'") > 0): ?>
                                     <option value="3">Atas permintaan sendiri</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Pulang Paksa' and no_rawat = '$norawat'") > 0): ?>
-                                    <option value="3">Atas permintaan sendiri</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Meninggal' and no_rawat = '$norawat'") > 0): ?>
                                     <option value="4">Meninggal</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = '+' and no_rawat = '$norawat'") > 0): ?>
-                                    <option value="4">Meninggal</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Persetujuan Dokter' and no_rawat = '$norawat'") > 0): ?>
-                                    <option value="1">Atas persetujuan dokter</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Permintaan Sendiri' and no_rawat = '$norawat'") > 0): ?>
-                                    <option value="3">Atas permintaan sendiri</option>
-                                <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Lain-lain' and no_rawat = '$norawat'") > 0): ?>
                                     <option value="5">Lain-lain</option>
-                                <?php else: ?>
-                                    <option value="1">Atas persetujuan dokter</option>
-                                <?php endif; ?>
-                                <option value="1">Atas persetujuan dokter</option>
-                                <option value="2">Dirujuk</option>
-                                <option value="3">Atas permintaan sendiri</option>
-                                <option value="4">Meninggal</option>
-                                <option value="5">Lain-lain</option>
-                            </select> 
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Diagnosa</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <?php
-                                $penyakit = '';
-                                $a = 1;
-                                $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
-                                    if ($a == 1) {
-                                        $penyakit = $barispenyakit['kd_penyakit'];
-                                    } else {
-                                        $penyakit .= '#'.$barispenyakit['kd_penyakit'];
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Diagnosa</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <?php
+                                    $penyakit = '';
+                                    $a = 1;
+                                    $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                    while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
+                                        if ($a == 1) {
+                                            $penyakit = $barispenyakit['kd_penyakit'];
+                                        } else {
+                                            $penyakit .= '#'.$barispenyakit['kd_penyakit'];
+                                        }
+                                        $a++;
                                     }
-                                    $a++;
-                                }
-                            ?>
-                            <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Prosedur</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <?php
-                                $prosedur = '';
-                                $a = 1;
-                                $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
-                                    if ($a == 1) {
-                                        $prosedur = $barisprosedur['kode'];
-                                    } else {
-                                        $prosedur .= '#'.$barisprosedur['kode'];
+                                ?>
+                                <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Prosedur</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <?php
+                                    $prosedur = '';
+                                    $a = 1;
+                                    $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                    while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
+                                        if ($a == 1) {
+                                            $prosedur = $barisprosedur['kode'];
+                                        } else {
+                                            $prosedur .= '#'.$barisprosedur['kode'];
+                                        }
+                                        $a++;
                                     }
-                                    $a++;
-                                }
-                            ?>
-                            <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
-                        </td>
-                    </tr>
-                    <?php
-                        $querybilling = bukaquery("select 
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Operasi') as prosedur_bedah,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter', 'Ranap Dokter')) as konsultasi,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Paramedis', 'Ranap Paramedis')) as keperawatan,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Radiologi') as radiologi,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Laborat') as laboratorium,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Kamar') + reg_periksa.biaya_reg as kamar,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kronis%') as obat_kronis,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kemo%') as obat_kemoterapi,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Obat', 'Retur Obat', 'Resep Pulang')) as obat,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Tambahan') as bmhp,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Harian', 'Service')) as sewa_alat,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan like '%terapi%') as rehabilitasi,
-                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat) as totalbilling
-                        from reg_periksa where reg_periksa.no_rawat = '$norawat'");
+                                ?>
+                                <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
+                            </td>
+                        </tr>
+                        <?php
+                            $querybilling = bukaquery("select 
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Operasi') as prosedur_bedah,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter', 'Ranap Dokter')) as konsultasi,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Paramedis', 'Ranap Paramedis')) as keperawatan,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Radiologi') as radiologi,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Laborat') as laboratorium,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Kamar') + reg_periksa.biaya_reg as kamar,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kronis%') as obat_kronis,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kemo%') as obat_kemoterapi,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Obat', 'Retur Obat', 'Resep Pulang')) as obat,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Tambahan') as bmhp,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Harian', 'Service')) as sewa_alat,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan like '%terapi%') as rehabilitasi,
+                                (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat) as totalbilling
+                            from reg_periksa where reg_periksa.no_rawat = '$norawat'");
 
-                        $billing = mysqli_fetch_array($querybilling);
-                        $prosedur_non_bedah = $billing['prosedur_non_bedah'];
-                        $prosedur_bedah = $billing['prosedur_bedah'];
-                        $konsultasi = $billing['konsultasi'];
-                        $tenaga_ahli = 0;
-                        $keperawatan = $billing['keperawatan'];
-                        $radiologi = $billing['radiologi'];
-                        $laboratorium = $billing['laboratorium'];
-                        $kamar = $billing['kamar'];
-                        $obat_kronis = $billing['obat_kronis'];
-                        $obat_kemoterapi = $billing['obat_kemoterapi'];
-                        $obat = $billing['obat'] - $obat_kronis - $obat_kemoterapi;
-                        $bmhp = $billing['bmhp'];
-                        $sewa_alat = $billing['sewa_alat'];
-                        $rehabilitasi = $billing['rehabilitasi'];
-                        $totalbilling = $billing['totalbilling'];
-                    ?>
-                    <tr class="head">
-                        <td width="41%">Biaya Prosedur Non Bedah</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_prosedur_non_bedah" name="prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_non_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Prosedur Bedah</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_prosedur_bedah" name="prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Konsultasi</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_konsultasi" name="konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $konsultasi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Tenaga Ahli</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_tenaga_ahli" name="tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $tenaga_ahli ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Keperawatan</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_keperawatan" name="keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $keperawatan ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Penunjang</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_penunjang" name="penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Radiologi</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_radiologi" name="radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $radiologi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Laboratorium</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_laboratorium" name="laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $laboratorium ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Pelayanan Darah</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_pelayanan_darah" name="pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Rehabilitasi</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_rehabilitasi" name="rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Kamar</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_kamar" name="kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $kamar ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Rawat Intensif</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_rawat_intensif" name="rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Obat</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_obat" name="obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Obat Kronis</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_obat_kronis" name="obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kronis ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Obat Kemoterapi</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_obat_kemoterapi" name="obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kemoterapi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Alkes</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_alkes" name="alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya BMHP</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_bmhp" name="bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $bmhp ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Biaya Sewa Alat</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_sewa_alat" name="sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $sewa_alat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Tarif Poli Eksekutif</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">TOTAL BILLING</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <span>Rp. </span><span id="totalbilling"><?= $totalbilling ?></span>
-                        </td>
-                    </tr>
-                    <tr class="head">
-                        <td width="41%">Nama Dokter</td>
-                        <td>:</td>
-                        <td width="57%">
-                            <select name="nama_dokter" class="text2" style="font-family: Tahoma">
-                                <option value="<?= $nm_dokter ?>"><?= $nm_dokter ?></option>
-                                <?php $hasildokter = bukaquery("select nm_dokter from dokter order by nm_dokter asc"); ?>
-                                <?php while ($barisdokter = mysqli_fetch_array($hasildokter)): ?>
-                                    <option value="<?= $barisdokter['nm_dokter'] ?>"><?= $barisdokter['nm_dokter'] ?></option>
-                                <?php endwhile; ?>
-                            </select>
-                        </td>
-                    </tr>
-                    <?php if ($corona == 'PasienCorona'): ?>
-                        <?php $hasilcorona = bukaquery("select
-                            pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah, 
-                            kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah, 
-                            peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,  
-                            plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,  
-                            desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,   
-                            mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,    
-                            desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,  
-                            covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd, 
-                            nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6, 
-                            covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind 
-                            from perawatan_corona where no_rawat = '$norawat'"
-                        ); ?>
-                        <?php while ($bariscorona = mysqli_fetch_array($hasilcorona)): ?>
-                            <tr class="head">
-                                <td width="41%">Dilakukan Pemulasaran Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="pemulasaraan_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytpemulasaraan_jenazah'] ?>"><?= $bariscorona['pemulasaraan_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Kantong Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="kantong_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytkantong_jenazah'] ?>"><?= $bariscorona['kantong_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Peti Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="peti_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytpeti_jenazah'] ?>"><?= $bariscorona['peti_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Plastik Erat?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="plastik_erat" class="text3">
-                                        <option value="<?= $bariscorona['ytplastik_erat'] ?>"><?= $bariscorona['plastik_erat'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Desinfektan Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="desinfektan_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytdesinfektan_jenazah'] ?>"><?= $bariscorona['desinfektan_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Mobil Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="mobil_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytmobil_jenazah'] ?>"><?= $bariscorona['mobil_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Menggunakan Desinfektan Mobil Jenazah?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="desinfektan_mobil_jenazah" class="text3">
-                                        <option value="<?= $bariscorona['ytdesinfektan_mobil_jenazah'] ?>"><?= $bariscorona['desinfektan_mobil_jenazah'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Status Covid/Corona</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="covid19_status_cd" class="text3">
-                                        <option value="<?= $bariscorona['ytcovid19_status_cd'] ?>"><?= $bariscorona['covid19_status_cd'] ?></option>
-                                        <option value="1">ODP</option>
-                                        <option value="2">PDP</option>
-                                        <option value="3">Positif</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">No. Jaminan/NIK/KITAS/KITAP/PASPOR/JKN</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="nomor_kartu_t" class="text" type="text" class="inputbox" value="<?= $bariscorona['nomor_kartu_t'] ?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang ICU Dengan Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes1" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes1'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang ICU Tanpa Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes2" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes2'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Dengan Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes3" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes3'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Tanpa Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes4" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes4'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Dengan Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes5" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes5'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Tanpa Ventilator</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="episodes6" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes6'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="41%">Ada Comorbid/Complexity/Penyerta?</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="covid19_cc_ind" class="text3">
-                                        <option value="<?= $bariscorona['ytcovid19_cc_ind'] ?>"><?= $bariscorona['covid19_cc_ind'] ?></option>
-                                        <option value="1">Ya</option>
-                                        <option value="0">Tidak</option>
-                                    </select> 
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
+                            $billing = mysqli_fetch_array($querybilling);
+                            $prosedur_non_bedah = $billing['prosedur_non_bedah'];
+                            $prosedur_bedah = $billing['prosedur_bedah'];
+                            $konsultasi = $billing['konsultasi'];
+                            $tenaga_ahli = 0;
+                            $keperawatan = $billing['keperawatan'];
+                            $radiologi = $billing['radiologi'];
+                            $laboratorium = $billing['laboratorium'];
+                            $kamar = $billing['kamar'];
+                            $obat_kronis = $billing['obat_kronis'];
+                            $obat_kemoterapi = $billing['obat_kemoterapi'];
+                            $obat = $billing['obat'] - $obat_kronis - $obat_kemoterapi;
+                            $bmhp = $billing['bmhp'];
+                            $sewa_alat = $billing['sewa_alat'];
+                            $rehabilitasi = $billing['rehabilitasi'];
+                            $totalbilling = $billing['totalbilling'];
+                        ?>
+                        <tr class="head">
+                            <td width="41%">Biaya Prosedur Non Bedah</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_prosedur_non_bedah" name="prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_non_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Prosedur Bedah</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_prosedur_bedah" name="prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Konsultasi</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_konsultasi" name="konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $konsultasi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Tenaga Ahli</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_tenaga_ahli" name="tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $tenaga_ahli ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Keperawatan</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_keperawatan" name="keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $keperawatan ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Penunjang</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_penunjang" name="penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Radiologi</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_radiologi" name="radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $radiologi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Laboratorium</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_laboratorium" name="laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $laboratorium ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Pelayanan Darah</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_pelayanan_darah" name="pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Rehabilitasi</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_rehabilitasi" name="rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Kamar</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_kamar" name="kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $kamar ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Rawat Intensif</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_rawat_intensif" name="rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Obat</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_obat" name="obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Obat Kronis</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_obat_kronis" name="obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kronis ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Obat Kemoterapi</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_obat_kemoterapi" name="obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kemoterapi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Alkes</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_alkes" name="alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya BMHP</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_bmhp" name="bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $bmhp ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Biaya Sewa Alat</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_sewa_alat" name="sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $sewa_alat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Tarif Poli Eksekutif</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">TOTAL BILLING</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <span>Rp. </span><span id="totalbilling"><?= $totalbilling ?></span>
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Nama Dokter</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <select name="nama_dokter" class="text2" style="font-family: Tahoma">
+                                    <option value="<?= $nm_dokter ?>"><?= $nm_dokter ?></option>
+                                    <?php $hasildokter = bukaquery("select nm_dokter from dokter order by nm_dokter asc"); ?>
+                                    <?php while ($barisdokter = mysqli_fetch_array($hasildokter)): ?>
+                                        <option value="<?= $barisdokter['nm_dokter'] ?>"><?= $barisdokter['nm_dokter'] ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <?php if ($corona == 'PasienCorona'): ?>
+                            <?php $hasilcorona = bukaquery("select
+                                pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah, 
+                                kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah, 
+                                peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,  
+                                plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,  
+                                desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,   
+                                mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,    
+                                desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,  
+                                covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd, 
+                                nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6, 
+                                covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind 
+                                from perawatan_corona where no_rawat = '$norawat'"
+                            ); ?>
+                            <?php while ($bariscorona = mysqli_fetch_array($hasilcorona)): ?>
+                                <tr class="head">
+                                    <td width="41%">Dilakukan Pemulasaran Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="pemulasaraan_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytpemulasaraan_jenazah'] ?>"><?= $bariscorona['pemulasaraan_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Kantong Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="kantong_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytkantong_jenazah'] ?>"><?= $bariscorona['kantong_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Peti Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="peti_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytpeti_jenazah'] ?>"><?= $bariscorona['peti_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Plastik Erat?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="plastik_erat" class="text3">
+                                            <option value="<?= $bariscorona['ytplastik_erat'] ?>"><?= $bariscorona['plastik_erat'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Desinfektan Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="desinfektan_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytdesinfektan_jenazah'] ?>"><?= $bariscorona['desinfektan_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Mobil Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="mobil_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytmobil_jenazah'] ?>"><?= $bariscorona['mobil_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Menggunakan Desinfektan Mobil Jenazah?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="desinfektan_mobil_jenazah" class="text3">
+                                            <option value="<?= $bariscorona['ytdesinfektan_mobil_jenazah'] ?>"><?= $bariscorona['desinfektan_mobil_jenazah'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Status Covid/Corona</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="covid19_status_cd" class="text3">
+                                            <option value="<?= $bariscorona['ytcovid19_status_cd'] ?>"><?= $bariscorona['covid19_status_cd'] ?></option>
+                                            <option value="1">ODP</option>
+                                            <option value="2">PDP</option>
+                                            <option value="3">Positif</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">No. Jaminan/NIK/KITAS/KITAP/PASPOR/JKN</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="nomor_kartu_t" class="text" type="text" class="inputbox" value="<?= $bariscorona['nomor_kartu_t'] ?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang ICU Dengan Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes1" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes1'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang ICU Tanpa Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes2" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes2'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Dengan Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes3" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes3'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Tanpa Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes4" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes4'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Dengan Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes5" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes5'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Tanpa Ventilator</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <input name="episodes6" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes6'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="41%">Ada Comorbid/Complexity/Penyerta?</td>
+                                    <td>:</td>
+                                    <td width="57%">
+                                        <select name="covid19_cc_ind" class="text3">
+                                            <option value="<?= $bariscorona['ytcovid19_cc_ind'] ?>"><?= $bariscorona['covid19_cc_ind'] ?></option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select> 
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </table>
             </div>
@@ -871,6 +869,8 @@
 
                     if ((int) round($validasi) === 0) {
                         if ($corona == 'PasienCorona') {
+                            echo "Bridging klaim INACBG untuk Pasien Covid-19 belum support!";
+                            /*
                             $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
                             $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
                             $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
@@ -909,30 +909,53 @@
                             } else {
                                 echo 'Semua field harus isi..!!!';
                             }
+                            */
                         } else {
                             if ($action == 'stage2') {
-                                $special_cmg = implode('#', [
+                                $special_cmg = implode('#', array_filter([
                                     $special_procedure,
                                     $special_prosthesis,
                                     $special_investigation,
                                     $special_drug,
-                                ]);
+                                ]));
 
-                                $action = GroupingStage2($nomor_sep, $special_cmg);
+                                ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2Smc($nomor_sep, $special_cmg);
+
+                                if (! $success) {
+                                    echo $error;
+                                    echo <<<HTML
+                                        <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=stage2">
+                                    HTML;
+                                } else {
+                                    echo <<<HTML
+                                        <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true">
+                                    HTML;
+                                }
                             } else {
                                 if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
                                     BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
                                     EditUlangKlaim($nosep);
-                                    $action = UpdateDataKlaim2($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                    ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                         $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
                                         $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
                                         $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
                                         $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                         $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                         $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
-                                    echo <<<HTML
-                                        <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action={$action}">
-                                    HTML;
+                                    if (! $success) {
+                                        echo $error;
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
+                                        HTML;
+                                    } else if ($success && $data = 'stage2') {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
+                                        HTML;
+                                    } else {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
+                                        HTML;
+                                    }
                                 } else {
                                     echo 'Semua field harus isi..!!!';
                                 }
