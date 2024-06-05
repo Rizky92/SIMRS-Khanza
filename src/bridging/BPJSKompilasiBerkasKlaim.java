@@ -2418,13 +2418,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     public void tampilINACBG() {
-        String aksi = "BukanCorona";
+        String corona = "BukanCorona";
+        
         if (Sequel.cariBooleanSmc("select * from perawatan_corona where perawatan_corona.no_rawat = ?", lblNoRawat.getText())) {
-            aksi = "PasienCorona";
+            corona = "PasienCorona";
         }
+        
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
             + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB()
-            + "&page=DetailKirimSmc&nosep=" + lblNoSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + aksi;
+            + "&page=DetailKirimSmc&nosep=" + lblNoSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + corona;
         Platform.runLater(() -> {
             WebView view = new WebView();
             engine = view.getEngine();
