@@ -1011,12 +1011,6 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="198" y="0" width="1" height="60" uuid="b97ad227-2628-43dc-a0d9-9fce8d6fe982"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<line>
 				<reportElement positionType="Float" x="0" y="60" width="557" height="1" uuid="6ab40595-9413-4a5e-bd63-6d514c71032b"/>
 				<graphicElement>
 					<pen lineWidth="0.75" lineStyle="Solid"/>
@@ -1091,8 +1085,14 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="198" y="0" width="1" height="60" uuid="de6d0b56-57c2-4558-a1b7-4453ca696056"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
 		</band>
-		<band height="175" splitType="Prevent">
+		<band height="146" splitType="Prevent">
 			<line>
 				<reportElement positionType="Float" x="0" y="15" width="557" height="1" uuid="5ebbc599-8608-449e-966b-bd99ca38ad37"/>
 				<graphicElement>
@@ -1111,7 +1111,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				<text><![CDATA[III. STATUS LOKALIS]]></text>
 			</staticText>
 			<image scaleImage="FillFrame" isUsingCache="true" onErrorType="Blank">
-				<reportElement positionType="Float" x="3" y="19" width="551" height="123" uuid="f76e15c4-4f7a-47f9-8ff8-39a1f2cdb512"/>
+				<reportElement positionType="Float" x="3" y="19" width="240" height="123" uuid="f76e15c4-4f7a-47f9-8ff8-39a1f2cdb512"/>
 				<imageExpression><![CDATA[$P{lokalis}]]></imageExpression>
 			</image>
 			<line>
@@ -1121,7 +1121,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="3" y="146" width="550" height="27" uuid="44e779f5-1209-4b2d-b8a8-c2dd47d6797a">
+				<reportElement positionType="Float" x="250" y="19" width="304" height="123" uuid="44e779f5-1209-4b2d-b8a8-c2dd47d6797a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1131,13 +1131,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA["Keterangan : "+$F{ket_lokalis}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="Float" x="0" y="174" width="557" height="1" uuid="3d6f79e3-0d2a-40fe-aa75-a882ddf3443e"/>
-				<graphicElement>
-					<pen lineWidth="0.75" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="175" uuid="9946cfb2-055c-4853-b175-2b6a31d85ae4">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="145" uuid="9946cfb2-055c-4853-b175-2b6a31d85ae4">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1145,11 +1139,17 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="556" y="0" width="1" height="175" uuid="6afd264e-c471-4d07-8e98-0631b42ae29a">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="556" y="0" width="1" height="145" uuid="6afd264e-c471-4d07-8e98-0631b42ae29a">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="246" y="16" width="1" height="128" uuid="b97ad227-2628-43dc-a0d9-9fce8d6fe982"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 		</band>
@@ -1285,9 +1285,9 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="145" splitType="Prevent">
+		<band height="30" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="3" y="17" width="550" height="124" uuid="1d346b8e-53ea-457f-b6d0-460ee30e034d">
+				<reportElement positionType="Float" x="3" y="17" width="550" height="12" uuid="1d346b8e-53ea-457f-b6d0-460ee30e034d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
@@ -1308,13 +1308,13 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				<text><![CDATA[VI. TATALAKSANA]]></text>
 			</staticText>
 			<line>
-				<reportElement positionType="Float" x="0" y="144" width="557" height="1" uuid="554b2ed8-96c2-4283-b99d-499c8dd939f6"/>
+				<reportElement positionType="Float" x="1" y="29" width="557" height="1" uuid="554b2ed8-96c2-4283-b99d-499c8dd939f6"/>
 				<graphicElement>
 					<pen lineWidth="0.75" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="556" y="0" width="1" height="144" uuid="210370e1-5699-4071-8263-4c2be50deca7">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="556" y="0" width="1" height="29" uuid="210370e1-5699-4071-8263-4c2be50deca7">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1322,7 +1322,7 @@ where penilaian_medis_igd.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="144" uuid="dde71b26-e638-4dde-824c-95453d8aff8c">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="29" uuid="dde71b26-e638-4dde-824c-95453d8aff8c">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
