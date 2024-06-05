@@ -192,6 +192,46 @@
                     <?php if ($action == 'stage2'): ?>
                         <tr class="head"><td colspan="3"><hr></td></tr>
                         <tr class="head">
+                            <td width="41%">Diagnosa</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <?php
+                                    $penyakit = '';
+                                    $a = 1;
+                                    $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                    while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
+                                        if ($a == 1) {
+                                            $penyakit = $barispenyakit['kd_penyakit'];
+                                        } else {
+                                            $penyakit .= '#'.$barispenyakit['kd_penyakit'];
+                                        }
+                                        $a++;
+                                    }
+                                ?>
+                                <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr class="head">
+                            <td width="41%">Prosedur</td>
+                            <td>:</td>
+                            <td width="57%">
+                                <?php
+                                    $prosedur = '';
+                                    $a = 1;
+                                    $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                    while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
+                                        if ($a == 1) {
+                                            $prosedur = $barisprosedur['kode'];
+                                        } else {
+                                            $prosedur .= '#'.$barisprosedur['kode'];
+                                        }
+                                        $a++;
+                                    }
+                                ?>
+                                <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
+                            </td>
+                        </tr>
+                        <tr class="head">
                             <td width="41%">Special Procedure</td>
                             <td>:</td>
                             <td width="57%">
