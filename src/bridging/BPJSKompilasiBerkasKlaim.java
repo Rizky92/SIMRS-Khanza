@@ -38,6 +38,7 @@ import java.util.Locale;
 import java.util.Map;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -1142,6 +1143,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if (tabMode.getRowCount() != 0) {
                 try {
                     getData();
+                    tabPane1.setSelectedIndex(0);
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -1153,6 +1155,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
+                    tabPane1.setSelectedIndex(0);
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -2247,7 +2250,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select reg_periksa.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.status_lanjut, reg_periksa.tgl_registrasi, date (bridging_sep.tglpulang) as tglpulang, kamar_inap.stts_pulang, " +
             "case when reg_periksa.status_lanjut = 'Ranap' then concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) when reg_periksa.status_lanjut = 'Ralan' then poliklinik.nm_poli end as ruangan, diagnosa_pasien.kd_penyakit, " +
-            "exists(select * from inacbg_data_terkirim2 where inacbg_data_terkirim2.no_sep = bridging_sep.no_sep) as inacbg_terkirim from reg_periksa join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+            "exists(select * from inacbg_cetak_klaim where inacbg_cetak_klaim.no_sep = bridging_sep.no_sep) as inacbg_terkirim from reg_periksa join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
             "join bridging_sep on reg_periksa.no_rawat = bridging_sep.no_rawat and (if (reg_periksa.status_lanjut = 'Ranap', '1', '2')) = bridging_sep.jnspelayanan join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
             "join diagnosa_pasien on reg_periksa.no_rawat = diagnosa_pasien.no_rawat and reg_periksa.status_lanjut = diagnosa_pasien.status and diagnosa_pasien.prioritas = '1' " +
             "left join kamar_inap on reg_periksa.no_rawat = kamar_inap.no_rawat and kamar_inap.stts_pulang != 'Pindah Kamar' left join kamar on kamar_inap.kd_kamar = kamar.kd_kamar left join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
@@ -2396,7 +2399,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText());
             panelDiagnosaSmc.batal();
             panelDiagnosaSmc.pilihTab(0);
-            tabPane1.setSelectedIndex(0);
             tampilINACBG();
             tampilBilling();
         }
@@ -2419,14 +2421,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     public void tampilINACBG() {
         String corona = "BukanCorona";
+        String aksi = "";
         
         if (Sequel.cariBooleanSmc("select * from perawatan_corona where perawatan_corona.no_rawat = ?", lblNoRawat.getText())) {
             corona = "PasienCorona";
         }
         
+        if (btnPDFKlaimINACBG.isEnabled()) {
+            aksi = "&sukses=true&action=selesai";
+        }
+        
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() 
             + "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB()
-            + "&page=DetailKirimSmc&nosep=" + lblNoSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + corona;
+            + "&page=DetailKirimSmc&nosep=" + lblNoSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + corona + aksi;
         Platform.runLater(() -> {
             WebView view = new WebView();
             engine = view.getEngine();
@@ -2441,6 +2448,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     });
                 }
             });
+            
+            engine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends Worker.State> ov, Worker.State oldState, Worker.State newState) -> {
+                if (newState == Worker.State.SUCCEEDED) {
+                    try {
+                        if (engine.getLocation().replaceAll(url, "").contains("action=selesai")) {
+                            getData();
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("Notifikasi : " + ex);
+                    }
+                }
+            });
+            
             jfxPanelicare.setScene(new Scene(view));
             try {
                 engine.load(url);

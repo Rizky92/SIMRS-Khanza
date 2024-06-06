@@ -1182,6 +1182,8 @@
         ];
     
         $msg = Request(json_encode($request));
+
+        print_r($msg);
     
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
@@ -1334,7 +1336,7 @@
     
         file_put_contents('pages/pdf/'.$nomor_sep.'.pdf', base64_decode($encodedPDF));
     
-        if (bukaquery2("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')")[0] == '0') {
+        if (mysqli_fetch_array(bukaquery2("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')"))[0] == '0') {
             InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
         }
     
