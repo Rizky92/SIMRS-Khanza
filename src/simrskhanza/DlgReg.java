@@ -15503,8 +15503,17 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnHasilPemeriksaanUSGGynecologi,
                                  MnHasilPemeriksaanEKG,
                                  MnSudahTerbitSEP,
-                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,
-            MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan;
+                                 MnInputNoAntrianRegistrasi,
+                                 MnPenatalaksanaanTerapiOkupasi,
+                                 MnHasilPemeriksaanUSGNeonatus,
+                                 MnHasilEndoskopiFaringLaring,
+                                 MnHasilEndoskopiHidung,
+                                 MnHasilEndoskopiTelinga,
+                                 MnPenilaianPasienImunitasRendah,
+                                 MnCatatanKeseimbanganCairan,
+                                 MnCatatanObservasiCHBP,
+                                 MnCatatanObservasiInduksiPersalinan,
+                                 MnUpdateJamRegistrasiNonBPJS;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
    
     private void tampil() {
@@ -16606,7 +16615,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnInputNoAntrianRegistrasi.setName("MnInputNoAntrianRegistrasi"); 
         MnInputNoAntrianRegistrasi.setPreferredSize(new java.awt.Dimension(320, 26));
         MnInputNoAntrianRegistrasi.addActionListener(this::MnInputNoAntrianRegistrasiActionPerformed);
-        jPopupMenu1.add(MnInputNoAntrianRegistrasi, 0);
+        jPopupMenu1.add(MnInputNoAntrianRegistrasi, 1);
         
         MnHasilEndoskopiFaringLaring = new javax.swing.JMenuItem();
         MnHasilEndoskopiFaringLaring.setBackground(new java.awt.Color(255, 255, 254));
@@ -16815,6 +16824,19 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMCatatanMonitoring.add(MnCatatanObservasiIGD);
         MnRMCatatanMonitoring.add(MnCatatanObservasiCHBP);
         MnRMCatatanMonitoring.add(MnCatatanObservasiInduksiPersalinan);
+        
+        MnUpdateJamRegistrasiNonBPJS = new javax.swing.JMenuItem();
+        MnUpdateJamRegistrasiNonBPJS.setBackground(new java.awt.Color(255, 255, 254));
+        MnUpdateJamRegistrasiNonBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnUpdateJamRegistrasiNonBPJS.setForeground(new java.awt.Color(50, 50, 50));
+        MnUpdateJamRegistrasiNonBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnUpdateJamRegistrasiNonBPJS.setText("Update Jam Registrasi Non BPJS");
+        MnUpdateJamRegistrasiNonBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnUpdateJamRegistrasiNonBPJS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnUpdateJamRegistrasiNonBPJS.setName("MnUpdateJamRegistrasiNonBPJS"); 
+        MnUpdateJamRegistrasiNonBPJS.setPreferredSize(new java.awt.Dimension(320, 26));
+        MnUpdateJamRegistrasiNonBPJS.addActionListener(this::MnUpdateJamRegistrasiNonBPJSActionPerformed);
+        jPopupMenu1.add(MnUpdateJamRegistrasiNonBPJS, 0);
     }
     
     private void ganti(){
@@ -16846,6 +16868,16 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             tabMode.setValueAt(kdpoli.getText(),tbPetugas.getSelectedRow(),21);
             tabMode.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),22);
             emptTeks();
+        }
+    }
+    
+    private void MnUpdateJamRegistrasiNonBPJSActionPerformed(java.awt.event.ActionEvent evt) {
+        if (tbPetugas.getRowCount() == 0) {
+            
+        } else if (tbPetugas.getSelectedRow() < 0) {
+            
+        } else {
+            
         }
     }
 }

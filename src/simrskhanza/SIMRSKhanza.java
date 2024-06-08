@@ -11,6 +11,7 @@
  */
 package simrskhanza;
 
+import fungsi.sekuel;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -27,6 +28,8 @@ public class SIMRSKhanza {
            frmUtama utama=frmUtama.getInstance();
            utama.isWall();
            utama.setVisible(true);
+           
+            sekuel.nyalakanBatasEdit();
         }); 
     }
     
