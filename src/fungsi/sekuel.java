@@ -80,7 +80,7 @@ public final class sekuel {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            sekuel.pemberlakuanBatasEdit = true;
+            sekuel.pemberlakuanBatasEdit = false;
         }
         
         System.out.println("\nPemberlakuan Batas Edit : " + (sekuel.pemberlakuanBatasEdit ? "AKTIF" : "TIDAK AKTIF"));
