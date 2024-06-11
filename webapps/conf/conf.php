@@ -641,7 +641,11 @@
     }
         
     function formatDuit2($duit){
-        return @number_format($duit,0,",",".")."";
+        return @number_format((float)$duit,0,",",".")."";
+    }
+
+    function formatDuitSmc($duit) {
+        return (round($duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
     }
         
     function formatDec($duit){
@@ -927,5 +931,4 @@
         elseif ($x < 1000000000)
           return Terbilang($x / 1000000) . " juta" . Terbilang($x % 1000000);
     }
-        
 ?>

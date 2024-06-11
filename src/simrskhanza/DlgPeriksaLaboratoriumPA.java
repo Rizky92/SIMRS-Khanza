@@ -1101,7 +1101,6 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
                 param.put("jampermintaan",Sequel.cariIsi("select jam_permintaan from permintaan_labpa where noorder=?",noorder)); 
                 Valid.MyReport("rptPeriksaLabPermintaanPA.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);  
             }
-                       
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed

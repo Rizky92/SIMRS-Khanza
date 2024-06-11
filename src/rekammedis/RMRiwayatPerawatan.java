@@ -2849,6 +2849,17 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         isPasien();
         BtnCari1ActionPerformed(null);
     }
+    
+    public void setNoRMKompilasi(String noRawat, String noRM) {
+        NoRM.setText(noRM);
+        NoRawat.setText(noRawat);
+        R4.setSelected(true);
+        TabRawat.setSelectedIndex(2);
+        chkSemua.setSelected(true);
+        chkSemuaItemStateChanged(null);
+        isPasien();
+        BtnCari1ActionPerformed(null);
+    }
 
     private void isPasien() {
         try{

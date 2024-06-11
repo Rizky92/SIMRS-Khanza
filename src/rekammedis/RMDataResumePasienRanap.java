@@ -355,7 +355,6 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         carilaborat.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                System.out.println("WindowClosedEvent : " + e);
                 for (i = 0; i < carilaborat.getTable().getRowCount(); i++) {
                     if (carilaborat.getTable().getValueAt(i, 0).toString().equals("true") || carilaborat.getTable().getSelectedRow() == i) {
                         HasilLaborat.append(carilaborat.getTable().getValueAt(i, 3).toString() + ", ");

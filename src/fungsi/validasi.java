@@ -10,8 +10,8 @@ import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -45,15 +45,14 @@ import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import uz.ncipro.calendar.JDateTimePicker;
 import widget.Button;
 import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
-import java.io.File;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
 import widget.TextBox;
 /**
  *
@@ -100,6 +99,10 @@ public final class validasi {
     
     public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
+    }
+    
+    public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
+        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
     }
     
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {

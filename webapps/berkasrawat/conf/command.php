@@ -27,6 +27,10 @@
         }
     }
 
+    function cekSesiBillingVedika() {
+        return ($_SESSION['ses_admin_berkas_rawat'] ?? null) === 'billing';
+    }
+
     function cekUser() {
         if (isset($_SESSION['ses_admin_berkas_rawat'])) {
             return true;
@@ -87,6 +91,8 @@
                 case 'ListVedika'           : include_once('pages/listvedika.php'); break;
                 default			    : include_once('homevedika.php');
             }
+        } else if (cekSesiBillingVedika()) {
+            include_once('pages/billingklaim.php');
         }else{
             switch ($aksi) {
                 case 'HomeAdmin'            : include_once('homevedika.php'); break;

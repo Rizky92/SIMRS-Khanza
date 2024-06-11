@@ -3,8 +3,10 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="TAMPILANDEFAULTRIWAYATPASIEN">5 riwayat terakhir</entry>
+    <entry key="GUNAKANDIAGNOSAEKLAIM">yes</entry>
     <entry key="VALIDASIRESEPKRONIS">yes</entry>
     <entry key="VALIDASIULANGHASILPERMINTAAN">labpk,labpa,labmb,rad</entry>
+    <entry key="VALIDASIULANGPINDAHKAMAR">yes</entry>
     <entry key="ADAMLABSAPIURL">http://demo.adamlabs.id:2311/adam-lis</entry>
     <entry key="ADAMLABSAPIKEY"></entry>
     <entry key="ADAMLABSAPIKODERS"></entry>

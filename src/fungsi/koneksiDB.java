@@ -121,7 +121,25 @@ public class koneksiDB {
             return "";
         }
     }
+
+    public static boolean GUNAKANDIAGNOSAEKLAIM() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("GUNAKANDIAGNOSAEKLAIM").equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
     
+    public static boolean VALIDASIULANGPINDAHKAMAR() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("VALIDASIULANGPINDAHKAMAR").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

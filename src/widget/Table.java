@@ -30,5 +30,6 @@ public class Table extends JTable {
         getTableHeader().setBackground(new Color(255,250,250));
         getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255,250,250)));
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+        getTableHeader().setReorderingAllowed(false);
     }
 }

@@ -41,10 +41,18 @@ ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAUL
 CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
   `code` varchar(7) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 1
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
+  PRIMARY KEY (`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
+
+CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
+  `no_sep` varchar(40) NOT NULL,
+  `path` varchar(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL DEFAULT NULL AFTER `nama_industri`;
 
@@ -156,11 +164,21 @@ CREATE TABLE IF NOT EXISTS `tampjurnal_smc`  (
   PRIMARY KEY (`kd_rek`, `user_id`, `ip`) USING HASH
 ) ENGINE = MEMORY CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Fixed;
 
+CREATE TABLE IF NOT EXISTS `tempinacbg`  (
+  `coder_nik` varchar(20) NOT NULL,
+  `cmg_code` varchar(10) NOT NULL,
+  `cmg_description` varchar(100) NULL DEFAULT NULL,
+  `cmg_type` varchar(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`coder_nik`, `cmg_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `transfer_pasien_antar_ruang` MODIFY COLUMN IF EXISTS `diagnosa_utama` varchar(100) NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','false') NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_nonmedis` enum('true','false') NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_specimen_radiologi`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 

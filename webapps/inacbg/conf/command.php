@@ -47,7 +47,7 @@
     function formProtek() {
             $aksi=isset($_GET['act'])?$_GET['act']:NULL;
             if (!cekUser()) {
-                $form = array ('HomeAdmin','KlaimBaruOtomatis','KlaimBaruManual','KlaimBaruManual2','DetailKirim');
+                $form = array ('HomeAdmin','KlaimBaruOtomatis','KlaimBaruManual','KlaimBaruManual2','DetailKirim', 'DetailKirimSmc');
                     foreach ($form as $page) {
                         if ($aksi==$page) {
                             echo "<META HTTP-EQUIV = 'Refresh' Content = '0; URL = ?act=Home'>";
@@ -61,16 +61,15 @@
 
     function actionPages() {
         $aksi=isset($_REQUEST['act'])?$_REQUEST['act']:NULL;
-            formProtek();
-            switch ($aksi) {
-                case 'HomeAdmin'            : include_once('pages/kontak.php'); break;
-                case 'KlaimBaruOtomatis'    : include_once('pages/klaimbaruotomatis.php'); break;
-                case 'KlaimBaruManual'      : include_once('pages/klaimbarumanual.php'); break;
-                case 'KlaimBaruManual2'     : include_once('pages/klaimbarumanual2.php'); break;
-                case 'DetailKirim'          : include_once('pages/detailkirim.php'); break;
-
-                default                     : include_once('pages/kontak.php');
-
-            }
+        formProtek();
+        switch ($aksi) {
+            case 'HomeAdmin'            : include_once('pages/kontak.php'); break;
+            case 'KlaimBaruOtomatis'    : include_once('pages/klaimbaruotomatis.php'); break;
+            case 'KlaimBaruManual'      : include_once('pages/klaimbarumanual.php'); break;
+            case 'KlaimBaruManual2'     : include_once('pages/klaimbarumanual2.php'); break;
+            case 'DetailKirim'          : include_once('pages/detailkirim.php'); break;
+            case 'DetailKirimSmc'          : include_once('pages/detailkirimsmc.php'); break;
+            default                     : include_once('pages/kontak.php');
+        }
     }
 ?>
