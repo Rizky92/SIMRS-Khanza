@@ -1,5 +1,28 @@
 SET FOREIGN_KEY_CHECKS=0;
 
+CREATE TABLE IF NOT EXISTS `adamlabs_orderlab`  (
+  `noorder` varchar(20) NOT NULL,
+  `no_laboratorium` varchar(30) NOT NULL,
+  PRIMARY KEY (`noorder`, `no_laboratorium`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `noorder` varchar(20) NULL DEFAULT NULL,
+  `url` varchar(255) NULL DEFAULT NULL,
+  `method` varchar(5) NULL DEFAULT NULL,
+  `request` text NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `response` text NULL DEFAULT NULL,
+  `user_id` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `noorder`(`noorder`) USING BTREE,
+  INDEX `url`(`url`) USING BTREE,
+  INDEX `method`(`method`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` int(10) UNSIGNED NOT NULL,
   `tanggal` date NOT NULL,
