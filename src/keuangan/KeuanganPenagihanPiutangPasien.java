@@ -172,6 +172,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Catatan.setDocument(new batasInput((int)100).getKata(Catatan));
         Ditujukan.setDocument(new batasInput((int)150).getKata(Ditujukan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        Diskon.setDocument(new batasInput((int) 4).getOnlyAngka(Diskon));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -375,6 +376,8 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         LCountDipilih1 = new widget.Label();
         jLabel14 = new widget.Label();
         BtnAll = new widget.Button();
+        label25 = new widget.Label();
+        Diskon = new widget.TextBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbBelumLunas = new widget.Table();
@@ -786,7 +789,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnCari);
-        BtnCari.setBounds(475, 42, 100, 30);
+        BtnCari.setBounds(475, 42, 70, 30);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -841,7 +844,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         LCountDipilih2.setName("LCountDipilih2"); // NOI18N
         LCountDipilih2.setPreferredSize(new java.awt.Dimension(230, 23));
         panelisi1.add(LCountDipilih2);
-        LCountDipilih2.setBounds(602, 10, 170, 23);
+        LCountDipilih2.setBounds(602, 10, 120, 23);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(50, 50, 50));
@@ -904,6 +907,22 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         });
         panelisi1.add(BtnAll);
         BtnAll.setBounds(431, 45, 28, 23);
+
+        label25.setText("Diskon (%) :");
+        label25.setName("label25"); // NOI18N
+        label25.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelisi1.add(label25);
+        label25.setBounds(726, 10, 70, 23);
+
+        Diskon.setName("Diskon"); // NOI18N
+        Diskon.setPreferredSize(new java.awt.Dimension(207, 23));
+        Diskon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiskonKeyPressed(evt);
+            }
+        });
+        panelisi1.add(Diskon);
+        Diskon.setBounds(800, 10, 60, 23);
 
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
@@ -1108,10 +1127,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         jml=tbBelumLunas.getRowCount();
                         for(i=0;i<jml;i++){
                             if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
-                                if(Sequel.menyimpantf2("detail_penagihan_piutang","?,?,?","Detail Penagihan",3,new String[]{
-                                    NoPenagihan.getText(),tbBelumLunas.getValueAt(i,1).toString(),tbBelumLunas.getValueAt(i,6).toString()
-                                })==false){
-                                    sukses=false;
+                                if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", null, 
+                                    NoPenagihan.getText(), tbBelumLunas.getValueAt(i, 1).toString(), tbBelumLunas.getValueAt(i, 6).toString(),
+                                    Valid.SetAngka(Valid.SetAngka(tbBelumLunas.getValueAt(i, 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
+                                )) {
+                                    sukses = false;
                                 }
                             }
                         }
@@ -1395,6 +1415,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
+    private void DiskonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiskonKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiskonKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1422,6 +1446,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Button BtnPenjamin;
     private widget.Button BtnSimpan;
     private widget.TextBox Catatan;
+    private widget.TextBox Diskon;
     private widget.TextBox Ditujukan;
     private widget.TextBox KdAkun;
     private widget.Label LCountBelumDibayar1;
@@ -1463,6 +1488,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Label label20;
     private widget.Label label23;
     private widget.Label label24;
+    private widget.Label label25;
     private widget.Label label32;
     private widget.Label label33;
     private widget.TextBox nmmenyetujui;
