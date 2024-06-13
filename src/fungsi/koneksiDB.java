@@ -104,6 +104,33 @@ public class koneksiDB {
         }
     }
     
+    public static String ADAMLABSKECAMATANID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSKECAMATANID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSKABUPATENID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSKABUPATENID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSPROVINSIID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSPROVINSIID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static String LABORATORIUMKIRIMHASIL() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
