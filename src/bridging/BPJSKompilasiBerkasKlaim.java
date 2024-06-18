@@ -1758,7 +1758,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        resume.setNoRMKompilasi(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 0).toString(), tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 2).toString());
+        resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
         resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         resume.setLocationRelativeTo(internalFrame1);
         resume.setVisible(true);
