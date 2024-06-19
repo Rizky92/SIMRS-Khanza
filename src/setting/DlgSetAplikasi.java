@@ -29,7 +29,6 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -58,7 +57,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         this.setLocation(10,10);
         setSize(457,249);
 
-        Object[] row={"Nama Toko","Alamat Toko","Kota","Propinsi","Aktifkan?","Wallpaper","KontaK","Email","Logo","Kode PPK BPJS","Kode PPK Inhealth","Kode PPK Kemenkes", "Pemberlakuan Batas Edit"};
+        Object[] row={"Nama Toko","Alamat Toko","Kota","Propinsi","Aktifkan?","Wallpaper","KontaK","Email","Logo","Kode PPK BPJS","Kode PPK Inhealth","Kode PPK Kemenkes"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -159,7 +158,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Aplikasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Aplikasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -280,7 +279,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
         panelGlass1.setName("panelGlass1"); // NOI18N
-        panelGlass1.setPreferredSize(new java.awt.Dimension(200, 312));
+        panelGlass1.setPreferredSize(new java.awt.Dimension(200, 282));
         panelGlass1.setLayout(null);
 
         label35.setText("Nama RS :");
@@ -524,23 +523,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         panelGlass1.add(kdPPK2);
         kdPPK2.setBounds(610, 250, 110, 23);
 
-        label13.setText("Aktifkan Pemberlakuan Edit 2x24 Jam ?");
-        label13.setName("label13"); // NOI18N
-        label13.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelGlass1.add(label13);
-        label13.setBounds(0, 280, 220, 23);
-
-        YesNoBatasEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No", "Yes" }));
-        YesNoBatasEdit.setSelectedIndex(1);
-        YesNoBatasEdit.setName("YesNoBatasEdit"); // NOI18N
-        YesNoBatasEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                YesNoBatasEditKeyPressed(evt);
-            }
-        });
-        panelGlass1.add(YesNoBatasEdit);
-        YesNoBatasEdit.setBounds(225, 280, 70, 23);
-
         internalFrame1.add(panelGlass1, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
@@ -613,11 +595,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
         }else if(tabMode.getRowCount()==0){
-            tbAdmin.clearSelection();
             Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
                              "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
-                             "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+"','"+kdPPK2.getText()+
-                             "','"+YesNoBatasEdit.getSelectedItem().toString()+"'","Setting",EGb,ELogo);
+                             "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+"','"+kdPPK2.getText()+"'","Setting",EGb,ELogo);
             tampil();
         }else if(tabMode.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Aplikasi...!!!!");
@@ -723,12 +703,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
         }else{  
-            tbAdmin.clearSelection();
             Sequel.queryu("delete from setting ");
             Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
                              "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
                              "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+
-                             "','"+kdPPK2.getText()+"','"+YesNoBatasEdit.getSelectedItem().toString()+"'","Setting",EGb,ELogo);
+                             "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+"','"+kdPPK2.getText()+"'","Setting",EGb,ELogo);
             tampil();
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -752,10 +731,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private void kdPPK2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdPPK2KeyPressed
         Valid.pindah(evt,kdPPK1,BtnCariLogo);
     }//GEN-LAST:event_kdPPK2KeyPressed
-
-    private void YesNoBatasEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YesNoBatasEditKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_YesNoBatasEditKeyPressed
 
     /**
     * @param args the command line arguments
@@ -819,7 +794,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes,pemberlakuan_2x24_jam from setting";
+        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes, from setting";
         prosesCari(sql);
     }
 
@@ -831,7 +806,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 Object[] data={rs.getString(1),rs.getString(2),rs.getString(3),
                                rs.getString(4),rs.getString(5),rs.getBlob(6),
                                rs.getString(7),rs.getString(8),rs.getBlob(9),
-                               rs.getString(10),rs.getString(11),rs.getString(12),(rs.getBoolean(13) ? "Yes" : "No")
+                               rs.getString(10),rs.getString(11),rs.getString(12)
                 };
                 tabMode.addRow(data);
             }
@@ -853,7 +828,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             kdPPK.setText(tabMode.getValueAt(row,9).toString());
             kdPPK1.setText(tabMode.getValueAt(row,10).toString());
             kdPPK2.setText(tabMode.getValueAt(row,11).toString());
-            YesNoBatasEdit.setSelectedItem(tabMode.getValueAt(row, 12).toString());
             try {
                 ResultSet hasil = koneksi.prepareStatement("select wallpaper,logo from setting").executeQuery();
                 for (int I = 0; hasil.next(); I++) {

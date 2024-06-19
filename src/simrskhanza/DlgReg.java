@@ -16615,7 +16615,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnInputNoAntrianRegistrasi.setName("MnInputNoAntrianRegistrasi"); 
         MnInputNoAntrianRegistrasi.setPreferredSize(new java.awt.Dimension(320, 26));
         MnInputNoAntrianRegistrasi.addActionListener(this::MnInputNoAntrianRegistrasiActionPerformed);
-        jPopupMenu1.add(MnInputNoAntrianRegistrasi, 1);
+        jPopupMenu1.add(MnInputNoAntrianRegistrasi, 0);
         
         MnHasilEndoskopiFaringLaring = new javax.swing.JMenuItem();
         MnHasilEndoskopiFaringLaring.setBackground(new java.awt.Color(255, 255, 254));
