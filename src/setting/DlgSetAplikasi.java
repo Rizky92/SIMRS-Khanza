@@ -146,8 +146,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPK1 = new widget.TextBox();
         label44 = new widget.Label();
         kdPPK2 = new widget.TextBox();
-        label13 = new widget.Label();
-        YesNoBatasEdit = new widget.ComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -768,13 +766,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private widget.TextBox Propinsi;
     private widget.ScrollPane Scroll;
     private widget.ComboBox YesNo;
-    private widget.ComboBox YesNoBatasEdit;
     private widget.InternalFrame internalFrame1;
     private widget.TextBox kdPPK;
     private widget.TextBox kdPPK1;
     private widget.TextBox kdPPK2;
     private widget.Label label12;
-    private widget.Label label13;
     private widget.Label label34;
     private widget.Label label35;
     private widget.Label label36;
@@ -794,7 +790,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes, from setting";
+        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes from setting";
         prosesCari(sql);
     }
 
