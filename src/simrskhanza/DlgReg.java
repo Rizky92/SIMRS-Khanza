@@ -16873,11 +16873,37 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void MnUpdateJamRegistrasiNonBPJSActionPerformed(java.awt.event.ActionEvent evt) {
         if (tbPetugas.getRowCount() == 0) {
-            
-        } else if (tbPetugas.getSelectedRow() < 0) {
-            
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa dipilih...!!!!");
+            return;
+        }
+        
+        if (tbPetugas.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau diupdate terlebih dahulu...!!!!");
+            return;
+        }
+        
+        String kodePJ = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString();
+        String noRawat = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString();
+        
+        if (kodePJ.equals("BPJ")) {
+            JOptionPane.showMessageDialog(null, "Maaf, hanya dibolehkan untuk pasien Non BPJS...!!!!");
+            return;
+        }
+        
+        if (akses.getadmin()) {
+            Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
         } else {
-            
+            if (
+                Sequel.cariBooleanSmc("select * from pemeriksaan_ralan where no_rawat = ?", noRawat) ||
+                Sequel.cariIsiSmc("select stts from reg_periksa where no_rawat = ?", noRawat).equalsIgnoreCase("sudah")
+            ) {
+                JOptionPane.showMessageDialog(null, "Maaf, pasien sudah menerima pelayanan...!!!!");
+            } else {
+                if (Sequel.cekTanggal48jam(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString() + " " + tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 4).toString(), Sequel.ambiltanggalsekarang())) {
+                    Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
+                    tbPetugas.setValueAt(Sequel.ambiltanggalsekarang().substring(11), tbPetugas.getSelectedRow(), 4);
+                }
+            }
         }
     }
 }
