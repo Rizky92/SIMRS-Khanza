@@ -1275,14 +1275,14 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         }else if(NmRuangOperasi.getText().trim().equals("")){
             Valid.textKosong(BtnRuangOperasi,"Ruang Operasi");
         } else if (Sequel.cariIntegerSmc(
-            "select count(*) from booking_operasi where (kd_ruang_ok = ? or kd_dokter = ?) and no_rawat != ? and status != 'Selesai' " +
-            "and cast(concat(tanggal, ' ', jam_mulai) as datetime) between concat(?, ' ', ?) and " +
-            "(if (cast(? as time) > cast(? as time), concat(date_add(?, interval 1 day), ' ', ?), concat(?, ' ', ?)))",
+            "select count(*) from booking_operasi where (kd_ruang_ok = ? or kd_dokter = ?) and no_rawat != ? and status != 'Selesai' and ( " +
+            "if (time_to_sec(?) > time_to_sec(?), (tanggal = ? and jam_mulai >= ?) or (tanggal = date_add(?, interval 1 day) and jam_mulai <= ?), " +
+            "(tanggal = ? and jam_mulai between ? and ?)))",
             KdRuangOperasi.getText(), KdDokter.getText(), TNoRw.getText(),
-            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai),
             Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai),
+            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai),
             Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai),
-            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai)
+            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai)
         ) > 0) {
             JOptionPane.showMessageDialog(rootPane,"Jadwal bentrok dengan jam mulai operasi yang lain..!!");
             JamMulai.requestFocus();
