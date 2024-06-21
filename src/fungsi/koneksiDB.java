@@ -1510,6 +1510,26 @@ public class koneksiDB {
         return var;
     }
     
+    public static String SFTPMANDIRIPATHACK(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("SFTPMANDIRIPATHACK"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String SFTPMANDIRIPATHMT940(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("SFTPMANDIRIPATHMT940"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
     public static String SFTPMANDIRIHOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1544,6 +1564,16 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("SFTPMANDIRIPAS"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String KUNCIDOKTERRANAP(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("KUNCIDOKTERRANAP"));
         }catch(Exception e){
             var=""; 
         }

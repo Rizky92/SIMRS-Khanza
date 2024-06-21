@@ -58,9 +58,9 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Kode","Metode Pembayaran","Biaya Transaksi"};
-        
-        tabMode=new DefaultTableModel(null,row){
+        tabMode=new DefaultTableModel(null,new Object[]{
+                "Kode Metode","Metode Pembayaran","Biaya","Kode Bank","Bank Tujuan Transaksi","Kode Transaksi"}
+            ){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
@@ -68,14 +68,20 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(70);
             }else if(i==1){
-                column.setPreferredWidth(420);
+                column.setPreferredWidth(170);
             }else if(i==2){
+                column.setPreferredWidth(70);
+            }else if(i==3){
                 column.setPreferredWidth(100);
+            }else if(i==4){
+                column.setPreferredWidth(200);
+            }else if(i==5){
+                column.setPreferredWidth(90);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -131,15 +137,12 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Kode Transaksi Bank Tujuan Transfer Bank Mandir ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Kode Transaksi Bank Tujuan Transfer Bank Mandiri ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -295,7 +298,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        MandiriMetodePembayaran form=new MandiriMetodePembayaran(null,false);
+        MandiriKodeTransaksiTujuanTransfer form=new MandiriKodeTransaksiTujuanTransfer(null,false);
         form.emptTeks();
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         form.setLocationRelativeTo(internalFrame1);
@@ -305,13 +308,9 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         
     }//GEN-LAST:event_BtnTambahActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        emptTeks();
-    }//GEN-LAST:event_formWindowActivated
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/mandirimetodepembayaran.iyem")<30){
+            if(Valid.daysOld("./cache/kodetransaksitujuantransfer.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -365,16 +364,21 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
-            file=new File("./cache/mandirimetodepembayaran.iyem");
+            file=new File("./cache/kodetransaksitujuantransfer.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
             iyem="";
-            ps=koneksi.prepareStatement("select * from metode_pembayaran_bankmandiri order by metode_pembayaran_bankmandiri.kode_metode");
+            ps=koneksi.prepareStatement(
+                   "select kodetransaksi_tujuan_transfer_bankmandiri.kode_metode,metode_pembayaran_bankmandiri.nama_metode,metode_pembayaran_bankmandiri.biaya_transaksi,"+
+                   "kodetransaksi_tujuan_transfer_bankmandiri.kode_bank,bank_tujuan_transfer_bankmandiri.nama_bank,kodetransaksi_tujuan_transfer_bankmandiri.kode_transaksi "+
+                   "from kodetransaksi_tujuan_transfer_bankmandiri inner join metode_pembayaran_bankmandiri on kodetransaksi_tujuan_transfer_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode "+
+                   "inner join bank_tujuan_transfer_bankmandiri on bank_tujuan_transfer_bankmandiri.kode_bank=kodetransaksi_tujuan_transfer_bankmandiri.kode_bank "+
+                   "order by kodetransaksi_tujuan_transfer_bankmandiri.kode_metode");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3)});
-                    iyem=iyem+"{\"Kode\":\""+rs.getString(1)+"\",\"MetodePembayaran\":\""+rs.getString(2)+"\",\"BiayaTransaksi\":\""+rs.getString(3)+"\"},";
+                    tabMode.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
+                    iyem=iyem+"{\"KodeMetode\":\""+rs.getString(1)+"\",\"MetodePembayaran\":\""+rs.getString(2)+"\",\"BiayaTransaksi\":\""+rs.getString(3)+"\",\"KodeBank\":\""+rs.getString(4)+"\",\"NamaBank\":\""+rs.getString(5)+"\",\"KodeTransaksi\":\""+rs.getString(6)+"\"},";
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -386,7 +390,7 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
                     ps.close();
                 }
             }
-            fileWriter.write("{\"mandirimetodepembayaran\":["+iyem.substring(0,iyem.length()-1)+"]}");
+            fileWriter.write("{\"kodetransaksitujuantransfer\":["+iyem.substring(0,iyem.length()-1)+"]}");
             fileWriter.flush();
             fileWriter.close();
             iyem=null;
@@ -398,22 +402,22 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
 
     private void tampil2() {
         try {
-            myObj = new FileReader("./cache/mandirimetodepembayaran.iyem");
+            myObj = new FileReader("./cache/kodetransaksitujuantransfer.iyem");
             root = mapper.readTree(myObj);
             Valid.tabelKosong(tabMode);
-            response = root.path("mandirimetodepembayaran");
+            response = root.path("kodetransaksitujuantransfer");
             if(response.isArray()){
                 if(TCari.getText().trim().equals("")){
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
-                            list.path("Kode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText()
+                            list.path("KodeMetode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText(),list.path("KodeBank").asText(),list.path("NamaBank").asText(),list.path("KodeTransaksi").asText()
                         }); 
                     }
                 }else{
                     for(JsonNode list:response){
-                        if(list.path("Kode").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("MetodePembayaran").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                        if(list.path("KodeMetode").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("MetodePembayaran").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("KodeBank").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBank").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabMode.addRow(new Object[]{
-                                list.path("Kode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText()
+                                list.path("KodeMetode").asText(),list.path("MetodePembayaran").asText(),list.path("BiayaTransaksi").asText(),list.path("KodeBank").asText(),list.path("NamaBank").asText(),list.path("KodeTransaksi").asText()
                             });                    
                         }
                     }
@@ -426,7 +430,8 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         LCount.setText(""+tabMode.getRowCount());
     }
     
-    public void emptTeks() {
+    public void setCari(String data) {
+        TCari.setText(data);
         TCari.requestFocus();
     }
 
@@ -436,6 +441,6 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
     }
     
     public void isCek(){        
-        BtnTambah.setEnabled(akses.getmetode_pembayaran_bankmandiri());
+        BtnTambah.setEnabled(akses.getkodetransaksi_tujuan_transfer_bankmandiri());
     }
 }
