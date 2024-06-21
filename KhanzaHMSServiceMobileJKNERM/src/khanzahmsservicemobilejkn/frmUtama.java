@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.Timer;
@@ -186,11 +188,13 @@ public class frmUtama extends javax.swing.JFrame {
             private int nilai_jam;
             private int nilai_menit;
             private int nilai_detik;
+            private String tgl1, tgl2;
+            private Date now;
             public void actionPerformed(ActionEvent e) {
                 nol_jam = "";
                 nol_menit = "";
                 nol_detik = "";
-                Date now = Calendar.getInstance().getTime();
+                now = Calendar.getInstance().getTime();
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
                 nilai_jam = now.getHours();
                 nilai_menit = now.getMinutes();
@@ -214,13 +218,20 @@ public class frmUtama extends javax.swing.JFrame {
                 jam = nol_jam + Integer.toString(nilai_jam);
                 menit = nol_menit + Integer.toString(nilai_menit);
                 detik = nol_detik + Integer.toString(nilai_detik);
-                if(jam.equals("01")&&menit.equals("01")&&detik.equals("01")){
+                if(jam.equals("01")&&menit.equals("01")){
                     TeksArea.setText("");
                     date = new Date();  
                     Tanggal1.setText(tanggalFormat.format(date)); 
                     Tanggal2.setText(tanggalFormat.format(date)); 
                 }
                 if(detik.equals("01")&&((nilai_menit%5)==0)){
+                    if (Tanggal1.getText().equals(Tanggal2.getText())) {
+                        tgl1 = LocalDate.parse(Tanggal1.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(6).toString();
+                    } else {
+                        tgl1 = Tanggal1.getText();
+                    }
+                    tgl2 = Tanggal2.getText();
+                    
                     day=cal.get(Calendar.DAY_OF_WEEK);
                     switch (day) {
                         case 1:
@@ -250,7 +261,7 @@ public class frmUtama extends javax.swing.JFrame {
                     
                     try {
                         koneksi=koneksiDB.condb();
-                        TeksArea.append("Menjalankan WS tambah antrian Mobile JKN Pasien BPJS\n");
+                        TeksArea.append("---=== Menjalankan WS tambah antrian Mobile JKN Pasien BPJS Per "+tgl1+" s.d. "+tgl2+" ===---\n");
                         
                         //pasien JKN
                         ps=koneksi.prepareStatement(
@@ -264,10 +275,11 @@ public class frmUtama extends javax.swing.JFrame {
                                 "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                 "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
                                 "INNER JOIN dokter ON reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                "WHERE referensi_mobilejkn_bpjs.statuskirim='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa between "+
-                                (Tanggal1.getText().equals(Tanggal2.getText())?"SUBDATE('"+Tanggal2.getText()+"',INTERVAL 6 DAY) and '"+Tanggal2.getText()+"'":"'"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"'")+
+                                "WHERE referensi_mobilejkn_bpjs.statuskirim='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa between ? and ?"+
                                 "order by referensi_mobilejkn_bpjs.tanggalperiksa");
                         try {
+                            ps.setString(1, tgl1);
+                            ps.setString(2, tgl2);
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 try {     
@@ -310,7 +322,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat"), "JKN", "-", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                    Sequel.logTaskid(rs.getString("no_rawat"), "JKN", "+", nameNode.path("code").asText(), nameNode.path("message").asText());
                                     if(nameNode.path("code").asText().equals("200")||nameNode.path("code").asText().equals("208")||nameNode.path("message").asText().equals("Ok")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where nobooking='"+rs.getString("nobooking")+"'");
                                     }   
@@ -330,10 +342,11 @@ public class frmUtama extends javax.swing.JFrame {
                             }
                         }
                         
-                        TeksArea.append("Menjalankan WS batal antrian Mobile JKN Pasien BPJS\n");
-                        ps=koneksi.prepareStatement(
-                                "SELECT * FROM referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.statuskirim='Belum' and referensi_mobilejkn_bpjs_batal.tanggalbatal between "+(Tanggal1.getText().equals(Tanggal2.getText())?"SUBDATE('"+Tanggal2.getText()+"',INTERVAL 6 DAY) and '"+Tanggal2.getText()+"'":"'"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"'"));
+                        TeksArea.append("---=== Menjalankan WS batal antrian Mobile JKN Pasien BPJS Per "+tgl1+" 00:00:00 s.d. "+tgl2+" 23:59:59 ===---\n");
+                        ps = koneksi.prepareStatement("select * from referensi_mobilejkn_bpjs_batal where statuskirim = 'Belum' and tanggalbatal between ? and ?");
                         try {
+                            ps.setString(1, tgl1 + " 00:00:00.000");
+                            ps.setString(2, tgl2 + " 23:59:59.999");
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 try {     
@@ -355,9 +368,10 @@ public class frmUtama extends javax.swing.JFrame {
                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat_batal"), "JKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText());
+                                    Sequel.logTaskid(rs.getString("no_rawat_batal"), "JKN", "-", nameNode.path("code").asText(), nameNode.path("message").asText());
                                     if(nameNode.path("code").asText().equals("200")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs_batal set statuskirim='Sudah' where nomorreferensi='"+rs.getString("nomorreferensi")+"'");
+                                        /*
                                         datajam=rs.getString("tanggalbatal");
                                         if(!datajam.equals("")){
                                             if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat_batal"),"99",datajam})==true){
@@ -393,6 +407,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 }
                                             }
                                         }
+                                        */
                                     }  
                                     TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                 }catch (Exception ex) {
@@ -410,6 +425,7 @@ public class frmUtama extends javax.swing.JFrame {
                             }
                         }
                         
+                        TeksArea.append("---=== Menjalankan WS Kirim TaskID Mobile JKN Pasien BPJS Per "+Tanggal1.getText()+" s.d. "+Tanggal2.getText()+" ===---\n");
                         ps=koneksi.prepareStatement(
                                 "SELECT referensi_mobilejkn_bpjs.nobooking,referensi_mobilejkn_bpjs.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
                                 "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,poliklinik.nm_poli,dokter.nm_dokter,referensi_mobilejkn_bpjs.jampraktek,"+
@@ -421,9 +437,11 @@ public class frmUtama extends javax.swing.JFrame {
                                 "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                 "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
                                 "INNER JOIN dokter ON reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                "WHERE referensi_mobilejkn_bpjs.statuskirim='Sudah' and referensi_mobilejkn_bpjs.tanggalperiksa between '"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"' "+
+                                "WHERE referensi_mobilejkn_bpjs.statuskirim='Sudah' and referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? "+
                                 "order by referensi_mobilejkn_bpjs.tanggalperiksa");
                         try {
+                            ps.setString(1, Tanggal1.getText());
+                            ps.setString(2, Tanggal2.getText());
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 task3="";task4="";task5="";task6="";task7="";task99="";
@@ -468,7 +486,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"3",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid mulai tunggu poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 3: Waktu mulai tunggu poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
@@ -502,11 +520,16 @@ public class frmUtama extends javax.swing.JFrame {
                                 
                                 if(task4.equals("")){
                                     datajam=Sequel.cariIsi("select concat(pemeriksaan_ralan.tgl_perawatan,' ',pemeriksaan_ralan.jam_rawat) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=?",rs.getString("no_rawat"));
+                                    /*
+                                    if(datajam.equals("")){
+                                        datajam=Sequel.cariIsi("select if(diterima='0000-00-00 00:00:00','',diterima) from mutasi_berkas where mutasi_berkas.no_rawat=?",rs.getString("no_rawat"));
+                                    }
+                                    */
                                     if(!datajam.equals("")){
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"4",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid mulai pelayanan poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 4: Waktu akhir tunggu poli/mulai pelayanan poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
@@ -539,12 +562,18 @@ public class frmUtama extends javax.swing.JFrame {
                                 }
                                 
                                 if(task5.equals("")){
+                                    /*
+                                    datajam=Sequel.cariIsi("select if(kembali='0000-00-00 00:00:00','',kembali) from mutasi_berkas where mutasi_berkas.no_rawat=?",rs.getString("no_rawat"));
+                                    if(datajam.equals("")){
+                                        datajam=Sequel.cariIsi("select concat(tgl_registrasi, ' ', current_time()) from reg_periksa where reg_periksa.stts='Sudah' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    }
+                                    */
                                     datajam=Sequel.cariIsi("select concat(tgl_registrasi, ' ', current_time()) from reg_periksa where reg_periksa.stts='Sudah' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
                                     if(!datajam.equals("")){
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"5",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid selesai pelayanan poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 5: Waktu akhir pelayanan poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
@@ -612,7 +641,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"6",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid permintaan resep poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 6: Waktu mulai pelayanan resep poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
@@ -650,7 +679,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"7",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid validasi resep poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 7: Waktu penyerahan resep poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
@@ -688,7 +717,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"99",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
                                             try {     
-                                                TeksArea.append("Menjalankan WS taskid batal pelayanan poli Mobile JKN Pasien BPJS\n");
+                                                TeksArea.append("Task ID 99: Waktu batal pelayanan poli\n");
                                                 headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
