@@ -5,19 +5,29 @@
     require_once('../../conf/conf.php');
 
     function getKey() {
-       $keyRS = "c8527ecb36aa437c912d926bd25f61abc08037e482e8e45fbce9d50f8f997439";   
-       return $keyRS;
-    }
-
-    function getUrlWS() {
-        $UrlWS = "http://192.168.202.222/E-Klaim/ws.php";
-        return $UrlWS;
-    }
-    
-    function getKelasRS() {
-        $kelasRS = "BP";
-        return $kelasRS;
-    }
+        $keyRS = "";
+ 
+        if (empty($keyRS)) {
+             throw new \Exception("Key belum ada!");
+        }
+ 
+        return $keyRS;
+     }
+ 
+     function getUrlWS() {
+         $UrlWS = "http://localhost/E-Klaim/ws.php";
+         return $UrlWS;
+     }
+     
+     function getKelasRS() {
+         $kelasRS = "";
+ 
+         if (empty($kelasRS)) {
+             throw new Exception("Kelas RS belum ada!");
+         }
+ 
+         return $kelasRS;
+     }
 
     function mc_encrypt($data, $strkey) {
         $key = hex2bin($strkey);

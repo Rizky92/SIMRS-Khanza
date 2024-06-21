@@ -44,7 +44,7 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
             Beban_Jasa_Medik_Dokter_Laborat_Ralan="",Utang_Jasa_Medik_Dokter_Laborat_Ralan="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Dokter_Radiologi_Ralan="",Utang_Jasa_Medik_Dokter_Radiologi_Ralan="",Beban_Jasa_Medik_Dokter_Radiologi_Ranap="",Utang_Jasa_Medik_Dokter_Radiologi_Ranap="",
             Beban_Jasa_Medik_Dokter_Operasi_Ralan="",Utang_Jasa_Medik_Dokter_Operasi_Ralan="",Beban_Jasa_Medik_Dokter_Operasi_Ranap="",Utang_Jasa_Medik_Dokter_Operasi_Ranap="",
-            Bayar_JM_Dokter=Sequel.cariIsi("select set_akun.Bayar_JM_Dokter from set_akun"),koderekening="";
+            Bayar_JM_Dokter=Sequel.cariIsi("select set_akun.Bayar_JM_Dokter from set_akun"),koderekening="",Host_to_Host_Bank_Mandiri="",Akun_Biaya_Mandiri="",kodemcm="",norekening="";
     public ObjectMapper mapper = new ObjectMapper();
     public JsonNode root;
     public JsonNode response;
@@ -177,6 +177,15 @@ public class KeuanganCariBayarJMDokter extends javax.swing.JDialog {
         }
         ChkInput.setSelected(false);
         isForm();
+        
+        try {
+            if(Valid.daysOld("./cache/akunbankmandiri.iyem")<30){
+                tampilAkunBankMandiri2();
+            }else{
+                tampilAkunBankMandiri();
+            }
+        } catch (Exception e) {
+        }
     }
 
     /** This method is called from within the constructor to
@@ -673,6 +682,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             } 
                             
                             if(sukses==true){
+                                totaltagihan=0;
+                                if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
+                                    totaltagihan=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                    Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                                }
                                 Sequel.deleteTampJurnal();
                                 if(rs.getDouble("rawatjalan")>0){
                                     Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", rs.getDouble("rawatjalan"), 0);
@@ -706,9 +720,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ranap, "Beban Jasa Medik Dokter Operasi Ranap", rs.getDouble("operasiranap"), 0);
                                     Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, rs.getDouble("operasiranap"));
                                 }
+                                if(totaltagihan>0){
+                                    Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, totaltagihan);
+                                }
                                 if(rs.getDouble("besar_bayar")>0){
                                     Sequel.insertOrUpdateTampJurnal(Bayar_JM_Dokter, "Bayar JM Dokter", 0, rs.getDouble("besar_bayar"));
-                                    Sequel.insertOrUpdateTampJurnal(koderekening, rs.getString("nama_bayar"), rs.getDouble("besar_bayar"), 0);
+                                    Sequel.insertOrUpdateTampJurnal(koderekening, rs.getString("nama_bayar"), totaltagihan + rs.getDouble("besar_bayar"), 0);
                                 }
                                 sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
                             }
@@ -1966,6 +1983,67 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
             FormInput.setVisible(false);      
             ChkInput.setVisible(true);
+        }
+    }
+    
+    public void tampilAkunBankMandiri() { 
+        try{     
+            ps=koneksi.prepareStatement(
+                    "select set_akun_mandiri.kd_rek,set_akun_mandiri.kd_rek_biaya,set_akun_mandiri.kode_mcm,set_akun_mandiri.no_rekening from set_akun_mandiri");
+            try {
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    file=new File("./cache/akunbankmandiri.iyem");
+                    file.createNewFile();
+                    fileWriter = new FileWriter(file);
+                    Host_to_Host_Bank_Mandiri=rs.getString("kd_rek");
+                    Akun_Biaya_Mandiri=rs.getString("kd_rek_biaya");
+                    kodemcm=rs.getString("kode_mcm");
+                    norekening=rs.getString("no_rekening");
+                    fileWriter.write("{\"akunbankmandiri\":\""+Host_to_Host_Bank_Mandiri+"\",\"kodemcm\":\""+kodemcm+"\",\"akunbiayabankmandiri\":\""+Akun_Biaya_Mandiri+"\",\"norekening\":\""+norekening+"\"}");
+                    fileWriter.flush();
+                    fileWriter.close();
+                }
+            } catch (Exception e) {
+                Host_to_Host_Bank_Mandiri="";
+                Akun_Biaya_Mandiri="";
+                kodemcm="";
+                norekening="";
+                System.out.println("Notif Nota : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+             Host_to_Host_Bank_Mandiri="";
+             Akun_Biaya_Mandiri="";
+             kodemcm="";
+             norekening="";
+        }
+    }
+    
+    public void tampilAkunBankMandiri2() { 
+        try{      
+             myObj = new FileReader("./cache/akunbankmandiri.iyem");
+             root = mapper.readTree(myObj);
+             response = root.path("akunbankmandiri");
+             Host_to_Host_Bank_Mandiri=response.asText();
+             response = root.path("akunbiayabankmandiri");
+             Akun_Biaya_Mandiri=response.asText();
+             response = root.path("kodemcm");
+             kodemcm=response.asText();
+             response = root.path("norekening");
+             norekening=response.asText();
+             myObj.close();
+        } catch (Exception e) {
+             Host_to_Host_Bank_Mandiri="";
+             Akun_Biaya_Mandiri="";
+             kodemcm="";
+             norekening="";
         }
     }
 }
