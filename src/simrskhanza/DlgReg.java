@@ -15503,8 +15503,17 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnHasilPemeriksaanUSGGynecologi,
                                  MnHasilPemeriksaanEKG,
                                  MnSudahTerbitSEP,
-                                 MnInputNoAntrianRegistrasi,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,
-            MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan;
+                                 MnInputNoAntrianRegistrasi,
+                                 MnPenatalaksanaanTerapiOkupasi,
+                                 MnHasilPemeriksaanUSGNeonatus,
+                                 MnHasilEndoskopiFaringLaring,
+                                 MnHasilEndoskopiHidung,
+                                 MnHasilEndoskopiTelinga,
+                                 MnPenilaianPasienImunitasRendah,
+                                 MnCatatanKeseimbanganCairan,
+                                 MnCatatanObservasiCHBP,
+                                 MnCatatanObservasiInduksiPersalinan,
+                                 MnUpdateJamRegistrasiNonBPJS;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
    
     private void tampil() {
@@ -16815,6 +16824,19 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMCatatanMonitoring.add(MnCatatanObservasiIGD);
         MnRMCatatanMonitoring.add(MnCatatanObservasiCHBP);
         MnRMCatatanMonitoring.add(MnCatatanObservasiInduksiPersalinan);
+        
+        MnUpdateJamRegistrasiNonBPJS = new javax.swing.JMenuItem();
+        MnUpdateJamRegistrasiNonBPJS.setBackground(new java.awt.Color(255, 255, 254));
+        MnUpdateJamRegistrasiNonBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnUpdateJamRegistrasiNonBPJS.setForeground(new java.awt.Color(50, 50, 50));
+        MnUpdateJamRegistrasiNonBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnUpdateJamRegistrasiNonBPJS.setText("Update Jam Registrasi Non BPJS");
+        MnUpdateJamRegistrasiNonBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnUpdateJamRegistrasiNonBPJS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnUpdateJamRegistrasiNonBPJS.setName("MnUpdateJamRegistrasiNonBPJS"); 
+        MnUpdateJamRegistrasiNonBPJS.setPreferredSize(new java.awt.Dimension(320, 26));
+        MnUpdateJamRegistrasiNonBPJS.addActionListener(this::MnUpdateJamRegistrasiNonBPJSActionPerformed);
+        jPopupMenu1.add(MnUpdateJamRegistrasiNonBPJS, 0);
     }
     
     private void ganti(){
@@ -16846,6 +16868,42 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             tabMode.setValueAt(kdpoli.getText(),tbPetugas.getSelectedRow(),21);
             tabMode.setValueAt(kdpnj.getText(),tbPetugas.getSelectedRow(),22);
             emptTeks();
+        }
+    }
+    
+    private void MnUpdateJamRegistrasiNonBPJSActionPerformed(java.awt.event.ActionEvent evt) {
+        if (tbPetugas.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa dipilih...!!!!");
+            return;
+        }
+        
+        if (tbPetugas.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau diupdate terlebih dahulu...!!!!");
+            return;
+        }
+        
+        String kodePJ = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString();
+        String noRawat = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString();
+        
+        if (kodePJ.equals("BPJ")) {
+            JOptionPane.showMessageDialog(null, "Maaf, hanya dibolehkan untuk pasien Non BPJS...!!!!");
+            return;
+        }
+        
+        if (akses.getadmin()) {
+            Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
+        } else {
+            if (
+                Sequel.cariBooleanSmc("select * from pemeriksaan_ralan where no_rawat = ?", noRawat) ||
+                Sequel.cariIsiSmc("select stts from reg_periksa where no_rawat = ?", noRawat).equalsIgnoreCase("sudah")
+            ) {
+                JOptionPane.showMessageDialog(null, "Maaf, pasien sudah menerima pelayanan...!!!!");
+            } else {
+                if (Sequel.cekTanggal48jam(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString() + " " + tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 4).toString(), Sequel.ambiltanggalsekarang())) {
+                    Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
+                    tbPetugas.setValueAt(Sequel.ambiltanggalsekarang().substring(11), tbPetugas.getSelectedRow(), 4);
+                }
+            }
         }
     }
 }

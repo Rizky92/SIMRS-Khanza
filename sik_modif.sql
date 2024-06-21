@@ -74,11 +74,14 @@ ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAUL
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER `tgl_lahir`;
 
-CREATE DEFINER = `root`@`%` TRIGGER IF NOT EXISTS `set_password_user` AFTER INSERT ON `pasien` FOR EACH ROW insert into personal_pasien values(
-  new.no_rkm_medis,
-  '',
-  aes_encrypt(date_format(new.tgl_lahir, '%d%m%Y'), 'windi')
-);
+CREATE TRIGGER IF NOT EXISTS `set_password_user`
+  AFTER INSERT ON `pasien`
+  FOR EACH ROW
+  INSERT INTO `personal_pasien` VALUES (
+    NEW.no_rkm_medis,
+    '',
+    AES_ENCRYPT(DATE_FORMAT(NEW.tgl_lahir, '%d%m%Y'), 'windi')
+  );
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
 
@@ -140,6 +143,8 @@ ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder2` v
 ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder3` varchar(200) NOT NULL AFTER `kd_prosedur_sekunder2`;
 
 ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(150) NULL DEFAULT NULL AFTER `obat_system`;
+
+ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` TINYINT NULL DEFAULT NULL AFTER `logo`;
 
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;
 
