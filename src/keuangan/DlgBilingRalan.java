@@ -2486,6 +2486,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','PPN',':','','','','','"+Valid.SetAngka(besarppn)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
                         i++;
                         Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL BAYAR',':','','','','','"+TagihanPPn.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
+                        i++;
+                        row2=tbAkunBayar.getRowCount();                
+                        for(r=0;r<row2;r++){
+                            if(Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())>0){
+                                Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tbAkunBayar.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(r,4).toString())))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
+                                i++;
+                            } 
+                        }
                     }else if(piutang>0){                                                   
                         i++;
                         Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL TAGIHAN',':','','','','','"+TtlSemua.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
@@ -2496,7 +2504,22 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         i++;
                         Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','EKSES',':','','','','','"+Valid.SetAngka(bayar)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
                         i++;
-                        Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','SISA PIUTANG',':','','','','','"+Valid.SetAngka(piutang)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");                                           
+                        row2=tbAkunBayar.getRowCount();                
+                        for(r=0;r<row2;r++){
+                            if(Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())>0){
+                                Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tbAkunBayar.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(r,4).toString())))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
+                                i++;
+                            } 
+                        }
+                        Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','SISA PIUTANG',':','','','','','"+Valid.SetAngka(piutang)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");      
+                        i++;
+                        row2=tabModeAkunPiutang.getRowCount();
+                        for(r=0;r<row2;r++){ 
+                            if(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString())>0){
+                                Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tabModeAkunPiutang.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka(Valid.SetAngka(tabModeAkunPiutang.getValueAt(r,3).toString()))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan"); 
+                                i++;
+                            }
+                        }
                     }
 
                     i = 0;
@@ -2954,7 +2977,7 @@ private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GE
                     psakunbayar.setString(1,TNoRw.getText());
                     rsakunbayar=psakunbayar.executeQuery();
                     while(rsakunbayar.next()){
-                        Sequel.insertTampJurnal(rsakunbayar.getString("kd_rek"), rsakunbayar.getString("nama_bayar"), 0, rsakunbayar.getDouble("besar_bayar"));
+                        Sequel.insertOrUpdateTampJurnal(rsakunbayar.getString("kd_rek"), rsakunbayar.getString("nama_bayar"), 0, rsakunbayar.getDouble("besar_bayar"));
                     } 
                 }catch (Exception e) {
                     sukses=false;
@@ -2977,7 +3000,7 @@ private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GE
                     psakunpiutang.setString(1,TNoRw.getText());
                     rsakunpiutang=psakunpiutang.executeQuery();
                     while(rsakunpiutang.next()){
-                        Sequel.insertTampJurnal(rsakunpiutang.getString("kd_rek"), rsakunpiutang.getString("nama_bayar"), 0, rsakunpiutang.getDouble("totalpiutang"));
+                        Sequel.insertOrUpdateTampJurnal(rsakunpiutang.getString("kd_rek"), rsakunpiutang.getString("nama_bayar"), 0, rsakunpiutang.getDouble("totalpiutang"));
                     } 
                 }catch (Exception e) {
                     sukses=false;
@@ -5340,7 +5363,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private void tampilAkunBankMandiri() { 
         try{     
             psrekening=koneksi.prepareStatement(
-                    "select set_akun_mandiri.kd_rek,set_akun_mandiri.kd_rek_biaya,set_akun_mandiri.kode_mcm from set_akun_mandiri");
+                    "select set_akun_mandiri.kd_rek,set_akun_mandiri.kd_rek_biaya,set_akun_mandiri.kode_mcm,set_akun_mandiri.no_rekening from set_akun_mandiri");
             try {
                 rsrekening=psrekening.executeQuery();
                 if(rsrekening.next()){
@@ -5348,7 +5371,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     file.createNewFile();
                     fileWriter = new FileWriter(file);
                     Host_to_Host_Bank_Mandiri=rsrekening.getString("kd_rek");
-                    fileWriter.write("{\"akunbankmandiri\":\""+Host_to_Host_Bank_Mandiri+"\",\"kodemcm\":\""+rsrekening.getString("kode_mcm")+"\",\"akunbiayabankmandiri\":\""+rsrekening.getString("kd_rek_biaya")+"\"}");
+                    fileWriter.write("{\"akunbankmandiri\":\""+Host_to_Host_Bank_Mandiri+"\",\"kodemcm\":\""+rsrekening.getString("kode_mcm")+"\",\"akunbiayabankmandiri\":\""+rsrekening.getString("kd_rek_biaya")+"\",\"norekening\":\""+rsrekening.getString("no_rekening")+"\"}");
                     fileWriter.flush();
                     fileWriter.close();
                 }
@@ -5871,7 +5894,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 if(Sequel.menyimpantf2("detail_nota_jalan","?,?,?,?","Akun bayar",4,new String[]{
                                         TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
                                     })==true){
-                                        Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
+                                        Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
                                         if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
                                             if(Sequel.menyimpantf2("tagihan_bpd_jateng","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,''",16,new String[]{
                                                 no_rkm_medis,nm_pasien,alamat,jk,tgl_lahir,umurdaftar,tgl_registrasi,no_nota.replaceAll("/",""),Double.toString(itembayar),"Pembayaran Pasien Rawat Jalan",TNoRw.getText(),"Ralan",Valid.SetTgl(DTPTgl.getSelectedItem()+""),"Pending",akses.getkode(),"0000-00-00"
@@ -5917,7 +5940,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                     if(Sequel.menyimpantf2("detail_nota_jalan","?,?,?,?","Akun bayar",4,new String[]{
                                             TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(total)
                                         })==true){
-                                            Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
+                                            Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
                                             if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
                                                 if(Sequel.menyimpantf2("tagihan_bpd_jateng","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,''",16,new String[]{
                                                     no_rkm_medis,nm_pasien,alamat,jk,tgl_lahir,umurdaftar,tgl_registrasi,no_nota.replaceAll("/",""),Double.toString(total),"Pembayaran Pasien Rawat Jalan",TNoRw.getText(),"Ralan",Valid.SetTgl(DTPTgl.getSelectedItem()+""),"Pending",akses.getkode(),"0000-00-00"
@@ -5962,7 +5985,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                     if(Sequel.menyimpantf2("detail_nota_jalan","?,?,?,?","Akun bayar",4,new String[]{
                                             TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
                                         })==true){
-                                            Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
+                                            Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
                                             if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
                                                 if(Sequel.menyimpantf2("tagihan_bpd_jateng","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,''",16,new String[]{
                                                     no_rkm_medis,nm_pasien,alamat,jk,tgl_lahir,umurdaftar,tgl_registrasi,no_nota.replaceAll("/",""),Double.toString(itembayar),"Pembayaran Pasien Rawat Jalan",TNoRw.getText(),"Ralan",Valid.SetTgl(DTPTgl.getSelectedItem()+""),"Pending",akses.getkode(),"0000-00-00"
@@ -6022,7 +6045,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                     TNoRw.getText(),tabModeAkunPiutang.getValueAt(r,0).toString(),tabModeAkunPiutang.getValueAt(r,2).toString(),
                                     Double.toString(itempiutang),Double.toString(itempiutang),Valid.SetTgl(tabModeAkunPiutang.getValueAt(r,4).toString())
                                 })==true){
-                                    Sequel.insertTampJurnal(tabModeAkunPiutang.getValueAt(r, 1).toString(), tabModeAkunPiutang.getValueAt(r, 0).toString(), itempiutang, 0);
+                                    Sequel.insertOrUpdateTampJurnal(tabModeAkunPiutang.getValueAt(r, 1).toString(), tabModeAkunPiutang.getValueAt(r, 0).toString(), itempiutang, 0);
                             }else{
                                 sukses=false;
                             }

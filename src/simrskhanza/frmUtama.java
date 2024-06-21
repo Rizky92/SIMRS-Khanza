@@ -14604,6 +14604,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
     private void MenuRevalidateCacheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRevalidateCacheActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        sekuel.nyalakanBatasEdit();
+        
         File file;
         FileWriter fileWriter;
         String iyem = null;

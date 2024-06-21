@@ -3506,13 +3506,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void exportBerkasDigitalPerawatan(String urutan) {
-        if (! Sequel.cariBooleanSmc("select * from berkas_digital_perawatan where no_rawat = ?", lblNoRawat.getText())) return;
+        if (! Sequel.cariBooleanSmc("select * from berkas_digital_perawatan where no_rawat = ? and lokasi_file like '%.pdf'", lblNoRawat.getText())) return;
         
         int i = 1;
         String filename = "";
         HttpURLConnection http;
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/";
-        try (PreparedStatement ps = koneksi.prepareStatement("select lokasi_file from berkas_digital_perawatan where no_rawat = ?")) {
+        try (PreparedStatement ps = koneksi.prepareStatement("select lokasi_file from berkas_digital_perawatan where no_rawat = ? and lokasi_file like '%.pdf'")) {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -3528,9 +3528,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             } else {
                                 System.out.println("File not found : " + url + rs.getString("lokasi_file"));
                             }
-                        } finally {
-                            System.out.println("Skipping entry : " + url + rs.getString("lokasi_file"));
-                            continue;
                         }
                     }
                 }
@@ -3553,7 +3550,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         exportBilling("007");
         exportHasilLab("008");
         exportHasilRadiologi("009");
-         exportBerkasDigitalPerawatan("010");
+        exportBerkasDigitalPerawatan("010");
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {

@@ -947,14 +947,18 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
-            if (evt.getClickCount() == 1) {
-                if (! kodeTindakanDicopy.isBlank()) {
-                    String sql = "insert into template_laboratorium (kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, " +
+            if (! kodeTindakanDicopy.isBlank()) {
+                if (kodeTindakanDicopy.equals(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString())) {
+                    JOptionPane.showMessageDialog(rootPane, "Maaf, tarif yang dipilih tidak boleh sama...!!!");
+                    kodeTindakanDicopy = "";
+                } else {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "insert into template_laboratorium (kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, " +
                         "nilai_rujukan_pa, bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut) " +
                         "select ? as kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, nilai_rujukan_pa, " +
                         "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut " +
-                        "from template_laboratorium where kd_jenis_prw = ?";
-                    try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+                        "from template_laboratorium where kd_jenis_prw = ?"
+                    )) {
                         ps.setString(1, tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
                         ps.setString(2, kodeTindakanDicopy);
                         ps.executeUpdate();
@@ -965,11 +969,11 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                         JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat mengcopy template lab...!!!\nPastikan data yang dicopy sudah benar.");
                     }
-                } else {
-                    try {
-                        getData();
-                    } catch (java.lang.NullPointerException e) {
-                    }
+                }
+            } else {
+                try {
+                    getData();
+                } catch (java.lang.NullPointerException e) {
                 }
             }
         }
@@ -1391,7 +1395,7 @@ private void btnPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         BtnHapus.setEnabled(akses.gettarif_lab());
         BtnEdit.setEnabled(akses.gettarif_lab());
         BtnPrint.setEnabled(akses.gettarif_lab());
-        ppCopyTemplate.setEnabled(akses.getkode().equals("Admin Utama"));
+        ppCopyTemplate.setEnabled(akses.gettarif_lab());
         
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);

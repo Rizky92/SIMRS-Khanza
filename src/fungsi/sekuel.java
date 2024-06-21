@@ -63,6 +63,7 @@ public final class sekuel {
     private String dicari="";
     private Date tanggal=new Date();
     private boolean bool=false;
+    private static boolean pemberlakuanBatasEdit = true;
     private final DecimalFormat df2 = new DecimalFormat("####");
     private SimpleDateFormat formattanggal = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date waktumulai,kegiatan;
@@ -70,6 +71,19 @@ public final class sekuel {
     
     public sekuel(){
         super();
+    }
+    
+    public static void nyalakanBatasEdit() {
+        try (ResultSet rs = koneksiDB.condb().prepareStatement("select setting.pemberlakuan_2x24_jam from setting").executeQuery()) {
+            if (rs.next()) {
+                sekuel.pemberlakuanBatasEdit = rs.getString(1).equals("Yes");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            sekuel.pemberlakuanBatasEdit = false;
+        }
+        
+        System.out.println("\nPemberlakuan Batas Edit : " + (sekuel.pemberlakuanBatasEdit ? "AKTIF" : "TIDAK AKTIF"));
     }
     
     private double parseDouble(String value)
@@ -2034,6 +2048,9 @@ public final class sekuel {
     }
     
     public boolean cekTanggalRegistrasi(String tanggalregistrasi,String tanggalinputdata){
+        if (! sekuel.pemberlakuanBatasEdit) {
+            return true;
+        }
         bool=false;
         try {
             waktumulai = formattanggal.parse(tanggalregistrasi);
@@ -2053,6 +2070,9 @@ public final class sekuel {
     }
     
     public boolean cekTanggal48jam(String tanggalmulai,String tanggalinputdata){
+        if (! sekuel.pemberlakuanBatasEdit) {
+            return true;
+        }
         bool=false;
         try {
             waktumulai = formattanggal.parse(tanggalmulai);

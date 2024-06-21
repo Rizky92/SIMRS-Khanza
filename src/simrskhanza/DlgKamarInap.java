@@ -196,7 +196,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-MM-yyyy");
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,
+    private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,KUNCIDOKTERRANAP="",
             hariawal="",pilihancetak="",aktifkan_hapus_data_salah="",terbitsep="",namadokter="";
     private PreparedStatement ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur,pspulang;
     private ResultSet rs,rs2,rssetjam,rspulang;
@@ -763,6 +763,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             diagnosaakhir.setEditable(false);
+        }
+        
+        try {
+            KUNCIDOKTERRANAP=koneksiDB.KUNCIDOKTERRANAP();
+        } catch (Exception e) {
+            KUNCIDOKTERRANAP="no";
         }
     }
 
@@ -6284,6 +6290,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
         order="order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk";
         terbitsep="";
         namadokter="";
+        if((!akses.getkode().equals("Admin Utama"))){
+            if(KUNCIDOKTERRANAP.equals("yes")){
+                if(!billing.rawatinap.perawatan.dokter.tampil3(akses.getkode()).equals("")){
+                    namadokter=akses.getkode();
+                }
+            } 
+        }       
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -16913,15 +16926,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
     }
     
-    private void MnFilterDPJPActionPerformed(java.awt.event.ActionEvent evt) {      
-        i=2;
-        akses.setform("DlgKamarInap");
-        billing.rawatinap.perawatan.dokter.isCek();
-        billing.rawatinap.perawatan.dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        billing.rawatinap.perawatan.dokter.setLocationRelativeTo(internalFrame1);
-        billing.rawatinap.perawatan.dokter.setVisible(true);
-    }
-    
     private void MnPenilaianPasienImunitasRendahActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -18083,7 +18087,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 MnHapusDataSalah.setEnabled(true);
             }else{
                 MnHapusDataSalah.setEnabled(false);
-            }                
+            }   
+            if(KUNCIDOKTERRANAP.equals("yes")){
+                if(!billing.rawatinap.perawatan.dokter.tampil3(akses.getkode()).equals("")){
+                    namadokter=akses.getkode();
+                }
+            }
         } 
    }
     

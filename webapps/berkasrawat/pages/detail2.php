@@ -87,17 +87,26 @@
                     $no_rawat           = validTeks(trim($_POST['no_rawat']));
                     $kode               = validTeks(trim($_POST['kode']));
                     $dokumen            = validTeks(str_replace(" ","_","pages/upload/".$_FILES['dokumen']['name']));
-                    if((strtolower(substr($dokumen,-3))=="jpg")||(strtolower(substr($dokumen,-3))=="pdf")||(strtolower(substr($dokumen,-4))=="jpeg")){
-                        move_uploaded_file($_FILES['dokumen']['tmp_name'],$dokumen);
-                        if ((!empty($no_rawat))&&(!empty($kode))&&(!empty($dokumen))) {
-                            switch($action) {
-                                case "TAMBAH":
-                                    Tambah(" berkas_digital_perawatan "," '$no_rawat','$kode','$dokumen'", " Berkas Digital Perawatan " );
-                                    echo"<meta http-equiv='refresh' content='1;URL=?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e")."'>";
-                                    break;
+                    if((strtolower(substr($dokumen,-4))==".jpg")||(strtolower(substr($dokumen,-4))==".pdf")||(strtolower(substr($dokumen,-5))==".jpeg")){
+                        if(($_FILES['dokumen']['type'] == 'application/pdf')||($_FILES['dokumen']['type'] == 'image/jpeg')||($_FILES['dokumen']['type'] == 'image/jpg')){
+                            if((mime_content_type($_FILES['dokumen']['tmp_name'])== 'application/pdf')||(mime_content_type($_FILES['dokumen']['tmp_name'])== 'image/jpeg')||(mime_content_type($_FILES['dokumen']['tmp_name'])== 'image/jpg')){
+                                if ((!empty($no_rawat))&&(!empty($kode))&&(!empty($dokumen))) {
+                                    switch($action) {
+                                        case "TAMBAH":
+                                            if(Tambah(" berkas_digital_perawatan "," '$no_rawat','$kode','$dokumen'", " Berkas Digital Perawatan " )){
+                                                move_uploaded_file($_FILES['dokumen']['tmp_name'],$dokumen);
+                                            }
+                                            echo"<meta http-equiv='refresh' content='1;URL=?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e")."'>";
+                                            break;
+                                    }
+                                }else if ((empty($no_rawat))||(empty($kode))||(empty($dokumen))){
+                                    echo 'Semua field harus isi..!!!';
+                                }
+                            }else{
+                                echo "Berkas harus pdf/JPG";
                             }
-                        }else if ((empty($no_rawat))||(empty($kode))||(empty($dokumen))){
-                            echo 'Semua field harus isi..!!!';
+                        }else{
+                            echo "Berkas harus pdf/JPG";
                         }
                     }else{
                         echo "Berkas harus pdf/JPG";
@@ -150,17 +159,17 @@
                 unlink($norawat["lokasi_file"]);
                 Hapus(" berkas_digital_perawatan "," no_rawat ='".validTeks($norawat["no_rawat"])."' and kode ='".validTeks($norawat["kode"])."' and lokasi_file='".validTeks($norawat["lokasi_file"])."' ","?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e"));
             }
-            
-            echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td><td><input name='BtnKeluar' type='submit' class='button' value='&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;' /></td>                        
+
+            echo <<<HTML
+                <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
+                    <tr class="head">
+                        <td><div align="left">Data : $jumlah</div></td>
+                        <td>
+                            <a href="?act=List&action=Keluar" class="button">&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;</a>
+                        </td>
                     </tr>     
-                 </table>");
-            
-            $BtnKeluar=isset($_POST['BtnKeluar'])?$_POST['BtnKeluar']:NULL;
-            if (isset($BtnKeluar)) {
-                echo"<meta http-equiv='refresh' content='1;URL=?act=List&action=Keluar'>";
-            }        
+                </table>
+            HTML;
         ?>       
         </form>
     </div>
