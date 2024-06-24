@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>KhanzaHMS</comment>
-    <entry key="TAMPILANDEFAULTRIWAYATPASIEN">5 riwayat terakhir</entry>
+    <entry key="TAMPILANDEFAULTRIWAYATPASIEN"></entry>
     <entry key="GUNAKANDIAGNOSAEKLAIM">yes</entry>
     <entry key="VALIDASIRESEPKRONIS">yes</entry>
     <entry key="VALIDASIULANGHASILPERMINTAAN">labpk,labpa,labmb,rad</entry>
