@@ -1524,7 +1524,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 }
             }
             LCount.setText(Valid.SetAngka(sisapiutang));
-            LCount1.setText(Valid.SetAngka(sisapiutang));
+            LCount1.setText(Valid.SetAngka(total));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
