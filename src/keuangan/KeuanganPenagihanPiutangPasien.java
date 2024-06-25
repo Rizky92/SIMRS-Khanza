@@ -50,8 +50,6 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     private String[] norawat,tglpiutang,norm,pasien,statusrawat,carabayar,nokartu,asalperusahaan,nip,nonota;
     private boolean[] pilih;
     private DlgCariPegawai petugas=new DlgCariPegawai(null,false);
-    private DlgBilingRalan billingralan = new DlgBilingRalan(null, false);
-    private DlgBilingRanap billingranap = new DlgBilingRanap(null, false);
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -1034,22 +1032,24 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             } else {
                 status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
                 if (status.equals("Ralan")) {
-                    billingralan.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
-                    billingralan.isCek();
-                    billingralan.isRawat();
-                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billingralan.TNoRw.getText()) > 0) {
-                        billingralan.setPiutang();
+                    DlgBilingRalan billing = new DlgBilingRalan(null, false);
+                    billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                    billing.isCek();
+                    billing.isRawat();
+                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
+                        billing.setPiutang();
                     }
-                    billingralan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billingralan.setLocationRelativeTo(internalFrame1);
-                    billingralan.setVisible(true);
+                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    billing.setLocationRelativeTo(internalFrame1);
+                    billing.setVisible(true);
                 } else if (status.equals("Ranap")) {
-                    billingranap.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
-                    billingranap.isCek();
-                    billingranap.isRawat();
-                    billingranap.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billingranap.setLocationRelativeTo(internalFrame1);
-                    billingranap.setVisible(true);
+                    DlgBilingRanap billing = new DlgBilingRanap(null, false);
+                    billing.TNoRw.setText(tbBelumLunas.getValueAt(tbBelumLunas.getSelectedRow(), 1).toString());
+                    billing.isCek();
+                    billing.isRawat();
+                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    billing.setLocationRelativeTo(internalFrame1);
+                    billing.setVisible(true);
                 }
             }
         }
@@ -1063,22 +1063,24 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             } else {
                 status = Sequel.cariIsiSmc("select status_lanjut from reg_periksa where no_rawat = ?", tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
                 if (status.equals("Ralan")) {
-                    billingralan.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
-                    billingralan.isCek();
-                    billingralan.isRawat();
-                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billingralan.TNoRw.getText()) > 0) {
-                        billingralan.setPiutang();
+                    DlgBilingRalan billing = new DlgBilingRalan(null, false);
+                    billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                    billing.isCek();
+                    billing.isRawat();
+                    if (Sequel.cariIntegerSmc("select count(*) from piutang_pasien where no_rawat = ?", billing.TNoRw.getText()) > 0) {
+                        billing.setPiutang();
                     }
-                    billingralan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billingralan.setLocationRelativeTo(internalFrame1);
-                    billingralan.setVisible(true);
+                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    billing.setLocationRelativeTo(internalFrame1);
+                    billing.setVisible(true);
                 } else if (status.equals("Ranap")) {
-                    billingranap.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
-                    billingranap.isCek();
-                    billingranap.isRawat();
-                    billingranap.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                    billingranap.setLocationRelativeTo(internalFrame1);
-                    billingranap.setVisible(true);
+                    DlgBilingRanap billing = new DlgBilingRanap(null, false);
+                    billing.TNoRw.setText(tbBelumDitagihkan.getValueAt(tbBelumDitagihkan.getSelectedRow(), 1).toString());
+                    billing.isCek();
+                    billing.isRawat();
+                    billing.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    billing.setLocationRelativeTo(internalFrame1);
+                    billing.setVisible(true);
                 }
             }
         }
