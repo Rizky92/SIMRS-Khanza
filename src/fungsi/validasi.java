@@ -97,7 +97,7 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
-    public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
+    public String getWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
