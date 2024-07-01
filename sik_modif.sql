@@ -1,12 +1,33 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE TABLE IF NOT EXISTS `adamlabs_orderlab`  (
-  `noorder` varchar(20) NOT NULL,
-  `no_laboratorium` varchar(30) NOT NULL,
-  PRIMARY KEY (`noorder`, `no_laboratorium`) USING BTREE
+CREATE TABLE `adamlabs_mapping_tindakan`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `kode_kategori` varchar(5) NOT NULL,
+  `nama_kategori` varchar(20) NULL DEFAULT NULL,
+  `nm_perawatan` varchar(80) NULL DEFAULT NULL,
+  `kode_pemeriksaan_lis` varchar(20) NULL DEFAULT NULL,
+  `id_template` int(11) NULL DEFAULT NULL,
+  `pemeriksaan` varchar(200) NULL DEFAULT NULL,
+  `satuan` varchar(20) NULL DEFAULT NULL,
+  `nilai_rujukan` varchar(50) NULL DEFAULT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NULL DEFAULT NULL,
+  `status_umur` enum('Dewasa','Anak-anak') NULL DEFAULT NULL,
+  `urutan` int(10) UNSIGNED NULL DEFAULT NULL,
+  `status` enum('0','1') NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `kd_jenis_prw`(`kd_jenis_prw`) USING BTREE,
+  INDEX `kategori`(`nama_kategori`) USING BTREE,
+  INDEX `nm_perawatan`(`nm_perawatan`) USING BTREE,
+  INDEX `pemeriksaan`(`pemeriksaan`) USING BTREE,
+  INDEX `satuan`(`satuan`) USING BTREE,
+  INDEX `jenis_kelamin`(`jenis_kelamin`) USING BTREE,
+  INDEX `status_umur`(`status_umur`) USING BTREE,
+  INDEX `mapping_adamlabs_kode_kategori_IDX`(`kode_kategori`) USING BTREE,
+  INDEX `mapping_adamlabs_kode_pemeriksaan_lis_IDX`(`kode_pemeriksaan_lis`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
+CREATE TABLE `adamlabs_request_response`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `noorder` varchar(20) NULL DEFAULT NULL,
   `url` varchar(255) NULL DEFAULT NULL,
@@ -21,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `method`(`method`) USING BTREE,
   INDEX `code`(`code`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` int(10) UNSIGNED NOT NULL,
@@ -58,6 +79,10 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
   CONSTRAINT `detail_pemberian_obat_selanjutnya_databarang_FK` FOREIGN KEY (`kode_brng`) REFERENCES `databarang` (`kode_brng`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `detail_pemberian_obat_selanjutnya_pasien_FK` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(500) NOT NULL AFTER `id_template`;
+
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(500) NOT NULL AFTER `nilai`;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
