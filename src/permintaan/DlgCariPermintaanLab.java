@@ -84,6 +84,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private String pilihan="",alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",la="",ld="",pa="",pd="",InformasiTambahan,DiagnosaKlinis,
                     NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",json="",finger="";
     
+    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL(),
+                         LABORATORIUMURUTANHASIL = koneksiDB.LABORATORIUMURUTANHASIL();
+    
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -2125,7 +2128,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
-                            apiAdamlabs.registrasi(NoPermintaan.trim());
+                            autoKirimOrderKeLIS(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -5002,7 +5005,17 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }
     }
     
-    private void autoKirimKeAdamlabs() {
+    private void autoKirimOrderKeLIS(String noorder) {
+        if (LABORATORIUMKIRIMHASIL.isBlank()) {
+            return;
+        }
         
+        switch (LABORATORIUMKIRIMHASIL) {
+            case "adamlabs":
+                apiAdamlabs.registrasi(noorder);
+                break;
+            default:
+                return;
+        }
     }
 }

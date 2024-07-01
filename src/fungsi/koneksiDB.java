@@ -140,10 +140,10 @@ public class koneksiDB {
         }
     }
     
-    public static String LABORATORIUMTARIKHASIL() {
+    public static String LABORATORIUMURUTANHASIL() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            return prop.getProperty("LABORATORIUMTARIKHASIL");
+            return prop.getProperty("LABORATORIUMURUTANHASIL");
         } catch (Exception e) {
             return "";
         }
