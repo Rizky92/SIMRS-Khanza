@@ -2,7 +2,7 @@
 Software ini adalah Software Menejemen Rumah Sakit/Klinik/Puskesmas yang gratis, sumber tersedia, dan boleh digunakan siapa saja tanpa dikenai biaya apapun. Hal yang tidak boleh dilakukan adalah memperjualbelikan/mengambil keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat software (Khanza.Soft Media).  
 
 ## Lisensi
-Licensi yang dianut di software ini adalah [Aladdin Free Public License (AFPL)](https://en.wikipedia.org/wiki/Aladdin_Free_Public_License)  
+Lisensi yang dianut di software ini adalah [Aladdin Free Public License (AFPL)](https://spdx.org/licenses/Aladdin.html)  
 
 ## Panduan
 Informasi dan panduan bisa dicek di halaman [wiki](https://github.com/mas-elkhanza/SIMRS-Khanza/wiki)  

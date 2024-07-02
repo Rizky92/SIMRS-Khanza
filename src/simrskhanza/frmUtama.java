@@ -469,6 +469,8 @@ import bridging.MobileJKNFKTPReferensiPoli;
 import bridging.MobileJKNPembatalanPendaftaran;
 import bridging.MobileJKNReferensiPendaftaran;
 import bridging.PCareCekKartu;
+import bridging.PCareCekReferensiAlergi;
+import bridging.PCareCekReferensiPrognosa;
 import bridging.PCareCekReferensiTACC;
 import bridging.SatuSehatKirimClinicalImpression;
 import bridging.SatuSehatKirimCondition;
@@ -21775,6 +21777,28 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnPCareReferensiAlergiActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        PCareCekReferensiAlergi form=new PCareCekReferensiAlergi(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
+    
+    private void btnPCareReferensiPrognosaActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        PCareCekReferensiPrognosa form=new PCareCekReferensiPrognosa(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
             
     /**
     * @param args the command line arguments
@@ -22472,7 +22496,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnKirimDiagnosticReportLabMBSatuSehat,btnKepatuhanKelengkapanKeselamatanBedah,btnNilaiPiutangPerJenisBayarPerBulan,btnRingkasanPiutangPerJenisBayar,
             btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,btnUserSmc,
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
-            btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian;
+            btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa;
     
     public void isWall(){
         try{            
@@ -25312,6 +25336,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpcare_cek_sarana()==true){
                 Panelmenu.add(btnPCareReferensiSarana);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcare_cek_alergi()==true){
+                Panelmenu.add(btnPCareReferensiAlergi);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcare_cek_prognosa()==true){
+                Panelmenu.add(btnPCareReferensiPrognosa);
                 jmlmenu++;
             }
             
@@ -30502,6 +30536,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getpcare_cek_sarana()==true){
             Panelmenu.add(btnPCareReferensiSarana);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcare_cek_alergi()==true){
+            Panelmenu.add(btnPCareReferensiAlergi);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcare_cek_prognosa()==true){
+            Panelmenu.add(btnPCareReferensiPrognosa);
             jmlmenu++;
         }
         
@@ -36766,6 +36810,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpcare_cek_sarana()==true){
             if(btnPCareReferensiSarana.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPCareReferensiSarana);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpcare_cek_alergi()==true){
+            if(btnPCareReferensiAlergi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCareReferensiAlergi);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpcare_cek_prognosa()==true){
+            if(btnPCareReferensiPrognosa.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCareReferensiPrognosa);
                 jmlmenu++;
             }                
         }
@@ -44849,5 +44907,21 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSKPRekapitulasiPenilaian.setName("btnSKPRekapitulasiPenilaian"); 
         btnSKPRekapitulasiPenilaian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSKPRekapitulasiPenilaian.addActionListener(this::btnSKPRekapitulasiPenilaianActionPerformed);
+        
+        btnPCareReferensiAlergi = new widget.ButtonBig();
+        btnPCareReferensiAlergi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); 
+        btnPCareReferensiAlergi.setText("Referensi Alergi PCare");
+        btnPCareReferensiAlergi.setIconTextGap(0);
+        btnPCareReferensiAlergi.setName("btnPCareReferensiAlergi"); 
+        btnPCareReferensiAlergi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCareReferensiAlergi.addActionListener(this::btnPCareReferensiAlergiActionPerformed);
+        
+        btnPCareReferensiPrognosa = new widget.ButtonBig();
+        btnPCareReferensiPrognosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pcare.png"))); 
+        btnPCareReferensiPrognosa.setText("Referensi Prognosa PCare");
+        btnPCareReferensiPrognosa.setIconTextGap(0);
+        btnPCareReferensiPrognosa.setName("btnPCareReferensiPrognosa"); 
+        btnPCareReferensiPrognosa.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCareReferensiPrognosa.addActionListener(this::btnPCareReferensiPrognosaActionPerformed);
     }
 }
