@@ -88,6 +88,15 @@
         $save=str_replace("='","",$save);
         $save=str_replace("=/","",$save);
         $save=str_replace("=","",$save);
+        $save=str_replace("password","",$save);
+        $save=str_replace("submit","",$save);
+        $save=str_replace("input","",$save);
+        $save=str_replace("meta","",$save);
+        $save=str_replace("md5","",$save);
+        $save=str_replace("pass","",$save);
+        $save=str_replace("SESSION","",$save);
+        $save=str_replace("login_shell","",$save);
+        $save=str_replace("value","",$save);
         return $save;
     }
     
@@ -131,6 +140,15 @@
         $save=str_replace("='","",$save);
         $save=str_replace("=/","",$save);
         $save=str_replace("=","",$save);
+        $save=str_replace("password","",$save);
+        $save=str_replace("submit","",$save);
+        $save=str_replace("input","",$save);
+        $save=str_replace("meta","",$save);
+        $save=str_replace("md5","",$save);
+        $save=str_replace("pass","",$save);
+        $save=str_replace("SESSION","",$save);
+        $save=str_replace("login_shell","",$save);
+        $save=str_replace("value","",$save);
         return $save;
     }
     
@@ -173,6 +191,15 @@
         $save=str_replace("='","",$save);
         $save=str_replace("=/","",$save);
         $save=str_replace("=","",$save);
+        $save=str_replace("password","",$save);
+        $save=str_replace("submit","",$save);
+        $save=str_replace("input","",$save);
+        $save=str_replace("meta","",$save);
+        $save=str_replace("md5","",$save);
+        $save=str_replace("pass","",$save);
+        $save=str_replace("SESSION","",$save);
+        $save=str_replace("login_shell","",$save);
+        $save=str_replace("value","",$save);
         return $save;
     }
     
@@ -221,6 +248,15 @@
             $save=str_replace("='","",$save);
             $save=str_replace("=/","",$save);
             $save=str_replace("=","",$save);
+            $save=str_replace("password","",$save);
+            $save=str_replace("submit","",$save);
+            $save=str_replace("input","",$save);
+            $save=str_replace("meta","",$save);
+            $save=str_replace("md5","",$save);
+            $save=str_replace("pass","",$save);
+            $save=str_replace("SESSION","",$save);
+            $save=str_replace("login_shell","",$save);
+            $save=str_replace("value","",$save);
         }
         return $save;
     }
@@ -269,6 +305,15 @@
             $save=str_replace("='","",$save);
             $save=str_replace("=/","",$save);
             $save=str_replace("=","",$save);
+            $save=str_replace("password","",$save);
+            $save=str_replace("submit","",$save);
+            $save=str_replace("input","",$save);
+            $save=str_replace("meta","",$save);
+            $save=str_replace("md5","",$save);
+            $save=str_replace("pass","",$save);
+            $save=str_replace("SESSION","",$save);
+            $save=str_replace("login_shell","",$save);
+            $save=str_replace("value","",$save);
         }
         return $save;
     }
@@ -314,6 +359,15 @@
             $save=str_replace("='","",$save);
             $save=str_replace("=/","",$save);
             $save=str_replace("=","",$save);
+            $save=str_replace("password","",$save);
+            $save=str_replace("submit","",$save);
+            $save=str_replace("input","",$save);
+            $save=str_replace("meta","",$save);
+            $save=str_replace("md5","",$save);
+            $save=str_replace("pass","",$save);
+            $save=str_replace("SESSION","",$save);
+            $save=str_replace("login_shell","",$save);
+            $save=str_replace("value","",$save);
         }
         return $save;
     }
@@ -361,6 +415,15 @@
             $save=str_replace("='","",$save);
             $save=str_replace("=/","",$save);
             $save=str_replace("=","",$save);
+            $save=str_replace("password","",$save);
+            $save=str_replace("submit","",$save);
+            $save=str_replace("input","",$save);
+            $save=str_replace("meta","",$save);
+            $save=str_replace("md5","",$save);
+            $save=str_replace("pass","",$save);
+            $save=str_replace("SESSION","",$save);
+            $save=str_replace("login_shell","",$save);
+            $save=str_replace("value","",$save);
         }
         return $save;
     }
