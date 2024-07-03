@@ -18586,35 +18586,4 @@ public class DlgKamarInap extends javax.swing.JDialog {
             norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
         );
     }
-    
-    private class WarnaTableKamarRanap extends DefaultTableCellRenderer {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            
-            if (row % 2 == 1) {
-                component.setBackground(new Color(255, 244, 244));
-                component.setForeground(new Color(50, 50, 50));
-            } else {
-                component.setBackground(new Color(255, 255, 255));
-                component.setForeground(new Color(50, 50, 50));
-            }
-
-            if (table.getValueAt(row, 20).toString().equals("Sudah Bayar")) {
-                component.setBackground(new Color(50, 50, 50));
-                component.setForeground(new Color(255, 255, 255));
-            }
-
-            return component;
-        }
-    }
-    
-    private boolean bisaPindahKamar() {
-        if (! koneksiDB.VALIDASIULANGPINDAHKAMAR()) return true;
-        
-        return Sequel.cariBooleanSmc(
-            "select * from kamar_inap where no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ? and stts_pulang != 'Pindah Kamar'",
-            norawatpindah.getText(), kdkamarasal.getText(), tglmasuk, jammasuk
-        );
-    }
 }
