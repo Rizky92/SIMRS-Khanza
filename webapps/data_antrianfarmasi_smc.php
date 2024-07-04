@@ -41,7 +41,7 @@ $hasil = bukaquery($_sql);
                     <td><b>Nama Pasien</b></td>
                     <td><b>Jenis Resep</b></td>
                     <td><b>Dokter Peresep</b></td>
-                    <td><b>Validasi</b></td>
+                    <td><b>Mulai Pengerjaan</b></td>
                     <td><b>Penyerahan</b></td>
                 </tr>
             </thead>

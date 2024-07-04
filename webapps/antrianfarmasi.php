@@ -112,13 +112,13 @@
             function() { 
                 // $('#data').load('data_antrianfarmasi.php').fadeIn("fast"); 
                 $('#data').load('data_antrianfarmasi_smc.php').fadeIn("fast");
-            }, 9000
+            }, 10000
         );
         var auto_refresh = setInterval( 
             function() { 
                 // $('#judul').load('data_antrianfarmasijudul.php').fadeIn("fast"); 
                 $('#judul').load('data_antrianfarmasijudul_smc.php').fadeIn("fast"); 
-            }, 9000
+            }, 10000
         ); 
     </script>
 </body>
