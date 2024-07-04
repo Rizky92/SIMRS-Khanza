@@ -504,13 +504,22 @@
                                                         }else{
                                                             $sekarang  = date("Y-m-d");
                                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
-                                                            if($interval<0){
+                                                            if($interval < 0) {
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                                         'code' => 201
                                                                     )
-                                                                );  
+                                                                );
+                                                                http_response_code(201);
+                                                            } else if ($interval > 7) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_add('".validTeks4($decode["tanggalperiksa"], 20)."', interval -7 day), '%d-%m-%Y')");
+                                                                $response = array(
+                                                                    'metadata' => array(
+                                                                        'message' => 'Maaf, pengambilan antrian baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
+                                                                        'code' => 201
+                                                                    )
+                                                                );
                                                                 http_response_code(201);
                                                             }else{
                                                                 $sisakuota=getOne2("select count(no_rawat) from reg_periksa where kd_poli='$kdpoli' and kd_dokter='$kddokter' and tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' ");
@@ -1836,10 +1845,10 @@
         echo "   Header gunakan x-token:token yang diambil sebelumnya, x-username:user yang diberikan RS";
         echo "   Body berisi : \n";
         echo '   {'."\n";
-	echo '      "kodepoli":"XXX",'."\n";
-	echo '      "kodedokter":"XXXXX",'."\n";
-	echo '      "tanggalperiksa":"XXXX-XX-XX",'."\n";
-	echo '      "jampraktek":"XX:XX-XX:XX"'."\n";
+        echo '      "kodepoli":"XXX",'."\n";
+        echo '      "kodedokter":"XXXXX",'."\n";
+        echo '      "tanggalperiksa":"XXXX-XX-XX",'."\n";
+        echo '      "jampraktek":"XX:XX-XX:XX"'."\n";
         echo '   }'."\n\n";
         echo "   Hasilnya : \n";
         echo '   {'."\n";
