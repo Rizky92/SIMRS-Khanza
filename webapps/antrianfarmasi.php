@@ -39,6 +39,19 @@
             opacity: 0.10;
             filter:alpha(opacity=10);
         }
+
+        .two-column {
+            display: grid;
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column dense;
+            justify-items: stretch;
+        }
+
+        .two-column > * {
+            display: flex;
+            align-items: start;
+            justify-content: center;
+        }
     </style>
     <!-- Global style END -->
 
@@ -73,9 +86,13 @@
     </header>
     
     <main>
-        <div class="container-fluid" id="judul">
-        </div>
-        <div class="container-fluid" id="data">
+        <div class="container-fluid">
+            <div class="two-column">
+                <div id="pengerjaan">
+                </div>
+                <div id="penyerahan">
+                </div>
+            </div>
         </div>
     </main>
     
@@ -107,19 +124,13 @@
     </script>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script> 
-    <script type="text/javascript"> 
-        var auto_refresh = setInterval( 
-            function() { 
-                // $('#data').load('data_antrianfarmasi.php').fadeIn("fast"); 
-                $('#data').load('data_antrianfarmasi_smc.php').fadeIn("fast");
-            }, 10000
-        );
-        var auto_refresh = setInterval( 
-            function() { 
-                // $('#judul').load('data_antrianfarmasijudul.php').fadeIn("fast"); 
-                $('#judul').load('data_antrianfarmasijudul_smc.php').fadeIn("fast"); 
-            }, 10000
-        ); 
+    <script type="text/javascript">
+        let pengerjaan = setInterval(() => {
+            $('#pengerjaan').load('data_antrianfarmasi_pengerjaan_smc.php').fadeIn('fast')
+        }, 5000)
+        let penyerahan = setInterval(() => {
+            $('#penyerahan').load('data_antrianfarmasi_penyerahan_smc.php').fadeIn('fast')
+        }, 5000)
     </script>
 </body>
 </html>
