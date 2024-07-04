@@ -24,6 +24,7 @@ $_sql = "select poliklinik.nm_poli, pasien.nm_pasien,
          join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli
          where resep_obat.jam_peresepan != '00:00:00'
          and resep_obat.jam != '00:00:00'
+         and resep_obat.jam between current_time() - interval 3 hour and current_time()
          and resep_obat.status = 'ralan'
          and resep_obat.tgl_peresepan = current_date()
          and reg_periksa.kd_poli != 'IGDK'
