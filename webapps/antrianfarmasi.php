@@ -39,6 +39,19 @@
             opacity: 0.10;
             filter:alpha(opacity=10);
         }
+
+        .two-column {
+            display: grid;
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column dense;
+            justify-items: stretch;
+        }
+
+        .two-column > * {
+            display: flex;
+            align-items: start;
+            justify-content: center;
+        }
     </style>
     <!-- Global style END -->
 
@@ -49,7 +62,7 @@
             <div class="nav-wrapper">
                 <ul class="center hide-on-med-and-down" id="nv">
                     <li>
-                        <a href="./" class="ams hide-on-med-and-down"><i class="material-icons md-36">local_hospital</i> Antrian Apotek/Farmasi</a>
+                        <a href="./" class="ams hide-on-med-and-down"><i class="material-icons md-36">local_hospital</i> Antrian Apotek/Farmasi Rawat Jalan</a>
                     </li>
                     <li class="right" style="margin-right: 10px;">
                         <i class="material-icons">perm_contact_calendar</i>
@@ -73,9 +86,17 @@
     </header>
     
     <main>
-        <div class="container-fluid" id="judul">
-        </div>
-        <div class="container-fluid" id="data">
+        <div class="container-fluid">
+            <table>
+                <tr>
+                    <td style="vertical-align: top">
+                        <div id="pengerjaan"></div>
+                    </td>
+                    <td style="vertical-align: top">
+                        <div id="penyerahan"></div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </main>
     
@@ -107,17 +128,13 @@
     </script>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script> 
-    <script type="text/javascript"> 
-        var auto_refresh = setInterval( 
-            function() { 
-                $('#data').load('data_antrianfarmasi.php').fadeIn("fast"); 
-            }, 9000
-        );
-        var auto_refresh = setInterval( 
-            function() { 
-                $('#judul').load('data_antrianfarmasijudul.php').fadeIn("fast"); 
-            }, 9000
-        ); 
+    <script type="text/javascript">
+        let pengerjaan = setInterval(() => {
+            $('#pengerjaan').load('data_antrianfarmasi_pengerjaan_smc.php').fadeIn('fast')
+        }, 5000)
+        let penyerahan = setInterval(() => {
+            $('#penyerahan').load('data_antrianfarmasi_penyerahan_smc.php').fadeIn('fast')
+        }, 5000)
     </script>
 </body>
 </html>
