@@ -1208,6 +1208,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         total=0;
                         LCountDipilih1.setText("0");
                         LCountDipilih2.setText("0");
+                        Catatan.setText("");
+                        TotalPenagihan.setText("0");
+                        Diskon.setText("");
+                        NamaBank.setText("");
+                        NoRek.setText("");
                     }else{
                         Sequel.RollBack();
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1249,6 +1254,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         total=0;
                         LCountDipilih1.setText("0");
                         LCountDipilih2.setText("0");
+                        Catatan.setText("");
+                        TotalPenagihan.setText("0");
+                        Diskon.setText("");
+                        NamaBank.setText("");
+                        NoRek.setText("");
                     }else{
                         Sequel.RollBack();
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1472,13 +1482,14 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         
         LCountDipilih1.setText("0");
         LCountDipilih2.setText(Valid.SetAngka(0));
+        TotalPenagihan.setText("0");
         
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void DiskonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiskonKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (Integer.parseInt(Diskon.getText()) > 100) {
+            if (Valid.setAngkaSmc(Diskon.getText()) > 100) {
                 JOptionPane.showMessageDialog(null, "Maaf, diskon piutang maksimal yaitu 100%");
                 Diskon.setText("0");
                 Diskon.requestFocus();
@@ -2035,6 +2046,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
             LCountDipilih1.setText(jml+"");
             LCountDipilih2.setText(Valid.SetAngka(total));
+            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.setAngkaSmc(Diskon.getText()) / 100))));
         }   
     }
     
@@ -2053,6 +2065,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
             LCountDipilih1.setText(jml+"");
             LCountDipilih2.setText(Valid.SetAngka(total));
+            TotalPenagihan.setText(Valid.SetAngka(total - (total * (Valid.setAngkaSmc(Diskon.getText()) / 100))));
         }   
     }
     
