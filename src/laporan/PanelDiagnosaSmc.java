@@ -413,7 +413,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
 
     private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampildiagnosa();
+            tampildiagnosa(true);
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             tbDiagnosa.requestFocus();
         }
@@ -425,7 +425,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
 
     private void ProsedurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProsedurKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampilprosedure();
+            tampilprosedure(true);
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             tbProsedur.requestFocus();
         }
@@ -542,8 +542,12 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
         return i;
     }
-
+    
     private void tampildiagnosa() {
+        tampildiagnosa(false);
+    }
+
+    private void tampildiagnosa(boolean pilihPertama) {
         try {
             ArrayList<String> kode = new ArrayList();
             ArrayList<String> nama = new ArrayList();
@@ -554,24 +558,28 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             String notIn = "and penyakit.kd_penyakit not in (";
 
             int jml = 0;
-            for (int i = 0; i < tbDiagnosa.getRowCount(); i++) {
-                if (tbDiagnosa.getValueAt(i, 0).toString().equals("true")) {
-                    kode.add(tbDiagnosa.getValueAt(i, 1).toString());
-                    nama.add(tbDiagnosa.getValueAt(i, 2).toString());
-                    ciripny.add(tbDiagnosa.getValueAt(i, 3).toString());
-                    keterangan.add(tbDiagnosa.getValueAt(i, 4).toString());
-                    kategori.add(tbDiagnosa.getValueAt(i, 5).toString());
-                    cirium.add(tbDiagnosa.getValueAt(i, 6).toString());
-                    notIn = notIn.concat("?, ");
-                    ++jml;
+            if (! Diagnosa.getText().trim().isBlank()) {
+                for (int i = 0; i < tbDiagnosa.getRowCount(); i++) {
+                    if (tbDiagnosa.getValueAt(i, 0).toString().equals("true")) {
+                        kode.add(tbDiagnosa.getValueAt(i, 1).toString());
+                        nama.add(tbDiagnosa.getValueAt(i, 2).toString());
+                        ciripny.add(tbDiagnosa.getValueAt(i, 3).toString());
+                        keterangan.add(tbDiagnosa.getValueAt(i, 4).toString());
+                        kategori.add(tbDiagnosa.getValueAt(i, 5).toString());
+                        cirium.add(tbDiagnosa.getValueAt(i, 6).toString());
+                        notIn = notIn.concat("?, ");
+                        ++jml;
+                    }
                 }
             }
 
             Valid.tabelKosong(tabModeDiagnosa);
-            for (int i = 0; i < jml; i++) {
-                tabModeDiagnosa.addRow(new Object[] {
-                    true, kode.get(i), nama.get(i), ciripny.get(i), keterangan.get(i), kategori.get(i), cirium.get(i)
-                });
+            if (! Diagnosa.getText().trim().isBlank()) {
+                for (int i = 0; i < jml; i++) {
+                    tabModeDiagnosa.addRow(new Object[] {
+                        true, kode.get(i), nama.get(i), ciripny.get(i), keterangan.get(i), kategori.get(i), cirium.get(i)
+                    });
+                }
             }
             
             if (jml > 0) {
@@ -611,21 +619,30 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                     }
                 }
                 try (ResultSet rs = ps.executeQuery()) {
+                    if (pilihPertama && ! Diagnosa.getText().trim().isBlank()) {
+                        if (rs.first()) {
+                            tabModeDiagnosa.addRow(new Object[] {
+                                true, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
+                            });
+                        }
+                    }
                     while (rs.next()) {
                         tabModeDiagnosa.addRow(new Object[] {
                             false, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
                         });
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
     }
-
+    
     private void tampilprosedure() {
+        tampilprosedure(false);
+    }
+
+    private void tampilprosedure(boolean pilihPertama) {
         try {
             ArrayList<String> kode = new ArrayList();
             ArrayList<String> panjang = new ArrayList();
@@ -633,21 +650,25 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             String notIn = "and kode not in (";
 
             int jml = 0;
-            for (int i = 0; i < tbProsedur.getRowCount(); i++) {
-                if (tbProsedur.getValueAt(i, 0).toString().equals("true")) {
-                    kode.add(tbProsedur.getValueAt(i, 1).toString());
-                    panjang.add(tbProsedur.getValueAt(i, 2).toString());
-                    pendek.add(tbProsedur.getValueAt(i, 3).toString());
-                    notIn = notIn.concat("?, ");
-                    ++jml;
+            if (! Prosedur.getText().trim().isBlank()) {
+                for (int i = 0; i < tbProsedur.getRowCount(); i++) {
+                    if (tbProsedur.getValueAt(i, 0).toString().equals("true")) {
+                        kode.add(tbProsedur.getValueAt(i, 1).toString());
+                        panjang.add(tbProsedur.getValueAt(i, 2).toString());
+                        pendek.add(tbProsedur.getValueAt(i, 3).toString());
+                        notIn = notIn.concat("?, ");
+                        ++jml;
+                    }
                 }
             }
 
             Valid.tabelKosong(tabModeProsedur);
-            for (int i = 0; i < jml; i++) {
-                tabModeProsedur.addRow(new Object[] {
-                    true, kode.get(i), panjang.get(i), pendek.get(i)
-                });
+            if (! Prosedur.getText().trim().isBlank()) {
+                for (int i = 0; i < jml; i++) {
+                    tabModeProsedur.addRow(new Object[] {
+                        true, kode.get(i), panjang.get(i), pendek.get(i)
+                    });
+                }
             }
             
             if (jml > 0) {
@@ -660,7 +681,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             
             String searchQuery = "";
             
-            if (! Prosedur.getText().isBlank()) {
+            if (! Prosedur.getText().trim().isBlank()) {
                 for (int i = 0; i < keywords.length; i++) {
                     if (i == 0) {
                         searchQuery = " and (concat_ws(' ', kode, deskripsi_panjang, deskripsi_pendek) like ?";
@@ -679,20 +700,25 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                         ps.setString(i + 1, kode.get(i));
                     }
                 }
-                if (! Prosedur.getText().isBlank()) {
+                if (! Prosedur.getText().trim().isBlank()) {
                     for (int i = 0; i < keywords.length; i++) {
                         ps.setString(i + jml + 1, "%" + keywords[i] + "%");
                     }
                 }
                 try (ResultSet rs = ps.executeQuery()) {
+                    if (pilihPertama && ! Prosedur.getText().trim().isBlank()) {
+                        if (rs.first()) {
+                            tabModeProsedur.addRow(new Object[] {
+                                true, rs.getString(1), rs.getString(2), rs.getString(3)
+                            });
+                        }
+                    }
                     while (rs.next()) {
                         tabModeProsedur.addRow(new Object[] {
                             false, rs.getString(1), rs.getString(2), rs.getString(3)
                         });
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
