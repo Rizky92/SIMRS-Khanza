@@ -48,7 +48,7 @@
                     $nm_dokter2     = '';
                     $a              = 1;
                     $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
-                    $isError        = getOne("select code_cbg from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1");
+                    ['code_cbg' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery("select code_cbg, deskripsi from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
                     while ($barisdokter = mysqli_fetch_array($hasildokter)) {
                         if ($a == 1) {
                             $nm_dokter2 = $barisdokter['nm_dokter'];
@@ -128,9 +128,9 @@
                 <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
                 <input type="hidden" name="jk" value="<?= $jk ?>">
                 <input type="hidden" name="codernik" value="<?= $codernik ?>">
-                <?php if ($isError === 'X-0-98-X'): ?>
+                <?php if (substr($isError, 0, 1) === 'X'): ?>
                     <div class="center" style="margin-left: 0.7rem">
-                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR! Cek diagnosa/prosedur yang dimasukkan!</span>
+                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000"><?= $pesanError ?></span>
                     </div>
                 <?php endif; ?>
                 <div style="width: 100%; height: 90%; overflow: auto;">
