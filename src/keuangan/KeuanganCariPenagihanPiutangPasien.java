@@ -43,7 +43,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private String nopenagihan="",tanggal="",status="",penjamin="",bagianpenagihan="",transfer="";
-    private double nilaitagihan=0,totaltagihan=0;
+    private double nilaitagihan=0,totaltagihan=0, diskon = 0;
     private int i=0;
 
     /** Creates new form DlgProgramStudi
@@ -1155,51 +1155,32 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private void tampil() {
          Valid.tabelKosong(tabMode);
          try{
-             nopenagihan="";status="";penjamin="";bagianpenagihan="";transfer="";
-             if(!NoPenagihan.getText().trim().equals("")){
-                 nopenagihan=" and penagihan_piutang.no_tagihan like '%"+NoPenagihan.getText()+"%' ";
-             }
-             
-             tanggal=" penagihan_piutang.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' ";
-             if(!Status.getSelectedItem().toString().equals("Semua")){
-                 status=" and penagihan_piutang.status like '%"+Status.getSelectedItem().toString()+"%' ";
-             }
-             
-             if(!nmpenjab.getText().trim().equals("")){
-                 penjamin=" and concat(penagihan_piutang.kd_pj,penjab.nama_perusahaan) like '%"+kdpenjab.getText()+Perusahaan.getText()+"%' ";
-             }
-             
-             if(!NmPeg.getText().trim().equals("")){
-                 bagianpenagihan=" and concat(penagihan_piutang.nip,bagianpenagihan.nama) like '%"+KdPeg.getText()+NmPeg.getText()+"%' ";
-             }
-             
-             if(!NamaBank.getText().trim().equals("")){
-                 transfer=" and concat(akun_penagihan_piutang.nama_bank,akun_penagihan_piutang.no_rek) like '%"+NamaBank.getText()+NoRek.getText()+"%' ";
-             }
-             
              ps=koneksi.prepareStatement(
-                     "select penagihan_piutang.no_tagihan, penagihan_piutang.tanggal, penagihan_piutang.tanggaltempo, penagihan_piutang.tempo,"+
-                     "penagihan_piutang.nip,bagianpenagihan.nama as bagianpenagihan,penagihan_piutang.nip_menyetujui,menyetujui.nama as menyetujui,"+
-                     "penagihan_piutang.kd_pj,penjab.nama_perusahaan,penagihan_piutang.catatan,penagihan_piutang.kd_rek,akun_penagihan_piutang.nama_bank,"+
-                     "akun_penagihan_piutang.no_rek,penagihan_piutang.status "+
-                     "from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip "+
-                     "inner join pegawai as menyetujui on menyetujui.nik=penagihan_piutang.nip_menyetujui "+
-                     "inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj "+
-                     "inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek where "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and penagihan_piutang.no_tagihan like ? or "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and bagianpenagihan.nama like ? or "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and menyetujui.nama like ? or "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and penjab.nama_perusahaan like ? or "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and akun_penagihan_piutang.nama_bank like ? or "+
-                     tanggal+status+nopenagihan+penjamin+bagianpenagihan+transfer+" and akun_penagihan_piutang.no_rek like ? "+
-                     "order by penagihan_piutang.tanggal");
+                "select penagihan_piutang.no_tagihan, penagihan_piutang.tanggal, penagihan_piutang.tanggaltempo, penagihan_piutang.tempo, penagihan_piutang.nip, bagianpenagihan.nama as bagianpenagihan, " +
+                "penagihan_piutang.nip_menyetujui, menyetujui.nama as menyetujui, penagihan_piutang.kd_pj, penjab.nama_perusahaan, penagihan_piutang.catatan, penagihan_piutang.kd_rek, akun_penagihan_piutang.nama_bank, " +
+                "akun_penagihan_piutang.no_rek, penagihan_piutang.status from penagihan_piutang join pegawai as bagianpenagihan on bagianpenagihan.nik = penagihan_piutang.nip join pegawai as menyetujui on menyetujui.nik = penagihan_piutang.nip_menyetujui " +
+                "join penjab on penagihan_piutang.kd_pj = penjab.kd_pj join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek = penagihan_piutang.kd_rek where penagihan_piutang.tanggal between ? and ? and penagihan_piutang.status like ? " +
+                "and penagihan_piutang.no_tagihan like ? and penagihan_piutang.kd_pj like ? and penagihan_piutang.nip like ? and akun_penagihan_piutang.nama_bank like ? and (penagihan_piutang.no_tagihan like ? or bagianpenagihan.nama like ? " +
+                "or menyetujui.nama like ? or penjab.nama_perusahaan like ? or akun_penagihan_piutang.nama_bank like ? or akun_penagihan_piutang.no_rek like ?) order by penagihan_piutang.tanggal"
+             );
              try {
-                ps.setString(1,"%"+TCari.getText()+"%");
-                ps.setString(2,"%"+TCari.getText()+"%");
-                ps.setString(3,"%"+TCari.getText()+"%");
-                ps.setString(4,"%"+TCari.getText()+"%");
-                ps.setString(5,"%"+TCari.getText()+"%");
-                ps.setString(6,"%"+TCari.getText()+"%");
+                ps.setString(1, Valid.getTglSmc(Tanggal1));
+                ps.setString(2, Valid.getTglSmc(Tanggal2));
+                if (! Status.getSelectedItem().toString().equals("Semua")) {
+                    ps.setString(3, "%" + Status.getSelectedItem().toString() + "%");
+                } else {
+                    ps.setString(3, "%%");
+                }
+                ps.setString(4, "%" + NoPenagihan.getText() + "%");
+                ps.setString(5, "%" + kdpenjab.getText() + "%");
+                ps.setString(6, "%" + KdPeg.getText() + "%");
+                ps.setString(7, "%" + NamaBank.getText() + "%");
+                ps.setString(8, "%" + TCari.getText() + "%");
+                ps.setString(9, "%" + TCari.getText() + "%");
+                ps.setString(10, "%" + TCari.getText() + "%");
+                ps.setString(11, "%" + TCari.getText() + "%");
+                ps.setString(12, "%" + TCari.getText() + "%");
+                ps.setString(13, "%" + TCari.getText() + "%");
                 rs=ps.executeQuery();
                 totaltagihan=0;
                 while(rs.next()){
@@ -1214,7 +1195,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     nilaitagihan=0;
                     ps2=koneksi.prepareStatement(
                             "select piutang_pasien.tgl_piutang,pasien.nip,perusahaan_pasien.nama_perusahaan,piutang_pasien.no_rkm_medis,pasien.nm_pasien,"+
-                            "pasien.no_peserta,detail_penagihan_piutang.sisapiutang,detail_penagihan_piutang.no_rawat,reg_periksa.status_lanjut "+
+                            "pasien.no_peserta,detail_penagihan_piutang.sisapiutang,detail_penagihan_piutang.diskon,detail_penagihan_piutang.no_rawat,reg_periksa.status_lanjut "+
                             "from detail_penagihan_piutang inner join piutang_pasien on piutang_pasien.no_rawat=detail_penagihan_piutang.no_rawat "+
                             "inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -1223,13 +1204,15 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     try {
                         ps2.setString(1,rs.getString("no_tagihan"));
                         rs2=ps2.executeQuery();
+                        diskon = 0;
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{
                                 "","",rs2.getString("tgl_piutang"),rs2.getString("nip"),rs2.getString("nama_perusahaan"),rs2.getString("no_rawat"),
                                 rs2.getString("no_peserta"),Valid.SetAngka(rs2.getDouble("sisapiutang")),rs2.getString("no_rkm_medis")+" "+rs2.getString("nm_pasien"),rs2.getString("status_lanjut")
                             }); 
-                            nilaitagihan=nilaitagihan+rs2.getDouble("sisapiutang");
-                            totaltagihan=totaltagihan+rs2.getDouble("sisapiutang");
+                            diskon += rs2.getDouble("diskon");
+                            nilaitagihan += rs2.getDouble("sisapiutang");
+                            totaltagihan += (rs2.getDouble("sisapiutang") - rs2.getDouble("diskon"));
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
@@ -1244,6 +1227,14 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     tabMode.addRow(new Object[]{
                         "","","","Nilai Tagihan :","","","",Valid.SetAngka(nilaitagihan),"",""
                     }); 
+                    if (diskon > 0) {
+                        tabMode.addRow(new Object[]{
+                            "","","","Diskon :","","","","-" + Valid.SetAngka(diskon),"",""
+                        }); 
+                        tabMode.addRow(new Object[]{
+                            "","","","Total Nilai Tagihan :","","","",Valid.SetAngka(nilaitagihan - diskon),"",""
+                        }); 
+                    }
                 }
                 LTotal.setText(Valid.SetAngka(totaltagihan));
              } catch (Exception e) {
@@ -1355,32 +1346,32 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             return;
         }
         
-        double totalTagihan = 0;
+        double totalTagihan = 0, totalDiskon = 0;
         
         try {
             ps = koneksi.prepareStatement(
-                "select\n" +
-                "  detail_penagihan_piutang.no_rawat,\n" +
-                "  piutang_pasien.tgl_piutang,\n" +
-                "  piutang_pasien.no_rkm_medis,\n" +
-                "  pasien.nm_pasien,\n" +
-                "  reg_periksa.status_lanjut,\n" +
-                "  detail_piutang_pasien.sisapiutang,\n" +
-                "  penjab.png_jawab,\n" +
-                "  pasien.no_peserta,\n" +
-                "  perusahaan_pasien.nama_perusahaan,\n" +
-                "  pasien.nip,\n" +
-                "  if (reg_periksa.status_lanjut = 'Ralan', nota_jalan.no_nota, nota_inap.no_nota) no_nota\n" +
-                "from penagihan_piutang\n" +
-                "join detail_penagihan_piutang on penagihan_piutang.no_tagihan = detail_penagihan_piutang.no_tagihan\n" +
-                "left join detail_piutang_pasien on detail_penagihan_piutang.no_rawat = detail_piutang_pasien.no_rawat and penagihan_piutang.kd_pj = detail_piutang_pasien.kd_pj\n" +
-                "join piutang_pasien on detail_piutang_pasien.no_rawat = piutang_pasien.no_rawat\n" +
-                "left join reg_periksa on detail_penagihan_piutang.no_rawat = reg_periksa.no_rawat\n" +
-                "left join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
-                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj\n" +
-                "left join perusahaan_pasien on pasien.perusahaan_pasien = perusahaan_pasien.kode_perusahaan\n" +
-                "left join nota_jalan on detail_penagihan_piutang.no_rawat = nota_jalan.no_rawat\n" +
-                "left join nota_inap on detail_penagihan_piutang.no_rawat = nota_inap.no_rawat\n" +
+                "select " +
+                "detail_penagihan_piutang.no_rawat, " +
+                "piutang_pasien.tgl_piutang, " +
+                "piutang_pasien.no_rkm_medis, " +
+                "pasien.nm_pasien, " +
+                "reg_periksa.status_lanjut, " +
+                "detail_penagihan_piutang.sisapiutang, " +
+                "detail_penagihan_piutang.diskon, " +
+                "penjab.png_jawab, " +
+                "pasien.no_peserta, " +
+                "perusahaan_pasien.nama_perusahaan, " +
+                "pasien.nip, " +
+                "if (reg_periksa.status_lanjut = 'Ralan', nota_jalan.no_nota, nota_inap.no_nota) no_nota " +
+                "from penagihan_piutang " +
+                "join detail_penagihan_piutang on penagihan_piutang.no_tagihan = detail_penagihan_piutang.no_tagihan " +
+                "join piutang_pasien on detail_penagihan_piutang.no_rawat = piutang_pasien.no_rawat " +
+                "left join reg_periksa on detail_penagihan_piutang.no_rawat = reg_periksa.no_rawat " +
+                "left join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj " +
+                "left join perusahaan_pasien on pasien.perusahaan_pasien = perusahaan_pasien.kode_perusahaan " +
+                "left join nota_jalan on detail_penagihan_piutang.no_rawat = nota_jalan.no_rawat " +
+                "left join nota_inap on detail_penagihan_piutang.no_rawat = nota_inap.no_rawat " +
                 "where penagihan_piutang.no_tagihan = ?"
             );
             ps.setString(1, nopenagihan);
@@ -1392,10 +1383,11 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             Sequel.deleteTemporary();
             
             while (rs.next()) {
-                Sequel.temporary(String.valueOf(i), rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("pasien.nm_pasien"),
+                Sequel.temporary(String.valueOf(i++), rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("pasien.nm_pasien"),
                     rs.getString("status_lanjut"), NumberFormat.getInstance().format(rs.getDouble("sisapiutang")), rs.getString("png_jawab"), rs.getString("no_peserta"),
                     rs.getString("nama_perusahaan"), rs.getString("nip"), rs.getString("no_nota"));
                 
+                totalDiskon += rs.getDouble("diskon");
                 totalTagihan += rs.getDouble("sisapiutang");
             }
             
@@ -1430,28 +1422,28 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         
         try {
             ps = koneksi.prepareStatement(
-                "select\n" +
-                "  penjab.png_jawab,\n" +
-                "  penjab.alamat_asuransi,\n" +
-                "  penjab.no_telp,\n" +
-                "  penjab.attn,\n" +
-                "  penagihan_piutang.tanggal,\n" +
-                "  penagihan_piutang.tanggaltempo,\n" +
-                "  penagihan_piutang.tempo,\n" +
-                "  penagihan_piutang.kd_rek,\n" +
-                "  penagihan_piutang.catatan,\n" +
-                "  akun_penagihan_piutang.atas_nama,\n" +
-                "  akun_penagihan_piutang.nama_bank,\n" +
-                "  akun_penagihan_piutang.no_rek,\n" +
-                "  penagihan_piutang.nip,\n" +
-                "  p_penagih.nama nama_penagih,\n" +
-                "  penagihan_piutang.nip_menyetujui,\n" +
-                "  p_menyetujui.nama nama_menyetujui\n" +
-                "from penagihan_piutang\n" +
-                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj\n" +
-                "left join akun_penagihan_piutang on penagihan_piutang.kd_rek = akun_penagihan_piutang.kd_rek\n" +
-                "left join pegawai p_penagih on penagihan_piutang.nip = p_penagih.nik\n" +
-                "left join pegawai p_menyetujui on penagihan_piutang.nip_menyetujui = p_menyetujui.nik\n" +
+                "select " +
+                "penjab.png_jawab, " +
+                "penjab.alamat_asuransi, " +
+                "penjab.no_telp, " +
+                "penjab.attn, " +
+                "penagihan_piutang.tanggal, " +
+                "penagihan_piutang.tanggaltempo, " +
+                "penagihan_piutang.tempo, " +
+                "penagihan_piutang.kd_rek, " +
+                "penagihan_piutang.catatan, " +
+                "akun_penagihan_piutang.atas_nama, " +
+                "akun_penagihan_piutang.nama_bank, " +
+                "akun_penagihan_piutang.no_rek, " +
+                "penagihan_piutang.nip, " +
+                "p_penagih.nama nama_penagih, " +
+                "penagihan_piutang.nip_menyetujui, " +
+                "p_menyetujui.nama nama_menyetujui " +
+                "from penagihan_piutang " +
+                "left join penjab on penagihan_piutang.kd_pj = penjab.kd_pj " +
+                "left join akun_penagihan_piutang on penagihan_piutang.kd_rek = akun_penagihan_piutang.kd_rek " +
+                "left join pegawai p_penagih on penagihan_piutang.nip = p_penagih.nik " +
+                "left join pegawai p_menyetujui on penagihan_piutang.nip_menyetujui = p_menyetujui.nik " +
                 "where penagihan_piutang.no_tagihan = ?"
             );
             ps.setString(1, nopenagihan);
@@ -1511,8 +1503,15 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         param.put("namabank", namaBank);
         param.put("atasnama", atasNama);
         param.put("norek", noRekening);
-        param.put("tagihan", Valid.SetAngka(totalTagihan));
-        param.put("terbilang", Valid.terbilang(totalTagihan) + " rupiah");
+        if (totalDiskon > 0) {
+            param.put("subtotal", Valid.SetAngka(totalTagihan));
+            param.put("diskon", Valid.SetAngka(totalDiskon));
+            param.put("tagihan", Valid.SetAngka(totalTagihan - totalDiskon));
+            param.put("terbilang", Valid.terbilang(totalTagihan - totalDiskon) + " rupiah");
+        } else {
+            param.put("tagihan", Valid.SetAngka(totalTagihan));
+            param.put("terbilang", Valid.terbilang(totalTagihan) + " rupiah");
+        }
         param.put("bagianpenagihan", namaPenagih);
         param.put("catatan", catatan);
         param.put("menyetujui", namaMenyetujui);
@@ -1524,7 +1523,11 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         param.put("finger2", "Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh " + namaMenyetujui + "\nID "+(status.equals("")?nipMenyetujui:status)+"\n"+tglTagihan);
         
         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-        Valid.MyReportqry("rptSuratPenagihanPiutang.jasper", "report", "::[ Surat Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+        if (totalDiskon > 0) {
+            Valid.MyReportqry("rptSuratPenagihanPiutang2.jasper", "report", "::[ Surat Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+        } else {
+            Valid.MyReportqry("rptSuratPenagihanPiutang.jasper", "report", "::[ Surat Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
+        }
         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
         Valid.MyReportqry("rptKwitansiPenagihanPiutang.jasper", "report", "::[ Kwitansi Penagihan Piutang ]::", "select * from temporary where temporary.temp37 = '" + akses.getalamatip() + "' order by temporary.no", param);
     }
