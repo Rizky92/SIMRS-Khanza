@@ -990,11 +990,8 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
              JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(!(Keterangan.getText().trim().equals(""))){
             if(tbResep.getSelectedRow()>-1){
-                if(kategori.Host_to_Host_Bank_Mandiri.equals("")){
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan akun bayar, silahkan hubungi administrator..!!");
-                }else{
-                    Sequel.AutoComitFalse();
-                    sukses=true;     
+                Sequel.AutoComitFalse();
+                sukses=true;     
 
                     if(Sequel.queryu2tf("delete from pengeluaran_harian where no_keluar=?",1,new String[]{
                         tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()
@@ -1038,20 +1035,19 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         sukses=false;
                     }               
 
-                    if(sukses==true){
-                        Sequel.Commit();
-                    }else{
-                        sukses=false;
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
+                if(sukses==true){
+                    Sequel.Commit();
+                }else{
+                    sukses=false;
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    Sequel.RollBack();
+                }
 
-                    Sequel.AutoComitTrue();
-                    if(sukses==true){
-                        tabMode.removeRow(tbResep.getSelectedRow());
-                        emptTeks();
-                        hitung();
-                    }
+                Sequel.AutoComitTrue();
+                if(sukses==true){
+                    tabMode.removeRow(tbResep.getSelectedRow());
+                    emptTeks();
+                    hitung();
                 }
             }                
         }

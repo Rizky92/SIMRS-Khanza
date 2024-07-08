@@ -15071,6 +15071,29 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
+    private void MnDataKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode2.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas2.requestFocus();
+        }else{
+            if(tbPetugas2.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgPermintaanKonsultasiMedik form=new DlgPermintaanKonsultasiMedik(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
     private void MnDataOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -15558,7 +15581,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnCatatanKeseimbanganCairan,
                                  MnCatatanObservasiCHBP,
                                  MnCatatanObservasiInduksiPersalinan,
-                                 MnUpdateJamRegistrasiNonBPJS,MnPermintaanKonsultasiMedik,MnDataOperasi;
+                                 MnUpdateJamRegistrasiNonBPJS,MnPermintaanKonsultasiMedik,MnDataOperasi,MnDataKonsultasiMedik;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi;
    
     private void tampil() {
@@ -16124,6 +16147,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPenatalaksanaanTerapiOkupasi.setEnabled(akses.getpenatalaksanaan_terapi_okupasi());
         MnCatatanKeseimbanganCairan.setEnabled(akses.getbalance_cairan());
         MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
+        MnDataKonsultasiMedik.setEnabled(akses.getjawaban_konsultasi_medik());
         
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -16772,6 +16796,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPermintaanKonsultasiMedik.setPreferredSize(new java.awt.Dimension(210, 26));
         MnPermintaanKonsultasiMedik.addActionListener(this::MnPermintaanKonsultasiMedikActionPerformed);
         
+        MnDataKonsultasiMedik = new javax.swing.JMenuItem();
+        MnDataKonsultasiMedik.setBackground(new java.awt.Color(255, 255, 254));
+        MnDataKonsultasiMedik.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnDataKonsultasiMedik.setForeground(new java.awt.Color(50, 50, 50));
+        MnDataKonsultasiMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnDataKonsultasiMedik.setText("Data Konsultasi Medik");
+        MnDataKonsultasiMedik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnDataKonsultasiMedik.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnDataKonsultasiMedik.setName("MnDataKonsultasiMedik");
+        MnDataKonsultasiMedik.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnDataKonsultasiMedik.addActionListener(this::MnDataKonsultasiMedikActionPerformed);
+        
         MnHasilUSG = new javax.swing.JMenu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
@@ -16911,6 +16947,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         
         MnPermintaan.add(MnPermintaanKonsultasiMedik);
         MnTindakan.add(MnDataOperasi);
+        jPopupMenu2.add(MnDataKonsultasiMedik);
     }
     
     private void ganti(){
