@@ -40,6 +40,13 @@ ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double 
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
+CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
+  `code` varchar(7) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
+  PRIMARY KEY (`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
 
 CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
