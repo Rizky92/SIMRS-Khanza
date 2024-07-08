@@ -382,6 +382,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Diskon = new widget.TextBox();
         jLabel15 = new javax.swing.JLabel();
         TotalPenagihan = new javax.swing.JLabel();
+        BtnPrint = new widget.Button();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbBelumLunas = new widget.Table();
@@ -746,7 +747,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         label10.setName("label10"); // NOI18N
         label10.setPreferredSize(new java.awt.Dimension(75, 23));
         panelisi1.add(label10);
-        label10.setBounds(120, 75, 75, 23);
+        label10.setBounds(120, 77, 75, 23);
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -756,7 +757,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
         });
         panelisi1.add(TCari);
-        TCari.setBounds(199, 75, 200, 23);
+        TCari.setBounds(199, 77, 200, 23);
 
         BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari1.setMnemonic('1');
@@ -774,7 +775,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnCari1);
-        BtnCari1.setBounds(401, 75, 28, 23);
+        BtnCari1.setBounds(401, 77, 28, 23);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnCari.setMnemonic('C');
@@ -910,7 +911,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnAll);
-        BtnAll.setBounds(431, 75, 28, 23);
+        BtnAll.setBounds(431, 77, 28, 23);
 
         label25.setText("Diskon (%) :");
         label25.setName("label25"); // NOI18N
@@ -948,6 +949,25 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         TotalPenagihan.setPreferredSize(new java.awt.Dimension(230, 23));
         panelisi1.add(TotalPenagihan);
         TotalPenagihan.setBounds(555, 40, 120, 23);
+
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrintKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnPrint);
+        BtnPrint.setBounds(560, 72, 100, 30);
 
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
@@ -1504,6 +1524,18 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
     }//GEN-LAST:event_DiskonKeyPressed
 
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        //
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnPrintActionPerformed(null);
+        }else{
+            Valid.pindah(evt, TCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnPrintKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1529,6 +1561,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Button BtnKeluar;
     private widget.Button BtnPenagihan;
     private widget.Button BtnPenjamin;
+    private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.TextBox Catatan;
     private widget.TextBox Diskon;
@@ -2078,12 +2111,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             kdptg.setText(akses.getkode());
             BtnSimpan.setEnabled(akses.getpenagihan_piutang_pasien());
             nmptg.setText(petugas.tampil3(kdptg.getText()));
-        }        
+        }
+        BtnPrint.setEnabled(akses.getadmin() || akses.getcetak_penagihan_piutang_sebelum_simpan());
     }
     
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(penagihan_piutang.no_tagihan,3),signed)),0) from penagihan_piutang where penagihan_piutang.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "PP"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPenagihan); 
+        Valid.autoNomorSmc(NoPenagihan, "PP", "penagihan_piutang", "no_tagihan", 3, "0", Valid.getTglSmc(Tanggal));
     }
     
     private void cetakInvoice() {
