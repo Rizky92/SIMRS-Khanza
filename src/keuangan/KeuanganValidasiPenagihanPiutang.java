@@ -587,7 +587,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganPiutangBelumLunas form=new KeuanganPiutangBelumLunas(null,false);
             form.isCek();
-            form.tampiltagihan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().trim());
+            form.tampiltagihanSmc(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString().trim());
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
@@ -671,7 +671,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             sisapiutang=0;
             ps=koneksi.prepareStatement(
                      "select penagihan_piutang.no_tagihan,penagihan_piutang.tanggal,penagihan_piutang.tanggaltempo,bagianpenagihan.nama,"+
-                     "penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total "+
+                     "penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total, sum(detail_penagihan_piutang.diskon) as diskon "+
                      "from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip "+
                      "inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj "+
                      "inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek "+
@@ -689,9 +689,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_tagihan"),rs.getString("tanggal"),rs.getString("nama"),rs.getString("tanggaltempo"),
-                        rs.getString("nama_perusahaan"),rs.getString("nama_bank"),Valid.SetAngka(rs.getDouble("total"))
+                        rs.getString("nama_perusahaan"),rs.getString("nama_bank"),Valid.SetAngka(rs.getDouble("total") - rs.getDouble("diskon"))
                     });
-                    sisapiutang=sisapiutang+rs.getDouble("total");
+                    sisapiutang += rs.getDouble("total") + rs.getDouble("diskon");
                 }
             } catch (Exception e) {
                 System.out.println(e);

@@ -1541,7 +1541,6 @@ public final class RMPenilaianAwalMedisIGD extends javax.swing.JDialog {
                 }
             }
         }
-    
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1879,7 +1878,7 @@ public final class RMPenilaianAwalMedisIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-        //Valid.pindah(evt,Monitoring,BtnSimpan);
+        Valid.pindah(evt,TCari,BtnSimpan);
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void BBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BBKeyPressed

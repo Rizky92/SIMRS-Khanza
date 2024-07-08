@@ -97,7 +97,7 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
-    public String setWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
+    public String getWaktuSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
@@ -1148,6 +1148,14 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JButton kanan){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            kanan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            kiri.requestFocus();
+        }
+    }
+    
+    public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JCheckBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){

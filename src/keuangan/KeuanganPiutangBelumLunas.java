@@ -1477,6 +1477,58 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             System.out.println("Notifikasi : "+e);
         }
     }
+    
+    public void tampiltagihanSmc(String notagihan) {
+        this.notagihan = notagihan;
+        Valid.tabelKosong(tabMode);
+        try {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select akun_piutang.kd_rek, akun_piutang.nama_bayar, akun_bayar.nama_bayar from penagihan_piutang " +
+                "join akun_piutang on penagihan_piutang.kd_pj = akun_piutang.kd_pj " +
+                "join akun_bayar on penagihan_piutang.kd_rek = akun_bayar.kd_rek " +
+                "where penagihan_piutang.no_tagihan = ?"
+            )) {
+                ps.setString(1, notagihan);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        kdpenjab.setText(rs.getString(1));
+                        nmpenjab.setText(rs.getString(2));
+                        AkunBayar.setSelectedItem(rs.getString(3));
+                    }
+                }
+            }
+            
+            sisapiutang = 0;
+            total = 0;
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as pasien, piutang_pasien.status, " +
+                "detail_piutang_pasien.totalpiutang, 0 as uangmuka, detail_piutang_pasien.sisapiutang, piutang_pasien.tgltempo, detail_piutang_pasien.nama_bayar, " +
+                "(select round(ifnull(sum(bayar_piutang.besar_cicilan), 0) + ifnull(sum(bayar_piutang.diskon_piutang), 0) + ifnull(sum(bayar_piutang.tidak_terbayar), 0), 2) " +
+                "from bayar_piutang where bayar_piutang.no_rawat = piutang_pasien.no_rawat and bayar_piutang.kd_rek_kontra = ?) as besar_cicilan, detail_penagihan_piutang.diskon " +
+                "from piutang_pasien join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat " +
+                "join penjab on reg_periksa.kd_pj = penjab.kd_pj join detail_piutang_pasien on piutang_pasien.no_rawat = detail_piutang_pasien.no_rawat join detail_penagihan_piutang on " +
+                "piutang_pasien.no_rawat = detail_penagihan_piutang.no_rawat and detail_penagihan_piutang.no_tagihan = ? where detail_piutang_pasien.sisapiutang >= 1 order by piutang_pasien.tgl_piutang"
+            )) {
+                ps.setString(1, kdpenjab.getText());
+                ps.setString(2, notagihan);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new Object[] {
+                            true, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
+                            rs.getDouble(6), rs.getDouble("besar_cicilan"), rs.getDouble(5) - (rs.getDouble(6) + rs.getDouble("besar_cicilan") + rs.getDouble(7)),
+                            rs.getString(8), rs.getString(9), rs.getDouble(7) - rs.getDouble("diskon"), rs.getDouble("diskon"), 0
+                        });
+                        sisapiutang += rs.getDouble(7) - rs.getDouble("besar_cicilan");
+                        total += rs.getDouble(5) - rs.getDouble(6) + rs.getDouble("besar_cicilan");
+                    }
+                }
+            }
+            LCount.setText(Valid.SetAngka(sisapiutang));
+            LCount1.setText(Valid.SetAngka(total));
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
 
     private void getdata() {
         if(kdpenjab.getText().equals("")||nmpenjab.getText().equals("")){
