@@ -166,12 +166,17 @@
     <entry key="PORTVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="HOSTSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="DATABASESLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PORTSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSLIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="HOSTADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="DATABASEADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PORTADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASADAMLABS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="URLORTHANC">http://192.168.11.23</entry>
+    <entry key="URLORTHANC">http://localhost</entry>
     <entry key="PORTORTHANC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERORTHANC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSORTHANC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
