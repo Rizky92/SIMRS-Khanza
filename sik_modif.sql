@@ -28,20 +28,22 @@ CREATE TABLE `adamlabs_mapping_tindakan`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `adamlabs_request_response`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `noorder` varchar(20) NULL DEFAULT NULL,
+  `no_laboratorium` varchar(30) NOT NULL,
+  `noorder` varchar(15) NOT NULL,
   `url` varchar(255) NULL DEFAULT NULL,
   `method` varchar(5) NULL DEFAULT NULL,
   `request` text NULL DEFAULT NULL,
   `code` varchar(5) NULL DEFAULT NULL,
   `response` text NULL DEFAULT NULL,
-  `user_id` varchar(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `noorder`(`noorder`) USING BTREE,
+  `pengirim` varchar(20) NOT NULL,
+  PRIMARY KEY (`no_laboratorium`, `noorder`) USING BTREE,
+  CONSTRAINT `adamlabs_request_response_permintaan_lab_ibfk_1` FOREIGN KEY (`noorder`) REFERENCES `permintaan_lab` (`noorder`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `adamlabs_request_response_pegawai_ibfk_2` FOREIGN KEY (`pengirim`) REFERENCES `pegawai` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE,
   INDEX `url`(`url`) USING BTREE,
   INDEX `method`(`method`) USING BTREE,
+  INDEX `request`(`request`) USING BTREE,
   INDEX `code`(`code`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE
+  INDEX `response`(`response`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (

@@ -86,8 +86,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private String pilihan="",alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",la="",ld="",pa="",pd="",InformasiTambahan,DiagnosaKlinis,
                     NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",json="",finger="";
     
-    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL(),
-                         LABORATORIUMURUTANHASIL = koneksiDB.LABORATORIUMURUTANHASIL();
+    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -445,6 +444,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnAmbilLISSOFTMEDIX.setVisible(false);
         BtnKirimVansLab.setVisible(false);
         BtnAmbilVanslab.setVisible(false);
+        BtnKirimLISSLIMS.setVisible(false);
+        BtnAmbilLISSLIMS.setVisible(false);
+        BtnAmbilAdamLabs.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -4824,7 +4826,6 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnKirimLISMADQLAB.setEnabled(akses.getpermintaan_lab());
         BtnAmbilLISMADQLAB.setEnabled(akses.getperiksa_lab());
         BtnKirimAdamLabs.setEnabled(akses.getpermintaan_lab());
-        BtnAmbilAdamLabs.setEnabled(false);
     }
     
     public void setPasien(String pasien){

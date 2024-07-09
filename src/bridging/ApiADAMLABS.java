@@ -64,7 +64,7 @@ public class ApiADAMLABS
                 "pasien.tgl_lahir, trim(pasien.no_ktp) as no_ktp, concat(if (permintaan_lab.status = 'ralan', ifnull ((select pemeriksaan_ralan.berat from pemeriksaan_ralan " +
                 "where pemeriksaan_ralan.no_rawat = permintaan_lab.no_rawat order by pemeriksaan_ralan.tgl_perawatan desc limit 1), '-'), ifnull ((select pemeriksaan_ranap.berat " +
                 "from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = permintaan_lab.no_rawat order by pemeriksaan_ranap.tgl_perawatan desc, pemeriksaan_ranap.jam_rawat desc " +
-                "limit 1), '-')), 'kg') as bb, if (permintaan_lab.informasi_tambahan like '%cito%', 'Cito', 'Reguler') as jenis_registrasi, ifnull (if (permintaan_lab.status = 'ralan', " +
+                "limit 1), '-') as bb, if (permintaan_lab.informasi_tambahan like '%cito%', 'Cito', 'Reguler') as jenis_registrasi, ifnull (if (permintaan_lab.status = 'ralan', " +
                 "concat(reg_periksa.kd_poli, '|', poliklinik.nm_poli), (select concat(kamar.kd_bangsal, '|', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar " +
                 "join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where kamar_inap.no_rawat = permintaan_lab.no_rawat order by kamar_inap.tgl_masuk desc, kamar_inap.jam_masuk desc limit 1)), " +
                 "'-|-') as asal_unit, ifnull ((select concat(diagnosa_pasien.kd_penyakit, '|', penyakit.nm_penyakit) from diagnosa_pasien join penyakit on diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit " +
@@ -142,8 +142,8 @@ public class ApiADAMLABS
             response = obj.readTree(responseEntity.getBody());
             Sequel.menyimpanSmc(
                 "adamlabs_request_response",
-                "noorder, url, method, request, code, response, user_id",
-                kodeRegistrasi, url, "POST", jsonBuilder, String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
+                "no_laboratorium, noorder, url, method, request, code, response, pengirim",
+                response.path("payload").path("registrasi").path("no_lab").asText(), kodeRegistrasi, url, "POST", jsonBuilder, String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
             );
             if (response.path("status").asText().equals("200")) {
                 Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("registrasi").path("no_lab").asText());
