@@ -230,7 +230,7 @@ public final class akses {
             balance_cairan=false,catatan_observasi_chbp=false,catatan_observasi_induksi_persalinan=false,skp_kategori_penilaian=false,skp_kriteria_penilaian=false,
             skp_penilaian=false,referensi_poli_mobilejknfktp=false,referensi_dokter_mobilejknfktp=false,skp_rekapitulasi_penilaian=false,pembayaran_pihak_ke3_bankmandiri=false,
             metode_pembayaran_bankmandiri=false,bank_tujuan_transfer_bankmandiri=false,kodetransaksi_tujuan_transfer_bankmandiri=false,konsultasi_medik=false,jawaban_konsultasi_medik=false,
-            pcare_cek_alergi=false,pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,cetak_penagihan_piutang_sebelum_simpan=false;
+            pcare_cek_alergi=false,pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,cetak_penagihan_piutang_sebelum_simpan=false,data_sasaran_usialansia=false,skrining_perilaku_merokok_sekolah_remaja=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -1307,6 +1307,8 @@ public final class akses {
                         akses.pcare_cek_prognosa=true;
                         akses.data_sasaran_usiaproduktif=true;
                         akses.cetak_penagihan_piutang_sebelum_simpan=true;
+                        akses.data_sasaran_usialansia=true;
+                        akses.skrining_perilaku_merokok_sekolah_remaja=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2367,6 +2369,8 @@ public final class akses {
                         akses.pcare_cek_prognosa=rs2.getBoolean("pcare_cek_prognosa");
                         akses.data_sasaran_usiaproduktif=rs2.getBoolean("data_sasaran_usiaproduktif");
                         akses.cetak_penagihan_piutang_sebelum_simpan=rs2.getBoolean("cetak_penagihan_piutang_sebelum_simpan");
+                        akses.data_sasaran_usialansia=rs2.getBoolean("data_sasaran_usialansia");
+                        akses.skrining_perilaku_merokok_sekolah_remaja=rs2.getBoolean("skrining_perilaku_merokok_sekolah_remaja");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3425,6 +3429,8 @@ public final class akses {
                         akses.pcare_cek_prognosa=false;
                         akses.data_sasaran_usiaproduktif=false;
                         akses.cetak_penagihan_piutang_sebelum_simpan=false;
+                        akses.data_sasaran_usialansia=false;
+                        akses.skrining_perilaku_merokok_sekolah_remaja=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4506,6 +4512,8 @@ public final class akses {
         akses.pcare_cek_prognosa=false;
         akses.data_sasaran_usiaproduktif=false;
         akses.cetak_penagihan_piutang_sebelum_simpan=false;
+        akses.data_sasaran_usialansia=false;
+        akses.skrining_perilaku_merokok_sekolah_remaja=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -5603,4 +5611,6 @@ public final class akses {
     public static boolean getpcare_cek_prognosa(){return akses.pcare_cek_prognosa;}
     public static boolean getdata_sasaran_usiaproduktif(){return akses.data_sasaran_usiaproduktif;}
     public static boolean getcetak_penagihan_piutang_sebelum_simpan(){return akses.cetak_penagihan_piutang_sebelum_simpan;}
+    public static boolean getdata_sasaran_usialansia(){return akses.data_sasaran_usialansia;}
+    public static boolean getskrining_perilaku_merokok_sekolah_remaja(){return akses.skrining_perilaku_merokok_sekolah_remaja;}
 }   

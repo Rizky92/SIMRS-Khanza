@@ -1,10 +1,3 @@
-CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
-  `code` varchar(7) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
-  PRIMARY KEY (`code`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 INSERT INTO `eklaim_icd10` VALUES ("A00", "Cholera", 1);
 INSERT INTO `eklaim_icd10` VALUES ("A00.0", "Cholera due to vibrio cholerae 01, biovar cholerae", 1);
 INSERT INTO `eklaim_icd10` VALUES ("A00.1", "Cholera due to vibrio cholerae 01, biovar eltor", 1);

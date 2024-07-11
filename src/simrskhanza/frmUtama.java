@@ -755,6 +755,8 @@ import laporan.DlgDaftarPasienRanap;
 import laporan.DlgDaftarPasienRanapPolri;
 import laporan.DlgDaftarPasienRanapTNI;
 import laporan.DlgDataKlasifikasiPasienRanap;
+import laporan.DlgDataSasaranUsiaLansia;
+import laporan.DlgDataSasaranUsiaProduktif;
 import laporan.DlgDemografiUmurKunjungan;
 import laporan.DlgDosisRadiologi;
 import rekammedis.RMDataResumePasien;
@@ -958,6 +960,7 @@ import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningMPP;
 import rekammedis.RMSkriningMPPFormA;
 import rekammedis.RMSkriningMPPFormB;
+import rekammedis.RMSkriningMerokokUsiaSekolahRemaja;
 import rekammedis.RMSkriningNutrisiAnak;
 import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
@@ -21812,6 +21815,42 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     } 
+    
+    private void btnDataSasaranUsiaProduktifActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgDataSasaranUsiaProduktif form=new DlgDataSasaranUsiaProduktif(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
+    
+    private void btnDataSasaranUsiaLansiaActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgDataSasaranUsiaLansia form=new DlgDataSasaranUsiaLansia(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
+    
+    private void btnSkriningMerokokUsiaSekolahActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningMerokokUsiaSekolahRemaja form=new RMSkriningMerokokUsiaSekolahRemaja(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
             
     /**
     * @param args the command line arguments
@@ -22509,7 +22548,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnKirimDiagnosticReportLabMBSatuSehat,btnKepatuhanKelengkapanKeselamatanBedah,btnNilaiPiutangPerJenisBayarPerBulan,btnRingkasanPiutangPerJenisBayar,
             btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,btnUserSmc,
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
-            btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik;
+            btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
+            btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah;
     
     public void isWall(){
         try{            
@@ -24551,6 +24591,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpemeriksaan_fisik_ralan_per_penyakit()==true){
                 Panelmenu.add(btnPemeriksaanFisikRalanPerPenyakit);
+                jmlmenu++;
+            }
+            
+            if(akses.getdata_sasaran_usiaproduktif()==true){
+                Panelmenu.add(btnDataSasaranUsiaProduktif);
+                jmlmenu++;
+            }
+            
+            if(akses.getdata_sasaran_usialansia()==true){
+                Panelmenu.add(btnDataSasaranUsiaLansia);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==10){   
@@ -26610,6 +26660,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getedukasi_pasien_keluarga_rj()==true){
                 Panelmenu.add(btnEdukasiPasienKeluargaRJ);
+                jmlmenu++;
+            }
+            
+            if(akses.getskrining_perilaku_merokok_sekolah_remaja()==true){
+                Panelmenu.add(btnSkriningMerokokUsiaSekolah);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==13){  
@@ -29760,6 +29815,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPemeriksaanFisikRalanPerPenyakit);
             jmlmenu++;
         }
+        
+        if(akses.getdata_sasaran_usiaproduktif()==true){
+            Panelmenu.add(btnDataSasaranUsiaProduktif);
+            jmlmenu++;
+        }
+        
+        if(akses.getdata_sasaran_usialansia()==true){
+            Panelmenu.add(btnDataSasaranUsiaLansia);
+            jmlmenu++;
+        }
 
         if(akses.getkamar()==true){
             Panelmenu.add(btnKamar);
@@ -31804,6 +31869,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getedukasi_pasien_keluarga_rj()==true){
             Panelmenu.add(btnEdukasiPasienKeluargaRJ);
+            jmlmenu++;
+        }
+        
+        if(akses.getskrining_perilaku_merokok_sekolah_remaja()==true){
+            Panelmenu.add(btnSkriningMerokokUsiaSekolah);
             jmlmenu++;
         }
 
@@ -35724,6 +35794,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getdata_sasaran_usiaproduktif()==true){  
+            if(btnDataSasaranUsiaProduktif.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnDataSasaranUsiaProduktif);                 
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getdata_sasaran_usialansia()==true){  
+            if(btnDataSasaranUsiaLansia.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnDataSasaranUsiaLansia);                 
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getkamar()==true){
             if(btnKamar.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnKamar);
@@ -38590,6 +38674,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getedukasi_pasien_keluarga_rj()==true){
             if(btnEdukasiPasienKeluargaRJ.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnEdukasiPasienKeluargaRJ);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getskrining_ralan_pernapasan_pertahun()==true){
+            if(btnSkriningMerokokUsiaSekolah.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningMerokokUsiaSekolah);
                 jmlmenu++;
             }                
         }
@@ -44961,5 +45052,29 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnKonsultasiMedik.setName("btnKonsultasiMedik"); 
         btnKonsultasiMedik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonsultasiMedik.addActionListener(this::btnKonsultasiMedikActionPerformed);
+        
+        btnDataSasaranUsiaProduktif = new widget.ButtonBig();
+        btnDataSasaranUsiaProduktif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49607_product_report_sales_icon.png"))); 
+        btnDataSasaranUsiaProduktif.setText("Data Sasaran Usia Produktif");
+        btnDataSasaranUsiaProduktif.setIconTextGap(0);
+        btnDataSasaranUsiaProduktif.setName("btnDataSasaranUsiaProduktif"); 
+        btnDataSasaranUsiaProduktif.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnDataSasaranUsiaProduktif.addActionListener(this::btnDataSasaranUsiaProduktifActionPerformed);
+        
+        btnDataSasaranUsiaLansia = new widget.ButtonBig();
+        btnDataSasaranUsiaLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/49607_product_report_sales_icon.png"))); 
+        btnDataSasaranUsiaLansia.setText("Data Sasaran Usia Lansia");
+        btnDataSasaranUsiaLansia.setIconTextGap(0);
+        btnDataSasaranUsiaLansia.setName("btnDataSasaranUsiaLansia"); 
+        btnDataSasaranUsiaLansia.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnDataSasaranUsiaLansia.addActionListener(this::btnDataSasaranUsiaLansiaActionPerformed);
+        
+        btnSkriningMerokokUsiaSekolah = new widget.ButtonBig();
+        btnSkriningMerokokUsiaSekolah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3017868_day_patrick_pipe_smoke_st_icon.png"))); 
+        btnSkriningMerokokUsiaSekolah.setText("Skrining Merokok Usia Sekolah & Remaja");
+        btnSkriningMerokokUsiaSekolah.setIconTextGap(0);
+        btnSkriningMerokokUsiaSekolah.setName("btnSkriningMerokokUsiaSekolah"); 
+        btnSkriningMerokokUsiaSekolah.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningMerokokUsiaSekolah.addActionListener(this::btnSkriningMerokokUsiaSekolahActionPerformed);
     }
 }
