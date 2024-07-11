@@ -1156,7 +1156,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 ChkJln.setSelected(false);    
                 Sequel.AutoComitFalse();
                 sukses=true;
-                int coba = 0, maxCoba = 5;
+                int coba = 0, maxCoba = 10;
                 if(ubah==false){
                     if (checkboxSimpanTemplateResep.isSelected() && ! textTemplateResep.getText().isBlank()) {
                         while (Sequel.menyimpantfSmc(
@@ -1174,9 +1174,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 "0000-00-00",
                                 "00:00:00",
                                 textTemplateResep.getText()
-                            }) == false && coba < maxCoba) {
-                            emptTeksobat();
-                            sukses = (++coba) < maxCoba;
+                            }) == false && coba++ < maxCoba) {
+                            autonomor(coba + 1);
+                            sukses = coba < maxCoba;
                         }
                         if (sukses == true) {
                             simpandata();
@@ -1196,9 +1196,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 status,
                                 "0000-00-00",
                                 "00:00:00"
-                            }) == false && coba < maxCoba) {
-                            emptTeksobat();
-                            sukses = (++coba) < maxCoba;
+                            }) == false && coba++ < maxCoba) {
+                            autonomor(coba + 1);
+                            sukses = coba < maxCoba;
                         }
                         if (sukses == true) {
                             simpandata();
@@ -1961,8 +1961,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
     public void emptTeksobat() {
         if(ChkRM.isSelected()==true){
-            Valid.autoNomorSmc(NoResep, null, "resep_obat", "no_resep", 4, "0", DTPBeri.getSelectedItem());
+            autonomor(1);
         } 
+    }
+    
+    public void autonomor(int next) {
+        Valid.autoNomorSmc(NoResep, "", "resep_obat", "no_resep", 4, "0", DTPBeri, next);
     }
 
     public JTable getTable(){

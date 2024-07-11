@@ -93,6 +93,10 @@ public final class validasi {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tgl, int next) {
+        component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, getTglSmc(tgl), next));
+    }
+    
     public String getTglSmc(Tanggal tgl) {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
