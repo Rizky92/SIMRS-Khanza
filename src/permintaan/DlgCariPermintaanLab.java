@@ -1,4 +1,5 @@
 package permintaan;
+import bridging.ApiADAMLABS;
 import bridging.ApiLICA;
 import bridging.ApiMEDQLAB;
 import bridging.ApiSOFTMEDIX;
@@ -78,11 +79,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private ApiSOFTMEDIX softmedix=new ApiSOFTMEDIX();
     private ObjectMapper mapper = new ObjectMapper();
     private ApiMEDQLAB medqlab=new ApiMEDQLAB();
+    private final ApiADAMLABS apiAdamlabs = new ApiADAMLABS();
     private WebEngine engine;
     private JsonNode root;
     private JsonNode response;
     private String pilihan="",alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",la="",ld="",pa="",pd="",InformasiTambahan,DiagnosaKlinis,
                     NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",json="",finger="";
+    
+    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -424,6 +428,25 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         
         ChkAccor.setSelected(false);
         isMenu();
+        BtnKirimLica.setVisible(false);
+        BtnAmbilLica.setVisible(false);
+        BtnKirimSysmex.setVisible(false);
+        BtnAmbilSysmex.setVisible(false);
+        BtnKirimLISELIMS.setVisible(false);
+        BtnAmbilLISELIMS.setVisible(false);
+        BtnKirimLISTeras.setVisible(false);
+        BtnAmbilLISTeras.setVisible(false);
+        BtnKirimLISMADQLAB.setVisible(false);
+        BtnAmbilLISMADQLAB.setVisible(false);
+        BtnKirimLISSMARTLAB.setVisible(false);
+        BtnAmbilLISSMARTLAB.setVisible(false);
+        BtnKirimLISSOFTMEDIX.setVisible(false);
+        BtnAmbilLISSOFTMEDIX.setVisible(false);
+        BtnKirimVansLab.setVisible(false);
+        BtnAmbilVanslab.setVisible(false);
+        BtnKirimLISSLIMS.setVisible(false);
+        BtnAmbilLISSLIMS.setVisible(false);
+        BtnAmbilAdamLabs.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -597,7 +620,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         WindowTerkirim.getContentPane().add(jButton1);
-        jButton1.setBounds(200, 15, 72, 30);
+        jButton1.setBounds(200, 15, 76, 30);
 
         WindowJnsRegistrasi.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowJnsRegistrasi.setName("WindowJnsRegistrasi"); // NOI18N
@@ -655,14 +678,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
             public void windowDeactivated(java.awt.event.WindowEvent evt) {
                 formWindowDeactivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -1004,7 +1027,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
         TabRawatJalan.addTab("Item Permintaan", scrollPane2);
 
-        internalFrame2.add(TabRawatJalan, java.awt.BorderLayout.CENTER);
+        internalFrame2.add(TabRawatJalan, java.awt.BorderLayout.PAGE_START);
 
         TabPilihRawat.addTab("Rawat Jalan", internalFrame2);
 
@@ -2145,6 +2168,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
+                            autoKirimOrderKeLIS(NoPermintaan);
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -2192,6 +2216,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         Valid.SetTgl(TanggalPulang.getSelectedItem()+""),TanggalPulang.getSelectedItem().toString().substring(11,19),NoPermintaan
                         })==true){
                             WindowAmbilSampel.dispose();
+                            apiAdamlabs.registrasi(NoPermintaan.trim());
                             try {
                                 pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
                                 switch (pilihan) {
@@ -4176,49 +4201,23 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }//GEN-LAST:event_BtnAmbilLISSLIMSActionPerformed
 
     private void BtnKirimAdamLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimAdamLabsActionPerformed
-        if(TabPilihRawat.getSelectedIndex()==0){
-            if(TabRawatJalan.getSelectedIndex()==0){
-                if(!NoRawat.equals("")){
-                    if(NoPermintaan.trim().equals("")||DiagnosaKlinis.trim().equals("")){
-                        Valid.textKosong(TCari,"No.Permintaan");
-                    }else{
-                        //TanggalPulang.setDate(new Date());
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        WindowJnsRegistrasi.setLocationRelativeTo(internalFrame1);
-                        WindowJnsRegistrasi.setVisible(true);
-                        this.setCursor(Cursor.getDefaultCursor());
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tbLabRalan.getSelectedRow() != -1) {
+                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                        apiAdamlabs.registrasi(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
-                    TCari.requestFocus();
                 }
-            }else if(TabRawatJalan.getSelectedIndex()==1){
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih Data Permintaan...!!!!");
-                TabRawatJalan.setSelectedIndex(0);
-                TCari.requestFocus();
             }
-        }else if(TabPilihRawat.getSelectedIndex()==1){
-            if(TabRawatInap.getSelectedIndex()==0){
-                if(!NoRawat.equals("")){
-                    if(NoPermintaan.trim().equals("")||DiagnosaKlinis.trim().equals("")){
-                        Valid.textKosong(TCari,"No.Permintaan");
-                    }else{
-                        //TanggalPulang.setDate(new Date());
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        WindowJnsRegistrasi.setLocationRelativeTo(internalFrame1);
-                        WindowJnsRegistrasi.setVisible(true);
-                        this.setCursor(Cursor.getDefaultCursor());
+        } else if (TabPilihRawat.getSelectedIndex() == 1) {
+            if (TabRawatInap.getSelectedIndex() == 0) {
+                if (tbLabRanap.getSelectedRow() != -1) {
+                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                        apiAdamlabs.registrasi(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data permintaan...!!!!");
-                    TCari.requestFocus();
                 }
-            }else if(TabRawatInap.getSelectedIndex()==1){
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih Data Permintaan...!!!!");
-                TabRawatInap.setSelectedIndex(0);
-                TCari.requestFocus();
             }
-        } // TODO add your handling code here:
+        }
     }//GEN-LAST:event_BtnKirimAdamLabsActionPerformed
 
     private void BtnAmbilAdamLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAmbilAdamLabsActionPerformed
@@ -4826,6 +4825,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnAmbilLISTeras.setEnabled(akses.getperiksa_lab());
         BtnKirimLISMADQLAB.setEnabled(akses.getpermintaan_lab());
         BtnAmbilLISMADQLAB.setEnabled(akses.getperiksa_lab());
+        BtnKirimAdamLabs.setEnabled(akses.getpermintaan_lab());
     }
     
     public void setPasien(String pasien){
@@ -5267,4 +5267,17 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }
     }
     
+    private void autoKirimOrderKeLIS(String noorder) {
+        if (LABORATORIUMKIRIMHASIL.isBlank()) {
+            return;
+        }
+        
+        switch (LABORATORIUMKIRIMHASIL) {
+            case "adamlabs":
+                apiAdamlabs.registrasi(noorder);
+                break;
+            default:
+                return;
+        }
+    }
 }

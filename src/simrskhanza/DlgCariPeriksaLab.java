@@ -331,6 +331,8 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCetakLab = new javax.swing.JMenu();
+        MnCetakHasilLabSMCTabel = new javax.swing.JMenuItem();
+        MnCetakHasilLabSMCMorfologi = new javax.swing.JMenuItem();
         MnCetakHasilLab = new javax.swing.JMenuItem();
         MnCetakHasilLab1 = new javax.swing.JMenuItem();
         MnCetakHasilLab2 = new javax.swing.JMenuItem();
@@ -345,6 +347,8 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab22 = new javax.swing.JMenuItem();
         MnCetakHasilLab24 = new javax.swing.JMenuItem();
         MnPDFLab = new javax.swing.JMenu();
+        MnPDFHasilLabSMCTabel = new javax.swing.JMenuItem();
+        MnPDFHasilLabSMCMorfologi = new javax.swing.JMenuItem();
         MnCetakHasilLab11 = new javax.swing.JMenuItem();
         MnCetakHasilLab12 = new javax.swing.JMenuItem();
         MnCetakHasilLab13 = new javax.swing.JMenuItem();
@@ -421,6 +425,34 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakLab.setName("MnCetakLab"); // NOI18N
         MnCetakLab.setPreferredSize(new java.awt.Dimension(190, 26));
+
+        MnCetakHasilLabSMCTabel.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakHasilLabSMCTabel.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakHasilLabSMCTabel.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakHasilLabSMCTabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakHasilLabSMCTabel.setText("Model 1");
+        MnCetakHasilLabSMCTabel.setName("MnCetakHasilLabSMCTabel"); // NOI18N
+        MnCetakHasilLabSMCTabel.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilLabSMCTabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakHasilLabSMCTabelActionPerformed(evt);
+            }
+        });
+        MnCetakLab.add(MnCetakHasilLabSMCTabel);
+
+        MnCetakHasilLabSMCMorfologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakHasilLabSMCMorfologi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakHasilLabSMCMorfologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakHasilLabSMCMorfologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakHasilLabSMCMorfologi.setText("Model 1");
+        MnCetakHasilLabSMCMorfologi.setName("MnCetakHasilLabSMCMorfologi"); // NOI18N
+        MnCetakHasilLabSMCMorfologi.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilLabSMCMorfologi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakHasilLabSMCMorfologiActionPerformed(evt);
+            }
+        });
+        MnCetakLab.add(MnCetakHasilLabSMCMorfologi);
 
         MnCetakHasilLab.setBackground(new java.awt.Color(255, 255, 254));
         MnCetakHasilLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -615,6 +647,34 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnPDFLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPDFLab.setName("MnPDFLab"); // NOI18N
         MnPDFLab.setPreferredSize(new java.awt.Dimension(190, 26));
+
+        MnPDFHasilLabSMCTabel.setBackground(new java.awt.Color(255, 255, 254));
+        MnPDFHasilLabSMCTabel.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPDFHasilLabSMCTabel.setForeground(new java.awt.Color(50, 50, 50));
+        MnPDFHasilLabSMCTabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPDFHasilLabSMCTabel.setText("Model 1");
+        MnPDFHasilLabSMCTabel.setName("MnPDFHasilLabSMCTabel"); // NOI18N
+        MnPDFHasilLabSMCTabel.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnPDFHasilLabSMCTabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPDFHasilLabSMCTabelActionPerformed(evt);
+            }
+        });
+        MnPDFLab.add(MnPDFHasilLabSMCTabel);
+
+        MnPDFHasilLabSMCMorfologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnPDFHasilLabSMCMorfologi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPDFHasilLabSMCMorfologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnPDFHasilLabSMCMorfologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPDFHasilLabSMCMorfologi.setText("Model 1");
+        MnPDFHasilLabSMCMorfologi.setName("MnPDFHasilLabSMCMorfologi"); // NOI18N
+        MnPDFHasilLabSMCMorfologi.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnPDFHasilLabSMCMorfologi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPDFHasilLabSMCMorfologiActionPerformed(evt);
+            }
+        });
+        MnPDFLab.add(MnPDFHasilLabSMCMorfologi);
 
         MnCetakHasilLab11.setBackground(new java.awt.Color(255, 255, 254));
         MnCetakHasilLab11.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -6099,6 +6159,22 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
 
+    private void MnCetakHasilLabSMCTabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakHasilLabSMCTabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnCetakHasilLabSMCTabelActionPerformed
+
+    private void MnCetakHasilLabSMCMorfologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakHasilLabSMCMorfologiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnCetakHasilLabSMCMorfologiActionPerformed
+
+    private void MnPDFHasilLabSMCTabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPDFHasilLabSMCTabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnPDFHasilLabSMCTabelActionPerformed
+
+    private void MnPDFHasilLabSMCMorfologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPDFHasilLabSMCMorfologiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnPDFHasilLabSMCMorfologiActionPerformed
+
     private void MnCetakHasilLab24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakHasilLab24ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
@@ -6310,9 +6386,13 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JMenuItem MnCetakHasilLab7;
     private javax.swing.JMenuItem MnCetakHasilLab8;
     private javax.swing.JMenuItem MnCetakHasilLab9;
+    private javax.swing.JMenuItem MnCetakHasilLabSMCMorfologi;
+    private javax.swing.JMenuItem MnCetakHasilLabSMCTabel;
     private javax.swing.JMenu MnCetakLab;
     private javax.swing.JMenuItem MnCetakNota;
     private javax.swing.JMenuItem MnCetakSuratCovid;
+    private javax.swing.JMenuItem MnPDFHasilLabSMCMorfologi;
+    private javax.swing.JMenuItem MnPDFHasilLabSMCTabel;
     private javax.swing.JMenu MnPDFLab;
     private javax.swing.JMenuItem MnSaranKesan;
     private javax.swing.JMenuItem MnUbah;
