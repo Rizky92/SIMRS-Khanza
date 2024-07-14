@@ -161,6 +161,37 @@ public final class sekuel {
         return output;
     }
     
+    public String autoNomorSmc(String prefix, String table, String kolom, int panjang, String pad, String tanggal, int next) {
+        String output = "";
+        
+        String sql = "select " +
+            "concat(?, date_format(?, '%Y%m%d'), " +
+            "lpad(ifnull(max(convert(right(" + table + "." + kolom + ", ?), signed)), 0) + ?, ?, ?)) " +
+            "from " + table + " " +
+            "where " + table + "." + kolom + " like concat(?, date_format(?, '%Y%m%d'), '%')";
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            ps.setString(1, prefix);
+            ps.setString(2, tanggal);
+            ps.setInt(3, panjang);
+            ps.setInt(4, next);
+            ps.setInt(5, panjang);
+            ps.setString(6, pad);
+            ps.setString(7, prefix);
+            ps.setString(8, tanggal);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    output = rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
     public String cariIsiSmc(String sql, String... values)
     {
         String output = "";
