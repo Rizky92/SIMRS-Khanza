@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="155" pageHeight="56" columnWidth="149" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3">
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="155" pageHeight="56" columnWidth="149" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3" uuid="690b8f2b-4a06-433a-8695-a1757a902436">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -88,13 +89,13 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 	</background>
 	<title>
 		<band height="50">
-			<textField>
-				<reportElement x="0" y="0" width="149" height="50" forecolor="#000000"/>
+			<staticText>
+				<reportElement x="0" y="0" width="149" height="50" forecolor="#000000" uuid="745f425a-fd59-4091-bbaf-4cb08d892ef0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Black" size="32"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[UMUM]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[UMUM]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>
