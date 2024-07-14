@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -1681,16 +1681,17 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
     
     private void isHitungKeseimbangan(){
         try {
-            int infus = Integer.parseInt(Infus.getText());
-            int tranfusi = Integer.parseInt(Tranfusi.getText());
-            int minum = Integer.parseInt(Minum.getText());
-            int urine = Integer.parseInt(Urine.getText());
-            int drain = Integer.parseInt(Drain.getText());
-            int ngt = Integer.parseInt(NGT.getText());
-            int iwl = Integer.parseInt(IWL.getText());
+            double infus = Infus.getText().isBlank() ? 0 : Valid.SetAngka(Infus.getText()),
+                   tranfusi = Tranfusi.getText().isBlank() ? 0 : Valid.SetAngka(Tranfusi.getText()),
+                   minum = Minum.getText().isBlank() ? 0 : Valid.SetAngka(Minum.getText()),
+                   urine = Urine.getText().isBlank() ? 0 : Valid.SetAngka(Urine.getText()),
+                   drain = Drain.getText().isBlank() ? 0 : Valid.SetAngka(Drain.getText()),
+                   ngt = NGT.getText().isBlank() ? 0 : Valid.SetAngka(NGT.getText()),
+                   iwl = IWL.getText().isBlank() ? 0 : Valid.SetAngka(IWL.getText());
 
-            int result = (infus + tranfusi + minum) - (urine + drain + ngt + iwl);
-            Keseimbangan.setText(Integer.toString(result));
+            Keseimbangan.setText(Valid.SetAngka6(
+                (infus + tranfusi + minum) - (urine + drain + ngt + iwl)
+            ));
         } catch (Exception e) {
             Keseimbangan.setText("0");
         }
