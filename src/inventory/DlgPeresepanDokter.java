@@ -3399,7 +3399,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                             rs2.getString("kode_sat"),Valid.roundUp(rs2.getDouble("harga"),100),
                                             rs2.getDouble("h_beli"),rs2.getString("nama"),rs2.getDouble("stok"),
                                             rs2.getDouble("kapasitas"),rs2.getDouble("p1"),"/",rs2.getDouble("p2"),
-                                            rs2.getString("kandungan"),rs2.getDouble("stok"),rs2.getString("nama_industri"),rs2.getString("letak_barang"),rs2.getString("kategori")
+                                            rs2.getString("kandungan"),rs2.getDouble("jml"),rs2.getString("nama_industri"),rs2.getString("letak_barang"),rs2.getString("kategori")
                                         });  
                                     }        
                                 } 
@@ -3410,7 +3410,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                         rs2.getString("kode_sat"),Valid.roundUp(rs2.getDouble("harga"),100),
                                         rs2.getDouble("h_beli"),rs2.getString("nama"),rs2.getDouble("stok"),
                                         rs2.getDouble("kapasitas"),rs2.getDouble("p1"),"/",rs2.getDouble("p2"),
-                                        rs2.getString("kandungan"),rs2.getDouble("stok"),rs2.getString("nama_industri"),rs2.getString("letak_barang"),rs2.getString("kategori")
+                                        rs2.getString("kandungan"),rs2.getDouble("jml"),rs2.getString("nama_industri"),rs2.getString("letak_barang"),rs2.getString("kategori")
                                     });  
                                 } 
                             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39117999-ee30-4dd3-9d28-3fc3fa281a0c">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -242,7 +242,7 @@
 	<detail>
 		<band height="12">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="76" height="10" uuid="967617e8-d844-4a55-98b1-d49ea594e0d7">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -252,7 +252,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp1}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="162" y="0" width="148" height="10" uuid="c49f98c6-59b4-445f-9a93-0574de61108b"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -260,7 +260,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp4}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="450" y="0" width="21" height="10" uuid="7ad50932-6c88-45c6-b8cd-0402832e526e">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -270,7 +270,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp6}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="472" y="0" width="48" height="10" uuid="4cc2fceb-0134-4b61-bfef-1e1f31f29ee0">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -280,7 +280,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp7}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="310" y="0" width="140" height="10" uuid="32dcc10c-2b61-4539-93ff-5f121d26ce7a"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -288,7 +288,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp5}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="76" y="0" width="50" height="10" uuid="a8988080-beac-450b-9688-33b0e2e2eeab">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -298,7 +298,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp2}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00">
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0.00">
 				<reportElement x="522" y="0" width="53" height="10" uuid="b7107351-ca74-4211-9256-97400066f834">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -308,7 +308,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp8}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00">
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0.00">
 				<reportElement x="577" y="0" width="90" height="10" uuid="f2c516e0-4b14-4460-a645-2f6af29fa592">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -318,7 +318,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp9}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="126" y="0" width="36" height="10" uuid="4f9f4805-41b1-4f52-8ae5-43cc2a87d9c4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -328,7 +328,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp3}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="667" y="0" width="55" height="10" uuid="2b236cb5-eca5-49c9-b266-75db77e097cd"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -336,7 +336,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp10}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField isStretchWithOverflow="true">
 				<reportElement x="722" y="0" width="78" height="10" uuid="fd8d3faa-b6eb-4547-8bb8-c403e033f1d4"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
