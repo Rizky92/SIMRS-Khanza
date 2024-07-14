@@ -435,6 +435,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkSkriningGiziLanjut = new widget.CekBox();
         chkMonitoringGizi = new widget.CekBox();
         chkCatatanADIMEGizi = new widget.CekBox();
+        chkSkriningMerokokUsiaRemaja = new widget.CekBox();
+        chkSkriningKekerasanPadaPerempuan = new widget.CekBox();
+        chkSkriningObesitas = new widget.CekBox();
         chkRekonsiliasiObat = new widget.CekBox();
         chkKonselingFarmasi = new widget.CekBox();
         chkPelayananInformasiObat = new widget.CekBox();
@@ -738,7 +741,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3200));
+        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3270));
         FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         chkSemua.setSelected(true);
@@ -1602,6 +1605,30 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanADIMEGizi.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkCatatanADIMEGizi);
 
+        chkSkriningMerokokUsiaRemaja.setSelected(true);
+        chkSkriningMerokokUsiaRemaja.setText("Skrining Merokok Usia Sekolah");
+        chkSkriningMerokokUsiaRemaja.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkSkriningMerokokUsiaRemaja.setName("chkSkriningMerokokUsiaRemaja"); // NOI18N
+        chkSkriningMerokokUsiaRemaja.setOpaque(false);
+        chkSkriningMerokokUsiaRemaja.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkSkriningMerokokUsiaRemaja);
+
+        chkSkriningKekerasanPadaPerempuan.setSelected(true);
+        chkSkriningKekerasanPadaPerempuan.setText("Skrining Kekerasan Pada Perempuan");
+        chkSkriningKekerasanPadaPerempuan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkSkriningKekerasanPadaPerempuan.setName("chkSkriningKekerasanPadaPerempuan"); // NOI18N
+        chkSkriningKekerasanPadaPerempuan.setOpaque(false);
+        chkSkriningKekerasanPadaPerempuan.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkSkriningKekerasanPadaPerempuan);
+
+        chkSkriningObesitas.setSelected(true);
+        chkSkriningObesitas.setText("Skrining Obesitas");
+        chkSkriningObesitas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkSkriningObesitas.setName("chkSkriningObesitas"); // NOI18N
+        chkSkriningObesitas.setOpaque(false);
+        chkSkriningObesitas.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkSkriningObesitas);
+
         chkRekonsiliasiObat.setSelected(true);
         chkRekonsiliasiObat.setText("Rekonsiliasi Obat");
         chkRekonsiliasiObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2432,6 +2459,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkCatatanObservasiCHBP.setSelected(true);
             chkCatatanObservasiInduksiPersalinan.setSelected(true);
             chkKonsultasiMedik.setSelected(true);
+            chkSkriningMerokokUsiaRemaja.setSelected(true);
+            chkSkriningKekerasanPadaPerempuan.setSelected(true);
+            chkSkriningObesitas.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkAsuhanKeperawatanRalan.setSelected(false);
@@ -2571,6 +2601,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkCatatanObservasiCHBP.setSelected(false);
             chkCatatanObservasiInduksiPersalinan.setSelected(false);
             chkKonsultasiMedik.setSelected(false);
+            chkSkriningMerokokUsiaRemaja.setSelected(false);
+            chkSkriningKekerasanPadaPerempuan.setSelected(false);
+            chkSkriningObesitas.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -2786,9 +2819,12 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkSkorBromagePascaAnestesi;
     private widget.CekBox chkSkorStewardPascaAnestesi;
     private widget.CekBox chkSkriningGiziLanjut;
+    private widget.CekBox chkSkriningKekerasanPadaPerempuan;
+    private widget.CekBox chkSkriningMerokokUsiaRemaja;
     private widget.CekBox chkSkriningNutrisiAnak;
     private widget.CekBox chkSkriningNutrisiDewasa;
     private widget.CekBox chkSkriningNutrisiLansia;
+    private widget.CekBox chkSkriningObesitas;
     private widget.CekBox chkTambahanBiaya;
     private widget.CekBox chkTimeOutSebelumInsisi;
     private widget.CekBox chkTindakanRalanDokter;
@@ -3477,6 +3513,12 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanPenilaianPasienKeracunan(rs.getString("no_rawat"));
                     //menampilkan skrining gizi lanjut
                     menampilkanGizi(rs.getString("no_rawat"));
+                    //menampilkan skrining merokok usia sekolah
+                    menampilkanSKriningMerokokUsiaSekolah(rs.getString("no_rawat"));
+                    //menampilkan skrining kekerasan Pada Perempuan
+                    menampilkanSKriningKekerasanPadaPerempuan(rs.getString("no_rawat"));
+                    //menampilkan skrining obesitas
+                    menampilkanSkriningObesitas(rs.getString("no_rawat"));
                     //menampilkan konseling farmasi
                     menampilkanRekonsiliasiObat(rs.getString("no_rawat"));
                     //menampilkan konseling farmasi
@@ -26218,6 +26260,487 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Penilaian Pasien Imunitas Rendah : "+e);
+        }
+    }
+    
+    private void menampilkanSKriningMerokokUsiaSekolah(String norawat) {
+        try {
+            if(chkSkriningMerokokUsiaRemaja.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select skrining_perilaku_merokok_sekolah_remaja.kelas,skrining_perilaku_merokok_sekolah_remaja.kd_sekolah,master_sekolah.nm_sekolah,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.nip,petugas.nama,skrining_perilaku_merokok_sekolah_remaja.tanggal,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.apakah_anda_merokok,skrining_perilaku_merokok_sekolah_remaja.jumlah_batang_rokok,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.jumlah_batang_rokok_hariminggu,skrining_perilaku_merokok_sekolah_remaja.jenis_rokok_yang_digunakan,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.jenis_rokok_yang_digunakan_keterangan,skrining_perilaku_merokok_sekolah_remaja.usia_mulai_merokok,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.alasan_mulai_merokok,skrining_perilaku_merokok_sekolah_remaja.alasan_mulai_merokok_keterangan,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.sudah_berapa_lama_merokok,skrining_perilaku_merokok_sekolah_remaja.bagaimana_biasanya_mendapatkan_rokok,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.bagaimana_biasanya_mendapatkan_rokok_keterangan,skrining_perilaku_merokok_sekolah_remaja.keinginan_berhenti_merokok,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.alasan_utama_berhenti_merokok,skrining_perilaku_merokok_sekolah_remaja.alasan_utama_berhenti_merokok_keterangan,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.tahu_dampak_kesehatan_merokok,skrining_perilaku_merokok_sekolah_remaja.dampak_kesehatan_dari_merokok_yang_diketahui,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.tahu_merokok_pintu_masuk_narkoba,skrining_perilaku_merokok_sekolah_remaja.melihat_orang_merokok_di_sekolah,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.orang_yang_paling_sering_merokok_disekolah,skrining_perilaku_merokok_sekolah_remaja.orang_yang_paling_sering_merokok_disekolah_keterangan,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.ada_anggota_keluarga_di_rumah_yang_merokok,skrining_perilaku_merokok_sekolah_remaja.teman_dekat_banyakyang_merokok,"+
+                            "skrining_perilaku_merokok_sekolah_remaja.dilakukan_pemeriksaan_kadar_co_pernapasan,skrining_perilaku_merokok_sekolah_remaja.hasil_pemeriksaan_co_pernapasan "+
+                            "from skrining_perilaku_merokok_sekolah_remaja inner join petugas on skrining_perilaku_merokok_sekolah_remaja.nip=petugas.nip "+
+                            "inner join master_sekolah on master_sekolah.kd_sekolah=skrining_perilaku_merokok_sekolah_remaja.kd_sekolah "+
+                            "where skrining_perilaku_merokok_sekolah_remaja.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Skrining Perilaku Merokok Bagi Anak Usia Sekolah</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
+                                              "<td width='70%' border='0'>Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "ASAL SEKOLAH"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='70%' border='0'>Nama Sekolah : "+rs2.getString("nm_sekolah")+"</td>"+
+                                              "<td width='30%' border='0'>Kelas : "+rs2.getString("kelas")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "I. PERILAKU MEROKOK"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>a.</td>"+
+                                              "<td width='66%'>Apakah Anda merokok ? (Bila jawaban 3 dan 4, langsung ke bagian Bagian II)</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("apakah_anda_merokok")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>b.</td>"+
+                                              "<td width='66%'>Berapa jumlah batang rokok yang Anda hisap setiap hari atau minggu ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("jumlah_batang_rokok")+" "+rs2.getString("jumlah_batang_rokok_hariminggu")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>c.</td>"+
+                                              "<td width='66%'>Jika jawaban a adalah 1 dan 2, jenis rokok yang digunakan ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("jenis_rokok_yang_digunakan")+(rs2.getString("jenis_rokok_yang_digunakan_keterangan").equals("")?"":", "+rs2.getString("jenis_rokok_yang_digunakan_keterangan"))+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>d.</td>"+
+                                              "<td width='66%'>Berapa usia Anda mulai merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("usia_mulai_merokok")+" Tahun</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>e.</td>"+
+                                              "<td width='66%'>Apa alasan utama Anda mulai merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("alasan_mulai_merokok")+(rs2.getString("alasan_mulai_merokok_keterangan").equals("")?"":", "+rs2.getString("alasan_mulai_merokok_keterangan"))+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>f.</td>"+
+                                              "<td width='66%'>Sudah berapa lama Anda merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("sudah_berapa_lama_merokok")+" Bulan</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>g.</td>"+
+                                              "<td width='66%'>Bagaimana biasanya (paling sering) kamu mendapatkan rokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("bagaimana_biasanya_mendapatkan_rokok")+(rs2.getString("bagaimana_biasanya_mendapatkan_rokok_keterangan").equals("")?"":", "+rs2.getString("bagaimana_biasanya_mendapatkan_rokok_keterangan"))+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>h.</td>"+
+                                              "<td width='66%'>Apakah ada keinginan Anda untuk berhenti merokok ? (Jika Tidak, langsung ke Bagian II)</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("keinginan_berhenti_merokok")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>i.</td>"+
+                                              "<td width='66%'>Jika Ya apa alasan utama Anda mau berhenti merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("alasan_utama_berhenti_merokok")+(rs2.getString("alasan_utama_berhenti_merokok_keterangan").equals("")?"":", "+rs2.getString("alasan_utama_berhenti_merokok_keterangan"))+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "II. PENGETAHUAN TENTANG ROKOK"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>a.</td>"+
+                                              "<td width='66%'>Apakah Anda tahu dampak kesehatan dari merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("tahu_dampak_kesehatan_merokok")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>b.</td>"+
+                                              "<td width='66%'>Jika Ya, pilihlah menurut Anda dampak kesehatan dari merokok yang Anda ketahui ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("dampak_kesehatan_dari_merokok_yang_diketahui")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>c.</td>"+
+                                              "<td width='66%'>Apakah Anda tahu merokok menjadi pintu masuk penggunaan narkoba ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("tahu_merokok_pintu_masuk_narkoba")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "III. SUMBER PAPARAN PERILAKU MEROKOK"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>a.</td>"+
+                                              "<td width='66%'>Apakah Anda pernah melihat orang yang merokok di satuan pendidikan?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("melihat_orang_merokok_di_sekolah")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>b.</td>"+
+                                              "<td width='66%'>Jika Ya sebutkan orang yang paling sering Anda lihat merokok di satuan pendidikan !</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("orang_yang_paling_sering_merokok_disekolah")+(rs2.getString("orang_yang_paling_sering_merokok_disekolah_keterangan").equals("")?"":", "+rs2.getString("orang_yang_paling_sering_merokok_disekolah_keterangan"))+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>c.</td>"+
+                                              "<td width='66%'>Apakah ada anggota keluarga di rumah yang merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("ada_anggota_keluarga_di_rumah_yang_merokok")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>d.</td>"+
+                                              "<td width='66%'>Apakah teman-teman dekatmu banyak yang merokok ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("teman_dekat_banyakyang_merokok")+" Tahun</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "IV. PEMERIKSAAN KADAR CO PERNAPASAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>a.</td>"+
+                                              "<td width='66%'>Apakah dilakukan pemeriksaan kadar CO pernapasan ?</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("dilakukan_pemeriksaan_kadar_co_pernapasan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>b.</td>"+
+                                              "<td width='66%'>Hasil pemeriksaan kadar CO pernapasan</td>"+
+                                              "<td width='30%' align='center'>"+rs2.getString("hasil_pemeriksaan_co_pernapasan")+" Ppm</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"
+                            ); 
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Skrining Merokok Pada Usia Remaja : "+e);
+        }
+    }
+    
+    private void menampilkanSKriningKekerasanPadaPerempuan(String norawat) {
+        try {
+            if(chkSkriningKekerasanPadaPerempuan.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,skrining_kekerasan_pada_perempuan.nip,"+
+                            "petugas.nama,skrining_kekerasan_pada_perempuan.tanggal,skrining_kekerasan_pada_perempuan.menggambarkan_hubungan,skrining_kekerasan_pada_perempuan.skor_menggambarkan_hubungan,"+
+                            "skrining_kekerasan_pada_perempuan.berdebat_dengan_pasangan,skrining_kekerasan_pada_perempuan.skor_berdebat_dengan_pasangan,skrining_kekerasan_pada_perempuan.pertengkaran_membuat_sedih,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pertengkaran_membuat_sedih,skrining_kekerasan_pada_perempuan.pertengkaran_menghasilkan_pukulan,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pertengkaran_menghasilkan_pukulan,skrining_kekerasan_pada_perempuan.pernah_merasa_takut_dengan_pasangan,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pernah_merasa_takut_dengan_pasangan,skrining_kekerasan_pada_perempuan.pasangan_melecehkan_secara_fisik,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pasangan_melecehkan_secara_fisik,skrining_kekerasan_pada_perempuan.pasangan_melecehkan_secara_imosional,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pasangan_melecehkan_secara_imosional,skrining_kekerasan_pada_perempuan.pasangan_melecehkan_secara_seksual,"+
+                            "skrining_kekerasan_pada_perempuan.skor_pasangan_melecehkan_secara_seksual,skrining_kekerasan_pada_perempuan.totalskor,skrining_kekerasan_pada_perempuan.hasil_skrining "+
+                            "from skrining_kekerasan_pada_perempuan inner join reg_periksa on skrining_kekerasan_pada_perempuan.no_rawat=reg_periksa.no_rawat "+
+                            "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_kekerasan_pada_perempuan.nip=petugas.nip "+
+                            "where skrining_kekerasan_pada_perempuan.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Skrining Kekerasan Pada Perempuan</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
+                                              "<td width='70%' border='0'>Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "I. PERTANYAAN AWAL"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>"+
+                                              "<td valign='top' width='62%' bgcolor='#FFFAF8' align='center'>Pertanyaan</td>"+
+                                              "<td valign='top' width='30%' bgcolor='#FFFAF8' align='center'>Jawaban</td>"+
+                                              "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>Skor</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>1.</td>"+
+                                              "<td>Secara umum, bagaimana Anda menggambarkan hubungan Anda ?</td>"+
+                                              "<td align='center'>"+rs2.getString("menggambarkan_hubungan")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_menggambarkan_hubungan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>2.</td>"+
+                                              "<td>Seperti apa saat Anda dan pasangan berdebat ?</td>"+
+                                              "<td align='center'>"+rs2.getString("berdebat_dengan_pasangan")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_berdebat_dengan_pasangan")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "II. PERTANYAAN LANJUTAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>"+
+                                              "<td valign='top' width='62%' bgcolor='#FFFAF8' align='center'>Pertanyaan</td>"+
+                                              "<td valign='top' width='30%' bgcolor='#FFFAF8' align='center'>Jawaban</td>"+
+                                              "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>Skor</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>1.</td>"+
+                                              "<td>Apakah pertengkaran pernah membuat Anda merasa sedih atau buruk tentang diri sendiri ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pertengkaran_membuat_sedih")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pertengkaran_membuat_sedih")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>2.</td>"+
+                                              "<td>Apakah pertengkaran pernah menghasilkan pukulan, tendangan, atau dorongan ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pertengkaran_menghasilkan_pukulan")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pertengkaran_menghasilkan_pukulan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>3.</td>"+
+                                              "<td>Apakah Anda pernah merasa takut dengan apa yang pasangan Anda katakan atau lakukan ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pernah_merasa_takut_dengan_pasangan")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pernah_merasa_takut_dengan_pasangan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>4.</td>"+
+                                              "<td>Apakah pasangan Anda pernah melecehkan Anda secara fisik ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pasangan_melecehkan_secara_fisik")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pasangan_melecehkan_secara_fisik")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>5.</td>"+
+                                              "<td>Pernahkah pasangan Anda melecehkan Anda secara emosional ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pasangan_melecehkan_secara_imosional")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pasangan_melecehkan_secara_imosional")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td>6.</td>"+
+                                              "<td>Apakah pasangan Anda pernah melecehkan Anda secara seksual ?</td>"+
+                                              "<td align='center'>"+rs2.getString("pasangan_melecehkan_secara_seksual")+"</td>"+
+                                              "<td align='center'>"+rs2.getString("skor_pasangan_melecehkan_secara_seksual")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "III. INTERPRETASI"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='96%' align='left'>Hasil Skrining : "+rs2.getString("hasil_skrining")+"</td>"+
+                                              "<td valign='top' width='4%' align='center'>"+rs2.getString("totalskor")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"
+                            ); 
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Skrining Kekerasan Pada Perempuan : "+e);
+        }
+    }
+    
+    private void menampilkanSkriningObesitas(String norawat) {
+        try {
+            if(chkSkriningObesitas.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select skrining_obesitas.tanggal,skrining_obesitas.kebiasaan_makan_manis,skrining_obesitas.aktifitas_fisik_setiap_hari,skrining_obesitas.istirahat_cukup,skrining_obesitas.risiko_merokok,"+
+                            "skrining_obesitas.riwayat_minum_alkohol_merokok_keluarga,skrining_obesitas.riwayat_penggunaan_obat_steroid,skrining_obesitas.berat_badan,skrining_obesitas.tinggi_badan,"+
+                            "skrining_obesitas.imt,skrining_obesitas.kasifikasi_imt,skrining_obesitas.lingkar_pinggang,skrining_obesitas.risiko_lingkar_pinggang,skrining_obesitas.status_obesitas,"+
+                            "skrining_obesitas.keterangan,skrining_obesitas.nip,petugas.nama from skrining_obesitas inner join petugas on skrining_obesitas.nip=petugas.nip "+
+                            "where skrining_obesitas.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Skrining Obesitas</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
+                                              "<td width='70%' border='0'>Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "I. ANAMNESIS"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>1.</td>"+
+                                              "<td width='70%'>Kebiasaan Makan Manis</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("kebiasaan_makan_manis")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>2.</td>"+
+                                              "<td width='70%'>Aktifitas Fisik Setiap Hari</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("aktifitas_fisik_setiap_hari")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>3.</td>"+
+                                              "<td width='70%'>Istirahat Cukup</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("istirahat_cukup")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>4.</td>"+
+                                              "<td width='70%'>Risiko Merokok</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("risiko_merokok")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>5.</td>"+
+                                              "<td width='70%'>Riwayat Minum Alkohol / Merokok Di Keluarga</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("riwayat_minum_alkohol_merokok_keluarga")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>6.</td>"+
+                                              "<td width='70%'>Riwayat Penggunaan Obat-obatan Steroid</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("riwayat_penggunaan_obat_steroid")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "II. PEMERIKSAAN FISIK (KLASIFIKASI WHO ASIA PASIFIK , 2020)"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%'>1.</td>"+
+                                              "<td width='70%'>Berat Badan (Kg)</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("berat_badan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>2.</td>"+
+                                              "<td width='70%'>Tinggi Badan (Cm)</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("tinggi_badan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>3.</td>"+
+                                              "<td width='70%'>Indeks Masa Tubuh (BB/TB²)</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("imt")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>4.</td>"+
+                                              "<td width='70%'>Klasifikasi IMT</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("kasifikasi_imt")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>5.</td>"+
+                                              "<td width='70%'>Lingkat Pinggang (Cm)</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("lingkar_pinggang")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%'>6.</td>"+
+                                              "<td width='70%'>Risiko Berdasarkan Lingkar Pinggang</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("risiko_lingkar_pinggang")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "III. INTERPRETASI"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='25%'>Status Obesitas</td>"+
+                                              "<td width='75%'>"+rs2.getString("status_obesitas")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='25%'>Keterangan</td>"+
+                                              "<td width='75%'>"+rs2.getString("keterangan")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"
+                            ); 
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Skrining Obesitas : "+e);
         }
     }
 }
