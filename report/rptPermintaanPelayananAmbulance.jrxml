@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="557" leftMargin="19" rightMargin="19" topMargin="19" bottomMargin="19" uuid="34c13d5a-cd6b-451e-8001-9fd298d2274a">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -191,7 +191,7 @@ inner join dokter on penilaian_medis_ralan_psikiatrik.kd_dokter=dokter.kd_dokter
 					<font fontName="Tahoma" size="9" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jk}.ReplaceAll("L","Laki-laki").ReplaceAll("P","Perempuan")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jk}.replaceAll("L","Laki-laki").replaceAll("P","Perempuan")]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="314" y="108" width="60" height="11" uuid="91db409e-9799-453a-81f2-1b11974c411f">
