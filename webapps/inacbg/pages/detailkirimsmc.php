@@ -564,7 +564,12 @@
                                 $bmhp = $billing['bmhp'];
                                 $sewa_alat = $billing['sewa_alat'];
                                 $rehabilitasi = $billing['rehabilitasi'];
+
                                 $totalbilling = $billing['totalbilling'];
+
+                                $totalbillingsementara = $prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli
+                                                       + $keperawatan + $radiologi + $laboratorium + $kamar + $obat_kronis
+                                                       + $obat_kemoterapi + $obat + $bmhp + $sewa_alat+ $rehabilitasi;
                             ?>
                             <tr class="head">
                                 <td width="41%">Biaya Prosedur Non Bedah</td>
@@ -746,7 +751,6 @@
                                     <input id="diskon_billing_sewa_alat" name="diskon_sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
-
                             <tr class="head">
                                 <td width="41%">Tarif Poli Eksekutif</td>
                                 <td>:</td>
@@ -755,6 +759,13 @@
                                     <input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
                                     <input id="diskon_billing_tarif_poli_eks" name="diskon_tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Total Rincian Biaya</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <span>Rp. </span><span id="totalbillingsementara"><?= $totalbillingsementara ?></span>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -1050,7 +1061,6 @@
                         }
 
                         if ((int) round($validasi) === 0) {
-                            echo "BILLING SESUAI!";
                             if ($corona == 'PasienCorona') {
                                 echo "Bridging klaim INACBG untuk Pasien Covid-19 belum support!";
                                 // $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
@@ -1155,7 +1165,8 @@
     <?php endif; ?>
 </div>
 <script>
-    let totalbilling       = document.querySelector('#totalbilling')
+    let totalbilling              = document.querySelector('#totalbilling')
+    let totalbillingsementara     = document.querySelector('#totalbillingsementara')
 
     let prosedur_non_bedah        = document.querySelector('#billing_prosedur_non_bedah')
     let diskon_prosedur_non_bedah = document.querySelector('#diskon_billing_prosedur_non_bedah')
@@ -1196,8 +1207,10 @@
     let tarif_poli_eks            = document.querySelector('#billing_tarif_poli_eks')
     let diskon_tarif_poli_eks     = document.querySelector('#diskon_billing_tarif_poli_eks')
 
-    const hitungRincianBilling = (e, nilaibilling) => {
-        totalbillingsementara
+    function hitungRincianBilling() {
+        let nilaibilling = totalbilling.innerHTML
+
+        let totalrincianbilling
             = (parseInt(prosedur_non_bedah.value) - parseInt(diskon_prosedur_non_bedah.value))
             + (parseInt(prosedur_bedah.value) - parseInt(diskon_prosedur_bedah.value))
             + (parseInt(konsultasi.value) - parseInt(diskon_konsultasi.value))
@@ -1218,24 +1231,22 @@
             + (parseInt(sewa_alat.value) - parseInt(diskon_sewa_alat.value))
             + (parseInt(tarif_poli_eks.value) - parseInt(diskon_tarif_poli_eks.value))
 
-        totalbilling.innerHTML = totalbillingsementara
+        totalbillingsementara.innerHTML = totalrincianbilling
 
-        if (parseInt(totalbillingsementara) != parseInt(nilaibilling)) {
-            totalbilling.style.fontWeight = '700'
-            totalbilling.style.color = '#f00'
+        if (parseInt(totalrincianbilling) == parseInt(nilaibilling)) {
+            totalbillingsementara.style.fontWeight = '400'
+            totalbillingsementara.style.color = 'inherit'
         } else {
-            totalbilling.style.fontWeight = '400'
-            totalbilling.style.color = 'inherit'
+            totalbillingsementara.style.fontWeight = '700'
+            totalbillingsementara.style.color = '#f00'
         }
     }
 
-    function janganEnter(e, nilaibilling) {
+    function janganSubmitSaatEnter(e) {
         if (e.key == 'Enter' || e.keyCode == 13) {
             e.preventDefault()
 
-            e.stopImmediatePropagation()
-
-            hitungRincianBilling(nilaibilling)
+            hitungRincianBilling()
 
             return false;
         }
@@ -1243,140 +1254,82 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        let nilaibilling
-            = (parseInt(prosedur_non_bedah.value) - parseInt(diskon_prosedur_non_bedah.value))
-            + (parseInt(prosedur_bedah.value) - parseInt(diskon_prosedur_bedah.value))
-            + (parseInt(konsultasi.value) - parseInt(diskon_konsultasi.value))
-            + (parseInt(tenaga_ahli.value) - parseInt(diskon_tenaga_ahli.value))
-            + (parseInt(keperawatan.value) - parseInt(diskon_keperawatan.value))
-            + (parseInt(penunjang.value) - parseInt(diskon_penunjang.value))
-            + (parseInt(radiologi.value) - parseInt(diskon_radiologi.value))
-            + (parseInt(laboratorium.value) - parseInt(diskon_laboratorium.value))
-            + (parseInt(pelayanan_darah.value) - parseInt(diskon_pelayanan_darah.value))
-            + (parseInt(rehabilitasi.value) - parseInt(diskon_rehabilitasi.value))
-            + (parseInt(kamar.value) - parseInt(diskon_kamar.value))
-            + (parseInt(rawat_intensif.value) - parseInt(diskon_rawat_intensif.value))
-            + (parseInt(obat.value) - parseInt(diskon_obat.value))
-            + (parseInt(obat_kronis.value) - parseInt(diskon_obat_kronis.value))
-            + (parseInt(obat_kemoterapi.value) - parseInt(diskon_obat_kemoterapi.value))
-            + (parseInt(alkes.value) - parseInt(diskon_alkes.value))
-            + (parseInt(bmhp.value) - parseInt(diskon_bmhp.value))
-            + (parseInt(sewa_alat.value) - parseInt(diskon_sewa_alat.value))
-            + (parseInt(tarif_poli_eks.value) - parseInt(diskon_tarif_poli_eks.value))
-        
-        prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        prosedur_non_bedah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        prosedur_non_bedah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_prosedur_non_bedah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_prosedur_non_bedah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        prosedur_bedah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        prosedur_bedah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_prosedur_bedah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_prosedur_bedah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        konsultasi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        konsultasi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        konsultasi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_konsultasi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_konsultasi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_konsultasi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        tenaga_ahli.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        tenaga_ahli.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_tenaga_ahli.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_tenaga_ahli.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        keperawatan.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        keperawatan.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        keperawatan.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_keperawatan.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_keperawatan.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_keperawatan.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        penunjang.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        penunjang.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        penunjang.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_penunjang.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_penunjang.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_penunjang.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        radiologi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        radiologi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        radiologi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_radiologi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_radiologi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_radiologi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        laboratorium.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        laboratorium.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        laboratorium.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_laboratorium.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_laboratorium.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_laboratorium.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        pelayanan_darah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        pelayanan_darah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_pelayanan_darah.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_pelayanan_darah.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        rehabilitasi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        rehabilitasi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        rehabilitasi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_rehabilitasi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_rehabilitasi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_rehabilitasi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        kamar.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        kamar.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        kamar.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_kamar.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_kamar.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_kamar.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        rawat_intensif.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        rawat_intensif.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        rawat_intensif.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_rawat_intensif.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_rawat_intensif.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_rawat_intensif.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        obat.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        obat.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        obat.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_obat.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_obat.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_obat.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        obat_kronis.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        obat_kronis.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        obat_kronis.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_obat_kronis.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_obat_kronis.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_obat_kronis.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        obat_kemoterapi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        obat_kemoterapi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_obat_kemoterapi.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_obat_kemoterapi.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        alkes.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        alkes.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        alkes.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_alkes.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_alkes.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_alkes.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        bmhp.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        bmhp.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        bmhp.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_bmhp.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_bmhp.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_bmhp.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        sewa_alat.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        sewa_alat.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        sewa_alat.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_sewa_alat.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_sewa_alat.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_sewa_alat.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        tarif_poli_eks.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        tarif_poli_eks.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
-        diskon_tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling(nilaibilling))
-        diskon_tarif_poli_eks.addEventListener('keypress', (e) => janganEnter(e, nilaibilling))
-        diskon_tarif_poli_eks.addEventListener('keydown', (e) => janganEnter(e, nilaibilling))
+        hitungRincianBilling();
+        prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        prosedur_non_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_prosedur_non_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        prosedur_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_prosedur_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        konsultasi.addEventListener('change', (e) => hitungRincianBilling())
+        konsultasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_konsultasi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_konsultasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling())
+        tenaga_ahli.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_tenaga_ahli.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        keperawatan.addEventListener('change', (e) => hitungRincianBilling())
+        keperawatan.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_keperawatan.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_keperawatan.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        penunjang.addEventListener('change', (e) => hitungRincianBilling())
+        penunjang.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_penunjang.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_penunjang.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        radiologi.addEventListener('change', (e) => hitungRincianBilling())
+        radiologi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_radiologi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_radiologi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        laboratorium.addEventListener('change', (e) => hitungRincianBilling())
+        laboratorium.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_laboratorium.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_laboratorium.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling())
+        pelayanan_darah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_pelayanan_darah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        rehabilitasi.addEventListener('change', (e) => hitungRincianBilling())
+        rehabilitasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_rehabilitasi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_rehabilitasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        kamar.addEventListener('change', (e) => hitungRincianBilling())
+        kamar.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_kamar.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_kamar.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        rawat_intensif.addEventListener('change', (e) => hitungRincianBilling())
+        rawat_intensif.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_rawat_intensif.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_rawat_intensif.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat.addEventListener('change', (e) => hitungRincianBilling())
+        obat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat_kronis.addEventListener('change', (e) => hitungRincianBilling())
+        obat_kronis.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat_kronis.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat_kronis.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling())
+        obat_kemoterapi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat_kemoterapi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        alkes.addEventListener('change', (e) => hitungRincianBilling())
+        alkes.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_alkes.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_alkes.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        bmhp.addEventListener('change', (e) => hitungRincianBilling())
+        bmhp.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_bmhp.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_bmhp.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        sewa_alat.addEventListener('change', (e) => hitungRincianBilling())
+        sewa_alat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_sewa_alat.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_sewa_alat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling())
+        tarif_poli_eks.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_tarif_poli_eks.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
     })
 </script>
