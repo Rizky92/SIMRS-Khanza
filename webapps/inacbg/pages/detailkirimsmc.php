@@ -1138,7 +1138,7 @@
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
                                             HTML;
-                                        } else if ($success && $data == 'stage2') {
+                                        } else if ($success && $response == 'stage2') {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
                                             HTML;
