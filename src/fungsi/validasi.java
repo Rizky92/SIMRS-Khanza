@@ -114,13 +114,13 @@ public final class validasi {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
-            jasperViewer.setTitle(judul);
+            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
+            jv.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-            jasperViewer.setSize(screen.width - 50, screen.height - 50);
-            jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-            jasperViewer.setLocationRelativeTo(null);
-            jasperViewer.setVisible(true);
+            jv.setSize(screen.width - 50, screen.height - 50);
+            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+            jv.setLocationRelativeTo(null);
+            jv.setVisible(true);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);

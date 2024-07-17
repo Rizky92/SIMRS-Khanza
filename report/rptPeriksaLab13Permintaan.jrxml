@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="522" leftMargin="56" rightMargin="17" topMargin="20" bottomMargin="20" uuid="46cb9bbf-ef29-4d1d-84db-9c53208be50b">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -11,15 +10,13 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="noperiksa" class="java.lang.String"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="norm" class="java.lang.String"/>
 	<parameter name="namapasien" class="java.lang.String"/>
 	<parameter name="jkel" class="java.lang.String"/>
 	<parameter name="lahir" class="java.lang.String"/>
 	<parameter name="pengirim" class="java.lang.String"/>
 	<parameter name="petugas" class="java.lang.String"/>
-	<parameter name="tanggal" class="java.lang.String"/>
-	<parameter name="jam" class="java.lang.String"/>
 	<parameter name="penjab" class="java.lang.String"/>
 	<parameter name="alamat" class="java.lang.String"/>
 	<parameter name="kamar" class="java.lang.String"/>
@@ -36,18 +33,44 @@
 	<parameter name="nopermintaan" class="java.lang.String"/>
 	<parameter name="tanggalpermintaan" class="java.lang.String"/>
 	<parameter name="jampermintaan" class="java.lang.String"/>
+	<parameter name="noperiksa" class="java.lang.String"/>
+	<parameter name="tanggal" class="java.lang.String"/>
+	<parameter name="jam" class="java.lang.String"/>
+	<parameter name="tgl_periksa" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select jns_perawatan_lab.nm_perawatan, template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template inner join jns_perawatan_lab on detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where detail_periksa_lab.no_rawat= $P{noperiksa} and detail_periksa_lab.jam= $P{jam} and template_laboratorium.Pemeriksaan != '' and detail_periksa_lab.nilai != '' order by jns_perawatan_lab.nm_perawatan asc, template_laboratorium.urut asc]]>
+		<![CDATA[SELECT jns_perawatan_lab.nm_perawatan,
+	template_laboratorium.`Pemeriksaan`,
+	detail_periksa_lab.nilai
+FROM detail_periksa_lab
+	inner join template_laboratorium ON 
+	 detail_periksa_lab.id_template = template_laboratorium.id_template 
+	inner join jns_perawatan_lab ON 
+	 detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw 
+WHERE 
+	 detail_periksa_lab.no_rawat = $P{noperiksa} 
+	 AND detail_periksa_lab.tgl_periksa = $P{tgl_periksa} 
+	 AND detail_periksa_lab.jam = $P{jam} 
+ORDER BY jns_perawatan_lab.kd_jenis_prw ASC,
+	template_laboratorium.urut ASC]]>
 	</queryString>
-	<field name="nm_perawatan" class="java.lang.String"/>
-	<field name="Pemeriksaan" class="java.lang.String"/>
-	<field name="nilai" class="java.lang.String"/>
+	<field name="nm_perawatan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nm_perawatan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="jns_perawatan_lab"/>
+	</field>
+	<field name="Pemeriksaan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Pemeriksaan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="template_laboratorium"/>
+	</field>
+	<field name="nilai" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nilai"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detail_periksa_lab"/>
+	</field>
 	<group name="Group1" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{nm_perawatan}]]></groupExpression>
 		<groupHeader>
 			<band height="43">
 				<staticText>
-					<reportElement mode="Transparent" x="94" y="10" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="8b90fb2f-3846-4323-9c36-035b7c1ebb23"/>
+					<reportElement mode="Transparent" x="88" y="8" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="8b90fb2f-3846-4323-9c36-035b7c1ebb23"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Tahoma" size="10" isBold="false"/>
 						<paragraph lineSpacing="Single"/>
@@ -55,7 +78,7 @@
 					<text><![CDATA[:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Transparent" x="3" y="10" width="91" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="82583720-04f2-4b07-894a-61b837a4705b"/>
+					<reportElement mode="Transparent" x="-1" y="8" width="89" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="82583720-04f2-4b07-894a-61b837a4705b"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Tahoma" size="10" isBold="true"/>
 						<paragraph lineSpacing="Single"/>
@@ -63,7 +86,7 @@
 					<text><![CDATA[Item name]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement stretchType="RelativeToTallestObject" x="104" y="10" width="131" height="15" uuid="73de9678-484d-4c06-b069-ecb5a1d63253"/>
+					<reportElement stretchType="RelativeToTallestObject" x="98" y="8" width="175" height="15" uuid="73de9678-484d-4c06-b069-ecb5a1d63253"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Tahoma" size="10"/>
 						<paragraph lineSpacing="Single"/>
@@ -71,7 +94,7 @@
 					<textFieldExpression><![CDATA[$F{nm_perawatan}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Transparent" x="3" y="25" width="91" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="50188c7c-0869-45c5-b077-e5691887ec59"/>
+					<reportElement mode="Transparent" x="-1" y="27" width="89" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="50188c7c-0869-45c5-b077-e5691887ec59"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Tahoma" size="10" isBold="true"/>
 						<paragraph lineSpacing="Single"/>
@@ -215,7 +238,7 @@
 				<text><![CDATA[JK/Tgl.Lahir]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="98" y="156" width="35" height="15" uuid="73e440b5-5167-4988-a55c-cd10d97b150e"/>
+				<reportElement x="98" y="156" width="16" height="15" uuid="73e440b5-5167-4988-a55c-cd10d97b150e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
@@ -223,7 +246,7 @@
 				<textFieldExpression><![CDATA[$P{jkel}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="133" y="156" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="cde61e95-e2dc-4ff6-8dfd-efa108e7a432"/>
+				<reportElement mode="Transparent" x="114" y="156" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="cde61e95-e2dc-4ff6-8dfd-efa108e7a432"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -231,7 +254,7 @@
 				<text><![CDATA[/]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="143" y="156" width="83" height="15" uuid="54eb0e8f-02aa-4954-9cdb-4b525ad1cc25"/>
+				<reportElement x="124" y="156" width="83" height="15" uuid="54eb0e8f-02aa-4954-9cdb-4b525ad1cc25"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
@@ -429,7 +452,7 @@
 				<text><![CDATA[Jam Permintaan]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="100" y="201" width="175" height="15" uuid="223164fb-35e5-40af-bc6f-cd91998f1c5a">
+				<reportElement x="98" y="201" width="175" height="15" uuid="223164fb-35e5-40af-bc6f-cd91998f1c5a">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -439,7 +462,7 @@
 				<textFieldExpression><![CDATA[$P{pengirim}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="90" y="201" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="f8113ad0-dd30-4d8e-80a3-0dc25f84c1d9"/>
+				<reportElement mode="Transparent" x="88" y="201" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="f8113ad0-dd30-4d8e-80a3-0dc25f84c1d9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -447,7 +470,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="-1" y="201" width="91" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="cbed5683-94f8-4b29-bb97-b8b2ebd7cfcb"/>
+				<reportElement mode="Transparent" x="-1" y="201" width="89" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="cbed5683-94f8-4b29-bb97-b8b2ebd7cfcb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -485,13 +508,13 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="56" splitType="Stretch">
+		<band height="51" splitType="Stretch">
 			<textField>
-				<reportElement x="2" y="8" width="91" height="14" uuid="4eb1251f-0d0e-479d-9e32-43579d02a2e4"/>
+				<reportElement x="-1" y="1" width="89" height="14" uuid="4eb1251f-0d0e-479d-9e32-43579d02a2e4"/>
 				<textFieldExpression><![CDATA[$F{Pemeriksaan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="93" y="8" width="10" height="14" forecolor="#000000" backcolor="#F0F0DC" uuid="75d894ba-0eda-44ea-9bf2-980630b433b2"/>
+				<reportElement mode="Transparent" x="88" y="1" width="10" height="14" forecolor="#000000" backcolor="#F0F0DC" uuid="75d894ba-0eda-44ea-9bf2-980630b433b2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -499,7 +522,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="103" y="8" width="414" height="48" uuid="2d2d30ab-6f0b-45d4-b581-1f2036679395"/>
+				<reportElement x="98" y="1" width="420" height="48" uuid="2d2d30ab-6f0b-45d4-b581-1f2036679395"/>
 				<textFieldExpression><![CDATA[$F{nilai}]]></textFieldExpression>
 			</textField>
 		</band>
