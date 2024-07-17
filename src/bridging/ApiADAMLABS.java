@@ -155,7 +155,7 @@ public class ApiADAMLABS
             System.out.println(e.getResponseBodyAsString());
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            if (e.getMessage().contains("UnknownHostException")) {
+            if (e.getMessage().contains("HostException")) {
                 System.out.println("Sambungan ke server ADAMLABS terputus!");
             }
         }
