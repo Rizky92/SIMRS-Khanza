@@ -3638,8 +3638,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             URL fileUrl = new URL(url + rs.getString("lokasi_file"));
                             http = (HttpURLConnection) fileUrl.openConnection();
                             if (http.getResponseCode() == 200) {
-                                http.disconnect();
                                 fileChannel.transferFrom(Channels.newChannel(fileUrl.openStream()), 0, Long.MAX_VALUE);
+                                http.disconnect();
                             } else {
                                 System.out.println("File not found : " + url + rs.getString("lokasi_file"));
                             }
@@ -3707,12 +3707,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
     
-    private void cleanupSingleFile(String nameContains) {
+    private void cleanupSingleFile(String containsName) {
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {
             for (File file : files) {
-                if (file.isFile() && file.getName().startsWith(nameContains)) {
+                if (file.isFile() && file.getName().startsWith(containsName)) {
                     file.delete();
                 }
             }
