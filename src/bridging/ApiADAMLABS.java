@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
-import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -56,8 +55,7 @@ public class ApiADAMLABS
     private HttpComponentsClientHttpRequestFactory factory;
     private String url;
     
-    public void registrasi(String kodeRegistrasi)
-    {
+    public void registrasi(String kodeRegistrasi) {
         try {
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select permintaan_lab.noorder, permintaan_lab.diagnosa_klinis, pasien.nm_pasien, pasien.no_rkm_medis, pasien.jk, pasien.alamat, pasien.no_tlp, " +
@@ -161,9 +159,9 @@ public class ApiADAMLABS
         }
     }
     
-    private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException
-    {
+    private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
+        
         TrustManager[] trustManagers = {
             new X509TrustManager() {
                 @Override
