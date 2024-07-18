@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="536" leftMargin="39" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7435c0f7-de74-4940-ae33-c2370e46f8e7">
 	<property name="ireport.zoom" value="1.399522140629204"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK Localhost"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -34,22 +34,72 @@
 	<parameter name="namadokter3" class="java.lang.String"/>
 	<parameter name="jamkeluar" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,resume_pasien_ranap.kd_dokter,dokter.nm_dokter,reg_periksa.kd_dokter as kodepengirim,pengirim.nm_dokter as pengirim,
-                    reg_periksa.tgl_registrasi,reg_periksa.jam_reg,resume_pasien_ranap.diagnosa_awal,resume_pasien_ranap.alasan,resume_pasien_ranap.keluhan_utama,resume_pasien_ranap.pemeriksaan_fisik,
-                    resume_pasien_ranap.jalannya_penyakit,resume_pasien_ranap.pemeriksaan_penunjang,resume_pasien_ranap.hasil_laborat,resume_pasien_ranap.tindakan_dan_operasi,resume_pasien_ranap.obat_di_rs,
-                    resume_pasien_ranap.diagnosa_utama,resume_pasien_ranap.kd_diagnosa_utama,resume_pasien_ranap.diagnosa_sekunder,resume_pasien_ranap.kd_diagnosa_sekunder,resume_pasien_ranap.diagnosa_sekunder2,
-                    resume_pasien_ranap.kd_diagnosa_sekunder2,resume_pasien_ranap.diagnosa_sekunder3,resume_pasien_ranap.kd_diagnosa_sekunder3,resume_pasien_ranap.diagnosa_sekunder4,
-                    resume_pasien_ranap.kd_diagnosa_sekunder4,resume_pasien_ranap.prosedur_utama,resume_pasien_ranap.kd_prosedur_utama,resume_pasien_ranap.prosedur_sekunder,resume_pasien_ranap.kd_prosedur_sekunder,
-                    resume_pasien_ranap.prosedur_sekunder2,resume_pasien_ranap.kd_prosedur_sekunder2,resume_pasien_ranap.prosedur_sekunder3,resume_pasien_ranap.kd_prosedur_sekunder3,resume_pasien_ranap.alergi,
-                    resume_pasien_ranap.diet,resume_pasien_ranap.lab_belum,resume_pasien_ranap.edukasi,resume_pasien_ranap.cara_keluar,resume_pasien_ranap.ket_keluar,resume_pasien_ranap.keadaan,
-                    resume_pasien_ranap.ket_keadaan,resume_pasien_ranap.dilanjutkan,resume_pasien_ranap.ket_dilanjutkan,resume_pasien_ranap.kontrol,resume_pasien_ranap.obat_pulang,reg_periksa.kd_pj,penjab.png_jawab,
-                    reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.pekerjaan,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat
-                   
-                    from resume_pasien_ranap inner join reg_periksa on resume_pasien_ranap.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                    inner join dokter on resume_pasien_ranap.kd_dokter=dokter.kd_dokter inner join dokter as pengirim on reg_periksa.kd_dokter=pengirim.kd_dokter 
-                    inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab 
-                    inner join penjab on penjab.kd_pj=reg_periksa.kd_pj
-where resume_pasien_ranap.no_rawat= $P{norawat}]]>
+		<![CDATA[select reg_periksa.no_rawat,
+    reg_periksa.no_rkm_medis,
+    pasien.nm_pasien,
+    resume_pasien_ranap.kd_dokter,
+    dokter.nm_dokter,
+    reg_periksa.kd_dokter as kodepengirim,
+    pengirim.nm_dokter as pengirim,
+    reg_periksa.tgl_registrasi,
+    reg_periksa.jam_reg,
+    resume_pasien_ranap.diagnosa_awal,
+    resume_pasien_ranap.alasan,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.keluhan_utama, '\\R', '; '), '\\t', ' ')) as keluhan_utama,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.pemeriksaan_fisik, '\\R', '; '), '\\t', ' ')) as pemeriksaan_fisik,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.jalannya_penyakit, '\\R', '; '), '\\t', ' ')) as jalannya_penyakit,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.pemeriksaan_penunjang, '\\R', '; '), '\\t', ' ')) as pemeriksaan_penunjang,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.hasil_laborat, '\\R', '; '), '\\t', ' ')) as hasil_laborat,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.tindakan_dan_operasi, '\\R', '; '), '\\t', ' ')) as tindakan_dan_operasi,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.obat_di_rs, '\\R', '; '), '\\t', ' ')) as obat_di_rs,
+    resume_pasien_ranap.diagnosa_utama,
+    resume_pasien_ranap.kd_diagnosa_utama,
+    resume_pasien_ranap.diagnosa_sekunder,
+    resume_pasien_ranap.kd_diagnosa_sekunder,
+    resume_pasien_ranap.diagnosa_sekunder2,
+    resume_pasien_ranap.kd_diagnosa_sekunder2,
+    resume_pasien_ranap.diagnosa_sekunder3,
+    resume_pasien_ranap.kd_diagnosa_sekunder3,
+    resume_pasien_ranap.diagnosa_sekunder4,
+    resume_pasien_ranap.kd_diagnosa_sekunder4,
+    resume_pasien_ranap.prosedur_utama,
+    resume_pasien_ranap.kd_prosedur_utama,
+    resume_pasien_ranap.prosedur_sekunder,
+    resume_pasien_ranap.kd_prosedur_sekunder,
+    resume_pasien_ranap.prosedur_sekunder2,
+    resume_pasien_ranap.kd_prosedur_sekunder2,
+    resume_pasien_ranap.prosedur_sekunder3,
+    resume_pasien_ranap.kd_prosedur_sekunder3,
+    resume_pasien_ranap.alergi,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.diet, '\\R', '; '), '\\t', ' ')) as diet,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.lab_belum, '\\R', '; '), '\\t', ' ')) as lab_belum,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.edukasi, '\\R', '; '), '\\t', ' ')) as edukasi,
+    resume_pasien_ranap.cara_keluar,
+    if (trim(resume_pasien_ranap.ket_keluar) = '', '', concat(', ', trim(resume_pasien_ranap.ket_keluar))) as ket_keluar,
+    resume_pasien_ranap.keadaan,
+    if (trim(resume_pasien_ranap.ket_keadaan) = '', '', concat(', ', trim(resume_pasien_ranap.ket_keadaan))) as ket_keadaan,
+    resume_pasien_ranap.dilanjutkan,
+    if (trim(resume_pasien_ranap.ket_dilanjutkan) = '', '', concat(', ', trim(resume_pasien_ranap.ket_dilanjutkan))) as ket_dilanjutkan,
+    resume_pasien_ranap.kontrol,
+    trim(regexp_replace(regexp_replace(resume_pasien_ranap.obat_pulang, '\\R', '; '), '\\t', ' ')) as obat_pulang,
+    reg_periksa.kd_pj,
+    penjab.png_jawab,
+    reg_periksa.umurdaftar,
+    reg_periksa.sttsumur,
+    pasien.pekerjaan,
+    pasien.jk,
+    pasien.tgl_lahir,
+    concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat
+from resume_pasien_ranap
+    join reg_periksa on resume_pasien_ranap.no_rawat = reg_periksa.no_rawat
+    join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
+    join dokter on resume_pasien_ranap.kd_dokter = dokter.kd_dokter
+    join dokter as pengirim on reg_periksa.kd_dokter = pengirim.kd_dokter
+    join kelurahan on pasien.kd_kel = kelurahan.kd_kel
+    join kecamatan on pasien.kd_kec = kecamatan.kd_kec
+    join kabupaten on pasien.kd_kab = kabupaten.kd_kab
+    join penjab on penjab.kd_pj = reg_periksa.kd_pj
+where resume_pasien_ranap.no_rawat = '2024/07/07/000110']]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="no_rawat"/>
@@ -732,7 +782,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{keluhan_utama}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{keluhan_utama}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="96" y="18" width="5" height="10" uuid="729c5652-64bd-426f-af2e-e640f42d2825">
@@ -816,7 +866,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pemeriksaan_fisik}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pemeriksaan_fisik}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="34" splitType="Stretch">
@@ -838,7 +888,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jalannya_penyakit}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jalannya_penyakit}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="33" splitType="Stretch">
@@ -850,7 +900,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pemeriksaan_penunjang}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pemeriksaan_penunjang}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="11" y="2" width="239" height="10" uuid="1008fcfe-159a-4c5c-981f-0ae1920270ed">
@@ -882,7 +932,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{hasil_laborat}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{hasil_laborat}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="32" splitType="Stretch">
@@ -904,7 +954,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tindakan_dan_operasi}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tindakan_dan_operasi}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="32" splitType="Stretch">
@@ -926,7 +976,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{obat_di_rs}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{obat_di_rs}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="120" splitType="Stretch">
@@ -1520,7 +1570,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{diet}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{diet}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="11" y="12" width="239" height="10" uuid="d5297cc1-9ba3-4096-8385-fba6d13606fb">
@@ -1562,7 +1612,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{lab_belum}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lab_belum}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="31" splitType="Stretch">
@@ -1584,7 +1634,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{edukasi}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{edukasi}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="58" splitType="Stretch">
@@ -1616,7 +1666,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{keadaan}+($F{ket_keadaan}.equals("")?"":", "+$F{ket_keadaan})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{keadaan}+$F{ket_keadaan}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="296" y="2" width="60" height="10" uuid="1ab78dc1-8e9d-4aa7-bf1d-12967ae5dd10">
@@ -1636,7 +1686,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{obat_pulang}.replace("\n", " ").replace("\r", " ").replace(System.getProperty("line.separator"), " ")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{obat_pulang}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="357" y="2" width="5" height="10" uuid="e691fc34-a2ba-4b50-978c-442a676ee4df">
@@ -1706,7 +1756,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dilanjutkan}+($F{ket_dilanjutkan}.equals("")?"":", "+$F{ket_dilanjutkan})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dilanjutkan}+$F{ket_dilanjutkan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" mode="Transparent" x="363" y="2" width="173" height="10" backcolor="#CCCCCC" uuid="cf772080-b032-48cf-aa32-b4320c6b8e22">
@@ -1716,7 +1766,7 @@ where resume_pasien_ranap.no_rawat= $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isItalic="false" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cara_keluar}+($F{ket_keluar}.equals("")?"":", "+$F{ket_keluar})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cara_keluar}+$F{ket_keluar}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="73" y="14" width="5" height="10" uuid="4c76d915-b1d7-4cbf-a02b-8ccbadc5cada">

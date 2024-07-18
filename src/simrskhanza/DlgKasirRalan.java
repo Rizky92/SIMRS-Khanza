@@ -172,10 +172,12 @@ import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMRekonsiliasiObat;
 import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
+import rekammedis.RMSkriningKekerasanPadaPerempuan;
 import rekammedis.RMSkriningMerokokUsiaSekolahRemaja;
 import rekammedis.RMSkriningNutrisiAnak;
 import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
+import rekammedis.RMSkriningObesitas;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMTriaseIGD;
@@ -14240,6 +14242,52 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
+    private void MnSkriningKekerasanPadaWanitaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningKekerasanPadaPerempuan form=new RMSkriningKekerasanPadaPerempuan(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnSkriningObesitasActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningObesitas form=new RMSkriningObesitas(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -14679,7 +14727,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     // End of variables declaration//GEN-END:variables
     private javax.swing.JMenuItem MnPenilaianPreInduksi,MnHasilPemeriksaanUSG,MnHasilPemeriksaanUSGUrologi,MnHasilPemeriksaanUSGGynecologi,MnHasilPemeriksaanEKG,MnSudahTerbitSEP,MnPenatalaksanaanTerapiOkupasi,MnHasilPemeriksaanUSGNeonatus,
                                   MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan,
-                                  MnPermintaanKonsultasiMedik,MnDataOperasi,MnDataKonsultasiMedik,MnSkriningMerokokUsiaSekolahRemaja;
+                                  MnPermintaanKonsultasiMedik,MnDataOperasi,MnDataKonsultasiMedik,MnSkriningMerokokUsiaSekolahRemaja,MnSkriningKekerasanPadaWanita,MnSkriningObesitas;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining;
     
     private void tampilkasir() {     
@@ -15030,6 +15078,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
         MnDataKonsultasiMedik.setEnabled(akses.getjawaban_konsultasi_medik());
         MnSkriningMerokokUsiaSekolahRemaja.setEnabled(akses.getskrining_perilaku_merokok_sekolah_remaja());
+        MnSkriningKekerasanPadaWanita.setEnabled(akses.getskrining_kekerasan_pada_perempuan());
+        MnSkriningObesitas.setEnabled(akses.getskrining_obesitas());
         
         if(akses.getkode().equals("Admin Utama")){
             MnHapusData.setEnabled(true);
@@ -15804,6 +15854,30 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSkriningMerokokUsiaSekolahRemaja.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSkriningMerokokUsiaSekolahRemaja.addActionListener(this::MnSkriningMerokokUsiaSekolahRemajaActionPerformed);
         
+        MnSkriningKekerasanPadaWanita = new javax.swing.JMenuItem();
+        MnSkriningKekerasanPadaWanita.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningKekerasanPadaWanita.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningKekerasanPadaWanita.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningKekerasanPadaWanita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningKekerasanPadaWanita.setText("Skrining Kekerasan Pada Perempuan");
+        MnSkriningKekerasanPadaWanita.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningKekerasanPadaWanita.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningKekerasanPadaWanita.setName("MnSkriningKekerasanPadaWanita");
+        MnSkriningKekerasanPadaWanita.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnSkriningKekerasanPadaWanita.addActionListener(this::MnSkriningKekerasanPadaWanitaActionPerformed);
+        
+        MnSkriningObesitas = new javax.swing.JMenuItem();
+        MnSkriningObesitas.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningObesitas.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningObesitas.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningObesitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningObesitas.setText("Skrining Obesitas");
+        MnSkriningObesitas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningObesitas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningObesitas.setName("MnSkriningObesitas");
+        MnSkriningObesitas.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnSkriningObesitas.addActionListener(this::MnSkriningObesitasActionPerformed);
+        
         MnDataKonsultasiMedik = new javax.swing.JMenuItem();
         MnDataKonsultasiMedik.setBackground(new java.awt.Color(255, 255, 254));
         MnDataKonsultasiMedik.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -15944,6 +16018,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnRMCatatanMonitoring.add(MnCatatanObservasiInduksiPersalinan);
         
         MnRMSkrining.add(MnSkriningMerokokUsiaSekolahRemaja);
+        MnRMSkrining.add(MnSkriningKekerasanPadaWanita);
+        MnRMSkrining.add(MnSkriningObesitas);
         
         MnPermintaan.add(MnPermintaanKonsultasiMedik);
         MnTindakanRalan.add(MnDataOperasi);

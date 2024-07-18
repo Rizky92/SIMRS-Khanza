@@ -166,6 +166,14 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
+        JumlahRokok.setDocument(new batasInput((byte)4).getKata(JumlahRokok));
+        UsiaMulaiMerokok.setDocument(new batasInput((byte)3).getKata(UsiaMulaiMerokok));
+        KeteranganAlasanUtamaMerokok.setDocument(new batasInput((byte)40).getKata(KeteranganAlasanUtamaMerokok));
+        LamaMerokok.setDocument(new batasInput((byte)5).getKata(LamaMerokok));
+        KeteranganCaraMendapatkanRokok.setDocument(new batasInput((byte)40).getKata(KeteranganCaraMendapatkanRokok));
+        KeteranganAlasanUtamaBerhentiMerokok.setDocument(new batasInput((byte)40).getKata(KeteranganAlasanUtamaBerhentiMerokok));
+        KeteranganYangPalingSeringMerokokDiSekolah.setDocument(new batasInput((byte)40).getKata(KeteranganYangPalingSeringMerokokDiSekolah));
+        HasilPemeriksaanCO.setDocument(new batasInput((byte)5).getKata(HasilPemeriksaanCO));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -598,7 +606,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -612,7 +620,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -733,7 +741,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-07-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -852,11 +860,6 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         Umur.setEditable(false);
         Umur.setFocusTraversalPolicyProvider(true);
         Umur.setName("Umur"); // NOI18N
-        Umur.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                UmurKeyPressed(evt);
-            }
-        });
         FormInput.add(Umur);
         Umur.setBounds(79, 40, 50, 23);
 
@@ -1420,7 +1423,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         jLabel113.setBounds(44, 660, 20, 23);
 
         jLabel114.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel114.setText("Apakah dilakukan pemeriksaan kadar CO pernapasan?");
+        jLabel114.setText("Apakah dilakukan pemeriksaan kadar CO pernapasan ?");
         jLabel114.setName("jLabel114"); // NOI18N
         FormInput.add(jLabel114);
         jLabel114.setBounds(57, 660, 480, 23);
@@ -1574,7 +1577,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
                             }
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
+                        JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh petugas yang bersangkutan..!!");
                     }
                 }
             }else{
@@ -1593,6 +1596,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         petugas.dispose();
+        sekolah.dispose();
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
@@ -1870,10 +1874,6 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         }
     }//GEN-LAST:event_MnSkriningMerokokActionPerformed
 
-    private void UmurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurKeyPressed
-        //Valid.pindah(evt,btnPetugas,TBPB);
-    }//GEN-LAST:event_UmurKeyPressed
-
     private void KelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasKeyPressed
         Valid.pindah(evt,TCari,btnAsalSekolah);
     }//GEN-LAST:event_KelasKeyPressed
@@ -2050,6 +2050,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
     private void MerokokDiPendidikanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MerokokDiPendidikanItemStateChanged
         if(MerokokDiPendidikan.getSelectedIndex()==1){
             YangPalingSeringMerokokDiSekolah.setSelectedIndex(4);
+            KeteranganYangPalingSeringMerokokDiSekolah.setText("");
         }else{
             YangPalingSeringMerokokDiSekolah.setSelectedIndex(0);
         }
@@ -2341,8 +2342,6 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
             Kelas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             KdAsalSekolah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             NmAsalSekolah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
-            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(14,15));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().substring(17,19));
