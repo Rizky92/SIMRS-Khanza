@@ -28,7 +28,7 @@
                     $kode = '';
                 }
             ?>
-            <input type="hidden" name="kode" value="<?= $kode ?>">
+            <input type="hidden" name="kodelama" value="<?= $kode ?>">
             <input type="hidden" name="action" value="<?= $action ?>">
             <div align="center" class="link">
                 <span>|</span> <a href="?act=List">List Berkas</a> <span>|</span>
@@ -83,11 +83,23 @@
                     $nama             = validTeks4($nama, 100);
                     $includeKompilasi = validTeks4($includeKompilasi, 1);
                     $includeKompilasi = (int) filter_var($includeKompilasi, FILTER_VALIDATE_BOOLEAN);
-                    if (!empty($kode) && !empty($nama)) {
-                        Tambah("master_berkas_digital", "'$kode', '$nama', $includeKompilasi", "Master Berkas Digital");
-                        echo "<meta http-equiv='refresh' content='1;URL=?act=MasterBerkas&action=TAMBAH'>";
-                    } else {
-                        echo 'Semua field harus isi..!!!';
+                    if ($action == 'TAMBAH') {
+                        if (!empty($kode) && !empty($nama)) {
+                            Tambah("master_berkas_digital", "'$kode', '$nama', $includeKompilasi", "Master Berkas Digital");
+                            echo "<meta http-equiv='refresh' content='1;URL=?act=MasterBerkas&action=TAMBAH'>";
+                        } else {
+                            echo 'Semua field harus isi..!!!';
+                        }
+                    } else if ($action == 'EDIT') {
+                        $kodelama = trim($_POST['kodelama']);
+                        if (!empty($kode) && !empty($nama)) {
+                            Ubah("master_berkas_digital", "kode='$kode', nama='$nama', include_kompilasi_berkas=$includeKompilasi where kode='$kodelama'", "Master Berkas Digital");
+                            echo "<meta http-equiv='refresh' content='1;URL=?act=MasterBerkas&action=TAMBAH'>";
+                        } else {
+                            echo 'Semua field harus isi..!!!';
+                        }
+                    } else if ($action == 'HAPUS') {
+                        Hapus("master_berkas_digital", "kode='$kode'", "?act=MasterBerkas&action=TAMBAH");
                     }
                 }
             ?>
@@ -150,11 +162,6 @@
                 <?php endif; ?>
             </div>
         </form>
-        <?php
-            if ($action == "HAPUS") {
-                Hapus("master_berkas_digital", "kode='$kode'", "?act=MasterBerkas&action=TAMBAH");
-            }
-        ?>
         <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
             <tr class="head">
                 <td>
