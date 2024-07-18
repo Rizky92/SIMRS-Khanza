@@ -3615,13 +3615,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void exportBerkasDigitalPerawatan(String urutan) {
-        if (! Sequel.cariBooleanSmc("select * from berkas_digital_perawatan where no_rawat = ? and lokasi_file like '%.pdf'", lblNoRawat.getText())) return;
+        if (! Sequel.cariBooleanSmc(
+            "select * from berkas_digital_perawatan join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+            "where no_rawat = ? and lokasi_file like '%.pdf' and master_berkas_digital.include_kompilasi_berkas = 0", lblNoRawat.getText()
+        )) return;
         
         int i = 1;
         String filename = "";
         HttpURLConnection http;
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/";
-        try (PreparedStatement ps = koneksi.prepareStatement("select lokasi_file from berkas_digital_perawatan where no_rawat = ? and lokasi_file like '%.pdf'")) {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select lokasi_file from berkas_digital_perawatan join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
+            "where no_rawat = ? and lokasi_file like '%.pdf' and master_berkas_digital.include_kompilasi_berkas = 1"
+        )) {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
