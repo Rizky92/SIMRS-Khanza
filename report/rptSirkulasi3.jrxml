@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="1300" pageHeight="612" orientation="Landscape" columnWidth="1260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b49497ef-177f-410b-aed5-d9f16d671cc3">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="561"/>
@@ -342,7 +342,7 @@
 	</columnHeader>
 	<detail>
 		<band height="10" splitType="Stretch">
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="48" height="10" uuid="bcb25812-507a-4e04-809f-7852429c6ed7"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -350,7 +350,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp1}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="49" y="0" width="158" height="10" uuid="495bcf2c-7b7b-410d-a713-5bd1ca155563"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -358,7 +358,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp2}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="218" y="0" width="34" height="10" uuid="444972dc-7657-41d5-b14b-8bf02c5f1e49"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -366,7 +366,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp3}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="252" y="0" width="70" height="10" uuid="9c8048f2-7315-4479-9cd9-14c330f8369a"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -374,7 +374,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp4}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="322" y="0" width="63" height="10" uuid="c5d5aa0d-1364-4aa9-b63d-099943d590a4"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -382,7 +382,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp5}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="452" y="0" width="63" height="10" uuid="03087fbe-6ef4-48ee-a285-297ca0b0d748"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -390,7 +390,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp7}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="582" y="0" width="63" height="10" uuid="f65cc357-3f0b-4eb0-8d55-1cf85b860467"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -398,7 +398,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp9}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="647" y="0" width="63" height="10" uuid="bf68d257-3c43-4c0c-b8a9-7879b7a66c5a"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -406,7 +406,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp10}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="712" y="0" width="63" height="10" uuid="2043f09a-1779-4c01-8d3a-d49c63c0f707"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -414,7 +414,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp11}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="776" y="0" width="63" height="10" uuid="bb538e62-9ee3-4e47-a87d-a74a25fd6bce"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -422,7 +422,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp12}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="517" y="0" width="63" height="10" uuid="15f48635-9649-47b4-a57f-d14f7241ee0c"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -430,7 +430,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp8}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="386" y="0" width="63" height="10" uuid="24681134-252b-47ca-af45-edd8999182f9"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -438,7 +438,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp6}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="840" y="0" width="69" height="10" uuid="6b75f0cd-f4dc-4d0c-b114-1fd776c9dc46"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -446,7 +446,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp13}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="909" y="0" width="58" height="10" uuid="ddcb7e29-48b2-45e3-bd4b-25b414cb2794"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -454,7 +454,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp14}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="967" y="0" width="73" height="10" uuid="2f7413c6-5c3d-4f81-8126-e232caa14c61"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -462,7 +462,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp15}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="1040" y="0" width="71" height="10" uuid="f03285a3-6060-4563-be8c-26e7a01d25f7"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -470,7 +470,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp16}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="1111" y="0" width="73" height="10" uuid="c0754d4d-3c6a-4267-8940-f49f07ac92e4"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -478,7 +478,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{temp17}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="1184" y="0" width="76" height="10" uuid="a5b83204-3684-4402-b99d-05f3ef9bc55b"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
