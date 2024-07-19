@@ -833,6 +833,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         FormInput.add(jLabel28);
         jLabel28.setBounds(0, 120, 128, 23);
 
+        Keseimbangan.setEditable(false);
         Keseimbangan.setFocusTraversalPolicyProvider(true);
         Keseimbangan.setName("Keseimbangan"); // NOI18N
         Keseimbangan.addKeyListener(new java.awt.event.KeyAdapter() {
