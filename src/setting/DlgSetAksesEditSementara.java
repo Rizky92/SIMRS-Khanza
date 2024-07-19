@@ -12,40 +12,27 @@
 package setting;
 
 import fungsi.WarnaTable;
-import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariPetugas;
 
 /**
  *
  * @author perpustakaan
  */
-public class DlgUserSmc extends javax.swing.JDialog {
+public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final DlgUpdateUser personal = new DlgUpdateUser(null, false);
-    private final DlgCariDokter dlgdokter = new DlgCariDokter(null, false);
-    private final DlgCariPetugas dlgpetugas = new DlgCariPetugas(null, false);
-    private String copyhakakses = "", userdicopy = "";
 
     /**
      * Creates new form DlgUser
@@ -53,16 +40,16 @@ public class DlgUserSmc extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public DlgUserSmc(java.awt.Frame parent, boolean modal) {
+    public DlgSetAksesEditSementara(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"User ID", "Nama User", "Jabatan", "Password"};
+        Object[] row = {"NIK", "Nama", "Jabatan/Spesialis", "Awal Batas Edit", "Akhir Batas Edit"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3;
+                return false;
             }
 
             @Override
@@ -74,48 +61,14 @@ public class DlgUserSmc extends javax.swing.JDialog {
         tbUser.setModel(tabMode);
         tbUser.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbUser.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tbUser.getColumnModel().getColumn(0).setPreferredWidth(70);
         tbUser.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tbUser.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tbUser.getColumnModel().getColumn(2).setPreferredWidth(100);
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tbUser.getColumnModel().getColumn(4).setPreferredWidth(100);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TKd.setDocument(new batasInput((byte) 30).getKata(TKd));
-        TPass.setDocument(new batasInput((byte) 50).getKata(TPass));
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-
-        dlgdokter.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (dlgdokter.getTable().getSelectedRow() != -1) {
-                    TKd.setText(dlgdokter.getTable().getValueAt(dlgdokter.getTable().getSelectedRow(), 0).toString());
-                    TNmUser.setText(dlgdokter.getTable().getValueAt(dlgdokter.getTable().getSelectedRow(), 1).toString());
-                    TPass.setText(dlgdokter.getTable().getValueAt(dlgdokter.getTable().getSelectedRow(), 0).toString());
-                    Jabatan.setText(dlgdokter.getTable().getValueAt(dlgdokter.getTable().getSelectedRow(), 10).toString());
-                }
-                TKd.requestFocus();
-            }
-        });
-
-        dlgpetugas.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (dlgpetugas.getTable().getSelectedRow() != -1) {
-                    TKd.setText(dlgpetugas.getTable().getValueAt(dlgpetugas.getTable().getSelectedRow(), 0).toString());
-                    TNmUser.setText(dlgpetugas.getTable().getValueAt(dlgpetugas.getTable().getSelectedRow(), 1).toString());
-                    TPass.setText(dlgpetugas.getTable().getValueAt(dlgpetugas.getTable().getSelectedRow(), 0).toString());
-                    Jabatan.setText(dlgpetugas.getTable().getValueAt(dlgpetugas.getTable().getSelectedRow(), 9).toString());
-                }
-                TKd.requestFocus();
-            }
-        });
-
-        personal.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                tampil();
-            }
-        });
     }
 
     /**
@@ -125,21 +78,24 @@ public class DlgUserSmc extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCopyHakAkses = new javax.swing.JMenuItem();
-        MnSetUser = new javax.swing.JMenuItem();
-        Jabatan = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbUser = new widget.Table();
         panelGlass5 = new widget.panelisi();
         jLabel3 = new widget.Label();
         jLabel4 = new widget.Label();
-        TKd = new widget.TextBox();
-        TPass = new widget.TextBox();
+        TUser = new widget.TextBox();
         BtnSeek = new widget.Button();
-        BtnSeek1 = new widget.Button();
         TNmUser = new widget.TextBox();
+        DTPTgl = new widget.Tanggal();
+        CmbJam = new widget.ComboBox();
+        CmbMenit = new widget.ComboBox();
+        CmbDetik = new widget.ComboBox();
+        jLabel5 = new widget.Label();
+        DTPTgl1 = new widget.Tanggal();
+        CmbJam1 = new widget.ComboBox();
+        CmbMenit1 = new widget.ComboBox();
+        CmbDetik1 = new widget.ComboBox();
         jPanel1 = new javax.swing.JPanel();
         panelGlass7 = new widget.panelisi();
         jLabel6 = new widget.Label();
@@ -156,41 +112,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
 
-        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
-
-        MnCopyHakAkses.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCopyHakAkses.setForeground(new java.awt.Color(50, 50, 50));
-        MnCopyHakAkses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCopyHakAkses.setText("Copy Hak Akses");
-        MnCopyHakAkses.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnCopyHakAkses.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnCopyHakAkses.setName("MnCopyHakAkses"); // NOI18N
-        MnCopyHakAkses.setPreferredSize(new java.awt.Dimension(150, 26));
-        MnCopyHakAkses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCopyHakAksesActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnCopyHakAkses);
-
-        MnSetUser.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSetUser.setForeground(new java.awt.Color(50, 50, 50));
-        MnSetUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSetUser.setText("Set Personal");
-        MnSetUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnSetUser.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnSetUser.setName("MnSetUser"); // NOI18N
-        MnSetUser.setPreferredSize(new java.awt.Dimension(150, 26));
-        MnSetUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSetUserActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnSetUser);
-
-        Jabatan.setEditable(false);
-        Jabatan.setName("Jabatan"); // NOI18N
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -200,7 +121,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup User ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar User dengan Akses Edit Sementara ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -208,7 +129,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbUser.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbUser.setComponentPopupMenu(jPopupMenu1);
         tbUser.setName("tbUser"); // NOI18N
         tbUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -225,77 +145,85 @@ public class DlgUserSmc extends javax.swing.JDialog {
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelGlass5.setName("panelGlass5"); // NOI18N
-        panelGlass5.setPreferredSize(new java.awt.Dimension(55, 47));
+        panelGlass5.setPreferredSize(new java.awt.Dimension(55, 77));
         panelGlass5.setLayout(null);
 
-        jLabel3.setText("Dokter/Petugas :");
+        jLabel3.setText("Akun :");
         jLabel3.setName("jLabel3"); // NOI18N
         panelGlass5.add(jLabel3);
-        jLabel3.setBounds(5, 12, 94, 23);
+        jLabel3.setBounds(0, 12, 48, 23);
 
-        jLabel4.setText("Password :");
+        jLabel4.setText("Akses Edit Dari :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass5.add(jLabel4);
-        jLabel4.setBounds(449, 12, 60, 23);
+        jLabel4.setBounds(0, 42, 94, 23);
 
-        TKd.setEditable(false);
-        TKd.setHighlighter(null);
-        TKd.setName("TKd"); // NOI18N
-        TKd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TKdKeyPressed(evt);
-            }
-        });
-        panelGlass5.add(TKd);
-        TKd.setBounds(102, 12, 112, 23);
-
-        TPass.setName("TPass"); // NOI18N
-        TPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPassKeyPressed(evt);
-            }
-        });
-        panelGlass5.add(TPass);
-        TPass.setBounds(512, 12, 180, 23);
+        TUser.setEditable(false);
+        TUser.setHighlighter(null);
+        TUser.setName("TUser"); // NOI18N
+        panelGlass5.add(TUser);
+        TUser.setBounds(52, 12, 112, 23);
 
         BtnSeek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnSeek.setMnemonic('1');
         BtnSeek.setToolTipText("Alt+1");
         BtnSeek.setName("BtnSeek"); // NOI18N
-        BtnSeek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSeekActionPerformed(evt);
-            }
-        });
-        BtnSeek.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeekKeyPressed(evt);
-            }
-        });
         panelGlass5.add(BtnSeek);
-        BtnSeek.setBounds(216, 12, 28, 23);
-
-        BtnSeek1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek1.setMnemonic('2');
-        BtnSeek1.setToolTipText("Alt+2");
-        BtnSeek1.setName("BtnSeek1"); // NOI18N
-        BtnSeek1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSeek1ActionPerformed(evt);
-            }
-        });
-        BtnSeek1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek1KeyPressed(evt);
-            }
-        });
-        panelGlass5.add(BtnSeek1);
-        BtnSeek1.setBounds(245, 12, 28, 23);
+        BtnSeek.setBounds(389, 12, 28, 23);
 
         TNmUser.setEditable(false);
         TNmUser.setName("TNmUser"); // NOI18N
         panelGlass5.add(TNmUser);
-        TNmUser.setBounds(275, 12, 160, 23);
+        TNmUser.setBounds(168, 12, 217, 23);
+
+        DTPTgl.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl.setMinimumSize(new java.awt.Dimension(90, 23));
+        DTPTgl.setName("DTPTgl"); // NOI18N
+        DTPTgl.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass5.add(DTPTgl);
+        DTPTgl.setBounds(98, 42, 90, 23);
+
+        CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam.setName("CmbJam"); // NOI18N
+        panelGlass5.add(CmbJam);
+        CmbJam.setBounds(192, 42, 62, 23);
+
+        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit.setName("CmbMenit"); // NOI18N
+        panelGlass5.add(CmbMenit);
+        CmbMenit.setBounds(262, 42, 62, 23);
+
+        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik.setName("CmbDetik"); // NOI18N
+        panelGlass5.add(CmbDetik);
+        CmbDetik.setBounds(322, 42, 62, 23);
+
+        jLabel5.setText("sampai");
+        jLabel5.setName("jLabel5"); // NOI18N
+        panelGlass5.add(jLabel5);
+        jLabel5.setBounds(392, 42, 34, 23);
+
+        DTPTgl1.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl1.setMinimumSize(new java.awt.Dimension(90, 23));
+        DTPTgl1.setName("DTPTgl1"); // NOI18N
+        DTPTgl1.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass5.add(DTPTgl1);
+        DTPTgl1.setBounds(434, 42, 90, 23);
+
+        CmbJam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam1.setName("CmbJam1"); // NOI18N
+        panelGlass5.add(CmbJam1);
+        CmbJam1.setBounds(528, 42, 62, 23);
+
+        CmbMenit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit1.setName("CmbMenit1"); // NOI18N
+        panelGlass5.add(CmbMenit1);
+        CmbMenit1.setBounds(594, 42, 62, 23);
+
+        CmbDetik1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik1.setName("CmbDetik1"); // NOI18N
+        panelGlass5.add(CmbDetik1);
+        CmbDetik1.setBounds(660, 42, 62, 23);
 
         internalFrame1.add(panelGlass5, java.awt.BorderLayout.PAGE_START);
 
@@ -379,16 +307,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSimpanActionPerformed(evt);
-            }
-        });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSimpanKeyPressed(evt);
-            }
-        });
         panelGlass6.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
@@ -397,16 +315,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBatalActionPerformed(evt);
-            }
-        });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnBatalKeyPressed(evt);
-            }
-        });
         panelGlass6.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
@@ -415,16 +323,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnHapusActionPerformed(evt);
-            }
-        });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnHapusKeyPressed(evt);
-            }
-        });
         panelGlass6.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
@@ -433,16 +331,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
         panelGlass6.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
@@ -451,16 +339,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnPrintKeyPressed(evt);
-            }
-        });
         panelGlass6.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
@@ -490,82 +368,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if (TKd.getText().trim().isBlank() || TNmUser.getText().trim().isBlank()) {
-            Valid.textKosong(TKd, "User");
-        } else if (TPass.getText().trim().isBlank()) {
-            Valid.textKosong(TPass, "Password");
-        } else {
-            if (Sequel.executeRawSmc("insert into user (id_user, password) values (aes_encrypt(?, 'nur'), aes_encrypt(?, 'windi'))", TKd.getText(), TPass.getText())) {
-                tabMode.addRow(new Object[] {
-                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), TPass.getText()
-                });
-                emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
-            }
-        }
-}//GEN-LAST:event_BtnSimpanActionPerformed
-
-    private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnSimpanActionPerformed(null);
-        } else {
-            Valid.pindah(evt, TPass, BtnHapus);
-        }
-}//GEN-LAST:event_BtnSimpanKeyPressed
-
-    private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tabMode.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
-            TKd.requestFocus();
-        } else if (TPass.getText().trim().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        } else {
-            if (tbUser.getSelectedRow() != -1) {
-                if (Sequel.executeRawSmc("delete from user where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')", TKd.getText(), TPass.getText())) {
-                    tabMode.removeRow(tbUser.getSelectedRow());
-                    emptTeks();
-                    LCount.setText("" + tabMode.getRowCount());
-                }
-            }
-        }
-}//GEN-LAST:event_BtnHapusActionPerformed
-
-    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnHapusActionPerformed(null);
-        } else {
-            Valid.pindah(evt, BtnSimpan, BtnEdit);
-        }
-}//GEN-LAST:event_BtnHapusKeyPressed
-
-    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if (TKd.getText().trim().isBlank() || TNmUser.getText().trim().isBlank()) {
-            Valid.textKosong(TKd, "User");
-        } else if (TPass.getText().trim().isBlank()) {
-            Valid.textKosong(TPass, "Password");
-        } else {
-            if (tbUser.getSelectedRow() != -1) {
-                if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')",
-                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString(), tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString()
-                )) {
-                    tabMode.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
-                    tabMode.setValueAt(TPass.getText(), tbUser.getSelectedRow(), 3);
-                    emptTeks();
-                }
-            }
-        }
-
-}//GEN-LAST:event_BtnEditActionPerformed
-
-    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnEditActionPerformed(null);
-        } else {
-            Valid.pindah(evt, BtnHapus, BtnKeluar);
-        }
-}//GEN-LAST:event_BtnEditKeyPressed
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -577,72 +379,6 @@ public class DlgUserSmc extends javax.swing.JDialog {
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
 }//GEN-LAST:event_BtnKeluarKeyPressed
-
-    private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-        Valid.pindah(evt, BtnSimpan, TPass);
-}//GEN-LAST:event_TKdKeyPressed
-
-    private void TPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPassKeyPressed
-        Valid.pindah(evt, TKd, BtnSimpan);
-}//GEN-LAST:event_TPassKeyPressed
-
-    private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
-        dlgdokter.emptTeks();
-        dlgdokter.isCek();
-        dlgdokter.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        dlgdokter.setLocationRelativeTo(internalFrame1);
-        dlgdokter.setVisible(true);
-}//GEN-LAST:event_BtnSeekActionPerformed
-
-    private void BtnSeekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeekKeyPressed
-        Valid.pindah(evt, TKd, TPass);
-}//GEN-LAST:event_BtnSeekKeyPressed
-
-    private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek1ActionPerformed
-        dlgpetugas.emptTeks();
-        dlgpetugas.isCek();
-        dlgpetugas.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        dlgpetugas.setLocationRelativeTo(internalFrame1);
-        dlgpetugas.setVisible(true);
-}//GEN-LAST:event_BtnSeek1ActionPerformed
-
-    private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek1KeyPressed
-        Valid.pindah(evt, TKd, TPass);
-}//GEN-LAST:event_BtnSeek1KeyPressed
-
-private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    if (tabMode.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-        TKd.requestFocus();
-    } else if (tabMode.getRowCount() != 0) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars", akses.getnamars());
-        param.put("alamatrs", akses.getalamatrs());
-        param.put("kotars", akses.getkabupatenrs());
-        param.put("propinsirs", akses.getpropinsirs());
-        param.put("kontakrs", akses.getkontakrs());
-        param.put("emailrs", akses.getemailrs());
-        Sequel.deleteTemporary();
-        for (int i = 0; i < tabMode.getRowCount(); i++) {
-            Sequel.temporary(String.valueOf(i),
-                tabMode.getValueAt(i, 0).toString(),
-                tabMode.getValueAt(i, 1).toString(),
-                tabMode.getValueAt(i, 3).toString()
-            );
-        }
-        Valid.MyReportqry("rptUser.jasper", "report", "::[ Data User ]::", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
-    }
-    this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
-
-private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-        BtnPrintActionPerformed(null);
-    } else {
-        Valid.pindah(evt, BtnHapus, BtnKeluar);
-    }
-}//GEN-LAST:event_BtnPrintKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -682,127 +418,16 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TCari.setText("");
             tampil();
         } else {
-            Valid.pindah(evt, BtnCari, TKd);
+            Valid.pindah(evt, BtnCari, TUser);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-    private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        emptTeks();
-    }//GEN-LAST:event_BtnBatalActionPerformed
-
-    private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            emptTeks();
-        } else {
-            Valid.pindah(evt, BtnSimpan, BtnHapus);
-        }
-    }//GEN-LAST:event_BtnBatalKeyPressed
-
-    private void MnCopyHakAksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCopyHakAksesActionPerformed
-        if (tabMode.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, data user...!!!!");
-            TCari.requestFocus();
-        } else if (TKd.getText().trim().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data user yang mau dicopy hak aksesnya...!!!");
-            tbUser.requestFocus();
-        } else {
-            copyhakakses = "copy";
-            userdicopy = TKd.getText();
-            JOptionPane.showMessageDialog(null, "Silahkan pilih user tujuan..!!");
-        }
-    }//GEN-LAST:event_MnCopyHakAksesActionPerformed
-
-    private void MnSetUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSetUserActionPerformed
-        if (tbUser.getSelectedRow() != -1) {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            personal.isUser(TKd.getText(), TNmUser.getText(), TPass.getText());
-            personal.setSize(460, this.getHeight() - 50);
-            personal.setLocationRelativeTo(internalFrame1);
-            personal.setAlwaysOnTop(false);
-            personal.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Silahkan pilih dulu nama user..!!");
-        }
-    }//GEN-LAST:event_MnSetUserActionPerformed
-
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
-        if (tabMode.getRowCount() != 0) {
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-
-            if (evt.getClickCount() == 1) {
-                if (copyhakakses.equals("copy")) {
-                    if (userdicopy.equals(TKd.getText())) {
-                        JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
-                        userdicopy = "";
-                        copyhakakses = "";
-                    } else {
-                        int reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah bener belum data copy hak aksesnya..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-                        if (reply == JOptionPane.YES_OPTION) {
-                            String sqlupdate = "";
-                            try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
-                                ps.setString(1, userdicopy);
-                                try (ResultSet rs = ps.executeQuery()) {
-                                    if (rs.next()) {
-                                        try (PreparedStatement ps2 = koneksi.prepareStatement("select column_name as `column_name` from information_schema.columns where table_schema = ? and table_name = 'user' and column_name not in ('id_user', 'password')")) {
-                                            ps2.setString(1, koneksiDB.DATABASE());
-                                            try (ResultSet rs2 = ps2.executeQuery()) {
-                                                while (rs2.next()) {
-                                                    rs.getString(rs2.getString("column_name"));
-                                                    if (rs.wasNull()) {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = null, ";
-                                                    } else {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
-                                                    }
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            System.out.println("Notif : " + e);
-                                        }
-                                    }
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : " + e);
-                            }
-                            sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 2);
-                            if (Sequel.mengupdatetfSmc("user", sqlupdate, "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-                                JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
-                                userdicopy = "";
-                                copyhakakses = "";
-                            }
-                        } else {
-                            userdicopy = "";
-                            copyhakakses = "";
-                        }
-                    }
-                }
-            }
-        }
+        
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void tbUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyPressed
-        if (tabMode.getRowCount() != 0) {
-            if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-                try {
-                    getData();
-                } catch (java.lang.NullPointerException e) {
-                }
-            } else if (evt.getKeyCode() == KeyEvent.VK_V) {
-                if (tbUser.getSelectedColumn() > 4) {
-                    if (tbUser.getSelectedRow() != -1) {
-                        if (tbUser.getValueAt(tbUser.getSelectedRow(), tbUser.getSelectedColumn()).toString().equals("false")) {
-                            tbUser.setValueAt(true, tbUser.getSelectedRow(), tbUser.getSelectedColumn());
-                        } else {
-                            tbUser.setValueAt(false, tbUser.getSelectedRow(), tbUser.getSelectedColumn());
-                        }
-
-                    }
-                }
-            }
-        }
+        
     }//GEN-LAST:event_tbUserKeyPressed
 
     /**
@@ -810,7 +435,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgUserSmc dialog = new DlgUserSmc(new javax.swing.JFrame(), true);
+            DlgSetAksesEditSementara dialog = new DlgSetAksesEditSementara(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -830,24 +455,27 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSeek;
-    private widget.Button BtnSeek1;
     private widget.Button BtnSimpan;
-    private widget.TextBox Jabatan;
+    private widget.ComboBox CmbDetik;
+    private widget.ComboBox CmbDetik1;
+    private widget.ComboBox CmbJam;
+    private widget.ComboBox CmbJam1;
+    private widget.ComboBox CmbMenit;
+    private widget.ComboBox CmbMenit1;
+    private widget.Tanggal DTPTgl;
+    private widget.Tanggal DTPTgl1;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnCopyHakAkses;
-    private javax.swing.JMenuItem MnSetUser;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
-    private widget.TextBox TKd;
     private widget.TextBox TNmUser;
-    private widget.TextBox TPass;
+    private widget.TextBox TUser;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
+    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass7;
@@ -882,18 +510,12 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 
     public void emptTeks() {
-        TKd.setText("");
-        TNmUser.setText("");
-        TPass.setText("");
-        tbUser.clearSelection();
-        TKd.requestFocus();
+        
     }
 
     private void getData() {
         if (tbUser.getSelectedRow() != -1) {
-            TKd.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
-            TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
-            TPass.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString());
+            
         }
     }
 }
