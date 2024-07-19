@@ -119,6 +119,33 @@ public class batasInput {
         };return filter;
     }
 
+public PlainDocument getNilai(final JTextField inputan) {
+    filter = new PlainDocument() {
+        @Override
+        public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+            StringBuffer buf = new StringBuffer();
+            int c = 0;
+            char[] inputChars = str.toCharArray();
+            for (int i = 0; i < inputChars.length; i++) {
+                inputChars[i] = Character.toUpperCase(inputChars[i]);
+                boolean isOnlyAngka = Character.isDigit(inputChars[i]);
+                boolean isMinusSign = (inputChars[i] == '-') && (offs == 0) && (inputan.getText().length() == 0);
+                boolean isOnlyTitik=Character.valueOf(inputChars[i]).toString().equals(".");
+                if (isOnlyAngka || isMinusSign || isOnlyTitik) {
+                    inputChars[c] = inputChars[i];
+                    c++;
+                }
+            }
+            buf.append(inputChars, 0, c);
+            int x = inputan.getText().length();
+            if (x < length) {
+                super.insertString(offs, new String(buf), a);
+            }
+        }
+    };
+    return filter;
+}
+
     public PlainDocument getKata(final JTextField inputan){
         filter=new PlainDocument(){
             @Override
