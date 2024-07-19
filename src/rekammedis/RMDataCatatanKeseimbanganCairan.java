@@ -256,12 +256,10 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel26 = new widget.Label();
         IWL = new widget.TextBox();
-        jLabel28 = new widget.Label();
         Keseimbangan = new widget.TextBox();
         jLabel27 = new widget.Label();
         jLabel29 = new widget.Label();
         Keterangan = new widget.TextBox();
-        jLabel30 = new widget.Label();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -459,7 +457,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -473,7 +471,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -569,7 +567,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -680,10 +678,10 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
 
-        jLabel12.setText("Infus (ml):");
+        jLabel12.setText("Infus (ml) :");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
-        jLabel12.setBounds(10, 90, 70, 23);
+        jLabel12.setBounds(0, 90, 67, 23);
         jLabel12.getAccessibleContext().setAccessibleDescription("");
 
         Infus.setFocusTraversalPolicyProvider(true);
@@ -697,7 +695,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Infus);
-        Infus.setBounds(80, 90, 50, 23);
+        Infus.setBounds(71, 90, 50, 23);
 
         Minum.setFocusTraversalPolicyProvider(true);
         Minum.setName("Minum"); // NOI18N
@@ -710,17 +708,17 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Minum);
-        Minum.setBounds(330, 90, 50, 23);
+        Minum.setBounds(337, 90, 50, 23);
 
         jLabel20.setText("Minum (ml) :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(260, 90, 70, 23);
+        jLabel20.setBounds(263, 90, 70, 23);
 
         jLabel23.setText("Tranfusi (ml) :");
         jLabel23.setName("jLabel23"); // NOI18N
         FormInput.add(jLabel23);
-        jLabel23.setBounds(130, 90, 80, 23);
+        jLabel23.setBounds(125, 90, 80, 23);
 
         Tranfusi.setFocusTraversalPolicyProvider(true);
         Tranfusi.setName("Tranfusi"); // NOI18N
@@ -733,7 +731,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Tranfusi);
-        Tranfusi.setBounds(210, 90, 50, 23);
+        Tranfusi.setBounds(209, 90, 50, 23);
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Input :");
@@ -745,7 +743,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         jLabel22.setText("NGT/Oral (ml) :");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(700, 90, 90, 23);
+        jLabel22.setBounds(696, 90, 90, 23);
 
         NGT.setFocusTraversalPolicyProvider(true);
         NGT.setName("NGT"); // NOI18N
@@ -771,12 +769,12 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Drain);
-        Drain.setBounds(650, 90, 50, 23);
+        Drain.setBounds(642, 90, 50, 23);
 
         jLabel24.setText("Drain (ml) :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
-        jLabel24.setBounds(580, 90, 70, 23);
+        jLabel24.setBounds(568, 90, 70, 23);
 
         Urine.setFocusTraversalPolicyProvider(true);
         Urine.setName("Urine"); // NOI18N
@@ -789,18 +787,18 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Urine);
-        Urine.setBounds(530, 90, 50, 23);
+        Urine.setBounds(514, 90, 50, 23);
 
         jLabel13.setText("Urine/Feses (ml) :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(430, 90, 100, 23);
+        jLabel13.setBounds(410, 90, 100, 23);
 
         jLabel25.setText("Output :");
         jLabel25.setName("jLabel25"); // NOI18N
         jLabel25.setVerifyInputWhenFocusTarget(false);
         FormInput.add(jLabel25);
-        jLabel25.setBounds(420, 70, 50, 23);
+        jLabel25.setBounds(416, 70, 50, 23);
 
         jSeparator2.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator2.setForeground(new java.awt.Color(239, 244, 234));
@@ -812,7 +810,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         jLabel26.setText("IWL (ml) :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
-        jLabel26.setBounds(840, 90, 60, 23);
+        jLabel26.setBounds(844, 90, 60, 23);
 
         IWL.setFocusTraversalPolicyProvider(true);
         IWL.setName("IWL"); // NOI18N
@@ -825,13 +823,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(IWL);
-        IWL.setBounds(900, 90, 50, 23);
-
-        jLabel28.setText(":");
-        jLabel28.setName("jLabel28"); // NOI18N
-        jLabel28.setVerifyInputWhenFocusTarget(false);
-        FormInput.add(jLabel28);
-        jLabel28.setBounds(0, 120, 128, 23);
+        IWL.setBounds(908, 90, 50, 23);
 
         Keseimbangan.setEditable(false);
         Keseimbangan.setFocusTraversalPolicyProvider(true);
@@ -842,19 +834,19 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Keseimbangan);
-        Keseimbangan.setBounds(132, 120, 50, 23);
+        Keseimbangan.setBounds(149, 120, 50, 23);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel27.setText("Keseimbangan Cairan");
+        jLabel27.setText("Keseimbangan Cairan (ml) :");
         jLabel27.setName("jLabel27"); // NOI18N
         jLabel27.setVerifyInputWhenFocusTarget(false);
         FormInput.add(jLabel27);
-        jLabel27.setBounds(14, 120, 130, 23);
+        jLabel27.setBounds(14, 120, 131, 23);
 
         jLabel29.setText("Keterangan :");
         jLabel29.setName("jLabel29"); // NOI18N
         FormInput.add(jLabel29);
-        jLabel29.setBounds(390, 120, 100, 23);
+        jLabel29.setBounds(388, 120, 100, 23);
 
         Keterangan.setFocusTraversalPolicyProvider(true);
         Keterangan.setName("Keterangan"); // NOI18N
@@ -864,12 +856,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             }
         });
         FormInput.add(Keterangan);
-        Keterangan.setBounds(490, 120, 481, 23);
-
-        jLabel30.setText("(ml)");
-        jLabel30.setName("jLabel30"); // NOI18N
-        FormInput.add(jLabel30);
-        jLabel30.setBounds(180, 120, 30, 23);
+        Keterangan.setBounds(492, 120, 466, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1370,9 +1357,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
     private widget.Label jLabel25;
     private widget.Label jLabel26;
     private widget.Label jLabel27;
-    private widget.Label jLabel28;
     private widget.Label jLabel29;
-    private widget.Label jLabel30;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
