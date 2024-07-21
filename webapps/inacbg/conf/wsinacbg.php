@@ -1143,7 +1143,7 @@
 
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
-                '[%s] method "new_claim": %s - %s',
+                '[%s] method "reedit_claim": %s - %s',
                 $msg['metadata']['code'],
                 $msg['metadata']['error_no'],
                 $msg['metadata']['message']
@@ -1456,7 +1456,7 @@
 
         file_put_contents('pages/pdf/'.$nomor_sep.'.pdf', base64_decode($encodedPDF));
 
-        if (mysqli_fetch_array(bukaquery2("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')"))[0] == '0') {
+        if (getOne("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')") == '0') {
             InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
         }
 

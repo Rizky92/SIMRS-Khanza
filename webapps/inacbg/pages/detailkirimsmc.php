@@ -130,7 +130,7 @@
                 <input type="hidden" name="codernik" value="<?= $codernik ?>">
                 <?php if (substr($isError, 0, 1) === 'X'): ?>
                     <div class="center" style="margin-left: 0.7rem">
-                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000"><?= $pesanError ?></span>
+                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR: <?= $pesanError ?></span>
                     </div>
                 <?php endif; ?>
                 <div style="width: 100%; height: 90%; overflow: auto;">
@@ -569,7 +569,7 @@
 
                                 $totalbillingsementara = $prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli
                                                        + $keperawatan + $radiologi + $laboratorium + $kamar + $obat_kronis
-                                                       + $obat_kemoterapi + $obat + $bmhp + $sewa_alat+ $rehabilitasi;
+                                                       + $obat_kemoterapi + $obat + $bmhp + $sewa_alat + $rehabilitasi;
                             ?>
                             <tr class="head">
                                 <td width="41%">Biaya Prosedur Non Bedah</td>
@@ -1116,36 +1116,38 @@
                                         echo $error;
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=stage2">
-                                        HTML;
+                                            HTML;
                                     } else {
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                        HTML;
+                                            HTML;
                                     }
                                 } else {
                                     if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
                                         BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
                                         EditUlangKlaimSmc($nosep);
-                                        ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                        ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
+                                            $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
                                             $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
                                             $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
                                             $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                             $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                            $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
+                                            $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use
+                                        );
                                         if (! $success) {
                                             echo $error;
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
-                                            HTML;
+                                                HTML;
                                         } else if ($success && $response == 'stage2') {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
-                                            HTML;
+                                                HTML;
                                         } else {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                            HTML;
+                                                HTML;
                                         }
                                     } else {
                                         echo 'Semua field harus isi..!!!';
