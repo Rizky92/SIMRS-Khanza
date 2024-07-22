@@ -13995,6 +13995,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private void ppTampilkanSeleksiBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiBPJSActionPerformed
         filter="yes";
         caripenjab = "BPJ";
+        perJenisAsuransi = "";
         tampilkasir();
     }//GEN-LAST:event_ppTampilkanSeleksiBPJSActionPerformed
 
