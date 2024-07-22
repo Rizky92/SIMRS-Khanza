@@ -866,8 +866,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnTampilkan = new javax.swing.JMenu();
         MnTampilkanJenisBayar = new javax.swing.JMenu();
         ppTampilkanSeleksiBPJS = new javax.swing.JMenuItem();
-        ppTampilkanSeleksiAsuransi = new javax.swing.JMenuItem();
         ppTampilkanSeleksiPribadi = new javax.swing.JMenuItem();
+        ppTampilkanSeleksiAsuransi = new javax.swing.JMenuItem();
         ppTampilkanSeleksi = new javax.swing.JMenuItem();
         ppTampilkanBelumDiagnosa = new javax.swing.JMenuItem();
         MnGanti = new javax.swing.JMenu();
@@ -4597,7 +4597,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnTampilkan.setPreferredSize(new java.awt.Dimension(200, 26));
 
         MnTampilkanJenisBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnTampilkanJenisBayar.setText("Per Jenis Bayar");
+        MnTampilkanJenisBayar.setText("Per Jenis Jaminan");
         MnTampilkanJenisBayar.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnTampilkanJenisBayar.setName("MnTampilkanJenisBayar"); // NOI18N
         MnTampilkanJenisBayar.setPreferredSize(new java.awt.Dimension(200, 26));
@@ -4616,20 +4616,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         MnTampilkanJenisBayar.add(ppTampilkanSeleksiBPJS);
 
-        ppTampilkanSeleksiAsuransi.setBackground(new java.awt.Color(255, 255, 254));
-        ppTampilkanSeleksiAsuransi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppTampilkanSeleksiAsuransi.setForeground(new java.awt.Color(50, 50, 50));
-        ppTampilkanSeleksiAsuransi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppTampilkanSeleksiAsuransi.setText("Asuransi/COB BPJS");
-        ppTampilkanSeleksiAsuransi.setName("ppTampilkanSeleksiAsuransi"); // NOI18N
-        ppTampilkanSeleksiAsuransi.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppTampilkanSeleksiAsuransi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppTampilkanSeleksiAsuransiActionPerformed(evt);
-            }
-        });
-        MnTampilkanJenisBayar.add(ppTampilkanSeleksiAsuransi);
-
         ppTampilkanSeleksiPribadi.setBackground(new java.awt.Color(255, 255, 254));
         ppTampilkanSeleksiPribadi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppTampilkanSeleksiPribadi.setForeground(new java.awt.Color(50, 50, 50));
@@ -4643,6 +4629,20 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnTampilkanJenisBayar.add(ppTampilkanSeleksiPribadi);
+
+        ppTampilkanSeleksiAsuransi.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSeleksiAsuransi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSeleksiAsuransi.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSeleksiAsuransi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSeleksiAsuransi.setText("Asuransi/COB BPJS");
+        ppTampilkanSeleksiAsuransi.setName("ppTampilkanSeleksiAsuransi"); // NOI18N
+        ppTampilkanSeleksiAsuransi.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanSeleksiAsuransi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSeleksiAsuransiActionPerformed(evt);
+            }
+        });
+        MnTampilkanJenisBayar.add(ppTampilkanSeleksiAsuransi);
 
         ppTampilkanSeleksi.setBackground(new java.awt.Color(255, 255, 254));
         ppTampilkanSeleksi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -4666,7 +4666,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         ppTampilkanBelumDiagnosa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppTampilkanBelumDiagnosa.setForeground(new java.awt.Color(50, 50, 50));
         ppTampilkanBelumDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppTampilkanBelumDiagnosa.setText("Tampilkan Belum Masuk Diagnosa");
+        ppTampilkanBelumDiagnosa.setText("Belum Masuk Diagnosa");
         ppTampilkanBelumDiagnosa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppTampilkanBelumDiagnosa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppTampilkanBelumDiagnosa.setName("ppTampilkanBelumDiagnosa"); // NOI18N
