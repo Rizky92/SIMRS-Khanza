@@ -125,7 +125,7 @@
                                 <div align="center">Nama Berkas Digital</div>
                             </td>
                             <td width="6%">
-                                <div align="center">Exclude Kompilasi</div>
+                                <div align="center">Masuk Berkas Kompilasi</div>
                             </td>
                         </tr>
                         <?php while ($baris = mysqli_fetch_array($hasil)): ?>

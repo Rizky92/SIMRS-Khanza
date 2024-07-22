@@ -45,25 +45,8 @@
                     $tgl_registrasi = $baris['tgl_registrasi'];
                     $jam_reg        = $baris['jam_reg'];
                     $nm_poli        = $baris['nm_poli'];
-                    $nm_dokter2     = '';
-                    $a              = 1;
-                    $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
+                    $nm_dokter      = getOne("select d.nm_dokter from bridging_sep s join maping_dokter_dpjpvclaim m on s.kddpjp = m.kd_dokter_bpjs join dokter d on m.kd_dokter = d.kd_dokter where s.no_sep = '$nosep'");
                     ['code_cbg' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery("select code_cbg, deskripsi from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
-                    while ($barisdokter = mysqli_fetch_array($hasildokter)) {
-                        if ($a == 1) {
-                            $nm_dokter2 = $barisdokter['nm_dokter'];
-                        } else {
-                            $nm_dokter2 = $nm_dokter2 . '#' . $barisdokter['nm_dokter'];
-                        }
-                        $a++;
-                    }
-                    
-                    $nm_dokter = '';
-                    if (! empty($nm_dokter2)) {
-                        $nm_dokter = $nm_dokter2;
-                    } else {
-                        $nm_dokter = $baris['nm_dokter'];
-                    }
 
                     $status_lanjut = $baris['status_lanjut'];
                     $png_jawab = $baris['png_jawab'];
