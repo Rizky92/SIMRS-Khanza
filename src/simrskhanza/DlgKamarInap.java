@@ -606,8 +606,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 } else if (akses.getform().equals("DlgKamarInap_tampilkanSeleksiActionPerformed")) {
                     if(billing.carabayar.getTable().getSelectedRow()!= -1){
                         perJenisAsuransi = " and reg_periksa.kd_pj = '" + billing.carabayar.getTable().getValueAt(billing.carabayar.getTable().getSelectedRow(),1).toString() + "' ";
+                        tampil();
                     } 
-                    tampil();
                 }
             }
             @Override
