@@ -4655,7 +4655,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         ppTampilkanSeleksi.setPreferredSize(new java.awt.Dimension(200, 26));
         ppTampilkanSeleksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppTampilkanSeleksiBtnPrintActionPerformed(evt);
+                ppTampilkanSeleksiActionPerformed(evt);
             }
         });
         MnTampilkanJenisBayar.add(ppTampilkanSeleksi);
@@ -9930,7 +9930,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }                
     }//GEN-LAST:event_ppBerkasDigital1BtnPrintActionPerformed
 
-    private void ppTampilkanSeleksiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiBtnPrintActionPerformed
+    private void ppTampilkanSeleksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiActionPerformed
         akses.setform("DlgKasirRalan");
         filter="yes";
         perJenisAsuransi = "";
@@ -9939,7 +9939,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         billing.penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         billing.penjab.setLocationRelativeTo(internalFrame1);
         billing.penjab.setVisible(true);
-    }//GEN-LAST:event_ppTampilkanSeleksiBtnPrintActionPerformed
+    }//GEN-LAST:event_ppTampilkanSeleksiActionPerformed
 
     private void MnStatusBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnStatusBaruActionPerformed
         if(TNoRw.getText().trim().equals("")){
@@ -11769,7 +11769,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }//GEN-LAST:event_ppProgramPRBActionPerformed
 
     private void ppTampilkanBelumDiagnosaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanBelumDiagnosaBtnPrintActionPerformed
-        tampildiagnosa=" and reg_periksa.no_rawat not in (select no_rawat from diagnosa_pasien) ";
+        tampildiagnosa=" and not exists(select * from diagnosa_pasien where diagnosa_pasien.no_rawat = reg_periksa.no_rawat) ";
         tampilkasir();
     }//GEN-LAST:event_ppTampilkanBelumDiagnosaBtnPrintActionPerformed
 
