@@ -349,6 +349,34 @@
 				</textElement>
 				<text><![CDATA[Menyetujui]]></text>
 			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="360" y="80" width="179" height="12" uuid="42a74d8e-5aaa-481c-baec-20dbae3ac0c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="94" width="179" height="11" uuid="eff1812d-2e38-4ca2-b205-6b2cde5a058a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[DIREKTUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="29" width="50" height="11" uuid="7f6b3d65-e802-4053-8a53-28e1ed5b7a4f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Mengetahui]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
