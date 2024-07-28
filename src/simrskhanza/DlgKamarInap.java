@@ -199,6 +199,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private Date date = new Date();
     private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,KUNCIDOKTERRANAP="",
             hariawal="",pilihancetak="",aktifkan_hapus_data_salah="",terbitsep="",namadokter="";
+    private String tampildiagnosa = "", perJenisAsuransi = "";
     private PreparedStatement ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur,pspulang;
     private ResultSet rs,rs2,rssetjam,rspulang;
     private int i,row=0;
@@ -602,6 +603,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         nmpenjab.setText(billing.carabayar.getTable().getValueAt(billing.carabayar.getTable().getSelectedRow(),2).toString());
                     } 
                     kdpenjab.requestFocus();
+                } else if (akses.getform().equals("DlgKamarInap_tampilkanSeleksiActionPerformed")) {
+                    if(billing.carabayar.getTable().getSelectedRow()!= -1){
+                        perJenisAsuransi = " and reg_periksa.kd_pj = '" + billing.carabayar.getTable().getValueAt(billing.carabayar.getTable().getSelectedRow(),1).toString() + "' ";
+                        tampil();
+                    } 
                 }
             }
             @Override
@@ -1035,6 +1041,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnUrutKamarAsc = new javax.swing.JMenuItem();
         MnUrutTanggalMasukAsc = new javax.swing.JMenuItem();
         MnUrutTanggalMasukDesc = new javax.swing.JMenuItem();
+        MnTampilkan = new javax.swing.JMenu();
+        MnTampilkanJenisBayar = new javax.swing.JMenu();
+        ppTampilkanSeleksiBPJS = new javax.swing.JMenuItem();
+        ppTampilkanSeleksiPribadi = new javax.swing.JMenuItem();
+        ppTampilkanSeleksiAsuransi = new javax.swing.JMenuItem();
+        ppTampilkanSeleksi = new javax.swing.JMenuItem();
+        ppTampilkanBelumDiagnosa = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         JamMasuk = new widget.TextBox();
         WindowPindahKamar = new javax.swing.JDialog();
@@ -4807,6 +4820,96 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         jPopupMenu1.add(MnUrut);
 
+        MnTampilkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnTampilkan.setText("Tampilkan");
+        MnTampilkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnTampilkan.setName("MnTampilkan"); // NOI18N
+        MnTampilkan.setPreferredSize(new java.awt.Dimension(200, 26));
+
+        MnTampilkanJenisBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnTampilkanJenisBayar.setText("Per Jenis Jaminan");
+        MnTampilkanJenisBayar.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnTampilkanJenisBayar.setName("MnTampilkanJenisBayar"); // NOI18N
+        MnTampilkanJenisBayar.setPreferredSize(new java.awt.Dimension(200, 26));
+
+        ppTampilkanSeleksiBPJS.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSeleksiBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSeleksiBPJS.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSeleksiBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSeleksiBPJS.setText("BPJS Kesehatan");
+        ppTampilkanSeleksiBPJS.setName("ppTampilkanSeleksiBPJS"); // NOI18N
+        ppTampilkanSeleksiBPJS.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanSeleksiBPJS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSeleksiBPJSActionPerformed(evt);
+            }
+        });
+        MnTampilkanJenisBayar.add(ppTampilkanSeleksiBPJS);
+
+        ppTampilkanSeleksiPribadi.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSeleksiPribadi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSeleksiPribadi.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSeleksiPribadi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSeleksiPribadi.setText("Pribadi/Umum");
+        ppTampilkanSeleksiPribadi.setName("ppTampilkanSeleksiPribadi"); // NOI18N
+        ppTampilkanSeleksiPribadi.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanSeleksiPribadi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSeleksiPribadiActionPerformed(evt);
+            }
+        });
+        MnTampilkanJenisBayar.add(ppTampilkanSeleksiPribadi);
+
+        ppTampilkanSeleksiAsuransi.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSeleksiAsuransi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSeleksiAsuransi.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSeleksiAsuransi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSeleksiAsuransi.setText("Asuransi/COB BPJS");
+        ppTampilkanSeleksiAsuransi.setName("ppTampilkanSeleksiAsuransi"); // NOI18N
+        ppTampilkanSeleksiAsuransi.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanSeleksiAsuransi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSeleksiAsuransiActionPerformed(evt);
+            }
+        });
+        MnTampilkanJenisBayar.add(ppTampilkanSeleksiAsuransi);
+
+        ppTampilkanSeleksi.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSeleksi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSeleksi.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSeleksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSeleksi.setText("Pilih Jenis Bayar/Asuransi");
+        ppTampilkanSeleksi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppTampilkanSeleksi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppTampilkanSeleksi.setName("ppTampilkanSeleksi"); // NOI18N
+        ppTampilkanSeleksi.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanSeleksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSeleksiActionPerformed(evt);
+            }
+        });
+        MnTampilkanJenisBayar.add(ppTampilkanSeleksi);
+
+        MnTampilkan.add(MnTampilkanJenisBayar);
+
+        ppTampilkanBelumDiagnosa.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanBelumDiagnosa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanBelumDiagnosa.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanBelumDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanBelumDiagnosa.setText("Belum Masuk Diagnosa");
+        ppTampilkanBelumDiagnosa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppTampilkanBelumDiagnosa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppTampilkanBelumDiagnosa.setName("ppTampilkanBelumDiagnosa"); // NOI18N
+        ppTampilkanBelumDiagnosa.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppTampilkanBelumDiagnosa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanBelumDiagnosaBtnPrintActionPerformed(evt);
+            }
+        });
+        MnTampilkan.add(ppTampilkanBelumDiagnosa);
+
+        jPopupMenu1.add(MnTampilkan);
+
         JamMasuk.setEditable(false);
         JamMasuk.setForeground(new java.awt.Color(255, 255, 255));
         JamMasuk.setHighlighter(null);
@@ -5461,7 +5564,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024 08:32:20" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024 08:50:47" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -5479,11 +5582,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         StatusPulang.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 StatusPulangItemStateChanged(evt);
-            }
-        });
-        StatusPulang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                StatusPulangKeyPressed(evt);
             }
         });
         internalFrame11.add(StatusPulang);
@@ -5507,7 +5605,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -5536,11 +5634,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TNoRwPulang.setEditable(false);
         TNoRwPulang.setHighlighter(null);
         TNoRwPulang.setName("TNoRwPulang"); // NOI18N
-        TNoRwPulang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRwPulangKeyPressed(evt);
-            }
-        });
         internalFrame11.add(TNoRwPulang);
         TNoRwPulang.setBounds(81, 32, 180, 23);
 
@@ -5564,16 +5657,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TNoSEPRanapPulang.setEditable(false);
         TNoSEPRanapPulang.setHighlighter(null);
         TNoSEPRanapPulang.setName("TNoSEPRanapPulang"); // NOI18N
-        TNoSEPRanapPulang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TNoSEPRanapPulangActionPerformed(evt);
-            }
-        });
-        TNoSEPRanapPulang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoSEPRanapPulangKeyPressed(evt);
-            }
-        });
         internalFrame11.add(TNoSEPRanapPulang);
         TNoSEPRanapPulang.setBounds(395, 32, 180, 23);
 
@@ -5820,7 +5903,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5843,7 +5926,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5869,7 +5952,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -5887,7 +5970,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -6291,6 +6374,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         order="order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk";
         terbitsep="";
         namadokter="";
+        perJenisAsuransi = "";
+        tampildiagnosa = "";
         if((!akses.getkode().equals("Admin Utama"))){
             if(KUNCIDOKTERRANAP.equals("yes")){
                 if(!billing.rawatinap.perawatan.dokter.tampil3(akses.getkode()).equals("")){
@@ -15931,25 +16016,34 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_StatusPulangItemStateChanged
 
-    private void StatusPulangKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_StatusPulangKeyPressed
-    {//GEN-HEADEREND:event_StatusPulangKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_StatusPulangKeyPressed
+    private void ppTampilkanSeleksiBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiBPJSActionPerformed
+        perJenisAsuransi = " and reg_periksa.kd_pj = 'BPJ' ";
+        tampil();
+    }//GEN-LAST:event_ppTampilkanSeleksiBPJSActionPerformed
 
-    private void TNoRwPulangKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TNoRwPulangKeyPressed
-    {//GEN-HEADEREND:event_TNoRwPulangKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNoRwPulangKeyPressed
+    private void ppTampilkanSeleksiPribadiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiPribadiActionPerformed
+        perJenisAsuransi = " and reg_periksa.kd_pj = 'A09' ";
+        tampil();
+    }//GEN-LAST:event_ppTampilkanSeleksiPribadiActionPerformed
 
-    private void TNoSEPRanapPulangKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TNoSEPRanapPulangKeyPressed
-    {//GEN-HEADEREND:event_TNoSEPRanapPulangKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNoSEPRanapPulangKeyPressed
+    private void ppTampilkanSeleksiAsuransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiAsuransiActionPerformed
+        perJenisAsuransi = " and reg_periksa.kd_pj not in ('BPJ', 'A09') ";
+        tampil();
+    }//GEN-LAST:event_ppTampilkanSeleksiAsuransiActionPerformed
 
-    private void TNoSEPRanapPulangActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_TNoSEPRanapPulangActionPerformed
-    {//GEN-HEADEREND:event_TNoSEPRanapPulangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNoSEPRanapPulangActionPerformed
+    private void ppTampilkanSeleksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiActionPerformed
+        akses.setform("DlgKamarInap_tampilkanSeleksiActionPerformed");
+        billing.carabayar.emptTeks();
+        billing.carabayar.isCek();
+        billing.carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        billing.carabayar.setLocationRelativeTo(internalFrame1);
+        billing.carabayar.setVisible(true);
+    }//GEN-LAST:event_ppTampilkanSeleksiActionPerformed
+
+    private void ppTampilkanBelumDiagnosaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanBelumDiagnosaBtnPrintActionPerformed
+        tampildiagnosa=" and not exists(select * from diagnosa_pasien where diagnosa_pasien.no_rawat = reg_periksa.no_rawat and diagnosa_pasien.status = 'Ranap') ";
+        tampil();
+    }//GEN-LAST:event_ppTampilkanBelumDiagnosaBtnPrintActionPerformed
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
@@ -17446,6 +17540,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnSuratJaminanPelayanan;
     private javax.swing.JMenuItem MnSuratKeteranganRawatInap;
     private javax.swing.JMenuItem MnSuratKontrol;
+    private javax.swing.JMenu MnTampilkan;
+    private javax.swing.JMenu MnTampilkanJenisBayar;
     private javax.swing.JMenuItem MnTeridentifikasiTB;
     private javax.swing.JMenuItem MnTimeOutSebelumInsisi;
     private javax.swing.JMenu MnTindakan;
@@ -17628,6 +17724,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppSuplesiJasaRaharja;
     private javax.swing.JMenuItem ppSuratKontrol;
     private javax.swing.JMenuItem ppSuratPRI;
+    private javax.swing.JMenuItem ppTampilkanBelumDiagnosa;
+    private javax.swing.JMenuItem ppTampilkanSeleksi;
+    private javax.swing.JMenuItem ppTampilkanSeleksiAsuransi;
+    private javax.swing.JMenuItem ppTampilkanSeleksiBPJS;
+    private javax.swing.JMenuItem ppTampilkanSeleksiPribadi;
     private widget.Table tbKamIn;
     private widget.TextBox ttlbiaya;
     private widget.TextBox ttlbiayapindah;
@@ -17641,10 +17742,21 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                   MnHasilPemeriksaanEKG,
                                   MnBelumTerbitSEP,
                                   MnSudahTerbitSEP,
-                                  MnSEPUpdateTanggalPulang,MnHasilPemeriksaanUSGNeonatus,MnHasilEndoskopiFaringLaring,
-                                  MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianAwalKeperawatanRanapNeonatus,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan,MnPermintaanKonsultasiMedik,
+                                  MnSEPUpdateTanggalPulang,
+                                  MnHasilPemeriksaanUSGNeonatus,
+                                  MnHasilEndoskopiFaringLaring,
+                                  MnHasilEndoskopiHidung,
+                                  MnHasilEndoskopiTelinga,
+                                  MnPenilaianAwalKeperawatanRanapNeonatus,
+                                  MnPenilaianPasienImunitasRendah,
+                                  MnCatatanKeseimbanganCairan,
+                                  MnCatatanObservasiCHBP,
+                                  MnCatatanObservasiInduksiPersalinan,
+                                  MnPermintaanKonsultasiMedik,
                                   MnDataOperasi;
-    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi;
+    private javax.swing.JMenu MnHasilUSG,
+                              MnHasilEndoskopi,
+                              MnCatatanObservasi;
     
     private void tampil() {
         if(R1.isSelected()==true){
@@ -17672,6 +17784,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                "kamar_inap.tgl_masuk like '%"+TCari.getText().trim()+"%' or dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or kamar_inap.stts_pulang like '%"+TCari.getText().trim()+"%' or "+
                "kamar_inap.tgl_keluar like '%"+TCari.getText().trim()+"%' or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or pasien.agama like '%"+TCari.getText().trim()+"%') "+terbitsep;
         }
+        key = key + perJenisAsuransi + tampildiagnosa;
         
         Valid.tabelKosong(tabMode);
         try{
