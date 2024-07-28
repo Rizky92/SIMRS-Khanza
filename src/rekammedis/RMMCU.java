@@ -991,7 +991,7 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel53.setBounds(10, 70, 180, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2024 08:38:24" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024 15:53:41" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -1210,10 +1210,10 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel61.setBounds(10, 1200, 182, 23);
 
         jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel62.setText("D. RONGSEN THORAX");
+        jLabel62.setText("D. PEMERIKSAAN RADIOLOGI (TERLAMPIR)");
         jLabel62.setName("jLabel62"); // NOI18N
         FormInput.add(jLabel62);
-        jLabel62.setBounds(10, 1120, 182, 23);
+        jLabel62.setBounds(10, 1120, 240, 23);
 
         scrollPane11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane11.setName("scrollPane11"); // NOI18N
@@ -2351,7 +2351,7 @@ public final class RMMCU extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2365,7 +2365,7 @@ public final class RMMCU extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-04-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3804,6 +3804,7 @@ public final class RMMCU extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        autoPopulate();
     }
     
     public void setNoRm(String norwt, Date tgl2) {
@@ -3985,6 +3986,30 @@ public final class RMMCU extends javax.swing.JDialog {
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
+        }
+    }
+    
+    private void autoPopulate() {
+        if (! Sequel.cariBooleanSmc("select * from pemeriksaan_ralan where no_rawat = ?", TNoRw.getText())) return;
+        
+        try (PreparedStatement ps = koneksi.prepareStatement("select * from pemeriksaan_ralan where no_rawat = ? order by tgl_perawatan desc, jam_rawat desc limit 1")) {
+            ps.setString(1, TNoRw.getText());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Kesadaran.setSelectedItem(rs.getString("kesadaran"));
+                    RiwayatPenyakitKeluarga.setText(rs.getString("keluhan"));
+                    RiwayatAlergiMakanan.setText(rs.getString("alergi"));
+                    TD.setText(rs.getString("tensi"));
+                    Nadi.setText(rs.getString("nadi"));
+                    RR.setText(rs.getString("respirasi"));
+                    TinggiBadan.setText(rs.getString("tinggi"));
+                    BeratBadan.setText(rs.getString("berat"));
+                    Suhu.setText(rs.getString("suhu_tubuh"));
+                    Lainlain.setText(rs.getString("pemeriksaan"));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 }
