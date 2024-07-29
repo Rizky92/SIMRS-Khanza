@@ -310,7 +310,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "JKN", "add", nameNode.path("code").asText(), nameNode.path("message").asText(), null);
+                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "JKN", "add", nameNode.path("code").asText(), nameNode.path("message").asText(), rs.getString("estimasidilayani"));
                                     if(nameNode.path("code").asText().equals("200")||nameNode.path("code").asText().equals("208")||nameNode.path("message").asText().equals("Ok")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where nobooking='"+rs.getString("nobooking")+"'");
                                     }   

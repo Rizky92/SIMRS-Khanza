@@ -108,16 +108,22 @@ ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(25
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `no_rawat` varchar(17) NULL DEFAULT NULL,
-  `jenispasien` enum('JKN','NON JKN') NULL DEFAULT NULL,
-  `taskid` char(2) NULL DEFAULT NULL,
-  `code` varchar(5) NULL DEFAULT NULL,
-  `message` varchar(200) NULL DEFAULT NULL,
-  `waktu` datetime NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX`(`no_rawat`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX`(`waktu`) USING BTREE
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `no_rawat` varchar(17) NOT NULL,
+  `kodebooking` varchar(15) DEFAULT NULL,
+  `jenispasien` enum('JKN','NON JKN') DEFAULT NULL,
+  `taskid` char(3) DEFAULT NULL,
+  `code` varchar(5) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `waktu` datetime DEFAULT NULL,
+  `waktu_rs` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX` (`no_rawat`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX` (`waktu`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_kodebooking_IDX` (`kodebooking`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_jenispasien_IDX` (`jenispasien`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX` (`taskid`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_code_IDX` (`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;
