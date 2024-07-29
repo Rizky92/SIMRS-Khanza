@@ -502,6 +502,7 @@ import bridging.SatuSehatMapingRadiologi;
 import bridging.SatuSehatMapingVaksin;
 import bridging.SatuSehatReferensiPasien;
 import bridging.SatuSehatReferensiPraktisi;
+import bridginglis.AdamlabsMappingPemeriksaanLab;
 import dapur.DapurSuplier;
 import grafikanalisa.GrafikHemodialisaPerBulan;
 import grafikanalisa.GrafikHemodialisaPerTanggal;
@@ -21889,7 +21890,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
-    } 
+    }
+    
+    private void btnMappingPemeriksaanLabAdamlabsActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        AdamlabsMappingPemeriksaanLab form=new AdamlabsMappingPemeriksaanLab(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22588,7 +22601,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,btnUserSmc,
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
-            btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara;
+            btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnMappingPemeriksaanLabAdamlabs;
     
     public void isWall(){
         try{            
@@ -25808,6 +25821,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if (akses.getbpjs_kompilasi_berkas_klaim()) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+                jmlmenu++;
+            }
+            
+            if (true) {
+                Panelmenu.add(btnMappingPemeriksaanLabAdamlabs);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -45190,5 +45208,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningRisikoKankerPayudara.setName("btnSkriningRisikoKankerPayudara"); 
         btnSkriningRisikoKankerPayudara.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerPayudara.addActionListener(this::btnSkriningRisikoKankerPayudaraActionPerformed);
+        
+        btnMappingPemeriksaanLabAdamlabs = new widget.ButtonBig();
+        btnMappingPemeriksaanLabAdamlabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/adamlabs.png")));
+        btnMappingPemeriksaanLabAdamlabs.setText("Kompilasi Berkas Klaim BPJS");
+        btnMappingPemeriksaanLabAdamlabs.setIconTextGap(0);
+        btnMappingPemeriksaanLabAdamlabs.setName("btnMappingPemeriksaanLabAdamlabs"); 
+        btnMappingPemeriksaanLabAdamlabs.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnMappingPemeriksaanLabAdamlabs.addActionListener(this::btnMappingPemeriksaanLabAdamlabsActionPerformed);
     }
 }
