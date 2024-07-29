@@ -1125,7 +1125,11 @@
 
         InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
 
-        return $msg['metadata']['message'];
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil disimpan',
+            'error' => null,
+        ];
     }
 
     function EditUlangKlaimSmc($nomor_sep)
@@ -1158,7 +1162,11 @@
             ];
         }
 
-        return $msg['metadata']['message'];
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil diedit',
+            'error' => null,
+        ];
     }
 
     function MenghapusKlaimSmc($nomor_sep, $coder_nik)
@@ -1196,7 +1204,11 @@
         Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
         Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
 
-        echo $msg['metadata']['message']."";
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil Dihapus!',
+            'error' => null,
+        ];
     }
 
     function UpdateDataKlaimSmc(
