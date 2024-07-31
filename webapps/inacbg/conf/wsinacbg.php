@@ -1084,7 +1084,131 @@
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
         //echo $hasildecrypt;
         $msg = json_decode($hasildecrypt,true);
+        print_r($msg);
         return $msg;
+    }
+
+    function BuatKlaimBaruSmc($nomor_kartu, $nomor_sep, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $norawat)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'new_claim',
+            ],
+            'data' => [
+                'nomor_kartu' => $nomor_kartu,
+                'nomor_sep' => $nomor_sep,
+                'nomor_rm' => $nomor_rm,
+                'nama_pasien' => $nama_pasien,
+                'tgl_lahir' => $tgl_lahir,
+                'gender' => $gender,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "new_claim": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil disimpan',
+            'error' => null,
+        ];
+    }
+
+    function EditUlangKlaimSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'reedit_claim',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "reedit_claim": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil diedit',
+            'error' => null,
+        ];
+    }
+
+    function MenghapusKlaimSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'delete_claim',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'coder_nik' => $coder_nik,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "new_claim": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2("inacbg_grouping_stage_12", "no_sep='".$nomor_sep."'");
+        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
+        Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil Dihapus!',
+            'error' => null,
+        ];
     }
 
     function UpdateDataKlaimSmc(
@@ -1178,7 +1302,7 @@
     
         return GroupingStage1Smc($nomor_sep, $coder_nik);
     }
-    
+
     function GroupingStage1Smc($nomor_sep, $coder_nik)
     {
         $request = [
@@ -1190,11 +1314,9 @@
                 'nomor_sep' => $nomor_sep,
             ]
         ];
-    
+
         $msg = Request(json_encode($request));
 
-        print_r($msg);
-    
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "grouper stage 1": %s - %s',
@@ -1204,27 +1326,27 @@
             );
 
             echo $error;
-            
+
             return [
                 'success' => false,
                 'data' => null,
                 'error' => $error,
             ];
         }
-    
+
         Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
         $cbg             = validangka($msg['response']['cbg']['tariff']);
         $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
         $chronic         = validangka($msg['response']['chronic']['tariff']);
         $add_payment_amt = validangka($msg['response']['add_payment_amt']);
         InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
-    
+
         if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
             Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
             foreach ($msg['special_cmg_option'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
                 InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
             }
-    
+
             return [
                 'success' => true,
                 'data' => 'stage2',
@@ -1234,7 +1356,7 @@
             return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
         }
     }
-    
+
     function GroupingStage2Smc($nomor_sep, $coder_nik, $special_cmg)
     {
         $request = [
@@ -1247,9 +1369,9 @@
                 'special_cmg' => $special_cmg,
             ],
         ];
-    
+
         $msg = Request(json_encode($request));
-    
+
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "grouper stage 2": %s - %s',
@@ -1266,7 +1388,7 @@
                 'error' => $error,
             ];
         }
-    
+
         Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
         Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
         $cbg             = validangka($msg['response']['cbg']['tariff']);
@@ -1274,7 +1396,7 @@
         $chronic         = validangka($msg['response']['chronic']['tariff']);
         $add_payment_amt = validangka($msg['response']['add_payment_amt']);
         InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
-    
+
         return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
     }
     
@@ -1289,9 +1411,9 @@
                 'coder_nik' => $coder_nik,
             ],
         ];
-    
+
         $msg = Request(json_encode($request));
-    
+
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "claim_final": %s - %s',
@@ -1308,7 +1430,7 @@
                 'error' => $error,
             ];
         }
-    
+
         return CetakKlaimSmc($nomor_sep);
     }
     
@@ -1322,9 +1444,9 @@
                 'nomor_sep' => $nomor_sep,
             ],
         ];
-    
+
         $msg = Request(json_encode($request));
-    
+
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "claim_print": %s - %s',
@@ -1341,15 +1463,15 @@
                 'error' => $error
             ];
         }
-    
+
         $encodedPDF = $msg['data'];
-    
+
         file_put_contents('pages/pdf/'.$nomor_sep.'.pdf', base64_decode($encodedPDF));
-    
-        if (mysqli_fetch_array(bukaquery2("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')"))[0] == '0') {
+
+        if (getOne("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')") == '0') {
             InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
         }
-    
+
         return [
             'success' => true,
             'data' => 'Klaim berhasil disimpan!',

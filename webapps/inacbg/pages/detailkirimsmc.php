@@ -45,25 +45,8 @@
                     $tgl_registrasi = $baris['tgl_registrasi'];
                     $jam_reg        = $baris['jam_reg'];
                     $nm_poli        = $baris['nm_poli'];
-                    $nm_dokter2     = '';
-                    $a              = 1;
-                    $hasildokter    = bukaquery("select dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = '$norawat'");
-                    $isError        = getOne("select code_cbg from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1");
-                    while ($barisdokter = mysqli_fetch_array($hasildokter)) {
-                        if ($a == 1) {
-                            $nm_dokter2 = $barisdokter['nm_dokter'];
-                        } else {
-                            $nm_dokter2 = $nm_dokter2 . '#' . $barisdokter['nm_dokter'];
-                        }
-                        $a++;
-                    }
-                    
-                    $nm_dokter = '';
-                    if (! empty($nm_dokter2)) {
-                        $nm_dokter = $nm_dokter2;
-                    } else {
-                        $nm_dokter = $baris['nm_dokter'];
-                    }
+                    $nm_dokter      = getOne("select d.nm_dokter from bridging_sep s join maping_dokter_dpjpvclaim m on s.kddpjp = m.kd_dokter_bpjs join dokter d on m.kd_dokter = d.kd_dokter where s.no_sep = '$nosep'");
+                    ['code_cbg' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery("select code_cbg, deskripsi from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
 
                     $status_lanjut = $baris['status_lanjut'];
                     $png_jawab = $baris['png_jawab'];
@@ -128,9 +111,9 @@
                 <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
                 <input type="hidden" name="jk" value="<?= $jk ?>">
                 <input type="hidden" name="codernik" value="<?= $codernik ?>">
-                <?php if ($isError === 'X-0-98-X'): ?>
+                <?php if (substr($isError, 0, 1) === 'X'): ?>
                     <div class="center" style="margin-left: 0.7rem">
-                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR! Cek diagnosa/prosedur yang dimasukkan!</span>
+                        <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR: <?= $pesanError ?></span>
                     </div>
                 <?php endif; ?>
                 <div style="width: 100%; height: 90%; overflow: auto;">
@@ -539,7 +522,7 @@
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Paramedis', 'Ranap Paramedis')) as keperawatan,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Radiologi') as radiologi,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Laborat') as laboratorium,
-                                    (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Kamar') + reg_periksa.biaya_reg as kamar,
+                                    (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Registrasi', 'Kamar')) as kamar,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kronis%') as obat_kronis,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kemo%') as obat_kemoterapi,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Obat', 'Retur Obat', 'Resep Pulang')) as obat,
@@ -564,139 +547,208 @@
                                 $bmhp = $billing['bmhp'];
                                 $sewa_alat = $billing['sewa_alat'];
                                 $rehabilitasi = $billing['rehabilitasi'];
+
                                 $totalbilling = $billing['totalbilling'];
+
+                                $totalbillingsementara = $prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli
+                                                       + $keperawatan + $radiologi + $laboratorium + $kamar + $obat_kronis
+                                                       + $obat_kemoterapi + $obat + $bmhp + $sewa_alat + $rehabilitasi;
                             ?>
                             <tr class="head">
                                 <td width="41%">Biaya Prosedur Non Bedah</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_prosedur_non_bedah" name="prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_non_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_prosedur_non_bedah" name="prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_non_bedah ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_prosedur_non_bedah" name="diskon_prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Prosedur Bedah</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_prosedur_bedah" name="prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_bedah ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_prosedur_bedah" name="prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_bedah ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_prosedur_bedah" name="diskon_prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Konsultasi</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_konsultasi" name="konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $konsultasi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_konsultasi" name="konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $konsultasi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_konsultasi" name="diskon_konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Tenaga Ahli</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_tenaga_ahli" name="tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $tenaga_ahli ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_tenaga_ahli" name="tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $tenaga_ahli ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_tenaga_ahli" name="diskon_tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Keperawatan</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_keperawatan" name="keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $keperawatan ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_keperawatan" name="keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $keperawatan ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_keperawatan" name="diskon_keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Penunjang</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_penunjang" name="penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_penunjang" name="penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_penunjang" name="diskon_penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Radiologi</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_radiologi" name="radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $radiologi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_radiologi" name="radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $radiologi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_radiologi" name="diskon_radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Laboratorium</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_laboratorium" name="laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $laboratorium ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_laboratorium" name="laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $laboratorium ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_laboratorium" name="diskon_laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Pelayanan Darah</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_pelayanan_darah" name="pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_pelayanan_darah" name="pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_pelayanan_darah" name="diskon_pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Rehabilitasi</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_rehabilitasi" name="rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_rehabilitasi" name="rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_rehabilitasi" name="diskon_rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Kamar</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_kamar" name="kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $kamar ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_kamar" name="kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $kamar ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_kamar" name="diskon_kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Rawat Intensif</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_rawat_intensif" name="rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_rawat_intensif" name="rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_rawat_intensif" name="diskon_rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Obat</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_obat" name="obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_obat" name="obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_obat" name="diskon_obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Obat Kronis</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_obat_kronis" name="obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kronis ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_obat_kronis" name="obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kronis ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_obat_kronis" name="diskon_obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Obat Kemoterapi</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_obat_kemoterapi" name="obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kemoterapi ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_obat_kemoterapi" name="obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kemoterapi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_obat_kemoterapi" name="diskon_obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Alkes</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_alkes" name="alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_alkes" name="alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_alkes" name="diskon_alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya BMHP</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_bmhp" name="bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $bmhp ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_bmhp" name="bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $bmhp ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_bmhp" name="diskon_bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Biaya Sewa Alat</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_sewa_alat" name="sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $sewa_alat ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_sewa_alat" name="sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $sewa_alat ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_sewa_alat" name="diskon_sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
                                 <td width="41%">Tarif Poli Eksekutif</td>
                                 <td>:</td>
                                 <td width="57%">
-                                    <span>Rp. </span><input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span>Rp. </span>
+                                    <input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                    <span> Diskon </span>
+                                    <input id="diskon_billing_tarif_poli_eks" name="diskon_tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="10" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="41%">Total Rincian Biaya</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <span>Rp. </span><span id="totalbillingsementara"><?= $totalbillingsementara ?></span>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -926,73 +978,112 @@
                             $diastole            = validTeks(trim($_POST['diastole']));
                             $gender              = ($jk == 'L') ? '1' : '2';
 
-                            $prosedur_non_bedah    = validTeks(trim($_POST['prosedur_non_bedah']));
-                            $prosedur_bedah        = validTeks(trim($_POST['prosedur_bedah']));
-                            $konsultasi            = validTeks(trim($_POST['konsultasi']));
-                            $tenaga_ahli           = validTeks(trim($_POST['tenaga_ahli']));
-                            $keperawatan           = validTeks(trim($_POST['keperawatan']));
-                            $penunjang             = validTeks(trim($_POST['penunjang']));
-                            $radiologi             = validTeks(trim($_POST['radiologi']));
-                            $laboratorium          = validTeks(trim($_POST['laboratorium']));
-                            $pelayanan_darah       = validTeks(trim($_POST['pelayanan_darah']));
-                            $rehabilitasi          = validTeks(trim($_POST['rehabilitasi']));
-                            $kamar                 = validTeks(trim($_POST['kamar']));
-                            $rawat_intensif        = validTeks(trim($_POST['rawat_intensif']));
-                            $obat                  = validTeks(trim($_POST['obat']));
-                            $obat_kronis           = validTeks(trim($_POST['obat_kronis']));
-                            $obat_kemoterapi       = validTeks(trim($_POST['obat_kemoterapi']));
-                            $alkes                 = validTeks(trim($_POST['alkes']));
-                            $bmhp                  = validTeks(trim($_POST['bmhp']));
-                            $sewa_alat             = validTeks(trim($_POST['sewa_alat']));
-                            $tarif_poli_eks        = validTeks(trim($_POST['tarif_poli_eks']));
+                            $prosedur_non_bedah        = validTeks(trim($_POST['prosedur_non_bedah']));
+                            $diskon_prosedur_non_bedah = validTeks(trim($_POST['diskon_prosedur_non_bedah']));
+                            $prosedur_bedah            = validTeks(trim($_POST['prosedur_bedah']));
+                            $diskon_prosedur_bedah     = validTeks(trim($_POST['diskon_prosedur_bedah']));
+                            $konsultasi                = validTeks(trim($_POST['konsultasi']));
+                            $diskon_konsultasi         = validTeks(trim($_POST['diskon_konsultasi']));
+                            $tenaga_ahli               = validTeks(trim($_POST['tenaga_ahli']));
+                            $diskon_tenaga_ahli        = validTeks(trim($_POST['diskon_tenaga_ahli']));
+                            $keperawatan               = validTeks(trim($_POST['keperawatan']));
+                            $diskon_keperawatan        = validTeks(trim($_POST['diskon_keperawatan']));
+                            $penunjang                 = validTeks(trim($_POST['penunjang']));
+                            $diskon_penunjang          = validTeks(trim($_POST['diskon_penunjang']));
+                            $radiologi                 = validTeks(trim($_POST['radiologi']));
+                            $diskon_radiologi          = validTeks(trim($_POST['diskon_radiologi']));
+                            $laboratorium              = validTeks(trim($_POST['laboratorium']));
+                            $diskon_laboratorium       = validTeks(trim($_POST['diskon_laboratorium']));
+                            $pelayanan_darah           = validTeks(trim($_POST['pelayanan_darah']));
+                            $diskon_pelayanan_darah    = validTeks(trim($_POST['diskon_pelayanan_darah']));
+                            $rehabilitasi              = validTeks(trim($_POST['rehabilitasi']));
+                            $diskon_rehabilitasi       = validTeks(trim($_POST['diskon_rehabilitasi']));
+                            $kamar                     = validTeks(trim($_POST['kamar']));
+                            $diskon_kamar              = validTeks(trim($_POST['diskon_kamar']));
+                            $rawat_intensif            = validTeks(trim($_POST['rawat_intensif']));
+                            $diskon_rawat_intensif     = validTeks(trim($_POST['diskon_rawat_intensif']));
+                            $obat                      = validTeks(trim($_POST['obat']));
+                            $diskon_obat               = validTeks(trim($_POST['diskon_obat']));
+                            $obat_kronis               = validTeks(trim($_POST['obat_kronis']));
+                            $diskon_obat_kronis        = validTeks(trim($_POST['diskon_obat_kronis']));
+                            $obat_kemoterapi           = validTeks(trim($_POST['obat_kemoterapi']));
+                            $diskon_obat_kemoterapi    = validTeks(trim($_POST['diskon_obat_kemoterapi']));
+                            $alkes                     = validTeks(trim($_POST['alkes']));
+                            $diskon_alkes              = validTeks(trim($_POST['diskon_alkes']));
+                            $bmhp                      = validTeks(trim($_POST['bmhp']));
+                            $diskon_bmhp               = validTeks(trim($_POST['diskon_bmhp']));
+                            $sewa_alat                 = validTeks(trim($_POST['sewa_alat']));
+                            $diskon_sewa_alat          = validTeks(trim($_POST['diskon_sewa_alat']));
+                            $tarif_poli_eks            = validTeks(trim($_POST['tarif_poli_eks']));
+                            $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
+
                             $dializer_single_use   = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
 
-                            $validasi = $totalbilling - ($prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli + $keperawatan + $penunjang + $radiologi + $laboratorium + $pelayanan_darah + $rehabilitasi + $kamar + $rawat_intensif + $obat + $obat_kronis + $obat_kemoterapi + $alkes + $bmhp + $sewa_alat + $tarif_poli_eks);
+                            $totalbillingsementara
+                                = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)
+                                + ($prosedur_bedah - $diskon_prosedur_bedah)
+                                + ($konsultasi - $diskon_konsultasi)
+                                + ($tenaga_ahli - $diskon_tenaga_ahli)
+                                + ($keperawatan - $diskon_keperawatan)
+                                + ($penunjang - $diskon_penunjang)
+                                + ($radiologi - $diskon_radiologi)
+                                + ($laboratorium - $diskon_laboratorium)
+                                + ($pelayanan_darah - $diskon_pelayanan_darah)
+                                + ($rehabilitasi - $diskon_rehabilitasi)
+                                + ($kamar - $diskon_kamar)
+                                + ($rawat_intensif - $diskon_rawat_intensif)
+                                + ($obat - $diskon_obat)
+                                + ($obat_kronis - $diskon_obat_kronis)
+                                + ($obat_kemoterapi - $diskon_obat_kemoterapi)
+                                + ($alkes - $diskon_alkes)
+                                + ($bmhp - $diskon_bmhp)
+                                + ($sewa_alat - $diskon_sewa_alat)
+                                + ($tarif_poli_eks - $diskon_tarif_poli_eks);
+
+                            $validasi = $totalbilling - $totalbillingsementara;
                         }
 
                         if ((int) round($validasi) === 0) {
                             if ($corona == 'PasienCorona') {
                                 echo "Bridging klaim INACBG untuk Pasien Covid-19 belum support!";
-                                /*
-                                $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
-                                $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
-                                $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
-                                $plastik_erat               = validTeks(trim($_POST['plastik_erat']));
-                                $desinfektan_jenazah        = validTeks(trim($_POST['desinfektan_jenazah']));
-                                $mobil_jenazah              = validTeks(trim($_POST['mobil_jenazah']));
-                                $desinfektan_mobil_jenazah  = validTeks(trim($_POST['desinfektan_mobil_jenazah']));
-                                $covid19_status_cd          = validTeks(trim($_POST['covid19_status_cd']));
-                                $nomor_kartu_t              = validTeks(trim($_POST['nomor_kartu_t']));
-                                $episodes1                  = validTeks(trim($_POST['episodes1']));
-                                $episodes2                  = validTeks(trim($_POST['episodes2']));
-                                $episodes3                  = validTeks(trim($_POST['episodes3']));
-                                $episodes4                  = validTeks(trim($_POST['episodes4']));
-                                $episodes5                  = validTeks(trim($_POST['episodes5']));
-                                $episodes6                  = validTeks(trim($_POST['episodes6']));
-                                $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
-                                $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
-                                $episodes                   = substr($episodes, 0, -1); 
+                                // $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
+                                // $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
+                                // $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
+                                // $plastik_erat               = validTeks(trim($_POST['plastik_erat']));
+                                // $desinfektan_jenazah        = validTeks(trim($_POST['desinfektan_jenazah']));
+                                // $mobil_jenazah              = validTeks(trim($_POST['mobil_jenazah']));
+                                // $desinfektan_mobil_jenazah  = validTeks(trim($_POST['desinfektan_mobil_jenazah']));
+                                // $covid19_status_cd          = validTeks(trim($_POST['covid19_status_cd']));
+                                // $nomor_kartu_t              = validTeks(trim($_POST['nomor_kartu_t']));
+                                // $episodes1                  = validTeks(trim($_POST['episodes1']));
+                                // $episodes2                  = validTeks(trim($_POST['episodes2']));
+                                // $episodes3                  = validTeks(trim($_POST['episodes3']));
+                                // $episodes4                  = validTeks(trim($_POST['episodes4']));
+                                // $episodes5                  = validTeks(trim($_POST['episodes5']));
+                                // $episodes6                  = validTeks(trim($_POST['episodes6']));
+                                // $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
+                                // $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
+                                // $episodes                   = substr($episodes, 0, -1); 
                                 
-                                if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
-                                    BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                    EditUlangKlaim($nosep);
-                                    UpdateDataKlaim3($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
-                                        $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
-                                        $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
-                                        $tarif_poli_eks, $nama_dokter, getKelasRS(), "71", "COVID-19", "#", $codernik,
-                                        $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
-                                        $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                        $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
-                                        $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
-                                        $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
-                                    CetakKlaim($nosep);
-                                    echo <<<HTML
-                                        <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
-                                    HTML;
-                                } else {
-                                    echo 'Semua field harus isi..!!!';
-                                }
-                                */
+                                // if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
+                                //     BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                //     EditUlangKlaim($nosep);
+                                //     UpdateDataKlaim3($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                //         $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
+                                //         $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
+                                //         $tarif_poli_eks, $nama_dokter, getKelasRS(), "71", "COVID-19", "#", $codernik,
+                                //         $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
+                                //         $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
+                                //         $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
+                                //         $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
+                                //         $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
+                                //     CetakKlaim($nosep);
+                                //     echo <<<HTML
+                                //         <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
+                                //     HTML;
+                                // } else {
+                                //     echo 'Semua field harus isi..!!!';
+                                // }
                             } else {
                                 if ($action == 'stage2') {
                                     $special_cmg = implode('#', array_filter([
@@ -1008,36 +1099,38 @@
                                         echo $error;
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=stage2">
-                                        HTML;
+                                            HTML;
                                     } else {
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                        HTML;
+                                            HTML;
                                     }
                                 } else {
                                     if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
-                                        BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                        EditUlangKlaim($nosep);
-                                        ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                                        BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                        EditUlangKlaimSmc($nosep);
+                                        ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
+                                            $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
                                             $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
                                             $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
                                             $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
                                             $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                            $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use);
+                                            $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use
+                                        );
                                         if (! $success) {
                                             echo $error;
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
-                                            HTML;
-                                        } else if ($success && $data == 'stage2') {
+                                                HTML;
+                                        } else if ($success && $response == 'stage2') {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
-                                            HTML;
+                                                HTML;
                                         } else {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                            HTML;
+                                                HTML;
                                         }
                                     } else {
                                         echo 'Semua field harus isi..!!!';
@@ -1057,72 +1150,171 @@
     <?php endif; ?>
 </div>
 <script>
-    let totalbilling       = document.querySelector('#totalbilling')
-    let prosedur_non_bedah = document.querySelector('#billing_prosedur_non_bedah')
-    let prosedur_bedah     = document.querySelector('#billing_prosedur_bedah')
-    let konsultasi         = document.querySelector('#billing_konsultasi')
-    let tenaga_ahli        = document.querySelector('#billing_tenaga_ahli')
-    let keperawatan        = document.querySelector('#billing_keperawatan')
-    let penunjang          = document.querySelector('#billing_penunjang')
-    let radiologi          = document.querySelector('#billing_radiologi')
-    let laboratorium       = document.querySelector('#billing_laboratorium')
-    let pelayanan_darah    = document.querySelector('#billing_pelayanan_darah')
-    let rehabilitasi       = document.querySelector('#billing_rehabilitasi')
-    let kamar              = document.querySelector('#billing_kamar')
-    let rawat_intensif     = document.querySelector('#billing_rawat_intensif')
-    let obat               = document.querySelector('#billing_obat')
-    let obat_kronis        = document.querySelector('#billing_obat_kronis')
-    let obat_kemoterapi    = document.querySelector('#billing_obat_kemoterapi')
-    let alkes              = document.querySelector('#billing_alkes')
-    let bmhp               = document.querySelector('#billing_bmhp')
-    let sewa_alat          = document.querySelector('#billing_sewa_alat')
-    let tarif_poli_eks     = document.querySelector('#billing_tarif_poli_eks')
+    let totalbilling              = document.querySelector('#totalbilling')
+    let totalbillingsementara     = document.querySelector('#totalbillingsementara')
 
-    const changeListener = (nilaibilling) => {
-        totalbillingsementara = parseInt(prosedur_non_bedah.value) + parseInt(prosedur_bedah.value) + parseInt(konsultasi.value)
-            + parseInt(tenaga_ahli.value) + parseInt(keperawatan.value) + parseInt(penunjang.value) + parseInt(radiologi.value)
-            + parseInt(laboratorium.value) + parseInt(pelayanan_darah.value) + parseInt(rehabilitasi.value) + parseInt(kamar.value)
-            + parseInt(rawat_intensif.value) + parseInt(obat.value) + parseInt(obat_kronis.value) + parseInt(obat_kemoterapi.value)
-            + parseInt(alkes.value) + parseInt(bmhp.value) + parseInt(sewa_alat.value) + parseInt(tarif_poli_eks.value)
+    let prosedur_non_bedah        = document.querySelector('#billing_prosedur_non_bedah')
+    let diskon_prosedur_non_bedah = document.querySelector('#diskon_billing_prosedur_non_bedah')
+    let prosedur_bedah            = document.querySelector('#billing_prosedur_bedah')
+    let diskon_prosedur_bedah     = document.querySelector('#diskon_billing_prosedur_bedah')
+    let konsultasi                = document.querySelector('#billing_konsultasi')
+    let diskon_konsultasi         = document.querySelector('#diskon_billing_konsultasi')
+    let tenaga_ahli               = document.querySelector('#billing_tenaga_ahli')
+    let diskon_tenaga_ahli        = document.querySelector('#diskon_billing_tenaga_ahli')
+    let keperawatan               = document.querySelector('#billing_keperawatan')
+    let diskon_keperawatan        = document.querySelector('#diskon_billing_keperawatan')
+    let penunjang                 = document.querySelector('#billing_penunjang')
+    let diskon_penunjang          = document.querySelector('#diskon_billing_penunjang')
+    let radiologi                 = document.querySelector('#billing_radiologi')
+    let diskon_radiologi          = document.querySelector('#diskon_billing_radiologi')
+    let laboratorium              = document.querySelector('#billing_laboratorium')
+    let diskon_laboratorium       = document.querySelector('#diskon_billing_laboratorium')
+    let pelayanan_darah           = document.querySelector('#billing_pelayanan_darah')
+    let diskon_pelayanan_darah    = document.querySelector('#diskon_billing_pelayanan_darah')
+    let rehabilitasi              = document.querySelector('#billing_rehabilitasi')
+    let diskon_rehabilitasi       = document.querySelector('#diskon_billing_rehabilitasi')
+    let kamar                     = document.querySelector('#billing_kamar')
+    let diskon_kamar              = document.querySelector('#diskon_billing_kamar')
+    let rawat_intensif            = document.querySelector('#billing_rawat_intensif')
+    let diskon_rawat_intensif     = document.querySelector('#diskon_billing_rawat_intensif')
+    let obat                      = document.querySelector('#billing_obat')
+    let diskon_obat               = document.querySelector('#diskon_billing_obat')
+    let obat_kronis               = document.querySelector('#billing_obat_kronis')
+    let diskon_obat_kronis        = document.querySelector('#diskon_billing_obat_kronis')
+    let obat_kemoterapi           = document.querySelector('#billing_obat_kemoterapi')
+    let diskon_obat_kemoterapi    = document.querySelector('#diskon_billing_obat_kemoterapi')
+    let alkes                     = document.querySelector('#billing_alkes')
+    let diskon_alkes              = document.querySelector('#diskon_billing_alkes')
+    let bmhp                      = document.querySelector('#billing_bmhp')
+    let diskon_bmhp               = document.querySelector('#diskon_billing_bmhp')
+    let sewa_alat                 = document.querySelector('#billing_sewa_alat')
+    let diskon_sewa_alat          = document.querySelector('#diskon_billing_sewa_alat')
+    let tarif_poli_eks            = document.querySelector('#billing_tarif_poli_eks')
+    let diskon_tarif_poli_eks     = document.querySelector('#diskon_billing_tarif_poli_eks')
 
-        totalbilling.innerHTML = totalbillingsementara
+    function hitungRincianBilling() {
+        let nilaibilling = totalbilling.innerHTML
 
-        console.log({nilaibilling, totalbillingsementara})
+        let totalrincianbilling
+            = (parseInt(prosedur_non_bedah.value) - parseInt(diskon_prosedur_non_bedah.value))
+            + (parseInt(prosedur_bedah.value) - parseInt(diskon_prosedur_bedah.value))
+            + (parseInt(konsultasi.value) - parseInt(diskon_konsultasi.value))
+            + (parseInt(tenaga_ahli.value) - parseInt(diskon_tenaga_ahli.value))
+            + (parseInt(keperawatan.value) - parseInt(diskon_keperawatan.value))
+            + (parseInt(penunjang.value) - parseInt(diskon_penunjang.value))
+            + (parseInt(radiologi.value) - parseInt(diskon_radiologi.value))
+            + (parseInt(laboratorium.value) - parseInt(diskon_laboratorium.value))
+            + (parseInt(pelayanan_darah.value) - parseInt(diskon_pelayanan_darah.value))
+            + (parseInt(rehabilitasi.value) - parseInt(diskon_rehabilitasi.value))
+            + (parseInt(kamar.value) - parseInt(diskon_kamar.value))
+            + (parseInt(rawat_intensif.value) - parseInt(diskon_rawat_intensif.value))
+            + (parseInt(obat.value) - parseInt(diskon_obat.value))
+            + (parseInt(obat_kronis.value) - parseInt(diskon_obat_kronis.value))
+            + (parseInt(obat_kemoterapi.value) - parseInt(diskon_obat_kemoterapi.value))
+            + (parseInt(alkes.value) - parseInt(diskon_alkes.value))
+            + (parseInt(bmhp.value) - parseInt(diskon_bmhp.value))
+            + (parseInt(sewa_alat.value) - parseInt(diskon_sewa_alat.value))
+            + (parseInt(tarif_poli_eks.value) - parseInt(diskon_tarif_poli_eks.value))
 
-        if (parseInt(totalbillingsementara) != parseInt(nilaibilling)) {
-            totalbilling.style.fontWeight = '700'
-            totalbilling.style.color = '#f00'
+        totalbillingsementara.innerHTML = totalrincianbilling
+
+        if (parseInt(totalrincianbilling) == parseInt(nilaibilling)) {
+            totalbillingsementara.style.fontWeight = '400'
+            totalbillingsementara.style.color = 'inherit'
         } else {
-            totalbilling.style.fontWeight = '400'
-            totalbilling.style.color = 'inherit'
+            totalbillingsementara.style.fontWeight = '700'
+            totalbillingsementara.style.color = '#f00'
         }
     }
 
+    function janganSubmitSaatEnter(e) {
+        if (e.key == 'Enter' || e.keyCode == 13) {
+            e.preventDefault()
+
+            hitungRincianBilling()
+
+            return false;
+        }
+        return true
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-        let nilaibilling = parseInt(prosedur_non_bedah.value) + parseInt(prosedur_bedah.value) + parseInt(konsultasi.value)
-            + parseInt(tenaga_ahli.value) + parseInt(keperawatan.value) + parseInt(penunjang.value) + parseInt(radiologi.value)
-            + parseInt(laboratorium.value) + parseInt(pelayanan_darah.value) + parseInt(rehabilitasi.value) + parseInt(kamar.value)
-            + parseInt(rawat_intensif.value) + parseInt(obat.value) + parseInt(obat_kronis.value) + parseInt(obat_kemoterapi.value)
-            + parseInt(alkes.value) + parseInt(bmhp.value) + parseInt(sewa_alat.value) + parseInt(tarif_poli_eks.value)
-        
-        prosedur_non_bedah.addEventListener('change', (e) => changeListener(nilaibilling))
-        prosedur_bedah.addEventListener('change', (e) => changeListener(nilaibilling))
-        konsultasi.addEventListener('change', (e) => changeListener(nilaibilling))
-        tenaga_ahli.addEventListener('change', (e) => changeListener(nilaibilling))
-        keperawatan.addEventListener('change', (e) => changeListener(nilaibilling))
-        penunjang.addEventListener('change', (e) => changeListener(nilaibilling))
-        radiologi.addEventListener('change', (e) => changeListener(nilaibilling))
-        laboratorium.addEventListener('change', (e) => changeListener(nilaibilling))
-        pelayanan_darah.addEventListener('change', (e) => changeListener(nilaibilling))
-        rehabilitasi.addEventListener('change', (e) => changeListener(nilaibilling))
-        kamar.addEventListener('change', (e) => changeListener(nilaibilling))
-        rawat_intensif.addEventListener('change', (e) => changeListener(nilaibilling))
-        obat.addEventListener('change', (e) => changeListener(nilaibilling))
-        obat_kronis.addEventListener('change', (e) => changeListener(nilaibilling))
-        obat_kemoterapi.addEventListener('change', (e) => changeListener(nilaibilling))
-        alkes.addEventListener('change', (e) => changeListener(nilaibilling))
-        bmhp.addEventListener('change', (e) => changeListener(nilaibilling))
-        sewa_alat.addEventListener('change', (e) => changeListener(nilaibilling))
-        tarif_poli_eks.addEventListener('change', (e) => changeListener(nilaibilling))
+        hitungRincianBilling();
+        prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        prosedur_non_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_prosedur_non_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_prosedur_non_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        prosedur_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_prosedur_bedah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_prosedur_bedah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        konsultasi.addEventListener('change', (e) => hitungRincianBilling())
+        konsultasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_konsultasi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_konsultasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling())
+        tenaga_ahli.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_tenaga_ahli.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_tenaga_ahli.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        keperawatan.addEventListener('change', (e) => hitungRincianBilling())
+        keperawatan.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_keperawatan.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_keperawatan.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        penunjang.addEventListener('change', (e) => hitungRincianBilling())
+        penunjang.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_penunjang.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_penunjang.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        radiologi.addEventListener('change', (e) => hitungRincianBilling())
+        radiologi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_radiologi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_radiologi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        laboratorium.addEventListener('change', (e) => hitungRincianBilling())
+        laboratorium.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_laboratorium.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_laboratorium.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling())
+        pelayanan_darah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_pelayanan_darah.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_pelayanan_darah.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        rehabilitasi.addEventListener('change', (e) => hitungRincianBilling())
+        rehabilitasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_rehabilitasi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_rehabilitasi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        kamar.addEventListener('change', (e) => hitungRincianBilling())
+        kamar.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_kamar.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_kamar.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        rawat_intensif.addEventListener('change', (e) => hitungRincianBilling())
+        rawat_intensif.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_rawat_intensif.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_rawat_intensif.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat.addEventListener('change', (e) => hitungRincianBilling())
+        obat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat_kronis.addEventListener('change', (e) => hitungRincianBilling())
+        obat_kronis.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat_kronis.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat_kronis.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling())
+        obat_kemoterapi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_obat_kemoterapi.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_obat_kemoterapi.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        alkes.addEventListener('change', (e) => hitungRincianBilling())
+        alkes.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_alkes.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_alkes.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        bmhp.addEventListener('change', (e) => hitungRincianBilling())
+        bmhp.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_bmhp.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_bmhp.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        sewa_alat.addEventListener('change', (e) => hitungRincianBilling())
+        sewa_alat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_sewa_alat.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_sewa_alat.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling())
+        tarif_poli_eks.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
+        diskon_tarif_poli_eks.addEventListener('change', (e) => hitungRincianBilling())
+        diskon_tarif_poli_eks.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
     })
 </script>

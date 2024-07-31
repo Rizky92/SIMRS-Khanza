@@ -2171,7 +2171,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_dr on rawat_jl_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -2229,7 +2229,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_drpr on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -2291,7 +2291,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_dr on rawat_inap_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -2349,7 +2349,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_drpr on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -2415,7 +2415,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator1 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator1) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2474,7 +2474,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator2 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator2) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2532,7 +2532,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator3 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator3) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2590,7 +2590,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2648,7 +2648,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anestesi = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anestesi) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2706,7 +2706,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_umum = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_umum) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2764,7 +2764,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_pjanak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_pjanak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2829,7 +2829,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -2889,7 +2889,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -2950,7 +2950,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3010,7 +3010,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -3077,7 +3077,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3137,7 +3137,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3208,7 +3208,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_dr on rawat_jl_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -3267,7 +3267,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_drpr on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -3330,7 +3330,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_dr on rawat_inap_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -3389,7 +3389,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_drpr on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -3456,7 +3456,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator1 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator1) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3516,7 +3516,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator2 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator2) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3575,7 +3575,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator3 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator3) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3634,7 +3634,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3693,7 +3693,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anestesi = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anestesi) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3752,7 +3752,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_umum = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_umum) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3811,7 +3811,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_pjanak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_pjanak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3877,7 +3877,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -3938,7 +3938,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -4000,7 +4000,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4061,7 +4061,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -4129,7 +4129,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4190,7 +4190,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4262,7 +4262,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_dr on rawat_jl_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -4323,7 +4323,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_drpr on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -4388,7 +4388,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_dr on rawat_inap_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -4449,7 +4449,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_drpr on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -4518,7 +4518,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator1 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator1) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4580,7 +4580,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator2 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator2) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4641,7 +4641,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator3 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator3) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4702,7 +4702,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4763,7 +4763,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anestesi = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anestesi) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4824,7 +4824,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_umum = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_umum) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4885,7 +4885,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_pjanak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_pjanak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -4953,7 +4953,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5016,7 +5016,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -5080,7 +5080,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5143,7 +5143,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -5213,7 +5213,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5276,7 +5276,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5350,7 +5350,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_dr on rawat_jl_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -5411,7 +5411,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_drpr on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -5476,7 +5476,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_dr on rawat_inap_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -5537,7 +5537,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_drpr on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -5606,7 +5606,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator1 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator1) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5668,7 +5668,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator2 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator2) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5729,7 +5729,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator3 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator3) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5790,7 +5790,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5851,7 +5851,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anestesi = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anestesi) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5912,7 +5912,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_umum = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_umum) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -5973,7 +5973,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_pjanak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_pjanak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6041,7 +6041,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6104,7 +6104,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -6168,7 +6168,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6231,7 +6231,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -6301,7 +6301,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6364,7 +6364,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6438,7 +6438,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_dr on rawat_jl_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -6498,7 +6498,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatjalandrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_jl_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_jl_drpr on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -6562,7 +6562,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_dr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_dr on rawat_inap_dr.no_rawat = reg_periksa.no_rawat\n" +
@@ -6622,7 +6622,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psrawatinapdrpr = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = rawat_inap_drpr.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from pasien\n" +
                     "join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
                     "join rawat_inap_drpr on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat\n" +
@@ -6690,7 +6690,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator1 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator1) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6751,7 +6751,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator2 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator2) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6811,7 +6811,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayaoperator3 = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.operator3) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6871,7 +6871,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6931,7 +6931,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiayadokter_anestesi = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_anestesi) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -6991,7 +6991,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_umum = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_umum) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -7051,7 +7051,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psbiaya_dokter_pjanak = koneksi.prepareStatement(
                     "select\n" +
                         "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = operasi.dokter_pjanak) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from operasi\n" +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -7118,7 +7118,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -7180,7 +7180,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -7243,7 +7243,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_lab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_lab\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -7305,7 +7305,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psdetaillab_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_lab.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from detail_periksa_lab\n" +
                     "join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam\n" +
                     "join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat\n" +
@@ -7374,7 +7374,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
@@ -7436,7 +7436,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psperiksa_radiologi_perujuk = koneksi.prepareStatement(
                     "select\n" +
                         "periksa_radiologi.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_radiologi.status, jns_perawatan_radiologi.nm_perawatan, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, periksa_radiologi.kd_jenis_prw, reg_periksa.kd_pj,\n" +
-                        "(select group_concat(bridging_sep.no_sep separator ', ') from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = reg_periksa.no_rawat and maping_dokter_dpjpvclaim.kd_dokter = periksa_radiologi.kd_dokter) as no_sep\n" +
+                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
                     "from periksa_radiologi\n" +
                     "join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat\n" +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +

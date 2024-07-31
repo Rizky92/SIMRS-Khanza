@@ -83,6 +83,8 @@ ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
+ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
+
 CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
   `code` varchar(7) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -130,6 +132,8 @@ CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
   CONSTRAINT `mapping_user_bridginglab_petugas_fk` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
+
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAULT NULL AFTER `jk`;
@@ -144,6 +148,8 @@ CREATE TRIGGER IF NOT EXISTS `set_password_user`
     '',
     AES_ENCRYPT(DATE_FORMAT(NEW.tgl_lahir, '%d%m%Y'), 'windi')
   );
+
+ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
 
