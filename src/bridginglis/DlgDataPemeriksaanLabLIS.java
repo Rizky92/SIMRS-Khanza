@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+public final class DlgDataPemeriksaanLabLIS extends javax.swing.JDialog {
+    private final DefaultTableModel tabMode;
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
     private int i = 0, id_pemeriksaan = -1;
-    private String satuan = "";
+    private String satuan = "", vendor = "";
 
     /**
      * Creates new form DlgJnsPerawatanRalan
@@ -26,13 +26,13 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public AdamlabsMappingPemeriksaanLab(java.awt.Frame parent, boolean modal) {
+    public DlgDataPemeriksaanLabLIS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8, 1);
         setSize(628, 674);
 
-        Object[] row = {"Kode Tindakan", "Nama Tindakan", "ID Template", "Pemeriksaan", "ID", "Kode Periksa LIS", "Nama Periksa LIS", "Satuan LIS", "Ktg. Periksa LIS"};
+        Object[] row = {"Kode Tindakan", "Nama Tindakan", "ID Template", "Nama Template", "ID", "Kode Periksa", "Nama Periksa", "Satuan", "Ktg. Periksa", "Vendor"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -507,7 +507,20 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-
+        if (tbJnsPerawatan.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, tidak ada data yang bisa dihapus...!!!");
+        } else if (tbJnsPerawatan.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus...!!!");
+        } else {
+            if (Sequel.menghapustfSmc(
+                "mapping_pemeriksaan_labpk", "id_pemeriksaan = ? and id_template = ?",
+                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString(),
+                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString()
+            )) {
+                tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+                LCount.setText(String.valueOf(tabMode.getRowCount()));
+            }
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -517,7 +530,30 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-
+        if (TKdJenisPrw.getText().isBlank() || TNmPerawatan.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih Tindakan Lab terlebih dahulu...!!!");
+            BtnJnsPerawatanLab.requestFocus();
+        } else if (TIdTemplate.getText().isBlank() || TNamaTemplate.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih Item Pemeriksaan terlebih dahulu...!!!");
+            BtnTemplateLab.requestFocus();
+        } else if (TKodeLIS.getText().isBlank() || TNamaLIS.getText().isBlank() || satuan.isBlank() || TKtgLIS.getText().isBlank() || id_pemeriksaan < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih Item Pemeriksaan dari LIS terlebih dahulu...!!!");
+            BtnPemeriksaanLabpk.requestFocus();
+        } else {
+            if (Sequel.menghapustfSmc(
+                "mapping_pemeriksaan_labpk", "id_pemeriksaan = ? and id_template = ?",
+                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString(),
+                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString()
+            )) {
+                tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
+                if (Sequel.menyimpantfSmc("mapping_pemeriksaan_labpk", null, String.valueOf(id_pemeriksaan), TIdTemplate.getText())) {
+                    tabMode.addRow(new Object[] {
+                        TKdJenisPrw.getText(), TNmPerawatan.getText(), TIdTemplate.getText(), TNamaTemplate.getText(),
+                        id_pemeriksaan, TKodeLIS.getText(), TNamaLIS.getText(), satuan, TKtgLIS.getText()
+                    });
+                }
+            }
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
@@ -649,7 +685,7 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            AdamlabsMappingPemeriksaanLab dialog = new AdamlabsMappingPemeriksaanLab(new javax.swing.JFrame(), true);
+            DlgDataPemeriksaanLabLIS dialog = new DlgDataPemeriksaanLabLIS(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -700,13 +736,13 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select template_laboratorium.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, mapping_pemeriksaan_labpk.id_template, template_laboratorium.pemeriksaan, "
-            + "pemeriksaan_labpk.id, pemeriksaan_labpk.kode_pemeriksaan, pemeriksaan_labpk.nama_pemeriksaan, pemeriksaan_labpk.satuan, pemeriksaan_labpk.kategori "
-            + "from pemeriksaan_labpk join pemeriksaan_labpk_kategori on pemeriksaan_labpk.kategori = pemeriksaan_labpk_kategori.nama "
+            + "pemeriksaan_labpk.id, pemeriksaan_labpk.kode_pemeriksaan, pemeriksaan_labpk.nama_pemeriksaan, pemeriksaan_labpk.satuan, pemeriksaan_labpk.kategori, "
+            + "pemeriksaan_labpk.vendor from pemeriksaan_labpk join pemeriksaan_labpk_kategori on pemeriksaan_labpk.kategori = pemeriksaan_labpk_kategori.nama "
             + "join mapping_pemeriksaan_labpk on pemeriksaan_labpk.id = mapping_pemeriksaan_labpk.id_pemeriksaan "
             + "join template_laboratorium on mapping_pemeriksaan_labpk.id_template = template_laboratorium.id_template "
             + "join jns_perawatan_lab on template_laboratorium.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw "
-            + "where pemeriksaan_labpk.vendor = 'adamlabs' and jns_perawatan_lab.status = '1' and jns_perawatan_lab.kategori = 'PK' "
-            + "and (pemeriksaan_labpk.kode_pemeriksaan like ? or pemeriksaan_labpk.nama_pemeriksaan like ? or pemeriksaan_labpk.kategori like ? "
+            + "where jns_perawatan_lab.status = '1' and jns_perawatan_lab.kategori = 'PK' and (pemeriksaan_labpk.kode_pemeriksaan like ? "
+            + "or pemeriksaan_labpk.nama_pemeriksaan like ? or pemeriksaan_labpk.kategori like ? or pemeriksaan_labpk.vendor like ? "
             + "or mapping_pemeriksaan_labpk.id_template like ? or template_laboratorium.pemeriksaan like ? or template_laboratorium.kd_jenis_prw like ? "
             + "or jns_perawatan_lab.nm_perawatan like ?) order by pemeriksaan_labpk_kategori.urut asc, pemeriksaan_labpk.urut asc"
         )) {
@@ -717,11 +753,12 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
             ps.setString(5, "%" + TCari.getText() + "%");
             ps.setString(6, "%" + TCari.getText() + "%");
             ps.setString(7, "%" + TCari.getText() + "%");
+            ps.setString(8, "%" + TCari.getText() + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
                         rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)
                     });
                 }
             }
@@ -741,6 +778,7 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
         TKtgLIS.setText("");
         TNamaLIS.setText("");
         satuan = "";
+        vendor = "";
     }
 
     private void getData() {
@@ -754,6 +792,7 @@ public final class AdamlabsMappingPemeriksaanLab extends javax.swing.JDialog {
             TKtgLIS.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 8).toString());
             TNamaLIS.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 6).toString());
             satuan = tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 7).toString();
+            vendor = tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 9).toString();
         }
     }
 

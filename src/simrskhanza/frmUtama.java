@@ -502,7 +502,7 @@ import bridging.SatuSehatMapingRadiologi;
 import bridging.SatuSehatMapingVaksin;
 import bridging.SatuSehatReferensiPasien;
 import bridging.SatuSehatReferensiPraktisi;
-import bridginglis.AdamlabsMappingPemeriksaanLab;
+import bridginglis.DlgMappingPemeriksaanLab;
 import dapur.DapurSuplier;
 import grafikanalisa.GrafikHemodialisaPerBulan;
 import grafikanalisa.GrafikHemodialisaPerTanggal;
@@ -21895,7 +21895,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void btnMappingPemeriksaanLabAdamlabsActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        AdamlabsMappingPemeriksaanLab form=new AdamlabsMappingPemeriksaanLab(this,false);
+        DlgMappingPemeriksaanLab form=new DlgMappingPemeriksaanLab(this,false);
         form.isCek();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
