@@ -1651,4 +1651,14 @@ public class koneksiDB {
         }
         return var;
     }
+    
+    public static String ADDANTRIANAPIMOBILEJKNFKTP(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("ADDANTRIANAPIMOBILEJKNFKTP");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }

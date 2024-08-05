@@ -967,6 +967,8 @@ import rekammedis.RMSkriningNutrisiAnak;
 import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMSkriningObesitas;
+import rekammedis.RMSkriningRisikoKankerParu;
+import rekammedis.RMSkriningKesehatanGigiMulutRemaja;
 import rekammedis.RMSkriningRisikoKankerPayudara;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
@@ -976,36 +978,6 @@ import setting.DlgPasswordBPJS;
 import setting.DlgRuangOperasi;
 import setting.DlgSetHargaToko;
 import setting.DlgUserSmc;
-import simrskhanza.DlgAbout;
-import simrskhanza.DlgBahasa;
-import simrskhanza.DlgCacatFisik;
-import simrskhanza.DlgCariPeriksaLab;
-import simrskhanza.DlgCariPeriksaLabMB;
-import simrskhanza.DlgCariPeriksaLabPA;
-import simrskhanza.DlgCariPeriksaRadiologi;
-import simrskhanza.DlgCariTagihanOperasi;
-import simrskhanza.DlgDpjp;
-import simrskhanza.DlgGolonganPolri;
-import simrskhanza.DlgGolonganTNI;
-import simrskhanza.DlgIGD;
-import simrskhanza.DlgIKBBayi;
-import simrskhanza.DlgJabatanPolri;
-import simrskhanza.DlgJabatanTNI;
-import simrskhanza.DlgKasirRalan;
-import simrskhanza.DlgLhtCatatanPasien;
-import simrskhanza.DlgPangkatPolri;
-import simrskhanza.DlgPangkatTNI;
-import simrskhanza.DlgPasienMati;
-import simrskhanza.DlgPemberianDiet;
-import simrskhanza.DlgPenanggungJawab;
-import simrskhanza.DlgPerusahaan;
-import simrskhanza.DlgRawatJalan;
-import simrskhanza.DlgReg;
-import simrskhanza.DlgRujuk;
-import simrskhanza.DlgRujukMasuk;
-import simrskhanza.DlgSatuanPolri;
-import simrskhanza.DlgSatuanTNI;
-import simrskhanza.DlgSuku;
 import smsui.frmSmsView;
 import surat.MasterTemplatePersetujuanPenolakanTindakan;
 import surat.PengumumanEPasien;
@@ -21892,6 +21864,30 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnSkriningRisikoKankerParuActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningRisikoKankerParu form=new RMSkriningRisikoKankerParu(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnSkriningKesehatanGigiMulutRemajaActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningKesehatanGigiMulutRemaja form=new RMSkriningKesehatanGigiMulutRemaja(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     private void btnMappingPemeriksaanLabAdamlabsActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -22601,7 +22597,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianPasienImunitasRendah,btnCatatanKeseimbanganCairan,btnCatatanObservasiCHBP,btnCatatanObservasiInduksiPersalinan,btnSKPKategoriPenilaian,btnSKPKriteriaPenilaian,btnUserSmc,
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
-            btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnMappingPemeriksaanLabAdamlabs;
+            btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
+            btnSkriningKesehatanGigiMulutRemaja,btnMappingPemeriksaanLabAdamlabs;
     
     public void isWall(){
         try{            
@@ -26737,6 +26734,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getskrining_risiko_kanker_payudara()==true){
                 Panelmenu.add(btnSkriningRisikoKankerPayudara);
+                jmlmenu++;
+            }
+            
+            if(akses.getskrining_risiko_kanker_paru()==true){
+                Panelmenu.add(btnSkriningRisikoKankerParu);
+                jmlmenu++;
+            }
+            
+            if(akses.getskrining_kesehatan_gigi_mulut_remaja()==true){
+                Panelmenu.add(btnSkriningKesehatanGigiMulutRemaja);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==13){  
@@ -31961,6 +31968,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getskrining_risiko_kanker_payudara()==true){
             Panelmenu.add(btnSkriningRisikoKankerPayudara);
+            jmlmenu++;
+        }
+        
+        if(akses.getskrining_risiko_kanker_paru()==true){
+            Panelmenu.add(btnSkriningRisikoKankerParu);
+            jmlmenu++;
+        }
+        
+        if(akses.getskrining_kesehatan_gigi_mulut_remaja()==true){
+            Panelmenu.add(btnSkriningKesehatanGigiMulutRemaja);
             jmlmenu++;
         }
 
@@ -38793,6 +38810,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getskrining_risiko_kanker_paru()==true){
+            if(btnSkriningRisikoKankerParu.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningRisikoKankerParu);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getskrining_kesehatan_gigi_mulut_remaja()==true){
+            if(btnSkriningKesehatanGigiMulutRemaja.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningKesehatanGigiMulutRemaja);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getpengambilan_utd2()==true){
             if(btnPengambilanUTD2.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPengambilanUTD2); 
@@ -45208,6 +45239,22 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningRisikoKankerPayudara.setName("btnSkriningRisikoKankerPayudara"); 
         btnSkriningRisikoKankerPayudara.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerPayudara.addActionListener(this::btnSkriningRisikoKankerPayudaraActionPerformed);
+        
+        btnSkriningRisikoKankerParu = new widget.ButtonBig();
+        btnSkriningRisikoKankerParu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5862576_covid-19_infection_inspect_lung_virus_icon.png"))); 
+        btnSkriningRisikoKankerParu.setText("Skrining Risiko Kanker Paru");
+        btnSkriningRisikoKankerParu.setIconTextGap(0);
+        btnSkriningRisikoKankerParu.setName("btnSkriningRisikoKankerParu"); 
+        btnSkriningRisikoKankerParu.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningRisikoKankerParu.addActionListener(this::btnSkriningRisikoKankerParuActionPerformed);
+        
+        btnSkriningKesehatanGigiMulutRemaja = new widget.ButtonBig();
+        btnSkriningKesehatanGigiMulutRemaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185081_dental_dentist_dentistry_loose tooth_medical_icon.png"))); 
+        btnSkriningKesehatanGigiMulutRemaja.setText("Skrining Kesehatan Gigi Mulut Remaja");
+        btnSkriningKesehatanGigiMulutRemaja.setIconTextGap(0);
+        btnSkriningKesehatanGigiMulutRemaja.setName("btnSkriningKesehatanGigiMulutRemaja"); 
+        btnSkriningKesehatanGigiMulutRemaja.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningKesehatanGigiMulutRemaja.addActionListener(this::btnSkriningKesehatanGigiMulutRemajaActionPerformed);
         
         btnMappingPemeriksaanLabAdamlabs = new widget.ButtonBig();
         btnMappingPemeriksaanLabAdamlabs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/adamlabs.png")));

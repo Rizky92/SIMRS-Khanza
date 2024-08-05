@@ -1446,6 +1446,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     }
                                 }
                                 
+                                
                                 harga=Sequel.cariIsiAngka("select data_batch."+hppfarmasi+" from data_batch where data_batch.kode_brng='"+rs.getString("kode_brng")+"' and data_batch.no_batch='"+rs2.getString("no_batch")+"' and data_batch.no_faktur='"+rs2.getString("no_faktur")+"' ");
                                 if(harga<=0){
                                     harga=rs.getDouble("harga");
@@ -1720,8 +1721,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     ps3.setString(1,rs.getString("kode_brng"));
                                     ps3.setString(2,rs2.getString("no_batch"));
                                     ps3.setString(3,rs2.getString("no_faktur"));
-                                    ps3.setString(4,tglopname);
-                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                                    ps3.setString(4,tglopname+" 00:00:01");
+                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                                     ps3.setString(6,KdGudang.getText());
                                     rs3=ps3.executeQuery();
                                     if(rs3.next()){                    
@@ -1811,8 +1812,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     ps3.setString(1,rs.getString("kode_brng"));
                                     ps3.setString(2,rs2.getString("no_batch"));
                                     ps3.setString(3,rs2.getString("no_faktur"));
-                                    ps3.setString(4,tglopname);
-                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                                    ps3.setString(4,tglopname+" 00:00:01");
+                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                                     ps3.setString(6,KdGudang.getText());
                                     rs3=ps3.executeQuery();
                                     if(rs3.next()){                    
@@ -1840,8 +1841,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     ps3.setString(1,rs.getString("kode_brng"));
                                     ps3.setString(2,rs2.getString("no_batch"));
                                     ps3.setString(3,rs2.getString("no_faktur"));
-                                    ps3.setString(4,tglopname);
-                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                                    ps3.setString(4,tglopname+" 00:00:01");
+                                    ps3.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
                                     ps3.setString(6,KdGudang.getText());
                                     rs3=ps3.executeQuery();
                                     if(rs3.next()){                    

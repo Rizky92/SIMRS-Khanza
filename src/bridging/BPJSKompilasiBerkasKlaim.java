@@ -3615,7 +3615,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
     
     private void exportBerkasDigitalPerawatan(String urutan) {
-        if (! Sequel.cariBooleanSmc(
+        if (Sequel.cariBooleanSmc(
             "select * from berkas_digital_perawatan join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
             "where no_rawat = ? and lokasi_file like '%.pdf' and master_berkas_digital.include_kompilasi_berkas = 0", lblNoRawat.getText()
         )) return;
