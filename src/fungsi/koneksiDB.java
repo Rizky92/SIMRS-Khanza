@@ -73,7 +73,79 @@ public class koneksiDB {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             return prop.getProperty(propertyName);
         } catch (Exception e) {
-            return null;
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSAPIURL() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSAPIURL");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSAPIKEY() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return EnkripsiAES.decrypt(prop.getProperty("ADAMLABSAPIKEY"));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSAPIKODERS() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSAPIKODERS");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSKECAMATANID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSKECAMATANID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSKABUPATENID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSKABUPATENID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String ADAMLABSPROVINSIID() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("ADAMLABSPROVINSIID");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String LABORATORIUMKIRIMHASIL() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("LABORATORIUMKIRIMHASIL");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String LABORATORIUMURUTANHASIL() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("LABORATORIUMURUTANHASIL");
+        } catch (Exception e) {
+            return "";
         }
     }
 
@@ -103,7 +175,7 @@ public class koneksiDB {
             return false;
         }
     }
-    
+
     public static boolean VALIDASIRESEPKRONIS() {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
