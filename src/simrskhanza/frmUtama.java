@@ -970,6 +970,7 @@ import rekammedis.RMSkriningObesitas;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningKesehatanGigiMulutRemaja;
 import rekammedis.RMSkriningRisikoKankerPayudara;
+import rekammedis.RMSkriningTBC;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMUjiFungsiKFR;
@@ -21899,6 +21900,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnSkriningTBCActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningTBC form=new RMSkriningTBC(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22598,7 +22611,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
-            btnSkriningKesehatanGigiMulutRemaja,btnMappingPemeriksaanLabAdamlabs;
+            btnSkriningKesehatanGigiMulutRemaja,btnMappingPemeriksaanLabAdamlabs,btnSkriningTBC;
     
     public void isWall(){
         try{            
@@ -26744,6 +26757,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getskrining_kesehatan_gigi_mulut_remaja()==true){
                 Panelmenu.add(btnSkriningKesehatanGigiMulutRemaja);
+                jmlmenu++;
+            }
+            
+            if(akses.getskrining_tbc()==true){
+                Panelmenu.add(btnSkriningTBC);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==13){  
@@ -31978,6 +31996,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getskrining_kesehatan_gigi_mulut_remaja()==true){
             Panelmenu.add(btnSkriningKesehatanGigiMulutRemaja);
+            jmlmenu++;
+        }
+        
+        if(akses.getskrining_tbc()==true){
+            Panelmenu.add(btnSkriningTBC);
             jmlmenu++;
         }
 
@@ -38824,6 +38847,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getskrining_tbc()==true){
+            if(btnSkriningTBC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningTBC);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getpengambilan_utd2()==true){
             if(btnPengambilanUTD2.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPengambilanUTD2); 
@@ -45263,5 +45293,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnMappingPemeriksaanLabAdamlabs.setName("btnMappingPemeriksaanLabAdamlabs"); 
         btnMappingPemeriksaanLabAdamlabs.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingPemeriksaanLabAdamlabs.addActionListener(this::btnMappingPemeriksaanLabAdamlabsActionPerformed);
+        
+        btnSkriningTBC = new widget.ButtonBig();
+        btnSkriningTBC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/infected_lungs_virus transmission_virus_bacteria_icon.png"))); 
+        btnSkriningTBC.setText("Skrining TBC");
+        btnSkriningTBC.setIconTextGap(0);
+        btnSkriningTBC.setName("btnSkriningTBC"); 
+        btnSkriningTBC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningTBC.addActionListener(this::btnSkriningTBCActionPerformed);
     }
 }
