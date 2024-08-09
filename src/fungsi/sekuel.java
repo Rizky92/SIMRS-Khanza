@@ -95,6 +95,54 @@ public final class sekuel {
         }
     }
     
+    public String autoNomorSmc(String table, String kolom, int panjang, String infix, String pad, String separator, String tanggal) {
+        String output = "";
+        
+        String sql = "select concat_ws(?, " +
+            "date_format(?, concat_ws(?, '%Y', '%m', '%d')), " +
+            "concat(?, lpad(ifnull(max(convert(right(" + table + "." + kolom + ", ?), signed)), 0) + 1, ?, ?))) " +
+            "from " + table + " where " + table + "." + kolom + " like concat(date_format(?, concat_ws(?, '%Y', '%m', '%d')), ?, ?, '%')";
+        
+        String tracker = sql
+            .replaceFirst("\\?", "'" + separator + "'")
+            .replaceFirst("\\?", "'" + tanggal + "'")
+            .replaceFirst("\\?", "'" + separator + "'")
+            .replaceFirst("\\?", "'" + infix + "'")
+            .replaceFirst("\\?", String.valueOf(panjang))
+            .replaceFirst("\\?", String.valueOf(panjang))
+            .replaceFirst("\\?", "'" + pad + "'")
+            .replaceFirst("\\?", "'" + tanggal + "'")
+            .replaceFirst("\\?", "'" + separator + "'")
+            .replaceFirst("\\?", "'" + separator + "'")
+            .replaceFirst("\\?", "'" + infix + "'");
+        
+        System.out.println("SQL = " + tracker);
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            ps.setString(1, separator);
+            ps.setString(2, tanggal);
+            ps.setString(3, separator);
+            ps.setString(4, infix);
+            ps.setInt(5, panjang);
+            ps.setInt(6, panjang);
+            ps.setString(7, pad);
+            ps.setString(8, tanggal);
+            ps.setString(9, separator);
+            ps.setString(10, separator);
+            ps.setString(11, infix);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    output = rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = "";
+        }
+        
+        return output;
+    }
+    
     public String autoNomorSmc(String table, String kolom, int panjang, String pad, String tanggal)
     {
         return autoNomorSmc(null, table, kolom, panjang, pad, tanggal);

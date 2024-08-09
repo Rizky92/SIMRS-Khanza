@@ -4920,7 +4920,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 psreg.setString(1,TNoRw.getText());
                 rsreg=psreg.executeQuery();            
                 while(rsreg.next()){
-                    tabModeRwJlDr.addRow(new Object[]{true,"No.Nota",": "+Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_nota,4),signed)),0) from nota_inap where tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RI",4),"",null,null,null,null,"-"});
+                    tabModeRwJlDr.addRow(new Object[]{true,"No.Nota",": "+Sequel.autoNomorSmc("nota_inap", "no_nota", 4, "RI", "0", "/", Valid.getTglSmc(DTPTgl)),"",null,null,null,null,"-"});
                     
                     pskamar=koneksi.prepareStatement("select concat(kamar.kd_kamar,', ',bangsal.nm_bangsal) from bangsal inner join kamar "+
                         "on kamar.kd_bangsal=bangsal.kd_bangsal where kamar.kd_kamar=?");
@@ -7036,7 +7036,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());    
                 psnota=koneksi.prepareStatement(sqlpsnota);
                 try {
-                    no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_inap.no_nota,4),signed)),0) from nota_inap where nota_inap.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RI",4);
+                    no_nota=Sequel.autoNomorSmc("nota_inap", "no_nota", 4, "RI", "0", "/", Valid.getTglSmc(DTPTgl));
                     tbBilling.setValueAt(": "+no_nota,0,2);
                     psnota.setString(1,TNoRw.getText());
                     psnota.setString(2,no_nota);
@@ -7045,7 +7045,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psnota.setDouble(5,uangdeposit);
                     psnota.executeUpdate();
                 } catch (Exception e) {
-                    no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_inap.no_nota,4),signed)),0) from nota_inap where nota_inap.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RI",4);
+                    no_nota=Sequel.autoNomorSmc("nota_inap", "no_nota", 4, "RI", "0", "/", Valid.getTglSmc(DTPTgl));
                     Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());               
                     tbBilling.setValueAt(": "+no_nota,0,2);
                     psnota=koneksi.prepareStatement(sqlpsnota);
@@ -7065,7 +7065,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psnota.close();
                 }
             } catch (Exception e) {
-                no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_inap.no_nota,4),signed)),0) from nota_inap where nota_inap.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RI",4);
+                no_nota=Sequel.autoNomorSmc("nota_inap", "no_nota", 4, "RI", "0", "/", Valid.getTglSmc(DTPTgl));
                 Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());               
                 tbBilling.setValueAt(": "+no_nota,0,2);
                 psnota=koneksi.prepareStatement(sqlpsnota);

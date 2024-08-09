@@ -4417,7 +4417,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 psreg.setString(1,TNoRw.getText());
                 rsreg=psreg.executeQuery();            
                 if(rsreg.next()){
-                    tabModeRwJlDr.addRow(new Object[]{true,"No.Nota",": "+Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4),"",null,null,null,null,"-"});                
+                    tabModeRwJlDr.addRow(new Object[] {true, "No.Nota", ": " + Sequel.autoNomorSmc("nota_jalan", "no_nota", 4, "RJ", "0", "/", Valid.getTglSmc(DTPTgl)), "", null, null, null, null, "-"});
                     pscaripoli=koneksi.prepareStatement(sqlpscaripoli);
                     try{
                         pscaripoli.setString(1,rsreg.getString("kd_poli"));
@@ -5786,14 +5786,14 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             try {
                 psnota=koneksi.prepareStatement("insert into nota_jalan values(?,?,?,?)");
                 try {    
-                    no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4);
+                    no_nota=Sequel.autoNomorSmc("nota_jalan", "no_nota", 4, "RJ", "0", "/", Valid.getTglSmc(DTPTgl));
                     psnota.setString(1,TNoRw.getText());
                     psnota.setString(2,no_nota);
                     psnota.setString(3,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                     psnota.setString(4,DTPTgl.getSelectedItem().toString().substring(11,19));
                     psnota.executeUpdate();
                 } catch (Exception e) {
-                    nota_jalan=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4);
+                    nota_jalan=Sequel.autoNomorSmc("nota_jalan", "no_nota", 4, "RJ", "0", "/", Valid.getTglSmc(DTPTgl));
                     Sequel.meghapus("nota_jalan","no_rawat",TNoRw.getText());               
                     tbBilling.setValueAt(": "+nota_jalan,0,2);
                     no_nota=nota_jalan;
