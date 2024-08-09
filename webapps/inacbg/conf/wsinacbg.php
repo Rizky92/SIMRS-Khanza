@@ -1466,7 +1466,13 @@
 
         $encodedPDF = $msg['data'];
 
-        file_put_contents('pages/pdf/'.$nomor_sep.'.pdf', base64_decode($encodedPDF));
+        $filename = 'pages/pdf/'.$nomor_sep.'.pdf';
+
+        if (file_exists($filename)) {
+            unlink($filename);
+        }
+
+        file_put_contents($filename, base64_decode($encodedPDF));
 
         if (getOne("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')") == '0') {
             InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");

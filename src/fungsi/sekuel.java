@@ -507,11 +507,11 @@ public final class sekuel {
     public void menghapusSmc(String table, String wheres, String... values) {
         String sql = "delete from " + table + " where " + wheres;
         String track = sql;
-        
+
         if (wheres == null || wheres.isBlank()) {
             sql = "delete from " + table;
         }
-        
+
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -523,18 +523,18 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     public boolean menghapustfSmc(String table, String wheres, String... values) {
         boolean output = true;
-        
+
         String sql = "delete from " + table + " where " + wheres;
-        
+
         if (wheres == null || wheres.isBlank()) {
             sql = "delete from " + table;
         }
-        
+
         String track = sql;
-        
+
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -546,7 +546,7 @@ public final class sekuel {
             System.out.println("Notif : " + e);
             output = false;
         }
-        
+
         return output;
     }
     

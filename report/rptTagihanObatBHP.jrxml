@@ -330,14 +330,14 @@
 				<text><![CDATA[MANAGER KEUANGAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="32" y="80" width="65" height="11" uuid="e3b81e3e-d921-4ed5-9c3f-b8a72a8e726d">
+				<reportElement x="4" y="80" width="121" height="11" uuid="e3b81e3e-d921-4ed5-9c3f-b8a72a8e726d">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. DAISY WIJAYA]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="39" y="29" width="50" height="11" uuid="e0b4bb40-c27d-4f51-850f-465dfb65cfbf">

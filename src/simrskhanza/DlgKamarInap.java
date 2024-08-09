@@ -7896,6 +7896,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             Sequel.queryu("delete from kamar_inap where no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'");
                             Sequel.mengedit("kamar","kd_kamar='"+kdkamar.getText()+"'","status='KOSONG'");                
                             if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",norawat.getText())==0){
+                                Sequel.menghapusSmc("dpjp_ranap", "no_rawat = ?", norawat.getText());
                                 Sequel.mengedit("reg_periksa","no_rawat='"+norawat.getText()+"'","status_lanjut='Ralan'");
                                 Sequel.mengedit("reg_periksa","no_rawat='"+norawat.getText()+"'","stts='Sudah'");
                             }
@@ -15960,7 +15961,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 + "\"tglMeninggal\": \"" + (NoSuratKematian.getText().trim().isBlank() ? "" : Valid.SetTgl(TanggalKematian.getSelectedItem().toString())) + "\","
                 + "\"tglPulang\": \"" + Valid.SetTgl(TanggalPulang.getSelectedItem().toString()) + "\","
                 + "\"noLPManual\": \"" + NoLPManual.getText().trim() + "\","
-                + "\"user\": \"" + akses.getkode().trim().substring(0, 9) + "\""
+                + "\"user\": \"" + akses.getkode().trim() + "\""
                 + "}"
                 + "}"
                 + "}";

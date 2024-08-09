@@ -16,10 +16,24 @@
         </div>
         <div class="entry" style="font-family: Tahoma; margin-top: 0.5rem; margin-left: 0.5rem">
             <a href="?act=DetailKirimSmc&<?= $queryurl ?>">[Kirim Ulang]</a>
+            <br />
+            <br />
+            <a href="?act=DetailKirimSmc&<?= $queryurl ?>&action=cetak">[Tarik ulang hasil cetak klaim]</a>
         </div>
+    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'cetak'): ?>
+        <?php
+            $codernik = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
+            $corona   = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
+            $nosep    = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
+            $action   = 'selesai';
+            $queryurl = http_build_query(compact('codernik', 'nosep', 'corona', 'action'));
+        ?>
+        <?php if (CetakKlaimSmc($nosep)['success']): ?>
+            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
+        <?php endif; ?>
     <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
-            <div class="entry">        
+            <div class="entry">
                 <?php
                     $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
                     $sukses         = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;

@@ -33,6 +33,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,6 +63,7 @@ import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.jsoup.Jsoup;
@@ -1848,7 +1850,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (lblNoSEP.getText().isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu!");
         } else {
-            Valid.panggilUrl("inacbg/" + Sequel.cariIsiSmc("select path from inacbg_cetak_klaim where no_sep = ?", lblNoSEP.getText()));
+            String file = "inacbg/" + Sequel.cariIsiSmc("select path from inacbg_cetak_klaim where no_sep = ?", lblNoSEP.getText());
+            file = file + "?hash=" + DigestUtils.sha256Hex(lblNoSEP.getText() + Instant.now().toString());
+            Valid.panggilUrl(file);
         }
     }//GEN-LAST:event_btnPDFKlaimINACBGActionPerformed
 
