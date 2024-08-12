@@ -54,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 
 ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double NULL DEFAULT NULL AFTER `sisapiutang`;
 
+ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
+
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
 CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
@@ -86,20 +88,21 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL 
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
+ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
+
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAULT NULL AFTER `jk`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER `tgl_lahir`;
 
-CREATE TRIGGER IF NOT EXISTS `set_password_user`
-  AFTER INSERT ON `pasien`
-  FOR EACH ROW
-  INSERT INTO `personal_pasien` VALUES (
-    NEW.no_rkm_medis,
-    '',
-    AES_ENCRYPT(DATE_FORMAT(NEW.tgl_lahir, '%d%m%Y'), 'windi')
-  );
+CREATE DEFINER = `root`@`%` TRIGGER IF NOT EXISTS `set_password_user` AFTER INSERT ON `pasien` FOR EACH ROW insert into personal_pasien values(
+  new.no_rkm_medis,
+  '',
+  aes_encrypt(date_format(new.tgl_lahir, '%d%m%Y'), 'windi')
+);
+
+ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
 
@@ -110,13 +113,13 @@ ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` var
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) NOT NULL,
-  `kodebooking` varchar(15) DEFAULT NULL,
-  `jenispasien` enum('JKN','NON JKN') DEFAULT NULL,
-  `taskid` char(3) DEFAULT NULL,
-  `code` varchar(5) DEFAULT NULL,
-  `message` varchar(200) DEFAULT NULL,
-  `waktu` datetime DEFAULT NULL,
-  `waktu_rs` datetime DEFAULT NULL,
+  `kodebooking` varchar(15) NULL DEFAULT NULL,
+  `jenispasien` enum('JKN','NON JKN') NULL DEFAULT NULL,
+  `taskid` char(3) NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `message` varchar(200) NULL DEFAULT NULL,
+  `waktu` datetime NULL DEFAULT NULL,
+  `waktu_rs` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX` (`no_rawat`) USING BTREE,
   KEY `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX` (`waktu`) USING BTREE,

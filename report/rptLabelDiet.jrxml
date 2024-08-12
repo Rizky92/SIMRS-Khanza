@@ -261,14 +261,14 @@ and detail_beri_diet.waktu=jam_diet_pasien.waktu]]>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="2" y="117" width="185" height="10" uuid="aa2715ce-6c13-4d9a-8213-8e6b7dd794cb">
+				<reportElement x="2" y="118" width="58" height="10" uuid="aa2715ce-6c13-4d9a-8213-8e6b7dd794cb">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Baik Dikonsumsi SEBELUM pukul 08.00/13.00/19.00]]></text>
+				<text><![CDATA[Batas Konsumsi]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="140" width="185" height="10" uuid="9575bc7e-9c18-4b6f-86cf-6175e5085b7a">
@@ -281,7 +281,7 @@ and detail_beri_diet.waktu=jam_diet_pasien.waktu]]>
 				<text><![CDATA["Semoga Lekas Sembuh"]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="128" width="185" height="10" uuid="d031ef69-e848-4bb8-b0e2-0fa5e297c70a">
+				<reportElement x="2" y="129" width="185" height="10" uuid="d031ef69-e848-4bb8-b0e2-0fa5e297c70a">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -289,6 +289,26 @@ and detail_beri_diet.waktu=jam_diet_pasien.waktu]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Alat makan akan diambil satu jam setelah penyajian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="118" width="68" height="10" uuid="e8cce060-aeb3-4aea-b928-1990710879b2">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[MAKSIMAL 2 JAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="118" width="62" height="10" uuid="71a6d2a5-8c05-4e26-96a6-c7cecb735154">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Setelah Disajikan]]></text>
 			</staticText>
 		</band>
 	</detail>

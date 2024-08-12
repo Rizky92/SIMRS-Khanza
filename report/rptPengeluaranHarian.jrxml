@@ -353,14 +353,14 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<text><![CDATA[MANAGER KEUANGAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="53" y="80" width="65" height="11" uuid="dede0247-bd61-4e62-b0d5-75760b0d1363">
+				<reportElement x="17" y="80" width="137" height="11" uuid="dede0247-bd61-4e62-b0d5-75760b0d1363">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. DAISY WIJAYA]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="60" y="40" width="50" height="11" uuid="2b05c26b-673b-44e4-83bc-56d68a183e11">
