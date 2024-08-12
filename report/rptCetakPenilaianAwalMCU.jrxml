@@ -795,7 +795,7 @@ inner join dokter on penilaian_mcu.kd_dokter=dokter.kd_dokter]]>
 					<font fontName="Tahoma" size="8" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[D. RONTGEN THORAX]]></text>
+				<text><![CDATA[D. PEMERIKSAAN RADIOLOGI]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2" y="543" width="538" height="1" uuid="5787cec8-0b13-47a9-ae57-3e9f98b810c5">

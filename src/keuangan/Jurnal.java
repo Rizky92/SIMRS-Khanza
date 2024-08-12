@@ -119,7 +119,6 @@ public class Jurnal {
                         }
                     } else {
                         System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
-                        sukses = false;
                     }
                 }
             } catch (Exception e) {
@@ -218,7 +217,6 @@ public class Jurnal {
                         }
                     } else {
                         System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
-                        sukses = false;
                     }
                 }
             } catch (Exception e) {
