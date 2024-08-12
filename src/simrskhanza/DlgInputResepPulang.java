@@ -182,8 +182,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
             aktifkanbatch = "no";
         }
     }
-    private DlgBarang barang=new DlgBarang(null,false);
-    private double x=0,y=0,z=0,stokbarang=0,kenaikan=0;
+    private double y=0,stokbarang=0,kenaikan=0;
     private int jml=0,i=0,index;
     private double[] jumlah,harga,stok;
     private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,dosis,nobatch,nofaktur;
@@ -1076,7 +1075,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else if(kelas.getText().equals("Kelas VVIP")){
             Jeniskelas.setSelectedItem("VVIP");
         }        
-        kenaikan=Sequel.cariIsiAngka("select (hargajual/100) from set_harga_obat_ranap where kd_pj='"+KdPj.getText()+"' and kelas='"+kelas.getText()+"'");
+        kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ranap.hargajual/100) from set_harga_obat_ranap where set_harga_obat_ranap.kd_pj='"+KdPj.getText()+"' and set_harga_obat_ranap.kelas='"+kelas.getText()+"'");
         this.nopermintaan="";
     }
     
