@@ -977,6 +977,7 @@ import rekammedis.RMUjiFungsiKFR;
 import setting.DlgJamDietPasien;
 import setting.DlgPasswordBPJS;
 import setting.DlgRuangOperasi;
+import setting.DlgSetAksesEditSementara;
 import setting.DlgSetHargaToko;
 import setting.DlgUserSmc;
 import smsui.frmSmsView;
@@ -21914,6 +21915,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnSetAksesEditSementaraActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetAksesEditSementara aplikasi=new DlgSetAksesEditSementara(this,false);
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.tampil();
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22613,7 +22627,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
-            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak;
+            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnSetAksesEditSementara;
     
     public void isWall(){
         try{            
@@ -27992,6 +28006,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnRuangOperasi);
                 jmlmenu++;
             }
+            
+            if(akses.getadmin()==true){
+                Panelmenu.add(btnSetAksesEditSementara);
+                jmlmenu++;
+            }
         }    
     }
 
@@ -33227,6 +33246,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if (akses.getbpjs_kompilasi_berkas_klaim()) {
             Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+            jmlmenu++;
+        }
+        
+        if (akses.getadmin()) {
+            Panelmenu.add(btnSetAksesEditSementara);
             jmlmenu++;
         }
     }
@@ -40576,6 +40600,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if (akses.getadmin()) {
+            if (btnSetAksesEditSementara.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetAksesEditSementara);
+                jmlmenu++;
+            }
+        }
     }
 
     private void initKhanza() {
@@ -45315,5 +45346,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningTBC.setName("btnSkriningTBC"); 
         btnSkriningTBC.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningTBC.addActionListener(this::btnSkriningTBCActionPerformed);
+        
+        btnSetAksesEditSementara = new widget.ButtonBig();
+        btnSetAksesEditSementara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360484978_application-pgp-signature.png")));
+        btnSetAksesEditSementara.setText("Set Akses Edit Sementara");
+        btnSetAksesEditSementara.setIconTextGap(0);
+        btnSetAksesEditSementara.setName("btnSetAksesEditSementara"); 
+        btnSetAksesEditSementara.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetAksesEditSementara.addActionListener(this::btnSetAksesEditSementaraActionPerformed);
     }
 }

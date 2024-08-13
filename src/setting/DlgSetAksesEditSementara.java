@@ -21,6 +21,8 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +46,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"NIK", "Nama", "Jabatan/Spesialis", "Awal Batas Edit", "Akhir Batas Edit"};
+        Object[] row = {"NIK", "Nama", "Jabatan/Spesialis", "Akhir Batas Edit"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -65,7 +67,6 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         tbUser.getColumnModel().getColumn(1).setPreferredWidth(200);
         tbUser.getColumnModel().getColumn(2).setPreferredWidth(100);
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tbUser.getColumnModel().getColumn(4).setPreferredWidth(100);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
@@ -87,11 +88,6 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         TUser = new widget.TextBox();
         BtnSeek = new widget.Button();
         TNmUser = new widget.TextBox();
-        DTPTgl = new widget.Tanggal();
-        CmbJam = new widget.ComboBox();
-        CmbMenit = new widget.ComboBox();
-        CmbDetik = new widget.ComboBox();
-        jLabel5 = new widget.Label();
         DTPTgl1 = new widget.Tanggal();
         CmbJam1 = new widget.ComboBox();
         CmbMenit1 = new widget.ComboBox();
@@ -153,10 +149,10 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         panelGlass5.add(jLabel3);
         jLabel3.setBounds(0, 12, 48, 23);
 
-        jLabel4.setText("Akses Edit Dari :");
+        jLabel4.setText("Akses Edit Sampai :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass5.add(jLabel4);
-        jLabel4.setBounds(0, 42, 94, 23);
+        jLabel4.setBounds(0, 42, 110, 23);
 
         TUser.setEditable(false);
         TUser.setHighlighter(null);
@@ -176,54 +172,28 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         panelGlass5.add(TNmUser);
         TNmUser.setBounds(168, 12, 217, 23);
 
-        DTPTgl.setDisplayFormat("dd-MM-yyyy");
-        DTPTgl.setMinimumSize(new java.awt.Dimension(90, 23));
-        DTPTgl.setName("DTPTgl"); // NOI18N
-        DTPTgl.setPreferredSize(new java.awt.Dimension(90, 23));
-        panelGlass5.add(DTPTgl);
-        DTPTgl.setBounds(98, 42, 90, 23);
-
-        CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        CmbJam.setName("CmbJam"); // NOI18N
-        panelGlass5.add(CmbJam);
-        CmbJam.setBounds(192, 42, 62, 23);
-
-        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        CmbMenit.setName("CmbMenit"); // NOI18N
-        panelGlass5.add(CmbMenit);
-        CmbMenit.setBounds(262, 42, 62, 23);
-
-        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        CmbDetik.setName("CmbDetik"); // NOI18N
-        panelGlass5.add(CmbDetik);
-        CmbDetik.setBounds(322, 42, 62, 23);
-
-        jLabel5.setText("sampai");
-        jLabel5.setName("jLabel5"); // NOI18N
-        panelGlass5.add(jLabel5);
-        jLabel5.setBounds(392, 42, 34, 23);
-
+        DTPTgl1.setEditable(false);
         DTPTgl1.setDisplayFormat("dd-MM-yyyy");
         DTPTgl1.setMinimumSize(new java.awt.Dimension(90, 23));
         DTPTgl1.setName("DTPTgl1"); // NOI18N
         DTPTgl1.setPreferredSize(new java.awt.Dimension(90, 23));
         panelGlass5.add(DTPTgl1);
-        DTPTgl1.setBounds(434, 42, 90, 23);
+        DTPTgl1.setBounds(114, 42, 90, 23);
 
         CmbJam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJam1.setName("CmbJam1"); // NOI18N
         panelGlass5.add(CmbJam1);
-        CmbJam1.setBounds(528, 42, 62, 23);
+        CmbJam1.setBounds(208, 42, 62, 23);
 
         CmbMenit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenit1.setName("CmbMenit1"); // NOI18N
         panelGlass5.add(CmbMenit1);
-        CmbMenit1.setBounds(594, 42, 62, 23);
+        CmbMenit1.setBounds(274, 42, 62, 23);
 
         CmbDetik1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetik1.setName("CmbDetik1"); // NOI18N
         panelGlass5.add(CmbDetik1);
-        CmbDetik1.setBounds(660, 42, 62, 23);
+        CmbDetik1.setBounds(340, 42, 62, 23);
 
         internalFrame1.add(panelGlass5, java.awt.BorderLayout.PAGE_START);
 
@@ -307,6 +277,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanActionPerformed(evt);
+            }
+        });
         panelGlass6.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
@@ -423,12 +398,18 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
-        
+        getData();
     }//GEN-LAST:event_tbUserMouseClicked
 
     private void tbUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUserKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            getData();
+        }
     }//GEN-LAST:event_tbUserKeyPressed
+
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,13 +437,9 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.Button BtnSeek;
     private widget.Button BtnSimpan;
-    private widget.ComboBox CmbDetik;
     private widget.ComboBox CmbDetik1;
-    private widget.ComboBox CmbJam;
     private widget.ComboBox CmbJam1;
-    private widget.ComboBox CmbMenit;
     private widget.ComboBox CmbMenit1;
-    private widget.Tanggal DTPTgl;
     private widget.Tanggal DTPTgl1;
     private widget.Label LCount;
     private widget.ScrollPane Scroll;
@@ -472,7 +449,6 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
-    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -482,22 +458,19 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private widget.Table tbUser;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
-        try (PreparedStatement ps = koneksi.prepareStatement("select aes_decrypt(user.id_user, 'nur'), pegawai.nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, " +
-            "aes_decrypt(user.password, 'windi') from user left join pegawai on aes_decrypt(user.id_user, 'nur') = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter " +
-            "left join petugas on pegawai.nik = petugas.nip left join spesialis on dokter.kd_sps = spesialis.kd_sps left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn " +
-            "where pegawai.nik like ? or pegawai.nama like ? or coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') like ? order by aes_decrypt(user.id_user, 'nur')"
+    public void tampil() {
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select coalesce(pegawai.nik, '-') as nik, coalesce(pegawai.nama, '-') as nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, " +
+            "set_akses_edit_sementara.tgl_selesai from set_akses_edit_sementara join user on set_akses_edit_sementara.id_user = user.id_user " +
+            "left join pegawai on (aes_decrypt(set_akses_edit_sementara.id_user), 'nur') = pegawai.nik) left join dokter on pegawai.nik = dokter.kd_dokter " +
+            "left join spesialis on dokter.kd_sps = spesialis.kd_sps left join petugas on pegawai.nik = petugas.nip left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn " +
+            "where (pegawai.nik like ? or pegawai.nama like ? or spesialis.nm_sps like ? or jabatan.nm_jbtn like ?)"
         )) {
             Valid.tabelKosong(tabMode);
-            if (TCari.getText().isBlank()) {
-                ps.setString(1, "%%");
-                ps.setString(2, "%%");
-                ps.setString(3, "%%");
-            } else {
-                ps.setString(1, "%" + TCari.getText() + "%");
-                ps.setString(2, "%" + TCari.getText() + "%");
-                ps.setString(3, "%" + TCari.getText() + "%");
-            }
+            ps.setString(1, "%" + TCari.getText() + "%");
+            ps.setString(2, "%" + TCari.getText() + "%");
+            ps.setString(3, "%" + TCari.getText() + "%");
+            ps.setString(4, "%" + TCari.getText() + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
@@ -510,11 +483,25 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }
 
     public void emptTeks() {
-        
+        TUser.setText("");
+        TNmUser.setText("");
+        DTPTgl1.setDate(new Date());
+        CmbJam1.setSelectedItem("00");
+        CmbMenit1.setSelectedItem("00");
+        CmbDetik1.setSelectedItem("00");
     }
 
     private void getData() {
-        if (tbUser.getSelectedRow() != -1) {
+        try {
+            if (tbUser.getSelectedRow() != -1) {
+                TUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
+                TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
+                DTPTgl1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString()));
+                CmbJam1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(11, 13));
+                CmbMenit1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(14, 16));
+                CmbDetik1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(17, 19));
+            }
+        } catch (Exception e) {
             
         }
     }

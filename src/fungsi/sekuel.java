@@ -2147,7 +2147,7 @@ public final class sekuel {
     }
     
     public boolean cekTanggal48jam(String tanggalmulai,String tanggalinputdata){
-        if (! sekuel.pemberlakuanBatasEdit) {
+        if (! sekuel.pemberlakuanBatasEdit || akses.getakses_edit_sementara()) {
             return true;
         }
         bool=false;

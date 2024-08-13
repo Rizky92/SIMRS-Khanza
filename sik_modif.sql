@@ -167,6 +167,12 @@ ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder3` v
 
 ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(150) NULL DEFAULT NULL AFTER `obat_system`;
 
+CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
+  `id_user` varchar(700) NOT NULL,
+  `tgl_selesai` datetime NOT NULL,
+  PRIMARY KEY (`id_user`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
 
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;

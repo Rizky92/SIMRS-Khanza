@@ -3,6 +3,7 @@ package fungsi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 
 /**
@@ -19,6 +20,8 @@ public final class akses {
     private static PreparedStatement ps,ps2;
     private static ResultSet rs,rs2;
     
+    private static boolean edit = false;
+    private static long tglSelesai = -1;
     private static String kode="",kdbangsal="",alamatip="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser="",kode_ppk=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
     private static boolean aktif=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
@@ -1317,7 +1320,16 @@ public final class akses {
                         akses.skrining_tbc=true;
                         akses.skrining_kesehatan_gigi_mulut_remaja=true;
                         akses.penilaian_awal_keperawatan_ranap_bayi=true;
-                    }else if(rs2.getRow()>=1){   
+                    }else if(rs2.getRow()>=1){
+                        try (PreparedStatement ps = koneksi.prepareStatement("select * from akses_edit_user where id_user = ?")) {
+                            ps.setString(1, user);
+                            try (ResultSet rs = ps.executeQuery()) {
+                                if (rs.next()) {
+                                    akses.edit = true;
+                                    akses.tglSelesai = rs.getDate("tgl_selesai").getTime();
+                                }
+                            }
+                        }
                         rs2.beforeFirst();
                         rs2.next();
                         akses.kode=user;
@@ -3451,6 +3463,8 @@ public final class akses {
                         akses.skrining_tbc=false;
                         akses.skrining_kesehatan_gigi_mulut_remaja=false;
                         akses.penilaian_awal_keperawatan_ranap_bayi=false;
+                        akses.edit=false;
+                        akses.tglSelesai=-1;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4540,6 +4554,8 @@ public final class akses {
         akses.skrining_tbc=false;
         akses.skrining_kesehatan_gigi_mulut_remaja=false;
         akses.penilaian_awal_keperawatan_ranap_bayi=false;
+        akses.edit=false;
+        akses.tglSelesai=-1;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -5645,4 +5661,15 @@ public final class akses {
     public static boolean getskrining_tbc(){return akses.skrining_tbc;}
     public static boolean getskrining_kesehatan_gigi_mulut_remaja(){return akses.skrining_kesehatan_gigi_mulut_remaja;}
     public static boolean getpenilaian_awal_keperawatan_ranap_bayi(){return akses.penilaian_awal_keperawatan_ranap_bayi;}
+    
+    public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
+    private static void setEdit() {
+        if (! akses.edit) {
+            return;
+        }
+        
+        if (((new Date().getTime() - akses.tglSelesai) / 1000) > 0) {
+            akses.edit = false;
+        }
+    }
 }   
