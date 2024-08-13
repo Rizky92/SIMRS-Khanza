@@ -462,7 +462,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select coalesce(pegawai.nik, '-') as nik, coalesce(pegawai.nama, '-') as nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, " +
             "set_akses_edit_sementara.tgl_selesai from set_akses_edit_sementara join user on set_akses_edit_sementara.id_user = user.id_user " +
-            "left join pegawai on (aes_decrypt(set_akses_edit_sementara.id_user), 'nur') = pegawai.nik) left join dokter on pegawai.nik = dokter.kd_dokter " +
+            "left join pegawai on (aes_decrypt(set_akses_edit_sementara.id_user, 'nur')) = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter " +
             "left join spesialis on dokter.kd_sps = spesialis.kd_sps left join petugas on pegawai.nik = petugas.nip left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn " +
             "where (pegawai.nik like ? or pegawai.nama like ? or spesialis.nm_sps like ? or jabatan.nm_jbtn like ?)"
         )) {

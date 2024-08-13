@@ -1321,7 +1321,7 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_remaja=true;
                         akses.penilaian_awal_keperawatan_ranap_bayi=true;
                     }else if(rs2.getRow()>=1){
-                        try (PreparedStatement ps = koneksi.prepareStatement("select * from akses_edit_user where id_user = ?")) {
+                        try (PreparedStatement ps = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             ps.setString(1, user);
                             try (ResultSet rs = ps.executeQuery()) {
                                 if (rs.next()) {
