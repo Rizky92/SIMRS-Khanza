@@ -164,6 +164,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnSeek.setMnemonic('1');
         BtnSeek.setToolTipText("Alt+1");
         BtnSeek.setName("BtnSeek"); // NOI18N
+        BtnSeek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeekActionPerformed(evt);
+            }
+        });
         panelGlass5.add(BtnSeek);
         BtnSeek.setBounds(389, 12, 28, 23);
 
@@ -290,6 +295,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBatalActionPerformed(evt);
+            }
+        });
         panelGlass6.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
@@ -384,7 +394,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        TCari.setText("");
+        emptTeks();
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -408,8 +418,25 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }//GEN-LAST:event_tbUserKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        
+        if (TUser.getText().isBlank()) {
+            Valid.textKosong(TUser, "ID User");
+        } else if (TNmUser.getText().isBlank()) {
+            Valid.textKosong(TNmUser, "Nama User");
+        } else {
+            if (Sequel.menyimpantfSmc("set_akses_edit_sementara", null, TUser.getText(), Valid.getTglSmc(DTPTgl1) + " " + Valid.getWaktuSmc(CmbJam1, CmbMenit1, CmbDetik1))) {
+                emptTeks();
+                tampil();
+            }
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
+
+    private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
+        emptTeks();
+    }//GEN-LAST:event_BtnBatalActionPerformed
+
+    private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnSeekActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,10 +512,12 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     public void emptTeks() {
         TUser.setText("");
         TNmUser.setText("");
+        TCari.setText("");
         DTPTgl1.setDate(new Date());
         CmbJam1.setSelectedItem("00");
         CmbMenit1.setSelectedItem("00");
         CmbDetik1.setSelectedItem("00");
+        tbUser.clearSelection();
     }
 
     private void getData() {

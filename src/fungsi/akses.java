@@ -3,6 +3,7 @@ package fungsi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -1321,15 +1322,6 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_remaja=true;
                         akses.penilaian_awal_keperawatan_ranap_bayi=true;
                     }else if(rs2.getRow()>=1){
-                        try (PreparedStatement ps = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
-                            ps.setString(1, user);
-                            try (ResultSet rs = ps.executeQuery()) {
-                                if (rs.next()) {
-                                    akses.edit = true;
-                                    akses.tglSelesai = rs.getDate("tgl_selesai").getTime();
-                                }
-                            }
-                        }
                         rs2.beforeFirst();
                         rs2.next();
                         akses.kode=user;
@@ -3485,7 +3477,21 @@ public final class akses {
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
-
+        
+        if (akses.jml2 > 0) {
+            try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where aes_decrypt(id_user, 'nur') = ?")) {
+                psx.setString(1, user);
+                try (ResultSet rsx = psx.executeQuery()) {
+                    if (rsx.next()) {
+                        akses.edit = true;
+                        System.out.println("Jam batas akhir: " + rsx.getTimestamp("tgl_selesai"));
+                        akses.tglSelesai = rsx.getTimestamp("tgl_selesai").getTime();
+                    }
+                }
+            } catch (Exception e) {
+                
+            }
+        }
     }
     
     public static void setLogOut(){
@@ -5664,6 +5670,10 @@ public final class akses {
     
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
+        System.out.println("Akses edit: " + akses.edit);
+        System.out.println("Jam sekarang: " + new Date());
+        System.out.println("Jam batas akhir: " + new Timestamp(akses.tglSelesai));
+        
         if (! akses.edit) {
             return;
         }
