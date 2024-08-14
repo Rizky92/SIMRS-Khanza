@@ -76,6 +76,15 @@ public class koneksiDB {
             return null;
         }
     }
+    
+    public static String TIMEZONESATUSEHAT() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("TIMEZONESATUSEHAT");
+        } catch (Exception e) {
+            return "+07:00";
+        }
+    }
 
     public static boolean GUNAKANDIAGNOSAEKLAIM() {
         try {
