@@ -562,6 +562,10 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
             if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&tbObat.getValueAt(i,13).toString().equals("")){
                 try {
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -637,6 +641,10 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
             if(tbObat.getValueAt(i,0).toString().equals("true")&&(!tbObat.getValueAt(i,4).toString().equals(""))&&(!tbObat.getValueAt(i,13).toString().equals(""))){
                 try {
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);

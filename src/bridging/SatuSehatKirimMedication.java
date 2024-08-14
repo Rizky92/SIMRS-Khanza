@@ -180,6 +180,7 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppPilihSemua = new javax.swing.JMenuItem();
+        ppPilihBelumDikirim = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
@@ -216,6 +217,22 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppPilihSemua);
+
+        ppPilihBelumDikirim.setBackground(new java.awt.Color(255, 255, 254));
+        ppPilihBelumDikirim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPilihBelumDikirim.setForeground(new java.awt.Color(50, 50, 50));
+        ppPilihBelumDikirim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPilihBelumDikirim.setText("Pilih Belum Dikirim");
+        ppPilihBelumDikirim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPilihBelumDikirim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPilihBelumDikirim.setName("ppPilihBelumDikirim"); // NOI18N
+        ppPilihBelumDikirim.setPreferredSize(new java.awt.Dimension(150, 26));
+        ppPilihBelumDikirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPilihBelumDikirimActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPilihBelumDikirim);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -696,6 +713,14 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
+    private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
+        for(i=0;i<tbObat.getRowCount();i++){
+            if (tbObat.getValueAt(i, 9).toString().isBlank()) {
+                tbObat.setValueAt(true,i,0);
+            }
+        }
+    }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -731,6 +756,7 @@ public final class SatuSehatKirimMedication extends javax.swing.JDialog {
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppPilihBelumDikirim;
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables

@@ -583,6 +583,14 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                    if (iddokter.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                        continue;
+                    }
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -683,6 +691,14 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,7).toString());
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,4).toString());
+                    if (iddokter.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                        continue;
+                    }
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
