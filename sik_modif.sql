@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `url`(`url`) USING BTREE,
   INDEX `method`(`method`) USING BTREE,
   INDEX `code`(`code`) USING BTREE,
-  INDEX `user_id`(`pengirim`) USING BTREE
+  INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
