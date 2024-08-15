@@ -36,6 +36,7 @@
   booking_operasi.jam_selesai,
   booking_operasi.status,
   booking_operasi.kd_dokter,
+  booking_operasi.catatan,
   dokter.nm_dokter,
   booking_operasi.kode_paket,
   paket_operasi.nm_perawatan,
@@ -62,6 +63,16 @@ where case
   when $P{status_operasi} = 'tgl masuk' then booking_operasi.tanggal between $P{tgl_awal} and $P{tgl_akhir}
   when $P{status_operasi} = 'tgl selesai' then booking_operasi.status = 'selesai' and booking_operasi.tanggal between $P{tgl_awal} and $P{tgl_akhir}
 end
+and (
+    booking_operasi.no_rawat like $P{cari}
+    or reg_periksa.no_rkm_medis like $P{cari}
+    or pasien.nm_pasien like $P{cari}
+    or booking_operasi.status like $P{cari}
+    or dokter.nm_dokter like $P{cari}
+    or paket_operasi.nm_perawatan like $P{cari}
+    or ruang_ok.nm_ruang_ok like $P{cari}
+    or booking_operasi.catatan like $P{cari}
+)
 order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
@@ -94,6 +105,10 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 	</field>
 	<field name="kd_dokter" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="kd_dokter"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_operasi"/>
+	</field>
+	<field name="catatan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="catatan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking_operasi"/>
 	</field>
 	<field name="nm_dokter" class="java.lang.String">
@@ -203,7 +218,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 	<columnHeader>
 		<band height="19" splitType="Stretch">
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="220" y="0" width="109" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="8fa67897-35dc-4523-aa47-3425dece7bd8"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="321" y="0" width="110" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="8fa67897-35dc-4523-aa47-3425dece7bd8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -211,7 +226,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Jaminan Pasien]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="906" y="0" width="54" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="03f90a05-a8ac-4753-b22a-f235be92329a"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="890" y="0" width="70" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="03f90a05-a8ac-4753-b22a-f235be92329a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -227,7 +242,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="329" y="0" width="28" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="c92b6063-5d76-4a47-b00f-a217de92c899"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="431" y="0" width="28" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="c92b6063-5d76-4a47-b00f-a217de92c899"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -235,7 +250,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Umur]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="412" y="0" width="31" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="d5a420b2-a137-48df-89c1-99724aa4bfc9"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="514" y="0" width="31" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="d5a420b2-a137-48df-89c1-99724aa4bfc9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -251,7 +266,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[No.Rawat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="474" y="0" width="38" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="2dbabf96-b562-489f-af34-cb39f1a6b8f4"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="576" y="0" width="38" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="2dbabf96-b562-489f-af34-cb39f1a6b8f4"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -259,7 +274,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Status]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="84" y="0" width="136" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="c21ff397-011c-4341-8c2a-53b13d937ce5"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="84" y="0" width="237" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="c21ff397-011c-4341-8c2a-53b13d937ce5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -267,7 +282,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Nama Pasien]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="357" y="0" width="15" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="67f6e24c-4ba9-491e-8e0c-d7f93673c7be"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="459" y="0" width="15" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="67f6e24c-4ba9-491e-8e0c-d7f93673c7be"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -275,7 +290,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[J.K.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="372" y="0" width="40" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="49969e03-591c-4c47-a480-2eb8d93d97f8"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="474" y="0" width="40" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="49969e03-591c-4c47-a480-2eb8d93d97f8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -283,7 +298,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="443" y="0" width="31" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="7fc392cd-4040-4417-8acb-74e2ac534d1d"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="545" y="0" width="31" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="7fc392cd-4040-4417-8acb-74e2ac534d1d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -291,23 +306,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Selesai]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="699" y="0" width="119" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="27280c8f-115a-44a0-b66f-b41b16f11d4d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="7"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Operasi]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="600" y="0" width="99" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="4578fa70-7935-432b-8de1-3da50fad7801"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="7"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Diagnosa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="512" y="0" width="88" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="15a1f475-01d5-4024-8be0-f381c30a73b6"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="614" y="0" width="88" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="15a1f475-01d5-4024-8be0-f381c30a73b6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -315,7 +314,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Rujukan Dari]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="818" y="0" width="88" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="6e88eb21-32b2-4b78-b7dd-6cd3ea48729d"/>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="702" y="0" width="188" height="18" forecolor="#000000" backcolor="#F0F0DC" uuid="6e88eb21-32b2-4b78-b7dd-6cd3ea48729d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -337,7 +336,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="13" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" x="0" y="0" width="16" height="10" uuid="609f6cc9-fe22-4631-93e7-ae5dba1b2925"/>
 				<textElement>
@@ -347,7 +346,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="220" y="0" width="106" height="10" uuid="15b666d4-4a67-4c3b-af71-6e25beaba6ae"/>
+				<reportElement positionType="Float" x="321" y="0" width="107" height="10" uuid="15b666d4-4a67-4c3b-af71-6e25beaba6ae"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -363,7 +362,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="84" y="0" width="133" height="10" uuid="720af4af-33ff-4a71-a386-a29eacfd08cb"/>
+				<reportElement positionType="Float" x="84" y="0" width="234" height="10" uuid="720af4af-33ff-4a71-a386-a29eacfd08cb"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -371,7 +370,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="329" y="0" width="25" height="10" uuid="600f8348-35aa-46e4-b4ed-787134d2a0e3"/>
+				<reportElement positionType="Float" x="431" y="0" width="25" height="10" uuid="600f8348-35aa-46e4-b4ed-787134d2a0e3"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -379,7 +378,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{umur}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="357" y="0" width="12" height="10" uuid="3c4769bd-0d29-4977-a13d-b9c6fe9d64d7"/>
+				<reportElement positionType="Float" x="459" y="0" width="12" height="10" uuid="3c4769bd-0d29-4977-a13d-b9c6fe9d64d7"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -387,7 +386,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{jk}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="372" y="0" width="37" height="10" uuid="4e8f8ec7-c7e2-4971-8074-ecd393348a10"/>
+				<reportElement positionType="Float" x="474" y="0" width="37" height="10" uuid="4e8f8ec7-c7e2-4971-8074-ecd393348a10"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -395,7 +394,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{tanggal}.toLocalDate()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="412" y="0" width="28" height="10" uuid="769e9f53-dd1c-4209-8985-4c8d9fd6a689"/>
+				<reportElement positionType="Float" x="514" y="0" width="28" height="10" uuid="769e9f53-dd1c-4209-8985-4c8d9fd6a689"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -403,7 +402,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{jam_mulai}.toLocalTime()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="443" y="0" width="28" height="10" uuid="1d76f491-2ac3-407e-8353-8d316952c6dd"/>
+				<reportElement positionType="Float" x="545" y="0" width="28" height="10" uuid="1d76f491-2ac3-407e-8353-8d316952c6dd"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -411,7 +410,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{jam_selesai}.toLocalTime()]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="474" y="0" width="35" height="10" uuid="f41c173b-498c-4d00-a45c-fa7c26b0c0ee"/>
+				<reportElement positionType="Float" x="576" y="0" width="35" height="10" uuid="f41c173b-498c-4d00-a45c-fa7c26b0c0ee"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -419,7 +418,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="512" y="0" width="85" height="10" uuid="3296b51d-930c-41c6-b38e-4a77eec760ae"/>
+				<reportElement positionType="Float" x="614" y="0" width="85" height="10" uuid="3296b51d-930c-41c6-b38e-4a77eec760ae"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -427,23 +426,23 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="600" y="0" width="96" height="10" uuid="7eb0a6ae-7892-4ab7-ab9a-b338cce47347"/>
+				<reportElement positionType="Float" x="230" y="10" width="281" height="10" uuid="7eb0a6ae-7892-4ab7-ab9a-b338cce47347"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{diagnosa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Diagnosa : " + ($F{diagnosa} == null || $F{diagnosa}.trim().isEmpty() ? "-" : $F{diagnosa})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="699" y="0" width="116" height="10" uuid="881c15ee-a7b3-48bb-a1ea-0a6fdf50c37f"/>
+				<reportElement positionType="Float" x="514" y="10" width="185" height="10" uuid="881c15ee-a7b3-48bb-a1ea-0a6fdf50c37f"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nm_perawatan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tindakan : " + ($F{nm_perawatan} == null || $F{nm_perawatan}.trim().isEmpty() ? "-" : $F{nm_perawatan})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="818" y="0" width="85" height="10" uuid="fa2f3e30-377f-4154-8900-19a49653b4d9"/>
+				<reportElement positionType="Float" x="702" y="0" width="185" height="10" uuid="fa2f3e30-377f-4154-8900-19a49653b4d9"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -451,7 +450,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{nm_dokter}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="906" y="0" width="54" height="10" uuid="be12197f-c1c5-4f72-aa03-d6f8fdffcda4"/>
+				<reportElement positionType="Float" x="890" y="0" width="70" height="10" uuid="be12197f-c1c5-4f72-aa03-d6f8fdffcda4"/>
 				<textElement>
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -459,22 +458,36 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$F{nm_ruang_ok}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="Float" x="0" y="11" width="960" height="1" uuid="70b900ab-00f5-429a-8f41-c21fb4489908">
+				<reportElement positionType="Float" x="0" y="20" width="960" height="1" uuid="70b900ab-00f5-429a-8f41-c21fb4489908">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.25" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="702" y="10" width="258" height="10" uuid="e7e40891-77ae-4a94-bbcb-0907f72d7753"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Catatan : " + ($F{catatan} == null || $F{catatan}.trim().isEmpty() ? "-" : $F{catatan})]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="18" splitType="Stretch">
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="960" height="1" uuid="3760a1dd-987d-4bb9-b406-59db588189bb"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="498" y="3" width="36" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="a1a35cc6-93c6-4cb6-848c-b7ea2a31e424"/>
+				<reportElement key="textField" x="498" y="1" width="36" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="a1a35cc6-93c6-4cb6-848c-b7ea2a31e424"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -488,7 +501,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="328" y="3" width="170" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="e1941301-f05e-4795-9b74-e9940e4ff752"/>
+				<reportElement key="textField" x="328" y="1" width="170" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="e1941301-f05e-4795-9b74-e9940e4ff752"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -502,7 +515,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari "]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="false">
-				<reportElement key="textField" x="1" y="3" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="6c8672f1-c0ae-472c-9a4b-c4f6ac9e19a9"/>
+				<reportElement key="textField" x="1" y="1" width="74" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="6c8672f1-c0ae-472c-9a4b-c4f6ac9e19a9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -516,7 +529,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="158" y="3" width="87" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="f2c10fbe-03c0-4963-9743-57ae16da7c60"/>
+				<reportElement key="textField" x="158" y="1" width="87" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="f2c10fbe-03c0-4963-9743-57ae16da7c60"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -530,7 +543,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}.toString()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="110" y="3" width="46" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="508673f7-d691-4553-b3d3-98cb3baad783"/>
+				<reportElement mode="Opaque" x="110" y="1" width="46" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="508673f7-d691-4553-b3d3-98cb3baad783"/>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -538,13 +551,7 @@ order by booking_operasi.tanggal, booking_operasi.jam_mulai]]>
 				<text><![CDATA[Record :]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="0" width="960" height="1" uuid="3760a1dd-987d-4bb9-b406-59db588189bb"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="0" y="16" width="960" height="1" uuid="5a4daabc-1fde-4395-9e89-7093b53fa847"/>
+				<reportElement x="0" y="15" width="960" height="1" uuid="5a4daabc-1fde-4395-9e89-7093b53fa847"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
