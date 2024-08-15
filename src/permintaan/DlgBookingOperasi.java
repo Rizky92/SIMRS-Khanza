@@ -1394,7 +1394,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("cari", TCari.getText());
+            param.put("cari", "%"+TCari.getText()+"%");
             if(R1.isSelected()==true){
                 param.put("status_operasi", "menunggu");
             }else if(R4.isSelected()==true){
@@ -1408,34 +1408,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                 param.put("tgl_awal", Valid.SetTgl(DTPCari3.getSelectedItem().toString()));
                 param.put("tgl_akhir", Valid.SetTgl(DTPCari4.getSelectedItem().toString()));
             }
-            
             Valid.reportSmc("rptJadwalOperasi.jasper", "report", "::[ Laporan Daftar Jadwal Operasi ]::", param);
-            
-//            Sequel.queryUpdate("delete from temporary where temp37 = ?", akses.getalamatip());
-//            
-//            for(i=0;i<tabMode.getRowCount();i++){
-//                Sequel.menyimpan("temporary","'"+i+"','"+
-//                    tabMode.getValueAt(i,0).toString()+"','"+
-//                    tabMode.getValueAt(i,1).toString()+"','"+
-//                    tabMode.getValueAt(i,2).toString()+"','"+
-//                    tabMode.getValueAt(i,3).toString()+"','"+
-//                    tabMode.getValueAt(i,4).toString()+"','"+
-//                    tabMode.getValueAt(i,5).toString()+"','"+
-//                    tabMode.getValueAt(i,6).toString()+"','"+
-//                    tabMode.getValueAt(i,7).toString()+"','"+
-//                    tabMode.getValueAt(i,8).toString()+"','"+
-//                    tabMode.getValueAt(i,9).toString()+"','"+
-//                    tabMode.getValueAt(i,10).toString()+"','"+
-//                    tabMode.getValueAt(i,11).toString()+"','"+
-//                    tabMode.getValueAt(i,12).toString()+"','"+
-//                    tabMode.getValueAt(i,13).toString()+"','"+
-//                    tabMode.getValueAt(i,14).toString()+"','"+
-//                    tabMode.getValueAt(i,15).toString()+"','"+
-//                    tabMode.getValueAt(i,16).toString()+"','"+
-//                    tabMode.getValueAt(i,17).toString()+"','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-//            }
-             
-//            Valid.MyReportqry("rptJadwalOperasi.jasper","report","::[ Laporan Daftar Jadwal Operasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
