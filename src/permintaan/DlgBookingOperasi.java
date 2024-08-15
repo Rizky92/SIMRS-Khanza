@@ -1566,9 +1566,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             JamMulai.requestFocus();
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                "No.","No.Rawat","Nama Pasien","Umur","J.K.","Tanggal","Mulai",
-                "Selesai","Status","Rujukan Dari","Diagnosa","Kode Operasi","Operasi",
-                "Kode Operator","Operator","Order","Kode OK","Nama Ruang Operasi","Catatan"
                 if (Sequel.mengupdatetfSmc("booking_operasi",
                     "no_rawat = ?, kode_paket = ?, tanggal = ?, jam_mulai = ?, jam_selesai = ?, status = ?, kd_dokter = ?, kd_ruang_ok = ?, catatan = ?",
                     "no_rawat = ? and kode_paket = ? and tanggal = ? and jam_mulai = ? and jam_selesai = ? and status = ? and kd_dokter = ? and kd_ruang_ok = ?",
@@ -1579,20 +1576,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString(),
                     tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString()
                 )) {
-                    tampil();
-                    emptTeks();
-                }
-                if(Sequel.mengedittf("booking_operasi","no_rawat=? and kode_paket=? and tanggal=? and jam_mulai=? and jam_selesai=? and status=? and kd_dokter=? and kd_ruang_ok=?",
-                        "no_rawat=?,kode_paket=?,tanggal=?,jam_mulai=?,jam_selesai=?,status=?,kd_dokter=?,kd_ruang_ok=?",16,new String[]{
-                        TNoRw.getText(),KdOperasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                        JamMulai.getSelectedItem()+":"+MenitMulai.getSelectedItem()+":"+DetikMulai.getSelectedItem(),
-                        JamSelesai.getSelectedItem()+":"+MenitSelesai.getSelectedItem()+":"+DetikSelesai.getSelectedItem(),
-                        Status.getSelectedItem().toString(),KdDokter.getText(),KdRuangOperasi.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),11).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),8).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()
-                     })==true){
                     tampil();
                     emptTeks();
                 }
