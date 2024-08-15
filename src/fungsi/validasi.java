@@ -115,13 +115,13 @@ public final class validasi {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
-            jv.setTitle(judul);
+            JasperViewer jasperViewer = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())), false);
+            jasperViewer.setTitle(judul);
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-            jv.setSize(screen.width - 50, screen.height - 50);
-            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-            jv.setLocationRelativeTo(null);
-            jv.setVisible(true);
+            jasperViewer.setSize(screen.width - 50, screen.height - 50);
+            jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+            jasperViewer.setLocationRelativeTo(null);
+            jasperViewer.setVisible(true);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
@@ -141,21 +141,6 @@ public final class validasi {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
         }
-    }
-    
-    public boolean pindahSmc(java.awt.event.KeyEvent evt, JComponent next, JComponent prev) {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            return true;
-        } else if (evt.getKeyCode() == KeyEvent.VK_TAB || evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            next.setFocusTraversalKeysEnabled(false);
-            next.requestFocus();
-            next.setFocusTraversalKeysEnabled(true);
-        } else if ((evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_TAB) || evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            prev.setFocusTraversalKeysEnabled(false);
-            prev.requestFocus();
-            prev.setFocusTraversalKeysEnabled(true);
-        }
-        return false;
     }
     
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
