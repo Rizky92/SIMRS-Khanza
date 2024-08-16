@@ -1115,18 +1115,34 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObat.getSelectedRow()>-1){
-            if(Sequel.queryu2tf("delete from konsultasi_medik where no_permintaan=?",1,new String[]{
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
-            })==true){
+        if (tbObat.getSelectedRow() <= -1) {
+            JOptionPane.showMessageDialog(null, "Silahkan anda pilih data terlebih dahulu..!!");
+            return;
+        }
+        
+        if (akses.getadmin()) {
+            if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
                 tampil();
                 emptTeks();
-            }else{
-                JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
             }
-        }else{
-            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        } 
+        } else {
+            if (akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(), 10).toString())) {
+                if (tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString().isBlank()) {
+                    if (Sequel.menghapustfSmc("konsultasi_medik", "no_permintaan = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
+                        tampil();
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Gagal menghapus, Ada jawaban dari dokter konsuli..!!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Hanya boleh dihapus oleh dokter yang meminta konsultasi..!!");
+            }
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
