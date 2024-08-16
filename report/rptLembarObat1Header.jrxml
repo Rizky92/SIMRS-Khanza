@@ -9,7 +9,7 @@
   pasien.nm_pasien,
   pasien.tgl_lahir,
   ifnull ((select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = resep_obat.no_rawat and bridging_sep.jnspelayanan = case when resep_obat.status = 'ranap' then '1' else '2' end), '-') as no_sep,
-  (select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat = resep_obat.no_rawat) as no_kartu,
+  ifnull ((select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat = resep_obat.no_rawat and bridging_sep.jnspelayanan = case when resep_obat.status = 'ranap' then '1' else '2' end), '-') as no_kartu,
   pasien.no_rkm_medis,
   resep_obat.no_rawat,
   penjab.png_jawab,
