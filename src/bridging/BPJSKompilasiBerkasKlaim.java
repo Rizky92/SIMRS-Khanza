@@ -1240,9 +1240,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            tampilBilling();
-            tampilINACBG();
             gabung();
+            getData();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnValidasiQRActionPerformed
@@ -2425,6 +2424,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSurkon.setEnabled(false);
         btnSPRI.setText("Tidak Ada");
         btnSPRI.setEnabled(false);
+        btnPDFKlaimINACBG.setText("Tidak Ada");
+        btnPDFKlaimINACBG.setEnabled(false);
+        tbKompilasi.clearSelection();
     }
 
     private void getData() {
@@ -2440,66 +2442,104 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
             btnSEP.setText("Ada");
             btnSEP.setEnabled(true);
-            if (Sequel.cariBooleanSmc("select * from data_triase_igd where no_rawat = ?", lblNoRawat.getText())) {
-                btnTriaseIGD.setText("Ada");
-                btnTriaseIGD.setEnabled(true);
-            } else {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select exists(select * from data_triase_igd where data_triase_igd.no_rawat = bridging_sep.no_rawat) as ada_triase, " +
+                "exists(select * from resume_pasien_ranap where resume_pasien_ranap.no_rawat = bridging_sep.no_rawat) as ada_resume_ranap, " +
+                "exists(select * from inacbg_cetak_klaim where inacbg_cetak_klaim.no_sep = bridging_sep.no_sep) as ada_cetak_klaim, " +
+                "exists(select * from penilaian_medis_igd where penilaian_medis_igd.no_rawat = bridging_sep.no_rawat) as ada_awal_medis_igd, " +
+                "exists(select * from periksa_lab where periksa_lab.no_rawat = bridging_sep.no_rawat) as ada_periksa_lab, " +
+                "exists(select * from periksa_radiologi where periksa_radiologi.no_rawat = bridging_sep.no_rawat) as ada_periksa_rad, " +
+                "exists(select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?) as ada_skdp, " +
+                "exists(select * from bridging_surat_pri_bpjs where bridging_surat_pri_bpjs.no_rawat = bridging_sep.no_rawat) as ada_spri, " +
+                "exists(select * from billing where billing.no_rawat = bridging_sep.no_rawat) as ada_billing from bridging_sep where bridging_sep.no_sep = ?"
+            )) {
+                ps.setString(1, noSuratKontrol);
+                ps.setString(2, lblNoSEP.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getBoolean("ada_triase")) {
+                            btnTriaseIGD.setText("Ada");
+                            btnTriaseIGD.setEnabled(true);
+                        } else {
+                            btnTriaseIGD.setText("Tidak Ada");
+                            btnTriaseIGD.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_resume_ranap")) {
+                            btnResumeRanap.setText("Ada");
+                            btnResumeRanap.setEnabled(true);
+                        } else {
+                            btnResumeRanap.setText("Tidak Ada");
+                            btnResumeRanap.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_billing")) {
+                            btnInvoice.setText("Ada");
+                            btnInvoice.setEnabled(true);
+                        } else {
+                            btnInvoice.setText("Tidak Ada");
+                            btnInvoice.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_awal_medis_igd")) {
+                            btnAwalMedisIGD.setText("Ada");
+                            btnAwalMedisIGD.setEnabled(true);
+                        } else {
+                            btnAwalMedisIGD.setText("Tidak Ada");
+                            btnAwalMedisIGD.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_periksa_lab")) {
+                            btnHasilLab.setText("Ada");
+                            btnHasilLab.setEnabled(true);
+                        } else {
+                            btnHasilLab.setText("Tidak Ada");
+                            btnHasilLab.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_periksa_rad")) {
+                            btnHasilRad.setText("Ada");
+                            btnHasilRad.setEnabled(true);
+                        } else {
+                            btnHasilRad.setText("Tidak Ada");
+                            btnHasilRad.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_skdp")) {
+                            btnSurkon.setText("Ada");
+                            btnSurkon.setEnabled(true);
+                        } else {
+                            btnSurkon.setText("Tidak Ada");
+                            btnSurkon.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_spri")) {
+                            btnSPRI.setText("Ada");
+                            btnSPRI.setEnabled(true);
+                        } else {
+                            btnSPRI.setText("Tidak Ada");
+                            btnSPRI.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_cetak_klaim")) {
+                            btnPDFKlaimINACBG.setText("Ada");
+                            btnPDFKlaimINACBG.setEnabled(true);
+                        } else {
+                            btnPDFKlaimINACBG.setText("Tidak Ada");
+                            btnPDFKlaimINACBG.setEnabled(false);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
                 btnTriaseIGD.setText("Tidak Ada");
                 btnTriaseIGD.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from resume_pasien_ranap where no_rawat = ?", lblNoRawat.getText())) {
-                btnResumeRanap.setText("Ada");
-                btnResumeRanap.setEnabled(true);
-            } else {
                 btnResumeRanap.setText("Tidak Ada");
                 btnResumeRanap.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from billing where no_rawat = ?", lblNoRawat.getText())) {
-                btnInvoice.setText("Ada");
-                btnInvoice.setEnabled(true);
-            } else {
                 btnInvoice.setText("Tidak Ada");
                 btnInvoice.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText())) {
-                btnAwalMedisIGD.setText("Ada");
-                btnAwalMedisIGD.setEnabled(true);
-            } else {
                 btnAwalMedisIGD.setText("Tidak Ada");
                 btnAwalMedisIGD.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from periksa_lab where no_rawat = ?", lblNoRawat.getText())) {
-                btnHasilLab.setText("Ada");
-                btnHasilLab.setEnabled(true);
-            } else {
                 btnHasilLab.setText("Tidak Ada");
                 btnHasilLab.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from periksa_radiologi where no_rawat = ?", lblNoRawat.getText())) {
-                btnHasilRad.setText("Ada");
-                btnHasilRad.setEnabled(true);
-            } else {
                 btnHasilRad.setText("Tidak Ada");
                 btnHasilRad.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from bridging_surat_kontrol_bpjs where no_surat = ?", noSuratKontrol)) {
-                btnSurkon.setText("Ada");
-                btnSurkon.setEnabled(true);
-            } else {
                 btnSurkon.setText("Tidak Ada");
                 btnSurkon.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from bridging_surat_pri_bpjs where no_rawat = ?", lblNoRawat.getText())) {
-                btnSPRI.setText("Ada");
-                btnSPRI.setEnabled(true);
-            } else {
                 btnSPRI.setText("Tidak Ada");
                 btnSPRI.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from inacbg_cetak_klaim where no_sep = ?", lblNoSEP.getText())) {
-                btnPDFKlaimINACBG.setText("Ada");
-                btnPDFKlaimINACBG.setEnabled(true);
-            } else {
                 btnPDFKlaimINACBG.setText("Tidak Ada");
                 btnPDFKlaimINACBG.setEnabled(false);
             }
@@ -2510,13 +2550,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             tampilBilling();
         }
     }
-
-    /*
-    public void setNoRm(String norwt, Date tgl1, Date tgl2) {
-        DTPCari1.setDate(tgl1);
-        DTPCari2.setDate(tgl2);
-    }
-    */
 
     public void isCek() {
         lblCoderNIK.setText(Sequel.cariIsiSmc("select no_ik from inacbg_coder_nik where nik = ?", akses.getkode()));
@@ -3673,42 +3706,52 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {
-            mergePDF();
+            exportSukses = mergePDF();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
+        }
+        
+        if (exportSukses) {
             cleanupAfterMerge(true);
             JOptionPane.showMessageDialog(rootPane, "Export PDF berhasil!");
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
             exportSukses = true;
         }
     }
 
-    private void mergePDF() {
+    private boolean mergePDF() {
+        boolean sukses = true;
         PDFMergerUtility pdfMerger = new PDFMergerUtility();
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {
-            Arrays.sort(files, (file1, file2) -> file1.getName().compareTo(file2.getName()));
-            for (File file : files) {
-                if (file.isFile() && file.getName().endsWith(".pdf") && file.getName().startsWith(lblNoSEP.getText() + "_")) {
-                    try {
-                        pdfMerger.addSource(file);
-                    } catch (IOException e) {
-                        System.err.println("Error adding file: " + file.getName());
+            try {
+                Arrays.sort(files, (file1, file2) -> file1.getName().compareTo(file2.getName()));
+                for (File file : files) {
+                    if (file.isFile() && file.getName().endsWith(".pdf") && file.getName().startsWith(lblNoSEP.getText() + "_")) {
+                        try {
+                            pdfMerger.addSource(file);
+                        } catch (Exception e) {
+                            System.err.println("Error adding file: " + file.getName());
+                            sukses = false;
+                            throw e;
+                        }
                     }
                 }
-            }
-            pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
-            try {
+                pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
                 System.out.println("PDFs merged successfully!");
                 File f = new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 Desktop.getDesktop().open(f);
-            } catch (IOException e) {
-                System.err.println("Error merging PDFs.");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                sukses = false;
+                e.printStackTrace();
             }
         } else {
             System.out.println("No PDF files found in the folder: ./berkaspdf/" + tanggalExport);
         }
+        return sukses;
     }
     
     private void cleanupSingleFile(String containsName) {
