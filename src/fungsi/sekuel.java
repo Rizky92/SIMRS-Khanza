@@ -31,13 +31,12 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -84,6 +83,44 @@ public final class sekuel {
         }
         
         System.out.println("\nPemberlakuan Batas Edit : " + (sekuel.pemberlakuanBatasEdit ? "AKTIF" : "TIDAK AKTIF"));
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat, Date tgl) {
+        String tglRegist = cariIsiSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat),
+               tglSekarang = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        if (tgl == null) {
+            tglSekarang = sdf.format(new Date());
+        } else {
+            tglSekarang = sdf.format(tgl);
+        }
+        
+        if (tglRegist.equals(tglSekarang)) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + tglRegist + " !");
+            return false;
+        }
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat, String tgl) {
+        String tglRegist = cariIsiSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat);
+        
+        if (tgl == null || tgl.isBlank()) {
+            tgl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+        
+        if (tglRegist.equals(tgl)) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + tglRegist + " !");
+            return false;
+        }
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat) {
+        return cekTanggalRegistrasiSmc(noRawat, "");
     }
     
     private double parseDouble(String value)
@@ -349,6 +386,25 @@ public final class sekuel {
         }
         
         return output;
+    }
+    
+    public Date cariTglSmc(String sql, String... values) {
+        Date date = null;
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    date = (Date) rs.getDate(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            date = null;
+        }
+        
+        return date;
     }
     
     public void menyimpanSmc(String table, String kolom, String... values)
