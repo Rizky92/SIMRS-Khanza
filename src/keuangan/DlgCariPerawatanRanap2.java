@@ -814,7 +814,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
             } else {
-                simpan2();
+                if (akses.getadmin() || Sequel.cekTanggalRegistrasiSmc(TNoRw.getText())) {
+                    simpan2();
+                }
             }
             /*
             try {          
@@ -3096,20 +3098,24 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         NmPtg2.setText(nama2);
     }
     
+    public void setPetugas2(String kodeDokter, String namaDokter, String kodePetugas, String namaPetugas) {
+        kddokter.setText(kodeDokter);
+        nmdokter.setText(namaDokter);
+        KdPtg2.setText(kodePetugas);
+        NmPtg2.setText(namaPetugas);
+    }
+    
     private void isktg(){
         Sequel.cariIsi("select kategori_perawatan.nm_kategori from kategori_perawatan where kategori_perawatan.kd_kategori=? ",NmKtg,KdKtg.getText());
     }
 
     private void simpan2() {
-        try {
-            Sequel.AutoComitFalse();
-            sukses = true;
-            ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
-            hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
-            if (pilihtable.equals("rawat_inap_dr")
-                || pilihtable.equals("rawat_inap_pr")
-                || pilihtable.equals("rawat_inap_drpr")
-            ) {
+        if (pilihtable.equals("rawat_inap_dr")|| pilihtable.equals("rawat_inap_pr") || pilihtable.equals("rawat_inap_drpr")) {
+            try {
+                Sequel.AutoComitFalse();
+                sukses = true;
+                ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
+                hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
                 for (i = 0; i < tbKamar.getRowCount(); i++) {
                     pg = false; sg = false; sr = false; mlm = false;
                     switch (pilihtable) {
@@ -3412,7 +3418,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
                                     tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
                                     tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
                                 )) {
@@ -3450,7 +3456,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
                                     tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
                                     tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
                                 )) {
@@ -3488,7 +3494,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
                                     tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
                                     tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
                                 )) {
@@ -3526,7 +3532,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
-                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
                                     tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
                                     tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
                                 )) {
@@ -3637,10 +3643,10 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
         }
     }
 }

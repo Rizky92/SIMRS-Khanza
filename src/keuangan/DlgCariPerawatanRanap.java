@@ -898,7 +898,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
             } else {
-                simpan2();
+                if (akses.getadmin() || Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
+                    simpan2();
+                }
             }
             /*
             try {          
