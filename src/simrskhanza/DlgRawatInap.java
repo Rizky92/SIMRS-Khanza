@@ -6401,7 +6401,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TCari.requestFocus();
             }else{
                 perawatan.setNoRm(TNoRw.getText(),"rawat_inap_drpr",DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false,TPasien.getText());
-                perawatan.setPetugas(KdDok2.getText(),TDokter2.getText(),"-","-");
+                perawatan.setPetugas(KdDok2.getText(),TDokter2.getText(),kdptg2.getText(),TPerawat2.getText());
                 akses.setform("DlgRawatInap");
                 perawatan.emptTeks();
                 perawatan.isCek();
