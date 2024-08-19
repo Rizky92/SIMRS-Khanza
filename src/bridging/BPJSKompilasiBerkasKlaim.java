@@ -3740,7 +3740,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     }
                 }
                 pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
-                pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
+                pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(80 * 1_000_000));
                 System.out.println("PDFs merged successfully!");
                 File f = new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 Desktop.getDesktop().open(f);
