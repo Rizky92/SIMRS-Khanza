@@ -71,7 +71,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.","No.Rawat","Nama Pasien","Umur","J.K.","Tanggal","Mulai",
                 "Selesai","Status","Rujukan Dari","Diagnosa","Kode Operasi","Operasi",
-                "Kode Operator","Operator","Order","Kode OK","Nama Ruang Operasi"
+                "Kode Operator","Operator","Order","Kode OK","Nama Ruang Operasi","Catatan"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -81,7 +81,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(28);
@@ -122,6 +122,8 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                 column.setPreferredWidth(50);
             }else if(i==17){
                 column.setPreferredWidth(130);
+            }else if(i==18){
+                column.setPreferredWidth(200);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -303,6 +305,8 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         KdRuangOperasi = new widget.TextBox();
         NmRuangOperasi = new widget.TextBox();
         BtnRuangOperasi = new widget.Button();
+        jLabel13 = new widget.Label();
+        Catatan = new widget.TextBox();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
         ScrollMenu = new widget.ScrollPane();
@@ -562,7 +566,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -585,7 +589,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -613,7 +617,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2024" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -636,7 +640,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2024" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -659,7 +663,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 126));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 156));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -719,7 +723,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         TPasien.setBounds(195, 10, 208, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -918,6 +922,15 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         });
         FormInput.add(BtnRuangOperasi);
         BtnRuangOperasi.setBounds(815, 10, 28, 23);
+
+        jLabel13.setText("Catatan :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(0, 100, 70, 23);
+
+        Catatan.setName("Catatan"); // NOI18N
+        FormInput.add(Catatan);
+        Catatan.setBounds(73, 100, 770, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1291,12 +1304,11 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCari.requestFocus();
             }else{
-                if(Sequel.menyimpantf("booking_operasi","?,?,?,?,?,?,?,?","data", 8,new String[]{
-                    TNoRw.getText(),KdOperasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                    JamMulai.getSelectedItem()+":"+MenitMulai.getSelectedItem()+":"+DetikMulai.getSelectedItem(),
-                    JamSelesai.getSelectedItem()+":"+MenitSelesai.getSelectedItem()+":"+DetikSelesai.getSelectedItem(),
-                    Status.getSelectedItem().toString(),KdDokter.getText(),KdRuangOperasi.getText()
-                    })==true){
+                if (Sequel.menyimpantfSmc("booking_operasi", null,
+                    TNoRw.getText(), KdOperasi.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai),
+                    Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai), Status.getSelectedItem().toString(),
+                    KdDokter.getText(), KdRuangOperasi.getText(), Catatan.getText()
+                )) {
                     tampil();
                     emptTeks();
                 }
@@ -1382,7 +1394,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("cari", TCari.getText());
+            param.put("cari", "%"+TCari.getText()+"%");
             if(R1.isSelected()==true){
                 param.put("status_operasi", "menunggu");
             }else if(R4.isSelected()==true){
@@ -1396,34 +1408,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
                 param.put("tgl_awal", Valid.SetTgl(DTPCari3.getSelectedItem().toString()));
                 param.put("tgl_akhir", Valid.SetTgl(DTPCari4.getSelectedItem().toString()));
             }
-            
-            Valid.viewReport("rptJadwalOperasi.jasper", "::[ Laporan Daftar Jadwal Operasi ]::", param);
-            
-//            Sequel.queryUpdate("delete from temporary where temp37 = ?", akses.getalamatip());
-//            
-//            for(i=0;i<tabMode.getRowCount();i++){
-//                Sequel.menyimpan("temporary","'"+i+"','"+
-//                    tabMode.getValueAt(i,0).toString()+"','"+
-//                    tabMode.getValueAt(i,1).toString()+"','"+
-//                    tabMode.getValueAt(i,2).toString()+"','"+
-//                    tabMode.getValueAt(i,3).toString()+"','"+
-//                    tabMode.getValueAt(i,4).toString()+"','"+
-//                    tabMode.getValueAt(i,5).toString()+"','"+
-//                    tabMode.getValueAt(i,6).toString()+"','"+
-//                    tabMode.getValueAt(i,7).toString()+"','"+
-//                    tabMode.getValueAt(i,8).toString()+"','"+
-//                    tabMode.getValueAt(i,9).toString()+"','"+
-//                    tabMode.getValueAt(i,10).toString()+"','"+
-//                    tabMode.getValueAt(i,11).toString()+"','"+
-//                    tabMode.getValueAt(i,12).toString()+"','"+
-//                    tabMode.getValueAt(i,13).toString()+"','"+
-//                    tabMode.getValueAt(i,14).toString()+"','"+
-//                    tabMode.getValueAt(i,15).toString()+"','"+
-//                    tabMode.getValueAt(i,16).toString()+"','"+
-//                    tabMode.getValueAt(i,17).toString()+"','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
-//            }
-             
-//            Valid.MyReportqry("rptJadwalOperasi.jasper","report","::[ Laporan Daftar Jadwal Operasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            Valid.reportSmc("rptJadwalOperasi.jasper", "report", "::[ Laporan Daftar Jadwal Operasi ]::", param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1537,25 +1522,30 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.textKosong(KdOperasi,"Operasi");
         }else if(NmRuangOperasi.getText().trim().equals("")){
             Valid.textKosong(BtnRuangOperasi,"Ruang Operasi");
-        }else if((!(JamMulai.getSelectedItem().toString()+MenitMulai.getSelectedItem().toString()+DetikMulai.getSelectedItem().toString()).equals("000000"))&&
-            (Sequel.cariInteger("select count(booking_operasi.no_rawat) from booking_operasi where booking_operasi.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' "+
-            "and booking_operasi.kd_ruang_ok='"+KdRuangOperasi.getText()+"' and booking_operasi.no_rawat<>'"+TNoRw.getText()+"' and "+
-            "booking_operasi.jam_mulai between '"+JamMulai.getSelectedItem()+":"+MenitMulai.getSelectedItem()+":"+DetikMulai.getSelectedItem()+"' and '"+JamSelesai.getSelectedItem()+":"+MenitSelesai.getSelectedItem()+":"+DetikSelesai.getSelectedItem()+"'")>0)){
+        } else if (Sequel.cariIntegerSmc(
+            "select count(*) from booking_operasi where (kd_ruang_ok = ? or kd_dokter = ?) and no_rawat != ? and status != 'Selesai' and ( " +
+            "if (time_to_sec(?) > time_to_sec(?), (tanggal = ? and jam_mulai >= ?) or (tanggal = date_add(?, interval 1 day) and jam_mulai <= ?), " +
+            "(tanggal = ? and jam_mulai between ? and ?)))",
+            KdRuangOperasi.getText(), KdDokter.getText(), TNoRw.getText(),
+            Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai),
+            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai),
+            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai),
+            Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai)
+        ) > 0) {
             JOptionPane.showMessageDialog(rootPane,"Jadwal bentrok dengan jam mulai operasi yang lain..!!");
             JamMulai.requestFocus();
         }else{
             if(tbObat.getSelectedRow()!= -1){
-                if(Sequel.mengedittf("booking_operasi","no_rawat=? and kode_paket=? and tanggal=? and jam_mulai=? and jam_selesai=? and status=? and kd_dokter=? and kd_ruang_ok=?",
-                        "no_rawat=?,kode_paket=?,tanggal=?,jam_mulai=?,jam_selesai=?,status=?,kd_dokter=?,kd_ruang_ok=?",16,new String[]{
-                        TNoRw.getText(),KdOperasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                        JamMulai.getSelectedItem()+":"+MenitMulai.getSelectedItem()+":"+DetikMulai.getSelectedItem(),
-                        JamSelesai.getSelectedItem()+":"+MenitSelesai.getSelectedItem()+":"+DetikSelesai.getSelectedItem(),
-                        Status.getSelectedItem().toString(),KdDokter.getText(),KdRuangOperasi.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),11).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),8).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString(),
-                        tbObat.getValueAt(tbObat.getSelectedRow(),16).toString()
-                     })==true){
+                if (Sequel.mengupdatetfSmc("booking_operasi",
+                    "no_rawat = ?, kode_paket = ?, tanggal = ?, jam_mulai = ?, jam_selesai = ?, status = ?, kd_dokter = ?, kd_ruang_ok = ?, catatan = ?",
+                    "no_rawat = ? and kode_paket = ? and tanggal = ? and jam_mulai = ? and jam_selesai = ? and status = ? and kd_dokter = ? and kd_ruang_ok = ?",
+                    TNoRw.getText(), KdOperasi.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(JamMulai, MenitMulai, DetikMulai), Valid.getWaktuSmc(JamSelesai, MenitSelesai, DetikSelesai),
+                    Status.getSelectedItem().toString(), KdDokter.getText(), KdRuangOperasi.getText(), Catatan.getText(),
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString(),
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString(),
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString(),
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 13).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 16).toString()
+                )) {
                     tampil();
                     emptTeks();
                 }
@@ -2100,6 +2090,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnTagihanOperasi;
     private widget.Button BtnTimeOutSebelumInsisi;
     private widget.Button BtnTransferAntarRuang;
+    private widget.TextBox Catatan;
     private widget.CekBox ChkAccor;
     private widget.CekBox ChkInput;
     private widget.Tanggal DTPCari1;
@@ -2140,6 +2131,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
+    private widget.Label jLabel13;
     private widget.Label jLabel22;
     private widget.Label jLabel25;
     private widget.Label jLabel35;
@@ -2172,7 +2164,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "select booking_operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,booking_operasi.tanggal,"+
                     "booking_operasi.jam_mulai,booking_operasi.jam_selesai,booking_operasi.status,booking_operasi.kd_dokter,"+
                     "dokter.nm_dokter,booking_operasi.kode_paket,paket_operasi.nm_perawatan,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
-                    "pasien.jk,poliklinik.nm_poli,booking_operasi.kd_ruang_ok,ruang_ok.nm_ruang_ok "+
+                    "pasien.jk,poliklinik.nm_poli,booking_operasi.kd_ruang_ok,ruang_ok.nm_ruang_ok,booking_operasi.catatan "+
                     "from booking_operasi inner join reg_periksa on booking_operasi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join paket_operasi on booking_operasi.kode_paket=paket_operasi.kode_paket "+
@@ -2181,7 +2173,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "inner join ruang_ok on booking_operasi.kd_ruang_ok=ruang_ok.kd_ruang_ok "+
                     "where "+status+(TCari.getText().trim().equals("")?"":" and (booking_operasi.no_rawat like ? or reg_periksa.no_rkm_medis like ? "+
                     "or pasien.nm_pasien like ? or booking_operasi.status like ? or dokter.nm_dokter like ? or paket_operasi.nm_perawatan like ? "+
-                    "or ruang_ok.nm_ruang_ok like ?) ")+"order by booking_operasi.tanggal,booking_operasi.jam_mulai");
+                    "or ruang_ok.nm_ruang_ok like ? or booking_operasi.catatan like ?) ")+"order by booking_operasi.tanggal,booking_operasi.jam_mulai");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -2191,6 +2183,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
+                    ps.setString(8,"%"+TCari.getText().trim()+"%");
                 }
                     
                 rs=ps.executeQuery();
@@ -2210,7 +2203,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs.getString("jk"),rs.getString("tanggal"),rs.getString("jam_mulai"),rs.getString("jam_selesai"),
                         rs.getString("status"),kamar,diagnosa,rs.getString("kode_paket"),rs.getString("nm_perawatan"),
                         rs.getString("kd_dokter"),rs.getString("nm_dokter"),order,rs.getString("kd_ruang_ok"),
-                        rs.getString("nm_ruang_ok")
+                        rs.getString("nm_ruang_ok"),rs.getString("catatan")
                     });
                     i++;
                 }
@@ -2244,6 +2237,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         JamSelesai.setSelectedItem("00");
         MenitSelesai.setSelectedItem("00");
         DetikSelesai.setSelectedItem("00");
+        Catatan.setText("");
+        tbObat.clearSelection();
         DTPTgl.setDate(new Date());
         DTPTgl.requestFocus();
     }
@@ -2267,6 +2262,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             KdRuangOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             NmRuangOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             Valid.SetTgl(DTPTgl,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            Catatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 18).toString());
         }
     }
     
@@ -2283,7 +2279,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,126));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,156));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
