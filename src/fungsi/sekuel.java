@@ -86,37 +86,42 @@ public final class sekuel {
     }
     
     public boolean cekTanggalRegistrasiSmc(String noRawat, Date tgl) {
-        String tglRegist = cariIsiSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat),
-               tglSekarang = "";
+        Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
         if (tgl == null) {
-            tglSekarang = sdf.format(new Date());
-        } else {
-            tglSekarang = sdf.format(tgl);
+            tgl = new Date();
         }
         
-        if (tglRegist.equals(tglSekarang)) {
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + tglRegist + " !");
+        if ((tgl.getTime() - tglRegist.getTime()) < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
             return false;
         }
+        
+        return true;
     }
     
     public boolean cekTanggalRegistrasiSmc(String noRawat, String tgl) {
-        String tglRegist = cariIsiSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat),
+             tglKegiatan = null;
         
         if (tgl == null || tgl.isBlank()) {
-            tgl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            tglKegiatan = new Date();
+        } else {
+            try {
+                tglKegiatan = sdf.parse(tgl);
+            } catch (Exception e) {
+                tglKegiatan = new Date();
+            }
         }
         
-        if (tglRegist.equals(tgl)) {
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + tglRegist + " !");
+        if ((tglKegiatan.getTime() - tglRegist.getTime()) < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
             return false;
         }
+        
+        return true;
     }
     
     public boolean cekTanggalRegistrasiSmc(String noRawat) {
@@ -396,7 +401,7 @@ public final class sekuel {
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    date = (Date) rs.getDate(1);
+                    date = (Date) rs.getTimestamp(1);
                 }
             }
         } catch (Exception e) {
@@ -573,7 +578,9 @@ public final class sekuel {
                 ps.setString(i + 1, values[i]);
                 track = track.replaceFirst("\\?", "'" + values[i] + "'");
             }
-            ps.executeUpdate();
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "Tidak ada data yang dihapus...!!!");
+            }
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -596,7 +603,9 @@ public final class sekuel {
                 ps.setString(i + 1, values[i]);
                 track = track.replaceFirst("\\?", "'" + values[i] + "'");
             }
-            ps.executeUpdate();
+            if (ps.executeUpdate() <= 0) {
+                output = false;
+            }
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
