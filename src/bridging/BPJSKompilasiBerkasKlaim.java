@@ -3533,7 +3533,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         int j = 1;
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select pasien.jk, date_format(pasien.tgl_lahir, '%d-%m-%Y') as tgllahir, concat(reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur) as umur, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, periksa_radiologi.dokter_perujuk, "
-            + "dokter_perujuk.nm_dokter nm_dokter_perujuk, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, dokter.nm_dokter, periksa_radiologi.nip, petugas.nama nama_petugas, jns_perawatan_radiologi.nm_perawatan, "
+            + "dokter_perujuk.nm_dokter nm_dokter_perujuk, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.kd_dokter, dokter.nm_dokter, periksa_radiologi.nip, petugas.nama nama_petugas, jns_perawatan_radiologi.nm_perawatan, "
             + "periksa_radiologi.status, periksa_radiologi.proyeksi, periksa_radiologi.kV, periksa_radiologi.mAS, periksa_radiologi.FFD, periksa_radiologi.BSF, periksa_radiologi.inak, periksa_radiologi.jml_penyinaran, periksa_radiologi.dosis "
             + "from periksa_radiologi join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join dokter dokter_perujuk on periksa_radiologi.dokter_perujuk = dokter_perujuk.kd_dokter "
             + "join dokter on periksa_radiologi.kd_dokter = dokter.kd_dokter join petugas on periksa_radiologi.nip = petugas.nip join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw "
@@ -3542,14 +3542,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    String pemeriksaan = rs.getString("nm_perawatan") + " dengan Proyeksi : " + rs.getString("proyeksi")
-                        + ", kV : " + rs.getString("kV")
-                        + ", mAS : " + rs.getString("mAS")
-                        + ", FFD : " + rs.getString("FFD")
-                        + ", BSF : " + rs.getString("BSF")
-                        + ", Inak : " + rs.getString("Inak")
-                        + ", Jumlah penyinaran : " + rs.getString("jml_penyinaran")
-                        + ", Dosis Radiasi : " + rs.getString("dosis");
+                    String pemeriksaan = rs.getString("nm_perawatan")
+                        + (rs.getString("proyeksi").isBlank() || rs.getString("proyeksi") == null ? "" : " dengan Proyeksi : " + rs.getString("proyeksi"))
+                        + (rs.getString("kV").isBlank() || rs.getString("kV") == null ? "" : ", kV : " + rs.getString("kV"))
+                        + (rs.getString("mAS").isBlank() || rs.getString("mAS") == null ? "" : ", mAS : " + rs.getString("mAS"))
+                        + (rs.getString("FFD").isBlank() || rs.getString("FFD") == null ? "" : ", FFD : " + rs.getString("FFD"))
+                        + (rs.getString("BSF").isBlank() || rs.getString("BSF") == null ? "" : ", BSF : " + rs.getString("BSF"))
+                        + (rs.getString("Inak").isBlank() || rs.getString("Inak") == null ? "" : ", Inak : " + rs.getString("Inak"))
+                        + (rs.getString("jml_penyinaran").isBlank() || rs.getString("jml_penyinaran") == null ? "" : ", Jumlah penyinaran : " + rs.getString("jml_penyinaran"))
+                        + (rs.getString("dosis").isBlank() || rs.getString("dosis") == null ? "" : ", Dosis Radiasi : " + rs.getString("dosis"));
                     Map<String, Object> param = new HashMap<>();
                     param.put("noperiksa", lblNoRawat.getText());
                     param.put("norm", lblNoRM.getText());
@@ -3557,9 +3558,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     param.put("jkel", rs.getString("jk"));
                     param.put("umur", rs.getString("umur"));
                     param.put("lahir", rs.getString("tgllahir"));
-                    param.put("pengirim", rs.getString("nm_dokter"));
+                    param.put("pengirim", rs.getString("nm_dokter_perujuk"));
                     param.put("tanggal", rs.getString("tgl_periksa"));
-                    param.put("penjab", rs.getString("nm_dokter_perujuk"));
+                    param.put("penjab", rs.getString("nm_dokter"));
                     param.put("petugas", rs.getString("nama_petugas"));
                     param.put("alamat", rs.getString("alamat"));
                     String kamar = "", kelas = "", namaKamar = "", noRawatIbu = "";
@@ -3591,8 +3592,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     param.put("emailrs", akses.getemailrs());
                     param.put("hasil", Sequel.cariIsiSmc("select hasil from hasil_radiologi where no_rawat = ? and tgl_periksa = ? and jam = ?", lblNoRawat.getText(), rs.getString("tgl_periksa"), rs.getString("jam")));
                     param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("dokter_perujuk"));
-                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter_perujuk") + "\nID " + (finger.isBlank() ? rs.getString("dokter_perujuk") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
+                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                     finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
                     param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                     exportPDF("rptPeriksaRadiologi.jasper", urutan + "_PeriksaRadiologi" + String.valueOf(j++), param);
