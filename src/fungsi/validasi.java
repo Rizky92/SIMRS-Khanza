@@ -105,6 +105,10 @@ public final class validasi {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
+    public String getTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
+        return getTglSmc(tgl) + " " + getWaktuSmc(jam, menit, detik);
+    }
+    
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
     }

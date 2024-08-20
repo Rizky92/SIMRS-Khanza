@@ -102,6 +102,7 @@ import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPengkajianRestrain;
 import rekammedis.RMPenilaianAwalKeperawatanKebidananRanap;
 import rekammedis.RMPenilaianAwalKeperawatanRanap;
+import rekammedis.RMPenilaianAwalKeperawatanRanapBayiAnak;
 import rekammedis.RMPenilaianAwalKeperawatanRanapNeonatus;
 import rekammedis.RMPenilaianAwalMedisHemodialisa;
 import rekammedis.RMPenilaianAwalMedisRanapDewasa;
@@ -1603,7 +1604,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-08-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1617,7 +1618,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-08-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2354,7 +2355,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(jLabel58);
         jLabel58.setBounds(234, 220, 70, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma","Apatis","Delirium" }));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" }));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3265,7 +3266,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-12-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-08-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3381,6 +3382,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnRiwayatActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnRiwayat);
 
         BtnResepObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnResepObat.setText("Input Resep");
@@ -3397,6 +3399,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnResepObatActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnResepObat);
 
         BtnCopyResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCopyResep.setText("Copy Resep");
@@ -3413,6 +3416,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCopyResepActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCopyResep);
 
         BtnPermintaanStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPermintaanStok.setText("Permintaan Stok Pasien");
@@ -3429,6 +3433,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPermintaanStokActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPermintaanStok);
 
         BtnPermintaanResepPulang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPermintaanResepPulang.setText("Permintaan Resep Pulang");
@@ -3445,6 +3450,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPermintaanResepPulangActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPermintaanResepPulang);
 
         BtnInputObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnInputObat.setText("Input Obat & BHP");
@@ -3461,6 +3467,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnInputObatActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnInputObat);
 
         BtnObatBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnObatBhp.setText("Data Obat & BHP");
@@ -3477,6 +3484,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnObatBhpActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnObatBhp);
 
         BtnBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnBerkasDigital.setText("Berkas Digital");
@@ -3493,6 +3501,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnBerkasDigitalActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnBerkasDigital);
 
         BtnPermintaanLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPermintaanLab.setText("Permintaan Lab");
@@ -3509,6 +3518,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPermintaanLabActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPermintaanLab);
 
         BtnPermintaanRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPermintaanRad.setText("Permintaan Rad");
@@ -3525,6 +3535,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPermintaanRadActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPermintaanRad);
 
         BtnJadwalOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnJadwalOperasi.setText("Jadwal Operasi");
@@ -3541,6 +3552,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnJadwalOperasiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnJadwalOperasi);
 
         BtnSKDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSKDP.setText("Surat Kontrol");
@@ -3557,6 +3569,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSKDPActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSKDP);
 
         BtnRujukKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnRujukKeluar.setText("Rujuk Keluar");
@@ -3573,6 +3586,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnRujukKeluarActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnRujukKeluar);
 
         BtnDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnDiagnosa.setText("Diagnosa");
@@ -3589,6 +3603,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnDiagnosaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnDiagnosa);
 
         BtnResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnResume.setText("Resume Pasien");
@@ -3605,6 +3620,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnResumeActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnResume);
 
         BtnAwalKeperawatanUmum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalKeperawatanUmum.setText("Awal Keperawatan Umum");
@@ -3621,6 +3637,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalKeperawatanUmumActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalKeperawatanUmum);
 
         BtnAwalKeperawatanKandungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalKeperawatanKandungan.setText("Awal Keperawatan Kandungan");
@@ -3637,6 +3654,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalKeperawatanKandunganActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalKeperawatanKandungan);
 
         BtnAwalFisioterapi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalFisioterapi.setText("Awal Fisioterapi");
@@ -3653,6 +3671,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalFisioterapiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalFisioterapi);
 
         BtnAwalMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalMedis.setText("Awal Medis Umum");
@@ -3669,6 +3688,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalMedisActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalMedis);
 
         BtnAwalMedisKandungan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalMedisKandungan.setText("Awal Medis Kandungan");
@@ -3685,6 +3705,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalMedisKandunganActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalMedisKandungan);
 
         BtnAwalMedisHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAwalMedisHemodialisa.setText("Awal Medis Hemodialisa");
@@ -3701,6 +3722,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAwalMedisHemodialisaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAwalMedisHemodialisa);
 
         BtnChecklistPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistPreOperasi.setText("Check List Pre Operasi");
@@ -3717,6 +3739,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistPreOperasiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistPreOperasi);
 
         BtnSignInSebelumAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSignInSebelumAnestesi.setText("Sign-In Sebelum Anestesi");
@@ -3733,6 +3756,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSignInSebelumAnestesiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSignInSebelumAnestesi);
 
         BtnTimeOutSebelumInsisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnTimeOutSebelumInsisi.setText("Time-Out Sebelum Insisi");
@@ -3749,6 +3773,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnTimeOutSebelumInsisiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnTimeOutSebelumInsisi);
 
         BtnSignOutSebelumMenutupLuka.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSignOutSebelumMenutupLuka.setText("Sign-Out Sebelum Menutup Luka");
@@ -3765,6 +3790,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSignOutSebelumMenutupLukaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSignOutSebelumMenutupLuka);
 
         BtnChecklistPostOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistPostOperasi.setText("Check List Post Operasi");
@@ -3781,6 +3807,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistPostOperasiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistPostOperasi);
 
         BtnPenilaianPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianPreOperasi.setText("Penilaian Pre Operasi");
@@ -3797,6 +3824,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianPreOperasiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianPreOperasi);
 
         BtnPenilaianPreAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianPreAnestesi.setText("Penilaian Pre Anestesi");
@@ -3813,6 +3841,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianPreAnestesiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianPreAnestesi);
 
         BtnSkorAldrettePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkorAldrettePascaAnestesi.setText("Skor Aldrette Pasca Anestesi");
@@ -3829,6 +3858,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkorAldrettePascaAnestesiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkorAldrettePascaAnestesi);
 
         BtnSkorStewardPascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkorStewardPascaAnestesi.setText("Skor Steward Pasca Anestesi");
@@ -3845,6 +3875,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkorStewardPascaAnestesiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkorStewardPascaAnestesi);
 
         BtnPenilaianPsikolog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianPsikolog.setText("Penilaian Psikolog");
@@ -3861,6 +3892,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianPsikologActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianPsikolog);
 
         BtnPerencanaanPemulangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPerencanaanPemulangan.setText("Perencanaan Pemulangan");
@@ -3877,6 +3909,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPerencanaanPemulanganActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPerencanaanPemulangan);
 
         BtnPenilaianLanjutanResikoJatuhDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhDewasa.setText("Lanjutan Risiko Jatuh Dewasa");
@@ -3893,6 +3926,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhDewasaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhDewasa);
 
         BtnPenilaianLanjutanResikoJatuhAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhAnak.setText("Lanjutan Risiko Jatuh Anak");
@@ -3909,6 +3943,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhAnakActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhAnak);
 
         BtnPenilaianLanjutanResikoJatuhLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhLansia.setText("Lanjutan Risiko Jatuh Lansia");
@@ -3925,6 +3960,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhLansiaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhLansia);
 
         BtnPenilaianLanjutanResikoJatuhNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhNeonatus.setText("Lanjutan Risiko Jatuh Neonatus");
@@ -3941,6 +3977,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhNeonatusActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhNeonatus);
 
         BtnPenilaianLanjutanResikoJatuhGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhGeriatri.setText("Lanjutan Risiko Jatuh Geriatri");
@@ -3957,6 +3994,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhGeriatriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhGeriatri);
 
         BtnPenilaianLanjutanResikoJatuhPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanResikoJatuhPsikiatri.setText("Lanjutan Risiko Jatuh Psikiatri");
@@ -3973,6 +4011,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanResikoJatuhPsikiatriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanResikoJatuhPsikiatri);
 
         BtnPenilaianLanjutanSkriningFungsional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianLanjutanSkriningFungsional.setText("Lanjutan Skrining Fungsional");
@@ -3989,6 +4028,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianLanjutanSkriningFungsionalActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianLanjutanSkriningFungsional);
 
         BtnPenilaianResikoDekubitus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianResikoDekubitus.setText("Risiko Dekubitus");
@@ -4005,6 +4045,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianResikoDekubitusActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianResikoDekubitus);
 
         BtnHasilPemeriksaanUSG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnHasilPemeriksaanUSG.setText("Hasil USG Kandungan");
@@ -4021,6 +4062,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnHasilPemeriksaanUSGActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnHasilPemeriksaanUSG);
 
         BtnDokumentasiESWL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnDokumentasiESWL.setText("Dokumentasi Tindakan ESWL");
@@ -4037,6 +4079,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnDokumentasiESWLActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnDokumentasiESWL);
 
         BtnCatatanPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanPersalinan.setText("Catatan Persalinan");
@@ -4053,6 +4096,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanPersalinanActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanPersalinan);
 
         BtnCatatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatan.setText("Catatan Pasien");
@@ -4069,6 +4113,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatan);
 
         BtnCatatanObservasiRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanObservasiRanap.setText("Observasi Ranap");
@@ -4085,6 +4130,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanObservasiRanapActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanObservasiRanap);
 
         BtnCatatanObservasiRanapKebidanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanObservasiRanapKebidanan.setText("Observasi Kebidanan");
@@ -4101,6 +4147,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanObservasiRanapKebidananActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanObservasiRanapKebidanan);
 
         BtnCatatanObservasiRanapPostPartum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanObservasiRanapPostPartum.setText("Observasi Post Partum");
@@ -4117,6 +4164,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanObservasiRanapPostPartumActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanObservasiRanapPostPartum);
 
         BtnFollowUpDBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnFollowUpDBD.setText("Follow Up DBD");
@@ -4133,6 +4181,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnFollowUpDBDActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnFollowUpDBD);
 
         BtnCatatanKeperawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanKeperawatan.setText("Catatan Keperawatan");
@@ -4149,6 +4198,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanKeperawatanActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanKeperawatan);
 
         BtnCatatanCekGDS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanCekGDS.setText("Catatan Cek GDS");
@@ -4165,6 +4215,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanCekGDSActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanCekGDS);
 
         BtnPenilaianUlangNyeri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianUlangNyeri.setText("Penilaian Ulang Nyeri");
@@ -4181,6 +4232,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianUlangNyeriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianUlangNyeri);
 
         BtnPemantauanPEWSAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPemantauanPEWSAnak.setText("Pemantauan PEWS Anak");
@@ -4197,6 +4249,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPemantauanPEWSAnakActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPemantauanPEWSAnak);
 
         BtnPemantauanPEWSDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPemantauanPEWSDewasa.setText("Pemantauan EWS Dewasa");
@@ -4213,6 +4266,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPemantauanPEWSDewasaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPemantauanPEWSDewasa);
 
         BtnPemantauanMEOWS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPemantauanMEOWS.setText("Pemantauan MEOWS Obstetri");
@@ -4229,6 +4283,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPemantauanMEOWSActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPemantauanMEOWS);
 
         BtnPemantauanEWSNeonatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPemantauanEWSNeonatus.setText("Pemantauan EWS Neonatus");
@@ -4245,6 +4300,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPemantauanEWSNeonatusActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPemantauanEWSNeonatus);
 
         BtnChecklistKriteriaMasukHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistKriteriaMasukHCU.setText("Check List Masuk HCU");
@@ -4261,6 +4317,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistKriteriaMasukHCUActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistKriteriaMasukHCU);
 
         BtnChecklistKriteriaKeluarHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistKriteriaKeluarHCU.setText("Check List Keluar HCU");
@@ -4277,6 +4334,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistKriteriaKeluarHCUActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistKriteriaKeluarHCU);
 
         BtnChecklistKriteriaMasukICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistKriteriaMasukICU.setText("Check List Masuk ICU");
@@ -4293,6 +4351,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistKriteriaMasukICUActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistKriteriaMasukICU);
 
         BtnChecklistKriteriaKeluarICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistKriteriaKeluarICU.setText("Check List Keluar ICU");
@@ -4309,6 +4368,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnChecklistKriteriaKeluarICUActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnChecklistKriteriaKeluarICU);
 
         BtnMonitoringReaksiTranfusi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnMonitoringReaksiTranfusi.setText("Monitoring Reaksi Tranfusi");
@@ -4325,6 +4385,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnMonitoringReaksiTranfusiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnMonitoringReaksiTranfusi);
 
         BtnSkriningNutrisiDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkriningNutrisiDewasa.setText("Skrining Nutrisi Dewasa");
@@ -4341,6 +4402,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkriningNutrisiDewasaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkriningNutrisiDewasa);
 
         BtnSkriningNutrisiLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkriningNutrisiLansia.setText("Skrining Nutrisi Lansia");
@@ -4357,6 +4419,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkriningNutrisiLansiaActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkriningNutrisiLansia);
 
         BtnSkriningNutrisiAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkriningNutrisiAnak.setText("Skrining Nutrisi Anak");
@@ -4373,6 +4436,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkriningNutrisiAnakActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkriningNutrisiAnak);
 
         BtnSkriningGiziLanjut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnSkriningGiziLanjut.setText("Skrining Gizi Lanjut");
@@ -4389,6 +4453,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnSkriningGiziLanjutActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnSkriningGiziLanjut);
 
         BtnAsuhanGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnAsuhanGizi.setText("Asuhan Gizi");
@@ -4405,6 +4470,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnAsuhanGiziActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnAsuhanGizi);
 
         BtnMonitoringAsuhanGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnMonitoringAsuhanGizi.setText("Monitoring Gizi");
@@ -4421,6 +4487,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnMonitoringAsuhanGiziActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnMonitoringAsuhanGizi);
 
         BtnCatatanADIMEGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCatatanADIMEGizi.setText("Catatan ADIME Gizi");
@@ -4437,6 +4504,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnCatatanADIMEGiziActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnCatatanADIMEGizi);
 
         BtnKonselingFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKonselingFarmasi.setText("Konseling Farmasi");
@@ -4453,6 +4521,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnKonselingFarmasiActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnKonselingFarmasi);
 
         BtnInformasiObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnInformasiObat.setText("Informasi Obat");
@@ -4469,6 +4538,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnInformasiObatActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnInformasiObat);
 
         BtnRekonsiliasiObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnRekonsiliasiObat.setText("Rekonsiliasi Obat");
@@ -4485,6 +4555,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnRekonsiliasiObatActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnRekonsiliasiObat);
 
         BtnTransferAntarRuang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnTransferAntarRuang.setText("Transfer Antar Ruang");
@@ -4501,6 +4572,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnTransferAntarRuangActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnTransferAntarRuang);
 
         BtnPengkajianRestrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPengkajianRestrain.setText("Pengkajian Restrain");
@@ -4517,6 +4589,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPengkajianRestrainActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPengkajianRestrain);
 
         BtnPenilaianPasienTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianPasienTerminal.setText("Penilaian Pasien Terminal");
@@ -4533,6 +4606,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianPasienTerminalActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianPasienTerminal);
 
         BtnPenilaianKorbanKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianKorbanKekerasan.setText("Penilaian Korban Kekerasan");
@@ -4549,6 +4623,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianKorbanKekerasanActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianKorbanKekerasan);
 
         BtnPenilaianKecemasanAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianKecemasanAnak.setText("Penilaian Kecemasan Anak");
@@ -4565,6 +4640,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianKecemasanAnakActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianKecemasanAnak);
 
         BtnPenilaianPasienPenyakitMenular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianPasienPenyakitMenular.setText("Pasien Penyakit Menular");
@@ -4581,6 +4657,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianPasienPenyakitMenularActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianPasienPenyakitMenular);
 
         BtnPenilaianTambahanGeriatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianTambahanGeriatri.setText("Tambahan Pasien Geriatri");
@@ -4597,6 +4674,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianTambahanGeriatriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianTambahanGeriatri);
 
         BtnPenilaianTambahanBunuhDiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianTambahanBunuhDiri.setText("Tambahan Bunuh Diri");
@@ -4613,6 +4691,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianTambahanBunuhDiriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianTambahanBunuhDiri);
 
         BtnPenilaianTambahanPerilakuKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianTambahanPerilakuKekerasan.setText("Tambahan Perilaku Kekerasan");
@@ -4629,6 +4708,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianTambahanPerilakuKekerasanActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianTambahanPerilakuKekerasan);
 
         BtnPenilaianTambahanMelarikanDiri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPenilaianTambahanMelarikanDiri.setText("Tambahan Melarikan Diri");
@@ -4645,6 +4725,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 BtnPenilaianTambahanMelarikanDiriActionPerformed(evt);
             }
         });
+        FormMenu.add(BtnPenilaianTambahanMelarikanDiri);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -6235,8 +6316,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TCari.requestFocus();
             }else{
                 perawatan2.setNoRm(TNoRw.getText(),"rawat_inap_dr",DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false,TPasien.getText());
-                perawatan2.setPetugas(KdDok.getText(),TDokter.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",
-                    TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                // perawatan2.setPetugas(KdDok.getText(),TDokter.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",
+                //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                perawatan2.setPetugas2(KdDok.getText(), TDokter.getText(), "-", "-");
                 akses.setform("DlgRawatInap");
                 perawatan2.isCek();
                 perawatan2.tampil2();
@@ -6289,8 +6371,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TCari.requestFocus();
             }else{
                 perawatan2.setNoRm(TNoRw.getText(),"rawat_inap_pr",DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false,TPasien.getText());
-                perawatan2.setPetugas(kdptg.getText(),TPerawat.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",
-                    TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                // perawatan2.setPetugas(kdptg.getText(),TPerawat.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",
+                //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                perawatan2.setPetugas2(kdptg.getText(), TPerawat.getText(), "-", "-");
                 akses.setform("DlgRawatInap");
                 perawatan2.isCek();
                 perawatan2.tampil2();
@@ -6318,7 +6401,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TCari.requestFocus();
             }else{
                 perawatan.setNoRm(TNoRw.getText(),"rawat_inap_drpr",DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false,TPasien.getText());
-                perawatan.setPetugas(KdDok2.getText(),TDokter2.getText(),"-","-");
+                perawatan.setPetugas(KdDok2.getText(),TDokter2.getText(),kdptg2.getText(),TPerawat2.getText());
                 akses.setform("DlgRawatInap");
                 perawatan.emptTeks();
                 perawatan.isCek();
@@ -6347,8 +6430,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 TCari.requestFocus();
             }else{
                 perawatan2.setNoRm(TNoRw.getText(),"rawat_inap_drpr",DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false,TPasien.getText());
-                perawatan2.setPetugas(KdDok2.getText(),TDokter2.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),kdptg2.getText(),TPerawat2.getText(),
-                    TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                // perawatan2.setPetugas(KdDok2.getText(),TDokter2.getText(),TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),kdptg2.getText(),TPerawat2.getText(),
+                //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
+                perawatan2.setPetugas2(KdDok2.getText(), TDokter2.getText(), kdptg2.getText(), TPerawat2.getText());
                 akses.setform("DlgRawatInap");
                 perawatan2.isCek();
                 perawatan2.tampil2();
@@ -8316,6 +8400,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
     
+    private void BtnAwalKeperawatanBayiAnakActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianAwalKeperawatanRanapBayiAnak form=new RMPenilaianAwalKeperawatanRanapBayiAnak(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -8646,7 +8747,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.TextBox TanggalRegistrasi;
     // End of variables declaration//GEN-END:variables
     private widget.Button BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG,BtnHasilPemeriksaanUSGNeonatus,BtnHasilEndoskopiFaringLaring,BtnHasilEndoskopiHidung,BtnHasilEndoskopiTelinga,
-                          BtnAwalKeperawatanNeonatus,BtnPenilaianPasienImunitasRendah,BtnCatatanKeseimbanganCairan,BtnCatatanObservasiCHBP,BtnCatatanObservasiInduksiPersalinan,BtnPermintaanKonsultasiMedik;
+                          BtnAwalKeperawatanNeonatus,BtnPenilaianPasienImunitasRendah,BtnCatatanKeseimbanganCairan,BtnCatatanObservasiCHBP,BtnCatatanObservasiInduksiPersalinan,BtnPermintaanKonsultasiMedik,BtnAwalKeperawatanBayiAnak;
     
     public void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -9403,6 +9504,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(akses.getkonsultasi_medik()==true){
             tinggi=tinggi+24;
         }
+        BtnAwalKeperawatanBayiAnak.setVisible(akses.getpenilaian_awal_keperawatan_ranap_neonatus());   
+        if(akses.getpenilaian_awal_keperawatan_ranap_bayi()==true){
+            tinggi=tinggi+24;
+        }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
         
         if(akses.getjml2()>=1){
@@ -9947,6 +10052,19 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnAwalKeperawatanNeonatus.setRoundRect(false);
         BtnAwalKeperawatanNeonatus.addActionListener(this::BtnAwalKeperawatanNeonatusActionPerformed);
         
+        BtnAwalKeperawatanBayiAnak = new widget.Button();
+        BtnAwalKeperawatanBayiAnak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnAwalKeperawatanBayiAnak.setText("Awal Keperawatan Bayi/Anak");
+        BtnAwalKeperawatanBayiAnak.setFocusPainted(false);
+        BtnAwalKeperawatanBayiAnak.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnAwalKeperawatanBayiAnak.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAwalKeperawatanBayiAnak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAwalKeperawatanBayiAnak.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAwalKeperawatanBayiAnak.setName("BtnAwalKeperawatanBayiAnak");
+        BtnAwalKeperawatanBayiAnak.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAwalKeperawatanBayiAnak.setRoundRect(false);
+        BtnAwalKeperawatanBayiAnak.addActionListener(this::BtnAwalKeperawatanBayiAnakActionPerformed);
+        
         BtnPenilaianPasienImunitasRendah = new widget.Button();
         BtnPenilaianPasienImunitasRendah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
         BtnPenilaianPasienImunitasRendah.setText("Pasien Imunitas Rendah");
@@ -10035,6 +10153,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnAwalKeperawatanUmum);
         FormMenu.add(BtnAwalKeperawatanKandungan);
         FormMenu.add(BtnAwalKeperawatanNeonatus);
+        FormMenu.add(BtnAwalKeperawatanBayiAnak);
         FormMenu.add(BtnAwalFisioterapi);
         FormMenu.add(BtnAwalMedis);
         FormMenu.add(BtnAwalMedisKandungan);

@@ -9,6 +9,7 @@
   pasien.nm_pasien,
   pasien.tgl_lahir,
   ifnull ((select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = resep_obat.no_rawat and bridging_sep.jnspelayanan = case when resep_obat.status = 'ranap' then '1' else '2' end), '-') as no_sep,
+  ifnull ((select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat = resep_obat.no_rawat and bridging_sep.jnspelayanan = case when resep_obat.status = 'ranap' then '1' else '2' end), '-') as no_kartu,
   pasien.no_rkm_medis,
   resep_obat.no_rawat,
   penjab.png_jawab,
@@ -58,11 +59,15 @@ where no_resep = $P{noresep}]]>
 		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 	</field>
+	<field name="no_kartu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="no_kartu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="no_kartu"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="60">
+		<band height="72">
 			<textField>
 				<reportElement mode="Transparent" x="55" y="27" width="80" height="9" uuid="cde686ae-b5df-440d-bd72-e20035f58c50"/>
 				<textElement markup="none">
@@ -256,7 +261,7 @@ where no_resep = $P{noresep}]]>
 				<textFieldExpression><![CDATA[$F{no_sep}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="36" width="50" height="9" uuid="a7642bd2-dff3-4feb-9dfb-939e1a2c0571"/>
+				<reportElement mode="Transparent" x="0" y="45" width="50" height="9" uuid="a7642bd2-dff3-4feb-9dfb-939e1a2c0571"/>
 				<textElement markup="none">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -264,7 +269,7 @@ where no_resep = $P{noresep}]]>
 				<text><![CDATA[Alamat Pasien]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Transparent" x="55" y="36" width="222" height="23" uuid="31256bdb-419d-4fb1-aaa5-7dc47ef6596f"/>
+				<reportElement mode="Transparent" x="55" y="45" width="222" height="23" uuid="31256bdb-419d-4fb1-aaa5-7dc47ef6596f"/>
 				<textElement markup="none">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
@@ -272,13 +277,37 @@ where no_resep = $P{noresep}]]>
 				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="50" y="36" width="5" height="9" uuid="8faa6db1-d187-4626-83d3-76d50a3028c7"/>
+				<reportElement mode="Transparent" x="50" y="45" width="5" height="9" uuid="8faa6db1-d187-4626-83d3-76d50a3028c7"/>
 				<textElement markup="none">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="36" width="50" height="9" uuid="01b63dda-12de-4074-b509-1ee8a3d6a3c0"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. Kartu BPJS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="50" y="36" width="5" height="9" uuid="9a7700ac-b689-4934-b069-b0c8bbe860e3"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="55" y="36" width="80" height="9" uuid="6dd87cde-42d8-45b4-962b-71468b10bc71"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_kartu}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 </jasperReport>
