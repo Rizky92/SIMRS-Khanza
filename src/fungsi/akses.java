@@ -3,7 +3,6 @@ package fungsi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -3482,17 +3481,20 @@ public final class akses {
             }
         
         if (akses.jml2 > 0) {
-            try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where aes_decrypt(id_user, 'nur') = ?")) {
+            try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                 psx.setString(1, user);
                 try (ResultSet rsx = psx.executeQuery()) {
                     if (rsx.next()) {
-                        akses.edit = true;
-                        System.out.println("Jam batas akhir: " + rsx.getTimestamp("tgl_selesai"));
                         akses.tglSelesai = rsx.getTimestamp("tgl_selesai").getTime();
+                        akses.edit = ((System.currentTimeMillis() - akses.tglSelesai) / 1000) < 0;
+                    } else {
+                        akses.tglSelesai = -1;
+                        akses.edit = false;
                     }
                 }
             } catch (Exception e) {
-                
+                akses.tglSelesai = -1;
+                akses.edit = false;
             }
         }
     }
@@ -5675,15 +5677,11 @@ public final class akses {
     
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
-        System.out.println("Akses edit: " + akses.edit);
-        System.out.println("Jam sekarang: " + new Date());
-        System.out.println("Jam batas akhir: " + new Timestamp(akses.tglSelesai));
-        
         if (! akses.edit) {
             return;
         }
         
-        if (((new Date().getTime() - akses.tglSelesai) / 1000) > 0) {
+        if (((System.currentTimeMillis() - akses.tglSelesai) / 1000) > 0) {
             akses.edit = false;
         }
     }

@@ -12,18 +12,28 @@
 package setting;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +45,9 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
+    private final DlgCariUser cariUser = new DlgCariUser(null, false);
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", new Locale("id", "ID"));
+    private String jabatan = "";
 
     /**
      * Creates new form DlgUser
@@ -64,12 +77,56 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbUser.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tbUser.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tbUser.getColumnModel().getColumn(1).setPreferredWidth(250);
         tbUser.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tbUser.getColumnModel().getColumn(3).setPreferredWidth(150);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        cariUser.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    cariUser.dispose();
+                }
+            }
+        });
+        
+        cariUser.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (cariUser.getTable().getSelectedRow() > -1) {
+                    TUser.setText(cariUser.getTable().getValueAt(cariUser.getTable().getSelectedRow(), 0).toString());
+                    TNmUser.setText(cariUser.getTable().getValueAt(cariUser.getTable().getSelectedRow(), 1).toString());
+                    jabatan = cariUser.getTable().getValueAt(cariUser.getTable().getSelectedRow(), 3).toString();
+                }
+            }
+        });
 
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -308,6 +365,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusActionPerformed(evt);
+            }
+        });
         panelGlass6.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
@@ -316,6 +378,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
         panelGlass6.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
@@ -324,6 +391,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
         panelGlass6.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
@@ -423,9 +495,11 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         } else if (TNmUser.getText().isBlank()) {
             Valid.textKosong(TNmUser, "Nama User");
         } else {
-            if (Sequel.menyimpantfSmc("set_akses_edit_sementara", null, TUser.getText(), Valid.getTglSmc(DTPTgl1) + " " + Valid.getWaktuSmc(CmbJam1, CmbMenit1, CmbDetik1))) {
+            if (Sequel.menyimpantfSmc("set_akses_edit_sementara", null, TUser.getText(), Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1))) {
+                tabMode.addRow(new Object[] {
+                    TUser.getText(), TNmUser.getText(), jabatan, Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1)
+                });
                 emptTeks();
-                tampil();
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -435,8 +509,70 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
-        // TODO add your handling code here:
+        cariUser.emptTeks();
+        cariUser.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        cariUser.setLocationRelativeTo(internalFrame1);
+        cariUser.tampil();
+        cariUser.setVisible(true);
     }//GEN-LAST:event_BtnSeekActionPerformed
+
+    private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (tbUser.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus terlebih dahulu...!!!");
+            return;
+        }
+        if (Sequel.menghapustfSmc("akses_edit_sementara", "id_user = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+            emptTeks();
+            tabMode.removeRow(tbUser.getSelectedRow());
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tbUser.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau diubah terlebih dahulu...!!!");
+            return;
+        }
+        
+        if (TUser.getText().isBlank()) {
+            Valid.textKosong(TUser, "ID User");
+        } else if (TNmUser.getText().isBlank()) {
+            Valid.textKosong(TNmUser, "Nama User");
+        } else {
+            if (Sequel.mengupdatetfSmc("set_akses_edit_sementara", "tgl_selesai = ?", "id_user = ?",
+                Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1),
+                tabMode.getValueAt(tbUser.getSelectedRow(), 0).toString()
+            )) {
+                tabMode.setValueAt(Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1), tbUser.getSelectedRow(), 3);
+                emptTeks();
+            }
+        }
+    }//GEN-LAST:event_BtnEditActionPerformed
+
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+        } else {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            Sequel.deleteTemporary();
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                Sequel.temporary(String.valueOf(i),
+                    tabMode.getValueAt(i, 0).toString(),
+                    tabMode.getValueAt(i, 1).toString(),
+                    tabMode.getValueAt(i, 2).toString(),
+                    tabMode.getValueAt(i, 3).toString()
+                );
+            }
+            Valid.reportTempSmc("rptUserAksesEdit.jasper", "report", "::[ Data User ]::", param);
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,8 +624,8 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     public void tampil() {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select coalesce(pegawai.nik, '-') as nik, coalesce(pegawai.nama, '-') as nama, coalesce(spesialis.nm_sps, jabatan.nm_jbtn, '-') as jabatan, " +
-            "set_akses_edit_sementara.tgl_selesai from set_akses_edit_sementara join user on set_akses_edit_sementara.id_user = user.id_user " +
-            "left join pegawai on (aes_decrypt(set_akses_edit_sementara.id_user, 'nur')) = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter " +
+            "set_akses_edit_sementara.tgl_selesai from set_akses_edit_sementara join user on set_akses_edit_sementara.id_user = aes_decrypt(user.id_user, 'nur') " +
+            "left join pegawai on set_akses_edit_sementara.id_user = pegawai.nik left join dokter on pegawai.nik = dokter.kd_dokter " +
             "left join spesialis on dokter.kd_sps = spesialis.kd_sps left join petugas on pegawai.nik = petugas.nip left join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn " +
             "where (pegawai.nik like ? or pegawai.nama like ? or spesialis.nm_sps like ? or jabatan.nm_jbtn like ?)"
         )) {
@@ -513,6 +649,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         TUser.setText("");
         TNmUser.setText("");
         TCari.setText("");
+        jabatan = "";
         DTPTgl1.setDate(new Date());
         CmbJam1.setSelectedItem("00");
         CmbMenit1.setSelectedItem("00");
@@ -525,6 +662,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
             if (tbUser.getSelectedRow() != -1) {
                 TUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
                 TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
+                jabatan = tbUser.getValueAt(tbUser.getSelectedRow(), 2).toString();
                 DTPTgl1.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString()));
                 CmbJam1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(11, 13));
                 CmbMenit1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(14, 16));

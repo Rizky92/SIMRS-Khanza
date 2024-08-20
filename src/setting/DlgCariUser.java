@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -13,12 +12,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -26,32 +23,21 @@ import javax.swing.table.TableColumn;
  */
 public final class DlgCariUser extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private Connection koneksi = koneksiDB.condb();
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private final Connection koneksi = koneksiDB.condb();
+    private final validasi Valid = new validasi();
+    private final ObjectMapper mapper = new ObjectMapper();
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
-    private ObjectMapper mapper = new ObjectMapper();
+    private String iyem = null;
     private JsonNode root;
-    private JsonNode response;
-    private FileReader myObj;
-    private sekuel Sequel = new sekuel();
 
-    /**
-     * Creates new form DlgPenyakit
-     *
-     * @param parent
-     * @param modal
-     */
     public DlgCariUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10, 2);
         setSize(656, 250);
 
-        Object[] row = {"User ID", "Nama", "Jabatan"};
+        Object[] row = {"User ID", "Nama", "Status", "Jabatan"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -61,32 +47,33 @@ public final class DlgCariUser extends javax.swing.JDialog {
         tbKamar.setModel(tabMode);
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbKamar.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tbKamar.getColumnModel().getColumn(0).setPreferredWidth(80);
         tbKamar.getColumnModel().getColumn(1).setPreferredWidth(250);
-        tbKamar.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tbKamar.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tbKamar.getColumnModel().getColumn(3).setPreferredWidth(140);
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil2();
+                        tampil();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil2();
+                        tampil();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil2();
+                        tampil();
                     }
                 }
             });
@@ -100,7 +87,6 @@ public final class DlgCariUser extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Kd2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -112,14 +98,6 @@ public final class DlgCariUser extends javax.swing.JDialog {
         label10 = new widget.Label();
         LCount = new widget.Label();
         BtnKeluar = new widget.Button();
-
-        Kd2.setHighlighter(null);
-        Kd2.setName("Kd2"); // NOI18N
-        Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Kd2KeyPressed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -233,65 +211,43 @@ public final class DlgCariUser extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        } else {
-            Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        TCari.setText("");
-        tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+        emptTeks();
+        tampil3();
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnAllActionPerformed(null);
-        } else {
-            Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
-
-    private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Kd2KeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        emptTeks();
+        tampil();
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if (Valid.daysOld("./cache/pegawai.iyem") < 30) {
-                tampil2();
-            } else {
-                tampil();
-            }
-        } catch (Exception e) {
-        }
+        emptTeks();
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -325,7 +281,6 @@ public final class DlgCariUser extends javax.swing.JDialog {
     private widget.Button BtnAll;
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
-    private widget.TextBox Kd2;
     private widget.Label LCount;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -336,188 +291,87 @@ public final class DlgCariUser extends javax.swing.JDialog {
     public widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try {
-            file = new File("./cache/pegawai.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            ps = koneksi.prepareStatement("select pegawai.nik,pegawai.nama,pegawai.jk,pegawai.jbtn,pegawai.jnj_jabatan,pegawai.departemen,pegawai.bidang,pegawai.stts_wp,pegawai.stts_kerja,"
-                + "pegawai.npwp,pegawai.pendidikan,pegawai.tmp_lahir,pegawai.tgl_lahir,pegawai.alamat,pegawai.kota,pegawai.mulai_kerja,pegawai.ms_kerja,"
-                + "pegawai.indexins,pegawai.bpd,pegawai.rekening,pegawai.stts_aktif,pegawai.wajibmasuk,pegawai.mulai_kontrak,pegawai.no_ktp from pegawai "
-                + "where pegawai.stts_aktif<>'KELUAR' order by pegawai.id ASC ");
-            try {
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
-                        rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getString(20),
-                        rs.getString(21), rs.getString(22), rs.getString(23), rs.getString(24)
-                    });
-                    iyem = iyem + "{\"NIP\":\"" + rs.getString(1) + "\",\"Nama\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"Jabatan\":\"" + rs.getString(4) + "\",\"KodeJenjang\":\"" + rs.getString(5) + "\","
-                        + "\"Departemen\":\"" + rs.getString(6) + "\",\"Bidang\":\"" + rs.getString(7) + "\",\"Status\":\"" + rs.getString(8) + "\",\"StatusKaryawan\":\"" + rs.getString(9) + "\",\"NPWP\":\"" + rs.getString(10) + "\","
-                        + "\"Pendidikan\":\"" + rs.getString(11) + "\",\"TmpLahir\":\"" + rs.getString(12) + "\",\"TglLahir\":\"" + rs.getString(13) + "\",\"Alamat\":\"" + rs.getString(14).replaceAll("\"", "") + "\",\"Kota\":\"" + rs.getString(15).replaceAll("\"", "") + "\","
-                        + "\"MulaiKerja\":\"" + rs.getString(16) + "\",\"KodeMsKerja\":\"" + rs.getString(17) + "\",\"KodeIndex\":\"" + rs.getString(18) + "\",\"BPD\":\"" + rs.getString(19) + "\",\"Rekening\":\"" + rs.getString(20) + "\","
-                        + "\"SttsAktif\":\"" + rs.getString(21) + "\",\"WajibMasuk\":\"" + rs.getString(22) + "\",\"MulaiKontrak\":\"" + rs.getString(23) + "\",\"NoKTP\":\"" + rs.getString(24) + "\"},";
-                }
-            } catch (Exception e) {
-                System.out.println("Note : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            }
-            fileWriter.write("{\"pegawai\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+    public void tampil() {
+        if (Valid.daysOld("./cache/cariuser.iyem") < 30) {
+            tampil2();
+        } else {
+            tampil3();
         }
-        LCount.setText("" + tabMode.getRowCount());
-    }
-
-    public void emptTeks() {
-        Kd2.setText("");
-        TCari.requestFocus();
-    }
-
-    public JTable getTable() {
-        return tbKamar;
     }
 
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/pegawai.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("pegawai");
-            if (response.isArray()) {
-                if (TCari.getText().trim().equals("")) {
-                    for (JsonNode list : response) {
+        Valid.tabelKosong(tabMode);
+
+        try (FileReader fr = new FileReader("./cache/cariuser.iyem")) {
+            root = mapper.readTree(fr).path("cariuser");
+            if (root.isArray()) {
+                if (TCari.getText().isBlank()) {
+                    for (JsonNode obj : root) {
                         tabMode.addRow(new Object[] {
-                            list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(), list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(), list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(), list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(), list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(), list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
+                            obj.path("id_user").asText(), obj.path("nama_user").asText(), obj.path("status").asText(), obj.path("ktg").asText()
                         });
                     }
                 } else {
-                    for (JsonNode list : response) {
-                        if (list.path("NIP").asText().toLowerCase().contains(TCari.getText().toLowerCase()) || list.path("Nama").asText().toLowerCase().contains(TCari.getText().toLowerCase()) || list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase()) || list.path("Bidang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) || list.path("Departemen").asText().toLowerCase().contains(TCari.getText().toLowerCase())) {
+                    for (JsonNode obj : root) {
+                        if (obj.path("id_user").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            || obj.path("nama_user").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            || obj.path("status").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            || obj.path("ktg").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                        ) {
                             tabMode.addRow(new Object[] {
-                                list.path("NIP").asText(), list.path("Nama").asText(), list.path("JK").asText(), list.path("Jabatan").asText(), list.path("KodeJenjang").asText(), list.path("Departemen").asText(), list.path("Bidang").asText(), list.path("Status").asText(), list.path("StatusKaryawan").asText(), list.path("NPWP").asText(), list.path("Pendidikan").asText(), list.path("TmpLahir").asText(), list.path("TglLahir").asText(), list.path("Alamat").asText(), list.path("Kota").asText(), list.path("MulaiKerja").asText(), list.path("KodeMsKerja").asText(), list.path("KodeIndex").asText(), list.path("BPD").asText(), list.path("Rekening").asText(), list.path("SttsAktif").asText(), list.path("WajibMasuk").asText(), list.path("MulaiKontrak").asText(), list.path("NoKTP").asText()
+                                obj.path("id_user").asText(), obj.path("nama_user").asText(), obj.path("status").asText(), obj.path("ktg").asText()
                             });
                         }
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
+
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
     }
 
-    public String tampil3(String kode) {
+    private void tampil3() {
+        Valid.tabelKosong(tabMode);
+        
         try {
-            if (Valid.daysOld("./cache/pegawai.iyem") > 7) {
-                tampil();
-            }
-        } catch (Exception e) {
-            if (e.toString().contains("No such file or directory")) {
-                tampil();
-            }
-        }
-
-        iyem = "";
-        try {
-            myObj = new FileReader("./cache/pegawai.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().toLowerCase().equals(kode)) {
-                        iyem = list.path("Nama").asText();
+            file = new File("./cache/cariuser.iyem");
+            file.createNewFile();
+            try (FileWriter fw = new FileWriter(file)) {
+                iyem = "";
+                try (ResultSet rs = koneksi.prepareStatement(
+                    "select profil.* from user join (select petugas.nip as id_user, petugas.nama as nama, "
+                    + "'Petugas' as status, jabatan.nm_jbtn ktg from petugas join jabatan on petugas.kd_jbtn = jabatan.kd_jbtn "
+                    + "where petugas.status = '1' union select dokter.kd_dokter as id_user, dokter.nm_dokter as nama, "
+                    + "'Dokter' as status, spesialis.nm_sps as ktg from dokter join spesialis on dokter.kd_sps = spesialis.kd_sps "
+                    + "where dokter.status = '1') as profil on aes_decrypt(user.id_user, 'nur') = profil.id_user order by profil.id_user"
+                ).executeQuery()) {
+                    while (rs.next()) {
+                        iyem = iyem + "{\"id_user\":\"" + rs.getString(1) + "\",\"nama_user\":\"" + rs.getString(2) + "\",\"status\":\"" + rs.getString(3) + "\",\"ktg\": \"" + rs.getString(4) + "\"},";
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)
+                        });
                     }
                 }
+                fw.write("{\"cariuser\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
+                fw.flush();
             }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
+            iyem = null;
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
         }
-        if (iyem.equals("")) {
-            iyem = Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?", kode);
-        }
-        return iyem;
+
+        LCount.setText(String.valueOf(tbKamar.getRowCount()));
     }
 
-    public String tampilJbatan(String kode) {
-        try {
-            if (Valid.daysOld("./cache/pegawai.iyem") > 7) {
-                tampil();
-            }
-        } catch (Exception e) {
-            if (e.toString().contains("No such file or directory")) {
-                tampil();
-            }
-        }
-
-        iyem = "";
-        try {
-            myObj = new FileReader("./cache/pegawai.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().toLowerCase().equals(kode)) {
-                        iyem = list.path("Jabatan").asText();
-                    }
-                }
-            }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-        }
-        if (iyem.equals("")) {
-            iyem = Sequel.cariIsi("select pegawai.jbtn from pegawai where pegawai.nik=?", kode);
-        }
-        return iyem;
+    public void emptTeks() {
+        TCari.setText("");
+        TCari.requestFocus();
+        tbKamar.clearSelection();
     }
 
-    public String tampilDepartemen(String kode) {
-        try {
-            if (Valid.daysOld("./cache/pegawai.iyem") > 7) {
-                tampil();
-            }
-        } catch (Exception e) {
-            if (e.toString().contains("No such file or directory")) {
-                tampil();
-            }
-        }
-
-        iyem = "";
-        try {
-            myObj = new FileReader("./cache/pegawai.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("pegawai");
-            if (response.isArray()) {
-                for (JsonNode list : response) {
-                    if (list.path("NIP").asText().toLowerCase().equals(kode)) {
-                        iyem = list.path("Departemen").asText();
-                    }
-                }
-            }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-        }
-        if (iyem.equals("")) {
-            iyem = Sequel.cariIsi("select pegawai.departemen from pegawai where pegawai.nik=?", kode);
-        }
-        return iyem;
+    public JTable getTable() {
+        return tbKamar;
     }
 }

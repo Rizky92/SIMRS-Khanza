@@ -543,6 +543,9 @@
                       <Dimension value="[100, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHapusActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="widget.Button" name="BtnEdit">
                   <Properties>
@@ -557,6 +560,9 @@
                       <Dimension value="[100, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEditActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="widget.Button" name="BtnPrint">
                   <Properties>
@@ -571,6 +577,9 @@
                       <Dimension value="[100, 30]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPrintActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="widget.Button" name="BtnKeluar">
                   <Properties>
