@@ -31,13 +31,12 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -84,6 +83,49 @@ public final class sekuel {
         }
         
         System.out.println("\nPemberlakuan Batas Edit : " + (sekuel.pemberlakuanBatasEdit ? "AKTIF" : "TIDAK AKTIF"));
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat, Date tgl) {
+        Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        if (tgl == null) {
+            tgl = new Date();
+        }
+        
+        if ((tgl.getTime() - tglRegist.getTime()) < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat, String tgl) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date tglRegist = cariTglSmc("select concat(tgl_registrasi, ' ', jam_reg) from reg_periksa where no_rawat = ?", noRawat),
+             tglKegiatan = null;
+        
+        if (tgl == null || tgl.isBlank()) {
+            tglKegiatan = new Date();
+        } else {
+            try {
+                tglKegiatan = sdf.parse(tgl);
+            } catch (Exception e) {
+                tglKegiatan = new Date();
+            }
+        }
+        
+        if ((tglKegiatan.getTime() - tglRegist.getTime()) < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean cekTanggalRegistrasiSmc(String noRawat) {
+        return cekTanggalRegistrasiSmc(noRawat, "");
     }
     
     private double parseDouble(String value)
@@ -351,6 +393,25 @@ public final class sekuel {
         return output;
     }
     
+    public Date cariTglSmc(String sql, String... values) {
+        Date date = null;
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    date = (Date) rs.getTimestamp(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            date = null;
+        }
+        
+        return date;
+    }
+    
     public void menyimpanSmc(String table, String kolom, String... values)
     {
         String bindings = "";
@@ -517,7 +578,9 @@ public final class sekuel {
                 ps.setString(i + 1, values[i]);
                 track = track.replaceFirst("\\?", "'" + values[i] + "'");
             }
-            ps.executeUpdate();
+            if (ps.executeUpdate() <= 0) {
+                JOptionPane.showMessageDialog(null, "Tidak ada data yang dihapus...!!!");
+            }
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -540,7 +603,9 @@ public final class sekuel {
                 ps.setString(i + 1, values[i]);
                 track = track.replaceFirst("\\?", "'" + values[i] + "'");
             }
-            ps.executeUpdate();
+            if (ps.executeUpdate() <= 0) {
+                output = false;
+            }
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -1690,6 +1755,38 @@ public final class sekuel {
                 bool=false;
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            if(AKTIFKANTRACKSQL.equals("yes")){
+                dicari="";
+                for(angka=1;angka<=i;angka++){
+                    dicari=dicari+"|"+a[angka-1];
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
+        } catch (Exception e) {
+            bool=false;
+            System.out.println("Notifikasi : "+e);
+        }   
+        return bool;
+    }
+    
+    public boolean mengedittf2(String table,String acuan_field,String update,int i,String[] a){
+        bool=true;
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate();       
+                bool=true;
+             }catch(Exception e){
+                bool=false;
+                System.out.println("Notifikasi : "+e);
              }finally{
                 if(ps != null){
                     ps.close();

@@ -1240,8 +1240,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            tampilBilling();
-            tampilINACBG();
+            getData();
             gabung();
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -2425,6 +2424,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnSurkon.setEnabled(false);
         btnSPRI.setText("Tidak Ada");
         btnSPRI.setEnabled(false);
+        btnPDFKlaimINACBG.setText("Tidak Ada");
+        btnPDFKlaimINACBG.setEnabled(false);
+        tbKompilasi.clearSelection();
     }
 
     private void getData() {
@@ -2440,66 +2442,104 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
             btnSEP.setText("Ada");
             btnSEP.setEnabled(true);
-            if (Sequel.cariBooleanSmc("select * from data_triase_igd where no_rawat = ?", lblNoRawat.getText())) {
-                btnTriaseIGD.setText("Ada");
-                btnTriaseIGD.setEnabled(true);
-            } else {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select exists(select * from data_triase_igd where data_triase_igd.no_rawat = bridging_sep.no_rawat) as ada_triase, " +
+                "exists(select * from resume_pasien_ranap where resume_pasien_ranap.no_rawat = bridging_sep.no_rawat) as ada_resume_ranap, " +
+                "exists(select * from inacbg_cetak_klaim where inacbg_cetak_klaim.no_sep = bridging_sep.no_sep) as ada_cetak_klaim, " +
+                "exists(select * from penilaian_medis_igd where penilaian_medis_igd.no_rawat = bridging_sep.no_rawat) as ada_awal_medis_igd, " +
+                "exists(select * from periksa_lab where periksa_lab.no_rawat = bridging_sep.no_rawat) as ada_periksa_lab, " +
+                "exists(select * from periksa_radiologi where periksa_radiologi.no_rawat = bridging_sep.no_rawat) as ada_periksa_rad, " +
+                "exists(select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?) as ada_skdp, " +
+                "exists(select * from bridging_surat_pri_bpjs where bridging_surat_pri_bpjs.no_rawat = bridging_sep.no_rawat) as ada_spri, " +
+                "exists(select * from billing where billing.no_rawat = bridging_sep.no_rawat) as ada_billing from bridging_sep where bridging_sep.no_sep = ?"
+            )) {
+                ps.setString(1, noSuratKontrol);
+                ps.setString(2, lblNoSEP.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getBoolean("ada_triase")) {
+                            btnTriaseIGD.setText("Ada");
+                            btnTriaseIGD.setEnabled(true);
+                        } else {
+                            btnTriaseIGD.setText("Tidak Ada");
+                            btnTriaseIGD.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_resume_ranap")) {
+                            btnResumeRanap.setText("Ada");
+                            btnResumeRanap.setEnabled(true);
+                        } else {
+                            btnResumeRanap.setText("Tidak Ada");
+                            btnResumeRanap.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_billing")) {
+                            btnInvoice.setText("Ada");
+                            btnInvoice.setEnabled(true);
+                        } else {
+                            btnInvoice.setText("Tidak Ada");
+                            btnInvoice.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_awal_medis_igd")) {
+                            btnAwalMedisIGD.setText("Ada");
+                            btnAwalMedisIGD.setEnabled(true);
+                        } else {
+                            btnAwalMedisIGD.setText("Tidak Ada");
+                            btnAwalMedisIGD.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_periksa_lab")) {
+                            btnHasilLab.setText("Ada");
+                            btnHasilLab.setEnabled(true);
+                        } else {
+                            btnHasilLab.setText("Tidak Ada");
+                            btnHasilLab.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_periksa_rad")) {
+                            btnHasilRad.setText("Ada");
+                            btnHasilRad.setEnabled(true);
+                        } else {
+                            btnHasilRad.setText("Tidak Ada");
+                            btnHasilRad.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_skdp")) {
+                            btnSurkon.setText("Ada");
+                            btnSurkon.setEnabled(true);
+                        } else {
+                            btnSurkon.setText("Tidak Ada");
+                            btnSurkon.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_spri")) {
+                            btnSPRI.setText("Ada");
+                            btnSPRI.setEnabled(true);
+                        } else {
+                            btnSPRI.setText("Tidak Ada");
+                            btnSPRI.setEnabled(false);
+                        }
+                        if (rs.getBoolean("ada_cetak_klaim")) {
+                            btnPDFKlaimINACBG.setText("Ada");
+                            btnPDFKlaimINACBG.setEnabled(true);
+                        } else {
+                            btnPDFKlaimINACBG.setText("Tidak Ada");
+                            btnPDFKlaimINACBG.setEnabled(false);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
                 btnTriaseIGD.setText("Tidak Ada");
                 btnTriaseIGD.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from resume_pasien_ranap where no_rawat = ?", lblNoRawat.getText())) {
-                btnResumeRanap.setText("Ada");
-                btnResumeRanap.setEnabled(true);
-            } else {
                 btnResumeRanap.setText("Tidak Ada");
                 btnResumeRanap.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from billing where no_rawat = ?", lblNoRawat.getText())) {
-                btnInvoice.setText("Ada");
-                btnInvoice.setEnabled(true);
-            } else {
                 btnInvoice.setText("Tidak Ada");
                 btnInvoice.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from penilaian_medis_igd where no_rawat = ?", lblNoRawat.getText())) {
-                btnAwalMedisIGD.setText("Ada");
-                btnAwalMedisIGD.setEnabled(true);
-            } else {
                 btnAwalMedisIGD.setText("Tidak Ada");
                 btnAwalMedisIGD.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from periksa_lab where no_rawat = ?", lblNoRawat.getText())) {
-                btnHasilLab.setText("Ada");
-                btnHasilLab.setEnabled(true);
-            } else {
                 btnHasilLab.setText("Tidak Ada");
                 btnHasilLab.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from periksa_radiologi where no_rawat = ?", lblNoRawat.getText())) {
-                btnHasilRad.setText("Ada");
-                btnHasilRad.setEnabled(true);
-            } else {
                 btnHasilRad.setText("Tidak Ada");
                 btnHasilRad.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from bridging_surat_kontrol_bpjs where no_surat = ?", noSuratKontrol)) {
-                btnSurkon.setText("Ada");
-                btnSurkon.setEnabled(true);
-            } else {
                 btnSurkon.setText("Tidak Ada");
                 btnSurkon.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from bridging_surat_pri_bpjs where no_rawat = ?", lblNoRawat.getText())) {
-                btnSPRI.setText("Ada");
-                btnSPRI.setEnabled(true);
-            } else {
                 btnSPRI.setText("Tidak Ada");
                 btnSPRI.setEnabled(false);
-            }
-            if (Sequel.cariBooleanSmc("select * from inacbg_cetak_klaim where no_sep = ?", lblNoSEP.getText())) {
-                btnPDFKlaimINACBG.setText("Ada");
-                btnPDFKlaimINACBG.setEnabled(true);
-            } else {
                 btnPDFKlaimINACBG.setText("Tidak Ada");
                 btnPDFKlaimINACBG.setEnabled(false);
             }
@@ -2510,13 +2550,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             tampilBilling();
         }
     }
-
-    /*
-    public void setNoRm(String norwt, Date tgl1, Date tgl2) {
-        DTPCari1.setDate(tgl1);
-        DTPCari2.setDate(tgl2);
-    }
-    */
 
     public void isCek() {
         lblCoderNIK.setText(Sequel.cariIsiSmc("select no_ik from inacbg_coder_nik where nik = ?", akses.getkode()));
@@ -2632,6 +2665,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
 
@@ -2648,11 +2682,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 JasperFillManager.fillReport("./report/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery())),
                 "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + savedFileName.replaceAll(".pdf", "") + ".pdf"
             );
-        } catch (JRException e) {
+        } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
 
@@ -2696,6 +2729,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             } catch (Exception e) {
                 exportSukses = false;
                 System.out.println("Notif : " + e);
+                e.printStackTrace();
             }
         }
     }
@@ -2777,6 +2811,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
+            e.printStackTrace();
             cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_Billing.pdf");
         }
     }
@@ -3131,6 +3166,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
     
@@ -3313,6 +3349,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
 
@@ -3490,6 +3527,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
 
@@ -3500,7 +3538,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         int j = 1;
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select pasien.jk, date_format(pasien.tgl_lahir, '%d-%m-%Y') as tgllahir, concat(reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur) as umur, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, periksa_radiologi.dokter_perujuk, "
-            + "dokter_perujuk.nm_dokter nm_dokter_perujuk, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, dokter.nm_dokter, periksa_radiologi.nip, petugas.nama nama_petugas, jns_perawatan_radiologi.nm_perawatan, "
+            + "dokter_perujuk.nm_dokter nm_dokter_perujuk, periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.kd_dokter, dokter.nm_dokter, periksa_radiologi.nip, petugas.nama nama_petugas, jns_perawatan_radiologi.nm_perawatan, "
             + "periksa_radiologi.status, periksa_radiologi.proyeksi, periksa_radiologi.kV, periksa_radiologi.mAS, periksa_radiologi.FFD, periksa_radiologi.BSF, periksa_radiologi.inak, periksa_radiologi.jml_penyinaran, periksa_radiologi.dosis "
             + "from periksa_radiologi join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join dokter dokter_perujuk on periksa_radiologi.dokter_perujuk = dokter_perujuk.kd_dokter "
             + "join dokter on periksa_radiologi.kd_dokter = dokter.kd_dokter join petugas on periksa_radiologi.nip = petugas.nip join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw "
@@ -3509,14 +3547,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             ps.setString(1, lblNoRawat.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    String pemeriksaan = rs.getString("nm_perawatan") + " dengan Proyeksi : " + rs.getString("proyeksi")
-                        + ", kV : " + rs.getString("kV")
-                        + ", mAS : " + rs.getString("mAS")
-                        + ", FFD : " + rs.getString("FFD")
-                        + ", BSF : " + rs.getString("BSF")
-                        + ", Inak : " + rs.getString("Inak")
-                        + ", Jumlah penyinaran : " + rs.getString("jml_penyinaran")
-                        + ", Dosis Radiasi : " + rs.getString("dosis");
+                    String pemeriksaan = rs.getString("nm_perawatan")
+                        + (rs.getString("proyeksi").isBlank() || rs.getString("proyeksi") == null ? "" : " dengan Proyeksi : " + rs.getString("proyeksi"))
+                        + (rs.getString("kV").isBlank() || rs.getString("kV") == null ? "" : ", kV : " + rs.getString("kV"))
+                        + (rs.getString("mAS").isBlank() || rs.getString("mAS") == null ? "" : ", mAS : " + rs.getString("mAS"))
+                        + (rs.getString("FFD").isBlank() || rs.getString("FFD") == null ? "" : ", FFD : " + rs.getString("FFD"))
+                        + (rs.getString("BSF").isBlank() || rs.getString("BSF") == null ? "" : ", BSF : " + rs.getString("BSF"))
+                        + (rs.getString("Inak").isBlank() || rs.getString("Inak") == null ? "" : ", Inak : " + rs.getString("Inak"))
+                        + (rs.getString("jml_penyinaran").isBlank() || rs.getString("jml_penyinaran") == null ? "" : ", Jumlah penyinaran : " + rs.getString("jml_penyinaran"))
+                        + (rs.getString("dosis").isBlank() || rs.getString("dosis") == null ? "" : ", Dosis Radiasi : " + rs.getString("dosis"));
                     Map<String, Object> param = new HashMap<>();
                     param.put("noperiksa", lblNoRawat.getText());
                     param.put("norm", lblNoRM.getText());
@@ -3524,9 +3563,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     param.put("jkel", rs.getString("jk"));
                     param.put("umur", rs.getString("umur"));
                     param.put("lahir", rs.getString("tgllahir"));
-                    param.put("pengirim", rs.getString("nm_dokter"));
+                    param.put("pengirim", rs.getString("nm_dokter_perujuk"));
                     param.put("tanggal", rs.getString("tgl_periksa"));
-                    param.put("penjab", rs.getString("nm_dokter_perujuk"));
+                    param.put("penjab", rs.getString("nm_dokter"));
                     param.put("petugas", rs.getString("nama_petugas"));
                     param.put("alamat", rs.getString("alamat"));
                     String kamar = "", kelas = "", namaKamar = "", noRawatIbu = "";
@@ -3558,15 +3597,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     param.put("emailrs", akses.getemailrs());
                     param.put("hasil", Sequel.cariIsiSmc("select hasil from hasil_radiologi where no_rawat = ? and tgl_periksa = ? and jam = ?", lblNoRawat.getText(), rs.getString("tgl_periksa"), rs.getString("jam")));
                     param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("dokter_perujuk"));
-                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter_perujuk") + "\nID " + (finger.isBlank() ? rs.getString("dokter_perujuk") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
+                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                     finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
-                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
+                    param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                     exportPDF("rptPeriksaRadiologi.jasper", urutan + "_PeriksaRadiologi" + String.valueOf(j++), param);
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            e.printStackTrace();
         }
     }
 
@@ -3654,6 +3694,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
+            e.printStackTrace();
             cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_BerkasDigital");
         }
     }
@@ -3673,42 +3714,52 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {
-            mergePDF();
+            exportSukses = mergePDF();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
+        }
+        
+        if (exportSukses) {
             cleanupAfterMerge(true);
             JOptionPane.showMessageDialog(rootPane, "Export PDF berhasil!");
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
             exportSukses = true;
         }
     }
 
-    private void mergePDF() {
+    private boolean mergePDF() {
+        boolean sukses = true;
         PDFMergerUtility pdfMerger = new PDFMergerUtility();
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {
-            Arrays.sort(files, (file1, file2) -> file1.getName().compareTo(file2.getName()));
-            for (File file : files) {
-                if (file.isFile() && file.getName().endsWith(".pdf") && file.getName().startsWith(lblNoSEP.getText() + "_")) {
-                    try {
-                        pdfMerger.addSource(file);
-                    } catch (IOException e) {
-                        System.err.println("Error adding file: " + file.getName());
+            try {
+                Arrays.sort(files, (file1, file2) -> file1.getName().compareTo(file2.getName()));
+                for (File file : files) {
+                    if (file.isFile() && file.getName().endsWith(".pdf") && file.getName().startsWith(lblNoSEP.getText() + "_")) {
+                        try {
+                            pdfMerger.addSource(file);
+                        } catch (Exception e) {
+                            System.err.println("Error adding file: " + file.getName());
+                            sukses = false;
+                            throw e;
+                        }
                     }
                 }
-            }
-            pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
-            try {
-                pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
+                pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
+                pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(80 * 1_000_000));
                 System.out.println("PDFs merged successfully!");
                 File f = new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 Desktop.getDesktop().open(f);
-            } catch (IOException e) {
-                System.err.println("Error merging PDFs.");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                sukses = false;
+                e.printStackTrace();
             }
         } else {
             System.out.println("No PDF files found in the folder: ./berkaspdf/" + tanggalExport);
         }
+        return sukses;
     }
     
     private void cleanupSingleFile(String containsName) {
