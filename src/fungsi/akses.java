@@ -5681,7 +5681,7 @@ public final class akses {
             return;
         }
         
-        if (((System.currentTimeMillis() - akses.tglSelesai) / 1000) > 0) {
+        if (((new sekuel().cariTglSmc("select now()").getTime() - akses.tglSelesai) / 1000) > 0) {
             akses.edit = false;
         }
     }

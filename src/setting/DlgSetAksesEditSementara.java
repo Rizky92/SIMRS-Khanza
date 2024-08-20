@@ -517,13 +517,13 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeekActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if (tbUser.getSelectedRow() < 0) {
+        if (tbUser.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus terlebih dahulu...!!!");
             return;
         }
-        if (Sequel.menghapustfSmc("akses_edit_sementara", "id_user = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-            emptTeks();
+        if (Sequel.menghapustfSmc("set_akses_edit_sementara", "id_user = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
             tabMode.removeRow(tbUser.getSelectedRow());
+            emptTeks();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
