@@ -14,14 +14,12 @@ package keuangan;
 import bridging.ApiPcare;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -44,6 +42,8 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPetugas;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -895,6 +895,14 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")){
             Valid.textKosong(TCari,"Pasien & Dokter");
         }else{
+            if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
+                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+            } else {
+                if (akses.getadmin() || Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
+                    simpan2();
+                }
+            }
+            /*
             try {          
                 if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")||pilihtable.equals("rawat_inap_drpr")){
                     Sequel.AutoComitFalse();
@@ -1091,6 +1099,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             } catch (Exception ex) {
                 System.out.println(ex);                
             }
+            */
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1759,5 +1768,146 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         } 
+    }
+    
+    private void simpan2() {
+        if (pilihtable.equals("rawat_inap_dr") || pilihtable.equals("rawat_inap_pr") || pilihtable.equals("rawat_inap_drpr")) {
+            try {
+                Sequel.AutoComitFalse();
+                sukses = true;
+                ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
+                for (i = 0; i < tbKamar.getRowCount(); i++) {
+                    if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString())) {
+                        switch (pilihtable) {
+                            case "rawat_inap_dr":
+                                if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 9).toString(),
+                                    tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    if (aktifpcare.equals("yes")) {
+                                        simpanTindakanPCare(
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
+                                            tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), "0", tbKamar.getValueAt(i, 9).toString(),
+                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                        );
+                                    }
+                                } else {
+                                    sukses = false;
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                }
+                                break;
+                            case "rawat_inap_pr":
+                                if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
+                                    tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                )) {
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    if (aktifpcare.equals("yes")) {
+                                        simpanTindakanPCare(
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
+                                            tbKamar.getValueAt(i, 6).toString(), "0", tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
+                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                        );
+                                    }
+                                } else {
+                                    sukses = false;
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                }
+                                break;
+                            case "rawat_inap_drpr":
+                                if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 1).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk),
+                                    tbKamar.getValueAt(i, 5).toString(), tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 8).toString(),
+                                    tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 4).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 5).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 6).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    if (aktifpcare.equals("yes")) {
+                                        simpanTindakanPCare(
+                                            nokunjungan, Sequel.cariIsiSmc("select kd_tindakan_pcare from maping_tindakan_pcare where kd_jenis_prw = ?", tbKamar.getValueAt(i, 1).toString()),
+                                            TNoRw.getText(), Valid.getTglSmc(DTPTgl), Valid.getWaktuSmc(cmbJam, cmbMnt, cmbDtk), tbKamar.getValueAt(i, 1).toString(), tbKamar.getValueAt(i, 5).toString(),
+                                            tbKamar.getValueAt(i, 6).toString(), tbKamar.getValueAt(i, 7).toString(), tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(),
+                                            tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 4).toString()
+                                        );
+                                    }
+                                } else {
+                                    sukses = false;
+                                    JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan tindakan " + tbKamar.getValueAt(i, 2).toString() + ". Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+                                }
+                                break;
+                        }
+                    }
+                }
+                
+                if (sukses) {
+                    Sequel.deleteTampJurnal();
+                    if (ttlpendapatan > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
+                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, ttlpendapatan);
+                    }
+                    if (ttljmdokter > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                    }
+                    if (ttljmperawat > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                    }
+                    if (ttlkso > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, ttlkso);
+                    }
+                    if (ttljasasarana > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                    }
+                    if (ttlbhp > 0) {
+                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", ttlbhp, 0);
+                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
+                    }
+                    if (ttlmenejemen > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                    }
+                    sukses = jur.simpanJurnal(TNoRw.getText(), "U", "TINDAKAN RAWAT INAP PASIEN " + TPasien.getText() + " DIPOSTING OLEH " + akses.getkode());
+                }
+
+                if (sukses) {
+                    Sequel.Commit();
+                } else {
+                    Sequel.RollBack();
+                }
+                Sequel.AutoComitTrue();
+                
+                if (sukses) {
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            }
+        }
     }
 }
