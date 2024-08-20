@@ -332,7 +332,7 @@ public class frmUtama extends javax.swing.JFrame {
                         
                         TeksArea.append("Menjalankan WS batal antrian Mobile JKN Pasien BPJS\n");
                         ps=koneksi.prepareStatement(
-                                "SELECT * FROM referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.statuskirim='Belum' and referensi_mobilejkn_bpjs_batal.tanggalbatal between "+(Tanggal1.getText().equals(Tanggal2.getText())?"SUBDATE('"+Tanggal2.getText()+"',INTERVAL 6 DAY) and '"+Tanggal2.getText()+"'":"'"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"'"));
+                                "SELECT * FROM referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.statuskirim='Belum' and referensi_mobilejkn_bpjs_batal.tanggalbatal between "+(Tanggal1.getText().equals(Tanggal2.getText())?"CONCAT(SUBDATE('"+Tanggal2.getText()+"',INTERVAL 6 DAY), ' 00:00:00.000') and '"+Tanggal2.getText()+" 23:59:59.999'":"CONCAT('"+Tanggal1.getText()+" 00:00:00.000') and '"+Tanggal2.getText()+" 23:59:59.999'"));
                         try {
                             rs=ps.executeQuery();
                             while(rs.next()){
