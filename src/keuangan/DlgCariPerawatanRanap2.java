@@ -11,14 +11,12 @@
 
 package keuangan;
 
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -34,6 +32,8 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPetugas;
 import simrskhanza.DlgKtgPerawatan;
 
 /**
@@ -811,6 +811,14 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")){
             Valid.textKosong(TCari,"Pasien & Dokter");
         }else{
+            if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
+                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+            } else {
+                if (akses.getadmin() || Sequel.cekTanggalRegistrasiSmc(TNoRw.getText())) {
+                    simpan2();
+                }
+            }
+            /*
             try {          
                 if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")||pilihtable.equals("rawat_inap_drpr")){
                     Sequel.AutoComitFalse();
@@ -1775,6 +1783,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 System.out.println(ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
             }
+            */
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -3089,7 +3098,555 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         NmPtg2.setText(nama2);
     }
     
+    public void setPetugas2(String kodeDokter, String namaDokter, String kodePetugas, String namaPetugas) {
+        kddokter.setText(kodeDokter);
+        nmdokter.setText(namaDokter);
+        KdPtg2.setText(kodePetugas);
+        NmPtg2.setText(namaPetugas);
+    }
+    
     private void isktg(){
         Sequel.cariIsi("select kategori_perawatan.nm_kategori from kategori_perawatan where kategori_perawatan.kd_kategori=? ",NmKtg,KdKtg.getText());
+    }
+
+    private void simpan2() {
+        if (pilihtable.equals("rawat_inap_dr")|| pilihtable.equals("rawat_inap_pr") || pilihtable.equals("rawat_inap_drpr")) {
+            try {
+                Sequel.AutoComitFalse();
+                sukses = true;
+                ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
+                hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
+                for (i = 0; i < tbKamar.getRowCount(); i++) {
+                    pg = false; sg = false; sr = false; mlm = false;
+                    switch (pilihtable) {
+                        case "rawat_inap_dr":
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                pg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sr = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                                if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                mlm = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                                if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+                            break;
+                        case "rawat_inap_pr":
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                pg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                )) {
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                )) {
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sr = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                                if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                )) {
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                mlm = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                                if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                )) {
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+                            break;
+                        case "rawat_inap_drpr":
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                pg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && pg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "07:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sg = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && sg) {
+                                if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "12:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                sr = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && sr) {
+                                if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "16:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+
+                            if (Sequel.cariBooleanSmc(
+                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
+                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
+                            )) {
+                                mlm = true;
+                            }
+                            if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
+                                if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
+                                    tbKamar.getValueAt(i, 8).toString(), tbKamar.getValueAt(i, 9).toString(), tbKamar.getValueAt(i, 10).toString(), tbKamar.getValueAt(i, 11).toString(),
+                                    tbKamar.getValueAt(i, 12).toString(), tbKamar.getValueAt(i, 13).toString(), tbKamar.getValueAt(i, 7).toString()
+                                )) {
+                                    ttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    ttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    ttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    ttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    ttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    ttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    ttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            } else if (!Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && mlm) {
+                                if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                    TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl), "20:00:00"
+                                )) {
+                                    hapusttljmdokter += Double.parseDouble(tbKamar.getValueAt(i, 10).toString());
+                                    hapusttljmperawat += Double.parseDouble(tbKamar.getValueAt(i, 11).toString());
+                                    hapusttlkso += Double.parseDouble(tbKamar.getValueAt(i, 12).toString());
+                                    hapusttlpendapatan += Double.parseDouble(tbKamar.getValueAt(i, 7).toString());
+                                    hapusttlmenejemen += Double.parseDouble(tbKamar.getValueAt(i, 13).toString());
+                                    hapusttljasasarana += Double.parseDouble(tbKamar.getValueAt(i, 8).toString());
+                                    hapusttlbhp += Double.parseDouble(tbKamar.getValueAt(i, 9).toString());
+                                } else {
+                                    sukses = false;
+                                }
+                            }
+                            break;
+                    }
+                }
+                if (sukses) {
+                    Sequel.deleteTampJurnal();
+                    if (hapusttlpendapatan > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, hapusttlpendapatan);
+                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", hapusttlpendapatan, 0);
+                    }
+                    if (hapusttljmdokter > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, hapusttljmdokter);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", hapusttljmdokter, 0);
+                    }
+                    if (hapusttljmperawat > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, hapusttljmperawat);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", hapusttljmperawat, 0);
+                    }
+                    if (hapusttlkso > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, hapusttlkso);
+                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", hapusttlkso, 0);
+                    }
+                    if (hapusttlmenejemen > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, hapusttlmenejemen);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", hapusttlmenejemen, 0);
+                    }
+                    if (hapusttljasasarana > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, hapusttljasasarana);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", hapusttljasasarana, 0);
+                    }
+                    if (hapusttlbhp > 0) {
+                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, hapusttlbhp);
+                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", hapusttlbhp, 0);
+                    }
+                    sukses = jur.simpanJurnal(TNoRw.getText(), "U", "PEMBATALAN TINDAKAN RAWAT INAP PASIEN OLEH " + akses.getkode());
+                }
+
+                if (sukses) {
+                    Sequel.deleteTampJurnal();
+                    if (ttlpendapatan > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
+                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", 0, ttlpendapatan);
+                    }
+                    if (ttljmdokter > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                    }
+                    if (ttljmperawat > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                    }
+                    if (ttlkso > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, ttlkso);
+                    }
+                    if (ttljasasarana > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                    }
+                    if (ttlbhp > 0) {
+                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", ttlbhp, 0);
+                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
+                    }
+                    if (ttlmenejemen > 0) {
+                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                    }
+                    sukses = jur.simpanJurnal(TNoRw.getText(), "U", "TINDAKAN RAWAT INAP PASIEN " + TPasien.getText() + " DIPOSTING OLEH " + akses.getkode());
+                }
+
+                if (sukses) {
+                    Sequel.Commit();
+                } else {
+                    Sequel.RollBack();
+                }
+                Sequel.AutoComitTrue();
+
+                if (sukses) {
+                    tampil2();
+                    JOptionPane.showMessageDialog(null, "Proses simpan selesai...!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
+            }
+        }
     }
 }
