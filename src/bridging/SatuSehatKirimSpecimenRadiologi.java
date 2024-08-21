@@ -283,6 +283,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
         Scroll.setViewportView(tbObat);
