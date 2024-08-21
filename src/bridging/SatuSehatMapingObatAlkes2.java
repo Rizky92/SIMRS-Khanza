@@ -463,7 +463,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(660, 245));
+        PanelInput.setPreferredSize(new java.awt.Dimension(660, 275));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
