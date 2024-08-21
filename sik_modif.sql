@@ -112,6 +112,10 @@ ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(25
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
 
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ibu` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_bayi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_ibu`;
+
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) NULL DEFAULT NULL,
