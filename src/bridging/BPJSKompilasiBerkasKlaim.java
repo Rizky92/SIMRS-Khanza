@@ -2595,18 +2595,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             });
             
-            engine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends Worker.State> ov, Worker.State oldState, Worker.State newState) -> {
-                if (newState == Worker.State.SUCCEEDED) {
-                    try {
-                        if (engine.getLocation().replaceAll(url, "").contains("action=selesai")) {
-                            getData();
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("Notifikasi : " + ex);
-                    }
-                }
-            });
-            
             jfxPanelicare.setScene(new Scene(view));
             try {
                 engine.load(url);
