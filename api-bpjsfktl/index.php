@@ -494,7 +494,7 @@
                                                         );
                                                         http_response_code(201);
                                                     }else{
-                                                        $sudahdaftar=getOne2("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.kd_poli='$kdpoli' and reg_periksa.kd_dokter='$kddokter' and reg_periksa.tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' and pasien.no_peserta='".validTeks4($decode['nomorkartu'],20)."' ");
+                                                        $sudahdaftar=getOne2("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.kd_poli='$kdpoli' and reg_periksa.kd_dokter='$kddokter' and reg_periksa.tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' and pasien.no_peserta='".validTeks4($decode['nomorkartu'],20)."' and reg_periksa.stts != 'Batal'");
                                                         if($sudahdaftar>0){
                                                             $response = array(
                                                                 'metadata' => array(
@@ -531,10 +531,9 @@
                                                                     $noReg           = noRegPoliSmc($kdpoli, $kddokter, validTeks4($decode['tanggalperiksa'], 20));
                                                                     $max             = norawatSmc(validTeks4($decode['tanggalperiksa'], 20));
                                                                     $no_rawat        = str_replace("-","/",validTeks4($decode['tanggalperiksa'],20)."/").sprintf("%06s", $max);
-                                                                    $maxbooking      = getOne2("select ifnull(MAX(CONVERT(RIGHT(nobooking,6),signed)),0)+1 from referensi_mobilejkn_bpjs where tanggalperiksa='".validTeks4($decode['tanggalperiksa'],20)."'");
-                                                                    $nobooking       = str_replace("-","",validTeks4($decode['tanggalperiksa'],20)."").sprintf("%06s", $maxbooking);
+                                                                    $nobooking       = getOne2("select concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), lpad(ifnull(max(convert(right(referensi_mobilejkn_bpjs.nobooking, 6), signed)), 0) + 1, 6, '0')) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nobooking like concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), '%')");
                                                                     $statuspoli      = getOne2("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='$datapeserta[no_rkm_medis]' and kd_poli='$kdpoli')>0,'Lama','Baru' )");
-                                                                    $dilayani        = $noReg*$waktutunggu;
+                                                                    $dilayani        = (int) $noReg * $waktutunggu;
                                                                     $statusdaftar    = $datapeserta['tgl_daftar']==$decode['tanggalperiksa']?"1":"0";
 
                                                                     if($datapeserta["tahun"] > 0){
@@ -564,7 +563,7 @@
 
                                                                     $querybooking = bukaquery2("insert into referensi_mobilejkn_bpjs values('$nobooking','$no_rawat', '".validTeks4($decode['nomorkartu'],20)."', '".validTeks4($decode['nik'],20)."','".validTeks4($decode['nohp'],20)."','".validTeks4($decode['kodepoli'],20)."','$statusdaftar','$datapeserta[no_rkm_medis]','".validTeks4($decode['tanggalperiksa'],20)."','".validTeks4($decode['kodedokter'],20)."','".validTeks4($decode['jampraktek'],20)."','".$jeniskunjungan."','".validTeks4($decode['nomorreferensi'],30)."','".$kdpoli."-".$noReg."','$noReg','".(strtotime(validTeks4($decode['tanggalperiksa'],20).' '.$jadwal['jam_mulai'].'+'.$dilayani.' minute')* 1000)."','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','Belum','0000-00-00 00:00:00','Belum')");
                                                                     if ($querybooking) {
-                                                                        $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."',addtime('".$jadwal['jam_mulai']."','".($dilayani*1000)."'), '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select registrasilama from poliklinik where kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
+                                                                        $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."', current_time(), '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select registrasilama from poliklinik where kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
                                                                         if ($query) {
                                                                             $response = array(
                                                                                 'response' => array(
