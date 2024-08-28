@@ -65,11 +65,10 @@ public final class sekuel {
         super();
     }
     
-    public boolean cariBooleanSmc(String query, String... values)
-    {
+    public boolean cariBooleanSmc(String query, String... values) {
         boolean output = false;
         try {
-            ps = connect.prepareStatement(query);
+            ps = connect.prepareStatement("select exists(" + query + ")");
             try {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, values[i]);
