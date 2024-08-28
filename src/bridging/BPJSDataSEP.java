@@ -7093,7 +7093,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                             nameNode = root.path("metadata");  
                             respon=nameNode.path("code").asText();
-                            Sequel.logTaskidSmc(TNoRw.getText(), null, "JKN", "add", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                            Sequel.logTaskidSmc(TNoRw.getText(), null, "Onsite", "addantrean", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
                             System.out.println("respon WS BPJS Kirim Pakai NoRujukan : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                         } catch (Exception e) {
                             statusantrean=false;
@@ -7143,7 +7143,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                 System.out.println("URL : "+URL);
                                 root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                 nameNode = root.path("metadata");  
-                                Sequel.logTaskidSmc(TNoRw.getText(), null, "JKN", "add", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                Sequel.logTaskidSmc(TNoRw.getText(), null, "Onsite", "addantrean", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
                                 System.out.println("respon WS BPJS Kirim Pakai SKDP : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                 if(nameNode.path("code").asText().equals("201")){
                                     statusantrean=false;
