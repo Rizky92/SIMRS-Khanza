@@ -67,24 +67,13 @@ public final class sekuel {
     
     public boolean cariBooleanSmc(String query, String... values) {
         boolean output = false;
-        try {
-            ps = connect.prepareStatement("select exists(" + query + ")");
-            try {
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }
-                rs = ps.executeQuery();
+        try (PreparedStatement ps = connect.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     output = rs.getBoolean(1);
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
                 }
             }
         } catch (Exception e) {
@@ -93,27 +82,15 @@ public final class sekuel {
         return output;
     }
     
-    public String cariIsiSmc(String query, String... values)
-    {
+    public String cariIsiSmc(String query, String... values) {
         String output = "";
-        try {
-            ps = connect.prepareStatement(query);
-            try {
-                for (int i = 0; i < values.length; i++) {
-                    ps.setString(i + 1, values[i]);
-                }
-                rs = ps.executeQuery();
+        try (PreparedStatement ps = connect.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     output = rs.getString(1);
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
                 }
             }
         } catch (Exception e) {
@@ -134,6 +111,21 @@ public final class sekuel {
             ps.setString(5, code);
             ps.setString(6, message);
             ps.setString(7, wakturs);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void mengupdateSmc(String table, String kolom, String where, String... values) {
+        String query = "update " + table + " set " + kolom + " where " + where;
+        if (kolom == null || kolom.isBlank()) {
+            query = "update " + table + " set " + kolom;
+        }
+        try (PreparedStatement ps = connect.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
