@@ -893,7 +893,7 @@ public final class sekuel {
     
     public void logTaskidSmc(String norawat, String kodebooking, String jenisPasien, String taskid, String code, String message, String wakturs) {
         try (PreparedStatement ps = connect.prepareStatement(
-            "insert into referensi_mobilejkn_bpjs_taskid_response (no_rawat, kodebooking, jenispasien, taskid, code, message, waktu, waktu_rs) " +
+            "insert into referensi_mobilejkn_bpjs_taskid_response2 (no_rawat, kodebooking, jenispasien, taskid, code, message, waktu, waktu_rs) " +
             "values (?, ?, ?, ?, ?, ?, now(), ?)"
         )) {
             ps.setString(1, norawat);
