@@ -203,13 +203,15 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
-  `id` bigint(20) UNSGINED NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) NOT NULL,
   `kodebooking` varchar(15) NULL DEFAULT NULL,
   `jenispasien` enum('MobileJKN','Onsite') NULL DEFAULT NULL,
   `taskid` enum('addantrean','batalantrean','addantreanfarmasi','1','2','3','4','5','6','7','99') NULL DEFAULT NULL,
+  `request` varchar(5000) NULL DEFAULT NULL,
   `code` varchar(5) NULL DEFAULT NULL,
   `message` varchar(200) NULL DEFAULT NULL,
+  `response` varchar(5000) NULL DEFAULT NULL,
   `waktu` datetime NULL DEFAULT NULL,
   `waktu_rs` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

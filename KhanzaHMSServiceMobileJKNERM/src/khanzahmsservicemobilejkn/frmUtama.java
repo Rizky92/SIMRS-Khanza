@@ -264,7 +264,8 @@ public class frmUtama extends javax.swing.JFrame {
                                 "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                 "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
                                 "INNER JOIN dokter ON reg_periksa.kd_dokter=dokter.kd_dokter "+
-                                "WHERE referensi_mobilejkn_bpjs.statuskirim='Belum' and referensi_mobilejkn_bpjs.tanggalperiksa between "+
+                                "WHERE referensi_mobilejkn_bpjs.status = 'Belum' and referensi_mobilejkn_bpjs.statuskirim='Belum' " +
+                                "and referensi_mobilejkn_bpjs.tanggalperiksa between "+
                                 (Tanggal1.getText().equals(Tanggal2.getText()) 
                                     ? "'" + Tanggal1.getText() + "' and date_add('" + Tanggal1.getText() + "', interval 6 day) " 
                                     : "'" + Tanggal1.getText() + "' and '" + Tanggal2.getText() + "' ") +
@@ -273,13 +274,13 @@ public class frmUtama extends javax.swing.JFrame {
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 try {     
-                                    headers = new HttpHeaders();
+                                    /*headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                     headers.add("x-timestamp",utc);
                                     headers.add("x-signature",api.getHmac(utc));
-                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                     requestJson ="{" +
                                                     "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                     "\"jenispasien\": \"JKN\"," +
@@ -306,13 +307,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                     "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\"" +
                                                 "}";
                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                    requestEntity = new HttpEntity(requestJson,headers);
+                                    // requestEntity = new HttpEntity(requestJson,headers);
                                     URL = link+"/antrean/add";	
                                     System.out.println("URL : "+URL);
                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", nameNode.path("code").asText(), nameNode.path("message").asText(), rs.getString("tanggalperiksa") + " " + dateFormat.format(new Date(rs.getLong("estimasidilayani"))).substring(11, 19));
+                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), rs.getString("tanggalperiksa") + " " + dateFormat.format(new Date(rs.getLong("estimasidilayani"))).substring(11, 19));
                                     if(nameNode.path("code").asText().equals("200")||nameNode.path("code").asText().equals("208")||nameNode.path("message").asText().equals("Ok")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where nobooking='"+rs.getString("nobooking")+"'");
                                     }   
@@ -342,25 +344,26 @@ public class frmUtama extends javax.swing.JFrame {
                             rs=ps.executeQuery();
                             while(rs.next()){
                                 try {     
-                                    headers = new HttpHeaders();
+                                    /*headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                     headers.add("x-timestamp",utc);
                                     headers.add("x-signature",api.getHmac(utc));
-                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                     requestJson ="{" +
                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                      "\"keterangan\": \""+rs.getString("keterangan")+"\"" +
                                                   "}";
                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                    requestEntity = new HttpEntity(requestJson,headers);
+                                    // requestEntity = new HttpEntity(requestJson,headers);
                                     URL = link+"/antrean/batal";	
                                     System.out.println("URL : "+URL);
                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat_batal"), rs.getString("nobooking"), "MobileJKN", "batalantrean", nameNode.path("code").asText(), nameNode.path("message").asText(), rs.getString("tanggalbatal"));
+                                    Sequel.logTaskid(rs.getString("no_rawat_batal"), rs.getString("nobooking"), "MobileJKN", "batalantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), rs.getString("tanggalbatal"));
                                     if(nameNode.path("code").asText().equals("200")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs_batal set statuskirim='Sudah' where nomorreferensi='"+rs.getString("nomorreferensi")+"'");
                                         /* Per 14 Juni 2024, taskid 99 tidak perlu dikirim untuk WS batal antrean mobileJKN
@@ -384,13 +387,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if (nameNode.path("code").asText().equals("200")) {
                                                         Sequel.mengupdateSmc("referensi_mobilejkn_bpjs", "status = 'Batal'", "nobooking = ?", rs.getString("nobooking"));
                                                     } else {
@@ -481,26 +484,26 @@ public class frmUtama extends javax.swing.JFrame {
                                             task99 = "Sudah";
                                             try {     
                                                 TeksArea.append("Menjalankan WS taskid batal pelayanan poli Mobile JKN Pasien BPJS\n");
-                                                headers = new HttpHeaders();
+                                                /*headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                 headers.add("x-timestamp",utc);
                                                 headers.add("x-signature",api.getHmac(utc));
-                                                headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                 requestJson ="{" +
                                                                  "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                  "\"taskid\": \"99\"," +
                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                               "}";
                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                 URL = link+"/antrean/updatewaktu";	
                                                 System.out.println("URL : "+URL);
                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                 nameNode = root.path("metadata");
-                                                Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                 if (nameNode.path("code").asText().equals("200")) {
                                                     Sequel.mengupdateSmc("referensi_mobilejkn_bpjs", "status = 'Batal'", "nobooking = ?", rs.getString("nobooking"));
                                                 } else {
@@ -525,26 +528,27 @@ public class frmUtama extends javax.swing.JFrame {
                                                 task3 = "Sudah";
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid mulai tunggu poli Mobile JKN Pasien BPJS\n");
-                                                    headers = new HttpHeaders();
+                                                    /*headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                     headers.add("x-timestamp",utc);
                                                     headers.add("x-signature",api.getHmac(utc));
-                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                     requestJson ="{" +
                                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                      "\"taskid\": \"3\"," +
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "3", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "3", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if(!nameNode.path("code").asText().equals("200")){
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='3' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task3 = "";
@@ -569,26 +573,27 @@ public class frmUtama extends javax.swing.JFrame {
                                                 task4 = "Sudah";
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid mulai pelayanan poli Mobile JKN Pasien BPJS\n");
-                                                    headers = new HttpHeaders();
+                                                    /*headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                     headers.add("x-timestamp",utc);
                                                     headers.add("x-signature",api.getHmac(utc));
-                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                     requestJson ="{" +
                                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                      "\"taskid\": \"4\"," +
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "4", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "4", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if(!nameNode.path("code").asText().equals("200")){
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='4' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task4 = "";
@@ -613,26 +618,27 @@ public class frmUtama extends javax.swing.JFrame {
                                                 task5 = "Sudah";
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid selesai pelayanan poli Mobile JKN Pasien BPJS\n");
-                                                    headers = new HttpHeaders();
+                                                    /*headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                     headers.add("x-timestamp",utc);
                                                     headers.add("x-signature",api.getHmac(utc));
-                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                     requestJson ="{" +
                                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                      "\"taskid\": \"5\"," +
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "5", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "5", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if(!nameNode.path("code").asText().equals("200")){
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='5' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task5 = "";
@@ -651,13 +657,13 @@ public class frmUtama extends javax.swing.JFrame {
                                         if(!noresep.equals("")){
                                             try {     
                                                 TeksArea.append("Menjalankan WS tambah antrian farmasi Mobile JKN Pasien BPJS\n");
-                                                headers = new HttpHeaders();
+                                                /*headers = new HttpHeaders();
                                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                                 headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                 utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                 headers.add("x-timestamp",utc);
                                                 headers.add("x-signature",api.getHmac(utc));
-                                                headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                 requestJson ="{" +
                                                                  "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                  "\"jenisresep\": \""+(Sequel.cariInteger("select count(resep_dokter_racikan.no_resep) from resep_dokter_racikan where resep_dokter_racikan.no_resep=?",noresep)>0?"Racikan":"Non Racikan")+"\"," +
@@ -665,13 +671,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                  "\"keterangan\": \"Resep dibuat secara elektronik di poli\"" +
                                                               "}";
                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                 URL = link+"/antrean/farmasi/add";	
                                                 System.out.println("URL : "+URL);
                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                 nameNode = root.path("metadata");
-                                                Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantreanfarmasi", nameNode.path("code").asText(), nameNode.path("message").asText(), null);
+                                                Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantreanfarmasi", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), null);
                                                 TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                             }catch (Exception ex) {
                                                 System.out.println("Notifikasi Bridging : "+ex);
@@ -685,26 +692,27 @@ public class frmUtama extends javax.swing.JFrame {
                                                 task6 = "Sudah";
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid permintaan resep poli Mobile JKN Pasien BPJS\n");
-                                                    headers = new HttpHeaders();
+                                                    /*headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                     headers.add("x-timestamp",utc);
                                                     headers.add("x-signature",api.getHmac(utc));
-                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                     requestJson ="{" +
                                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                      "\"taskid\": \"6\"," +
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "6", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "6", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if(!nameNode.path("code").asText().equals("200")){
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='6' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task6 = "";
@@ -726,26 +734,27 @@ public class frmUtama extends javax.swing.JFrame {
                                                 task7 = "Sudah";
                                                 try {     
                                                     TeksArea.append("Menjalankan WS taskid validasi resep poli Mobile JKN Pasien BPJS\n");
-                                                    headers = new HttpHeaders();
+                                                    /*headers = new HttpHeaders();
                                                     headers.setContentType(MediaType.APPLICATION_JSON);
                                                     headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
                                                     utc=String.valueOf(api.GetUTCdatetimeAsString());
                                                     headers.add("x-timestamp",utc);
                                                     headers.add("x-signature",api.getHmac(utc));
-                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
+                                                    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());*/
                                                     requestJson ="{" +
                                                                      "\"kodebooking\": \""+rs.getString("nobooking")+"\"," +
                                                                      "\"taskid\": \"7\"," +
                                                                      "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                   "}";
                                                     TeksArea.append("JSON : "+requestJson+"\n");
-                                                    requestEntity = new HttpEntity(requestJson,headers);
+                                                    // requestEntity = new HttpEntity(requestJson,headers);
                                                     URL = link+"/antrean/updatewaktu";	
                                                     System.out.println("URL : "+URL);
                                                     //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                                    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    // root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                                    root = mapper.readTree("{\"metadata\":{\"message\":\"Ok\",\"code\":200}}");
                                                     nameNode = root.path("metadata");
-                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "7", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "7", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                     if(!nameNode.path("code").asText().equals("200")){
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='7' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task7 = "";
@@ -853,13 +862,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                              "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
-                                                            requestEntity = new HttpEntity(requestJson,headers);
+                                                            // requestEntity = new HttpEntity(requestJson,headers);
                                                             URL = link+"/antrean/updatewaktu";	
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");
-                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "99", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "99", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                             if(!nameNode.path("code").asText().equals("200")){
                                                                 Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='99' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                 task99 = "";
@@ -895,13 +904,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "1", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "1", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='1' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task1 = "";
@@ -936,13 +945,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "2", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "2", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='2' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task2 = "";
@@ -994,14 +1003,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                             "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\"" +
                                                                         "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
-                                                            requestEntity = new HttpEntity(requestJson,headers);
+                                                            // requestEntity = new HttpEntity(requestJson,headers);
                                                             URL = link+"/antrean/add";	
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");  
                                                             TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
-                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "addantrean", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                         }
                                                     }catch (Exception ex) {
                                                         System.out.println("Notifikasi Bridging : "+ex);
@@ -1027,13 +1036,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "3", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "3", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='3' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task3 = "";
@@ -1071,13 +1080,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "4", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "4", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='4' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task4 = "";
@@ -1115,13 +1124,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "5", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "5", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='5' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task5 = "";
@@ -1154,13 +1163,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                              "\"keterangan\": \"Resep dibuat secara elektronik di poli\"" +
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
-                                                            requestEntity = new HttpEntity(requestJson,headers);
+                                                            // requestEntity = new HttpEntity(requestJson,headers);
                                                             URL = link+"/antrean/farmasi/add";	
                                                             System.out.println("URL : "+URL);
                                                             //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                             nameNode = root.path("metadata");
-                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "addantreanfarmasi", nameNode.path("code").asText(), nameNode.path("message").asText(), null);
+                                                            Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "addantreanfarmasi", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), null);
                                                             TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                                         }catch (Exception ex) {
                                                             System.out.println("Notifikasi Bridging : "+ex);
@@ -1187,13 +1196,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "NON JKN", "6", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "NON JKN", "6", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='6' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task6 = "";
@@ -1228,13 +1237,13 @@ public class frmUtama extends javax.swing.JFrame {
                                                                                  "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                               "}";
                                                                 TeksArea.append("JSON : "+requestJson+"\n");
-                                                                requestEntity = new HttpEntity(requestJson,headers);
+                                                                // requestEntity = new HttpEntity(requestJson,headers);
                                                                 URL = link+"/antrean/updatewaktu";	
                                                                 System.out.println("URL : "+URL);
                                                                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                                                 nameNode = root.path("metadata");
-                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "7", nameNode.path("code").asText(), nameNode.path("message").asText(), datajam);
+                                                                Sequel.logTaskid(rs.getString("no_rawat"), null, "Onsite", "7", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                                                 if(!nameNode.path("code").asText().equals("200")){
                                                                     Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='7' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                                     task7 = "";
