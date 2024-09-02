@@ -102,8 +102,8 @@ public final class sekuel {
     public void logTaskid(String norawat, String kodebooking, String jenisPasien, String taskid, String request, String response, String code, String message, String wakturs) {
         try (PreparedStatement ps = connect.prepareStatement(
             "insert into referensi_mobilejkn_bpjs_taskid_response2 " +
-            "(no_rawat, kodebooking, jenispasien, taskid, request, code, message, response, waktu, waktu_rs) " +
-            "values (?, ?, ?, ?, ?, ?, now(), ?)"
+            "(no_rawat, kodebooking, jenispasien, taskid , request, code, message, response , waktu, waktu_rs) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, now(), ?)"
         )) {
             ps.setString(1, norawat);
             ps.setString(2, kodebooking);
