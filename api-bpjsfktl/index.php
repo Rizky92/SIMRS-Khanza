@@ -505,19 +505,19 @@
                                                         }else{
                                                             $sekarang  = date("Y-m-d");
                                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
-                                                            if($interval < 0) {
+                                                            if($interval<0){
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                                         'code' => 201
                                                                     )
-                                                                );
+                                                                );  
                                                                 http_response_code(201);
-                                                            } else if ($interval > 7) {
-                                                                $tanggalbatasambil = getOne2("select date_format(date_add('".validTeks4($decode["tanggalperiksa"], 20)."', interval -7 day), '%d-%m-%Y')");
+															} else if ($interval > 30) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_add('".validTeks4($decode["tanggalperiksa"], 20)."', interval -30 day), '%d-%m-%Y')");
                                                                 $response = array(
                                                                     'metadata' => array(
-                                                                        'message' => 'Maaf, pengambilan antrian baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
+                                                                        'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
                                                                         'code' => 201
                                                                     )
                                                                 );
@@ -563,7 +563,7 @@
 
                                                                     $querybooking = bukaquery2("insert into referensi_mobilejkn_bpjs values('$nobooking','$no_rawat', '".validTeks4($decode['nomorkartu'],20)."', '".validTeks4($decode['nik'],20)."','".validTeks4($decode['nohp'],20)."','".validTeks4($decode['kodepoli'],20)."','$statusdaftar','$datapeserta[no_rkm_medis]','".validTeks4($decode['tanggalperiksa'],20)."','".validTeks4($decode['kodedokter'],20)."','".validTeks4($decode['jampraktek'],20)."','".$jeniskunjungan."','".validTeks4($decode['nomorreferensi'],30)."','".$kdpoli."-".$noReg."','$noReg','".(strtotime(validTeks4($decode['tanggalperiksa'],20).' '.$jadwal['jam_mulai'].'+'.$dilayani.' minute')* 1000)."','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','Belum','0000-00-00 00:00:00','Belum')");
                                                                     if ($querybooking) {
-                                                                        $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."', current_time(), '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select registrasilama from poliklinik where kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
+                                                                        $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."',current_time(), '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select registrasilama from poliklinik where kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
                                                                         if ($query) {
                                                                             $response = array(
                                                                                 'response' => array(
@@ -638,7 +638,8 @@
                                 $decode = json_decode($konten, true);
                                 if((!empty($header['x-token'])) && (USERNAME==$header['x-username']) && (cektoken($header['x-token'])=='true')){
                                     @$tanggal=date("Y-m-d", ($decode['waktu']/1000));
-                                    @$tanggalchekcin=date("Y-m-d H:i:s", ($decode['waktu']/1000));
+                                    // @$tanggalchekcin=date("Y-m-d H:i:s", ($decode['waktu']/1000));
+                                    @$tanggalchekcin=date("Y-m-d H:i:s", strtotime('+ 1 hour', $decode['waktu']/1000));
                                     if(empty($decode['kodebooking'])) { 
                                         $response = array(
                                             'metadata' => array(
@@ -1821,7 +1822,8 @@
             tampil();
         }
     }else{
-        tampil();
+        // tampil();
+        echo 'coba';
     }
     
     function tampil(){
