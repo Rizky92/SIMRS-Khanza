@@ -53,6 +53,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
+    private DlgPasienBaruMCUPerusahaan pasienbaru=new DlgPasienBaruMCUPerusahaan(null,false);
     private String status="",BASENOREG="",URUTNOREG="",umur="0",sttsumur="Th";
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     
@@ -307,6 +308,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
         Popup = new javax.swing.JPopupMenu();
         ppPilih = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
+        ppPengajuanPasienBaru = new javax.swing.JMenuItem();
         TNoReg = new widget.TextBox();
         TNoRw = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -379,6 +381,22 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
             }
         });
         Popup.add(ppBersihkan);
+
+        ppPengajuanPasienBaru.setBackground(new java.awt.Color(255, 255, 254));
+        ppPengajuanPasienBaru.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPengajuanPasienBaru.setForeground(new java.awt.Color(50, 50, 50));
+        ppPengajuanPasienBaru.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuanPasienBaru.setText("Pengajuan Pasien Baru");
+        ppPengajuanPasienBaru.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPengajuanPasienBaru.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPengajuanPasienBaru.setName("ppPengajuanPasienBaru"); // NOI18N
+        ppPengajuanPasienBaru.setPreferredSize(new java.awt.Dimension(180, 25));
+        ppPengajuanPasienBaru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuanPasienBaruActionPerformed(evt);
+            }
+        });
+        Popup.add(ppPengajuanPasienBaru);
 
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.setPreferredSize(new java.awt.Dimension(170, 23));
@@ -494,7 +512,7 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
         jLabel16.setBounds(0, 10, 85, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-08-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-08-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1040,6 +1058,19 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }//GEN-LAST:event_ppPilihActionPerformed
 
+    private void ppPengajuanPasienBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuanPasienBaruActionPerformed
+        if(NmPerusahaan.getText().trim().equals("")||KdPerusahaan.getText().trim().equals("")){
+            Valid.textKosong(BtnPerusahaan,"Perusahaan/Instansi MCU");
+        }else{
+            pasienbaru.KodePerusahaan=KdPerusahaan.getText();
+            pasienbaru.TanggalMCU=Valid.SetTgl(Tanggal.getSelectedItem()+"");
+            pasienbaru.tampil();
+            pasienbaru.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            pasienbaru.setLocationRelativeTo(internalFrame1);
+            pasienbaru.setVisible(true);
+        }
+    }//GEN-LAST:event_ppPengajuanPasienBaruActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1095,6 +1126,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppPengajuanPasienBaru;
     private javax.swing.JMenuItem ppPilih;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbDokter;
@@ -1161,18 +1193,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     
     
     public void isCek(){
-        autoNomor();
         TCari.requestFocus();
         BtnSimpan.setEnabled(akses.getbooking_mcu_perusahaan());
         BtnBatal.setEnabled(akses.getbooking_mcu_perusahaan());
         BtnCari.setEnabled(akses.getbooking_mcu_perusahaan());
     }
-    
-    private void autoNomor() {
-        /*Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(skp_penilaian.nomor_penilaian,3),signed)),0) from skp_penilaian where left(skp_penilaian.tanggal,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "SKP"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),4,NoPenilaian); */
-    }
-
  
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
