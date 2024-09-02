@@ -52,6 +52,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     private DlgCariPoli2 poli2=new DlgCariPoli2(null,false);
     private DlgPasien pasien=new DlgPasien(null,false);
     private String aktifjadwal="",URUTNOREG="",status="",no_rawat="",umur="",sttsumur="",nohp="";
+    private String BASENOREG = koneksiDB.BASENOREG();
     private StringBuilder htmlContent;
     
     
@@ -1719,6 +1720,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void isNomer(){
+        autonomorSmc();
+        /*
         switch (URUTNOREG) {
             case "poli":
                 Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from booking_registrasi where kd_poli='"+KdPoli.getText()+"' and tanggal_periksa='"+Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+"'","",3,NoReg);
@@ -1732,6 +1735,67 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             default:
                 Valid.autoNomer3("select ifnull(MAX(CONVERT(no_reg,signed)),0) from booking_registrasi where kd_dokter='"+KdDokter.getText()+"' and tanggal_periksa='"+Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+"'","",3,NoReg);
                 break;
+        }
+        */
+    }
+    
+    private void autonomorSmc() {
+        if (BASENOREG.equals("booking")) {
+            switch (URUTNOREG.replaceAll("\\s+", "")) {
+                case "poli":
+                    NoReg.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1, 3, '0') from booking_registrasi where booking_registrasi.kd_poli = ? and booking_registrasi.tanggal_periksa = ?", KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa)));
+                    break;
+                case "dokter":
+                    NoReg.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1, 3, '0') from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.tanggal_periksa = ?", KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa)));
+                    break;
+                case "dokter+poli":
+                case "poli+dokter":
+                    NoReg.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1, 3, '0') from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.kd_poli = ? and booking_registrasi.tanggal_periksa = ?", KdDokter.getText(), KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa)));
+                    break;
+                default:
+                    NoReg.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1, 3, '0') from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.tanggal_periksa = ?", KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa)));
+                    break;
+            }
+        } else {
+            switch (URUTNOREG.replaceAll("\\s+", "")) {
+                case "poli":
+                    NoReg.setText(Sequel.cariIsiSmc(
+                        "select lpad(greatest("
+                            + "(select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1 from booking_registrasi where booking_registrasi.kd_poli = ? and booking_registrasi.tanggal_periksa = ?), "
+                            + "(select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) + 1 from reg_periksa where reg_periksa.kd_poli = ? and reg_periksa.tgl_registrasi = ?)"
+                            + "), 3, '0')",
+                        KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa), KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa)
+                    ));
+                    break;
+                case "dokter":
+                    NoReg.setText(Sequel.cariIsiSmc(
+                        "select lpad(greatest("
+                            + "(select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1 from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.tanggal_periksa = ?), "
+                            + "(select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) + 1 from reg_periksa where reg_periksa.kd_dokter = ? and reg_periksa.tgl_registrasi = ?)"
+                            + "), 3, '0')",
+                        KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa)
+                    ));
+                    break;
+                case "dokter+poli":
+                case "poli+dokter":
+                    NoReg.setText(Sequel.cariIsiSmc(
+                        "select lpad(greatest("
+                            + "(select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1 from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.kd_poli = ? and booking_registrasi.tanggal_periksa = ?), "
+                            + "(select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) + 1 from reg_periksa where reg_periksa.kd_dokter = ? and reg_periksa.kd_poli = ? and reg_periksa.tgl_registrasi = ?)"
+                            + "), 3, '0')",
+                        KdDokter.getText(), KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa)
+                    ));
+                    break;
+                default:
+                    NoReg.setText(Sequel.cariIsiSmc(
+                        "select lpad(greatest("
+                            + "(select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1 from booking_registrasi where booking_registrasi.kd_dokter = ? and booking_registrasi.tanggal_periksa = ?), "
+                            + "(select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) + 1 from reg_periksa where reg_periksa.kd_dokter = ? and reg_periksa.tgl_registrasi = ?)"
+                            + "), 3, '0')",
+                        KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), Valid.getTglSmc(TanggalPeriksa)
+                    ));
+                    break;
+            }
         }
     }
 
