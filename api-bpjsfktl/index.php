@@ -513,8 +513,8 @@
                                                                     )
                                                                 );  
                                                                 http_response_code(201);
-															} else if ($interval > 30) {
-                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 30 day), '%d-%m-%Y')");
+															} else if ($interval > 7) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 7 day), '%d-%m-%Y')");
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
