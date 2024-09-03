@@ -260,7 +260,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 "referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,"+
                                 "referensi_mobilejkn_bpjs.kodepoli,referensi_mobilejkn_bpjs.pasienbaru,referensi_mobilejkn_bpjs.kodedokter,referensi_mobilejkn_bpjs.jampraktek,"+
                                 "referensi_mobilejkn_bpjs.nomorantrean,referensi_mobilejkn_bpjs.angkaantrean,referensi_mobilejkn_bpjs.estimasidilayani,referensi_mobilejkn_bpjs.sisakuotajkn,"+
-                                "referensi_mobilejkn_bpjs.kuotajkn,referensi_mobilejkn_bpjs.sisakuotanonjkn,referensi_mobilejkn_bpjs.kuotanonjkn "+
+                                "referensi_mobilejkn_bpjs.kuotajkn,referensi_mobilejkn_bpjs.sisakuotanonjkn,referensi_mobilejkn_bpjs.kuotanonjkn,from_unixtime(referensi_mobilejkn_bpjs.estimasidilayani/1000) as dt_ed "+
                                 "FROM referensi_mobilejkn_bpjs INNER JOIN reg_periksa ON referensi_mobilejkn_bpjs.no_rawat=reg_periksa.no_rawat "+
                                 "INNER JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                                 "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
@@ -299,7 +299,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                     "\"jeniskunjungan\": "+rs.getString("jeniskunjungan").substring(0,1)+"," +
                                                     "\"nomorreferensi\": \""+rs.getString("nomorreferensi")+"\"," +
                                                     "\"nomorantrean\": \""+rs.getString("nomorantrean")+"\"," +
-                                                    "\"angkaantrean\": "+Integer.parseInt(rs.getString("angkaantrean"))+"," +
+                                                    "\"angkaantrean\": "+rs.getInt("angkaantrean")+"," +
                                                     "\"estimasidilayani\": "+rs.getString("estimasidilayani")+"," +
                                                     "\"sisakuotajkn\": "+rs.getString("sisakuotajkn")+"," +
                                                     "\"kuotajkn\": "+rs.getString("kuotajkn")+"," +
@@ -314,7 +314,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                     System.out.println("Response : " + root.asText());
                                     nameNode = root.path("metadata");
-                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), rs.getString("tanggalperiksa") + " " + dateFormat.format(new Date(rs.getLong("estimasidilayani"))).substring(11, 19));
+                                    Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), rs.getString("dt_ed"));
                                     if(nameNode.path("code").asText().equals("200")||nameNode.path("code").asText().equals("208")||nameNode.path("message").asText().equals("Ok")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs set statuskirim='Sudah' where nobooking='"+rs.getString("nobooking")+"'");
                                     }   
@@ -365,7 +365,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     Sequel.logTaskid(rs.getString("no_rawat_batal"), rs.getString("nobooking"), "MobileJKN", "batalantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), rs.getString("tanggalbatal"));
                                     if(nameNode.path("code").asText().equals("200")){
                                         Sequel.queryu2("update referensi_mobilejkn_bpjs_batal set statuskirim='Sudah' where nomorreferensi='"+rs.getString("nomorreferensi")+"'");
-                                        /* // Per 14 Juni 2024, taskid 99 tidak perlu dikirim untuk WS batal antrean mobileJKN
+                                        // Per 14 Juni 2024, taskid 99 tidak perlu dikirim untuk WS batal antrean mobileJKN
                                         datajam=rs.getString("tanggalbatal");
                                         if(!datajam.equals("")){
                                             if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"99",datajam})==true){
@@ -393,9 +393,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                     System.out.println("Response : " + root.asText());
                                                     nameNode = root.path("metadata");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
-                                                    if (nameNode.path("code").asText().equals("200")) {
-                                                        Sequel.mengupdateSmc("referensi_mobilejkn_bpjs", "status = 'Batal'", "nobooking = ?", rs.getString("nobooking"));
-                                                    } else {
+                                                    if (!nameNode.path("code").asText().equals("200")) {
                                                         Sequel.queryu2("delete from referensi_mobilejkn_bpjs_taskid where taskid='99' and no_rawat='"+rs.getString("no_rawat")+"'");
                                                         task99 = "";
                                                     }  
@@ -404,7 +402,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                     System.out.println("Notifikasi Bridging : "+ex);
                                                 }
                                             }
-                                        } */
+                                        }
                                     }  
                                     TeksArea.append("respon WS BPJS : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                 }catch (Exception ex) {

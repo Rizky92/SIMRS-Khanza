@@ -505,13 +505,13 @@
                                                         }else{
                                                             $sekarang  = date("Y-m-d");
                                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
-                                                            if($interval < 0){
+                                                            if($interval < 0) {
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                                         'code' => 201
                                                                     )
-                                                                );  
+                                                                );
                                                                 http_response_code(201);
 															} else if ($interval > 7) {
                                                                 $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 7 day), '%d-%m-%Y')");
