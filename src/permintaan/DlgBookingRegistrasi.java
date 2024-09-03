@@ -1734,7 +1734,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 break;
         }
     }
-    
+
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){            
             Valid.SetTgl(TanggalBooking,tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
