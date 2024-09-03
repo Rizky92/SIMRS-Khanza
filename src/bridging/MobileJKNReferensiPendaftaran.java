@@ -480,10 +480,6 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(), 
                     tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
                 });
-                Sequel.mengupdateSmc("reg_periksa", "stts = 'Batal'", "no_rawat = ? and no_rkm_medis = ? and stts = 'Belum'",
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString(),
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString()
-                );
                 tampil();
             }
         }else{
@@ -573,10 +569,12 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        String sql = "select referensi_mobilejkn_bpjs.no_rawat, referensi_mobilejkn_bpjs.norm, pasien.nm_pasien, referensi_mobilejkn_bpjs.nohp, referensi_mobilejkn_bpjs.nomorkartu, referensi_mobilejkn_bpjs.nik, " +
-            "referensi_mobilejkn_bpjs.tanggalperiksa, referensi_mobilejkn_bpjs.jampraktek, referensi_mobilejkn_bpjs.jeniskunjungan, referensi_mobilejkn_bpjs.nomorreferensi, referensi_mobilejkn_bpjs.validasi, " +
-            "referensi_mobilejkn_bpjs.nobooking, referensi_mobilejkn_bpjs.kodepoli, referensi_mobilejkn_bpjs.kodedokter, referensi_mobilejkn_bpjs.status, ifnull(nm_dokter_bpjs, '') as nm_dokter_bpjs, " +
-            "ifnull(nm_poli_bpjs, '') as nm_poli_bpjs from referensi_mobilejkn_bpjs join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis " +
+        String sql = "select " +
+                "no_rawat, norm, pasien.nm_pasien, nohp, nomorkartu, nik, tanggalperiksa, jampraktek, jeniskunjungan, nomorreferensi, " +
+                "validasi, nobooking, referensi_mobilejkn_bpjs.kodepoli, referensi_mobilejkn_bpjs.kodedokter, referensi_mobilejkn_bpjs.status, " +
+                "ifnull(nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(nm_poli_bpjs, '') as nm_poli_bpjs  " +
+            "from referensi_mobilejkn_bpjs " +
+            "join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis " +
             "left join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
             "left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
             "where referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " +

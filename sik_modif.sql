@@ -187,6 +187,35 @@ ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS 
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_ibu`;
 
+CREATE TABLE IF NOT EXISTS `referensi_bridgingantrean_bpjs`  (
+  `no_rawat` varchar(17) NOT NULL,
+  `nomorkartu` varchar(25) NULL DEFAULT NULL,
+  `nik` varchar(30) NULL DEFAULT NULL,
+  `nohp` varchar(15) NULL DEFAULT NULL,
+  `kodepoli` varchar(15) NULL DEFAULT NULL,
+  `pasienbaru` enum('0','1') NOT NULL,
+  `norm` varchar(15) NULL DEFAULT NULL,
+  `tanggalperiksa` date NULL DEFAULT NULL,
+  `kodedokter` varchar(20) NULL DEFAULT NULL,
+  `jampraktek` varchar(12) NULL DEFAULT NULL,
+  `jeniskunjungan` enum('1 (Rujukan FKTP)','2 (Rujukan Internal)','3 (Kontrol)','4 (Rujukan Antar RS)') NULL DEFAULT NULL,
+  `nomorreferensi` varchar(40) NOT NULL,
+  `nomorantrean` varchar(15) NOT NULL,
+  `angkaantrean` varchar(5) NOT NULL,
+  `estimasidilayani` varchar(15) NOT NULL,
+  `sisakuotajkn` int(11) NOT NULL,
+  `kuotajkn` int(11) NOT NULL,
+  `sisakuotanonjkn` int(11) NOT NULL,
+  `kuotanonjkn` int(11) NOT NULL,
+  `status` enum('Belum','Sudah','Batal','Gagal') NOT NULL,
+  `validasi` datetime NOT NULL,
+  `statuskirim` enum('Belum','Sudah') NOT NULL,
+  PRIMARY KEY (`no_rawat`) USING BTREE,
+  INDEX `norm`(`norm`) USING BTREE,
+  CONSTRAINT `referensi_mobilejkn_bpjs_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `referensi_mobilejkn_bpjs_ibfk_2` FOREIGN KEY (`norm`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) NULL DEFAULT NULL,
