@@ -1,5 +1,28 @@
 SET FOREIGN_KEY_CHECKS=0;
 
+CREATE TABLE IF NOT EXISTS `adamlabs_orderlab`  (
+  `noorder` varchar(20) NOT NULL,
+  `no_laboratorium` varchar(30) NOT NULL,
+  PRIMARY KEY (`noorder`, `no_laboratorium`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `noorder` varchar(20) NULL DEFAULT NULL,
+  `url` varchar(255) NULL DEFAULT NULL,
+  `method` varchar(5) NULL DEFAULT NULL,
+  `request` text NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `response` text NULL DEFAULT NULL,
+  `pengirim` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `noorder`(`noorder`) USING BTREE,
+  INDEX `url`(`url`) USING BTREE,
+  INDEX `method`(`method`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `pengirim`(`pengirim`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` int(10) UNSIGNED NOT NULL,
   `tanggal` date NOT NULL,
@@ -56,6 +79,10 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 
 ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double NULL DEFAULT NULL AFTER `sisapiutang`;
 
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(500) NOT NULL AFTER `id_template`;
+
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(500) NOT NULL AFTER `nilai`;
+
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
@@ -90,6 +117,23 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL 
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
+CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
+  `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
+  `id_template` int(11) NOT NULL,
+  PRIMARY KEY (`id_pemeriksaan`, `id_template`) USING BTREE,
+  INDEX `id_template`(`id_template`) USING BTREE,
+  CONSTRAINT `mapping_pemeriksaan_labpk_ibfk_1` FOREIGN KEY (`id_pemeriksaan`) REFERENCES `pemeriksaan_labpk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `mapping_pemeriksaan_labpk_ibfk_2` FOREIGN KEY (`id_template`) REFERENCES `template_laboratorium` (`id_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
+  `nip` varchar(20) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `vendor` varchar(100) NOT NULL,
+  PRIMARY KEY (`nip`,`username`,`vendor`),
+  CONSTRAINT `mapping_user_bridginglab_petugas_fk` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
@@ -108,9 +152,40 @@ ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
 
+CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_pemeriksaan` varchar(20) NOT NULL,
+  `nama_pemeriksaan` varchar(200) NOT NULL,
+  `satuan` varchar(15) NOT NULL,
+  `metode` varchar(50) NULL DEFAULT NULL,
+  `kategori` varchar(50) NOT NULL,
+  `urut` int(10) UNSIGNED NULL DEFAULT NULL,
+  `vendor` varchar(15) NOT NULL DEFAULT '',
+  `kode_compound` varchar(255) GENERATED ALWAYS AS (concat_ws('-',`kode_pemeriksaan`,`kategori`,`vendor`)) VIRTUAL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `kode_pemeriksaan`(`kode_pemeriksaan`) USING BTREE,
+  INDEX `nama_pemeriksaan`(`nama_pemeriksaan`) USING BTREE,
+  INDEX `urut`(`urut`) USING BTREE,
+  INDEX `vendor`(`vendor`) USING BTREE,
+  INDEX `pemeriksaan_labpk_pemeriksaan_labpk_kategori_FK`(`kategori`) USING BTREE,
+  INDEX `kode_compund`(`kode_compound`) USING BTREE,
+  CONSTRAINT `pemeriksaan_labpk_pemeriksaan_labpk_kategori_FK` FOREIGN KEY (`kategori`) REFERENCES `pemeriksaan_labpk_kategori` (`nama`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
+  `nama` varchar(50) NOT NULL,
+  `urut` int(10) UNSIGNED NULL DEFAULT NULL,
+  PRIMARY KEY (`nama`) USING BTREE,
+  INDEX `urut_idx`(`urut`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ibu` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_bayi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_ibu`;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -125,6 +200,27 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   INDEX `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX`(`waktu`) USING BTREE,
   INDEX `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX`(`taskid`) USING BTREE,
   INDEX `referensi_mobilejkn_bpjs_taskid_response_code_IDX`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `no_rawat` varchar(17) NOT NULL,
+  `kodebooking` varchar(17) NULL DEFAULT NULL,
+  `jenispasien` enum('MobileJKN','Onsite') NULL DEFAULT NULL,
+  `taskid` enum('addantrean','batalantrean','addantreanfarmasi','1','2','3','4','5','6','7','99') NULL DEFAULT NULL,
+  `request` varchar(5000) NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `message` varchar(200) NULL DEFAULT NULL,
+  `response` varchar(5000) NULL DEFAULT NULL,
+  `waktu` datetime NULL DEFAULT NULL,
+  `waktu_rs` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX` (`no_rawat`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX` (`waktu`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_kodebooking_IDX` (`kodebooking`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_jenispasien_IDX` (`jenispasien`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX` (`taskid`) USING BTREE,
+  KEY `referensi_mobilejkn_bpjs_taskid_response_code_IDX` (`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;

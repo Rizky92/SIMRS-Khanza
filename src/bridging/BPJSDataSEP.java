@@ -6970,6 +6970,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     
     public boolean SimpanAntrianOnSite(){
         statusantrean=true;
+        String pasienbaru = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', '1', '0') from reg_periksa where reg_periksa.no_rawat = ?", TNoRw.getText());
         if(Sequel.cariInteger("select count(referensi_mobilejkn_bpjs.no_rawat) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.no_rawat=?", TNoRw.getText())==0){
             if((!NoRujukan.getText().equals(""))||(!NoSKDP.getText().equals(""))){
                 if(TujuanKunjungan.getSelectedItem().toString().trim().equals("0. Normal")&&FlagProsedur.getSelectedItem().toString().trim().equals("")&&Penunjang.getSelectedItem().toString().trim().equals("")&&AsesmenPoli.getSelectedItem().toString().trim().equals("")){
@@ -7060,7 +7061,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             headers.add("x-timestamp",utc);
                             headers.add("x-signature",apiMobileJKN.getHmac(utc));
                             headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
-
                             requestJson ="{" +
                                             "\"kodebooking\": \""+TNoRw.getText()+"\"," +
                                             "\"jenispasien\": \"JKN\"," +
@@ -7069,7 +7069,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                             "\"nohp\": \""+NoTelp.getText()+"\"," +
                                             "\"kodepoli\": \""+KdPoli.getText()+"\"," +
                                             "\"namapoli\": \""+NmPoli.getText()+"\"," +
-                                            "\"pasienbaru\": 0," +
+                                            "\"pasienbaru\": " + pasienbaru + "," +
                                             "\"norm\": \""+TNoRM.getText()+"\"," +
                                             "\"tanggalperiksa\": \""+Valid.SetTgl(TanggalSEP.getSelectedItem()+"")+"\"," +
                                             "\"kodedokter\": "+KdDPJP.getText()+"," +
@@ -7093,6 +7093,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                             nameNode = root.path("metadata");  
                             respon=nameNode.path("code").asText();
+                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                             System.out.println("respon WS BPJS Kirim Pakai NoRujukan : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                         } catch (Exception e) {
                             statusantrean=false;
@@ -7119,7 +7120,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                                 "\"nohp\": \""+NoTelp.getText()+"\"," +
                                                 "\"kodepoli\": \""+KdPoli.getText()+"\"," +
                                                 "\"namapoli\": \""+NmPoli.getText()+"\"," +
-                                                "\"pasienbaru\": 0," +
+                                                "\"pasienbaru\": " + pasienbaru + "," +
                                                 "\"norm\": \""+TNoRM.getText()+"\"," +
                                                 "\"tanggalperiksa\": \""+Valid.SetTgl(TanggalSEP.getSelectedItem()+"")+"\"," +
                                                 "\"kodedokter\": "+KdDPJP.getText()+"," +
@@ -7142,6 +7143,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                 System.out.println("URL : "+URL);
                                 root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                                 nameNode = root.path("metadata");  
+                                Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.asText(), datajam);
                                 System.out.println("respon WS BPJS Kirim Pakai SKDP : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                                 if(nameNode.path("code").asText().equals("201")){
                                     statusantrean=false;

@@ -513,11 +513,11 @@
                                                                     )
                                                                 );
                                                                 http_response_code(201);
-                                                            } else if ($interval > 7) {
-                                                                $tanggalbatasambil = getOne2("select date_format(date_add('".validTeks4($decode["tanggalperiksa"], 20)."', interval -7 day), '%d-%m-%Y')");
+															} else if ($interval > 7) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 7 day), '%d-%m-%Y')");
                                                                 $response = array(
                                                                     'metadata' => array(
-                                                                        'message' => 'Maaf, pengambilan antrian baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
+                                                                        'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
                                                                         'code' => 201
                                                                     )
                                                                 );
@@ -526,13 +526,12 @@
                                                                 $sisakuota=getOne2("select count(no_rawat) from reg_periksa where kd_poli='$kdpoli' and kd_dokter='$kddokter' and tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' ");
                                                                 if ($sisakuota < $jadwal['kuota']) {
                                                                     $datapeserta     = cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20));
-                                                                    $noReg           = noRegPoli($kdpoli,$kddokter,validTeks4($decode['tanggalperiksa'],20));
-                                                                    $max             = getOne2("select ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0)+1 from reg_periksa where tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."'");
+                                                                    $noReg           = noRegPoliSmc($kdpoli, $kddokter, validTeks4($decode['tanggalperiksa'], 20));
+                                                                    $max             = norawatSmc(validTeks4($decode['tanggalperiksa'], 20));
                                                                     $no_rawat        = str_replace("-","/",validTeks4($decode['tanggalperiksa'],20)."/").sprintf("%06s", $max);
-                                                                    $maxbooking      = getOne2("select ifnull(MAX(CONVERT(RIGHT(nobooking,6),signed)),0)+1 from referensi_mobilejkn_bpjs where tanggalperiksa='".validTeks4($decode['tanggalperiksa'],20)."'");
-                                                                    $nobooking       = str_replace("-","",validTeks4($decode['tanggalperiksa'],20)."").sprintf("%06s", $maxbooking);
+                                                                    $nobooking       = getOne2("select concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), lpad(ifnull(max(convert(right(referensi_mobilejkn_bpjs.nobooking, 6), signed)), 0) + 1, 6, '0')) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nobooking like concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), '%')");
                                                                     $statuspoli      = getOne2("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='$datapeserta[no_rkm_medis]' and kd_poli='$kdpoli')>0,'Lama','Baru' )");
-                                                                    $dilayani        = $noReg*$waktutunggu;
+                                                                    $dilayani        = (int) $noReg * $waktutunggu;
                                                                     $statusdaftar    = $datapeserta['tgl_daftar']==$decode['tanggalperiksa']?"1":"0";
 
                                                                     if($datapeserta["tahun"] > 0){
@@ -637,7 +636,7 @@
                                 $decode = json_decode($konten, true);
                                 if((!empty($header['x-token'])) && (USERNAME==$header['x-username']) && (cektoken($header['x-token'])=='true')){
                                     @$tanggal=date("Y-m-d", ($decode['waktu']/1000));
-                                    @$tanggalchekcin=date("Y-m-d H:i:s", ($decode['waktu']/1000));
+                                    @$tanggalchekcin=date("Y-m-d H:i:s", strtotime('+ 1 hour', $decode['waktu']/1000));
                                     if(empty($decode['kodebooking'])) { 
                                         $response = array(
                                             'metadata' => array(
@@ -1820,7 +1819,8 @@
             tampil();
         }
     }else{
-        tampil();
+        // tampil();
+        echo 'coba';
     }
     
     function tampil(){

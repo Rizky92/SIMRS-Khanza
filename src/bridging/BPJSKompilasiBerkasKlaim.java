@@ -1212,13 +1212,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKompilasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKompilasiMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            if (tabMode.getRowCount() != 0) {
-                try {
-                    getData();
-                    tabPane1.setSelectedIndex(0);
-                } catch (java.lang.NullPointerException e) {
-                }
+        if (tabMode.getRowCount() != 0) {
+            try {
+                getData();
+                tabPane1.setSelectedIndex(0);
+            } catch (java.lang.NullPointerException e) {
             }
         }
     }//GEN-LAST:event_tbKompilasiMouseClicked
@@ -1698,12 +1696,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         TNoSEPRanapPulang.setText(rspulang.getString("no_sep"));
                         TNoRMPulang.setText(rspulang.getString("no_rkm_medis"));
                         TPasienPulang.setText(rspulang.getString("nm_pasien"));
-                        TanggalPulang.setSelectedItem(
-                            rspulang.getString("tglpulang").substring(8, 10) + "-"
-                            + rspulang.getString("tglpulang").substring(5, 7) + "-"
-                            + rspulang.getString("tglpulang").substring(0, 4) + " "
-                            + rspulang.getString("tglpulang").substring(11, 19)
-                        );
+                        TanggalPulang.setDate(rspulang.getTimestamp("tglpulang"));
                         WindowUpdatePulang.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");

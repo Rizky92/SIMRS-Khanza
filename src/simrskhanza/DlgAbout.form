@@ -121,7 +121,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="32" green="32" red="32" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="2024-07-22"/>
+                <Property name="text" type="java.lang.String" value="2024-09-04"/>
                 <Property name="name" type="java.lang.String" value="jLabel17" noResource="true"/>
               </Properties>
               <Constraints>
@@ -138,7 +138,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="32" green="32" red="32" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Patch 1"/>
                 <Property name="name" type="java.lang.String" value="jLabel18" noResource="true"/>
               </Properties>
               <Constraints>
