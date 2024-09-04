@@ -890,6 +890,25 @@ public final class sekuel {
     {
         this.insertOrUpdateTampJurnal(kdRek, nmRek, parseDouble(d), parseDouble(k));
     }
+    
+    public void logTaskid(String norawat, String kodebooking, String jenisPasien, String taskid, String request, String code, String message, String response, String wakturs) {
+        try (PreparedStatement ps = connect.prepareStatement(
+            "insert into referensi_mobilejkn_bpjs_taskid_response2 (no_rawat, kodebooking, jenispasien, taskid, request, code, message, response, waktu, waktu_rs) values (?, ?, ?, ?, ?, ?, ?, ?, now(), ?)"
+        )) {
+            ps.setString(1, norawat);
+            ps.setString(2, kodebooking);
+            ps.setString(3, jenisPasien);
+            ps.setString(4, taskid);
+            ps.setString(5, request);
+            ps.setString(6, code);
+            ps.setString(7, message);
+            ps.setString(8, response);
+            ps.setString(9, wakturs);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
 
     public void menyimpan(String table,String value,String sama){
         try {

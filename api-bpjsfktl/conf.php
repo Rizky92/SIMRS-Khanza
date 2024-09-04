@@ -120,6 +120,23 @@
         return $no_reg;
     }
 
+    function noRegPoliSmc($kd_poli, $kd_dokter, $tgl) {
+        return getOne(<<<SQL
+        select lpad(greatest(
+            (select ifnull(max(convert(booking_registrasi.no_reg, signed)), 0) + 1 from booking_registrasi where booking_registrasi.kd_poli = '{$kd_poli}' and booking_registrasi.kd_dokter = '{$kd_dokter}' and booking_registrasi.tanggal_periksa = '{$tgl}'),
+            (select ifnull(max(convert(reg_periksa.no_reg, signed)), 0) + 1 from reg_periksa where reg_periksa.kd_poli = '{$kd_poli}' and reg_periksa.kd_dokter = '{$kd_dokter}' and reg_periksa.tgl_registrasi = '{$tgl}')
+        ), 3, '0')
+        SQL);
+    }
+
+    function norawatSmc($tgl) {
+        return getOne2(<<<SQL
+            select greatest(
+                (select ifnull(max(convert(right(referensi_mobilejkn_bpjs.no_rawat, 6), signed)), 0) + 1 from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.no_rawat like concat(date_format('{$tgl}', '%Y/%m/%d'), '%')),
+                (select ifnull(max(convert(right(reg_periksa.no_rawat, 6), signed)), 0) + 1 from reg_periksa where reg_periksa.no_rawat like concat(date_format('{$tgl}', '%Y/%m/%d'), '%')))
+            SQL);
+    }
+
     function FormatTgl($format, $tanggal){
         return date($format, strtotime($tanggal));
     }
