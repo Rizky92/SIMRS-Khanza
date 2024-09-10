@@ -7953,7 +7953,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="12-08-2024 13:25:39"/>
+                    <StringItem index="0" value="09-09-2024 08:11:43"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -7976,7 +7976,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="301" y="92" width="81" height="23"/>
+                  <AbsoluteConstraints x="300" y="92" width="81" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -8034,20 +8034,21 @@
             </Component>
             <Component class="widget.Label" name="jLabel48">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tanggal Kematian :"/>
+                <Property name="text" type="java.lang.String" value="Tgl. Kematian :"/>
                 <Property name="name" type="java.lang.String" value="jLabel48" noResource="true"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="300" y="122" width="100" height="23"/>
+                  <AbsoluteConstraints x="300" y="122" width="80" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="widget.Tanggal" name="TanggalKematian">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="12-08-2024"/>
+                    <StringItem index="0" value="09-09-2024"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8060,7 +8061,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="404" y="122" width="171" height="23"/>
+                  <AbsoluteConstraints x="385" y="122" width="100" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -8160,7 +8161,6 @@
             </Component>
             <Component class="widget.TextBox" name="TNoSEPRanapPulang">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
                 <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="null"/>
                 </Property>
@@ -8570,7 +8570,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="12-08-2024"/>
+                        <StringItem index="0" value="09-09-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8599,7 +8599,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="12-08-2024"/>
+                        <StringItem index="0" value="09-09-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8639,7 +8639,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="12-08-2024"/>
+                        <StringItem index="0" value="09-09-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8667,7 +8667,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="12-08-2024"/>
+                        <StringItem index="0" value="09-09-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

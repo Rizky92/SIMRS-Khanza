@@ -110,6 +110,10 @@ public final class validasi {
         return getTglSmc(tgl) + " " + getWaktuSmc(jam, menit, detik);
     }
     
+    public String setTglJamSmc(Date tgljam) {
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
+    }
+    
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
     }

@@ -2784,6 +2784,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         try (FileOutputStream os = new FileOutputStream("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_Billing.pdf")) {
             URL url = new URL(link);
             org.jsoup.nodes.Document jsoupDoc = Jsoup.parse(url, 30000);
+            jsoupDoc.head().appendElement("style").appendText("body { font-family: Arial, sans-serif }");
             org.w3c.dom.Document w3cDoc = new W3CDom().fromJsoup(jsoupDoc);
             PdfRendererBuilder builder = new PdfRendererBuilder();
             builder.withW3cDocument(w3cDoc, link);
