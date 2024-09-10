@@ -57,7 +57,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"User ID", "Nama User", "Jabatan", "Password"};
+        Object[] row = {"User ID", "Nama User", "Jabatan", "Password", "pw"};
 
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -78,6 +78,8 @@ public class DlgUserSmc extends javax.swing.JDialog {
         tbUser.getColumnModel().getColumn(1).setPreferredWidth(200);
         tbUser.getColumnModel().getColumn(2).setPreferredWidth(120);
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tbUser.getColumnModel().getColumn(4).setMinWidth(0);
+        tbUser.getColumnModel().getColumn(4).setMaxWidth(0);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte) 30).getKata(TKd));
@@ -498,10 +500,10 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (Sequel.executeRawSmc("insert into user (id_user, password) values (aes_encrypt(?, 'nur'), aes_encrypt(?, 'windi'))", TKd.getText(), TPass.getText())) {
                 tabMode.addRow(new Object[] {
-                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), TPass.getText()
+                    TKd.getText(), TNmUser.getText(), Jabatan.getText(), "**********", TPass.getText()
                 });
                 emptTeks();
-                LCount.setText("" + tabMode.getRowCount());
+                LCount.setText(String.valueOf(tabMode.getRowCount()));
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -525,7 +527,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
                 if (Sequel.executeRawSmc("delete from user where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')", TKd.getText(), TPass.getText())) {
                     tabMode.removeRow(tbUser.getSelectedRow());
                     emptTeks();
-                    LCount.setText("" + tabMode.getRowCount());
+                    LCount.setText(String.valueOf(tabMode.getRowCount()));
                 }
             }
         }
@@ -547,10 +549,10 @@ public class DlgUserSmc extends javax.swing.JDialog {
         } else {
             if (tbUser.getSelectedRow() != -1) {
                 if (Sequel.executeRawSmc("update user set id_user = aes_encrypt(?, 'nur'), password = aes_encrypt(?, 'windi') where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi')",
-                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString(), tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString()
+                    TKd.getText(), TPass.getText(), tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString(), tbUser.getValueAt(tbUser.getSelectedRow(), 4).toString()
                 )) {
                     tabMode.setValueAt(TKd.getText(), tbUser.getSelectedRow(), 0);
-                    tabMode.setValueAt(TPass.getText(), tbUser.getSelectedRow(), 3);
+                    tabMode.setValueAt(TPass.getText(), tbUser.getSelectedRow(), 4);
                     emptTeks();
                 }
             }
@@ -728,56 +730,54 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
         if (tabMode.getRowCount() != 0) {
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-
-            if (evt.getClickCount() == 1) {
-                if (copyhakakses.equals("copy")) {
-                    if (userdicopy.equals(TKd.getText())) {
-                        JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
-                        userdicopy = "";
-                        copyhakakses = "";
-                    } else {
-                        int reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah bener belum data copy hak aksesnya..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-                        if (reply == JOptionPane.YES_OPTION) {
-                            String sqlupdate = "";
-                            try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
-                                ps.setString(1, userdicopy);
-                                try (ResultSet rs = ps.executeQuery()) {
-                                    if (rs.next()) {
-                                        try (PreparedStatement ps2 = koneksi.prepareStatement("select column_name as `column_name` from information_schema.columns where table_schema = ? and table_name = 'user' and column_name not in ('id_user', 'password')")) {
-                                            ps2.setString(1, koneksiDB.DATABASE());
-                                            try (ResultSet rs2 = ps2.executeQuery()) {
-                                                while (rs2.next()) {
-                                                    rs.getString(rs2.getString("column_name"));
-                                                    if (rs.wasNull()) {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = null, ";
-                                                    } else {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
-                                                    }
+            if (copyhakakses.equals("copy")) {
+                if (userdicopy.equals(TKd.getText())) {
+                    JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
+                    userdicopy = "";
+                    copyhakakses = "";
+                } else {
+                    int reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah bener belum data copy hak aksesnya..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        String sqlupdate = "";
+                        try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
+                            ps.setString(1, userdicopy);
+                            try (ResultSet rs = ps.executeQuery()) {
+                                if (rs.next()) {
+                                    try (PreparedStatement ps2 = koneksi.prepareStatement("select column_name as `column_name` from information_schema.columns where table_schema = ? and table_name = 'user' and column_name not in ('id_user', 'password')")) {
+                                        ps2.setString(1, koneksiDB.DATABASE());
+                                        try (ResultSet rs2 = ps2.executeQuery()) {
+                                            while (rs2.next()) {
+                                                rs.getString(rs2.getString("column_name"));
+                                                if (rs.wasNull()) {
+                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = null, ";
+                                                } else {
+                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
                                                 }
                                             }
-                                        } catch (Exception e) {
-                                            System.out.println("Notif : " + e);
                                         }
+                                    } catch (Exception e) {
+                                        System.out.println("Notif : " + e);
                                     }
                                 }
-                            } catch (Exception e) {
-                                System.out.println("Notif : " + e);
                             }
-                            sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 2);
-                            if (Sequel.mengupdatetfSmc("user", sqlupdate, "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-                                JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
-                                userdicopy = "";
-                                copyhakakses = "";
-                            }
-                        } else {
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 2);
+                        if (Sequel.mengupdatetfSmc("user", sqlupdate, "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
+                            JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
                             userdicopy = "";
                             copyhakakses = "";
                         }
+                    } else {
+                        userdicopy = "";
+                        copyhakakses = "";
                     }
+                }
+            } else {
+                try {
+                    getData();
+                } catch (java.lang.NullPointerException e) {
                 }
             }
         }
@@ -872,7 +872,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+                    tabMode.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), "**********", rs.getString(4)});
                 }
             }
             LCount.setText(String.valueOf(tabMode.getRowCount()));
@@ -893,7 +893,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if (tbUser.getSelectedRow() != -1) {
             TKd.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString());
             TNmUser.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 1).toString());
-            TPass.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString());
+            TPass.setText(tbUser.getValueAt(tbUser.getSelectedRow(), 4).toString());
         }
     }
 }

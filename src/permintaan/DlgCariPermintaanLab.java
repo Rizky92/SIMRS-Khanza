@@ -5268,7 +5268,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     private void autoKirimOrderKeLIS(String noorder) {
-        if (LABORATORIUMKIRIMHASIL.isBlank()) {
+        if (LABORATORIUMKIRIMHASIL == null || LABORATORIUMKIRIMHASIL.isBlank()) {
             return;
         }
         

@@ -5565,7 +5565,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024 08:50:47" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024 08:11:43" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -5576,7 +5576,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel46.setText("Status Pulang :");
         jLabel46.setName("jLabel46"); // NOI18N
         internalFrame11.add(jLabel46);
-        jLabel46.setBounds(301, 92, 81, 23);
+        jLabel46.setBounds(300, 92, 81, 23);
 
         StatusPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Atas Persetujuan Dokter", "3. Atas Permintaan Sendiri", "4. Meninggal", "5. Lain-lain" }));
         StatusPulang.setName("StatusPulang"); // NOI18N
@@ -5601,19 +5601,20 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame11.add(NoSuratKematian);
         NoSuratKematian.setBounds(123, 122, 160, 23);
 
-        jLabel48.setText("Tanggal Kematian :");
+        jLabel48.setText("Tgl. Kematian :");
         jLabel48.setName("jLabel48"); // NOI18N
         internalFrame11.add(jLabel48);
-        jLabel48.setBounds(300, 122, 100, 23);
+        jLabel48.setBounds(300, 122, 80, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
+        TanggalKematian.setEditable(false);
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
         TanggalKematian.setOpaque(false);
         TanggalKematian.setPreferredSize(new java.awt.Dimension(95, 23));
         internalFrame11.add(TanggalKematian);
-        TanggalKematian.setBounds(404, 122, 171, 23);
+        TanggalKematian.setBounds(385, 122, 100, 23);
 
         jLabel49.setText("No. LP Manual :");
         jLabel49.setName("jLabel49"); // NOI18N
@@ -5655,7 +5656,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame11.add(jLabel41);
         jLabel41.setBounds(0, 62, 78, 23);
 
-        TNoSEPRanapPulang.setEditable(false);
         TNoSEPRanapPulang.setHighlighter(null);
         TNoSEPRanapPulang.setName("TNoSEPRanapPulang"); // NOI18N
         internalFrame11.add(TNoSEPRanapPulang);
@@ -5904,7 +5904,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5927,7 +5927,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5953,7 +5953,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -5971,7 +5971,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-07-2024" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-09-2024" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -15996,12 +15996,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }
                 }
                 WindowUpdatePulang.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            
             if (e.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus..!!");
+                JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus..!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan data..!!!");
             }
         }
     }//GEN-LAST:event_BtnSimpan8ActionPerformed
@@ -16544,140 +16547,88 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }
     
     private void MnSEPUpdateTanggalPulangActionPerformed(java.awt.event.ActionEvent evt) {
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
-        }else{
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             emptTeksUpdatePulang();
-            if(tbKamIn.getSelectedRow()>-1){
-                if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-                    try {
-                        psanak=koneksi.prepareStatement(
-                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");            
-                        try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
-                            rs2=psanak.executeQuery();
-                            if(rs2.next()){
-                                pspulang = koneksi.prepareStatement("select bridging_sep.no_rawat, bridging_sep.no_sep, pasien.no_rkm_medis, pasien.nm_pasien, " +
-                                    "if (bridging_sep.tglpulang is null or bridging_sep.tglpulang = '0000-00-00 00:00:00', " +
-                                    "(select if (max(concat(kamar_inap.tgl_keluar, ' ',kamar_inap.jam_keluar)) = '0000-00-00 00:00:00' " +
-                                    "or max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar)) is null, now(), " +
-                                    "max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar))) " +
-                                    "from kamar_inap where kamar_inap.no_rawat = bridging_sep.no_rawat " +
-                                    "), bridging_sep.tglpulang) as tglpulang " +
-                                    "from bridging_sep " +
-                                    "join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                                    "where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat = ? " +
-                                    "order by bridging_sep.tglsep desc limit 1");
-                                try {
-                                    pspulang.setString(1, rs2.getString("no_rawat2"));
-                                    rspulang = pspulang.executeQuery();
-                                    if(rspulang.next()){
-                                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                        WindowUpdatePulang.setSize(608, 264);
-                                        WindowUpdatePulang.setLocationRelativeTo(internalFrame1);
-                                        TNoRwPulang.setText(rspulang.getString("no_rawat"));
-                                        TNoSEPRanapPulang.setText(rspulang.getString("no_sep"));
-                                        TNoRMPulang.setText(rspulang.getString("no_rkm_medis"));
-                                        TPasienPulang.setText(rspulang.getString("nm_pasien"));
-                                        TanggalPulang.setSelectedItem(
-                                            rspulang.getString("tglpulang").substring(8, 10) + "-" +
-                                            rspulang.getString("tglpulang").substring(5, 7) + "-" +
-                                            rspulang.getString("tglpulang").substring(0, 4) + " " +
-                                            rspulang.getString("tglpulang").substring(11, 19)
-                                        );
-                                        WindowUpdatePulang.setVisible(true);
-                                        this.setCursor(Cursor.getDefaultCursor());
-                                    }else{
-                                        JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
-                                        TCari.requestFocus();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    System.out.println("Notif : "+e);
-                                } finally{
-                                    if (rspulang != null) {
-                                        rspulang.close();
-                                    }
-                                    if (pspulang != null) {
-                                        pspulang.close();
+            if (tbKamIn.getSelectedRow() > -1) {
+                if (tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString().equals("")) {
+                    try (PreparedStatement ps = koneksi.prepareStatement("select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat = ?")) {
+                        ps.setString(1, tbKamIn.getValueAt(tbKamIn.getSelectedRow() - 1, 0).toString());
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs2.next()) {
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "select bridging_sep.no_rawat, bridging_sep.no_sep, pasien.no_rkm_medis, pasien.nm_pasien, if(bridging_sep.tglpulang = '0000-00-00 00:00:00', " +
+                                    "(select if(max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar)) = '0000-00-00 00:00:00' or max(concat(kamar_inap.tgl_keluar, ' ', " +
+                                    "kamar_inap.jam_keluar)) is null, now(), max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar))) from kamar_inap " +
+                                    "where kamar_inap.no_rawat = bridging_sep.no_rawat), bridging_sep.tglpulang) as tglpulang from bridging_sep " +
+                                    "join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                                    "where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat = ? order by bridging_sep.tglsep desc limit 1"
+                                )) {
+                                    ps2.setString(1, rs.getString("no_rawat2"));
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        if (rs2.next()) {
+                                            WindowUpdatePulang.setSize(608, 264);
+                                            WindowUpdatePulang.setLocationRelativeTo(internalFrame1);
+                                            TNoRwPulang.setText(rs2.getString("no_rawat"));
+                                            TNoSEPRanapPulang.setText(rs2.getString("no_sep"));
+                                            TNoRMPulang.setText(rs2.getString("no_rkm_medis"));
+                                            TPasienPulang.setText(rs2.getString("nm_pasien"));
+                                            TanggalPulang.setSelectedItem(Valid.setTglJamSmc((Date) rs2.getTimestamp("tglpulang")));
+                                            WindowUpdatePulang.setVisible(true);
+                                        } else {
+                                            this.setCursor(Cursor.getDefaultCursor());
+                                            JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                            TCari.requestFocus();
+                                        }
                                     }
                                 }
-                            }else{
-                                  JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-                                  tbKamIn.requestFocus();
-                            }
-                        } catch(Exception ex){
-                            ex.printStackTrace();
-                            System.out.println("Notifikasi : "+ex);
-                        }finally{
-                              if(rs2 != null){
-                                  rs2.close();
-                              }
-                              if(psanak != null){
-                                  psanak.close();
-                              }
-                        }                    
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println(e);
-                    } 
-                }else{
-                    try {
-                        pspulang = koneksi.prepareStatement("select bridging_sep.no_rawat, bridging_sep.no_sep, pasien.no_rkm_medis, pasien.nm_pasien, " +
-                            "if (bridging_sep.tglpulang is null or bridging_sep.tglpulang = '0000-00-00 00:00:00', " +
-                            "(select if (max(concat(kamar_inap.tgl_keluar, ' ',kamar_inap.jam_keluar)) = '0000-00-00 00:00:00' " +
-                            "or max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar)) is null, now(), " +
-                            "max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar))) " +
-                            "from kamar_inap where kamar_inap.no_rawat = bridging_sep.no_rawat " +
-                            "), bridging_sep.tglpulang) as tglpulang " +
-                            "from bridging_sep " +
-                            "join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                            "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                            "where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat = ? " +
-                            "order by bridging_sep.tglsep desc limit 1");
-                        try {
-                            pspulang.setString(1, tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString());
-                            rspulang = pspulang.executeQuery();
-                            if(rspulang.next()){
-                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                WindowUpdatePulang.setSize(608, 264);
-                                WindowUpdatePulang.setLocationRelativeTo(internalFrame1);
-                                TNoRwPulang.setText(rspulang.getString("no_rawat"));
-                                TNoSEPRanapPulang.setText(rspulang.getString("no_sep"));
-                                TNoRMPulang.setText(rspulang.getString("no_rkm_medis"));
-                                TPasienPulang.setText(rspulang.getString("nm_pasien"));
-                                TanggalPulang.setSelectedItem(
-                                    rspulang.getString("tglpulang").substring(8, 10) + "-" +
-                                    rspulang.getString("tglpulang").substring(5, 7) + "-" +
-                                    rspulang.getString("tglpulang").substring(0, 4) + " " +
-                                    rspulang.getString("tglpulang").substring(11, 19)
-                                );
-                                WindowUpdatePulang.setVisible(true);
+                            } else {
                                 this.setCursor(Cursor.getDefaultCursor());
-                            }else{
-                                JOptionPane.showMessageDialog(null,"Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
-                                TCari.requestFocus();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            System.out.println("Notif : "+e);
-                        } finally{
-                            if (rspulang != null) {
-                                rspulang.close();
-                            }
-                            if (pspulang != null) {
-                                pspulang.close();
+                                JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu pasien...!!!");
+                                tbKamIn.requestFocus();
                             }
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("Notif : "+e);
+                        this.setCursor(Cursor.getDefaultCursor());
+                        System.out.println("Notif : " + e);
                     }
-                }   
+                } else {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select bridging_sep.no_rawat, bridging_sep.no_sep, pasien.no_rkm_medis, pasien.nm_pasien, if(bridging_sep.tglpulang = '0000-00-00 00:00:00', " +
+                        "(select if(max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar)) = '0000-00-00 00:00:00' or max(concat(kamar_inap.tgl_keluar, ' ', " +
+                        "kamar_inap.jam_keluar)) is null, now(), max(concat(kamar_inap.tgl_keluar, ' ', kamar_inap.jam_keluar))) from kamar_inap " +
+                        "where kamar_inap.no_rawat = bridging_sep.no_rawat), bridging_sep.tglpulang) as tglpulang from bridging_sep " +
+                        "join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                        "where bridging_sep.jnspelayanan = '1' and bridging_sep.no_rawat = ? order by bridging_sep.tglsep desc limit 1"
+                    )) {
+                        ps.setString(1, tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString());
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                WindowUpdatePulang.setSize(608, 264);
+                                WindowUpdatePulang.setLocationRelativeTo(internalFrame1);
+                                TNoRwPulang.setText(rs.getString("no_rawat"));
+                                TNoSEPRanapPulang.setText(rs.getString("no_sep"));
+                                TNoRMPulang.setText(rs.getString("no_rkm_medis"));
+                                TPasienPulang.setText(rs.getString("nm_pasien"));
+                                TanggalPulang.setSelectedItem(Valid.setTglJamSmc((Date) rs.getTimestamp("tglpulang")));
+                                WindowUpdatePulang.setVisible(true);
+                            } else {
+                                this.setCursor(Cursor.getDefaultCursor());
+                                JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                TCari.requestFocus();
+                            }
+                        }
+                    } catch (Exception e) {
+                        this.setCursor(Cursor.getDefaultCursor());
+                        System.out.println("Notif : " + e);
+                    }
+                }
             }
-        } 
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }
 
     

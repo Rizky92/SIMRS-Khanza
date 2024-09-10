@@ -7,14 +7,14 @@
     <entry key="VALIDASIRESEPKRONIS">yes</entry>
     <entry key="VALIDASIULANGHASILPERMINTAAN">labpk,labpa,labmb,rad</entry>
     <entry key="VALIDASIULANGPINDAHKAMAR">yes</entry>
-    <entry key="ADAMLABSAPIURL">http://demo.adamlabs.id:2311/adam-lis</entry>
+    <entry key="ADAMLABSAPIURL"></entry>
     <entry key="ADAMLABSAPIKEY"></entry>
     <entry key="ADAMLABSAPIKODERS"></entry>
     <entry key="ADAMLABSKECAMATANID"></entry>
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
-    <entry key="LABORATORIUMKIRIMHASIL">adamlabs</entry>
-    <entry key="LABORATORIUMURUTANHASIL">adamlabs</entry>
+    <entry key="LABORATORIUMKIRIMHASIL"></entry>
+    <entry key="LABORATORIUMURUTANHASIL"></entry>
 
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>                  <!-- localhost -->
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>              <!-- sik -->
