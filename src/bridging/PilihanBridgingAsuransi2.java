@@ -203,6 +203,8 @@ public final class PilihanBridgingAsuransi2 extends javax.swing.JDialog {
     }
 
     public void isCek() {
-
+        btnCekRujukanPCareBPJS.setEnabled(akses.getbpjs_cek_nomor_rujukan());
+        btnCekRujukanRSBPJS.setEnabled(akses.getbpjs_cek_nomor_rujukan_rs());
+        btnCekSuratKontrolBPJS.setEnabled(akses.getbpjs_cek_skdp());
     }
 }
