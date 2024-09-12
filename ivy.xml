@@ -1,0 +1,16 @@
+<ivy-module version="2.0">
+    <info organisation="id.or.yaski.simrskhanza" module="demo"/>
+
+    <configurations>
+        <conf name="compile" description="Required to compile application"/>
+    </configurations>
+
+    <dependencies>
+        <!-- compile dependencies -->
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7.5" conf="compile->default"/>
+
+        <!-- test dependencies -->
+        <!-- <dependency org="junit" name="junit" rev="4.11" conf="test->default"/> -->
+    </dependencies>
+
+</ivy-module>
