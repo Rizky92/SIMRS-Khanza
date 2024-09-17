@@ -269,6 +269,8 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes
 
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;
 
+ALTER TABLE suratsakitpihak2 ADD PRIMARY KEY (`no_surat`);
+
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,
   `nm_rek` varchar(100) NULL DEFAULT NULL,
