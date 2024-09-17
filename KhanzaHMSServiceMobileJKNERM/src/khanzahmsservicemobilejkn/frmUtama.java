@@ -1087,7 +1087,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                                              "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
-                                                            // requestEntity = new HttpEntity(requestJson,headers);
+                                                            requestEntity = new HttpEntity(requestJson,headers);
                                                             URL = link+"/antrean/updatewaktu";	
                                                             System.out.print("taskid5 " + rs.getString("no_rawat") + " : ");
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());

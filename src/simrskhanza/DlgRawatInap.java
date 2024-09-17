@@ -4766,10 +4766,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 simpan();
             }else{
-                if(TanggalRegistrasi.getText().equals("")){
+                /*if(TanggalRegistrasi.getText().equals("")){
                     TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                 }  
-                if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){
+                if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
+                if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                     simpan();
                 }
             }
@@ -5675,10 +5676,11 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 gantitindakandokter();
                             }else{
                                 if(Sequel.cekTanggal48jam(tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(),7)+" "+tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(),8),Sequel.ambiltanggalsekarang())==true){
-                                    if(TanggalRegistrasi.getText().equals("")){
+                                    /*if(TanggalRegistrasi.getText().equals("")){
                                         TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                                     }
-                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){
+                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
+                                    if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                                         gantitindakandokter();
                                     }
                                 }
@@ -5701,10 +5703,11 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 gantitindakanpetugas();
                             }else{
                                 if(Sequel.cekTanggal48jam(tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(),7)+" "+tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(),8),Sequel.ambiltanggalsekarang())==true){
-                                    if(TanggalRegistrasi.getText().equals("")){
+                                    /*if(TanggalRegistrasi.getText().equals("")){
                                         TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                                     }
-                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){
+                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
+                                    if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                                         gantitindakanpetugas();
                                     }
                                 }
@@ -5728,10 +5731,11 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 gantitindakandokterpetugas();
                             }else{
                                 if(Sequel.cekTanggal48jam(tbRawatDrPr.getValueAt(tbRawatDrPr.getSelectedRow(),9)+" "+tbRawatDrPr.getValueAt(tbRawatDrPr.getSelectedRow(),10),Sequel.ambiltanggalsekarang())==true){
-                                    if(TanggalRegistrasi.getText().equals("")){
+                                    /*if(TanggalRegistrasi.getText().equals("")){
                                         TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                                     }
-                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){
+                                    if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
+                                    if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                                         gantitindakandokterpetugas();
                                     }
                                 }

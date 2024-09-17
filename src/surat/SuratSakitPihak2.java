@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -411,7 +412,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -425,7 +426,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -524,7 +525,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         TPasien.setBounds(355, 10, 365, 23);
 
         TanggalAkhir.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2022" }));
+        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2024" }));
         TanggalAkhir.setDisplayFormat("dd-MM-yyyy");
         TanggalAkhir.setName("TanggalAkhir"); // NOI18N
         TanggalAkhir.setOpaque(false);
@@ -570,7 +571,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         jLabel18.setBounds(556, 40, 70, 23);
 
         TglLahir.setForeground(new java.awt.Color(50, 70, 50));
-        TglLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2022" }));
+        TglLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2024" }));
         TglLahir.setDisplayFormat("dd-MM-yyyy");
         TglLahir.setName("TglLahir"); // NOI18N
         TglLahir.setOpaque(false);
@@ -680,10 +681,15 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         jLabel15.setBounds(250, 40, 80, 23);
 
         TanggalAwal.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2022" }));
+        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2024" }));
         TanggalAwal.setDisplayFormat("dd-MM-yyyy");
         TanggalAwal.setName("TanggalAwal"); // NOI18N
         TanggalAwal.setOpaque(false);
+        TanggalAwal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalAwalItemStateChanged(evt);
+            }
+        });
         TanggalAwal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalAwalKeyPressed(evt);
@@ -816,6 +822,8 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             Valid.textKosong(Instansi,"Instansi Pihak Ke 2");
         }else if(AlamatPj.getText().trim().equals("")){
             Valid.textKosong(AlamatPj,"Alamat Pihak Ke 2");
+        } else if ((TanggalAwal.getDate().getTime() / 1000) > (TanggalAkhir.getDate().getTime() / 1000)) {
+            JOptionPane.showMessageDialog(null, "Tanggal awal tidak boleh melebihi tanggal akhir surat..!!");
         }else{
             if(Sequel.menyimpantf("suratsakitpihak2","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat Sakit",13,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalAwal.getSelectedItem()+""),Valid.SetTgl(TanggalAkhir.getSelectedItem()+""),LamaSakit.getText(),
@@ -1158,6 +1166,17 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         Valid.pindah(evt,AlamatPj,BtnSimpan);
     }//GEN-LAST:event_InstansiKeyPressed
 
+    private void TanggalAwalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalAwalItemStateChanged
+        bln_angka = evt.getItem().toString().substring(3, 5);
+        bln_romawi = getBulanRomawi(Integer.parseInt(bln_angka));
+        NoSurat.setText(Sequel.cariIsiSmc(
+            "select concat_ws('/', ?, 'SKS-2', ?, lpad(ifnull(max(convert(right(suratsakitpihak2.no_surat, 3), signed)), 0) + 1, 3, '0')) " +
+            "from suratsakitpihak2 where suratsakitpihak2.no_surat like concat_ws('/', ?, 'SKS-2', ?, '%')",
+            evt.getItem().toString().substring(6, 10), bln_romawi,
+            evt.getItem().toString().substring(6, 10), bln_romawi
+        ));
+    }//GEN-LAST:event_TanggalAwalItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -1304,35 +1323,15 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         TUmurHr.setText("0");
         AlamatPj.setText("");
         Instansi.setText("");
-        bln_angka = "";
         bln_romawi = "";
-        bln_angka = TanggalAwal.getSelectedItem().toString().substring(3,5);
-        if (bln_angka.equals("01")) {
-            bln_romawi = "I";
-        } else if (bln_angka.equals("02")) {
-            bln_romawi = "II";
-        } else if (bln_angka.equals("03")) {
-            bln_romawi = "III";
-        } else if (bln_angka.equals("04")) {
-            bln_romawi = "IV";
-        } else if (bln_angka.equals("05")) {
-            bln_romawi = "V";
-        } else if (bln_angka.equals("06")) {
-            bln_romawi = "VI";
-        } else if (bln_angka.equals("07")) {
-            bln_romawi = "VII";
-        } else if (bln_angka.equals("08")) {
-            bln_romawi = "VIII";
-        } else if (bln_angka.equals("09")) {
-            bln_romawi = "IX";
-        } else if (bln_angka.equals("10")) {
-            bln_romawi = "X";
-        } else if (bln_angka.equals("11")) {
-            bln_romawi = "XI";
-        } else if (bln_angka.equals("12")) {
-            bln_romawi = "XII";
-        }
-        Valid.autoNomer2("select ifnull(MAX(CONVERT(LEFT(suratsakitpihak2.no_surat,3),signed)),0) from suratsakitpihak2 where suratsakitpihak2.tanggalawal like '%" + Valid.SetTgl(TanggalAwal.getSelectedItem() + "").substring(0, 7) + "%' ",Valid.SetTgl(TanggalAwal.getSelectedItem() + "").substring(0, 4)+"/SKS-2/" + bln_romawi + "/", 3, NoSurat);
+        bln_angka = TanggalAwal.getSelectedItem().toString().substring(3, 5);
+        bln_romawi = getBulanRomawi(Integer.parseInt(bln_angka));
+        NoSurat.setText(Sequel.cariIsiSmc(
+            "select concat_ws('/', ?, 'SKS-2', ?, lpad(ifnull(max(convert(right(suratsakitpihak2.no_surat, 3), signed)), 0) + 1, 3, '0')) " +
+            "from suratsakitpihak2 where suratsakitpihak2.no_surat like concat_ws('/', ?, 'SKS-2', ?, '%')",
+            TanggalAwal.getSelectedItem().toString().substring(6, 10), bln_romawi,
+            TanggalAwal.getSelectedItem().toString().substring(6, 10), bln_romawi
+        ));
         NoSurat.requestFocus();
     }
 
@@ -1387,8 +1386,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             FormInput.setVisible(false);      
             ChkInput.setVisible(true);
         }
-    }
-       
+    }   
     
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_sakit_pihak_2());
@@ -1396,6 +1394,23 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getsurat_sakit_pihak_2());
     }
     
+    public String getBulanRomawi(int bulan) {
+        switch (bulan) {
+            case 1: return "I";
+            case 2: return "II";
+            case 3: return "III";
+            case 4: return "IV";
+            case 5: return "V";
+            case 6: return "VI";
+            case 7: return "VII";
+            case 8: return "VIII";
+            case 9: return "IX";
+            case 10: return "X";
+            case 11: return "XI";
+            case 12: return "XII";
+            default: return "";
+        }
+    }
 }
 
 

@@ -93,7 +93,7 @@ public final class sekuel {
             tgl = new Date();
         }
         
-        if ((tgl.getTime() - tglRegist.getTime()) < 0) {
+        if ((tgl.getTime() - tglRegist.getTime()) / 1000 < 0) {
             JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
             return false;
         }
@@ -116,7 +116,7 @@ public final class sekuel {
             }
         }
         
-        if ((tglKegiatan.getTime() - tglRegist.getTime()) < 0) {
+        if ((tglKegiatan.getTime() - tglRegist.getTime()) / 1000 < 0) {
             JOptionPane.showMessageDialog(null, "Maaf, jam input data / perubahan data minimal di jam " + sdf.format(tglRegist) + " !");
             return false;
         }

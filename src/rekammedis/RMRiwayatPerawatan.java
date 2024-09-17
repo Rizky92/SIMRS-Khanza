@@ -59,6 +59,9 @@ import javax.swing.text.html.StyleSheet;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import simrskhanza.DlgCariPasien;
+import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import java.util.Base64;
 
 /**
  *
@@ -301,6 +304,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         Pekerjaan = new widget.TextBox();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnGeneratePDF = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         R5 = new widget.RadioButton();
@@ -521,6 +526,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Pekerjaan.setName("Pekerjaan"); // NOI18N
         Pekerjaan.setPreferredSize(new java.awt.Dimension(100, 23));
 
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnGeneratePDF.setBackground(new java.awt.Color(255, 255, 254));
+        MnGeneratePDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGeneratePDF.setForeground(new java.awt.Color(50, 50, 50));
+        MnGeneratePDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGeneratePDF.setText("Generate File PDF");
+        MnGeneratePDF.setName("MnGeneratePDF"); // NOI18N
+        MnGeneratePDF.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnGeneratePDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnGeneratePDFActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnGeneratePDF);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -711,6 +732,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         LoadHTMLRiwayatPerawatan.setBorder(null);
+        LoadHTMLRiwayatPerawatan.setComponentPopupMenu(jPopupMenu1);
         LoadHTMLRiwayatPerawatan.setName("LoadHTMLRiwayatPerawatan"); // NOI18N
         Scroll.setViewportView(LoadHTMLRiwayatPerawatan);
 
@@ -2693,6 +2715,114 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         // TODO add your handling code here:
     }//GEN-LAST:event_R5ActionPerformed
 
+    private void MnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGeneratePDFActionPerformed
+        R4.setSelected(true);
+        if(NoRawat.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"No.Rawat masih kosong...!!!");
+            NoRawat.requestFocus();
+        }else{
+            tampilPerawatan();
+            try{
+                File g = new File("file.css");            
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
+                bg.close();
+
+                PdfWriter pdf = new PdfWriter("RPP"+NoRawat.getText().replaceAll("/","")+".pdf");
+                HtmlConverter.convertToPdf(
+                    LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                          replaceAll("<body>",
+                                     "<body>"+
+                                        "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                            "<tr>" +
+                                                "<td width='15%' border='0'>" +
+                                                    "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                                "</td>" +
+                                                "<td width='85%' border='0'>" +
+                                                    "<center>" +
+                                                        "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                        "<font color='000000' size='1'  face='Tahoma'>"+
+                                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                            "<br>RIWAYAT PERAWATAN" +
+                                                        "</font> " +
+                                                    "</center>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table><br>"+
+                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>No.RM</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+NoRM.getText().trim()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Nama Pasien</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+NmPasien.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Alamat</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Alamat.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Jenis Kelamin</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Jk.getText().replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+TempatLahir.getText()+" "+TanggalLahir.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Ibu Kandung</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+IbuKandung.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Golongan Darah</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+GD.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Status Nikah</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+StatusNikah.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Agama</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Agama.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Pendidikan.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Bahasa Dipakai</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Bahasa.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Cacat Fisik</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+CacatFisik.getText()+"</td>"+
+                                           "</tr>"+
+                                        "</table>"            
+                          ).
+                          replaceAll((getClass().getResource("/picture/"))+"","./gambar/"), pdf
+                );
+                File f = new File("RPP"+NoRawat.getText().replaceAll("/","")+".pdf");   
+                Desktop.getDesktop().browse(f.toURI());
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }  
+        }
+    }//GEN-LAST:event_MnGeneratePDFActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2733,6 +2863,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.editorpane LoadHTMLSOAPI;
     private widget.editorpane LoadHTMLTindakanLab;
     private widget.editorpane LoadHTMLTindakanRadiologi;
+    private javax.swing.JMenuItem MnGeneratePDF;
     private widget.TextBox NmPasien;
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
@@ -2912,6 +3043,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkUjiFungsiKFR;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label17;
     private widget.Label label18;
     private widget.Label label19;
@@ -4328,7 +4460,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                          "<tr>"+
                                             "<td valign='top' align='center'>"+w+"</td>"+
                                             "<td valign='top'>"+rs2.getString("tgl_periksa")+" "+rs2.getString("jam")+"</td>"+
-                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='100%' height='100%'/></a></td>"+
+                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='450px' height='450px'/></a></td>"+
                                          "</tr>"); 
                                     w++;
                                 }
@@ -6979,6 +7111,23 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                  teks.replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
                       replaceAll("<body>",
                                  "<body>"+
+                                    "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                        "<tr>" +
+                                            "<td width='15%' border='0'>" +
+                                                "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                            "</td>" +
+                                            "<td width='85%' border='0'>" +
+                                                "<center>" +
+                                                    "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    "<font color='000000' size='1'  face='Tahoma'>"+
+                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                        "<br>RIWAYAT PERAWATAN" +
+                                                    "</font> " +
+                                                "</center>" +
+                                            "</td>" +
+                                        "</tr>" +
+                                    "</table><br>"+
                                     "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                        "<tr class='isi'>"+ 
                                          "<td valign='top' width='20%'>No.RM</td>"+
