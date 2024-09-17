@@ -84,13 +84,15 @@ public final class validasi {
         super();
     };
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal) {
         component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, tanggal));
     }
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tgl) {
+        component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, getTglSmc(tgl)));
+    }
+    
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item) {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
