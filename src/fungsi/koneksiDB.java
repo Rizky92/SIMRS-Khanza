@@ -213,6 +213,15 @@ public class koneksiDB {
         }
     }
     
+    public static String URLKFAV2SATUSEHAT() {
+        try (FileInputStream f = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(f);
+            return prop.getProperty("URLKFAV2SATUSEHAT").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
