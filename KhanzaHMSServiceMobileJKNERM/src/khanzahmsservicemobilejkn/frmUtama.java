@@ -254,7 +254,7 @@ public class frmUtama extends javax.swing.JFrame {
                         TeksArea.append("Menjalankan WS tambah antrian Mobile JKN Pasien BPJS\n");
                         
                         //pasien MobileJKN
-                        ps=koneksi.prepareStatement(
+                        /*ps=koneksi.prepareStatement(
                                 "SELECT referensi_mobilejkn_bpjs.nobooking,referensi_mobilejkn_bpjs.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
                                 "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,poliklinik.nm_poli,dokter.nm_dokter,referensi_mobilejkn_bpjs.jampraktek,"+
                                 "referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,"+
@@ -334,7 +334,7 @@ public class frmUtama extends javax.swing.JFrame {
                             if(ps!=null){
                                 ps.close();
                             }
-                        }
+                        }*/
                         
                         TeksArea.append("Menjalankan WS batal antrian Mobile JKN Pasien BPJS\n");
                         ps=koneksi.prepareStatement(
@@ -435,9 +435,8 @@ public class frmUtama extends javax.swing.JFrame {
                             "if(exists(select * from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat = referensi_mobilejkn_bpjs.no_rawat and referensi_mobilejkn_bpjs_taskid.taskid = '7'), 'Sudah', '') as ada_task7, " +
                             "if(exists(select * from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat = referensi_mobilejkn_bpjs.no_rawat and referensi_mobilejkn_bpjs_taskid.taskid = '99'), 'Sudah', '') as ada_task99 " +
                             "from referensi_mobilejkn_bpjs join reg_periksa on referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join poliklinik " +
-                            "on reg_periksa.kd_poli = poliklinik.kd_poli join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where referensi_mobilejkn_bpjs.statuskirim = 'Sudah' and referensi_mobilejkn_bpjs.tanggalperiksa between " +
-                            "'" + Tanggal1.getText() + "' and '" + Tanggal2.getText() + "' and not exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking) " +
-                            "order by referensi_mobilejkn_bpjs.tanggalperiksa"
+                            "on reg_periksa.kd_poli = poliklinik.kd_poli join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where referensi_mobilejkn_bpjs.status = 'Checkin' and referensi_mobilejkn_bpjs.tanggalperiksa between " +
+                            "'" + Tanggal1.getText() + "' and '" + Tanggal2.getText() + "' order by referensi_mobilejkn_bpjs.tanggalperiksa"
                         );
                         try {
                             rs=ps.executeQuery();
@@ -1087,7 +1086,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                                              "\"waktu\": \""+parsedDate.getTime()+"\"" +
                                                                           "}";
                                                             TeksArea.append("JSON : "+requestJson+"\n");
-                                                            // requestEntity = new HttpEntity(requestJson,headers);
+                                                            requestEntity = new HttpEntity(requestJson,headers);
                                                             URL = link+"/antrean/updatewaktu";	
                                                             System.out.print("taskid5 " + rs.getString("no_rawat") + " : ");
                                                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());

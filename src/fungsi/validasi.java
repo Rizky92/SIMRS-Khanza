@@ -84,13 +84,15 @@ public final class validasi {
         super();
     };
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal) {
         component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, tanggal));
     }
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tgl) {
+        component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, getTglSmc(tgl)));
+    }
+    
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item) {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
@@ -108,6 +110,10 @@ public final class validasi {
     
     public String getTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
         return getTglSmc(tgl) + " " + getWaktuSmc(jam, menit, detik);
+    }
+    
+    public String getTglJamSmc(Tanggal tgljam) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tgljam.getDate());
     }
     
     public String setTglJamSmc(Date tgljam) {
