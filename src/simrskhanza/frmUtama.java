@@ -43,6 +43,7 @@ import bridging.ApotekBPJSDaftarPelayananObat;
 import bridging.ApotekBPJSKunjunganSEP;
 import bridging.ApotekBPJSMapingObat;
 import bridging.ApotekBPJSMonitoringKlaim;
+import bridging.BPJSAntreanPerKodebooking;
 import bridging.BPJSAntreanPerTanggal;
 import bridging.BPJSCekDataIndukKecelakaan;
 import bridging.BPJSCekDataSEPInternal;
@@ -21927,6 +21928,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnAntreanPerKodebookingBPJSActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BPJSAntreanPerKodebooking form = new BPJSAntreanPerKodebooking(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22626,7 +22639,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
-            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan;
+            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan,btnAntreanPerKodebookingBPJS;
     
     public void isWall(){
         try{            
@@ -25851,6 +25864,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if (akses.getbpjs_kompilasi_berkas_klaim()) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+                jmlmenu++;
+            }
+            
+            if (akses.getbpjs_antrean_pertanggal()) {
+                Panelmenu.add(btnAntreanPerKodebookingBPJS);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -33252,6 +33270,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
             jmlmenu++;
         }
+        
+        if (akses.getbpjs_antrean_pertanggal()) {
+            Panelmenu.add(btnAntreanPerKodebookingBPJS);
+            jmlmenu++;
+        }
     }
     
     private void isCariIsi() {
@@ -40606,6 +40629,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if (akses.getbpjs_antrean_pertanggal()) {
+            if (btnAntreanPerKodebookingBPJS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnAntreanPerKodebookingBPJS);
+                jmlmenu++;
+            }
+        }
     }
 
     private void initKhanza() {
@@ -45353,5 +45383,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnBookingMCUPerusahaan.setName("btnBookingMCUPerusahaan"); 
         btnBookingMCUPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingMCUPerusahaan.addActionListener(this::btnBookingMCUPerusahaanActionPerformed);
+        
+        btnAntreanPerKodebookingBPJS = new widget.ButtonBig();
+        btnAntreanPerKodebookingBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
+        btnAntreanPerKodebookingBPJS.setText("Antrean Per Kode Booking BPJS");
+        btnAntreanPerKodebookingBPJS.setIconTextGap(0);
+        btnAntreanPerKodebookingBPJS.setName("btnAntreanPerKodebookingBPJS"); 
+        btnAntreanPerKodebookingBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnAntreanPerKodebookingBPJS.addActionListener(this::btnAntreanPerKodebookingBPJSActionPerformed);
     }
 }
