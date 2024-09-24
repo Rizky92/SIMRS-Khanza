@@ -21929,7 +21929,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
-    private void btnAntreanPerKodebookingBPJSActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void btnBPJSAntreanPerKodebookingMobileJKNActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BPJSAntreanPerKodebooking form = new BPJSAntreanPerKodebooking(this, false);
@@ -22639,7 +22639,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
-            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan,btnAntreanPerKodebookingBPJS;
+            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan,btnBPJSAntreanPerKodebookingMobileJKN;
     
     public void isWall(){
         try{            
@@ -25868,7 +25868,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
             
             if (akses.getbpjs_antrean_pertanggal()) {
-                Panelmenu.add(btnAntreanPerKodebookingBPJS);
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -33272,7 +33272,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         }
         
         if (akses.getbpjs_antrean_pertanggal()) {
-            Panelmenu.add(btnAntreanPerKodebookingBPJS);
+            Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
             jmlmenu++;
         }
     }
@@ -40631,8 +40631,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         }
         
         if (akses.getbpjs_antrean_pertanggal()) {
-            if (btnAntreanPerKodebookingBPJS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnAntreanPerKodebookingBPJS);
+            if (btnBPJSAntreanPerKodebookingMobileJKN.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
                 jmlmenu++;
             }
         }
@@ -45384,12 +45384,12 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnBookingMCUPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingMCUPerusahaan.addActionListener(this::btnBookingMCUPerusahaanActionPerformed);
         
-        btnAntreanPerKodebookingBPJS = new widget.ButtonBig();
-        btnAntreanPerKodebookingBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
-        btnAntreanPerKodebookingBPJS.setText("Antrean Per Kode Booking BPJS");
-        btnAntreanPerKodebookingBPJS.setIconTextGap(0);
-        btnAntreanPerKodebookingBPJS.setName("btnAntreanPerKodebookingBPJS"); 
-        btnAntreanPerKodebookingBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAntreanPerKodebookingBPJS.addActionListener(this::btnAntreanPerKodebookingBPJSActionPerformed);
+        btnBPJSAntreanPerKodebookingMobileJKN = new widget.ButtonBig();
+        btnBPJSAntreanPerKodebookingMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
+        btnBPJSAntreanPerKodebookingMobileJKN.setText("Antrean Per Kode Booking Mobile JKN");
+        btnBPJSAntreanPerKodebookingMobileJKN.setIconTextGap(0);
+        btnBPJSAntreanPerKodebookingMobileJKN.setName("btnBPJSAntreanPerKodebookingMobileJKN"); 
+        btnBPJSAntreanPerKodebookingMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSAntreanPerKodebookingMobileJKN.addActionListener(this::btnBPJSAntreanPerKodebookingMobileJKNActionPerformed);
     }
 }
