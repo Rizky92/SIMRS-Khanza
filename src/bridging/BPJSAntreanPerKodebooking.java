@@ -244,21 +244,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
                 Sequel.temporary(String.valueOf(i + 1),
                     (String) tabMode.getValueAt(i, 0),
                     (String) tabMode.getValueAt(i, 1),
-                    (String) tabMode.getValueAt(i, 2),
-                    (String) tabMode.getValueAt(i, 3),
-                    (String) tabMode.getValueAt(i, 4),
-                    (String) tabMode.getValueAt(i, 5),
-                    (String) tabMode.getValueAt(i, 6),
-                    (String) tabMode.getValueAt(i, 7),
-                    (String) tabMode.getValueAt(i, 8),
-                    (String) tabMode.getValueAt(i, 9),
-                    (String) tabMode.getValueAt(i, 10),
-                    (String) tabMode.getValueAt(i, 11),
-                    (String) tabMode.getValueAt(i, 12),
-                    (String) tabMode.getValueAt(i, 13),
-                    (String) tabMode.getValueAt(i, 14),
-                    (String) tabMode.getValueAt(i, 15),
-                    (String) tabMode.getValueAt(i, 16)
+                    (String) tabMode.getValueAt(i, 2)
                 );
             }
 
@@ -270,7 +256,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
             param.put("kontakrs", akses.getkontakrs());
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            Valid.reportTempSmc("rptBPJSAntreanPerTanggal.jasper", "report", "::[ Antrean BPJS Per Kodebooking ]::", param);
+            Valid.reportTempSmc("rptBPJSAntreanPerKodebooking.jasper", "report", "::[ Antrean BPJS Per Kodebooking ]::", param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -360,11 +346,11 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
                         }
                         if (list.has("kodedokter")) {
                             tabMode.addRow(new Object[] {
-                                "Kode Poli", ":",
+                                "Kode Dokter", ":",
                                 list.path("kodedokter").asText()
                             });
                             tabMode.addRow(new Object[] {
-                                "Nama Poli", ":",
+                                "Nama Dokter", ":",
                                 Sequel.cariIsiSmc("select nm_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", list.path("kodedokter").asText())
                             });
                         }
