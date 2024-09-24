@@ -64,9 +64,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
         this.setLocation(8, 1);
         setSize(628, 674);
 
-        tabMode = new DefaultTableModel(null, new Object[] {
-            "Kode Booking", "Tanggal", "Kode Poli", "Kode Dokter", "Jam Praktek", "NIK", "Noka", "No. HP", "RM", "Jenis Kunjungan", "No. Ref", "Sumber Data", "Peserta", "No. Antrean", "Estimasi Dilayani", "Created Time", "Status"
-        }) {
+        tabMode = new DefaultTableModel(null, new Object[] {"", "", ""}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -77,42 +75,14 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
         tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(110);
             } else if (i == 1) {
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(30);
             } else if (i == 2) {
-                column.setPreferredWidth(70);
-            } else if (i == 3) {
-                column.setPreferredWidth(83);
-            } else if (i == 4) {
-                column.setPreferredWidth(90);
-            } else if (i == 5) {
-                column.setPreferredWidth(120);
-            } else if (i == 6) {
-                column.setPreferredWidth(100);
-            } else if (i == 7) {
-                column.setPreferredWidth(100);
-            } else if (i == 8) {
-                column.setPreferredWidth(60);
-            } else if (i == 9) {
-                column.setPreferredWidth(100);
-            } else if (i == 10) {
-                column.setPreferredWidth(140);
-            } else if (i == 11) {
-                column.setPreferredWidth(100);
-            } else if (i == 12) {
-                column.setPreferredWidth(70);
-            } else if (i == 13) {
-                column.setPreferredWidth(70);
-            } else if (i == 14) {
-                column.setPreferredWidth(120);
-            } else if (i == 15) {
-                column.setPreferredWidth(120);
-            } else if (i == 15) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(230);
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -363,27 +333,120 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
             nameNode = root.path("metadata");
             if (nameNode.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                System.out.println("Response : " + response);
                 if (response.isArray()) {
                     for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            list.path("kodebooking").asText(),
-                            list.path("tanggal").asText(),
-                            list.path("kodepoli").asText(),
-                            list.path("kodedokter").asText(),
-                            list.path("jampraktek").asText(),
-                            list.path("nik").asText(),
-                            list.path("nokapst").asText(),
-                            list.path("nohp").asText(),
-                            list.path("norekammedis").asText(),
-                            list.path("jeniskunjungan").asText(),
-                            list.path("nomorreferensi").asText(),
-                            list.path("sumberdata").asText(),
-                            list.path("ispeserta").asText().equals("true") ? "Ya" : "Tidak",
-                            list.path("noantrean").asText(),
-                            dtf.format((Date) new Timestamp(Long.parseLong(list.path("estimasidilayani").asText()))),
-                            dtf.format((Date) new Timestamp(Long.parseLong(list.path("createdtime").asText()))),
-                            list.path("status").asText()
-                        });
+                        if (list.has("kodebooking")) {
+                            tabMode.addRow(new Object[] {
+                                "Kode booking", ":",
+                                list.path("kodebooking").asText()
+                            });
+                        }
+                        if (list.has("tanggal")) {
+                            tabMode.addRow(new Object[] {
+                                "Tanggal", ":",
+                                list.path("tanggal").asText()
+                            });
+                        }
+                        if (list.has("kodepoli")) {
+                            tabMode.addRow(new Object[] {
+                                "Kode Poli", ":",
+                                list.path("kodepoli").asText()
+                            });
+                            tabMode.addRow(new Object[] {
+                                "Nama Poli", ":",
+                                Sequel.cariIsiSmc("select nm_poli_bpjs from maping_poli_bpjs where kd_poli_bpjs = ?", list.path("kodepoli").asText())
+                            });
+                        }
+                        if (list.has("kodedokter")) {
+                            tabMode.addRow(new Object[] {
+                                "Kode Poli", ":",
+                                list.path("kodedokter").asText()
+                            });
+                            tabMode.addRow(new Object[] {
+                                "Nama Poli", ":",
+                                Sequel.cariIsiSmc("select nm_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", list.path("kodedokter").asText())
+                            });
+                        }
+                        if (list.has("jampraktek")) {
+                            tabMode.addRow(new Object[] {
+                                "Jam Praktek", ":",
+                                list.path("jampraktek").asText()
+                            });
+                        }
+                        if (list.has("nik")) {
+                            tabMode.addRow(new Object[] {
+                                "NIK", ":",
+                                list.path("nik").asText()
+                            });
+                        }
+                        if (list.has("nokapst")) {
+                            tabMode.addRow(new Object[] {
+                                "No. Kartu Peserta", ":",
+                                list.path("nokapst").asText()
+                            });
+                        }
+                        if (list.has("nohp")) {
+                            tabMode.addRow(new Object[] {
+                                "No. HP", ":",
+                                list.path("nohp").asText()
+                            });
+                        }
+                        if (list.has("norekammedis")) {
+                            tabMode.addRow(new Object[] {
+                                "No. RM", ":",
+                                list.path("norekammedis").asText()
+                            });
+                        }
+                        if (list.has("jeniskunjungan")) {
+                            tabMode.addRow(new Object[] {
+                                "Jenis Kunjungan", ":",
+                                list.path("jeniskunjungan").asText()
+                            });
+                        }
+                        if (list.has("nomorreferensi")) {
+                            tabMode.addRow(new Object[] {
+                                "No. Referensi", ":",
+                                list.path("nomorreferensi").asText()
+                            });
+                        }
+                        if (list.has("sumberdata")) {
+                            tabMode.addRow(new Object[] {
+                                "Sumber Data", ":",
+                                list.path("sumberdata").asText()
+                            });
+                        }
+                        if (list.has("ispeserta")) {
+                            tabMode.addRow(new Object[] {
+                                "Peserta BPJS?", ":",
+                                (list.path("ispeserta").asBoolean() ? "Ya" : "Tidak")
+                            });
+                        }
+                        if (list.has("noantrean")) {
+                            tabMode.addRow(new Object[] {
+                                "No. Antrian", ":",
+                                list.path("noantrean").asText()
+                            });
+                        }
+                        if (list.has("estimasidilayani")) {
+                            tabMode.addRow(new Object[] {
+                                "Estimasi Dilayani", ":",
+                                dtf.format(new Date(list.path("estimasidilayani").asLong()))
+                            });
+                        }
+                        if (list.has("createdtime")) {
+                            tabMode.addRow(new Object[] {
+                                "Waktu Dibuat", ":",
+                                dtf.format(new Date(list.path("createdtime").asLong()))
+                            });
+                        }
+                        if (list.has("Status")) {
+                            tabMode.addRow(new Object[] {
+                                "Status", ":",
+                                list.path("Status").asText()
+                            });
+                        }
+                        tabMode.addRow(new Object[] {"", "", ""});
                     }
                 }
             } else {
