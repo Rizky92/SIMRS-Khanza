@@ -121,7 +121,7 @@ public final class validasi {
     }
     
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
-        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
+        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ? order by temporary.no", akses.getalamatip());
     }
     
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
