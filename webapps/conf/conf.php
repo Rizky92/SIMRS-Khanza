@@ -708,7 +708,7 @@
     }
 
     function formatDuitSmc($duit) {
-        return (round($duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
+        return (round((float) $duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
     }
         
     function formatDec($duit){
