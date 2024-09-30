@@ -90,7 +90,8 @@
     pasien.jk,
     pasien.tgl_lahir,
     concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat,
-    (select left(bridging_sep.no_sep, 19) from bridging_sep where bridging_sep.no_rawat = resume_pasien_ranap.no_rawat and bridging_sep.jnspelayanan = '1' limit 1) as no_sep
+    ifnull(bridging_sep.no_sep, '') as no_sep,
+    ifnull(bridging_sep.tglsep, '') as tglsep
 from resume_pasien_ranap
     join reg_periksa on resume_pasien_ranap.no_rawat = reg_periksa.no_rawat
     join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
@@ -100,6 +101,7 @@ from resume_pasien_ranap
     join kecamatan on pasien.kd_kec = kecamatan.kd_kec
     join kabupaten on pasien.kd_kab = kabupaten.kd_kab
     join penjab on penjab.kd_pj = reg_periksa.kd_pj
+    left join bridging_sep on resume_pasien_ranap.no_rawat = bridging_sep.no_rawat and bridging_sep.jnspelayanan = '1' and length(bridging_sep.no_sep) = 19
 where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
@@ -408,6 +410,9 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 	<field name="no_sep" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="no_sep"/>
 	</field>
+	<field name="tglsep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tglsep"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -425,7 +430,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<text><![CDATA[RESUME MEDIS PASIEN]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="48" y="3" width="486" height="17" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4"/>
+				<reportElement x="1" y="8" width="533" height="17" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="Single"/>
@@ -433,7 +438,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="17" width="486" height="14" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b"/>
+				<reportElement x="1" y="22" width="533" height="14" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -441,7 +446,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="28" width="486" height="14" uuid="6bb20c38-1c6d-461e-993d-04653cb69342"/>
+				<reportElement x="1" y="33" width="533" height="14" uuid="6bb20c38-1c6d-461e-993d-04653cb69342"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -455,7 +460,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="48" y="42" width="486" height="14" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f"/>
+				<reportElement x="1" y="42" width="533" height="14" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -767,12 +772,20 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA[$P{jamkeluar}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="400" y="0" width="136" height="17" uuid="25b9f83a-8ce1-4bbd-8d07-d868670b04e4"/>
+				<reportElement x="408" y="-6" width="136" height="13" uuid="25b9f83a-8ce1-4bbd-8d07-d868670b04e4"/>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="9" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{no_sep}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="408" y="6" width="136" height="11" uuid="86619745-1fac-4fa1-8570-d553847d714d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tglsep}.trim().equals("") ? "" : "Tgl. SEP : " + new java.text.SimpleDateFormat("dd-MM-yyyy").format(new java.text.SimpleDateFormat("yyyy-MM-dd").parse($F{tglsep}))]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="62" splitType="Stretch">
