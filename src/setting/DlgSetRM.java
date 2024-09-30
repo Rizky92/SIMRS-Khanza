@@ -128,7 +128,10 @@ public class DlgSetRM extends javax.swing.JDialog {
 
         tbKelengkapan.setDefaultRenderer(Object.class, new WarnaTable());
         
-        tabMode5=new DefaultTableModel(null,new Object[]{"Wajib closing kasir terlebih dahulu untuk perawatan sebelumnya"}){
+        tabMode5=new DefaultTableModel(null,new Object[]{
+            "Wajib closing kasir terlebih dahulu untuk perawatan sebelumnya",
+            "Izinkan registrasi berulang di IGD terlepas dari wajib closing kasir"
+        }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
 
@@ -336,6 +339,8 @@ public class DlgSetRM extends javax.swing.JDialog {
         panelGlass10 = new widget.panelisi();
         jLabel12 = new widget.Label();
         ValidasiRegistrasi = new widget.ComboBox();
+        jLabel54 = new widget.Label();
+        ValidasiRegistrasiIGD = new widget.ComboBox();
         internalFrame7 = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         tbValidasiCatatan = new widget.Table();
@@ -357,15 +362,16 @@ public class DlgSetRM extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         panelGlass5.setName("panelGlass5"); // NOI18N
         panelGlass5.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass5.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
@@ -425,7 +431,7 @@ public class DlgSetRM extends javax.swing.JDialog {
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 254));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
-        TabRawat.setForeground(new java.awt.Color(50,50,50));
+        TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1365,7 +1371,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         internalFrame6.add(Scroll5, java.awt.BorderLayout.CENTER);
 
         panelGlass10.setName("panelGlass10"); // NOI18N
-        panelGlass10.setPreferredSize(new java.awt.Dimension(44, 47));
+        panelGlass10.setPreferredSize(new java.awt.Dimension(44, 77));
         panelGlass10.setLayout(null);
 
         jLabel12.setText("Wajib closing kasir terlebih dahulu untuk perawatan sebelumnya :");
@@ -1383,6 +1389,22 @@ public class DlgSetRM extends javax.swing.JDialog {
         });
         panelGlass10.add(ValidasiRegistrasi);
         ValidasiRegistrasi.setBounds(333, 12, 70, 23);
+
+        jLabel54.setText("Izinkan registrasi berulang di IGD terlepas dari wajib closing kasir :");
+        jLabel54.setName("jLabel54"); // NOI18N
+        panelGlass10.add(jLabel54);
+        jLabel54.setBounds(0, 42, 330, 23);
+
+        ValidasiRegistrasiIGD.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
+        ValidasiRegistrasiIGD.setName("ValidasiRegistrasiIGD"); // NOI18N
+        ValidasiRegistrasiIGD.setPreferredSize(new java.awt.Dimension(55, 28));
+        ValidasiRegistrasiIGD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ValidasiRegistrasiIGDKeyPressed(evt);
+            }
+        });
+        panelGlass10.add(ValidasiRegistrasiIGD);
+        ValidasiRegistrasiIGD.setBounds(333, 42, 70, 23);
 
         internalFrame6.add(panelGlass10, java.awt.BorderLayout.PAGE_START);
 
@@ -1586,9 +1608,10 @@ public class DlgSetRM extends javax.swing.JDialog {
                 }   break;
             case 4:
                 if(tabMode5.getRowCount()==0){
-                    Sequel.menyimpan("set_validasi_registrasi",
-                            "'"+ValidasiRegistrasi.getSelectedItem().toString()+"'","Pengaturan Validasi Registrasi"
+                    Sequel.menyimpanSmc("set_validasi_registrasi", null,
+                        ValidasiRegistrasi.getSelectedItem().toString(), ValidasiRegistrasiIGD.getSelectedItem().toString()
                     );
+                    
                     tampilvalidasiregistrasi();
                 }else if(tabMode5.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
@@ -2082,6 +2105,10 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
         Valid.pindah(evt, YesNoPropinsiPJ,BtnSimpan);
     }//GEN-LAST:event_PanjangPropinsiPJKeyPressed
 
+    private void ValidasiRegistrasiIGDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ValidasiRegistrasiIGDKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ValidasiRegistrasiIGDKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -2139,6 +2166,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
     private widget.ComboBox TampilkanTNI;
     private widget.ComboBox ValidasiCatatan;
     private widget.ComboBox ValidasiRegistrasi;
+    private widget.ComboBox ValidasiRegistrasiIGD;
     private widget.ComboBox YesNoAlamat;
     private widget.ComboBox YesNoAlamatPJ;
     private widget.ComboBox YesNoKTP;
@@ -2216,6 +2244,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
     private widget.Label jLabel51;
     private widget.Label jLabel52;
     private widget.Label jLabel53;
+    private widget.Label jLabel54;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -2510,11 +2539,11 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
     private void tampilvalidasiregistrasi() {
         Valid.tabelKosong(tabMode5);
         try{   
-            ps5=koneksi.prepareStatement("select * from set_validasi_registrasi ");
+            ps5=koneksi.prepareStatement("select * from set_validasi_registrasi");
             try {
                 rs=ps5.executeQuery();
                 while(rs.next()){
-                    tabMode5.addRow(new Object[]{rs.getString(1)});
+                    tabMode5.addRow(new Object[]{rs.getString(1), rs.getString(2)});
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
