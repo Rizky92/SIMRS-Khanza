@@ -269,7 +269,13 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes
 
 ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;
 
-ALTER TABLE suratsakitpihak2 ADD PRIMARY KEY (`no_surat`);
+ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY (`no_surat`);
+
+ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` varchar(20) NULL DEFAULT NULL AFTER `tanggalakhir`;
+
+ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `lamasakit`;
+
+ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT FOREIGN KEY IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK` (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,

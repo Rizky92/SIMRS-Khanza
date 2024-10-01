@@ -404,14 +404,14 @@ and suratsakitpihak2.no_rawat=reg_periksa.no_rawat and pasien.kd_kec=kecamatan.k
 				<text><![CDATA[Alamat]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="83" y="263" width="378" height="27" uuid="b3d8b40a-2725-48c9-add9-9d4129558315">
+				<reportElement x="83" y="263" width="462" height="27" uuid="b3d8b40a-2725-48c9-add9-9d4129558315">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Mendampingi pasien selama" + $F{lamasakit} + " karena sakit terhitung dari tanggal " + $F{tanggalawal} + " sampai dengan " + $F{tanggalakhir}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Mendampingi pasien selama " + $F{lamasakit} + " karena sakit terhitung dari tanggal " + $F{tanggalawal} + " sampai dengan " + $F{tanggalakhir}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1" y="309" width="379" height="14" uuid="9c12cf67-af7a-45bc-b414-f493db08ccc5">
