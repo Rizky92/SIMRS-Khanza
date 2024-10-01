@@ -517,7 +517,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAkhir);
-        TanggalAkhir.setBounds(449, 40, 80, 23);
+        TanggalAkhir.setBounds(422, 40, 80, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
@@ -528,7 +528,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         jLabel16.setText("s.d. :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(403, 40, 33, 23);
+        jLabel16.setBounds(385, 40, 33, 23);
 
         TanggalAwal.setForeground(new java.awt.Color(50, 70, 50));
         TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
@@ -589,10 +589,10 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         FormInput.add(KdDokter);
         KdDokter.setBounds(74, 70, 141, 23);
 
-        jLabel18.setText("Lama prwt. :");
+        jLabel18.setText("Lama Perawatan :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(556, 40, 70, 23);
+        jLabel18.setBounds(536, 40, 90, 23);
 
         LamaSakit.setText("1 (Satu)");
         LamaSakit.setHighlighter(null);
@@ -1041,8 +1041,9 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             Valid.SetTgl(TanggalAwal,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Valid.SetTgl(TanggalAkhir,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
-            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString());
+            LamaSakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString());
+            KdDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString());
+            NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(), 8).toString());
         }
     }
 

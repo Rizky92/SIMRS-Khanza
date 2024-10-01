@@ -315,11 +315,11 @@ where reg_periksa.no_rawat = $P{no_rawat}]]>
 				<reportElement x="91" y="240" width="463" height="30" uuid="0bf4d318-e87a-4af1-842a-fd9f774e8e1f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Justified">
+				<textElement textAlignment="Left">
 					<font fontName="Tahoma" size="11"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Memerlukan istirahat selama " + $P{hari} + " hari karena sakit terhitung dari tanggal " + $P{TanggalAwal} + " sampai dengan " + $P{TanggalAkhir}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Memerlukan istirahat selama " + $P{hari} + " hari karena sakit terhitung dari tanggal " + $P{TanggalAwal} + " sampai dengan " + $P{TanggalAkhir} + "."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="289" width="554" height="14" uuid="2a6a0f25-49f6-4c7f-94ff-b01d6399b5d7">

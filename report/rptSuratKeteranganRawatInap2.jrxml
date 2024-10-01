@@ -136,13 +136,13 @@ where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
 				<text><![CDATA[SURAT KETERANGAN]]></text>
 			</staticText>
 			<line>
-				<reportElement x="187" y="71" width="180" height="1" uuid="7e7fc752-033b-4c49-a28e-880f14cc3858"/>
+				<reportElement x="185" y="71" width="181" height="1" uuid="7e7fc752-033b-4c49-a28e-880f14cc3858"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="187" y="75" width="180" height="14" uuid="be6621d1-5f61-4436-9093-7ac0a55e4efc"/>
+				<reportElement x="185" y="75" width="181" height="14" uuid="be6621d1-5f61-4436-9093-7ac0a55e4efc"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
