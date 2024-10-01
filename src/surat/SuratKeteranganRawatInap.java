@@ -209,8 +209,9 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Surat Keterangan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Surat Keterangan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -517,7 +518,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAkhir);
-        TanggalAkhir.setBounds(422, 40, 80, 23);
+        TanggalAkhir.setBounds(432, 40, 90, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
@@ -528,7 +529,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         jLabel16.setText("s.d. :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(385, 40, 33, 23);
+        jLabel16.setBounds(395, 40, 33, 23);
 
         TanggalAwal.setForeground(new java.awt.Color(50, 70, 50));
         TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
@@ -551,7 +552,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAwal);
-        TanggalAwal.setBounds(301, 40, 80, 23);
+        TanggalAwal.setBounds(301, 40, 90, 23);
 
         jLabel13.setText("Dari Tanggal :");
         jLabel13.setName("jLabel13"); // NOI18N
@@ -1058,7 +1059,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     public void setNoRm(String norwt) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        KdDokter.setText(Sequel.cariIsiSmc("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat = ?", TNoRw.getText()));
+        KdDokter.setText(Sequel.cariIsiSmc("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter = ?", TNoRw.getText(), akses.getkode()));
         NmDokter.setText(dokter.tampil3(KdDokter.getText()));
         isRawat();
         isPsien(); 

@@ -537,10 +537,12 @@ public final class DlgCariDokter extends javax.swing.JDialog {
             "select dokter.kd_dokter, dokter.nm_dokter, dokter.jk, dokter.tmp_lahir, dokter.tgl_lahir, dokter.gol_drh, "
             + "dokter.agama, dokter.almt_tgl, dokter.no_telp, dokter.stts_nikah, spesialis.nm_sps, dokter.alumni, "
             + "dokter.no_ijn_praktek from dokter join spesialis on dokter.kd_sps = spesialis.kd_sps join dpjp_ranap "
-            + "on dokter.kd_dokter = dpjp_ranap.kd_dokter and dpjp_ranap.no_rawat = ? where dokter.status = '1' "
-            + "order by dokter.nm_dokter"
+            + "on dokter.kd_dokter = dpjp_ranap.kd_dokter and dpjp_ranap.no_rawat = ? where dokter.status = '1' and ("
+            + "dokter.kd_dokter like ? or dokter.nm_dokter like ?) order by dokter.nm_dokter"
         )) {
             ps.setString(1, noRawat);
+            ps.setString(2, "%" + TCari.getText() + "%");
+            ps.setString(3, "%" + TCari.getText() + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new String[] {
