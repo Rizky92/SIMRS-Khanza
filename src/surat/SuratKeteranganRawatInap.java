@@ -858,7 +858,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu pasien...!!!");
         } else {
             Map<String, Object> param = new HashMap<>();
-            param.put("no_surat", NoSurat.getText());
+            param.put("no_surat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
             param.put("kotars", akses.getkabupatenrs());
