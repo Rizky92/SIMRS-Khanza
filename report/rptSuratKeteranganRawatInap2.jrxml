@@ -289,7 +289,7 @@ where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
 				<textFieldExpression><![CDATA[$F{nm_penyakit}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="335" y="403" width="156" height="14" uuid="4a0c853b-8efe-4cf5-b0a9-f61c8cf00c67"/>
+				<reportElement x="335" y="416" width="156" height="14" uuid="4a0c853b-8efe-4cf5-b0a9-f61c8cf00c67"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="10" isUnderline="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -329,7 +329,7 @@ where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
 				<text><![CDATA[     Demikian Surat Keterangan ini dibuat dengan benar dan untuk dapat digunakan sebagaimana mestinya.]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="336" y="326" width="153" height="73" uuid="c9f30456-b008-42ab-9bde-1549c168cdc6"/>
+				<reportElement x="336" y="326" width="151" height="83" uuid="c9f30456-b008-42ab-9bde-1549c168cdc6"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
 				</jr:QRCode>
