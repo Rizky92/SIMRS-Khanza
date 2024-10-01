@@ -1044,6 +1044,14 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getsurat_keterangan_rawat_inap());
         BtnHapus.setEnabled(akses.getsurat_keterangan_rawat_inap());
         BtnEdit.setEnabled(akses.getsurat_keterangan_rawat_inap());
+        if(akses.getjml2()>=1){
+            if (dokter.tampil3(akses.getkode()).equals("")) {
+                BtnSimpan.setEnabled(false);
+                BtnHapus.setEnabled(false);
+                BtnEdit.setEnabled(false);
+                JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
+            }
+        }
     }
 }
 
