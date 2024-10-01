@@ -18,10 +18,10 @@
 	<queryString>
 		<![CDATA[select surat_keterangan_rawat_inap.no_surat, dokter.nm_dokter, pasien.nm_pasien, reg_periksa.umurdaftar, reg_periksa.sttsumur, pasien.pekerjaan,
 pasien.no_rkm_medis, concat_ws(', ', pasien.alamat, kecamatan.nm_kec, kabupaten.nm_kab, propinsi.nm_prop) as alamat, surat_keterangan_rawat_inap.tanggalawal,
-surat_keterangan_rawat_inap.tanggalakhir, timestampdiff(day, surat_keterangan_rawat_inap.tanggalawal, surat_keterangan_rawat_inap.tanggalakhir) + 1 as hari,
-ifnull(penyakit.nm_penyakit, '-') as nm_penyakit, penjab.png_jawab from surat_keterangan_rawat_inap join reg_periksa on surat_keterangan_rawat_inap.no_rawat
-= reg_periksa.no_rawat join dokter on surat_keterangan_rawat_inap.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
-join kecamatan on pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab join propinsi on pasien.kd_prop = propinsi.kd_prop
+surat_keterangan_rawat_inap.tanggalakhir, surat_keterangan_rawat_inap.lamasakit, ifnull(penyakit.nm_penyakit, '-') as nm_penyakit, penjab.png_jawab
+from surat_keterangan_rawat_inap join reg_periksa on surat_keterangan_rawat_inap.no_rawat = reg_periksa.no_rawat join dokter on
+surat_keterangan_rawat_inap.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join kecamatan on
+pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab join propinsi on pasien.kd_prop = propinsi.kd_prop
 join penjab on reg_periksa.kd_pj = penjab.kd_pj left join diagnosa_pasien on surat_keterangan_rawat_inap.no_rawat = diagnosa_pasien.no_rawat and
 diagnosa_pasien.prioritas = '1' and diagnosa_pasien.status = 'Ranap' left join penyakit on diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit
 where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
@@ -69,8 +69,9 @@ where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
 		<property name="com.jaspersoft.studio.field.label" value="tanggalakhir"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="surat_keterangan_rawat_inap"/>
 	</field>
-	<field name="hari" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.label" value="hari"/>
+	<field name="lamasakit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lamasakit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="surat_keterangan_rawat_inap"/>
 	</field>
 	<field name="nm_penyakit" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nm_penyakit"/>
@@ -318,7 +319,7 @@ where surat_keterangan_rawat_inap.no_surat = $P{no_surat}]]>
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
-				<textFieldExpression><![CDATA["       Adalah benar telah menerima perawatan inap di " + $P{namars} + " mulai dari tanggal " + new java.text.SimpleDateFormat("dd-MM-yyyy", new java.util.Locale("id", "ID")).format($F{tanggalawal}) + " sampai dengan tanggal " + new java.text.SimpleDateFormat("dd-MM-yyyy", new java.util.Locale("id", "ID")).format($F{tanggalakhir}) + " selama " + $F{hari} + " hari."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["       Adalah benar telah menerima perawatan inap di " + $P{namars} + " mulai dari tanggal " + new java.text.SimpleDateFormat("dd-MM-yyyy", new java.util.Locale("id", "ID")).format($F{tanggalawal}) + " sampai dengan tanggal " + new java.text.SimpleDateFormat("dd-MM-yyyy", new java.util.Locale("id", "ID")).format($F{tanggalakhir}) + " selama " + $F{lamasakit} + " hari."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="19" y="260" width="500" height="16" uuid="ca9f62fa-cb1e-4e9f-afb5-b3c211fd323b"/>

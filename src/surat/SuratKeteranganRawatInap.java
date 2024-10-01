@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -58,7 +59,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         setSize(628,674);
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Surat","No.Rawat","No.R.M.","Nama Pasien","Dari Tanggal","Sampai Tanggal", "KodeDokter", "DPJP Pembuat Surat"
+            "No.Surat","No.Rawat","No.R.M.","Nama Pasien","Dari Tanggal","Sampai Tanggal", "Lama Perawatan", "KodeDokter", "DPJP Pembuat Surat"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -68,7 +69,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 9; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -83,9 +84,11 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(90);
             } else if (i == 6) {
+                column.setPreferredWidth(80);
+            } else if (i == 7) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
-            } else if (i == 7) {
+            } else if (i == 8) {
                 column.setPreferredWidth(240);
             }
         }
@@ -183,6 +186,8 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         NmDokter = new widget.TextBox();
         BtnSeek5 = new widget.Button();
         KdDokter = new widget.TextBox();
+        jLabel18 = new widget.Label();
+        LamaSakit = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -239,7 +244,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 44));
-        panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass8.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
@@ -371,7 +376,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
 
         panelGlass9.setName("panelGlass9"); // NOI18N
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
-        panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass9.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         jLabel19.setText("Tgl. Surat :");
         jLabel19.setName("jLabel19"); // NOI18N
@@ -379,7 +384,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -393,7 +398,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -492,10 +497,15 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(330, 10, 390, 23);
 
         TanggalAkhir.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
+        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
         TanggalAkhir.setDisplayFormat("dd-MM-yyyy");
         TanggalAkhir.setName("TanggalAkhir"); // NOI18N
         TanggalAkhir.setOpaque(false);
+        TanggalAkhir.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalAkhirItemStateChanged(evt);
+            }
+        });
         TanggalAkhir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TanggalAkhirActionPerformed(evt);
@@ -507,7 +517,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAkhir);
-        TanggalAkhir.setBounds(630, 40, 90, 23);
+        TanggalAkhir.setBounds(449, 40, 80, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
@@ -515,13 +525,13 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         FormInput.add(TNoRM);
         TNoRM.setBounds(217, 10, 111, 23);
 
-        jLabel16.setText("Sampai Tanggal :");
+        jLabel16.setText("s.d. :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(536, 40, 90, 23);
+        jLabel16.setBounds(403, 40, 33, 23);
 
         TanggalAwal.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2024" }));
+        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2024" }));
         TanggalAwal.setDisplayFormat("dd-MM-yyyy");
         TanggalAwal.setName("TanggalAwal"); // NOI18N
         TanggalAwal.setOpaque(false);
@@ -541,12 +551,12 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAwal);
-        TanggalAwal.setBounds(424, 40, 90, 23);
+        TanggalAwal.setBounds(301, 40, 80, 23);
 
         jLabel13.setText("Dari Tanggal :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(340, 40, 80, 23);
+        jLabel13.setBounds(217, 40, 80, 23);
 
         jLabel24.setText("DPJP Utama :");
         jLabel24.setName("jLabel24"); // NOI18N
@@ -578,6 +588,22 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         KdDokter.setName("KdDokter"); // NOI18N
         FormInput.add(KdDokter);
         KdDokter.setBounds(74, 70, 141, 23);
+
+        jLabel18.setText("Lama prwt. :");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(556, 40, 70, 23);
+
+        LamaSakit.setText("1 (Satu)");
+        LamaSakit.setHighlighter(null);
+        LamaSakit.setName("LamaSakit"); // NOI18N
+        LamaSakit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LamaSakitKeyPressed(evt);
+            }
+        });
+        FormInput.add(LamaSakit);
+        LamaSakit.setBounds(630, 40, 90, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -631,11 +657,11 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         }else{
             if (Sequel.menyimpantfSmc("surat_keterangan_rawat_inap", null,
                 NoSurat.getText(), TNoRw.getText(), Valid.getTglSmc(TanggalAwal),
-                Valid.getTglSmc(TanggalAkhir), KdDokter.getText()
+                Valid.getTglSmc(TanggalAkhir), KdDokter.getText(), LamaSakit.getText()
             )) {
                 tabMode.addRow(new String[] {
                     NoSurat.getText(), TNoRw.getText(), TNoRM.getText(), TPasien.getText(), Valid.getTglSmc(TanggalAwal),
-                    Valid.getTglSmc(TanggalAkhir), KdDokter.getText(), NmDokter.getText()
+                    Valid.getTglSmc(TanggalAkhir), LamaSakit.getText(), KdDokter.getText(), NmDokter.getText()
                 });
                 LCount.setText("" + tabMode.getRowCount());
                 emptTeks();
@@ -690,9 +716,9 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         }else{    
             if(tbObat.getSelectedRow()!= -1){
                 if (Sequel.mengupdatetfSmc("surat_keterangan_rawat_inap",
-                    "no_surat = ?, no_rawat = ?, tanggalawal = ?, tanggalakhir = ?, kd_dokter = ?", "no_surat = ?",
+                    "no_surat = ?, no_rawat = ?, tanggalawal = ?, tanggalakhir = ?, lamasakit = ?, kd_dokter = ?", "no_surat = ?",
                     NoSurat.getText(), TNoRw.getText(), Valid.getTglSmc(TanggalAwal), Valid.getTglSmc(TanggalAkhir),
-                    KdDokter.getText(), tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    LamaSakit.getText(), KdDokter.getText(), tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                 )) {
                     tbObat.setValueAt(NoSurat.getText(), tbObat.getSelectedRow(), 0);
                     tbObat.setValueAt(TNoRw.getText(), tbObat.getSelectedRow(), 1);
@@ -700,8 +726,9 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
                     tbObat.setValueAt(TPasien.getText(), tbObat.getSelectedRow(), 3);
                     tbObat.setValueAt(Valid.getTglSmc(TanggalAwal), tbObat.getSelectedRow(), 4);
                     tbObat.setValueAt(Valid.getTglSmc(TanggalAkhir), tbObat.getSelectedRow(), 5);
-                    tbObat.setValueAt(KdDokter.getText(), tbObat.getSelectedRow(), 6);
-                    tbObat.setValueAt(NmDokter.getText(), tbObat.getSelectedRow(), 7);
+                    tbObat.setValueAt(LamaSakit.getText(), tbObat.getSelectedRow(), 6);
+                    tbObat.setValueAt(KdDokter.getText(), tbObat.getSelectedRow(), 7);
+                    tbObat.setValueAt(NmDokter.getText(), tbObat.getSelectedRow(), 8);
                     emptTeks();
                 }
             }
@@ -813,7 +840,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
    
                                   
     private void TanggalAkhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalAkhirKeyPressed
-        Valid.pindah(evt,TanggalAwal,BtnSimpan);
+        Valid.pindah(evt,TanggalAwal,LamaSakit);
 }//GEN-LAST:event_TanggalAkhirKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
@@ -885,7 +912,16 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
 
     private void TanggalAwalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalAwalItemStateChanged
         Valid.autoNomorSmc(NoSurat, "SKR", "surat_keterangan_rawat_inap", "no_surat", 3, "0", evt.getItem());
+        hitungHari();
     }//GEN-LAST:event_TanggalAwalItemStateChanged
+
+    private void LamaSakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LamaSakitKeyPressed
+        Valid.pindah(evt,TanggalAkhir,BtnSimpan);
+    }//GEN-LAST:event_LamaSakitKeyPressed
+
+    private void TanggalAkhirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalAkhirItemStateChanged
+        hitungHari();
+    }//GEN-LAST:event_TanggalAkhirItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -919,6 +955,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput;
     private widget.TextBox KdDokter;
     private widget.Label LCount;
+    private widget.TextBox LamaSakit;
     private javax.swing.JMenuItem MnCetakSuratRawat;
     private widget.TextBox NmDokter;
     private widget.TextBox NoSurat;
@@ -933,6 +970,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel13;
     private widget.Label jLabel16;
+    private widget.Label jLabel18;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel24;
@@ -968,8 +1006,9 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new String[] {
-                        rs.getString("no_surat"), rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
-                        rs.getString("tanggalawal"), rs.getString("tanggalakhir"), rs.getString("kd_dokter"), rs.getString("nm_dokter")
+                        rs.getString("no_surat"), rs.getString("no_rawat"), rs.getString("no_rkm_medis"),
+                        rs.getString("nm_pasien"), rs.getString("tanggalawal"), rs.getString("tanggalakhir"),
+                        rs.getString("lamasakit"), rs.getString("kd_dokter"), rs.getString("nm_dokter")
                     });
                 }
             }
@@ -1038,7 +1077,16 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-       
+    
+    public void hitungHari() {
+        long hari = 1;
+        if ((TanggalAwal.getDate().getTime() / 1000) >= (TanggalAkhir.getDate().getTime() / 1000)) {
+            hari = 1;
+        } else {
+            hari = 1 + TimeUnit.DAYS.convert(TanggalAkhir.getDate().getTime() - TanggalAwal.getDate().getTime(), TimeUnit.MILLISECONDS);
+        }
+        LamaSakit.setText(hari + " (" + Valid.capitalize(Valid.terbilangSmc(hari)) + ")");
+    }
     
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_keterangan_rawat_inap());
@@ -1054,6 +1102,3 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
         }
     }
 }
-
-
-
