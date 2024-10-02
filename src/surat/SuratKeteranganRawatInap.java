@@ -655,6 +655,11 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
+        } else if ((TanggalAwal.getDate().getTime() / 1000) > (TanggalAkhir.getDate().getTime() / 1000)) {
+            JOptionPane.showMessageDialog(null, "Tanggal awal tidak boleh melebihi tanggal akhir surat..!!");
+            TanggalAwal.requestFocus();
+        } else if (KdDokter.getText().isBlank() || NmDokter.getText().isBlank()) {
+            Valid.textKosong(KdDokter, "DPJP Utama");
         }else{
             if (Sequel.menyimpantfSmc("surat_keterangan_rawat_inap", null,
                 NoSurat.getText(), TNoRw.getText(), Valid.getTglSmc(TanggalAwal),
@@ -714,6 +719,11 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             Valid.textKosong(NoSurat,"No.Surat");      
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");    
+        } else if ((TanggalAwal.getDate().getTime() / 1000) > (TanggalAkhir.getDate().getTime() / 1000)) {
+            JOptionPane.showMessageDialog(null, "Tanggal awal tidak boleh melebihi tanggal akhir surat..!!");
+            TanggalAwal.requestFocus();
+        } else if (KdDokter.getText().isBlank() || NmDokter.getText().isBlank()) {
+            Valid.textKosong(KdDokter, "DPJP Utama");
         }else{    
             if(tbObat.getSelectedRow()!= -1){
                 if (Sequel.mengupdatetfSmc("surat_keterangan_rawat_inap",
