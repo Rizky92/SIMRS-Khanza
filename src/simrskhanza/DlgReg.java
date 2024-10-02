@@ -51,6 +51,7 @@ import inventory.DlgCopyResep;
 import inventory.DlgPemberianObat;
 import inventory.DlgPeresepanDokter;
 import inventory.DlgResepObat;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -527,17 +528,17 @@ public final class DlgReg extends javax.swing.JDialog {
                 if(akses.getform().equals("DlgReg")){
                     if(pasien.getTable().getSelectedRow()!= -1){  
                         TNoRM.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
-                        isPas();
+                        isPas2();
                         isNumber();                                                    
                     }  
                     if(pasien.getTable2().getSelectedRow()!= -1){  
                         TNoRM.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),1).toString());
-                        isPas();
+                        isPas2();
                         isNumber();                                                    
                     }  
                     if(pasien.getTable3().getSelectedRow()!= -1){  
                         TNoRM.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),1).toString());
-                        isPas();
+                        isPas2();
                         isNumber();                                                    
                     }  
                     TNoRM.requestFocus();
@@ -6729,6 +6730,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
+        TNoRM.setOpaque(true);
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TNoRMKeyPressed(evt);
@@ -6813,6 +6815,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
+        TPasien.setOpaque(true);
         FormInput.add(TPasien);
         TPasien.setBounds(632, 12, 218, 23);
 
@@ -7118,7 +7121,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            isPas();
+            isPas2();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPasienActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
@@ -7140,7 +7143,7 @@ public final class DlgReg extends javax.swing.JDialog {
                         "select current_date() as sekarang",param); 
             }             
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            isPas();
+            isPas2();
             TPngJwb.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kdpoli.requestFocus();
@@ -7204,16 +7207,20 @@ public final class DlgReg extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 isRegistrasi();
             }else{
-                if(aktifjadwal.equals("aktif")){
-                    if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
-                        JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
-                        TCari.requestFocus();
+                if (validasiRegistrasi()) {
+                    if(aktifjadwal.equals("aktif")){
+                        if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
+                            JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
+                            TCari.requestFocus();
+                        }else{
+                            isRegistrasi();
+                        }                    
                     }else{
                         isRegistrasi();
-                    }                    
-                }else{
-                    isRegistrasi();
-                }  
+                    }  
+                } else {
+                    JOptionPane.showMessageDialog(null, "Tidak dapat mendaftarkan pasien, periksa kembali riwayat kunjungan sebelumnya..!!");
+                }
             }                          
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -15033,7 +15040,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnPermintaanKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanInformasiObatActionPerformed
+    private void MnPermintaanKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNoReg.requestFocus();
@@ -16013,6 +16020,64 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             isCekPasien();
         }        
     }
+
+    private void isPas2() {
+        if (validasiregistrasi.equals("Yes")) {
+            if (Sequel.cariInteger("select count(reg_periksa.no_rkm_medis) from reg_periksa where reg_periksa.no_rkm_medis=? and reg_periksa.status_bayar='Belum Bayar' and reg_periksa.stts<>'Batal'", TNoRM.getText()) > 0) {
+                TNoRM.setBackground(new Color(255, 210, 215));
+                TPasien.setBackground(new Color(255, 210, 215));
+                System.out.println("Hit yes");
+            } else {
+                TNoRM.setBackground(new Color(255, 255, 255));
+                TPasien.setBackground(new Color(255, 255, 255));
+                System.out.println("Hit yes false");
+            }
+        } else if (validasiregistrasi.equals("Peringatan di hari yang sama")) {
+            if (Sequel.cariBooleanSmc("select * from reg_periksa where reg_periksa.no_rkm_medis = ? and tgl_registrasi = ?", TNoRM.getText(), Valid.getTglSmc(DTPReg))) {
+                TNoRM.setBackground(new Color(255, 250, 210));
+                TPasien.setBackground(new Color(255, 250, 210));
+                System.out.println("Hit peringatan");
+            } else {
+                TNoRM.setBackground(new Color(255, 255, 255));
+                TPasien.setBackground(new Color(255, 255, 255));
+                System.out.println("Hit peringatan false");
+            }
+        } else {
+            TNoRM.setBackground(new Color(255, 255, 255));
+            TPasien.setBackground(new Color(255, 255, 255));
+            System.out.println("Hit no");
+        }
+
+        if (validasicatatan.equals("Yes")) {
+            if (Sequel.cariInteger("select count(catatan_pasien.no_rkm_medis) from catatan_pasien where catatan_pasien.no_rkm_medis=?", TNoRM.getText()) > 0) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgCatatan catatan = new DlgCatatan(null, false);
+                catatan.setNoRm(TNoRM.getText());
+                catatan.setSize(720, 330);
+                catatan.setLocationRelativeTo(internalFrame1);
+                catatan.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+
+        TNoRM.repaint();
+        TPasien.repaint();
+        isCekPasien();
+    }
+    
+    private boolean validasiRegistrasi() {
+        if (TNoRM.getBackground().equals(new Color(255, 210, 215))) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, pasien pada kunjungan sebelumnya memiliki tagihan yang belum di closing.\nSilahkan konfirmasi dengan pihak kasir.. !!");
+            return false;
+        } else if (TNoRM.getBackground().equals(new Color(255, 250, 210))) {
+            if (JOptionPane.showConfirmDialog(null, "Pasien telah memiliki kunjungan pada hari ini, lanjutkan registrasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
     
     private void isCekPasien(){
         try {
@@ -16604,14 +16669,14 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoRM.setText(norm);
         this.nosisrute=nosisrute;
         AsalRujukan.setText(FaskesAsal);
-        isPas();
+        isPas2();
     }
     
     public void SetPasien(String norm){
         ChkInput.setSelected(true);
         isForm(); 
         TNoRM.setText(norm);
-        isPas();
+        isPas2();
     }
     
     public void setPasien(String NamaPasien,String Kontak,String Alamat,String TempatLahir,String TglLahir,

@@ -357,15 +357,16 @@ public class DlgSetRM extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50)));
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         panelGlass5.setName("panelGlass5"); // NOI18N
         panelGlass5.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass5.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
@@ -425,7 +426,7 @@ public class DlgSetRM extends javax.swing.JDialog {
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 254));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
-        TabRawat.setForeground(new java.awt.Color(50,50,50));
+        TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1373,7 +1374,8 @@ public class DlgSetRM extends javax.swing.JDialog {
         panelGlass10.add(jLabel12);
         jLabel12.setBounds(0, 12, 330, 23);
 
-        ValidasiRegistrasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
+        ValidasiRegistrasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "Peringatan di hari yang sama", "No" }));
+        ValidasiRegistrasi.setSelectedIndex(1);
         ValidasiRegistrasi.setName("ValidasiRegistrasi"); // NOI18N
         ValidasiRegistrasi.setPreferredSize(new java.awt.Dimension(55, 28));
         ValidasiRegistrasi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1382,7 +1384,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             }
         });
         panelGlass10.add(ValidasiRegistrasi);
-        ValidasiRegistrasi.setBounds(333, 12, 70, 23);
+        ValidasiRegistrasi.setBounds(333, 12, 180, 23);
 
         internalFrame6.add(panelGlass10, java.awt.BorderLayout.PAGE_START);
 
