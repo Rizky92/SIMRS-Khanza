@@ -448,7 +448,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 task7 = rs.getString("ada_task7");
                                 task99 = rs.getString("ada_task99");
                                 if(task99.equals("")){
-                                    datajam=Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi, current_time()) from reg_periksa where reg_periksa.stts='Batal' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    datajam=Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi, ' ', current_time()) from reg_periksa where reg_periksa.stts='Batal' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
                                     if(!datajam.equals("")){
                                         if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"99",datajam})==true){
                                             parsedDate = dateFormat.parse(datajam);
@@ -835,7 +835,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         task7 = rs.getString("ada_task7");
                                         task99 = rs.getString("ada_task99");
                                         if(task99.equals("")){
-                                            datajam=Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi, current_time()) from reg_periksa where reg_periksa.stts='Batal' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                            datajam=Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi, ' ', current_time()) from reg_periksa where reg_periksa.stts='Batal' and reg_periksa.no_rawat=?",rs.getString("no_rawat"));
                                             if(!datajam.equals("")){
                                                 if(Sequel.menyimpantf2("referensi_mobilejkn_bpjs_taskid","?,?,?","task id",3,new String[]{rs.getString("no_rawat"),"99",datajam})==true){
                                                     parsedDate = dateFormat.parse(datajam);

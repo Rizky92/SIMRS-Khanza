@@ -27,6 +27,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -731,12 +732,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void tbUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUserMouseClicked
         if (tabMode.getRowCount() != 0) {
             if (copyhakakses.equals("copy")) {
-                if (userdicopy.equals(TKd.getText())) {
+                if (userdicopy.equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
                     JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
                     userdicopy = "";
                     copyhakakses = "";
                 } else {
-                    int reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah bener belum data copy hak aksesnya..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                    JCheckBox checkbox = new JCheckBox("Hanya copy hak akses yang aktif");
+                    int reply = JOptionPane.showConfirmDialog(null, new Object[] {"Eeiiiiiits, udah bener belum data copy hak aksesnya..??", checkbox}, "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                    boolean selected = checkbox.isSelected();
                     if (reply == JOptionPane.YES_OPTION) {
                         String sqlupdate = "";
                         try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
@@ -748,26 +751,39 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
                                                 rs.getString(rs2.getString("column_name"));
-                                                if (rs.wasNull()) {
-                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = null, ";
+                                                if (!selected) {
+                                                    if (rs.wasNull()) {
+                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = 'false', ";
+                                                    } else {
+                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
+                                                    }
                                                 } else {
-                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
+                                                    if (rs.getString(rs2.getString("column_name")).equals("true")) {
+                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
+                                                    }
                                                 }
                                             }
                                         }
-                                    } catch (Exception e) {
-                                        System.out.println("Notif : " + e);
                                     }
                                 }
                             }
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
+                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy hak akses user..!!");
+                            userdicopy = "";
+                            copyhakakses = "";
+                        }
+                        if (sqlupdate.isBlank()) {
+                            userdicopy = "";
+                            copyhakakses = "";
+                            JOptionPane.showMessageDialog(null, "Tidak ada hak akses yang bisa dicopy..!!");
+                            return;
                         }
                         sqlupdate = sqlupdate.substring(0, sqlupdate.length() - 2);
                         if (Sequel.mengupdatetfSmc("user", sqlupdate, "aes_decrypt(id_user, 'nur') = ?", tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-                            JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
                             userdicopy = "";
                             copyhakakses = "";
+                            JOptionPane.showMessageDialog(null, "Copy hak akses user berhasil!");
                         }
                     } else {
                         userdicopy = "";
@@ -789,17 +805,6 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 try {
                     getData();
                 } catch (java.lang.NullPointerException e) {
-                }
-            } else if (evt.getKeyCode() == KeyEvent.VK_V) {
-                if (tbUser.getSelectedColumn() > 4) {
-                    if (tbUser.getSelectedRow() != -1) {
-                        if (tbUser.getValueAt(tbUser.getSelectedRow(), tbUser.getSelectedColumn()).toString().equals("false")) {
-                            tbUser.setValueAt(true, tbUser.getSelectedRow(), tbUser.getSelectedColumn());
-                        } else {
-                            tbUser.setValueAt(false, tbUser.getSelectedRow(), tbUser.getSelectedColumn());
-                        }
-
-                    }
                 }
             }
         }
