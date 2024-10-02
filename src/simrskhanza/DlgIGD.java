@@ -200,6 +200,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             status="Baru",alamatperujuk="-",umur="0",sttsumur="Th",IPPRINTERTRACER="",norawatdipilih="",normdipilih="",
             validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi"),
             validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),variabel="";
+    private boolean validasiRegistIGD = Sequel.cariIsiSmc("select set_validasi_registrasi.izinkan_registrasi_igd from set_validasi_registrasi").equals("Yes");
     private char ESC = 27;
     // ganti kertas
     private char[] FORM_FEED = {12};
@@ -11741,7 +11742,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
 
     private void isPas(){
-        if(validasiregistrasi.equals("Yes")){
+        if(validasiregistrasi.equals("Yes") && !validasiRegistIGD){
             if(Sequel.cariInteger("select count(reg_periksa.no_rkm_medis) from reg_periksa where reg_periksa.no_rkm_medis=? and reg_periksa.status_bayar='Belum Bayar' and reg_periksa.stts<>'Batal'",TNoRM.getText())>0){
                 JOptionPane.showMessageDialog(rootPane,"Maaf, pasien pada kunjungan sebelumnya memiliki tagihan yang belum di closing.\nSilahkan konfirmasi dengan pihak kasir.. !!");
             }else{
