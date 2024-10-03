@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ca8e316-5e4c-4bbe-bad5-394bd0979269">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -404,65 +404,15 @@ and suratsakitpihak2.no_rawat=reg_periksa.no_rawat and pasien.kd_kec=kecamatan.k
 				<text><![CDATA[Alamat]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="235" y="263" width="20" height="14" uuid="3fe1f8b1-a8fe-4e4c-b794-b796a5ff5ee3">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{lamasakit}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="443" y="263" width="74" height="14" uuid="89df2541-0690-416e-9dba-9ff4b9336aa8">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggalawal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="83" y="278" width="74" height="14" uuid="2fdf9b15-ad4e-45b6-80f6-fb966bcb2fdf">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left">
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[sampai dengan]]></text>
-			</staticText>
-			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="160" y="278" width="104" height="14" uuid="7b2922f8-fa95-4627-b470-f2c013e2c862">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggalakhir}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="83" y="263" width="134" height="14" uuid="3d38e927-b948-4bbe-81f4-fb6c7b710b3f">
+				<reportElement x="83" y="263" width="462" height="27" uuid="b3d8b40a-2725-48c9-add9-9d4129558315">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Mendampingi pasien selama]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="263" y="263" width="27" height="14" uuid="69348dbc-93df-4550-b688-c1c29b19c588">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[hari]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Mendampingi pasien selama " + $F{lamasakit} + " karena sakit terhitung dari tanggal " + $F{tanggalawal} + " sampai dengan " + $F{tanggalakhir}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="1" y="309" width="379" height="14" uuid="9c12cf67-af7a-45bc-b414-f493db08ccc5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -522,16 +472,6 @@ and suratsakitpihak2.no_rawat=reg_periksa.no_rawat and pasien.kd_kec=kecamatan.k
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="287" y="263" width="153" height="14" uuid="954d2c6d-d5fd-4dfd-93d3-d76f3efad974">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Tahoma" size="10"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[karena sakit terhitung dari tanggal]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="382" y="413" width="172" height="17" uuid="7ef02f45-fde9-4fa1-a47a-0e169cd7f314"/>

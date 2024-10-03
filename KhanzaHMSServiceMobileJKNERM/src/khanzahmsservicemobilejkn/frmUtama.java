@@ -435,9 +435,8 @@ public class frmUtama extends javax.swing.JFrame {
                             "if(exists(select * from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat = referensi_mobilejkn_bpjs.no_rawat and referensi_mobilejkn_bpjs_taskid.taskid = '7'), 'Sudah', '') as ada_task7, " +
                             "if(exists(select * from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat = referensi_mobilejkn_bpjs.no_rawat and referensi_mobilejkn_bpjs_taskid.taskid = '99'), 'Sudah', '') as ada_task99 " +
                             "from referensi_mobilejkn_bpjs join reg_periksa on referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join poliklinik " +
-                            "on reg_periksa.kd_poli = poliklinik.kd_poli join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where referensi_mobilejkn_bpjs.statuskirim = 'Sudah' and referensi_mobilejkn_bpjs.tanggalperiksa between " +
-                            "'" + Tanggal1.getText() + "' and '" + Tanggal2.getText() + "' and not exists(select * from referensi_mobilejkn_bpjs_batal where referensi_mobilejkn_bpjs_batal.nobooking = referensi_mobilejkn_bpjs.nobooking) " +
-                            "order by referensi_mobilejkn_bpjs.tanggalperiksa"
+                            "on reg_periksa.kd_poli = poliklinik.kd_poli join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where referensi_mobilejkn_bpjs.status = 'Checkin' and referensi_mobilejkn_bpjs.tanggalperiksa between " +
+                            "'" + Tanggal1.getText() + "' and '" + Tanggal2.getText() + "' order by referensi_mobilejkn_bpjs.tanggalperiksa"
                         );
                         try {
                             rs=ps.executeQuery();
