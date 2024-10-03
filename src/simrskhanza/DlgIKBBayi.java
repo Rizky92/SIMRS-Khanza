@@ -62,6 +62,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             bpjsibu="",bpjsayah="",notlp="",bpjsby="",nikplpr="",nmplpr="",almtplpr="",
             krjplpr="",niks1="",nms1="",almts1="",krjs1="",niks2="",nms2="",almts2="",
             krjs2="",umribu="",umrayah="",umrplpr="",umrs1="",umrs2="";
+    private final boolean RESTRIKSIRMKELAHIRANBAYI = koneksiDB.RESTRIKSIRMKELAHIRANBAYI();
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -2887,95 +2888,74 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 tbAPGAR.getValueAt(2,6).toString().equals("")||tbAPGAR.getValueAt(3,6).toString().equals("")||tbAPGAR.getValueAt(4,6).toString().equals("")){
             JOptionPane.showMessageDialog(null,"Nilai APGAR harus valid...!!!");
         }else{
-            if(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_rkm_medis=?",NoRm.getText()).isEmpty()){ 
-                Sequel.queryu4("insert into cacat_fisik values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert into penjab values(?,?)",2,new String[]{"-","-"});
-                Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert into bahasa_pasien values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert into suku_bangsa values(?,?)",2,new String[]{"0","-"});
-                Sequel.queryu4("insert into perusahaan_pasien values(?,?,?,?,?)",2,new String[]{"-","-","-","-","-"});
-                if(Sequel.menyimpantf("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                    NoRm.getText(),NmBayi.getText(),"-",
-                    JKel.getSelectedItem().toString().substring(0,1),"-",
-                    Valid.SetTgl(Lahir.getSelectedItem()+""),
-                    Nmibu.getText(),AlamatIbu.getText(),"-","-","BELUM MENIKAH","-",
-                    Valid.SetTgl(Daftar.getSelectedItem()+""),"0",UmurBayi.getText(),
-                    "-","AYAH",NmAyah.getText(),"-","-",
-                    Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?","-"),
-                    Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?","-"),
-                    Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?","-"),
-                    "-",AlamatIbu.getText(),"-","-","-","-",
-                    Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?","-"),
-                    Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?","-"),
-                    Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?","-"),
-                    "-","-",Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?","-"),"-"
-                })==true){
-                    try {
-                        if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
-                            UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
-                            LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
-                            Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
-                            KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+tbAPGAR.getValueAt(0,4).toString()+"','"+
-                            tbAPGAR.getValueAt(1,4).toString()+"','"+tbAPGAR.getValueAt(2,4).toString()+"','"+tbAPGAR.getValueAt(3,4).toString()+"','"+
-                            tbAPGAR.getValueAt(4,4).toString()+"','"+N1.getText()+"','"+tbAPGAR.getValueAt(0,5).toString()+"','"+tbAPGAR.getValueAt(1,5).toString()+"','"+
-                            tbAPGAR.getValueAt(2,5).toString()+"','"+tbAPGAR.getValueAt(3,5).toString()+"','"+tbAPGAR.getValueAt(4,5).toString()+"','"+N5.getText()+"','"+
-                            tbAPGAR.getValueAt(0,6).toString()+"','"+tbAPGAR.getValueAt(1,6).toString()+"','"+tbAPGAR.getValueAt(2,6).toString()+"','"+
-                            tbAPGAR.getValueAt(3,6).toString()+"','"+tbAPGAR.getValueAt(4,6).toString()+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
-                            Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
-                                Sequel.queryu2("delete from set_no_rkm_medis");
-                                Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{NoRm.getText()}); 
-                                emptTeks();
-                        }else{
-                            Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
-                        }  
-                    } catch (Exception e) {
-                        Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
-                        JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
-                    }    
-                }else{
-                    autoNomor();
-                    autoSKL();
+            if (RESTRIKSIRMKELAHIRANBAYI) {
+                if (Sequel.cariBooleanSmc("select * from pasien where pasien.no_rkm_medis = ?", NoRm.getText().trim())) {
+                    if (Sequel.menyimpantfSmc("pasien_bayi", null, 
+                        NoRm.getText().trim(), UmurIbu.getText(), NmAyah.getText(), UmurAyah.getText(), Berat.getText(), Panjang.getText(), LingkarKepala.getText(),
+                        Proses.getText(), Anakke.getText(), Valid.getWaktuSmc(jam, menit, detik), Keterangan.getText(), Diagnosa.getText(), PenyulitKehamilan.getText(),
+                        Ketuban.getText(), LingkarPerut.getText(), LingkarDada.getText(), KdPenolong.getText(), NoSKL.getText(), G.getText(), P.getText(), A.getText(),
+                        tbAPGAR.getValueAt(0, 4).toString(), tbAPGAR.getValueAt(1, 4).toString(), tbAPGAR.getValueAt(2, 4).toString(), tbAPGAR.getValueAt(3, 4).toString(),
+                        tbAPGAR.getValueAt(4, 4).toString(), N1.getText(), tbAPGAR.getValueAt(0, 5).toString(), tbAPGAR.getValueAt(1, 5).toString(), tbAPGAR.getValueAt(2, 5).toString(),
+                        tbAPGAR.getValueAt(3, 5).toString(), tbAPGAR.getValueAt(4, 5).toString(), N5.getText(), tbAPGAR.getValueAt(0, 6).toString(), tbAPGAR.getValueAt(1, 6).toString(),
+                        tbAPGAR.getValueAt(2, 6).toString(), tbAPGAR.getValueAt(3, 6).toString(), tbAPGAR.getValueAt(4, 6).toString(), N10.getText(), Resusitas.getText(),
+                        ObatDiberikan.getText(), Mikasi.getText(), Mikonium.getText()
+                    )) {
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Gagal menyimpan data kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data RM bayi tidak ditemukan, silahkan konfirmasi ke bagian pendaftaran/rekam medis..!!");
+                }
+            } else {
+                if(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_rkm_medis=?",NoRm.getText().trim()).isEmpty()){ 
+                    Sequel.queryu4("insert into cacat_fisik values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert into penjab values(?,?)",2,new String[]{"-","-"});
+                    Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert into bahasa_pasien values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert into suku_bangsa values(?,?)",2,new String[]{"0","-"});
+                    Sequel.queryu4("insert into perusahaan_pasien values(?,?,?,?,?)",2,new String[]{"-","-","-","-","-"});
                     if(Sequel.menyimpantf("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
-                            NoRm.getText(),NmBayi.getText(),"-",
-                            JKel.getSelectedItem().toString().substring(0,1),"-",
-                            Valid.SetTgl(Lahir.getSelectedItem()+""),
-                            Nmibu.getText(),AlamatIbu.getText(),"-","-","BELUM MENIKAH","-",
-                            Valid.SetTgl(Daftar.getSelectedItem()+""),"0",UmurBayi.getText(),
-                            "-","AYAH",NmAyah.getText(),"-","-",
-                            Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?","-"),
-                            Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?","-"),
-                            Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?","-"),
-                            "-",AlamatIbu.getText(),"-","-","-","-",
-                            Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?","-"),
-                            Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?","-"),
-                            Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?","-"),
-                            "-","-",Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?","-"),"-"
-                        })==true){
-                            try {
-                                if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
-                                    UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
-                                    LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
-                                    Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
-                                    KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,4).toString())+"','"+
-                                    Valid.SetInteger(tbAPGAR.getValueAt(1,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,4).toString())+"','"+
-                                    Valid.SetInteger(tbAPGAR.getValueAt(4,4).toString())+"','"+N1.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,5).toString())+"','"+
-                                    Valid.SetInteger(tbAPGAR.getValueAt(2,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,5).toString())+"','"+N5.getText()+"','"+
-                                    Valid.SetInteger(tbAPGAR.getValueAt(0,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,6).toString())+"','"+
-                                    Valid.SetInteger(tbAPGAR.getValueAt(3,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,6).toString())+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
-                                    Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
-                                        Sequel.queryu2("delete from set_no_rkm_medis");
-                                        Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{NoRm.getText()}); 
-                                        emptTeks();
-                                }else{
-                                    Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
-                                }  
-                            } catch (Exception e) {
+                        NoRm.getText(),NmBayi.getText(),"-",
+                        JKel.getSelectedItem().toString().substring(0,1),"-",
+                        Valid.SetTgl(Lahir.getSelectedItem()+""),
+                        Nmibu.getText(),AlamatIbu.getText(),"-","-","BELUM MENIKAH","-",
+                        Valid.SetTgl(Daftar.getSelectedItem()+""),"0",UmurBayi.getText(),
+                        "-","AYAH",NmAyah.getText(),"-","-",
+                        Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?","-"),
+                        Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?","-"),
+                        Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?","-"),
+                        "-",AlamatIbu.getText(),"-","-","-","-",
+                        Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?","-"),
+                        Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?","-"),
+                        Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?","-"),
+                        "-","-",Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?","-"),"-"
+                    })==true){
+                        try {
+                            if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
+                                UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
+                                LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
+                                Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
+                                KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+tbAPGAR.getValueAt(0,4).toString()+"','"+
+                                tbAPGAR.getValueAt(1,4).toString()+"','"+tbAPGAR.getValueAt(2,4).toString()+"','"+tbAPGAR.getValueAt(3,4).toString()+"','"+
+                                tbAPGAR.getValueAt(4,4).toString()+"','"+N1.getText()+"','"+tbAPGAR.getValueAt(0,5).toString()+"','"+tbAPGAR.getValueAt(1,5).toString()+"','"+
+                                tbAPGAR.getValueAt(2,5).toString()+"','"+tbAPGAR.getValueAt(3,5).toString()+"','"+tbAPGAR.getValueAt(4,5).toString()+"','"+N5.getText()+"','"+
+                                tbAPGAR.getValueAt(0,6).toString()+"','"+tbAPGAR.getValueAt(1,6).toString()+"','"+tbAPGAR.getValueAt(2,6).toString()+"','"+
+                                tbAPGAR.getValueAt(3,6).toString()+"','"+tbAPGAR.getValueAt(4,6).toString()+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
+                                Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
+                                    Sequel.queryu2("delete from set_no_rkm_medis");
+                                    Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{NoRm.getText()}); 
+                                    emptTeks();
+                            }else{
                                 Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
-                                JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
                             }  
+                        } catch (Exception e) {
+                            Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
+                            JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
+                        }    
                     }else{
                         autoNomor();
                         autoSKL();
@@ -3016,28 +2996,70 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 } catch (Exception e) {
                                     Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
                                     JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
-                                }
+                                }  
+                        }else{
+                            autoNomor();
+                            autoSKL();
+                            if(Sequel.menyimpantf("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
+                                    NoRm.getText(),NmBayi.getText(),"-",
+                                    JKel.getSelectedItem().toString().substring(0,1),"-",
+                                    Valid.SetTgl(Lahir.getSelectedItem()+""),
+                                    Nmibu.getText(),AlamatIbu.getText(),"-","-","BELUM MENIKAH","-",
+                                    Valid.SetTgl(Daftar.getSelectedItem()+""),"0",UmurBayi.getText(),
+                                    "-","AYAH",NmAyah.getText(),"-","-",
+                                    Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?","-"),
+                                    Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?","-"),
+                                    Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?","-"),
+                                    "-",AlamatIbu.getText(),"-","-","-","-",
+                                    Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?","-"),
+                                    Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?","-"),
+                                    Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?","-"),
+                                    "-","-",Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?","-"),"-"
+                                })==true){
+                                    try {
+                                        if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
+                                            UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
+                                            LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
+                                            Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
+                                            KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,4).toString())+"','"+
+                                            Valid.SetInteger(tbAPGAR.getValueAt(1,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,4).toString())+"','"+
+                                            Valid.SetInteger(tbAPGAR.getValueAt(4,4).toString())+"','"+N1.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,5).toString())+"','"+
+                                            Valid.SetInteger(tbAPGAR.getValueAt(2,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,5).toString())+"','"+N5.getText()+"','"+
+                                            Valid.SetInteger(tbAPGAR.getValueAt(0,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,6).toString())+"','"+
+                                            Valid.SetInteger(tbAPGAR.getValueAt(3,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,6).toString())+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
+                                            Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
+                                                Sequel.queryu2("delete from set_no_rkm_medis");
+                                                Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{NoRm.getText()}); 
+                                                emptTeks();
+                                        }else{
+                                            Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
+                                        }  
+                                    } catch (Exception e) {
+                                        Sequel.meghapus("pasien","no_rkm_medis",NoRm.getText());
+                                        JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
+                                    }
+                            }
                         }
                     }
+                }else{
+                    try {
+                        if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
+                                UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
+                                LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
+                                Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
+                                KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,4).toString())+"','"+
+                                Valid.SetInteger(tbAPGAR.getValueAt(1,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,4).toString())+"','"+
+                                Valid.SetInteger(tbAPGAR.getValueAt(4,4).toString())+"','"+N1.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,5).toString())+"','"+
+                                Valid.SetInteger(tbAPGAR.getValueAt(2,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,5).toString())+"','"+N5.getText()+"','"+
+                                Valid.SetInteger(tbAPGAR.getValueAt(0,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,6).toString())+"','"+
+                                Valid.SetInteger(tbAPGAR.getValueAt(3,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,6).toString())+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
+                                Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
+                                emptTeks();
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
+                    }            
                 }
-            }else{
-                try {
-                    if(Sequel.menyimpantf("pasien_bayi","'"+NoRm.getText()+"','"+
-                            UmurIbu.getText()+"','"+NmAyah.getText()+"','"+UmurAyah.getText()+"','"+Berat.getText()+"','"+Panjang.getText()+"','"+
-                            LingkarKepala.getText()+"','"+Proses.getText()+"','"+Anakke.getText()+"','"+jam.getSelectedItem()+":"+menit.getSelectedItem()+":"+detik.getSelectedItem()+"','"+
-                            Keterangan.getText()+"','"+Diagnosa.getText()+"','"+PenyulitKehamilan.getText()+"','"+Ketuban.getText()+"','"+LingkarPerut.getText()+"','"+LingkarDada.getText()+"','"+
-                            KdPenolong.getText()+"','"+NoSKL.getText()+"','"+G.getText()+"','"+P.getText()+"','"+A.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,4).toString())+"','"+
-                            Valid.SetInteger(tbAPGAR.getValueAt(1,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,4).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,4).toString())+"','"+
-                            Valid.SetInteger(tbAPGAR.getValueAt(4,4).toString())+"','"+N1.getText()+"','"+Valid.SetInteger(tbAPGAR.getValueAt(0,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,5).toString())+"','"+
-                            Valid.SetInteger(tbAPGAR.getValueAt(2,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(3,5).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,5).toString())+"','"+N5.getText()+"','"+
-                            Valid.SetInteger(tbAPGAR.getValueAt(0,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(1,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(2,6).toString())+"','"+
-                            Valid.SetInteger(tbAPGAR.getValueAt(3,6).toString())+"','"+Valid.SetInteger(tbAPGAR.getValueAt(4,6).toString())+"','"+N10.getText()+"','"+Resusitas.getText()+"','"+ObatDiberikan.getText()+"','"+
-                            Mikasi.getText()+"','"+Mikonium.getText()+"'","No.RM/No.SKL")==true){
-                            emptTeks();
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null,"Gagal menyimpan kelahiran bayi, silahkan periksa data yang mau disimpan..!!");
-                }            
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed

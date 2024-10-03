@@ -213,6 +213,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean RESTRIKSIRMKELAHIRANBAYI() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("RESTRIKSIRMKELAHIRANBAYI").equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return true;
+        }
+    }
+    
     public static String URLKFAV2SATUSEHAT() {
         try (FileInputStream f = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(f);

@@ -586,6 +586,10 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
     }
+    
+    public void menghapusSmc(String table) {
+        menghapusSmc(table, null);
+    }
 
     public boolean menghapustfSmc(String table, String wheres, String... values) {
         boolean output = true;

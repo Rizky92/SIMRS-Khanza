@@ -51,6 +51,7 @@ public final class DlgCariDokter extends javax.swing.JDialog {
     private JsonNode response;
     private FileReader myObj;
     private sekuel Sequel=new sekuel();
+    private String noRawat = "";
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -401,49 +402,53 @@ public final class DlgCariDokter extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try {
-            file=new File("./cache/dokter.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem="";
-            ps=koneksi.prepareStatement(
-                "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
-                "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
-                "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek "+
-                "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
-                "where dokter.status='1' order by dokter.nm_dokter");
-            try{
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new String[]{
-                        rs.getString(1),rs.getString(2),rs.getString(3),
-                        rs.getString(4),rs.getString(5),rs.getString(6),
-                        rs.getString(7),rs.getString(8),rs.getString(9),
-                        rs.getString(10),rs.getString(11),rs.getString(12),
-                        rs.getString(13)
-                    });
-                    iyem=iyem+"{\"KodeDokter\":\""+rs.getString(1)+"\",\"NamaDokter\":\""+rs.getString(2).replaceAll("\"","")+"\",\"JK\":\""+rs.getString(3)+"\",\"TmpLahir\":\""+rs.getString(4).replaceAll("\"","")+"\",\"TglLahir\":\""+rs.getString(5)+"\",\"GD\":\""+rs.getString(6)+"\",\"Agama\":\""+rs.getString(7)+"\",\"AlamatTinggal\":\""+rs.getString(8).replaceAll("\"","")+"\",\"NoTelp\":\""+rs.getString(9)+"\",\"SttsNikah\":\""+rs.getString(10)+"\",\"Spesialis\":\""+rs.getString(11)+"\",\"Alumni\":\""+rs.getString(12).replaceAll("\"","")+"\",\"NoIjinPraktek\":\""+rs.getString(13)+"\"},";
+        if (! this.noRawat.isBlank()) {
+            tampilDPJP(this.noRawat);
+        } else {
+            Valid.tabelKosong(tabMode);
+            try {
+                file=new File("./cache/dokter.iyem");
+                file.createNewFile();
+                fileWriter = new FileWriter(file);
+                iyem="";
+                ps=koneksi.prepareStatement(
+                    "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
+                    "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
+                    "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek "+
+                    "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
+                    "where dokter.status='1' order by dokter.nm_dokter");
+                try{
+                    rs=ps.executeQuery();
+                    while(rs.next()){
+                        tabMode.addRow(new String[]{
+                            rs.getString(1),rs.getString(2),rs.getString(3),
+                            rs.getString(4),rs.getString(5),rs.getString(6),
+                            rs.getString(7),rs.getString(8),rs.getString(9),
+                            rs.getString(10),rs.getString(11),rs.getString(12),
+                            rs.getString(13)
+                        });
+                        iyem=iyem+"{\"KodeDokter\":\""+rs.getString(1)+"\",\"NamaDokter\":\""+rs.getString(2).replaceAll("\"","")+"\",\"JK\":\""+rs.getString(3)+"\",\"TmpLahir\":\""+rs.getString(4).replaceAll("\"","")+"\",\"TglLahir\":\""+rs.getString(5)+"\",\"GD\":\""+rs.getString(6)+"\",\"Agama\":\""+rs.getString(7)+"\",\"AlamatTinggal\":\""+rs.getString(8).replaceAll("\"","")+"\",\"NoTelp\":\""+rs.getString(9)+"\",\"SttsNikah\":\""+rs.getString(10)+"\",\"Spesialis\":\""+rs.getString(11)+"\",\"Alumni\":\""+rs.getString(12).replaceAll("\"","")+"\",\"NoIjinPraktek\":\""+rs.getString(13)+"\"},";
+                    }
+                }catch(Exception e){
+                    System.out.println("Notifikasi : "+e);
+                }finally{
+                    if( rs != null ){
+                        rs.close();
+                    }
+
+                    if( ps != null ){
+                        ps.close();
+                    }
                 }
-            }catch(Exception e){
+                fileWriter.write("{\"dokter\":["+iyem.substring(0,iyem.length()-1)+"]}");
+                fileWriter.flush();
+                fileWriter.close();
+                iyem=null;
+            } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            }finally{
-                if( rs != null ){
-                    rs.close();
-                }
-                
-                if( ps != null ){
-                    ps.close();
-                }
             }
-            fileWriter.write("{\"dokter\":["+iyem.substring(0,iyem.length()-1)+"]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem=null;
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            LCount.setText(""+tabMode.getRowCount());
         }
-        LCount.setText(""+tabMode.getRowCount());
     }
 
     public void emptTeks() { 
@@ -459,31 +464,35 @@ public final class DlgCariDokter extends javax.swing.JDialog {
     }
     
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/dokter.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("dokter");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            list.path("KodeDokter").asText(),list.path("NamaDokter").asText(),list.path("JK").asText(),list.path("TmpLahir").asText(),list.path("TglLahir").asText(),list.path("GD").asText(),list.path("Agama").asText(),list.path("AlamatTinggal").asText(),list.path("NoTelp").asText(),list.path("SttsNikah").asText(),list.path("Spesialis").asText(),list.path("Alumni").asText(),list.path("NoIjinPraktek").asText()
-                        });
-                    }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("KodeDokter").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaDokter").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Spesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+        if (! this.noRawat.isBlank()) {
+            tampilDPJP(this.noRawat);
+        } else {
+            try {
+                myObj = new FileReader("./cache/dokter.iyem");
+                root = mapper.readTree(myObj);
+                Valid.tabelKosong(tabMode);
+                response = root.path("dokter");
+                if(response.isArray()){
+                    if(TCari.getText().trim().equals("")){
+                        for(JsonNode list:response){
                             tabMode.addRow(new Object[]{
                                 list.path("KodeDokter").asText(),list.path("NamaDokter").asText(),list.path("JK").asText(),list.path("TmpLahir").asText(),list.path("TglLahir").asText(),list.path("GD").asText(),list.path("Agama").asText(),list.path("AlamatTinggal").asText(),list.path("NoTelp").asText(),list.path("SttsNikah").asText(),list.path("Spesialis").asText(),list.path("Alumni").asText(),list.path("NoIjinPraktek").asText()
                             });
                         }
+                    }else{
+                        for(JsonNode list:response){
+                            if(list.path("KodeDokter").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaDokter").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Spesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                                tabMode.addRow(new Object[]{
+                                    list.path("KodeDokter").asText(),list.path("NamaDokter").asText(),list.path("JK").asText(),list.path("TmpLahir").asText(),list.path("TglLahir").asText(),list.path("GD").asText(),list.path("Agama").asText(),list.path("AlamatTinggal").asText(),list.path("NoTelp").asText(),list.path("SttsNikah").asText(),list.path("Spesialis").asText(),list.path("Alumni").asText(),list.path("NoIjinPraktek").asText()
+                                });
+                            }
+                        }
                     }
                 }
+                myObj.close();
+            } catch (Exception ex) {
+                System.out.println("Notifikasi : "+ex);
             }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
         }
     } 
     
@@ -519,5 +528,35 @@ public final class DlgCariDokter extends javax.swing.JDialog {
             iyem=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kode);
         }
         return iyem;
+    }
+    
+    public void tampilDPJP(String noRawat) {
+        this.noRawat = noRawat;
+        Valid.tabelKosong(tabMode);
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select dokter.kd_dokter, dokter.nm_dokter, dokter.jk, dokter.tmp_lahir, dokter.tgl_lahir, dokter.gol_drh, "
+            + "dokter.agama, dokter.almt_tgl, dokter.no_telp, dokter.stts_nikah, spesialis.nm_sps, dokter.alumni, "
+            + "dokter.no_ijn_praktek from dokter join spesialis on dokter.kd_sps = spesialis.kd_sps join dpjp_ranap "
+            + "on dokter.kd_dokter = dpjp_ranap.kd_dokter and dpjp_ranap.no_rawat = ? where dokter.status = '1' and ("
+            + "dokter.kd_dokter like ? or dokter.nm_dokter like ?) order by dokter.nm_dokter"
+        )) {
+            ps.setString(1, noRawat);
+            ps.setString(2, "%" + TCari.getText() + "%");
+            ps.setString(3, "%" + TCari.getText() + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new String[] {
+                        rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getString(8), rs.getString(9),
+                        rs.getString(10), rs.getString(11), rs.getString(12),
+                        rs.getString(13)
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        LCount.setText("" + tabMode.getRowCount());
     }
 }

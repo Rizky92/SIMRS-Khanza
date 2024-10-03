@@ -43,6 +43,7 @@ import bridging.ApotekBPJSDaftarPelayananObat;
 import bridging.ApotekBPJSKunjunganSEP;
 import bridging.ApotekBPJSMapingObat;
 import bridging.ApotekBPJSMonitoringKlaim;
+import bridging.BPJSAntreanPerKodebooking;
 import bridging.BPJSAntreanPerTanggal;
 import bridging.BPJSCekDataIndukKecelakaan;
 import bridging.BPJSCekDataSEPInternal;
@@ -1988,7 +1989,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06/06/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/09/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -21928,6 +21929,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnBPJSAntreanPerKodebookingMobileJKNActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BPJSAntreanPerKodebooking form = new BPJSAntreanPerKodebooking(this, false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22627,7 +22640,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnReferensiPoliMobileJKNFKTP,btnReferensiDokterMobileJKNFKTP,btnSKPPenilaianPegawai,btnMandiriMetodePembayaran,btnMandiriBankTujuanTRansfer,btnPembayaranPihakKe3BankMandiri,
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
-            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan;
+            btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan,btnBPJSAntreanPerKodebookingMobileJKN;
     
     public void isWall(){
         try{            
@@ -25852,6 +25865,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if (akses.getbpjs_kompilasi_berkas_klaim()) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
+                jmlmenu++;
+            }
+            
+            if (akses.getbpjs_antrean_pertanggal()) {
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -33253,6 +33271,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
             jmlmenu++;
         }
+        
+        if (akses.getbpjs_antrean_pertanggal()) {
+            Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+            jmlmenu++;
+        }
     }
     
     private void isCariIsi() {
@@ -40607,6 +40630,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if (akses.getbpjs_antrean_pertanggal()) {
+            if (btnBPJSAntreanPerKodebookingMobileJKN.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+                jmlmenu++;
+            }
+        }
     }
 
     private void initKhanza() {
@@ -45354,5 +45384,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnBookingMCUPerusahaan.setName("btnBookingMCUPerusahaan"); 
         btnBookingMCUPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingMCUPerusahaan.addActionListener(this::btnBookingMCUPerusahaanActionPerformed);
+        
+        btnBPJSAntreanPerKodebookingMobileJKN = new widget.ButtonBig();
+        btnBPJSAntreanPerKodebookingMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
+        btnBPJSAntreanPerKodebookingMobileJKN.setText("Antrean Per Kode Booking Mobile JKN");
+        btnBPJSAntreanPerKodebookingMobileJKN.setIconTextGap(0);
+        btnBPJSAntreanPerKodebookingMobileJKN.setName("btnBPJSAntreanPerKodebookingMobileJKN"); 
+        btnBPJSAntreanPerKodebookingMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSAntreanPerKodebookingMobileJKN.addActionListener(this::btnBPJSAntreanPerKodebookingMobileJKNActionPerformed);
     }
 }
