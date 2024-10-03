@@ -5134,7 +5134,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         labelKeterangan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelKeterangan.setName("labelKeterangan"); // NOI18N
         FormInput.add(labelKeterangan);
-        labelKeterangan.setBounds(884, 12, 260, 23);
+        labelKeterangan.setBounds(884, 12, 280, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
