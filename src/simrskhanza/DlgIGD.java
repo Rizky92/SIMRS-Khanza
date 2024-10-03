@@ -11678,6 +11678,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoRM.requestFocus();
         kdpnj.setText("");
         nmpnj.setText("");
+        labelKeterangan.setText("");
+        labelKeterangan.setForeground(new Color(50, 50, 50));
     }
 
     private void getData() {
