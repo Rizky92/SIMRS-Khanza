@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e, Request $request) {
-            if ($request->expectsJson()) {
+            if (!is_null($e) && $request->expectsJson()) {
                 return response()->json([
                     'status' => false,
                     'code' => 500,

@@ -41,7 +41,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
 
     private string $username;
 
-    private string $nip;
+    private ?string $nip = null;
 
     private float $totalJasaMedisDokter = 0;
 
@@ -80,16 +80,23 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
      */
     public function handle()
     {
-        $this->cariUser();
         $this->simpanHasilLab();
     }
 
     private function cariUser(): void
     {
-        $this->nip = DB::connection('mysql_sik')->table('mapping_user_bridginglab')
-            ->where('vendor', 'adamlabs')
-            ->where('username', $this->username)
-            ->value('nip');
+        if (!empty($this->noRawat)) {
+            $this->nip = DB::connection('mysql_sik')->table('periksa_lab')
+                ->where('no_rawat', $this->noRawat)
+                ->value('nip');
+        }
+        
+        if (empty($this->nip)) {
+            $this->nip = DB::connection('mysql_sik')->table('mapping_user_bridginglab')
+                ->where('vendor', 'adamlabs')
+                ->where('username', $this->username)
+                ->value('nip');
+        }
     }
 
     private function simpanHasilLab(): void
@@ -108,6 +115,8 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
             $this->noRawat = $permintaanLab->no_rawat;
             $this->statusRawat = $permintaanLab->status;
 
+            $this->cariUser();
+
             $waktuRegistrasi = carbon_immutable(optional($registrasi->pemeriksaan->first())->waktu_pemeriksaan);
 
             $this->tgl = $permintaanLab->tgl_hasil !== '0000-00-00' ? $permintaanLab->tgl_hasil : $waktuRegistrasi->toDateString();
@@ -122,17 +131,20 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
 
             DB::connection('mysql_sik')
                 ->transaction(function () use ($registrasi, $kategori, $tindakan, $tindakanSudahAda, $compound) {
+                    tracker_start('mysql_sik');
                     PermintaanLabPK::query()
                         ->where('noorder', $this->noRegistrasi)
                         ->update([
                             'tgl_hasil' => $this->tgl,
                             'jam_hasil' => $this->jam,
                         ]);
+                    tracker_end('mysql_sik', $this->username);
                     
                     TindakanLab::query()
                         ->whereIn('kd_jenis_prw', $tindakan->diff($tindakanSudahAda))
                         ->get()
                         ->each(function (TindakanLab $t) use ($registrasi) {
+                            tracker_start('mysql_sik');
                             HasilPeriksaLab::create([
                                 'no_rawat'               => $this->noRawat,
                                 'nip'                    => $this->nip,
@@ -152,6 +164,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                                 'status'                 => str($this->statusRawat)->title()->value(),
                                 'kategori'               => 'PK'
                             ]);
+                            tracker_end('mysql_sik', $this->username);
 
                             $this->totalJasaSarana       += $t->bagian_rs;
                             $this->totalBHP              += $t->bhp;
@@ -174,6 +187,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                                 ->first();
 
                             if ($pemeriksaan->status_bridging) {
+                                tracker_start('mysql_sik');
                                 HasilPeriksaLabDetail::query()
                                     ->where('no_rawat', $this->noRawat)
                                     ->where('kd_jenis_prw', $p->kd_jenis_prw)
@@ -184,7 +198,9 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                                         'nilai'      => $pemeriksaan->hasil_nilai_hasil,
                                         'keterangan' => $pemeriksaan->hasil_flag_kode ?? '',
                                     ]);
+                                tracker_end('mysql_sik', $this->username);
                             } else {
+                                tracker_start('mysql_sik');
                                 HasilPeriksaLabDetail::create([
                                     'no_rawat'       => $this->noRawat,
                                     'kd_jenis_prw'   => $p->kd_jenis_prw,
@@ -203,6 +219,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                                     'menejemen'      => $p->pemeriksaan_manajemen,
                                     'biaya_item'     => $p->pemeriksaan_pendapatan,
                                 ]);
+                                tracker_end('mysql_sik', $this->username);
         
                                 $this->totalJasaSarana       += $p->pemeriksaan_jasa_sarana;
                                 $this->totalBHP              += $p->pemeriksaan_bhp;
@@ -220,21 +237,25 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                     $this->catatJurnal();
                 });
         } catch (Throwable $e) {
+            tracker_start('mysql');
             Pemeriksaan::query()
                 ->where('no_registrasi', $this->noRegistrasi)
                 ->where('no_laboratorium', $this->noLaboratorium)
                 ->where('status_bridging', false)
                 ->delete();
+            tracker_end('mysql', $this->username);
 
             if (Pemeriksaan::query()
                 ->where('no_registrasi', $this->noRegistrasi)
                 ->where('no_laboratorium', $this->noLaboratorium)
                 ->count() === 0
             ) {
+                tracker_start('mysql');
                 Registrasi::query()
                     ->where('no_registrasi', $this->noRegistrasi)
                     ->where('no_laboratorium', $this->noLaboratorium)
                     ->delete();
+                tracker_end('mysql', $this->username);
             }
 
             throw $e;
@@ -249,6 +270,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
             ->where('jam', $this->jam)
             ->exists()
         ) {
+            tracker_start('mysql_sik');
             KesanSaran::create([
                 'no_rawat'    => $this->noRawat,
                 'tgl_periksa' => $this->tgl,
@@ -256,12 +278,15 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                 'saran'       => '',
                 'kesan'       => $registrasi->keterangan_hasil,
             ]);
+            tracker_end('mysql_sik', $this->username);
         } else {
+            tracker_start('mysql_sik');
             KesanSaran::query()
                 ->where('no_rawat', $this->noRawat)
                 ->where('tgl_periksa', $this->tgl)
                 ->where('jam', $this->jam)
                 ->update(['kesan' => $registrasi->keterangan_hasil]);
+            tracker_end('mysql_sik', $this->username);
         }
     }
 
@@ -292,7 +317,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                     'Utang_Jasa_Menejemen_Laborat_Ranap as utang_jasa_manajemen',
                 ])
                 ->first();
-            $statusRawat = 'RAWAT INAP';
+            $statusRawat = 'INAP';
         } else {
             $akunLaborat = DB::connection('mysql_sik')
                 ->table('set_akun_ralan')
@@ -315,7 +340,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
                     'Utang_Jasa_Menejemen_Laborat_Ralan as utang_jasa_manajemen',
                 ])
                 ->first();
-            $statusRawat = 'RAWAT JALAN';
+            $statusRawat = 'JALAN';
         }
 
         if (! $akunLaborat) {
@@ -370,12 +395,14 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
         );
 
         if ($detailJurnal->isNotEmpty()) {
+            tracker_start('mysql_sik');
             Jurnal::catat(
                 $this->noRawat,
-                sprintf('PEMERIKSAAN LABORAT RAWAT %s, DIPOSTING OLEH %s', str()->title($this->statusRawat), $this->nip),
+                sprintf('PEMERIKSAAN LABORAT RAWAT %s, DIPOSTING OLEH %s', $statusRawat, $this->nip),
                 'now',
                 $detailJurnal->all()        
             );
+            tracker_end('mysql_sik', $this->username);
         }
     }
 }

@@ -5351,8 +5351,6 @@ public final class DlgIGD extends javax.swing.JDialog {
                     });
                     emptTeks(); 
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Tidak dapat mendaftarkan pasien, cek kembali kunjungan sebelumnya..!!");
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -11832,9 +11830,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             JOptionPane.showMessageDialog(rootPane, "Maaf, pasien pada kunjungan sebelumnya memiliki tagihan yang belum di closing.\nSilahkan konfirmasi dengan pihak kasir.. !!");
             return false;
         } else if (labelKeterangan.getText().equals("Pasien sudah memiliki kunjungan pada hari ini")) {
-            if (JOptionPane.showConfirmDialog(null, "Pasien telah memiliki kunjungan pada hari ini, lanjutkan registrasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Pasien sudah memiliki kunjungan pada hari ini, lanjutkan registrasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 return true;
             } else {
+                JOptionPane.showMessageDialog(null, "Tidak dapat mendaftarkan pasien, cek kembali kunjungan sebelumnya..!!");
                 return false;
             }
         }

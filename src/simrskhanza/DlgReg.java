@@ -7081,7 +7081,6 @@ public final class DlgReg extends javax.swing.JDialog {
         TNoAntrian.setBounds(234, 12, 60, 23);
 
         labelKeterangan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelKeterangan.setText("Belum closing kasir pada kunjungan sebelumnya");
         labelKeterangan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelKeterangan.setName("labelKeterangan"); // NOI18N
         FormInput.add(labelKeterangan);
@@ -7290,8 +7289,6 @@ public final class DlgReg extends javax.swing.JDialog {
                     }else{
                         isRegistrasi();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Tidak dapat mendaftarkan pasien, cek kembali kunjungan sebelumnya..!!");
                 }
             }                          
         }
@@ -16244,6 +16241,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             if (JOptionPane.showConfirmDialog(null, "Pasien sudah memiliki kunjungan pada hari ini, lanjutkan registrasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 return true;
             } else {
+                JOptionPane.showMessageDialog(null, "Tidak dapat mendaftarkan pasien, cek kembali kunjungan sebelumnya..!!");
                 return false;
             }
         }
