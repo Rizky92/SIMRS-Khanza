@@ -148,6 +148,15 @@ public class koneksiDB {
             return "";
         }
     }
+    
+    public static String TIMEZONESATUSEHAT() {
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            return prop.getProperty("TIMEZONESATUSEHAT");
+        } catch (Exception e) {
+            return "+07:00";
+        }
+    }
 
     public static boolean GUNAKANDIAGNOSAEKLAIM() {
         try {
@@ -210,6 +219,15 @@ public class koneksiDB {
             return prop.getProperty("RESTRIKSIRMKELAHIRANBAYI").equalsIgnoreCase("yes");
         } catch (Exception e) {
             return true;
+        }
+    }
+    
+    public static String URLKFAV2SATUSEHAT() {
+        try (FileInputStream f = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(f);
+            return prop.getProperty("URLKFAV2SATUSEHAT").trim();
+        } catch (Exception e) {
+            return "";
         }
     }
     
