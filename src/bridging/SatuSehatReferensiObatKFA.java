@@ -13,19 +13,12 @@ import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.swing.BoundedRangeModel;
 import javax.swing.JOptionPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -47,9 +40,9 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
-    
+
     private String lastKeyword = "", lastProductType = "farmasi";
-    private List<String> codeKFALists = new ArrayList<String>();
+    private List<String> codeKFALists = new ArrayList<>();
 
     /**
      * Creates new form DlgKamar
@@ -62,7 +55,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10, 2);
         setSize(628, 674);
-        
+
         tabMode = new DefaultTableModel(null, new String[] {
             "KFA Code", "KFA System", "KFA Display", "Form Code", "Form System",
             "Form Display", "Num. Code", "Num. System", "Denom. Code",
@@ -73,7 +66,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
                 return false;
             }
         };
-        
+
         tbKamar.setModel(tabMode);
 
         //tbKamar.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbKamar.getBackground()));
@@ -113,7 +106,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-        
+
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -138,12 +131,6 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
                 }
             });
         }
-
-        try {
-            link = koneksiDB.URLFHIRSATUSEHAT();
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
     }
 
     /**
@@ -164,9 +151,9 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel6 = new widget.Label();
         LimitData = new widget.ComboBox();
+        BtnKeluar1 = new widget.Button();
         jLabel8 = new widget.Label();
         LCount = new widget.Label();
-        jLabel17 = new widget.Label();
         BtnKeluar = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -174,8 +161,9 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         setIconImages(null);
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Praktisi Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Obat KFA V2 Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
         internalFrame1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -190,7 +178,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
 
         panelGlass6.setName("panelGlass6"); // NOI18N
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass6.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         jLabel7.setText("Product Type :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -243,6 +231,23 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         LimitData.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(LimitData);
 
+        BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/attachment.png"))); // NOI18N
+        BtnKeluar1.setMnemonic('K');
+        BtnKeluar1.setToolTipText("Halaman Berikutnya");
+        BtnKeluar1.setName("BtnKeluar1"); // NOI18N
+        BtnKeluar1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKeluar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluar1ActionPerformed(evt);
+            }
+        });
+        BtnKeluar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKeluar1KeyPressed(evt);
+            }
+        });
+        panelGlass6.add(BtnKeluar1);
+
         jLabel8.setText("Record :");
         jLabel8.setName("jLabel8"); // NOI18N
         jLabel8.setPreferredSize(new java.awt.Dimension(60, 23));
@@ -253,10 +258,6 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         LCount.setName("LCount"); // NOI18N
         LCount.setPreferredSize(new java.awt.Dimension(40, 23));
         panelGlass6.add(LCount);
-
-        jLabel17.setName("jLabel17"); // NOI18N
-        jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
-        panelGlass6.add(jLabel17);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -321,6 +322,16 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
+    private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
+        page++;
+    }//GEN-LAST:event_BtnKeluar1ActionPerformed
+
+    private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnKeluar1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnKeluar1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -340,6 +351,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKeluar1;
     private widget.Label LCount;
     private widget.ComboBox LimitData;
     private widget.ComboBox ProductType;
@@ -347,7 +359,6 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
-    private widget.Label jLabel17;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -356,54 +367,48 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     public void tampil(String search) {
         TCari.setText(search);
-        if (page == 1) {
-            Valid.tabelKosong(tabMode);
-        }
-        
         getAllProducts();
-        
         LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
-    
+
     public void tampil() {
-        if (page == 1) {
-            Valid.tabelKosong(tabMode);
-        }
-        
         getAllProducts();
-        
         LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
 
     public JTable getTable() {
         return tbKamar;
     }
-    
+
     private void getAllProducts() {
         if (!TCari.getText().trim().equals(lastKeyword)) {
             lastKeyword = TCari.getText().trim();
             codeKFALists.clear();
             page = 1;
         }
-        
+
         if (!ProductType.getSelectedItem().toString().equals(lastProductType)) {
             lastProductType = ProductType.getSelectedItem().toString();
             codeKFALists.clear();
             page = 1;
         }
         
+        if (page == 1) {
+            Valid.tabelKosong(tabMode);
+        }
+
         link = koneksiDB.URLKFAV2SATUSEHAT() + "/products/all?page=" + page + "&size=" + LimitData.getSelectedItem().toString() + "&product_type=" + ProductType.getSelectedItem().toString();
         if (!TCari.getText().isBlank()) {
             link = link + "&keyword=" + TCari.getText().trim();
         }
-        
+
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
             requestEntity = new HttpEntity(headers);
             json = api.getRest().exchange(link, HttpMethod.GET, requestEntity, String.class).getBody();
-            
+
             root = mapper.readTree(json);
             System.out.println("Total : " + root.path("total").asText());
             System.out.println("Page : " + root.path("page").asText());
@@ -419,12 +424,14 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        
+
         getEachProductsDetail();
     }
-    
+
     private void getEachProductsDetail() {
-        if (codeKFALists.isEmpty()) return;
+        if (codeKFALists.isEmpty()) {
+            return;
+        }
         try {
             for (String kfaCode : codeKFALists) {
                 headers = new HttpHeaders();
@@ -447,8 +454,9 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
             System.out.println("Notif detail : " + e);
         }
     }
-    
+
     private void emptTeks() {
-        
+        TCari.setText("");
+        page = 1;
     }
 }

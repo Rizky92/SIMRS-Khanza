@@ -136,7 +136,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         KFACode.setDocument(new batasInput((byte) 15).getKata(KFACode));
         KodeBarang.setDocument(new batasInput((byte) 15).getKata(KodeBarang));
         KFASystem.setDocument(new batasInput((byte) 100).getKata(KFASystem));
-        KFADisplay.setDocument(new batasInput((byte) 80).getKata(KFADisplay));
+        KFADisplay.setDocument(new batasInput((byte) 500).getKata(KFADisplay));
         FormCode.setDocument(new batasInput((byte) 30).getKata(FormCode));
         FormSystem.setDocument(new batasInput((byte) 100).getKata(FormSystem));
         FormDisplay.setDocument(new batasInput((byte) 80).getKata(FormDisplay));
@@ -192,6 +192,37 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     barang.dispose();
+                }
+            }
+        });
+        
+        referensi.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (referensi.getTable().getSelectedRow() != -1) {
+                    KFACode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 0).toString());
+                    KFASystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 1).toString());
+                    KFADisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 2).toString());
+                    FormCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 3).toString());
+                    FormSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 4).toString());
+                    FormDisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 5).toString());
+                    NumeratorCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 6).toString());
+                    NumeratorSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 7).toString());
+                    DenominatorCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 8).toString());
+                    DenominatorSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 9).toString());
+                    RouteCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 10).toString());
+                    RouteSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 11).toString());
+                    RouteDisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 12).toString());
+                }
+                KFACode.requestFocus();
+            }
+        });
+        
+        referensi.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    referensi.dispose();
                 }
             }
         });
