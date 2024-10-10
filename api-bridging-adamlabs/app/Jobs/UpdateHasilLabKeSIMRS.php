@@ -81,20 +81,18 @@ class UpdateHasilLabKeSIMRS implements ShouldQueue
      */
     public function handle()
     {
+        $this->cariUser();
         $this->simpanHasilLab();
     }
 
     private function cariUser(): void
     {
-        if (!empty($this->noRawat) && !empty($this->tgl) && !empty($this->jam)) {
-            $this->nip = DB::connection('mysql_sik')->table('periksa_lab')
-                ->where('no_rawat', $this->noRawat)
-                ->where('tgl_periksa', $this->tgl)
-                ->where('jam', $this->jam)
-                ->value('nip');
-        }
-
         if (empty($this->nip)) {
+            $username = DB::connection('mysql')->table('registrasi')
+                ->where('no_laboratorium', $this->noLaboratorium)
+                ->where('no_registrasi', $this->noRegistrasi)
+                ->value('username');
+
             $this->nip = DB::connection('mysql_sik')->table('mapping_user_bridginglab')
                 ->where('vendor', 'adamlabs')
                 ->where('username', $this->username)
@@ -119,8 +117,6 @@ class UpdateHasilLabKeSIMRS implements ShouldQueue
             $this->statusRawat = $permintaanLab->status;
             $this->tgl = $permintaanLab->tgl_hasil;
             $this->jam = $permintaanLab->jam_hasil;
-
-            $this->cariUser();
 
             $kategori = $registrasi->pemeriksaan->pluck('kategori_pemeriksaan_nama')->filter()->unique()->values();
             $tindakan = $registrasi->pemeriksaan->pluck('kode_tindakan_simrs')->filter()->unique()->values();

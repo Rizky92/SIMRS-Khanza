@@ -80,17 +80,12 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
      */
     public function handle()
     {
+        $this->cariUser();
         $this->simpanHasilLab();
     }
 
     private function cariUser(): void
     {
-        if (!empty($this->noRawat)) {
-            $this->nip = DB::connection('mysql_sik')->table('periksa_lab')
-                ->where('no_rawat', $this->noRawat)
-                ->value('nip');
-        }
-        
         if (empty($this->nip)) {
             $this->nip = DB::connection('mysql_sik')->table('mapping_user_bridginglab')
                 ->where('vendor', 'adamlabs')
@@ -114,8 +109,6 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
 
             $this->noRawat = $permintaanLab->no_rawat;
             $this->statusRawat = $permintaanLab->status;
-
-            $this->cariUser();
 
             $waktuRegistrasi = carbon_immutable(optional($registrasi->pemeriksaan->first())->waktu_pemeriksaan);
 

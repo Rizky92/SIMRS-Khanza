@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
 
 ALTER TABLE `booking_operasi` ADD COLUMN IF NOT EXISTS `catatan` varchar(500) NULL DEFAULT NULL AFTER `kd_ruang_ok`;
 
+ALTER TABLE `booking_operasi` ADD INDEX IF NOT EXISTS `booking_operasi_catatan_IDX`(`catatan`) USING BTREE;
+
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `infus` double NOT NULL DEFAULT 0 AFTER `jam_rawat`;
 
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `tranfusi` double NOT NULL DEFAULT 0 AFTER `infus`;
@@ -79,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 
 ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double NULL DEFAULT NULL AFTER `sisapiutang`;
 
-ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(500) NOT NULL AFTER `id_template`;
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NOT NULL AFTER `id_template`;
 
-ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(500) NOT NULL AFTER `nilai`;
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
 
@@ -130,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
   `nip` varchar(20) NOT NULL,
   `username` varchar(100) NOT NULL,
   `vendor` varchar(100) NOT NULL,
-  PRIMARY KEY (`nip`,`username`,`vendor`),
+  PRIMARY KEY (`nip`, `username`, `vendor`) USING BTREE,
   CONSTRAINT `mapping_user_bridginglab_petugas_fk` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
@@ -183,9 +185,9 @@ ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(25
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
 
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ibu` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_bayi`;
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ibu` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_bayi`;
 
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -', '-') NOT NULL AFTER `gd_ibu`;
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_ibu`;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -214,13 +216,13 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
   `response` varchar(5000) NULL DEFAULT NULL,
   `waktu` datetime NULL DEFAULT NULL,
   `waktu_rs` datetime NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX` (`no_rawat`) USING BTREE,
-  KEY `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX` (`waktu`) USING BTREE,
-  KEY `referensi_mobilejkn_bpjs_taskid_response_kodebooking_IDX` (`kodebooking`) USING BTREE,
-  KEY `referensi_mobilejkn_bpjs_taskid_response_jenispasien_IDX` (`jenispasien`) USING BTREE,
-  KEY `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX` (`taskid`) USING BTREE,
-  KEY `referensi_mobilejkn_bpjs_taskid_response_code_IDX` (`code`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX`(`no_rawat`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX`(`waktu`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_kodebooking_IDX`(`kodebooking`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_jenispasien_IDX`(`jenispasien`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX`(`taskid`) USING BTREE,
+  INDEX `referensi_mobilejkn_bpjs_taskid_response_code_IDX`(`code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;
@@ -263,21 +265,25 @@ ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder2` v
 
 ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder3` varchar(200) NOT NULL AFTER `kd_prosedur_sekunder2`;
 
-ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(150) NULL DEFAULT NULL AFTER `obat_system`;
+ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `saran` varchar(1000) NULL DEFAULT NULL AFTER `jam`;
+
+ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `kesan` varchar(1000) NULL DEFAULT NULL AFTER `saran`;
+
+ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(500) NULL DEFAULT NULL AFTER `obat_system`;
 
 ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
 
-ALTER TABLE `skdp_bpjs` MODIFY COLUMN IF EXISTS `terapi` varchar(50) NOT NULL AFTER `diagnosa`;
-
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` varchar(20) NULL DEFAULT NULL AFTER `kd_dokter`;
 
-ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY IF NOT EXISTS (`kd_dokter`) REFERENCES `sik`.`dokter` (`kd_dokter`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY IF NOT EXISTS (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
-ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY (`no_surat`);
+ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
+
+ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY (`no_surat`) USING BTREE;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,

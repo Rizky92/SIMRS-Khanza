@@ -27,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -87,9 +88,9 @@ public class ApiADAMLABS
                             + "\"no_rm\": \"" + rs.getString("no_rkm_medis") + "\","
                             + "\"jenis_kelamin\": \"" + rs.getString("jk") + "\","
                             + "\"alamat\": \"" + rs.getString("alamat") + "\","
-                            + "\"no_telphone\": \"" + rs.getString("no_tlp") + "\","
+                            + "\"no_telphone\": \"" + rs.getString("no_tlp").trim() + "\","
                             + "\"tanggal_lahir\": \"" + df.format(rs.getDate("tgl_lahir")) + "\","
-                            + "\"nik\": \"" + rs.getString("no_ktp") + "\","
+                            + "\"nik\": \"" + rs.getString("no_ktp").trim() + "\","
                             + "\"ras\": \"-\","
                             + "\"berat_badan\": \"" + rs.getString("bb").toLowerCase().trim() + "kg\","
                             + "\"jenis_registrasi\" : \"" + rs.getString("jenis_registrasi") + "\","
@@ -149,8 +150,11 @@ public class ApiADAMLABS
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal kirim! Alasan: " + response.path("message").asText());
             }
-        } catch (HttpClientErrorException e) {
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
             System.out.println(e.getResponseBodyAsString());
+            if (e.getResponseBodyAsString().contains("<title>Error</title>")) {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses order lab..!!");
+            }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             if (e.getMessage().contains("HostException")) {

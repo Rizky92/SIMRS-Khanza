@@ -15,40 +15,78 @@ class SimpanHasilLabController
     {
         $data = $request->validated();
 
-        tracker_start('mysql');
-        Registrasi::firstOrCreate(
-            ['no_registrasi'   => Arr::get($data, 'no_registrasi'), 'no_laboratorium' => Arr::get($data, 'no_laboratorium')],
-            [
-                'waktu_registrasi'        => Arr::get($data, 'waktu_registrasi'),
-                'keterangan_hasil'        => Arr::get($data, 'keterangan_hasil'),
-                'diagnosa_awal'           => Arr::get($data, 'diagnosa_awal'),
-                'kode_rs'                 => Arr::get($data, 'kode_RS'),
-                'kode_lab'                => Arr::get($data, 'kode_lab'),
-                'username'                => Arr::get($data, 'username'),
-                'nama_pegawai'            => Arr::get($data, 'nama_pegawai'),
-                'dokter_penanggung_jawab' => Arr::get($data, 'dokter_penanggung_jawab'),
-                'umur_tahun'              => Arr::get($data, 'umur.tahun'),
-                'umur_bulan'              => Arr::get($data, 'umur.bulan'),
-                'umur_hari'               => Arr::get($data, 'umur.hari'),
-                'pasien_no_rm'            => Arr::get($data, 'pasien.no_rm'),
-                'pasien_nama_pasien'      => Arr::get($data, 'pasien.nama_pasien'),
-                'pasien_jenis_kelamin'    => Arr::get($data, 'pasien.jenis_kelamin'),
-                'pasien_tanggal_lahir'    => Arr::get($data, 'pasien.tanggal_lahir'),
-                'pasien_alamat'           => Arr::get($data, 'pasien.alamat'),
-                'pasien_nik'              => Arr::get($data, 'pasien.nik'),
-                'pasien_no_telphone'      => Arr::get($data, 'pasien.no_telphone'),
-                'pasien_ras'              => Arr::get($data, 'pasien.ras'),
-                'pasien_berat_badan'      => Arr::get($data, 'pasien.berat_badan'),
-                'pasien_jenis_registrasi' => Arr::get($data, 'pasien.jenis_registrasi'),
-                'dokter_pengirim_kode'    => Arr::get($data, 'dokter_pengirim.kode'),
-                'dokter_pengirim_nama'    => Arr::get($data, 'dokter_pengirim.nama'),
-                'unit_asal_kode'          => Arr::get($data, 'unit_asal.kode'),
-                'unit_asal_nama'          => Arr::get($data, 'unit_asal.nama'),
-                'penjamin_kode'           => Arr::get($data, 'penjamin.kode'),
-                'penjamin_nama'           => Arr::get($data, 'penjamin.nama'),
-            ]
-        );
+        if (Registrasi::query()
+            ->where('no_registrasi', Arr::get($data, 'no_registrasi'))
+            ->where('no_laboratorium', Arr::get($data, 'no_laboratorium'))
+            ->exists()) {
+                tracker_start('mysql');
+                Registrasi::query()
+                    ->where('no_registrasi', Arr::get($data, 'no_registrasi'))
+                    ->where('no_laboratorium', Arr::get($data, 'no_laboratorium'))
+                    ->update([
+                        'waktu_registrasi'        => Arr::get($data, 'waktu_registrasi'),
+                        'keterangan_hasil'        => Arr::get($data, 'keterangan_hasil'),
+                        'diagnosa_awal'           => Arr::get($data, 'diagnosa_awal'),
+                        'kode_rs'                 => Arr::get($data, 'kode_RS'),
+                        'kode_lab'                => Arr::get($data, 'kode_lab'),
+                        'umur_tahun'              => Arr::get($data, 'umur.tahun'),
+                        'umur_bulan'              => Arr::get($data, 'umur.bulan'),
+                        'umur_hari'               => Arr::get($data, 'umur.hari'),
+                        'pasien_no_rm'            => Arr::get($data, 'pasien.no_rm'),
+                        'pasien_nama_pasien'      => Arr::get($data, 'pasien.nama_pasien'),
+                        'pasien_jenis_kelamin'    => Arr::get($data, 'pasien.jenis_kelamin'),
+                        'pasien_tanggal_lahir'    => Arr::get($data, 'pasien.tanggal_lahir'),
+                        'pasien_alamat'           => Arr::get($data, 'pasien.alamat'),
+                        'pasien_nik'              => Arr::get($data, 'pasien.nik'),
+                        'pasien_no_telphone'      => Arr::get($data, 'pasien.no_telphone'),
+                        'pasien_ras'              => Arr::get($data, 'pasien.ras'),
+                        'pasien_berat_badan'      => Arr::get($data, 'pasien.berat_badan'),
+                        'pasien_jenis_registrasi' => Arr::get($data, 'pasien.jenis_registrasi'),
+                        'dokter_pengirim_kode'    => Arr::get($data, 'dokter_pengirim.kode'),
+                        'dokter_pengirim_nama'    => Arr::get($data, 'dokter_pengirim.nama'),
+                        'unit_asal_kode'          => Arr::get($data, 'unit_asal.kode'),
+                        'unit_asal_nama'          => Arr::get($data, 'unit_asal.nama'),
+                        'penjamin_kode'           => Arr::get($data, 'penjamin.kode'),
+                        'penjamin_nama'           => Arr::get($data, 'penjamin.nama'),
+                    ]);
+                tracker_end('mysql', $data['username']);
+            } else {
+                tracker_start('mysql');
+                Registrasi::create([
+                    'no_registrasi'           => Arr::get($data, 'no_registrasi'),
+                    'no_laboratorium'         => Arr::get($data, 'no_laboratorium'),
+                    'waktu_registrasi'        => Arr::get($data, 'waktu_registrasi'),
+                    'keterangan_hasil'        => Arr::get($data, 'keterangan_hasil'),
+                    'diagnosa_awal'           => Arr::get($data, 'diagnosa_awal'),
+                    'kode_rs'                 => Arr::get($data, 'kode_RS'),
+                    'kode_lab'                => Arr::get($data, 'kode_lab'),
+                    'username'                => Arr::get($data, 'username'),
+                    'nama_pegawai'            => Arr::get($data, 'nama_pegawai'),
+                    'dokter_penanggung_jawab' => Arr::get($data, 'dokter_penanggung_jawab'),
+                    'umur_tahun'              => Arr::get($data, 'umur.tahun'),
+                    'umur_bulan'              => Arr::get($data, 'umur.bulan'),
+                    'umur_hari'               => Arr::get($data, 'umur.hari'),
+                    'pasien_no_rm'            => Arr::get($data, 'pasien.no_rm'),
+                    'pasien_nama_pasien'      => Arr::get($data, 'pasien.nama_pasien'),
+                    'pasien_jenis_kelamin'    => Arr::get($data, 'pasien.jenis_kelamin'),
+                    'pasien_tanggal_lahir'    => Arr::get($data, 'pasien.tanggal_lahir'),
+                    'pasien_alamat'           => Arr::get($data, 'pasien.alamat'),
+                    'pasien_nik'              => Arr::get($data, 'pasien.nik'),
+                    'pasien_no_telphone'      => Arr::get($data, 'pasien.no_telphone'),
+                    'pasien_ras'              => Arr::get($data, 'pasien.ras'),
+                    'pasien_berat_badan'      => Arr::get($data, 'pasien.berat_badan'),
+                    'pasien_jenis_registrasi' => Arr::get($data, 'pasien.jenis_registrasi'),
+                    'dokter_pengirim_kode'    => Arr::get($data, 'dokter_pengirim.kode'),
+                    'dokter_pengirim_nama'    => Arr::get($data, 'dokter_pengirim.nama'),
+                    'unit_asal_kode'          => Arr::get($data, 'unit_asal.kode'),
+                    'unit_asal_nama'          => Arr::get($data, 'unit_asal.nama'),
+                    'penjamin_kode'           => Arr::get($data, 'penjamin.kode'),
+                    'penjamin_nama'           => Arr::get($data, 'penjamin.nama'),
+                ]);
+                tracker_end('mysql', $data['username']);
+            }
 
+        tracker_start('mysql');
         foreach ($data['pemeriksaan'] as $pemeriksaan) {
             if (Arr::get($pemeriksaan, 'status_bridging')) {
                 Pemeriksaan::query()

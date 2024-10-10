@@ -6,6 +6,7 @@ Lisensi yang dianut di software ini adalah [Aladdin Free Public License (AFPL)](
 
 ## Panduan
 Informasi dan panduan bisa dicek di halaman [wiki](https://github.com/mas-elkhanza/SIMRS-Khanza/wiki)  
+Library yang digunakan bisa di download [disini](https://drive.google.com/drive/folders/1bLKuw8l9k5ElC5dxxlrXijACPLtNmCTg?usp=sharing).  
 Hasil build/Software jadi bisa di download di [Folder drive SIMRS Khanza](https://drive.google.com/drive/folders/0ByL--Jg6bdF7RG1NSlVTT2ZPODg)  
 
 ## Donasi

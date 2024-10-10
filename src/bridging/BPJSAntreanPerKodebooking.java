@@ -82,7 +82,7 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
             } else if (i == 1) {
                 column.setPreferredWidth(30);
             } else if (i == 2) {
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(280);
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -336,22 +336,14 @@ public final class BPJSAntreanPerKodebooking extends javax.swing.JDialog {
                         }
                         if (list.has("kodepoli")) {
                             tabMode.addRow(new Object[] {
-                                "Kode Poli", ":",
-                                list.path("kodepoli").asText()
-                            });
-                            tabMode.addRow(new Object[] {
-                                "Nama Poli", ":",
-                                Sequel.cariIsiSmc("select nm_poli_bpjs from maping_poli_bpjs where kd_poli_bpjs = ?", list.path("kodepoli").asText())
+                                "Poli", ":",
+                                list.path("kodepoli").asText() + " - " + Sequel.cariIsiSmc("select nm_poli_bpjs from maping_poli_bpjs where kd_poli_bpjs = ?", list.path("kodepoli").asText())
                             });
                         }
                         if (list.has("kodedokter")) {
                             tabMode.addRow(new Object[] {
-                                "Kode Dokter", ":",
-                                list.path("kodedokter").asText()
-                            });
-                            tabMode.addRow(new Object[] {
-                                "Nama Dokter", ":",
-                                Sequel.cariIsiSmc("select nm_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", list.path("kodedokter").asText())
+                                "Dokter", ":",
+                                list.path("kodedokter").asText() + " - " + Sequel.cariIsiSmc("select nm_dokter_bpjs from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", list.path("kodedokter").asText())
                             });
                         }
                         if (list.has("jampraktek")) {

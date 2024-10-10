@@ -579,7 +579,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                                             "\"noKartu\": \""+NoKartu.getText()+"\"," +
                                                                             "\"tglDaftar\": \""+TanggalDaftar.getSelectedItem()+"\"," +
                                                                             "\"kdPoli\": \""+KdPoliTujuan.getText()+"\"," +
-                                                                            "\"keluhan\": \""+Keluhan.getText()+"\"," +
+                                                                            "\"keluhan\": \""+(Keluhan.getText().equals("")?"Tidak Ada":Keluhan.getText())+"\"," +
                                                                             "\"kdSadar\": \""+KdSadar.getText()+"\"," +
                                                                             "\"sistole\": "+Sistole.getText()+"," +
                                                                             "\"diastole\": "+Diastole.getText()+"," +
@@ -598,14 +598,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                                             "\"rujukLanjut\": null," +
                                                                             "\"kdTacc\": -1," +
                                                                             "\"alasanTacc\": null," +
-                                                                            "\"anamnesa\": \""+Keluhan.getText()+"\"," +
+                                                                            "\"anamnesa\": \""+(Keluhan.getText().equals("")?"Tidak Ada":Keluhan.getText())+"\"," +
                                                                             "\"alergiMakan\": \""+KdAlergiMakanan.getText()+"\"," +
                                                                             "\"alergiUdara\": \""+KdAlergiUdara.getText()+"\"," +
                                                                             "\"alergiObat\": \""+KdAlergiObat.getText()+"\"," +
                                                                             "\"kdPrognosa\": \""+KdPrognosa.getText()+"\"," +
-                                                                            "\"terapiObat\": \""+TerapiObat.getText()+"\"," +
-                                                                            "\"terapiNonObat\": \""+TerapiNonObat.getText()+"\"," +
-                                                                            "\"bmhp\": \""+BMHP.getText()+"\"," +
+                                                                            "\"terapiObat\": \""+(TerapiObat.getText().equals("")?"Tidak Ada":TerapiObat.getText())+"\"," +
+                                                                            "\"terapiNonObat\": \""+(TerapiNonObat.getText().equals("")?"Tidak Ada":TerapiNonObat.getText())+"\"," +
+                                                                            "\"bmhp\": \""+(BMHP.getText().equals("")?"Tidak Ada":BMHP.getText())+"\"," +
                                                                             "\"suhu\": \""+TSuhu.getText()+"\"" +
                                                                           "}";
                                                             TeksArea.append(requestJson+"\n");
@@ -724,7 +724,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"noKartu\": \""+NoKartu.getText()+"\"," +
                                                 "\"tglDaftar\": \""+TanggalDaftar.getSelectedItem()+"\"," +
                                                 "\"kdPoli\": \""+KdPoliTujuan.getText()+"\"," +
-                                                "\"keluhan\": \""+Keluhan.getText()+"\"," +
+                                                "\"keluhan\": \""+(Keluhan.getText().equals("")?"Tidak Ada":Keluhan.getText())+"\"," +
                                                 "\"kdSadar\": \""+KdSadar.getText()+"\"," +
                                                 "\"sistole\": "+Sistole.getText()+"," +
                                                 "\"diastole\": "+Diastole.getText()+"," +
@@ -743,14 +743,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"rujukLanjut\": null," +
                                                 "\"kdTacc\": -1," +
                                                 "\"alasanTacc\": null," +
-                                                "\"anamnesa\": \""+Keluhan.getText()+"\"," +
+                                                "\"anamnesa\": \""+(Keluhan.getText().equals("")?"Tidak Ada":Keluhan.getText())+"\"," +
                                                 "\"alergiMakan\": \""+KdAlergiMakanan.getText()+"\"," +
                                                 "\"alergiUdara\": \""+KdAlergiUdara.getText()+"\"," +
                                                 "\"alergiObat\": \""+KdAlergiObat.getText()+"\"," +
                                                 "\"kdPrognosa\": \""+KdPrognosa.getText()+"\"," +
-                                                "\"terapiObat\": \""+TerapiObat.getText()+"\"," +
-                                                "\"terapiNonObat\": \""+TerapiNonObat.getText()+"\"," +
-                                                "\"bmhp\": \""+BMHP.getText()+"\"," +
+                                                "\"terapiObat\": \""+(TerapiObat.getText().equals("")?"Tidak Ada":TerapiObat.getText())+"\"," +
+                                                "\"terapiNonObat\": \""+(TerapiNonObat.getText().equals("")?"Tidak Ada":TerapiNonObat.getText())+"\"," +
+                                                "\"bmhp\": \""+(BMHP.getText().equals("")?"Tidak Ada":BMHP.getText())+"\"," +
                                                 "\"suhu\": \""+TSuhu.getText()+"\"" +
                                               "}";
                                 TeksArea.append(requestJson+"\n");
@@ -1538,8 +1538,8 @@ public class frmUtama extends javax.swing.JFrame {
                         bmhp=rscari.getString("nama_brng")+" "+rscari.getString("jml")+", "+bmhp;
                     }
                 }
-                TerapiObat.setText(terapiobat);
-                BMHP.setText(bmhp);
+                TerapiObat.setText(terapiobat.equals("")?"Tidak Ada":terapiobat);
+                BMHP.setText(bmhp.equals("")?"Tidak Ada":bmhp);
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -1587,7 +1587,7 @@ public class frmUtama extends javax.swing.JFrame {
                         Keluhan.setText(rscari.getString("keluhan")+(rscari.getString("pemeriksaan").equals("")?"":", "+rscari.getString("pemeriksaan")));
                         NmSadar.setText(rscari.getString("kesadaran"));
                         TSuhu.setText(rscari.getString("suhu_tubuh"));
-                        TerapiNonObat.setText(rscari.getString("instruksi").equals("")?"Tidak Ada Terapi":rscari.getString("instruksi"));
+                        TerapiNonObat.setText(rscari.getString("instruksi").equals("")?"Tidak Ada":rscari.getString("instruksi"));
                         if(rscari.getString("kesadaran").equals("Compos Mentis")){
                             KdSadar.setText("01");
                         }else if(rscari.getString("kesadaran").equals("Somnolence")){
@@ -1697,6 +1697,7 @@ public class frmUtama extends javax.swing.JFrame {
                         KdAlergiObat.setText("00");
                         NmAlergiObat.setText("Tidak Ada");
                         TSuhu.setText("0");
+                        TerapiNonObat.setText("Tidak Ada");
                     }
                 }catch(Exception ex){
                     TeksArea.append("Notif : "+ex+"\n");
@@ -1774,7 +1775,7 @@ public class frmUtama extends javax.swing.JFrame {
                         Keluhan.setText(rscari.getString("keluhan")+(rscari.getString("pemeriksaan").equals("")?"":", "+rscari.getString("pemeriksaan")));
                         NmSadar.setText(rscari.getString("kesadaran"));
                         TSuhu.setText(rscari.getString("suhu_tubuh"));
-                        TerapiNonObat.setText(rscari.getString("instruksi").equals("")?"Tidak Ada Terapi":rscari.getString("instruksi"));
+                        TerapiNonObat.setText(rscari.getString("instruksi").equals("")?"Tidak Ada":rscari.getString("instruksi"));
                         if(rscari.getString("kesadaran").equals("Compos Mentis")){
                             KdSadar.setText("01");
                         }else if(rscari.getString("kesadaran").equals("Somnolence")){
@@ -1884,6 +1885,7 @@ public class frmUtama extends javax.swing.JFrame {
                         KdAlergiObat.setText("00");
                         NmAlergiObat.setText("Tidak Ada");
                         TSuhu.setText("0");
+                        TerapiNonObat.setText("Tidak Ada");
                     }
                 }catch(Exception ex){
                     TeksArea.append("Notif : "+ex+"\n");
