@@ -3,6 +3,7 @@ package fungsi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 
 /**
@@ -19,6 +20,8 @@ public final class akses {
     private static PreparedStatement ps,ps2;
     private static ResultSet rs,rs2;
     
+    private static boolean edit = false;
+    private static long tglSelesai = -1;
     private static String kode="",kdbangsal="",alamatip="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser="",kode_ppk=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
     private static boolean aktif=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
@@ -3457,6 +3460,8 @@ public final class akses {
                         akses.penilaian_awal_keperawatan_ranap_bayi=false;
                         akses.booking_mcu_perusahaan=false;
                         akses.catatan_observasi_restrain_nonfarma=false;
+                        akses.edit=false;
+                        akses.tglSelesai=-1;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -3477,7 +3482,24 @@ public final class akses {
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
-
+        
+        if (akses.jml2 > 0) {
+            try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
+                psx.setString(1, user);
+                try (ResultSet rsx = psx.executeQuery()) {
+                    if (rsx.next()) {
+                        akses.tglSelesai = rsx.getTimestamp("tgl_selesai").getTime();
+                        akses.edit = ((System.currentTimeMillis() - akses.tglSelesai) / 1000) < 0;
+                    } else {
+                        akses.tglSelesai = -1;
+                        akses.edit = false;
+                    }
+                }
+            } catch (Exception e) {
+                akses.tglSelesai = -1;
+                akses.edit = false;
+            }
+        }
     }
     
     public static void setLogOut(){
@@ -4548,6 +4570,8 @@ public final class akses {
         akses.penilaian_awal_keperawatan_ranap_bayi=false;
         akses.booking_mcu_perusahaan=false;
         akses.catatan_observasi_restrain_nonfarma=false;
+        akses.edit=false;
+        akses.tglSelesai=-1;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -5655,4 +5679,15 @@ public final class akses {
     public static boolean getpenilaian_awal_keperawatan_ranap_bayi(){return akses.penilaian_awal_keperawatan_ranap_bayi;}
     public static boolean getbooking_mcu_perusahaan(){return akses.booking_mcu_perusahaan;}
     public static boolean getcatatan_observasi_restrain_nonfarma(){return akses.catatan_observasi_restrain_nonfarma;}
+    
+    public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
+    private static void setEdit() {
+        if (! akses.edit) {
+            return;
+        }
+        
+        if (((new sekuel().cariTglSmc("select now()").getTime() - akses.tglSelesai) / 1000) > 0) {
+            akses.edit = false;
+        }
+    }
 }   
