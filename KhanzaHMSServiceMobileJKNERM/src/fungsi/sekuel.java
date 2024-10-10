@@ -120,6 +120,28 @@ public final class sekuel {
         }
     }
     
+    public boolean menyimpantfSmc(String table, String kolom, String... values) {
+        boolean output = true;
+        String query = "insert into " + table + " (" + kolom + ") values (";
+        if (kolom == null || kolom.isBlank()) {
+            query = "insert into " + table + " values (";
+        }
+        for (int i = 0; i < values.length; i++) {
+            query = query + "?, ";
+        }
+        query = query.substring(0, query.length() - 2) + ")";
+        try (PreparedStatement ps = connect.prepareStatement(query)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            output = false;
+            System.out.println("Notif : " + e);
+        }
+        return output;
+    }
+    
     public void mengupdateSmc(String table, String kolom, String where, String... values) {
         String query = "update " + table + " set " + kolom + " where " + where;
         if (kolom == null || kolom.isBlank()) {

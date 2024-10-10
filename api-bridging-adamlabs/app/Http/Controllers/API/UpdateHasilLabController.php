@@ -15,6 +15,7 @@ class UpdateHasilLabController
     {
         $data = $request->validated();
 
+        tracker_start('mysql');
         Registrasi::query()
             ->where('no_laboratorium', $data['no_laboratorium'])
             ->where('no_registrasi', $data['no_registrasi'])
@@ -35,10 +36,12 @@ class UpdateHasilLabController
                     'hasil_flag_kode'   => Arr::get($pemeriksaan, 'hasil.flag_kode'),
                 ]);
         }
+        tracker_end('mysql', $data['username']);
 
         UpdateHasilLabKeSIMRS::dispatch([
             'no_laboratorium' => $data['no_laboratorium'],
             'no_registrasi'   => $data['no_registrasi'],
+            'username'        => $data['username'],
         ]);
 
         return response()->json([

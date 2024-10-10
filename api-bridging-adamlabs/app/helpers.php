@@ -15,7 +15,7 @@ if (! function_exists('tracker_start')) {
 }
 
 if (! function_exists('tracker_end')) {
-    function tracker_end(string $connection = 'mysql'): void
+    function tracker_end(string $connection = 'mysql', ?string $userId = null, ?string $ip = null): void
     {
         if (! DB::connection($connection)->logging()) {
             return;
@@ -38,9 +38,10 @@ if (! function_exists('tracker_end')) {
                 ->replaceArray('?', $log['bindings'])
                 ->value();
 
-            DB::connection('mysql_smc')->table('trackersql')->insert([
-                'tanggal'    => now(),
+            DB::connection('mysql')->table('trackersql')->insert([
                 'sqle'       => $sql,
+                'usere'      => $userId,
+                'ip'         => $ip ?? request()->ip(),
                 'connection' => $connection,
             ]);
         }

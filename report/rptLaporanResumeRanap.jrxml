@@ -89,7 +89,9 @@
     pasien.pekerjaan,
     pasien.jk,
     pasien.tgl_lahir,
-    concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat
+    concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat,
+    ifnull(bridging_sep.no_sep, '') as no_sep,
+    ifnull(bridging_sep.tglsep, '') as tglsep
 from resume_pasien_ranap
     join reg_periksa on resume_pasien_ranap.no_rawat = reg_periksa.no_rawat
     join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
@@ -99,310 +101,317 @@ from resume_pasien_ranap
     join kecamatan on pasien.kd_kec = kecamatan.kd_kec
     join kabupaten on pasien.kd_kab = kabupaten.kd_kab
     join penjab on penjab.kd_pj = reg_periksa.kd_pj
+    left join bridging_sep on resume_pasien_ranap.no_rawat = bridging_sep.no_rawat and bridging_sep.jnspelayanan = '1' and length(bridging_sep.no_sep) = 19
 where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="no_rawat"/>
 		<property name="com.jaspersoft.studio.field.label" value="no_rawat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="no_rawat"/>
 	</field>
 	<field name="no_rkm_medis" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="no_rkm_medis"/>
 		<property name="com.jaspersoft.studio.field.label" value="no_rkm_medis"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="no_rkm_medis"/>
 	</field>
 	<field name="nm_pasien" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nm_pasien"/>
 		<property name="com.jaspersoft.studio.field.label" value="nm_pasien"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<property name="com.jaspersoft.studio.field.name" value="nm_pasien"/>
 	</field>
 	<field name="kd_dokter" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_dokter"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_dokter"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_dokter"/>
 	</field>
 	<field name="nm_dokter" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nm_dokter"/>
 		<property name="com.jaspersoft.studio.field.label" value="nm_dokter"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="dokter"/>
+		<property name="com.jaspersoft.studio.field.name" value="nm_dokter"/>
 	</field>
 	<field name="kodepengirim" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_dokter"/>
 		<property name="com.jaspersoft.studio.field.label" value="kodepengirim"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_dokter"/>
 	</field>
 	<field name="pengirim" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nm_dokter"/>
 		<property name="com.jaspersoft.studio.field.label" value="pengirim"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="dokter"/>
+		<property name="com.jaspersoft.studio.field.name" value="nm_dokter"/>
 	</field>
 	<field name="tgl_registrasi" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="tgl_registrasi"/>
 		<property name="com.jaspersoft.studio.field.label" value="tgl_registrasi"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="tgl_registrasi"/>
 	</field>
 	<field name="jam_reg" class="java.sql.Time">
-		<property name="com.jaspersoft.studio.field.name" value="jam_reg"/>
 		<property name="com.jaspersoft.studio.field.label" value="jam_reg"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="jam_reg"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="diagnosa_awal" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_awal"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_awal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_awal"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alasan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="alasan"/>
 		<property name="com.jaspersoft.studio.field.label" value="alasan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="alasan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="keluhan_utama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="keluhan_utama"/>
 		<property name="com.jaspersoft.studio.field.label" value="keluhan_utama"/>
+		<property name="com.jaspersoft.studio.field.name" value="keluhan_utama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 	</field>
 	<field name="pemeriksaan_fisik" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="pemeriksaan_fisik"/>
 		<property name="com.jaspersoft.studio.field.label" value="pemeriksaan_fisik"/>
+		<property name="com.jaspersoft.studio.field.name" value="pemeriksaan_fisik"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="jalannya_penyakit" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="jalannya_penyakit"/>
 		<property name="com.jaspersoft.studio.field.label" value="jalannya_penyakit"/>
+		<property name="com.jaspersoft.studio.field.name" value="jalannya_penyakit"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 	</field>
 	<field name="pemeriksaan_penunjang" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="pemeriksaan_penunjang"/>
 		<property name="com.jaspersoft.studio.field.label" value="pemeriksaan_penunjang"/>
+		<property name="com.jaspersoft.studio.field.name" value="pemeriksaan_penunjang"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 	</field>
 	<field name="hasil_laborat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="hasil_laborat"/>
 		<property name="com.jaspersoft.studio.field.label" value="hasil_laborat"/>
+		<property name="com.jaspersoft.studio.field.name" value="hasil_laborat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 	</field>
 	<field name="tindakan_dan_operasi" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="tindakan_dan_operasi"/>
 		<property name="com.jaspersoft.studio.field.label" value="tindakan_dan_operasi"/>
+		<property name="com.jaspersoft.studio.field.name" value="tindakan_dan_operasi"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="obat_di_rs" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="obat_di_rs"/>
 		<property name="com.jaspersoft.studio.field.label" value="obat_di_rs"/>
+		<property name="com.jaspersoft.studio.field.name" value="obat_di_rs"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="diagnosa_utama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_utama"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_utama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_utama"/>
 	</field>
 	<field name="kd_diagnosa_utama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_utama"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_diagnosa_utama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_utama"/>
 	</field>
 	<field name="diagnosa_sekunder" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_sekunder"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder"/>
 	</field>
 	<field name="kd_diagnosa_sekunder" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_diagnosa_sekunder"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder"/>
 	</field>
 	<field name="diagnosa_sekunder2" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder2"/>
 	</field>
 	<field name="kd_diagnosa_sekunder2" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_diagnosa_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder2"/>
 	</field>
 	<field name="diagnosa_sekunder3" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder3"/>
 	</field>
 	<field name="kd_diagnosa_sekunder3" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_diagnosa_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder3"/>
 	</field>
 	<field name="diagnosa_sekunder4" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder4"/>
 		<property name="com.jaspersoft.studio.field.label" value="diagnosa_sekunder4"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa_sekunder4"/>
 	</field>
 	<field name="kd_diagnosa_sekunder4" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder4"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_diagnosa_sekunder4"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_diagnosa_sekunder4"/>
 	</field>
 	<field name="prosedur_utama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="prosedur_utama"/>
 		<property name="com.jaspersoft.studio.field.label" value="prosedur_utama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="prosedur_utama"/>
 	</field>
 	<field name="kd_prosedur_utama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_utama"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_prosedur_utama"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_utama"/>
 	</field>
 	<field name="prosedur_sekunder" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder"/>
 		<property name="com.jaspersoft.studio.field.label" value="prosedur_sekunder"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder"/>
 	</field>
 	<field name="kd_prosedur_sekunder" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_prosedur_sekunder"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder"/>
 	</field>
 	<field name="prosedur_sekunder2" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.label" value="prosedur_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder2"/>
 	</field>
 	<field name="kd_prosedur_sekunder2" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_prosedur_sekunder2"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder2"/>
 	</field>
 	<field name="prosedur_sekunder3" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.label" value="prosedur_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="prosedur_sekunder3"/>
 	</field>
 	<field name="kd_prosedur_sekunder3" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_prosedur_sekunder3"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_prosedur_sekunder3"/>
 	</field>
 	<field name="alergi" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="alergi"/>
 		<property name="com.jaspersoft.studio.field.label" value="alergi"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="alergi"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="diet" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diet"/>
 		<property name="com.jaspersoft.studio.field.label" value="diet"/>
+		<property name="com.jaspersoft.studio.field.name" value="diet"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="lab_belum" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="lab_belum"/>
 		<property name="com.jaspersoft.studio.field.label" value="lab_belum"/>
+		<property name="com.jaspersoft.studio.field.name" value="lab_belum"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="edukasi" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="edukasi"/>
 		<property name="com.jaspersoft.studio.field.label" value="edukasi"/>
+		<property name="com.jaspersoft.studio.field.name" value="edukasi"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="cara_keluar" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="cara_keluar"/>
 		<property name="com.jaspersoft.studio.field.label" value="cara_keluar"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="cara_keluar"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ket_keluar" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="ket_keluar"/>
 		<property name="com.jaspersoft.studio.field.label" value="ket_keluar"/>
+		<property name="com.jaspersoft.studio.field.name" value="ket_keluar"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="keadaan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="keadaan"/>
 		<property name="com.jaspersoft.studio.field.label" value="keadaan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="keadaan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ket_keadaan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="ket_keadaan"/>
 		<property name="com.jaspersoft.studio.field.label" value="ket_keadaan"/>
+		<property name="com.jaspersoft.studio.field.name" value="ket_keadaan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dilanjutkan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="dilanjutkan"/>
 		<property name="com.jaspersoft.studio.field.label" value="dilanjutkan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="dilanjutkan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ket_dilanjutkan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="ket_dilanjutkan"/>
 		<property name="com.jaspersoft.studio.field.label" value="ket_dilanjutkan"/>
+		<property name="com.jaspersoft.studio.field.name" value="ket_dilanjutkan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="kontrol" class="java.sql.Timestamp">
-		<property name="com.jaspersoft.studio.field.name" value="kontrol"/>
 		<property name="com.jaspersoft.studio.field.label" value="kontrol"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
+		<property name="com.jaspersoft.studio.field.name" value="kontrol"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="obat_pulang" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="obat_pulang"/>
 		<property name="com.jaspersoft.studio.field.label" value="obat_pulang"/>
+		<property name="com.jaspersoft.studio.field.name" value="obat_pulang"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="resume_pasien_ranap"/>
 	</field>
 	<field name="kd_pj" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="kd_pj"/>
 		<property name="com.jaspersoft.studio.field.label" value="kd_pj"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="kd_pj"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="png_jawab" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="png_jawab"/>
 		<property name="com.jaspersoft.studio.field.label" value="png_jawab"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="penjab"/>
+		<property name="com.jaspersoft.studio.field.name" value="png_jawab"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="umurdaftar" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="umurdaftar"/>
 		<property name="com.jaspersoft.studio.field.label" value="umurdaftar"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="umurdaftar"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="sttsumur" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="sttsumur"/>
 		<property name="com.jaspersoft.studio.field.label" value="sttsumur"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reg_periksa"/>
+		<property name="com.jaspersoft.studio.field.name" value="sttsumur"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="pekerjaan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="pekerjaan"/>
 		<property name="com.jaspersoft.studio.field.label" value="pekerjaan"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<property name="com.jaspersoft.studio.field.name" value="pekerjaan"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="jk" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="jk"/>
 		<property name="com.jaspersoft.studio.field.label" value="jk"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<property name="com.jaspersoft.studio.field.name" value="jk"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="tgl_lahir" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="tgl_lahir"/>
 		<property name="com.jaspersoft.studio.field.label" value="tgl_lahir"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<property name="com.jaspersoft.studio.field.name" value="tgl_lahir"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alamat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="alamat"/>
 		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
+		<property name="com.jaspersoft.studio.field.name" value="alamat"/>
+	</field>
+	<field name="no_sep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="no_sep"/>
+	</field>
+	<field name="tglsep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tglsep"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -421,15 +430,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<text><![CDATA[RESUME MEDIS PASIEN]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="48" y="3" width="486" height="17" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="48" y="17" width="486" height="14" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b"/>
+				<reportElement x="48" y="22" width="439" height="11" uuid="ba45cdb1-6e88-4a05-8795-1ae63b3ef11b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -437,7 +438,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="48" y="28" width="486" height="14" uuid="6bb20c38-1c6d-461e-993d-04653cb69342"/>
+				<reportElement x="48" y="33" width="439" height="10" uuid="6bb20c38-1c6d-461e-993d-04653cb69342"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -451,7 +452,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="48" y="42" width="486" height="14" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f"/>
+				<reportElement x="48" y="43" width="439" height="11" uuid="14bd74cb-266d-4524-b5f1-6402afbb3b8f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -762,6 +763,30 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{jamkeluar}]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement isPrintRepeatedValues="false" x="399" y="-5" width="136" height="13" uuid="25b9f83a-8ce1-4bbd-8d07-d868670b04e4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9" isBold="true" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_sep}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement isPrintRepeatedValues="false" x="399" y="7" width="136" height="11" uuid="86619745-1fac-4fa1-8570-d553847d714d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tglsep}.trim().equals("") ? "" : "Tgl. SEP : " + new java.text.SimpleDateFormat("dd-MM-yyyy").format(new java.text.SimpleDateFormat("yyyy-MM-dd").parse($F{tglsep}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="7" width="439" height="15" uuid="6c31c284-e35b-4e6c-8447-af5f9207b9b4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="62" splitType="Stretch">
 			<staticText>
@@ -849,7 +874,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 		</band>
 		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="11" y="2" width="422" height="10" uuid="239a30c5-fd87-4c9d-b308-118958e018dd">
+				<reportElement positionType="Float" x="11" y="3" width="422" height="10" uuid="239a30c5-fd87-4c9d-b308-118958e018dd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -871,7 +896,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 		</band>
 		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="11" y="2" width="239" height="10" uuid="e7d085b1-2c1c-4460-84ff-5f414d12ce51">
+				<reportElement positionType="Float" x="11" y="3" width="239" height="10" uuid="e7d085b1-2c1c-4460-84ff-5f414d12ce51">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -903,7 +928,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<textFieldExpression><![CDATA[$F{pemeriksaan_penunjang}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="11" y="2" width="239" height="10" uuid="1008fcfe-159a-4c5c-981f-0ae1920270ed">
+				<reportElement positionType="Float" x="11" y="3" width="239" height="10" uuid="1008fcfe-159a-4c5c-981f-0ae1920270ed">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -915,7 +940,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 		</band>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="11" y="0" width="239" height="10" uuid="6aae4583-f4e9-4bef-ab60-55000daa99b4">
+				<reportElement positionType="Float" x="11" y="3" width="239" height="10" uuid="6aae4583-f4e9-4bef-ab60-55000daa99b4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -925,7 +950,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<text><![CDATA[Pemeriksaan Penunjang Laboratorium Terpenting :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Transparent" x="21" y="11" width="510" height="20" backcolor="#CCCCCC" uuid="3c6f89b7-273b-4aac-b99b-5e070b7f07b1">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Transparent" x="21" y="13" width="510" height="19" backcolor="#CCCCCC" uuid="3c6f89b7-273b-4aac-b99b-5e070b7f07b1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -937,7 +962,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 		</band>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="11" y="0" width="239" height="10" uuid="87b7897f-2cbb-4097-8247-793927a76bc6">
+				<reportElement positionType="Float" x="11" y="3" width="239" height="10" uuid="87b7897f-2cbb-4097-8247-793927a76bc6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -947,7 +972,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 				<text><![CDATA[Tindakan/Operasi Selama Perawatan :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Transparent" x="21" y="11" width="510" height="20" backcolor="#CCCCCC" uuid="8b23749f-b30d-4a2e-ad2b-87eba96dea1b">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" mode="Transparent" x="21" y="13" width="510" height="18" backcolor="#CCCCCC" uuid="8b23749f-b30d-4a2e-ad2b-87eba96dea1b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>

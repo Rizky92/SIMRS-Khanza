@@ -79,18 +79,24 @@ public final class validasi {
     private final int year=(now.get(Calendar.YEAR));
     private String[] nomina={"","satu","dua","tiga","empat","lima","enam",
                          "tujuh","delapan","sembilan","sepuluh","sebelas"};
+    private String[] nominal2 = {
+        "nol","satu","dua","tiga","empat","lima","enam",
+        "tujuh","delapan","sembilan","sepuluh","sebelas"
+    };
     
     public validasi(){
         super();
     };
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, String tanggal) {
         component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, tanggal));
     }
     
-    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item)
-    {
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tgl) {
+        component.setText(sek.autoNomorSmc(prefix, table, kolom, panjang, pad, getTglSmc(tgl)));
+    }
+    
+    public void autoNomorSmc(JTextField component, String prefix, String table, String kolom, int panjang, String pad, Object item) {
         autoNomorSmc(component, prefix, table, kolom, panjang, pad, SetTgl(item.toString()));
     }
     
@@ -110,12 +116,16 @@ public final class validasi {
         return getTglSmc(tgl) + " " + getWaktuSmc(jam, menit, detik);
     }
     
+    public String getTglJamSmc(Tanggal tgljam) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tgljam.getDate());
+    }
+    
     public String setTglJamSmc(Date tgljam) {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
     }
     
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
-        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ?", akses.getalamatip());
+        reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ? order by temporary.no", akses.getalamatip());
     }
     
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
@@ -149,6 +159,46 @@ public final class validasi {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
         }
+    }
+    
+    public String capitalize(String judul) {
+        return judul.substring(0, 1).toUpperCase() + judul.substring(1);
+    }
+    
+    public String terbilangSmc(double nilai) {
+        if (nilai < 12) {
+            return nominal2[(int) nilai];
+        }
+
+        if (nilai >= 12 && nilai <= 19) {
+            return nominal2[(int) nilai % 10] + " belas ";
+        }
+
+        if (nilai >= 20 && nilai <= 99) {
+            return nominal2[(int) nilai / 10] + " puluh " + nominal2[(int) nilai % 10];
+        }
+
+        if (nilai >= 100 && nilai <= 199) {
+            return "seratus " + terbilangSmc(nilai % 100);
+        }
+
+        if (nilai >= 200 && nilai <= 999) {
+            return nominal2[(int) nilai / 100] + " ratus " + terbilangSmc(nilai % 100);
+        }
+
+        if (nilai >= 1_000 && nilai <= 1_999) {
+            return "seribu " + terbilangSmc(nilai % 1_000);
+        }
+
+        if (nilai >= 2_000 && nilai <= 999_999) {
+            return terbilangSmc((int) nilai / 1_000) + " ribu " + terbilangSmc(nilai % 1_000);
+        }
+
+        if (nilai >= 1_000_000 && nilai <= 999_999_999) {
+            return terbilangSmc((int) nilai / 1_000_000) + " juta " + terbilangSmc(nilai % 1_000_000);
+        }
+        
+        return "";
     }
     
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        

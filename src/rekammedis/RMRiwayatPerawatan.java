@@ -12,6 +12,8 @@
 package rekammedis;
 
 import bridging.ICareRiwayatPerawatan;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -59,6 +61,47 @@ import javax.swing.text.html.StyleSheet;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import simrskhanza.DlgCariPasien;
+import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import static com.jcraft.jsch.ChannelSftp.SSH_FX_NO_SUCH_FILE;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Base64;
+import java.util.Properties;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -73,13 +116,30 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
     private double biayaperawatan=0;
-    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
+    private String kddpjp="",dpjp="",json,dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",path="",authStr="",base64Creds="",requestJson, TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
+    private boolean esign=false;
+    private JSch jsch;
+    private Session session;
+    private Channel channel;
+    private ChannelSftp sftpChannel;
+    private Properties config;
+    private HttpHeaders headers;
+    private ObjectMapper mapper= new ObjectMapper();
+    private MultiValueMap<String, Object> map;
+    private HttpEntity<MultiValueMap<String, Object>> requestEntity;
+    private JsonNode root;
+    private JsonNode nameNode;
+    private SSLContext sslContext;
+    private SSLSocketFactory sslFactory;
+    private SecretKeySpec secretKey;
+    private Scheme scheme;
+    private HttpComponentsClientHttpRequestFactory factory;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -89,6 +149,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
+        WindowPhrase.setSize(320,100);
         
         tabModeRegistrasi=new DefaultTableModel(null,new Object[]{
                 "No.","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju/DPJP","Umur","Poliklinik/Kamar","Jenis Bayar"
@@ -301,6 +362,17 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         Pekerjaan = new widget.TextBox();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnGeneratePDF = new javax.swing.JMenuItem();
+        MnGeneratePDFESign = new javax.swing.JMenuItem();
+        WindowPhrase = new javax.swing.JDialog();
+        internalFrame8 = new widget.InternalFrame();
+        jLabel42 = new widget.Label();
+        panelisi5 = new widget.panelisi();
+        BtnClosePhrase = new widget.Button();
+        BtnSimpanTandaTangan = new widget.Button();
+        jLabel39 = new widget.Label();
+        Phrase = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         R5 = new widget.RadioButton();
@@ -383,6 +455,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanap = new widget.CekBox();
         chkCatatanObservasiRanapKebidanan = new widget.CekBox();
         chkCatatanObservasiRanapPostPartum = new widget.CekBox();
+        chkCatatanObservasiRestrainNonFarmakologi = new widget.CekBox();
         chkFollowUpDBD = new widget.CekBox();
         chkCatatanKeseimbanganCairan = new widget.CekBox();
         chkCatatanCekGDS = new widget.CekBox();
@@ -520,6 +593,95 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Pekerjaan.setEditable(false);
         Pekerjaan.setName("Pekerjaan"); // NOI18N
         Pekerjaan.setPreferredSize(new java.awt.Dimension(100, 23));
+
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnGeneratePDF.setBackground(new java.awt.Color(255, 255, 254));
+        MnGeneratePDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGeneratePDF.setForeground(new java.awt.Color(50, 50, 50));
+        MnGeneratePDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGeneratePDF.setText("Jadikan File PDF");
+        MnGeneratePDF.setName("MnGeneratePDF"); // NOI18N
+        MnGeneratePDF.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnGeneratePDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnGeneratePDFActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnGeneratePDF);
+
+        MnGeneratePDFESign.setBackground(new java.awt.Color(255, 255, 254));
+        MnGeneratePDFESign.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGeneratePDFESign.setForeground(new java.awt.Color(50, 50, 50));
+        MnGeneratePDFESign.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGeneratePDFESign.setText("Jadikan File PDF E-Sign");
+        MnGeneratePDFESign.setName("MnGeneratePDFESign"); // NOI18N
+        MnGeneratePDFESign.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnGeneratePDFESign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnGeneratePDFESignActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnGeneratePDFESign);
+
+        WindowPhrase.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowPhrase.setModal(true);
+        WindowPhrase.setName("WindowPhrase"); // NOI18N
+        WindowPhrase.setUndecorated(true);
+        WindowPhrase.setResizable(false);
+
+        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ E-Sign / Tanda Tangan Elektronik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame8.setName("internalFrame8"); // NOI18N
+        internalFrame8.setLayout(new java.awt.BorderLayout());
+
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel42.setText("%");
+        jLabel42.setName("jLabel42"); // NOI18N
+        internalFrame8.add(jLabel42, java.awt.BorderLayout.CENTER);
+
+        panelisi5.setName("panelisi5"); // NOI18N
+        panelisi5.setPreferredSize(new java.awt.Dimension(100, 44));
+        panelisi5.setLayout(null);
+
+        BtnClosePhrase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnClosePhrase.setMnemonic('U');
+        BtnClosePhrase.setText("Batal");
+        BtnClosePhrase.setToolTipText("Alt+U");
+        BtnClosePhrase.setName("BtnClosePhrase"); // NOI18N
+        BtnClosePhrase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnClosePhraseActionPerformed(evt);
+            }
+        });
+        panelisi5.add(BtnClosePhrase);
+        BtnClosePhrase.setBounds(200, 40, 100, 30);
+
+        BtnSimpanTandaTangan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanTandaTangan.setMnemonic('S');
+        BtnSimpanTandaTangan.setText("Simpan");
+        BtnSimpanTandaTangan.setToolTipText("Alt+S");
+        BtnSimpanTandaTangan.setName("BtnSimpanTandaTangan"); // NOI18N
+        BtnSimpanTandaTangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanTandaTanganActionPerformed(evt);
+            }
+        });
+        panelisi5.add(BtnSimpanTandaTangan);
+        BtnSimpanTandaTangan.setBounds(10, 40, 100, 30);
+
+        jLabel39.setText("Masukkan Passphrase :");
+        jLabel39.setName("jLabel39"); // NOI18N
+        panelisi5.add(jLabel39);
+        jLabel39.setBounds(0, 10, 130, 23);
+
+        Phrase.setHighlighter(null);
+        Phrase.setName("Phrase"); // NOI18N
+        panelisi5.add(Phrase);
+        Phrase.setBounds(134, 10, 160, 23);
+
+        internalFrame8.add(panelisi5, java.awt.BorderLayout.CENTER);
+
+        WindowPhrase.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -711,6 +873,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         LoadHTMLRiwayatPerawatan.setBorder(null);
+        LoadHTMLRiwayatPerawatan.setComponentPopupMenu(jPopupMenu1);
         LoadHTMLRiwayatPerawatan.setName("LoadHTMLRiwayatPerawatan"); // NOI18N
         Scroll.setViewportView(LoadHTMLRiwayatPerawatan);
 
@@ -747,7 +910,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3385));
+        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3430));
         FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         chkSemua.setSelected(true);
@@ -1194,6 +1357,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanapPostPartum.setOpaque(false);
         chkCatatanObservasiRanapPostPartum.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkCatatanObservasiRanapPostPartum);
+
+        chkCatatanObservasiRestrainNonFarmakologi.setSelected(true);
+        chkCatatanObservasiRestrainNonFarmakologi.setText("Catatan Observasi Restrain Nonfarmakologi");
+        chkCatatanObservasiRestrainNonFarmakologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkCatatanObservasiRestrainNonFarmakologi.setName("chkCatatanObservasiRestrainNonFarmakologi"); // NOI18N
+        chkCatatanObservasiRestrainNonFarmakologi.setOpaque(false);
+        chkCatatanObservasiRestrainNonFarmakologi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkCatatanObservasiRestrainNonFarmakologi);
 
         chkFollowUpDBD.setSelected(true);
         chkFollowUpDBD.setText("Follow Up DBD");
@@ -2340,6 +2511,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     tampilSoapi();
                     break;
                 case 2:
+                    esign=false;
                     tampilPerawatan();
                     break;
                 case 3:
@@ -2524,6 +2696,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkSkriningTBC.setSelected(true);
             chkAsuhanMedisMCU.setSelected(true);
             chkAsuhanKeperawatanRanapBayi.setSelected(true);
+            chkCatatanObservasiRestrainNonFarmakologi.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkAsuhanKeperawatanRalan.setSelected(false);
@@ -2672,6 +2845,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkSkriningTBC.setSelected(false);
             chkAsuhanMedisMCU.setSelected(false);
             chkAsuhanKeperawatanRanapBayi.setSelected(false);
+            chkCatatanObservasiRestrainNonFarmakologi.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -2692,6 +2866,470 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void R5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_R5ActionPerformed
+
+    private void MnGeneratePDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGeneratePDFActionPerformed
+        R4.setSelected(true);
+        if(NoRawat.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"No.Rawat masih kosong...!!!");
+            NoRawat.requestFocus();
+        }else{
+            try{
+                esign=false;
+                tampilPerawatan();
+                File g = new File("file.css");            
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
+                bg.close();
+
+                PdfWriter pdf = new PdfWriter("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                HtmlConverter.convertToPdf(
+                    LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                          replaceAll("<body>",
+                                     "<body>"+
+                                        "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                            "<tr>" +
+                                                "<td width='15%' border='0'>" +
+                                                    "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                                "</td>" +
+                                                "<td width='85%' border='0'>" +
+                                                    "<center>" +
+                                                        "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                        "<font color='000000' size='1'  face='Tahoma'>"+
+                                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                            "<br>RIWAYAT PERAWATAN" +
+                                                        "</font> " +
+                                                    "</center>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table><br>"+
+                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>No.RM</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+NoRM.getText().trim()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Nama Pasien</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+NmPasien.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Alamat</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Alamat.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Jenis Kelamin</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Jk.getText().replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+TempatLahir.getText()+" "+TanggalLahir.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Ibu Kandung</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+IbuKandung.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Golongan Darah</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+GD.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Status Nikah</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+StatusNikah.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Agama</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Agama.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Pendidikan.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Bahasa Dipakai</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+Bahasa.getText()+"</td>"+
+                                           "</tr>"+
+                                           "<tr class='isi'>"+ 
+                                             "<td valign='top' width='20%'>Cacat Fisik</td>"+
+                                             "<td valign='top' width='1%' align='center'>:</td>"+
+                                             "<td valign='top' width='79%'>"+CacatFisik.getText()+"</td>"+
+                                           "</tr>"+
+                                        "</table>"            
+                          ).
+                          replaceAll((getClass().getResource("/picture/"))+"","./gambar/"), pdf
+                );
+                File f = new File("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");   
+                Desktop.getDesktop().browse(f.toURI());
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }  
+        }
+    }//GEN-LAST:event_MnGeneratePDFActionPerformed
+
+    private void MnGeneratePDFESignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGeneratePDFESignActionPerformed
+        R4.setSelected(true);
+        if(NoRawat.getText().equals("")){
+            Valid.textKosong(Phrase,"No.Rawat");
+        }else{
+            WindowPhrase.setAlwaysOnTop(true);
+            WindowPhrase.setLocationRelativeTo(internalFrame1);
+            WindowPhrase.setVisible(true);
+        } 
+    }//GEN-LAST:event_MnGeneratePDFESignActionPerformed
+
+    private void BtnClosePhraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClosePhraseActionPerformed
+        Phrase.setText("");
+        WindowPhrase.dispose();
+    }//GEN-LAST:event_BtnClosePhraseActionPerformed
+
+    private void BtnSimpanTandaTanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanTandaTanganActionPerformed
+        R4.setSelected(true);
+        if(Phrase.getText().equals("")){
+            Valid.textKosong(Phrase,"Phrase");
+        }else{
+            try{
+                jsch = new JSch();
+                session = jsch.getSession(koneksiDB.SFTPFILEESIGNUSER(),koneksiDB.SFTPFILEESIGNHOST(),Integer.parseInt(koneksiDB.SFTPFILEESIGNPORT()));
+                config = new Properties();
+                config.put("StrictHostKeyChecking", "no");
+                config.put("PreferredAuthentications", "publickey,keyboard-interactive,password");
+                session.setConfig(config);
+                session.setPassword(koneksiDB.SFTPFILEESIGNPAS());
+                session.connect();
+                if(session.isConnected()==true){
+                    System.out.println("Session berhasil terkoneksi\n");
+                    session.setTimeout(30000);
+                    channel = session.openChannel("sftp");
+                    sftpChannel = (ChannelSftp) channel;
+                    sftpChannel.connect();
+                    if(sftpChannel.isConnected()==true){
+                        System.out.println("SFTP berhasil terkoneksi\n");
+                        System.out.println("Memeriksa direktori "+koneksiDB.SFTPFILEESIGNFOLDER()+"\n");
+                        sftpChannel.cd(koneksiDB.SFTPFILEESIGNFOLDER());
+                        try {
+                            System.out.println("Memeriksa file RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                            path = sftpChannel.ls("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf").toString();
+                            if (path.contains("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf")) {
+                                System.out.println("File RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf ditemukan");
+                                sftpChannel.rm("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                esign=true;
+                                tampilPerawatan();
+                                if(esign==true){
+                                    File g = new File("file.css");            
+                                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                                    bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
+                                    bg.close();
+
+                                    PdfWriter pdf = new PdfWriter("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                    HtmlConverter.convertToPdf(
+                                        LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                                              replaceAll("<body>",
+                                                         "<body>"+
+                                                            "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                                                "<tr>" +
+                                                                    "<td width='15%' border='0'>" +
+                                                                        "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                                                    "</td>" +
+                                                                    "<td width='85%' border='0'>" +
+                                                                        "<center>" +
+                                                                            "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                                            "<font color='000000' size='1'  face='Tahoma'>"+
+                                                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                                                "<br>RIWAYAT PERAWATAN" +
+                                                                            "</font> " +
+                                                                        "</center>" +
+                                                                    "</td>" +
+                                                                "</tr>" +
+                                                            "</table><br>"+
+                                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>No.RM</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+NoRM.getText().trim()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Nama Pasien</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+NmPasien.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Alamat</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Alamat.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Jenis Kelamin</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Jk.getText().replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+TempatLahir.getText()+" "+TanggalLahir.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Ibu Kandung</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+IbuKandung.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Golongan Darah</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+GD.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Status Nikah</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+StatusNikah.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Agama</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Agama.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Pendidikan.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Bahasa Dipakai</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Bahasa.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Cacat Fisik</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+CacatFisik.getText()+"</td>"+
+                                                               "</tr>"+
+                                                            "</table>"            
+                                              ).
+                                              replaceAll((getClass().getResource("/picture/"))+"","./gambar/"), pdf
+                                    );
+                                    System.out.println("Membuat ulang File RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf untuk dikirim ke server");
+                                    File f = new File("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");   
+                                    sftpChannel.put("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf","RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                    try {
+                                        authStr = koneksiDB.USERNAMEAPIESIGN()+":"+koneksiDB.PASSAPIESIGN();
+                                        base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes());
+                                        headers = new HttpHeaders();
+                                        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+                                        headers.add("Authorization", "Basic " + base64Creds);
+                                        map= new LinkedMultiValueMap<>();
+                                        /*try (FileInputStream imageInFile = new FileInputStream(f)) {
+                                            byte fileData[] = new byte[(int) f.length()];
+                                            imageInFile.read(fileData);
+                                            file=Base64.getEncoder().encodeToString(fileData);
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File tidak ketemu : " + e);
+                                        } catch (IOException ioe) {
+                                            System.out.println("Error " + ioe);
+                                        }*/
+                                        //FileSystemResource resource = new FileSystemResource(f.getAbsoluteFile());
+                                        map.add("file",koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        map.add("nik",Sequel.cariIsi("select pegawai.no_ktp from pegawai where pegawai.nik=?",akses.getkode()));
+                                        map.add("passphrase",Phrase.getText());
+                                        map.add("tampilan","visible");
+                                        map.add("image","false");
+                                        map.add("linkQR",koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        map.add("width","90");
+                                        map.add("height","90");
+                                        map.add("tag_koordinat","#");
+                                        requestEntity = new HttpEntity<>(map, headers);
+                                        System.out.println("URL E-Sign : "+koneksiDB.URLAPIESIGN());
+                                        System.out.println("linkQR : "+koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        RestTemplate rest=getRest();
+                                        rest.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+                                        rest.getMessageConverters().add(new StringHttpMessageConverter());
+                                        rest.getMessageConverters().add(new ResourceHttpMessageConverter());
+                                        ResponseEntity<byte[]> respon;
+                                        respon=rest.exchange(koneksiDB.URLAPIESIGN(),HttpMethod.POST,requestEntity,byte[].class);
+                                        if (respon.getStatusCode().equals(HttpStatus.OK)) {
+
+                                        }
+                                        //ResponseEntity<byte[]> result = getRest().exchange(koneksiDB.URLAPIESIGN(),HttpMethod.POST, requestEntity, byte[].class);
+                                        //f.delete();
+                                        //FileOutputStream fileOutputStream = new FileOutputStream("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        //org.apache.commons.io.IOUtils.write(result.getBody(), fileOutputStream);
+                                    }catch (Exception ex) {
+                                        //sftpChannel.rm("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        System.out.println("Notifikasi Bridging : "+ex);
+                                    }
+                                }
+                            }
+                        } catch (SftpException x) {
+                            if (x.id == SSH_FX_NO_SUCH_FILE) {
+                                esign=true;
+                                tampilPerawatan();
+                                if(esign==true){
+                                    File g = new File("file.css");            
+                                    BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                                    bg.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;border: white;}");
+                                    bg.close();
+
+                                    PdfWriter pdf = new PdfWriter("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                    HtmlConverter.convertToPdf(
+                                        LoadHTMLRiwayatPerawatan.getText().replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
+                                              replaceAll("<body>",
+                                                         "<body>"+
+                                                            "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                                                "<tr>" +
+                                                                    "<td width='15%' border='0'>" +
+                                                                        "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                                                    "</td>" +
+                                                                    "<td width='85%' border='0'>" +
+                                                                        "<center>" +
+                                                                            "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                                            "<font color='000000' size='1'  face='Tahoma'>"+
+                                                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                                                "<br>RIWAYAT PERAWATAN" +
+                                                                            "</font> " +
+                                                                        "</center>" +
+                                                                    "</td>" +
+                                                                "</tr>" +
+                                                            "</table><br>"+
+                                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>No.RM</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+NoRM.getText().trim()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Nama Pasien</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+NmPasien.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Alamat</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Alamat.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Jenis Kelamin</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Jk.getText().replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+TempatLahir.getText()+" "+TanggalLahir.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Ibu Kandung</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+IbuKandung.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Golongan Darah</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+GD.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Status Nikah</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+StatusNikah.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Agama</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Agama.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Pendidikan.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Bahasa Dipakai</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+Bahasa.getText()+"</td>"+
+                                                               "</tr>"+
+                                                               "<tr class='isi'>"+ 
+                                                                 "<td valign='top' width='20%'>Cacat Fisik</td>"+
+                                                                 "<td valign='top' width='1%' align='center'>:</td>"+
+                                                                 "<td valign='top' width='79%'>"+CacatFisik.getText()+"</td>"+
+                                                               "</tr>"+
+                                                            "</table>"            
+                                              ).
+                                              replaceAll((getClass().getResource("/picture/"))+"","./gambar/"), pdf
+                                    );
+                                    System.out.println("Membuat File RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf untuk dikirim ke server");
+                                    File f = new File("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");   
+                                    sftpChannel.put("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf","RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                    try {
+                                        authStr = koneksiDB.USERNAMEAPIESIGN()+":"+koneksiDB.PASSAPIESIGN();
+                                        base64Creds = Base64.getEncoder().encodeToString(authStr.getBytes());
+                                        headers = new HttpHeaders();
+                                        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+                                        headers.add("Authorization", "Basic " + base64Creds);
+                                        map= new LinkedMultiValueMap<>();
+                                        /*try (FileInputStream imageInFile = new FileInputStream(f)) {
+                                            byte fileData[] = new byte[(int) f.length()];
+                                            imageInFile.read(fileData);
+                                            file=Base64.getEncoder().encodeToString(fileData);
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File tidak ketemu : " + e);
+                                        } catch (IOException ioe) {
+                                            System.out.println("Error " + ioe);
+                                        }*/
+                                        //FileSystemResource resource = new FileSystemResource(f.getAbsoluteFile());
+                                        map.add("file",koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        map.add("nik",Sequel.cariIsi("select pegawai.no_ktp from pegawai where pegawai.nik=?",akses.getkode()));
+                                        map.add("passphrase",Phrase.getText());
+                                        map.add("tampilan","visible");
+                                        map.add("image","false");
+                                        map.add("linkQR",koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        map.add("width","90");
+                                        map.add("height","90");
+                                        map.add("tag_koordinat","#");
+                                        requestEntity = new HttpEntity<>(map, headers);
+                                        System.out.println("URL E-Sign : "+koneksiDB.URLAPIESIGN());
+                                        System.out.println("linkQR : "+koneksiDB.URLAKSESFILEESIGN()+"/RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        RestTemplate rest=getRest();
+                                        rest.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+                                        rest.getMessageConverters().add(new StringHttpMessageConverter());
+                                        rest.getMessageConverters().add(new ResourceHttpMessageConverter());
+                                        ResponseEntity<byte[]> respon;
+                                        respon=rest.exchange(koneksiDB.URLAPIESIGN(),HttpMethod.POST,requestEntity,byte[].class);
+                                        if (respon.getStatusCode().equals(HttpStatus.OK)) {
+
+                                        }
+                                        //ResponseEntity<byte[]> result = getRest().exchange(koneksiDB.URLAPIESIGN(),HttpMethod.POST, requestEntity, byte[].class);
+                                        //f.delete();
+                                        //FileOutputStream fileOutputStream = new FileOutputStream("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        //org.apache.commons.io.IOUtils.write(result.getBody(), fileOutputStream);
+                                    }catch (Exception ex) {
+                                        //sftpChannel.rm("RPP"+NoRawat.getText().trim().replaceAll("/","")+".pdf");
+                                        System.out.println("Notifikasi Bridging : "+ex);
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        System.out.println("SFTP gagal terkoneksi\n");
+                    }
+                    sftpChannel.disconnect();
+                }else{
+                    System.out.println("Session gagal terkoneksi\n");
+                }
+                session.disconnect();
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } 
+        }
+    }//GEN-LAST:event_BtnSimpanTandaTanganActionPerformed
 
     /**
     * @param args the command line arguments
@@ -2714,9 +3352,11 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox Alamat;
     private widget.TextBox Bahasa;
     private widget.Button BtnCari1;
+    private widget.Button BtnClosePhrase;
     private widget.Button BtnKeluar;
     private widget.Button BtnPasien;
     private widget.Button BtnPrint;
+    private widget.Button BtnSimpanTandaTangan;
     private widget.TextBox CacatFisik;
     private widget.CekBox ChkAccor;
     private widget.CekBox ChkInput;
@@ -2733,6 +3373,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.editorpane LoadHTMLSOAPI;
     private widget.editorpane LoadHTMLTindakanLab;
     private widget.editorpane LoadHTMLTindakanRadiologi;
+    private javax.swing.JMenuItem MnGeneratePDF;
+    private javax.swing.JMenuItem MnGeneratePDFESign;
     private widget.TextBox NmPasien;
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
@@ -2740,6 +3382,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.JPanel PanelInput;
     private widget.TextBox Pekerjaan;
     private widget.TextBox Pendidikan;
+    private widget.TextBox Phrase;
     private widget.RadioButton R1;
     private widget.RadioButton R2;
     private widget.RadioButton R3;
@@ -2761,6 +3404,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox TempatLahir;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
+    private javax.swing.JDialog WindowPhrase;
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.CekBox chkAsuhanFisioterapi;
     private widget.CekBox chkAsuhanGizi;
@@ -2826,6 +3470,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkCatatanObservasiRanap;
     private widget.CekBox chkCatatanObservasiRanapKebidanan;
     private widget.CekBox chkCatatanObservasiRanapPostPartum;
+    private widget.CekBox chkCatatanObservasiRestrainNonFarmakologi;
     private widget.CekBox chkCatatanPersalinan;
     private widget.CekBox chkChecklistKriteriaKeluarHCU;
     private widget.CekBox chkChecklistKriteriaKeluarICU;
@@ -2912,6 +3557,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkUjiFungsiKFR;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
+    private widget.InternalFrame internalFrame8;
+    private widget.Label jLabel39;
+    private widget.Label jLabel42;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label17;
     private widget.Label label18;
     private widget.Label label19;
@@ -2926,6 +3575,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.Label label28;
     private widget.Label label29;
     private widget.panelisi panelGlass5;
+    private widget.panelisi panelisi5;
     private widget.Table tbRegistrasi;
     // End of variables declaration//GEN-END:variables
 
@@ -4325,10 +4975,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                 w=1;
                                 while(rs2.next()){
                                     htmlContent.append(
-                                         "<tr>"+
+                                         "<tr height='"+internalFrame2.getHeight()+"px'>"+
                                             "<td valign='top' align='center'>"+w+"</td>"+
                                             "<td valign='top'>"+rs2.getString("tgl_periksa")+" "+rs2.getString("jam")+"</td>"+
-                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='100%' height='100%'/></a></td>"+
+                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='99%'/></a></td>"+
                                          "</tr>"); 
                                     w++;
                                 }
@@ -5144,72 +5794,125 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     }
                     
                     if(R4.isSelected()==true){
-                        if(rs.getString("status_lanjut").equals("Ralan")){
-                            get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs.getString("kd_dokter").replace(" ","_"));
-                            http.executeMethod(get);
+                        if(esign==false){
+                            if(rs.getString("status_lanjut").equals("Ralan")){
+                                get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs.getString("kd_dokter").replace(" ","_"));
+                                http.executeMethod(get);
 
-                            htmlContent.append(
-                                "<tr class='isi'>"+ 
-                                   "<td valign='top' width='2%'></td>"+        
-                                   "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
-                                   "<td valign='middle' width='1%' align='center'>:</td>"+
-                                   "<td valign='middle' width='79%' align='center'>Dokter Poli<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs.getString("kd_dokter")+".png'/><br>"+rs.getString("nm_dokter")+"</td>"+
-                                "</tr>"
-                            );
-                        }else if(rs.getString("status_lanjut").equals("Ranap")){
-                            try{
-                                rs3=koneksi.prepareStatement(
-                                    "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){
-                                    htmlContent.append(
-                                        "<tr class='isi'>"+ 
-                                          "<td valign='top' width='2%'></td>"+        
-                                          "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
-                                          "<td valign='middle' width='1%' align='center'>:</td>"+
-                                          "<td valign='top' width='79%' align='center'>"+
-                                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                 "<tr class='isi'>"
-                                      );
-                                      rs3.beforeFirst();
-                                      urutdpjp=1;
-                                      while(rs3.next()){
-                                          get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs3.getString("kd_dokter").replace(" ","_"));
-                                          http.executeMethod(get);
-                                          htmlContent.append("<td border='0' align='center'>Dokter DPJP "+urutdpjp+"<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs3.getString("kd_dokter")+".png'/><br>"+rs3.getString("nm_dokter")+"</td>");
-                                          urutdpjp++;
-                                      }
-                                      htmlContent.append(
-                                                  "</tr>"+
-                                              "</table>"+
-                                          "</td>"+
-                                        "</tr>"
-                                      );    
-                                }else{
-                                    get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs.getString("kd_dokter").replace(" ","_"));
-                                    http.executeMethod(get);
+                                htmlContent.append(
+                                    "<tr class='isi'>"+ 
+                                       "<td valign='top' width='2%'></td>"+        
+                                       "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
+                                       "<td valign='middle' width='1%' align='center'>:</td>"+
+                                       "<td valign='middle' width='79%' align='center'>Dokter Poli<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs.getString("kd_dokter")+".png'/><br>"+rs.getString("nm_dokter")+"</td>"+
+                                    "</tr>"
+                                );
+                            }else if(rs.getString("status_lanjut").equals("Ranap")){
+                                try{
+                                    rs3=koneksi.prepareStatement(
+                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                    if(rs3.next()){
+                                        htmlContent.append(
+                                            "<tr class='isi'>"+ 
+                                              "<td valign='top' width='2%'></td>"+        
+                                              "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
+                                              "<td valign='middle' width='1%' align='center'>:</td>"+
+                                              "<td valign='top' width='79%' align='center'>"+
+                                                  "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                     "<tr class='isi'>"
+                                          );
+                                          rs3.beforeFirst();
+                                          urutdpjp=1;
+                                          while(rs3.next()){
+                                              get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs3.getString("kd_dokter").replace(" ","_"));
+                                              http.executeMethod(get);
+                                              htmlContent.append("<td border='0' align='center'>Dokter DPJP "+urutdpjp+"<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs3.getString("kd_dokter")+".png'/><br>"+rs3.getString("nm_dokter")+"</td>");
+                                              urutdpjp++;
+                                          }
+                                          htmlContent.append(
+                                                      "</tr>"+
+                                                  "</table>"+
+                                              "</td>"+
+                                            "</tr>"
+                                          );    
+                                    }else{
+                                        get = new GetMethod("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/generateqrcode.php?kodedokter="+rs.getString("kd_dokter").replace(" ","_"));
+                                        http.executeMethod(get);
 
+                                        htmlContent.append(
+                                            "<tr class='isi'>"+ 
+                                               "<td valign='top' width='2%'></td>"+        
+                                               "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
+                                               "<td valign='middle' width='1%' align='center'>:</td>"+
+                                               "<td valign='middle' width='79%' align='center'>Dokter DPJP<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs.getString("kd_dokter")+".png'/><br>"+rs.getString("nm_dokter")+"</td>"+
+                                            "</tr>"
+                                        );
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Tanda Tangan IGD : "+e);
+                                } finally{
+                                    if(rs3!=null){
+                                        rs3.close();
+                                    }
+                                }
+                            }
+                        }else if(esign==true){
+                            if(rs.getString("status_lanjut").equals("Ralan")){
+                                if(akses.getkode().equals(rs.getString("kd_dokter"))){
                                     htmlContent.append(
                                         "<tr class='isi'>"+ 
                                            "<td valign='top' width='2%'></td>"+        
                                            "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
                                            "<td valign='middle' width='1%' align='center'>:</td>"+
-                                           "<td valign='middle' width='79%' align='center'>Dokter DPJP<br><img width='90' height='90' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penggajian/temp/"+rs.getString("kd_dokter")+".png'/><br>"+rs.getString("nm_dokter")+"</td>"+
+                                           "<td valign='middle' width='79%' align='center'>Dokter Poli<br><br><br><br><br><br>#<br><br><br><br><br><br>"+rs.getString("nm_dokter")+"</td>"+
                                         "</tr>"
                                     );
+                                }else{
+                                    esign=false;
+                                    JOptionPane.showMessageDialog(null,"Harus dilakukan oleh Dokter Poli yang menangani pasien...!!!!");
                                 }
-                            } catch (Exception e) {
-                                System.out.println("Tanda Tangan IGD : "+e);
-                            } finally{
-                                if(rs3!=null){
-                                    rs3.close();
+                            }else if(rs.getString("status_lanjut").equals("Ranap")){
+                                try{
+                                    rs3=koneksi.prepareStatement(
+                                        "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' and dpjp_ranap.kd_dokter='"+akses.getkode()+"'").executeQuery();
+                                    if(rs3.next()){
+                                        htmlContent.append(
+                                            "<tr class='isi'>"+ 
+                                               "<td valign='top' width='2%'></td>"+        
+                                               "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
+                                               "<td valign='middle' width='1%' align='center'>:</td>"+
+                                               "<td valign='middle' width='79%' align='center'>Dokter DPJP<br><br><br><br><br><br>#<br><br><br><br><br><br>"+rs3.getString("nm_dokter")+"</td>"+
+                                            "</tr>"
+                                        );
+                                    }else{
+                                        if(akses.getkode().equals(rs.getString("kd_dokter"))){
+                                            htmlContent.append(
+                                                "<tr class='isi'>"+ 
+                                                   "<td valign='top' width='2%'></td>"+        
+                                                   "<td valign='middle' width='18%'>Tanda Tangan/Verifikasi</td>"+
+                                                   "<td valign='middle' width='1%' align='center'>:</td>"+
+                                                   "<td valign='middle' width='79%' align='center'>Dokter DPJP<br><br><br><br><br><br>#<br><br><br><br><br><br>"+rs.getString("nm_dokter")+"</td>"+
+                                                "</tr>"
+                                            );
+                                        }else{
+                                            esign=false;
+                                            JOptionPane.showMessageDialog(null,"Harus dilakukan oleh Dokter DPJP yang menangani pasien...!!!!");
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Tanda Tangan IGD : "+e);
+                                } finally{
+                                    if(rs3!=null){
+                                        rs3.close();
+                                    }
                                 }
                             }
                         }
                     }
+                    
                     htmlContent.append(
                         "<tr class='isi'><td></td><td colspan='3' align='right'>&nbsp;</tr>"
                     );
-                    
                 }
                 
                 LoadHTMLRiwayatPerawatan.setText(
@@ -6979,6 +7682,23 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                  teks.replaceAll("<head>","<head><link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\" />").
                       replaceAll("<body>",
                                  "<body>"+
+                                    "<table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>" +
+                                        "<tr>" +
+                                            "<td width='15%' border='0'>" +
+                                                "<img width='50' height='50' src='data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(Sequel.cariGambar("select setting.logo from setting").readAllBytes())+"'/>" +
+                                            "</td>" +
+                                            "<td width='85%' border='0'>" +
+                                                "<center>" +
+                                                    "<font color='000000' size='3'  face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    "<font color='000000' size='1'  face='Tahoma'>"+
+                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br/>" +
+                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+
+                                                        "<br>RIWAYAT PERAWATAN" +
+                                                    "</font> " +
+                                                "</center>" +
+                                            "</td>" +
+                                        "</tr>" +
+                                    "</table><br>"+
                                     "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                        "<tr class='isi'>"+ 
                                          "<td valign='top' width='20%'>No.RM</td>"+
@@ -15309,6 +16029,78 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' align='center'>"+rs2.getString("kontraksi")+"</td>"+
                                     "<td valign='top' colspan='2'>"+rs2.getString("perdarahan")+"</td>"+
                                     "<td valign='top' colspan='2'>"+rs2.getString("keterangan")+"</td>"+
+                                 "</tr>"
+                            );                                        
+                            w++;
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+            
+            //menampilkan catatan observasi restrain non farmakologi
+            if(chkCatatanObservasiRestrainNonFarmakologi.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select catatan_observasi_restrain_nonfarma.tgl_perawatan,catatan_observasi_restrain_nonfarma.jam_rawat,"+
+                            "catatan_observasi_restrain_nonfarma.tangan_kiri,catatan_observasi_restrain_nonfarma.tangan_kanan,catatan_observasi_restrain_nonfarma.kaki_kiri,"+
+                            "catatan_observasi_restrain_nonfarma.kaki_kanan,catatan_observasi_restrain_nonfarma.badan,catatan_observasi_restrain_nonfarma.edema,"+
+                            "catatan_observasi_restrain_nonfarma.iritasi,catatan_observasi_restrain_nonfarma.sirkulasi,catatan_observasi_restrain_nonfarma.kondisi_keterangan,"+
+                            "catatan_observasi_restrain_nonfarma.nip,petugas.nama from catatan_observasi_restrain_nonfarma inner join petugas on catatan_observasi_restrain_nonfarma.nip=petugas.nip "+
+                            "where catatan_observasi_restrain_nonfarma.no_rawat='"+norawat+"' order by catatan_observasi_restrain_nonfarma.tgl_perawatan,catatan_observasi_restrain_nonfarma.jam_rawat").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Catatan Observasi Restrain Nonfarmakologi</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                 "<tr align='center'>"+
+                                    "<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>"+
+                                    "<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>"+
+                                    "<td valign='middle' width='23%' bgcolor='#FFFAF8' colspan='5'>Lokasi Pemasangan Restarin</td>"+
+                                    "<td valign='middle' width='17%' bgcolor='#FFFAF8' colspan='3'>Observasi Lokasi Pemasangan</td>"+
+                                    "<td valign='middle' width='20%' bgcolor='#FFFAF8' rowspan='2'>Kondisi</td>"+
+                                    "<td valign='middle' width='21%' bgcolor='#FFFAF8' rowspan='2'>Petugas</td>"+
+                                 "</tr>"+
+                                 "<tr align='center'>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Tangan Kiri</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Tangan Kanan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Badan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Kaki Kiri</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Kaki Kanan</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Edema</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Iritasi</td>"+
+                                    "<td valign='middle' bgcolor='#FFFAF8'>Sirkulasi</td>"+
+                                 "</tr>"
+                        );
+                        rs2.beforeFirst();
+                        w=1;
+                        while(rs2.next()){
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top' align='center' rowspan='3'>"+w+"</td>"+
+                                    "<td valign='top' rowspan='3'>"+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("tangan_kiri")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("tangan_kanan")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("badan")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("kaki_kiri")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("kaki_kanan")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("edema")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("iritasi")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("sirkulasi")+"</td>"+
+                                    "<td valign='top' align='center'>"+rs2.getString("kondisi_keterangan")+"</td>"+
+                                    "<td valign='top' rowspan='3'>"+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
                                  "</tr>"
                             );                                        
                             w++;
@@ -28730,5 +29522,22 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         } catch (Exception e) {
             System.out.println("Notif Asuhan Keperawatan Ranap Bayi : "+e);
         }
+    }
+    
+    public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
+        sslContext = SSLContext.getInstance("SSL");
+        TrustManager[] trustManagers= {
+            new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {return null;}
+                public void checkServerTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
+                public void checkClientTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
+            }
+        };
+        sslContext.init(null,trustManagers , new SecureRandom());
+        sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        scheme=new Scheme("https",443,sslFactory);
+        factory=new HttpComponentsClientHttpRequestFactory();
+        factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
+        return new RestTemplate(factory);
     }
 }

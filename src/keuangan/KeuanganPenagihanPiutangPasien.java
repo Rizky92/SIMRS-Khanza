@@ -307,6 +307,22 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         }); 
 
+        Diskon.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+        });
     }
     
 
@@ -922,11 +938,6 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Diskon.setToolTipText("");
         Diskon.setName("Diskon"); // NOI18N
         Diskon.setPreferredSize(new java.awt.Dimension(207, 23));
-        Diskon.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DiskonKeyPressed(evt);
-            }
-        });
         panelisi1.add(Diskon);
         Diskon.setBounds(396, 40, 60, 23);
 
@@ -1578,23 +1589,6 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppBersihkanActionPerformed
-
-    private void DiskonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiskonKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (Valid.setAngkaSmc(Diskon.getText()) > 100) {
-                JOptionPane.showMessageDialog(null, "Maaf, diskon piutang maksimal yaitu 100%");
-                Diskon.setText("0");
-                Diskon.requestFocus();
-            } else {
-                TotalPenagihan.setText(
-                    Valid.SetAngka(
-                        Valid.setAngkaSmc(LCountDipilih2.getText().replaceAll(",", ""))
-                        - (Valid.setAngkaSmc(LCountDipilih2.getText().replaceAll(",", "")) * (Valid.setAngkaSmc(Diskon.getText()) / 100))
-                    )
-                );
-            }
-        }
-    }//GEN-LAST:event_DiskonKeyPressed
 
     /**
     * @param args the command line arguments
@@ -2328,6 +2322,21 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 Valid.MyReportqry("rptKwitansiPenagihanPiutang.jasper","report","::[ Kwitansi Penagihan Piutang ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 this.setCursor(Cursor.getDefaultCursor());
             }
+        }
+    }
+    
+    private void cekDiskon() {
+        if (Valid.setAngkaSmc(Diskon.getText()) > 100) {
+            JOptionPane.showMessageDialog(null, "Maaf, diskon piutang maksimal yaitu 100%");
+            Diskon.setText("0");
+            Diskon.requestFocus();
+        } else {
+            TotalPenagihan.setText(
+                Valid.SetAngka(
+                    Valid.setAngkaSmc(LCountDipilih2.getText().replaceAll(",", ""))
+                    - (Valid.setAngkaSmc(LCountDipilih2.getText().replaceAll(",", "")) * (Valid.setAngkaSmc(Diskon.getText()) / 100))
+                )
+            );
         }
     }
 }

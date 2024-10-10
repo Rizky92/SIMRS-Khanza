@@ -125,7 +125,7 @@
                 <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
                 <input type="hidden" name="jk" value="<?= $jk ?>">
                 <input type="hidden" name="codernik" value="<?= $codernik ?>">
-                <?php if (substr($isError, 0, 1) === 'X'): ?>
+                <?php if (substr($isError ?? '', 0, 1) === 'X'): ?>
                     <div class="center" style="margin-left: 0.7rem">
                         <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR: <?= $pesanError ?></span>
                     </div>
