@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
@@ -33,6 +34,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -685,7 +688,9 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                                 tbObat.setValueAt(false,i,0);
                             }
                         }
-                    }catch(Exception e){
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
+                    } catch (Exception e) {
                         System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
@@ -778,6 +783,8 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                         json=api.getRest().exchange(link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
