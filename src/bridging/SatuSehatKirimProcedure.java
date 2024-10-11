@@ -638,7 +638,7 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
                             }
                         }
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
@@ -717,7 +717,7 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
-                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
