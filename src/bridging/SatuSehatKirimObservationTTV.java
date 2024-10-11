@@ -33,6 +33,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -2187,6 +2189,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbSuhu.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2271,6 +2275,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbRespirasi.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2355,6 +2361,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbNadi.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2439,6 +2447,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbSpO2.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2522,6 +2532,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbGCS.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2603,6 +2615,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbKesadaran.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2735,6 +2749,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbTensi.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2819,6 +2835,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbTB.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2903,6 +2921,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbBB.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2987,6 +3007,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbLP.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3161,6 +3183,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSuhu.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3237,6 +3261,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbRespirasi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3313,6 +3339,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbNadi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3389,6 +3417,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSpO2.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3464,6 +3494,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbGCS.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3537,6 +3569,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbKesadaran.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3644,6 +3678,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTensi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3720,6 +3756,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTB.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3796,6 +3834,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbBB.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3872,6 +3912,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbLP.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }

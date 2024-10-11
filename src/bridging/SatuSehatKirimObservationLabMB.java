@@ -33,6 +33,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -680,6 +682,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                 tbObat.setValueAt(false,i,0);
                             }
                         }
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
@@ -774,6 +778,8 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                         json=api.getRest().exchange(link+"/Observation/"+tbObat.getValueAt(i,18).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON" + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
