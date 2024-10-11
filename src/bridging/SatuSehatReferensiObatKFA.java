@@ -16,8 +16,6 @@ import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import org.springframework.http.HttpEntity;
@@ -32,17 +30,15 @@ import org.springframework.http.MediaType;
 public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final ApiSatuSehat api = new ApiSatuSehat();
     private int i = 0, page = 1;
     private String link = "", json = "";
-    private ApiSatuSehat api = new ApiSatuSehat();
     private HttpHeaders headers;
     private HttpEntity requestEntity;
-    private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
-
     private String lastKeyword = "", lastProductType = "farmasi";
-    private List<String> codeKFALists = new ArrayList<>();
 
     /**
      * Creates new form DlgKamar
@@ -57,9 +53,8 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         setSize(628, 674);
 
         tabMode = new DefaultTableModel(null, new String[] {
-            "KFA Code", "KFA System", "KFA Display", "Form Code", "Form System",
-            "Form Display", "Num. Code", "Num. System", "Denom. Code",
-            "Denom. System", "Route Code", "Route System", "Route Display"
+            "KFA Code", "KFA Display", "Aktif?", "Status", "Tipe Produk",
+            "Form Code", "Form Display", "Generic?", "Satuan Barang"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -74,34 +69,35 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         TableColumn column;
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < 9; i++) {
             column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
+                // KFA Code
                 column.setPreferredWidth(80);
             } else if (i == 1) {
-                column.setPreferredWidth(160);
-            } else if (i == 2) {
+                // KFA Display
                 column.setPreferredWidth(380);
-            } else if (i == 3) {
+            } else if (i == 2) {
+                // Aktif?
                 column.setPreferredWidth(65);
-            } else if (i == 4) {
-                column.setPreferredWidth(210);
-            } else if (i == 5) {
+            } else if (i == 3) {
+                // Status
                 column.setPreferredWidth(80);
-            } else if (i == 6) {
-                column.setPreferredWidth(70);
-            } else if (i == 7) {
-                column.setPreferredWidth(130);
-            } else if (i == 8) {
-                column.setPreferredWidth(70);
-            } else if (i == 9) {
-                column.setPreferredWidth(100);
-            } else if (i == 10) {
-                column.setPreferredWidth(70);
-            } else if (i == 11) {
+            } else if (i == 4) {
+                // Tipe Produk
                 column.setPreferredWidth(110);
-            } else if (i == 12) {
+            } else if (i == 5) {
+                // Form Code
+                column.setPreferredWidth(70);
+            } else if (i == 6) {
+                // Form Name
                 column.setPreferredWidth(100);
+            } else if (i == 7) {
+                // Generik?
+                column.setPreferredWidth(70);
+            } else if (i == 8) {
+                // Dosis per satuan
+                column.setPreferredWidth(150);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -324,6 +320,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
 
     private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
         page++;
+        tampil();
     }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
     private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
@@ -383,13 +380,11 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     private void getAllProducts() {
         if (!TCari.getText().trim().equals(lastKeyword)) {
             lastKeyword = TCari.getText().trim();
-            codeKFALists.clear();
             page = 1;
         }
 
         if (!ProductType.getSelectedItem().toString().equals(lastProductType)) {
             lastProductType = ProductType.getSelectedItem().toString();
-            codeKFALists.clear();
             page = 1;
         }
         
@@ -412,51 +407,31 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
             root = mapper.readTree(json);
             System.out.println("Total : " + root.path("total").asText());
             System.out.println("Page : " + root.path("page").asText());
-            System.out.println("Size : " + root.path("page").asText());
+            System.out.println("Size : " + root.path("size").asText());
             response = root.path("items").path("data");
             if (response.isArray()) {
                 for (JsonNode obj : response) {
-                    if (obj.path("active").asBoolean() || obj.path("state").asText().equals("valid")) {
-                        codeKFALists.add(obj.path("kfa_code").asText());
-                    }
+                    tabMode.addRow(new String[] {
+                        obj.path("kfa_code").asText(),
+                        obj.path("name").asText(),
+                        obj.path("active").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
+                        obj.path("state").asText(),
+                        obj.path("farmalkes_type").path("group").asText(),
+                        obj.path("dosage_form").path("code").asText(),
+                        obj.path("dosage_form").path("name").asText(),
+                        obj.path("generik").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
+                        obj.path("dose_per_unit").asText() + " " + obj.path("uom").path("name").asText()
+                    });
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        getEachProductsDetail();
     }
 
-    private void getEachProductsDetail() {
-        if (codeKFALists.isEmpty()) {
-            return;
-        }
-        try {
-            for (String kfaCode : codeKFALists) {
-                headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
-                headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
-                requestEntity = new HttpEntity(headers);
-                link = koneksiDB.URLKFAV2SATUSEHAT() + "/products?identifier=kfa&code=" + kfaCode;
-                json = api.getRest().exchange(link, HttpMethod.GET, requestEntity, String.class).getBody();
-                root = mapper.readTree(json);
-                response = root.path("result");
-                tabMode.addRow(new String[] {
-                    kfaCode, "http://sys-ids.kemkes.go.id/kfa", response.path("name").asText(),
-                    response.path("dosage_form").path("code").asText(), "http://terminology.kemkes.go.id/CodeSystem/medication-form",
-                    response.path("dosage_form").path("name").asText(), response.path("ucum").path("cs_code").asText(),
-                    "http://unitsofmeasure.org", "-", "-", response.path("rute_pemberian").path("code").asText(),
-                    "http://www.whocc.no/atc", response.path("rute_pemberian").path("name").asText()
-                });
-            }
-        } catch (Exception e) {
-            System.out.println("Notif detail : " + e);
-        }
-    }
-
-    private void emptTeks() {
+    public void emptTeks() {
         TCari.setText("");
+        lastKeyword = "";
         page = 1;
     }
 }

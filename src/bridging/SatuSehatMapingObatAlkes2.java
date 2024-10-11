@@ -4,6 +4,8 @@
  */
 package bridging;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -27,6 +29,10 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -34,14 +40,19 @@ import javax.swing.table.TableColumn;
  */
 public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private sekuel Sequel = new sekuel();
-    private validasi Valid = new validasi();
-    private Connection koneksi = koneksiDB.condb();
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
+    private final DlgBarang barang = new DlgBarang(null, false);
+    private final SatuSehatReferensiObatKFA referensi = new SatuSehatReferensiObatKFA(null, false);
+    private final ApiSatuSehat api = new ApiSatuSehat();
+    private final ObjectMapper mapper = new ObjectMapper();
+    private HttpHeaders headers;
+    private HttpEntity requestEntity;
+    private JsonNode root;
+    private JsonNode response;
     private int i = 0;
-    private DlgBarang barang = new DlgBarang(null, false);
-    private SatuSehatReferensiObatKFA referensi = new SatuSehatReferensiObatKFA(null, false);
+    private String link = "", json = "";
 
     /**
      * Creates new form DlgJnsPerawatanRalan
@@ -136,7 +147,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         KFACode.setDocument(new batasInput((byte) 15).getKata(KFACode));
         KodeBarang.setDocument(new batasInput((byte) 15).getKata(KodeBarang));
         KFASystem.setDocument(new batasInput((byte) 100).getKata(KFASystem));
-        KFADisplay.setDocument(new batasInput((byte) 500).getKata(KFADisplay));
         FormCode.setDocument(new batasInput((byte) 30).getKata(FormCode));
         FormSystem.setDocument(new batasInput((byte) 100).getKata(FormSystem));
         FormDisplay.setDocument(new batasInput((byte) 80).getKata(FormDisplay));
@@ -146,7 +156,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         DenominatorSystem.setDocument(new batasInput((byte) 80).getKata(DenominatorSystem));
         RouteCode.setDocument(new batasInput((byte) 30).getKata(RouteCode));
         RouteSystem.setDocument(new batasInput((byte) 100).getKata(RouteSystem));
-        RouteDisplay.setDocument(new batasInput((byte) 80).getKata(RouteDisplay));
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
@@ -200,19 +209,35 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (referensi.getTable().getSelectedRow() != -1) {
-                    KFACode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 0).toString());
-                    KFASystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 1).toString());
-                    KFADisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 2).toString());
-                    FormCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 3).toString());
-                    FormSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 4).toString());
-                    FormDisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 5).toString());
-                    NumeratorCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 6).toString());
-                    NumeratorSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 7).toString());
-                    DenominatorCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 8).toString());
-                    DenominatorSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 9).toString());
-                    RouteCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 10).toString());
-                    RouteSystem.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 11).toString());
-                    RouteDisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 12).toString());
+                    link = koneksiDB.URLKFAV2SATUSEHAT() + "/products?identifier=kfa&code=" + referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 0).toString();
+                    try {
+                        headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
+                        requestEntity = new HttpEntity(headers);
+                        json = api.getRest().exchange(link, HttpMethod.GET, requestEntity, String.class).getBody();
+                        root = mapper.readTree(json).path("result");
+                        System.out.println("URL : " + link);
+                        System.out.println("Response : " + root);
+                        if (root.isObject()) {
+                            KFACode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 0).toString());
+                            KFASystem.setText("http://sys-ids.kemkes.go.id/kfa");
+                            KFADisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 1).toString());
+                            FormCode.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 5).toString());
+                            FormSystem.setText("http://terminology.kemkes.go.id/CodeSystem/medication-form");
+                            FormDisplay.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(), 6).toString());
+                            NumeratorCode.setText(root.path("ucum").path("cs_code").asText());
+                            NumeratorSystem.setText("http://unitsofmeasure.org");
+                            DenominatorCode.setText("");
+                            DenominatorSystem.setText("http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm");
+                            RouteCode.setText(root.path("rute_pemberian").path("code").asText());
+                            RouteSystem.setText("http://www.whocc.no/atc");
+                            RouteDisplay.setText(root.path("rute_pemberian").path("name").asText());
+                        }
+                    } catch (Exception x) {
+                        System.out.println("Notif : " + x);
+                    }
+                    
                 }
                 KFACode.requestFocus();
             }
@@ -655,7 +680,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(0, 130, 105, 23);
 
-        jLabel13.setText("Denomina Code :");
+        jLabel13.setText("Denominator Code :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 190, 105, 23);
@@ -1151,6 +1176,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
 
     private void btnCariKFAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariKFAActionPerformed
         akses.setform("SatuSehatMapingObatAlkes2");
+        referensi.emptTeks();
         referensi.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         referensi.setLocationRelativeTo(internalFrame1);
         referensi.setVisible(true);
