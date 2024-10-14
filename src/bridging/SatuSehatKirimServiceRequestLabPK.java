@@ -57,6 +57,7 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
     private StringBuilder htmlContent;    
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -655,7 +656,7 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
                                         "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
                                     "}," +
-                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"requester\": {" +
                                         "\"reference\": \"Practitioner/"+iddokter+"\"," +
                                         "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
@@ -766,7 +767,7 @@ public final class SatuSehatKirimServiceRequestLabPK extends javax.swing.JDialog
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"," +
                                         "\"display\": \"Permintaan "+tbObat.getValueAt(i,12).toString()+" atas nama pasien "+tbObat.getValueAt(i,3).toString()+" No.RM "+tbObat.getValueAt(i,2).toString()+" No.Rawat "+tbObat.getValueAt(i,1).toString()+", pada tanggal "+tbObat.getValueAt(i,10).toString()+"\"" +
                                     "}," +
-                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"authoredOn\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"requester\": {" +
                                         "\"reference\": \"Practitioner/"+iddokter+"\"," +
                                         "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +

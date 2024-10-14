@@ -57,6 +57,7 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
     private StringBuilder htmlContent;    
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -667,8 +668,8 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                     "\"encounter\": {" +
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
+                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"performer\": [" +
                                         "{" +
                                             "\"reference\": \"Practitioner/"+iddokter+"\"" +
@@ -783,8 +784,8 @@ public final class SatuSehatKirimDiagnosticReportRadiologi extends javax.swing.J
                                     "\"encounter\": {" +
                                         "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
+                                    "\"issued\": \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"performer\": [" +
                                         "{" +
                                             "\"reference\": \"Practitioner/"+iddokter+"\"" +

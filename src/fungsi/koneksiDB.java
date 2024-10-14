@@ -213,6 +213,16 @@ public class koneksiDB {
         }
     }
     
+    public static String TIMEZONESATUSEHAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("TIMEZONESATUSEHAT");
+        } catch (Exception e) {
+            // fallback default khanza
+            return "+07:00";
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

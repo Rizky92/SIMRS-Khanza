@@ -57,6 +57,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
     private StringBuilder htmlContent;    
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -664,7 +665,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                     "\"specimen\": {" +
                                         "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                "}";
                         System.out.println("URL : "+link+"/Observation");
@@ -770,7 +771,7 @@ public final class SatuSehatKirimObservationLabMB extends javax.swing.JDialog {
                                     "\"specimen\": {" +
                                         "\"reference\": \"Specimen/"+tbObat.getValueAt(i,13).toString()+"\"" +
                                     "}," +
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"," +
                                     "\"valueString\": \""+tbObat.getValueAt(i,11).toString().replaceAll("(\r|\r||\r)","<br>").replaceAll("\t", " ")+"\"" +
                                "}";
                         System.out.println("URL : "+link+"/Observation/"+tbObat.getValueAt(i,18).toString());

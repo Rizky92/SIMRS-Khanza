@@ -57,6 +57,7 @@ public final class SatuSehatKirimDiet extends javax.swing.JDialog {
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
     private StringBuilder htmlContent;    
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -744,7 +745,7 @@ public final class SatuSehatKirimDiet extends javax.swing.JDialog {
                                         "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
                                         "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
                                     "}," +
-                                    "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\" ," +
+                                    "\"date\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\" ," +
                                     "\"author\" : [" +
                                         "{" +
                                             "\"reference\" : \"Practitioner/"+idpraktisi+"\" ," +

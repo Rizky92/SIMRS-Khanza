@@ -57,6 +57,7 @@ public final class SatuSehatKirimSpecimenLabPK extends javax.swing.JDialog {
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
     private StringBuilder htmlContent;    
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -619,7 +620,7 @@ public final class SatuSehatKirimSpecimenLabPK extends javax.swing.JDialog {
                                             "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
                                         "}" +
                                     "]," +
-                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"" +
                                 "}";
                         System.out.println("URL : "+link+"/Specimen");
                         System.out.println("Request JSON : "+json);
@@ -701,7 +702,7 @@ public final class SatuSehatKirimSpecimenLabPK extends javax.swing.JDialog {
                                             "\"reference\": \"ServiceRequest/"+tbObat.getValueAt(i,11).toString()+"\"" +
                                         "}" +
                                     "]," +
-                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+"+07:00\"" +
+                                    "\"receivedTime\": \""+tbObat.getValueAt(i,6).toString().replaceAll(" ","T")+TIMEZONESATUSEHAT+"\"" +
                                 "}";
                         System.out.println("URL : "+link+"/Specimen/"+tbObat.getValueAt(i,13).toString());
                         System.out.println("Request JSON : "+json);

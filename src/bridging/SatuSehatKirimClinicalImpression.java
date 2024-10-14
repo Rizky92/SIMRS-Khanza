@@ -56,7 +56,8 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     private JsonNode root;
     private JsonNode response;
     private SatuSehatCekNIK cekViaSatuSehat=new SatuSehatCekNIK();  
-    private StringBuilder htmlContent;    
+    private StringBuilder htmlContent;  
+    private final String TIMEZONESATUSEHAT = koneksiDB.TIMEZONESATUSEHAT();
     
     /** Creates new form DlgKamar
      * @param parent
@@ -637,8 +638,8 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                                       "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
                                       "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
                                     "},"+
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+TIMEZONESATUSEHAT+"\"," +
+                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+TIMEZONESATUSEHAT+"\"," +
                                     "\"assessor\" : {"+
                                       "\"reference\" : \"Practitioner/"+iddokter+"\""+
                                     "},"+
@@ -741,8 +742,8 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                                       "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,9).toString()+"\","+
                                       "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
                                     "},"+
-                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
-                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+"+07:00\"," +
+                                    "\"effectiveDateTime\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+TIMEZONESATUSEHAT+"\"," +
+                                    "\"date\": \""+tbObat.getValueAt(i,14).toString()+"T"+tbObat.getValueAt(i,15).toString()+TIMEZONESATUSEHAT+"\"," +
                                     "\"assessor\" : {"+
                                       "\"reference\" : \"Practitioner/"+iddokter+"\""+
                                     "},"+
