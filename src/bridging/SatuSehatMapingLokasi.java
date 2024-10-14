@@ -33,6 +33,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import simrskhanza.DlgCariPoli;
 
 /**
@@ -2045,7 +2047,9 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
-                    } 
+                    }
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2166,6 +2170,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                     } 
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2284,6 +2290,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2405,6 +2413,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2526,6 +2536,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2647,6 +2659,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2768,6 +2782,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -2892,6 +2908,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping organisasi ke server Satu Sehat Kemenkes");
                     } 
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3037,6 +3055,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                     } 
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3145,6 +3165,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                     } 
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3262,6 +3284,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3378,6 +3402,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3494,6 +3520,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3610,6 +3638,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3726,6 +3756,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3834,6 +3866,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                     } 
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi Bridging : "+e);
                     JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -3975,6 +4009,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4102,6 +4138,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4225,6 +4263,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4348,6 +4388,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4471,6 +4513,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4594,6 +4638,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4717,6 +4763,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
@@ -4845,6 +4893,8 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
                         }else{
                             JOptionPane.showMessageDialog(null,"Gagal melakukan mapping lokasi ke server Satu Sehat Kemenkes");
                         } 
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                     }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                         JOptionPane.showMessageDialog(null,"Error Respon Satu Sehat Kemenkes : "+e);
