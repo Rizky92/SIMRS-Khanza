@@ -33,6 +33,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -208,6 +210,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppPilihSemua = new javax.swing.JMenuItem();
+        ppPilihBelumDikirim = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
@@ -248,6 +251,22 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
             }
         });
         jPopupMenu1.add(ppPilihSemua);
+
+        ppPilihBelumDikirim.setBackground(new java.awt.Color(255, 255, 254));
+        ppPilihBelumDikirim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPilihBelumDikirim.setForeground(new java.awt.Color(50, 50, 50));
+        ppPilihBelumDikirim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPilihBelumDikirim.setText("Pilih Belum Dikirim");
+        ppPilihBelumDikirim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPilihBelumDikirim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPilihBelumDikirim.setName("ppPilihBelumDikirim"); // NOI18N
+        ppPilihBelumDikirim.setPreferredSize(new java.awt.Dimension(150, 26));
+        ppPilihBelumDikirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPilihBelumDikirimActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPilihBelumDikirim);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -395,7 +414,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
         jLabel15.setPreferredSize(new java.awt.Dimension(85, 23));
         panelGlass9.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-06-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -408,7 +427,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass9.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-06-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -594,6 +613,14 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                    if (iddokter.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                        continue;
+                    }
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -659,7 +686,9 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                                 tbObat.setValueAt(false,i,0);
                             }
                         }
-                    }catch(Exception e){
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                    } catch (Exception e) {
                         System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
@@ -687,6 +716,14 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                 try {
                     iddokter=cekViaSatuSehat.tampilIDParktisi(tbObat.getValueAt(i,13).toString());
                     idpasien=cekViaSatuSehat.tampilIDPasien(tbObat.getValueAt(i,5).toString());
+                    if (iddokter.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                        continue;
+                    }
+                    if (idpasien.isBlank()) {
+                        System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                        continue;
+                    }
                     try{
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -744,7 +781,9 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                         json=api.getRest().exchange(link+"/ClinicalImpression/"+tbObat.getValueAt(i,19).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
-                    }catch(Exception e){
+                    } catch (HttpClientErrorException | HttpServerErrorException e) {
+                        System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+                    } catch (Exception e) {
                         System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
@@ -767,6 +806,14 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
+        for (i = 0; i < tbObat.getRowCount(); i++) {
+            if (tbObat.getValueAt(i, 19).toString().isBlank()) {
+                tbObat.setValueAt(true, i, 0);
+            }
+        }
+    }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
 
     /**
     * @param args the command line arguments
@@ -807,6 +854,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppPilihBelumDikirim;
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
@@ -905,7 +953,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         false,rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                        rs.getString("no_ktp"),rs.getString("stts"),"Ralan",rs.getString("pulang"),rs.getString("id_encounter"),rs.getString("keluhan")+", "+rs.getString("pemeriksaan"),rs.getString("penilaian"),
+                        rs.getString("no_ktp"),rs.getString("stts"),"Ranap",rs.getString("pulang"),rs.getString("id_encounter"),rs.getString("keluhan")+", "+rs.getString("pemeriksaan"),rs.getString("penilaian"),
                         rs.getString("nama"),rs.getString("ktppraktisi"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("kd_penyakit"),rs.getString("nm_penyakit"),rs.getString("id_condition"),
                         rs.getString("satu_sehat_clinicalimpression")
                     });
