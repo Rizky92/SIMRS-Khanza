@@ -1427,7 +1427,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         } else {
             hari = 1 + TimeUnit.DAYS.convert(TanggalAkhir.getDate().getTime() - TanggalAwal.getDate().getTime(), TimeUnit.MILLISECONDS);
         }
-        LamaSakit.setText(hari + " (" + Valid.capitalize(Valid.terbilangSmc(hari)) + ")");
+        LamaSakit.setText(hari + " (" + Valid.capitalizeSmc(Valid.terbilangSmc(hari)) + ")");
     }
     
     public String getBulanRomawi(int bulan) {

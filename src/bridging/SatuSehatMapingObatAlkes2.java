@@ -876,7 +876,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else if (RouteDisplay.getText().isBlank()) {
             Valid.textKosong(RouteDisplay, "Route Display");
         } else {
-            if (Sequel.menyimpantfSmc("satu_sehat_mapping_obat", null,
+            if (Sequel.menyimpantfNotifSmc("Data Obat", "satu_sehat_mapping_obat", null,
                 KodeBarang.getText(), KFACode.getText(), KFASystem.getText(), KFADisplay.getText(), FormCode.getText(), FormSystem.getText(),
                 FormDisplay.getText(), NumeratorCode.getText(), NumeratorSystem.getText(), DenominatorCode.getText(), DenominatorSystem.getText(),
                 RouteCode.getText(), RouteSystem.getText(), RouteDisplay.getText()

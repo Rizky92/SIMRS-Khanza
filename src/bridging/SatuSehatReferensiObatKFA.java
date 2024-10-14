@@ -16,12 +16,8 @@ import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
-import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -161,9 +157,13 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         setIconImages(null);
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new java.awt.BorderLayout());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Obat KFA V2 Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Praktisi Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
         internalFrame1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -178,7 +178,7 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
 
         panelGlass6.setName("panelGlass6"); // NOI18N
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelGlass6.setLayout(new java.awt.FlowLayout(0, 5, 9));
+        panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         jLabel7.setText("Product Type :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -333,6 +333,10 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnKeluar1KeyPressed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        TCari.requestFocus();
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -382,61 +386,54 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
     }
 
     private void getAllProducts() {
+        if (!TCari.getText().trim().equals(lastKeyword)) {
+            lastKeyword = TCari.getText().trim();
+            page = 1;
+        }
+
+        if (!ProductType.getSelectedItem().toString().equals(lastProductType)) {
+            lastProductType = ProductType.getSelectedItem().toString();
+            page = 1;
+        }
+        
+        if (page == 1) {
+            Valid.tabelKosong(tabMode);
+        }
+
+        link = koneksiDB.URLKFAV2SATUSEHAT() + "/products/all?page=" + page + "&size=" + LimitData.getSelectedItem().toString() + "&product_type=" + ProductType.getSelectedItem().toString();
+        if (!TCari.getText().isBlank()) {
+            link = link + "&keyword=" + TCari.getText().trim();
+        }
+
         try {
-            if (!TCari.getText().trim().equals(lastKeyword)) {
-                lastKeyword = TCari.getText().trim();
-                page = 1;
-            }
-            
-            if (!ProductType.getSelectedItem().toString().equals(lastProductType)) {
-                lastProductType = ProductType.getSelectedItem().toString();
-                page = 1;
-            }
-            
-            if (page == 1) {
-                Valid.tabelKosong(tabMode);
-            }
-            
-            URIBuilder url = new URIBuilder(koneksiDB.URLKFAV2SATUSEHAT() + "/products/all");
-            url.setParameter("page", String.valueOf(page));
-            url.setParameter("size", LimitData.getSelectedItem().toString());
-            url.setParameter("product_type", ProductType.getSelectedItem().toString());
-            if (!TCari.getText().isBlank()) {
-                url.setParameter("keyword", TCari.getText().trim());
-            }
-            
-            try {
-                headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
-                headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
-                requestEntity = new HttpEntity(headers);
-                json = api.getRest().exchange(url.build(), HttpMethod.GET, requestEntity, String.class).getBody();
-                
-                root = mapper.readTree(json);
-                System.out.println("Total : " + root.path("total").asText());
-                System.out.println("Page : " + root.path("page").asText());
-                System.out.println("Size : " + root.path("size").asText());
-                response = root.path("items").path("data");
-                if (response.isArray()) {
-                    for (JsonNode obj : response) {
-                        tabMode.addRow(new String[] {
-                            obj.path("kfa_code").asText(),
-                            obj.path("name").asText(),
-                            obj.path("active").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
-                            obj.path("state").asText(),
-                            obj.path("farmalkes_type").path("group").asText(),
-                            obj.path("dosage_form").path("code").asText(),
-                            obj.path("dosage_form").path("name").asText(),
-                            obj.path("generik").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
-                            obj.path("dose_per_unit").asText() + " " + obj.path("uom").path("name").asText()
-                        });
-                    }
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
+            requestEntity = new HttpEntity(headers);
+            json = api.getRest().exchange(link, HttpMethod.GET, requestEntity, String.class).getBody();
+
+            root = mapper.readTree(json);
+            System.out.println("Total : " + root.path("total").asText());
+            System.out.println("Page : " + root.path("page").asText());
+            System.out.println("Size : " + root.path("size").asText());
+            response = root.path("items").path("data");
+            if (response.isArray()) {
+                for (JsonNode obj : response) {
+                    tabMode.addRow(new String[] {
+                        obj.path("kfa_code").asText(),
+                        obj.path("name").asText(),
+                        obj.path("active").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
+                        obj.path("state").asText(),
+                        obj.path("farmalkes_type").path("group").asText(),
+                        obj.path("dosage_form").path("code").asText(),
+                        obj.path("dosage_form").path("name").asText(),
+                        obj.path("generik").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
+                        obj.path("dose_per_unit").asText() + " " + obj.path("uom").path("name").asText()
+                    });
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
             }
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(SatuSehatReferensiObatKFA.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 
