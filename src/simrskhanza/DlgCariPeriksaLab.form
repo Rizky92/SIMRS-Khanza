@@ -59,7 +59,7 @@
                 <Property name="text" type="java.lang.String" value="Model Paragraf"/>
                 <Property name="name" type="java.lang.String" value="MnCetakHasilLabSMCParagraf" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[100, 26]"/>
+                  <Dimension value="[180, 26]"/>
                 </Property>
               </Properties>
               <Events>

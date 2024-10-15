@@ -5091,6 +5091,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                     while(rs3.next()){
                                                         switch (rs3.getString("keterangan").toLowerCase()) {
                                                             case "l":
+                                                            case "kl":
                                                                 htmlContent.append(
                                                                     "<tr>"+
                                                                        "<td valign='top' align='center'></td>"+
@@ -5103,6 +5104,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                     "</tr>"); 
                                                                 break;
                                                             case "h":
+                                                            case "kh":
+                                                            case "tn":
                                                                 htmlContent.append(
                                                                     "<tr>"+
                                                                        "<td valign='top' align='center'></td>"+
@@ -6908,26 +6911,29 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                 while (rs3.next()) {
                                                     switch (rs3.getString("keterangan").toLowerCase()) {
                                                         case "l":
+                                                        case "kl":
                                                             htmlContent.append(
                                                                 "<tr>"
                                                                 + "<td valign='top' align='center'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#0000FF'>" + rs3.getString("nilai") + " " + rs3.getString("satuan") + "</td>"
-                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan") + "</td>"
+                                                                + "<td valign='top' style='color:#0000FF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
                                                             break;
                                                         case "h":
+                                                        case "kh":
+                                                        case "tn":
                                                             htmlContent.append(
                                                                 "<tr>"
                                                                 + "<td valign='top' align='center'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#FF0000'>" + rs3.getString("nilai") + " " + rs3.getString("satuan") + "</td>"
-                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan") + "</td>"
+                                                                + "<td valign='top' style='color:#FF0000'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
                                                             break;
@@ -6938,8 +6944,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top'><b>" + rs3.getString("nilai") + " " + rs3.getString("satuan") + "</bb></td>"
-                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan") + "</td>"
+                                                                + "<td valign='top'><b>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</bb></td>"
+                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
                                                             break;
@@ -6950,8 +6956,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top'>" + rs3.getString("nilai") + " " + rs3.getString("satuan") + "</td>"
-                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan") + "</td>"
+                                                                + "<td valign='top'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
                                                     }

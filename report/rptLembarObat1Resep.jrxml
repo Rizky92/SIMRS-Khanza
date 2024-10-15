@@ -100,14 +100,14 @@ where detail_pemberian_obat.tgl_perawatan=$P{tanggal} and detail_pemberian_obat.
 		</band>
 	</detail>
 	<summary>
-		<band height="13" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="Rp #,##0.00">
 				<reportElement mode="Transparent" x="220" y="1" width="57" height="10" uuid="eff0167a-f596-4ca2-87b6-32e3b117aa05"/>
 				<textElement textAlignment="Right">
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[java.lang.Math.round($V{total}*0.11)]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="16" y="1" width="57" height="10" uuid="1b07f8e9-9e61-44f8-8606-6259825db684"/>
@@ -115,8 +115,24 @@ where detail_pemberian_obat.tgl_perawatan=$P{tanggal} and detail_pemberian_obat.
 					<font fontName="Tahoma" size="7"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
+				<text><![CDATA[PPN :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="16" y="11" width="57" height="10" uuid="490d70d9-bbae-434c-9cd2-5a88e844c567"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
 				<text><![CDATA[TOTAL :]]></text>
 			</staticText>
+			<textField isStretchWithOverflow="true" pattern="Rp #,##0.00">
+				<reportElement mode="Transparent" x="220" y="11" width="57" height="10" uuid="84dc16fe-44c5-4368-a2ea-aee8f11f74d0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}+java.lang.Math.round($V{total}*0.11)]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
