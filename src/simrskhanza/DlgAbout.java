@@ -66,7 +66,6 @@ public class DlgAbout extends javax.swing.JDialog {
         setTitle("::[ About Program ]::");
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ About Program ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -102,9 +101,10 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
+        jLabel18.setText("Patch 2");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
-        jLabel18.setBounds(107, 28, 170, 0);
+        jLabel18.setBounds(107, 28, 170, 14);
 
         internalFrame1.add(panelGlass1);
         panelGlass1.setBounds(7, 38, 454, 90);

@@ -369,7 +369,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="5" y="1" width="190" height="13" uuid="f7b08aca-95ba-4502-a95e-b667f447d08d"/>
-				<textElement verticalAlignment="Middle">
+				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -379,7 +379,7 @@
 				<reportElement stretchType="RelativeToBandHeight" x="195" y="1" width="98" height="13" uuid="4c181114-2208-489e-ba21-3e62e2ea998c">
 					<printWhenExpression><![CDATA[($F{temp5}!="" ? Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -387,7 +387,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="293" y="1" width="153" height="13" uuid="876e5c7d-c009-41cc-9f06-b9790f9232b0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -395,10 +395,10 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="195" y="1" width="98" height="13" forecolor="#0000FF" uuid="484ecc9f-5860-4f39-830c-4a937c23b315">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ? 
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -406,10 +406,10 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="195" y="1" width="98" height="13" forecolor="#FF0000" uuid="a7ed8b12-899c-4e63-8217-0de3394e0c0d">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ? 
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
