@@ -335,7 +335,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{jkel}.equals("l" || $F{temp5}.toLowerCase().equals("kl")? "Laki-Laki":"Perempuan"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{jkel}.equals("l")?"Laki-Laki":"Perempuan"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement key="staticText-22" stretchType="RelativeToBandHeight" mode="Transparent" x="210" y="310" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="34e8dcbd-f1da-4a87-98bc-2729a50599af"/>
