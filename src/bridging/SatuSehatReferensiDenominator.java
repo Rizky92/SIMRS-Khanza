@@ -60,9 +60,9 @@ public final class SatuSehatReferensiDenominator extends javax.swing.JDialog {
             if (i == 0) {
                 column.setPreferredWidth(70);
             } else if (i == 1) {
-                column.setPreferredWidth(190);
+                column.setPreferredWidth(260);
             } else if (i == 2) {
-                column.setPreferredWidth(420);
+                column.setPreferredWidth(560);
             } else if (i == 3) {
                 column.setPreferredWidth(70);
             } else if (i == 4) {
@@ -129,7 +129,7 @@ public final class SatuSehatReferensiDenominator extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Numerator Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Denominator Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -301,7 +301,7 @@ public final class SatuSehatReferensiDenominator extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if (Valid.daysOld("./cache/dokter.iyem") < 30) {
+            if (Valid.daysOld("./cache/satusehatdenominator.iyem") < 30) {
                 tampil2();
             } else {
                 tampil();
@@ -352,7 +352,7 @@ public final class SatuSehatReferensiDenominator extends javax.swing.JDialog {
                         tabMode.addRow(new String[] {
                             rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
                         });
-                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"display\":\"" + rs.getString(2) + "\",\"definition\":\"" + rs.getString(3) + "\",\"status\":\"" + rs.getString(4) + "\",\"system\":\"" + rs.getString(5) + "\"},";
+                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"display\":\"" + rs.getString(2).replaceAll("\\\"", "\\\\\"") + "\",\"definition\":\"" + rs.getString(3).replaceAll("\\\"", "\\\\\"") + "\",\"status\":\"" + rs.getString(4) + "\",\"system\":\"" + rs.getString(5) + "\"},";
                     }
                 }
                 fw.write("{\"data\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
@@ -365,7 +365,7 @@ public final class SatuSehatReferensiDenominator extends javax.swing.JDialog {
 
     private void tampil2() {
         Valid.tabelKosong(tabMode);
-        try (FileReader fr = new FileReader("./cache/satusehatnumerator.iyem")) {
+        try (FileReader fr = new FileReader("./cache/satusehatdenominator.iyem")) {
             JsonNode root = new ObjectMapper().readTree(fr).path("data");
             if (root.isArray()) {
                 if (TCari.getText().isBlank()) {

@@ -297,7 +297,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if (Valid.daysOld("./cache/dokter.iyem") < 30) {
+            if (Valid.daysOld("./cache/satusehatdenominator.iyem") < 30) {
                 tampil2();
             } else {
                 tampil();
@@ -348,7 +348,7 @@ public final class SatuSehatReferensiNumerator extends javax.swing.JDialog {
                         tabMode.addRow(new String[] {
                             rs.getString(1), rs.getString(2), rs.getString(3)
                         });
-                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"name\":\"" + rs.getString(2) + "\",\"system\":\"" + rs.getString(3) + "\"},";
+                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"name\":\"" + rs.getString(2).replaceAll("\\\"", "\\\\\"") + "\",\"system\":\"" + rs.getString(3) + "\"},";
                     }
                 }
                 fw.write("{\"data\":[" + iyem.substring(0, iyem.length() - 1) + "]}");

@@ -127,7 +127,7 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Numerator Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Referensi Data Rute Pemberian Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -299,7 +299,7 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if (Valid.daysOld("./cache/dokter.iyem") < 30) {
+            if (Valid.daysOld("./cache/satusehatroute.iyem") < 30) {
                 tampil2();
             } else {
                 tampil();
@@ -350,7 +350,7 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
                         tabMode.addRow(new String[] {
                             rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)
                         });
-                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"display\":\"" + rs.getString(2) + "\",\"keterangan\":\"" + rs.getString(3) + "\",\"system\":\"" + rs.getString(4) + "\"},";
+                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"display\":\"" + rs.getString(2).replaceAll("\\\"", "\\\\\"") + "\",\"keterangan\":\"" + rs.getString(3).replaceAll("\\\"", "\\\\\"") + "\",\"system\":\"" + rs.getString(4) + "\"},";
                     }
                 }
                 fw.write("{\"data\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
