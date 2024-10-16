@@ -14,6 +14,18 @@
             $action = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
             $cari   = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
             $cari   = json_decode(encrypt_decrypt($cari,"d"),true); 
+            $action = "no";
+            $tahunawal    = '';
+            $bulanawal    = '';
+            $tanggalawal  = '';
+            $tahunakhir   = '';
+            $bulanakhir   = '';
+            $tanggalakhir = '';
+            $no_rawat     = '';
+            $status       = '';
+            $keyword      = '';
+            $carabayar    = '';
+            $poli         = '';
             if (isset($cari["tahunawal"])) {
                 $tahunawal      = validTeks4((isset($cari['tahunawal'])?$cari['tahunawal']:NULL),4);
                 $bulanawal      = validTeks4((isset($cari['bulanawal'])?$cari['bulanawal']:NULL),2);
@@ -288,4 +300,3 @@
 	</form>
     </div>
 </div>
-

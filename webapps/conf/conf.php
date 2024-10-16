@@ -48,6 +48,8 @@
     }
     
     function validTeks($data){
+        if ($data === null) return '';
+
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
         $save=str_replace(";","",$save);
@@ -204,6 +206,7 @@
     }
     
     function validTeks4($data,$panjang){
+        if ($data === null) return '';
         $save="";
         if(strlen($data)>$panjang){
             header('Location: https://www.google.com');
@@ -954,7 +957,7 @@
                 $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
                 break;
              case "d":
-                $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                $output = openssl_decrypt(base64_decode((string) $string), $encrypt_method, $key, 0, $iv);
                 break;
         }
         

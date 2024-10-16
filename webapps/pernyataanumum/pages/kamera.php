@@ -103,7 +103,7 @@
                 </tr>
                 <tr class="text-dark">
                     <td width="25%">Nomor Telp/Nomor HP</td>
-                    <td width="75%">: <?=$no_telppj;?></td>
+                    <td width="75%">: <?= isset($no_telppj) ? $no_telppj : '' ?></td>
                 </tr>
                 <tr class="text-dark">
                     <td width="25%">Nomor KTP</td>
@@ -188,4 +188,3 @@
     </script>
 </body>
 </html>
-
