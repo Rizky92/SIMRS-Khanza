@@ -45,12 +45,14 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
     private final validasi Valid = new validasi();
     private final DlgBarang barang = new DlgBarang(null, false);
     private final SatuSehatReferensiObatKFA referensi = new SatuSehatReferensiObatKFA(null, false);
+    private final SatuSehatReferensiNumerator numerator = new SatuSehatReferensiNumerator(null, false);
+    private final SatuSehatReferensiDenominator denom = new SatuSehatReferensiDenominator(null, false);
+    private final SatuSehatReferensiRoute route = new SatuSehatReferensiRoute(null, false);
     private final ApiSatuSehat api = new ApiSatuSehat();
     private final ObjectMapper mapper = new ObjectMapper();
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private JsonNode root;
-    private JsonNode response;
     private int i = 0;
     private String link = "", json = "";
 
@@ -89,10 +91,10 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                     column.setPreferredWidth(80);
                     break;
                 case 1:
-                    column.setPreferredWidth(200);
+                    column.setPreferredWidth(158);
                     break;
                 case 2:
-                    column.setPreferredWidth(85);
+                    column.setPreferredWidth(80);
                     break;
                 case 3:
                     column.setPreferredWidth(200);
@@ -109,34 +111,34 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                     column.setPreferredWidth(200);
                     break;
                 case 7:
-                    column.setPreferredWidth(80);
+                    column.setPreferredWidth(75);
                     break;
                 case 8:
-                    column.setPreferredWidth(200);
+                    column.setPreferredWidth(308);
                     break;
                 case 9:
-                    column.setPreferredWidth(170);
+                    column.setPreferredWidth(130);
                     break;
                 case 10:
                     column.setPreferredWidth(90);
                     break;
                 case 11:
-                    column.setPreferredWidth(200);
+                    column.setPreferredWidth(138);
                     break;
                 case 12:
                     column.setPreferredWidth(100);
                     break;
                 case 13:
-                    column.setPreferredWidth(200);
+                    column.setPreferredWidth(313);
                     break;
                 case 14:
                     column.setPreferredWidth(90);
                     break;
                 case 15:
-                    column.setPreferredWidth(170);
+                    column.setPreferredWidth(130);
                     break;
                 case 16:
-                    column.setPreferredWidth(170);
+                    column.setPreferredWidth(140);
                     break;
                 default:
                     break;
@@ -204,7 +206,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         referensi.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -241,12 +243,70 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                 KFACode.requestFocus();
             }
         });
-        
+
         referensi.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     referensi.dispose();
+                }
+            }
+        });
+
+        numerator.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (numerator.getTable().getSelectedRow() != -1) {
+                    NumeratorCode.setText(numerator.getTable().getValueAt(numerator.getTable().getSelectedRow(), 0).toString());
+                    NumeratorSystem.setText(numerator.getTable().getValueAt(numerator.getTable().getSelectedRow(), 2).toString());
+                }
+            }
+        });
+
+        numerator.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    numerator.dispose();
+                }
+            }
+        });
+
+        denom.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (denom.getTable().getSelectedRow() != -1) {
+                    DenominatorCode.setText(denom.getTable().getValueAt(denom.getTable().getSelectedRow(), 0).toString());
+                    DenominatorSystem.setText(denom.getTable().getValueAt(denom.getTable().getSelectedRow(), 4).toString());
+                }
+            }
+        });
+
+        denom.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    denom.dispose();
+                }
+            }
+        });
+
+        route.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (route.getTable().getSelectedRow() != -1) {
+                    RouteCode.setText(route.getTable().getValueAt(route.getTable().getSelectedRow(), 0).toString());
+                    RouteSystem.setText(route.getTable().getValueAt(route.getTable().getSelectedRow(), 3).toString());
+                    RouteDisplay.setText(route.getTable().getValueAt(route.getTable().getSelectedRow(), 1).toString());
+                }
+            }
+        });
+
+        route.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    route.dispose();
                 }
             }
         });
@@ -316,10 +376,18 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         btnCariKFA = new widget.Button();
         Satuan = new widget.TextBox();
         Kategori = new widget.TextBox();
+        btnNumer = new widget.Button();
+        btnDenom = new widget.Button();
+        btnRoute = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Mapping Obat/Alkes/BHP Satu Sehat KFA v2 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -561,10 +629,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(100, 104));
         FormInput.setLayout(null);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("KFA System :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(345, 40, 80, 23);
+        jLabel4.setBounds(345, 40, 64, 23);
 
         NamaBarang.setEditable(false);
         NamaBarang.setHighlighter(null);
@@ -649,10 +718,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(KFADisplay);
         KFADisplay.setBounds(109, 70, 615, 23);
 
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setText("Form System :");
         jLabel11.setName("jLabel11"); // NOI18N
         FormInput.add(jLabel11);
-        jLabel11.setBounds(192, 100, 90, 23);
+        jLabel11.setBounds(196, 100, 69, 23);
 
         FormSystem.setHighlighter(null);
         FormSystem.setName("FormSystem"); // NOI18N
@@ -662,7 +732,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(FormSystem);
-        FormSystem.setBounds(286, 100, 438, 23);
+        FormSystem.setBounds(269, 100, 455, 23);
 
         FormDisplay.setHighlighter(null);
         FormDisplay.setName("FormDisplay"); // NOI18N
@@ -684,10 +754,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 190, 105, 23);
 
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Numerator System :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(180, 160, 130, 23);
+        jLabel14.setBounds(188, 160, 96, 23);
 
         NumeratorSystem.setHighlighter(null);
         NumeratorSystem.setName("NumeratorSystem"); // NOI18N
@@ -697,7 +768,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(NumeratorSystem);
-        NumeratorSystem.setBounds(314, 160, 410, 23);
+        NumeratorSystem.setBounds(288, 160, 404, 23);
 
         DenominatorCode.setHighlighter(null);
         DenominatorCode.setName("DenominatorCode"); // NOI18N
@@ -717,12 +788,13 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(KFASystem);
-        KFASystem.setBounds(429, 40, 295, 23);
+        KFASystem.setBounds(417, 40, 307, 23);
 
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("Denominator System :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(180, 190, 130, 23);
+        jLabel15.setBounds(188, 190, 106, 23);
 
         DenominatorSystem.setHighlighter(null);
         DenominatorSystem.setName("DenominatorSystem"); // NOI18N
@@ -732,7 +804,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(DenominatorSystem);
-        DenominatorSystem.setBounds(314, 190, 410, 23);
+        DenominatorSystem.setBounds(298, 190, 394, 23);
 
         jLabel16.setText("Route Code :");
         jLabel16.setName("jLabel16"); // NOI18N
@@ -749,10 +821,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(RouteCode);
         RouteCode.setBounds(109, 220, 70, 23);
 
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Route System :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(185, 220, 90, 23);
+        jLabel17.setBounds(188, 220, 74, 23);
 
         RouteSystem.setHighlighter(null);
         RouteSystem.setName("RouteSystem"); // NOI18N
@@ -762,12 +835,13 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(RouteSystem);
-        RouteSystem.setBounds(279, 220, 187, 23);
+        RouteSystem.setBounds(266, 220, 188, 23);
 
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel18.setText("Route Display :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(469, 220, 91, 23);
+        jLabel18.setBounds(462, 220, 73, 23);
 
         RouteDisplay.setHighlighter(null);
         RouteDisplay.setName("RouteDisplay"); // NOI18N
@@ -777,7 +851,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             }
         });
         FormInput.add(RouteDisplay);
-        RouteDisplay.setBounds(564, 220, 160, 23);
+        RouteDisplay.setBounds(539, 220, 153, 23);
 
         jLabel19.setText("KFA Code :");
         jLabel19.setName("jLabel19"); // NOI18N
@@ -823,6 +897,57 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(Kategori);
         Kategori.setBounds(520, 10, 172, 23);
 
+        btnNumer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnNumer.setMnemonic('1');
+        btnNumer.setToolTipText("Alt+1");
+        btnNumer.setName("btnNumer"); // NOI18N
+        btnNumer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNumerActionPerformed(evt);
+            }
+        });
+        btnNumer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnNumerKeyPressed(evt);
+            }
+        });
+        FormInput.add(btnNumer);
+        btnNumer.setBounds(696, 160, 28, 23);
+
+        btnDenom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnDenom.setMnemonic('1');
+        btnDenom.setToolTipText("Alt+1");
+        btnDenom.setName("btnDenom"); // NOI18N
+        btnDenom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDenomActionPerformed(evt);
+            }
+        });
+        btnDenom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDenomKeyPressed(evt);
+            }
+        });
+        FormInput.add(btnDenom);
+        btnDenom.setBounds(696, 190, 28, 23);
+
+        btnRoute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnRoute.setMnemonic('1');
+        btnRoute.setToolTipText("Alt+1");
+        btnRoute.setName("btnRoute"); // NOI18N
+        btnRoute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRouteActionPerformed(evt);
+            }
+        });
+        btnRoute.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnRouteKeyPressed(evt);
+            }
+        });
+        FormInput.add(btnRoute);
+        btnRoute.setBounds(696, 220, 28, 23);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
@@ -840,11 +965,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         barang.setLocationRelativeTo(internalFrame1);
         barang.setAlwaysOnTop(false);
         barang.setVisible(true);
-}//GEN-LAST:event_btnBarangActionPerformed
+    }//GEN-LAST:event_btnBarangActionPerformed
 
     private void btnBarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBarangKeyPressed
         Valid.pindah(evt, KFASystem, KFADisplay);
-}//GEN-LAST:event_btnBarangKeyPressed
+    }//GEN-LAST:event_btnBarangKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if (KFACode.getText().isBlank()) {
@@ -890,7 +1015,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                 LCount.setText(String.valueOf(tabMode.getRowCount()));
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -898,11 +1023,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, RouteDisplay, BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -910,7 +1035,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnSimpan, BtnHapus);
         }
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (Valid.hapusTabletf(tabMode, NamaBarang, "satu_sehat_mapping_obat", "kode_brng") == true) {
@@ -918,7 +1043,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             emptTeks();
             LCount.setText("" + tabMode.getRowCount());
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -926,7 +1051,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if (KFACode.getText().isBlank()) {
@@ -960,8 +1085,8 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             if (tbJnsPerawatan.getSelectedRow() > -1) {
                 if (Sequel.mengupdatetfSmc("satu_sehat_mapping_obat",
-                    "kode_brng = ?, obat_code = ?, obat_system = ?, obat_display = ?, form_code = ?, form_system = ?, form_display = ?, numerator_code = ?, " +
-                    "numerator_system = ?, denominator_code = ?, denominator_system = ?, route_code = ?, route_system = ?, route_display = ?",
+                    "kode_brng = ?, obat_code = ?, obat_system = ?, obat_display = ?, form_code = ?, form_system = ?, form_display = ?, numerator_code = ?, "
+                    + "numerator_system = ?, denominator_code = ?, denominator_system = ?, route_code = ?, route_system = ?, route_display = ?",
                     "kode_brng = ?",
                     KodeBarang.getText(), KFACode.getText(), KFASystem.getText(), KFADisplay.getText(), FormCode.getText(), FormSystem.getText(),
                     FormDisplay.getText(), NumeratorCode.getText(), NumeratorSystem.getText(), DenominatorCode.getText(), DenominatorSystem.getText(),
@@ -988,7 +1113,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -996,11 +1121,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1008,7 +1133,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnEdit, TCari);
         }
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1028,7 +1153,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             Valid.MyReport("rptMapingKFASatuSehat.jasper", "report", "::[ Mapping Obat/Alkes/BHP Satu Sehat Kemenkes ]::", param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1036,7 +1161,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1046,11 +1171,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1058,12 +1183,12 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1072,7 +1197,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if (tabMode.getRowCount() != 0) {
@@ -1081,7 +1206,7 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
         if (tabMode.getRowCount() != 0) {
@@ -1101,9 +1226,9 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
     private void KodeBarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeBarangKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select databarang.nama_brng, kodesatuan.satuan, kategori_barang.nama as nama_kategori from databarang " +
-                "join kodesatuan on databarang.kode_sat = kodesatuan.kode_sat join kategori_barang on " +
-                "databarang.kode_kategori = kategori_barang.kode where databarang.kode_brng = ?"
+                "select databarang.nama_brng, kodesatuan.satuan, kategori_barang.nama as nama_kategori from databarang "
+                + "join kodesatuan on databarang.kode_sat = kodesatuan.kode_sat join kategori_barang on "
+                + "databarang.kode_kategori = kategori_barang.kode where databarang.kode_brng = ?"
             )) {
                 ps.setString(1, KodeBarang.getText());
                 try (ResultSet rs = ps.executeQuery()) {
@@ -1187,6 +1312,43 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCariKFAKeyPressed
 
+    private void btnNumerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNumerActionPerformed
+        numerator.emptTeks();
+        numerator.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        numerator.setLocationRelativeTo(internalFrame1);
+        numerator.setVisible(true);
+    }//GEN-LAST:event_btnNumerActionPerformed
+
+    private void btnNumerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnNumerKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNumerKeyPressed
+
+    private void btnDenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenomActionPerformed
+        denom.emptTeks();
+        denom.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        denom.setLocationRelativeTo(internalFrame1);
+        denom.setVisible(true);
+    }//GEN-LAST:event_btnDenomActionPerformed
+
+    private void btnDenomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDenomKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDenomKeyPressed
+
+    private void btnRouteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRouteActionPerformed
+        route.emptTeks();
+        route.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        route.setLocationRelativeTo(internalFrame1);
+        route.setVisible(true);
+    }//GEN-LAST:event_btnRouteActionPerformed
+
+    private void btnRouteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRouteKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRouteKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampil();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -1237,6 +1399,9 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
     private widget.TextBox TCari;
     private widget.Button btnBarang;
     private widget.Button btnCariKFA;
+    private widget.Button btnDenom;
+    private widget.Button btnNumer;
+    private widget.Button btnRoute;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
@@ -1263,16 +1428,16 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select satu_sehat_mapping_obat.obat_code, satu_sehat_mapping_obat.obat_system, databarang.kode_brng, databarang.nama_brng, kodesatuan.satuan, " +
-            "kategori_barang.nama as nama_kategori, satu_sehat_mapping_obat.obat_display, satu_sehat_mapping_obat.form_code, satu_sehat_mapping_obat.form_system, " +
-            "satu_sehat_mapping_obat.form_display, satu_sehat_mapping_obat.numerator_code, satu_sehat_mapping_obat.numerator_system, satu_sehat_mapping_obat.denominator_code, " +
-            "satu_sehat_mapping_obat.denominator_system, satu_sehat_mapping_obat.route_code, satu_sehat_mapping_obat.route_system, satu_sehat_mapping_obat.route_display " +
-            "from satu_sehat_mapping_obat join databarang on satu_sehat_mapping_obat.kode_brng = databarang.kode_brng join kodesatuan on databarang.kode_sat = kodesatuan.kode_sat " +
-            "join kategori_barang on databarang.kode_kategori = kategori_barang.kode where satu_sehat_mapping_obat.obat_code like ? or satu_sehat_mapping_obat.obat_system like ? " +
-            "or databarang.kode_brng like ? or databarang.nama_brng like ? or kodesatuan.satuan like ? or kategori_barang.nama like ? or satu_sehat_mapping_obat.obat_display like ? " +
-            "or satu_sehat_mapping_obat.form_code like ? or satu_sehat_mapping_obat.form_system like ? or satu_sehat_mapping_obat.form_display like ? or satu_sehat_mapping_obat.numerator_code like ? " +
-            "or satu_sehat_mapping_obat.numerator_system like ? or satu_sehat_mapping_obat.denominator_code like ? or satu_sehat_mapping_obat.denominator_system like ? " +
-            "or satu_sehat_mapping_obat.route_code like ? or satu_sehat_mapping_obat.route_system like ? or satu_sehat_mapping_obat.route_display like ?"
+            "select satu_sehat_mapping_obat.obat_code, satu_sehat_mapping_obat.obat_system, databarang.kode_brng, databarang.nama_brng, kodesatuan.satuan, "
+            + "kategori_barang.nama as nama_kategori, satu_sehat_mapping_obat.obat_display, satu_sehat_mapping_obat.form_code, satu_sehat_mapping_obat.form_system, "
+            + "satu_sehat_mapping_obat.form_display, satu_sehat_mapping_obat.numerator_code, satu_sehat_mapping_obat.numerator_system, satu_sehat_mapping_obat.denominator_code, "
+            + "satu_sehat_mapping_obat.denominator_system, satu_sehat_mapping_obat.route_code, satu_sehat_mapping_obat.route_system, satu_sehat_mapping_obat.route_display "
+            + "from satu_sehat_mapping_obat join databarang on satu_sehat_mapping_obat.kode_brng = databarang.kode_brng join kodesatuan on databarang.kode_sat = kodesatuan.kode_sat "
+            + "join kategori_barang on databarang.kode_kategori = kategori_barang.kode where satu_sehat_mapping_obat.obat_code like ? or satu_sehat_mapping_obat.obat_system like ? "
+            + "or databarang.kode_brng like ? or databarang.nama_brng like ? or kodesatuan.satuan like ? or kategori_barang.nama like ? or satu_sehat_mapping_obat.obat_display like ? "
+            + "or satu_sehat_mapping_obat.form_code like ? or satu_sehat_mapping_obat.form_system like ? or satu_sehat_mapping_obat.form_display like ? or satu_sehat_mapping_obat.numerator_code like ? "
+            + "or satu_sehat_mapping_obat.numerator_system like ? or satu_sehat_mapping_obat.denominator_code like ? or satu_sehat_mapping_obat.denominator_system like ? "
+            + "or satu_sehat_mapping_obat.route_code like ? or satu_sehat_mapping_obat.route_system like ? or satu_sehat_mapping_obat.route_display like ?"
         )) {
             if (TCari.getText().isBlank()) {
                 for (int i = 1; i <= 17; i++) {
