@@ -161,7 +161,7 @@ public final class validasi {
         }
     }
     
-    public String capitalize(String judul) {
+    public String capitalizeSmc(String judul) {
         return judul.substring(0, 1).toUpperCase() + judul.substring(1);
     }
     

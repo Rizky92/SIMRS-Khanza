@@ -271,6 +271,33 @@ ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `kesan` varchar(1000) NULL
 
 ALTER TABLE `satu_sehat_mapping_obat` MODIFY COLUMN IF EXISTS `obat_display` varchar(500) NULL DEFAULT NULL AFTER `obat_system`;
 
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_denominator`  (
+  `code` varchar(30) NOT NULL,
+  `display` varchar(100) NULL DEFAULT NULL,
+  `definition` varchar(400) NULL DEFAULT NULL,
+  `status` varchar(10) NULL DEFAULT NULL,
+  `system` varchar(100) NOT NULL,
+  PRIMARY KEY (`code`, `system`) USING BTREE,
+  INDEX `satu_sehat_referensi_denominator_obat_display_ibfk_1`(`display`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
+  `code` varchar(30) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `display` varchar(200) NULL DEFAULT NULL,
+  `system` varchar(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  PRIMARY KEY (`code`, `system`) USING BTREE,
+  INDEX `satu_sehat_referensi_numerator_obat_display_ibfk_1`(`display`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_route`  (
+  `code` varchar(30) NOT NULL,
+  `display` varchar(100) NULL DEFAULT NULL,
+  `keterangan` text NULL DEFAULT NULL,
+  `system` varchar(100) NOT NULL,
+  PRIMARY KEY (`code`, `system`) USING BTREE,
+  INDEX `satu_sehat_referensi_route_display_ibfk_1`(`display`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
