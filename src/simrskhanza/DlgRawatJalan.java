@@ -6457,7 +6457,9 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             switch (TabRawat.getSelectedIndex()) {
                 case 3:
                     if(KdPeg.getText().trim().equals("")||TPegawai.getText().trim().equals("")){
-                            Valid.textKosong(KdPeg,"Dokter/Paramedis masih kosong...!!");
+                            Valid.textKosong(KdPeg,"Dokter/Paramedis");
+                    } else if (cmbKesadaran.getSelectedItem().toString().isBlank()) {
+                        Valid.textKosong(cmbKesadaran, "Kesadaran");
                     }else if((!TKeluhan.getText().trim().equals(""))||(!TPemeriksaan.getText().trim().equals(""))||(!TSuhu.getText().trim().equals(""))||
                             (!TTensi.getText().trim().equals(""))||(!TAlergi.getText().trim().equals(""))||(!TTinggi.getText().trim().equals(""))||
                             (!TBerat.getText().trim().equals(""))||(!TRespirasi.getText().trim().equals(""))||(!TNadi.getText().trim().equals(""))||
