@@ -281,6 +281,35 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_denominator`  (
   INDEX `satu_sehat_referensi_denominator_obat_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_loinc_lab`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kategori` varchar(50) NULL DEFAULT NULL,
+  `nama_pemeriksaan` varchar(200) NULL DEFAULT NULL,
+  `jenis` enum('Permintaan','Hasil','Permintaan & Hasil','') NULL DEFAULT NULL,
+  `spesimen` varchar(50) NULL DEFAULT NULL,
+  `tipe_hasil` varchar(50) NULL DEFAULT NULL,
+  `satuan` varchar(50) NULL DEFAULT NULL,
+  `metode_analisis` varchar(100) NULL DEFAULT NULL,
+  `code` varchar(30) NOT NULL,
+  `code_system` varchar(100) NULL DEFAULT NULL,
+  `display` varchar(300) NULL DEFAULT NULL,
+  `component` varchar(150) NULL DEFAULT NULL,
+  `property` varchar(30) NULL DEFAULT NULL,
+  `timing` varchar(10) NULL DEFAULT NULL,
+  `system_periksa` varchar(30) NULL DEFAULT NULL,
+  `scale` varchar(10) NULL DEFAULT NULL,
+  `method` varchar(100) NULL DEFAULT NULL,
+  `uom` varchar(30) NULL DEFAULT NULL,
+  `first_version` varchar(10) NULL DEFAULT NULL,
+  `latest_version` varchar(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `kategori`(`kategori` ASC) USING BTREE,
+  INDEX `nama_pemeriksaan`(`nama_pemeriksaan` ASC) USING BTREE,
+  INDEX `jenis`(`jenis` ASC) USING BTREE,
+  INDEX `display`(`display` ASC) USING BTREE,
+  INDEX `system_periksa`(`system_periksa` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
   `code` varchar(30) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `display` varchar(200) NULL DEFAULT NULL,
