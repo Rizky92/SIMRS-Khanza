@@ -41,6 +41,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     private ResultSet rs;    
     private int i=0;
     private DlgCariTemplateLaborat pemeriksaan=new DlgCariTemplateLaborat(null,false);
+    private final SatuSehatReferensiLabLoinc referensi = new SatuSehatReferensiLabLoinc(null, false);
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -454,7 +455,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         jLabel4.setText("System :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(249, 40, 45, 23);
+        jLabel4.setBounds(245, 40, 45, 23);
 
         KodePemeriksaan.setEditable(false);
         KodePemeriksaan.setHighlighter(null);
@@ -477,7 +478,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnCariTemplateLab);
-        BtnCariTemplateLab.setBounds(211, 10, 28, 23);
+        BtnCariTemplateLab.setBounds(213, 10, 28, 23);
 
         PeriksaCode.setHighlighter(null);
         PeriksaCode.setName("PeriksaCode"); // NOI18N
@@ -517,7 +518,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }
         });
         FormInput.add(PeriksaSystem);
-        PeriksaSystem.setBounds(298, 40, 426, 23);
+        PeriksaSystem.setBounds(294, 40, 430, 23);
 
         jLabel11.setText("Sampel Code :");
         jLabel11.setName("jLabel11"); // NOI18N
@@ -577,7 +578,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }
         });
         FormInput.add(NamaTindakan);
-        NamaTindakan.setBounds(249, 10, 236, 23);
+        NamaTindakan.setBounds(245, 10, 240, 23);
 
         NamaPemeriksaan.setHighlighter(null);
         NamaPemeriksaan.setName("NamaPemeriksaan"); // NOI18N
@@ -604,7 +605,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnCariReferensiMapping);
-        BtnCariReferensiMapping.setBounds(211, 40, 28, 23);
+        BtnCariReferensiMapping.setBounds(213, 40, 28, 23);
 
         BtnCariReferensiSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnCariReferensiSampel.setMnemonic('1');
@@ -875,7 +876,9 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_NamaPemeriksaanKeyPressed
 
     private void BtnCariReferensiMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingActionPerformed
-        // TODO add your handling code here:
+        referensi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        referensi.setLocationRelativeTo(internalFrame1);
+        referensi.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiMappingActionPerformed
 
     private void BtnCariReferensiMappingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingKeyPressed
