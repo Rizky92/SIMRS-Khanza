@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.sekuel;
 import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,22 +21,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 
 /**
  *
  * @author dosen
  */
-public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
+public final class SatuSehatReferensiRadiologiSNOMED extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final validasi Valid = new validasi();
-    private final sekuel Sequel = new sekuel();
     private TableColumn column;
     /**
      * Creates new form DlgKamar
@@ -45,29 +38,18 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SatuSehatReferensiLabLoinc(java.awt.Frame parent, boolean modal) {
+    public SatuSehatReferensiRadiologiSNOMED(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10, 2);
         setSize(628, 674);
 
         tabMode = new DefaultTableModel(null, new String[] {
-            "No", "Kategori", "Nama", "Jenis", "Spesimen", "Tipe Hasil", "Satuan",
-            "Metode Analisis", "Code", "Display", "Component", "Property", "Timing",
-            "System", "Scale", "Method", "Unit of Measure", "Code System",
-            "First Version", "Latest Version"
+            "Code", "System", "Display", "Display Indonesia"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 0) {
-                    return java.lang.Integer.class;
-                }
-                return java.lang.String.class;
             }
         };
 
@@ -86,39 +68,7 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
             } else if (i == 2) {
                 column.setPreferredWidth(420);
             } else if (i == 3) {
-                column.setPreferredWidth(80);
-            } else if (i == 4) {
-                column.setPreferredWidth(130);
-            } else if (i == 5) {
-                column.setPreferredWidth(180);
-            } else if (i == 6) {
-                column.setPreferredWidth(152);
-            } else if (i == 7) {
-                column.setPreferredWidth(100);
-            } else if (i == 8) {
-                column.setPreferredWidth(320);
-            } else if (i == 9) {
-                column.setPreferredWidth(80);
-            } else if (i == 10) {
-                column.setPreferredWidth(480);
-            } else if (i == 11) {
-                column.setPreferredWidth(360);
-            } else if (i == 12) {
-                column.setPreferredWidth(80);
-            } else if (i == 13) {
-                column.setPreferredWidth(70);
-            } else if (i == 14) {
-                column.setPreferredWidth(120);
-            } else if (i == 15) {
-                column.setPreferredWidth(60);
-            } else if (i == 16) {
-                column.setPreferredWidth(150);
-            } else if (i == 17) {
-                column.setPreferredWidth(230);
-            } else if (i == 18) {
-                column.setPreferredWidth(70);
-            } else if (i == 19) {
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(420);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -180,7 +130,7 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Praktisi Satu Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Satu Sehat Referensi Radiologi SNOMED-CT ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -337,7 +287,7 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SatuSehatReferensiLabLoinc dialog = new SatuSehatReferensiLabLoinc(new javax.swing.JFrame(), true);
+            SatuSehatReferensiRadiologiSNOMED dialog = new SatuSehatReferensiRadiologiSNOMED(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -362,81 +312,36 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
     public void tampil() {
-        if (Valid.daysOld("./cache/satusehatreferensiloinclab.iyem") > 30) {
+        if (Valid.daysOld("./cache/satusehatreferensiradiologisnomed.iyem") > 30) {
             tampil2();
         }
         Valid.tabelKosong(tabMode);
         
-        try (FileReader fr = new FileReader("./cache/satusehatreferensiloinclab.iyem")) {
+        try (FileReader fr = new FileReader("./cache/satusehatreferensiradiologisnomed.iyem")) {
             JsonNode arr = new ObjectMapper().readTree(fr).path("data");
             if (arr.isArray()) {
                 if (TCari.getText().isBlank()) {
                     for (JsonNode obj : arr) {
                         tabMode.addRow(new Object[] {
-                            obj.path("id").asInt(),
-                            obj.path("kategori").asText(),
-                            obj.path("nama_pemeriksaan").asText(),
-                            obj.path("jenis").asText(),
-                            obj.path("spesimen").asText(),
-                            obj.path("tipe_hasil").asText(),
-                            obj.path("satuan").asText(),
-                            obj.path("metode_analisis").asText(),
                             obj.path("code").asText(),
+                            obj.path("system").asText(),
                             obj.path("display").asText(),
-                            obj.path("component").asText(),
-                            obj.path("property").asText(),
-                            obj.path("timing").asText(),
-                            obj.path("system_periksa").asText(),
-                            obj.path("scale").asText(),
-                            obj.path("method").asText(),
-                            obj.path("uom").asText(),
-                            obj.path("code_system").asText(),
-                            obj.path("first_version").asText(),
-                            obj.path("latest_version").asText(),
+                            obj.path("display_ind").asText(),
                         });
                     }
                 } else {
                     for (JsonNode obj : arr) {
                         if (
-                            obj.path("kategori").asText().contains(TCari.getText().trim())
-                            || obj.path("nama_pemeriksaan").asText().contains(TCari.getText().trim())
-                            || obj.path("jenis").asText().contains(TCari.getText().trim())
-                            || obj.path("spesimen").asText().contains(TCari.getText().trim())
-                            || obj.path("tipe_hasil").asText().contains(TCari.getText().trim())
-                            || obj.path("satuan").asText().contains(TCari.getText().trim())
-                            || obj.path("metode_analisis").asText().contains(TCari.getText().trim())
-                            || obj.path("code").asText().contains(TCari.getText().trim())
+                            obj.path("code").asText().contains(TCari.getText().trim())
+                            || obj.path("system").asText().contains(TCari.getText().trim())
                             || obj.path("display").asText().contains(TCari.getText().trim())
-                            || obj.path("component").asText().contains(TCari.getText().trim())
-                            || obj.path("property").asText().contains(TCari.getText().trim())
-                            || obj.path("timing").asText().contains(TCari.getText().trim())
-                            || obj.path("system_periksa").asText().contains(TCari.getText().trim())
-                            || obj.path("scale").asText().contains(TCari.getText().trim())
-                            || obj.path("method").asText().contains(TCari.getText().trim())
-                            || obj.path("uom").asText().contains(TCari.getText().trim())
-                            || obj.path("code_system").asText().contains(TCari.getText().trim())
+                            || obj.path("display_ind").asText().contains(TCari.getText().trim())
                         ) {
                             tabMode.addRow(new Object[] {
-                                obj.path("id").asInt(),
-                                obj.path("kategori").asText(),
-                                obj.path("nama_pemeriksaan").asText(),
-                                obj.path("jenis").asText(),
-                                obj.path("spesimen").asText(),
-                                obj.path("tipe_hasil").asText(),
-                                obj.path("satuan").asText(),
-                                obj.path("metode_analisis").asText(),
                                 obj.path("code").asText(),
+                                obj.path("system").asText(),
                                 obj.path("display").asText(),
-                                obj.path("component").asText(),
-                                obj.path("property").asText(),
-                                obj.path("timing").asText(),
-                                obj.path("system_periksa").asText(),
-                                obj.path("scale").asText(),
-                                obj.path("method").asText(),
-                                obj.path("uom").asText(),
-                                obj.path("code_system").asText(),
-                                obj.path("first_version").asText(),
-                                obj.path("latest_version").asText(),
+                                obj.path("display_ind").asText(),
                             });
                         }
                     }
@@ -450,34 +355,18 @@ public final class SatuSehatReferensiLabLoinc extends javax.swing.JDialog {
     }
     
     public void tampil2() {
-        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_loinc_lab")) {
-            File file = new File("./cache/satusehatreferensiloinclab.iyem");
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_radiologi_snomed")) {
+            File file = new File("./cache/satusehatreferensiradiologisnomed.iyem");
             file.createNewFile();
             String iyem = "";
             
             while (rs.next()) {
-                iyem = iyem + "{\"id\": " + rs.getInt("id") + ",\"kategori\": \"" + rs.getString("kategori") + "\",\"nama_pemeriksaan\": \"" + rs.getString("nama_pemeriksaan") + "\",\"jenis\": \"" + rs.getString("jenis") + "\",\"spesimen\": \"" + rs.getString("spesimen") + "\",\"tipe_hasil\": \"" + rs.getString("tipe_hasil") + "\",\"satuan\": \"" + rs.getString("satuan") + "\",\"metode_analisis\": \"" + rs.getString("metode_analisis") + "\",\"code\": \"" + rs.getString("code") + "\",\"display\": \"" + rs.getString("display") + "\",\"component\": \"" + rs.getString("component") + "\",\"property\": \"" + rs.getString("property") + "\",\"timing\": \"" + rs.getString("timing") + "\",\"system_periksa\": \"" + rs.getString("system_periksa") + "\",\"scale\": \"" + rs.getString("scale") + "\",\"method\": \"" + rs.getString("method") + "\",\"uom\": \"" + rs.getString("uom") + "\",\"code_system\": \"" + rs.getString("code_system") + "\",\"first_version\": \"" + rs.getString("first_version") + "\",\"latest_version\": \"" + rs.getString("latest_version") + "\"},";
+                iyem = iyem + "{\"code\":\"" + rs.getString("code") + "\",\"system\":\"" + rs.getString("system") + "\",\"display\":\"" + rs.getString("display") + "\",\"display_ind\":\"" + rs.getString("display_ind") + "\"},";
                 tabMode.addRow(new Object[] {
-                    rs.getInt("id"),
-                    rs.getString("kategori"),
-                    rs.getString("nama_pemeriksaan"),
-                    rs.getString("jenis"),
-                    rs.getString("spesimen"),
-                    rs.getString("tipe_hasil"),
-                    rs.getString("satuan"),
-                    rs.getString("metode_analisis"),
                     rs.getString("code"),
+                    rs.getString("system"),
                     rs.getString("display"),
-                    rs.getString("component"),
-                    rs.getString("property"),
-                    rs.getString("timing"),
-                    rs.getString("system_periksa"),
-                    rs.getString("scale"),
-                    rs.getString("method"),
-                    rs.getString("uom"),
-                    rs.getString("code_system"),
-                    rs.getString("first_version"),
-                    rs.getString("latest_version")
+                    rs.getString("display_ind")
                 });
             }
             try (FileWriter fw = new FileWriter(file)) {

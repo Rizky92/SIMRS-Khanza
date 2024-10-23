@@ -373,7 +373,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
         return tbKamar;
     }
     
-    private void tampil2() {
+    public void tampil2() {
         try {
             myObj = new FileReader("./cache/templatelaborat.iyem");
             root = mapper.readTree(myObj);
