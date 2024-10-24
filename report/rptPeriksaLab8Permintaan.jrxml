@@ -335,7 +335,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{jkel}.equals("L")? "Laki-Laki":"Perempuan"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{jkel}.equals("l")?"Laki-Laki":"Perempuan"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement key="staticText-22" stretchType="RelativeToBandHeight" mode="Transparent" x="210" y="310" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="34e8dcbd-f1da-4a87-98bc-2729a50599af"/>
@@ -554,7 +554,7 @@
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-1" stretchType="RelativeToTallestObject" x="15" y="-29" width="242" height="13" uuid="4753e99a-1e6d-4ea5-883b-851d80f31558"/>
-				<textElement verticalAlignment="Middle">
+				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -564,7 +564,7 @@
 				<reportElement key="textField-2" stretchType="RelativeToTallestObject" x="301" y="-29" width="191" height="13" uuid="5003e9b6-e66a-4f79-ac5c-9a3d0107b0d9">
 					<printWhenExpression><![CDATA[($F{temp5}!="" ? Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -581,10 +581,10 @@
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-3" stretchType="RelativeToTallestObject" x="301" y="-29" width="191" height="13" forecolor="#0000FF" uuid="8d395fdc-367c-4f69-8ee1-03db26f4a47e">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("l") || $F{temp5}.toLowerCase().equals("kl") ? 
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -592,10 +592,10 @@
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField-4" stretchType="RelativeToTallestObject" x="301" y="-29" width="191" height="13" forecolor="#FF0000" uuid="c0348cdc-c9b6-4441-9546-a40d35b5d503">
-					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") ? 
+					<printWhenExpression><![CDATA[($F{temp5}.toLowerCase().equals("h") || $F{temp5}.toLowerCase().equals("kh") || $F{temp5}.toLowerCase().equals("tn") ? 
   Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>

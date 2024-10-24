@@ -430,7 +430,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLabSMCParagraf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnCetakHasilLabSMCParagraf.setText("Model Paragraf");
         MnCetakHasilLabSMCParagraf.setName("MnCetakHasilLabSMCParagraf"); // NOI18N
-        MnCetakHasilLabSMCParagraf.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilLabSMCParagraf.setPreferredSize(new java.awt.Dimension(180, 26));
         MnCetakHasilLabSMCParagraf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnCetakHasilLabSMCParagrafActionPerformed(evt);

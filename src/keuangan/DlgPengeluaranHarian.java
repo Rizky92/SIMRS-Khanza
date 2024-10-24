@@ -631,7 +631,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -645,7 +645,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -789,11 +789,16 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         btnKategori.setBounds(409, 12, 28, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2024 14:40:39" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024 15:00:22" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
         Tanggal.setPreferredSize(new java.awt.Dimension(100, 23));
+        Tanggal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalItemStateChanged(evt);
+            }
+        });
         Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKeyPressed(evt);
@@ -924,6 +929,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                     DlgBayarMandiri.setLocationRelativeTo(internalFrame1);
                     DlgBayarMandiri.setVisible(true);
                 }else{
+                    autoNomor();
                     Sequel.AutoComitFalse();
                     sukses=true;    
                     if(Sequel.menyimpantf2("pengeluaran_harian","?,?,?,?,?,?","Pengeluaran",6,new String[]{
@@ -1329,6 +1335,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Valid.pindah(evt,KotaAtasNamaRekening,BtnMetode);
     }//GEN-LAST:event_RekeningAtasNamaKeyPressed
 
+    private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -1524,8 +1534,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pengeluaran_harian.no_keluar,3),signed)),0) from pengeluaran_harian where pengeluaran_harian.tanggal like '%"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"%' ",
-                "PH"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,Nomor); 
+        Valid.autoNomorSmc(Nomor, "PH", "pengeluaran_harian", "no_keluar", 3, "0", Tanggal);
     }
     
     public void setPengajuan(String nopengajuan,String keterangan,String pengeluaran){

@@ -33,6 +33,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -801,6 +803,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppPilihSemua = new javax.swing.JMenuItem();
+        ppPilihBelumDikirim = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         LoadHTML = new widget.editorpane();
         internalFrame1 = new widget.InternalFrame();
@@ -860,6 +863,22 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppPilihSemua);
+
+        ppPilihBelumDikirim.setBackground(new java.awt.Color(255, 255, 254));
+        ppPilihBelumDikirim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPilihBelumDikirim.setForeground(new java.awt.Color(50, 50, 50));
+        ppPilihBelumDikirim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPilihBelumDikirim.setText("Pilih Belum Dikirim");
+        ppPilihBelumDikirim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPilihBelumDikirim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPilihBelumDikirim.setName("ppPilihBelumDikirim"); // NOI18N
+        ppPilihBelumDikirim.setPreferredSize(new java.awt.Dimension(150, 26));
+        ppPilihBelumDikirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPilihBelumDikirimActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPilihBelumDikirim);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -997,7 +1016,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(85, 23));
         panelGlass9.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1010,7 +1029,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass9.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1067,6 +1086,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbSuhu.setAutoCreateRowSorter(true);
         tbSuhu.setComponentPopupMenu(jPopupMenu1);
         tbSuhu.setName("tbSuhu"); // NOI18N
         Scroll.setViewportView(tbSuhu);
@@ -1077,6 +1097,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbRespirasi.setAutoCreateRowSorter(true);
         tbRespirasi.setComponentPopupMenu(jPopupMenu1);
         tbRespirasi.setName("tbRespirasi"); // NOI18N
         Scroll1.setViewportView(tbRespirasi);
@@ -1087,6 +1108,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbNadi.setAutoCreateRowSorter(true);
         tbNadi.setComponentPopupMenu(jPopupMenu1);
         tbNadi.setName("tbNadi"); // NOI18N
         Scroll2.setViewportView(tbNadi);
@@ -1097,6 +1119,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbSpO2.setAutoCreateRowSorter(true);
         tbSpO2.setComponentPopupMenu(jPopupMenu1);
         tbSpO2.setName("tbSpO2"); // NOI18N
         Scroll3.setViewportView(tbSpO2);
@@ -1107,6 +1130,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbGCS.setAutoCreateRowSorter(true);
         tbGCS.setComponentPopupMenu(jPopupMenu1);
         tbGCS.setName("tbGCS"); // NOI18N
         Scroll4.setViewportView(tbGCS);
@@ -1117,6 +1141,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
 
+        tbKesadaran.setAutoCreateRowSorter(true);
         tbKesadaran.setComponentPopupMenu(jPopupMenu1);
         tbKesadaran.setName("tbKesadaran"); // NOI18N
         Scroll5.setViewportView(tbKesadaran);
@@ -1127,6 +1152,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbTensi.setAutoCreateRowSorter(true);
         tbTensi.setComponentPopupMenu(jPopupMenu1);
         tbTensi.setName("tbTensi"); // NOI18N
         Scroll6.setViewportView(tbTensi);
@@ -1137,6 +1163,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbTB.setAutoCreateRowSorter(true);
         tbTB.setComponentPopupMenu(jPopupMenu1);
         tbTB.setName("tbTB"); // NOI18N
         Scroll7.setViewportView(tbTB);
@@ -1147,6 +1174,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbBB.setAutoCreateRowSorter(true);
         tbBB.setComponentPopupMenu(jPopupMenu1);
         tbBB.setName("tbBB"); // NOI18N
         Scroll8.setViewportView(tbBB);
@@ -1157,6 +1185,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll9.setName("Scroll9"); // NOI18N
         Scroll9.setOpaque(true);
 
+        tbLP.setAutoCreateRowSorter(true);
         tbLP.setComponentPopupMenu(jPopupMenu1);
         tbLP.setName("tbLP"); // NOI18N
         Scroll9.setViewportView(tbLP);
@@ -2090,6 +2119,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbSuhu.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2152,6 +2189,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbSuhu.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2166,6 +2205,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbRespirasi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2228,6 +2275,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbRespirasi.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2242,6 +2291,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbNadi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2304,6 +2361,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbNadi.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2318,6 +2377,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbSpO2.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2380,6 +2447,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbSpO2.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2394,6 +2463,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbGCS.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2455,6 +2532,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbGCS.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2469,6 +2548,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbKesadaran.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2528,6 +2615,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbKesadaran.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2542,6 +2631,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbTensi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         arrSplit = tbTensi.getValueAt(i,10).toString().split("/");
                         sistole="0";
                         try {
@@ -2666,6 +2763,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbTB.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2742,6 +2847,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbBB.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2804,6 +2917,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbBB.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2818,6 +2933,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbLP.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -2880,6 +3003,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                                     tbLP.setValueAt(false,i,0);
                                 }
                             }
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -2992,6 +3117,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSuhu.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbSuhu.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3046,6 +3179,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSuhu.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3060,6 +3195,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbRespirasi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbRespirasi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3114,6 +3257,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbRespirasi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3128,6 +3273,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbNadi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbNadi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3182,6 +3335,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbNadi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3196,6 +3351,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbSpO2.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbSpO2.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3250,6 +3413,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSpO2.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3264,6 +3429,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbGCS.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbGCS.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3317,6 +3490,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbGCS.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3331,6 +3506,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbKesadaran.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbKesadaran.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3382,6 +3565,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbKesadaran.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3396,6 +3581,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTensi.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbTensi.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3481,6 +3674,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTensi.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3495,6 +3690,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbTB.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbTB.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3549,6 +3752,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTB.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3563,6 +3768,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbBB.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbBB.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3617,6 +3830,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbBB.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3631,6 +3846,14 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                     try {
                         iddokter=cekViaSatuSehat.tampilIDParktisi(tbLP.getValueAt(i,12).toString());
                         idpasien=cekViaSatuSehat.tampilIDPasien(tbLP.getValueAt(i,5).toString());
+                        if (iddokter.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Praktisi!");
+                            continue;
+                        }
+                        if (idpasien.isBlank()) {
+                            System.out.println("Notif : Tidak dapat menemukan ID Pasien!");
+                            continue;
+                        }
                         try{
                             headers = new HttpHeaders();
                             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -3685,6 +3908,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbLP.setValueAt(false,i,0);
+                        } catch (HttpClientErrorException | HttpServerErrorException e) {
+                            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                         }catch(Exception e){
                             System.out.println("Notifikasi Bridging : "+e);
                         }
@@ -3747,6 +3972,74 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAll1KeyPressed
 
+    private void ppPilihBelumDikirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihBelumDikirimActionPerformed
+        switch (TabRawat.getSelectedIndex()) {
+            case 0:
+                for(i=0;i<tbSuhu.getRowCount();i++){
+                    if (tbSuhu.getValueAt(i, 15).toString().isBlank()) {
+                        tbSuhu.setValueAt(true,i,0);
+                    }
+                }
+                break;
+            case 1:
+                for(i=0;i<tbRespirasi.getRowCount();i++){
+                    if (tbRespirasi.getValueAt(i, 15).toString().isBlank()) {
+                        tbRespirasi.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 2:
+                for(i=0;i<tbNadi.getRowCount();i++){
+                    if (tbNadi.getValueAt(i, 15).toString().isBlank()) {
+                        tbNadi.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 3:
+                for(i=0;i<tbSpO2.getRowCount();i++){
+                    if (tbSpO2.getValueAt(i, 15).toString().isBlank()) {
+                        tbSpO2.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 4:
+                for(i=0;i<tbGCS.getRowCount();i++){
+                    if (tbGCS.getValueAt(i, 15).toString().isBlank()) {
+                        tbGCS.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 5:
+                for(i=0;i<tbKesadaran.getRowCount();i++){
+                    if (tbKesadaran.getValueAt(i, 15).toString().isBlank()) {
+                        tbKesadaran.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 6:
+                for(i=0;i<tbTensi.getRowCount();i++){
+                    if (tbTensi.getValueAt(i, 15).toString().isBlank()) {
+                        tbTensi.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 7:
+                for(i=0;i<tbTB.getRowCount();i++){
+                    if (tbTB.getValueAt(i, 15).toString().isBlank()) {
+                        tbTB.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 8:
+                for(i=0;i<tbBB.getRowCount();i++){
+                    if (tbBB.getValueAt(i, 15).toString().isBlank()) {
+                        tbBB.setValueAt(true,i,0);
+                    }
+                }   break;
+            case 9:
+                for(i=0;i<tbLP.getRowCount();i++){
+                    if (tbLP.getValueAt(i, 15).toString().isBlank()) {
+                        tbLP.setValueAt(true,i,0);
+                    }
+                }   break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_ppPilihBelumDikirimActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3796,6 +4089,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppPilihBelumDikirim;
     private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbBB;
     private widget.Table tbGCS;

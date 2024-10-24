@@ -14,6 +14,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -123,6 +125,8 @@ public class SatuSehatCekNIK {
                             }
                         }
                     }
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -208,6 +212,8 @@ public class SatuSehatCekNIK {
                             }
                         }
                     }
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
@@ -259,6 +265,9 @@ public class SatuSehatCekNIK {
             for(JsonNode list:root.path("entry")){
                 idpasien=list.path("resource").path("id").asText();
             }
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            idpasien="";
+            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
         }catch(Exception e){
             idpasien="";
             System.out.println("Notifikasi : "+e);
@@ -281,6 +290,9 @@ public class SatuSehatCekNIK {
             for(JsonNode list:response){
                idpasien=list.path("resource").path("id").asText();
             }
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            idpasien="";
+            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
         }catch(Exception e){
             idpasien="";
             System.out.println("Notifikasi : "+e);

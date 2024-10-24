@@ -53,47 +53,61 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(628,674);
 
-        tabMode=new DefaultTableModel(null,new Object[]{
-                "No.Rawat","No.RM","Nama Pasien","No.HP","No.Kartu","NIK","Tanggal","Poliklinik","Dokter","Jam Praktek","Jenis Kunjungan","Nomor Referensi","Status","Validasi Checkin","No.Booking"
-            }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "P", "No.Rawat", "No.RM", "Nama Pasien", "No.HP", "No.Kartu", "NIK", "Tanggal", "Poliklinik", "Dokter",
+            "Jam Praktek", "Jenis Kunjungan", "Nomor Referensi", "Status", "Validasi Checkin", "No.Booking"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 0;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
+                }
+                return java.lang.String.class;
+            }
         };
         tbJnsPerawatan.setModel(tabMode);
 
         tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 15; i++) {
+        for (i = 0; i < 16; i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
-            if(i==0){
+            if (i == 0) {
+                column.setPreferredWidth(20);
+            } else if(i==1){
                 column.setPreferredWidth(110);
-            }else if(i==1){
-                column.setPreferredWidth(70);
             }else if(i==2){
-                column.setPreferredWidth(160);
-            }else if(i==3){
-                column.setPreferredWidth(83);
-            }else if(i==4){
-                column.setPreferredWidth(90);
-            }else if(i==5){
-                column.setPreferredWidth(103);
-            }else if(i==6){
-                column.setPreferredWidth(65);
-            }else if(i==7){
-                column.setPreferredWidth(140);
-            }else if(i==8){
-                column.setPreferredWidth(160);
-            }else if(i==9){
                 column.setPreferredWidth(70);
+            }else if(i==3){
+                column.setPreferredWidth(160);
+            }else if(i==4){
+                column.setPreferredWidth(83);
+            }else if(i==5){
+                column.setPreferredWidth(90);
+            }else if(i==6){
+                column.setPreferredWidth(103);
+            }else if(i==7){
+                column.setPreferredWidth(65);
+            }else if(i==8){
+                column.setPreferredWidth(140);
+            }else if(i==9){
+                column.setPreferredWidth(160);
             }else if(i==10){
-                column.setPreferredWidth(110);
+                column.setPreferredWidth(70);
             }else if(i==11){
-                column.setPreferredWidth(125);
+                column.setPreferredWidth(110);
             }else if(i==12){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(125);
             }else if(i==13){
-                column.setPreferredWidth(115);
+                column.setPreferredWidth(50);
             }else if(i==14){
+                column.setPreferredWidth(115);
+            }else if(i==15){
                 column.setPreferredWidth(110);
             }
         }
@@ -136,6 +150,9 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        ppPilihSemua = new javax.swing.JMenuItem();
+        ppBersihkan = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -158,6 +175,40 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         BtnAll = new widget.Button();
 
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        ppPilihSemua.setBackground(new java.awt.Color(255, 255, 254));
+        ppPilihSemua.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPilihSemua.setForeground(new java.awt.Color(50, 50, 50));
+        ppPilihSemua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPilihSemua.setText("Pilih Semua");
+        ppPilihSemua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPilihSemua.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPilihSemua.setName("ppPilihSemua"); // NOI18N
+        ppPilihSemua.setPreferredSize(new java.awt.Dimension(150, 26));
+        ppPilihSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPilihSemuaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPilihSemua);
+
+        ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
+        ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppBersihkan.setForeground(new java.awt.Color(50, 50, 50));
+        ppBersihkan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppBersihkan.setText("Hilangkan Pilihan");
+        ppBersihkan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppBersihkan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppBersihkan.setName("ppBersihkan"); // NOI18N
+        ppBersihkan.setPreferredSize(new java.awt.Dimension(150, 26));
+        ppBersihkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppBersihkanActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppBersihkan);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -170,6 +221,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbJnsPerawatan.setComponentPopupMenu(jPopupMenu1);
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         Scroll.setViewportView(tbJnsPerawatan);
 
@@ -297,7 +349,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -311,7 +363,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -396,7 +448,6 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             for(int r=0;r<row;r++){  
                 Sequel.temporary(
                     String.valueOf(r + 1),
-                    (String) tabMode.getValueAt(r, 0),
                     (String) tabMode.getValueAt(r, 1),
                     (String) tabMode.getValueAt(r, 2),
                     (String) tabMode.getValueAt(r, 3),
@@ -410,7 +461,8 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                     (String) tabMode.getValueAt(r, 11),
                     (String) tabMode.getValueAt(r, 12),
                     (String) tabMode.getValueAt(r, 13),
-                    (String) tabMode.getValueAt(r, 14)
+                    (String) tabMode.getValueAt(r, 14),
+                    (String) tabMode.getValueAt(r, 15)
                 );
             }
             
@@ -472,18 +524,22 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        if(tbJnsPerawatan.getSelectedRow()!= -1){
-            if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
-                tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
-            })==true){
-                Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(), 
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
-                });
-                tampil();
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
+        } else {
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
+                        tbJnsPerawatan.getValueAt(i,15).toString()
+                    })==true){
+                        Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
+                            tbJnsPerawatan.getValueAt(i,2).toString(),tbJnsPerawatan.getValueAt(i,1).toString(), 
+                            tbJnsPerawatan.getValueAt(i,12).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(i,15).toString()
+                        });
+                    }
+                }
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Silahkan pilih dulu data yang mau dibatalkan..!!");
+            tampil();
         }
     }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -496,10 +552,18 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnCheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCheckinActionPerformed
-        if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Checkin',validasi=now()",1,new String[]{
-            tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
-        })==true){
-            Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
+        } else {
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Checkin',validasi=now()",1,new String[]{
+                        tbJnsPerawatan.getValueAt(i,15).toString()
+                    })==true){
+                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
+                    }
+                }
+            }
             tampil();
         }
     }//GEN-LAST:event_BtnCheckinActionPerformed
@@ -513,10 +577,19 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCheckinKeyPressed
 
     private void BtnBelumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBelumActionPerformed
-        if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
-            tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
-        })==true){
-            Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
+        } else {
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Belum',validasi='0000-00-00 00:00:00'",1,new String[]{
+                        tbJnsPerawatan.getValueAt(i,15).toString()
+                    })==true){
+                        Sequel.meghapus("referensi_mobilejkn_bpjs_batal","nobooking",tbJnsPerawatan.getValueAt(i,15).toString());
+                        tampil();
+                    }
+                }
+            }
             tampil();
         }
     }//GEN-LAST:event_BtnBelumActionPerformed
@@ -526,6 +599,18 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
             BtnBelumActionPerformed(null);
         }else{Valid.pindah(evt, BtnCheckin, BtnBatal);}
     }//GEN-LAST:event_BtnBelumKeyPressed
+
+    private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
+            tbJnsPerawatan.setValueAt(true,i,0);
+        }
+    }//GEN-LAST:event_ppPilihSemuaActionPerformed
+
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
+            tbJnsPerawatan.setValueAt(false,i,0);
+        }
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
     /**
     * @param args the command line arguments
@@ -562,8 +647,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
+    private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppPilihSemua;
     private widget.Table tbJnsPerawatan;
     // End of variables declaration//GEN-END:variables
 
@@ -606,6 +694,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
+                        false,
                         rs.getString("no_rawat"),
                         rs.getString("norm"),
                         rs.getString("nm_pasien"),                        
