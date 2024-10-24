@@ -1016,7 +1016,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(85, 23));
         panelGlass9.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1029,7 +1029,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass9.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-09-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1086,6 +1086,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbSuhu.setAutoCreateRowSorter(true);
         tbSuhu.setComponentPopupMenu(jPopupMenu1);
         tbSuhu.setName("tbSuhu"); // NOI18N
         Scroll.setViewportView(tbSuhu);
@@ -1096,6 +1097,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbRespirasi.setAutoCreateRowSorter(true);
         tbRespirasi.setComponentPopupMenu(jPopupMenu1);
         tbRespirasi.setName("tbRespirasi"); // NOI18N
         Scroll1.setViewportView(tbRespirasi);
@@ -1106,6 +1108,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbNadi.setAutoCreateRowSorter(true);
         tbNadi.setComponentPopupMenu(jPopupMenu1);
         tbNadi.setName("tbNadi"); // NOI18N
         Scroll2.setViewportView(tbNadi);
@@ -1116,6 +1119,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll3.setName("Scroll3"); // NOI18N
         Scroll3.setOpaque(true);
 
+        tbSpO2.setAutoCreateRowSorter(true);
         tbSpO2.setComponentPopupMenu(jPopupMenu1);
         tbSpO2.setName("tbSpO2"); // NOI18N
         Scroll3.setViewportView(tbSpO2);
@@ -1126,6 +1130,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll4.setName("Scroll4"); // NOI18N
         Scroll4.setOpaque(true);
 
+        tbGCS.setAutoCreateRowSorter(true);
         tbGCS.setComponentPopupMenu(jPopupMenu1);
         tbGCS.setName("tbGCS"); // NOI18N
         Scroll4.setViewportView(tbGCS);
@@ -1136,6 +1141,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll5.setName("Scroll5"); // NOI18N
         Scroll5.setOpaque(true);
 
+        tbKesadaran.setAutoCreateRowSorter(true);
         tbKesadaran.setComponentPopupMenu(jPopupMenu1);
         tbKesadaran.setName("tbKesadaran"); // NOI18N
         Scroll5.setViewportView(tbKesadaran);
@@ -1146,6 +1152,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll6.setName("Scroll6"); // NOI18N
         Scroll6.setOpaque(true);
 
+        tbTensi.setAutoCreateRowSorter(true);
         tbTensi.setComponentPopupMenu(jPopupMenu1);
         tbTensi.setName("tbTensi"); // NOI18N
         Scroll6.setViewportView(tbTensi);
@@ -1156,6 +1163,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
+        tbTB.setAutoCreateRowSorter(true);
         tbTB.setComponentPopupMenu(jPopupMenu1);
         tbTB.setName("tbTB"); // NOI18N
         Scroll7.setViewportView(tbTB);
@@ -1166,6 +1174,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll8.setName("Scroll8"); // NOI18N
         Scroll8.setOpaque(true);
 
+        tbBB.setAutoCreateRowSorter(true);
         tbBB.setComponentPopupMenu(jPopupMenu1);
         tbBB.setName("tbBB"); // NOI18N
         Scroll8.setViewportView(tbBB);
@@ -1176,6 +1185,7 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
         Scroll9.setName("Scroll9"); // NOI18N
         Scroll9.setOpaque(true);
 
+        tbLP.setAutoCreateRowSorter(true);
         tbLP.setComponentPopupMenu(jPopupMenu1);
         tbLP.setName("tbLP"); // NOI18N
         Scroll9.setViewportView(tbLP);
