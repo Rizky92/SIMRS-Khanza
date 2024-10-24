@@ -666,16 +666,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
-                            signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
-                            signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -939,16 +939,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
-                            signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
-                            signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
