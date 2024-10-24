@@ -322,6 +322,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbObat.setAutoCreateRowSorter(true);
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
         Scroll.setViewportView(tbObat);
@@ -434,7 +435,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(85, 23));
         panelGlass9.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -447,7 +448,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass9.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -666,16 +667,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
-                            signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
-                            signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -939,16 +940,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
-                            signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
-                            signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
