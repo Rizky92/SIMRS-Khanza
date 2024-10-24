@@ -61,7 +61,7 @@ public final class SatuSehatReferensiRadiologiLOINC extends javax.swing.JDialog 
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 4; i++) {
             column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(50);

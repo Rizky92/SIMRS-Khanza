@@ -14,10 +14,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +41,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     private int i=0;
     private DlgCariTemplateLaborat pemeriksaan=new DlgCariTemplateLaborat(null,false);
     private final SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
-    private final SatuSehatReferensiLabSNOMED refSample = new SatuSehatReferensiLabSNOMED(null, false);
+    private final SatuSehatReferensiLabSNOMED refSampel = new SatuSehatReferensiLabSNOMED(null, false);
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -162,23 +160,23 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }
         });
         
-        refSample.addWindowListener(new WindowAdapter() {
+        refSampel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (refSample.getTable().getSelectedRow() != -1) {
-                    SampelCode.setText(refSample.getTable().getValueAt(refSample.getTable().getSelectedRow(), 0).toString());
-                    SampelSystem.setText(refSample.getTable().getValueAt(refSample.getTable().getSelectedRow(), 1).toString());
-                    SampelDisplay.setText(refSample.getTable().getValueAt(refSample.getTable().getSelectedRow(), 2).toString());
+                if (refSampel.getTable().getSelectedRow() != -1) {
+                    SampelCode.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 0).toString());
+                    SampelSystem.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 1).toString());
+                    SampelDisplay.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 2).toString());
                 }
                 BtnCariReferensiSampel.requestFocus();
             }
         });
 
-        refSample.getTable().addKeyListener(new KeyAdapter() {
+        refSampel.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    refSample.dispose();
+                    refSampel.dispose();
                 }
             }
         });
@@ -594,7 +592,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(SampelSystem);
         SampelSystem.setBounds(380, 100, 344, 23);
 
-        jLabel13.setText("Pemeriksaan Lab :");
+        jLabel13.setText("Pemeriksaan :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 10, 95, 23);
@@ -921,11 +919,11 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiMappingKeyPressed
 
     private void BtnCariReferensiSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelActionPerformed
-        refSample.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        refSample.setLocationRelativeTo(internalFrame1);
-        refSample.emptTeks();
-        refSample.tampil();
-        refSample.setVisible(true);
+        refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        refSampel.setLocationRelativeTo(internalFrame1);
+        refSampel.emptTeks();
+        refSampel.tampil();
+        refSampel.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiSampelActionPerformed
 
     private void BtnCariReferensiSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelKeyPressed
