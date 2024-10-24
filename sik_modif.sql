@@ -138,6 +138,55 @@ CREATE TABLE IF NOT EXISTS `mapping_user_bridginglab`  (
 
 ALTER TABLE `master_berkas_digital` ADD COLUMN IF NOT EXISTS `include_kompilasi_berkas` tinyint(1) NOT NULL DEFAULT 1 AFTER `nama`;
 
+CREATE TABLE IF NOT EXISTS `paket_mcu`  (
+  `kode_paket` varchar(20) NOT NULL,
+  `kd_pj` char(4) NOT NULL,
+  `nama_paket` varchar(200) NULL DEFAULT NULL,
+  `keterangan` text NULL DEFAULT NULL,
+  PRIMARY KEY (`kode_paket`) USING BTREE,
+  INDEX `kd_pj`(`kd_pj`) USING BTREE,
+  CONSTRAINT `paket_mcu_ibfk_1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab` (`kd_pj`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `paket_mcu_detail_permintaan_lab`  (
+  `kode_paket` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  `id_template` int(11) NOT NULL,
+  PRIMARY KEY (`kode_paket`, `kd_jenis_prw`, `id_template`) USING BTREE,
+  INDEX `kd_jenis_prw`(`kd_jenis_prw`) USING BTREE,
+  INDEX `id_template`(`id_template`) USING BTREE,
+  CONSTRAINT `paket_mcu_detail_permintaan_lab_ibfk_1` FOREIGN KEY (`kode_paket`) REFERENCES `paket_mcu` (`kode_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `paket_mcu_detail_permintaan_lab_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_lab` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `paket_mcu_detail_permintaan_lab_ibfk_3` FOREIGN KEY (`id_template`) REFERENCES `template_laboratorium` (`id_template`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `paket_mcu_permintaan_lab`  (
+  `kode_paket` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`kode_paket`, `kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw`(`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `paket_mcu_permintaan_lab_ibfk_1` FOREIGN KEY (`kode_paket`) REFERENCES `paket_mcu` (`kode_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `paket_mcu_permintaan_lab_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_lab` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `paket_mcu_permintaan_radiologi`  (
+  `kode_paket` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`kode_paket`, `kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw`(`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `paket_mcu_permintaan_radiologi_ibfk_1` FOREIGN KEY (`kode_paket`) REFERENCES `paket_mcu` (`kode_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `paket_mcu_permintaan_radiologi_ibfk_2` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan_radiologi` (`kd_jenis_prw`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `paket_mcu_tindakan`  (
+  `kode_paket` varchar(20) NOT NULL,
+  `kd_jenis_prw` varchar(15) NOT NULL,
+  PRIMARY KEY (`kode_paket`, `kd_jenis_prw`) USING BTREE,
+  INDEX `kd_jenis_prw`(`kd_jenis_prw`) USING BTREE,
+  CONSTRAINT `paket_mcu_tindakan_ibfk_1` FOREIGN KEY (`kd_jenis_prw`) REFERENCES `jns_perawatan` (`kd_jenis_prw`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `paket_mcu_tindakan_ibfk_2` FOREIGN KEY (`kode_paket`) REFERENCES `paket_mcu` (`kode_paket`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAULT NULL AFTER `no_rkm_medis`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAULT NULL AFTER `jk`;
@@ -388,6 +437,10 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_nonmedis` enum('true','false') NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_specimen_radiologi`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `paket_mcu` enum('true','false') NULL DEFAULT NULL AFTER `catatan_anestesi_sedasi`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `master_paket_mcu` enum('true','false') NULL DEFAULT NULL AFTER `paket_mcu`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
