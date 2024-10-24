@@ -164,6 +164,7 @@ import rekammedis.RMSkriningNutrisiAnak;
 import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMSkriningObesitas;
+import rekammedis.RMSkriningPUMA;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
 import rekammedis.RMSkriningTBC;
@@ -9690,6 +9691,24 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
     
+    private void BtnSkriningPUMAActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMSkriningPUMA form=new RMSkriningPUMA(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -10052,7 +10071,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                           BtnHasilEndoskopiFaringLaring,
                           BtnHasilEndoskopiHidung,BtnHasilEndoskopiTelinga,BtnPenilaianPasienImunitasRendah,BtnCatatanKeseimbanganCairan,BtnCatatanObservasiCHBP,
                           BtnCatatanObservasiInduksiPersalinan,BtnPermintaanKonsultasiMedik,BtnSkriningMerokokUsiaRemaja,BtnSkriningKekerasanPadaWanita,BtnSkriningObesitas,BtnSkriningRisikoKankerPayudara,BtnSkriningRisikoKankerParu,
-                          BtnSkriningKesehatanGigiMulutremaja,BtnSkriningTBC,BtnCatatanAnastesiSedasi;    
+                          BtnSkriningKesehatanGigiMulutremaja,BtnSkriningTBC,BtnCatatanAnastesiSedasi,BtnSkriningPUMA;    
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
         try{
@@ -10834,6 +10853,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         BtnSkriningTBC.setVisible(akses.getskrining_tbc());   
         if(akses.getskrining_tbc()==true){
+            tinggi=tinggi+24;
+        }
+        BtnSkriningPUMA.setVisible(akses.getskrining_puma());   
+        if(akses.getskrining_puma()==true){
             tinggi=tinggi+24;
         }
         BtnCatatanAnastesiSedasi.setVisible(akses.getcatatan_anestesi_sedasi());   
@@ -12376,6 +12399,19 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnSkriningTBC.setRoundRect(false);
         BtnSkriningTBC.addActionListener(this::BtnSkriningTBCActionPerformed);
         
+        BtnSkriningPUMA = new widget.Button();
+        BtnSkriningPUMA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnSkriningPUMA.setText("Skrining PUMA");
+        BtnSkriningPUMA.setFocusPainted(false);
+        BtnSkriningPUMA.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnSkriningPUMA.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnSkriningPUMA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnSkriningPUMA.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnSkriningPUMA.setName("BtnSkriningPUMA"); 
+        BtnSkriningPUMA.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnSkriningPUMA.setRoundRect(false);
+        BtnSkriningPUMA.addActionListener(this::BtnSkriningPUMAActionPerformed);
+        
         BtnCatatanAnastesiSedasi = new widget.Button();
         BtnCatatanAnastesiSedasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
         BtnCatatanAnastesiSedasi.setText("Catatan Anestesi-Sedasi");
@@ -12492,6 +12528,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnSkriningRisikoKankerParu);
         FormMenu.add(BtnSkriningKesehatanGigiMulutremaja);
         FormMenu.add(BtnSkriningTBC);
+        FormMenu.add(BtnSkriningPUMA);
         FormMenu.add(BtnSkriningNutrisiDewasa);
         FormMenu.add(BtnSkriningNutrisiLansia);
         FormMenu.add(BtnSkriningNutrisiAnak);
