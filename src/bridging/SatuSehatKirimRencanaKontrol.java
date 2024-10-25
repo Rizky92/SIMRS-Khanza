@@ -72,7 +72,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
 //        false, rs.getString("tgl_registrasi") + "T" + rs.getString("jam_reg") + "+07:00", rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
 //                                rs.getString("no_ktp"), rs.getString("noktpdokter"), rs.getString("nm_dokter"), rs.getString("id_encounter"), rs.getString("kd_penyakit"), rs.getString("nm_penyakit"),
 //                                rs.getString("deskripsi_panjang"), rs.getString("id_lokasi_satusehat"),rs.getString("tgl_surat"),rs.getString("tgl_rencana"),rs.getString("id_rtl")
-        tabMode = new DefaultTableModel(null, new String[]{
+        tabMode = new DefaultTableModel(null, new String[] {
             "P", "Tanggal Registrasi", "No.Rawat", "No.RM", "Nama Pasien", "No.KTP Pasien", "KTP Dokter", "Nama Dokter",
             "Encounter", "Kd Penyakit", "Penyakit", "ID Org", "ID Lokasi", "Nama Poli", "Tgl Surat", "Tgl Rencana", "ID RTL", "SEP"
         }) {
@@ -84,7 +84,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 }
                 return a;
             }
-            Class[] types = new Class[]{
+            Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -144,7 +144,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabMode1 = new DefaultTableModel(null, new String[]{
+        tabMode1 = new DefaultTableModel(null, new String[] {
             "P", "Tanggal Registrasi", "No.Rawat", "No.RM", "Nama Pasien", "No.KTP Pasien", "KTP Dokter", "Nama Dokter",
             "Encounter", "Kd Penyakit", "Penyakit", "ID Org", "ID Lokasi", "Nama Poli", "Tgl Surat", "Tgl Rencana", "ID RTL", "No Surat"
         }) {
@@ -156,7 +156,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 }
                 return a;
             }
-            Class[] types = new Class[]{
+            Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -216,7 +216,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
         }
         tbKamar1.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabMode2 = new DefaultTableModel(null, new String[]{
+        tabMode2 = new DefaultTableModel(null, new String[] {
             "P", "Tanggal Registrasi", "No.Rawat", "No.RM", "Nama Pasien", "No.KTP Pasien", "KTP Dokter", "Nama Dokter",
             "Encounter", "Kd Penyakit", "Penyakit", "ID Org", "ID Lokasi", "Nama Poli", "Tgl Surat", "Tgl Rencana", "ID RTL", "No Surat"
         }) {
@@ -228,7 +228,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 }
                 return a;
             }
-            Class[] types = new Class[]{
+            Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -288,7 +288,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
         }
         tbKamar2.setDefaultRenderer(Object.class, new WarnaTable());
 
-        tabMode3 = new DefaultTableModel(null, new String[]{
+        tabMode3 = new DefaultTableModel(null, new String[] {
             "P", "Tanggal Registrasi", "No.Rawat", "No.RM", "Nama Pasien", "No.KTP Pasien", "KTP Dokter", "Nama Dokter",
             "Encounter", "Kd Penyakit", "Penyakit", "Jns Pelayanan", "Di Rujuk ke", "Catatan", "Nama Poli", "ID Org", "No SEP", "ID RTL", "Rencana Kunjungan"
         }) {
@@ -300,7 +300,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 }
                 return a;
             }
-            Class[] types = new Class[]{
+            Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -396,9 +396,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -795,76 +793,76 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                 headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
                                 json = "{\n"
-                                        + "    \"resourceType\": \"ServiceRequest\",\n"
-                                        + "    \"identifier\": [\n"
-                                        + "        {\n"
-                                        + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
-                                        + "            \"value\": \"" + tbKamar.getValueAt(i, 11).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"status\": \"active\",\n"
-                                        + "    \"intent\": \"original-order\",\n"
-                                        + "    \"priority\": \"routine\",\n"
-                                        + "    \"category\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                    \"code\": \"3457005\",\n"
-                                        + "                    \"display\": \"Patient referral\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"code\": {\n"
-                                        + "        \"coding\": [\n"
-                                        + "            {\n"
-                                        + "                \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                \"code\": \"185389009\",\n"
-                                        + "                \"display\": \"Follow-up visit\"\n"
-                                        + "            }\n"
-                                        + "        ],\n"
-                                        + "        \"text\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada tanggal " + tbKamar.getValueAt(i, 15).toString() + " \"\n"
-                                        + "    },\n"
-                                        + "    \"subject\": {\n"
-                                        + "        \"reference\": \"Patient/" + idpasien + "\"\n"
-                                        + "    },\n"
-                                        + "    \"encounter\": {\n"
-                                        + "        \"reference\": \"Encounter/" + tbKamar.getValueAt(i, 8).toString() + "\",\n"
-                                        + "        \"display\": \"Kunjungan " + tbKamar.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar.getValueAt(i, 1).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"occurrenceDateTime\": \"" + tbKamar.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"authoredOn\": \"" + tbKamar.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"requester\": {\n"
-                                        + "        \"reference\": \"Practitioner/" + iddokter + "\",\n"
-                                        + "        \"display\": \"" + tbKamar.getValueAt(i, 7).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"performer\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Practitioner/" + iddokter + "\",\n"
-                                        + "            \"display\": \"" + tbKamar.getValueAt(i, 7).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"reasonCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
-                                        + "                    \"code\": \"" + tbKamar.getValueAt(i, 9).toString() + "\",\n"
-                                        + "                    \"display\": \"" + tbKamar.getValueAt(i, 10).toString() + "\"\n"
-                                        + "                }\n"
-                                        + "            ],\n"
-                                        + "            \"text\": \"Kontrol rutin bulanan\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"locationReference\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Location/" + tbKamar.getValueAt(i, 12).toString() + "\",\n"
-                                        + "            \"display\": \"" + tbKamar.getValueAt(i, 13).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"patientInstruction\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada " + tbKamar.getValueAt(i, 15).toString() + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
-                                        + "}";
+                                    + "    \"resourceType\": \"ServiceRequest\",\n"
+                                    + "    \"identifier\": [\n"
+                                    + "        {\n"
+                                    + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
+                                    + "            \"value\": \"" + tbKamar.getValueAt(i, 11).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"status\": \"active\",\n"
+                                    + "    \"intent\": \"original-order\",\n"
+                                    + "    \"priority\": \"routine\",\n"
+                                    + "    \"category\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                    \"code\": \"3457005\",\n"
+                                    + "                    \"display\": \"Patient referral\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"code\": {\n"
+                                    + "        \"coding\": [\n"
+                                    + "            {\n"
+                                    + "                \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                \"code\": \"185389009\",\n"
+                                    + "                \"display\": \"Follow-up visit\"\n"
+                                    + "            }\n"
+                                    + "        ],\n"
+                                    + "        \"text\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada tanggal " + tbKamar.getValueAt(i, 15).toString() + " \"\n"
+                                    + "    },\n"
+                                    + "    \"subject\": {\n"
+                                    + "        \"reference\": \"Patient/" + idpasien + "\"\n"
+                                    + "    },\n"
+                                    + "    \"encounter\": {\n"
+                                    + "        \"reference\": \"Encounter/" + tbKamar.getValueAt(i, 8).toString() + "\",\n"
+                                    + "        \"display\": \"Kunjungan " + tbKamar.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar.getValueAt(i, 1).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"occurrenceDateTime\": \"" + tbKamar.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"authoredOn\": \"" + tbKamar.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"requester\": {\n"
+                                    + "        \"reference\": \"Practitioner/" + iddokter + "\",\n"
+                                    + "        \"display\": \"" + tbKamar.getValueAt(i, 7).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"performer\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Practitioner/" + iddokter + "\",\n"
+                                    + "            \"display\": \"" + tbKamar.getValueAt(i, 7).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"reasonCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
+                                    + "                    \"code\": \"" + tbKamar.getValueAt(i, 9).toString() + "\",\n"
+                                    + "                    \"display\": \"" + tbKamar.getValueAt(i, 10).toString() + "\"\n"
+                                    + "                }\n"
+                                    + "            ],\n"
+                                    + "            \"text\": \"Kontrol rutin bulanan\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"locationReference\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Location/" + tbKamar.getValueAt(i, 12).toString() + "\",\n"
+                                    + "            \"display\": \"" + tbKamar.getValueAt(i, 13).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"patientInstruction\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada " + tbKamar.getValueAt(i, 15).toString() + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
+                                    + "}";
                                 System.out.println("URL : " + link + "/ServiceRequest");
                                 System.out.println("Request JSON : " + json);
                                 requestEntity = new HttpEntity(json, headers);
@@ -873,7 +871,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[] {
                                         tbKamar.getValueAt(i, 2).toString(), tbKamar.getValueAt(i, 17).toString(), response.asText()
                                     }
                                     );
@@ -910,87 +908,87 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                 headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
                                 json = "{\n"
-                                        + "    \"resourceType\": \"ServiceRequest\",\n"
-                                        + "    \"identifier\": [\n"
-                                        + "        {\n"
-                                        + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
-                                        + "            \"value\": \"" + tbKamar1.getValueAt(i, 11).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"status\": \"active\",\n"
-                                        + "    \"intent\": \"original-order\",\n"
-                                        + "    \"priority\": \"routine\",\n"
-                                        + "    \"category\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                    \"code\": \"3457005\",\n"
-                                        + "                    \"display\": \"Patient referral\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"code\": {\n"
-                                        + "        \"coding\": [\n"
-                                        + "            {\n"
-                                        + "                \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                \"code\": \"185389009\",\n"
-                                        + "                \"display\": \"Follow-up visit\"\n"
-                                        + "            }\n"
-                                        + "        ],\n"
-                                        + "        \"text\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada tanggal " + tbKamar1.getValueAt(j, 15).toString() + " \"\n"
-                                        + "    },\n"
-                                        + "    \"subject\": {\n"
-                                        + "        \"reference\": \"Patient/" + idpasien1 + "\"\n"
-                                        + "    },\n"
-                                        + "    \"encounter\": {\n"
-                                        + "        \"reference\": \"Encounter/" + tbKamar1.getValueAt(i, 8).toString() + "\",\n"
-                                        + "        \"display\": \"Kunjungan " + tbKamar1.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar1.getValueAt(i, 1).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"occurrenceDateTime\": \"" + tbKamar1.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"authoredOn\": \"" + tbKamar1.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"requester\": {\n"
-                                        + "        \"reference\": \"Practitioner/" + iddokter1 + "\",\n"
-                                        + "        \"display\": \"" + tbKamar1.getValueAt(i, 7).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"performer\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Practitioner/" + iddokter1 + "\",\n"
-                                        + "            \"display\": \"" + tbKamar1.getValueAt(i, 7).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"reasonCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
-                                        + "                    \"code\": \"" + tbKamar1.getValueAt(i, 9).toString() + "\",\n"
-                                        + "                    \"display\": \"" + tbKamar1.getValueAt(i, 10).toString() + "\"\n"
-                                        + "                }\n"
-                                        + "            ],\n"
-                                        + "            \"text\": \"Kontrol rutin bulanan\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"locationReference\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Location/" + tbKamar1.getValueAt(i, 12).toString() + "\",\n"
-                                        + "            \"display\": \"" + tbKamar1.getValueAt(i, 13).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"patientInstruction\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada " + tbKamar1.getValueAt(i, 15).toString() + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
-                                        + "}";
+                                    + "    \"resourceType\": \"ServiceRequest\",\n"
+                                    + "    \"identifier\": [\n"
+                                    + "        {\n"
+                                    + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
+                                    + "            \"value\": \"" + tbKamar1.getValueAt(i, 11).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"status\": \"active\",\n"
+                                    + "    \"intent\": \"original-order\",\n"
+                                    + "    \"priority\": \"routine\",\n"
+                                    + "    \"category\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                    \"code\": \"3457005\",\n"
+                                    + "                    \"display\": \"Patient referral\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"code\": {\n"
+                                    + "        \"coding\": [\n"
+                                    + "            {\n"
+                                    + "                \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                \"code\": \"185389009\",\n"
+                                    + "                \"display\": \"Follow-up visit\"\n"
+                                    + "            }\n"
+                                    + "        ],\n"
+                                    + "        \"text\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada tanggal " + tbKamar1.getValueAt(j, 15).toString() + " \"\n"
+                                    + "    },\n"
+                                    + "    \"subject\": {\n"
+                                    + "        \"reference\": \"Patient/" + idpasien1 + "\"\n"
+                                    + "    },\n"
+                                    + "    \"encounter\": {\n"
+                                    + "        \"reference\": \"Encounter/" + tbKamar1.getValueAt(i, 8).toString() + "\",\n"
+                                    + "        \"display\": \"Kunjungan " + tbKamar1.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar1.getValueAt(i, 1).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"occurrenceDateTime\": \"" + tbKamar1.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"authoredOn\": \"" + tbKamar1.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"requester\": {\n"
+                                    + "        \"reference\": \"Practitioner/" + iddokter1 + "\",\n"
+                                    + "        \"display\": \"" + tbKamar1.getValueAt(i, 7).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"performer\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Practitioner/" + iddokter1 + "\",\n"
+                                    + "            \"display\": \"" + tbKamar1.getValueAt(i, 7).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"reasonCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
+                                    + "                    \"code\": \"" + tbKamar1.getValueAt(i, 9).toString() + "\",\n"
+                                    + "                    \"display\": \"" + tbKamar1.getValueAt(i, 10).toString() + "\"\n"
+                                    + "                }\n"
+                                    + "            ],\n"
+                                    + "            \"text\": \"Kontrol rutin bulanan\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"locationReference\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Location/" + tbKamar1.getValueAt(i, 12).toString() + "\",\n"
+                                    + "            \"display\": \"" + tbKamar1.getValueAt(i, 13).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"patientInstruction\": \"Kontrol kembali ke Rumah Sakit Indriati Boyolali pada " + tbKamar1.getValueAt(i, 15).toString() + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
+                                    + "}";
                                 System.out.println("URL : " + link + "/ServiceRequest");
                                 System.out.println("Request JSON : " + json);
                                 requestEntity = new HttpEntity(json, headers);
                                 json
-                                        = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
-                                        ).getBody();
+                                    = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
+                                    ).getBody();
                                 System.out.println("Result JSON : " + json);
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[] {
                                         tbKamar1.getValueAt(i, 2).toString(), tbKamar1.getValueAt(i, 17).toString(), response.asText()
                                     });
                                 }
@@ -1024,90 +1022,90 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                 headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
                                 json = "{\n"
-                                        + "    \"resourceType\": \"ServiceRequest\",\n"
-                                        + "    \"identifier\": [\n"
-                                        + "        {\n"
-                                        + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
-                                        + "            \"value\": \"" + tbKamar2.getValueAt(i, 11).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"status\": \"active\",\n"
-                                        + "    \"intent\": \"original-order\",\n"
-                                        + "    \"priority\": \"routine\",\n"
-                                        + "    \"category\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                    \"code\": \"3457005\",\n"
-                                        + "                    \"display\": \"Patient referral\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"code\": {\n"
-                                        + "        \"coding\": [\n"
-                                        + "            {\n"
-                                        + "                \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                \"code\": \"737481003\",\n"
-                                        + "                \"display\": \"Inpatient care management\"\n"
-                                        + "            }\n"
-                                        + "        ]\n"
-                                        + "    },\n"
-                                        + "    \"subject\": {\n"
-                                        + "        \"reference\": \"Patient/" + idpasien2 + "\"\n"
-                                        + "    },\n"
-                                        + "    \"encounter\": {\n"
-                                        + "        \"reference\": \"Encounter/" + tbKamar2.getValueAt(i, 8).toString() + "\",\n"
-                                        + "        \"display\": \"Kunjungan " + tbKamar2.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar2.getValueAt(i, 1).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"occurrenceDateTime\": \"" + tbKamar2.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"requester\": {\n"
-                                        + "        \"reference\": \"Practitioner/" + iddokter2 + "\",\n"
-                                        + "        \"display\": \"" + tbKamar2.getValueAt(i, 7).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"performer\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Practitioner/" + iddokter2 + "\",\n"
-                                        + "            \"display\": \"" + tbKamar2.getValueAt(i, 7).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"reasonCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
-                                        + "                    \"code\": \"" + tbKamar2.getValueAt(i, 9).toString().trim() + "\",\n"
-                                        + "                    \"display\": \"" + tbKamar2.getValueAt(i, 10).toString() + "\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"locationCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n"
-                                        + "                    \"code\": \"HOSP\",\n"
-                                        + "                    \"display\": \"Hospital\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"patientInstruction\": \"Rencana Tindak Lanjut Rawat Inap di RS Indriati Boyolali pada " + tbKamar2.getValueAt(i, 15).toString()
-                                        + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
-                                        + "}";
+                                    + "    \"resourceType\": \"ServiceRequest\",\n"
+                                    + "    \"identifier\": [\n"
+                                    + "        {\n"
+                                    + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
+                                    + "            \"value\": \"" + tbKamar2.getValueAt(i, 11).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"status\": \"active\",\n"
+                                    + "    \"intent\": \"original-order\",\n"
+                                    + "    \"priority\": \"routine\",\n"
+                                    + "    \"category\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                    \"code\": \"3457005\",\n"
+                                    + "                    \"display\": \"Patient referral\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"code\": {\n"
+                                    + "        \"coding\": [\n"
+                                    + "            {\n"
+                                    + "                \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                \"code\": \"737481003\",\n"
+                                    + "                \"display\": \"Inpatient care management\"\n"
+                                    + "            }\n"
+                                    + "        ]\n"
+                                    + "    },\n"
+                                    + "    \"subject\": {\n"
+                                    + "        \"reference\": \"Patient/" + idpasien2 + "\"\n"
+                                    + "    },\n"
+                                    + "    \"encounter\": {\n"
+                                    + "        \"reference\": \"Encounter/" + tbKamar2.getValueAt(i, 8).toString() + "\",\n"
+                                    + "        \"display\": \"Kunjungan " + tbKamar2.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar2.getValueAt(i, 1).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"occurrenceDateTime\": \"" + tbKamar2.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"requester\": {\n"
+                                    + "        \"reference\": \"Practitioner/" + iddokter2 + "\",\n"
+                                    + "        \"display\": \"" + tbKamar2.getValueAt(i, 7).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"performer\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Practitioner/" + iddokter2 + "\",\n"
+                                    + "            \"display\": \"" + tbKamar2.getValueAt(i, 7).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"reasonCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
+                                    + "                    \"code\": \"" + tbKamar2.getValueAt(i, 9).toString().trim() + "\",\n"
+                                    + "                    \"display\": \"" + tbKamar2.getValueAt(i, 10).toString() + "\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"locationCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n"
+                                    + "                    \"code\": \"HOSP\",\n"
+                                    + "                    \"display\": \"Hospital\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"patientInstruction\": \"Rencana Tindak Lanjut Rawat Inap di RS Indriati Boyolali pada " + tbKamar2.getValueAt(i, 15).toString()
+                                    + ". Dalam keadaan darurat dapat menghubungi hotline (0276) 3280111\"\n"
+                                    + "}";
                                 System.out.println("URL : " + link + "/ServiceRequest");
                                 System.out.println("Request JSON : " + json);
                                 requestEntity = new HttpEntity(json, headers);
                                 json
-                                        = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
-                                        ).getBody();
+                                    = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
+                                    ).getBody();
                                 System.out.println("Result JSON : " + json);
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[] {
                                         tbKamar2.getValueAt(i, 2).toString(), tbKamar2.getValueAt(i, 17).toString(), response.asText()
                                     });
                                 }
@@ -1142,7 +1140,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             idpasien3 = cekViaSatuSehat.tampilIDPasien(tbKamar3.getValueAt(i, 5).toString());
                             iddokter3 = cekViaSatuSehat.tampilIDParktisi(tbKamar3.getValueAt(i, 6).toString());
                             if (tbKamar3.getValueAt(i, 11) != null
-                                    && tbKamar3.getValueAt(i, 11).toString().equals("2")) {
+                                && tbKamar3.getValueAt(i, 11).toString().equals("2")) {
                                 code = "737492002";
                                 display = "Outpatient care plan";
                             } else {
@@ -1154,89 +1152,89 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 headers.setContentType(MediaType.APPLICATION_JSON);
                                 headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
                                 json = "{\n"
-                                        + "    \"resourceType\": \"ServiceRequest\",\n"
-                                        + "    \"identifier\": [\n"
-                                        + "        {\n"
-                                        + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
-                                        + "            \"value\": \"" + tbKamar3.getValueAt(i, 15).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"status\": \"active\",\n"
-                                        + "    \"intent\": \"original-order\",\n"
-                                        + "    \"priority\": \"routine\",\n"
-                                        + "    \"category\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                    \"code\": \"3457005\",\n"
-                                        + "                    \"display\": \"Patient referral\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"code\": {\n"
-                                        + "        \"coding\": [\n"
-                                        + "            {\n"
-                                        + "                \"system\": \"http://snomed.info/sct\",\n"
-                                        + "                \"code\": \"" + code + "\",\n"
-                                        + "                \"display\": \"" + display + "\"\n"
-                                        + "            }\n"
-                                        + "        ]\n"
-                                        + "    },\n"
-                                        + "    \"subject\": {\n"
-                                        + "        \"reference\": \"Patient/" + idpasien3 + "\"\n"
-                                        + "    },\n"
-                                        + "    \"encounter\": {\n"
-                                        + "        \"reference\": \"Encounter/" + tbKamar3.getValueAt(i, 8).toString() + "\",\n"
-                                        + "        \"display\": \"Rencana Kunjungan " + tbKamar3.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar3.getValueAt(i, 1).toString() + " \"\n"
-                                        + "    },\n"
-                                        + "    \"occurrenceDateTime\": \"" + tbKamar3.getValueAt(i, 1).toString() + "\",\n"
-                                        + "    \"requester\": {\n"
-                                        + "        \"reference\": \"Practitioner/" + iddokter3 + "\",\n"
-                                        + "        \"display\": \"" + tbKamar3.getValueAt(i, 7).toString() + "\"\n"
-                                        + "    },\n"
-                                        + "    \"performer\": [\n"
-                                        + "        {\n"
-                                        + "            \"reference\": \"Practitioner/" + iddokter3 + "\",\n"
-                                        + "            \"display\": \"" + tbKamar3.getValueAt(i, 7).toString() + "\"\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"reasonCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
-                                        + "                    \"code\": \"" + tbKamar3.getValueAt(i, 9).toString().trim() + "\",\n"
-                                        + "                    \"display\": \"" + tbKamar3.getValueAt(i, 10).toString() + "\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"locationCode\": [\n"
-                                        + "        {\n"
-                                        + "            \"coding\": [\n"
-                                        + "                {\n"
-                                        + "                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n"
-                                        + "                    \"code\": \"HOSP\",\n"
-                                        + "                    \"display\": \"Hospital\"\n"
-                                        + "                }\n"
-                                        + "            ]\n"
-                                        + "        }\n"
-                                        + "    ],\n"
-                                        + "    \"patientInstruction\": \"Rencana Tindak Lanjut Rujuk Keluar ke " + tbKamar3.getValueAt(i, 12).toString() + " di " + tbKamar3.getValueAt(i, 14).toString() + " dengan catatan " + tbKamar3.getValueAt(i, 13).toString() + ". Rencana Kunjungan pada " + tbKamar3.getValueAt(i, 17).toString() + "\"\n"
-                                        + "}";
+                                    + "    \"resourceType\": \"ServiceRequest\",\n"
+                                    + "    \"identifier\": [\n"
+                                    + "        {\n"
+                                    + "            \"system\": \"http://sys-ids.kemkes.go.id/servicerequest/" + koneksiDB.IDSATUSEHAT() + "\",\n"
+                                    + "            \"value\": \"" + tbKamar3.getValueAt(i, 15).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"status\": \"active\",\n"
+                                    + "    \"intent\": \"original-order\",\n"
+                                    + "    \"priority\": \"routine\",\n"
+                                    + "    \"category\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                    \"code\": \"3457005\",\n"
+                                    + "                    \"display\": \"Patient referral\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"code\": {\n"
+                                    + "        \"coding\": [\n"
+                                    + "            {\n"
+                                    + "                \"system\": \"http://snomed.info/sct\",\n"
+                                    + "                \"code\": \"" + code + "\",\n"
+                                    + "                \"display\": \"" + display + "\"\n"
+                                    + "            }\n"
+                                    + "        ]\n"
+                                    + "    },\n"
+                                    + "    \"subject\": {\n"
+                                    + "        \"reference\": \"Patient/" + idpasien3 + "\"\n"
+                                    + "    },\n"
+                                    + "    \"encounter\": {\n"
+                                    + "        \"reference\": \"Encounter/" + tbKamar3.getValueAt(i, 8).toString() + "\",\n"
+                                    + "        \"display\": \"Rencana Kunjungan " + tbKamar3.getValueAt(i, 4).toString() + " pada tanggal " + tbKamar3.getValueAt(i, 1).toString() + " \"\n"
+                                    + "    },\n"
+                                    + "    \"occurrenceDateTime\": \"" + tbKamar3.getValueAt(i, 1).toString() + "\",\n"
+                                    + "    \"requester\": {\n"
+                                    + "        \"reference\": \"Practitioner/" + iddokter3 + "\",\n"
+                                    + "        \"display\": \"" + tbKamar3.getValueAt(i, 7).toString() + "\"\n"
+                                    + "    },\n"
+                                    + "    \"performer\": [\n"
+                                    + "        {\n"
+                                    + "            \"reference\": \"Practitioner/" + iddokter3 + "\",\n"
+                                    + "            \"display\": \"" + tbKamar3.getValueAt(i, 7).toString() + "\"\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"reasonCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://hl7.org/fhir/sid/icd-10\",\n"
+                                    + "                    \"code\": \"" + tbKamar3.getValueAt(i, 9).toString().trim() + "\",\n"
+                                    + "                    \"display\": \"" + tbKamar3.getValueAt(i, 10).toString() + "\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"locationCode\": [\n"
+                                    + "        {\n"
+                                    + "            \"coding\": [\n"
+                                    + "                {\n"
+                                    + "                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n"
+                                    + "                    \"code\": \"HOSP\",\n"
+                                    + "                    \"display\": \"Hospital\"\n"
+                                    + "                }\n"
+                                    + "            ]\n"
+                                    + "        }\n"
+                                    + "    ],\n"
+                                    + "    \"patientInstruction\": \"Rencana Tindak Lanjut Rujuk Keluar ke " + tbKamar3.getValueAt(i, 12).toString() + " di " + tbKamar3.getValueAt(i, 14).toString() + " dengan catatan " + tbKamar3.getValueAt(i, 13).toString() + ". Rencana Kunjungan pada " + tbKamar3.getValueAt(i, 17).toString() + "\"\n"
+                                    + "}";
                                 System.out.println("URL : " + link + "/ServiceRequest");
                                 System.out.println("Request JSON : " + json);
                                 requestEntity = new HttpEntity(json, headers);
                                 json
-                                        = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
-                                        ).getBody();
+                                    = api.getRest().exchange(link + "/ServiceRequest", HttpMethod.POST, requestEntity, String.class
+                                    ).getBody();
                                 System.out.println("Result JSON : " + json);
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[] {
                                         tbKamar3.getValueAt(i, 2).toString(), tbKamar3.getValueAt(i, 16).toString(), response.asText()
                                     });
                                 }
@@ -1312,47 +1310,47 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
                         json = "{"
-                                + "\"resourceType\": \"Procedure\","
-                                + "\"id\": \"" + tbKamar.getValueAt(i, 12).toString() + "\","
-                                + "\"status\": \"completed\","
-                                + "\"category\": {"
-                                + "\"coding\": ["
-                                + "{"
-                                + "\"system\": \"http://snomed.info/sct\","
-                                + "\"code\": \"103693007\","
-                                + "\"display\": \"Diagnostic procedure\""
-                                + "}"
-                                + "],"
-                                + "\"text\":\"Diagnostic procedure\""
-                                + "},"
-                                + "\"code\": {"
-                                + "\"coding\": ["
-                                + "{"
-                                + "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\","
-                                + "\"code\": \"" + tbKamar.getValueAt(i, 10).toString() + "\","
-                                + "\"display\": \"" + tbKamar.getValueAt(i, 11).toString() + "\""
-                                + "}"
-                                + "]"
-                                + "},"
-                                + "\"subject\": {"
-                                + "\"reference\": \"Patient/" + idpasien + "\","
-                                + "\"display\": \"" + tbKamar.getValueAt(i, 4).toString() + "\""
-                                + "},"
-                                + "\"encounter\": {"
-                                + "\"reference\": \"Encounter/" + tbKamar.getValueAt(i, 9).toString() + "\","
-                                + "\"display\": \"Prosedur " + tbKamar.getValueAt(i, 4).toString() + " selama kunjungan/dirawat dari tanggal " + tbKamar.getValueAt(i, 1).toString() + " sampai " + tbKamar.getValueAt(i, 8).toString() + "\""
-                                + "},"
-                                + "\"performedPeriod\": {"
-                                + "\"start\": \"" + tbKamar.getValueAt(i, 1).toString() + "\","
-                                + "\"end\": \"" + tbKamar.getValueAt(i, 8).toString() + "\""
-                                + "}"
-                                + "}";
+                            + "\"resourceType\": \"Procedure\","
+                            + "\"id\": \"" + tbKamar.getValueAt(i, 12).toString() + "\","
+                            + "\"status\": \"completed\","
+                            + "\"category\": {"
+                            + "\"coding\": ["
+                            + "{"
+                            + "\"system\": \"http://snomed.info/sct\","
+                            + "\"code\": \"103693007\","
+                            + "\"display\": \"Diagnostic procedure\""
+                            + "}"
+                            + "],"
+                            + "\"text\":\"Diagnostic procedure\""
+                            + "},"
+                            + "\"code\": {"
+                            + "\"coding\": ["
+                            + "{"
+                            + "\"system\": \"http://hl7.org/fhir/sid/icd-9-cm\","
+                            + "\"code\": \"" + tbKamar.getValueAt(i, 10).toString() + "\","
+                            + "\"display\": \"" + tbKamar.getValueAt(i, 11).toString() + "\""
+                            + "}"
+                            + "]"
+                            + "},"
+                            + "\"subject\": {"
+                            + "\"reference\": \"Patient/" + idpasien + "\","
+                            + "\"display\": \"" + tbKamar.getValueAt(i, 4).toString() + "\""
+                            + "},"
+                            + "\"encounter\": {"
+                            + "\"reference\": \"Encounter/" + tbKamar.getValueAt(i, 9).toString() + "\","
+                            + "\"display\": \"Prosedur " + tbKamar.getValueAt(i, 4).toString() + " selama kunjungan/dirawat dari tanggal " + tbKamar.getValueAt(i, 1).toString() + " sampai " + tbKamar.getValueAt(i, 8).toString() + "\""
+                            + "},"
+                            + "\"performedPeriod\": {"
+                            + "\"start\": \"" + tbKamar.getValueAt(i, 1).toString() + "\","
+                            + "\"end\": \"" + tbKamar.getValueAt(i, 8).toString() + "\""
+                            + "}"
+                            + "}";
                         System.out.println("URL : " + link + "/Procedure/" + tbKamar.getValueAt(i, 12).toString());
                         System.out.println("Request JSON : " + json);
                         requestEntity = new HttpEntity(json, headers);
                         json
-                                = api.getRest().exchange(link + "/Procedure/" + tbKamar.getValueAt(i, 12).toString(), HttpMethod.PUT, requestEntity, String.class
-                                ).getBody();
+                            = api.getRest().exchange(link + "/Procedure/" + tbKamar.getValueAt(i, 12).toString(), HttpMethod.PUT, requestEntity, String.class
+                            ).getBody();
                         System.out.println("Result JSON : " + json);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
                         // Handle client and server errors
@@ -1469,42 +1467,42 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 Valid.tabelKosong(tabMode);
                 try {
                     ps = koneksi.prepareStatement(
-                            "SELECT\n"
-                            + "	pasien.no_ktp,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
-                            + "	satu_sehat_encounter.id_encounter,reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,\n"
-                            + "	pasien.nm_pasien,pasien.no_rkm_medis, \n"
-                            + "	pegawai.no_ktp AS noktpdokter,\n"
-                            + "	dokter.nm_dokter,\n"
-                            + "	diagnosa_pasien.kd_penyakit,\n"
-                            + "	penyakit.nm_penyakit,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
-                            + "	poliklinik.nm_poli,\n"
-                            + "	bridging_surat_kontrol_bpjs.no_surat,\n"
-                            + "	bridging_surat_kontrol_bpjs.tgl_surat,\n"
-                            + "	bridging_surat_kontrol_bpjs.tgl_rencana,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl, reg_periksa.jam_reg, reg_periksa.no_rawat \n"
-                            + "FROM\n"
-                            + "	reg_periksa\n"
-                            + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
-                            + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
-                            + "	INNER JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter\n"
-                            + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON reg_periksa.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
-                            + "	INNER JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat\n"
-                            + "	INNER JOIN bridging_surat_kontrol_bpjs ON bridging_sep.no_sep = bridging_surat_kontrol_bpjs.no_sep\n"
-                            + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik\n"
-                            + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
-                            + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
-                            + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat \n"
-                            + "	AND bridging_surat_kontrol_bpjs.no_surat = satu_sehat_rtl.nosurkon \n"
-                            + "where " + belumterkirim + " reg_periksa.tgl_registrasi between ? and ? "
-                            + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
-                            + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
-                            + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
-                            + " GROUP BY\n"
-                            + "	bridging_surat_kontrol_bpjs.no_surat "
-                            + "order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat");
+                        "SELECT\n"
+                        + "	pasien.no_ktp,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
+                        + "	satu_sehat_encounter.id_encounter,reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,\n"
+                        + "	pasien.nm_pasien,pasien.no_rkm_medis, \n"
+                        + "	pegawai.no_ktp AS noktpdokter,\n"
+                        + "	dokter.nm_dokter,\n"
+                        + "	diagnosa_pasien.kd_penyakit,\n"
+                        + "	penyakit.nm_penyakit,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
+                        + "	poliklinik.nm_poli,\n"
+                        + "	bridging_surat_kontrol_bpjs.no_surat,\n"
+                        + "	bridging_surat_kontrol_bpjs.tgl_surat,\n"
+                        + "	bridging_surat_kontrol_bpjs.tgl_rencana,\n"
+                        + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl, reg_periksa.jam_reg, reg_periksa.no_rawat \n"
+                        + "FROM\n"
+                        + "	reg_periksa\n"
+                        + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
+                        + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
+                        + "	INNER JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter\n"
+                        + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON reg_periksa.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
+                        + "	INNER JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat\n"
+                        + "	INNER JOIN bridging_surat_kontrol_bpjs ON bridging_sep.no_sep = bridging_surat_kontrol_bpjs.no_sep\n"
+                        + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik\n"
+                        + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
+                        + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
+                        + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
+                        + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat \n"
+                        + "	AND bridging_surat_kontrol_bpjs.no_surat = satu_sehat_rtl.nosurkon \n"
+                        + "where " + belumterkirim + " reg_periksa.tgl_registrasi between ? and ? "
+                        + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
+                        + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
+                        + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
+                        + " GROUP BY\n"
+                        + "	bridging_surat_kontrol_bpjs.no_surat "
+                        + "order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat");
                     try {
                         ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
                         ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
@@ -1518,50 +1516,47 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                         }
                         rs = ps.executeQuery();
                         while (rs.next()) {
-//                            if (cekflagging.GeneralConsentSatuSehat(rs.getString("no_rkm_medis")) == true) {
-                                if (rs.getString("id_rtl").equals("")) {
-                                    tabMode.addRow(new Object[]{
-                                        true, rs.getString("tgl_registrasi") + "T" + rs.getString("jam_reg") + "+07:00",
-                                        rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),
-                                        rs.getString("nm_pasien"),
-                                        rs.getString("no_ktp"),
-                                        rs.getString("noktpdokter"),
-                                        rs.getString("nm_dokter"),
-                                        rs.getString("id_encounter"),
-                                        rs.getString("kd_penyakit"),
-                                        rs.getString("nm_penyakit"),
-                                        rs.getString("id_organisasi_satusehat"),
-                                        rs.getString("id_lokasi_satusehat"),
-                                        rs.getString("nm_poli"),
-                                        rs.getString("tgl_surat"),
-                                        rs.getString("tgl_rencana"),
-                                        rs.getString("id_rtl"),
-                                        rs.getString("no_surat")
-                                    });
-                                } else {
-                                    tabMode.addRow(new Object[]{
-                                        false, rs.getString("tgl_registrasi") + "T" + rs.getString("jam_reg") + "+07:00",
-                                        rs.getString("no_rawat"),
-                                        rs.getString("no_rkm_medis"),
-                                        rs.getString("nm_pasien"),
-                                        rs.getString("no_ktp"),
-                                        rs.getString("noktpdokter"),
-                                        rs.getString("nm_dokter"),
-                                        rs.getString("id_encounter"),
-                                        rs.getString("kd_penyakit"),
-                                        rs.getString("nm_penyakit"),
-                                        rs.getString("id_organisasi_satusehat"),
-                                        rs.getString("id_lokasi_satusehat"),
-                                        rs.getString("nm_poli"),
-                                        rs.getString("tgl_surat"),
-                                        rs.getString("tgl_rencana"),
-                                        rs.getString("id_rtl"),
-                                        rs.getString("no_surat")
-                                    });
-                                }
-
-//                            }
+                            if (rs.getString("id_rtl").equals("")) {
+                                tabMode.addRow(new Object[] {
+                                    true, rs.getString("tgl_registrasi") + "T" + rs.getString("jam_reg") + "+07:00",
+                                    rs.getString("no_rawat"),
+                                    rs.getString("no_rkm_medis"),
+                                    rs.getString("nm_pasien"),
+                                    rs.getString("no_ktp"),
+                                    rs.getString("noktpdokter"),
+                                    rs.getString("nm_dokter"),
+                                    rs.getString("id_encounter"),
+                                    rs.getString("kd_penyakit"),
+                                    rs.getString("nm_penyakit"),
+                                    rs.getString("id_organisasi_satusehat"),
+                                    rs.getString("id_lokasi_satusehat"),
+                                    rs.getString("nm_poli"),
+                                    rs.getString("tgl_surat"),
+                                    rs.getString("tgl_rencana"),
+                                    rs.getString("id_rtl"),
+                                    rs.getString("no_surat")
+                                });
+                            } else {
+                                tabMode.addRow(new Object[] {
+                                    false, rs.getString("tgl_registrasi") + "T" + rs.getString("jam_reg") + "+07:00",
+                                    rs.getString("no_rawat"),
+                                    rs.getString("no_rkm_medis"),
+                                    rs.getString("nm_pasien"),
+                                    rs.getString("no_ktp"),
+                                    rs.getString("noktpdokter"),
+                                    rs.getString("nm_dokter"),
+                                    rs.getString("id_encounter"),
+                                    rs.getString("kd_penyakit"),
+                                    rs.getString("nm_penyakit"),
+                                    rs.getString("id_organisasi_satusehat"),
+                                    rs.getString("id_lokasi_satusehat"),
+                                    rs.getString("nm_poli"),
+                                    rs.getString("tgl_surat"),
+                                    rs.getString("tgl_rencana"),
+                                    rs.getString("id_rtl"),
+                                    rs.getString("no_surat")
+                                });
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
@@ -1589,45 +1584,45 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 Valid.tabelKosong(tabMode1);
                 try {
                     ps1 = koneksi.prepareStatement(
-                            "SELECT\n"
-                            + "	reg_periksa.no_rawat,\n"
-                            + "	reg_periksa.tgl_registrasi,\n"
-                            + "	reg_periksa.jam_reg,\n"
-                            + "	pasien.no_rkm_medis,\n"
-                            + "	pasien.nm_pasien,\n"
-                            + "	pasien.no_ktp,\n"
-                            + "	pegawai.no_ktp noktpdokter,\n"
-                            + "	dokter.nm_dokter,\n"
-                            + "	skdp_bpjs_new.tanggal_surat,\n"
-                            + "	skdp_bpjs_new.tanggal_periksakembali,\n"
-                            + "	skdp_bpjs_new.tl,\n"
-                            + "	satu_sehat_encounter.id_encounter,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
-                            + "	poliklinik.nm_poli,\n"
-                            + "	diagnosa_pasien.kd_penyakit,\n"
-                            + "	penyakit.nm_penyakit,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
-                            + "FROM\n"
-                            + "	reg_periksa\n"
-                            + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
-                            + "	INNER JOIN skdp_bpjs_new ON pasien.no_rkm_medis = skdp_bpjs_new.no_rkm_medis \n"
-                            + "	AND reg_periksa.no_rawat = skdp_bpjs_new.no_rawat\n"
-                            + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
-                            + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON skdp_bpjs_new.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
-                            + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
-                            + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
-                            + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON skdp_bpjs_new.no_rawat = satu_sehat_rtl.no_rawat\n"
-                            + "	INNER JOIN dokter ON skdp_bpjs_new.kd_dokter = dokter.kd_dokter\n"
-                            + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik  \n"
-                            + "where " + belumterkirim1 + " reg_periksa.tgl_registrasi between ? and ? "
-                            + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
-                            + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
-                            + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
-                            + " GROUP BY\n"
-                            + "	reg_periksa.no_rawat  "
-                            + "order by reg_periksa.tgl_registrasi ASC,reg_periksa.jam_reg ASC,reg_periksa.no_rawat ASC, skdp_bpjs_new.tanggal_surat ASC");
+                        "SELECT\n"
+                        + "	reg_periksa.no_rawat,\n"
+                        + "	reg_periksa.tgl_registrasi,\n"
+                        + "	reg_periksa.jam_reg,\n"
+                        + "	pasien.no_rkm_medis,\n"
+                        + "	pasien.nm_pasien,\n"
+                        + "	pasien.no_ktp,\n"
+                        + "	pegawai.no_ktp noktpdokter,\n"
+                        + "	dokter.nm_dokter,\n"
+                        + "	skdp_bpjs_new.tanggal_surat,\n"
+                        + "	skdp_bpjs_new.tanggal_periksakembali,\n"
+                        + "	skdp_bpjs_new.tl,\n"
+                        + "	satu_sehat_encounter.id_encounter,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
+                        + "	poliklinik.nm_poli,\n"
+                        + "	diagnosa_pasien.kd_penyakit,\n"
+                        + "	penyakit.nm_penyakit,\n"
+                        + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
+                        + "FROM\n"
+                        + "	reg_periksa\n"
+                        + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
+                        + "	INNER JOIN skdp_bpjs_new ON pasien.no_rkm_medis = skdp_bpjs_new.no_rkm_medis \n"
+                        + "	AND reg_periksa.no_rawat = skdp_bpjs_new.no_rawat\n"
+                        + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
+                        + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON skdp_bpjs_new.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
+                        + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
+                        + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
+                        + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
+                        + "	LEFT JOIN satu_sehat_rtl ON skdp_bpjs_new.no_rawat = satu_sehat_rtl.no_rawat\n"
+                        + "	INNER JOIN dokter ON skdp_bpjs_new.kd_dokter = dokter.kd_dokter\n"
+                        + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik  \n"
+                        + "where " + belumterkirim1 + " reg_periksa.tgl_registrasi between ? and ? "
+                        + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
+                        + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
+                        + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
+                        + " GROUP BY\n"
+                        + "	reg_periksa.no_rawat  "
+                        + "order by reg_periksa.tgl_registrasi ASC,reg_periksa.jam_reg ASC,reg_periksa.no_rawat ASC, skdp_bpjs_new.tanggal_surat ASC");
                     try {
                         ps1.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
                         ps1.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
@@ -1641,50 +1636,47 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                         }
                         rs1 = ps1.executeQuery();
                         while (rs1.next()) {
-//                            if (cekflagging.GeneralConsentSatuSehat(rs1.getString("no_rkm_medis")) == true) {
-                                if (rs1.getString("id_rtl").equals("")) {
-                                    tabMode1.addRow(new Object[]{
-                                        true, rs1.getString("tgl_registrasi") + "T" + rs1.getString("jam_reg") + "+07:00",
-                                        rs1.getString("no_rawat"),
-                                        rs1.getString("no_rkm_medis"),
-                                        rs1.getString("nm_pasien"),
-                                        rs1.getString("no_ktp"),
-                                        rs1.getString("noktpdokter"),
-                                        rs1.getString("nm_dokter"),
-                                        rs1.getString("id_encounter"),
-                                        rs1.getString("kd_penyakit"),
-                                        rs1.getString("nm_penyakit"),
-                                        rs1.getString("id_organisasi_satusehat"),
-                                        rs1.getString("id_lokasi_satusehat"),
-                                        rs1.getString("nm_poli"),
-                                        rs1.getString("tanggal_surat"),
-                                        rs1.getString("tanggal_periksakembali"),
-                                        rs1.getString("id_rtl"),
-                                        "SUKON" + rs1.getString("no_rawat")
-                                    });
-                                } else {
-                                    tabMode1.addRow(new Object[]{
-                                        false, rs1.getString("tgl_registrasi") + "T" + rs1.getString("jam_reg") + "+07:00",
-                                        rs1.getString("no_rawat"),
-                                        rs1.getString("no_rkm_medis"),
-                                        rs1.getString("nm_pasien"),
-                                        rs1.getString("no_ktp"),
-                                        rs1.getString("noktpdokter"),
-                                        rs1.getString("nm_dokter"),
-                                        rs1.getString("id_encounter"),
-                                        rs1.getString("kd_penyakit"),
-                                        rs1.getString("nm_penyakit"),
-                                        rs1.getString("id_organisasi_satusehat"),
-                                        rs1.getString("id_lokasi_satusehat"),
-                                        rs1.getString("nm_poli"),
-                                        rs1.getString("tanggal_surat"),
-                                        rs1.getString("tanggal_periksakembali"),
-                                        rs1.getString("id_rtl"),
-                                        "SUKON" + rs1.getString("no_rawat")
-                                    });
-                                }
-
-//                            }
+                            if (rs1.getString("id_rtl").equals("")) {
+                                tabMode1.addRow(new Object[] {
+                                    true, rs1.getString("tgl_registrasi") + "T" + rs1.getString("jam_reg") + "+07:00",
+                                    rs1.getString("no_rawat"),
+                                    rs1.getString("no_rkm_medis"),
+                                    rs1.getString("nm_pasien"),
+                                    rs1.getString("no_ktp"),
+                                    rs1.getString("noktpdokter"),
+                                    rs1.getString("nm_dokter"),
+                                    rs1.getString("id_encounter"),
+                                    rs1.getString("kd_penyakit"),
+                                    rs1.getString("nm_penyakit"),
+                                    rs1.getString("id_organisasi_satusehat"),
+                                    rs1.getString("id_lokasi_satusehat"),
+                                    rs1.getString("nm_poli"),
+                                    rs1.getString("tanggal_surat"),
+                                    rs1.getString("tanggal_periksakembali"),
+                                    rs1.getString("id_rtl"),
+                                    "SUKON" + rs1.getString("no_rawat")
+                                });
+                            } else {
+                                tabMode1.addRow(new Object[] {
+                                    false, rs1.getString("tgl_registrasi") + "T" + rs1.getString("jam_reg") + "+07:00",
+                                    rs1.getString("no_rawat"),
+                                    rs1.getString("no_rkm_medis"),
+                                    rs1.getString("nm_pasien"),
+                                    rs1.getString("no_ktp"),
+                                    rs1.getString("noktpdokter"),
+                                    rs1.getString("nm_dokter"),
+                                    rs1.getString("id_encounter"),
+                                    rs1.getString("kd_penyakit"),
+                                    rs1.getString("nm_penyakit"),
+                                    rs1.getString("id_organisasi_satusehat"),
+                                    rs1.getString("id_lokasi_satusehat"),
+                                    rs1.getString("nm_poli"),
+                                    rs1.getString("tanggal_surat"),
+                                    rs1.getString("tanggal_periksakembali"),
+                                    rs1.getString("id_rtl"),
+                                    "SUKON" + rs1.getString("no_rawat")
+                                });
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
@@ -1713,51 +1705,51 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 Valid.tabelKosong(tabMode2);
                 try {
                     ps2 = koneksi.prepareStatement(
-                            "SELECT\n"
-                            + "	reg_periksa.tgl_registrasi,\n"
-                            + "	reg_periksa.jam_reg,\n"
-                            + "	reg_periksa.no_rawat,\n"
-                            + "	pasien.no_rkm_medis,\n"
-                            + "	pasien.nm_pasien,\n"
-                            + "	pasien.no_ktp,\n"
-                            + "	bridging_surat_pri_bpjs.tgl_surat,\n"
-                            + "	bridging_surat_pri_bpjs.no_surat,\n"
-                            + "	bridging_surat_pri_bpjs.tgl_rencana,\n"
-                            + "	satu_sehat_encounter.id_encounter,\n"
-                            + "	maping_poli_bpjs.kd_poli_rs,\n"
-                            + "	poliklinik.nm_poli,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
-                            + "	pegawai.no_ktp noktpdokter,\n"
-                            + "	dokter.nm_dokter,\n"
-                            + "	diagnosa_pasien.kd_penyakit,\n"
-                            + "	penyakit.nm_penyakit,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
-                            + "FROM\n"
-                            + "	reg_periksa\n"
-                            + "	INNER JOIN bridging_surat_pri_bpjs ON reg_periksa.no_rawat = bridging_surat_pri_bpjs.no_rawat\n"
-                            + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
-                            + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
-                            + "	INNER JOIN maping_poli_bpjs ON bridging_surat_pri_bpjs.kd_poli_bpjs = maping_poli_bpjs.kd_poli_bpjs\n"
-                            + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON maping_poli_bpjs.kd_poli_rs = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
-                            + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
-                            + "	INNER JOIN maping_dokter_dpjpvclaim ON bridging_surat_pri_bpjs.kd_dokter_bpjs = maping_dokter_dpjpvclaim.kd_dokter_bpjs\n"
-                            + "	INNER JOIN dokter ON maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter\n"
-                            + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik\n"
-                            + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
-                            + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat   \n"
-                            + "where " + belumterkirim2 + " reg_periksa.tgl_registrasi between ? and ? "
-                            + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
-                            + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
-                            + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
-                            + " GROUP BY\n"
-                            + "	bridging_surat_pri_bpjs.no_surat \n"
-                            + "ORDER BY\n"
-                            + "	reg_periksa.tgl_registrasi ASC,\n"
-                            + "	reg_periksa.jam_reg ASC,\n"
-                            + "	reg_periksa.no_rawat ASC,\n"
-                            + "	bridging_surat_pri_bpjs.tgl_surat ASC");
+                        "SELECT\n"
+                        + "	reg_periksa.tgl_registrasi,\n"
+                        + "	reg_periksa.jam_reg,\n"
+                        + "	reg_periksa.no_rawat,\n"
+                        + "	pasien.no_rkm_medis,\n"
+                        + "	pasien.nm_pasien,\n"
+                        + "	pasien.no_ktp,\n"
+                        + "	bridging_surat_pri_bpjs.tgl_surat,\n"
+                        + "	bridging_surat_pri_bpjs.no_surat,\n"
+                        + "	bridging_surat_pri_bpjs.tgl_rencana,\n"
+                        + "	satu_sehat_encounter.id_encounter,\n"
+                        + "	maping_poli_bpjs.kd_poli_rs,\n"
+                        + "	poliklinik.nm_poli,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,\n"
+                        + "	pegawai.no_ktp noktpdokter,\n"
+                        + "	dokter.nm_dokter,\n"
+                        + "	diagnosa_pasien.kd_penyakit,\n"
+                        + "	penyakit.nm_penyakit,\n"
+                        + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
+                        + "FROM\n"
+                        + "	reg_periksa\n"
+                        + "	INNER JOIN bridging_surat_pri_bpjs ON reg_periksa.no_rawat = bridging_surat_pri_bpjs.no_rawat\n"
+                        + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
+                        + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
+                        + "	INNER JOIN maping_poli_bpjs ON bridging_surat_pri_bpjs.kd_poli_bpjs = maping_poli_bpjs.kd_poli_bpjs\n"
+                        + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON maping_poli_bpjs.kd_poli_rs = satu_sehat_mapping_lokasi_ralan.kd_poli\n"
+                        + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
+                        + "	INNER JOIN maping_dokter_dpjpvclaim ON bridging_surat_pri_bpjs.kd_dokter_bpjs = maping_dokter_dpjpvclaim.kd_dokter_bpjs\n"
+                        + "	INNER JOIN dokter ON maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter\n"
+                        + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik\n"
+                        + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
+                        + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
+                        + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat   \n"
+                        + "where " + belumterkirim2 + " reg_periksa.tgl_registrasi between ? and ? "
+                        + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
+                        + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
+                        + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
+                        + " GROUP BY\n"
+                        + "	bridging_surat_pri_bpjs.no_surat \n"
+                        + "ORDER BY\n"
+                        + "	reg_periksa.tgl_registrasi ASC,\n"
+                        + "	reg_periksa.jam_reg ASC,\n"
+                        + "	reg_periksa.no_rawat ASC,\n"
+                        + "	bridging_surat_pri_bpjs.tgl_surat ASC");
                     try {
                         ps2.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
                         ps2.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
@@ -1771,50 +1763,47 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                         }
                         rs2 = ps2.executeQuery();
                         while (rs2.next()) {
-//                            if (cekflagging.GeneralConsentSatuSehat(rs2.getString("no_rkm_medis")) == true) {
-                                if (rs2.getString("id_rtl").equals("")) {
-                                    tabMode2.addRow(new Object[]{
-                                        true, rs2.getString("tgl_registrasi") + "T" + rs2.getString("jam_reg") + "+07:00",
-                                        rs2.getString("no_rawat"),
-                                        rs2.getString("no_rkm_medis"),
-                                        rs2.getString("nm_pasien"),
-                                        rs2.getString("no_ktp"),
-                                        rs2.getString("noktpdokter"),
-                                        rs2.getString("nm_dokter"),
-                                        rs2.getString("id_encounter"),
-                                        rs2.getString("kd_penyakit"),
-                                        rs2.getString("nm_penyakit"),
-                                        rs2.getString("id_organisasi_satusehat"),
-                                        rs2.getString("id_lokasi_satusehat"),
-                                        rs2.getString("nm_poli"),
-                                        rs2.getString("tgl_surat"),
-                                        rs2.getString("tgl_rencana"),
-                                        rs2.getString("id_rtl"),
-                                        "PRI" + rs2.getString("no_surat")
-                                    });
-                                } else {
-                                    tabMode2.addRow(new Object[]{
-                                        false, rs2.getString("tgl_registrasi") + "T" + rs2.getString("jam_reg") + "+07:00",
-                                        rs2.getString("no_rawat"),
-                                        rs2.getString("no_rkm_medis"),
-                                        rs2.getString("nm_pasien"),
-                                        rs2.getString("no_ktp"),
-                                        rs2.getString("noktpdokter"),
-                                        rs2.getString("nm_dokter"),
-                                        rs2.getString("id_encounter"),
-                                        rs2.getString("kd_penyakit"),
-                                        rs2.getString("nm_penyakit"),
-                                        rs2.getString("id_organisasi_satusehat"),
-                                        rs2.getString("id_lokasi_satusehat"),
-                                        rs2.getString("nm_poli"),
-                                        rs2.getString("tgl_surat"),
-                                        rs2.getString("tgl_rencana"),
-                                        rs2.getString("id_rtl"),
-                                        "PRI" + rs2.getString("no_surat")
-                                    });
-                                }
-
-//                            }
+                            if (rs2.getString("id_rtl").equals("")) {
+                                tabMode2.addRow(new Object[] {
+                                    true, rs2.getString("tgl_registrasi") + "T" + rs2.getString("jam_reg") + "+07:00",
+                                    rs2.getString("no_rawat"),
+                                    rs2.getString("no_rkm_medis"),
+                                    rs2.getString("nm_pasien"),
+                                    rs2.getString("no_ktp"),
+                                    rs2.getString("noktpdokter"),
+                                    rs2.getString("nm_dokter"),
+                                    rs2.getString("id_encounter"),
+                                    rs2.getString("kd_penyakit"),
+                                    rs2.getString("nm_penyakit"),
+                                    rs2.getString("id_organisasi_satusehat"),
+                                    rs2.getString("id_lokasi_satusehat"),
+                                    rs2.getString("nm_poli"),
+                                    rs2.getString("tgl_surat"),
+                                    rs2.getString("tgl_rencana"),
+                                    rs2.getString("id_rtl"),
+                                    "PRI" + rs2.getString("no_surat")
+                                });
+                            } else {
+                                tabMode2.addRow(new Object[] {
+                                    false, rs2.getString("tgl_registrasi") + "T" + rs2.getString("jam_reg") + "+07:00",
+                                    rs2.getString("no_rawat"),
+                                    rs2.getString("no_rkm_medis"),
+                                    rs2.getString("nm_pasien"),
+                                    rs2.getString("no_ktp"),
+                                    rs2.getString("noktpdokter"),
+                                    rs2.getString("nm_dokter"),
+                                    rs2.getString("id_encounter"),
+                                    rs2.getString("kd_penyakit"),
+                                    rs2.getString("nm_penyakit"),
+                                    rs2.getString("id_organisasi_satusehat"),
+                                    rs2.getString("id_lokasi_satusehat"),
+                                    rs2.getString("nm_poli"),
+                                    rs2.getString("tgl_surat"),
+                                    rs2.getString("tgl_rencana"),
+                                    rs2.getString("id_rtl"),
+                                    "PRI" + rs2.getString("no_surat")
+                                });
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
@@ -1841,50 +1830,50 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                 Valid.tabelKosong(tabMode3);
                 try {
                     ps3 = koneksi.prepareStatement(
-                            "SELECT\n"
-                            + "	reg_periksa.tgl_registrasi,\n"
-                            + "	reg_periksa.jam_reg,\n"
-                            + "	reg_periksa.no_rawat,\n"
-                            + "	pasien.no_rkm_medis,\n"
-                            + "	pasien.nm_pasien,\n"
-                            + "	pasien.no_ktp,\n"
-                            + "	bridging_rujukan_bpjs.no_sep,\n"
-                            + "	bridging_rujukan_bpjs.tglRujukan,\n"
-                            + "	bridging_rujukan_bpjs.tglRencanaKunjungan,\n"
-                            + "	bridging_rujukan_bpjs.jnsPelayanan,\n"
-                            + "	bridging_rujukan_bpjs.nm_ppkDirujuk,\n"
-                            + "	bridging_rujukan_bpjs.catatan,\n"
-                            + "	bridging_rujukan_bpjs.diagRujukan,\n"
-                            + "	bridging_rujukan_bpjs.nama_diagRujukan,\n"
-                            + "	bridging_rujukan_bpjs.poliRujukan,\n"
-                            + "	bridging_rujukan_bpjs.nama_poliRujukan,\n"
-                            + "	pegawai.no_ktp AS noktpdokter,\n"
-                            + "	maping_dokter_dpjpvclaim.kd_dokter,\n"
-                            + "	maping_dokter_dpjpvclaim.kd_dokter_bpjs,\n"
-                            + "	maping_dokter_dpjpvclaim.nm_dokter_bpjs,\n"
-                            + "	satu_sehat_encounter.id_encounter,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl,\n"
-                            + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat \n"
-                            + "FROM\n"
-                            + "	reg_periksa\n"
-                            + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
-                            + "	INNER JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat\n"
-                            + "	INNER JOIN bridging_rujukan_bpjs ON bridging_sep.no_sep = bridging_rujukan_bpjs.no_sep\n"
-                            + "	INNER JOIN maping_dokter_dpjpvclaim ON bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs\n"
-                            + "	INNER JOIN pegawai ON maping_dokter_dpjpvclaim.kd_dokter = pegawai.nik\n"
-                            + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat\n"
-                            + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON reg_periksa.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli \n"
-                            + "where " + belumterkirim3 + " reg_periksa.tgl_registrasi between ? and ? "
-                            + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
-                            + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
-                            + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
-                            + " GROUP BY\n"
-                            + "	bridging_rujukan_bpjs.no_sep  \n"
-                            + "ORDER BY\n"
-                            + "	reg_periksa.tgl_registrasi ASC,\n"
-                            + "	reg_periksa.jam_reg ASC,\n"
-                            + "	reg_periksa.no_rawat ASC");
+                        "SELECT\n"
+                        + "	reg_periksa.tgl_registrasi,\n"
+                        + "	reg_periksa.jam_reg,\n"
+                        + "	reg_periksa.no_rawat,\n"
+                        + "	pasien.no_rkm_medis,\n"
+                        + "	pasien.nm_pasien,\n"
+                        + "	pasien.no_ktp,\n"
+                        + "	bridging_rujukan_bpjs.no_sep,\n"
+                        + "	bridging_rujukan_bpjs.tglRujukan,\n"
+                        + "	bridging_rujukan_bpjs.tglRencanaKunjungan,\n"
+                        + "	bridging_rujukan_bpjs.jnsPelayanan,\n"
+                        + "	bridging_rujukan_bpjs.nm_ppkDirujuk,\n"
+                        + "	bridging_rujukan_bpjs.catatan,\n"
+                        + "	bridging_rujukan_bpjs.diagRujukan,\n"
+                        + "	bridging_rujukan_bpjs.nama_diagRujukan,\n"
+                        + "	bridging_rujukan_bpjs.poliRujukan,\n"
+                        + "	bridging_rujukan_bpjs.nama_poliRujukan,\n"
+                        + "	pegawai.no_ktp AS noktpdokter,\n"
+                        + "	maping_dokter_dpjpvclaim.kd_dokter,\n"
+                        + "	maping_dokter_dpjpvclaim.kd_dokter_bpjs,\n"
+                        + "	maping_dokter_dpjpvclaim.nm_dokter_bpjs,\n"
+                        + "	satu_sehat_encounter.id_encounter,\n"
+                        + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl,\n"
+                        + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat \n"
+                        + "FROM\n"
+                        + "	reg_periksa\n"
+                        + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
+                        + "	INNER JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat\n"
+                        + "	INNER JOIN bridging_rujukan_bpjs ON bridging_sep.no_sep = bridging_rujukan_bpjs.no_sep\n"
+                        + "	INNER JOIN maping_dokter_dpjpvclaim ON bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs\n"
+                        + "	INNER JOIN pegawai ON maping_dokter_dpjpvclaim.kd_dokter = pegawai.nik\n"
+                        + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
+                        + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat\n"
+                        + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON reg_periksa.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli \n"
+                        + "where " + belumterkirim3 + " reg_periksa.tgl_registrasi between ? and ? "
+                        + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
+                        + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
+                        + "reg_periksa.stts like ? or reg_periksa.status_lanjut like ?)") + " "
+                        + " GROUP BY\n"
+                        + "	bridging_rujukan_bpjs.no_sep  \n"
+                        + "ORDER BY\n"
+                        + "	reg_periksa.tgl_registrasi ASC,\n"
+                        + "	reg_periksa.jam_reg ASC,\n"
+                        + "	reg_periksa.no_rawat ASC");
                     try {
                         ps3.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
                         ps3.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
@@ -1898,54 +1887,51 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                         }
                         rs3 = ps3.executeQuery();
                         while (rs3.next()) {
-//                            if (cekflagging.GeneralConsentSatuSehat(rs3.getString("no_rkm_medis")) == true) {
-                                if (rs3.getString("id_rtl").equals("")) {
-                                    tabMode3.addRow(new Object[]{
-                                        true,
-                                        rs3.getString("tglRujukan") + "T" + rs3.getString("jam_reg") + "+07:00",
-                                        rs3.getString("no_rawat"),
-                                        rs3.getString("no_rkm_medis"),
-                                        rs3.getString("nm_pasien"),
-                                        rs3.getString("no_ktp"),
-                                        rs3.getString("noktpdokter"),
-                                        rs3.getString("nm_dokter_bpjs"),
-                                        rs3.getString("id_encounter"),
-                                        rs3.getString("diagRujukan"),
-                                        rs3.getString("nama_diagRujukan"),
-                                        rs3.getString("jnsPelayanan"),
-                                        rs3.getString("nm_ppkDirujuk"),
-                                        rs3.getString("catatan"),
-                                        rs3.getString("nama_poliRujukan"),
-                                        rs3.getString("id_organisasi_satusehat"),
-                                        "RK" + rs3.getString("no_sep"),
-                                        rs3.getString("id_rtl"),
-                                        rs3.getString("tglRencanaKunjungan")
-                                    });
-                                } else {
-                                    tabMode3.addRow(new Object[]{
-                                        false,
-                                        rs3.getString("tgl_registrasi") + "T" + rs3.getString("jam_reg") + "+07:00",
-                                        rs3.getString("no_rawat"),
-                                        rs3.getString("no_rkm_medis"),
-                                        rs3.getString("nm_pasien"),
-                                        rs3.getString("no_ktp"),
-                                        rs3.getString("noktpdokter"),
-                                        rs3.getString("nm_dokter_bpjs"),
-                                        rs3.getString("id_encounter"),
-                                        rs3.getString("diagRujukan"),
-                                        rs3.getString("nama_diagRujukan"),
-                                        rs3.getString("jnsPelayanan"),
-                                        rs3.getString("nm_ppkDirujuk"),
-                                        rs3.getString("catatan"),
-                                        rs3.getString("nama_poliRujukan"),
-                                        rs3.getString("id_organisasi_satusehat"),
-                                        "RK" + rs3.getString("no_sep"),
-                                        rs3.getString("id_rtl"),
-                                        rs3.getString("tglRencanaKunjungan")
-                                    });
-                                }
-
-//                            }
+                            if (rs3.getString("id_rtl").equals("")) {
+                                tabMode3.addRow(new Object[] {
+                                    true,
+                                    rs3.getString("tglRujukan") + "T" + rs3.getString("jam_reg") + "+07:00",
+                                    rs3.getString("no_rawat"),
+                                    rs3.getString("no_rkm_medis"),
+                                    rs3.getString("nm_pasien"),
+                                    rs3.getString("no_ktp"),
+                                    rs3.getString("noktpdokter"),
+                                    rs3.getString("nm_dokter_bpjs"),
+                                    rs3.getString("id_encounter"),
+                                    rs3.getString("diagRujukan"),
+                                    rs3.getString("nama_diagRujukan"),
+                                    rs3.getString("jnsPelayanan"),
+                                    rs3.getString("nm_ppkDirujuk"),
+                                    rs3.getString("catatan"),
+                                    rs3.getString("nama_poliRujukan"),
+                                    rs3.getString("id_organisasi_satusehat"),
+                                    "RK" + rs3.getString("no_sep"),
+                                    rs3.getString("id_rtl"),
+                                    rs3.getString("tglRencanaKunjungan")
+                                });
+                            } else {
+                                tabMode3.addRow(new Object[] {
+                                    false,
+                                    rs3.getString("tgl_registrasi") + "T" + rs3.getString("jam_reg") + "+07:00",
+                                    rs3.getString("no_rawat"),
+                                    rs3.getString("no_rkm_medis"),
+                                    rs3.getString("nm_pasien"),
+                                    rs3.getString("no_ktp"),
+                                    rs3.getString("noktpdokter"),
+                                    rs3.getString("nm_dokter_bpjs"),
+                                    rs3.getString("id_encounter"),
+                                    rs3.getString("diagRujukan"),
+                                    rs3.getString("nama_diagRujukan"),
+                                    rs3.getString("jnsPelayanan"),
+                                    rs3.getString("nm_ppkDirujuk"),
+                                    rs3.getString("catatan"),
+                                    rs3.getString("nama_poliRujukan"),
+                                    rs3.getString("id_organisasi_satusehat"),
+                                    "RK" + rs3.getString("no_sep"),
+                                    rs3.getString("id_rtl"),
+                                    rs3.getString("tglRencanaKunjungan")
+                                });
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
