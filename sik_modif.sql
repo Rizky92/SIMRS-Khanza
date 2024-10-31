@@ -309,6 +309,18 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
   INDEX `satu_sehat_referensi_numerator_obat_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_patient`  (
+  `no_ktp` varchar(20) NOT NULL,
+  `patient_ihs_number` varchar(20) NOT NULL,
+  PRIMARY KEY (`no_ktp`, `patient_ihs_number`) USING BTREE
+) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_practitioneer`  (
+  `no_ktp` varchar(20) NOT NULL,
+  `practition_his_number` varchar(20) NOT NULL,
+  PRIMARY KEY (`nik`, `practition_his_number`) USING BTREE
+) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_radiologi_loinc`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
