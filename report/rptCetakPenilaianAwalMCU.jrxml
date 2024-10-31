@@ -2241,20 +2241,8 @@ inner join dokter on penilaian_mcu.kd_dokter=dokter.kd_dokter]]>
 				</textElement>
 				<text><![CDATA[K. KESIMPULAN]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="286" y="700" width="251" height="11" uuid="2cb620d8-a8bc-4e2e-9532-a8470b7005f3">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Dokter Penanggung Jawab]]></text>
-			</staticText>
 			<textField pattern="MMM, dd/MM/yyyy hh:mm:ss z">
-				<reportElement mode="Transparent" x="286" y="682" width="251" height="10" uuid="f2456642-100c-41a8-b7ed-73dc8e8b1e66">
+				<reportElement mode="Transparent" x="340" y="682" width="199" height="10" uuid="f2456642-100c-41a8-b7ed-73dc8e8b1e66">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
@@ -2264,7 +2252,7 @@ inner join dokter on penilaian_mcu.kd_dokter=dokter.kd_dokter]]>
 				<textFieldExpression><![CDATA[$P{kotars}+", "+new java.text.SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format($F{tanggal})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="2" y="773" width="267" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
+				<reportElement mode="Transparent" x="340" y="773" width="199" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -2380,7 +2368,7 @@ inner join dokter on penilaian_mcu.kd_dokter=dokter.kd_dokter]]>
 				<textFieldExpression><![CDATA[$F{merokok}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="700" width="267" height="11" uuid="459f9dff-d207-425c-a5a5-b5b9ce803a48">
+				<reportElement x="340" y="700" width="199" height="11" uuid="459f9dff-d207-425c-a5a5-b5b9ce803a48">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
@@ -2390,19 +2378,6 @@ inner join dokter on penilaian_mcu.kd_dokter=dokter.kd_dokter]]>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Dokter Pemeriksa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="286" y="773" width="251" height="11" uuid="ba868ad2-da19-4e06-8d85-cb7ddfe9db63">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
-					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[dr. Desy Ayu Lenisty]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="248" width="538" height="1" uuid="949d23e8-0003-4466-ba04-fe535d6bc351">
