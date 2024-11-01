@@ -684,16 +684,16 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -853,16 +853,16 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -1189,6 +1189,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
     }
     

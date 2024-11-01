@@ -892,6 +892,7 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_procedure());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_procedure());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_procedure());
     }
     
