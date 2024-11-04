@@ -49,7 +49,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
     private PreparedStatement ps;
     private ResultSet rs;   
     private int i=0;
-    private String link="",json="",idpasien="",iddokter="",signa1="1",signa2="1";
+    private String link="",json="",idpasien="",iddokter="",signa1="1",signa2="1",idrequest="";
     private ApiSatuSehat api=new ApiSatuSehat();
     private HttpHeaders headers ;
     private HttpEntity requestEntity;
@@ -684,22 +684,23 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
                     } 
                     
                     try{
+                        //idrequest=Sequel.cariIsi("select satu_sehat_medicationrequest.id_medicationrequest where satu_sehat_medicationrequest.no_resep='"+tbObat.getValueAt(i,25).toString()+"' and satu_sehat_medicationrequest.kode_brng='"+tbObat.getValueAt(i,11).toString()+"'");
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
@@ -707,12 +708,12 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                     "\"resourceType\": \"MedicationDispense\"," +
                                     "\"identifier\": [" +
                                         "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                             "\"use\": \"official\"," +
                                             "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
                                         "}," +
                                         "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                             "\"use\": \"official\"," +
                                             "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
                                         "}" +
@@ -853,16 +854,16 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -877,12 +878,12 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
                                     "\"id\": \""+tbObat.getValueAt(i,26).toString()+"\"," +
                                     "\"identifier\": [" +
                                         "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/prescription/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                             "\"use\": \"official\"," +
                                             "\"value\": \""+tbObat.getValueAt(i,25).toString()+"\"" +
                                         "}," +
                                         "{" +
-                                            "\"system\": \"http://sys-ids.kemkes.go.id/prescription-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
+                                            "\"system\": \"http://sys-ids.kemkes.go.id/medicationdispense-item/"+koneksiDB.IDSATUSEHAT()+"\"," +
                                             "\"use\": \"official\"," +
                                             "\"value\": \""+tbObat.getValueAt(i,11).toString()+"\"" +
                                         "}" +
@@ -1189,6 +1190,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_medicationdispense());
     }
     

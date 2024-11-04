@@ -3,6 +3,7 @@
 /dist
 /lib
 /setting/database*.xml
+/setting/database*.ini
 **/*.DS_Store
 **/.DS_Store
 **/*.html_files

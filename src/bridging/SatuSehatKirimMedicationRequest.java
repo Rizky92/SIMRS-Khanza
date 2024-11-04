@@ -667,16 +667,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -879,6 +879,9 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                                 "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
                                                 "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
                                                 "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}," +
+                                            "\"performer\": {" +
+                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                             "}" +
                                         "}" +
                                     "}";
@@ -891,7 +894,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                             response = root.path("id");
                             if(!response.asText().equals("")){
                                 if(Sequel.menyimpantf2("satu_sehat_medicationrequest_racikan","?,?,?,?","Obat/Alkes",4,new String[]{
-                                    tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,11).toString(),response.asText()
+                                    tbObat.getValueAt(i,25).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,27).toString(),response.asText()
                                 })==true){
                                     tbObat.setValueAt(response.asText(),i,26);
                                     tbObat.setValueAt(false,i,0);
@@ -940,16 +943,16 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                     arrSplit = tbObat.getValueAt(i,24).toString().toLowerCase().split("x");
                     signa1="1";
                     try {
-                        if(!arrSplit[0].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa1=arrSplit[0].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa1=arrSplit[0].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa1="1";
                     }
                     signa2="1";
                     try {
-                        if(!arrSplit[1].replaceAll("[a-zA-Z].*", "").trim().equals("")){
-                            signa2=arrSplit[1].replaceAll("[a-zA-Z].*", "").trim();
+                        if(!arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim().equals("")){
+                            signa2=arrSplit[1].replaceAll("(?=[^\\d.,]).*", "").replaceAll("\\,",".").trim();
                         }
                     } catch (Exception e) {
                         signa2="1";
@@ -1145,6 +1148,9 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                                 "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
                                                 "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
                                                 "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}," +
+                                            "\"performer\": {" +
+                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                             "}" +
                                         "}" +
                                     "}";
@@ -1451,6 +1457,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_medicationrequest());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_medicationrequest());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_medicationrequest());
     }
     

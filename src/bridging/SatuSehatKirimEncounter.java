@@ -1125,6 +1125,7 @@ public final class SatuSehatKirimEncounter extends javax.swing.JDialog {
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_encounter());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_encounter());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_encounter());
     }
     

@@ -8,6 +8,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
 import java.io.FileReader;
 import javax.swing.JOptionPane;
 import org.springframework.http.HttpEntity;
@@ -33,6 +34,7 @@ public class SatuSehatCekNIK {
     private JsonNode root;
     private JsonNode response;
     private FileReader dataPropinsi,dataKabupaten,dataKecamatan,dataKelurahan;
+    private final sekuel Sequel = new sekuel();
         
     public SatuSehatCekNIK(){
         super();
@@ -252,50 +254,60 @@ public class SatuSehatCekNIK {
     }
     
     public String tampilIDPasien(String cari) {
-        idpasien="";
-        try{
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-            requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
-            json=api.getRest().exchange(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("JSON : "+json);
-            root = mapper.readTree(json);
-            for(JsonNode list:root.path("entry")){
-                idpasien=list.path("resource").path("id").asText();
+        idpasien = Sequel.cariIsiSmc("select patient_ihs_number from satu_sehat_referensi_patient where no_ktp = ?", cari);
+        if (idpasien.isBlank()) {
+            try{
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                requestEntity = new HttpEntity(headers);
+                System.out.println("URL : "+link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
+                json=api.getRest().exchange(link+"/Patient?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+                System.out.println("JSON : "+json);
+                root = mapper.readTree(json);
+                for(JsonNode list:root.path("entry")){
+                    idpasien=list.path("resource").path("id").asText();
+                    if (!idpasien.isBlank() && !idpasien.contains("null")) {
+                        Sequel.menyimpanSmc("satu_sehat_referensi_patient", null, cari, idpasien);
+                    }
+                }
+            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                idpasien="";
+                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+            }catch(Exception e){
+                idpasien="";
+                System.out.println("Notifikasi : "+e);
             }
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            idpasien="";
-            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-        }catch(Exception e){
-            idpasien="";
-            System.out.println("Notifikasi : "+e);
         }
         return idpasien;
     }
     
     public String tampilIDParktisi(String cari) {
-        idpasien="";
-        try{
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-            requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
-            json=api.getRest().exchange(link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("JSON : "+json);
-            root = mapper.readTree(json);
-            response = root.path("entry");
-            for(JsonNode list:response){
-               idpasien=list.path("resource").path("id").asText();
+        idpasien = Sequel.cariIsiSmc("select practition_his_number from satu_sehat_referensi_practitioneer where no_ktp = ?", cari);
+        if (idpasien.isBlank()) {
+            try{
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
+                requestEntity = new HttpEntity(headers);
+                System.out.println("URL : "+link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari);
+                json=api.getRest().exchange(link+"/Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|"+cari, HttpMethod.GET, requestEntity, String.class).getBody();
+                System.out.println("JSON : "+json);
+                root = mapper.readTree(json);
+                response = root.path("entry");
+                for(JsonNode list:response){
+                   idpasien=list.path("resource").path("id").asText();
+                   if (!idpasien.isBlank() && !idpasien.contains("null")) {
+                        Sequel.menyimpanSmc("satu_sehat_referensi_practitioneer", null, cari, idpasien);
+                    }
+                }
+            } catch (HttpClientErrorException | HttpServerErrorException e) {
+                idpasien="";
+                System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
+            }catch(Exception e){
+                idpasien="";
+                System.out.println("Notifikasi : "+e);
             }
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            idpasien="";
-            System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-        }catch(Exception e){
-            idpasien="";
-            System.out.println("Notifikasi : "+e);
         }
         return idpasien;
     }
