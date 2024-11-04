@@ -495,7 +495,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         } else if (TNmUser.getText().isBlank()) {
             Valid.textKosong(TNmUser, "Nama User");
         } else {
-            if (Sequel.menyimpantfSmc("set_akses_edit_sementara", null, TUser.getText(), Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1))) {
+            if (Sequel.menyimpantfNotifSmc("User", "set_akses_edit_sementara", null, TUser.getText(), Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1))) {
                 tabMode.addRow(new Object[] {
                     TUser.getText(), TNmUser.getText(), jabatan, Valid.getTglJamSmc(DTPTgl1, CmbJam1, CmbMenit1, CmbDetik1)
                 });
