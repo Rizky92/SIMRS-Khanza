@@ -7520,7 +7520,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     //hasil pemeriksaan radiologi
                     try {
                         rs2 = koneksi.prepareStatement(
-                            "select tgl_periksa,jam, hasil from hasil_radiologi where no_rawat='" + rs.getString("no_rawat") + "' order by tgl_periksa,jam").executeQuery();
+                            "select hasil_radiologi.tgl_periksa,hasil_radiologi.jam,hasil_radiologi.hasil from hasil_radiologi where hasil_radiologi.no_rawat='" + rs.getString("no_rawat") + "' order by hasil_radiologi.tgl_periksa,hasil_radiologi.jam").executeQuery();
                         if (rs2.next()) {
                             htmlContent.append(
                                 "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
@@ -7555,7 +7555,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     //gambar pemeriksaan radiologi
                     try {
                         rs2 = koneksi.prepareStatement(
-                            "select tgl_periksa,jam, lokasi_gambar from gambar_radiologi where no_rawat='" + rs.getString("no_rawat") + "' order by tgl_periksa,jam").executeQuery();
+                            "select gambar_radiologi.tgl_periksa,gambar_radiologi.jam,gambar_radiologi.lokasi_gambar from gambar_radiologi where gambar_radiologi.no_rawat='" + rs.getString("no_rawat") + "' order by gambar_radiologi.tgl_periksa,gambar_radiologi.jam").executeQuery();
                         if (rs2.next()) {
                             htmlContent.append(
                                 "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
@@ -7687,7 +7687,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         + "<td valign='top' align='center'>");
                     
                     if (rs.getString("lokasi_file").toLowerCase().contains(".jpg") || rs.getString("lokasi_file").toLowerCase().contains(".jpeg")) {
-                        htmlContent.append("<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "'><img alt='Berkas Digital' src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "' width='450' height='450'/></a>");
+                        htmlContent.append("<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "'><img alt='Berkas Digital' src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "' height='450'/></a>");
                     } else {
                         htmlContent.append("<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/" + rs.getString("lokasi_file") + "'>" + rs.getString("nama") + "_" + rs.getString("lokasi_file").replaceAll("pages/upload/", "") + "</a>");
                     }
