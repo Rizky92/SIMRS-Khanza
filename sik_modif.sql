@@ -368,7 +368,7 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
 
-ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY (`no_surat`) USING BTREE;
+ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY IF NOT EXISTS (`no_surat`) USING BTREE;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,

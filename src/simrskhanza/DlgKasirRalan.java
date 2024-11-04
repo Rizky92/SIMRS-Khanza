@@ -185,6 +185,7 @@ import rekammedis.RMSkriningPUMA;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
 import rekammedis.RMSkriningTBC;
+import rekammedis.RMSkriningTalasemia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMTriaseIGD;
@@ -14640,6 +14641,28 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
+    private void MnSkriningThalassemiaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningTalasemia form=new RMSkriningTalasemia(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
     /**
     * @param args the command line arguments
     */
@@ -15109,7 +15132,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                   MnSkriningTBC,
                                   MnCatatanAnastesiSedasi,
                                   MnSkriningPUMA,
-                                  MnSkriningAdiksiNikotin;
+                                  MnSkriningAdiksiNikotin,MnSkriningThalassemia;
     private javax.swing.JMenu MnHasilUSG,
                               MnHasilEndoskopi,
                               MnRMSkrining;
@@ -15471,6 +15494,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnCatatanAnastesiSedasi.setEnabled(akses.getcatatan_anestesi_sedasi());
         MnSkriningPUMA.setEnabled(akses.getskrining_puma());
         MnSkriningAdiksiNikotin.setEnabled(akses.getskrining_adiksi_nikotin());
+        MnSkriningThalassemia.setEnabled(akses.getskrining_thalassemia());
         
         if(akses.getkode().equals("Admin Utama")){
             MnHapusData.setEnabled(true);
@@ -16353,6 +16377,18 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSkriningAdiksiNikotin.setPreferredSize(new java.awt.Dimension(280, 26));
         MnSkriningAdiksiNikotin.addActionListener(this::MnSkriningAdiksiNikotinActionPerformed);
         
+        MnSkriningThalassemia = new javax.swing.JMenuItem();
+        MnSkriningThalassemia.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningThalassemia.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningThalassemia.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningThalassemia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningThalassemia.setText("Skrining Thalassemia");
+        MnSkriningThalassemia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningThalassemia.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningThalassemia.setName("MnSkriningThalassemia");
+        MnSkriningThalassemia.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningThalassemia.addActionListener(this::MnSkriningThalassemiaActionPerformed);
+        
         MnCatatanAnastesiSedasi = new javax.swing.JMenuItem();
         MnCatatanAnastesiSedasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanAnastesiSedasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -16502,6 +16538,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnRMSkrining.add(MnSkriningTBC);
         MnRMSkrining.add(MnSkriningPUMA);
         MnRMSkrining.add(MnSkriningAdiksiNikotin);
+        MnRMSkrining.add(MnSkriningThalassemia);
         
         MnPermintaan.add(MnPermintaanKonsultasiMedik);
         MnTindakanRalan.add(MnDataOperasi);
