@@ -2704,6 +2704,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             return;
         }
         
+        try {
+            File dir = new File("./berkaspdf/" + tanggalExport);
+            if (!dir.isDirectory() && !dir.mkdirs()) {
+                Files.createDirectory(dir.toPath());
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/" + filename;
         String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_KlaimINACBG.pdf";
         if (filename.endsWith(".pdf")) {
@@ -3656,6 +3665,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         );
     }
     
+    private void exportRiwayatPasien(String urutan) {
+        try {
+            resume.kompilasiDariRiwayat(lblNoRawat.getText(), lblNoRM.getText(), tanggalExport, lblNoSEP.getText(), urutan);
+        } catch (Exception e) {
+            exportSukses = false;
+            System.out.println("Notif : " + e);
+            e.printStackTrace();
+            cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_Riwayat");
+        }
+    }
+    
     private void exportBerkasDigitalPerawatan(String urutan) {
         if (Sequel.cariBooleanSmc(
             "select * from berkas_digital_perawatan join master_berkas_digital on berkas_digital_perawatan.kode = master_berkas_digital.kode " +
@@ -3701,6 +3721,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         exportKlaimINACBG("001");
         exportSEP("002");
+        /*
         exportTriaseIGD("003");
         exportAwalMedisIGD("004");
         exportSOAP("005");
@@ -3708,7 +3729,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         exportBilling("007");
         exportHasilLab("008");
         exportHasilRadiologi("009");
-        exportBerkasDigitalPerawatan("010");
+        */
+        exportRiwayatPasien("003");
+        exportBerkasDigitalPerawatan("004");
         // exportSKDP("009");
         // exportSPRI("010");
         if (exportSukses) {
