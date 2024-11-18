@@ -116,6 +116,10 @@ public final class SuratSakit extends javax.swing.JDialog {
         }
         ChkInput.setSelected(false);
         isForm();
+        
+        MnCetakSuratSakit1.setEnabled(false);
+        MnCetakSuratSakit4.setEnabled(false);
+        MnCetakSuratSakit5.setEnabled(false);
     }
         
         
