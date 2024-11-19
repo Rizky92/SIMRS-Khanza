@@ -991,7 +991,6 @@ import setting.DlgPasswordBPJS;
 import setting.DlgRuangOperasi;
 import setting.DlgSetAksesEditSementara;
 import setting.DlgSetHargaToko;
-import setting.DlgSetPenjabUnitSmc;
 import setting.DlgUserSmc;
 import smsui.frmSmsView;
 import surat.MasterTemplatePersetujuanPenolakanTindakan;
@@ -9633,7 +9632,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgSetPenjabUnitSmc aplikasi=new DlgSetPenjabUnitSmc(this,false);
+        DlgSetPenjabLab aplikasi=new DlgSetPenjabLab(this,false);
         aplikasi.emptTeks();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);

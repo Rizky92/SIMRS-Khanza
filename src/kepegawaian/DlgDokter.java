@@ -17,12 +17,15 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import fungsi.Painter;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,10 +34,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import restore.DlgRestoreDokter;
@@ -54,6 +60,13 @@ public class DlgDokter extends javax.swing.JDialog {
     private DlgCariSpesialis spesial=new DlgCariSpesialis(null,false);
     private PreparedStatement stat;
     private ResultSet rs;
+    private String pathGambar = null;
+    
+    private final JFileChooser fc = new JFileChooser();
+    private final FileFilter png = new FileNameExtensionFilter("Gambar PNG", "png");
+    private final FileFilter jpg = new FileNameExtensionFilter("Gambar JPG/JPEG", "jpg", "jpeg");
+    private final FileFilter gif = new FileNameExtensionFilter("Gambar GIF", "gif");
+    private final FileFilter aff = new FileNameExtensionFilter("PNG, JPG/JPEG, atau GIF", "png", "jpg", "jpeg", "gif");
 
     /** Creates new form DlgDokter
      * @param parent
@@ -207,7 +220,17 @@ public class DlgDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
+        MnGambarTTD = new javax.swing.JMenuItem();
         MnRestore = new javax.swing.JMenuItem();
+        WindowInputTTD = new javax.swing.JDialog();
+        internalFrame8 = new widget.InternalFrame();
+        FormInput1 = new widget.PanelBiasa();
+        label37 = new widget.Label();
+        BtnCariTTD = new widget.Button();
+        PhotoTTD = new Painter();
+        BtnSimpanTTD = new widget.Button();
+        BtnHapusTTD = new widget.Button();
+        BtnKeluarTTD = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -267,6 +290,23 @@ public class DlgDokter extends javax.swing.JDialog {
 
         Popup.setName("Popup"); // NOI18N
 
+        MnGambarTTD.setBackground(new java.awt.Color(255, 255, 254));
+        MnGambarTTD.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGambarTTD.setForeground(new java.awt.Color(50, 50, 50));
+        MnGambarTTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGambarTTD.setText("Gambar TTD");
+        MnGambarTTD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnGambarTTD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnGambarTTD.setIconTextGap(5);
+        MnGambarTTD.setName("MnGambarTTD"); // NOI18N
+        MnGambarTTD.setPreferredSize(new java.awt.Dimension(200, 28));
+        MnGambarTTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnGambarTTDActionPerformed(evt);
+            }
+        });
+        Popup.add(MnGambarTTD);
+
         MnRestore.setBackground(new java.awt.Color(255, 255, 254));
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnRestore.setForeground(new java.awt.Color(50, 50, 50));
@@ -283,6 +323,107 @@ public class DlgDokter extends javax.swing.JDialog {
             }
         });
         Popup.add(MnRestore);
+
+        WindowInputTTD.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowInputTTD.setName("WindowInputTTD"); // NOI18N
+        WindowInputTTD.setUndecorated(true);
+        WindowInputTTD.setResizable(false);
+
+        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Cetak Surat Keterangan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame8.setName("internalFrame8"); // NOI18N
+        internalFrame8.setLayout(new java.awt.BorderLayout(1, 1));
+
+        FormInput1.setName("FormInput1"); // NOI18N
+        FormInput1.setLayout(null);
+
+        label37.setText("Gambar TTD :");
+        label37.setName("label37"); // NOI18N
+        label37.setPreferredSize(new java.awt.Dimension(35, 23));
+        FormInput1.add(label37);
+        label37.setBounds(0, 12, 82, 23);
+
+        BtnCariTTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnCariTTD.setMnemonic('C');
+        BtnCariTTD.setToolTipText("Alt+C");
+        BtnCariTTD.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        BtnCariTTD.setName("BtnCariTTD"); // NOI18N
+        BtnCariTTD.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnCariTTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariTTDActionPerformed(evt);
+            }
+        });
+        FormInput1.add(BtnCariTTD);
+        BtnCariTTD.setBounds(54, 42, 28, 23);
+
+        PhotoTTD.setBackground(new java.awt.Color(245, 255, 235));
+        PhotoTTD.setForeground(new java.awt.Color(235, 255, 235));
+        PhotoTTD.setName("PhotoTTD"); // NOI18N
+        FormInput1.add(PhotoTTD);
+        PhotoTTD.setBounds(86, 12, 310, 206);
+
+        BtnSimpanTTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanTTD.setMnemonic('S');
+        BtnSimpanTTD.setText("Simpan");
+        BtnSimpanTTD.setToolTipText("Alt+S");
+        BtnSimpanTTD.setName("BtnSimpanTTD"); // NOI18N
+        BtnSimpanTTD.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnSimpanTTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanTTDActionPerformed(evt);
+            }
+        });
+        BtnSimpanTTD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSimpanTTDKeyPressed(evt);
+            }
+        });
+        FormInput1.add(BtnSimpanTTD);
+        BtnSimpanTTD.setBounds(86, 222, 100, 30);
+
+        BtnHapusTTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapusTTD.setMnemonic('H');
+        BtnHapusTTD.setText("Hapus");
+        BtnHapusTTD.setToolTipText("Alt+H");
+        BtnHapusTTD.setIconTextGap(3);
+        BtnHapusTTD.setName("BtnHapusTTD"); // NOI18N
+        BtnHapusTTD.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapusTTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusTTDActionPerformed(evt);
+            }
+        });
+        BtnHapusTTD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnHapusTTDKeyPressed(evt);
+            }
+        });
+        FormInput1.add(BtnHapusTTD);
+        BtnHapusTTD.setBounds(191, 222, 100, 30);
+
+        BtnKeluarTTD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnKeluarTTD.setMnemonic('H');
+        BtnKeluarTTD.setText("Keluar");
+        BtnKeluarTTD.setToolTipText("Alt+H");
+        BtnKeluarTTD.setIconTextGap(3);
+        BtnKeluarTTD.setName("BtnKeluarTTD"); // NOI18N
+        BtnKeluarTTD.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluarTTD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarTTDActionPerformed(evt);
+            }
+        });
+        BtnKeluarTTD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKeluarTTDKeyPressed(evt);
+            }
+        });
+        FormInput1.add(BtnKeluarTTD);
+        BtnKeluarTTD.setBounds(296, 222, 100, 30);
+
+        internalFrame8.add(FormInput1, java.awt.BorderLayout.CENTER);
+
+        WindowInputTTD.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -653,7 +794,7 @@ public class DlgDokter extends javax.swing.JDialog {
         jLabel13.setBounds(2, 102, 95, 23);
 
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-02-2022" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-11-2024" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -1197,6 +1338,96 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_tbDokterKeyReleased
 
+    private void MnGambarTTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGambarTTDActionPerformed
+        if (TKd.getText().isBlank() || TNm.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu..!!");
+            tbDokter.requestFocus();
+        } else {
+            tampilTTDSekarang();
+            WindowInputTTD.setSize(434, 282);
+            WindowInputTTD.setLocationRelativeTo(internalFrame1);
+            WindowInputTTD.setVisible(true);
+        }
+    }//GEN-LAST:event_MnGambarTTDActionPerformed
+
+    private void BtnCariTTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTTDActionPerformed
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(png);
+        fc.addChoosableFileFilter(jpg);
+        fc.addChoosableFileFilter(gif);
+        fc.addChoosableFileFilter(aff);
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            pathGambar = fc.getSelectedFile().toString();
+            ((Painter) PhotoTTD).setImage(pathGambar);
+        }
+    }//GEN-LAST:event_BtnCariTTDActionPerformed
+
+    private void BtnSimpanTTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanTTDActionPerformed
+        if (TKd.getText().isBlank() || TNm.getText().isBlank()) {
+            Valid.textKosong(TKd, "Dokter");
+        } else {
+            try (
+                PreparedStatement ps = koneksi.prepareStatement("insert into dokter_ttdbasah values (?, ?) on duplicate key update gambar_ttd = ?");
+                FileInputStream fs1 = new FileInputStream(pathGambar);
+                FileInputStream fs2 = new FileInputStream(pathGambar)
+            ) {
+                ps.setString(1, TKd.getText());
+                ps.setBinaryStream(2, fs1, new File(pathGambar).length());
+                ps.setBinaryStream(3, fs2, new File(pathGambar).length());
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "TTD berhasil disimpan..!!");
+                ((Painter) PhotoTTD).removeImage();
+                emptTeks();
+                WindowInputTTD.dispose();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+    }//GEN-LAST:event_BtnSimpanTTDActionPerformed
+
+    private void BtnSimpanTTDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanTTDKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnSimpanActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnCariTTD, BtnBatal);
+        }
+    }//GEN-LAST:event_BtnSimpanTTDKeyPressed
+
+    private void BtnHapusTTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusTTDActionPerformed
+        if (TKd.getText().isBlank() || TNm.getText().isBlank()) {
+            Valid.textKosong(TKd, "Dokter");
+        } else {
+            if (Sequel.menghapustfSmc("dokter_ttdbasah", "kd_dokter = ?", TKd.getText())) {
+                ((Painter) PhotoTTD).removeImage();
+                JOptionPane.showMessageDialog(null, "TTD berhasil dihapus..!!");
+                emptTeks();
+                WindowInputTTD.dispose();
+            }
+        }
+    }//GEN-LAST:event_BtnHapusTTDActionPerformed
+
+    private void BtnHapusTTDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusTTDKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnHapusActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnBatal, BtnEdit);
+        }
+    }//GEN-LAST:event_BtnHapusTTDKeyPressed
+
+    private void BtnKeluarTTDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarTTDActionPerformed
+        ((Painter) PhotoTTD).removeImage();
+        emptTeks();
+        WindowInputTTD.dispose();
+    }//GEN-LAST:event_BtnKeluarTTDActionPerformed
+
+    private void BtnKeluarTTDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarTTDKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnKeluarTTDActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnHapusTTD, BtnCariTTD);
+        }
+    }//GEN-LAST:event_BtnKeluarTTDKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1218,11 +1449,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnCariPegawai;
+    private widget.Button BtnCariTTD;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
+    private widget.Button BtnHapusTTD;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKeluarTTD;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnSimpanTTD;
     private widget.ComboBox CMbGd;
     private widget.CekBox ChkInput;
     private widget.ComboBox CmbCrGd;
@@ -1231,10 +1466,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.ComboBox CmbStts;
     private widget.Tanggal DTPLahir;
     private widget.PanelBiasa FormInput;
+    private widget.PanelBiasa FormInput1;
     private widget.TextBox KdSps;
     private widget.Label LCount;
+    private javax.swing.JMenuItem MnGambarTTD;
     private javax.swing.JMenuItem MnRestore;
     private javax.swing.JPanel PanelInput;
+    private java.awt.Canvas PhotoTTD;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TAlmt;
@@ -1246,10 +1484,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox TSpesialis;
     private widget.TextBox TTlp;
     private widget.TextBox TTmp;
+    private javax.swing.JDialog WindowInputTTD;
     private widget.Button btnSpesial;
     private widget.ComboBox cmbAgama;
     private widget.ComboBox cmbCrJk;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame8;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
@@ -1269,6 +1509,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator4;
+    private widget.Label label37;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
     private widget.Table tbDokter;
@@ -1420,6 +1661,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.SetTgl(DTPLahir,tbDokter.getValueAt(row,4).toString());
         }
     }
+    
+    private void tampilTTDSekarang() {
+        if (TKd.getText().isBlank() || TNm.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data terlebih dahulu..!!");
+        } else {
+            ((Painter) PhotoTTD).removeImage();
+            ((Painter) PhotoTTD).setImage(Sequel.cariBlobSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", TKd.getText()));
+        }
+    }
 
     
     public JTextField getTextField(){
@@ -1451,8 +1701,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         BtnPrint.setEnabled(akses.getdokter());
         if(akses.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
+            MnGambarTTD.setEnabled(true);
         }else{
             MnRestore.setEnabled(false);
+            MnGambarTTD.setEnabled(false);
         } 
     }
 }
