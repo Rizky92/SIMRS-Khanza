@@ -88,42 +88,6 @@
                     <td padding="0" width="15%" align="right"><font color="111111" size="1" face="Tahoma"><b><?= formatDuitSmc($total) ?></b></font></td>
                 </tr>
                 <tr class="isi12" padding="0">
-                    <td colspan="7" padding="0">
-                        <table width="100%" bgcolor="#ffffff" align="left" border="0" padding="0" cellspacing="0" cellpadding="0">
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                            </tr>
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">Keluarga Pasien</font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma"><?= getOne("select setting.kabupaten from setting") ?></font></td>
-                            </tr>
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma"></font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">Kasir</font></td>
-                            </tr>
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="right"><font color="000000" size="1" face="Tahoma"></font></td>
-                            </tr>
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="right"><font color="000000" size="1" face="Tahoma"></font></td>
-                            </tr>
-                            <tr class="isi12" padding="0">
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">( ............................. )</font></td>
-                                <td padding="0" width="20%" align="center"><font color="000000" size="1" face="Tahoma">&nbsp;</font></td>
-                                <td padding="0" width="40%" align="center"><font color="000000" size="1" face="Tahoma">( ............................. )</font></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="isi12" padding="0">
                     <td colspan="7" padding="0">&nbsp</td>
                 </tr>
             </table>

@@ -1548,14 +1548,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("lahir", rs.getString("tgllahir"));
                         param.put("pengirim", rs.getString("nm_dokter"));
                         param.put("tanggal", rs.getString("tgl_periksa"));
-                        param.put("penjab", rs.getString("nm_dokter_perujuk"));
+                        param.put("penjab", rs.getString("nm_dokter"));
                         param.put("petugas", rs.getString("nama_petugas"));
                         param.put("alamat", rs.getString("alamat"));
                         String kamar = "", kelas = "", namaKamar = "", noRawatIbu = "";
                         if (lblStatusRawat.getText().contains("Ranap")) {
                             noRawatIbu = Sequel.cariIsiSmc("select no_rawat from ranap_gabung where no_rawat2 = ?", lblNoRawat.getText());
                             if (!noRawatIbu.isBlank()) {
-                                kamar = Sequel.cariIsiSmc("select ifnull(kd_kamar, '') from kamar_inap where no_rawat = ? order by tgl_masuk desc limit 1", noRawatIbu);
+                                kamar = Sequel.cariIsiSmc("select ifnull(kd_kamar, '') from kamar_inap where no_rawat = ? order by tgl_masuk desc, jam_masuk desc limit 1", noRawatIbu);
                                 kelas = Sequel.cariIsiSmc("select kamar.kelas from kamar inner join kamar_inap on kamar.kd_kamar = kamar_inap.kd_kamar where no_rawat = ? order by str_to_date(concat(kamar_inap.tgl_masuk, ' ', kamar_inap.jam_masuk), '%Y-%m-%d %H:%i:%s') desc limit 1", noRawatIbu);
                             } else {
                                 kamar = Sequel.cariIsiSmc("select ifnull(kd_kamar, '') from kamar_inap where no_rawat = ? order by tgl_masuk desc limit 1", lblNoRawat.getText());
@@ -1580,8 +1580,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("emailrs", akses.getemailrs());
                         param.put("hasil", Sequel.cariIsiSmc("select hasil from hasil_radiologi where no_rawat = ? and tgl_periksa = ? and jam = ?", lblNoRawat.getText(), rs.getString("tgl_periksa"), rs.getString("jam")));
                         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("dokter_perujuk"));
-                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter_perujuk") + "\nID " + (finger.isBlank() ? rs.getString("dokter_perujuk") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
+                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                         finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
                         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                         Valid.reportSmc("rptPeriksaRadiologi.jasper", "report", "::[ Pemeriksaan Radiologi ]::", param);
@@ -3719,7 +3719,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void gabung() {
         tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        exportKlaimINACBG("001");
+        // exportKlaimINACBG("001");
         exportSEP("002");
         /*
         exportTriaseIGD("003");
@@ -3768,7 +3768,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     }
                 }
                 pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
-                pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(120 * 1_000_000));
+                pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(180 * 1_000_000));
                 System.out.println("PDFs merged successfully!");
                 File f = new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 Desktop.getDesktop().open(f);

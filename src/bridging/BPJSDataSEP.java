@@ -6557,6 +6557,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         TabRawat.setSelectedIndex(1);
     }
     
+    public void setNoRm3(String norwt, String norm, Date tgl1) {
+        TCari.setText(norwt);
+        TNoRM.setText(norm);
+        DTPCari1.setDate(tgl1);
+        DTPCari2.setDate(tgl1);
+        TabRawat.setSelectedIndex(1);
+    }
+    
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbpjs_sep());
         BtnHapus.setEnabled(akses.gethapus_edit_sep_bpjs());
