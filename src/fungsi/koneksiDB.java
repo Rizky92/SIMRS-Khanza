@@ -222,6 +222,15 @@ public class koneksiDB {
         }
     }
     
+    public static String KOMPILASIBERKASGUNAKANRIWAYATPASIEN() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KOMPILASIBERKASGUNAKANRIWAYATPASIEN").trim().toLowerCase().replaceAll("\\s+", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
