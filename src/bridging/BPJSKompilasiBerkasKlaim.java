@@ -170,8 +170,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
         
         panelDiagnosaSmc.getTabbedPane().addChangeListener((ChangeEvent e) -> {
-            JTabbedPane tab = (JTabbedPane) e.getSource();
-            if (tab.getSelectedIndex() == 0) {
+            if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
                 BtnSimpanDiagnosa.setEnabled(true);
                 BtnHapusDiagnosa.setEnabled(false);
             } else {
@@ -401,7 +400,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024 08:33:04" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024 09:01:07" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -442,7 +441,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -642,7 +641,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -656,7 +655,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -771,7 +770,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.add(lblNamaPasien);
         lblNamaPasien.setBounds(160, 10, 200, 14);
 
-        jLabel15.setText("No Rawat : ");
+        jLabel15.setText("No. Rawat : ");
         jLabel15.setName("jLabel15"); // NOI18N
         jLabel15.setPreferredSize(new java.awt.Dimension(120, 14));
         panelBiasa1.add(jLabel15);
@@ -789,14 +788,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.add(lblNoRM);
         lblNoRM.setBounds(120, 10, 36, 14);
 
-        jLabel17.setText("No SEP : ");
+        jLabel17.setText("No. SEP : ");
         jLabel17.setName("jLabel17"); // NOI18N
         jLabel17.setPreferredSize(new java.awt.Dimension(120, 14));
         panelBiasa1.add(jLabel17);
         jLabel17.setBounds(0, 70, 120, 14);
 
         lblNoSEP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNoSEP.setText("0302R1101124V999999");
         lblNoSEP.setToolTipText("");
         lblNoSEP.setName("lblNoSEP"); // NOI18N
         lblNoSEP.setPreferredSize(new java.awt.Dimension(300, 14));
@@ -1260,14 +1258,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             param.put("noreg", Sequel.cariIsiSmc("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat = ?", lblNoRawat.getText()));
             param.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
             param.put("parameter", lblNoSEP.getText());
+            
             String pilihan = (String) JOptionPane.showInputDialog(
                 null, "Silahkan pilih model SEP yang mau dilihat", "Pilih Model SEP", JOptionPane.INFORMATION_MESSAGE, null,
-                new String[] {"Model 1 (Lembar SEP)", "Model 2 (IGDTL)", "Model 3 (Lembar SEP Alternatif)", "Model 4 (RJTL)"}, "Model 3 (Lembar SEP)"
+                new String[] {"Model 1 (Lembar SEP)", "Model 2 (IGDTL)", "Model 3 (Lembar SEP Alternatif)", "Model 4 (RJTL)"}, "Model 1 (Lembar SEP)"
             );
+            
             if (pilihan == null) return;
             
             switch (pilihan) {
-                case "Model 1":
+                case "Model 1 (Lembar SEP)":
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP.jasper", "report", "::[ Cetak SEP ]::", param);
@@ -1285,7 +1285,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     }
                     this.setCursor(Cursor.getDefaultCursor());
                     break;
-                case "Model 3 (Lembar SEP)":
+                case "Model 3 (Lembar SEP Alternatif)":
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP5.jasper", "report", "::[ Cetak SEP ]::", param);
@@ -1362,7 +1362,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            Valid.reportSmc("rptLaporanResumeRanap.jasper", "report", "::[ Laporan Resume Pasien ]::", param);
+            Valid.reportSmc("rptLaporanResumeRanapKompilasi.jasper", "report", "::[ Laporan Resume Pasien ]::", param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnResumeRanapActionPerformed
@@ -1499,13 +1499,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                 ps2.setString(2, rs.getString("tgl_periksa"));
                                 ps2.setString(3, rs.getString("jam"));
                                 try (ResultSet rs2 = ps2.executeQuery()) {
+                                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
                                     if (rs2.next()) {
                                         param.put("nopermintaan", rs2.getString("noorder"));
                                         param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
                                         param.put("jampermintaan", rs2.getString("jam_permintaan"));
-                                        Valid.reportSmc("rptPeriksaLab4Permintaan.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        Valid.reportSmc("rptPeriksaLab4PermintaanKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                     } else {
-                                        Valid.reportSmc("rptPeriksaLab4.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        Valid.reportSmc("rptPeriksaLab4Kompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                     }
                                 }
                             }
@@ -1531,13 +1532,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                 ps2.setString(2, rs.getString("tgl_periksa"));
                                 ps2.setString(3, rs.getString("jam"));
                                 try (ResultSet rs2 = ps2.executeQuery()) {
+                                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
                                     if (rs2.next()) {
                                         param.put("nopermintaan", rs2.getString("noorder"));
                                         param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
                                         param.put("jampermintaan", rs2.getString("jam_permintaan"));
-                                        Valid.reportSmc("rptPeriksaLabPermintaanPA.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        Valid.reportSmc("rptPeriksaLabPermintaanPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                     } else {
-                                        Valid.reportSmc("rptPeriksaLabPA.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        Valid.reportSmc("rptPeriksaLabPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
                                     }
                                 }
                             }
@@ -1622,7 +1624,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                         finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
                         param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
-                        Valid.reportSmc("rptPeriksaRadiologi.jasper", "report", "::[ Pemeriksaan Radiologi ]::", param);
+                        param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter.kd_dokter = ?", rs.getString("kd_dokter")));
+                        Valid.reportSmc("rptPeriksaRadiologiKompilasi.jasper", "report", "::[ Pemeriksaan Radiologi ]::", param);
                     }
                 }
             } catch (Exception e) {
@@ -3524,6 +3527,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                 ps2.setString(2, rs.getString("tgl_periksa"));
                                 ps2.setString(3, rs.getString("jam"));
                                 try (ResultSet rs2 = ps2.executeQuery()) {
+                                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
                                     if (rs2.next()) {
                                         param.put("nopermintaan", rs2.getString("noorder"));
                                         param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
@@ -3556,6 +3560,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                 ps2.setString(2, rs.getString("tgl_periksa"));
                                 ps2.setString(3, rs.getString("jam"));
                                 try (ResultSet rs2 = ps2.executeQuery()) {
+                                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
                                     if (rs2.next()) {
                                         param.put("nopermintaan", rs2.getString("noorder"));
                                         param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
@@ -3646,6 +3651,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
                     finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
                     param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama_petugas") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("tgl_periksa")));
+                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
                     exportPDF("rptPeriksaRadiologiKompilasi.jasper", urutan + "_PeriksaRadiologi" + String.valueOf(j++), param);
                 }
             }

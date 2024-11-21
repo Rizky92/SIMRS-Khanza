@@ -53,7 +53,7 @@ import uz.ncipro.calendar.JDateTimePicker;
  */
 public final class sekuel {
     private javax.swing.ImageIcon icon = null;
-    private String track = "", folder, AKTIFKANTRACKSQL = koneksiDB.AKTIFKANTRACKSQL();
+    private String folder, AKTIFKANTRACKSQL = koneksiDB.AKTIFKANTRACKSQL();
     private final Connection connect=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
@@ -137,11 +137,13 @@ public final class sekuel {
         }
     }
     
-    public String autoNomorSmc(String table, String kolom, int panjang, String pad, String tanggal) {
+    public String autoNomorSmc(String table, String kolom, int panjang, String pad, String tanggal)
+    {
         return autoNomorSmc(null, table, kolom, panjang, pad, tanggal);
     }
     
-    public String autoNomorSmc(String prefix, String table, String kolom, int panjang, String pad, String tanggal) {
+    public String autoNomorSmc(String prefix, String table, String kolom, int panjang, String pad, String tanggal)
+    {
         String output = "";
         
         String sql = "select " +
@@ -150,7 +152,7 @@ public final class sekuel {
             "from " + table + " " +
             "where " + table + "." + kolom + " like concat(?, date_format(?, '%Y%m%d'), '%')";
         
-        if (prefix == null || prefix.isBlank()) {
+        if (prefix == null) {
             sql = "select " +
                 "concat(date_format(?, '%Y%m%d'), " +
                 "lpad(ifnull(max(convert(right(" + table + "." + kolom + ", ?), signed)), 0) + 1, ?, ?)) " +
@@ -158,25 +160,40 @@ public final class sekuel {
                 "where " + table + "." + kolom + " like concat(date_format(?, '%Y%m%d'), '%')";
         }
         
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            if (prefix == null) {
-                ps.setString(1, tanggal);
-                ps.setInt(2, panjang);
-                ps.setInt(3, panjang);
-                ps.setString(4, pad);
-                ps.setString(5, tanggal);
-            } else {
-                ps.setString(1, prefix);
-                ps.setString(2, tanggal);
-                ps.setInt(3, panjang);
-                ps.setInt(4, panjang);
-                ps.setString(5, pad);
-                ps.setString(6, prefix);
-                ps.setString(7, tanggal);
-            }
-            try (ResultSet rs = ps.executeQuery()) {
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                if (prefix == null) {
+                    ps.setString(1, tanggal);
+                    ps.setInt(2, panjang);
+                    ps.setInt(3, panjang);
+                    ps.setString(4, pad);
+                    ps.setString(5, tanggal);
+                } else {
+                    ps.setString(1, prefix);
+                    ps.setString(2, tanggal);
+                    ps.setInt(3, panjang);
+                    ps.setInt(4, panjang);
+                    ps.setString(5, pad);
+                    ps.setString(6, prefix);
+                    ps.setString(7, tanggal);
+                }
+                
+                rs = ps.executeQuery();
+
                 if (rs.next()) {
                     output = rs.getString(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
                 }
             }
         } catch (Exception e) {
@@ -217,71 +234,122 @@ public final class sekuel {
         return output;
     }
     
-    public String cariIsiSmc(String sql, String... values) {
+    public String cariIsiSmc(String sql, String... values)
+    {
         String output = "";
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
             for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
+                ps.setString(i + 1, values[i]); 
             }
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    output = rs.getString(1);
-                }
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                output = rs.getString(1);
             }
+            
+            rs.close();
+            ps.close();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        
         return output;
     }
     
-    public boolean cariBooleanSmc(String sql, String... values) {
+    public boolean cariBooleanSmc(String sql, String... values)
+    {
         boolean output = false;
-        try (PreparedStatement ps = connect.prepareStatement("select exists(" + sql + ")")) {
+        
+        try {
+            ps = connect.prepareStatement("select exists(" + sql + ")");
+            
             for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
+                ps.setString(i + 1, values[i]); 
             }
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    output = rs.getBoolean(1);
-                }
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                output = rs.getBoolean(1);
             }
+            
+            rs.close();
+            ps.close();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        
         return output;
     }
     
     public int cariIntegerSmc(String sql, String... values) {
         int output = 0;
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            try (ResultSet rs = ps.executeQuery()) {
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
                 if (rs.next()) {
                     output = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        
         return output;
     }
     
     public double cariDoubleSmc(String sql, String... values) {
         double output = 0;
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            try (ResultSet rs = ps.executeQuery()) {
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                
+                rs = ps.executeQuery();
+                
                 if (rs.next()) {
                     output = rs.getDouble(1);
                 }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                
+                if (ps != null) {
+                    ps.close();
+                }
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            System.out.println("Notifikasi : " + e);
         }
+        
         return output;
     }
     
@@ -326,23 +394,24 @@ public final class sekuel {
     }
     
     public Date cariTglSmc(String sql, String... values) {
-        Date output = null;
+        Date date = null;
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    output = (Date) rs.getTimestamp(1);
+                    date = (Date) rs.getTimestamp(1);
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            output = null;
+            date = null;
         }
-        return output;
+        
+        return date;
     }
-    
+
     public Blob cariBlobSmc(String sql, String... values) {
         Blob output = null;
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
@@ -360,131 +429,214 @@ public final class sekuel {
         }
         return output;
     }
-    
-    public void menyimpanSmc(String table, String kolom, String... values) {
-        String sql = "insert into " + table + " (" + kolom + ") values (";
-        for (int i = 0; i < values.length; i++) {
-            sql = sql + "?, ";
-        }
-        sql = sql.substring(0, sql.length() - 2).concat(")");
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("insert")));
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data...!!!");
-        }
-    }
-    
-    public boolean menyimpantfSmc(String table, String kolom, String... values) {
-        boolean output = true;
-        
-        String sql = "insert into " + table + " (" + kolom + ") values (";
-        for (int i = 0; i < values.length; i++) {
-            sql = sql + "?, ";
-        }
-        sql = sql.substring(0, sql.length() - 2).concat(")");
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("insert")));
-        } catch (Exception e) {
-            output = false;
-            System.out.println("Notif : " + e);
-            if (e.toString().toLowerCase().contains("duplicate")) {
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data, kemungkinan ada inputan yang sama dimasukkan sebelumnya..!!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data...!!!");
-            }
-        }
-        
-        return output;
-    }
-    
-    public boolean menyimpantfNotifSmc(String judulOnDuplicate, String table, String kolom, String... values) {
-        boolean output = true;
-        
-        String sql = "insert into " + table + " (" + kolom + ") values (";
-        for (int i = 0; i < values.length; i++) {
-            sql = sql + "?, ";
-        }
-        sql = sql.substring(0, sql.length() - 2).concat(")");
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("insert")));
-        } catch (Exception e) {
-            output = false;
-            System.out.println("Notif : " + e);
-            if (e.toString().toLowerCase().contains("duplicate") && judulOnDuplicate != null && !judulOnDuplicate.isBlank()) {
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data, kemungkinan ada " + judulOnDuplicate + " yang sama dimasukkan sebelumnya..!!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data...!!!");
-            }
-        }
-        
-        return output;
-    }
-    
-    public void mengupdateSmc(String table, String kolom, String where, String... values) {
-        String sql = "update " + table + " set " + kolom + " where " + where;
-        if (where == null || where.isBlank()) {
-            sql = "update " + table + " set " + kolom;
-        }
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("update")));
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
-        }
-    }
-    
-    public boolean mengupdatetfSmc(String table, String kolom, String where, String... values) {
-        boolean output = true;
-        String sql = "update " + table + " set " + kolom + " where " + where;
-        if (where == null || where.isBlank()) {
-            sql = "update " + table + " set " + kolom;
-        }
-        
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("update")));
-        } catch (Exception e) {
-            output = false;
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
-        }
-        
-        return output;
-    }
-    
-    public void menghapusSmc(String table, String where, String... values) {
-        String sql = "delete from " + table + " where " + where;
 
-        if (where == null || where.isBlank()) {
+    public ByteArrayInputStream cariGambarSmc(String sql, String... values) {
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new ByteArrayInputStream(rs.getBytes(1));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return null;
+    }
+    
+    public void menyimpanSmc(String table, String kolom, String... values)
+    {
+        String bindings = "";
+        String trackedBindings = "";
+        
+        for (int i = 0; i < values.length; i++) {
+            if (i == values.length - 1) {
+                bindings = bindings.concat("?");
+                trackedBindings = trackedBindings.concat("'" + values[i] + "'");
+            } else {
+                bindings = bindings.concat("?, ");
+                trackedBindings = trackedBindings.concat("'" + values[i] + "', ");
+            }
+        }
+        
+        String query = "insert into " + table + " (" + kolom + ") values (" + bindings + ")";
+        String track = "insert into " + table + " (" + kolom + ") values (" + trackedBindings + ")";
+        
+        if (kolom == null) {
+            query = "insert into " + table + " values (" + bindings + ")";
+            track = "insert into " + table + " values (" + trackedBindings + ")";
+        }
+        
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+                ps.executeUpdate();
+                SimpanTrack(track);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+        }
+    }
+    
+    public boolean menyimpantfSmc(String table, String kolom, String... values)
+    {
+        boolean output = false;
+        String bindings = "";
+        String trackedBindings = "";
+        
+        for (int i = 0; i < values.length; i++) {
+            if (i == values.length - 1) {
+                bindings = bindings.concat("?");
+                trackedBindings = trackedBindings.concat("'" + values[i] + "'");
+            } else {
+                bindings = bindings.concat("?, ");
+                trackedBindings = trackedBindings.concat("'" + values[i] + "', ");
+            }
+        }
+        
+        String query = "insert into " + table + " (" + kolom + ") values (" + bindings + ")";
+        String track = "insert into " + table + " (" + kolom + ") values (" + trackedBindings + ")";
+        
+        if (kolom == null) {
+            query = "insert into " + table + " values (" + bindings + ")";
+            track = "insert into " + table + " values (" + trackedBindings + ")";
+        }
+        
+        try {
+            ps = connect.prepareStatement(query);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+
+                ps.executeUpdate();
+                SimpanTrack(track);
+                output = true;
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                output = false;
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = false;
+        }
+        
+        return output;
+    }
+    
+    public boolean menyimpantfNotifSmc(String judulOnDuplicate, String table, String columns, String... values) {
+        boolean output = false;
+        
+        String sql = "insert into " + table + " (" + columns + ") values (";
+        if (columns == null || columns.isBlank()) {
+            sql = "insert into " + table + " values(";
+        }
+        
+        String track = sql;
+        
+        for (String value : values) {
+            sql = sql.concat("?, ");
+            track = track.concat("'" + value + "', ");
+        }
+        sql = sql.substring(0, sql.length() - 2).concat(")");
+        track = track.substring(0, track.length() - 2).concat(")");
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            ps.executeUpdate();
+            SimpanTrack(track);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            output = false;
+            if (judulOnDuplicate != null && !judulOnDuplicate.isBlank()) {
+                JOptionPane.showMessageDialog(null, "Tidak bisa menyimpan data, kemungkinan ada " + judulOnDuplicate + " yang sama dimasukkan sebelumnya.");
+            }
+        }
+        return output;
+    }
+    
+    public void mengupdateSmc(String table, String columns, String conditions, String... values)
+    {
+        String query = "update " + table + " set " + columns + " where " + conditions;
+        String track = query;
+        
+        try {
+            ps = connect.prepareStatement("update " + table + " set " + columns + " where " + conditions);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                    track = track.replaceFirst("\\?", "'" + values[i] + "'");
+                }
+                ps.executeUpdate();
+                SimpanTrack(track);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
+        }
+    }
+    
+    public boolean mengupdatetfSmc(String table, String columns, String conditions, String... values)
+    {
+        boolean output = false;
+        String query = "update " + table + " set " + columns + " where " + conditions;
+        String track = query;
+        
+        try {
+            ps = connect.prepareStatement("update " + table + " set " + columns + " where " + conditions);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                    track = track.replaceFirst("\\?", "'" + values[i] + "'");
+                }
+                ps.executeUpdate();
+                SimpanTrack(track);
+                output = true;
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return output;
+    }
+    
+    public void menghapusSmc(String table, String wheres, String... values) {
+        String sql = "delete from " + table + " where " + wheres;
+        String track = sql;
+
+        if (wheres == null || wheres.isBlank()) {
             sql = "delete from " + table;
         }
 

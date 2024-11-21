@@ -33,6 +33,7 @@
 	<parameter name="jampermintaan" class="java.lang.String"/>
 	<parameter name="userid" class="java.lang.String"/>
 	<parameter name="ipaddress" class="java.lang.String"/>
+	<parameter name="ttd" class="java.io.InputStream" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14, temp15, temp16 from temporary_lab where temp36 = $P{userid} and temp37 = $P{ipaddress} order by no asc]]>
 	</queryString>
@@ -787,10 +788,11 @@
 				<text><![CDATA[Penanggung Jawab]]></text>
 			</staticText>
 			<image>
-				<reportElement x="399" y="44" width="50" height="50" uuid="ea42ecc6-c364-4f78-93a5-77bf4b1d2314"/>
+				<reportElement x="385" y="36" width="78" height="78" uuid="ea42ecc6-c364-4f78-93a5-77bf4b1d2314"/>
+				<imageExpression><![CDATA[$P{ttd}]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="326" y="106" width="190" height="15" uuid="479bcd7e-d2d6-4594-9ae3-17226fb87f48"/>
+				<reportElement stretchType="RelativeToBandHeight" x="326" y="110" width="190" height="15" uuid="479bcd7e-d2d6-4594-9ae3-17226fb87f48"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>

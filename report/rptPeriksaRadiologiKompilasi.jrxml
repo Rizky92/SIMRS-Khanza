@@ -460,7 +460,7 @@
 				<text><![CDATA[Penanggung Jawab]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="314" y="112" width="208" height="15" uuid="43bdfd4c-bb74-43ae-87e2-11ce770a05d8"/>
+				<reportElement x="314" y="114" width="208" height="15" uuid="43bdfd4c-bb74-43ae-87e2-11ce770a05d8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
@@ -468,7 +468,7 @@
 				<textFieldExpression><![CDATA[$P{penjab}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="383" y="41" width="71" height="71" uuid="09fe8786-32ce-4ae0-a0af-64f390f374ae"/>
+				<reportElement x="377" y="36" width="82" height="82" uuid="09fe8786-32ce-4ae0-a0af-64f390f374ae"/>
 				<imageExpression><![CDATA[$P{ttd}]]></imageExpression>
 			</image>
 		</band>
