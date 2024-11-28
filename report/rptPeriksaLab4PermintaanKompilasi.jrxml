@@ -798,30 +798,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{penjab}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="98" width="134" height="10" forecolor="#000000" backcolor="#F0F0DC" uuid="4d9c7933-eb25-44f1-8274-e42124b7ea7d"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Catatan :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="108" width="186" height="10" forecolor="#000000" backcolor="#F0F0DC" uuid="f723df35-9e3a-440c-9bd3-2b3c7cf7fc19"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Jika ada keragu-raguan pemeriksaan,]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="118" width="186" height="10" forecolor="#000000" backcolor="#F0F0DC" uuid="cf9b31e2-00e1-46fe-aaf4-390c7e228129"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[diharapkan segera menghubungi laboratorium.]]></text>
-			</staticText>
 		</band>
 	</summary>
 </jasperReport>
