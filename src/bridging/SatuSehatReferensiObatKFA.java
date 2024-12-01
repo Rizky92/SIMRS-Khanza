@@ -18,6 +18,7 @@ import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
+import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -226,7 +227,8 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(jLabel6);
 
-        LimitData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100", "200", "300", "500", "1000" }));
+        LimitData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100", "200", "300" }));
+        LimitData.setSelectedIndex(1);
         LimitData.setName("LimitData"); // NOI18N
         LimitData.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(LimitData);
@@ -399,23 +401,25 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
         if (page == 1) {
             Valid.tabelKosong(tabMode);
         }
-
-        link = koneksiDB.URLKFAV2SATUSEHAT() + "/products/all?page=" + page + "&size=" + LimitData.getSelectedItem().toString() + "&product_type=" + ProductType.getSelectedItem().toString();
-        if (!TCari.getText().isBlank()) {
-            link = link + "&keyword=" + TCari.getText().trim();
-        }
-
+        
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
             requestEntity = new HttpEntity(headers);
-            json = api.getRest().exchange(link, HttpMethod.GET, requestEntity, String.class).getBody();
-
-            root = mapper.readTree(json);
-            System.out.println("Total : " + root.path("total").asText());
-            System.out.println("Page : " + root.path("page").asText());
-            System.out.println("Size : " + root.path("size").asText());
+            
+            URIBuilder uri = new URIBuilder(koneksiDB.URLKFAV2SATUSEHAT() + "/products/all")
+                .addParameter("page", "1")
+                .addParameter("size", LimitData.getSelectedItem().toString())
+                .addParameter("product_type", ProductType.getSelectedItem().toString());
+            
+            if (!TCari.getText().isBlank()) {
+                uri.addParameter("keyword", TCari.getText().trim());
+            }
+            System.out.println("URL : " + uri.toString());
+            
+            root = mapper.readTree(api.getRest().exchange(uri.build(), HttpMethod.GET, requestEntity, String.class).getBody());
+            System.out.println("RESULT JSON : " + root.toString());
             response = root.path("items").path("data");
             if (response.isArray()) {
                 for (JsonNode obj : response) {
@@ -423,10 +427,10 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
                         obj.path("kfa_code").asText(),
                         obj.path("name").asText(),
                         obj.path("active").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
-                        obj.path("state").asText(),
-                        obj.path("farmalkes_type").path("group").asText(),
-                        obj.path("dosage_form").path("code").asText(),
-                        obj.path("dosage_form").path("name").asText(),
+                        obj.path("state").isNull() ? "" : obj.path("state").asText(),
+                        obj.path("farmalkes_type").path("group").isNull() ? "" : obj.path("farmalkes_type").path("group").asText(),
+                        obj.path("dosage_form").path("code").isNull() ? "" : obj.path("dosage_form").path("code").asText(),
+                        obj.path("dosage_form").path("name").isNull() ? "" : obj.path("dosage_form").path("name").asText(),
                         obj.path("generik").asText().replace("true", "Ya").replace("false", "Tidak").replaceAll("\\W*(?:\\b(?!(?:Ya|Tidak)\\b)\\w+\\W*|\\W+)+", ""),
                         obj.path("dose_per_unit").asText() + " " + obj.path("uom").path("name").asText()
                     });

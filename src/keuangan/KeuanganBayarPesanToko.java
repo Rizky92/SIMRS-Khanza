@@ -1274,6 +1274,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             }else{
                 tampilAkunBayar();
             }
+        } catch (Exception e) {
+        }
+        
+        try {
             if(Valid.daysOld("./cache/akunbankmandiri.iyem")<30){
                 tampilAkunBankMandiri2();
             }else{
@@ -1726,7 +1730,11 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             }
             myObj.close();
         } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+            if(ex.toString().contains("java.io.FileNotFoundException")){
+                tampilAkunBayar();
+            }else{
+                System.out.println("Notifikasi : "+ex);
+            }
         }
     } 
     

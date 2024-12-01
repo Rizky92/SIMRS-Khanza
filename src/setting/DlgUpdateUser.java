@@ -198,7 +198,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,data_sasaran_usialansia=false,skrining_perilaku_merokok_sekolah_remaja=false,skrining_kekerasan_pada_perempuan=false,skrining_obesitas=false,
             skrining_risiko_kanker_payudara=false,skrining_risiko_kanker_paru=false,skrining_tbc=false,skrining_kesehatan_gigi_mulut_remaja=false,penilaian_awal_keperawatan_ranap_bayi=false,booking_mcu_perusahaan=false,
             catatan_observasi_restrain_nonfarma=false,catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,skrining_puma=false,satu_sehat_kirim_careplan=false,satu_sehat_kirim_medicationstatement=false,
-            skrining_adiksi_nikotin=false,skrining_thalassemia=false,skrining_instrumen_sdq=false;
+            skrining_adiksi_nikotin=false,skrining_thalassemia=false,skrining_instrumen_sdq=false,skrining_instrumen_srq=false,checklist_pemberian_fibrinolitik=false,skrining_kanker_kolorektal=false,dapur_pemesanan=false,
+            bayar_pesan_dapur=false,hutang_dapur=false,titip_faktur_dapur=false,validasi_tagihan_dapur=false,surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,
+            ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,
+            sirkulasi_dapur=false,sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur;
 
     /** Creates new form DlgUser
      * @param parent
@@ -820,7 +823,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         pcare_cek_prognosa=false;data_sasaran_usiaproduktif=false;data_sasaran_usialansia=false;skrining_perilaku_merokok_sekolah_remaja=false;skrining_kekerasan_pada_perempuan=false;skrining_obesitas=false;
         skrining_risiko_kanker_payudara=false;skrining_risiko_kanker_paru=false;skrining_tbc=false;skrining_kesehatan_gigi_mulut_remaja=false;penilaian_awal_keperawatan_ranap_bayi=false;booking_mcu_perusahaan=false;
         catatan_observasi_restrain_nonfarma=false;catatan_observasi_ventilator=false;catatan_anestesi_sedasi=false;skrining_puma=false;satu_sehat_kirim_careplan=false;satu_sehat_kirim_medicationstatement=false;
-        skrining_adiksi_nikotin=false;skrining_thalassemia=false;skrining_instrumen_sdq=false;
+        skrining_adiksi_nikotin=false;skrining_thalassemia=false;skrining_instrumen_sdq=false;skrining_instrumen_srq=false;checklist_pemberian_fibrinolitik=false;skrining_kanker_kolorektal=false;dapur_pemesanan=false;
+        bayar_pesan_dapur=false;hutang_dapur=false;titip_faktur_dapur=false;validasi_tagihan_dapur=false;surat_pemesanan_dapur=false;pengajuan_barang_dapur=false;dapur_returbeli=false;hibah_dapur=false;
+        ringkasan_penerimaan_dapur=false;ringkasan_pengajuan_dapur=false;ringkasan_pemesanan_dapur=false;ringkasan_returbeli_dapur=false;ringkasan_stokkeluar_dapur=false;dapur_stokkeluar_pertanggal=false;
+        sirkulasi_dapur=false;sirkulasi_dapur2=false;verifikasi_penerimaan_dapur=false;nilai_penerimaan_vendor_dapur_perbulan=false;ringkasan_hutang_vendor_dapur=false;
         try{    
             jml=0;
             for(i=0;i<tbUser.getRowCount();i++){
@@ -1059,7 +1065,11 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                 "user.skrining_kekerasan_pada_perempuan,user.skrining_obesitas,user.skrining_risiko_kanker_payudara,user.skrining_risiko_kanker_paru,user.skrining_tbc,"+
                 "user.skrining_kesehatan_gigi_mulut_remaja,user.penilaian_awal_keperawatan_ranap_bayi,user.booking_mcu_perusahaan,user.catatan_observasi_restrain_nonfarma,"+
                 "user.catatan_observasi_ventilator,user.catatan_anestesi_sedasi,user.skrining_puma,user.satu_sehat_kirim_careplan,user.satu_sehat_kirim_medicationstatement,"+
-                "user.skrining_adiksi_nikotin,user.skrining_thalassemia,user.skrining_instrumen_sdq from user where user.id_user=AES_ENCRYPT(?,'nur')");
+                "user.skrining_adiksi_nikotin,user.skrining_thalassemia,user.skrining_instrumen_sdq,user.skrining_instrumen_srq,user.checklist_pemberian_fibrinolitik,"+
+                "user.skrining_kanker_kolorektal,user.dapur_pemesanan,user.bayar_pesan_dapur,user.hutang_dapur,user.titip_faktur_dapur,user.validasi_tagihan_dapur,"+
+                "user.surat_pemesanan_dapur,user.pengajuan_barang_dapur,user.dapur_returbeli,user.hibah_dapur,user.ringkasan_penerimaan_dapur,user.ringkasan_pengajuan_dapur,"+
+                "user.ringkasan_pemesanan_dapur,user.ringkasan_returbeli_dapur,user.ringkasan_stokkeluar_dapur,user.dapur_stokkeluar_pertanggal,user.sirkulasi_dapur,"+
+                "user.sirkulasi_dapur2,user.verifikasi_penerimaan_dapur,user.nilai_penerimaan_vendor_dapur_perbulan,user.ringkasan_hutang_vendor_dapur from user where user.id_user=AES_ENCRYPT(?,'nur')");
             try {
                 ps.setString(1,user);
                 rs=ps.executeQuery();
@@ -1182,6 +1192,9 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                     kodetransaksi_tujuan_transfer_bankmandiri=rs.getBoolean("kodetransaksi_tujuan_transfer_bankmandiri");konsultasi_medik=rs.getBoolean("konsultasi_medik");jawaban_konsultasi_medik=rs.getBoolean("jawaban_konsultasi_medik");pcare_cek_alergi=rs.getBoolean("pcare_cek_alergi");pcare_cek_prognosa=rs.getBoolean("pcare_cek_prognosa");data_sasaran_usiaproduktif=rs.getBoolean("data_sasaran_usiaproduktif");data_sasaran_usialansia=rs.getBoolean("data_sasaran_usialansia");skrining_perilaku_merokok_sekolah_remaja=rs.getBoolean("skrining_perilaku_merokok_sekolah_remaja");
                     skrining_kekerasan_pada_perempuan=rs.getBoolean("skrining_kekerasan_pada_perempuan");skrining_obesitas=rs.getBoolean("skrining_obesitas");skrining_risiko_kanker_payudara=rs.getBoolean("skrining_risiko_kanker_payudara");skrining_risiko_kanker_paru=rs.getBoolean("skrining_risiko_kanker_paru");skrining_tbc=rs.getBoolean("skrining_tbc");skrining_kesehatan_gigi_mulut_remaja=rs.getBoolean("skrining_kesehatan_gigi_mulut_remaja");penilaian_awal_keperawatan_ranap_bayi=rs.getBoolean("penilaian_awal_keperawatan_ranap_bayi");booking_mcu_perusahaan=rs.getBoolean("booking_mcu_perusahaan");
                     catatan_observasi_restrain_nonfarma=rs.getBoolean("catatan_observasi_restrain_nonfarma");catatan_observasi_ventilator=rs.getBoolean("catatan_observasi_ventilator");catatan_anestesi_sedasi=rs.getBoolean("catatan_anestesi_sedasi");skrining_puma=rs.getBoolean("skrining_puma");satu_sehat_kirim_careplan=rs.getBoolean("satu_sehat_kirim_careplan");satu_sehat_kirim_medicationstatement=rs.getBoolean("satu_sehat_kirim_medicationstatement");skrining_adiksi_nikotin=rs.getBoolean("skrining_adiksi_nikotin");skrining_thalassemia=rs.getBoolean("skrining_thalassemia");skrining_instrumen_sdq=rs.getBoolean("skrining_instrumen_sdq");
+                    skrining_instrumen_srq=rs.getBoolean("skrining_instrumen_srq");checklist_pemberian_fibrinolitik=rs.getBoolean("checklist_pemberian_fibrinolitik");skrining_kanker_kolorektal=rs.getBoolean("skrining_kanker_kolorektal");dapur_pemesanan=rs.getBoolean("dapur_pemesanan");bayar_pesan_dapur=rs.getBoolean("bayar_pesan_dapur");hutang_dapur=rs.getBoolean("hutang_dapur");titip_faktur_dapur=rs.getBoolean("titip_faktur_dapur");validasi_tagihan_dapur=rs.getBoolean("validasi_tagihan_dapur");surat_pemesanan_dapur=rs.getBoolean("surat_pemesanan_dapur");pengajuan_barang_dapur=rs.getBoolean("pengajuan_barang_dapur");
+                    dapur_returbeli=rs.getBoolean("dapur_returbeli");hibah_dapur=rs.getBoolean("hibah_dapur");ringkasan_penerimaan_dapur=rs.getBoolean("ringkasan_penerimaan_dapur");ringkasan_pengajuan_dapur=rs.getBoolean("ringkasan_pengajuan_dapur");ringkasan_pemesanan_dapur=rs.getBoolean("ringkasan_pemesanan_dapur");ringkasan_returbeli_dapur=rs.getBoolean("ringkasan_returbeli_dapur");ringkasan_stokkeluar_dapur=rs.getBoolean("ringkasan_stokkeluar_dapur");dapur_stokkeluar_pertanggal=rs.getBoolean("dapur_stokkeluar_pertanggal");sirkulasi_dapur=rs.getBoolean("sirkulasi_dapur");sirkulasi_dapur2=rs.getBoolean("sirkulasi_dapur2");
+                    verifikasi_penerimaan_dapur=rs.getBoolean("verifikasi_penerimaan_dapur");nilai_penerimaan_vendor_dapur_perbulan=rs.getBoolean("nilai_penerimaan_vendor_dapur_perbulan");ringkasan_hutang_vendor_dapur=rs.getBoolean("ringkasan_hutang_vendor_dapur");
                     setTampil();
                 }       
                 LCount.setText(""+tabMode.getRowCount());
@@ -2089,7 +2102,67 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[F]Ringkasan Pengadaan Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[F]Ringkasan Pengadaan Barang Dapur",dapur_ringkasan_pembelian});
         }
+        
+        if("[F]Penerimaan Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Penerimaan Barang Dapur",dapur_pemesanan});
+        }
+        
+        if("[F]Surat Pemesanan Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Surat Pemesanan Barang Dapur",surat_pemesanan_dapur});
+        }
+        
+        if("[F]Pengajuan Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Pengajuan Barang Dapur",pengajuan_barang_dapur});
+        }
 
+        if("[F]Retur Ke Suplier Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Retur Ke Suplier Dapur",dapur_returbeli});
+        }
+        
+        if("[F]Hibah Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Hibah Barang Dapur",hibah_dapur});
+        }
+        
+        if("[F]Ringkasan Penerimaan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Ringkasan Penerimaan Dapur",ringkasan_penerimaan_dapur});
+        }
+        
+        if("[F]Ringkasan Pengajuan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Ringkasan Pengajuan Dapur",ringkasan_pengajuan_dapur});
+        }
+        
+        if("[F]Ringkasan Pemesanan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Ringkasan Pemesanan Dapur",ringkasan_pemesanan_dapur});
+        }
+        
+        if("[F]Ringkasan Retur Suplier Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Ringkasan Retur Suplier Dapur",ringkasan_returbeli_dapur});
+        }
+        
+        if("[F]Ringkasan Stok Keluar Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Ringkasan Stok Keluar Dapur",ringkasan_stokkeluar_dapur});
+        }
+        
+        if("[F]Stok Keluar Dapur Per Tanggal".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Stok Keluar Dapur Per Tanggal",dapur_stokkeluar_pertanggal});
+        }
+        
+        if("[F]Sirkulasi Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Sirkulasi Barang Dapur",sirkulasi_dapur});
+        }
+        
+        if("[F]Sirkulasi Barang Dapur 2".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Sirkulasi Barang Dapur 2",sirkulasi_dapur2});
+        }
+        
+        if("[F]Verifikasi Penerimaan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Verifikasi Penerimaan Dapur",verifikasi_penerimaan_dapur});
+        }
+                
+        if("[F]Nilai Penerimaan Vendor Dapur Per Bulan".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[F]Nilai Penerimaan Vendor Dapur Per Bulan",nilai_penerimaan_vendor_dapur_perbulan});
+        }
+                
         if("[G]Jenis Inventaris".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[G]Jenis Inventaris",inventaris_jenis});
         }
@@ -3093,7 +3166,27 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[K]Pembayaran Pihak Ke 3 Bank Mandiri".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[K]Pembayaran Pihak Ke 3 Bank Mandiri",pembayaran_pihak_ke3_bankmandiri});
         }
+        
+        if("[K]Bayar Pesan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[K]Bayar Pesan Dapur",bayar_pesan_dapur});
+        }
+        
+        if("[K]Hutang Barang Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[K]Hutang Barang Dapur",hutang_dapur});
+        }
 
+        if("[K]Titip Faktur/Tagihan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[K]Titip Faktur/Tagihan Dapur",titip_faktur_dapur});
+        }
+        
+        if("[K]Validasi Titip Faktur/Tagihan Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[K]Validasi Titip Faktur/Tagihan Dapur",validasi_tagihan_dapur});
+        }
+        
+        if("[K]Ringkasan Hutang Vendor Dapur".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[K]Ringkasan Hutang Vendor Dapur",ringkasan_hutang_vendor_dapur});
+        }
+        
         if("[L]Cek NIK".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Cek NIK",bpjs_cek_nik});
         }
@@ -4540,6 +4633,18 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         
         if("[M]Skrining Instrumen SDQ".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Skrining Instrumen SDQ",skrining_instrumen_sdq});
+        }
+        
+        if("[M]Skrining Instrumen SRQ".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[M]Skrining Instrumen SRQ",skrining_instrumen_srq});
+        }
+        
+        if("[M]Checklist Pemberian Fibrinolitik".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[M]Checklist Pemberian Fibrinolitik",checklist_pemberian_fibrinolitik});
+        }
+        
+        if("[M]Skrining Kanker Kolorektal".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[M]Skrining Kanker Kolorektal",skrining_kanker_kolorektal});
         }
         
         if("[N]Pengambilan BHP Medis".toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -6385,6 +6490,66 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","dapur_ringkasan_pembelian='"+tbUser.getValueAt(i,2).toString()+"'");
             }
             
+            if("[F]Penerimaan Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","dapur_pemesanan='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Surat Pemesanan Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","surat_pemesanan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Pengajuan Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pengajuan_barang_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Retur Ke Suplier Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","dapur_returbeli='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Hibah Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","hibah_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Ringkasan Penerimaan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_penerimaan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Ringkasan Pengajuan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_pengajuan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Ringkasan Pemesanan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_pemesanan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Ringkasan Retur Suplier Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_returbeli_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Ringkasan Stok Keluar Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_stokkeluar_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Stok Keluar Dapur Per Tanggal".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","dapur_stokkeluar_pertanggal='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Sirkulasi Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","sirkulasi_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Sirkulasi Barang Dapur 2".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","sirkulasi_dapur2='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Verifikasi Penerimaan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","verifikasi_penerimaan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[F]Nilai Penerimaan Vendor Dapur Per Bulan".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","nilai_penerimaan_vendor_dapur_perbulan='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+                    
             if("[G]Jenis Inventaris".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","inventaris_jenis='"+tbUser.getValueAt(i,2).toString()+"'");
             }
@@ -7387,6 +7552,26 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[K]Pembayaran Pihak Ke 3 Bank Mandiri".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pembayaran_pihak_ke3_bankmandiri='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[K]Bayar Pesan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bayar_pesan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[K]Hutang Barang Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","hutang_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[K]Titip Faktur/Tagihan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","titip_faktur_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[K]Validasi Titip Faktur/Tagihan Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","validasi_tagihan_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[K]Ringkasan Hutang Vendor Dapur".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","ringkasan_hutang_vendor_dapur='"+tbUser.getValueAt(i,2).toString()+"'");
             }
         }
     }
@@ -8839,6 +9024,18 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[M]Skrining Instrumen SDQ".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_instrumen_sdq='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[M]Skrining Instrumen SRQ".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_instrumen_srq='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[M]Checklist Pemberian Fibrinolitik".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","checklist_pemberian_fibrinolitik='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[M]Skrining Kanker Kolorektal".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_kanker_kolorektal='"+tbUser.getValueAt(i,2).toString()+"'");
             }
             
             if("[N]Pengambilan BHP Medis".equals(tbUser.getValueAt(i,1).toString())){

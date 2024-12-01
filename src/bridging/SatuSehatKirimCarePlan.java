@@ -614,7 +614,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                         "],"
                                     )+
                                     "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString()+"\"," +
+                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                     "\"subject\" : {" +
                                         "\"reference\" : \"Patient/"+idpasien+"\"," +
                                         "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
@@ -710,7 +710,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                         "],"
                                     )+
                                     "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString()+"\"," +
+                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                     "\"subject\" : {" +
                                         "\"reference\" : \"Patient/"+idpasien+"\"," +
                                         "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +

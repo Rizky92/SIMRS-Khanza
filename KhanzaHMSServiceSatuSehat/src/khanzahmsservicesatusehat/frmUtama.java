@@ -4738,7 +4738,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("nm_perawatan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("nm_perawatan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -4853,7 +4853,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("nm_perawatan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("nm_perawatan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -5653,7 +5653,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -5769,7 +5769,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -5887,7 +5887,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -6003,7 +6003,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             "}," +
                                             "\"encounter\": {" +
                                                 "\"reference\": \"Encounter/"+rs.getString("id_encounter")+"\"," +
-                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\"" +
+                                                "\"display\": \"Permintaan "+rs.getString("Pemeriksaan")+" atas nama pasien "+rs.getString("nm_pasien")+" No.RM "+rs.getString("no_rkm_medis")+" No.Rawat "+rs.getString("no_rawat")+", pada tanggal "+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"\"" +
                                             "}," +
                                             "\"authoredOn\" : \""+rs.getString("tgl_permintaan")+"T"+rs.getString("jam_permintaan")+"+07:00\"," +
                                             "\"requester\": {" +
@@ -7479,7 +7479,7 @@ public class frmUtama extends javax.swing.JFrame {
                 ps.setString(2,Tanggal2.getText()+" ");
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    if((!rs.getString("no_ktp").equals(""))&&(!rs.getString("ktppraktisi").equals(""))&&rs.getString("satu_sehat_diet").equals("")){
+                    if((!rs.getString("no_ktp").equals(""))&&(!rs.getString("ktppraktisi").equals(""))&&rs.getString("satu_sehat_careplan").equals("")){
                         try {
                             iddokter=cekViaSatuSehat.tampilIDParktisi(rs.getString("ktppraktisi"));
                             idpasien=cekViaSatuSehat.tampilIDPasien(rs.getString("no_ktp"));
@@ -7507,7 +7507,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "}" +
                                             "]," +
                                             "\"intent\" : \"plan\"," +
-                                            "\"description\" : \""+rs.getString("rtl")+"\"," +
+                                            "\"description\" : \""+rs.getString("rtl").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                             "\"subject\" : {" +
                                                 "\"reference\" : \"Patient/"+idpasien+"\"," +
                                                 "\"display\" : \""+rs.getString("nm_pasien")+"\"" +
@@ -7516,7 +7516,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\" : \"Encounter/"+rs.getString("id_encounter")+"\","+
                                                 "\"display\" : \"Kunjungan "+rs.getString("nm_pasien")+" pada tanggal "+rs.getString("tgl_registrasi")+" dengan nomor kunjungan "+rs.getString("no_rawat")+"\""+
                                             "}," +
-                                            "\"created\" : \""+rs.getString("tanggal").replaceAll(" ","T")+"+07:00\"," +
+                                            "\"created\" : \""+rs.getString("tgl_perawatan").replaceAll(" ","T")+"+07:00\"," +
                                             "\"author\" : {" +
                                                 "\"reference\" : \"Practitioner/"+iddokter+"\"," +
                                                 "\"display\" : \""+rs.getString("nama")+"\"" +
@@ -7571,7 +7571,7 @@ public class frmUtama extends javax.swing.JFrame {
                 ps.setString(2,Tanggal2.getText()+" ");
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    if((!rs.getString("no_ktp").equals(""))&&(!rs.getString("ktppraktisi").equals(""))&&rs.getString("satu_sehat_diet").equals("")){
+                    if((!rs.getString("no_ktp").equals(""))&&(!rs.getString("ktppraktisi").equals(""))&&rs.getString("satu_sehat_careplan").equals("")){
                         try {
                             iddokter=cekViaSatuSehat.tampilIDParktisi(rs.getString("ktppraktisi"));
                             idpasien=cekViaSatuSehat.tampilIDPasien(rs.getString("no_ktp"));
@@ -7599,7 +7599,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "}" +
                                             "]," +
                                             "\"intent\" : \"plan\"," +
-                                            "\"description\" : \""+rs.getString("rtl")+"\"," +
+                                            "\"description\" : \""+rs.getString("rtl").replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                             "\"subject\" : {" +
                                                 "\"reference\" : \"Patient/"+idpasien+"\"," +
                                                 "\"display\" : \""+rs.getString("nm_pasien")+"\"" +
@@ -7608,7 +7608,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\" : \"Encounter/"+rs.getString("id_encounter")+"\","+
                                                 "\"display\" : \"Kunjungan "+rs.getString("nm_pasien")+" pada tanggal "+rs.getString("tgl_registrasi")+" dengan nomor kunjungan "+rs.getString("no_rawat")+"\""+
                                             "}," +
-                                            "\"created\" : \""+rs.getString("tanggal").replaceAll(" ","T")+"+07:00\"," +
+                                            "\"created\" : \""+rs.getString("tgl_perawatan").replaceAll(" ","T")+"+07:00\"," +
                                             "\"author\" : {" +
                                                 "\"reference\" : \"Practitioner/"+iddokter+"\"," +
                                                 "\"display\" : \""+rs.getString("nama")+"\"" +
