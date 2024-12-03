@@ -51,6 +51,7 @@ import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -77,6 +78,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.HtmlUtils;
 import rekammedis.RMRiwayatPerawatan;
+import setting.DlgSetAplikasi;
 import simrskhanza.DlgCariCaraBayar;
 
 public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
@@ -259,6 +261,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel13 = new widget.Label();
         TMaxMemory = new widget.TextBox();
         jLabel16 = new widget.Label();
+        fc = new javax.swing.JFileChooser();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -426,7 +429,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-12-2024 23:34:24" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024 11:06:05" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -467,7 +470,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-12-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -568,8 +571,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame12.add(BtnBukaFolderExport);
         BtnBukaFolderExport.setBounds(324, 62, 136, 23);
 
-        CmbPilihanAplikasiPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(Aplikasi Default)", "Google Chrome", "Mozilla Firefox", "Microsoft Edge", "Pilih Aplikasi..." }));
+        CmbPilihanAplikasiPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(Aplikasi Default)", "Google Chrome", "Mozilla Firefox", "Microsoft Edge", "Pilih Aplikasi...", "Jangan Buka PDF" }));
         CmbPilihanAplikasiPDF.setName("CmbPilihanAplikasiPDF"); // NOI18N
+        CmbPilihanAplikasiPDF.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbPilihanAplikasiPDFItemStateChanged(evt);
+            }
+        });
         internalFrame12.add(CmbPilihanAplikasiPDF);
         CmbPilihanAplikasiPDF.setBounds(140, 32, 130, 23);
 
@@ -655,6 +663,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel16.setBounds(228, 92, 14, 23);
 
         WindowPengaturan.getContentPane().add(internalFrame12, java.awt.BorderLayout.CENTER);
+
+        fc.setControlButtonsAreShown(false);
+        fc.setCurrentDirectory(null);
+        fc.setFileHidingEnabled(true);
+        fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setName("fc"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -810,7 +824,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -824,7 +838,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -905,7 +919,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGlass11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelGlass11, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2490,6 +2504,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 case 4:
                     aplikasipdf = TPathAplikasiPDF.getText().trim();
                     break;
+                case 5:
+                    aplikasipdf = "disable";
+                    break;
                 default:
                     aplikasipdf = "";
                     break;
@@ -2518,7 +2535,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanPengaturanActionPerformed
 
     private void BtnPilihAplikasiPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihAplikasiPDFActionPerformed
-        // TODO add your handling code here:
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            TPathAplikasiPDF.setText(fc.getSelectedFile().getAbsolutePath());
+        }
     }//GEN-LAST:event_BtnPilihAplikasiPDFActionPerformed
 
     private void BtnResetPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetPengaturanActionPerformed
@@ -2535,6 +2554,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }//GEN-LAST:event_BtnResetPengaturanActionPerformed
+
+    private void CmbPilihanAplikasiPDFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbPilihanAplikasiPDFItemStateChanged
+        if (CmbPilihanAplikasiPDF.getSelectedIndex() == 4) {
+            TPathAplikasiPDF.setEditable(true);
+            BtnPilihAplikasiPDF.setEnabled(true);
+        } else {
+            TPathAplikasiPDF.setText("");
+            TPathAplikasiPDF.setEditable(false);
+            BtnPilihAplikasiPDF.setEnabled(false);
+        }
+    }//GEN-LAST:event_CmbPilihanAplikasiPDFItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -2604,6 +2634,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Button btnSPRI;
     private widget.Button btnSurkon;
     private widget.Button btnTriaseIGD;
+    private javax.swing.JFileChooser fc;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame11;
     private widget.InternalFrame internalFrame12;
@@ -4119,7 +4150,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(KOMPILASIBERKASMAXMEMORY * 1_000_000));
                 System.out.println("PDFs berhasil digabung!");
-                Valid.panggilUrlSmc(KOMPILASIBERKASAPLIKASIPDF, new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf").getAbsolutePath());
+                if (!KOMPILASIBERKASAPLIKASIPDF.equalsIgnoreCase("disable")) {
+                    Valid.panggilUrlSmc(KOMPILASIBERKASAPLIKASIPDF, new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf").getAbsolutePath());
+                }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
                 sukses = false;
@@ -4190,6 +4223,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             TPathAplikasiPDF.setEditable(false);
                             BtnPilihAplikasiPDF.setEnabled(false);
                             CmbPilihanAplikasiPDF.setSelectedIndex(3);
+                            break;
+                        case "disable":
+                            TPathAplikasiPDF.setText("");
+                            TPathAplikasiPDF.setEditable(false);
+                            BtnPilihAplikasiPDF.setEnabled(false);
+                            CmbPilihanAplikasiPDF.setSelectedIndex(5);
                             break;
                         default:
                             TPathAplikasiPDF.setText(root.path("aplikasipdf").asText());

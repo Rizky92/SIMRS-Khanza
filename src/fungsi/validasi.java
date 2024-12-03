@@ -219,6 +219,8 @@ public final class validasi {
     public void panggilUrlSmc(String app, String url) {
         if (app == null || app.isBlank()) {
             panggilUrl2(url);
+        } else if (app.equalsIgnoreCase("disable")) {
+            //
         } else {
             String os = System.getProperty("os.name").toLowerCase();
             String realpath = "";
@@ -235,7 +237,7 @@ public final class validasi {
                     }
                     Runtime.getRuntime().exec(realpath + " " + url);
                 } else if (os.contains("mac") || os.contains("nix") || os.contains("nux")) {
-                    System.out.println("Notif : Unsupported os detected, using default behaviour...");
+                    System.out.println("Notif : Sistem operasi belum disupport, menggunakan proses default...");
                     panggilUrl2(url);
                 }
             } catch (Exception e) {
