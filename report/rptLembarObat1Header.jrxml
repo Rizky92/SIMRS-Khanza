@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptLembarObat1Header" pageWidth="277" pageHeight="595" columnWidth="277" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="809f25f0-d604-4ae9-972a-f73b27944d83">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="noresep" class="java.lang.String"/>
 	<queryString>

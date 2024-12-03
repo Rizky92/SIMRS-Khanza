@@ -6,7 +6,6 @@
 	<property name="ireport.y" value="143"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="33"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="956"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="koneksi"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="penanggung" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>

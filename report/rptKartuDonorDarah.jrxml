@@ -6,7 +6,6 @@
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="koneksi"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
 		<![CDATA[select utd_pendonor.no_pendonor,utd_pendonor.nama,utd_pendonor.no_ktp,utd_pendonor.jk,utd_pendonor.tmp_lahir,utd_pendonor.tgl_lahir,

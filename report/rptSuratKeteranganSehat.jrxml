@@ -6,7 +6,6 @@
 	<property name="ireport.y" value="96"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="63"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="926"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lokal"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>

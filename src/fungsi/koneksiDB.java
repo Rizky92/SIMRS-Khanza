@@ -69,8 +69,8 @@ public class koneksiDB {
     }
     
     public static String raw(String propertyName) {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty(propertyName);
         } catch (Exception e) {
             return "";
@@ -78,8 +78,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSAPIURL() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("ADAMLABSAPIURL");
         } catch (Exception e) {
             return "";
@@ -87,8 +87,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSAPIKEY() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return EnkripsiAES.decrypt(prop.getProperty("ADAMLABSAPIKEY"));
         } catch (Exception e) {
             return "";
@@ -96,8 +96,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSAPIKODERS() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("ADAMLABSAPIKODERS");
         } catch (Exception e) {
             return "";
@@ -105,8 +105,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSKECAMATANID() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("ADAMLABSKECAMATANID");
         } catch (Exception e) {
             return "";
@@ -114,8 +114,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSKABUPATENID() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("ADAMLABSKABUPATENID");
         } catch (Exception e) {
             return "";
@@ -123,8 +123,8 @@ public class koneksiDB {
     }
     
     public static String ADAMLABSPROVINSIID() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("ADAMLABSPROVINSIID");
         } catch (Exception e) {
             return "";
@@ -132,8 +132,8 @@ public class koneksiDB {
     }
     
     public static String LABORATORIUMKIRIMHASIL() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("LABORATORIUMKIRIMHASIL");
         } catch (Exception e) {
             return "";
@@ -141,8 +141,8 @@ public class koneksiDB {
     }
     
     public static String LABORATORIUMURUTANHASIL() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("LABORATORIUMURUTANHASIL");
         } catch (Exception e) {
             return "";
@@ -150,8 +150,8 @@ public class koneksiDB {
     }
 
     public static boolean GUNAKANDIAGNOSAEKLAIM() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("GUNAKANDIAGNOSAEKLAIM").equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
@@ -159,8 +159,8 @@ public class koneksiDB {
     }
     
     public static boolean VALIDASIULANGPINDAHKAMAR() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("VALIDASIULANGPINDAHKAMAR").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
@@ -168,8 +168,8 @@ public class koneksiDB {
     }
 
     public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("VALIDASIULANGHASILPERMINTAAN").toLowerCase().trim().contains(kategori);
         } catch (IOException e) {
             return false;
@@ -177,8 +177,8 @@ public class koneksiDB {
     }
 
     public static boolean VALIDASIRESEPKRONIS() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             return prop.getProperty("VALIDASIRESEPKRONIS").toLowerCase().trim().equals("yes");
         } catch (IOException e) {
             return false;
@@ -186,8 +186,8 @@ public class koneksiDB {
     }
     
     public static String TAMPILANDEFAULTRIWAYATPASIEN() {
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
             String value = prop.getProperty("TAMPILANDEFAULTRIWAYATPASIEN").toLowerCase().trim();
             switch (value) {
                 case "2 riwayat terakhir":
@@ -228,6 +228,33 @@ public class koneksiDB {
             return prop.getProperty("KOMPILASIBERKASGUNAKANRIWAYATPASIEN").trim().toLowerCase().replaceAll("\\s+", "");
         } catch (Exception e) {
             return "";
+        }
+    }
+    
+    public static String KOMPILASIBERKASAPLIKASIPDF() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KOMPILASIBERKASAPLIKASIPDF");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static String KOMPILASIBERKASGUNAKANTANGGALEXPORT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("KOMPILASIBERKASGUNAKANTANGGALEXPORT").trim().toLowerCase().replaceAll("\\s+", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public static long KOMPILASIBERKASMAXMEMORY() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return Long.parseLong(prop.getProperty("KOMPILASIBERKASMAXMEMORY"));
+        } catch (Exception e) {
+            return 200;
         }
     }
     

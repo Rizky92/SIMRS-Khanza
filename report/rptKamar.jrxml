@@ -4,7 +4,6 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="server"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value="YmFuZ3NhbCAsMTUsMTUsZDI2ZjQxYTQtZTM4Ni00MjkzLTk3NzMtZjM3NWZkOGYyMWU1O2thbWFy&#xA;ICwxNTMsMTUsZmNhZmI3ZTEtN2I5Zi00NWJiLWFjZGYtZjBjZWU5NzhhZmFjOw==&#xA;"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>

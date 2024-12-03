@@ -15,7 +15,6 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
 	<parameter name="kotars" class="java.lang.String"/>

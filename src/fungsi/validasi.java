@@ -227,6 +227,36 @@ public final class validasi {
         return "";
     }
     
+    public void panggilUrlSmc(String app, String url) {
+        if (app == null || app.isBlank()) {
+            panggilUrl2(url);
+        } else if (app.equalsIgnoreCase("disable")) {
+            //
+        } else {
+            String os = System.getProperty("os.name").toLowerCase();
+            String realpath = "";
+            try {
+                if (os.contains("windows")) {
+                    if (app.equalsIgnoreCase("chrome")) {
+                        realpath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+                    } else if (app.equalsIgnoreCase("firefox")) {
+                        realpath = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+                    } else if (app.equalsIgnoreCase("msedge")) {
+                        realpath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+                    } else {
+                        realpath = app;
+                    }
+                    Runtime.getRuntime().exec(realpath + " " + url);
+                } else if (os.contains("mac") || os.contains("nix") || os.contains("nux")) {
+                    System.out.println("Notif : Sistem operasi belum disupport, menggunakan proses default...");
+                    panggilUrl2(url);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+    }
+    
     public void cleanupTextSmc(JTextComponent txt) {
         try {
             CharsetEncoder latin1Encoder = Charset.forName("ISO-8859-1").newEncoder();

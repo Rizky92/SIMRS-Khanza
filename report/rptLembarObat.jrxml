@@ -4,7 +4,6 @@
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="143"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="penanggung" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
