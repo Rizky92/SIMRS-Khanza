@@ -309,7 +309,7 @@
                     <li <?=$halaman=="RiwayatPeriksa"?"class='active'":""?>>
                         <a href="index.php?act=RiwayatPeriksa&hal=RiwayatPeriksa">
                             <i class="material-icons">local_pharmacy</i>
-                            <span>Riwayat Periksa</span>
+                            <span>Riwayat Kunjungan</span>
                         </a>
                     </li>
                     <li <?=$halaman=="RiwayatMCU"?"class='active'":""?>>
@@ -321,20 +321,44 @@
                     <li <?=$halaman=="AntrianTindakan"?"class='active'":""?>>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">event_seat</i>
-                            <span>Daftar Permintaan & Tindakan</span>
+                            <span>Hasil Pemeriksaan</span>
                         </a>
                         <ul class="ml-menu">
                             <li <?=$subhalaman=="AntrianPemeriksaanLab"?"class='active'":""?>>
-                                <a href="index.php?act=AntrianPemeriksaanLab&hal=AntrianTindakan">Pemeriksaan Laborat</a>
+                                <a href="index.php?act=AntrianPemeriksaanLab&hal=AntrianTindakan">Laborat PK</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianPemeriksaanLabMB"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianPemeriksaanLabMB&hal=AntrianTindakan">Laborat MB</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianPemeriksaanLabPA"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianPemeriksaanLabPA&hal=AntrianTindakan">Laborat PA</a>
                             </li>
                             <li <?=$subhalaman=="AntrianPemeriksaanRad"?"class='active'":""?>>
-                                <a href="index.php?act=AntrianPemeriksaanRad&hal=AntrianTindakan">Pemeriksaan Radiologi</a>
+                                <a href="index.php?act=AntrianPemeriksaanRad&hal=AntrianTindakan">Radiologi</a>
                             </li>
-                            <li <?=$subhalaman=="AtrianResepObat"?"class='active'":""?>>
-                                <a href="index.php?act=AtrianResepObat&hal=AntrianTindakan">Resep Obat</a>
+                            <li <?=$subhalaman=="AntrianUSGKandungan"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianUSGKandungan&hal=AntrianTindakan">USG Kandungan</a>
                             </li>
-                            <li <?=$subhalaman=="AtrianOperasi"?"class='active'":""?>>
-                                <a href="index.php?act=AtrianOperasi&hal=AntrianTindakan">Operasi</a>
+                            <li <?=$subhalaman=="AntrianUSGUrologi"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianUSGUrologi&hal=AntrianTindakan">USG Urologi</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianUSGGynecologi"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianUSGGynecologi&hal=AntrianTindakan">USG Gynecologi</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianUSGNeonatus"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianUSGNeonatus&hal=AntrianTindakan">USG Neonatus</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianEKG"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianEKG&hal=AntrianTindakan">EKG</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianEndoskopiFaring"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianEndoskopiFaring&hal=AntrianTindakan">Endoskopi Faring/Laringoskopi</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianEndoskopiHidung"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianEndoskopiHidung&hal=AntrianTindakan">Endoskopi Hidung</a>
+                            </li>
+                            <li <?=$subhalaman=="AntrianEndoskopiTelinga"?"class='active'":""?>>
+                                <a href="index.php?act=AntrianEndoskopiTelinga&hal=AntrianTindakan">Endoskopi Telinga</a>
                             </li>
                         </ul>
                     </li>
@@ -361,6 +385,17 @@
                             </li>
                             <li <?=$subhalaman=="SuratCovid"?"class='active'":""?>>
                                 <a href="index.php?act=SuratCovid&hal=Surat">Keterangan Covid</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li <?=$halaman=="Persetujuan"?"class='active'":""?>>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment_turned_in</i>
+                            <span>Persetujuan</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li <?=$subhalaman=="PersetujuanUmum"?"class='active'":""?>>
+                                <a href="index.php?act=PersetujuanUmum&hal=Persetujuan">Persetujuan Umum</a>
                             </li>
                         </ul>
                     </li>
