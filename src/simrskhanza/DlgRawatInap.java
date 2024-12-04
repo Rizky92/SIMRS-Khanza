@@ -5750,6 +5750,12 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                         }
                     }   break;
                 case 3:
+                    Valid.cleanupTextSmc(TKeluhan);
+                    Valid.cleanupTextSmc(TPemeriksaan);
+                    Valid.cleanupTextSmc(TPenilaian);
+                    Valid.cleanupTextSmc(TindakLanjut);
+                    Valid.cleanupTextSmc(TInstruksi);
+                    Valid.cleanupTextSmc(TEvaluasi);
                     if((!TKeluhan.getText().trim().equals(""))||(!TPemeriksaan.getText().trim().equals(""))||(!TSuhu.getText().trim().equals(""))||
                             (!TTensi.getText().trim().equals(""))||(!TAlergi.getText().trim().equals(""))||(!TTinggi.getText().trim().equals(""))||
                             (!TBerat.getText().trim().equals(""))||(!TRespirasi.getText().trim().equals(""))||(!TNadi.getText().trim().equals(""))||
@@ -10589,6 +10595,12 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }                            
                 }   break;
             case 3:
+                Valid.cleanupTextSmc(TKeluhan);
+                Valid.cleanupTextSmc(TPemeriksaan);
+                Valid.cleanupTextSmc(TPenilaian);
+                Valid.cleanupTextSmc(TindakLanjut);
+                Valid.cleanupTextSmc(TInstruksi);
+                Valid.cleanupTextSmc(TEvaluasi);
                 if((!TKeluhan.getText().trim().equals(""))||(!TPemeriksaan.getText().trim().equals(""))||(!TSuhu.getText().trim().equals(""))||
                         (!TTensi.getText().trim().equals(""))||(!TAlergi.getText().trim().equals(""))||(!TTinggi.getText().trim().equals(""))||
                         (!TBerat.getText().trim().equals(""))||(!TRespirasi.getText().trim().equals(""))||(!TNadi.getText().trim().equals(""))||

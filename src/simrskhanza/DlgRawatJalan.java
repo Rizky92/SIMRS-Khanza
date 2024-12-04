@@ -6463,6 +6463,12 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }else{
             switch (TabRawat.getSelectedIndex()) {
                 case 3:
+                    Valid.cleanupTextSmc(TKeluhan);
+                    Valid.cleanupTextSmc(TPemeriksaan);
+                    Valid.cleanupTextSmc(TPenilaian);
+                    Valid.cleanupTextSmc(TindakLanjut);
+                    Valid.cleanupTextSmc(TInstruksi);
+                    Valid.cleanupTextSmc(TEvaluasi);
                     if(KdPeg.getText().trim().equals("")||TPegawai.getText().trim().equals("")){
                             Valid.textKosong(KdPeg,"Dokter/Paramedis");
                     } else if (cmbKesadaran.getSelectedItem().toString().isBlank()) {
@@ -12850,6 +12856,12 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }  
                 break;
             case 3:
+                Valid.cleanupTextSmc(TKeluhan);
+                Valid.cleanupTextSmc(TPemeriksaan);
+                Valid.cleanupTextSmc(TPenilaian);
+                Valid.cleanupTextSmc(TindakLanjut);
+                Valid.cleanupTextSmc(TInstruksi);
+                Valid.cleanupTextSmc(TEvaluasi);
                 if((!TKeluhan.getText().trim().equals(""))||(!TPemeriksaan.getText().trim().equals(""))||(!TSuhu.getText().trim().equals(""))||
                         (!TTensi.getText().trim().equals(""))||(!TAlergi.getText().trim().equals(""))||(!TTinggi.getText().trim().equals(""))||
                         (!TBerat.getText().trim().equals(""))||(!TRespirasi.getText().trim().equals(""))||(!TNadi.getText().trim().equals(""))||
