@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0bf46801-580a-469b-99ba-e103c2a475e1">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -359,7 +359,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{namapasien}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="MM-dd-yyyy">
+			<textField isStretchWithOverflow="true" pattern="dd-MM-yyyy">
 				<reportElement mode="Transparent" x="430" y="33" width="120" height="10" uuid="226ba1a5-02fe-44d0-becb-916b909690d2"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
@@ -451,7 +451,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField pattern="MM-dd-yyyy">
+			<textField pattern="dd-MM-yyyy">
 				<reportElement mode="Transparent" x="93" y="84" width="108" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="d5fe83bf-95bc-40f3-8a10-6354bd772374"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="false"/>
@@ -774,7 +774,7 @@
 				</textElement>
 				<text><![CDATA[Tanggal & Jam]]></text>
 			</staticText>
-			<textField pattern="MM-dd-yyyy">
+			<textField pattern="dd-MM-yyyy">
 				<reportElement mode="Transparent" x="180" y="33" width="45" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="ffee6f29-f294-48e8-aa61-d533598e06b9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>

@@ -1086,8 +1086,17 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
         }else{
-            Sequel.queryu("update permintaan_medis set status='Tidak Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
-            tampil();
+            if (Sequel.cariBooleanSmc("select * from permintaan_medis where permintaan_medis.no_permintaan = ? and permintaan_medis.status = 'Disetujui'", tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString().trim())) {
+                if (akses.getadmin()) {
+                    Sequel.queryu("update permintaan_medis set status='Tidak Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                    tampil();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Data permintaan sudah divalidasi...!!");
+                }
+            } else {
+                Sequel.queryu("update permintaan_medis set status='Tidak Disetujui' where no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                tampil();
+            }
         } 
     }//GEN-LAST:event_ppTidakDisetujuiActionPerformed
 
