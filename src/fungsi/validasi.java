@@ -246,7 +246,12 @@ public final class validasi {
                     } else {
                         realpath = app;
                     }
-                    Runtime.getRuntime().exec(realpath + " " + url);
+                    if (realpath.contains(".lnk")) {
+                        ProcessBuilder pb = new ProcessBuilder(new String[]{"cmd", "/c", realpath, url});
+                        pb.start();
+                    } else {
+                        Runtime.getRuntime().exec(realpath + " " + url);
+                    }
                 } else if (os.contains("mac") || os.contains("nix") || os.contains("nux")) {
                     System.out.println("Notif : Sistem operasi belum disupport, menggunakan proses default...");
                     panggilUrl2(url);

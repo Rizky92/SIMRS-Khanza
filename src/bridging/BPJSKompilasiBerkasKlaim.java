@@ -2532,7 +2532,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             File f = new File("./cache/pengaturankompilasi.iyem");
             f.createNewFile();
             try (FileWriter fw = new FileWriter(f)) {
-                fw.write("{\"pengaturan\":{\"aplikasipdf\":\"" + aplikasipdf + "\",\"tanggalexport\":\"" + tanggalexport + "\",\"maxmemory\":" + maxmemory + "}}");
+                fw.write("{\"pengaturan\":{\"aplikasipdf\":\"" + aplikasipdf.replace("\\", "\\\\") + "\",\"tanggalexport\":\"" + tanggalexport + "\",\"maxmemory\":" + maxmemory + "}}");
                 fw.flush();
                 KOMPILASIBERKASAPLIKASIPDF = aplikasipdf;
                 KOMPILASIBERKASGUNAKANTANGGALEXPORT = tanggalexport;
@@ -2546,6 +2546,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanPengaturanActionPerformed
 
     private void BtnPilihAplikasiPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihAplikasiPDFActionPerformed
+        if (!TPathAplikasiPDF.getText().isBlank()) {
+            fc.setCurrentDirectory(new File(TPathAplikasiPDF.getText().substring(0, TPathAplikasiPDF.getText().lastIndexOf("\\"))));
+        }
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             TPathAplikasiPDF.setText(fc.getSelectedFile().getAbsolutePath());
         }
@@ -2570,9 +2573,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (CmbPilihanAplikasiPDF.getSelectedIndex() == 4) {
             TPathAplikasiPDF.setEditable(true);
             BtnPilihAplikasiPDF.setEnabled(true);
-            if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED && fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                TPathAplikasiPDF.setText(fc.getSelectedFile().getAbsolutePath());
-            }
         } else {
             TPathAplikasiPDF.setText("");
             TPathAplikasiPDF.setEditable(false);
