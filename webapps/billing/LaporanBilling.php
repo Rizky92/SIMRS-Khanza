@@ -51,7 +51,7 @@
                                         </font> 
                                     </center>
                                 </td>
-                                <td  width='20%'><font color='000000' size='2'  face='Tahoma' align='right'>$carabayar</font></td>
+                                <td width='20%'><font color='000000' size='2'  face='Tahoma' align='right'>$carabayar</font></td>
                             </tr>
                         </table>
                     </td>
