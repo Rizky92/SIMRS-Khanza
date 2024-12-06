@@ -18,6 +18,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="prb" class="java.lang.String"/>
+	<parameter name="cetakanke" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select
     bridging_sep.no_sep,
@@ -273,7 +274,7 @@ where no_sep = $P{parameter}]]>
 		<band/>
 	</pageHeader>
 	<detail>
-		<band height="802">
+		<band height="796">
 			<rectangle>
 				<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="1" y="340" width="531" height="456" uuid="d7c5aba1-4d6a-45ce-88e4-686bf9143899"/>
 				<graphicElement>
@@ -1124,7 +1125,7 @@ $P{namars}]]></textFieldExpression>
 					<font fontName="Tahoma" size="6" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Cetakan ke 1, " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Cetakan ke "+ ($P{cetakanke} == null ? "1" : $P{cetakanke}) + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="311" y="154" width="64" height="11" uuid="8bc25992-9f13-481c-8686-05e7fec88f36">

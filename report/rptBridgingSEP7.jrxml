@@ -21,6 +21,7 @@
 	<parameter name="noreg" class="java.lang.String"/>
 	<parameter name="dokter" class="java.lang.String"/>
 	<parameter name="prb" class="java.lang.String"/>
+	<parameter name="cetakanke" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select
     bridging_sep.no_sep,
@@ -980,7 +981,7 @@ $P{namars}]]></textFieldExpression>
 					<font fontName="Tahoma" size="6" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Cetakan ke 1, " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Cetakan ke "+ ($P{cetakanke} == null ? "1" : $P{cetakanke}) + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="311" y="46" width="222" height="23" uuid="4174b708-4a3d-42dd-973b-7f870ea4454c">

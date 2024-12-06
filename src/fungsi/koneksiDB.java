@@ -234,7 +234,7 @@ public class koneksiDB {
     public static String KOMPILASIBERKASAPLIKASIPDF() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("KOMPILASIBERKASAPLIKASIPDF");
+            return (prop.getProperty("KOMPILASIBERKASAPLIKASIPDF") == null ? "" : prop.getProperty("KOMPILASIBERKASAPLIKASIPDF"));
         } catch (Exception e) {
             return "";
         }

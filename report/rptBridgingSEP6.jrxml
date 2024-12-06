@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 5.2.0  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="390" columnWidth="533" leftMargin="42" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b011cd6-3692-40a3-8405-4d0ebaaf5dee">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
@@ -29,6 +29,7 @@
 	<parameter name="norawat" class="java.lang.String"/>
 	<parameter name="noreg" class="java.lang.String"/>
 	<parameter name="prb" class="java.lang.String"/>
+	<parameter name="cetakanke" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,
 bridging_sep.tglrujukan,bridging_sep.no_rujukan,bridging_sep.kdppkrujukan,
@@ -109,8 +110,12 @@ bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep  where no_sep= $P
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="if(bridging_sep.jnspelayanan=&apos;1&apos;,&apos;Rawat Inap&apos;,&apos;Rawat Jalan&apos;)" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="if(bridging_sep.jnspelayanan=&apos;1&apos;,&apos;Rawat Inap&apos;,&apos;Rawat Jalan&apos;)"/>
-		<property name="com.jaspersoft.studio.field.label" value="if(bridging_sep.jnspelayanan=&apos;1&apos;,&apos;Rawat Inap&apos;,&apos;Rawat Jalan&apos;)"/>
+		<property name="com.jaspersoft.studio.field.name">
+			<![CDATA[if(bridging_sep.jnspelayanan='1','Rawat Inap','Rawat Jalan')]]>
+		</property>
+		<property name="com.jaspersoft.studio.field.label">
+			<![CDATA[if(bridging_sep.jnspelayanan='1','Rawat Inap','Rawat Jalan')]]>
+		</property>
 	</field>
 	<field name="catatan" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="catatan"/>
@@ -143,12 +148,20 @@ bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep  where no_sep= $P
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="if(bridging_sep.klsrawat=&apos;1&apos;,&apos;Kelas 1&apos;,if(bridging_sep.klsrawat=&apos;2&apos;,&apos;Kelas 2&apos;,&apos;Kelas 3&apos;))" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="if(bridging_sep.klsrawat=&apos;1&apos;,&apos;Kelas 1&apos;,if(bridging_sep.klsrawat=&apos;2&apos;,&apos;Kelas 2&apos;,&apos;Kelas 3&apos;))"/>
-		<property name="com.jaspersoft.studio.field.label" value="if(bridging_sep.klsrawat=&apos;1&apos;,&apos;Kelas 1&apos;,if(bridging_sep.klsrawat=&apos;2&apos;,&apos;Kelas 2&apos;,&apos;Kelas 3&apos;))"/>
+		<property name="com.jaspersoft.studio.field.name">
+			<![CDATA[if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3'))]]>
+		</property>
+		<property name="com.jaspersoft.studio.field.label">
+			<![CDATA[if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3'))]]>
+		</property>
 	</field>
 	<field name="if(bridging_sep.lakalantas=&apos;0&apos;,&apos;Kasus Kecelakaan&apos;,&apos;Bukan Kasus Kecelakaan&apos;)" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="if(bridging_sep.lakalantas=&apos;0&apos;,&apos;Kasus Kecelakaan&apos;,&apos;Bukan Kasus Kecelakaan&apos;)"/>
-		<property name="com.jaspersoft.studio.field.label" value="if(bridging_sep.lakalantas=&apos;0&apos;,&apos;Kasus Kecelakaan&apos;,&apos;Bukan Kasus Kecelakaan&apos;)"/>
+		<property name="com.jaspersoft.studio.field.name">
+			<![CDATA[if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan')]]>
+		</property>
+		<property name="com.jaspersoft.studio.field.label">
+			<![CDATA[if(bridging_sep.lakalantas='0','Kasus Kecelakaan','Bukan Kasus Kecelakaan')]]>
+		</property>
 	</field>
 	<field name="lokasilaka" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="lokasilaka"/>
@@ -548,28 +561,6 @@ bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep  where no_sep= $P
 				<text><![CDATA[*SEP bukan sebagai bukti penjaminan peserta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="301" width="48" height="11" uuid="7119d9d0-6457-49a1-878f-94de830cfb66"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="7" isBold="false" isItalic="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Cetakan ke 1]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yyyy h:mm:ss a" isBlankWhenNull="false">
-				<reportElement key="textField" x="48" y="301" width="216" height="11" forecolor="#000000" backcolor="#FFFFFF" uuid="6d279b67-8e17-4091-8445-0ed249595855"/>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="7" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
-			</textField>
-			<staticText>
 				<reportElement x="393" y="212" width="7" height="13" uuid="78245ac9-ac0d-45b5-b10d-5c4bdde4326b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -911,6 +902,14 @@ bridging_sep.nmdpdjp,bridging_sep.lakalantas from bridging_sep  where no_sep= $P
 					<jr:codeExpression><![CDATA[$F{no_sep}]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
+			<textField>
+				<reportElement x="1" y="301" width="308" height="11" uuid="34404f85-0cbd-49aa-b1d4-98b121b893b7"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="7" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cetakan ke "+ ($P{cetakanke} == null ? "1" : $P{cetakanke}) + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

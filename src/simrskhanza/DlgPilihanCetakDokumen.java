@@ -985,7 +985,8 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
-                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));    
+                    param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP)); 
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1045,6 +1046,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEP3.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1106,6 +1108,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("noreg",NoReg);
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEP5.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1168,6 +1171,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("dokter",NamaDokter);
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqry("rptBridgingSEP7.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1241,6 +1245,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));  
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEP.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1300,6 +1305,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("kontakrs",akses.getkontakrs());
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEP3.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1361,6 +1367,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("noreg",NoReg);
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEP5.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
@@ -1423,6 +1430,7 @@ public final class DlgPilihanCetakDokumen extends javax.swing.JDialog {
                     param.put("dokter",NamaDokter);
                     param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
                     param.put("prb",Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?",NoSEP));
+                    param.put("cetakanke", 1);
                     if(TglRujukan.equals("")){
                         if(JenisPelayanan.equals("ranap")){
                             Valid.MyReportqrypdf("rptBridgingSEP7.jasper","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+

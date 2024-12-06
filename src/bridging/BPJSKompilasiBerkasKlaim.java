@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import fungsi.akses;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -207,6 +208,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             }
         });
+        
+        TMaxMemory.setDocument(new batasInput(4).getOnlyAngka(TMaxMemory));
 
         cekPengaturanKompilasi();
     }
@@ -258,6 +261,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel13 = new widget.Label();
         TMaxMemory = new widget.TextBox();
         jLabel16 = new widget.Label();
+        jLabel22 = new widget.Label();
         fc = new javax.swing.JFileChooser();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
@@ -426,7 +430,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024 13:09:29" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2024 10:01:55" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -467,7 +471,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2024" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -530,12 +534,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         WindowUpdatePulang.getContentPane().add(internalFrame11, java.awt.BorderLayout.CENTER);
 
         WindowPengaturan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowPengaturan.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         WindowPengaturan.setName("WindowPengaturan"); // NOI18N
         WindowPengaturan.setUndecorated(true);
-        WindowPengaturan.setPreferredSize(new java.awt.Dimension(610, 182));
         WindowPengaturan.setResizable(false);
 
-        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pengaturan Kompilasi Berkas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Kompilasi Berkas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame12.setName("internalFrame12"); // NOI18N
         internalFrame12.setPreferredSize(new java.awt.Dimension(610, 182));
         internalFrame12.setLayout(null);
@@ -590,7 +594,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame12.add(TPathAplikasiPDF);
         TPathAplikasiPDF.setBounds(274, 32, 294, 23);
 
-        jLabel42.setText("Tanggal Export Default :");
+        jLabel42.setText("Gunakan Tanggal Export :");
         jLabel42.setName("jLabel42"); // NOI18N
         internalFrame12.add(jLabel42);
         jLabel42.setBounds(0, 62, 136, 23);
@@ -644,10 +648,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame12.add(BtnResetPengaturan);
         BtnResetPengaturan.setBounds(150, 132, 86, 30);
 
-        jLabel13.setText("Max. Memory :");
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("_____________________________________________________________________________________________________");
         jLabel13.setName("jLabel13"); // NOI18N
         internalFrame12.add(jLabel13);
-        jLabel13.setBounds(0, 92, 136, 23);
+        jLabel13.setBounds(0, 116, 610, 12);
 
         TMaxMemory.setHighlighter(null);
         TMaxMemory.setName("TMaxMemory"); // NOI18N
@@ -659,6 +665,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel16.setName("jLabel16"); // NOI18N
         internalFrame12.add(jLabel16);
         jLabel16.setBounds(228, 92, 14, 23);
+
+        jLabel22.setText("Max. Memory :");
+        jLabel22.setName("jLabel22"); // NOI18N
+        internalFrame12.add(jLabel22);
+        jLabel22.setBounds(0, 92, 136, 23);
 
         WindowPengaturan.getContentPane().add(internalFrame12, java.awt.BorderLayout.CENTER);
 
@@ -821,7 +832,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -835,7 +846,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1445,6 +1456,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             param.put("noreg", Sequel.cariIsiSmc("select reg_periksa.no_reg from reg_periksa where reg_periksa.no_rawat = ?", lblNoRawat.getText()));
             param.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
             param.put("parameter", lblNoSEP.getText());
+            param.put("cetakanke", 2);
             
             String pilihan = (String) JOptionPane.showInputDialog(
                 null, "Silahkan pilih model SEP yang mau dilihat", "Pilih Model SEP", JOptionPane.INFORMATION_MESSAGE, null,
@@ -2465,6 +2477,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPenjaminActionPerformed
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
+        cekPengaturanKompilasi();
         WindowPengaturan.setSize(610, 172);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
@@ -2557,6 +2570,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (CmbPilihanAplikasiPDF.getSelectedIndex() == 4) {
             TPathAplikasiPDF.setEditable(true);
             BtnPilihAplikasiPDF.setEnabled(true);
+            if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED && fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                TPathAplikasiPDF.setText(fc.getSelectedFile().getAbsolutePath());
+            }
         } else {
             TPathAplikasiPDF.setText("");
             TPathAplikasiPDF.setEditable(false);
@@ -2648,6 +2664,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Label jLabel19;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
+    private widget.Label jLabel22;
     private widget.Label jLabel25;
     private widget.Label jLabel26;
     private widget.Label jLabel27;
@@ -2991,21 +3008,22 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (lblNoSEP.getText().equals("Tidak Ada")) {
             return;
         }
-        Map<String, Object> params = new HashMap<>();
-        params.put("namars", akses.getnamars());
-        params.put("alamatrs", akses.getalamatrs());
-        params.put("kotars", akses.getkabupatenrs());
-        params.put("propinsirs", akses.getpropinsirs());
-        params.put("kontakrs", akses.getkontakrs());
-        params.put("norawat", lblNoRawat.getText());
-        params.put("prb", Sequel.cariIsiSmc("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep = ?", lblNoSEP.getText()));
-        params.put("noreg", Sequel.cariIsiSmc("select no_reg from reg_periksa where no_rawat = ?", lblNoRawat.getText()));
-        params.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
-        params.put("parameter", lblNoSEP.getText());
+        Map<String, Object> param = new HashMap<>();
+        param.put("namars", akses.getnamars());
+        param.put("alamatrs", akses.getalamatrs());
+        param.put("kotars", akses.getkabupatenrs());
+        param.put("propinsirs", akses.getpropinsirs());
+        param.put("kontakrs", akses.getkontakrs());
+        param.put("norawat", lblNoRawat.getText());
+        param.put("prb", Sequel.cariIsiSmc("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep = ?", lblNoSEP.getText()));
+        param.put("noreg", Sequel.cariIsiSmc("select no_reg from reg_periksa where no_rawat = ?", lblNoRawat.getText()));
+        param.put("logo", Sequel.cariGambar("select gambar.bpjs from gambar"));
+        param.put("parameter", lblNoSEP.getText());
+        param.put("cetakanke", 2);
         if (lblStatusRawat.getText().contains("Ranap")) {
-            exportPDF("rptBridgingSEP.jasper", urutan + "_SEP", params);
+            exportPDF("rptBridgingSEP.jasper", urutan + "_SEP", param);
         } else {
-            exportPDF("rptBridgingSEP2.jasper", urutan + "_SEP", params);
+            exportPDF("rptBridgingSEP2.jasper", urutan + "_SEP", param);
         }
     }
     
@@ -3027,6 +3045,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        
         HttpURLConnection http;
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/" + filename;
         String exportPath = "./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + "_" + urutan + "_KlaimINACBG.pdf";
@@ -3045,6 +3064,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             } catch (Exception e) {
                 exportSukses = false;
                 System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, e);
             }
         }
     }
@@ -3083,19 +3103,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             ps.setString(1, lblNoRawat.getText());
             ps.setString(2, kodeDokter);
             try (ResultSet rs = ps.executeQuery()) {
-                int i = 2;
-                while (rs.next()) {
+                for (int i = 2; rs.next(); i++) {
                     if (i == 2) {
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
                         param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                         param.put("namadokter2", rs.getString("nm_dokter"));
                     }
                     if (i == 3) {
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
                         param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
                         param.put("namadokter3", rs.getString("nm_dokter"));
                     }
-                    ++i;
                 }
             }
         } catch (Exception e) {
@@ -3127,7 +3145,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
-            cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_Billing.pdf");
+            cleanupSinglePDF(lblNoSEP.getText() + "_" + urutan + "_Billing.pdf");
         }
     }
     
@@ -4015,7 +4033,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
-            cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_Riwayat");
+            cleanupSinglePDF(lblNoSEP.getText() + "_" + urutan + "_Riwayat");
         }
     }
     
@@ -4045,7 +4063,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             } else {
                                 fileChannel.close();
                                 os.close();
-                                cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_BerkasDigital" + String.valueOf(i));
+                                cleanupSinglePDF(lblNoSEP.getText() + "_" + urutan + "_BerkasDigital" + String.valueOf(i));
                                 System.out.println("File tidak ditemukan : " + url + rs.getString("lokasi_file"));
                                 if (JOptionPane.showConfirmDialog(null, "Berkas " + rs.getString("nama") + " \"" + rs.getString("lokasi_file").substring(rs.getString("lokasi_file").lastIndexOf("/") + 1) + "\" tidak ditemukan, lewati?", "Lewati Berkas", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                                     throw new Exception("Terdapat berkas digital yang tidak bisa ditemukan..!!");
@@ -4058,7 +4076,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } catch (Exception e) {
             exportSukses = false;
             System.out.println("Notif : " + e);
-            cleanupSingleFile(lblNoSEP.getText() + "_" + urutan + "_BerkasDigital");
+            cleanupSinglePDF(lblNoSEP.getText() + "_" + urutan + "_BerkasDigital");
         }
     }
 
@@ -4115,9 +4133,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tidak bisa mengekspor sebagai PDF!");
         }
+        cleanTemporaryPDF();
         
         if (exportSukses) {
-            cleanupAfterMerge();
             JOptionPane.showMessageDialog(rootPane, "Export PDF berhasil!");
         } else {
             exportSukses = true;
@@ -4146,7 +4164,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 pdfMerger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf");
                 pdfMerger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(KOMPILASIBERKASMAXMEMORY * 1_000_000));
                 System.out.println("PDFs berhasil digabung!");
-                if (!KOMPILASIBERKASAPLIKASIPDF.equalsIgnoreCase("disable")) {
+                if (KOMPILASIBERKASAPLIKASIPDF == null || !KOMPILASIBERKASAPLIKASIPDF.equalsIgnoreCase("disable")) {
                     Valid.panggilUrlSmc(KOMPILASIBERKASAPLIKASIPDF, new File("./berkaspdf/" + tanggalExport + "/" + lblNoSEP.getText() + ".pdf").getAbsolutePath());
                 }
             } catch (Exception e) {
@@ -4159,7 +4177,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         return sukses;
     }
     
-    private void cleanupSingleFile(String containsName) {
+    private void cleanupSinglePDF(String containsName) {
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {
@@ -4171,7 +4189,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
 
-    private void cleanupAfterMerge() {
+    private void cleanTemporaryPDF() {
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {

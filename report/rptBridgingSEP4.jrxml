@@ -18,6 +18,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="prb" class="java.lang.String"/>
+	<parameter name="cetakanke" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select
     bridging_sep.no_sep,
@@ -1356,7 +1357,7 @@ $P{namars}]]></textFieldExpression>
 					<font fontName="Tahoma" size="6" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Cetakan ke 1, " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Cetakan ke "+ ($P{cetakanke} == null ? "1" : $P{cetakanke}) + ", " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new java.util.Locale("id", "ID")).format(new Date())]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="311" y="46" width="222" height="23" uuid="8a4c796a-b65a-4b67-8cfd-57e7df88f8e9">
