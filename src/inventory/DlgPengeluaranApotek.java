@@ -1321,7 +1321,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if(rs.next()){  
                     kdgudang.setText(rs.getString("kd_bangsaltujuan"));
                     nmgudang.setText(rs.getString("tujuan"));
-                    catatan.setText("No.Permintaan "+rs.getString("no_permintaan")+" Tgl. "+rs.getString("tanggal")+ " dari " + rs.getString("kd_bangsal") +" oleh "+rs.getString("nip"));
+                    catatan.setText("No.Permintaan "+rs.getString("no_permintaan")+" Tgl "+rs.getString("tanggal")+" Ruang "+rs.getString("asal")+" oleh "+rs.getString("nama"));
                 } 
             } catch (Exception e) {
                 System.out.println("Note : "+e);
