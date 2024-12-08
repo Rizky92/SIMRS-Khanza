@@ -244,23 +244,23 @@ public final class akses {
             sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false;
     
     public static void setData(String user, String pass) {
-        try {        
-                ps=koneksi.prepareStatement("select * from admin where admin.usere=AES_ENCRYPT(?,'nur') and admin.passworde=AES_ENCRYPT(?,'windi')");               
-                ps2=koneksi.prepareStatement("select * from user where user.id_user=AES_ENCRYPT(?,'nur') and user.password=AES_ENCRYPT(?,'windi')");
-                try {
-                    ps.setString(1,user);
-                    ps.setString(2,pass);
-                    rs=ps.executeQuery();
-                    rs.last();           
-
-                    ps2.setString(1,user);
-                    ps2.setString(2,pass);
-                    rs2=ps2.executeQuery();
-                    rs2.last();
-
-                    akses.jml1=rs.getRow();
-                    akses.jml2=rs2.getRow();               
-                    if(rs.getRow()>=1){
+        try (
+            PreparedStatement ps = koneksi.prepareStatement("select * from admin where admin.usere=AES_ENCRYPT(?,'nur') and admin.passworde=AES_ENCRYPT(?,'windi')");
+            PreparedStatement ps2 = koneksi.prepareStatement("select * from user where user.id_user=AES_ENCRYPT(?,'nur') and user.password=AES_ENCRYPT(?,'windi')")
+        ) {
+            ps.setString(1,user);
+            ps.setString(2,pass);
+            ps2.setString(1,user);
+            ps2.setString(2,pass);
+            try (
+                ResultSet rs = ps.executeQuery();
+                ResultSet rs2 = ps2.executeQuery()
+            ) {
+                rs.last();
+                rs2.last();
+                akses.jml1 = rs.getRow();
+                akses.jml2 = rs2.getRow();
+                if(rs.getRow()>=1){
                         akses.kode="Admin Utama";
                         akses.penyakit=true;
                         akses.obat_penyakit=true;
@@ -2460,6 +2460,21 @@ public final class akses {
                         akses.verifikasi_penerimaan_dapur=rs2.getBoolean("verifikasi_penerimaan_dapur");
                         akses.nilai_penerimaan_vendor_dapur_perbulan=rs2.getBoolean("nilai_penerimaan_vendor_dapur_perbulan");
                         akses.ringkasan_hutang_vendor_dapur=rs2.getBoolean("ringkasan_hutang_vendor_dapur");
+                        try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
+                            psx.setString(1, user);
+                            try (ResultSet rsx = psx.executeQuery()) {
+                                if (rsx.next()) {
+                                    akses.tglSelesai = rsx.getTimestamp("tgl_selesai").getTime();
+                                    akses.edit = ((System.currentTimeMillis() - akses.tglSelesai) / 1000) < 0;
+                                } else {
+                                    akses.tglSelesai = -1;
+                                    akses.edit = false;
+                                }
+                            }
+                        } catch (Exception e) {
+                            akses.tglSelesai = -1;
+                            akses.edit = false;
+                        }
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3562,42 +3577,9 @@ public final class akses {
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(rs2!=null){
-                        rs2.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
-                    if(ps2!=null){
-                        ps2.close();
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
             }
-        
-        if (akses.jml2 > 0) {
-            try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
-                psx.setString(1, user);
-                try (ResultSet rsx = psx.executeQuery()) {
-                    if (rsx.next()) {
-                        akses.tglSelesai = rsx.getTimestamp("tgl_selesai").getTime();
-                        akses.edit = ((System.currentTimeMillis() - akses.tglSelesai) / 1000) < 0;
-                    } else {
-                        akses.tglSelesai = -1;
-                        akses.edit = false;
-                    }
-                }
-            } catch (Exception e) {
-                akses.tglSelesai = -1;
-                akses.edit = false;
-            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
         }
     }
     
