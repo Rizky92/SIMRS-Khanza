@@ -6923,8 +6923,8 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
                         Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
                     } catch (HttpServerErrorException | HttpClientErrorException e) {
                         statusantrean = false;
-                        System.out.println("Notif : " + e.getStatusText() + " " + e.getMessage());
-                        Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusText(), e.getMessage(), "", datajam);
+                        System.out.println("Notif : " + e.getMessage());
+                        Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                     } catch (Exception e) {
                         statusantrean=false;
                         System.out.println("Notif No.Rujuk : "+e);
@@ -6979,8 +6979,8 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
                             }
                         } catch (HttpServerErrorException | HttpClientErrorException e) {
                             statusantrean = false;
-                            System.out.println("Notif : " + e.getStatusText() + " " + e.getMessage());
-                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusText(), e.getMessage(), "", datajam);
+                            System.out.println("Notif : " + e.getMessage());
+                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                         } catch (Exception e) {
                             statusantrean=false;
                             System.out.println("Notif SKDP : "+e);
