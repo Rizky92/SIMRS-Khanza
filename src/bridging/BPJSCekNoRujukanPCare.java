@@ -7426,7 +7426,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         respon=nameNode.path("code").asText();
                         System.out.println("respon WS BPJS Kirim Pakai NoRujukan : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                         Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
-                    } catch (HttpServerErrorException | HttpClientErrorException e) {
+                    } catch (HttpClientErrorException e) {
+                        statusantrean = false;
+                        System.out.println("Notif : " + e.getMessage());
+                        Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
+                    } catch (HttpServerErrorException e) {
                         statusantrean = false;
                         System.out.println("Notif : " + e.getMessage());
                         Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
@@ -7482,7 +7486,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                             if(nameNode.path("code").asText().equals("201")){
                                 statusantrean=false;
                             }
-                        } catch (HttpServerErrorException | HttpClientErrorException e) {
+                        } catch (HttpClientErrorException e) {
+                            statusantrean = false;
+                            System.out.println("Notif : " + e.getMessage());
+                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
+                        } catch (HttpServerErrorException e) {
                             statusantrean = false;
                             System.out.println("Notif : " + e.getMessage());
                             Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
