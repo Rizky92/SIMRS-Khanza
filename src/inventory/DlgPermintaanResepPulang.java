@@ -1318,7 +1318,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             LTotal.setText(Valid.SetAngka(ttl));
             ppnobat=0;
             if(tampilkan_ppnobat_ranap.equals("Yes")){
-                 ppnobat=ttl*0.11;
+                 ppnobat=ttl*0.12;
                  ttl=ttl+ppnobat;
                  LPpn.setText(Valid.SetAngka(ppnobat));
             }
@@ -1719,7 +1719,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         LTotal.setText(Valid.SetAngka(ttl));
         ppnobat=0;
         if(tampilkan_ppnobat_ranap.equals("Yes")){
-             ppnobat=ttl*0.11;
+             ppnobat=ttl*0.12;
              ttl=ttl+ppnobat;
              LPpn.setText(Valid.SetAngka(ppnobat));
         }
