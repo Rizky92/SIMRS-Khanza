@@ -7,6 +7,8 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -26,6 +28,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
@@ -94,7 +97,43 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+        tbDokter.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (column >= 2) {
+                    switch (table.getValueAt(row, 6).toString().toLowerCase().trim()) {
+                        case "l":
+                        case "kl":
+                            component.setBackground(new Color(43, 63, 255));
+                            component.setForeground(new Color(255, 255, 255));
+                            break;
+                        case "h":
+                        case "kh":
+                        case "tn":
+                            component.setBackground(new Color(255, 63, 43));
+                            component.setForeground(new Color(255, 255, 255));
+                            break;
+                        default:
+                            component.setForeground(new Color(50, 50, 50));
+                            if (row % 2 == 1) {
+                                component.setBackground(new Color(255, 244, 244));
+                            } else {
+                                component.setBackground(new Color(255, 255, 255));
+                            }
+                            break;
+                    }
+                } else {
+                    component.setForeground(new Color(50, 50, 50));
+                    if (row % 2 == 1) {
+                        component.setBackground(new Color(255, 244, 244));
+                    } else {
+                        component.setBackground(new Color(255, 255, 255));
+                    }
+                }
+                return component;
+            }
+        });
             tabMode2=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","Pasien","Tgl.Periksa","Jam","Pemeriksaan",
                 "Item Pemeriksaan","Hasil","Satuan","Nilai Rujukan","Keterangan",
