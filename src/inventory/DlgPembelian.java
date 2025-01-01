@@ -667,7 +667,7 @@ public class DlgPembelian extends javax.swing.JDialog {
         panelisi1.add(LTagiha);
         LTagiha.setBounds(590, 20, 120, 30);
 
-        tppn.setText("12");
+        tppn.setText("11");
         tppn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tppn.setName("tppn"); // NOI18N
         tppn.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -1732,7 +1732,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public void isCek(){
         autoNomor();
         TCari.requestFocus();
-        tppn.setText("12");
+        tppn.setText("11");
         BtnSimpan.setEnabled(akses.getpemesanan_obat());
         BtnTambah.setEnabled(akses.getobat());
         BtnSetHarga.setEnabled(akses.getset_harga_obat());

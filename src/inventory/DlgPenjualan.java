@@ -603,7 +603,7 @@ public class DlgPenjualan extends javax.swing.JDialog {
         }
         
         if(tampilkan_ppnobat_ralan.equals("Yes")){
-            PersenppnObat.setText("12");
+            PersenppnObat.setText("11");
         }else{
             PersenppnObat.setText("0");
         }
@@ -1012,7 +1012,7 @@ public class DlgPenjualan extends javax.swing.JDialog {
         panelisi5.add(BesarPPNObat);
         BesarPPNObat.setBounds(320, 10, 85, 23);
 
-        PersenppnObat.setText("12");
+        PersenppnObat.setText("11");
         PersenppnObat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         PersenppnObat.setName("PersenppnObat"); // NOI18N
         PersenppnObat.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -1652,7 +1652,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ongkir=0;
                     ppnobat=0;
                     if(tampilkan_ppnobat_ralan.equals("Yes")){
-                        PersenppnObat.setText("12");
+                        PersenppnObat.setText("11");
                     }else{
                         PersenppnObat.setText("0");
                     }
