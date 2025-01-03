@@ -6663,7 +6663,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="508" y="115" width="62" height="23"/>
+                  <AbsoluteConstraints x="401" y="115" width="62" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -6737,7 +6737,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="441" y="115" width="62" height="23"/>
+                  <AbsoluteConstraints x="334" y="115" width="62" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -6775,7 +6775,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="374" y="115" width="62" height="23"/>
+                  <AbsoluteConstraints x="270" y="115" width="62" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -6932,90 +6932,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="widget.ComboBox" name="CmbTahunpindah">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-                <Property name="name" type="java.lang.String" value="CmbTahunpindah" noResource="true"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="209" y="115" width="100" height="23"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="widget.ComboBox" name="CmbBlnpindah">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="12">
-                    <StringItem index="0" value="01"/>
-                    <StringItem index="1" value="02"/>
-                    <StringItem index="2" value="03"/>
-                    <StringItem index="3" value="04"/>
-                    <StringItem index="4" value="05"/>
-                    <StringItem index="5" value="06"/>
-                    <StringItem index="6" value="07"/>
-                    <StringItem index="7" value="08"/>
-                    <StringItem index="8" value="09"/>
-                    <StringItem index="9" value="10"/>
-                    <StringItem index="10" value="11"/>
-                    <StringItem index="11" value="12"/>
-                  </StringArray>
-                </Property>
-                <Property name="name" type="java.lang.String" value="CmbBlnpindah" noResource="true"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="142" y="115" width="62" height="23"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="widget.ComboBox" name="CmbTglpindah">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="31">
-                    <StringItem index="0" value="01"/>
-                    <StringItem index="1" value="02"/>
-                    <StringItem index="2" value="03"/>
-                    <StringItem index="3" value="04"/>
-                    <StringItem index="4" value="05"/>
-                    <StringItem index="5" value="06"/>
-                    <StringItem index="6" value="07"/>
-                    <StringItem index="7" value="08"/>
-                    <StringItem index="8" value="09"/>
-                    <StringItem index="9" value="10"/>
-                    <StringItem index="10" value="11"/>
-                    <StringItem index="11" value="12"/>
-                    <StringItem index="12" value="13"/>
-                    <StringItem index="13" value="14"/>
-                    <StringItem index="14" value="15"/>
-                    <StringItem index="15" value="16"/>
-                    <StringItem index="16" value="17"/>
-                    <StringItem index="17" value="18"/>
-                    <StringItem index="18" value="19"/>
-                    <StringItem index="19" value="20"/>
-                    <StringItem index="20" value="21"/>
-                    <StringItem index="21" value="22"/>
-                    <StringItem index="22" value="23"/>
-                    <StringItem index="23" value="24"/>
-                    <StringItem index="24" value="25"/>
-                    <StringItem index="25" value="26"/>
-                    <StringItem index="26" value="27"/>
-                    <StringItem index="27" value="28"/>
-                    <StringItem index="28" value="29"/>
-                    <StringItem index="29" value="30"/>
-                    <StringItem index="30" value="31"/>
-                  </StringArray>
-                </Property>
-                <Property name="name" type="java.lang.String" value="CmbTglpindah" noResource="true"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="75" y="115" width="62" height="23"/>
-                </Constraint>
-              </Constraints>
-            </Component>
             <Component class="widget.Label" name="jLabel35">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jam :"/>
@@ -7023,7 +6939,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="304" y="115" width="67" height="23"/>
+                  <AbsoluteConstraints x="197" y="115" width="67" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -7144,6 +7060,17 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="75" y="55" width="95" height="23"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="widget.Tanggal" name="DTPTglpindah">
+              <Properties>
+                <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
+                <Property name="name" type="java.lang.String" value="DTPTglpindah" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="75" y="115" width="120" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -7953,7 +7880,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="09-09-2024 08:11:43"/>
+                    <StringItem index="0" value="03-01-2025 11:03:55"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -8048,7 +7975,7 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="09-09-2024"/>
+                    <StringItem index="0" value="03-01-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8570,7 +8497,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="09-09-2024"/>
+                        <StringItem index="0" value="03-01-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8599,7 +8526,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="09-09-2024"/>
+                        <StringItem index="0" value="03-01-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8639,7 +8566,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="09-09-2024"/>
+                        <StringItem index="0" value="03-01-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8667,7 +8594,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="09-09-2024"/>
+                        <StringItem index="0" value="03-01-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
