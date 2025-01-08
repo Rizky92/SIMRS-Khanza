@@ -1538,15 +1538,37 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void tbDetailResepObatRacikanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDetailResepObatRacikanPropertyChange
         if(this.isVisible()==true){
             try {
-                if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
-                    if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString().contains("%")){
-                        getDatadetailresepracikan2();
+                if ("tableCellEditor".equals(evt.getPropertyName())) {
+                    if (!tbDetailResepObatRacikan.isEditing()) {
+                        if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
+                            i=tbDetailResepObatRacikan.getSelectedColumn();
+                            if((i==11)||(i==9)||(i==13)||(i==14)){
+                                try {
+                                    if(!tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString().equals(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())){
+                                        if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())==0){
+                                            JOptionPane.showMessageDialog(null,"Kapasitas obat masih kosong..!!!");
+                                        }else{
+                                            tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())*
+                                                (Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString())/Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),11).toString())),1),
+                                                    tbDetailResepObatRacikan.getSelectedRow(),12);
+                                            getDatadetailresepracikan();
+                                        }                                
+                                    }
+                                } catch (Exception e) {
+                                    tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),12);
+                                }
+                            }else if(i==12){
+                                if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),12).toString().contains("%")){
+                                    getDatadetailresepracikan2();
+                                }else{
+                                    getDatadetailresepracikan();
+                                }
+                            }
+                            getCekStokRacikan();
+                            hitungResep();
+                        }  
                     }
-                }else{
-                    getDatadetailresepracikan();
-                }  
-                getCekStokRacikan();
-                hitungResep();
+                }
             } catch (Exception e) {
             }   
         }
