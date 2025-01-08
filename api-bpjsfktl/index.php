@@ -461,7 +461,7 @@
                                             }else{
                                                 if(empty(cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20)))){ 
                                                     /* Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
-                                                     * $response = array(
+                                                    * $response = array(
                                                         'metadata' => array(
                                                             'message' =>  'Data pasien ini tidak ditemukan, silahkan melakukan registrasi pasien baru ke loket administrasi Kami',
                                                             'code' => 201
@@ -513,14 +513,22 @@
                                                                     )
                                                                 );
                                                                 http_response_code(201);
-															} else if ($interval > 7) {
-                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 7 day), '%d-%m-%Y')");
+                                                            } else if ($interval > 30) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 30 day), '%d-%m-%Y')");
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
                                                                         'code' => 201
                                                                     )
                                                                 );
+                                                                http_response_code(201);
+                                                            } else if ((strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
+                                                                $response = [
+                                                                    'metadata' => [
+                                                                        'message' => 'Maaf, pengambilan tanggal antrian tidak boleh dimajukan. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '!',
+                                                                        'code' => 201,
+                                                                    ],
+                                                                ];
                                                                 http_response_code(201);
                                                             }else{
                                                                 $sisakuota=getOne2("select count(no_rawat) from reg_periksa where kd_poli='$kdpoli' and kd_dokter='$kddokter' and tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' ");
@@ -650,6 +658,7 @@
                                             }
                                         }
                                     }
+                                    
                                 }else {
                                     $response = array(
                                         'metadata' => array(
