@@ -209,7 +209,7 @@ public final class sekuel {
         return false;
     }
 
-    public int cariIntegerSmc(String sql, String... values) {
+    public int cariIntegerSmc(String sql, int defaultValue, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -222,10 +222,14 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        return -1;
+        return defaultValue;
+    }
+    
+    public int cariIntegerSmc(String sql, String... values) {
+        return cariIntegerSmc(sql, 0, values);
     }
 
-    public double cariDoubleSmc(String sql, String... values) {
+    public double cariDoubleSmc(String sql, double defaultValue, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -238,7 +242,11 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        return -1;
+        return defaultValue;
+    }
+    
+    public double cariDoubleSmc(String sql, String... values) {
+        return cariDoubleSmc(sql, 0, values);
     }
 
     public Date cariTglSmc(String sql, String... values) {

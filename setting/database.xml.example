@@ -7,14 +7,13 @@
     <entry key="VALIDASIRESEPKRONIS">yes</entry>
     <entry key="VALIDASIULANGHASILPERMINTAAN">labpk,labpa,labmb,rad</entry>
     <entry key="VALIDASIULANGPINDAHKAMAR">yes</entry>
-    <entry key="ADAMLABSAPIURL"></entry>
-    <entry key="ADAMLABSAPIKEY"></entry>
+    <entry key="ADAMLABSAPIURL">http://192.168.100.111:2310/adam-lis</entry>
+    <entry key="ADAMLABSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="ADAMLABSAPIKODERS"></entry>
-    <entry key="ADAMLABSKECAMATANID"></entry>
-    <entry key="ADAMLABSKABUPATENID"></entry>
-    <entry key="ADAMLABSPROVINSIID"></entry>
-    <entry key="LABORATORIUMKIRIMHASIL"></entry>
-    <entry key="LABORATORIUMURUTANHASIL"></entry>
+    <entry key="ADAMLABSKECAMATANID">SAMARINDA ULU</entry>
+    <entry key="ADAMLABSKABUPATENID">SAMARINDA</entry>
+    <entry key="ADAMLABSPROVINSIID">KALIMANTAN TIMUR</entry>
+    <entry key="LABORATORIUMKIRIMHASIL">adamlabs</entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>
     <entry key="KOMPILASIBERKASGUNAKANRIWAYATPASIEN">ralan+ranap</entry>
