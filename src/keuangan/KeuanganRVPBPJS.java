@@ -3289,11 +3289,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 }
                 if(status.equals("Ralan")){
                     if(tampilkan_ppnobat_ralan.equals("Yes")){
-                        ppnobat=Valid.roundUp(obatralan*0.11,100);
+                        ppnobat=Valid.roundUp(obatralan*0.12,100);
                     }
                 }else if(status.equals("Ranap")){
                     if(tampilkan_ppnobat_ranap.equals("Yes")){
-                        ppnobat=Valid.roundUp((obatralan+obatranap-returobat)*0.11,100);
+                        ppnobat=Valid.roundUp((obatralan+obatranap-returobat)*0.12,100);
                     }
                     if(tampilkan_administrasi_di_billingranap.equals("No")){
                         registrasi=0;
@@ -4421,11 +4421,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
             if(status.equals("Ralan")){
                 if(tampilkan_ppnobat_ralan.equals("Yes")){
-                    ppnobat=Valid.roundUp(obatralan*0.11,100);
+                    ppnobat=Valid.roundUp(obatralan*0.12,100);
                 }
             }else if(status.equals("Ranap")){
                 if(tampilkan_ppnobat_ranap.equals("Yes")){
-                    ppnobat=Valid.roundUp((obatralan+obatranap-returobat)*0.11,100);
+                    ppnobat=Valid.roundUp((obatralan+obatranap-returobat)*0.12,100);
                 }
                 if(tampilkan_administrasi_di_billingranap.equals("No")){
                     registrasi=0;
