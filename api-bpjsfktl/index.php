@@ -460,14 +460,15 @@
                                                 http_response_code(201);
                                             }else{
                                                 if(empty(cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20)))){ 
-                                                    /* Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
-                                                    * $response = array(
+                                                    // Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
+                                                    $response = array(
                                                         'metadata' => array(
                                                             'message' =>  'Data pasien ini tidak ditemukan, silahkan melakukan registrasi pasien baru ke loket administrasi Kami',
                                                             'code' => 201
                                                         )
                                                     ); 
-                                                    http_response_code(201);*/
+                                                    http_response_code(201);
+                                                    /*
                                                     $response = array(
                                                         'metadata' => array(
                                                             'message' =>  'Data pasien ini tidak ditemukan',
@@ -475,6 +476,7 @@
                                                         )
                                                     ); 
                                                     http_response_code(202);
+                                                    */
                                                 }else{
                                                     /*if(empty($decode['norm'])) { 
                                                         $response = array(
@@ -485,7 +487,7 @@
                                                         );
                                                         http_response_code(201);
                                                     }else */
-                                                    if(strpos($decode['norm'],"'")||strpos($decode['norm'],"\\")){
+                                                    if(strpos($decode['norm'] ?? '',"'")||strpos($decode['norm'] ?? '',"\\")){
                                                         $response = array(
                                                             'metadata' => array(
                                                                 'message' => 'Format No.RM salah',
@@ -1501,6 +1503,7 @@
                                             )
                                         );
                                         http_response_code(201);
+                                    /* JANGAN VALIDASI RW
                                     }else if(empty($decode['rw'])) { 
                                         $response = array(
                                             'metadata' => array(
@@ -1517,6 +1520,7 @@
                                             )
                                         );
                                         http_response_code(201);
+                                    */
                                     }else if(empty($decode['rt'])) { 
                                         $response = array(
                                             'metadata' => array(
