@@ -507,13 +507,13 @@
                                                         }else{
                                                             $sekarang  = date("Y-m-d");
                                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
-                                                            if($interval < 0) {
+                                                            if($interval<0){
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                                         'code' => 201
                                                                     )
-                                                                );
+                                                                );  
                                                                 http_response_code(201);
                                                             } else if ($interval > 30) {
                                                                 $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 30 day), '%d-%m-%Y')");
@@ -524,10 +524,10 @@
                                                                     )
                                                                 );
                                                                 http_response_code(201);
-                                                            } else if ((strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
+                                                            } else if ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
                                                                 $response = [
                                                                     'metadata' => [
-                                                                        'message' => 'Maaf, pengambilan tanggal antrian tidak boleh dimajukan. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '!',
+                                                                        'message' => 'Pengambilan antrian poli tidak boleh maju dari tanggal rencana kontrol. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '.',
                                                                         'code' => 201,
                                                                     ],
                                                                 ];
