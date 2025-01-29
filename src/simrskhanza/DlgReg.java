@@ -9077,6 +9077,7 @@ private void btnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         akses.setform("DlgReg");
         pasien.penjab.onCari();
         pasien.penjab.isCek();
+        pasien.penjab.tampil2();
         pasien.penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pasien.penjab.setLocationRelativeTo(internalFrame1);
         pasien.penjab.setVisible(true);
@@ -15545,7 +15546,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnChecklistPemberianFibrinolitikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanObservasiIGDActionPerformed
+    private void MnChecklistPemberianFibrinolitikActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
