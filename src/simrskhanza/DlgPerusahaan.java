@@ -1,10 +1,10 @@
 package simrskhanza;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
@@ -71,13 +71,16 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
-        Kd.setDocument(new batasInput((byte)8).getKata(Kd));
-        Nm.setDocument(new batasInput((byte)70).getKata(Nm));      
-        Alamat.setDocument(new batasInput((byte)100).getKata(Alamat));  
-        Kota.setDocument(new batasInput((byte)40).getKata(Kota));    
-        Telp.setDocument(new batasInput((byte)27).getOnlyAngka(Telp)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));   
-        Password.setDocument(new batasInput((byte)100).getKata(Password));    
+        Kd.setDocument(new batasInput((int) 8).getKata(Kd));
+        Nm.setDocument(new batasInput((int) 70).getKata(Nm));
+        Alamat.setDocument(new batasInput((int) 100).getKata(Alamat));
+        Kota.setDocument(new batasInput((int) 40).getKata(Kota));
+        Telp.setDocument(new batasInput((byte) 27).getOnlyAngka(Telp));
+        Email.setDocument(new batasInput((int) 50).getKata(Email));
+        NPWP.setDocument(new batasInput((byte) 30).getOnlyAngka(Telp));
+        TCari.setDocument(new batasInput((int) 100).getKata(TCari));
+        Password.setDocument(new batasInput((int) 100).getKata(Password));
+        
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -601,12 +604,10 @@ public class DlgPerusahaan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data yang akan Anda hapus dengan menklik data pada tabel...!!!");
             tbDokter.requestFocus();
         }else{
-            if(Valid.hapusTabletf(tabMode,Kd,"perusahaan_pasien","kode_perusahaan")==true){
-                if(tbDokter.getSelectedRow()!= -1){
-                    tabMode.removeRow(tbDokter.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
-                    emptTeks();
-                }
+            if (Sequel.menghapustfSmc("perusahaan_pasien", "kode_perusahaan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString())) {
+                tabMode.removeRow(tbDokter.getSelectedRow());
+                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                emptTeks();
             }
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -629,26 +630,23 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         }else if(Kota.getText().trim().equals("")){
             Valid.textKosong(Kota,"Kota");
         }else{
-            if(Valid.editTabletf(tabMode,"perusahaan_pasien","kode_perusahaan","?","kode_perusahaan=?,nama_perusahaan=?,alamat=?,kota=?,no_telp=?",6,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
-            })==true){
-                if(!Password.getText().trim().equals("")){
-                    Sequel.mengedit("password_perusahaan_pasien","kode_perusahaan=?","password=aes_encrypt(?,'windi')", 2,new String[]{
-                        Password.getText(),Kd.getText()
-                    });
-                }else{
-                    Sequel.meghapus("password_perusahaan_pasien","kode_perusahaan",Kd.getText());
+            if (Sequel.mengupdatetfSmc("perusahaan_pasien", "kode_perusahaan = ?, nama_perusahaan = ?, alamat = ?, kota = ?, no_telp = ?, no_npwp = ?, email = ?", "kode_perusahaan = ?",
+                Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), NPWP.getText(), Email.getText(),
+                tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()
+            )) {
+                if (!Password.getText().isBlank()) {
+                    Sequel.mengupdateSmc("password_perusahaan_pasien", "password = aes_encrypt(?, 'windi')", "kode_perusahaan = ?", Password.getText(), Kd.getText());
+                } else {
+                    Sequel.menghapusSmc("password_perusahaan_pasien", "kode_perusahaan = ?", Kd.getText());
                 }
-                
-                if(tbDokter.getSelectedRow()!= -1){
-                    tbDokter.setValueAt(Kd.getText(),tbDokter.getSelectedRow(),0);
-                    tbDokter.setValueAt(Nm.getText(),tbDokter.getSelectedRow(),1);
-                    tbDokter.setValueAt(Alamat.getText(),tbDokter.getSelectedRow(),2);
-                    tbDokter.setValueAt(Kota.getText(),tbDokter.getSelectedRow(),3);
-                    tbDokter.setValueAt(Telp.getText(),tbDokter.getSelectedRow(),4);
-                    tbDokter.setValueAt(Password.getText(),tbDokter.getSelectedRow(),5);
-                    emptTeks();
-                }
+                tbDokter.setValueAt(Kd.getText(), tbDokter.getSelectedRow(), 0);
+                tbDokter.setValueAt(Nm.getText(), tbDokter.getSelectedRow(), 1);
+                tbDokter.setValueAt(Alamat.getText(), tbDokter.getSelectedRow(), 2);
+                tbDokter.setValueAt(Kota.getText(), tbDokter.getSelectedRow(), 3);
+                tbDokter.setValueAt(Telp.getText(), tbDokter.getSelectedRow(), 4);
+                tbDokter.setValueAt(Email.getText(), tbDokter.getSelectedRow(), 5);
+                tbDokter.setValueAt(NPWP.getText(), tbDokter.getSelectedRow(), 6);
+                tbDokter.setValueAt(Password.getText(), tbDokter.getSelectedRow(), 7);
             }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -731,18 +729,14 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         }else if(Kota.getText().trim().equals("")){
             Valid.textKosong(Kota,"Kota");
         }else{
-            if(Sequel.menyimpantf("perusahaan_pasien","?,?,?,?,?","Kode Instasi/Perusahaan",5,new String[]{
-                Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText()        
-            })==true){
-                if(!Password.getText().trim().equals("")){
-                    Sequel.menyimpan("password_perusahaan_pasien","?,aes_encrypt(?,'windi')",2,new String[]{
-                        Kd.getText(),Password.getText()
-                    });
+            if (Sequel.menyimpantfSmc("perusahaan_pasien", "", Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), NPWP.getText(), Email.getText())) {
+                if (!Password.getText().isBlank()) {
+                    Sequel.executeRawSmc("insert into password_perusahaan_pasien values (?, aes_encrypt(?, 'windi'))", Kd.getText(), Password.getText());
                 }
-                tabMode.addRow(new String[]{
-                    Kd.getText(),Nm.getText(),Alamat.getText(),Kota.getText(),Telp.getText(),Password.getText()
+                tabMode.addRow(new String[] {
+                    Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), Email.getText(), NPWP.getText(), Password.getText()
                 });
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText(String.valueOf(tabMode.getRowCount()));
                 emptTeks();
             }
         }
@@ -863,42 +857,35 @@ public class DlgPerusahaan extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
-            ps=koneksi.prepareStatement(
-                    "select perusahaan_pasien.kode_perusahaan, perusahaan_pasien.nama_perusahaan,perusahaan_pasien.alamat,perusahaan_pasien.kota,"+
-                    "perusahaan_pasien.no_telp,aes_decrypt(password_perusahaan_pasien.password,'windi') from perusahaan_pasien "+
-                    "left join password_perusahaan_pasien on perusahaan_pasien.kode_perusahaan=password_perusahaan_pasien.kode_perusahaan "+
-                    "where perusahaan_pasien.kode_perusahaan like ? or "+
-                    "perusahaan_pasien.nama_perusahaan like ? or "+
-                    "perusahaan_pasien.alamat like ? or "+
-                    "perusahaan_pasien.kota like ? or "+
-                    "perusahaan_pasien.no_telp like ? order by perusahaan_pasien.kode_perusahaan");
-            try {
-                ps.setString(1,"%"+TCari.getText().trim()+"%");
-                ps.setString(2,"%"+TCari.getText().trim()+"%");
-                ps.setString(3,"%"+TCari.getText().trim()+"%");
-                ps.setString(4,"%"+TCari.getText().trim()+"%");
-                ps.setString(5,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select perusahaan_pasien.*, password_perusahaan_pasien.password from perusahaan_pasien " +
+            "left join password_perusahaan_pasien on perusahaan_pasien.kode_perusahaan = password_perusahaan_pasien.kode_perusahaan " +
+            (TCari.getText().isBlank() ? "" : "where perusahaan_pasien.kode_perusahaan like ? or perusahaan_pasien.nama_perusahaan like ? " +
+            "or perusahaan_pasien.alamat like ? or perusahaan_pasien.alamat like ? or perusahaan_pasien.kota like ? or perusahaan_pasien.no_telp like ? " +
+            "or perusahaan_pasien.email like ? or perusahaan_pasien.no_npwp like ? ") + "order by perusahaan_pasien.kode_perusahaan"
+        )) {
+            if (!TCari.getText().isBlank()) {
+                ps.setString(1, "%" + TCari.getText() + "%");
+                ps.setString(2, "%" + TCari.getText() + "%");
+                ps.setString(3, "%" + TCari.getText() + "%");
+                ps.setString(4, "%" + TCari.getText() + "%");
+                ps.setString(5, "%" + TCari.getText() + "%");
+                ps.setString(6, "%" + TCari.getText() + "%");
+                ps.setString(7, "%" + TCari.getText() + "%");
+                ps.setString(8, "%" + TCari.getText() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new String[] {
+                        rs.getString("kode_perusahaan"), rs.getString("nama_perusahaan"), rs.getString("alamat"), rs.getString("kota"),
+                        rs.getString("no_telp"), rs.getString("email"), rs.getString("no_npwp"), rs.getString("password")
                     });
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
 
     public void emptTeks() {
@@ -907,20 +894,23 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         Alamat.setText("");
         Kota.setText("");
         Telp.setText("0");
+        Email.setText("");
+        NPWP.setText("");
         Password.setText("");
-        
         Kd.requestFocus();
         Valid.autoNomer("perusahaan_pasien","I",4,Kd);
     }
 
     private void getData() {
         if(tbDokter.getSelectedRow()!= -1){
-            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),1).toString());
-            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),2).toString());
-            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),3).toString());
-            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),4).toString());
-            Password.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),5).toString());
+            Kd.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+            Nm.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 1).toString());
+            Alamat.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 2).toString());
+            Kota.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 3).toString());
+            Telp.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 4).toString());
+            Email.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 5).toString());
+            NPWP.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 6).toString());
+            Password.setText(tabMode.getValueAt(tbDokter.getSelectedRow(), 7).toString());
         }
     }
 
