@@ -13,7 +13,6 @@
 package simrskhanza;
 import bridging.BPJSCekDataIndukKecelakaan;
 import bridging.BPJSCekSuplesiJasaRaharja;
-import rekammedis.RMRiwayatPerawatan;
 import bridging.BPJSDataSEP;
 import bridging.BPJSProgramPRB;
 import bridging.BPJSSPRI;
@@ -22,28 +21,24 @@ import bridging.CoronaPasien;
 import bridging.DlgDataTB;
 import bridging.ICareRiwayatPerawatan;
 import bridging.ICareRiwayatPerawatanFKTP;
-import permintaan.DlgBookingOperasi;
-import surat.SuratKontrol;
 import bridging.INACBGPerawatanCorona;
 import bridging.InhealthDataSJP;
 import bridging.PCareDataPendaftaran;
 import bridging.SisruteRujukanKeluar;
-import inventory.DlgResepObat;
-import inventory.DlgPemberianObat;
-import laporan.DlgDiagnosaPenyakit;
-import keuangan.DlgBilingRalan;
 import fungsi.WarnaTable;
 import fungsi.WarnaTableKasirRalan;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgCariObat;
 import inventory.DlgCopyResep;
+import inventory.DlgPemberianObat;
 import inventory.DlgPenjualan;
 import inventory.DlgPeresepanDokter;
 import inventory.DlgPiutang;
+import inventory.DlgResepObat;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Window;
@@ -66,19 +61,21 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.DlgBilingParsialRalan;
+import keuangan.DlgBilingRalan;
 import keuangan.DlgCariPerawatanRalan;
 import keuangan.DlgLhtPiutang;
-import keuangan.DlgRBObatPoli;
 import keuangan.DlgRBJmDokter;
 import keuangan.DlgRBJmParamedis;
+import keuangan.DlgRBObatPoli;
 import keuangan.DlgRBTindakanPoli;
 import keuangan.DlgRHJmDokter;
 import keuangan.DlgRHJmParamedis;
 import keuangan.Jurnal;
 import laporan.DlgBerkasRawat;
 import laporan.DlgDataInsidenKeselamatan;
+import laporan.DlgDiagnosaPenyakit;
+import permintaan.DlgBookingOperasi;
 import permintaan.DlgPermintaanKonsultasiMedik;
-import rekammedis.RMDataResumePasien;
 import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
@@ -99,8 +96,8 @@ import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
+import rekammedis.RMDataResumePasien;
 import rekammedis.RMDataSkriningGiziLanjut;
-import rekammedis.RMHemodialisa;
 import rekammedis.RMDeteksiDiniCorona;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
 import rekammedis.RMHasilEndoskopiFaringLaring;
@@ -112,15 +109,16 @@ import rekammedis.RMHasilPemeriksaanUSGGynecologi;
 import rekammedis.RMHasilPemeriksaanUSGNeonatus;
 import rekammedis.RMHasilPemeriksaanUSGUrologi;
 import rekammedis.RMHasilTindakanESWL;
+import rekammedis.RMHemodialisa;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMMCU;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
-import rekammedis.RMPemantauanMEOWS;
-import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPemantauanEWSD;
 import rekammedis.RMPemantauanEWSNeonatus;
+import rekammedis.RMPemantauanMEOWS;
+import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPenatalaksanaanTerapiOkupasi;
 import rekammedis.RMPengkajianRestrain;
 import rekammedis.RMPenilaianAwalKeperawatanBayiAnak;
@@ -130,14 +128,14 @@ import rekammedis.RMPenilaianAwalKeperawatanKebidanan;
 import rekammedis.RMPenilaianAwalKeperawatanRalan;
 import rekammedis.RMPenilaianAwalKeperawatanRalanGeriatri;
 import rekammedis.RMPenilaianAwalKeperawatanRalanPsikiatri;
+import rekammedis.RMPenilaianAwalMedisHemodialisa;
 import rekammedis.RMPenilaianAwalMedisIGD;
+import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
 import rekammedis.RMPenilaianAwalMedisRalanAnak;
 import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
-import rekammedis.RMPenilaianAwalMedisHemodialisa;
-import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
 import rekammedis.RMPenilaianAwalMedisRalanKandungan;
 import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
 import rekammedis.RMPenilaianAwalMedisRalanMata;
@@ -174,6 +172,7 @@ import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
 import rekammedis.RMPenilaianTerapiWicara;
 import rekammedis.RMPenilaianUlangNyeri;
 import rekammedis.RMRekonsiliasiObat;
+import rekammedis.RMRiwayatPerawatan;
 import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningAdiksiNikotin;
@@ -204,6 +203,7 @@ import surat.SuratKeteranganBebasTBC;
 import surat.SuratKeteranganCovid;
 import surat.SuratKeteranganSehat;
 import surat.SuratKewaspadaanKesehatan;
+import surat.SuratKontrol;
 import surat.SuratPenolakanAnjuranMedis;
 import surat.SuratPernyataanPasienUmum;
 import surat.SuratPersetujuanPenolakanTindakan;
@@ -6384,7 +6384,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-01-2025" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-01-2025" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -6431,7 +6431,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-01-2025" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-01-2025" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -6703,7 +6703,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-01-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-01-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6716,7 +6716,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-01-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-01-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6791,8 +6791,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tbKasirRalan2.setComponentPopupMenu(jPopupMenu2);
         tbKasirRalan2.setName("tbKasirRalan2"); // NOI18N
         tbKasirRalan2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbKasirRalan2MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbKasirRalan2MousePressed(evt);
             }
         });
         tbKasirRalan2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -8369,35 +8369,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             tampilkasir2();
         }
     }//GEN-LAST:event_TabRawatMouseClicked
-
-    private void tbKasirRalan2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKasirRalan2MouseClicked
-        if(tabModekasir2.getRowCount()!=0){
-            try {
-                getDatakasir2();
-            } catch (java.lang.NullPointerException e) {
-            }
-            if(evt.getClickCount()==2){
-                i=tbKasirRalan2.getSelectedColumn();
-                if(i==0){
-                    if(akses.gettindakan_ralan()==true){
-                        MnDataRalan1ActionPerformed(null);
-                    }
-                }else if(i==1){
-                    if(akses.getberi_obat()==true){
-                        MnPemberianObat1ActionPerformed(null);
-                    }                    
-                }else if(i==2){
-                    //if(var.getbilling_ralan()==true){
-                        MnBilling1ActionPerformed(null);
-                    //}                    
-                }else if(i==3){
-                    if(MnKamarInap1.isEnabled()==true){
-                        MnKamarInap1ActionPerformed(null);
-                    }                    
-                }
-            }
-        }
-    }//GEN-LAST:event_tbKasirRalan2MouseClicked
 
     private void tbKasirRalan2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKasirRalan2KeyPressed
         if(tabModekasir2.getRowCount()!=0){
@@ -14030,6 +14001,40 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
         }
     }//GEN-LAST:event_tbKasirRalanMousePressed
+
+    private void tbKasirRalan2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKasirRalan2MousePressed
+        int r = tbKasirRalan2.rowAtPoint(evt.getPoint());
+        int c = tbKasirRalan2.columnAtPoint(evt.getPoint());
+        if (!tbKasirRalan2.isRowSelected(r)) {
+            tbKasirRalan2.changeSelection(r, c, false, false);
+        }
+        if(tabModekasir2.getRowCount()!=0){
+            try {
+                getDatakasir2();
+            } catch (java.lang.NullPointerException e) {
+            }
+            if(evt.getClickCount()==2){
+                i=tbKasirRalan2.getSelectedColumn();
+                if(i==0){
+                    if(akses.gettindakan_ralan()==true){
+                        MnDataRalan1ActionPerformed(null);
+                    }
+                }else if(i==1){
+                    if(akses.getberi_obat()==true){
+                        MnPemberianObat1ActionPerformed(null);
+                    }                    
+                }else if(i==2){
+                    //if(var.getbilling_ralan()==true){
+                        MnBilling1ActionPerformed(null);
+                    //}                    
+                }else if(i==3){
+                    if(MnKamarInap1.isEnabled()==true){
+                        MnKamarInap1ActionPerformed(null);
+                    }                    
+                }
+            }
+        }
+    }//GEN-LAST:event_tbKasirRalan2MousePressed
 
     private void MnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         if(tabModekasir.getRowCount()==0){
