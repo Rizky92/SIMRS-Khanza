@@ -136,6 +136,33 @@ public final class sekuel {
         }
     }
     
+    public String autonomorSmc(String prefix, String table, int panjang, String pad) {
+        try (PreparedStatement ps = connect.prepareStatement("select concat(?, lpad(count(*), ?, ?)) from " + table)) {
+            ps.setString(1, prefix);
+            ps.setInt(2, panjang);
+            ps.setString(3, pad);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        if (prefix == null) {
+            prefix = "";
+        }
+        String output = "";
+        for (int i = 0; i < panjang - 1; i++) {
+            output += pad;
+            if (output.length() >= panjang - 1) {
+                output = output.substring(0, panjang - 1);
+                break;
+            }
+        }
+        return prefix + output + "1";
+    }
+    
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
         String sql = 
             "select concat(if(? is null or ? = '', '', concat(?, ?)), date_format(" +
