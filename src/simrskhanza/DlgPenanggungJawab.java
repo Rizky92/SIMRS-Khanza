@@ -12,11 +12,11 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -29,7 +29,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -40,10 +39,11 @@ import restore.DlgRestoreCaraBayar;
  * @author dosen
  */
 public final class DlgPenanggungJawab extends javax.swing.JDialog {
+    private final DlgRestoreCaraBayar restore = new DlgRestoreCaraBayar(null, true);
     private final DefaultTableModel tabMode;
-    private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
@@ -57,55 +57,50 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(628,674);
 
-        Object[] row={"P","Kode Asuransi","Nama Asuransi","Perusahaan Asuransi","Alamat Asuransi","No.Telp","Attn"};
-        tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if (colIndex==0) {
-                    a=true;
+        tabMode = new DefaultTableModel(null, new String[] {
+            "P", "Kode Asuransi", "Nama Asuransi", "Perusahaan Asuransi", "Alamat Asuransi", "No.Telp", "Email", "Attn", "NPWP"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 0;
+            }
+            
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
                 }
-                return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+                return java.lang.String.class;
+            }
         };
         tbKamar.setModel(tabMode);
-        //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 7; i++) {
-            TableColumn column = tbKamar.getColumnModel().getColumn(i);
-            if(i==0){
-                column.setPreferredWidth(20);
-            }else if(i==1){
-                column.setPreferredWidth(100);
-            }else if(i==2){
-                column.setPreferredWidth(160);
-            }else if(i==3){
-                column.setPreferredWidth(160);
-            }else if(i==4){
-                column.setPreferredWidth(170);
-            }else if(i==5){
-                column.setPreferredWidth(100);
-            }else if(i==6){
-                column.setPreferredWidth(150);
+        for (i = 0; i < 9; i++) {
+            switch (i) {
+                case 0: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(20); break;
+                case 1: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(100); break;
+                case 2: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(160); break;
+                case 3: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(160); break;
+                case 4: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(170); break;
+                case 5: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(100); break;
+                case 6: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(120); break;
+                case 7: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(150); break;
+                case 8: tbKamar.getColumnModel().getColumn(i).setPreferredWidth(120); break;
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         
-        KdAsuransi.setDocument(new batasInput((byte)3).getKata(KdAsuransi));
-        NmAsuransi.setDocument(new batasInput((int)50).getKata(NmAsuransi));
-        Perusahaan.setDocument(new batasInput((int)100).getKata(Perusahaan));
-        Attn.setDocument(new batasInput((int)60).getKata(Attn));
-        AlamatAsuransi.setDocument(new batasInput((int)130).getKata(AlamatAsuransi));
-        NoTelp.setDocument(new batasInput((byte)40).getKata(NoTelp));
-        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        KdAsuransi.setDocument(new batasInput((byte) 3).getKata(KdAsuransi));
+        NmAsuransi.setDocument(new batasInput((int) 50).getKata(NmAsuransi));
+        Perusahaan.setDocument(new batasInput((int) 100).getKata(Perusahaan));
+        AlamatAsuransi.setDocument(new batasInput((int) 130).getKata(AlamatAsuransi));
+         Attn.setDocument(new batasInput((int) 60).getKata(Attn));
+        NoTelp.setDocument(new batasInput((int) 40).getKata(NoTelp));
+        Email.setDocument(new batasInput((int) 50).getKata(Email));
+        NoNPWP.setDocument(new batasInput((byte) 30).getOnlyAngka(NoNPWP));
+        TCari.setDocument(new batasInput((int) 100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -724,10 +719,24 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
             Valid.textKosong(NoTelp,"No.Telp Perusahaan Penanggung/Askes/Asuransi");
         }else if(Attn.getText().trim().equals("")){
             Valid.textKosong(Attn,"Attn");
+        } else if (Email.getText().isBlank()) {
+            Valid.textKosong(Email, "E-mail");
+        } else if (NoNPWP.getText().isBlank()) {
+            Valid.textKosong(NoNPWP, "No. NPWP");
         }else{
-            Sequel.menyimpan("penjab","'"+KdAsuransi.getText()+"','"+NmAsuransi.getText()+"','"+Perusahaan.getText()+"','"+AlamatAsuransi.getText()+"','"+NoTelp.getText()+"','"+Attn.getText()+"','1'","Kode Penanggung/Askes/Asuransi");
-            BtnCariActionPerformed(evt);
-            emptTeks();
+            if (Sequel.menyimpantfSmc("penjab", "",
+                KdAsuransi.getText(), NmAsuransi.getText(), Perusahaan.getText(),
+                AlamatAsuransi.getText(), NoTelp.getText(), Email.getText(),
+                Attn.getText(), NoNPWP.getText(), "1"
+            )) {
+                tabMode.addRow(new Object[] {
+                    false, KdAsuransi.getText(), NmAsuransi.getText(), Perusahaan.getText(),
+                    AlamatAsuransi.getText(), NoTelp.getText(), Email.getText(),
+                    Attn.getText(), NoNPWP.getText()
+                });
+                LCount.setText(String.valueOf(tabMode.getRowCount()));
+                emptTeks();
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -754,7 +763,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for(i=0;i<tbKamar.getRowCount();i++){ 
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("penjab","kd_pj='"+tbKamar.getValueAt(i,1).toString()+"'","status='0'");
+                Sequel.mengupdateSmc("penjab", "status = '0'", "kd_pj = ?", tbKamar.getValueAt(i, 1).toString());
             }
         } 
         BtnCariActionPerformed(evt);
@@ -782,10 +791,20 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
             Valid.textKosong(NoTelp,"No.Telp Perusahaan Penanggung/Askes/Asuransi");
         }else if(Attn.getText().trim().equals("")){
             Valid.textKosong(Attn,"Attn");
+        } else if (Email.getText().isBlank()) {
+            Valid.textKosong(Email, "E-mail");
+        } else if (NoNPWP.getText().isBlank()) {
+            Valid.textKosong(NoNPWP, "No. NPWP");
         }else{
-            Valid.editTable(tabMode,"penjab","kd_pj",Kd2,"png_jawab='"+NmAsuransi.getText()+"',kd_pj='"+KdAsuransi.getText()+"',nama_perusahaan='"+Perusahaan.getText()+"',alamat_asuransi='"+AlamatAsuransi.getText()+"',no_telp='"+NoTelp.getText()+"',attn='"+Attn.getText()+"'");
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
-            emptTeks();
+            if (Sequel.mengupdatetfSmc("penjab",
+                "kd_pj = ?, png_jawab = ?, nama_perusahaan = ?, alamat_asuransi = ?, no_telp = ?, email = ?, attn = ?, no_npwp = ?", "kd_pj = ?",
+                KdAsuransi.getText(), NmAsuransi.getText(), Perusahaan.getText(),
+                AlamatAsuransi.getText(), NoTelp.getText(), Email.getText(),
+                Attn.getText(), NoNPWP.getText(), Kd2.getText()
+            )) {
+                tampil();
+                emptTeks();
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -931,7 +950,6 @@ private void NmAsuransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }//GEN-LAST:event_AttnKeyPressed
 
     private void MnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRestoreActionPerformed
-        DlgRestoreCaraBayar restore=new DlgRestoreCaraBayar(null,true);
         restore.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         restore.setLocationRelativeTo(internalFrame1);
         restore.setVisible(true);
@@ -1039,31 +1057,36 @@ private void NmAsuransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
-            ps=koneksi.prepareStatement(
-                    "select penjab.kd_pj,penjab.png_jawab,penjab.nama_perusahaan,penjab.alamat_asuransi,penjab.no_telp,penjab.attn "+
-                    "from penjab where penjab.status='1' and (penjab.kd_pj like ? or penjab.png_jawab like ?) order by penjab.png_jawab ");
-            try{
-                ps.setString(1,"%"+TCari.getText().trim()+"%");
-                ps.setString(2,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-                }
-            }catch(Exception ex){
-                System.out.println(ex);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select * from penjab where penjab.status = '1' " + (TCari.getText().isBlank() ? "" :
+            "and (penjab.kd_pj like ? or penjab.png_jawab like ? or penjab.nama_perusahaan like ? " +
+            "or penjab.alamat_asuransi like ? or penjab.no_telp like ? or penjab.email like ? " +
+            "or penjab.attn like ? or penjab.no_npwp like ?) ") + "order by penjab.png_jawab"
+        )) {
+            if (!TCari.getText().isBlank()) {
+                ps.setString(1, "%" + TCari.getText() + "%");
+                ps.setString(2, "%" + TCari.getText() + "%");
+                ps.setString(3, "%" + TCari.getText() + "%");
+                ps.setString(4, "%" + TCari.getText() + "%");
+                ps.setString(5, "%" + TCari.getText() + "%");
+                ps.setString(6, "%" + TCari.getText() + "%");
+                ps.setString(7, "%" + TCari.getText() + "%");
+                ps.setString(8, "%" + TCari.getText() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {
+                        false, rs.getString("kd_pj"), rs.getString("png_jawab"),
+                        rs.getString("nama_perusahaan"), rs.getString("alamat_asuransi"),
+                        rs.getString("no_telp"), rs.getString("email"),
+                        rs.getString("attn"), rs.getString("no_npwp")
+                    });
                 }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
 
     public void emptTeks() {
@@ -1072,21 +1095,25 @@ private void NmAsuransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         NmAsuransi.setText("");
         Perusahaan.setText("");
         AlamatAsuransi.setText("");
-        Attn.setText("");
         NoTelp.setText("0");
-        KdAsuransi.requestFocus();        
-        Valid.autoNomer("penjab","A",2,KdAsuransi);
+        Email.setText("");
+        Attn.setText("");
+        NoNPWP.setText("");
+        KdAsuransi.requestFocus();
+        tbKamar.clearSelection();
     }
 
     private void getData() {
         if(tbKamar.getSelectedRow()!= -1){
-            KdAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            NmAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString());
-            Perusahaan.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
-            AlamatAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
-            NoTelp.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString());
-            Attn.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString());
+            KdAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            NmAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
+            Perusahaan.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
+            AlamatAsuransi.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString());
+            NoTelp.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 5).toString());
+            Email.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString());
+            Attn.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString());
+            NoNPWP.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
         }
     }
 
