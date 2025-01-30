@@ -557,6 +557,9 @@
     }
     
     function validTeks4($data,$panjang){
+        if ($data === null) {
+            return '';
+        }
         $save="";
         if(strlen($data)>$panjang){
             header('Location: https://www.google.com');

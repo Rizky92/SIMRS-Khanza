@@ -39,8 +39,9 @@ public class IPSRSSuratPemesanan extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private WarnaTable2 warna=new WarnaTable2();
-    private DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
-    private IPSRSCariSuplier suplier=new IPSRSCariSuplier(null,false);
+    private final DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
+    private final IPSRSCariSuplier suplier=new IPSRSCariSuplier(null,false);
+    private final IPSRSCariSuratPemesanan form=new IPSRSCariSuratPemesanan(null,false);
     private double meterai=0,ttl=0,y=0,w=0,ttldisk=0,sbttl=0,ppn=0;
     private int jml=0,i=0,row=0,index=0,pilihan=1;
     private String[] kodebarang,namabarang,satuanbeli;
@@ -940,7 +941,6 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        IPSRSCariSuratPemesanan form=new IPSRSCariSuratPemesanan(null,false);
         form.emptTeks();
         form.isCek();
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);

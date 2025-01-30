@@ -242,7 +242,7 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Detail J.M Dokter 2 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Detail J.M Dokter 2 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -327,11 +327,6 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
         chkRalan.setName("chkRalan"); // NOI18N
         chkRalan.setOpaque(false);
         chkRalan.setPreferredSize(new java.awt.Dimension(95, 30));
-        chkRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkRalanActionPerformed(evt);
-            }
-        });
         panelisi1.add(chkRalan);
 
         chkRadiologi.setSelected(true);
@@ -340,11 +335,6 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
         chkRadiologi.setName("chkRadiologi"); // NOI18N
         chkRadiologi.setOpaque(false);
         chkRadiologi.setPreferredSize(new java.awt.Dimension(95, 30));
-        chkRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkRadiologiActionPerformed(evt);
-            }
-        });
         panelisi1.add(chkRadiologi);
 
         chkLaborat.setSelected(true);
@@ -353,11 +343,6 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
         chkLaborat.setName("chkLaborat"); // NOI18N
         chkLaborat.setOpaque(false);
         chkLaborat.setPreferredSize(new java.awt.Dimension(100, 30));
-        chkLaborat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkLaboratActionPerformed(evt);
-            }
-        });
         panelisi1.add(chkLaborat);
 
         chkOperasi.setSelected(true);
@@ -366,11 +351,6 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
         chkOperasi.setName("chkOperasi"); // NOI18N
         chkOperasi.setOpaque(false);
         chkOperasi.setPreferredSize(new java.awt.Dimension(95, 30));
-        chkOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkOperasiActionPerformed(evt);
-            }
-        });
         panelisi1.add(chkOperasi);
 
         chkRanap.setSelected(true);
@@ -379,11 +359,6 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
         chkRanap.setName("chkRanap"); // NOI18N
         chkRanap.setOpaque(false);
         chkRanap.setPreferredSize(new java.awt.Dimension(95, 30));
-        chkRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkRanapActionPerformed(evt);
-            }
-        });
         panelisi1.add(chkRanap);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
@@ -1108,26 +1083,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         Tgl1.requestFocus();
         pilihancarabayar="";
     }//GEN-LAST:event_formWindowOpened
-
-    private void chkRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRalanActionPerformed
-        prosesCari();
-    }//GEN-LAST:event_chkRalanActionPerformed
-
-    private void chkRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRadiologiActionPerformed
-        prosesCari();
-    }//GEN-LAST:event_chkRadiologiActionPerformed
-
-    private void chkLaboratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLaboratActionPerformed
-        prosesCari();
-    }//GEN-LAST:event_chkLaboratActionPerformed
-
-    private void chkOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkOperasiActionPerformed
-        prosesCari();
-    }//GEN-LAST:event_chkOperasiActionPerformed
-
-    private void chkRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRanapActionPerformed
-        prosesCari();
-    }//GEN-LAST:event_chkRanapActionPerformed
 
     private void ppTampilkanSeleksiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiBtnPrintActionPerformed
         carabayar.isCek();
