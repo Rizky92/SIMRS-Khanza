@@ -200,9 +200,19 @@ ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS 
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_ibu`;
 
+ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `email` varchar(50) NOT NULL DEFAULT '' AFTER `no_telp`;
+
+ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NOT NULL DEFAULT '' AFTER `attn`;
+
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `png_jawab` varchar(50) NOT NULL AFTER `kd_pj`;
 
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(100) NOT NULL AFTER `png_jawab`;
+
+ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `email` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
+
+ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NULL DEFAULT NULL AFTER `email`;
+
+ALTER TABLE `perusahaan_pasien` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(120) NULL DEFAULT NULL AFTER `kode_perusahaan`;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -425,6 +435,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_nonmedis` enum('true','false') NULL DEFAULT NULL AFTER `edit_hapus_spo_medis`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('true','false') NULL DEFAULT NULL AFTER `satu_sehat_kirim_specimen_radiologi`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pindah_kamar_pilihan_2` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_hutang_vendor_dapur`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
