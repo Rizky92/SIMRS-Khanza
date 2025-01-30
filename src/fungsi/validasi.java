@@ -102,6 +102,10 @@ public final class validasi {
         );
     }
     
+    public void autonomorSmc(JTextComponent component, String prefix, String table, int panjang, String pad) {
+        component.setText(sek.autonomorSmc(prefix, table, panjang, pad));
+    }
+    
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
         component.setText(sek.autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, next));
     }

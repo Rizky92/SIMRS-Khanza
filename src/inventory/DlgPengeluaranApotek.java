@@ -1272,7 +1272,6 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         LTotal.setText(Valid.SetAngka(ttl));
     }
-    
   
     
     public void isCek(){

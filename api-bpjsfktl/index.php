@@ -460,14 +460,15 @@
                                                 http_response_code(201);
                                             }else{
                                                 if(empty(cekpasien(validTeks4($decode['nik'],20),validTeks4($decode['nomorkartu'],20)))){ 
-                                                    /* Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
-                                                     * $response = array(
+                                                    // Silahkan aktifkan ini jika tidak ingin BPJS bisa menginsert data pasien baru
+                                                    $response = array(
                                                         'metadata' => array(
                                                             'message' =>  'Data pasien ini tidak ditemukan, silahkan melakukan registrasi pasien baru ke loket administrasi Kami',
                                                             'code' => 201
                                                         )
                                                     ); 
-                                                    http_response_code(201);*/
+                                                    http_response_code(201);
+                                                    /*
                                                     $response = array(
                                                         'metadata' => array(
                                                             'message' =>  'Data pasien ini tidak ditemukan',
@@ -475,6 +476,7 @@
                                                         )
                                                     ); 
                                                     http_response_code(202);
+                                                    */
                                                 }else{
                                                     /*if(empty($decode['norm'])) { 
                                                         $response = array(
@@ -485,7 +487,7 @@
                                                         );
                                                         http_response_code(201);
                                                     }else */
-                                                    if(strpos($decode['norm'],"'")||strpos($decode['norm'],"\\")){
+                                                    if(strpos($decode['norm'] ?? '',"'")||strpos($decode['norm'] ?? '',"\\")){
                                                         $response = array(
                                                             'metadata' => array(
                                                                 'message' => 'Format No.RM salah',
@@ -505,22 +507,30 @@
                                                         }else{
                                                             $sekarang  = date("Y-m-d");
                                                             $interval  = getOne2("select (TO_DAYS('".validTeks4($decode["tanggalperiksa"],20)."')-TO_DAYS('$sekarang'))");
-                                                            if($interval < 0) {
+                                                            if($interval<0){
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pendaftaran ke Poli ini sudah tutup',
                                                                         'code' => 201
                                                                     )
-                                                                );
+                                                                );  
                                                                 http_response_code(201);
-															} else if ($interval > 7) {
-                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 7 day), '%d-%m-%Y')");
+                                                            } else if ($interval > 30) {
+                                                                $tanggalbatasambil = getOne2("select date_format(date_sub('".validTeks4($decode["tanggalperiksa"], 20)."', interval 30 day), '%d-%m-%Y')");
                                                                 $response = array(
                                                                     'metadata' => array(
                                                                         'message' => 'Pengambilan antrian poli baru bisa dilakukan pada tanggal '.$tanggalbatasambil.'.',
                                                                         'code' => 201
                                                                     )
                                                                 );
+                                                                http_response_code(201);
+                                                            } else if ($decode['jeniskunjungan'] == '3' && (strtotime($decode['tanggalperiksa']) - ($tanggalskdp = strtotime(getOne2("select bridging_surat_kontrol_bpjs.tgl_rencana from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = '$decode[nomorreferensi]'")))) < 0) {
+                                                                $response = [
+                                                                    'metadata' => [
+                                                                        'message' => 'Pengambilan antrian poli tidak boleh maju dari tanggal rencana kontrol. Minimal pengambilan mulai tanggal ' . date('d-m-Y', $tanggalskdp) . '.',
+                                                                        'code' => 201,
+                                                                    ],
+                                                                ];
                                                                 http_response_code(201);
                                                             }else{
                                                                 $sisakuota=getOne2("select count(no_rawat) from reg_periksa where kd_poli='$kdpoli' and kd_dokter='$kddokter' and tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' ");
@@ -650,6 +660,7 @@
                                             }
                                         }
                                     }
+                                    
                                 }else {
                                     $response = array(
                                         'metadata' => array(
@@ -1492,6 +1503,7 @@
                                             )
                                         );
                                         http_response_code(201);
+                                    /* JANGAN VALIDASI RW
                                     }else if(empty($decode['rw'])) { 
                                         $response = array(
                                             'metadata' => array(
@@ -1508,6 +1520,7 @@
                                             )
                                         );
                                         http_response_code(201);
+                                    */
                                     }else if(empty($decode['rt'])) { 
                                         $response = array(
                                             'metadata' => array(
