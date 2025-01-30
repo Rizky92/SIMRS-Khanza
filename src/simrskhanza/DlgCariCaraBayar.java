@@ -14,10 +14,10 @@ package simrskhanza;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -510,8 +510,8 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{i,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
-                    iyem=iyem+"{\"KodeAsuransi\":\""+rs.getString(1)+"\",\"NamaAsuransi\":\""+rs.getString(2)+"\",\"PerusahaanAsuransi\":\""+rs.getString(3)+"\",\"AlamatAsuransi\":\""+rs.getString(4)+"\",\"NoTelp\":\""+rs.getString(5)+"\",\"Attn\":\""+rs.getString(6)+"\"},";
+                    tabMode.addRow(new Object[]{i,rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("nama_perusahaan"),rs.getString("alamat_asuransi"),rs.getString("no_telp"),rs.getString("attn")});
+                    iyem=iyem+"{\"KodeAsuransi\":\""+rs.getString("kd_pj")+"\",\"NamaAsuransi\":\""+rs.getString("png_jawab")+"\",\"PerusahaanAsuransi\":\""+rs.getString("nama_perusahaan")+"\",\"AlamatAsuransi\":\""+rs.getString("alamat_asuransi")+"\",\"NoTelp\":\""+rs.getString("no_telp")+"\",\"Attn\":\""+rs.getString("attn")+"\"},";
                     i++;
                 }
             }catch(Exception e){
@@ -548,7 +548,7 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getadmin());
     }
     
-    private void tampil2() {
+    public void tampil2() {
         try {
             myObj = new FileReader("./cache/penjab.iyem");
             root = mapper.readTree(myObj);
