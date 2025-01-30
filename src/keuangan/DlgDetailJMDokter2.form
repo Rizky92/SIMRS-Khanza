@@ -226,9 +226,6 @@
                   <Dimension value="[95, 30]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRalanActionPerformed"/>
-              </Events>
             </Component>
             <Component class="widget.CekBox" name="chkRadiologi">
               <Properties>
@@ -241,9 +238,6 @@
                   <Dimension value="[95, 30]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRadiologiActionPerformed"/>
-              </Events>
             </Component>
             <Component class="widget.CekBox" name="chkLaborat">
               <Properties>
@@ -256,9 +250,6 @@
                   <Dimension value="[100, 30]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkLaboratActionPerformed"/>
-              </Events>
             </Component>
             <Component class="widget.CekBox" name="chkOperasi">
               <Properties>
@@ -271,9 +262,6 @@
                   <Dimension value="[95, 30]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkOperasiActionPerformed"/>
-              </Events>
             </Component>
             <Component class="widget.CekBox" name="chkRanap">
               <Properties>
@@ -286,9 +274,6 @@
                   <Dimension value="[95, 30]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRanapActionPerformed"/>
-              </Events>
             </Component>
             <Component class="widget.Button" name="BtnAll">
               <Properties>
