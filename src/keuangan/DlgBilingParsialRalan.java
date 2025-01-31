@@ -14,15 +14,19 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -102,7 +106,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             Jasa_Sarana_Laborat_Ralan=0,Jasa_Perujuk_Laborat_Ralan=0,Jasa_Menejemen_Laborat_Ralan=0,Jasa_Medik_Dokter_Radiologi_Ralan=0,
             Jasa_Medik_Petugas_Radiologi_Ralan=0,Kso_Radiologi_Ralan=0,Persediaan_Radiologi_Rawat_Jalan=0,Jasa_Sarana_Radiologi_Ralan=0,
             Jasa_Perujuk_Radiologi_Ralan=0,Jasa_Menejemen_Radiologi_Ralan=0,Obat_Rawat_Jalan=0,Suspen_Tindakan_Ralan;
-    private boolean sukses=false;
+    private boolean sukses=false, waktu = true;
     
     /**
      * Creates new form DlgBillingParsialRalan
@@ -1841,7 +1845,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-08-2022 21:00:13" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024 11:54:24" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setOpaque(false);
         DTPTgl.setPreferredSize(new java.awt.Dimension(135, 23));
@@ -7396,4 +7400,12 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         }  
     }
     
+    private void jam2() {
+        new Timer(1000, (ActionEvent e) -> {
+            Date now = Calendar.getInstance().getTime();
+            if (waktu) {
+                DTPTgl.setDate(now);
+            }
+        }).start();
+    }
 }
