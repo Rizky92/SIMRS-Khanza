@@ -55,6 +55,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
     private JsonNode response;
     private BPJSCekReferensiPoliHFIS poli=new BPJSCekReferensiPoliHFIS(null,false);
     private BPJSCekReferensiDokterHFIS dokter=new BPJSCekReferensiDokterHFIS(null,false);
+    private final boolean SINKRONJADWALHFIS = koneksiDB.SINKRONJADWALHFIS();
 
     /** Creates new form DlgKamar
      * @param parent
