@@ -685,8 +685,37 @@ import keuangan.KeuanganValidasiTagihanNonMedis;
 import keuangan.KeuanganValidasiTagihanObatBHP;
 import laporan.DlgAnggotaMiliterDirawat;
 import laporan.DlgAnggotaPolriDirawat;
-import laporan.DlgBerkasRawat;
-import laporan.DlgBulananHAIs;
+import kepegawaian.DlgAuditKepatuhanAPD;
+import kepegawaian.DlgAuditPembuanganBendaTajam;
+import kepegawaian.DlgRuangAuditKepatuhan;
+import kepegawaian.DlgAuditPembuanganLimbah;
+import kepegawaian.DlgAuditPembuanganLimbahCairInfeksius;
+import kepegawaian.DlgAuditPenangananDarah;
+import kepegawaian.DlgAuditPenempatanPasien;
+import kepegawaian.DlgAuditPengelolaanLinenKotor;
+import kepegawaian.DlgAuditSterilisasiAlat;
+import kepegawaian.SKPKategoriPenilaian;
+import kepegawaian.SKPKriteriaPenilaian;
+import kepegawaian.SKPPenilaianPegawai;
+import kepegawaian.SKPRekapitulasiPenilaianPegawai;
+import keuangan.DlgLhtBankJabar;
+import keuangan.DlgLhtBankMandiri;
+import keuangan.DlgLhtBankPapua;
+import keuangan.DlgLhtPembayaranPihakKe3BankMandiri;
+import keuangan.DlgPendapatanPerAKun;
+import keuangan.DlgRekapBiayaRegistrasi;
+import keuangan.KeuanganBayarPemesananDapur;
+import keuangan.KeuanganHutangDapurBelumLunas;
+import keuangan.KeuanganNilaiPiutangPerJenisBayarPerBulan;
+import keuangan.KeuanganPengajuanBiaya;
+import keuangan.KeuanganPersetujuanPengajuanBiaya;
+import keuangan.KeuanganRekapPengajuanBiaya;
+import keuangan.KeuanganRingkasanHutangVendorDapur;
+import keuangan.KeuanganRingkasanJasaTindakan;
+import keuangan.KeuanganRingkasanPiutangPerJensBayar;
+import keuangan.KeuanganTagihanDapur;
+import keuangan.KeuanganValidasiPersetujuanPengajuanBiaya;
+import keuangan.KeuanganValidasiTagihanDapur;
 import laporan.DlgBulananKlasifikasiPasienRanap;
 import laporan.DlgCekEntryRalan;
 import laporan.DlgDaftarPasienRanap;
@@ -22416,6 +22445,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnPendapatanPerAkunActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPendapatanPerAKun aplikasi=new DlgPendapatanPerAKun(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
             
     /**
     * @param args the command line arguments
@@ -23121,7 +23161,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnHutangDapur,btnTagihanHutangDapur,btnValidasiTagihanDapur,btnSuratPemesananDapur,btnPengajuanBarangDapur,btnReturBarangDapur,btnHibahDapur,btnRingkasanPenerimaanDapur,
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
-            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnSetTampilJenisObatResep;
+            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnSetTampilJenisObatResep;
     
     public void isWall(){
         try{            
@@ -24817,6 +24857,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpiutang_akun_piutang()==true){
                 Panelmenu.add(btnPiutangPerAkunPiutang);
+                jmlmenu++;
+            }
+            
+            if(akses.getpendapatan_per_akun()==true){
+                Panelmenu.add(btnPendapatanPerAkun);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==9){ 
@@ -30275,6 +30320,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getpiutang_akun_piutang()==true){
             Panelmenu.add(btnPiutangPerAkunPiutang);
+            jmlmenu++;
+        }
+        
+        if(akses.getpendapatan_per_akun()==true){
+            Panelmenu.add(btnPendapatanPerAkun);
             jmlmenu++;
         }
 
@@ -36341,6 +36391,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpiutang_akun_piutang()==true){
             if(btnPiutangPerAkunPiutang.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPiutangPerAkunPiutang);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpendapatan_per_akun()==true){
+            if(btnPendapatanPerAkun.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPendapatanPerAkun);
                 jmlmenu++;
             }                
         }
@@ -46833,6 +46890,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRingkasanHutangVendorBarangDapur.setName("btnRingkasanHutangVendorBarangDapur");
         btnRingkasanHutangVendorBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorBarangDapur.addActionListener(this::btnRingkasanHutangVendorBarangDapurActionPerformed);
+        
+        btnPendapatanPerAkun = new widget.ButtonBig();
+        btnPendapatanPerAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); 
+        btnPendapatanPerAkun.setText("Pendapatan Per Akun");
+        btnPendapatanPerAkun.setIconTextGap(0);
+        btnPendapatanPerAkun.setName("btnPendapatanPerAkun");
+        btnPendapatanPerAkun.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPendapatanPerAkun.addActionListener(this::btnPendapatanPerAkunActionPerformed);
         
         btnSetTampilJenisObatResep = new widget.ButtonBig();
         btnSetTampilJenisObatResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); 
