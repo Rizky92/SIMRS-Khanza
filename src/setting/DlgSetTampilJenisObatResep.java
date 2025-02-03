@@ -52,9 +52,9 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         this.setLocation(8, 1);
         setSize(885, 674);
 
-        Object[] row = {"Kode Jenis", "Nama Jenis Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
-                 row2 = {"Kode Poliklinik", "Nama Poliklinik", "Kode Jenis", "Nama Jenis Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
-                 row3 = {"Kode Unit Kamar", "Nama Unit Kamar", "Kode Jenis", "Nama Jenis Bayar", "Kode Jenis Obat", "Nama Jenis Obat"};
+        Object[] row = {"Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
+                 row2 = {"Kode Poliklinik", "Nama Poliklinik", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
+                 row3 = {"Kode Unit Kamar", "Nama Unit Kamar", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"};
         
         tabMode = new DefaultTableModel(null, row) {
             @Override
@@ -66,10 +66,10 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbUmum.setModel(tabMode);
         tbUmum.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbUmum.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbUmum.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tbUmum.getColumnModel().getColumn(0).setPreferredWidth(90);
         tbUmum.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tbUmum.getColumnModel().getColumn(2).setPreferredWidth(40);
-        tbUmum.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tbUmum.getColumnModel().getColumn(2).setPreferredWidth(90);
+        tbUmum.getColumnModel().getColumn(3).setPreferredWidth(140);
         tbUmum.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeRalan = new DefaultTableModel(null, row2) {
@@ -82,12 +82,12 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRalan.setModel(tabModeRalan);
         tbRalan.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbRalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbRalan.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tbRalan.getColumnModel().getColumn(1).setPreferredWidth(175);
-        tbRalan.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tbRalan.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tbRalan.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tbRalan.getColumnModel().getColumn(2).setPreferredWidth(90);
         tbRalan.getColumnModel().getColumn(3).setPreferredWidth(200);
-        tbRalan.getColumnModel().getColumn(4).setPreferredWidth(40);
-        tbRalan.getColumnModel().getColumn(5).setPreferredWidth(120);
+        tbRalan.getColumnModel().getColumn(4).setPreferredWidth(90);
+        tbRalan.getColumnModel().getColumn(5).setPreferredWidth(140);
         tbRalan.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeRanap = new DefaultTableModel(null, row3) {
@@ -100,12 +100,12 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRanap.setModel(tabModeRanap);
         tbRanap.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbRanap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbRanap.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tbRanap.getColumnModel().getColumn(1).setPreferredWidth(175);
-        tbRanap.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tbRanap.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tbRanap.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tbRanap.getColumnModel().getColumn(2).setPreferredWidth(90);
         tbRanap.getColumnModel().getColumn(3).setPreferredWidth(200);
-        tbRanap.getColumnModel().getColumn(4).setPreferredWidth(40);
-        tbRanap.getColumnModel().getColumn(5).setPreferredWidth(120);
+        tbRanap.getColumnModel().getColumn(4).setPreferredWidth(90);
+        tbRanap.getColumnModel().getColumn(5).setPreferredWidth(140);
         tbRanap.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCariRalan.setDocument(new batasInput((int) 100).getKata(TCariRalan));
