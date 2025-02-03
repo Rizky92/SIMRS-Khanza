@@ -192,17 +192,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Tampil Resep Obat, Alkes & BHP Medis per Jenis Obat per Poliklinik / Unit Rawat Inap]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -287,11 +276,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbUmum.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUmumMouseClicked(evt);
-            }
-        });
-        tbUmum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tbUmumKeyPressed(evt);
             }
         });
         Scroll.setViewportView(tbUmum);
@@ -404,11 +388,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbRalanMouseClicked(evt);
-            }
-        });
-        tbRalan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tbRalanKeyPressed(evt);
             }
         });
         Scroll1.setViewportView(tbRalan);
@@ -588,11 +567,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 tbRanapMouseClicked(evt);
             }
         });
-        tbRanap.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tbRanapKeyPressed(evt);
-            }
-        });
         Scroll2.setViewportView(tbRanap);
 
         jPanel4.add(Scroll2, java.awt.BorderLayout.CENTER);
@@ -755,11 +729,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnPilihCaraBayarRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihCaraBayarRanapActionPerformed
-        penjab.isCek();
-        penjab.emptTeks();
-        penjab.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        penjab.setLocationRelativeTo(internalFrame1);
-        penjab.setVisible(true);
+        
     }//GEN-LAST:event_BtnPilihCaraBayarRanapActionPerformed
 
     private void tbUmumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUmumMouseClicked
@@ -771,96 +741,13 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbUmumMouseClicked
 
-    private void tbUmumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbUmumKeyPressed
-        if (tabMode.getRowCount() != 0) {
-            if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-                try {
-                    getData();
-                } catch (java.lang.NullPointerException e) {
-                }
-            }
-        }
-    }//GEN-LAST:event_tbUmumKeyPressed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        penjab.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (penjab.getTable().getSelectedRow() != -1) {
-                    kdpjRanap.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 1).toString());
-                    pngjawabRanap.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 2).toString());
-                }
-                kdpjRanap.requestFocus();
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });
-
-        penjab.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    penjab.dispose();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
-    }//GEN-LAST:event_formWindowActivated
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        penjab.removeWindowListener(null);
-        penjab.getTable().removeKeyListener(null);
-    }//GEN-LAST:event_formWindowClosed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
-        emptTeks();
-    }//GEN-LAST:event_formWindowOpened
-
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbRanapMouseClicked
 
-    private void tbRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRanapKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbRanapKeyPressed
-
     private void tbRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRalanMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbRalanMouseClicked
-
-    private void tbRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbRalanKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbRalanKeyPressed
 
     private void BtnPilihJenisObatRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihJenisObatRanapActionPerformed
         // TODO add your handling code here:
@@ -1015,6 +902,83 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        Valid.tabelKosong(tabMode);
+        try (ResultSet rs = koneksi.createStatement().executeQuery(
+            "select set_filter_jenis_resep_obat.kd_pj, penjab.png_jawab, set_filter_jenis_resep_obat.kdjns, jenis.nama from set_filter_jenis_resep_obat " +
+            "join penjab on set_filter_jenis_resep_obat.kd_pj = penjab.kd_pj join jenis on set_filter_jenis_resep_obat.kdjns = jenis.kdjns"
+        )) {
+            while (rs.next()) {
+                tabMode.addRow(new String[] {
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)
+                });
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void tampil2() {
+        Valid.tabelKosong(tabModeRalan);
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select set_filter_jenis_resep_obat_ralan.kd_poli, poliklinik.nm_poli, set_filter_jenis_resep_obat_ralan.kd_pj, penjab.png_jawab, " +
+            "set_filter_jenis_resep_obat_ralan.kdjns, jenis.nama from set_filter_jenis_resep_obat_ralan join poliklinik on " +
+            "set_filter_jenis_resep_obat_ralan.kd_poli = poliklinik.kd_poli join penjab on set_filter_jenis_resep_obat_ralan.kd_pj = " +
+            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ralan.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" : 
+            "where set_filter_jenis_resep_obat_ralan.kd_poli like ? or poliklinik.nm_poli like ? or set_filter_jenis_resep_obat_ralan.kd_pj " +
+            "like ? or penjab.png_jawab like ? or set_filter_jenis_resep_obat_ralan.kdjns like ? or jenis.nama like ?")
+        )) {
+            if (!TCariRalan.getText().isBlank()) {
+                ps.setString(1, "%" + TCariRalan.getText() + "%");
+                ps.setString(2, "%" + TCariRalan.getText() + "%");
+                ps.setString(3, "%" + TCariRalan.getText() + "%");
+                ps.setString(4, "%" + TCariRalan.getText() + "%");
+                ps.setString(5, "%" + TCariRalan.getText() + "%");
+                ps.setString(6, "%" + TCariRalan.getText() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabModeRalan.addRow(new String[] {
+                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void tampil3() {
+        Valid.tabelKosong(tabModeRanap);
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select set_filter_jenis_resep_obat_ranap.kd_bangsal, bangsal.nm_bangsal, set_filter_jenis_resep_obat_ranap.kd_pj, penjab.png_jawab, " +
+            "set_filter_jenis_resep_obat_ranap.kdjns, jenis.nama from set_filter_jenis_resep_obat_ranap join bangsal on " +
+            "set_filter_jenis_resep_obat_ranap.kd_bangsal = bangsal.kd_bangsal join penjab on set_filter_jenis_resep_obat_ranap.kd_pj = " +
+            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ranap.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" : 
+            "where set_filter_jenis_resep_obat_ranap.kd_bangsal like ? or bangsal.nm_bangsal like ? or set_filter_jenis_resep_obat_ranap.kd_pj " +
+            "like ? or penjab.png_jawab like ? or set_filter_jenis_resep_obat_ranap.kdjns like ? or jenis.nama like ?")
+        )) {
+            if (!TCariRalan.getText().isBlank()) {
+                ps.setString(1, "%" + TCariRalan.getText() + "%");
+                ps.setString(2, "%" + TCariRalan.getText() + "%");
+                ps.setString(3, "%" + TCariRalan.getText() + "%");
+                ps.setString(4, "%" + TCariRalan.getText() + "%");
+                ps.setString(5, "%" + TCariRalan.getText() + "%");
+                ps.setString(6, "%" + TCariRalan.getText() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabModeRalan.addRow(new String[] {
+                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    
+    private void tampil() {
         String sql = "select set_harga_obat_ralan.kd_pj,penjab.png_jawab, set_harga_obat_ralan.hargajual "
             + "from set_harga_obat_ralan inner join penjab on set_harga_obat_ralan.kd_pj=penjab.kd_pj "
             + "where set_harga_obat_ralan.kd_pj like '%" + TCari.getText().trim() + "%' or "
@@ -1042,18 +1006,10 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }
 
     private void emptTeks() {
-        harga.setText("0");
-        kdpjRanap.setText("");
-        pngjawabRanap.setText("");
-        harga.requestFocus();
+        
     }
 
     private void getData() {
-        int row = tbUmum.getSelectedRow();
-        if (row != -1) {
-            kdpjRanap.setText(tbUmum.getValueAt(row, 0).toString());
-            pngjawabRanap.setText(tbUmum.getValueAt(row, 1).toString());
-            harga.setText(tbUmum.getValueAt(row, 2).toString());
-        }
+        
     }
 }
