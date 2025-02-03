@@ -279,6 +279,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
+        BtnEdit = new widget.Button();
         BtnKeluar = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -842,7 +843,30 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 BtnHapusActionPerformed(evt);
             }
         });
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnHapusKeyPressed(evt);
+            }
+        });
         panelGlass8.add(BtnHapus);
+
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
+        BtnEdit.setText("Ganti");
+        BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnEdit);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -928,7 +952,45 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        
+        if (tabPane1.getSelectedIndex() == 0) {
+            if (tbUmum.getSelectedRow() != -1) {
+                if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat", "kd_pj = ? and kdjns = ?",
+                    tbUmum.getValueAt(tbUmum.getSelectedRow(), 0).toString(),
+                    tbUmum.getValueAt(tbUmum.getSelectedRow(), 2).toString())
+                ) {
+                    tabMode.removeRow(tbUmum.getSelectedRow());
+                    emptTeks();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus..!!");
+            }
+        } else if (tabPane1.getSelectedIndex() == 1) {
+            if (tbRalan.getSelectedRow() != -1) {
+                if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ralan", "kd_poli = ? and kd_pj = ? and kdjns = ?",
+                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString(),
+                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString(),
+                    tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString())
+                ) {
+                    tabModeRalan.removeRow(tbRalan.getSelectedRow());
+                    emptTeks();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus..!!");
+            }
+        } else if (tabPane1.getSelectedIndex() == 2) {
+            if (tbRanap.getSelectedRow() != -1) {
+                if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ranap", "kd_bangsal = ? and kd_pj = ? and kdjns = ?",
+                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString(),
+                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString(),
+                    tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString())
+                ) {
+                    tabModeRanap.removeRow(tbRanap.getSelectedRow());
+                    emptTeks();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus..!!");
+            }
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -943,26 +1005,23 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         if (tabMode.getRowCount() != 0) {
             try {
                 getData();
-            } catch (java.lang.NullPointerException e) {
-            }
+            } catch (java.lang.NullPointerException e) {}
         }
     }//GEN-LAST:event_tbUmumMouseClicked
 
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
-        if (tabModeRalan.getRowCount() != 0) {
+        if (tabModeRanap.getRowCount() != 0) {
             try {
                 getData();
-            } catch (java.lang.NullPointerException e) {
-            }
+            } catch (java.lang.NullPointerException e) {}
         }
     }//GEN-LAST:event_tbRanapMouseClicked
 
     private void tbRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRalanMouseClicked
-        if (tabModeRanap.getRowCount() != 0) {
+        if (tabModeRalan.getRowCount() != 0) {
             try {
                 getData();
-            } catch (java.lang.NullPointerException e) {
-            }
+            } catch (java.lang.NullPointerException e) {}
         }
     }//GEN-LAST:event_tbRalanMouseClicked
 
@@ -1098,6 +1157,106 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnPilihUnitKamarKeyPressed
 
+    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnHapusActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnHapusKeyPressed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if (tabPane1.getSelectedIndex() == 0) {
+            if (kdpj.getText().isBlank() || pngjawab.getText().isBlank()) {
+                Valid.textKosong(kdpj, "Cara Bayar");
+            } else if (kdjns.getText().isBlank() || nmjns.getText().isBlank()) {
+                Valid.textKosong(kdjns, "Jenis Obat");
+            } else {
+                if (tbUmum.getSelectedRow() != -1) {
+                    if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat",
+                        "kd_pj = ?, kdjns = ?", "kd_pj = ? and kdjns = ?", kdpj.getText(), kdjns.getText(),
+                        tbUmum.getValueAt(tbUmum.getSelectedRow(), 0).toString(),
+                        tbUmum.getValueAt(tbUmum.getSelectedRow(), 2).toString()
+                    )) {
+                        tbUmum.setValueAt(kdpj.getText(), tbUmum.getSelectedRow(), 0);
+                        tbUmum.setValueAt(pngjawab.getText(), tbUmum.getSelectedRow(), 1);
+                        tbUmum.setValueAt(kdjns.getText(), tbUmum.getSelectedRow(), 2);
+                        tbUmum.setValueAt(nmjns.getText(), tbUmum.getSelectedRow(), 3);
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maat, silahkan pilih data yang mau diubah terlebih dahulu..!!");
+                }
+            }
+        } else if (tabPane1.getSelectedIndex() == 1) {
+            if (kdpoli.getText().isBlank() || nmpoli.getText().isBlank()) {
+                Valid.textKosong(kdpoli, "Poliklinik");
+            } else if (kdpjRalan.getText().isBlank() || pngjawabRalan.getText().isBlank()) {
+                Valid.textKosong(kdpjRalan, "Cara Bayar");
+            } else if (kdjnsRalan.getText().isBlank() || nmjnsRalan.getText().isBlank()) {
+                Valid.textKosong(kdjnsRalan, "Jenis Obat");
+            } else {
+                if (tbRalan.getSelectedRow() != -1) {
+                    if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat_ralan",
+                        "kd_poli = ?, kd_pj = ?, kdjns = ?", "kd_poli = ? and kd_pj = ? and kdjns = ?",
+                        kdpoli.getText(), kdpjRalan.getText(), kdjnsRalan.getText(),
+                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString(),
+                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 2).toString(),
+                        tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString()
+                    )) {
+                        tbRalan.setValueAt(kdpoli.getText(), tbRalan.getSelectedRow(), 0);
+                        tbRalan.setValueAt(nmpoli.getText(), tbRalan.getSelectedRow(), 1);
+                        tbRalan.setValueAt(kdpjRalan.getText(), tbRalan.getSelectedRow(), 2);
+                        tbRalan.setValueAt(pngjawabRalan.getText(), tbRalan.getSelectedRow(), 3);
+                        tbRalan.setValueAt(kdjnsRalan.getText(), tbRalan.getSelectedRow(), 4);
+                        tbRalan.setValueAt(nmjnsRalan.getText(), tbRalan.getSelectedRow(), 5);
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maat, silahkan pilih data yang mau diubah terlebih dahulu..!!");
+                }
+            }
+        } else if (tabPane1.getSelectedIndex() == 2) {
+            if (kdbangsal.getText().isBlank() || nmbangsal.getText().isBlank()) {
+                Valid.textKosong(kdbangsal, "Unit Kamar Inap");
+            } else if (kdpjRanap.getText().isBlank() || pngjawabRanap.getText().isBlank()) {
+                Valid.textKosong(kdpjRanap, "Cara Bayar");
+            } else if (kdjnsRanap.getText().isBlank() || nmjnsRanap.getText().isBlank()) {
+                Valid.textKosong(kdjnsRanap, "Jenis Obat");
+            } else {
+                if (tbRanap.getSelectedRow() != -1) {
+                    if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat_ranap",
+                        "kd_bangsal = ?, kd_pj = ?, kdjns = ?", "kd_bangsal = ? and kd_pj = ? and kdjns = ?",
+                        kdbangsal.getText(), kdpjRanap.getText(), kdjnsRanap.getText(),
+                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString(),
+                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 2).toString(),
+                        tbRanap.getValueAt(tbRanap.getSelectedRow(), 4).toString()
+                    )) {
+                        tbRanap.setValueAt(kdbangsal.getText(), tbRanap.getSelectedRow(), 0);
+                        tbRanap.setValueAt(nmbangsal.getText(), tbRanap.getSelectedRow(), 1);
+                        tbRanap.setValueAt(kdpjRanap.getText(), tbRanap.getSelectedRow(), 2);
+                        tbRanap.setValueAt(pngjawabRanap.getText(), tbRanap.getSelectedRow(), 3);
+                        tbRanap.setValueAt(kdjnsRanap.getText(), tbRanap.getSelectedRow(), 4);
+                        tbRanap.setValueAt(nmjnsRanap.getText(), tbRanap.getSelectedRow(), 5);
+                        emptTeks();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maat, silahkan pilih data yang mau diubah terlebih dahulu..!!");
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnEditActionPerformed
+
+    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnEditActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnEditKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1120,6 +1279,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private widget.Button BtnBatal;
     private widget.Button BtnCariRalan;
     private widget.Button BtnCariRanap;
+    private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPilihCaraBayar;
@@ -1283,8 +1443,11 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         pngjawabRanap.setText("");
         kdjnsRanap.setText("");
         nmjnsRanap.setText("");
+        tbUmum.clearSelection();
+        tbRalan.clearSelection();
+        tbRanap.clearSelection();
     }
-
+    
     private void getData() {
         if (tabPane1.getSelectedIndex() == 0) {
             if (tbUmum.getSelectedRow() != -1) {
