@@ -136,6 +136,33 @@ public final class sekuel {
         }
     }
     
+    public String autonomorSmc(String prefix, String table, int panjang, String pad) {
+        try (PreparedStatement ps = connect.prepareStatement("select concat(?, lpad(count(*), ?, ?)) from " + table)) {
+            ps.setString(1, prefix);
+            ps.setInt(2, panjang);
+            ps.setString(3, pad);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        if (prefix == null) {
+            prefix = "";
+        }
+        String output = "";
+        for (int i = 0; i < panjang - 1; i++) {
+            output += pad;
+            if (output.length() >= panjang - 1) {
+                output = output.substring(0, panjang - 1);
+                break;
+            }
+        }
+        return prefix + output + "1";
+    }
+    
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
         String sql = 
             "select concat(if(? is null or ? = '', '', concat(?, ?)), date_format(" +
@@ -209,7 +236,7 @@ public final class sekuel {
         return false;
     }
 
-    public int cariIntegerSmc(String sql, String... values) {
+    public int cariIntegerSmc(String sql, int defaultValue, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -222,10 +249,14 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        return -1;
+        return defaultValue;
+    }
+    
+    public int cariIntegerSmc(String sql, String... values) {
+        return cariIntegerSmc(sql, 0, values);
     }
 
-    public double cariDoubleSmc(String sql, String... values) {
+    public double cariDoubleSmc(String sql, double defaultValue, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
@@ -238,7 +269,11 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        return -1;
+        return defaultValue;
+    }
+    
+    public double cariDoubleSmc(String sql, String... values) {
+        return cariDoubleSmc(sql, 0, values);
     }
 
     public Date cariTglSmc(String sql, String... values) {
@@ -1198,6 +1233,37 @@ public final class sekuel {
                 System.out.println("Notifikasi Edit : "+ex);
             }
         }
+    }
+    
+    public boolean menyimpantf(String table,String isisimpan,String isiedit,String acuan_field){
+        bool=true;
+        try{            
+            ps=connect.prepareStatement("insert into "+table+" values("+isisimpan+")");
+            ps.executeUpdate();   
+            if(ps != null){
+                ps.close();
+            }  
+            SimpanTrack("insert into "+table+" values("+isisimpan+")");
+            bool=true;
+        }catch(Exception e){
+            if(e.toString().toLowerCase().contains("duplicate")){
+                try {
+                    ps=connect.prepareStatement("update "+table+" set "+isiedit+" where "+acuan_field);
+                    ps.executeUpdate();
+                    if(ps != null){
+                        ps.close();
+                    }  
+                    SimpanTrack("update "+table+" set "+isiedit+" where "+acuan_field);
+                    bool=true;
+                } catch (Exception ex) {
+                    bool=false;
+                    System.out.println("Notifikasi Edit : "+ex);
+                }
+            }else{
+               bool=false; 
+            }
+        }
+        return bool;
     }
 
     public void menyimpan(String table,String value,String sama,JTextField AlmGb){

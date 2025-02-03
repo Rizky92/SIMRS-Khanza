@@ -396,13 +396,13 @@ where no_sep = $P{parameter}]]>
 				</textElement>
 				<text><![CDATA[Dokter Pemeriksa 2 (Konsultan)]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="380" y="690" width="132" height="11" uuid="972f133c-2db9-43bc-9523-dab671561df6"/>
+			<textField>
+				<reportElement x="380" y="690" width="132" height="11" uuid="1ebcba95-29fe-4921-bba7-f529a65d3f5f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Samarinda, ...............................]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Samarinda, " + new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tglsep})]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="380" y="705" width="132" height="10" uuid="bb0a3523-2323-40db-9921-cffcfcc12485"/>
 				<textElement textAlignment="Center">

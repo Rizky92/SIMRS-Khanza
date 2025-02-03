@@ -16,6 +16,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LIVE"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
 	<parameter name="kotars" class="java.lang.String"/>
@@ -90,7 +91,9 @@
     pasien.tgl_lahir,
     concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat,
     ifnull(bridging_sep.no_sep, '') as no_sep,
-    ifnull(bridging_sep.tglsep, '') as tglsep
+    ifnull(bridging_sep.tglsep, '') as tglsep,
+    (select kamar_inap.tgl_masuk from kamar_inap where kamar_inap.no_rawat = reg_periksa.no_rawat order by kamar_inap.tgl_masuk asc limit 1) as tgl_masuk,
+    (select kamar_inap.jam_masuk from kamar_inap where kamar_inap.no_rawat = reg_periksa.no_rawat order by kamar_inap.tgl_masuk asc, kamar_inap.jam_masuk asc limit 1) as jam_masuk
 from resume_pasien_ranap
     join reg_periksa on resume_pasien_ranap.no_rawat = reg_periksa.no_rawat
     join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
@@ -412,6 +415,12 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 	<field name="tglsep" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tglsep"/>
 	</field>
+	<field name="tgl_masuk" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tgl_masuk"/>
+	</field>
+	<field name="jam_masuk" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="jam_masuk"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -661,7 +670,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tgl_registrasi}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy").format($F{tgl_masuk})]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="81" width="534" height="1" uuid="d23d9c8b-7342-437c-84b3-9a737a130680"/>
@@ -752,7 +761,7 @@ where resume_pasien_ranap.no_rawat = $P{norawat}]]>
 					<font fontName="Tahoma" size="8" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jam_reg}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jam_masuk}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="446" y="133" width="82" height="10" uuid="18d9eeeb-6639-4ac1-8e07-3248bf80c972"/>

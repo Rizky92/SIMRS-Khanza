@@ -31,10 +31,12 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -79,7 +81,9 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.RIGHT);
+        
         for (int i = 0; i < 9; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
@@ -94,12 +98,16 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                 column.setPreferredWidth(50);
             }else if(i==5){
                 column.setPreferredWidth(100);
+                column.setCellRenderer(r);
             }else if(i==6){
                 column.setPreferredWidth(100);
+                column.setCellRenderer(r);
             }else if(i==7){
                 column.setPreferredWidth(100);
+                column.setCellRenderer(r);
             }else if(i==8){
                 column.setPreferredWidth(110);
+                column.setCellRenderer(r);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -202,6 +210,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         Tipe = new widget.TextBox();
         Balance = new widget.TextBox();
         label36 = new widget.Label();
+        ChkDebetKredit = new widget.CekBox();
         jPanel1 = new javax.swing.JPanel();
         panelisi3 = new widget.panelisi();
         label9 = new widget.Label();
@@ -352,6 +361,15 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         label36.setPreferredSize(new java.awt.Dimension(35, 23));
         panelisi4.add(label36);
         label36.setBounds(217, 42, 90, 23);
+
+        ChkDebetKredit.setText("Load Total Debet/Kredit");
+        ChkDebetKredit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ChkDebetKredit.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkDebetKredit.setName("ChkDebetKredit"); // NOI18N
+        ChkDebetKredit.setOpaque(false);
+        ChkDebetKredit.setPreferredSize(new java.awt.Dimension(85, 23));
+        panelisi4.add(ChkDebetKredit);
+        ChkDebetKredit.setBounds(623, 12, 160, 23);
 
         internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
 
@@ -857,6 +875,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.CekBox ChkDebetKredit;
     private widget.TextBox Kd;
     private widget.TextBox Kd2;
     private widget.Label LCount;
@@ -903,53 +922,60 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                 rs=ps.executeQuery();
                 while(rs.next()){
                     md = 0;mk = 0;saldoakhir=0;
-                    ps2=koneksi.prepareStatement(
-                            "select sum(detailjurnal.debet),sum(detailjurnal.kredit) "+
-                            "from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where "+
-                            "detailjurnal.kd_rek=? and jurnal.tgl_jurnal like ? ");
-                    try {
-                        ps2.setString(1,rs.getString(2));
-                        ps2.setString(2,"%"+Tahun.getSelectedItem()+"%");
-                        rs2=ps2.executeQuery();                
-                        if(rs2.next()){
-                            switch (rs.getString("balance")) {
-                                case "D":
-                                    md=rs2.getDouble(1);
-                                    mk=rs2.getDouble(2);
-                                    break;
-                                case "K":
-                                    md=rs2.getDouble(2);
-                                    mk=rs2.getDouble(1);
-                                    break;
-                            }
+                    if (ChkDebetKredit.isSelected()) {
+                        ps2=koneksi.prepareStatement(
+                                "select sum(detailjurnal.debet),sum(detailjurnal.kredit) "+
+                                "from jurnal inner join detailjurnal on detailjurnal.no_jurnal=jurnal.no_jurnal where "+
+                                "detailjurnal.kd_rek=? and jurnal.tgl_jurnal like ? ");
+                        try {
+                            ps2.setString(1,rs.getString(2));
+                            ps2.setString(2,"%"+Tahun.getSelectedItem()+"%");
+                            rs2=ps2.executeQuery();                
+                            if(rs2.next()){
+                                switch (rs.getString("balance")) {
+                                    case "D":
+                                        md=rs2.getDouble(1);
+                                        mk=rs2.getDouble(2);
+                                        break;
+                                    case "K":
+                                        md=rs2.getDouble(2);
+                                        mk=rs2.getDouble(1);
+                                        break;
+                                }
 
-                            saldoakhir=rs.getDouble(6)+(md-mk);
+                                saldoakhir=rs.getDouble(6)+(md-mk);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs2!=null){
+                                rs2.close();
+                            }
+                            if(ps2!=null){
+                                ps2.close();
+                            }
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notif : "+e);
-                    } finally{
-                        if(rs2!=null){
-                            rs2.close();
+
+                        if(saldoakhir<0){
+                            tabMode.addRow(new Object[]{
+                                 rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
+                                 rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
+                                 df2.format(md),df2.format(mk),"("+df2.format(saldoakhir*(-1))+")"
+                            });      
+                        }else{
+                            tabMode.addRow(new Object[]{
+                                 rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
+                                 rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
+                                 df2.format(md),df2.format(mk),df2.format(saldoakhir)
+                            }); 
                         }
-                        if(ps2!=null){
-                            ps2.close();
-                        }
+                    } else {
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1).substring(0, 4), rs.getString(2), rs.getString(3),
+                            rs.getString(4), rs.getString(5), df2.format(rs.getDouble(6)),
+                            "0", "0", "0"
+                        });
                     }
-                        
-                    if(saldoakhir<0){
-                        tabMode.addRow(new Object[]{
-                             rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
-                             rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
-                             df2.format(md),df2.format(mk),"("+df2.format(saldoakhir*(-1))+")"
-                        });      
-                    }else{
-                        tabMode.addRow(new Object[]{
-                             rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
-                             rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
-                             df2.format(md),df2.format(mk),df2.format(saldoakhir)
-                        }); 
-                    }
-                    
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -974,7 +1000,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         Balance.setText("");
         Tipe.setText("");
         Saldo.setText("");
-        Tahun.setSelectedIndex(1);
+        // Tahun.setSelectedIndex(1);
         Kd.requestFocus();        
     }
 
@@ -987,7 +1013,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             Nm.setText(tbKamar.getValueAt(row,2).toString());
             Tipe.setText(tbKamar.getValueAt(row,3).toString());
             Balance.setText(tbKamar.getValueAt(row,4).toString());
-            Saldo.setText(tbKamar.getValueAt(row,5).toString());
+            Saldo.setText(tbKamar.getValueAt(row,5).toString().replaceAll(",", ""));
         }
     }
 

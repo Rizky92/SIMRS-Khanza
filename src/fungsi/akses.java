@@ -241,7 +241,8 @@ public final class akses {
             skrining_kanker_kolorektal=false,dapur_pemesanan=false,bayar_pesan_dapur=false,hutang_dapur=false,titip_faktur_dapur=false,validasi_tagihan_dapur=false,
             surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,
             ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,sirkulasi_dapur=false,
-            sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,penilaian_psikologi_klinis=false;
+            sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,pindah_kamar_pilihan_2=false,penilaian_psikologi_klinis=false,
+            penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false;
     
     public static void setData(String user, String pass) {
         try (
@@ -1359,7 +1360,11 @@ public final class akses {
                         akses.verifikasi_penerimaan_dapur=true;
                         akses.nilai_penerimaan_vendor_dapur_perbulan=true;
                         akses.ringkasan_hutang_vendor_dapur=true;
+                        akses.pindah_kamar_pilihan_2=true;
                         akses.penilaian_psikologi_klinis=true;
+                        akses.penilaian_awal_medis_ranap_neonatus=true;
+                        akses.penilaian_derajat_dehidrasi=true;
+                        akses.ringkasan_jasa_tindakan_medis=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2461,7 +2466,11 @@ public final class akses {
                         akses.verifikasi_penerimaan_dapur=rs2.getBoolean("verifikasi_penerimaan_dapur");
                         akses.nilai_penerimaan_vendor_dapur_perbulan=rs2.getBoolean("nilai_penerimaan_vendor_dapur_perbulan");
                         akses.ringkasan_hutang_vendor_dapur=rs2.getBoolean("ringkasan_hutang_vendor_dapur");
+                        akses.pindah_kamar_pilihan_2=rs2.getBoolean("pindah_kamar_pilihan_2");
                         akses.penilaian_psikologi_klinis=rs2.getBoolean("penilaian_psikologi_klinis");
+                        akses.penilaian_awal_medis_ranap_neonatus=rs2.getBoolean("penilaian_awal_medis_ranap_neonatus");
+                        akses.penilaian_derajat_dehidrasi=rs2.getBoolean("penilaian_derajat_dehidrasi");
+                        akses.ringkasan_jasa_tindakan_medis=rs2.getBoolean("ringkasan_jasa_tindakan_medis");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -3576,7 +3585,11 @@ public final class akses {
                         akses.verifikasi_penerimaan_dapur=false;
                         akses.nilai_penerimaan_vendor_dapur_perbulan=false;
                         akses.ringkasan_hutang_vendor_dapur=false;
+                        akses.pindah_kamar_pilihan_2=false;
                         akses.penilaian_psikologi_klinis=false;
+                        akses.penilaian_awal_medis_ranap_neonatus=false;
+                        akses.penilaian_derajat_dehidrasi=false;
+                        akses.ringkasan_jasa_tindakan_medis=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
@@ -4685,7 +4698,11 @@ public final class akses {
         akses.verifikasi_penerimaan_dapur=false;
         akses.nilai_penerimaan_vendor_dapur_perbulan=false;
         akses.ringkasan_hutang_vendor_dapur=false;
+        akses.pindah_kamar_pilihan_2=false;
         akses.penilaian_psikologi_klinis=false;
+        akses.penilaian_awal_medis_ranap_neonatus=false;
+        akses.penilaian_derajat_dehidrasi=false;
+        akses.ringkasan_jasa_tindakan_medis=false;
         akses.edit=false;
         akses.tglSelesai=-1;
     }
@@ -5826,8 +5843,11 @@ public final class akses {
     public static boolean getverifikasi_penerimaan_dapur(){return akses.verifikasi_penerimaan_dapur;}
     public static boolean getnilai_penerimaan_vendor_dapur_perbulan(){return akses.nilai_penerimaan_vendor_dapur_perbulan;}
     public static boolean getringkasan_hutang_vendor_dapur(){return akses.ringkasan_hutang_vendor_dapur;}
+    public static boolean getpindah_kamar_pilihan_2(){return akses.pindah_kamar_pilihan_2;}
     public static boolean getpenilaian_psikologi_klinis(){return akses.penilaian_psikologi_klinis;}
-    
+    public static boolean getpenilaian_awal_medis_ranap_neonatus(){return akses.penilaian_awal_medis_ranap_neonatus;}
+    public static boolean getpenilaian_derajat_dehidrasi(){return akses.penilaian_derajat_dehidrasi;}
+    public static boolean getringkasan_jasa_tindakan_medis(){return akses.ringkasan_jasa_tindakan_medis;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {

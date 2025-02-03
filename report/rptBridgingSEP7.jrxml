@@ -279,6 +279,9 @@ where no_sep = $P{parameter}]]>
 	<detail>
 		<band height="802">
 			<rectangle>
+				<reportElement mode="Transparent" x="10" y="689" width="509" height="94" uuid="60dc08f0-e2e5-4cc6-9c7f-87c5c98b6a5e"/>
+			</rectangle>
+			<rectangle>
 				<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="1" y="337" width="531" height="459" uuid="bea881d9-10ae-4a61-a6e1-de7cc7d78aea"/>
 				<graphicElement>
 					<pen lineWidth="1.0"/>
@@ -1126,13 +1129,13 @@ $P{namars}]]></textFieldExpression>
 				</textElement>
 				<text><![CDATA[................................................................................................................]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="380" y="698" width="132" height="11" uuid="da39b139-3f87-4606-8c4d-5ab9127da8b3"/>
+			<textField>
+				<reportElement x="380" y="698" width="132" height="11" uuid="6cf4fea1-58e8-45cc-8b14-6f9e5b629f6f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Samarinda, ...............................]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Samarinda, " + new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tglsep})]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="138" y="479" width="304" height="16" uuid="6c07480f-81e9-4426-92c3-aa831a5008e4"/>
 				<textElement>
@@ -1150,9 +1153,6 @@ $P{namars}]]></textFieldExpression>
 			</staticText>
 			<rectangle>
 				<reportElement x="470" y="479" width="36" height="15" uuid="f5eae54e-5b34-4c0c-8760-0636880a8f43"/>
-			</rectangle>
-			<rectangle>
-				<reportElement mode="Transparent" x="10" y="689" width="509" height="94" uuid="60dc08f0-e2e5-4cc6-9c7f-87c5c98b6a5e"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="20" y="479" width="100" height="16" uuid="dfba57a7-012e-487b-99fc-c7c12961d3d7"/>
