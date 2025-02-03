@@ -371,13 +371,41 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_route`  (
   INDEX `satu_sehat_referensi_route_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
-
 CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
   `id_user` varchar(700) NOT NULL,
   `tgl_selesai` datetime NOT NULL,
   PRIMARY KEY (`id_user`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat`  (
+  `kd_pj` char(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `kdjns` char(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`kd_pj`, `kdjns`) USING BTREE,
+  CONSTRAINT `set_filter_jenis_resep_obat_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab`(`kd_pj`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis`(`kdjns`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ralan`  (
+  `kd_poli` char(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `kd_pj` char(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `kdjns` char(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`kd_poli`, `kd_pj`, `kdjns`) USING BTREE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_poli_ibfk1` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik`(`kd_poli`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab`(`kd_pj`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis`(`kdjns`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
+  `kd_bangsal` char(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `kd_pj` char(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `kdjns` char(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`kd_bangsal`, `kd_pj`, `kdjns`) USING BTREE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_bangsal_ibfk1` FOREIGN KEY (`kd_bangsal`) REFERENCES `bangsal`(`kd_bangsal`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab`(`kd_pj`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis`(`kdjns`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
 

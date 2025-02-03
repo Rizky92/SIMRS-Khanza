@@ -46850,6 +46850,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgSetTampilJenisObatResep aplikasi=new DlgSetTampilJenisObatResep(this,true);
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setAlwaysOnTop(false);
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
