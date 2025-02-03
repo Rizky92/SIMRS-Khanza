@@ -258,6 +258,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean AKTIFKANFILTERRESEPPERJENISOBAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("AKTIFKANFILTERRESEPPERJENISOBAT")).equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

@@ -36,7 +36,7 @@ import simrskhanza.DlgCariPoli;
  * @author dosen
  */
 public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode, tabModeRalan, tabModeRanap;
+    private final DefaultTableModel tabModeRalan, tabModeRanap;
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
@@ -52,27 +52,10 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         this.setLocation(8, 1);
         setSize(885, 674);
 
-        Object[] row = {"Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
-                 row2 = {"Kode Poliklinik", "Nama Poliklinik", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
-                 row3 = {"Kode Unit Kamar", "Nama Unit Kamar", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"};
+        Object[] row = {"Kode Poliklinik", "Nama Poliklinik", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
+                 row2 = {"Kode Unit Kamar", "Nama Unit Kamar", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"};
         
-        tabMode = new DefaultTableModel(null, row) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false;
-            }
-        };
-        
-        tbUmum.setModel(tabMode);
-        tbUmum.setPreferredScrollableViewportSize(new Dimension(800, 800));
-        tbUmum.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbUmum.getColumnModel().getColumn(0).setPreferredWidth(90);
-        tbUmum.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tbUmum.getColumnModel().getColumn(2).setPreferredWidth(90);
-        tbUmum.getColumnModel().getColumn(3).setPreferredWidth(140);
-        tbUmum.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        tabModeRalan = new DefaultTableModel(null, row2) {
+        tabModeRalan = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -90,7 +73,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRalan.getColumnModel().getColumn(5).setPreferredWidth(140);
         tbRalan.setDefaultRenderer(Object.class, new WarnaTable());
         
-        tabModeRanap = new DefaultTableModel(null, row3) {
+        tabModeRanap = new DefaultTableModel(null, row2) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -116,12 +99,9 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {
                 if (carabayar.getTable().getSelectedRow() != -1) {
                     if (tabPane1.getSelectedIndex() == 0) {
-                        kdpj.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 1).toString());
-                        pngjawab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 2).toString());
-                    } else if (tabPane1.getSelectedIndex() == 1) {
                         kdpjRalan.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 1).toString());
                         pngjawabRalan.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 2).toString());
-                    } else if (tabPane1.getSelectedIndex() == 2) {
+                    } else if (tabPane1.getSelectedIndex() == 1) {
                         kdpjRanap.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 1).toString());
                         pngjawabRanap.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(), 2).toString());
                     }
@@ -143,12 +123,9 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {
                 if (jenis.getTable().getSelectedRow() != -1) {
                     if (tabPane1.getSelectedIndex() == 0) {
-                        kdjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 0).toString());
-                        nmjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 1).toString());
-                    } else if (tabPane1.getSelectedIndex() == 1) {
                         kdjnsRalan.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 0).toString());
                         nmjnsRalan.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 1).toString());
-                    } else if (tabPane1.getSelectedIndex() == 2) {
+                    } else if (tabPane1.getSelectedIndex() == 1) {
                         kdjnsRanap.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 0).toString());
                         nmjnsRanap.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 1).toString());
                     }
@@ -169,7 +146,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {
                 if (poli.getTable().getSelectedRow() != -1) {
-                    if (tabPane1.getSelectedIndex() == 1) {
+                    if (tabPane1.getSelectedIndex() == 0) {
                         kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(), 0).toString());
                         nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(), 1).toString());
                     }
@@ -190,7 +167,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {
                 if (bangsal.getTable().getSelectedRow() != -1) {
-                    if (tabPane1.getSelectedIndex() == 2) {
+                    if (tabPane1.getSelectedIndex() == 1) {
                         kdbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(), 0).toString());
                         nmbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(), 1).toString());
                     }
@@ -217,18 +194,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
         internalFrame1 = new widget.InternalFrame();
         tabPane1 = new widget.TabPane();
-        jPanel7 = new javax.swing.JPanel();
-        panelGlass3 = new widget.panelisi();
-        jLabel5 = new widget.Label();
-        jLabel6 = new widget.Label();
-        pngjawab = new widget.TextBox();
-        BtnPilihCaraBayar = new widget.Button();
-        kdpj = new widget.TextBox();
-        kdjns = new widget.TextBox();
-        nmjns = new widget.TextBox();
-        BtnPilihJenisObat = new widget.Button();
-        Scroll = new widget.ScrollPane();
-        tbUmum = new widget.Table();
         jPanel6 = new javax.swing.JPanel();
         panelGlass4 = new widget.panelisi();
         jLabel8 = new widget.Label();
@@ -294,105 +259,11 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
         tabPane1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tabPane1.setName("tabPane1"); // NOI18N
-        tabPane1.setNextFocusableComponent(jPanel7);
         tabPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 tabPane1StateChanged(evt);
             }
         });
-
-        jPanel7.setName("jPanel7"); // NOI18N
-        jPanel7.setNextFocusableComponent(kdpj);
-        jPanel7.setOpaque(false);
-        jPanel7.setPreferredSize(new java.awt.Dimension(44, 100));
-        jPanel7.setLayout(new java.awt.BorderLayout(1, 1));
-
-        panelGlass3.setName("panelGlass3"); // NOI18N
-        panelGlass3.setPreferredSize(new java.awt.Dimension(711, 77));
-        panelGlass3.setLayout(null);
-
-        jLabel5.setText("Cara Bayar :");
-        jLabel5.setName("jLabel5"); // NOI18N
-        panelGlass3.add(jLabel5);
-        jLabel5.setBounds(0, 12, 80, 23);
-
-        jLabel6.setText("Jenis Obat :");
-        jLabel6.setName("jLabel6"); // NOI18N
-        panelGlass3.add(jLabel6);
-        jLabel6.setBounds(0, 42, 80, 23);
-
-        pngjawab.setEditable(false);
-        pngjawab.setHighlighter(null);
-        pngjawab.setName("pngjawab"); // NOI18N
-        pngjawab.setNextFocusableComponent(BtnPilihCaraBayar);
-        panelGlass3.add(pngjawab);
-        pngjawab.setBounds(187, 12, 302, 23);
-
-        BtnPilihCaraBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnPilihCaraBayar.setMnemonic('1');
-        BtnPilihCaraBayar.setToolTipText("Alt+1");
-        BtnPilihCaraBayar.setName("BtnPilihCaraBayar"); // NOI18N
-        BtnPilihCaraBayar.setNextFocusableComponent(kdjns);
-        BtnPilihCaraBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPilihCaraBayarActionPerformed(evt);
-            }
-        });
-        panelGlass3.add(BtnPilihCaraBayar);
-        BtnPilihCaraBayar.setBounds(493, 12, 28, 23);
-
-        kdpj.setEditable(false);
-        kdpj.setHighlighter(null);
-        kdpj.setName("kdpj"); // NOI18N
-        kdpj.setNextFocusableComponent(pngjawab);
-        panelGlass3.add(kdpj);
-        kdpj.setBounds(83, 12, 100, 23);
-
-        kdjns.setEditable(false);
-        kdjns.setHighlighter(null);
-        kdjns.setName("kdjns"); // NOI18N
-        kdjns.setNextFocusableComponent(nmjns);
-        panelGlass3.add(kdjns);
-        kdjns.setBounds(83, 42, 100, 23);
-
-        nmjns.setEditable(false);
-        nmjns.setHighlighter(null);
-        nmjns.setName("nmjns"); // NOI18N
-        nmjns.setNextFocusableComponent(BtnPilihJenisObat);
-        panelGlass3.add(nmjns);
-        nmjns.setBounds(187, 42, 182, 23);
-
-        BtnPilihJenisObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnPilihJenisObat.setMnemonic('1');
-        BtnPilihJenisObat.setToolTipText("Alt+1");
-        BtnPilihJenisObat.setName("BtnPilihJenisObat"); // NOI18N
-        BtnPilihJenisObat.setNextFocusableComponent(BtnSimpan);
-        BtnPilihJenisObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPilihJenisObatActionPerformed(evt);
-            }
-        });
-        panelGlass3.add(BtnPilihJenisObat);
-        BtnPilihJenisObat.setBounds(373, 42, 28, 23);
-
-        jPanel7.add(panelGlass3, java.awt.BorderLayout.PAGE_START);
-
-        Scroll.setName("Scroll"); // NOI18N
-        Scroll.setOpaque(true);
-
-        tbUmum.setAutoCreateRowSorter(true);
-        tbUmum.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbUmum.setName("tbUmum"); // NOI18N
-        tbUmum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbUmumMouseClicked(evt);
-            }
-        });
-        Scroll.setViewportView(tbUmum);
-
-        jPanel7.add(Scroll, java.awt.BorderLayout.CENTER);
-
-        tabPane1.addTab("Umum", jPanel7);
 
         jPanel6.setName("jPanel6"); // NOI18N
         jPanel6.setNextFocusableComponent(kdpoli);
@@ -896,21 +767,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if (tabPane1.getSelectedIndex() == 0) {
-            if (kdpj.getText().isBlank() || pngjawab.getText().isBlank()) {
-                Valid.textKosong(kdpj, "Cara Bayar");
-            } else if (kdjns.getText().isBlank() || nmjns.getText().isBlank()) {
-                Valid.textKosong(kdjns, "Jenis Obat");
-            } else {
-                if (Sequel.menyimpantfSmc("set_filter_jenis_resep_obat", "", kdpj.getText(), kdjns.getText())) {
-                    tabMode.addRow(new String[] {
-                        kdpj.getText(), pngjawab.getText(), kdjns.getText(), nmjns.getText()
-                    });
-                    emptTeks();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan Filter Jenis Obat Umum..!!");
-                }
-            }
-        } else if (tabPane1.getSelectedIndex() == 1) {
             if (kdpoli.getText().isBlank() || nmpoli.getText().isBlank()) {
                 Valid.textKosong(kdpoli, "Poliklinik");
             } else if (kdpjRalan.getText().isBlank() || pngjawabRalan.getText().isBlank()) {
@@ -927,7 +783,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan Filter Jenis Obat Rawat Jalan..!!");
                 }
             }
-        } else if (tabPane1.getSelectedIndex() == 2) {
+        } else if (tabPane1.getSelectedIndex() == 1) {
             if (kdbangsal.getText().isBlank() || nmbangsal.getText().isBlank()) {
                 Valid.textKosong(kdbangsal, "Unit Kamar Inap");
             } else if (kdpjRanap.getText().isBlank() || pngjawabRanap.getText().isBlank()) {
@@ -953,18 +809,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tabPane1.getSelectedIndex() == 0) {
-            if (tbUmum.getSelectedRow() != -1) {
-                if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat", "kd_pj = ? and kdjns = ?",
-                    tbUmum.getValueAt(tbUmum.getSelectedRow(), 0).toString(),
-                    tbUmum.getValueAt(tbUmum.getSelectedRow(), 2).toString())
-                ) {
-                    tabMode.removeRow(tbUmum.getSelectedRow());
-                    emptTeks();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus..!!");
-            }
-        } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRalan.getSelectedRow() != -1) {
                 if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ralan", "kd_poli = ? and kd_pj = ? and kdjns = ?",
                     tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString(),
@@ -977,7 +821,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau dihapus..!!");
             }
-        } else if (tabPane1.getSelectedIndex() == 2) {
+        } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRanap.getSelectedRow() != -1) {
                 if (Sequel.menghapustfSmc("set_filter_jenis_resep_obat_ranap", "kd_bangsal = ? and kd_pj = ? and kdjns = ?",
                     tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString(),
@@ -1000,14 +844,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private void BtnPilihCaraBayarRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihCaraBayarRanapActionPerformed
         tampilCaraBayar();
     }//GEN-LAST:event_BtnPilihCaraBayarRanapActionPerformed
-
-    private void tbUmumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUmumMouseClicked
-        if (tabMode.getRowCount() != 0) {
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {}
-        }
-    }//GEN-LAST:event_tbUmumMouseClicked
 
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
         if (tabModeRanap.getRowCount() != 0) {
@@ -1036,7 +872,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariRanapKeyPressed
 
     private void BtnCariRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariRanapActionPerformed
-        tampil3();
+        tampil2();
     }//GEN-LAST:event_BtnCariRanapActionPerformed
 
     private void BtnCariRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariRanapKeyPressed
@@ -1063,7 +899,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariRalanKeyPressed
 
     private void BtnCariRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariRalanActionPerformed
-        tampil2();
+        tampil();
     }//GEN-LAST:event_BtnCariRalanActionPerformed
 
     private void BtnCariRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariRalanKeyPressed
@@ -1082,14 +918,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             BtnAllRalanActionPerformed(null);
         }
     }//GEN-LAST:event_BtnAllRalanKeyPressed
-
-    private void BtnPilihCaraBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihCaraBayarActionPerformed
-        tampilCaraBayar();
-    }//GEN-LAST:event_BtnPilihCaraBayarActionPerformed
-
-    private void BtnPilihJenisObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihJenisObatActionPerformed
-        tampilJenis();
-    }//GEN-LAST:event_BtnPilihJenisObatActionPerformed
 
     private void BtnPilihCaraBayarRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihCaraBayarRalanActionPerformed
         tampilCaraBayar();
@@ -1128,8 +956,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             tampil();
         } else if (tabPane1.getSelectedIndex() == 1) {
             tampil2();
-        } else if (tabPane1.getSelectedIndex() == 2) {
-            tampil3();
         }
     }//GEN-LAST:event_tabPane1StateChanged
 
@@ -1165,30 +991,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if (tabPane1.getSelectedIndex() == 0) {
-            if (kdpj.getText().isBlank() || pngjawab.getText().isBlank()) {
-                Valid.textKosong(kdpj, "Cara Bayar");
-            } else if (kdjns.getText().isBlank() || nmjns.getText().isBlank()) {
-                Valid.textKosong(kdjns, "Jenis Obat");
-            } else {
-                if (tbUmum.getSelectedRow() != -1) {
-                    if (Sequel.mengupdatetfSmc("set_filter_jenis_resep_obat",
-                        "kd_pj = ?, kdjns = ?", "kd_pj = ? and kdjns = ?", kdpj.getText(), kdjns.getText(),
-                        tbUmum.getValueAt(tbUmum.getSelectedRow(), 0).toString(),
-                        tbUmum.getValueAt(tbUmum.getSelectedRow(), 2).toString()
-                    )) {
-                        tbUmum.setValueAt(kdpj.getText(), tbUmum.getSelectedRow(), 0);
-                        tbUmum.setValueAt(pngjawab.getText(), tbUmum.getSelectedRow(), 1);
-                        tbUmum.setValueAt(kdjns.getText(), tbUmum.getSelectedRow(), 2);
-                        tbUmum.setValueAt(nmjns.getText(), tbUmum.getSelectedRow(), 3);
-                        emptTeks();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data..!!");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Maat, silahkan pilih data yang mau diubah terlebih dahulu..!!");
-                }
-            }
-        } else if (tabPane1.getSelectedIndex() == 1) {
             if (kdpoli.getText().isBlank() || nmpoli.getText().isBlank()) {
                 Valid.textKosong(kdpoli, "Poliklinik");
             } else if (kdpjRalan.getText().isBlank() || pngjawabRalan.getText().isBlank()) {
@@ -1218,7 +1020,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Maat, silahkan pilih data yang mau diubah terlebih dahulu..!!");
                 }
             }
-        } else if (tabPane1.getSelectedIndex() == 2) {
+        } else if (tabPane1.getSelectedIndex() == 1) {
             if (kdbangsal.getText().isBlank() || nmbangsal.getText().isBlank()) {
                 Valid.textKosong(kdbangsal, "Unit Kamar Inap");
             } else if (kdpjRanap.getText().isBlank() || pngjawabRanap.getText().isBlank()) {
@@ -1282,10 +1084,8 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
-    private widget.Button BtnPilihCaraBayar;
     private widget.Button BtnPilihCaraBayarRalan;
     private widget.Button BtnPilihCaraBayarRanap;
-    private widget.Button BtnPilihJenisObat;
     private widget.Button BtnPilihJenisObatRalan;
     private widget.Button BtnPilihJenisObatRanap;
     private widget.Button BtnPilihPoli;
@@ -1293,7 +1093,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private widget.Button BtnSimpan;
     private widget.Label LCount1;
     private widget.Label LCountRanap;
-    private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.TextBox TCariRalan;
@@ -1306,61 +1105,34 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private widget.Label jLabel14;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
-    private widget.Label jLabel5;
-    private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private widget.TextBox kdbangsal;
-    private widget.TextBox kdjns;
     private widget.TextBox kdjnsRalan;
     private widget.TextBox kdjnsRanap;
-    private widget.TextBox kdpj;
     private widget.TextBox kdpjRalan;
     private widget.TextBox kdpjRanap;
     private widget.TextBox kdpoli;
     private widget.TextBox nmbangsal;
-    private widget.TextBox nmjns;
     private widget.TextBox nmjnsRalan;
     private widget.TextBox nmjnsRanap;
     private widget.TextBox nmpoli;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass13;
     private widget.panelisi panelGlass2;
-    private widget.panelisi panelGlass3;
     private widget.panelisi panelGlass4;
     private widget.panelisi panelGlass8;
-    private widget.TextBox pngjawab;
     private widget.TextBox pngjawabRalan;
     private widget.TextBox pngjawabRanap;
     private widget.TabPane tabPane1;
     private widget.Table tbRalan;
     private widget.Table tbRanap;
-    private widget.Table tbUmum;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        if (tabMode != null) {
-            Valid.tabelKosong(tabMode);
-        }
-        try (ResultSet rs = koneksi.createStatement().executeQuery(
-            "select set_filter_jenis_resep_obat.kd_pj, penjab.png_jawab, set_filter_jenis_resep_obat.kdjns, jenis.nama from set_filter_jenis_resep_obat " +
-            "join penjab on set_filter_jenis_resep_obat.kd_pj = penjab.kd_pj join jenis on set_filter_jenis_resep_obat.kdjns = jenis.kdjns"
-        )) {
-            while (rs.next()) {
-                tabMode.addRow(new String[] {
-                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)
-                });
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
-    private void tampil2() {
         if (tabModeRalan != null) {
             Valid.tabelKosong(tabModeRalan);
         }
@@ -1392,7 +1164,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         }
     }
     
-    private void tampil3() {
+    private void tampil2() {
         if (tabModeRanap != null) {
             Valid.tabelKosong(tabModeRanap);
         }
@@ -1427,10 +1199,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     private void emptTeks() {
         TCariRalan.setText("");
         TCariRanap.setText("");
-        kdpj.setText("");
-        pngjawab.setText("");
-        kdjns.setText("");
-        nmjns.setText("");
         kdpoli.setText("");
         nmpoli.setText("");
         kdpjRalan.setText("");
@@ -1443,20 +1211,12 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         pngjawabRanap.setText("");
         kdjnsRanap.setText("");
         nmjnsRanap.setText("");
-        tbUmum.clearSelection();
         tbRalan.clearSelection();
         tbRanap.clearSelection();
     }
     
     private void getData() {
         if (tabPane1.getSelectedIndex() == 0) {
-            if (tbUmum.getSelectedRow() != -1) {
-                kdpj.setText(tbUmum.getValueAt(tbUmum.getSelectedRow(), 0).toString());
-                pngjawab.setText(tbUmum.getValueAt(tbUmum.getSelectedRow(), 1).toString());
-                kdjns.setText(tbUmum.getValueAt(tbUmum.getSelectedRow(), 2).toString());
-                nmjns.setText(tbUmum.getValueAt(tbUmum.getSelectedRow(), 3).toString());
-            }
-        } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRalan.getSelectedRow() != -1) {
                 kdpoli.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 0).toString());
                 nmpoli.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 1).toString());
@@ -1465,7 +1225,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 kdjnsRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 4).toString());
                 nmjnsRalan.setText(tbRalan.getValueAt(tbRalan.getSelectedRow(), 5).toString());
             }
-        } else if (tabPane1.getSelectedIndex() == 2) {
+        } else if (tabPane1.getSelectedIndex() == 1) {
             if (tbRanap.getSelectedRow() != -1) {
                 kdbangsal.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 0).toString());
                 nmbangsal.setText(tbRanap.getValueAt(tbRanap.getSelectedRow(), 1).toString());

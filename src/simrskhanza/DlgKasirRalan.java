@@ -8276,7 +8276,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resep.setLocationRelativeTo(internalFrame1);
                         resep.setNoRm(TNoRw.getText(),new Date(),Jam.getText().substring(0,2),Jam.getText().substring(3,5),Jam.getText().substring(6,8),
-                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan");
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan",
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                         resep.isCek();
                         resep.tampilobat();
                         resep.setVisible(true);
@@ -8288,7 +8290,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resep.setLocationRelativeTo(internalFrame1);
                             resep.setNoRm(TNoRw.getText(),new Date(),Jam.getText().substring(0,2),Jam.getText().substring(3,5),Jam.getText().substring(6,8),
-                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan");
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan",
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                             resep.isCek();
                             resep.tampilobat();
                             resep.setVisible(true);
@@ -8797,7 +8801,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),12).toString().substring(3,5),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),12).toString().substring(6,8),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),
-                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString(),"ralan"
+                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString(),"ralan",
+                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),13).toString()
                     );
                     resep.isCek();                    
                     resep.tampilobat();
