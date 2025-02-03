@@ -429,6 +429,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
+        ppTampilkanSemuaObat = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         ppStok1 = new javax.swing.JMenuItem();
         KdPj = new widget.TextBox();
@@ -482,6 +483,22 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         tbDetailResepObatRacikan = new widget.Table();
 
         Popup.setName("Popup"); // NOI18N
+
+        ppTampilkanSemuaObat.setBackground(new java.awt.Color(255, 255, 254));
+        ppTampilkanSemuaObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppTampilkanSemuaObat.setForeground(new java.awt.Color(50, 50, 50));
+        ppTampilkanSemuaObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppTampilkanSemuaObat.setText("Bersihkan Jumlah");
+        ppTampilkanSemuaObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppTampilkanSemuaObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppTampilkanSemuaObat.setName("ppTampilkanSemuaObat"); // NOI18N
+        ppTampilkanSemuaObat.setPreferredSize(new java.awt.Dimension(180, 25));
+        ppTampilkanSemuaObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppTampilkanSemuaObatActionPerformed(evt);
+            }
+        });
+        Popup.add(ppTampilkanSemuaObat);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -777,7 +794,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2023" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2024" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1613,6 +1630,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterActionPerformed
 
+    private void ppTampilkanSemuaObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSemuaObatActionPerformed
+        
+    }//GEN-LAST:event_ppTampilkanSemuaObatActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1678,6 +1699,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.panelisi panelisi3;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppStok1;
+    private javax.swing.JMenuItem ppTampilkanSemuaObat;
     private widget.Table tbDetailResepObatRacikan;
     private widget.Table tbObatResepRacikan;
     private widget.Table tbResep;
