@@ -372,6 +372,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnGeneratePDF = new javax.swing.JMenuItem();
         MnGeneratePDFESign = new javax.swing.JMenuItem();
+        MnGeneratePDFSertiSign = new javax.swing.JMenuItem();
         WindowPhrase = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         jLabel42 = new widget.Label();
@@ -641,6 +642,20 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnGeneratePDFESign);
+
+        MnGeneratePDFSertiSign.setBackground(new java.awt.Color(255, 255, 254));
+        MnGeneratePDFSertiSign.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGeneratePDFSertiSign.setForeground(new java.awt.Color(50, 50, 50));
+        MnGeneratePDFSertiSign.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGeneratePDFSertiSign.setText("Jadikan File PDF SertiSign");
+        MnGeneratePDFSertiSign.setName("MnGeneratePDFSertiSign"); // NOI18N
+        MnGeneratePDFSertiSign.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnGeneratePDFSertiSign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnGeneratePDFSertiSignActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnGeneratePDFSertiSign);
 
         WindowPhrase.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowPhrase.setModal(true);
@@ -3522,6 +3537,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }//GEN-LAST:event_tbRegistrasiMouseClicked
 
+    private void MnGeneratePDFSertiSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGeneratePDFSertiSignActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnGeneratePDFSertiSignActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3566,6 +3585,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.editorpane LoadHTMLTindakanRadiologi;
     private javax.swing.JMenuItem MnGeneratePDF;
     private javax.swing.JMenuItem MnGeneratePDFESign;
+    private javax.swing.JMenuItem MnGeneratePDFSertiSign;
     private widget.TextBox NmPasien;
     private widget.TextBox NoRM;
     private widget.TextBox NoRawat;
