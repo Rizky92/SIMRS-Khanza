@@ -388,4 +388,68 @@
 			</line>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="105">
+			<staticText>
+				<reportElement x="842" y="94" width="121" height="11" uuid="5272a929-7365-4c2c-8471-a7bdf44fbfe7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[DIREKTUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="80" width="121" height="11" uuid="b5b70a0f-8ee8-495e-a884-68f51e85ca21">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="842" y="80" width="121" height="11" uuid="41bb8b55-a910-4bab-a917-19ce5e096487">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="29" width="50" height="11" uuid="f87d03f7-db24-4599-9610-f943f7a06eeb">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Menyetujui]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="94" width="121" height="11" uuid="d67d0ba4-e048-44a0-ada7-cf19ef4965fe">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[MANAGER KEUANGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="877" y="29" width="50" height="11" uuid="6d76058d-68d4-42da-b172-fb6308f350bc">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Mengetahui]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

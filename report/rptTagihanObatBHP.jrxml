@@ -337,7 +337,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="39" y="29" width="50" height="11" uuid="e0b4bb40-c27d-4f51-850f-465dfb65cfbf">
