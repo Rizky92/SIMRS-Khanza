@@ -135,7 +135,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nama Petugas]]></text>
+				<text><![CDATA[NAMA PETUGAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="16" y="19" width="68" height="9" uuid="e3f488fe-d403-48cf-b006-28fe20b7e34d"/>
@@ -163,7 +163,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Jam]]></text>
+				<text><![CDATA[JAM]]></text>
 			</staticText>
 			<line>
 				<reportElement x="13" y="19" width="249" height="1" uuid="216fc6be-ffff-4329-96a0-6121ab245ec0"/>
@@ -259,7 +259,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[No. Resep]]></text>
+				<text><![CDATA[No. RESEP]]></text>
 			</staticText>
 		</band>
 	</summary>
