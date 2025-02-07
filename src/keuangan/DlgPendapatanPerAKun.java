@@ -41,9 +41,9 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
     private ResultSet rs,rsakunbayar;
     private double all=0,bayar=0;
     private int i,kolom=0,no=0;
-    private String nopemasukanlain="",nonota="",petugas="",norawatjalan="",norawatinap="",notajual="",carabayar="",nodeposit="";
+    private String nopemasukanlain="",nonota="",keterangan="",norawatjalan="",norawatinap="",notajual="",carabayar="",nodeposit="";
     private StringBuilder htmlContent;
-    private String[] akunbayar,namabayar;
+    private String[] akunbayar,namabayar,akunpiutang,namapiutang;
     private double[] totalbayar;
 
     /** Creates new form DlgLhtBiaya
@@ -639,7 +639,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Nama Pasien</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>Jenis/Cara Bayar</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Keterangan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='400px'>Akun Bayar</td>"+
                 "</tr>"
             );   
@@ -671,9 +671,32 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
             
             totalbayar=new double[kolom]; 
             
+            /*kolom=0;
+            psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select akun_bayar.kd_rek from akun_bayar group by akun_bayar.kd_rek) order by rekening.nm_rek");
+            try {
+                rsakunpiutang=psakunpiutang.executeQuery();
+                rsakunpiutang.last();
+                akunpiutang=new String[rsakunpiutang.getRow()];
+                rsakunpiutang.beforeFirst();
+                while(rsakunpiutang.next()){
+                    akunpiutang[kolom]=rsakunpiutang.getString("nama_bayar");
+                    kolom++;
+                }
+            } catch (Exception e) {
+                System.out.println("Akun Bayar : "+e);
+            } finally{
+                if(rsakunpiutang!=null){
+                    rsakunpiutang.close();
+                }
+                if(psakunpiutang!=null){
+                    psakunpiutang.close();
+                }
+            }
+            totalpiutang=new double[kolom];   */
+            
             all=0;
-            ps= koneksi.prepareStatement(
-                    "select tagihan_sadewa.no_nota,tagihan_sadewa.tgl_bayar,tagihan_sadewa.nama_pasien,tagihan_sadewa.jumlah_bayar,tagihan_sadewa.petugas from tagihan_sadewa "+
+            ps=koneksi.prepareStatement(
+                    "select tagihan_sadewa.no_nota,tagihan_sadewa.tgl_bayar,tagihan_sadewa.nama_pasien,tagihan_sadewa.jumlah_bayar from tagihan_sadewa "+
                     "where tagihan_sadewa.tgl_bayar between ? and ? order by tagihan_sadewa.tgl_bayar,tagihan_sadewa.no_nota");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem());
@@ -681,7 +704,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 no=1;
                 while(rs.next()){                            
-                    petugas=rs.getString("petugas")+" "+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",rs.getString("petugas"));
+                    keterangan=Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",rs.getString("petugas"));
                     norawatinap="";
                     norawatjalan="";
                     notajual="";
@@ -719,7 +742,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                             }                                             
                         }
                     }
-                    if((petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
+                    if((keterangan.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
                         all=all+rs.getDouble("jumlah_bayar");
                         htmlContent.append(                             
                             "<tr class='isi'>"+
@@ -729,7 +752,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                                 "<td valign='middle' align='left'>"+rs.getString("nama_pasien")+"</td>"+
                                 "<td valign='middle' align='center'>"+carabayar+"</td>"+
                                 "<td valign='middle' align='right'>"+Valid.SetAngka(rs.getDouble("jumlah_bayar"))+"</td>"+
-                                "<td valign='middle' align='left'>"+petugas+"</td>"+
+                                "<td valign='middle' align='left'>"+keterangan+"</td>"+
                                 "<td>"+
                                     "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>");
                         for(i=0;i<kolom;i++){
@@ -851,7 +874,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
             
             all=0;
             ps= koneksi.prepareStatement(
-                    "select tagihan_sadewa.no_nota,tagihan_sadewa.tgl_bayar,tagihan_sadewa.nama_pasien,tagihan_sadewa.jumlah_bayar,tagihan_sadewa.petugas from tagihan_sadewa "+
+                    "select tagihan_sadewa.no_nota,tagihan_sadewa.tgl_bayar,tagihan_sadewa.nama_pasien,tagihan_sadewa.jumlah_bayar from tagihan_sadewa "+
                     "where tagihan_sadewa.tgl_bayar between ? and ? order by tagihan_sadewa.tgl_bayar,tagihan_sadewa.no_nota");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem());
@@ -859,7 +882,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 no=1;
                 while(rs.next()){                            
-                    petugas=rs.getString("petugas")+" "+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",rs.getString("petugas"));
+                    keterangan=Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",rs.getString("petugas"));
                     norawatinap="";
                     norawatjalan="";
                     notajual="";
@@ -897,7 +920,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                             }                                             
                         }
                     }
-                    if((petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
+                    if((keterangan.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
                         all=all+rs.getDouble("jumlah_bayar");
                         htmlContent.append(                             
                             "<tr class='isi'>"+
@@ -907,7 +930,7 @@ public final class DlgPendapatanPerAKun extends javax.swing.JDialog {
                                 "<td valign='middle' align='left'>"+rs.getString("nama_pasien")+"</td>"+
                                 "<td valign='middle' align='center'>"+carabayar+"</td>"+
                                 "<td valign='middle' align='right'>"+Math.round(rs.getDouble("jumlah_bayar"))+"</td>"+
-                                "<td valign='middle' align='left'>"+petugas+"</td>"+
+                                "<td valign='middle' align='left'>"+keterangan+"</td>"+
                                 "<td>"+
                                     "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>");
                         for(i=0;i<kolom;i++){
