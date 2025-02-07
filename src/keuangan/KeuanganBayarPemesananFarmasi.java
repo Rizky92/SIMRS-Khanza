@@ -40,6 +40,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -97,6 +98,7 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbKamar.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         for (int i = 0; i < 13; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);

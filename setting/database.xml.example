@@ -207,4 +207,7 @@
     <entry key="SFTPFILEESIGNUSER">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="SFTPFILEESIGNPAS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="SFTPFILEESIGNFOLDER">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLAPISERTISIGN">https://api-stag.sertisign.id/v2/poa/signing-qr</entry>
+    <entry key="APIKEYSERTISIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLDOKUMENSERTISIGN">https://sertisign.com/webhook</entry>
 </properties>

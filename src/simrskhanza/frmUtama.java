@@ -496,14 +496,6 @@ import kepegawaian.DlgAuditCuciTanganMedis;
 import kepegawaian.DlgAuditFasilitasAPD;
 import kepegawaian.DlgAuditFasilitasKebersihanTangan;
 import kepegawaian.DlgAuditKamarJenazah;
-import kepegawaian.DlgAuditKepatuhanAPD;
-import kepegawaian.DlgAuditPembuanganBendaTajam;
-import kepegawaian.DlgAuditPembuanganLimbah;
-import kepegawaian.DlgAuditPembuanganLimbahCairInfeksius;
-import kepegawaian.DlgAuditPenangananDarah;
-import kepegawaian.DlgAuditPenempatanPasien;
-import kepegawaian.DlgAuditPengelolaanLinenKotor;
-import kepegawaian.DlgAuditSterilisasiAlat;
 import kepegawaian.DlgBarcode;
 import kepegawaian.DlgBelum;
 import kepegawaian.DlgBerkasKepegawaian;
@@ -527,7 +519,6 @@ import kepegawaian.DlgRiwayatNaikGaji;
 import kepegawaian.DlgRiwayatPendidikan;
 import kepegawaian.DlgRiwayatPenelitian;
 import kepegawaian.DlgRiwayatPenghargaan;
-import kepegawaian.DlgRuangAuditKepatuhan;
 import kepegawaian.DlgSidikJari;
 import kepegawaian.DlgTemporaryPresensi;
 import kepegawaian.K3RSBagianTubuh;
@@ -547,10 +538,6 @@ import kepegawaian.K3RSPenyebabPerTahun;
 import kepegawaian.K3RSPeristiwa;
 import kepegawaian.PengajuanCutiAdmin;
 import kepegawaian.PengajuanCutiPegawai;
-import kepegawaian.SKPKategoriPenilaian;
-import kepegawaian.SKPKriteriaPenilaian;
-import kepegawaian.SKPPenilaianPegawai;
-import kepegawaian.SKPRekapitulasiPenilaianPegawai;
 import keuangan.DlgAkunAsetInventaris;
 import keuangan.DlgAkunBayar;
 import keuangan.DlgAkunBayarHutang;
@@ -581,12 +568,8 @@ import keuangan.DlgKategoriPemasukan;
 import keuangan.DlgKategoriPengeluaran;
 import keuangan.DlgLabaRugi;
 import keuangan.DlgLhtBRIVA;
-import keuangan.DlgLhtBankJabar;
 import keuangan.DlgLhtBankJateng;
-import keuangan.DlgLhtBankMandiri;
-import keuangan.DlgLhtBankPapua;
 import keuangan.DlgLhtBiaya;
-import keuangan.DlgLhtPembayaranPihakKe3BankMandiri;
 import keuangan.DlgLhtPiutang;
 import keuangan.DlgOmsetPenerimaan;
 import keuangan.DlgPaymentPoint;
@@ -632,59 +615,77 @@ import keuangan.DlgRHJmParamedis;
 import keuangan.DlgRHKSO;
 import keuangan.DlgRHMenejemen;
 import keuangan.DlgRHPaketBHP;
-import keuangan.DlgRekapBiayaRegistrasi;
 import keuangan.DlgRekapPembayaranPerPoli;
 import keuangan.DlgRekapPerShift;
 import keuangan.DlgRekening;
 import keuangan.DlgRekeningTahun;
 import keuangan.KeuanganBayarJMDokter;
 import keuangan.KeuanganBayarPemesananAset;
-import keuangan.KeuanganBayarPemesananDapur;
 import keuangan.KeuanganBayarPemesananFarmasi;
 import keuangan.KeuanganBayarPemesananNonMedis;
 import keuangan.KeuanganBayarPesanToko;
 import keuangan.KeuanganBayarPiutangLain;
 import keuangan.KeuanganBubes;
 import keuangan.KeuanganHutangAsetIventarisBelumLunas;
-import keuangan.KeuanganHutangDapurBelumLunas;
 import keuangan.KeuanganHutangNonMedisBelumLunas;
 import keuangan.KeuanganHutangObatBelumLunas;
 import keuangan.KeuanganHutangToko;
 import keuangan.KeuanganJasaTindakan;
 import keuangan.KeuanganKlaimRalan;
-import keuangan.KeuanganNilaiPiutangPerJenisBayarPerBulan;
 import keuangan.KeuanganPeminjamPiutang;
 import keuangan.KeuanganPenagihanPiutangPasien;
-import keuangan.KeuanganPengajuanBiaya;
-import keuangan.KeuanganPersetujuanPengajuanBiaya;
 import keuangan.KeuanganPiutangBelumLunas;
 import keuangan.KeuanganPiutangLainLain;
 import keuangan.KeuanganPiutangObatBelumLunas;
 import keuangan.KeuanganRVPBPJS;
 import keuangan.KeuanganRekapJmDokter;
-import keuangan.KeuanganRekapPengajuanBiaya;
 import keuangan.KeuanganRekapPoliAnak;
 import keuangan.KeuanganRincianPiutangPasien;
-import keuangan.KeuanganRingkasanHutangVendorDapur;
 import keuangan.KeuanganRingkasanHutangVendorFarmasi;
 import keuangan.KeuanganRingkasanHutangVendorNonMedis;
-import keuangan.KeuanganRingkasanJasaTindakan;
-import keuangan.KeuanganRingkasanPiutangPerJensBayar;
 import keuangan.KeuanganRingkasanTindakan;
 import keuangan.KeuanganSaldoAkunPerBulan;
 import keuangan.KeuanganSetTarifOnline;
 import keuangan.KeuanganTagihanAset;
-import keuangan.KeuanganTagihanDapur;
 import keuangan.KeuanganTagihanNonMedis;
 import keuangan.KeuanganTagihanObatBHP;
 import keuangan.KeuanganValidasiPenagihanPiutang;
-import keuangan.KeuanganValidasiPersetujuanPengajuanBiaya;
 import keuangan.KeuanganValidasiTagihanAset;
-import keuangan.KeuanganValidasiTagihanDapur;
 import keuangan.KeuanganValidasiTagihanNonMedis;
 import keuangan.KeuanganValidasiTagihanObatBHP;
 import laporan.DlgAnggotaMiliterDirawat;
 import laporan.DlgAnggotaPolriDirawat;
+import kepegawaian.DlgAuditKepatuhanAPD;
+import kepegawaian.DlgAuditPembuanganBendaTajam;
+import kepegawaian.DlgRuangAuditKepatuhan;
+import kepegawaian.DlgAuditPembuanganLimbah;
+import kepegawaian.DlgAuditPembuanganLimbahCairInfeksius;
+import kepegawaian.DlgAuditPenangananDarah;
+import kepegawaian.DlgAuditPenempatanPasien;
+import kepegawaian.DlgAuditPengelolaanLinenKotor;
+import kepegawaian.DlgAuditSterilisasiAlat;
+import kepegawaian.SKPKategoriPenilaian;
+import kepegawaian.SKPKriteriaPenilaian;
+import kepegawaian.SKPPenilaianPegawai;
+import kepegawaian.SKPRekapitulasiPenilaianPegawai;
+import keuangan.DlgLhtBankJabar;
+import keuangan.DlgLhtBankMandiri;
+import keuangan.DlgLhtBankPapua;
+import keuangan.DlgLhtPembayaranPihakKe3BankMandiri;
+import keuangan.DlgPendapatanPerAKun;
+import keuangan.DlgRekapBiayaRegistrasi;
+import keuangan.KeuanganBayarPemesananDapur;
+import keuangan.KeuanganHutangDapurBelumLunas;
+import keuangan.KeuanganNilaiPiutangPerJenisBayarPerBulan;
+import keuangan.KeuanganPengajuanBiaya;
+import keuangan.KeuanganPersetujuanPengajuanBiaya;
+import keuangan.KeuanganRekapPengajuanBiaya;
+import keuangan.KeuanganRingkasanHutangVendorDapur;
+import keuangan.KeuanganRingkasanJasaTindakan;
+import keuangan.KeuanganRingkasanPiutangPerJensBayar;
+import keuangan.KeuanganTagihanDapur;
+import keuangan.KeuanganValidasiPersetujuanPengajuanBiaya;
+import keuangan.KeuanganValidasiTagihanDapur;
 import laporan.DlgBerkasRawat;
 import laporan.DlgBulananHAIs;
 import laporan.DlgBulananKlasifikasiPasienRanap;
@@ -22415,6 +22416,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnPendapatanPerAkunActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPendapatanPerAKun aplikasi=new DlgPendapatanPerAKun(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    } 
             
     /**
     * @param args the command line arguments
@@ -23120,7 +23132,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnHutangDapur,btnTagihanHutangDapur,btnValidasiTagihanDapur,btnSuratPemesananDapur,btnPengajuanBarangDapur,btnReturBarangDapur,btnHibahDapur,btnRingkasanPenerimaanDapur,
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
-            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien;
+            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun;
     
     public void isWall(){
         try{            
@@ -24816,6 +24828,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpiutang_akun_piutang()==true){
                 Panelmenu.add(btnPiutangPerAkunPiutang);
+                jmlmenu++;
+            }
+            
+            if(akses.getpendapatan_per_akun()==true){
+                Panelmenu.add(btnPendapatanPerAkun);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==9){ 
@@ -30269,6 +30286,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getpiutang_akun_piutang()==true){
             Panelmenu.add(btnPiutangPerAkunPiutang);
+            jmlmenu++;
+        }
+        
+        if(akses.getpendapatan_per_akun()==true){
+            Panelmenu.add(btnPendapatanPerAkun);
             jmlmenu++;
         }
 
@@ -36330,6 +36352,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpiutang_akun_piutang()==true){
             if(btnPiutangPerAkunPiutang.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPiutangPerAkunPiutang);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpendapatan_per_akun()==true){
+            if(btnPendapatanPerAkun.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPendapatanPerAkun);
                 jmlmenu++;
             }                
         }
@@ -46815,5 +46844,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRingkasanHutangVendorBarangDapur.setName("btnRingkasanHutangVendorBarangDapur");
         btnRingkasanHutangVendorBarangDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanHutangVendorBarangDapur.addActionListener(this::btnRingkasanHutangVendorBarangDapurActionPerformed);
+        
+        btnPendapatanPerAkun = new widget.ButtonBig();
+        btnPendapatanPerAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); 
+        btnPendapatanPerAkun.setText("Pendapatan Per Akun");
+        btnPendapatanPerAkun.setIconTextGap(0);
+        btnPendapatanPerAkun.setName("btnPendapatanPerAkun");
+        btnPendapatanPerAkun.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPendapatanPerAkun.addActionListener(this::btnPendapatanPerAkunActionPerformed);
     }
 }
