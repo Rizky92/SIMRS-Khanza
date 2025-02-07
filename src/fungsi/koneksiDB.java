@@ -1825,4 +1825,14 @@ public class koneksiDB {
         }
         return var;
     }
+    
+    public static String URLDOKUMENSERTISIGN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLDOKUMENSERTISIGN");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }
