@@ -1536,6 +1536,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     public void isCek(){
+        TanggalSurat.setEnabled(akses.getadmin());
         BtnSimpan.setEnabled(akses.getbpjs_surat_kontrol());
         BtnHapus.setEnabled(akses.getbpjs_surat_kontrol());
         BtnPrint.setEnabled(akses.getbpjs_surat_kontrol());
