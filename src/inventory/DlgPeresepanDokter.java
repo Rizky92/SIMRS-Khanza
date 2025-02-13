@@ -1813,8 +1813,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode " +
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
                         queryfilterjenisobat+"group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -1827,19 +1827,21 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode " +
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=?  "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
                         queryfilterjenisobat+"order by databarang.nama_brng");
                 }
                     
                 try{
                     psresepasuransi.setDouble(1,kenaikan);
                     psresepasuransi.setString(2,bangsal);
-                    psresepasuransi.setString(3,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(4,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
+                    if(!TCari.getText().trim().equals("")){
+                        psresepasuransi.setString(3,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(4,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
+                    }
                     if (!queryfilterjenisobat.isBlank()) {
                         psresepasuransi.setString(8,KdPj.getText());
                         psresepasuransi.setString(9,kodeunit);
@@ -1879,8 +1881,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode " +
-                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
                         queryfilterjenisobat+"group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -1896,21 +1898,24 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join kategori_barang on databarang.kode_kategori = kategori_barang.kode " +
-                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
                         queryfilterjenisobat+"order by databarang.nama_brng");
                 }
                     
                 try{
                     psresep.setString(1,bangsal);
-                    psresep.setString(2,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(3,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(4,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(5,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(6,"%"+TCari.getText().trim()+"%");
+                    if(!TCari.getText().trim().equals("")){
+                        psresep.setString(2,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(3,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(4,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(5,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(6,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(7,"%"+TCari.getText().trim()+"%");
+                    }
                     if (!queryfilterjenisobat.isBlank()) {
-                        psresep.setString(7,KdPj.getText());
-                        psresep.setString(8,kodeunit);
+                        psresep.setString(8,KdPj.getText());
+                        psresep.setString(9,kodeunit);
                     }
                     rsobat=psresep.executeQuery();
                     if(Jeniskelas.getSelectedItem().equals("Karyawan")){
@@ -2267,8 +2272,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join kategori_barang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) group by gudangbarang.kode_brng order by databarang.nama_brng");
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
+                        " group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -2279,18 +2285,21 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join kategori_barang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) order by databarang.nama_brng");
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
+                        " order by databarang.nama_brng");
                 }
                     
                 try{ 
                     psresepasuransi.setDouble(1,kenaikan);
                     psresepasuransi.setString(2,bangsal);
-                    psresepasuransi.setString(3,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(4,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
-                    psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
+                    if(!TCari.getText().trim().equals("")){
+                        psresepasuransi.setString(3,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(4,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
+                        psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
+                    }
                     rsobat=psresepasuransi.executeQuery();
                     while(rsobat.next()){
                         tabModeDetailResepRacikan.addRow(new Object[] {
@@ -2327,8 +2336,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join kategori_barang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) group by gudangbarang.kode_brng order by databarang.nama_brng");
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
+                        " group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -2342,17 +2352,20 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join kategori_barang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
-                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
-                        " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) order by databarang.nama_brng");
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? "+
+                        (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
+                        " order by databarang.nama_brng");
                 }
                     
                 try{ 
                     psresep.setString(1,bangsal);
-                    psresep.setString(2,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(3,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(4,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(5,"%"+TCari.getText().trim()+"%");
-                    psresep.setString(6,"%"+TCari.getText().trim()+"%");
+                    if(!TCari.getText().trim().equals("")){
+                        psresep.setString(2,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(3,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(4,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(5,"%"+TCari.getText().trim()+"%");
+                        psresep.setString(6,"%"+TCari.getText().trim()+"%");
+                    }
                     rsobat=psresep.executeQuery();
                     if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                         while(rsobat.next()){
