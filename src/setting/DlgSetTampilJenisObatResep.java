@@ -259,11 +259,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
         tabPane1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tabPane1.setName("tabPane1"); // NOI18N
-        tabPane1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                tabPane1StateChanged(evt);
-            }
-        });
 
         jPanel6.setName("jPanel6"); // NOI18N
         jPanel6.setNextFocusableComponent(kdpoli);
@@ -951,14 +946,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_BtnKeluarKeyReleased
 
-    private void tabPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabPane1StateChanged
-        if (tabPane1.getSelectedIndex() == 0) {
-            tampil();
-        } else if (tabPane1.getSelectedIndex() == 1) {
-            tampil2();
-        }
-    }//GEN-LAST:event_tabPane1StateChanged
-
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnSimpanActionPerformed(null);
@@ -1133,9 +1120,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        if (tabModeRalan != null) {
-            Valid.tabelKosong(tabModeRalan);
-        }
+        Valid.tabelKosong(tabModeRalan);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_filter_jenis_resep_obat_ralan.kd_poli, poliklinik.nm_poli, set_filter_jenis_resep_obat_ralan.kd_pj, penjab.png_jawab, " +
             "set_filter_jenis_resep_obat_ralan.kdjns, jenis.nama from set_filter_jenis_resep_obat_ralan join poliklinik on " +
@@ -1165,9 +1150,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
     }
     
     private void tampil2() {
-        if (tabModeRanap != null) {
-            Valid.tabelKosong(tabModeRanap);
-        }
+        Valid.tabelKosong(tabModeRanap);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_filter_jenis_resep_obat_ranap.kd_bangsal, bangsal.nm_bangsal, set_filter_jenis_resep_obat_ranap.kd_pj, penjab.png_jawab, " +
             "set_filter_jenis_resep_obat_ranap.kdjns, jenis.nama from set_filter_jenis_resep_obat_ranap join bangsal on " +
@@ -1176,17 +1159,17 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             "where set_filter_jenis_resep_obat_ranap.kd_bangsal like ? or bangsal.nm_bangsal like ? or set_filter_jenis_resep_obat_ranap.kd_pj " +
             "like ? or penjab.png_jawab like ? or set_filter_jenis_resep_obat_ranap.kdjns like ? or jenis.nama like ?")
         )) {
-            if (!TCariRalan.getText().isBlank()) {
-                ps.setString(1, "%" + TCariRalan.getText() + "%");
-                ps.setString(2, "%" + TCariRalan.getText() + "%");
-                ps.setString(3, "%" + TCariRalan.getText() + "%");
-                ps.setString(4, "%" + TCariRalan.getText() + "%");
-                ps.setString(5, "%" + TCariRalan.getText() + "%");
-                ps.setString(6, "%" + TCariRalan.getText() + "%");
+            if (!TCariRanap.getText().isBlank()) {
+                ps.setString(1, "%" + TCariRanap.getText() + "%");
+                ps.setString(2, "%" + TCariRanap.getText() + "%");
+                ps.setString(3, "%" + TCariRanap.getText() + "%");
+                ps.setString(4, "%" + TCariRanap.getText() + "%");
+                ps.setString(5, "%" + TCariRanap.getText() + "%");
+                ps.setString(6, "%" + TCariRanap.getText() + "%");
             }
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    tabModeRalan.addRow(new String[] {
+                    tabModeRanap.addRow(new String[] {
                         rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
                     });
                 }

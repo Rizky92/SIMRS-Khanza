@@ -1842,10 +1842,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
                         psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
                         psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
-                    }
-                    if (!queryfilterjenisobat.isBlank()) {
-                        psresepasuransi.setString(8,KdPj.getText());
-                        psresepasuransi.setString(9,kodeunit);
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(8,KdPj.getText());
+                            psresepasuransi.setString(9,kodeunit);
+                        }
+                    } else {
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(3,KdPj.getText());
+                            psresepasuransi.setString(4,kodeunit);
+                        }
                     }
                         
                     rsobat=psresepasuransi.executeQuery();
@@ -1913,10 +1918,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresep.setString(5,"%"+TCari.getText().trim()+"%");
                         psresep.setString(6,"%"+TCari.getText().trim()+"%");
                         psresep.setString(7,"%"+TCari.getText().trim()+"%");
-                    }
-                    if (!queryfilterjenisobat.isBlank()) {
-                        psresep.setString(8,KdPj.getText());
-                        psresep.setString(9,kodeunit);
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(8,KdPj.getText());
+                            psresepasuransi.setString(9,kodeunit);
+                        }
+                    } else {
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(3,KdPj.getText());
+                            psresepasuransi.setString(4,kodeunit);
+                        }
                     }
                     rsobat=psresep.executeQuery();
                     if(Jeniskelas.getSelectedItem().equals("Karyawan")){
@@ -2308,7 +2318,17 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresepasuransi.setString(5,"%"+TCari.getText().trim()+"%");
                         psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
                         psresepasuransi.setString(7,"%"+TCari.getText().trim()+"%");
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(8,KdPj.getText());
+                            psresepasuransi.setString(9,kodeunit);
+                        }
+                    } else {
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(3,KdPj.getText());
+                            psresepasuransi.setString(4,kodeunit);
+                        }
                     }
+                    
                     rsobat=psresepasuransi.executeQuery();
                     while(rsobat.next()){
                         tabModeDetailResepRacikan.addRow(new Object[] {
@@ -2347,7 +2367,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
                         " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
                         (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
-                        " group by gudangbarang.kode_brng order by databarang.nama_brng");
+                        queryfilterjenisobat+"group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -2363,7 +2383,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
                         " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? "+
                         (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
-                        " order by databarang.nama_brng");
+                        queryfilterjenisobat+"order by databarang.nama_brng");
                 }
                     
                 try{ 
@@ -2374,7 +2394,17 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresep.setString(4,"%"+TCari.getText().trim()+"%");
                         psresep.setString(5,"%"+TCari.getText().trim()+"%");
                         psresep.setString(6,"%"+TCari.getText().trim()+"%");
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(8,KdPj.getText());
+                            psresepasuransi.setString(9,kodeunit);
+                        }
+                    } else {
+                        if (!queryfilterjenisobat.isBlank()) {
+                            psresepasuransi.setString(3,KdPj.getText());
+                            psresepasuransi.setString(4,kodeunit);
+                        }
                     }
+                    
                     rsobat=psresep.executeQuery();
                     if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                         while(rsobat.next()){
