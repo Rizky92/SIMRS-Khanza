@@ -68,7 +68,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DlgCariTemplateResep cariTemplateResep = new DlgCariTemplateResep(null, false);
     private String noracik="",AKTIFKANBATCHOBAT="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "";
+            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "",
+            queryfilterjenisobat="";
     private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1792,7 +1793,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
         
         try {
-            String queryfilterjenisobat = "";
+            queryfilterjenisobat = "";
             if (AKTIFKANFILTERRESEPPERJENISOBAT) {
                 if (status.toLowerCase().equals("ralan")) {
                     queryfilterjenisobat = "and exists(select * from set_filter_jenis_resep_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ? and set_filter_jenis_resep_obat_ralan.kdjns = databarang.kdjns) ";
@@ -2262,6 +2263,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         try {
             if(kenaikan>0){
+                queryfilterjenisobat = "";
+                if (AKTIFKANFILTERRESEPPERJENISOBAT) {
+                    if (status.toLowerCase().equals("ralan")) {
+                        queryfilterjenisobat = "and exists(select * from set_filter_jenis_resep_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ? and set_filter_jenis_resep_obat_ralan.kdjns = databarang.kdjns) ";
+                    } else if (status.toLowerCase().equals("ranap")) {
+                        queryfilterjenisobat = "and exists(select * from set_filter_jenis_resep_obat_ranap where set_filter_jenis_resep_obat_ranap.kd_pj = ? and set_filter_jenis_resep_obat_ranap.kd_bangsal = ? and set_filter_jenis_resep_obat_ranap.kdjns = databarang.kdjns) ";
+                    }
+                }
                 if(AKTIFKANBATCHOBAT.equals("yes")){
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -2274,7 +2283,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
                         " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? "+
                         (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
-                        " group by gudangbarang.kode_brng order by databarang.nama_brng");
+                        queryfilterjenisobat+"group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -2287,7 +2296,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " and industrifarmasi.kode_industri=databarang.kode_industri and databarang.kode_kategori = kategori_barang.kode "+
                         " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? "+
                         (TCari.getText().trim().equals("")?"":" and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ? or kategori_barang.nama like ?) ")+
-                        " order by databarang.nama_brng");
+                        queryfilterjenisobat+"order by databarang.nama_brng");
                 }
                     
                 try{ 

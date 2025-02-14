@@ -663,34 +663,6 @@ public final class sekuel {
         }
     }
     
-    public Object bacaPengaturan(String group, String key) {
-        try (PreparedStatement ps = connect.prepareStatement("select setting_tambahan.payload from setting_tambahan where setting_tambahan.group = ? and setting_tambahan.name = ?")) {
-            ps.setString(1, group);
-            ps.setString(2, key);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    ObjectMapper mapper = new ObjectMapper();
-                    JsonNode root = mapper.readTree(rs.getString(1));
-                    if (root.isArray()) {
-                        return root.fields();
-                    } else {
-                        Map.Entry<String, JsonNode> json = root.fields().next();
-                        if (json.getKey().equals("string")) {
-                            return json.getValue().asText();
-                        } else if (json.getKey().equals("boolean")) {
-                            return json.getValue().asBoolean();
-                        } else if (json.getKey().equals("number")) {
-                            return json.getValue().asDouble();
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        return null;
-    }
-
     public void menyimpan(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
