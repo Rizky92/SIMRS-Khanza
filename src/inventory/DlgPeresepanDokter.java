@@ -432,6 +432,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         Popup = new javax.swing.JPopupMenu();
         ppTampilkanSemuaObat = new javax.swing.JMenuItem();
+        pcTampilkanSemuaObat = new javax.swing.JCheckBoxMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         ppStok1 = new javax.swing.JMenuItem();
         KdPj = new widget.TextBox();
@@ -501,6 +502,16 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }
         });
         Popup.add(ppTampilkanSemuaObat);
+
+        pcTampilkanSemuaObat.setSelected(true);
+        pcTampilkanSemuaObat.setText("jCheckBoxMenuItem1");
+        pcTampilkanSemuaObat.setName("pcTampilkanSemuaObat"); // NOI18N
+        pcTampilkanSemuaObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pcTampilkanSemuaObatActionPerformed(evt);
+            }
+        });
+        Popup.add(pcTampilkanSemuaObat);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -796,7 +807,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2024" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-02-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1636,6 +1647,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
     }//GEN-LAST:event_ppTampilkanSemuaObatActionPerformed
 
+    private void pcTampilkanSemuaObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcTampilkanSemuaObatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pcTampilkanSemuaObatActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1699,6 +1714,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Label label12;
     private widget.Label label9;
     private widget.panelisi panelisi3;
+    private javax.swing.JCheckBoxMenuItem pcTampilkanSemuaObat;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppStok1;
     private javax.swing.JMenuItem ppTampilkanSemuaObat;
@@ -1919,13 +1935,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresep.setString(6,"%"+TCari.getText().trim()+"%");
                         psresep.setString(7,"%"+TCari.getText().trim()+"%");
                         if (!queryfilterjenisobat.isBlank()) {
-                            psresepasuransi.setString(8,KdPj.getText());
-                            psresepasuransi.setString(9,kodeunit);
+                            psresep.setString(8,KdPj.getText());
+                            psresep.setString(9,kodeunit);
                         }
                     } else {
                         if (!queryfilterjenisobat.isBlank()) {
-                            psresepasuransi.setString(3,KdPj.getText());
-                            psresepasuransi.setString(4,kodeunit);
+                            psresep.setString(2,KdPj.getText());
+                            psresep.setString(3,kodeunit);
                         }
                     }
                     rsobat=psresep.executeQuery();
@@ -2275,9 +2291,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if(kenaikan>0){
                 queryfilterjenisobat = "";
                 if (AKTIFKANFILTERRESEPPERJENISOBAT) {
-                    if (status.toLowerCase().equals("ralan")) {
+                    if (status.toLowerCase().equals("ralan") && Sequel.cariExistsSmc("select * from set_filter_jenis_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ?", KdPj.getText(), KdDokter.getText())) {
                         queryfilterjenisobat = "and exists(select * from set_filter_jenis_resep_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ? and set_filter_jenis_resep_obat_ralan.kdjns = databarang.kdjns) ";
-                    } else if (status.toLowerCase().equals("ranap")) {
+                    } else if (status.toLowerCase().equals("ranap") && Sequel.cariExistsSmc("select * from set_filter_jenis_obat_ranap where set_filter_jenis_resep_obat_ranap.kd_pj = ? and set_filter_jenis_resep_obat_ranap.kd_bangsal = ?", KdPj.getText(), kodeunit)) {
                         queryfilterjenisobat = "and exists(select * from set_filter_jenis_resep_obat_ranap where set_filter_jenis_resep_obat_ranap.kd_pj = ? and set_filter_jenis_resep_obat_ranap.kd_bangsal = ? and set_filter_jenis_resep_obat_ranap.kdjns = databarang.kdjns) ";
                     }
                 }
@@ -2395,13 +2411,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         psresep.setString(5,"%"+TCari.getText().trim()+"%");
                         psresep.setString(6,"%"+TCari.getText().trim()+"%");
                         if (!queryfilterjenisobat.isBlank()) {
-                            psresepasuransi.setString(8,KdPj.getText());
-                            psresepasuransi.setString(9,kodeunit);
+                            psresep.setString(7,KdPj.getText());
+                            psresep.setString(8,kodeunit);
                         }
                     } else {
                         if (!queryfilterjenisobat.isBlank()) {
-                            psresepasuransi.setString(3,KdPj.getText());
-                            psresepasuransi.setString(4,kodeunit);
+                            psresep.setString(2,KdPj.getText());
+                            psresep.setString(3,kodeunit);
                         }
                     }
                     

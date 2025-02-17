@@ -37,6 +37,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppTampilkanSemuaObatActionPerformed"/>
           </Events>
         </MenuItem>
+        <MenuItem class="javax.swing.JCheckBoxMenuItem" name="pcTampilkanSemuaObat">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="jCheckBoxMenuItem1"/>
+            <Property name="name" type="java.lang.String" value="pcTampilkanSemuaObat" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pcTampilkanSemuaObatActionPerformed"/>
+          </Events>
+        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="ppBersihkan">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

@@ -6650,7 +6650,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),
                         cmbDtk.getSelectedItem().toString(),KdDok.getText(),TDokter.getText(),"ranap",
-                        Sequel.cariIsiSmc("select kamar.kd_bangsal from kamar where kamar.kd_kamar = ?", kamar));
+                        Sequel.cariIsiSmc("select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?", kamar));
                 resep.isCek();
                 resep.tampilobat();
                 resep.setVisible(true);
