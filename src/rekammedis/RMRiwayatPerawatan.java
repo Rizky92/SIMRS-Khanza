@@ -1027,7 +1027,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3700));
+        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3705));
         FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         chkSemua.setSelected(true);
@@ -4059,6 +4059,12 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 System.out.println("Notifikasi : " + e);
             }
         }
+    }
+    
+    public void setNoRawat(String norawat) {
+        TabRawat.setSelectedIndex(2);
+        NoRawat.setText(norawat);
+        R4.setSelected(true);
     }
 
     private void isPasien() {
