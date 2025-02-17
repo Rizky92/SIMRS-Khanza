@@ -2305,6 +2305,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             map.put("Kadaluarsa", rsobat.getString("tgl_kadaluarsa"));
                             arraynode.add(mapper.valueToTree(map));
                         }
+                        rootnode.set("beriobatralan", arraynode);
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
                     }finally{
@@ -2362,7 +2363,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             map.put("Kadaluarsa", "");
                             arraynode.add(mapper.valueToTree(map));
                         }
-                        rootnode.put("beriobatralan", arraynode);
+                        rootnode.set("beriobatralan", arraynode);
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
                     }finally{
@@ -2425,7 +2426,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             map.put("Kadaluarsa", rsobat.getString("tgl_kadaluarsa"));
                             arraynode.add(mapper.valueToTree(map));
                         }
-                        rootnode.put("beriobatralan", arraynode);
+                        rootnode.set("beriobatralan", arraynode);
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
                     }finally{
@@ -2482,7 +2483,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             map.put("Kadaluarsa", "");
                             arraynode.add(mapper.valueToTree(map));
                         }
-                        rootnode.put("beriobatralan", arraynode);
+                        rootnode.set("beriobatralan", arraynode);
                     }catch(Exception e){
                         System.out.println("Notifikasi : "+e);
                     }finally{

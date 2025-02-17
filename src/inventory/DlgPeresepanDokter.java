@@ -1772,7 +1772,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         map.put("Kategori", rsobat.getString("kategori"));
                         arraynode.add(mapper.valueToTree(map));
                     }  
-                    rootnode.put("peresepandokter", arraynode);
+                    rootnode.set("peresepandokter", arraynode);
                 }catch(Exception e){
                     System.out.println("Notifikasi 1a: "+e);
                 }finally{
@@ -1846,7 +1846,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         map.put("Kategori", rsobat.getString("kategori"));
                         arraynode.add(mapper.valueToTree(map));
                     }  
-                    rootnode.put("peresepandokter", arraynode);
+                    rootnode.set("peresepandokter", arraynode);
                 }catch(Exception e){
                     System.out.println("Notifikasi 1b: "+e);
                 }finally{
