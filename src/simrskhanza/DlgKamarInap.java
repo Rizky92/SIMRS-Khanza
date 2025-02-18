@@ -9397,6 +9397,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     if(rs2.next()){
                                         DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
                                         dlgrwjl.isCek();
+                                        dlgrwjl.bypassranap=true;
                                         dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                         dlgrwjl.setLocationRelativeTo(internalFrame1);
                                         dlgrwjl.SetPoli(Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",rs2.getString("no_rawat2")));
@@ -9431,6 +9432,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }else{
                     DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
                     dlgrwjl.isCek();
+                    dlgrwjl.bypassranap=true;
                     dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dlgrwjl.setLocationRelativeTo(internalFrame1);
                     dlgrwjl.SetPoli(Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",norawat.getText()));
