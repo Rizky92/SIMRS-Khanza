@@ -2596,7 +2596,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     
                     rsobat = psresepasuransi.executeQuery();
                     
-                    if (! rsobat.first()) {
+                    if (! rsobat.next()) {
                         templateUmumKosong = true;
                     } else {
                         rsobat.beforeFirst();
@@ -2685,7 +2685,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     
                     rsobat = psresep.executeQuery();
                     
-                    if (! rsobat.first()) {
+                    if (! rsobat.next()) {
                         templateUmumKosong = true;
                     } else {
                         rsobat.beforeFirst();
@@ -2773,6 +2773,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 psresep.setString(1, noResep);
                 
                 rsobat = psresep.executeQuery();
+                int tidakAdaStokRacikan = 0, jumlahRacikan = 0;
                 
                 while (rsobat.next()) {
                     tabModeResepRacikan.addRow(new String[]{
@@ -2780,6 +2781,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         rsobat.getString("metode"), rsobat.getString("jml_dr"), rsobat.getString("aturan_pakai"),
                         rsobat.getString("keterangan")
                     });
+                    ++jumlahRacikan;
                     
                     if (kenaikan > 0) {
                         if (aktifkanbatch.equals("yes")) {
@@ -2817,8 +2819,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             
                             rs2 = ps2.executeQuery();
                             
-                            if (! rs2.first()) {
-                                templateRacikanKosong = true;
+                            if (! rs2.next()) {
+                                ++tidakAdaStokRacikan;
                             } else {
                                 rs2.beforeFirst();
                             }
@@ -2907,8 +2909,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             
                             rs2 = ps2.executeQuery();
                             
-                            if (! rs2.first()) {
-                                templateRacikanKosong = true;
+                            if (! rs2.next()) {
+                                ++tidakAdaStokRacikan;
                             } else {
                                 rs2.beforeFirst();
                             }
@@ -2994,6 +2996,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             }
                         }
                     }
+                }
+                if (tidakAdaStokRacikan == jumlahRacikan) {
+                    templateRacikanKosong = true;
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi 2 : " + e);
