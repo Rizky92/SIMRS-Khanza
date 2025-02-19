@@ -37,6 +37,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -325,6 +326,23 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
         return null;
+    }
+    
+    public ArrayList<String> cariArraySmc(String sql, String... values) {
+        ArrayList<String> list = new ArrayList<>();
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(rs.getString(1));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return list;
     }
 
     public void menyimpanSmc(String table, String kolom, String... values) {
