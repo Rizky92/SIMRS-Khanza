@@ -15,7 +15,7 @@
     }
 
     function getUrlWS() {
-        $UrlWS = "http://36.89.103.114:7474/E-Klaim/ws.php";
+        $UrlWS = "http://localhost/E-Klaim/ws.php";
         return $UrlWS;
     }
     
@@ -111,6 +111,8 @@
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
             InsertData2("inacbg_klaim_baru","'".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
         return $msg['metadata']['message'];
     }
@@ -132,6 +134,8 @@
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
             InsertData2("inacbg_klaim_baru_internal","'".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
         return $msg['metadata']['message'];
     }
@@ -153,6 +157,8 @@
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
             InsertData2("inacbg_klaim_baru2","'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
         return $msg['metadata']['message'];
     }
@@ -192,7 +198,7 @@
     function UpdateDataKlaim($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole){	
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
         
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
@@ -287,8 +293,9 @@
                             "data": {
                                 "nomor_sep": "'.$nomor_sep.'",
                                 "nomor_kartu": "'.$nomor_kartu.'",
-                                "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                                "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                                "tgl_masuk": "'.$tgl_masuk.'",
+                                "tgl_pulang": "'.$tgl_pulang.'",
+                                "cara_masuk": "'.$asalrujukan.'",
                                 "jenis_rawat": "'.$jenis_rawat.'",
                                 "kelas_rawat": "'.$kelas_rawat.'",
                                 "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -357,8 +364,8 @@
                             "data": {
                                 "nomor_sep": "'.$nomor_sep.'",
                                 "nomor_kartu": "'.$nomor_kartu.'",
-                                "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                                "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                                "tgl_masuk": "'.$tgl_masuk.'",
+                                "tgl_pulang": "'.$tgl_pulang.'",
                                 "jenis_rawat": "'.$jenis_rawat.'",
                                 "kelas_rawat": "'.$kelas_rawat.'",
                                 "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -415,13 +422,15 @@
             Hapus2("inacbg_data_terkirim", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim","'".$nomor_sep."','".$coder_nik."'");
             GroupingStage1($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
     function UpdateDataKlaimInternal($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole){	
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
         
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
@@ -516,8 +525,9 @@
                             "data": {
                                 "nomor_sep": "'.$nomor_sep.'",
                                 "nomor_kartu": "'.$nomor_kartu.'",
-                                "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                                "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                                "tgl_masuk": "'.$tgl_masuk.'",
+                                "tgl_pulang": "'.$tgl_pulang.'",
+                                "cara_masuk": "'.$asalrujukan.'",
                                 "jenis_rawat": "'.$jenis_rawat.'",
                                 "kelas_rawat": "'.$kelas_rawat.'",
                                 "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -586,8 +596,8 @@
                             "data": {
                                 "nomor_sep": "'.$nomor_sep.'",
                                 "nomor_kartu": "'.$nomor_kartu.'",
-                                "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                                "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                                "tgl_masuk": "'.$tgl_masuk.'",
+                                "tgl_pulang": "'.$tgl_pulang.'",
                                 "jenis_rawat": "'.$jenis_rawat.'",
                                 "kelas_rawat": "'.$kelas_rawat.'",
                                 "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -644,6 +654,8 @@
             Hapus2("inacbg_data_terkirim_internal", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim_internal","'".$nomor_sep."','".$coder_nik."'");
             GroupingStage1Internal($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -653,7 +665,7 @@
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
-                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole){	
+                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole,$cara_masuk){	
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -662,8 +674,9 @@
                         "data": {
                             "nomor_sep": "'.$nomor_sep.'",
                             "nomor_kartu": "'.$nomor_kartu.'",
-                            "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                            "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                            "tgl_masuk": "'.$tgl_masuk.'",
+                            "tgl_pulang": "'.$tgl_pulang.'",
+                            "cara_masuk": "'.$cara_masuk.'",
                             "jenis_rawat": "'.$jenis_rawat.'",
                             "kelas_rawat": "'.$kelas_rawat.'",
                             "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -714,11 +727,17 @@
                    }';
         //echo "Data : ".$request;
         $msg= Request($request);
+        $respon="Berhasil";
         if($msg['metadata']['message']=="Ok"){
             Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
             GroupingStage12($nomor_sep,$coder_nik);
+            $respon="Berhasil";
+        }else{
+            $respon="Gagal";
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
+        return $respon;
     }
     
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
@@ -729,7 +748,7 @@
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
                             $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah, 
                             $peti_jenazah,$plastik_erat,$desinfektan_jenazah,$mobil_jenazah,$desinfektan_mobil_jenazah,
-                            $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$sistole,$diastole){	
+                            $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$sistole,$diastole,$cara_masuk){	
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -738,8 +757,9 @@
                         "data": {
                             "nomor_sep": "'.$nomor_sep.'",
                             "nomor_kartu": "'.$nomor_kartu.'",
-                            "tgl_masuk": "'.$tgl_masuk.' 00:00:01",
-                            "tgl_pulang": "'.$tgl_pulang.' 23:59:59",
+                            "tgl_masuk": "'.$tgl_masuk.'",
+                            "tgl_pulang": "'.$tgl_pulang.'",
+                            "cara_masuk": "'.$cara_masuk.'",
                             "jenis_rawat": "'.$jenis_rawat.'",
                             "kelas_rawat": "'.$kelas_rawat.'",
                             "adl_sub_acute": "'.$adl_sub_acute.'",
@@ -805,6 +825,8 @@
             Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
             GroupingStage13($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -857,6 +879,8 @@
             $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
             InsertData2("inacbg_grouping_stage1","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
             FinalisasiKlaim($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -879,6 +903,8 @@
             $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
             InsertData2("inacbg_grouping_stage1_internal","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
             FinalisasiKlaim($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -901,6 +927,8 @@
             $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
             InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt)."'");
             FinalisasiKlaim($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -923,6 +951,8 @@
             $add_payment_amt    = validangka($msg['response']['add_payment_amt']);
             InsertData2("inacbg_grouping_stage12","'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg+$sub_acute+$chronic+$add_payment_amt+$msg['response']['covid19_data']['episodes'][0]['tariff']+$msg['response']['covid19_data']['episodes'][1]['tariff']+$msg['response']['covid19_data']['episodes'][2]['tariff']+$msg['response']['covid19_data']['episodes'][3]['tariff']+$msg['response']['covid19_data']['episodes'][4]['tariff']+$msg['response']['covid19_data']['episodes'][5]['tariff']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['pemulasaraan']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['kantong']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['peti']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['plastik']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['desinfektan_jenazah']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['mobil']+$msg['response']['covid19_data']['pemulasaraan_jenazah']['desinfektan_mobil']+$msg['response']['covid19_data']['top_up_rawat_gross']+$msg['response']['covid19_data']['top_up_rawat']+$msg['response']['covid19_data']['top_up_jenazah'])."'");
             FinalisasiKlaim($nomor_sep,$coder_nik);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -954,6 +984,8 @@
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
             //KirimKlaimIndividualKeDC($nomor_sep);
+        }else{
+            echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
     }
     
@@ -967,7 +999,7 @@
                         }
                    }';
         $msg= Request($request);
-        //echo $msg['metadata']['message']."";
+        echo $msg['metadata']['message']."";
     }
     
     function KirimKlaimPeriodeKeDC($start_dt,$stop_dt,$jenis_rawat){	
