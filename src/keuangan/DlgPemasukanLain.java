@@ -806,7 +806,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                     try {
                         Sequel.deleteTampJurnal();
                         psakun=koneksi.prepareStatement(
-                            "select kd_rek,'Akun',kd_rek2,'Kontra Akun' from kategori_pemasukan_lain where kode_kategori=?");
+                            "select kategori_pemasukan_lain.kd_rek,'Akun',kategori_pemasukan_lain.kd_rek2,'Kontra Akun' from kategori_pemasukan_lain where kategori_pemasukan_lain.kode_kategori=?");
                         try{
                             psakun.setString(1,KdKategori.getText());
                             rs=psakun.executeQuery();
@@ -1185,7 +1185,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Nomor.setText(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
             NmKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),2).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString()+" ",""));
             NmPtg.setText(tbResep.getValueAt(tbResep.getSelectedRow(),3).toString().replaceAll(tbResep.getValueAt(tbResep.getSelectedRow(),8).toString()+" ",""));
-            pemasukan.setText(String.valueOf(tbResep.getValueAt(tbResep.getSelectedRow(),4).toString()));
+            pemasukan.setText(Valid.SetAngka6(Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(),4).toString())));
             Keterangan.setText(tbResep.getValueAt(tbResep.getSelectedRow(),5).toString());
             Keperluan.setText(tbResep.getValueAt(tbResep.getSelectedRow(),6).toString());
             KdKategori.setText(tbResep.getValueAt(tbResep.getSelectedRow(),7).toString());
