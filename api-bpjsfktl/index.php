@@ -877,7 +877,7 @@
                                                             'code' => 200
                                                         )
                                                     );
-                                                    bukaquery2("insert into referensi_mobilejkn_bpjs_batal values('$booking[norm]','$booking[no_rawat]','$booking[nomorreferensi]',now(),'".validTeks4($decode['keterangan'],50)."','Belum','$booking[nobooking]')");
+                                                    bukaquery2("insert into referensi_mobilejkn_bpjs_batal values('$booking[norm]','$booking[no_rawat]','$booking[nomorreferensi]',now(),'".validTeks4($decode['keterangan'],50)."','Sudah','$booking[nobooking]')");
                                                     http_response_code(200);
                                                 }else{
                                                     $response = array(
