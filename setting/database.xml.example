@@ -40,6 +40,7 @@
     <entry key="RESEPRAJALKEPLAN">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
     <entry key="STOKKOSONGRESEP">yes</entry>
+    <entry key="TAMPILKANCOPYRESEPDOKTERLAIN">no</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
     <entry key="ALARMLAB">no</entry>
@@ -57,6 +58,7 @@
     <entry key="CONSIDAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERKEYAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="DIAGNOSARUJUKANMASUKAPIBPJS">no</entry>
+    <entry key="JADIKANBOOKINGSURATKONTROL">no</entry>
     <entry key="JADIKANBOOKINGSURATKONTROLAPIBPJS">no</entry>
     <entry key="URLAPIAPLICARE">https://apijkn-dev.bpjs-kesehatan.go.id/aplicaresws-dev</entry>
     <entry key="SECRETKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
