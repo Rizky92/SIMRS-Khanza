@@ -112,7 +112,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class,
-                java.lang.Object.class,java.lang.String.class,java.lang.String.class
+                java.lang.Object.class
              };
              /*Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
@@ -452,11 +452,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         ppTampilkanSemuaObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppTampilkanSemuaObat.setName("ppTampilkanSemuaObat"); // NOI18N
         ppTampilkanSemuaObat.setPreferredSize(new java.awt.Dimension(180, 25));
-        ppTampilkanSemuaObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppTampilkanSemuaObatActionPerformed(evt);
-            }
-        });
         Popup.add(ppTampilkanSemuaObat);
 
         pcFilterPerJenisObat.setBackground(new java.awt.Color(255, 255, 254));
@@ -466,11 +461,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         pcFilterPerJenisObat.setText("Filter Per Jenis Obat");
         pcFilterPerJenisObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         pcFilterPerJenisObat.setName("pcFilterPerJenisObat"); // NOI18N
-        pcFilterPerJenisObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pcFilterPerJenisObatActionPerformed(evt);
-            }
-        });
         Popup.add(pcFilterPerJenisObat);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 254));
@@ -1693,14 +1683,6 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterActionPerformed
-
-    private void ppTampilkanSemuaObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSemuaObatActionPerformed
-        
-    }//GEN-LAST:event_ppTampilkanSemuaObatActionPerformed
-
-    private void pcFilterPerJenisObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcFilterPerJenisObatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pcFilterPerJenisObatActionPerformed
 
     /**
     * @param args the command line arguments
