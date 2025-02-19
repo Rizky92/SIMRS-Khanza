@@ -1004,6 +1004,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        load = true;
         if(TabRawat.getSelectedIndex()==0){
             tampilcacheresep();
         }else if(TabRawat.getSelectedIndex()==1){
