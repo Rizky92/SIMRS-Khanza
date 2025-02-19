@@ -286,6 +286,15 @@ public final class validasi {
         }
     }
     
+    public boolean exists(String path) {
+        try {
+            return new File(path).isFile();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            return false;
+        }
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
