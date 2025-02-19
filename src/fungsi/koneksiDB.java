@@ -1148,6 +1148,16 @@ public class koneksiDB {
         return var;
     }
     
+    public static String TAMPILKANCOPYRESEPDOKTERLAIN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("TAMPILKANCOPYRESEPDOKTERLAIN");
+        }catch(Exception e){
+            var="no"; 
+        }
+        return var;
+    }
+    
     public static String HPPFARMASI(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1440,6 +1450,16 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=prop.getProperty("ADDANTRIANAPIMOBILEJKN");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String JADIKANBOOKINGSURATKONTROL(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("JADIKANBOOKINGSURATKONTROL");
         }catch(Exception e){
             var=""; 
         }
