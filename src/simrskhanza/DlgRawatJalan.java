@@ -13,7 +13,6 @@
 package simrskhanza;
 
 import bridging.ICareRiwayatPerawatan;
-import bridging.ICareRiwayatPerawatanFKTP;
 import surat.SuratKontrol;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -7474,7 +7473,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCopyResep daftar=new DlgCopyResep(null,false);
             daftar.isCek();
-            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan");
+            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan", kode_poli);
             daftar.tampil();
             daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             daftar.setLocationRelativeTo(internalFrame1);
@@ -12302,7 +12301,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         resep.setLocationRelativeTo(internalFrame1);
         resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),
-                cmbDtk.getSelectedItem().toString(),KdDok.getText(),TDokter.getText(),"ralan");
+                cmbDtk.getSelectedItem().toString(),KdDok.getText(),TDokter.getText(),"ralan", kode_poli);
         resep.isCek();
         resep.tampilobat();
         resep.setVisible(true);
