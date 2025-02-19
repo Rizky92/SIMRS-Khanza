@@ -12,6 +12,8 @@
 
 package fungsi;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,7 +37,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -199,7 +203,6 @@ public final class sekuel {
         return "";
     }
     
-    
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
         return autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, 1);
     }
@@ -322,6 +325,23 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
         return null;
+    }
+    
+    public ArrayList<String> cariArraySmc(String sql, String... values) {
+        ArrayList<String> list = new ArrayList<>();
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(rs.getString(1));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return list;
     }
 
     public void menyimpanSmc(String table, String kolom, String... values) {
@@ -659,7 +679,7 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
     }
-
+    
     public void menyimpan(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
