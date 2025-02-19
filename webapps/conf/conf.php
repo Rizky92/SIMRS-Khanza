@@ -545,7 +545,7 @@
     function bukaquery($sql){    
         $konektor=bukakoneksi();
         $result=mysqli_query($konektor, $sql)
-        or die (/*mysqli_error($konektor)*/"Silahkan hubungi administrator..!");
+        or die (mysqli_error($konektor)."Silahkan hubungi administrator..!");
         mysqli_close($konektor);
         return $result;
     }
@@ -609,7 +609,7 @@
     }
      
     function InsertData2($tabelname,$attrib) {
-        $command = bukaquery2("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
+        $command = bukaquery("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }
      
