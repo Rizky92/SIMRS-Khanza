@@ -193,6 +193,7 @@ import surat.SuratSakitPihak2;
  */
 public class DlgKamarInap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private final ApiBPJS api = new ApiBPJS();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();

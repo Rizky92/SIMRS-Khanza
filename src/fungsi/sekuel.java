@@ -435,7 +435,6 @@ public final class sekuel {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
         }
         return false;
     }
