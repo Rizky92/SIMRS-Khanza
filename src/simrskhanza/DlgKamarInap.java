@@ -41,6 +41,7 @@ import inventory.DlgPermintaanStokPasien;
 import inventory.DlgResepObat;
 import inventory.DlgResepPulang;
 import inventory.DlgReturJual;
+import inventory.DlgReturJualSMC;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -193,6 +194,7 @@ import surat.SuratSakitPihak2;
  */
 public class DlgKamarInap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private final ApiBPJS api = new ApiBPJS();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -8747,10 +8749,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     }else{
                                         akses.setkdbangsal(bangsal);
                                     }
-                                    DlgReturJual returjual=new DlgReturJual(null,false);
+                                    // DlgReturJual returjual=new DlgReturJual(null,false);
+                                    DlgReturJualSMC returjual=new DlgReturJualSMC(null,false);
                                     returjual.emptTeks();
                                     returjual.isCek();
                                     returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),rs2.getString("no_rawat2"));
+                                    returjual.tampilPemberianObat();
                                     returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     returjual.setLocationRelativeTo(internalFrame1);
                                     returjual.setVisible(true);
@@ -8788,10 +8792,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         }else{
                             akses.setkdbangsal(bangsal);
                         }
-                        DlgReturJual returjual=new DlgReturJual(null,false);
+                        // DlgReturJual returjual=new DlgReturJual(null,false);
+                        DlgReturJualSMC returjual=new DlgReturJualSMC(null,false);
                         returjual.emptTeks();
                         returjual.isCek();
                         returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),norawat.getText());
+                        returjual.tampilPemberianObat();
                         returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         returjual.setLocationRelativeTo(internalFrame1);
                         returjual.setVisible(true);
