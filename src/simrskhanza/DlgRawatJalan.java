@@ -7470,7 +7470,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCopyResep daftar=new DlgCopyResep(null,false);
             daftar.isCek();
-            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan");
+            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan", kode_poli);
             daftar.tampil();
             daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             daftar.setLocationRelativeTo(internalFrame1);

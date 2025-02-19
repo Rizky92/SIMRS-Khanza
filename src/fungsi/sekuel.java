@@ -203,7 +203,6 @@ public final class sekuel {
         return "";
     }
     
-    
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
         return autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, 1);
     }

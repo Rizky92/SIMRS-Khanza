@@ -77,8 +77,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DlgCariTemplateResep cariTemplateResep = new DlgCariTemplateResep(null, false);
     private String noracik="",aktifkanbatch="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "",
-            filterkodejenis="";
+            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "";
     private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
     private File file;
     private FileWriter fileWriter;
@@ -2201,6 +2200,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         SetHarga();
         ubah=false;
         copy=false;
+    }
+    
+    public void setNoRm(String norwt, Date tanggal, String status, String kodeunit) {
+        this.kodeunit = kodeunit;
+        setNoRm(norwt, tanggal, status);
     }
     
     public void setNoRm(String norwt,Date tanggal,String status) {        

@@ -6639,7 +6639,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgCopyResep daftar=new DlgCopyResep(null,false);
             daftar.isCek();
-            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),jenisbayar,"ranap");
+            daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),jenisbayar,"ranap",Sequel.cariIsiSmc("select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?", kamar));
             daftar.tampil();
             daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             daftar.setLocationRelativeTo(internalFrame1);
