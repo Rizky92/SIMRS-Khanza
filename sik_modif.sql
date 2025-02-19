@@ -373,13 +373,13 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_route`  (
   INDEX `satu_sehat_referensi_route_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
-
 CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
   `id_user` varchar(700) NOT NULL,
   `tgl_selesai` datetime NOT NULL,
   PRIMARY KEY (`id_user`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
 
