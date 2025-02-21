@@ -93,7 +93,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private WebEngine engine;
     private final String KOMPILASIBERKASGUNAKANRIWAYATPASIEN = koneksiDB.KOMPILASIBERKASGUNAKANRIWAYATPASIEN(),
                          KODEPPKBPJS = Sequel.cariIsiSmc("select setting.kode_ppk from setting limit 1") + "%";
-    private String finger = "", tanggalExport = "",
+    private String finger = "",
+                   tanggalExport = "",
                    KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
                    KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
     private boolean exportSukses = true;
@@ -156,8 +157,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 return component;
             }
         });
-        
-        
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
@@ -1793,20 +1792,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("penjab", rs.getString("nm_dokter"));
                         param.put("petugas", rs.getString("nama_petugas"));
                         param.put("alamat", rs.getString("alamat"));
-                        String kamar = "", kelas = "", namaKamar = "", noRawatIbu = "";
+                        String kamar = "", namaKamar = "", noRawatIbu = "";
                         if (lblStatusRawat.getText().contains("Ranap")) {
                             noRawatIbu = Sequel.cariIsiSmc("select no_rawat from ranap_gabung where no_rawat2 = ?", lblNoRawat.getText());
                             if (!noRawatIbu.isBlank()) {
                                 kamar = Sequel.cariIsiSmc("select ifnull(kd_kamar, '') from kamar_inap where no_rawat = ? order by tgl_masuk desc, jam_masuk desc limit 1", noRawatIbu);
-                                kelas = Sequel.cariIsiSmc("select kamar.kelas from kamar inner join kamar_inap on kamar.kd_kamar = kamar_inap.kd_kamar where no_rawat = ? order by str_to_date(concat(kamar_inap.tgl_masuk, ' ', kamar_inap.jam_masuk), '%Y-%m-%d %H:%i:%s') desc limit 1", noRawatIbu);
                             } else {
                                 kamar = Sequel.cariIsiSmc("select ifnull(kd_kamar, '') from kamar_inap where no_rawat = ? order by tgl_masuk desc limit 1", lblNoRawat.getText());
-                                kelas = Sequel.cariIsiSmc("select kamar.kelas from kamar inner join kamar_inap on kamar.kd_kamar = kamar_inap.kd_kamar where no_rawat = ? order by str_to_date(concat(kamar_inap.tgl_masuk, ' ', kamar_inap.jam_masuk), '%Y-%m-%d %H:%i:%s') desc limit 1", lblNoRawat.getText());
                             }
                             namaKamar = kamar + ", " + Sequel.cariIsiSmc("select bangsal.nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal = kamar.kd_bangsal where kamar.kd_kamar = ?", kamar);
                             kamar = "Kamar";
                         } else {
-                            kelas = "Rawat Jalan";
                             kamar = "Poli";
                             namaKamar = Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik inner join reg_periksa on poliklinik.kd_poli = reg_periksa.kd_poli where reg_periksa.no_rawat = ?", lblNoRawat.getText());
                         }
