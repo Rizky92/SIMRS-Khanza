@@ -602,6 +602,7 @@ import keuangan.DlgPembayaranRalan;
 import keuangan.DlgPembayaranRalanPerHari;
 import keuangan.DlgPembayaranRanap;
 import keuangan.DlgPembayaranRanapPerhari;
+import keuangan.DlgPendapatanPerAKun;
 import keuangan.DlgPendapatanPerCaraBayar;
 import keuangan.DlgPengaturanRekening;
 import keuangan.DlgPengeluaranHarian;
@@ -685,37 +686,6 @@ import keuangan.KeuanganValidasiTagihanNonMedis;
 import keuangan.KeuanganValidasiTagihanObatBHP;
 import laporan.DlgAnggotaMiliterDirawat;
 import laporan.DlgAnggotaPolriDirawat;
-import kepegawaian.DlgAuditKepatuhanAPD;
-import kepegawaian.DlgAuditPembuanganBendaTajam;
-import kepegawaian.DlgRuangAuditKepatuhan;
-import kepegawaian.DlgAuditPembuanganLimbah;
-import kepegawaian.DlgAuditPembuanganLimbahCairInfeksius;
-import kepegawaian.DlgAuditPenangananDarah;
-import kepegawaian.DlgAuditPenempatanPasien;
-import kepegawaian.DlgAuditPengelolaanLinenKotor;
-import kepegawaian.DlgAuditSterilisasiAlat;
-import kepegawaian.SKPKategoriPenilaian;
-import kepegawaian.SKPKriteriaPenilaian;
-import kepegawaian.SKPPenilaianPegawai;
-import kepegawaian.SKPRekapitulasiPenilaianPegawai;
-import keuangan.DlgLhtBankJabar;
-import keuangan.DlgLhtBankMandiri;
-import keuangan.DlgLhtBankPapua;
-import keuangan.DlgLhtPembayaranPihakKe3BankMandiri;
-import keuangan.DlgPendapatanPerAKun;
-import keuangan.DlgRekapBiayaRegistrasi;
-import keuangan.KeuanganBayarPemesananDapur;
-import keuangan.KeuanganHutangDapurBelumLunas;
-import keuangan.KeuanganNilaiPiutangPerJenisBayarPerBulan;
-import keuangan.KeuanganPengajuanBiaya;
-import keuangan.KeuanganPersetujuanPengajuanBiaya;
-import keuangan.KeuanganRekapPengajuanBiaya;
-import keuangan.KeuanganRingkasanHutangVendorDapur;
-import keuangan.KeuanganRingkasanJasaTindakan;
-import keuangan.KeuanganRingkasanPiutangPerJensBayar;
-import keuangan.KeuanganTagihanDapur;
-import keuangan.KeuanganValidasiPersetujuanPengajuanBiaya;
-import keuangan.KeuanganValidasiTagihanDapur;
 import laporan.DlgBerkasRawat;
 import laporan.DlgBulananHAIs;
 import laporan.DlgBulananKlasifikasiPasienRanap;
@@ -1044,6 +1014,7 @@ import setting.DlgSetOtoLokasi;
 import setting.DlgSetOtoRalan;
 import setting.DlgSetPenjabLab;
 import setting.DlgSetRM;
+import setting.DlgSetTampilJenisObatResep;
 import setting.DlgSetTarif;
 import setting.DlgUser;
 import setting.DlgUserSmc;
@@ -23189,7 +23160,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnHutangDapur,btnTagihanHutangDapur,btnValidasiTagihanDapur,btnSuratPemesananDapur,btnPengajuanBarangDapur,btnReturBarangDapur,btnHibahDapur,btnRingkasanPenerimaanDapur,
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
-            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar;
+            btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnSetTampilJenisObatResep;
     
     public void isWall(){
         try{            
@@ -28794,6 +28765,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnSetAksesEditSementara);
                 jmlmenu++;
             }
+            
+            if(akses.getadmin()==true){
+                Panelmenu.add(btnSetTampilJenisObatResep);
+                jmlmenu++;
+            }
         }    
     }
 
@@ -34239,6 +34215,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if (akses.getbpjs_antrean_pertanggal()) {
             Panelmenu.add(btnBPJSAntreanPerKodebookingMobileJKN);
+            jmlmenu++;
+        }
+        
+        if (akses.getadmin()) {
+            Panelmenu.add(btnSetTampilJenisObatResep);
             jmlmenu++;
         }
     }
@@ -41884,6 +41865,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if (akses.getadmin()) {
+            if (btnSetTampilJenisObatResep.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetTampilJenisObatResep);
+                jmlmenu++;
+            }
+        }
     }
 
     private void initKhanza() {
@@ -46946,7 +46934,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnPendapatanPerAkun = new widget.ButtonBig();
         btnPendapatanPerAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404046811_money.png"))); 
-        btnPendapatanPerAkun.setText("Pendapatan Per Akun");
+        btnPendapatanPerAkun.setText("Pendapatan Per Akun Rekening");
         btnPendapatanPerAkun.setIconTextGap(0);
         btnPendapatanPerAkun.setName("btnPendapatanPerAkun");
         btnPendapatanPerAkun.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -46959,5 +46947,25 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRl13KetersediaanKamar.setName("btnRl13KetersediaanKamar");
         btnRl13KetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl13KetersediaanKamar.addActionListener(this::btnRl13KetersediaanKamarActionPerformed);
+        
+        btnSetTampilJenisObatResep = new widget.ButtonBig();
+        btnSetTampilJenisObatResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); 
+        btnSetTampilJenisObatResep.setText("Set Tampil Jenis Obat Resep Rawat Jalan");
+        btnSetTampilJenisObatResep.setIconTextGap(0);
+        btnSetTampilJenisObatResep.setName("btnSetTampilJenisObatResep");
+        btnSetTampilJenisObatResep.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetTampilJenisObatResep.addActionListener(this::btnSetTampilJenisObatResepActionPerformed);
+    }
+    
+    private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetTampilJenisObatResep aplikasi=new DlgSetTampilJenisObatResep(this,true);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setAlwaysOnTop(false);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }
 }
