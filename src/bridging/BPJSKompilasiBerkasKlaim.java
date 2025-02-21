@@ -986,8 +986,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         btnSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSEP.setMnemonic('1');
-        btnSEP.setText("0302R1101124V003186");
-        btnSEP.setToolTipText("ALt+1");
+        btnSEP.setText("Lihat");
+        btnSEP.setToolTipText("");
         btnSEP.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnSEP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSEP.setName("btnSEP"); // NOI18N
