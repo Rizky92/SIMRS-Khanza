@@ -20,6 +20,7 @@
     <entry key="KOMPILASIBERKASGUNAKANTANGGALEXPORT"></entry>
     <entry key="KOMPILASIBERKASAPLIKASIPDF"></entry>
     <entry key="KOMPILASIBERKASMAXMEMORY">200</entry>
+    <entry key="AKTIFKANFILTERRESEPPERJENISOBAT">88tE0ZUstuza/UrtfBYkFA==</entry>
 
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>
@@ -39,6 +40,7 @@
     <entry key="RESEPRAJALKEPLAN">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
     <entry key="STOKKOSONGRESEP">yes</entry>
+    <entry key="TAMPILKANCOPYRESEPDOKTERLAIN">no</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
     <entry key="ALARMLAB">no</entry>
@@ -56,6 +58,7 @@
     <entry key="CONSIDAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERKEYAPIBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="DIAGNOSARUJUKANMASUKAPIBPJS">no</entry>
+    <entry key="JADIKANBOOKINGSURATKONTROL">no</entry>
     <entry key="JADIKANBOOKINGSURATKONTROLAPIBPJS">no</entry>
     <entry key="URLAPIAPLICARE">https://apijkn-dev.bpjs-kesehatan.go.id/aplicaresws-dev</entry>
     <entry key="SECRETKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
@@ -209,4 +212,5 @@
     <entry key="SFTPFILEESIGNFOLDER">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAPISERTISIGN">https://api-stag.sertisign.id/v2/poa/signing-qr</entry>
     <entry key="APIKEYSERTISIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLDOKUMENSERTISIGN">https://sertisign.com/webhook</entry>
 </properties>

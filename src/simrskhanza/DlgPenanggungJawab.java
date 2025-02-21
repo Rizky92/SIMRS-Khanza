@@ -96,7 +96,7 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
         NmAsuransi.setDocument(new batasInput((int) 50).getKata(NmAsuransi));
         Perusahaan.setDocument(new batasInput((int) 100).getKata(Perusahaan));
         AlamatAsuransi.setDocument(new batasInput((int) 130).getKata(AlamatAsuransi));
-         Attn.setDocument(new batasInput((int) 60).getKata(Attn));
+        Attn.setDocument(new batasInput((int) 60).getKata(Attn));
         NoTelp.setDocument(new batasInput((int) 40).getKata(NoTelp));
         Email.setDocument(new batasInput((int) 50).getKata(Email));
         NoNPWP.setDocument(new batasInput((byte) 30).getOnlyAngka(NoNPWP));

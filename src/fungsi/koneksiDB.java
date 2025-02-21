@@ -258,6 +258,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean AKTIFKANFILTERRESEPPERJENISOBAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("AKTIFKANFILTERRESEPPERJENISOBAT")).equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1148,6 +1157,16 @@ public class koneksiDB {
         return var;
     }
     
+    public static String TAMPILKANCOPYRESEPDOKTERLAIN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("TAMPILKANCOPYRESEPDOKTERLAIN");
+        }catch(Exception e){
+            var="no"; 
+        }
+        return var;
+    }
+    
     public static String HPPFARMASI(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1440,6 +1459,16 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=prop.getProperty("ADDANTRIANAPIMOBILEJKN");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String JADIKANBOOKINGSURATKONTROL(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("JADIKANBOOKINGSURATKONTROL");
         }catch(Exception e){
             var=""; 
         }
@@ -1820,6 +1849,16 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("APIKEYSERTISIGN"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String URLDOKUMENSERTISIGN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLDOKUMENSERTISIGN");
         }catch(Exception e){
             var=""; 
         }

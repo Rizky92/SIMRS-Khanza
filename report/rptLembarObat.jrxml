@@ -251,16 +251,16 @@
 				</textElement>
 				<text><![CDATA[___________  Jam ______]]></text>
 			</staticText>
-			<line>
-				<reportElement x="200" y="8" width="1" height="41" uuid="a8a238e3-42c8-4e0f-ba5e-260b7dcb2c48"/>
-			</line>
 			<staticText>
-				<reportElement x="200" y="9" width="62" height="9" uuid="13bd11d4-8be7-49db-b57e-c0853499adda"/>
+				<reportElement x="150" y="9" width="63" height="9" uuid="b1d3d395-cfde-46b8-86d6-504b5321b750"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[No. RESEP]]></text>
+				<text><![CDATA[No. Resep]]></text>
 			</staticText>
+			<line>
+				<reportElement x="150" y="8" width="1" height="41" uuid="4df75dae-fbeb-4ee1-96cd-6503672bbbf9"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

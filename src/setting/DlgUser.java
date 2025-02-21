@@ -48,7 +48,6 @@ public class DlgUser extends javax.swing.JDialog {
     private ResultSet rs;
     private String user="",jabatan="",copyhakakses="",userdicopy="";
     private int i=0,barisdicopy=-1;
-    private DlgUpdateUser personal=new DlgUpdateUser(null,false);
 
     /** Creates new form DlgUser
      * @param parent
@@ -259,7 +258,8 @@ public class DlgUser extends javax.swing.JDialog {
                 "[F]Retur Ke Suplier Dapur","[F]Hibah Barang Dapur","[F]Ringkasan Penerimaan Dapur","[F]Ringkasan Pengajuan Dapur","[F]Ringkasan Pemesanan Dapur","[F]Ringkasan Retur Suplier Dapur",
                 "[F]Ringkasan Stok Keluar Dapur","[F]Stok Keluar Dapur Per Tanggal","[F]Sirkulasi Barang Dapur","[F]Sirkulasi Barang Dapur 2","[F]Verifikasi Penerimaan Dapur",
                 "[F]Nilai Penerimaan Vendor Dapur Per Bulan","[K]Ringkasan Hutang Vendor Dapur","[M]Penilaian Psikologi Klinis","[M]Penilaian Awal Medis Ranap Neonatus","[M]Penilaian Derajat Dehidrasi",
-                "[I]Ringkasan Jasa Tindakan Pasien","[I]Pendapatan Per Akun"
+                "[I]Ringkasan Jasa Tindakan Pasien","[I]Pendapatan Per Akun Rekening","[M]Hasil Pemeriksaan ECHO","[M]Penilaian Bayi Baru Lahir","[J]RL 1.3 Ketersediaan Tempat Tidur",
+                "[I]Pendapatan Per Akun Closing"
         };
         
         tabMode=new DefaultTableModel(null,row){
@@ -559,6 +559,7 @@ public class DlgUser extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
              };
              @Override
@@ -572,7 +573,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 1100;i++) {
+        for (i = 0; i < 1104;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -3324,7 +3325,19 @@ public class DlgUser extends javax.swing.JDialog {
                     column.setPreferredWidth(176);
                     break;
                 case 1099:
-                    column.setPreferredWidth(123);
+                    column.setPreferredWidth(172);
+                    break;
+                case 1100:
+                    column.setPreferredWidth(143);
+                    break;
+                case 1101:
+                    column.setPreferredWidth(144);
+                    break;
+                case 1102:
+                    column.setPreferredWidth(185);
+                    break;
+                case 1103:
+                    column.setPreferredWidth(162);
                     break;
                 default:
                     column.setPreferredWidth(134);
@@ -3376,25 +3389,6 @@ public class DlgUser extends javax.swing.JDialog {
                     Jabatan.setText(dlgpetugas.getTable().getValueAt(dlgpetugas.getTable().getSelectedRow(),9).toString());
                 }            
                 TKd.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        personal.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                tampil();
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -3826,7 +3820,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tabMode.addRow(new Object[]{
                     TKd.getText(),TNmUser.getText(),Jabatan.getText(),TPass.getText(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
@@ -3854,7 +3848,7 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
+                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
@@ -5001,7 +4995,11 @@ public class DlgUser extends javax.swing.JDialog {
                     "penilaian_awal_medis_ranap_neonatus='"+tbUser.getValueAt(i,1096).toString()+"',"+
                     "penilaian_derajat_dehidrasi='"+tbUser.getValueAt(i,1097).toString()+"',"+
                     "ringkasan_jasa_tindakan_medis='"+tbUser.getValueAt(i,1098).toString()+"',"+
-                    "pendapatan_per_akun='"+tbUser.getValueAt(i,1099).toString()+"'")==true){
+                    "pendapatan_per_akun='"+tbUser.getValueAt(i,1099).toString()+"',"+
+                    "hasil_pemeriksaan_echo='"+tbUser.getValueAt(i,1100).toString()+"',"+
+                    "penilaian_bayi_baru_lahir='"+tbUser.getValueAt(i,1101).toString()+"',"+
+                    "rl1_3_ketersediaan_kamar='"+tbUser.getValueAt(i,1102).toString()+"',"+
+                    "pendapatan_per_akun_closing='"+tbUser.getValueAt(i,1103).toString()+"'")==true){
                     emptTeks();
                 }
             }         
@@ -5170,6 +5168,25 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void MnSetUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSetUserActionPerformed
         if(tbUser.getSelectedRow()!= -1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgUpdateUser personal=new DlgUpdateUser(null,false);
+            personal.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    tampil();
+                }
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });
             personal.isUser(TKd.getText(),TNmUser.getText(),TPass.getText());
             personal.setSize(460,this.getHeight()-50);
             personal.setLocationRelativeTo(internalFrame1);
@@ -6299,7 +6316,11 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         "penilaian_awal_medis_ranap_neonatus='"+tbUser.getValueAt(barisdicopy,1096).toString()+"',"+
                                         "penilaian_derajat_dehidrasi='"+tbUser.getValueAt(barisdicopy,1097).toString()+"',"+
                                         "ringkasan_jasa_tindakan_medis='"+tbUser.getValueAt(barisdicopy,1098).toString()+"',"+
-                                        "pendapatan_per_akun='"+tbUser.getValueAt(barisdicopy,1099).toString()+"'");
+                                        "pendapatan_per_akun='"+tbUser.getValueAt(barisdicopy,1099).toString()+"',"+
+                                        "hasil_pemeriksaan_echo='"+tbUser.getValueAt(barisdicopy,1100).toString()+"',"+
+                                        "penilaian_bayi_baru_lahir='"+tbUser.getValueAt(barisdicopy,1101).toString()+"',"+
+                                        "rl1_3_ketersediaan_kamar='"+tbUser.getValueAt(barisdicopy,1102).toString()+"',"+
+                                        "pendapatan_per_akun_closing='"+tbUser.getValueAt(barisdicopy,1103).toString()+"'");
                                 }
                                 userdicopy="";
                                 copyhakakses="";
@@ -6609,7 +6630,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "user.surat_pemesanan_dapur,user.pengajuan_barang_dapur,user.dapur_returbeli,user.hibah_dapur,user.ringkasan_penerimaan_dapur,user.ringkasan_pengajuan_dapur,"+
                 "user.ringkasan_pemesanan_dapur,user.ringkasan_returbeli_dapur,user.ringkasan_stokkeluar_dapur,user.dapur_stokkeluar_pertanggal,user.sirkulasi_dapur,"+
                 "user.sirkulasi_dapur2,user.verifikasi_penerimaan_dapur,user.nilai_penerimaan_vendor_dapur_perbulan,user.ringkasan_hutang_vendor_dapur,user.penilaian_psikologi_klinis,"+
-                "user.penilaian_awal_medis_ranap_neonatus,user.penilaian_derajat_dehidrasi,user.ringkasan_jasa_tindakan_medis,user.pendapatan_per_akun from user order by AES_DECRYPT(user.id_user,'nur')");
+                "user.penilaian_awal_medis_ranap_neonatus,user.penilaian_derajat_dehidrasi,user.ringkasan_jasa_tindakan_medis,user.pendapatan_per_akun,user.hasil_pemeriksaan_echo,"+
+                "user.penilaian_bayi_baru_lahir,user.rl1_3_ketersediaan_kamar,user.pendapatan_per_akun_closing from user order by AES_DECRYPT(user.id_user,'nur')");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -7721,7 +7743,11 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("penilaian_awal_medis_ranap_neonatus"),
                                rs.getBoolean("penilaian_derajat_dehidrasi"),
                                rs.getBoolean("ringkasan_jasa_tindakan_medis"),
-                               rs.getBoolean("pendapatan_per_akun")
+                               rs.getBoolean("pendapatan_per_akun"),
+                               rs.getBoolean("hasil_pemeriksaan_echo"),
+                               rs.getBoolean("penilaian_bayi_baru_lahir"),
+                               rs.getBoolean("rl1_3_ketersediaan_kamar"),
+                               rs.getBoolean("pendapatan_per_akun_closing")
                             });
                         }   
                     } catch (Exception e) {
@@ -8822,7 +8848,11 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                            rs.getBoolean("penilaian_awal_medis_ranap_neonatus"),
                            rs.getBoolean("penilaian_derajat_dehidrasi"),
                            rs.getBoolean("ringkasan_jasa_tindakan_medis"),
-                           rs.getBoolean("pendapatan_per_akun")
+                           rs.getBoolean("pendapatan_per_akun"),
+                           rs.getBoolean("hasil_pemeriksaan_echo"),
+                           rs.getBoolean("penilaian_bayi_baru_lahir"),
+                           rs.getBoolean("rl1_3_ketersediaan_kamar"),
+                           rs.getBoolean("pendapatan_per_akun_closing")
                         });
                     }                                             
                  }
