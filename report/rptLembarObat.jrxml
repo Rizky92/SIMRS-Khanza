@@ -131,7 +131,7 @@
 				<reportElement x="13" y="8" width="251" height="1" uuid="b431e7d4-b789-46fb-9c8b-3231f1e1c335"/>
 			</line>
 			<staticText>
-				<reportElement x="84" y="9" width="129" height="9" uuid="7aacc818-e6b1-4c65-9c3f-c62a08035e38"/>
+				<reportElement x="84" y="9" width="66" height="9" uuid="7aacc818-e6b1-4c65-9c3f-c62a08035e38"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
@@ -251,6 +251,16 @@
 				</textElement>
 				<text><![CDATA[___________  Jam ______]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="150" y="9" width="63" height="9" uuid="b1d3d395-cfde-46b8-86d6-504b5321b750"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Resep]]></text>
+			</staticText>
+			<line>
+				<reportElement x="150" y="8" width="1" height="41" uuid="4df75dae-fbeb-4ee1-96cd-6503672bbbf9"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>
