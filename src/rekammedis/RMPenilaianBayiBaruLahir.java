@@ -618,12 +618,41 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         TglLahirIbu = new widget.TextBox();
         jLabel15 = new widget.Label();
         NIKIbu = new widget.TextBox();
-        jLabel16 = new widget.Label();
         jLabel17 = new widget.Label();
         NmIbu1 = new widget.TextBox();
+        jLabel16 = new widget.Label();
         jLabel38 = new widget.Label();
         HbsAg = new widget.ComboBox();
         TglLahirIbu1 = new widget.TextBox();
+        jLabel39 = new widget.Label();
+        TglLahirIbu2 = new widget.TextBox();
+        jLabel18 = new widget.Label();
+        jLabel40 = new widget.Label();
+        jLabel41 = new widget.Label();
+        HbsAg1 = new widget.ComboBox();
+        jLabel42 = new widget.Label();
+        TglLahirIbu3 = new widget.TextBox();
+        jLabel20 = new widget.Label();
+        TglLahirIbu4 = new widget.TextBox();
+        HbsAg2 = new widget.ComboBox();
+        jLabel43 = new widget.Label();
+        jLabel22 = new widget.Label();
+        HbsAg3 = new widget.ComboBox();
+        jLabel44 = new widget.Label();
+        TglLahirIbu5 = new widget.TextBox();
+        jLabel45 = new widget.Label();
+        TglLahirIbu6 = new widget.TextBox();
+        TglLahirIbu7 = new widget.TextBox();
+        jLabel46 = new widget.Label();
+        jLabel23 = new widget.Label();
+        NmIbu2 = new widget.TextBox();
+        jLabel24 = new widget.Label();
+        jLabel25 = new widget.Label();
+        jLabel47 = new widget.Label();
+        HbsAg4 = new widget.ComboBox();
+        TglLahirIbu8 = new widget.TextBox();
+        jLabel48 = new widget.Label();
+        TglLahirIbu9 = new widget.TextBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1108,7 +1137,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         Scroll6.setViewportView(tbRiwayatKehamilan);
 
         FormInput.add(Scroll6);
-        Scroll6.setBounds(110, 170, 744, 93);
+        Scroll6.setBounds(110, 200, 744, 93);
 
         BtnTambahMasalah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
         BtnTambahMasalah.setMnemonic('3');
@@ -1121,7 +1150,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnTambahMasalah);
-        BtnTambahMasalah.setBounds(77, 170, 28, 23);
+        BtnTambahMasalah.setBounds(77, 200, 28, 23);
 
         BtnHapusRiwayatPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapusRiwayatPersalinan.setMnemonic('3');
@@ -1134,20 +1163,20 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnHapusRiwayatPersalinan);
-        BtnHapusRiwayatPersalinan.setBounds(77, 200, 28, 23);
+        BtnHapusRiwayatPersalinan.setBounds(77, 230, 28, 23);
 
         jSeparator2.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator2.setForeground(new java.awt.Color(239, 244, 234));
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
         jSeparator2.setName("jSeparator2"); // NOI18N
         FormInput.add(jSeparator2);
-        jSeparator2.setBounds(0, 380, 880, 1);
+        jSeparator2.setBounds(0, 410, 880, 1);
 
         jLabel115.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel115.setText("II. PEMERIKSAAN FISIK");
+        jLabel115.setText("II. RIWAYAT PERSALINAN");
         jLabel115.setName("jLabel115"); // NOI18N
         FormInput.add(jLabel115);
-        jLabel115.setBounds(10, 380, 180, 23);
+        jLabel115.setBounds(10, 410, 180, 23);
 
         jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel74.setText("APGAR Score :");
@@ -1261,12 +1290,6 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         FormInput.add(NIKIbu);
         NIKIbu.setBounds(724, 70, 130, 23);
 
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel16.setText("Status Perkawinan Ibu");
-        jLabel16.setName("jLabel16"); // NOI18N
-        FormInput.add(jLabel16);
-        jLabel16.setBounds(44, 120, 120, 23);
-
         jLabel17.setText(":");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
@@ -1277,6 +1300,12 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         NmIbu1.setName("NmIbu1"); // NOI18N
         FormInput.add(NmIbu1);
         NmIbu1.setBounds(164, 120, 110, 23);
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("Status Perkawinan Ibu");
+        jLabel16.setName("jLabel16"); // NOI18N
+        FormInput.add(jLabel16);
+        jLabel16.setBounds(44, 120, 130, 23);
 
         jLabel38.setText("Penyakit Yang Diderita Ibu :");
         jLabel38.setName("jLabel38"); // NOI18N
@@ -1297,6 +1326,179 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         TglLahirIbu1.setName("TglLahirIbu1"); // NOI18N
         FormInput.add(TglLahirIbu1);
         TglLahirIbu1.setBounds(532, 120, 322, 23);
+
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel39.setText("Obat Yang Dikonsumsi Selama Kehamilan");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(44, 150, 220, 23);
+
+        TglLahirIbu2.setHighlighter(null);
+        TglLahirIbu2.setName("TglLahirIbu2"); // NOI18N
+        FormInput.add(TglLahirIbu2);
+        TglLahirIbu2.setBounds(257, 150, 597, 23);
+
+        jLabel18.setText(":");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(0, 150, 253, 23);
+
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel40.setText("Riwayat Kehamilan Terdahulu :");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(44, 180, 190, 23);
+
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel41.setText("Kehamilan Sekarang :");
+        jLabel41.setName("jLabel41"); // NOI18N
+        FormInput.add(jLabel41);
+        jLabel41.setBounds(44, 300, 190, 23);
+
+        HbsAg1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        HbsAg1.setName("HbsAg1"); // NOI18N
+        HbsAg1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HbsAg1KeyPressed(evt);
+            }
+        });
+        FormInput.add(HbsAg1);
+        HbsAg1.setBounds(190, 320, 80, 23);
+
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel42.setText("Perawatan Antenatal");
+        jLabel42.setName("jLabel42"); // NOI18N
+        FormInput.add(jLabel42);
+        jLabel42.setBounds(77, 320, 140, 23);
+
+        TglLahirIbu3.setHighlighter(null);
+        TglLahirIbu3.setName("TglLahirIbu3"); // NOI18N
+        FormInput.add(TglLahirIbu3);
+        TglLahirIbu3.setBounds(273, 320, 200, 23);
+
+        jLabel20.setText(":");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(0, 320, 186, 23);
+
+        TglLahirIbu4.setHighlighter(null);
+        TglLahirIbu4.setName("TglLahirIbu4"); // NOI18N
+        FormInput.add(TglLahirIbu4);
+        TglLahirIbu4.setBounds(694, 320, 160, 23);
+
+        HbsAg2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        HbsAg2.setName("HbsAg2"); // NOI18N
+        HbsAg2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HbsAg2KeyPressed(evt);
+            }
+        });
+        FormInput.add(HbsAg2);
+        HbsAg2.setBounds(611, 320, 80, 23);
+
+        jLabel43.setText("Terdaftar Di EKohort :");
+        jLabel43.setName("jLabel43"); // NOI18N
+        FormInput.add(jLabel43);
+        jLabel43.setBounds(467, 320, 140, 23);
+
+        jLabel22.setText(":");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(0, 350, 177, 23);
+
+        HbsAg3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada", "Hiperemesis", "CPD", "Kelainan Letak", "Solutio Placenta", "Placenta Previa", "KPD", "Oligohydramnion", "Polyhydramnion", "Prolaps Tali Pusat", "IUGR", "Pre-eklamsi" }));
+        HbsAg3.setName("HbsAg3"); // NOI18N
+        HbsAg3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HbsAg3KeyPressed(evt);
+            }
+        });
+        FormInput.add(HbsAg3);
+        HbsAg3.setBounds(181, 350, 140, 23);
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel44.setText("Penyulit Kehamilan");
+        jLabel44.setName("jLabel44"); // NOI18N
+        FormInput.add(jLabel44);
+        jLabel44.setBounds(77, 350, 140, 23);
+
+        TglLahirIbu5.setHighlighter(null);
+        TglLahirIbu5.setName("TglLahirIbu5"); // NOI18N
+        FormInput.add(TglLahirIbu5);
+        TglLahirIbu5.setBounds(324, 350, 255, 23);
+
+        jLabel45.setText("Alergi :");
+        jLabel45.setName("jLabel45"); // NOI18N
+        FormInput.add(jLabel45);
+        jLabel45.setBounds(580, 350, 60, 23);
+
+        TglLahirIbu6.setHighlighter(null);
+        TglLahirIbu6.setName("TglLahirIbu6"); // NOI18N
+        FormInput.add(TglLahirIbu6);
+        TglLahirIbu6.setBounds(644, 350, 210, 23);
+
+        TglLahirIbu7.setHighlighter(null);
+        TglLahirIbu7.setName("TglLahirIbu7"); // NOI18N
+        FormInput.add(TglLahirIbu7);
+        TglLahirIbu7.setBounds(183, 380, 671, 23);
+
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel46.setText("Keterangan Lainnya");
+        jLabel46.setName("jLabel46"); // NOI18N
+        FormInput.add(jLabel46);
+        jLabel46.setBounds(77, 380, 120, 23);
+
+        jLabel23.setText(":");
+        jLabel23.setName("jLabel23"); // NOI18N
+        FormInput.add(jLabel23);
+        jLabel23.setBounds(0, 380, 179, 23);
+
+        NmIbu2.setEditable(false);
+        NmIbu2.setHighlighter(null);
+        NmIbu2.setName("NmIbu2"); // NOI18N
+        FormInput.add(NmIbu2);
+        NmIbu2.setBounds(135, 430, 180, 23);
+
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel24.setText("Umur Kehamilan");
+        jLabel24.setName("jLabel24"); // NOI18N
+        FormInput.add(jLabel24);
+        jLabel24.setBounds(44, 430, 130, 23);
+
+        jLabel25.setText(":");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(0, 430, 131, 23);
+
+        jLabel47.setText("Kehamilan :");
+        jLabel47.setName("jLabel47"); // NOI18N
+        FormInput.add(jLabel47);
+        jLabel47.setBounds(320, 430, 80, 23);
+
+        HbsAg4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tunggal", "Kembar" }));
+        HbsAg4.setName("HbsAg4"); // NOI18N
+        HbsAg4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HbsAg4KeyPressed(evt);
+            }
+        });
+        FormInput.add(HbsAg4);
+        HbsAg4.setBounds(404, 430, 90, 23);
+
+        TglLahirIbu8.setHighlighter(null);
+        TglLahirIbu8.setName("TglLahirIbu8"); // NOI18N
+        FormInput.add(TglLahirIbu8);
+        TglLahirIbu8.setBounds(497, 430, 157, 23);
+
+        jLabel48.setText("Urutan Kehamilan :");
+        jLabel48.setName("jLabel48"); // NOI18N
+        FormInput.add(jLabel48);
+        jLabel48.setBounds(660, 430, 110, 23);
+
+        TglLahirIbu9.setHighlighter(null);
+        TglLahirIbu9.setName("TglLahirIbu9"); // NOI18N
+        FormInput.add(TglLahirIbu9);
+        TglLahirIbu9.setBounds(774, 430, 80, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -2042,6 +2244,22 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         //Valid.pindah(evt,UsiaKehamilan,HIV);
     }//GEN-LAST:event_HbsAgKeyPressed
 
+    private void HbsAg1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HbsAg1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HbsAg1KeyPressed
+
+    private void HbsAg2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HbsAg2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HbsAg2KeyPressed
+
+    private void HbsAg3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HbsAg3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HbsAg3KeyPressed
+
+    private void HbsAg4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HbsAg4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HbsAg4KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -2079,6 +2297,10 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     private javax.swing.JDialog DlgRiwayatPersalinan;
     private widget.PanelBiasa FormInput;
     private widget.ComboBox HbsAg;
+    private widget.ComboBox HbsAg1;
+    private widget.ComboBox HbsAg2;
+    private widget.ComboBox HbsAg3;
+    private widget.ComboBox HbsAg4;
     private widget.ComboBox JK;
     private widget.TextBox JenisPersalinan;
     private widget.TextBox Jk;
@@ -2093,6 +2315,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     private widget.TextBox NmDokter;
     private widget.TextBox NmIbu;
     private widget.TextBox NmIbu1;
+    private widget.TextBox NmIbu2;
     private widget.TextBox NoRMIbu;
     private widget.TextBox Penolong;
     private widget.TextBox Penyulit;
@@ -2111,6 +2334,14 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     private widget.TextBox TglLahir;
     private widget.TextBox TglLahirIbu;
     private widget.TextBox TglLahirIbu1;
+    private widget.TextBox TglLahirIbu2;
+    private widget.TextBox TglLahirIbu3;
+    private widget.TextBox TglLahirIbu4;
+    private widget.TextBox TglLahirIbu5;
+    private widget.TextBox TglLahirIbu6;
+    private widget.TextBox TglLahirIbu7;
+    private widget.TextBox TglLahirIbu8;
+    private widget.TextBox TglLahirIbu9;
     private widget.TextBox UsiaHamil;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
@@ -2132,9 +2363,25 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
     private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private widget.Label jLabel20;
     private widget.Label jLabel21;
+    private widget.Label jLabel22;
+    private widget.Label jLabel23;
+    private widget.Label jLabel24;
+    private widget.Label jLabel25;
     private widget.Label jLabel38;
+    private widget.Label jLabel39;
+    private widget.Label jLabel40;
+    private widget.Label jLabel41;
+    private widget.Label jLabel42;
+    private widget.Label jLabel43;
+    private widget.Label jLabel44;
+    private widget.Label jLabel45;
+    private widget.Label jLabel46;
+    private widget.Label jLabel47;
+    private widget.Label jLabel48;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel74;
