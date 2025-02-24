@@ -21,7 +21,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no";
+    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no", kodeunit = "";
     private int jmlparsial=0;
     
     /** Creates new form 
@@ -587,12 +587,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnTambah.setEnabled(akses.getresep_dokter());
     }
     
-    public void setRM(String norawat,String norm,String kodedokter,String kodepj,String status){
+    public void setRM(String norawat,String norm,String kodedokter,String kodepj,String status,String kodeunit){
         this.norm=norm;
         this.status=status;
         this.norawat=norawat;
         this.kddokter=kodedokter;
         this.kode_pj=kodepj;
+        this.kodeunit = kodeunit;
     }
 
     private void panggilform() {

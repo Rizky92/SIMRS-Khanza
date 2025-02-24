@@ -9311,7 +9311,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resep.setLocationRelativeTo(internalFrame1);
                     resep.setNoRm(TNoRw.getText(),new Date(),CmbJam.getSelectedItem().toString(),CmbMenit.getSelectedItem().toString(),CmbDetik.getSelectedItem().toString(),
-                        KdDokter.getText(),TDokter.getText(),"ralan");
+                        KdDokter.getText(),TDokter.getText(),"ralan", kdpoli.getText());
                     resep.isCek();
                     resep.tampilobat();
                     resep.setVisible(true);
@@ -11787,7 +11787,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     daftar.setLocationRelativeTo(internalFrame1);
                     daftar.setVisible(true);
-                    daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDokter.getText(),kdpnj.getText(),"ralan");
+                    daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDokter.getText(),kdpnj.getText(),"ralan", kdpoli.getText());
                     daftar.tampil();
                     this.setCursor(Cursor.getDefaultCursor());
                 }    
@@ -15663,7 +15663,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanKebidananActionPerformed
+    private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
