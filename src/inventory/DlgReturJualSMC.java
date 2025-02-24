@@ -8,8 +8,10 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -18,6 +20,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import simrskhanza.DlgPasien;
@@ -31,6 +34,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
     private Jurnal jur = new Jurnal();
     private DlgCariBangsal bangsal = new DlgCariBangsal(null, false);
     private DlgCariReturJual form = new DlgCariReturJual(null, false);
+    private DlgPemberianObat cariobat = new DlgPemberianObat(null, false);
     private DlgPasien member = new DlgPasien(null, false);
     private double ttlretur = 0;
     private PreparedStatement ps;
@@ -116,7 +120,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         NoBatch.setDocument(new batasInput((byte) 20).getKata(NoBatch));
         Hargaretur.setDocument(new batasInput((byte) 13).getKata(Hargaretur));
 
-        Jmlretur.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        Jmlretur.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 isHitung();
@@ -133,7 +137,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
             }
         });
 
-        Hargaretur.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        Hargaretur.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 isHitung();
@@ -149,102 +153,39 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                 isHitung();
             }
         });
-
-        form.barang.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
+        
+        cariobat.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
-                    if (form.barang.getTable().getSelectedRow() != -1) {
-                        Kdbar.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 1).toString());
-                        nmbar.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 2).toString());
-                        Satuanbar.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 6).toString());
-                        if (Jenisjual.getSelectedItem().equals("Jual Bebas")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 20).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Karyawan")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 21).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Beli Luar")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 19).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Rawat Jalan")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 12).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Kelas 1")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 13).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Kelas 2")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 14).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Kelas 3")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 15).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Utama/BPJS")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 16).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("VIP")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 17).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("VVIP")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 18).toString());
-                        } else if (Jenisjual.getSelectedItem().equals("Harga Beli")) {
-                            Hargaretur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 11).toString());
-                        }
-
+                    if (cariobat.getTable().getSelectedRow() != -1) {
+                        Kdbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 5).toString());
+                        nmbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 6).toString());
+                        Satuanbar.setText(Sequel.cariIsiSmc("select databarang.kode_sat from databarang where databarang.kode_brng = ?", Kdbar.getText()));
+                        TtlPemberian.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 9).toString());
+                        Hargaretur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 12).toString());
                         if (aktifkanbatch.equals("yes")) {
-                            NoBatch.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 32).toString());
-                            NoFaktur.setText(form.barang.getTable().getValueAt(form.barang.getTable().getSelectedRow(), 33).toString());
+                            NoBatch.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 14).toString());
+                            NoFaktur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 15).toString());
                         }
-                    }
-                    Kdbar.requestFocus();
-                }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });
-
-        form.barang.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (akses.getform().equals("DlgReturJual")) {
-                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                        form.barang.dispose();
                         Kdbar.requestFocus();
                     }
                 }
             }
-
+        });
+        
+        cariobat.getTable().addKeyListener(new KeyAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyPressed(KeyEvent e) {
+                if (akses.getform().equals("DlgReturJual")) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        cariobat.dispose();
+                    }
+                }
             }
         });
-
-        member.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
+        
+        member.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -263,29 +204,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     kdmem.requestFocus();
                 }
             }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
         });
 
-        member.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
+        member.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -294,17 +215,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     }
                 }
             }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
         });
 
-        member.getTable2().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
+        member.getTable2().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -313,17 +226,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     }
                 }
             }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
         });
 
-        member.getTable3().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
+        member.getTable3().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -332,21 +237,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     }
                 }
             }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
         });
 
-        bangsal.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
+        bangsal.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -357,33 +250,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     kdgudang.requestFocus();
                 }
             }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
         });
 
-        form.petugas.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
+        form.petugas.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
@@ -393,22 +262,6 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
                     }
                     Kdptg.requestFocus();
                 }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
             }
         });
     }
@@ -452,13 +305,14 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         NoBatch = new widget.TextBox();
         NoFaktur = new widget.TextBox();
         label23 = new widget.Label();
+        label28 = new widget.Label();
+        TtlPemberian = new widget.Label();
         panelisiBeli = new widget.panelisi();
         label15 = new widget.Label();
         NoRetur = new widget.TextBox();
         label18 = new widget.Label();
         NoNota = new widget.TextBox();
         Kdptg = new widget.TextBox();
-        Jenisjual = new widget.ComboBox();
         label13 = new widget.Label();
         Nmptg = new widget.TextBox();
         BtnPtg = new widget.Button();
@@ -468,7 +322,6 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         kdmem = new widget.TextBox();
         nmmem = new widget.TextBox();
         BtnMmb = new widget.Button();
-        label12 = new widget.Label();
         label32 = new widget.Label();
         kdgudang = new widget.TextBox();
         nmgudang = new widget.TextBox();
@@ -745,13 +598,13 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
             }
         });
         panelisi4.add(Jmlretur);
-        Jmlretur.setBounds(524, 40, 50, 23);
+        Jmlretur.setBounds(484, 40, 50, 23);
 
-        label26.setText("Jumlah Retur :");
+        label26.setText("Jml. Retur :");
         label26.setName("label26"); // NOI18N
         label26.setPreferredSize(new java.awt.Dimension(90, 23));
         panelisi4.add(label26);
-        label26.setBounds(440, 40, 80, 23);
+        label26.setBounds(410, 40, 70, 23);
 
         Satuanbar.setEditable(false);
         Satuanbar.setName("Satuanbar"); // NOI18N
@@ -765,6 +618,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         panelisi4.add(label21);
         label21.setBounds(0, 40, 63, 23);
 
+        NoBatch.setEditable(false);
         NoBatch.setName("NoBatch"); // NOI18N
         NoBatch.setPreferredSize(new java.awt.Dimension(80, 23));
         NoBatch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -775,6 +629,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         panelisi4.add(NoBatch);
         NoBatch.setBounds(67, 40, 100, 23);
 
+        NoFaktur.setEditable(false);
         NoFaktur.setName("NoFaktur"); // NOI18N
         NoFaktur.setPreferredSize(new java.awt.Dimension(80, 23));
         NoFaktur.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -785,11 +640,27 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         panelisi4.add(NoFaktur);
         NoFaktur.setBounds(244, 40, 140, 23);
 
-        label23.setText("Faktur :");
+        label23.setText("No.Faktur :");
         label23.setName("label23"); // NOI18N
         label23.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisi4.add(label23);
         label23.setBounds(170, 40, 70, 23);
+
+        label28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label28.setText("/ ");
+        label28.setToolTipText("");
+        label28.setName("label28"); // NOI18N
+        label28.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi4.add(label28);
+        label28.setBounds(538, 40, 8, 23);
+
+        TtlPemberian.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TtlPemberian.setText("0");
+        TtlPemberian.setToolTipText("");
+        TtlPemberian.setName("TtlPemberian"); // NOI18N
+        TtlPemberian.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi4.add(TtlPemberian);
+        TtlPemberian.setBounds(546, 40, 42, 23);
 
         jPanel1.add(panelisi4, java.awt.BorderLayout.CENTER);
 
@@ -841,18 +712,6 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         panelisiBeli.add(Kdptg);
         Kdptg.setBounds(409, 40, 100, 23);
 
-        Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Kelas 1", "Kelas 2", "Kelas 3", "Utama/BPJS", "VIP", "VVIP", "Beli Luar", "Jual Bebas", "Karyawan", "Harga Beli" }));
-        Jenisjual.setSelectedIndex(10);
-        Jenisjual.setName("Jenisjual"); // NOI18N
-        Jenisjual.setPreferredSize(new java.awt.Dimension(45, 23));
-        Jenisjual.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                JenisjualItemStateChanged(evt);
-            }
-        });
-        panelisiBeli.add(Jenisjual);
-        Jenisjual.setBounds(74, 70, 120, 23);
-
         label13.setText("Petugas :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(70, 23));
@@ -882,7 +741,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         label11.setName("label11"); // NOI18N
         label11.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisiBeli.add(label11);
-        label11.setBounds(195, 70, 52, 23);
+        label11.setBounds(0, 70, 70, 23);
 
         TglRetur.setDisplayFormat("dd-MM-yyyy");
         TglRetur.setName("TglRetur"); // NOI18N
@@ -892,7 +751,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
             }
         });
         panelisiBeli.add(TglRetur);
-        TglRetur.setBounds(251, 70, 90, 23);
+        TglRetur.setBounds(74, 70, 90, 23);
 
         label16.setText("Pasien :");
         label16.setName("label16"); // NOI18N
@@ -927,12 +786,6 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
         });
         panelisiBeli.add(BtnMmb);
         BtnMmb.setBounds(744, 10, 28, 23);
-
-        label12.setText("Jenis :");
-        label12.setName("label12"); // NOI18N
-        label12.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelisiBeli.add(label12);
-        label12.setBounds(0, 70, 70, 23);
 
         label32.setText("Lokasi :");
         label32.setName("label32"); // NOI18N
@@ -1009,6 +862,9 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
             Valid.textKosong(NoBatch, "No.Batch");
         } else if (Hargaretur.getText().trim().equals("")) {
             Valid.textKosong(Hargaretur, "harga retur");
+        } else if (Double.parseDouble(Jmlretur.getText()) > Double.parseDouble(TtlPemberian.getText())) {
+            JOptionPane.showMessageDialog(null, "Jumlah obat retur tidak sesuai dengan pemberian obat..!!");
+            Jmlretur.requestFocus();
         } else {
             if (formvalid.equals("No")) {
                 if (aktifkanbatch.equals("yes")) {
@@ -1217,12 +1073,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
 private void KdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdbarKeyPressed
     if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-        cariBatch();
     } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-        cariBatch();
         Kdptg.requestFocus();
     } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-        cariBatch();
         Jmlretur.requestFocus();
     } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
         BtnBrgActionPerformed(null);
@@ -1231,19 +1084,28 @@ private void KdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kdb
 
 private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBrgActionPerformed
     akses.setform("DlgReturJual");
-    if (aktifkanbatch.equals("yes")) {
-        form.barang.aktifkanbatch = "yes";
-        form.barang.isBatch();
+    if (norawat.isBlank()) {
+        if (aktifkanbatch.equals("yes")) {
+            form.barang.aktifkanbatch = "yes";
+            form.barang.isBatch();
+        }
+        form.barang.emptTeks();
+        form.barang.isCek();
+        if (!norawat.equals("")) {
+            form.barang.tampil4(norawat);
+        }
+        form.barang.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        form.barang.setLocationRelativeTo(internalFrame1);
+        form.barang.setAlwaysOnTop(false);
+        form.barang.setVisible(true);
+    } else {
+        cariobat.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+        cariobat.setLocationRelativeTo(internalFrame1);
+        cariobat.isCek();
+        cariobat.setNoRM(norawat, "ranap");
+        cariobat.tampilObat();
+        cariobat.setVisible(true);
     }
-    form.barang.emptTeks();
-    form.barang.isCek();
-    if (!norawat.equals("")) {
-        form.barang.tampil4(norawat);
-    }
-    form.barang.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-    form.barang.setLocationRelativeTo(internalFrame1);
-    form.barang.setAlwaysOnTop(false);
-    form.barang.setVisible(true);
 }//GEN-LAST:event_BtnBrgActionPerformed
 
 private void JmlreturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JmlreturKeyPressed
@@ -1273,10 +1135,6 @@ private void BtnMmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     member.setAlwaysOnTop(false);
     member.setVisible(true);
 }//GEN-LAST:event_BtnMmbActionPerformed
-
-private void JenisjualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisjualItemStateChanged
-    cariBatch();
-}//GEN-LAST:event_JenisjualItemStateChanged
 
 private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCetakNotaActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1320,29 +1178,23 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // tampil();
+        tampil();
     }//GEN-LAST:event_formWindowOpened
 
     private void NoBatchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoBatchKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            cariBatch();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            cariBatch();
             Kdbar.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            cariBatch();
             Jmlretur.requestFocus();
         }
     }//GEN-LAST:event_NoBatchKeyPressed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            cariBatch();
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            cariBatch();
             Kdbar.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            cariBatch();
             Jmlretur.requestFocus();
         }
     }//GEN-LAST:event_NoFakturKeyPressed
@@ -1375,7 +1227,6 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Button BtnSimpan;
     private widget.Button BtnTambah;
     private widget.TextBox Hargaretur;
-    private widget.ComboBox Jenisjual;
     private widget.TextBox Jmlretur;
     private widget.TextBox Kd2;
     private widget.TextBox Kdbar;
@@ -1390,12 +1241,12 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.TextBox Satuanbar;
     private widget.TextBox Subtotal;
     private widget.Tanggal TglRetur;
+    private widget.Label TtlPemberian;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JPanel jPanel1;
     private widget.TextBox kdgudang;
     private widget.TextBox kdmem;
     private widget.Label label11;
-    private widget.Label label12;
     private widget.Label label13;
     private widget.Label label15;
     private widget.Label label16;
@@ -1406,6 +1257,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Label label25;
     private widget.Label label26;
     private widget.Label label27;
+    private widget.Label label28;
     private widget.Label label32;
     private widget.Label label9;
     private widget.TextBox nmbar;
@@ -1458,6 +1310,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         nmbar.setText("");
         Satuanbar.setText("");
         Hargaretur.setText("0");
+        TtlPemberian.setText("0");
         Jmlretur.setText("");
         Subtotal.setText("0");
         NoBatch.setText("");
@@ -1515,55 +1368,6 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?", nmmem, kdmem.getText());
         kdgudang.setText(akses.getkdbangsal());
         nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
-    }
-
-    private void cariBatch() {
-        try {
-            ps = koneksi.prepareStatement(
-                "select * from data_batch where data_batch.no_batch=? and data_batch.kode_brng=? and data_batch.no_faktur=?");
-            try {
-                ps.setString(1, NoBatch.getText());
-                ps.setString(2, Kdbar.getText());
-                ps.setString(3, NoFaktur.getText());
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    if (Jenisjual.getSelectedItem().equals("Karyawan")) {
-                        Hargaretur.setText(rs.getString("karyawan"));
-                    } else if (Jenisjual.getSelectedItem().equals("Jual Bebas")) {
-                        Hargaretur.setText(rs.getString("jualbebas"));
-                    } else if (Jenisjual.getSelectedItem().equals("Beli Luar")) {
-                        Hargaretur.setText(rs.getString("beliluar"));
-                    } else if (Jenisjual.getSelectedItem().equals("Rawat Jalan")) {
-                        Hargaretur.setText(rs.getString("ralan"));
-                    } else if (Jenisjual.getSelectedItem().equals("Kelas 1")) {
-                        Hargaretur.setText(rs.getString("kelas1"));
-                    } else if (Jenisjual.getSelectedItem().equals("Kelas 2")) {
-                        Hargaretur.setText(rs.getString("kelas2"));
-                    } else if (Jenisjual.getSelectedItem().equals("Kelas 3")) {
-                        Hargaretur.setText(rs.getString("kelas3"));
-                    } else if (Jenisjual.getSelectedItem().equals("Utama/BPJS")) {
-                        Hargaretur.setText(rs.getString("utama"));
-                    } else if (Jenisjual.getSelectedItem().equals("VIP")) {
-                        Hargaretur.setText(rs.getString("vip"));
-                    } else if (Jenisjual.getSelectedItem().equals("VVIP")) {
-                        Hargaretur.setText(rs.getString("vvip"));
-                    } else if (Jenisjual.getSelectedItem().equals("Harga Beli")) {
-                        Hargaretur.setText(rs.getString("h_beli"));
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
     }
 
     private void autonomor() {

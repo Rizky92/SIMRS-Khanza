@@ -1498,6 +1498,68 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
     }
 
+    public void tampilObat() {
+        Valid.tabelKosong(tabModePO);
+        
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select detail_pemberian_obat.tgl_perawatan, detail_pemberian_obat.jam, detail_pemberian_obat.no_rawat, reg_periksa.no_rkm_medis, " +
+            "pasien.nm_pasien, detail_pemberian_obat.kode_brng, databarang.nama_brng, detail_pemberian_obat.embalase, detail_pemberian_obat.tuslah, " +
+            "detail_pemberian_obat.jml, detail_pemberian_obat.biaya_obat, detail_pemberian_obat.total, detail_pemberian_obat.h_beli, " +
+            "detail_pemberian_obat.kd_bangsal, detail_pemberian_obat.no_batch, detail_pemberian_obat.no_faktur from detail_pemberian_obat " +
+            "join reg_periksa on detail_pemberian_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+            "join databarang on detail_pemberian_obat.kode_brng = databarang.kode_brng where detail_pemberian_obat.no_rawat = ? " + 
+            (TCariPasien.getText().isBlank() ? "" : "and reg_periksa.no_rkm_medis = ? ") + (TCari.getText().isBlank() ? "" :
+            "and (detail_pemberian_obat.tgl_perawatan like ? or detail_pemberian_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? " + 
+            "or pasien.nm_pasien like ? or detail_pemberian_obat.kode_brng like ? or databarang.nama_brng like ? or detail_pemberian_obat.no_faktur like ? " + 
+            "or detail_pemberian_obat.no_batch like ?) ") + "order by detail_pemberian_obat.tgl_perawatan"
+        )) {
+            ps.setString(1, TNoRw.getText());
+            if (!TCariPasien.getText().isBlank()) {
+                ps.setString(2, TCariPasien.getText());
+                
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(3, "%" + TCari.getText() + "%");
+                    ps.setString(4, "%" + TCari.getText() + "%");
+                    ps.setString(5, "%" + TCari.getText() + "%");
+                    ps.setString(6, "%" + TCari.getText() + "%");
+                    ps.setString(7, "%" + TCari.getText() + "%");
+                    ps.setString(8, "%" + TCari.getText() + "%");
+                    ps.setString(9, "%" + TCari.getText() + "%");
+                    ps.setString(10, "%" + TCari.getText() + "%");
+                }
+            } else {
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(2, "%" + TCari.getText() + "%");
+                    ps.setString(3, "%" + TCari.getText() + "%");
+                    ps.setString(4, "%" + TCari.getText() + "%");
+                    ps.setString(5, "%" + TCari.getText() + "%");
+                    ps.setString(6, "%" + TCari.getText() + "%");
+                    ps.setString(7, "%" + TCari.getText() + "%");
+                    ps.setString(8, "%" + TCari.getText() + "%");
+                    ps.setString(9, "%" + TCari.getText() + "%");
+                }
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    jumlahtotal = jumlahtotal + rs.getDouble("total");
+                    tabModePO.addRow(new Object[] {
+                        rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6),
+                        rs.getString(7), rs.getDouble(8), rs.getDouble(9),
+                        rs.getDouble(10), rs.getDouble(11), rs.getDouble(12),
+                        rs.getDouble(13), rs.getString(14), rs.getString(15),
+                        rs.getString(16)
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        LCount.setText("" + tabModePO.getRowCount());
+        LCount1.setText("" + Valid.SetAngka(jumlahtotal));
+    }
+    
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
     }
@@ -1520,6 +1582,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             THBeli.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),12).toString());
             Valid.SetTgl(DTPBeri,tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString());
         }
+    }
+    
+    public void setNoRM(String norwt, String statuspasien) {
+        TNoRw.setText(norwt);
+        TCari.setText(norwt);
+        isRawat();
+        isPsien();
+        status = statuspasien;
+        if (statuspasien.equals("ranap")) {
+            btnObat1.setEnabled(!Sequel.cariExistsSmc("select * from stok_obat_pasien where stok_obat_pasien.no_rawat = ? ", norwt));
+            BtnObat2.setEnabled(true);
+            BtnObat3.setEnabled(false);
+        } else if (statuspasien.equals("ralan")) {
+            btnObat1.setEnabled(true);
+            BtnObat2.setEnabled(false);
+            BtnObat3.setEnabled(true);
+        }
+        DTPCari1.setDate(Sequel.cariTglSmc("select min(detail_pemberian_obat.tgl_perawatan) from detail_pemberian_obat where detail_pemberian_obat.no_rawat = ?", norwt));
+        DTPCari2.setDate(Sequel.cariTglSmc("select max(detail_pemberian_obat.tgl_perawatan) from detail_pemberian_obat where detail_pemberian_obat.no_rawat = ?", norwt));
     }
     
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String statuspasien) {
@@ -1811,5 +1892,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             sukses=false;
         }
     }
-
+    
+    public JTable getTable() {
+        return tbPemberianObat;
+    }
 }
