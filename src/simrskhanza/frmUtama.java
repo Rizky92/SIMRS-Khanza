@@ -22481,6 +22481,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnPengeluaranPengeluaranActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPengeluaranPengeluaran aplikasi=new DlgPengeluaranPengeluaran(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -23187,7 +23198,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
             btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnSetTampilJenisObatResep,btnPendapatanPerAkunClosing,
-            btnPenilaianBayiBaruLahir;
+            btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran;
     
     public void isWall(){
         try{            
@@ -25714,6 +25725,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
 
+            if(akses.getpengeluaran_pengeluaran()==true){
+                Panelmenu.add(btnPengeluaranPengeluaran);
+                jmlmenu++;
+            }
+                    
             if(akses.getposting_jurnal()==true){
                 Panelmenu.add(btnPostingJurnal); 
                 jmlmenu++;
@@ -31192,6 +31208,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getrekap_pengajuan_biaya()==true){
             Panelmenu.add(btnRekapPengajuanBiaya);
+            jmlmenu++;
+        }
+        
+        if(akses.getpengeluaran_pengeluaran()==true){
+            Panelmenu.add(btnPengeluaranPengeluaran);
             jmlmenu++;
         }
 
@@ -37615,6 +37636,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getrekap_pengajuan_biaya()==true){
             if(btnRekapPengajuanBiaya.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnRekapPengajuanBiaya);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpengeluaran_pengeluaran()==true){
+            if(btnPengeluaranPengeluaran.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPengeluaranPengeluaran);
                 jmlmenu++;
             }                
         }
@@ -47024,6 +47052,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRl13KetersediaanKamar.setName("btnRl13KetersediaanKamar");
         btnRl13KetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRl13KetersediaanKamar.addActionListener(this::btnRl13KetersediaanKamarActionPerformed);
+        
+        btnPengeluaranPengeluaran = new widget.ButtonBig();
+        btnPengeluaranPengeluaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8822938_money_bag_gold_bars_icon.png"))); 
+        btnPengeluaranPengeluaran.setText("Pengeluaran-pengeluaran/Kas Keluar");
+        btnPengeluaranPengeluaran.setIconTextGap(0);
+        btnPengeluaranPengeluaran.setName("btnPengeluaranPengeluaran");
+        btnPengeluaranPengeluaran.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengeluaranPengeluaran.addActionListener(this::btnPengeluaranPengeluaranActionPerformed);
         
         btnSetTampilJenisObatResep = new widget.ButtonBig();
         btnSetTampilJenisObatResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487093_price.png"))); 
