@@ -157,6 +157,10 @@ CREATE DEFINER = `root`@`%` TRIGGER IF NOT EXISTS `set_password_user` AFTER INSE
   aes_encrypt(date_format(new.tgl_lahir, '%d%m%Y'), 'windi')
 );
 
+ALTER TABLE `pasien_bayi` ADD COLUMN IF NOT EXISTS `no_rkm_medis_ibu` varchar(15) NULL DEFAULT NULL AFTER `mikonium`;
+
+ALTER TABLE `pasien_bayi` ADD CONSTRAINT `pasien_bayi_ibfk_3` FOREIGN KEY IF NOT EXISTS (`no_rkm_medis_ibu`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE SET NULL ON UPDATE CASCADE;
+
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
