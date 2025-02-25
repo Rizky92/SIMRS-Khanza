@@ -1201,54 +1201,12 @@
         ];
     }
 
-    function MenghapusKlaimSmc($nomor_sep, $coder_nik)
-    {
-        $request = [
-            'metadata' => [
-                'method' => 'delete_claim',
-            ],
-            'data' => [
-                'nomor_sep' => $nomor_sep,
-                'coder_nik' => $coder_nik,
-            ],
-        ];
-
-        $msg = Request(json_encode($request));
-
-        if ($msg['metadata']['code'] != '200') {
-            $error = sprintf(
-                '[%s] method "new_claim": %s - %s',
-                $msg['metadata']['code'],
-                $msg['metadata']['error_no'],
-                $msg['metadata']['message']
-            );
-
-            echo $error;
-
-            return [
-                'success' => false,
-                'data' => null,
-                'error' => $error,
-            ];
-        }
-
-        Hapus2("inacbg_grouping_stage_12", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
-
-        return [
-            'success' => true,
-            'data' => 'Klaim berhasil Dihapus!',
-            'error' => null,
-        ];
-    }
-
     function UpdateDataKlaimSmc(
         $nomor_sep, $nomor_kartu, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure, $tarif_poli_eks,
         $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
         $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
-        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
+        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0", $asalrujukan
     ) {
         $request = [
             'metadata' => [
@@ -1307,6 +1265,7 @@
                 'payor_cd'       => $payor_cd,
                 'cob_cd'         => $cob_cd,
                 'coder_nik'      => $coder_nik,
+                'cara_masuk'     => $asalrujukan,
             ],
         ];
         
