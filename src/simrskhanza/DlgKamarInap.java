@@ -8754,7 +8754,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     returjual.emptTeks();
                                     returjual.isCek();
                                     returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),rs2.getString("no_rawat2"));
-                                    returjual.tampilPemberianObat();
                                     returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     returjual.setLocationRelativeTo(internalFrame1);
                                     returjual.setVisible(true);
@@ -8797,7 +8796,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         returjual.emptTeks();
                         returjual.isCek();
                         returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),norawat.getText());
-                        returjual.tampilPemberianObat();
                         returjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         returjual.setLocationRelativeTo(internalFrame1);
                         returjual.setVisible(true);

@@ -1418,36 +1418,4 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Notifikasi Tampil : " + e);
         }
     }
-
-    public void tampilPemberianObat() {
-        if (this.norawat.isBlank()) {
-            return;
-        }
-        Valid.tabelKosong(tabMode);
-
-        // "No.Nota","Kode Barang","Nama Barang","Satuan","Hrg.Retur(Rp)","Jml.Retur","Total Retur(Rp)","No.Batch","No.Faktur"
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select ? as no_nota, detail_pemberian_obat.kode_brng, databarang.nama_brng, kodesatuan.satuan, "
-            + "detail_pemberian_obat.biaya_obat, sum(detail_pemberian_obat.jml) as jumlah, "
-            + "detail_pemberian_obat.biaya_obat * sum(detail_pemberian_obat.jml) as total, "
-            + "detail_pemberian_obat.no_batch, detail_pemberian_obat.no_faktur "
-            + "from detail_pemberian_obat join databarang on detail_pemberian_obat.kode_brng = databarang.kode_brng "
-            + "join kodesatuan on databarang.kode_sat = kodesatuan.kode_sat where detail_pemberian_obat.no_rawat = ? "
-            + "group by detail_pemberian_obat.no_rawat, detail_pemberian_obat.kode_brng, detail_pemberian_obat.biaya_obat, "
-            + "detail_pemberian_obat.no_batch, detail_pemberian_obat.no_faktur"
-        )) {
-            ps.setString(1, NoNota.getText());
-            ps.setString(2, this.norawat);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
-                        rs.getDouble(6), rs.getDouble(7), rs.getString(8), rs.getString(9)
-                    });
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
 }
