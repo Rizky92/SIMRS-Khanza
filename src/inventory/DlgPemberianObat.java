@@ -1522,7 +1522,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.SetTgl(DTPBeri,tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString());
         }
     }
-
+    
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String statuspasien) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1812,4 +1812,5 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             sukses=false;
         }
     }
+
 }
