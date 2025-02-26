@@ -10,10 +10,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +32,7 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
     private Jurnal jur = new Jurnal();
     private DlgCariBangsal bangsal = new DlgCariBangsal(null, false);
     private DlgCariReturJual form = new DlgCariReturJual(null, false);
-    private DlgPemberianObat cariobat = new DlgPemberianObat(null, false);
+    private DlgCariPemberianObatSMC cariobat = new DlgCariPemberianObatSMC(null, false);
     private DlgPasien member = new DlgPasien(null, false);
     private double ttlretur = 0;
     private PreparedStatement ps;
@@ -159,14 +157,14 @@ public class DlgReturJualSMC extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if (akses.getform().equals("DlgReturJual")) {
                     if (cariobat.getTable().getSelectedRow() != -1) {
-                        Kdbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 5).toString());
-                        nmbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 6).toString());
-                        Satuanbar.setText(Sequel.cariIsiSmc("select databarang.kode_sat from databarang where databarang.kode_brng = ?", Kdbar.getText()));
-                        TtlPemberian.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 9).toString());
-                        Hargaretur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 12).toString());
+                        Kdbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 0).toString());
+                        nmbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 1).toString());
+                        Satuanbar.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 2).toString());
+                        Hargaretur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 4).toString());
+                        TtlPemberian.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 5).toString());
                         if (aktifkanbatch.equals("yes")) {
-                            NoBatch.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 14).toString());
-                            NoFaktur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 15).toString());
+                            NoBatch.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 7).toString());
+                            NoFaktur.setText(cariobat.getTable().getValueAt(cariobat.getTable().getSelectedRow(), 8).toString());
                         }
                         Kdbar.requestFocus();
                     }
@@ -1102,8 +1100,8 @@ private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         cariobat.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         cariobat.setLocationRelativeTo(internalFrame1);
         cariobat.isCek();
-        cariobat.setNoRM(norawat, "ranap");
-        cariobat.tampilObat();
+        cariobat.setNoRM(norawat);
+        cariobat.tampil();
         cariobat.setVisible(true);
     }
 }//GEN-LAST:event_BtnBrgActionPerformed
