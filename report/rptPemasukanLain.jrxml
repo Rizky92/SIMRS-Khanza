@@ -152,7 +152,7 @@
 				<text><![CDATA[Nomor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="722" y="0" width="78" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ea99f518-532c-4020-8dd8-f0984b3da80f"/>
+				<reportElement mode="Opaque" x="630" y="0" width="170" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ea99f518-532c-4020-8dd8-f0984b3da80f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -160,7 +160,7 @@
 				<text><![CDATA[Keperluan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="562" y="0" width="160" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="f2a944f1-e0e8-415b-8fcb-4ac30f2b4453"/>
+				<reportElement mode="Opaque" x="562" y="0" width="68" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="f2a944f1-e0e8-415b-8fcb-4ac30f2b4453"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -250,7 +250,7 @@
 				<textFieldExpression><![CDATA[$F{nip}+" "+$F{nama}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="562" y="0" width="160" height="10" uuid="06d1fbea-7dd1-4819-92c7-479340f89c5f"/>
+				<reportElement positionType="Float" x="562" y="0" width="68" height="10" uuid="06d1fbea-7dd1-4819-92c7-479340f89c5f"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -258,7 +258,7 @@
 				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="722" y="0" width="78" height="10" uuid="ecfdb25e-e521-4b10-a314-e49fdbb5f1bc"/>
+				<reportElement positionType="Float" x="630" y="0" width="170" height="10" uuid="ecfdb25e-e521-4b10-a314-e49fdbb5f1bc"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
