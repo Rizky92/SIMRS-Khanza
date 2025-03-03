@@ -243,7 +243,7 @@ public final class akses {
             ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,sirkulasi_dapur=false,
             sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,pindah_kamar_pilihan_2=false,penilaian_psikologi_klinis=false,
             penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
-            penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false;
+            penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false;
     
     public static void setData(String user, String pass) {
         try (
@@ -1370,6 +1370,9 @@ public final class akses {
                         akses.hasil_pemeriksaan_echo=true;
                         akses.penilaian_bayi_baru_lahir=true;
                         akses.rl1_3_ketersediaan_kamar=true;
+                        akses.pendapatan_per_akun_closing=true;
+                        akses.pengeluaran_pengeluaran=true;
+                        akses.skrining_diabetes_melitus=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2480,6 +2483,9 @@ public final class akses {
                         akses.hasil_pemeriksaan_echo=rs2.getBoolean("hasil_pemeriksaan_echo");
                         akses.penilaian_bayi_baru_lahir=rs2.getBoolean("penilaian_bayi_baru_lahir");
                         akses.rl1_3_ketersediaan_kamar=rs2.getBoolean("rl1_3_ketersediaan_kamar");
+                        akses.pendapatan_per_akun_closing=rs2.getBoolean("pendapatan_per_akun_closing");
+                        akses.pengeluaran_pengeluaran=rs2.getBoolean("pengeluaran_pengeluaran");
+                        akses.skrining_diabetes_melitus=rs2.getBoolean("skrining_diabetes_melitus");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -3603,6 +3609,9 @@ public final class akses {
                         akses.hasil_pemeriksaan_echo=false;
                         akses.penilaian_bayi_baru_lahir=false;
                         akses.rl1_3_ketersediaan_kamar=false;
+                        akses.pendapatan_per_akun_closing=false;
+                        akses.pengeluaran_pengeluaran=false;
+                        akses.skrining_diabetes_melitus=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
@@ -4720,6 +4729,9 @@ public final class akses {
         akses.hasil_pemeriksaan_echo=false;
         akses.penilaian_bayi_baru_lahir=false;
         akses.rl1_3_ketersediaan_kamar=false;
+        akses.pendapatan_per_akun_closing=false;
+        akses.pengeluaran_pengeluaran=false;
+        akses.skrining_diabetes_melitus=false;
         akses.edit=false;
         akses.tglSelesai=-1;
     }
@@ -5869,6 +5881,9 @@ public final class akses {
     public static boolean gethasil_pemeriksaan_echo(){return akses.hasil_pemeriksaan_echo;}
     public static boolean getpenilaian_bayi_baru_lahir(){return akses.penilaian_bayi_baru_lahir;}
     public static boolean getrl1_3_ketersediaan_kamar(){return akses.rl1_3_ketersediaan_kamar;}
+    public static boolean getpendapatan_per_akun_closing(){return akses.pendapatan_per_akun_closing;}
+    public static boolean getpengeluaran_pengeluaran(){return akses.pengeluaran_pengeluaran;}
+    public static boolean getskrining_diabetes_melitus(){return akses.skrining_diabetes_melitus;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {

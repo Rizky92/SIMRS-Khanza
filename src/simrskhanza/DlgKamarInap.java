@@ -193,6 +193,7 @@ import surat.SuratSakitPihak2;
  */
 public class DlgKamarInap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private final ApiBPJS api = new ApiBPJS();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -10598,7 +10599,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
                                 resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 resep.setLocationRelativeTo(internalFrame1);
-                                resep.setNoRm(rs2.getString("no_rawat2"),new Date(),"ranap");
+                                resep.setNoRm(rs2.getString("no_rawat2"),new Date(),"ranap", Sequel.cariIsiSmc(
+                                    "select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
+                                    "where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?",
+                                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 7).toString()
+                                ));
                                 resep.isCek();
                                 resep.tampilobat();
                                 resep.setVisible(true);
@@ -10641,7 +10646,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
                 resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 resep.setLocationRelativeTo(internalFrame1);
-                resep.setNoRm(norawat.getText(),new Date(),"ranap");
+                resep.setNoRm(norawat.getText(),new Date(),"ranap",Sequel.cariIsiSmc(
+                    "select kamar.kd_bangsal from kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal " +
+                    "where concat(kamar.kd_kamar, ' ', bangsal.nm_bangsal) = ?",
+                    tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 7).toString()
+                ));
                 resep.isCek();
                 resep.tampilobat();
                 resep.setVisible(true);
@@ -12358,7 +12367,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 dlgrjk.setLocationRelativeTo(internalFrame1);
                                 dlgrjk.isCek();
                                 dlgrjk.setNoRm(rs2.getString("no_rawat2"),new Date()); 
-                                dlgrjk.tampil();
                                 dlgrjk.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                           }else{
@@ -12401,7 +12409,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 dlgrjk.setLocationRelativeTo(internalFrame1);
                 dlgrjk.isCek();
                 dlgrjk.setNoRm(norawat.getText(),new Date()); 
-                dlgrjk.tampil();
                 dlgrjk.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }   

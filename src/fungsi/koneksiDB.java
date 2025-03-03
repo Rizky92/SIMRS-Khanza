@@ -31,6 +31,19 @@ public class koneksiDB {
                 dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                dataSource.setCachePreparedStatements(true);
+                dataSource.setPreparedStatementCacheSize(500);          
+                dataSource.setPreparedStatementCacheSqlLimit(4096); 
+                dataSource.setUseCompression(true);
+                dataSource.setAutoReconnect(true);                      
+                dataSource.setAutoReconnectForPools(true);
+                dataSource.setReconnectAtTxEnd(true);
+                dataSource.setUseServerPrepStmts(true);                 
+                dataSource.setUseLocalSessionState(true);               
+                dataSource.setUseLocalTransactionState(true); 
+                dataSource.setLoginTimeout(10);                         
+                dataSource.setConnectTimeout(10000);                  
+                dataSource.setSocketTimeout(30000);  
                 connection=dataSource.getConnection();       
                 System.out.println("  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
                         "	Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
@@ -58,6 +71,19 @@ public class koneksiDB {
                         dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;cachePrepStmts=true");
                         dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                         dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                        dataSource.setCachePreparedStatements(true);
+                        dataSource.setPreparedStatementCacheSize(500);          
+                        dataSource.setPreparedStatementCacheSqlLimit(4096); 
+                        dataSource.setUseCompression(true);
+                        dataSource.setAutoReconnect(true);                      
+                        dataSource.setAutoReconnectForPools(true);
+                        dataSource.setReconnectAtTxEnd(true);
+                        dataSource.setUseServerPrepStmts(true);                 
+                        dataSource.setUseLocalSessionState(true);               
+                        dataSource.setUseLocalTransactionState(true); 
+                        dataSource.setLoginTimeout(10);                         
+                        dataSource.setConnectTimeout(10000);                  
+                        dataSource.setSocketTimeout(30000);
                         connection=dataSource.getConnection();  
                     }
                 } catch (Exception ex) {
@@ -255,6 +281,15 @@ public class koneksiDB {
             return Long.parseLong(prop.getProperty("KOMPILASIBERKASMAXMEMORY"));
         } catch (Exception e) {
             return 200;
+        }
+    }
+    
+    public static boolean AKTIFKANFILTERRESEPPERJENISOBAT() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("AKTIFKANFILTERRESEPPERJENISOBAT")).equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
         }
     }
     

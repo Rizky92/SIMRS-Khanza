@@ -178,6 +178,7 @@ import rekammedis.RMRiwayatPerawatan;
 import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningAdiksiNikotin;
+import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningInstrumenSDQ;
 import rekammedis.RMSkriningKankerKolorektal;
 import rekammedis.RMSkriningKekerasanPadaPerempuan;
@@ -8278,7 +8279,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resep.setLocationRelativeTo(internalFrame1);
                         resep.setNoRm(TNoRw.getText(),new Date(),Jam.getText().substring(0,2),Jam.getText().substring(3,5),Jam.getText().substring(6,8),
-                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan");
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan",
+                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                         resep.isCek();
                         resep.tampilobat();
                         resep.setVisible(true);
@@ -8290,7 +8293,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resep.setLocationRelativeTo(internalFrame1);
                             resep.setNoRm(TNoRw.getText(),new Date(),Jam.getText().substring(0,2),Jam.getText().substring(3,5),Jam.getText().substring(6,8),
-                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan");
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"ralan",
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                             resep.isCek();
                             resep.tampilobat();
                             resep.setVisible(true);
@@ -8799,7 +8804,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),12).toString().substring(3,5),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),12).toString().substring(6,8),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),
-                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString(),"ralan"
+                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString(),"ralan",
+                        tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),13).toString()
                     );
                     resep.isCek();                    
                     resep.tampilobat();
@@ -11126,7 +11132,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         DlgCopyResep daftar=new DlgCopyResep(null,false);
                         daftar.isCek();
-                        daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString(),"ralan");
+                        daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString(),"ralan",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
                         daftar.tampil();
                         daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         daftar.setLocationRelativeTo(internalFrame1);
@@ -11139,7 +11145,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             DlgCopyResep daftar=new DlgCopyResep(null,false);
                             daftar.isCek();
-                            daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString(),"ralan");
+                            daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString(),"ralan",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
                             daftar.tampil();
                             daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                             daftar.setLocationRelativeTo(internalFrame1);
@@ -11184,7 +11190,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgCopyResep daftar=new DlgCopyResep(null,false);
                     daftar.isCek();
-                    daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),14).toString(),"ralan");
+                    daftar.setRM(TNoRwCari.getText(),TNoRMCari.getText(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),14).toString(),"ralan",tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),13).toString());
                     daftar.tampil();
                     daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     daftar.setLocationRelativeTo(internalFrame1);
@@ -14841,7 +14847,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
-    private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanKebidananActionPerformed
+    private void MnPenilaianBayiBaruLahirActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -14860,6 +14866,29 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 this.setCursor(Cursor.getDefaultCursor());
             }
+        }
+    }
+    
+    private void MnSkriningDiabetesMelitusActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningDiabetesMelitus form=new RMSkriningDiabetesMelitus(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
         }
     }
     
@@ -15333,7 +15362,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                   MnCatatanAnastesiSedasi,
                                   MnSkriningPUMA,
                                   MnSkriningAdiksiNikotin,MnSkriningThalassemia,MnSkriningInstrumenSDQ,MnSkriningInstrumenSRQ,MnChecklistPemberianFibrinolitik,
-                                  MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir;
+                                  MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus;
     private javax.swing.JMenu MnHasilUSG,
                               MnHasilEndoskopi,
                               MnRMSkrining;
@@ -15715,6 +15744,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSkriningInstrumenSDQ.setEnabled(akses.getskrining_instrumen_sdq());
         MnSkriningInstrumenSRQ.setEnabled(akses.getskrining_instrumen_srq());
         MnSkriningKankerKolorektal.setEnabled(akses.getskrining_kanker_kolorektal());
+        MnSkriningDiabetesMelitus.setEnabled(akses.getskrining_diabetes_melitus());
         
         if(akses.getkode().equals("Admin Utama")){
             MnHapusData.setEnabled(true);
@@ -16669,6 +16699,18 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSkriningKankerKolorektal.setPreferredSize(new java.awt.Dimension(280, 26));
         MnSkriningKankerKolorektal.addActionListener(this::MnSkriningKankerKolorektalActionPerformed);
         
+        MnSkriningDiabetesMelitus = new javax.swing.JMenuItem();
+        MnSkriningDiabetesMelitus.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningDiabetesMelitus.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningDiabetesMelitus.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningDiabetesMelitus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningDiabetesMelitus.setText("Skrining Diabetes Melitus");
+        MnSkriningDiabetesMelitus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningDiabetesMelitus.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningDiabetesMelitus.setName("MnSkriningDiabetesMelitus");
+        MnSkriningDiabetesMelitus.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningDiabetesMelitus.addActionListener(this::MnSkriningDiabetesMelitusActionPerformed);
+        
         MnCatatanAnastesiSedasi = new javax.swing.JMenuItem();
         MnCatatanAnastesiSedasi.setBackground(new java.awt.Color(255, 255, 254));
         MnCatatanAnastesiSedasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -16863,6 +16905,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnRMSkrining.add(MnSkriningInstrumenSDQ);
         MnRMSkrining.add(MnSkriningInstrumenSRQ);
         MnRMSkrining.add(MnSkriningKankerKolorektal);
+        MnRMSkrining.add(MnSkriningDiabetesMelitus);
         
         MnPermintaan.add(MnPermintaanKonsultasiMedik);
         MnTindakanRalan.add(MnDataOperasi);
