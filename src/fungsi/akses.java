@@ -243,7 +243,8 @@ public final class akses {
             ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,sirkulasi_dapur=false,
             sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,pindah_kamar_pilihan_2=false,penilaian_psikologi_klinis=false,
             penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
-            penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false;
+            penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false,
+            laporan_tindakan=false;
     
     public static void setData(String user, String pass) {
         try (
@@ -1373,6 +1374,7 @@ public final class akses {
                         akses.pendapatan_per_akun_closing=true;
                         akses.pengeluaran_pengeluaran=true;
                         akses.skrining_diabetes_melitus=true;
+                        akses.laporan_tindakan=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2486,6 +2488,8 @@ public final class akses {
                         akses.pendapatan_per_akun_closing=rs2.getBoolean("pendapatan_per_akun_closing");
                         akses.pengeluaran_pengeluaran=rs2.getBoolean("pengeluaran_pengeluaran");
                         akses.skrining_diabetes_melitus=rs2.getBoolean("skrining_diabetes_melitus");
+                        akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
+                        akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -3612,6 +3616,8 @@ public final class akses {
                         akses.pendapatan_per_akun_closing=false;
                         akses.pengeluaran_pengeluaran=false;
                         akses.skrining_diabetes_melitus=false;
+                        akses.laporan_tindakan=false;
+                        akses.laporan_tindakan=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
@@ -4732,6 +4738,8 @@ public final class akses {
         akses.pendapatan_per_akun_closing=false;
         akses.pengeluaran_pengeluaran=false;
         akses.skrining_diabetes_melitus=false;
+        akses.laporan_tindakan=false;
+        akses.laporan_tindakan=false;
         akses.edit=false;
         akses.tglSelesai=-1;
     }
@@ -5884,6 +5892,7 @@ public final class akses {
     public static boolean getpendapatan_per_akun_closing(){return akses.pendapatan_per_akun_closing;}
     public static boolean getpengeluaran_pengeluaran(){return akses.pengeluaran_pengeluaran;}
     public static boolean getskrining_diabetes_melitus(){return akses.skrining_diabetes_melitus;}
+    public static boolean getlaporan_tindakan(){return akses.laporan_tindakan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
