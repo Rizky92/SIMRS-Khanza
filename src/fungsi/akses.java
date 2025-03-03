@@ -2489,6 +2489,7 @@ public final class akses {
                         akses.pengeluaran_pengeluaran=rs2.getBoolean("pengeluaran_pengeluaran");
                         akses.skrining_diabetes_melitus=rs2.getBoolean("skrining_diabetes_melitus");
                         akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
+                        akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -3616,6 +3617,7 @@ public final class akses {
                         akses.pengeluaran_pengeluaran=false;
                         akses.skrining_diabetes_melitus=false;
                         akses.laporan_tindakan=false;
+                        akses.laporan_tindakan=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
@@ -4736,6 +4738,7 @@ public final class akses {
         akses.pendapatan_per_akun_closing=false;
         akses.pengeluaran_pengeluaran=false;
         akses.skrining_diabetes_melitus=false;
+        akses.laporan_tindakan=false;
         akses.laporan_tindakan=false;
         akses.edit=false;
         akses.tglSelesai=-1;
@@ -5889,6 +5892,7 @@ public final class akses {
     public static boolean getpendapatan_per_akun_closing(){return akses.pendapatan_per_akun_closing;}
     public static boolean getpengeluaran_pengeluaran(){return akses.pengeluaran_pengeluaran;}
     public static boolean getskrining_diabetes_melitus(){return akses.skrining_diabetes_melitus;}
+    public static boolean getlaporan_tindakan(){return akses.laporan_tindakan;}
     public static boolean getlaporan_tindakan(){return akses.laporan_tindakan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
