@@ -1364,9 +1364,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KodePerujuk.getText().equals("")||NmPerujuk.getText().equals("")){
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
-        }else if(InformasiTambahan.getText().equals("")){
+        }else if(InformasiTambahan.getText().isBlank()){
             Valid.textKosong(InformasiTambahan,"Informasi Tambahan");
-        }else if(DiagnosisKlinis.getText().equals("")){
+        }else if(DiagnosisKlinis.getText().isBlank()){
             Valid.textKosong(DiagnosisKlinis,"Indikasi/Diagnosis Klinis");
         }else if((jml+jml2+jml3)==0){
             Valid.textKosong(DiagnosisKlinis,"Data Permintaan");
@@ -1440,9 +1440,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KodePerujuk.getText().equals("")||NmPerujuk.getText().equals("")){
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
-        }else if(InformasiTambahan.getText().equals("")){
+        }else if(InformasiTambahan.getText().isBlank()){
             Valid.textKosong(InformasiTambahan,"Informasi Tambahan");
-        }else if(DiagnosisKlinis.getText().equals("")){
+        }else if(DiagnosisKlinis.getText().isBlank()){
             Valid.textKosong(DiagnosisKlinis,"Indikasi/Diagnosis Klinis");
         }else if((jml+jml2+jml3)==0){
             Valid.textKosong(Pemeriksaan,"Data Permintaan");
