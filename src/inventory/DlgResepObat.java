@@ -2939,12 +2939,4 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             } 
         }
     }
-    
-    private void ppKirimPesanWAPengerjaanActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    }
-    
-    private void ppKirimPesanWASelesaiActionPerformed(java.awt.event.ActionEvent evt) {
-        
-    }
 }
