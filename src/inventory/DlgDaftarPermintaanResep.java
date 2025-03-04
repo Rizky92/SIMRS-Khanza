@@ -3245,26 +3245,27 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "resep_obat", "tgl_penyerahan = ?, jam_penyerahan = ?", "no_resep = ?",
                             Valid.getTglSmc(TglSelesai), Valid.getWaktuSmc(TglSelesai), NoResep)
                         ) {
-                            Object[] p = {"Tidak Ada"};
-                            
                             if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
-                                p = new Object[] {"Tidak Ada", "Kirim Pesan WA"};
-                            }
-                            
-                            String pilihan = (String) JOptionPane.showInputDialog(null, 
-                                "Waktu selesai obat berhasil disimpan, silahkan pilih aksi selanjutnya..?", "Konfirmasi", 
-                                JOptionPane.QUESTION_MESSAGE, null, p, "Tidak ada");
-                            
-                            if (pilihan == null || pilihan.equals("Tidak ada")) {
+                                String pilihan = (String) JOptionPane.showInputDialog(null, 
+                                    "Waktu selesai obat berhasil disimpan, silahkan pilih aksi selanjutnya", "Konfirmasi", 
+                                    JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Tidak Ada", "Kirim Pesan WA"}, "Tidak ada");
+
+                                if (pilihan == null || pilihan.equals("Tidak ada")) {
+                                    Sequel.menghapusSmc("antriapotek3");
+                                    Sequel.menyimpanSmc("antriapotek3", "", NoResep, "1", NoRawat);
+                                    Sequel.menghapusSmc("bukti_penyerahan_resep_obat", "no_resep = ?", NoResep);
+                                } else {
+                                    switch (pilihan) {
+                                        case "Kirim Pesan WA":
+                                            kirimWASelesai();
+                                            break;
+                                    }
+                                }
+                            } else {
                                 Sequel.menghapusSmc("antriapotek3");
                                 Sequel.menyimpanSmc("antriapotek3", "", NoResep, "1", NoRawat);
                                 Sequel.menghapusSmc("bukti_penyerahan_resep_obat", "no_resep = ?", NoResep);
-                            } else {
-                                switch (pilihan) {
-                                    case "Kirim Pesan WA":
-                                        kirimWASelesai();
-                                        break;
-                                }
+                                JOptionPane.showMessageDialog(null, "Waktu selesai obat berhasil disimpan!");
                             }
                             WindowJamPenyerahan.dispose();
                         }
