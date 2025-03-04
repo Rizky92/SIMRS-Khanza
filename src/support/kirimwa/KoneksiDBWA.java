@@ -52,9 +52,9 @@ public final class KoneksiDBWA {
     
     public static boolean kirimPesanWA(String nomor, String pesan, String tanggal, String asal) {
         try (PreparedStatement ps = condb().prepareStatement(
-            "insert into wa_outbox (NOWA, PESAN, TANGGAL_JAM, STATUS, SOURCE, SENDER, TYPE) values (?, ?, date_add(?, interval ? second), 'ANTRIAN', ?, 'NODEJS', 'TEXT')"
+            "insert into wa_outbox (NOWA, PESAN, TANGGAL_JAM, STATUS, SOURCE, SENDER, TYPE) values " +
+            "(?, ?, date_add(?, interval ? second), 'ANTRIAN', ?, 'NODEJS', 'TEXT')"
         )) {
-            
             if (nomor.startsWith("0")) {
                 nomor = "62" + nomor.substring(1, nomor.length()) + "@c.us";
             } else if (nomor.startsWith("+")) {

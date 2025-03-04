@@ -2255,7 +2255,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void ppKirimWAPengerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKirimWAPengerjaanActionPerformed
         if (Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.status_lanjut = 'Ranap' and reg_periksa.no_rawat = ?", TNoRw.getText())) {
-            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya boleh untuk pasien rawat jalan!");
+            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya untuk pasien rawat jalan!");
             return;
         }
         
@@ -2278,7 +2278,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void ppKirimWASelesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKirimWASelesaiActionPerformed
         if (Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.status_lanjut = 'Ranap' and reg_periksa.no_rawat = ?", TNoRw.getText())) {
-            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya boleh untuk pasien rawat jalan!");
+            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya untuk pasien rawat jalan!");
             return;
         }
         
