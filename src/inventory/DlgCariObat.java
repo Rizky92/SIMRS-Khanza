@@ -60,6 +60,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import simrskhanza.DlgCariBangsal;
+import support.kirimwa.DlgKirimWA;
 import widget.Button;
 
 /**
@@ -68,6 +69,11 @@ import widget.Button;
  */
 public final class DlgCariObat extends javax.swing.JDialog {
     private final DefaultTableModel tabModeobat,tabModeObatRacikan,tabModeDetailObatRacikan;
+    private final String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
+                                              "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
+                                              "\nMohon untuk *MENUNGGU* terlebih dahulu. Kami akan mengirimkan pesan apabila resep anda telah selesai." +
+                                              "\n\nTerima kasih, semoga lekas sembuh.";
+    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -1380,6 +1386,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     ChkJln.setSelected(false);
                     Sequel.AutoComitFalse();
                     sukses=true;
+                    boolean adaRacikan = tbObatRacikan.getRowCount() > 0;
                     ttlhpp=0;ttljual=0;
                     for(i=0;i<tbObat.getRowCount();i++){ 
                         if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){                        
@@ -1730,14 +1737,40 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         LTotalTagihan.setText("0");
                     }else{
                         sukses=false;
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                         Sequel.RollBack();
                     }
-                    
                     Sequel.AutoComitTrue();
+                    
+                    if (!sukses) {
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    }
+                    
                     ChkJln.setSelected(true);
                     
                     if(sukses==true){
+                        if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
+                            String pilihan = (String) JOptionPane.showInputDialog(null, 
+                                "Validasi obat selesai, silahkan pilih aksi selanjutnya..?", "Konfirmasi", 
+                                JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Tidak ada", "Kirim Pesan WA"},
+                                !noresep.isBlank() ? "Kirim Pesan WA" : "Tidak ada");
+
+                            if (pilihan != null && pilihan.equals("Kirim Pesan WA")) {
+                                kirimWA.setSize(514, 350);
+                                kirimWA.setLocationRelativeTo(internalFrame1);
+
+                                kirimWA.setRM(TNoRM.getText(), TPasien.getText(), Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", TNoRM.getText()),
+                                    String.format(templateValidasiWA, TPasien.getText(), 
+                                        Sequel.cariIsiSmc("select poliklinik.nm_poli from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText()),
+                                        noresep.isBlank()
+                                            ? Sequel.cariIsiSmc("select dokter.nm_dokter from reg_periksa.join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where reg_periksa.no_rawat = ?", TNoRw.getText())
+                                            : Sequel.cariIsiSmc("select dokter.nm_dokter from resep_obat join dokter on resep_obat.kd_dokter = dokter.kd_dokter where resep_obat.no_resep = ?", noresep),
+                                        akses.getnamars(), new SimpleDateFormat("dd-MM-yyyy").format(DTPTgl.getDate()),
+                                        adaRacikan ? "RACIKAN" : "NON RACIKAN"
+                                ), "FARMASI");
+                                kirimWA.setVisible(true);
+                            }
+                        }
+                        
                         if(ChkNoResep.isSelected()==true){
                             DlgResepObat resep=new DlgResepObat(null,false);
                             resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());

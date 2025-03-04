@@ -134,6 +134,10 @@ public final class validasi {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
     
+    public String getWaktuSmc(Tanggal tgl) {
+        return new SimpleDateFormat("HH:mm:ss").format(tgl.getDate());
+    }
+    
     public String getTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
         return getTglSmc(tgl) + " " + getJamSmc(jam, menit, detik);
     }
