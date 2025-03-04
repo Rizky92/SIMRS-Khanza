@@ -279,7 +279,6 @@ public class DlgKirimWA extends javax.swing.JDialog {
             Date now = Calendar.getInstance().getTime();
             if (ChkJln.isSelected()) {
                 String jam = df.format(now);
-                
                 Tgl.setDate(now);
                 Jam.setSelectedItem(jam.substring(0, 2));
                 Menit.setSelectedItem(jam.substring(3, 5));

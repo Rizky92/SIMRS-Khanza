@@ -536,7 +536,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2024 11:03:57" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025 14:48:05" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -581,7 +581,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-02-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -595,7 +595,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-02-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3245,12 +3245,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "resep_obat", "tgl_penyerahan = ?, jam_penyerahan = ?", "no_resep = ?",
                             Valid.getTglSmc(TglSelesai), Valid.getWaktuSmc(TglSelesai), NoResep)
                         ) {
+                            Object[] p = {"Tidak Ada"};
+                            
+                            if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
+                                p = new Object[] {"Tidak Ada", "Kirim Pesan WA"};
+                            }
+                            
                             String pilihan = (String) JOptionPane.showInputDialog(null, 
                                 "Waktu selesai obat berhasil disimpan, silahkan pilih aksi selanjutnya..?", "Konfirmasi", 
-                                JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Tidak ada", "Kirim Pesan WA"}, "Tidak ada");
+                                JOptionPane.QUESTION_MESSAGE, null, p, "Tidak ada");
                             
                             if (pilihan == null || pilihan.equals("Tidak ada")) {
-                                WindowJamPenyerahan.dispose();
                                 Sequel.menghapusSmc("antriapotek3");
                                 Sequel.menyimpanSmc("antriapotek3", "", NoResep, "1", NoRawat);
                                 Sequel.menghapusSmc("bukti_penyerahan_resep_obat", "no_resep = ?", NoResep);
@@ -3261,6 +3266,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         break;
                                 }
                             }
+                            WindowJamPenyerahan.dispose();
                         }
                     }
                 } else {
@@ -3525,6 +3531,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
     
     public void isCek(){
+        BtnKirimWAPengerjaan.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
+        BtnKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
         BtnEdit.setEnabled(akses.getresep_dokter());
         BtnPrint.setEnabled(akses.getresep_dokter());
         BtnRekap.setEnabled(akses.getresep_obat());
@@ -5376,7 +5384,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "\nMohon untuk *MENUNGGU* terlebih dahulu. Kami akan mengirimkan pesan apabila resep anda telah selesai." +
                                     "\n\nTerima kasih, semoga lekas sembuh.";
         
-        boolean adaRacikan = Sequel.cariBooleanSmc("select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = ?", NoResep);
+        boolean adaRacikan = Sequel.cariExistsSmc("select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = ?", NoResep);
         kirimWA.setSize(514, 350);
         kirimWA.setLocationRelativeTo(internalFrame1);
         kirimWA.setRM(NoRM, Pasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", NoRM),

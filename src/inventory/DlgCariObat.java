@@ -1748,10 +1748,11 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     ChkJln.setSelected(true);
                     
                     if(sukses==true){
-                        if (!noresep.isBlank()) {
+                        if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
                             String pilihan = (String) JOptionPane.showInputDialog(null, 
                                 "Validasi obat selesai, silahkan pilih aksi selanjutnya..?", "Konfirmasi", 
-                                JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Tidak ada", "Kirim Pesan WA"}, "Tidak ada");
+                                JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Tidak ada", "Kirim Pesan WA"},
+                                !noresep.isBlank() ? "Kirim Pesan WA" : "Tidak ada");
 
                             if (pilihan != null && pilihan.equals("Kirim Pesan WA")) {
                                 kirimWA.setSize(514, 350);
