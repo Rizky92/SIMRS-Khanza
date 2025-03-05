@@ -19148,7 +19148,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkorAldrettePascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkorAldrettePascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
         MnSkorAldrettePascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
-        MnSkorAldrettePascaAnestesi.setText("Skor Bromage Pasca Anestesi");
+        MnSkorAldrettePascaAnestesi.setText("Skor Aldrette Pasca Anestesi");
         MnSkorAldrettePascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSkorAldrettePascaAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSkorAldrettePascaAnestesi.setName("MnSkorAldrettePascaAnestesi");
@@ -19160,7 +19160,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkorStewardPascaAnestesi.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkorStewardPascaAnestesi.setForeground(new java.awt.Color(50, 50, 50));
         MnSkorStewardPascaAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
-        MnSkorStewardPascaAnestesi.setText("Skor Bromage Pasca Anestesi");
+        MnSkorStewardPascaAnestesi.setText("Skor Steward Pasca Anestesi");
         MnSkorStewardPascaAnestesi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSkorStewardPascaAnestesi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSkorStewardPascaAnestesi.setName("MnSkorStewardPascaAnestesi");
