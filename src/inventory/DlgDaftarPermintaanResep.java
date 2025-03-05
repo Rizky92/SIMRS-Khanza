@@ -5380,31 +5380,35 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
     
     private void kirimWAPengerjaan() {
-        String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
-                                    "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
-                                    "\nMohon untuk *MENUNGGU* terlebih dahulu. Kami akan mengirimkan pesan apabila resep anda telah selesai." +
-                                    "\n\nTerima kasih, semoga lekas sembuh.";
-        
-        boolean adaRacikan = Sequel.cariExistsSmc("select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = ?", NoResep);
-        kirimWA.setSize(514, 350);
-        kirimWA.setLocationRelativeTo(internalFrame1);
-        kirimWA.setRM(NoRM, Pasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", NoRM),
-            String.format(templateValidasiWA, Pasien, Ruang, DokterPeresep, akses.getnamars(), TglPeresepan,
-                adaRacikan ? "RACIKAN" : "NON RACIKAN"
-        ), "FARMASI");
-        kirimWA.setVisible(true);
+        if (TabPilihRawat.getSelectedIndex() == 0 && TabRawatJalan.getSelectedIndex() == 0) {
+            String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
+                                        "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
+                                        "\nMohon untuk *MENUNGGU* terlebih dahulu. Kami akan mengirimkan pesan apabila resep anda telah selesai." +
+                                        "\n\nTerima kasih, semoga lekas sembuh.";
+
+            boolean adaRacikan = Sequel.cariExistsSmc("select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = ?", NoResep);
+            kirimWA.setSize(514, 350);
+            kirimWA.setLocationRelativeTo(internalFrame1);
+            kirimWA.setRM(NoRM, Pasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", NoRM),
+                String.format(templateValidasiWA, Pasien, Ruang, DokterPeresep, akses.getnamars(), TglPeresepan,
+                    adaRacikan ? "RACIKAN" : "NON RACIKAN"
+            ), "FARMASI");
+            kirimWA.setVisible(true);
+        }
     }
     
     private void kirimWASelesai() {
-        String templatePenyerahanWA = "Kepada %s\nPasien %s %s %s (%s)" +
-                                      "\n*RESEP OBAT ANDA TELAH SELESAI*. Harap segera mengambil obat anda di loket Instalasi Farmasi Rawat Jalan." +
-                                      "\n*Jika obat ditinggal, pengambilan obat dapat dilakukan pada hari kerja mulai jam 08:00 - 10:00 WITA dan 15:00 - 17:00 WITA*." +
-                                      "\n\nTerima kasih, semoga lekas sembuh.";
-        
-        kirimWA.setSize(514, 350);
-        kirimWA.setLocationRelativeTo(internalFrame1);
-        kirimWA.setRM(NoRM, Pasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", NoRM),
-            String.format(templatePenyerahanWA, Pasien, Ruang, DokterPeresep, akses.getnamars(), TglPeresepan), "FARMASI");
-        kirimWA.setVisible(true);
+        if (TabPilihRawat.getSelectedIndex() == 0 && TabRawatJalan.getSelectedIndex() == 0) {
+            String templatePenyerahanWA = "Kepada %s\nPasien %s %s %s (%s)" +
+                                          "\n*RESEP OBAT ANDA TELAH SELESAI*. Harap segera mengambil obat anda di loket Instalasi Farmasi Rawat Jalan." +
+                                          "\n*Jika obat ditinggal, pengambilan obat dapat dilakukan pada hari kerja mulai jam 08:00 - 10:00 WITA dan 15:00 - 17:00 WITA*." +
+                                          "\n\nTerima kasih, semoga lekas sembuh.";
+
+            kirimWA.setSize(514, 350);
+            kirimWA.setLocationRelativeTo(internalFrame1);
+            kirimWA.setRM(NoRM, Pasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", NoRM),
+                String.format(templatePenyerahanWA, Pasien, Ruang, DokterPeresep, akses.getnamars(), TglPeresepan), "FARMASI");
+            kirimWA.setVisible(true);
+        }
     }
 }
