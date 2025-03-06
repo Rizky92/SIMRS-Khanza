@@ -1068,7 +1068,7 @@
     }
     
     function Request($request){
-        $json = mc_encrypt ($request, getKey());  
+        $json = mc_encrypt($request, getKey());  
         $header = array("Content-Type: application/x-www-form-urlencoded");        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
@@ -1084,7 +1084,27 @@
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
         //echo $hasildecrypt;
         $msg = json_decode($hasildecrypt,true);
-        print_r($msg);
+        print_r(['request' => $request, 'response' => $msg]);
+        return $msg;
+    }
+
+    function Get($request) {
+        $json = mc_encrypt($request, getKey());
+        $header = ['Content-Type: application/json', 'Accept: application/json'];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, getUrlWS());
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        $response = curl_exec($ch);
+        $first = strpos($response, "\n") + 1;
+        $last = strrpos($response, "\n") - 1;
+        $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
+        $hasildecrypt = mc_decrypt($hasilresponse, getKey());
+        $msg = json_decode($hasildecrypt, true);
+        print_r(['request' => $request, 'response' => $msg]);
         return $msg;
     }
 
@@ -1116,6 +1136,41 @@
 
             echo $error;
 
+            return GetDataKlaimSmc($nomor_sep, $norawat);
+        }
+        
+        InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil disimpan',
+            'error' => null,
+        ];
+    }
+
+    function GetDataKlaimSmc($nomor_sep, $norawat)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'get_claim_data',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Get(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "get_claim_data": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
             return [
                 'success' => false,
                 'data' => null,
@@ -1123,7 +1178,12 @@
             ];
         }
 
-        InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+        $patient_id            = $msg['response']['data']['patient_id'];
+        $admission_id          = $msg['response']['data']['admission_id'];
+        $hospital_admission_id = $msg['response']['data']['hospital_admission_id'];
+
+        Hapus2('inacbg_klaim_baru2', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_klaim_baru2', "'$norawat', '$nomor_sep', '$patient_id', '$admission_id', '$hospital_admission_id'");
 
         return [
             'success' => true,
@@ -1185,7 +1245,7 @@
 
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
-                '[%s] method "new_claim": %s - %s',
+                '[%s] method "delete_claim": %s - %s',
                 $msg['metadata']['code'],
                 $msg['metadata']['error_no'],
                 $msg['metadata']['message']
