@@ -893,6 +893,7 @@ import rekammedis.RMHasilTindakanESWL;
 import rekammedis.RMHemodialisa;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMLaporanTindakan;
+import rekammedis.RMLayananKedokteranFisikRehabilitasi;
 import rekammedis.RMMCU;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
@@ -22536,6 +22537,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnLayananKedokteranFisikRehabilitasiActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMLayananKedokteranFisikRehabilitasi aplikasi=new RMLayananKedokteranFisikRehabilitasi(this,false);
+        aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setTampil();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -23242,7 +23257,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnRingkasanPengajuanDapur,btnRingkasanPemesananDapur,btnRingkasanReturBeliDapur,btnRingkasanStokKeluarDapur,btnStokKeluarDapurPerTanggal,btnSirkulasiDapur,btnSirkulasiDapur2,
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
             btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnSetTampilJenisObatResep,btnPendapatanPerAkunClosing,
-            btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnLaporanTindakan,btnPelaksanaanInformasiEdukasi;
+            btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnLaporanTindakan,btnPelaksanaanInformasiEdukasi,btnLayananKedokteranFisikRehabilitasi;
     
     public void isWall(){
         try{            
@@ -27495,6 +27510,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpenilaian_risiko_dekubitus()==true){
                 Panelmenu.add(btnPenilaianRisikoDekubitus);
+                jmlmenu++;
+            }
+            
+            if(akses.getlayanan_kedokteran_fisik_rehabilitasi()==true){
+                Panelmenu.add(btnLayananKedokteranFisikRehabilitasi);
                 jmlmenu++;
             }
             
@@ -32979,6 +32999,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getpenilaian_risiko_dekubitus()==true){
             Panelmenu.add(btnPenilaianRisikoDekubitus);
+            jmlmenu++;
+        }
+        
+        if(akses.getlayanan_kedokteran_fisik_rehabilitasi()==true){
+            Panelmenu.add(btnLayananKedokteranFisikRehabilitasi);
             jmlmenu++;
         }
         
@@ -40114,6 +40139,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getlayanan_kedokteran_fisik_rehabilitasi()==true){
+            if(btnLayananKedokteranFisikRehabilitasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnLayananKedokteranFisikRehabilitasi);
+                jmlmenu++;
+            }                
+        }
+                
         if(akses.getuji_fungsi_kfr()==true){
             if(btnUjiFungsiKFR.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnUjiFungsiKFR);
@@ -47199,5 +47231,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setAlwaysOnTop(false);
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
+        
+        btnLayananKedokteranFisikRehabilitasi = new widget.ButtonBig();
+        btnLayananKedokteranFisikRehabilitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4082071_healthcare_hospital_medical_icon.png"))); 
+        btnLayananKedokteranFisikRehabilitasi.setText("Layanan Kedokteran Fisik & Rehabilitasi");
+        btnLayananKedokteranFisikRehabilitasi.setIconTextGap(0);
+        btnLayananKedokteranFisikRehabilitasi.setName("btnLayananKedokteranFisikRehabilitasi");
+        btnLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnLayananKedokteranFisikRehabilitasi.addActionListener(this::btnLayananKedokteranFisikRehabilitasiActionPerformed);
     }
 }

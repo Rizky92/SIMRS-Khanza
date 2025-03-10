@@ -132,6 +132,7 @@ import rekammedis.RMHasilTindakanESWL;
 import rekammedis.RMHemodialisa;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMLaporanTindakan;
+import rekammedis.RMLayananKedokteranFisikRehabilitasi;
 import rekammedis.RMMCU;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
@@ -15756,6 +15757,28 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
+    private void MnLayananKedokteranFisikRehabilitasiActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMLayananKedokteranFisikRehabilitasi form=new RMLayananKedokteranFisikRehabilitasi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -16237,10 +16260,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                  MnCatatanAnastesiSedasi,
                                  MnSkriningPUMA,
                                  MnSkriningAdiksiNikotin,MnSkriningThalassemia,MnSkriningInstrumenSDQ,MnSkriningInstrumenSRQ,MnChecklistPemberianFibrinolitik,
-            MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus,MnLaporanTindakan,MnPelaksanaanInformasiEdukasi;
+            MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus,MnLaporanTindakan,MnPelaksanaanInformasiEdukasi,MnLayananKedokteranFisikRehabilitasi;
     private javax.swing.JMenu MnHasilUSG,
                               MnHasilEndoskopi,
-                              MnRMSkrining,MnEdukasi;
+                              MnRMSkrining,MnEdukasi,MnRehabMedik;
    
     private void tampil() {
         Valid.tabelKosong(tabMode);   
@@ -16880,6 +16903,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSkriningDiabetesMelitus.setEnabled(akses.getskrining_diabetes_melitus());
         MnLaporanTindakan.setEnabled(akses.getlaporan_tindakan());
         MnPelaksanaanInformasiEdukasi.setEnabled(akses.getpelaksanaan_informasi_edukasi());
+        MnLayananKedokteranFisikRehabilitasi.setEnabled(akses.getlayanan_kedokteran_fisik_rehabilitasi());
         
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -17756,6 +17780,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPelaksanaanInformasiEdukasi.setPreferredSize(new java.awt.Dimension(230, 26));
         MnPelaksanaanInformasiEdukasi.addActionListener(this::MnPelaksanaanInformasiEdukasiActionPerformed);
         
+        MnLayananKedokteranFisikRehabilitasi = new javax.swing.JMenuItem();
+        MnLayananKedokteranFisikRehabilitasi.setBackground(new java.awt.Color(255, 255, 254));
+        MnLayananKedokteranFisikRehabilitasi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnLayananKedokteranFisikRehabilitasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnLayananKedokteranFisikRehabilitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnLayananKedokteranFisikRehabilitasi.setText("Layanan Kedokteran Fisik & Rehabilitasi");
+        MnLayananKedokteranFisikRehabilitasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnLayananKedokteranFisikRehabilitasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnLayananKedokteranFisikRehabilitasi.setName("MnLayananKedokteranFisikRehabilitasi");
+        MnLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(230, 26));
+        MnLayananKedokteranFisikRehabilitasi.addActionListener(this::MnLayananKedokteranFisikRehabilitasiActionPerformed);
+        
         MnSkriningObesitas = new javax.swing.JMenuItem();
         MnSkriningObesitas.setBackground(new java.awt.Color(255, 255, 254));
         MnSkriningObesitas.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -17848,6 +17884,17 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnEdukasi.setName("MnEdukasi"); 
         MnEdukasi.setPreferredSize(new java.awt.Dimension(200, 26));
         
+        MnRehabMedik = new javax.swing.JMenu();
+        MnRehabMedik.setBackground(new java.awt.Color(255, 255, 254));
+        MnRehabMedik.setForeground(new java.awt.Color(50, 50, 50));
+        MnRehabMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnRehabMedik.setText("RM Rehab Medik");
+        MnRehabMedik.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        MnRehabMedik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnRehabMedik.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnRehabMedik.setName("MnRehabMedik"); 
+        MnRehabMedik.setPreferredSize(new java.awt.Dimension(200, 26));
+        
         MnRMOperasi.add(MnPenilaianPreInduksi);
         MnRMOperasi.add(MnChecklistPreOperasi);
         MnRMOperasi.add(MnSignInSebelumAnestesi);
@@ -17907,11 +17954,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnHasilEndoskopi.add(MnHasilEndoskopiTelinga);
         MnRMRawatJalan.add(MnHasilEndoskopi);
         MnRMRawatJalan.add(MnDokumentasiTindakanESWL);
-        MnRMRawatJalan.add(MnPenilaianFisioterapi);
         MnRMRawatJalan.add(MnPenilaianPsikolog);
         MnRMRawatJalan.add(MnPenilaianPsikologKlinis);
-        MnRMRawatJalan.add(MnPenilaianTerapiWicara);
-        MnRMRawatJalan.add(MnPenatalaksanaanTerapiOkupasi);
         
         MnBridging.add(MnSEP);
         MnBridging.add(ppSuratKontrol);
@@ -17975,6 +18019,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnEdukasi.add(MnEdukasiPasienKeluarga);
         MnEdukasi.add(MnPelaksanaanInformasiEdukasi);
         
+        MnRehabMedik.add(MnPenilaianFisioterapi);
+        MnRehabMedik.add(MnPenilaianTerapiWicara);
+        MnRehabMedik.add(MnPenatalaksanaanTerapiOkupasi);
+        MnRehabMedik.add(MnLayananKedokteranFisikRehabilitasi);
+        MnRehabMedik.add(MnUjiFungsiKFR);
+        
         MnUpdateJamRegistrasiNonBPJS = new javax.swing.JMenuItem();
         MnUpdateJamRegistrasiNonBPJS.setBackground(new java.awt.Color(255, 255, 254));
         MnUpdateJamRegistrasiNonBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -17997,7 +18047,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnDataRM.add(MnRMIGD);
         MnDataRM.add(MnRMOperasi);
         MnDataRM.add(MnRMHCU);
-        MnDataRM.add(MnUjiFungsiKFR);
+        MnDataRM.add(MnRehabMedik);
         MnDataRM.add(MnRMRisikoJatuh);
         MnDataRM.add(MnPenilaianLain);
         MnDataRM.add(MnRMFarmasi);
