@@ -14917,7 +14917,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
-    private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanCekGDSActionPerformed
+    private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {                                                
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -17055,6 +17055,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnDataRM.add(MnRMRawatJalan);
         MnDataRM.add(MnRMOperasi);
         MnDataRM.add(MnRMHCU);
+        MnDataRM.add(MnRehabMedik);
         MnDataRM.add(MnRMRisikoJatuh);
         MnDataRM.add(MnPenilaianLain);
         MnDataRM.add(MnRMFarmasi);
