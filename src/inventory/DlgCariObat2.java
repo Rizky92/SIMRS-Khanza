@@ -90,7 +90,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true, lanjut=true;
+    private boolean sukses=true, lanjut=true, load = false;
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
@@ -952,6 +952,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (!load) {
+            buatcacheberiobat();
+        }
+        load = true;
         if(TabRawat.getSelectedIndex()==0){
             tampilcacheberiobat();
         }else if(TabRawat.getSelectedIndex()==1){

@@ -107,7 +107,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true, lanjut = true, adaObatKronis = false, cekKolomObatKronis = false, cekKolomObatRacikanKronis = false, VALIDASIRESEPKRONIS = koneksiDB.VALIDASIRESEPKRONIS();
+    private boolean sukses=true, lanjut = true, adaObatKronis = false, cekKolomObatKronis = false, cekKolomObatRacikanKronis = false, VALIDASIRESEPKRONIS = koneksiDB.VALIDASIRESEPKRONIS(), load = false;
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
@@ -1145,6 +1145,10 @@ public final class DlgCariObat extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (!load) {
+            buatcacheberiobat();
+        }
+        load = true;
         if(TabRawat.getSelectedIndex()==0){
             tampilcacheberiobat();
         }else if(TabRawat.getSelectedIndex()==1){
@@ -2734,6 +2738,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     public void tampilobat2(String no_resep) {
+        this.load = true;
         this.noresep=no_resep; 
         adaObatKronis = false;
         try {
@@ -3574,6 +3579,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam) {        
+        this.load = true;
         aktifpcare="no";
         TNoRw.setText(norwt);
         LblNoRawat.setText(norwt);
@@ -3588,6 +3594,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     public void setNoRm2(String norwt,String norm,String nama,Date tanggal, String jam,String menit,String detik,boolean cekbox) {        
+        this.load = true;
         aktifpcare="no";
         TNoRw.setText(norwt);
         LblNoRawat.setText(norwt);

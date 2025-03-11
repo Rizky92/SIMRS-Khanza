@@ -87,7 +87,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private JsonNode response;
     private FileReader myObj;
     private Map<String, Object> map;
-    private ArrayList<String> arrlist;
+    private ArrayList<String> arrlist = new ArrayList<>();
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -1004,6 +1004,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (!load) {
+            buatcacheresep();
+        }
         load = true;
         if(TabRawat.getSelectedIndex()==0){
             tampilcacheresep();
@@ -1763,6 +1766,17 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         tampilcacheresep();           
     }
     
+    private void filterResepPerJenisObat() {
+        arrlist = new ArrayList<>();
+        if (AKTIFKANFILTERRESEPPERJENISOBAT) {
+            if (status.equalsIgnoreCase("ralan")) {
+                arrlist = Sequel.cariArraySmc("select set_filter_jenis_resep_obat_ralan.kdjns from set_filter_jenis_resep_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ?", KdPj.getText(), kodeunit);
+            } else if (status.equalsIgnoreCase("ranap")) {
+                arrlist = Sequel.cariArraySmc("select set_filter_jenis_resep_obat_ranap.kdjns from set_filter_jenis_resep_obat_ranap where set_filter_jenis_resep_obat_ranap.kd_pj = ? and set_filter_jenis_resep_obat_ranap.kd_bangsal = ?", KdPj.getText(), kodeunit);
+            }
+        }
+    }
+    
     private void buatcacheresep(){
         load = true;
         try{
@@ -1772,14 +1786,6 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             iyem="";
             ObjectNode rootnode = mapper.createObjectNode();
             
-            if (AKTIFKANFILTERRESEPPERJENISOBAT) {
-                arrlist = new ArrayList<>();
-                if (status.equalsIgnoreCase("ralan")) {
-                    arrlist = Sequel.cariArraySmc("select set_filter_jenis_resep_obat_ralan.kdjns from set_filter_jenis_resep_obat_ralan where set_filter_jenis_resep_obat_ralan.kd_pj = ? and set_filter_jenis_resep_obat_ralan.kd_poli = ?", KdPj.getText(), kodeunit);
-                } else if (status.equalsIgnoreCase("ranap")) {
-                    arrlist = Sequel.cariArraySmc("select set_filter_jenis_resep_obat_ranap.kdjns from set_filter_jenis_resep_obat_ranap where set_filter_jenis_resep_obat_ranap.kd_pj = ? and set_filter_jenis_resep_obat_ranap.kd_bangsal = ?", KdPj.getText(), kodeunit);
-                }
-            }
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     qrystokkosong="";
@@ -1939,6 +1945,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void tampilcacheresep() {  
         // Jangan mulai loading apabila belum buat cache
         if (!load) return;
+        
+        if (arrlist == null || arrlist.isEmpty()) {
+            filterResepPerJenisObat();
+        }
         
         try{
             z=0;
