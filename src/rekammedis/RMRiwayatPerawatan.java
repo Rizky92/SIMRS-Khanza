@@ -97,7 +97,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
     private double biayaperawatan=0;
-    private String kddpjp="",dpjp="",json,dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",authStr="",base64Creds="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
+    private String kddpjp="",dpjp="",json,dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
@@ -441,6 +441,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkLaporanTindakan = new widget.CekBox();
         chkDokumentasiTindakanESWL = new widget.CekBox();
         chkPerencanaanPemulangan = new widget.CekBox();
+        chkLayananKedokteranFisikRehabilitasi = new widget.CekBox();
         chkUjiFungsiKFR = new widget.CekBox();
         chkHemodialisa = new widget.CekBox();
         chkSkriningNutrisiDewasa = new widget.CekBox();
@@ -456,6 +457,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkSkriningRisikoKankerPayudara = new widget.CekBox();
         chkSkriningRisikoKankerParu = new widget.CekBox();
         chkSkriningGigiMulutRemaja = new widget.CekBox();
+        chkSkriningGigiMulutBalita = new widget.CekBox();
         chkSkriningTBC = new widget.CekBox();
         chkSkriningPUMA = new widget.CekBox();
         chkSkriningAdiksiNikotin = new widget.CekBox();
@@ -644,7 +646,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         WindowPhrase.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2025 07:57:27" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2025 15:38:15" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -972,7 +974,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3805));
+        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3855));
         FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         chkSemua.setSelected(true);
@@ -1868,6 +1870,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkPerencanaanPemulangan.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkPerencanaanPemulangan);
 
+        chkLayananKedokteranFisikRehabilitasi.setSelected(true);
+        chkLayananKedokteranFisikRehabilitasi.setText("Layanan Kedokteran Fisik & Rehabilitasi");
+        chkLayananKedokteranFisikRehabilitasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkLayananKedokteranFisikRehabilitasi.setName("chkLayananKedokteranFisikRehabilitasi"); // NOI18N
+        chkLayananKedokteranFisikRehabilitasi.setOpaque(false);
+        chkLayananKedokteranFisikRehabilitasi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkLayananKedokteranFisikRehabilitasi);
+
         chkUjiFungsiKFR.setSelected(true);
         chkUjiFungsiKFR.setText("Uji Fungsi/Prosedur KFR");
         chkUjiFungsiKFR.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1987,6 +1997,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkSkriningGigiMulutRemaja.setOpaque(false);
         chkSkriningGigiMulutRemaja.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkSkriningGigiMulutRemaja);
+
+        chkSkriningGigiMulutBalita.setSelected(true);
+        chkSkriningGigiMulutBalita.setText("Skrining Kesehatan Gigi & Mulut Balita");
+        chkSkriningGigiMulutBalita.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkSkriningGigiMulutBalita.setName("chkSkriningGigiMulutBalita"); // NOI18N
+        chkSkriningGigiMulutBalita.setOpaque(false);
+        chkSkriningGigiMulutBalita.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkSkriningGigiMulutBalita);
 
         chkSkriningTBC.setSelected(true);
         chkSkriningTBC.setText("Skrining TBC");
@@ -2950,6 +2968,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkSkriningDiabetesMelitus.setSelected(true);
             chkPenilaianBayiBaruLahir.setSelected(true);
             chkLaporanTindakan.setSelected(true);
+            chkLayananKedokteranFisikRehabilitasi.setEnabled(true);
+            chkSkriningGigiMulutBalita.setEnabled(true);
         }else{
             chkTriase.setSelected(false);
             chkAsuhanKeperawatanRalan.setSelected(false);
@@ -3115,6 +3135,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkSkriningDiabetesMelitus.setSelected(false);
             chkPenilaianBayiBaruLahir.setSelected(false);
             chkLaporanTindakan.setSelected(false);
+            chkLayananKedokteranFisikRehabilitasi.setEnabled(false);
+            chkSkriningGigiMulutBalita.setEnabled(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -3826,6 +3848,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkKonselingFarmasi;
     private widget.CekBox chkKonsultasiMedik;
     private widget.CekBox chkLaporanTindakan;
+    private widget.CekBox chkLayananKedokteranFisikRehabilitasi;
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
     private widget.CekBox chkOperasiVK;
@@ -3870,6 +3893,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkSkorStewardPascaAnestesi;
     private widget.CekBox chkSkriningAdiksiNikotin;
     private widget.CekBox chkSkriningDiabetesMelitus;
+    private widget.CekBox chkSkriningGigiMulutBalita;
     private widget.CekBox chkSkriningGigiMulutRemaja;
     private widget.CekBox chkSkriningGiziLanjut;
     private widget.CekBox chkSkriningInstrumenSDQ;
@@ -4609,6 +4633,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanAsuhanMedisRawatJalanParu(rs.getString("no_rawat"));
                     //menampilkan asuhan awal medis rawat jalan kedokteran fisik & rehabilitasi
                     menampilkanAsuhanMedisRawatJalanKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
+                    //menampilkan layanan kedokteran fisik dan rehabilitasi
+                    menampilkanLayananKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
                     //menampilkan uji fungsi KFR
                     menampilkanUjiFungsiKFR(rs.getString("no_rawat"));
                     //menampilkan hemodialisa
@@ -4753,7 +4779,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanSkriningRisikoKankerParu(rs.getString("no_rawat"));
                     //menampilkan skrining kesehatan gigi mulut
                     menampilkanSkriningKesehatanGigiMulutRemaja(rs.getString("no_rawat"));
-                    //menampilkan skrining kesehatan gigi mulut
+                    //menampilkan skrining kesehatan balita
+                    menampilkanSkriningKesehatanGigiMulutBalita(rs.getString("no_rawat"));
+                    //menampilkan skrining TBC
                     menampilkanSkriningTBC(rs.getString("no_rawat"));
                     //menampilkan skrining PUMA
                     menampilkanSkriningPUMA(rs.getString("no_rawat"));
@@ -16024,7 +16052,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_gambar.photo from hasil_pemeriksaan_usg_gambar where hasil_pemeriksaan_usg_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_gambar.photo from hasil_pemeriksaan_usg_gambar where hasil_pemeriksaan_usg_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26277,7 +26305,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_urologi_gambar.photo from hasil_pemeriksaan_usg_urologi_gambar where hasil_pemeriksaan_usg_urologi_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_urologi_gambar.photo from hasil_pemeriksaan_usg_urologi_gambar where hasil_pemeriksaan_usg_urologi_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26373,7 +26401,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_gynecologi_gambar.photo from hasil_pemeriksaan_usg_gynecologi_gambar where hasil_pemeriksaan_usg_gynecologi_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_gynecologi_gambar.photo from hasil_pemeriksaan_usg_gynecologi_gambar where hasil_pemeriksaan_usg_gynecologi_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26471,7 +26499,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_ekg_gambar.photo from hasil_pemeriksaan_ekg_gambar where hasil_pemeriksaan_ekg_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_ekg_gambar.photo from hasil_pemeriksaan_ekg_gambar where hasil_pemeriksaan_ekg_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26688,7 +26716,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_neonatus_gambar.photo from hasil_pemeriksaan_usg_neonatus_gambar where hasil_pemeriksaan_usg_neonatus_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_usg_neonatus_gambar.photo from hasil_pemeriksaan_usg_neonatus_gambar where hasil_pemeriksaan_usg_neonatus_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26788,7 +26816,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_endoskopi_faring_laring_gambar.photo from hasil_endoskopi_faring_laring_gambar where hasil_endoskopi_faring_laring_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_endoskopi_faring_laring_gambar.photo from hasil_endoskopi_faring_laring_gambar where hasil_endoskopi_faring_laring_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -26939,7 +26967,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_endoskopi_hidung_gambar.photo from hasil_endoskopi_hidung_gambar where hasil_endoskopi_hidung_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_endoskopi_hidung_gambar.photo from hasil_endoskopi_hidung_gambar where hasil_endoskopi_hidung_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -27082,7 +27110,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_endoskopi_telinga_gambar.photo from hasil_endoskopi_telinga_gambar where hasil_endoskopi_telinga_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_endoskopi_telinga_gambar.photo from hasil_endoskopi_telinga_gambar where hasil_endoskopi_telinga_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -32385,7 +32413,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
-                            file=Sequel.cariIsi("select hasil_pemeriksaan_echo_gambar.photo from hasil_pemeriksaan_echo_gambar where hasil_pemeriksaan_echo_gambar.no_rawat='"+rs.getString("no_rawat")+"'");
+                            file=Sequel.cariIsi("select hasil_pemeriksaan_echo_gambar.photo from hasil_pemeriksaan_echo_gambar where hasil_pemeriksaan_echo_gambar.no_rawat='"+norawat+"'");
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
@@ -33379,6 +33407,229 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Laporan Tindakan Medis : "+e);
+        }
+    }
+    
+    private void menampilkanLayananKedokteranFisikRehabilitasi(String norawat) {
+        try {
+            if(chkLayananKedokteranFisikRehabilitasi.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select layanan_kedokteran_fisik_rehabilitasi.tanggal,layanan_kedokteran_fisik_rehabilitasi.kd_dokter,dokter.nm_dokter,layanan_kedokteran_fisik_rehabilitasi.pendamping,layanan_kedokteran_fisik_rehabilitasi.keterangan_pendamping,"+
+                            "layanan_kedokteran_fisik_rehabilitasi.anamnesa,layanan_kedokteran_fisik_rehabilitasi.pemeriksaan_fisik,layanan_kedokteran_fisik_rehabilitasi.diagnosa_medis,layanan_kedokteran_fisik_rehabilitasi.diagnosa_fungsi,"+
+                            "layanan_kedokteran_fisik_rehabilitasi.tatalaksana,layanan_kedokteran_fisik_rehabilitasi.anjuran,layanan_kedokteran_fisik_rehabilitasi.evaluasi,layanan_kedokteran_fisik_rehabilitasi.suspek_penyakit_kerja,"+
+                            "layanan_kedokteran_fisik_rehabilitasi.keterangan_suspek_penyakit_kerja from layanan_kedokteran_fisik_rehabilitasi inner join dokter on layanan_kedokteran_fisik_rehabilitasi.kd_dokter=dokter.kd_dokter "+
+                            "where layanan_kedokteran_fisik_rehabilitasi.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Layanan Kedokteran Fisik & Rehabilitasi</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            file=Sequel.cariIsi("select bukti_layanan_kedokteran_fisik_rehabilitasi.photo from bukti_layanan_kedokteran_fisik_rehabilitasi where bukti_layanan_kedokteran_fisik_rehabilitasi.no_rawat='"+norawat+"'");
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "YANG MELAKUKAN LAYANAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='25%' border='0'>Tanggal Pelayanan : "+rs2.getString("tanggal")+"</td>"+
+                                              "<td width='40%' border='0'>Dokter SpKFR : "+rs2.getString("kd_dokter")+" "+rs2.getString("nm_dokter")+"</td>"+
+                                              "<td width='35%' border='0'>Didampingi : "+rs2.getString("pendamping")+(rs2.getString("keterangan_pendamping").equals("")?"":", "+rs2.getString("keterangan_pendamping"))+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "HASIL PENILAIAN/ASESMEN/PEMERIKSAAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Anamnesa</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("anamnesa")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Pemeriksaan Fisik & Uji Fungsi</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("pemeriksaan_fisik")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Diagnosis Medis (ICD - 10)</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("diagnosa_medis")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Diagnosis Fungsi (ICD - 10)</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("diagnosa_fungsi")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Tata Laksana KFR (ICD - 9 CM)</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("tatalaksana")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Anjuran</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("anjuran")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Evaluasi</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("evaluasi")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='29%'>Suspek Penyakit Akibat Kerja</td><td width='1%'>:</td><td width='70%'>"+rs2.getString("suspek_penyakit_kerja")+(rs2.getString("keterangan_suspek_penyakit_kerja").equals("")?"":", "+rs2.getString("keterangan_suspek_penyakit_kerja"))+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"
+                            );   
+                            if(!file.equals("")){
+                                htmlContent.append(
+                                    "<tr>"+
+                                        "<td valign='top'>"+
+                                           "PHOTO BUKTI PELAYANAN"+  
+                                           "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                              "<tr>"+
+                                                  "<td valign='top' border='0' width='100%' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/layanankedokteranfisikrehabilitasi/"+file+"'><img alt='Gambar Bukti Pelayanan' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/layanankedokteranfisikrehabilitasi/"+file+"' width='450' height='450'/></a></td>"+
+                                              "</tr>"+
+                                           "</table>"+
+                                        "</td>"+
+                                    "</tr>"
+                                );
+                            }
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Layanan Kedokteran Fisik Rehabilitasi : "+e);
+        }
+    }
+    
+    private void menampilkanSkriningKesehatanGigiMulutBalita(String norawat) {
+        try {
+            if(chkSkriningGigiMulutBalita.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select skrining_kesehatan_gigi_mulut_balita.nip,petugas.nama,skrining_kesehatan_gigi_mulut_balita.tanggal,skrining_kesehatan_gigi_mulut_balita.pernah_pemeriksaan_gigimulut,skrining_kesehatan_gigi_mulut_balita.sudah_tumbuh_gigi,"+
+                            "skrining_kesehatan_gigi_mulut_balita.jumlah_gigi_tumbuh,skrining_kesehatan_gigi_mulut_balita.kondisi_kebersihan_gigimulut,skrining_kesehatan_gigi_mulut_balita.kebiasaan_susu_botol,skrining_kesehatan_gigi_mulut_balita.mengemil_manis,"+
+                            "skrining_kesehatan_gigi_mulut_balita.menyikat_gigi_sebelum_tidur,skrining_kesehatan_gigi_mulut_balita.mengemut_makanan,skrining_kesehatan_gigi_mulut_balita.lidah_kotor,skrining_kesehatan_gigi_mulut_balita.celah_bibir,"+
+                            "skrining_kesehatan_gigi_mulut_balita.hasil_skrining,skrining_kesehatan_gigi_mulut_balita.keterangan from skrining_kesehatan_gigi_mulut_balita inner join petugas on skrining_kesehatan_gigi_mulut_balita.nip=petugas.nip "+
+                            "where skrining_kesehatan_gigi_mulut_balita.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Skrining Kesehatan Gigi & Mulut Balita</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            htmlContent.append(
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
+                                              "<td width='70%' border='0'>Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "I. ANAMNESIS"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>1.</td>"+
+                                              "<td width='70%'>Apakah Pernah Melakukan Pemeriksaan Gigi & Mulut ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("pernah_pemeriksaan_gigimulut")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>2.</td>"+
+                                              "<td width='70%'>Apakah Sudah Ada Gigi Yang Tumbuh ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("sudah_tumbuh_gigi")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>3.</td>"+
+                                              "<td width='70%'>Berapa Jumlah Gigi Yang Sudah Tumbuh ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("jumlah_gigi_tumbuh")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>4.</td>"+
+                                              "<td width='70%'>Bagaimana Kondisi Kebersihan Gigi & Mulut ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("kondisi_kebersihan_gigimulut")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>5.</td>"+
+                                              "<td width='70%'>Apakah Anak Mempunyai Kebiasaan Minum Susu Botol Saat Tidur Malam ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("kebiasaan_susu_botol")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>6.</td>"+
+                                              "<td width='70%'>Apakah Anak Mempunyai Kebiasaan Mengemil Makanan Manis Diantara Waktu Makan ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("mengemil_manis")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>7.</td>"+
+                                              "<td width='70%'>Apakah Anak Mempunyai Kebiasaan Menyikat Gigi Sebelum Tidur ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("menyikat_gigi_sebelum_tidur")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>8.</td>"+
+                                              "<td width='70%'>Apakah Anak Mempunyai Kebiasaan Mengemut Makanan ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("mengemut_makanan")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>9.</td>"+
+                                              "<td width='70%'>Apakah Lidah Anak Kotor ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("lidah_kotor")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='4%' align='center'>10.</td>"+
+                                              "<td width='70%'>Apakah Anak Mempunyai Celah Bibir Atau Langit-langit ?</td>"+
+                                              "<td width='26%' align='center'>"+rs2.getString("celah_bibir")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "II. INTERPRETASI"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='100%'>Hasil Skrining : "+rs2.getString("hasil_skrining")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='100%'>Keterangan : "+rs2.getString("keterangan")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"
+                            ); 
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Skrining Kesehatan Gigi & Mulut Anak Usia Sekolah & Remaja : "+e);
         }
     }
 }
