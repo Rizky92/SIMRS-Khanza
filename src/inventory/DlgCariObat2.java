@@ -2400,7 +2400,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     hargaobat = "HargaKelas2";
                     break;
                 case "Kelas 3":
-                    hargaobat = "Hargakelas3";
+                    hargaobat = "HargaKelas3";
                     break;
                 case "Utama/BPJS":
                     hargaobat = "HargaUtama";
@@ -3006,7 +3006,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     hargaobat = "HargaKelas2";
                     break;
                 case "Kelas 3":
-                    hargaobat = "Hargakelas3";
+                    hargaobat = "HargaKelas3";
                     break;
                 case "Utama/BPJS":
                     hargaobat = "HargaUtama";
