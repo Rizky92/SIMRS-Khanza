@@ -299,6 +299,20 @@ public final class validasi {
         }
     }
     
+    public String joinSmc(String separator, String... values) {
+        if (values.length == 0) {
+            return "";
+        }
+        
+        String base = values[0];
+        
+        for (int i = 1; i < values.length; i++) {
+            base = base.concat(separator + values[i]);
+        }
+        
+        return base;
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
