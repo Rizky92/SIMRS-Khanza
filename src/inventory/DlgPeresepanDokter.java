@@ -3406,11 +3406,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                                 "databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,sum(gudangbarang.stok) as stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
-                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml "+
+                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml, kategori_barang.nama as kategori "+
                                 "from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                                 "inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                                 "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
@@ -3421,11 +3422,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                                 "databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,gudangbarang.stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
-                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml "+
+                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml, kategori_barang.nama as kategori "+
                                 "from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                                 "inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                                 "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
@@ -3489,11 +3491,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 "databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
                                 "databarang.kelas2,databarang.kelas3,databarang.vip,databarang.vvip,"+
                                 "databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,sum(gudangbarang.stok) as stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
-                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml "+
+                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml, kategori_barang.nama as kategori "+
                                 "from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                                 "inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                                 "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
@@ -3506,11 +3509,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 "databarang.karyawan,databarang.ralan,databarang.beliluar,databarang.kelas1," +
                                 "databarang.kelas2,databarang.kelas3,databarang.vip,databarang.vvip,"+
                                 "databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,gudangbarang.stok,databarang.kapasitas,resep_dokter_racikan_detail.p1,"+
-                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml "+
+                                "resep_dokter_racikan_detail.p2,resep_dokter_racikan_detail.kandungan,resep_dokter_racikan_detail.jml, kategori_barang.nama as kategori "+
                                 "from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                                 "inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                                 "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                                 "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                                 "where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 "resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
