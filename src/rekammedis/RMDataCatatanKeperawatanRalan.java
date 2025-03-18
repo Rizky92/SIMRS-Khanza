@@ -652,6 +652,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         Uraian.setColumns(20);
         Uraian.setRows(5);
         Uraian.setName("Uraian"); // NOI18N
+        Uraian.setPreferredSize(new java.awt.Dimension(162, 250));
         Uraian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 UraianKeyPressed(evt);
