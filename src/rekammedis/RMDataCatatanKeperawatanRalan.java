@@ -414,7 +414,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -428,7 +428,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -489,7 +489,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 254));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 304));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
@@ -524,7 +524,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -652,7 +652,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         Uraian.setColumns(20);
         Uraian.setRows(5);
         Uraian.setName("Uraian"); // NOI18N
-        Uraian.setPreferredSize(new java.awt.Dimension(162, 250));
+        Uraian.setPreferredSize(null);
         Uraian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 UraianKeyPressed(evt);
@@ -661,7 +661,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         scrollPane2.setViewportView(Uraian);
 
         FormInput.add(scrollPane2);
-        scrollPane2.setBounds(74, 70, 715, 153);
+        scrollPane2.setBounds(74, 70, 715, 203);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1190,7 +1190,7 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,254));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,304));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
