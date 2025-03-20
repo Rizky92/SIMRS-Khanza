@@ -154,7 +154,7 @@ public class koneksiDB {
     public static String LABORATORIUMKIRIMHASIL() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("LABORATORIUMKIRIMHASIL");
+            return prop.getProperty("LABORATORIUMKIRIMHASIL", "");
         } catch (Exception e) {
             return "";
         }
@@ -172,7 +172,7 @@ public class koneksiDB {
     public static boolean GUNAKANDIAGNOSAEKLAIM() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("GUNAKANDIAGNOSAEKLAIM", "no").equalsIgnoreCase("yes");
+            return prop.getProperty("GUNAKANDIAGNOSAEKLAIM", "no").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
         }
@@ -188,9 +188,11 @@ public class koneksiDB {
     }
 
     public static boolean VALIDASIULANGHASILPERMINTAAN(String kategori) {
+        if (kategori.isBlank()) return false;
+        
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN", "no").toLowerCase().trim().contains(kategori);
+            return prop.getProperty("VALIDASIULANGHASILPERMINTAAN", "").toLowerCase().trim().contains(kategori);
         } catch (IOException e) {
             return false;
         }
@@ -227,7 +229,7 @@ public class koneksiDB {
     public static boolean RESTRIKSIRMKELAHIRANBAYI() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("RESTRIKSIRMKELAHIRANBAYI", "no").equalsIgnoreCase("yes");
+            return prop.getProperty("RESTRIKSIRMKELAHIRANBAYI", "no").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return true;
         }
@@ -281,7 +283,7 @@ public class koneksiDB {
     public static boolean AKTIFKANFILTERRESEPPERJENISOBAT() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return EnkripsiAES.decrypt(prop.getProperty("AKTIFKANFILTERRESEPPERJENISOBAT", EnkripsiAES.encrypt("no"))).equalsIgnoreCase("yes");
+            return EnkripsiAES.decrypt(prop.getProperty("AKTIFKANFILTERRESEPPERJENISOBAT", EnkripsiAES.encrypt("no"))).toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
         }
@@ -290,7 +292,7 @@ public class koneksiDB {
     public static boolean NOTIFWAFARMASIKEPASIEN() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("NOTIFWAFARMASIKEPASIEN", "no").equalsIgnoreCase("yes");
+            return prop.getProperty("NOTIFWAFARMASIKEPASIEN", "no").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
         }
