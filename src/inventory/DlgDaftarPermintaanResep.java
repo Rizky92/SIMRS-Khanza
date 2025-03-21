@@ -3243,7 +3243,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     } else {
                         if (Sequel.mengupdatetfSmc(
                             "resep_obat", "tgl_penyerahan = ?, jam_penyerahan = ?", "no_resep = ?",
-                            Valid.getTglSmc(TglSelesai), Valid.getWaktuSmc(TglSelesai), NoResep)
+                            Valid.getTglSmc(TglSelesai), Valid.getJamSmc(TglSelesai), NoResep)
                         ) {
                             if (koneksiDB.NOTIFWAFARMASIKEPASIEN()) {
                                 String pilihan = (String) JOptionPane.showInputDialog(null, 
