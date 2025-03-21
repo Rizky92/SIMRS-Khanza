@@ -976,6 +976,7 @@ import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningAdiksiNikotin;
 import rekammedis.RMSkriningAnemia;
 import rekammedis.RMSkriningDiabetesMelitus;
+import rekammedis.RMSkriningHipertensi;
 import rekammedis.RMSkriningInstrumenSDQ;
 import rekammedis.RMSkriningKankerKolorektal;
 import rekammedis.RMSkriningKekerasanPadaPerempuan;
@@ -22604,6 +22605,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnSkriningHipertensiActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningHipertensi form=new RMSkriningHipertensi(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -23311,7 +23324,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnVerifikasiPenerimaanDapur,btnNilaiPenerimaanVendorDapurPerBulan,btnRingkasanHutangVendorBarangDapur,btnPenilaianPsikologiKlinis,btnPenilaianAwalMedisRanapNeonatus,
             btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnSetTampilJenisObatResep,btnPendapatanPerAkunClosing,
             btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnLaporanTindakan,btnPelaksanaanInformasiEdukasi,btnLayananKedokteranFisikRehabilitasi,
-            btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR;
+            btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR,btnSkriningHipertensi;
     
     public void isWall(){
         try{            
@@ -27693,6 +27706,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getskrining_anemia()==true){
                 Panelmenu.add(btnSkriningAnemia);
+                jmlmenu++;
+            }
+            
+            if(akses.getsekrining_hipertensi()==true){
+                Panelmenu.add(btnSkriningHipertensi);
                 jmlmenu++;
             }
             
@@ -33202,6 +33220,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getskrining_anemia()==true){
             Panelmenu.add(btnSkriningAnemia);
+            jmlmenu++;
+        }
+        
+        if(akses.getsekrining_hipertensi()==true){
+            Panelmenu.add(btnSkriningHipertensi);
             jmlmenu++;
         }
         
@@ -40437,6 +40460,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getsekrining_hipertensi()==true){
+            if(btnSkriningHipertensi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningHipertensi);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getskrining_tbc()==true){
             if(btnSkriningTBC.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningTBC);
@@ -47061,6 +47091,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningAnemia.setName("btnSkriningAnemia"); 
         btnSkriningAnemia.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningAnemia.addActionListener(this::btnSkriningAnemiaActionPerformed);
+        
+        btnSkriningHipertensi = new widget.ButtonBig();
+        btnSkriningHipertensi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859959_blood_health_heart_hypertension_medical_icon.png"))); 
+        btnSkriningHipertensi.setText("Skrining Hipertensi");
+        btnSkriningHipertensi.setIconTextGap(0);
+        btnSkriningHipertensi.setName("btnSkriningHipertensi"); 
+        btnSkriningHipertensi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningHipertensi.addActionListener(this::btnSkriningHipertensiActionPerformed);
         
         btnSkriningTBC = new widget.ButtonBig();
         btnSkriningTBC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/infected_lungs_virus transmission_virus_bacteria_icon.png"))); 

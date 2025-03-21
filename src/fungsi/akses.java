@@ -245,7 +245,7 @@ public final class akses {
             penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
             penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false,
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
-            layanan_program_kfr=false;
+            layanan_program_kfr=false,sekrining_hipertensi=false,sekrining_kesehatan_penglihatan=false;
     
     public static void setData(String user, String pass) {
         try (
@@ -1381,6 +1381,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_balita=true;
                         akses.skrining_anemia=true;
                         akses.layanan_program_kfr=true;
+                        akses.sekrining_hipertensi=true;
+                        akses.sekrining_kesehatan_penglihatan=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2500,6 +2502,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_balita=rs2.getBoolean("skrining_kesehatan_gigi_mulut_balita");
                         akses.skrining_anemia=rs2.getBoolean("skrining_anemia");
                         akses.layanan_program_kfr=rs2.getBoolean("layanan_program_kfr");
+                        akses.sekrining_hipertensi=rs2.getBoolean("sekrining_hipertensi");
+                        akses.sekrining_kesehatan_penglihatan=rs2.getBoolean("sekrining_kesehatan_penglihatan");
                         akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
@@ -3633,6 +3637,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_balita=false;
                         akses.skrining_anemia=false;
                         akses.layanan_program_kfr=false;
+                        akses.sekrining_hipertensi=false;
+                        akses.sekrining_kesehatan_penglihatan=false;
                         akses.laporan_tindakan=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
@@ -4760,6 +4766,8 @@ public final class akses {
         akses.skrining_kesehatan_gigi_mulut_balita=false;
         akses.skrining_anemia=false;
         akses.layanan_program_kfr=false;
+        akses.sekrining_hipertensi=false;
+        akses.sekrining_kesehatan_penglihatan=false;
         akses.laporan_tindakan=false;
         akses.edit=false;
         akses.tglSelesai=-1;
@@ -5919,6 +5927,8 @@ public final class akses {
     public static boolean getskrining_kesehatan_gigi_mulut_balita(){return akses.skrining_kesehatan_gigi_mulut_balita;}
     public static boolean getskrining_anemia(){return akses.skrining_anemia;}
     public static boolean getlayanan_program_kfr(){return akses.layanan_program_kfr;}
+    public static boolean getsekrining_hipertensi(){return akses.sekrining_hipertensi;}
+    public static boolean getsekrining_kesehatan_penglihatan(){return akses.sekrining_kesehatan_penglihatan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
