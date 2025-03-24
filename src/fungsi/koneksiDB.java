@@ -235,6 +235,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean SINRKONJADWALHFIS() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("SINRKONJADWALHFIS").equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return true;
+        }
+    }
+    
     public static String URLKFAV2SATUSEHAT() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
