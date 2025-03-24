@@ -5656,7 +5656,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                                       "<td valign='top' style='color:#0000FF'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                                       "<td valign='top' style='background-color:#0000FF; color: #FFFFFF'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
                                                                        "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                                                        "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
                                                                     "</tr>"); 
@@ -5670,7 +5670,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                                       "<td valign='top' style='color:#FF0000'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                                       "<td valign='top' style='background-color:#FF0000; color: #FFFFFF'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
                                                                        "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                                                        "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
                                                                     "</tr>"); 
@@ -7567,7 +7567,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#0000FF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top' style='background-color: #0000FF; color: #FFFFFF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
                                                                 + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
@@ -7581,7 +7581,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#FF0000'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top' style='background-color: #FF0000; color: #FFFFFF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
                                                                 + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
