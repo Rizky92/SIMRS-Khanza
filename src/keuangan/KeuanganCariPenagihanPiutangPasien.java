@@ -1153,6 +1153,101 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        Valid.tabelKosong(tabMode);
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select penagihan_piutang.no_tagihan, penagihan_piutang.tanggal, penagihan_piutang.tanggaltempo, penagihan_piutang.tempo, penagihan_piutang.nip, " +
+            "bagianpenagihan.nama as bagianpenagihan, penagihan_piutang.nip_menyetujui, menyetujui.nama as menyetujui, penagihan_piutang.kd_pj, penjab.nama_perusahaan, " +
+            "penagihan_piutang.catatan, penagihan_piutang.kd_rek, akun_penagihan_piutang.nama_bank, akun_penagihan_piutang.no_rek, penagihan_piutang.status " +
+            "from penagihan_piutang join pegawai as bagianpenagihan on bagianpenagihan.nik = penagihan_piutang.nip join pegawai as menyetujui on " +
+            "menyetujui.nik = penagihan_piutang.nip_menyetujui join penjab on penagihan_piutang.kd_pj = penjab.kd_pj join akun_penagihan_piutang on " +
+            "akun_penagihan_piutang.kd_rek = penagihan_piutang.kd_rek where penagihan_piutang.tanggal between ? and ? and penagihan_piutang.status like ? " +
+            "and penagihan_piutang.no_tagihan like ? and penagihan_piutang.kd_pj like ? and penagihan_piutang.nip like ? and akun_penagihan_piutang.nama_bank like ? " +
+            "and (penagihan_piutang.no_tagihan like ? or bagianpenagihan.nama like ? or menyetujui.nama like ? or penjab.png_jawab like ? " +
+            "or akun_penagihan_piutang.nama_bank like ? or akun_penagihan_piutang.no_rek like ? or exists(select * from detail_penagihan_piutang " +
+            "join piutang_pasien on piutang_pasien.no_rawat = detail_penagihan_piutang.no_rawat join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis " +
+            "join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join perusahaan_pasien on perusahaan_pasien.kode_perusahaan = pasien.perusahaan_pasien " +
+            "where detail_penagihan_piutang.no_tagihan = penagihan_piutang.no_tagihan and (detail_penagihan_piutang.no_rawat like ? or piutang_pasien.no_rkm_medis like ? " +
+            "or reg_periksa.status_lanjut like ? or pasien.nip like ? or pasien.nm_pasien like ? or pasien.no_peserta like ?))) order by penagihan_piutang.tanggal"
+        )) {
+            ps.setString(1, Valid.getTglSmc(Tanggal1));
+            ps.setString(2, Valid.getTglSmc(Tanggal2));
+            if (! Status.getSelectedItem().toString().equals("Semua")) {
+                ps.setString(3, "%" + Status.getSelectedItem().toString() + "%");
+            } else {
+                ps.setString(3, "%%");
+            }
+            ps.setString(4, "%" + NoPenagihan.getText() + "%");
+            ps.setString(5, "%" + kdpenjab.getText() + "%");
+            ps.setString(6, "%" + KdPeg.getText() + "%");
+            ps.setString(7, "%" + NamaBank.getText() + "%");
+            ps.setString(8, "%" + TCari.getText() + "%");
+            ps.setString(9, "%" + TCari.getText() + "%");
+            ps.setString(10, "%" + TCari.getText() + "%");
+            ps.setString(11, "%" + TCari.getText() + "%");
+            ps.setString(12, "%" + TCari.getText() + "%");
+            ps.setString(13, "%" + TCari.getText() + "%");
+            ps.setString(14, "%" + TCari.getText() + "%");
+            ps.setString(15, "%" + TCari.getText() + "%");
+            ps.setString(16, "%" + TCari.getText() + "%");
+            ps.setString(17, "%" + TCari.getText() + "%");
+            ps.setString(18, "%" + TCari.getText() + "%");
+            ps.setString(19, "%" + TCari.getText() + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                totaltagihan = 0;
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {
+                        rs.getString("tanggal"), rs.getString("tempo"), rs.getString("tanggaltempo"), rs.getString("no_tagihan"),
+                        rs.getString("nip") + " " + rs.getString("bagianpenagihan"), rs.getString("nip_menyetujui") + " " + rs.getString("menyetujui"),
+                        rs.getString("kd_pj") + " " + rs.getString("nama_perusahaan"), rs.getString("catatan"),
+                        rs.getString("nama_bank") + " No.Rek. " + rs.getString("no_rek"), rs.getString("status")
+                    });
+                    tabMode.addRow(new Object[] {
+                        "", "", "Tgl.Piutang", "NIP", "Asal Perusahaan", "No.Rawat/No.Tagihan", "No.Peserta", "Piutang", "No.Rm & Nama Pasien", "Status"
+                    });
+                    nilaitagihan = 0;
+                    diskon = 0;
+                    try (PreparedStatement ps2 = koneksi.prepareStatement(
+                        "select piutang_pasien.tgl_piutang, pasien.nip, perusahaan_pasien.nama_perusahaan, piutang_pasien.no_rkm_medis, " +
+                        "pasien.nm_pasien, pasien.no_peserta, detail_penagihan_piutang.sisapiutang, detail_penagihan_piutang.diskon, " +
+                        "detail_penagihan_piutang.no_rawat, reg_periksa.status_lanjut from detail_penagihan_piutang join piutang_pasien " +
+                        "on piutang_pasien.no_rawat = detail_penagihan_piutang.no_rawat join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis " +
+                        "join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join perusahaan_pasien on perusahaan_pasien.kode_perusahaan " +
+                        "= pasien.perusahaan_pasien where detail_penagihan_piutang.no_tagihan = ? order by piutang_pasien.tgl_piutang"
+                    )) {
+                        ps2.setString(1, rs.getString("no_tagihan"));
+                        try (ResultSet rs2 = ps2.executeQuery()) {
+                            while (rs2.next()) {
+                                tabMode.addRow(new Object[] {
+                                    "", "", rs2.getString("tgl_piutang"), rs2.getString("nip"), rs2.getString("nama_perusahaan"),
+                                    rs2.getString("no_rawat"), rs2.getString("no_peserta"), Valid.SetAngka(rs2.getDouble("sisapiutang")),
+                                    rs2.getString("no_rkm_medis") + " " + rs2.getString("nm_pasien"), rs2.getString("status_lanjut")
+                                });
+                                diskon += rs2.getDouble("diskon");
+                                nilaitagihan += rs2.getDouble("sisapiutang");
+                                totaltagihan += (rs2.getDouble("sisapiutang") - rs2.getDouble("diskon"));
+                            }
+                        }
+                    }
+                    tabMode.addRow(new Object[] {
+                        "", "", "", "Nilai Tagihan :", "", "", "", Valid.SetAngka(nilaitagihan), "", ""
+                    });
+                    if (diskon > 0) {
+                        tabMode.addRow(new Object[] {
+                            "", "", "", "Diskon :", "", "", "", "-" + Valid.SetAngka(diskon), "", ""
+                        });
+                        tabMode.addRow(new Object[] {
+                            "", "", "", "Total Nilai Tagihan :", "", "", "", Valid.SetAngka(nilaitagihan - diskon), "", ""
+                        });
+                    }
+                }
+                LTotal.setText(Valid.SetAngka(totaltagihan));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void tampil2() {
          Valid.tabelKosong(tabMode);
          try{
              ps=koneksi.prepareStatement(
