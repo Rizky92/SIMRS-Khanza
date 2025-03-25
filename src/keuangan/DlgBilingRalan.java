@@ -5786,6 +5786,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 psnota=koneksi.prepareStatement("insert into nota_jalan values(?,?,?,?)");
                 try {    
                     no_nota=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4);
+                    tbBilling.setValueAt(": "+no_nota,0,2);
                     psnota.setString(1,TNoRw.getText());
                     psnota.setString(2,no_nota);
                     psnota.setString(3,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
