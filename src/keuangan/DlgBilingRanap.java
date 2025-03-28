@@ -4303,7 +4303,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psperiksalab.setString(1,TNoRw.getText());
                     rsperiksalab=psperiksalab.executeQuery();
                     while(rsperiksalab.next()){
-                        tabModeLab.addRow(new String[]{
+                        tabModeLab.addRow(new Object[]{
                             rsperiksalab.getString("noorder"),rsperiksalab.getString("tgl_permintaan"),rsperiksalab.getString("jam_permintaan"),rsperiksalab.getString("nm_dokter"),rsperiksalab.getString("status")
                         });
                     }
@@ -4327,7 +4327,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psperiksalab.setString(1,TNoRw.getText());
                     rsperiksalab=psperiksalab.executeQuery();
                     while(rsperiksalab.next()){
-                        tabModeLab.addRow(new String[]{
+                        tabModeLab.addRow(new Object[]{
                             rsperiksalab.getString("noorder"),rsperiksalab.getString("tgl_permintaan"),rsperiksalab.getString("jam_permintaan"),rsperiksalab.getString("nm_dokter"),rsperiksalab.getString("status")
                         });
                     }
@@ -4351,7 +4351,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psperiksalab.setString(1,TNoRw.getText());
                     rsperiksalab=psperiksalab.executeQuery();
                     while(rsperiksalab.next()){
-                        tabModeLab.addRow(new String[]{
+                        tabModeLab.addRow(new Object[]{
                             rsperiksalab.getString("noorder"),rsperiksalab.getString("tgl_permintaan"),rsperiksalab.getString("jam_permintaan"),rsperiksalab.getString("nm_dokter"),rsperiksalab.getString("status")
                         });
                     }
@@ -4376,7 +4376,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psperiksarad.setString(1,TNoRw.getText());
                     rsperiksarad=psperiksarad.executeQuery();
                     while(rsperiksarad.next()){
-                        tabModeRad.addRow(new String[]{
+                        tabModeRad.addRow(new Object[]{
                             rsperiksarad.getString("noorder"),rsperiksarad.getString("tgl_permintaan"),rsperiksarad.getString("jam_permintaan"),rsperiksarad.getString("nm_dokter"),rsperiksarad.getString("status")
                         });
                     }
@@ -4400,7 +4400,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psobatlangsung.setString(1,TNoRw.getText());
                     rscariobat=psobatlangsung.executeQuery();
                     while(rscariobat.next()){
-                        tabModeApotek.addRow(new String[]{
+                        tabModeApotek.addRow(new Object[]{
                             rscariobat.getString("no_resep"),rscariobat.getString("tgl_peresepan"),rscariobat.getString("jam_peresepan"),rscariobat.getString("nm_dokter"),rscariobat.getString("status")
                         });
                     }
