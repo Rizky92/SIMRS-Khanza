@@ -861,6 +861,7 @@ import rekammedis.RMChecklistPemberianFibrinolitik;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
+import rekammedis.RMDataCatatanCairanHemodialisa;
 import rekammedis.RMDataCatatanCekGDS;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import rekammedis.RMDataCatatanKeperawatanRanap;
@@ -996,6 +997,7 @@ import rekammedis.RMSkriningKesehatanPenglihatan;
 import rekammedis.RMSkriningPUMA;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
+import rekammedis.RMSkriningRisikoKankerServiks;
 import rekammedis.RMSkriningSRQ;
 import rekammedis.RMSkriningTBC;
 import rekammedis.RMSkriningTalasemia;
@@ -22657,6 +22659,30 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnSkriningRisikoKankerServiksActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningRisikoKankerServiks form=new RMSkriningRisikoKankerServiks(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnCatatanCairanHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMDataCatatanCairanHemodialisa form=new RMDataCatatanCairanHemodialisa(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -23364,7 +23390,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianDerajatDehidrasi,btnRingkasanJasaTindakanPasien,btnPendapatanPerAkun,btnHasilPemeriksaanECHO,btnRl13KetersediaanKamar,btnSetTampilJenisObatResep,btnPendapatanPerAkunClosing,
             btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnLaporanTindakan,btnPelaksanaanInformasiEdukasi,btnLayananKedokteranFisikRehabilitasi,
             btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR,btnSkriningHipertensi,btnSkriningKesehatanPenglihatan,
-            btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa;
+            btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa,btnSkriningRisikoKankerServiks,btnCatatanCairanHemodialisa;
     
     public void isWall(){
         try{            
@@ -27425,6 +27451,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
             
+            if(akses.getcatatan_cairan_hemodialisa()==true){
+                Panelmenu.add(btnCatatanCairanHemodialisa);
+                jmlmenu++;
+            }
+            
             if(akses.getfollow_up_dbd()==true){
                 Panelmenu.add(btnDataFollowUpDBD);
                 jmlmenu++;
@@ -27736,6 +27767,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getskrining_risiko_kanker_paru()==true){
                 Panelmenu.add(btnSkriningRisikoKankerParu);
+                jmlmenu++;
+            }
+            
+            if(akses.getskrining_risiko_kanker_serviks()==true){
+                Panelmenu.add(btnSkriningRisikoKankerServiks);
                 jmlmenu++;
             }
             
@@ -32954,6 +32990,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
         
+        if(akses.getcatatan_cairan_hemodialisa()==true){
+            Panelmenu.add(btnCatatanCairanHemodialisa);
+            jmlmenu++;
+        }
+        
         if(akses.getfollow_up_dbd()==true){
             Panelmenu.add(btnDataFollowUpDBD);
             jmlmenu++;
@@ -33265,6 +33306,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getskrining_risiko_kanker_paru()==true){
             Panelmenu.add(btnSkriningRisikoKankerParu);
+            jmlmenu++;
+        }
+        
+        if(akses.getskrining_risiko_kanker_serviks()==true){
+            Panelmenu.add(btnSkriningRisikoKankerServiks);
             jmlmenu++;
         }
         
@@ -40053,6 +40099,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getcatatan_cairan_hemodialisa()==true){
+            if(btnCatatanCairanHemodialisa.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnCatatanCairanHemodialisa);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getfollow_up_dbd()==true){
             if(btnDataFollowUpDBD.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnDataFollowUpDBD);
@@ -40512,6 +40565,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getskrining_risiko_kanker_paru()==true){
             if(btnSkriningRisikoKankerParu.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningRisikoKankerParu);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getskrining_risiko_kanker_serviks()==true){
+            if(btnSkriningRisikoKankerServiks.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningRisikoKankerServiks);
                 jmlmenu++;
             }                
         }
@@ -46983,6 +47043,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanObservasiHemodialisa.addActionListener(this::btnCatatanObservasiHemodialisaActionPerformed);
         
+        btnCatatanCairanHemodialisa = new widget.ButtonBig();
+        btnCatatanCairanHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1059390_document_clip_page_paper_text_icon.png"))); 
+        btnCatatanCairanHemodialisa.setText("Catatan Cairan Hemodialisa");
+        btnCatatanCairanHemodialisa.setIconTextGap(0);
+        btnCatatanCairanHemodialisa.setName("btnCatatanCairanHemodialisa"); 
+        btnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnCatatanCairanHemodialisa.addActionListener(this::btnCatatanCairanHemodialisaActionPerformed);
+        
         btnSKPKategoriPenilaian = new widget.ButtonBig();
         btnSKPKategoriPenilaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5986210_clothing_equipment_protection_protective_safety_icon.png"))); 
         btnSKPKategoriPenilaian.setText("Kategori Penilaian SKP");
@@ -47166,6 +47234,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningRisikoKankerParu.setName("btnSkriningRisikoKankerParu"); 
         btnSkriningRisikoKankerParu.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningRisikoKankerParu.addActionListener(this::btnSkriningRisikoKankerParuActionPerformed);
+        
+        btnSkriningRisikoKankerServiks = new widget.ButtonBig();
+        btnSkriningRisikoKankerServiks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/10716890_summer_swimsuit_beach_swimwear_bikini_icon.png"))); 
+        btnSkriningRisikoKankerServiks.setText("Skrining Risiko Kanker Serviks");
+        btnSkriningRisikoKankerServiks.setIconTextGap(0);
+        btnSkriningRisikoKankerServiks.setName("btnSkriningRisikoKankerServiks"); 
+        btnSkriningRisikoKankerServiks.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningRisikoKankerServiks.addActionListener(this::btnSkriningRisikoKankerServiksActionPerformed);
         
         btnSkriningKesehatanGigiMulutRemaja = new widget.ButtonBig();
         btnSkriningKesehatanGigiMulutRemaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185081_dental_dentist_dentistry_loose tooth_medical_icon.png"))); 
