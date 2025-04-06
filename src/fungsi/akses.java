@@ -246,7 +246,7 @@ public final class akses {
             penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false,
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
-            skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false;
+            skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false;
     
     public static void setData(String user, String pass) {
         try (
@@ -1388,6 +1388,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_dewasa=true;
                         akses.skrining_risiko_kanker_serviks=true;
                         akses.catatan_cairan_hemodialisa=true;
+                        akses.skrining_kesehatan_gigi_mulut_lansia=true;
+                        akses.skrining_indra_pendengaran=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2513,6 +2515,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_dewasa=rs2.getBoolean("skrining_kesehatan_gigi_mulut_dewasa");
                         akses.skrining_risiko_kanker_serviks=rs2.getBoolean("skrining_risiko_kanker_serviks");
                         akses.catatan_cairan_hemodialisa=rs2.getBoolean("catatan_cairan_hemodialisa");
+                        akses.skrining_kesehatan_gigi_mulut_lansia=rs2.getBoolean("skrining_kesehatan_gigi_mulut_lansia");
+                        akses.skrining_indra_pendengaran=rs2.getBoolean("skrining_indra_pendengaran");
                         akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
@@ -3652,6 +3656,8 @@ public final class akses {
                         akses.skrining_kesehatan_gigi_mulut_dewasa=false;
                         akses.skrining_risiko_kanker_serviks=false;
                         akses.catatan_cairan_hemodialisa=false;
+                        akses.skrining_kesehatan_gigi_mulut_lansia=false;
+                        akses.skrining_indra_pendengaran=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
                     }
@@ -4784,6 +4790,8 @@ public final class akses {
         akses.skrining_kesehatan_gigi_mulut_dewasa=false;
         akses.skrining_risiko_kanker_serviks=false;
         akses.catatan_cairan_hemodialisa=false;
+        akses.skrining_kesehatan_gigi_mulut_lansia=false;
+        akses.skrining_indra_pendengaran=false;
         akses.edit=false;
         akses.tglSelesai=-1;
     }
@@ -5948,6 +5956,8 @@ public final class akses {
     public static boolean getskrining_kesehatan_gigi_mulut_dewasa(){return akses.skrining_kesehatan_gigi_mulut_dewasa;}
     public static boolean getskrining_risiko_kanker_serviks(){return akses.skrining_risiko_kanker_serviks;}
     public static boolean getcatatan_cairan_hemodialisa(){return akses.catatan_cairan_hemodialisa;}
+    public static boolean getskrining_kesehatan_gigi_mulut_lansia(){return akses.skrining_kesehatan_gigi_mulut_lansia;}
+    public static boolean getskrining_indra_pendengaran(){return akses.skrining_indra_pendengaran;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {

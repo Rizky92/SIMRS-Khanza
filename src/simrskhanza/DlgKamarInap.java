@@ -209,7 +209,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
     private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,KUNCIDOKTERRANAP="",
-            hariawal="",pilihancetak="",aktifkan_hapus_data_salah="",terbitsep="",namadokter="";
+            hariawal="",aktifkan_hapus_data_salah="",terbitsep="",namadokter="";
     private String tampildiagnosa = "", perJenisAsuransi = "";
     private PreparedStatement ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur,pspulang;
     private ResultSet rs,rs2,rssetjam,rspulang;
@@ -6203,7 +6203,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }
 
                 try{
-                    pilihancetak = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan yang mau dicetak!","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1", "Laporan 2","Lembar Bimbingan Rohani"},"Laporan 1");
+                    String pilihancetak = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan yang mau dicetak!","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1", "Laporan 2","Lembar Bimbingan Rohani"},"Laporan 1");
                     switch (pilihancetak) {
                         case "Laporan 1":
                                  Map<String, Object> param = new HashMap<>();    

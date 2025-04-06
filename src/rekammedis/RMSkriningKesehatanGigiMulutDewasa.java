@@ -55,9 +55,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
     private ResultSet rs;
     private int i=0;    
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private String finger="";
-    private StringBuilder htmlContent;
-    private String TANGGALMUNDUR="yes",pilihan="";
+    private String TANGGALMUNDUR="yes";
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -207,7 +205,6 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnSkriningKesehatanGigiMulutDewasa = new javax.swing.JMenuItem();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         LoadHTML = new widget.editorpane();
         Jk = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -281,7 +278,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
         MnSkriningKesehatanGigiMulutDewasa.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnSkriningKesehatanGigiMulutDewasa.setForeground(new java.awt.Color(50, 50, 50));
         MnSkriningKesehatanGigiMulutDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSkriningKesehatanGigiMulutDewasa.setText("Formulir Skrining Kesehatan Ggi & Mulut Dewasa");
+        MnSkriningKesehatanGigiMulutDewasa.setText("Formulir Skrining Kesehatan Gigi & Mulut Dewasa");
         MnSkriningKesehatanGigiMulutDewasa.setName("MnSkriningKesehatanGigiMulutDewasa"); // NOI18N
         MnSkriningKesehatanGigiMulutDewasa.setPreferredSize(new java.awt.Dimension(300, 26));
         MnSkriningKesehatanGigiMulutDewasa.addActionListener(new java.awt.event.ActionListener() {
@@ -471,7 +468,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-04-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -485,7 +482,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-04-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -606,7 +603,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-04-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1037,8 +1034,9 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
 
                 File f;            
                 BufferedWriter bw;
+                StringBuilder htmlContent;
                 
-                pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
@@ -1312,7 +1310,7 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());   
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+            String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
             Valid.MyReportqry("rptFormulirSkriningKesehatanGigiMulutDewasa.jasper","report","::[ Formulir Skrining Kesehatan Gigi & Mulut Dewasa ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_kesehatan_gigi_mulut_dewasa.nip,petugas.nama,skrining_kesehatan_gigi_mulut_dewasa.tanggal,"+
@@ -1411,7 +1409,6 @@ public final class RMSkriningKesehatanGigiMulutDewasa extends javax.swing.JDialo
     private widget.TextBox TanggalRegistrasi;
     private widget.TextBox TglLahir;
     private widget.Button btnPetugas;
-    private javax.swing.ButtonGroup buttonGroup1;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel101;
     private widget.Label jLabel16;

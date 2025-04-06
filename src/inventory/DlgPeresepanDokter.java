@@ -1958,31 +1958,18 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             }    
 
-            pilih=null;
             pilih=new boolean[z]; 
-            jumlah=null;
             jumlah=new double[z];
-            harga=null;
             harga=new double[z];
-            kodebarang=null;
             kodebarang=new String[z];
-            namabarang=null;
             namabarang=new String[z];
-            kodesatuan=null;
             kodesatuan=new String[z];
-            letakbarang=null;
             letakbarang=new String[z];
-            namajenis=null;
-            namajenis=new String[z];                   
-            namakategori=null;
+            namajenis=new String[z];
             namakategori=new String[z];
-            aturan=null;
             aturan=new String[z];           
-            industri=null;
             industri=new String[z];         
-            beli=null;
             beli=new double[z];
-            stok=null;
             stok=new double[z]; 
             z=0;        
             for(i=0;i<tbResep.getRowCount();i++){
@@ -2284,39 +2271,22 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             }    
 
-            pilih=null;
             pilih=new boolean[z]; 
-            jumlah=null;
             jumlah=new double[z];
-            harga=null;
             harga=new double[z];
-            stok=null;
             stok=new double[z];
-            p1=null;
             p1=new double[z];
-            p2=null;
             p2=new double[z];
-            kodebarang=null;
             kodebarang=new String[z];
-            namabarang=null;
             namabarang=new String[z];
-            kodesatuan=null;
             kodesatuan=new String[z];
-            letakbarang=null;
             letakbarang=new String[z];
-            no=null;
             no=new String[z];
-            namajenis=null;
             namajenis=new String[z];        
-            industri=null;
             industri=new String[z];          
-            komposisi=null;
             komposisi=new String[z];        
-            beli=null;
             beli=new double[z];     
-            kapasitas=null;
             kapasitas=new double[z];   
-            kandungan=null;
             kandungan=new String[z];
             namakategori=null;
             namakategori=new String[z];
