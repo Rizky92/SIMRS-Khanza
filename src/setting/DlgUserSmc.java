@@ -769,9 +769,10 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             }
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
-                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy hak akses user..!!");
                             userdicopy = "";
                             copyhakakses = "";
+                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy hak akses user..!!");
+                            return;
                         }
                         if (sqlupdate.isBlank()) {
                             userdicopy = "";
