@@ -89,7 +89,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private int[] obatKronisSisaHari;
     private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,obatKronisPemberianSelanjutnya;
     private String signa1="1",signa2="1",nokunjungan="",kdObatSK="",requestJson="",URL="",otorisasi,sql="",aktifpcare="no",no_batchcari="", tgl_kadaluarsacari="", no_fakturcari="", aktifkanbatch="no",kodedokter="",namadokter="",noresep="",bangsal="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),tampilkan_ppnobat_ralan="",
-                   Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="",iyem="", kolomHarga = "ralan";
+                   Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="", kolomHarga = "ralan";
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
@@ -2258,7 +2258,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             file=new File("./cache/beriobatralan.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
             ObjectNode rootnode = mapper.createObjectNode();
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
@@ -2506,7 +2505,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             fileWriter.write(rootnode.toString());
             fileWriter.flush();
             fileWriter.close();
-            iyem=null; 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2609,6 +2607,29 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     kronis[i],obatKronisSisaHari[i],obatKronisPemberianSelanjutnya[i]
                 });
             }
+            
+            pilih=null;
+            jumlah=null;
+            harga=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            namajenis=null;                   
+            aturan=null;          
+            industri=null;        
+            beli=null;
+            kategori=null;
+            golongan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
+            kronis=null;
+            obatKronisSisaHari=null;
+            obatKronisPemberianSelanjutnya=null;
 
             String hargaobat = "";
             switch (Jeniskelas.getSelectedItem().toString()) {
@@ -3706,6 +3727,31 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     kronis[i],obatKronisSisaHari[i],obatKronisPemberianSelanjutnya[i]
                 });
             }
+
+            pilih=null; 
+            jumlah=null;
+            harga=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            no=null;
+            namajenis=null;       
+            industri=null;        
+            beli=null; 
+            kategori=null;
+            golongan=null;       
+            kapasitas=null;   
+            kandungan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
+            kronis=null;
+            obatKronisSisaHari=null;
+            obatKronisPemberianSelanjutnya=null;
             
             String hargaobat = "";
             switch (Jeniskelas.getSelectedItem().toString()) {

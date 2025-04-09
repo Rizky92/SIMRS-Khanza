@@ -77,7 +77,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private String signa1="1",signa2="1",kdObatSK="",requestJson="",nokunjungan="",URL="",otorisasi,sql="",no_batchcari="", tgl_kadaluarsacari="", 
                    no_fakturcari="",aktifkanbatch="no",aktifpcare="no",noresep="",Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",
                    Persediaan_Obat_Rawat_Inap="",hppfarmasi="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),
-                   VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="",iyem="";
+                   VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
     private WarnaTable2 warna=new WarnaTable2();
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
     private DlgCariAturanPakai aturanpakai = null;
@@ -1945,7 +1945,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             file=new File("./cache/beriobatranap.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
             ObjectNode rootnode = mapper.createObjectNode();
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
@@ -2213,7 +2212,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             fileWriter.write(rootnode.toString());
             fileWriter.flush();
             fileWriter.close();
-            iyem=null; 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2310,6 +2308,26 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                    beli[i],aturan[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i]
                 });
             }
+            
+            pilih=null;
+            jumlah=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            harga=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            namajenis=null;        
+            industri=null; 
+            beli=null;
+            aturan=null;
+            kategori=null;
+            golongan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
             
             myObj = new FileReader("./cache/beriobatranap.iyem");
             root = mapper.readTree(myObj);
@@ -2898,6 +2916,28 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     ts[i],industri[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i]
                 });
             }
+            
+            pilih=null;
+            jumlah=null;
+            harga=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            no=null;
+            namajenis=null;       
+            industri=null;         
+            beli=null; 
+            kategori=null;
+            golongan=null;       
+            kapasitas=null;  
+            kandungan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
             
             myObj = new FileReader("./cache/beriobatranap.iyem");
             root = mapper.readTree(myObj);
