@@ -22,6 +22,13 @@
     <entry key="KOMPILASIBERKASMAXMEMORY">200</entry>
     <entry key="AKTIFKANFILTERRESEPPERJENISOBAT">88tE0ZUstuza/UrtfBYkFA==</entry>
 
+    <entry key="NOTIFWAFARMASIKEPASIEN">no</entry>
+    <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="WANAME">AZHNccBwSmSho84f+X8GyQ==</entry>
+    <entry key="WAUSER">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="WAPASS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
     <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>
     <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
@@ -95,8 +102,8 @@
     <entry key="PASSMOBILEJKNFKTP">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERMOBILEJKNFKTP">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="ADDANTRIANAPIMOBILEJKNFKTP">yes</entry>
-    <entry key="DIVREGPCARE">REGIONAL V-JAWA TENGAH</entry>
-    <entry key="KACABPCARE">SURAKARTA</entry>
+    <entry key="DIVREGPCARE"></entry>
+    <entry key="KACABPCARE"></entry>
     <entry key="URLAPISISRUTE">https://api.sisrute.kemkes.go.id</entry>
     <entry key="IDSISRUTE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSSISRUTE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
@@ -204,7 +211,7 @@
     <entry key="URLAPIESIGN">http://localhost</entry>
     <entry key="USERNAMEAPIESIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSAPIESIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="URLAKSESFILEESIGN">http://localhost</entry>
+    <entry key="URLAKSESFILEESIGN">http://localhost/esign/jadikanpdf</entry>
     <entry key="SFTPFILEESIGNHOST">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="SFTPFILEESIGNPORT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="SFTPFILEESIGNUSER">l4nh5eVYrLAER/I2A4b3Tw==</entry>
