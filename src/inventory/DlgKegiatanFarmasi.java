@@ -218,12 +218,12 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kegiatan Farmasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kegiatan Farmasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
-        TabRawat.setForeground(new java.awt.Color(50,50,50));
+        TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -623,7 +623,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                     
-                    tabMode.addRow(new String[]{
+                    tabMode.addRow(new Object[]{
                         i+"",rs.getString("nama"),itempengadaan+"",itemtersedia+""
                     });
                     i++;
@@ -638,7 +638,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }    
-            tabMode.addRow(new String[]{
+            tabMode.addRow(new Object[]{
                 "","Total : ",jmlitempengadaan+"",jmlitemtersedia+""
             });
             this.setCursor(Cursor.getDefaultCursor());
@@ -709,7 +709,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                     
-                    tabMode2.addRow(new String[]{
+                    tabMode2.addRow(new Object[]{
                         i+"",rs.getString("nama"),itempengadaan+"",itemtersedia+""
                     });
                     i++;
@@ -724,7 +724,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }    
-            tabMode2.addRow(new String[]{
+            tabMode2.addRow(new Object[]{
                 "","Total : ",jmlitempengadaan+"",jmlitemtersedia+""
             });
             this.setCursor(Cursor.getDefaultCursor());
@@ -796,7 +796,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                     
-                    tabMode3.addRow(new String[]{
+                    tabMode3.addRow(new Object[]{
                         i+"",rs.getString("nama"),itempengadaan+"",itemtersedia+""
                     });
                     i++;
@@ -811,7 +811,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }    
-            tabMode3.addRow(new String[]{
+            tabMode3.addRow(new Object[]{
                 "","Total : ",jmlitempengadaan+"",jmlitemtersedia+""
             });
             this.setCursor(Cursor.getDefaultCursor());

@@ -636,7 +636,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -650,7 +650,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -771,7 +771,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -2615,8 +2615,8 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
                     
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{
-                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),rs.getString("nama"),rs.getString("tanggal"),
+                    tabMode.addRow(new Object[]{
+                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),rs.getString("nama"),rs.getString("tanggal"),
                         rs.getString("pernyataansrq1"),rs.getString("nilai_srq1"),rs.getString("pernyataansrq2"),rs.getString("nilai_srq2"),rs.getString("pernyataansrq3"),rs.getString("nilai_srq3"),rs.getString("pernyataansrq4"),
                         rs.getString("nilai_srq4"),rs.getString("pernyataansrq5"),rs.getString("nilai_srq5"),rs.getString("pernyataansrq6"),rs.getString("nilai_srq6"),rs.getString("pernyataansrq7"),rs.getString("nilai_srq7"),
                         rs.getString("pernyataansrq8"),rs.getString("nilai_srq8"),rs.getString("pernyataansrq9"),rs.getString("nilai_srq9"),rs.getString("pernyataansrq10"),rs.getString("nilai_srq10"),rs.getString("pernyataansrq11"),
@@ -2789,7 +2789,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-172));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
@@ -2970,7 +2970,7 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
             SRQ17.getSelectedItem().toString(),NilaiSRQ17.getText(),SRQ18.getSelectedItem().toString(),NilaiSRQ18.getText(),SRQ19.getSelectedItem().toString(),NilaiSRQ19.getText(),SRQ20.getSelectedItem().toString(),NilaiSRQ20.getText(),
             TotalNilai.getText(),Kesimpulan.getText()
         })==true){
-            tabMode.addRow(new String[]{
+            tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SRQ1.getSelectedItem().toString(),NilaiSRQ1.getText(),SRQ2.getSelectedItem().toString(),NilaiSRQ2.getText(),SRQ3.getSelectedItem().toString(),NilaiSRQ3.getText(),SRQ4.getSelectedItem().toString(),NilaiSRQ4.getText(), 
                 SRQ5.getSelectedItem().toString(),NilaiSRQ5.getText(),SRQ6.getSelectedItem().toString(),NilaiSRQ6.getText(),SRQ7.getSelectedItem().toString(),NilaiSRQ7.getText(),SRQ8.getSelectedItem().toString(),NilaiSRQ8.getText(), 

@@ -52,7 +52,6 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
     private validasi Valid=new validasi();    
     private Jurnal jur=new Jurnal();
     private Connection koneksi=koneksiDB.condb();
-    private DlgCariPeminjamPiutang peminjam=new DlgCariPeminjamPiutang(null,false);
     private double total=0,sisapiutang=0;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -60,7 +59,6 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
     private boolean sukses=true;
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -166,45 +164,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
-        peminjam.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(peminjam.getTable().getSelectedRow()!= -1){
-                    KdPeminjam.setText(peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),0).toString());
-                    NmPeminjam.setText(peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),1).toString());
-                    kontraakun=peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),4).toString();
-                    namakontraakun=peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),5).toString();
-                    BtnPeminjam.requestFocus();
-                }      
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {peminjam.emptTeks();}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });   
-        
-        peminjam.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    peminjam.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
+        } 
         
         ChkInput.setSelected(false);
         isForm();
@@ -1031,6 +991,44 @@ private void ppNotaPiutangBtnPrintActionPerformed(java.awt.event.ActionEvent evt
 private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPeminjamActionPerformed
         kontraakun="";
         namakontraakun="";
+        DlgCariPeminjamPiutang peminjam=new DlgCariPeminjamPiutang(null,false);
+        peminjam.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(peminjam.getTable().getSelectedRow()!= -1){
+                    KdPeminjam.setText(peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),0).toString());
+                    NmPeminjam.setText(peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),1).toString());
+                    kontraakun=peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),4).toString();
+                    namakontraakun=peminjam.getTable().getValueAt(peminjam.getTable().getSelectedRow(),5).toString();
+                    BtnPeminjam.requestFocus();
+                }      
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {peminjam.emptTeks();}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });   
+        
+        peminjam.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    peminjam.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         peminjam.emptTeks();
         peminjam.isCek();
         peminjam.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1157,24 +1155,16 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "select bayar_piutang_lainlain.tgl_bayar, bayar_piutang_lainlain.kode_peminjam,peminjampiutang.nama_peminjam, bayar_piutang_lainlain.besar_cicilan,"+
                     "bayar_piutang_lainlain.keterangan, bayar_piutang_lainlain.nota_piutang,bayar_piutang_lainlain.kd_rek,bayar_piutang_lainlain.nama_bayar from bayar_piutang_lainlain "+
                     "inner join peminjampiutang on bayar_piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam where "+
-                    "bayar_piutang_lainlain.tgl_bayar between ? and ? and bayar_piutang_lainlain.nota_piutang like ? or "+
-                    "bayar_piutang_lainlain.tgl_bayar between ? and ? and bayar_piutang_lainlain.kode_peminjam like ? or "+
-                    "bayar_piutang_lainlain.tgl_bayar between ? and ? and peminjampiutang.nama_peminjam like ? or "+
-                    "bayar_piutang_lainlain.tgl_bayar between ? and ? and bayar_piutang_lainlain.tgl_bayar like ? "+
-                    "order by bayar_piutang_lainlain.tgl_bayar,bayar_piutang_lainlain.kode_peminjam");
+                    "bayar_piutang_lainlain.tgl_bayar between ? and ? "+(TCari.getText().trim().equals("")?"":"and (bayar_piutang_lainlain.nota_piutang like ? or bayar_piutang_lainlain.kode_peminjam like ? or "+
+                    "peminjampiutang.nama_peminjam like ?) ")+"order by bayar_piutang_lainlain.tgl_bayar,bayar_piutang_lainlain.kode_peminjam");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(3,"%"+TCari.getText()+"%");
-                ps.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                ps.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(6,"%"+TCari.getText()+"%");
-                ps.setString(7,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                ps.setString(8,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(9,"%"+TCari.getText()+"%");
-                ps.setString(10,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                ps.setString(11,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                ps.setString(12,"%"+TCari.getText()+"%");
+                if(!TCari.getText().trim().equals("")){
+                    ps.setString(3,"%"+TCari.getText()+"%");
+                    ps.setString(4,"%"+TCari.getText()+"%");
+                    ps.setString(5,"%"+TCari.getText()+"%");
+                }   
                 rs=ps.executeQuery();
                 total=0;
                 while(rs.next()){                
@@ -1271,14 +1261,14 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
              file=new File("./cache/akunbayar.iyem");
              file.createNewFile();
              fileWriter = new FileWriter(file);
-             iyem="";
+             StringBuilder iyembuilder = new StringBuilder();
              ps=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
              try{
                  rs=ps.executeQuery();
                  AkunBayar.removeAllItems();
                  while(rs.next()){    
                      AkunBayar.addItem(rs.getString(1).replaceAll("\"",""));
-                     iyem=iyem+"{\"NamaAkun\":\""+rs.getString(1).replaceAll("\"","")+"\",\"KodeRek\":\""+rs.getString(2)+"\",\"PPN\":\""+rs.getDouble(3)+"\"},";
+                     iyembuilder.append("{\"NamaAkun\":\"").append(rs.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rs.getString(2)).append("\",\"PPN\":\"").append(rs.getDouble(3)).append("\"},");
                  }
              }catch (Exception e) {
                  System.out.println("Notifikasi : "+e);
@@ -1290,11 +1280,15 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                      ps.close();
                  } 
              }
-
-             fileWriter.write("{\"akunbayar\":["+iyem.substring(0,iyem.length()-1)+"]}");
-             fileWriter.flush();
+             
+             if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
+                fileWriter.flush();
+             }
+            
              fileWriter.close();
-             iyem=null;
+             iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }

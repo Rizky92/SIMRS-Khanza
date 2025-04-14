@@ -16,6 +16,7 @@ import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import java.net.URI;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import org.apache.http.client.utils.URIBuilder;
@@ -408,17 +409,19 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
             headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
             requestEntity = new HttpEntity(headers);
             
-            URIBuilder uri = new URIBuilder(koneksiDB.URLKFAV2SATUSEHAT() + "/products/all")
+            URIBuilder builder = new URIBuilder(koneksiDB.URLKFAV2SATUSEHAT() + "/products/all")
                 .addParameter("page", "1")
                 .addParameter("size", LimitData.getSelectedItem().toString())
                 .addParameter("product_type", ProductType.getSelectedItem().toString());
             
             if (!TCari.getText().isBlank()) {
-                uri.addParameter("keyword", TCari.getText().trim());
+                builder.addParameter("keyword", TCari.getText().trim());
             }
+            
+            URI uri = builder.build();
             System.out.println("URL : " + uri.toString());
             
-            root = mapper.readTree(api.getRest().exchange(uri.build(), HttpMethod.GET, requestEntity, String.class).getBody());
+            root = mapper.readTree(api.getRest().exchange(uri, HttpMethod.GET, requestEntity, String.class).getBody());
             System.out.println("RESULT JSON : " + root.toString());
             response = root.path("items").path("data");
             if (response.isArray()) {

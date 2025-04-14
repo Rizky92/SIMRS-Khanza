@@ -48,6 +48,9 @@
     }
     
     function validTeks($data){
+        if ($data === null) {
+            return '';
+        }
         $save=str_replace("'","",$data);
         $save=str_replace("\\","",$save);
         $save=str_replace(";","",$save);
@@ -204,6 +207,9 @@
     }
     
     function validTeks4($data,$panjang){
+        if ($data === null) {
+            return '';
+        }
         $save="";
         if(strlen($data)>$panjang){
             header('Location: https://www.google.com');
