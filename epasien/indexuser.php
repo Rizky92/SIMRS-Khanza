@@ -430,6 +430,15 @@
                             <li <?=$subhalaman=="PersetujuanRestrain"?"class='active'":""?>>
                                 <a href="index.php?act=PersetujuanRestrain&hal=Persetujuan">Persetujuan Restrain</a>
                             </li>
+                            <li <?=$subhalaman=="BuktiPelaksanaanEdukasi"?"class='active'":""?>>
+                                <a href="index.php?act=BuktiPelaksanaanEdukasi&hal=Persetujuan">Pelaksanaan Informasi/Edukasi</a>
+                            </li>
+                            <li <?=$subhalaman=="BuktiPelayananRehabilitasi"?"class='active'":""?>>
+                                <a href="index.php?act=BuktiPelayananRehabilitasi&hal=Persetujuan">Layanan Kedokteran Fisik</a>
+                            </li>
+                            <li <?=$subhalaman=="BuktiPelayananProgramKFR"?"class='active'":""?>>
+                                <a href="index.php?act=BuktiPelayananProgramKFR&hal=Persetujuan">Layanan Program KFR</a>
+                            </li>
                         </ul>
                     </li>
                     <li <?=$halaman=="Fasilitas"?"class='active'":""?>>

@@ -156,8 +156,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 return component;
             }
         });
-        
-        
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

@@ -85,7 +85,6 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private FileReader myObj;
     
     /**
@@ -1198,7 +1197,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             file=new File("./cache/tarifralan.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
+            StringBuilder iyembuilder = new StringBuilder();
             if(aktifpcare.equals("yes")){
                 sql="select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,jns_perawatan.bhp,jns_perawatan.material,"+
@@ -1245,7 +1244,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     rstindakan.getDouble("tarif_tindakanpr"),rstindakan.getDouble("kso"),
                                     rstindakan.getDouble("menejemen")
                                 });
-                                iyem=iyem+"{\"Kode\":\""+rstindakan.getString(1)+"\",\"NamaPerawatan\":\""+rstindakan.getString(2).replaceAll("\"","")+"\",\"KategoriPerawatan\":\""+rstindakan.getString(3)+"\",\"Tarif\":\""+rstindakan.getString("total_byrdr")+"\",\"BagianRS\":\""+rstindakan.getString("material")+"\",\"BHP\":\""+rstindakan.getString("bhp")+"\",\"JMDokter\":\""+rstindakan.getString("tarif_tindakandr")+"\",\"JMPerawat\":\""+rstindakan.getString("tarif_tindakanpr")+"\",\"KSO\":\""+rstindakan.getString("kso")+"\",\"Menejemen\":\""+rstindakan.getString("menejemen")+"\"},";
+                                iyembuilder.append("{\"Kode\":\"").append(rstindakan.getString(1)).append("\",\"NamaPerawatan\":\"").append(rstindakan.getString(2).replaceAll("\"","")).append("\",\"KategoriPerawatan\":\"").append(rstindakan.getString(3)).append("\",\"Tarif\":\"").append(rstindakan.getString("total_byrdr")).append("\",\"BagianRS\":\"").append(rstindakan.getString("material")).append("\",\"BHP\":\"").append(rstindakan.getString("bhp")).append("\",\"JMDokter\":\"").append(rstindakan.getString("tarif_tindakandr")).append("\",\"JMPerawat\":\"").append(rstindakan.getString("tarif_tindakanpr")).append("\",\"KSO\":\"").append(rstindakan.getString("kso")).append("\",\"Menejemen\":\"").append(rstindakan.getString("menejemen")).append("\"},");
                             }                        
                         }   
                         break;
@@ -1259,7 +1258,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     rstindakan.getDouble("tarif_tindakanpr"),rstindakan.getDouble("kso"),
                                     rstindakan.getDouble("menejemen")
                                 });
-                                iyem=iyem+"{\"Kode\":\""+rstindakan.getString(1)+"\",\"NamaPerawatan\":\""+rstindakan.getString(2).replaceAll("\"","")+"\",\"KategoriPerawatan\":\""+rstindakan.getString(3)+"\",\"Tarif\":\""+rstindakan.getString("total_byrpr")+"\",\"BagianRS\":\""+rstindakan.getString("material")+"\",\"BHP\":\""+rstindakan.getString("bhp")+"\",\"JMDokter\":\""+rstindakan.getString("tarif_tindakandr")+"\",\"JMPerawat\":\""+rstindakan.getString("tarif_tindakanpr")+"\",\"KSO\":\""+rstindakan.getString("kso")+"\",\"Menejemen\":\""+rstindakan.getString("menejemen")+"\"},";
+                                iyembuilder.append("{\"Kode\":\"").append(rstindakan.getString(1)).append("\",\"NamaPerawatan\":\"").append(rstindakan.getString(2).replaceAll("\"","")).append("\",\"KategoriPerawatan\":\"").append(rstindakan.getString(3)).append("\",\"Tarif\":\"").append(rstindakan.getString("total_byrpr")).append("\",\"BagianRS\":\"").append(rstindakan.getString("material")).append("\",\"BHP\":\"").append(rstindakan.getString("bhp")).append("\",\"JMDokter\":\"").append(rstindakan.getString("tarif_tindakandr")).append("\",\"JMPerawat\":\"").append(rstindakan.getString("tarif_tindakanpr")).append("\",\"KSO\":\"").append(rstindakan.getString("kso")).append("\",\"Menejemen\":\"").append(rstindakan.getString("menejemen")).append("\"},");
                             }                            
                         }   
                         break;
@@ -1273,7 +1272,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     rstindakan.getDouble("tarif_tindakanpr"),rstindakan.getDouble("kso"),
                                     rstindakan.getDouble("menejemen")
                                 });
-                                iyem=iyem+"{\"Kode\":\""+rstindakan.getString(1)+"\",\"NamaPerawatan\":\""+rstindakan.getString(2).replaceAll("\"","")+"\",\"KategoriPerawatan\":\""+rstindakan.getString(3)+"\",\"Tarif\":\""+rstindakan.getString("total_byrdrpr")+"\",\"BagianRS\":\""+rstindakan.getString("material")+"\",\"BHP\":\""+rstindakan.getString("bhp")+"\",\"JMDokter\":\""+rstindakan.getString("tarif_tindakandr")+"\",\"JMPerawat\":\""+rstindakan.getString("tarif_tindakanpr")+"\",\"KSO\":\""+rstindakan.getString("kso")+"\",\"Menejemen\":\""+rstindakan.getString("menejemen")+"\"},";
+                                iyembuilder.append("{\"Kode\":\"").append(rstindakan.getString(1)).append("\",\"NamaPerawatan\":\"").append(rstindakan.getString(2).replaceAll("\"","")).append("\",\"KategoriPerawatan\":\"").append(rstindakan.getString(3)).append("\",\"Tarif\":\"").append(rstindakan.getString("total_byrdrpr")).append("\",\"BagianRS\":\"").append(rstindakan.getString("material")).append("\",\"BHP\":\"").append(rstindakan.getString("bhp")).append("\",\"JMDokter\":\"").append(rstindakan.getString("tarif_tindakandr")).append("\",\"JMPerawat\":\"").append(rstindakan.getString("tarif_tindakanpr")).append("\",\"KSO\":\"").append(rstindakan.getString("kso")).append("\",\"Menejemen\":\"").append(rstindakan.getString("menejemen")).append("\"},");
                             }                        
                         }   
                         break;
@@ -1297,10 +1296,15 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     pstindakan4.close();
                 }
             }
-            fileWriter.write("{\"tarifralan\":["+iyem.substring(0,iyem.length()-1)+"]}");
-            fileWriter.flush();
+            
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"tarifralan\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+            
             fileWriter.close();
-            iyem=null;
+            iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1316,27 +1320,16 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
 
-            pilih=null;
             pilih=new boolean[jml]; 
-            kode=null;
             kode=new String[jml];
-            nama=null;
             nama=new String[jml];
-            kategori=null;
             kategori=new String[jml];
-            totaltnd=null;
             totaltnd=new double[jml];  
-            bagianrs=null;
             bagianrs=new double[jml];
-            bhp=null;
             bhp=new double[jml];
-            jmdokter=null;
             jmdokter=new double[jml];
-            jmperawat=null;
             jmperawat=new double[jml];
-            kso=null;
             kso=new double[jml];
-            menejemen=null;
             menejemen=new double[jml];
 
             index=0;        
@@ -1364,6 +1357,18 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     pilih[i],kode[i],nama[i],kategori[i],totaltnd[i],bagianrs[i],bhp[i],jmdokter[i],jmperawat[i],kso[i],menejemen[i]
                 });
             }
+            
+            pilih=null;
+            kode=null;
+            nama=null;
+            kategori=null;
+            totaltnd=null;  
+            bagianrs=null;
+            bhp=null;
+            jmdokter=null;
+            jmperawat=null;
+            kso=null;
+            menejemen=null;
             
             myObj = new FileReader("./cache/tarifralan.iyem");
             root = mapper.readTree(myObj);
