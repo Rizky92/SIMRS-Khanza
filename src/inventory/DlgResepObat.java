@@ -42,6 +42,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
+import support.kirimwa.DlgKirimWA;
 
 
 /**
@@ -64,6 +65,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private int i=0,pilihan=0,getno=0;
     private DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
 
     /** Creates new form DlgResepObat 
      *@param parent
@@ -307,6 +309,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
         ppLembarObat2 = new javax.swing.JMenuItem();
         ppUbahAturanPakai = new javax.swing.JMenuItem();
         ppUbahAturanPakai1 = new javax.swing.JMenuItem();
+        ppKirimWAPengerjaan = new javax.swing.JMenuItem();
+        ppKirimWASelesai = new javax.swing.JMenuItem();
         WindowInput3 = new javax.swing.JDialog();
         internalFrame4 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -525,6 +529,38 @@ public final class DlgResepObat extends javax.swing.JDialog {
             }
         });
         Popup2.add(ppUbahAturanPakai1);
+
+        ppKirimWAPengerjaan.setBackground(new java.awt.Color(255, 255, 254));
+        ppKirimWAPengerjaan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppKirimWAPengerjaan.setForeground(new java.awt.Color(50, 50, 50));
+        ppKirimWAPengerjaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppKirimWAPengerjaan.setText("Kirim Notif WA Pengerjaan");
+        ppKirimWAPengerjaan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppKirimWAPengerjaan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppKirimWAPengerjaan.setName("ppKirimWAPengerjaan"); // NOI18N
+        ppKirimWAPengerjaan.setPreferredSize(new java.awt.Dimension(225, 25));
+        ppKirimWAPengerjaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppKirimWAPengerjaanActionPerformed(evt);
+            }
+        });
+        Popup2.add(ppKirimWAPengerjaan);
+
+        ppKirimWASelesai.setBackground(new java.awt.Color(255, 255, 254));
+        ppKirimWASelesai.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppKirimWASelesai.setForeground(new java.awt.Color(50, 50, 50));
+        ppKirimWASelesai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppKirimWASelesai.setText("Kirim Notif WA Selesai");
+        ppKirimWASelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppKirimWASelesai.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppKirimWASelesai.setName("ppKirimWASelesai"); // NOI18N
+        ppKirimWASelesai.setPreferredSize(new java.awt.Dimension(225, 25));
+        ppKirimWASelesai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppKirimWASelesaiActionPerformed(evt);
+            }
+        });
+        Popup2.add(ppKirimWASelesai);
 
         WindowInput3.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowInput3.setName("WindowInput3"); // NOI18N
@@ -863,7 +899,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:52" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025 09:36:05" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -877,7 +913,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:53" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025 09:36:05" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1007,7 +1043,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 95, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1109,7 +1145,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         PanelAccor.setPreferredSize(new java.awt.Dimension(445, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
 
-        ChkAccor.setBackground(new java.awt.Color(255,250,250));
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
         ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
         ChkAccor.setSelected(true);
         ChkAccor.setFocusable(false);
@@ -2217,6 +2253,50 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_ppLembarObat2ActionPerformed
 
+    private void ppKirimWAPengerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKirimWAPengerjaanActionPerformed
+        if (Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.status_lanjut = 'Ranap' and reg_periksa.no_rawat = ?", TNoRw.getText())) {
+            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya untuk pasien rawat jalan!");
+            return;
+        }
+        
+        String templateValidasiWA = "Kepada %s\nPasien %s %s %s (%s)" +
+                                    "\n*RESEP OBAT SAAT INI DALAM PROSES PENGERJAAN %s* di Instalasi Farmasi Rawat Jalan. " +
+                                    "\nMohon untuk *MENUNGGU* terlebih dahulu. Kami akan mengirimkan pesan apabila resep anda telah selesai." +
+                                    "\n\nTerima kasih, semoga lekas sembuh.";
+        
+        boolean adaRacikan = Sequel.cariExistsSmc("select * from resep_dokter_racikan where resep_dokter_racikan.no_resep = ?", NoResep.getText());
+        kirimWA.setSize(514, 350);
+        kirimWA.setLocationRelativeTo(internalFrame1);
+        kirimWA.setRM(TNoRm.getText(), TPasien.getText(), Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", TNoRm.getText()),
+            String.format(templateValidasiWA, TPasien.getText(),
+                Sequel.cariIsiSmc("select poliklinik.nm_poli from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText()),
+                NmDokter.getText(), akses.getnamars(), Valid.getTglSmc(DTPBeri),
+                adaRacikan ? "RACIKAN" : "NON RACIKAN"
+        ), "FARMASI");
+        kirimWA.setVisible(true);
+    }//GEN-LAST:event_ppKirimWAPengerjaanActionPerformed
+
+    private void ppKirimWASelesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKirimWASelesaiActionPerformed
+        if (Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.status_lanjut = 'Ranap' and reg_periksa.no_rawat = ?", TNoRw.getText())) {
+            JOptionPane.showMessageDialog(null, "Kirim Pesan WA hanya untuk pasien rawat jalan!");
+            return;
+        }
+        
+        String templatePenyerahanWA = "Kepada %s\nPasien %s %s %s (%s)" +
+                                      "\n*RESEP OBAT ANDA TELAH SELESAI*. Harap segera mengambil obat anda di loket Instalasi Farmasi Rawat Jalan." +
+                                      "\n*Jika obat ditinggal, pengambilan obat dapat dilakukan pada hari kerja mulai jam 08:00 - 10:00 WITA dan 15:00 - 17:00 WITA*." +
+                                      "\n\nTerima kasih, semoga lekas sembuh.";
+        
+        kirimWA.setSize(514, 350);
+        kirimWA.setLocationRelativeTo(internalFrame1);
+        kirimWA.setRM(TNoRm.getText(), TPasien.getText(), Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", TNoRm.getText()),
+            String.format(templatePenyerahanWA, TPasien.getText(),
+                Sequel.cariIsiSmc("select poliklinik.nm_poli from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText()),
+                NmDokter.getText(), akses.getnamars(), Valid.getTglSmc(DTPBeri)
+        ), "FARMASI");
+        kirimWA.setVisible(true);
+    }//GEN-LAST:event_ppKirimWASelesaiActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2302,6 +2382,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.panelisi panelGlass9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
+    private javax.swing.JMenuItem ppKirimWAPengerjaan;
+    private javax.swing.JMenuItem ppKirimWASelesai;
     private javax.swing.JMenuItem ppLabelDataObat;
     private javax.swing.JMenuItem ppLembarObat;
     private javax.swing.JMenuItem ppLembarObat1;
@@ -2344,12 +2426,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 rs=ps.executeQuery();
                 jumlahtotal=0;
                 while(rs.next()){
-                    tabMode.addRow(new String[]{
+                    tabMode.addRow(new Object[]{
                         rs.getString("no_resep"),rs.getString("tgl_perawatan")+" "+rs.getString("jam"),
                         rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien"),
                         rs.getString("nm_dokter")
                     });
-                    tabMode.addRow(new String[]{"","Nama Obat","Jumlah x Harga + Embalase + Tuslah = Total","Aturan Pakai"});                
+                    tabMode.addRow(new Object[]{"","Nama Obat","Jumlah x Harga + Embalase + Tuslah = Total","Aturan Pakai"});                
                     ps2=koneksi.prepareStatement("select databarang.kode_brng,databarang.nama_brng,detail_pemberian_obat.jml,"+
                         "detail_pemberian_obat.biaya_obat,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,detail_pemberian_obat.total from "+
                         "detail_pemberian_obat inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
@@ -2367,7 +2449,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs2=ps2.executeQuery();
                         total=0;
                         while(rs2.next()){
-                            tabMode.addRow(new String[]{
+                            tabMode.addRow(new Object[]{
                                 "",rs2.getString("nama_brng"),rs2.getString("jml")+"  x  "+Valid.SetAngka(rs2.getDouble("biaya_obat"))+
                                 " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+" = "+Valid.SetAngka(rs2.getDouble("total")),
                                 Sequel.cariIsi("select aturan_pakai.aturan from aturan_pakai where aturan_pakai.tgl_perawatan='"+rs.getString("tgl_perawatan")+"' and "+
@@ -2401,7 +2483,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         psracikan.setString(3,rs.getString("no_rawat"));
                         rsracikan=psracikan.executeQuery();
                         while(rsracikan.next()){
-                            tabMode.addRow(new String[]{
+                            tabMode.addRow(new Object[]{
                                 "",rsracikan.getString("no_racik")+". "+rsracikan.getString("nama_racik"),
                                 rsracikan.getString("jml_dr")+" "+rsracikan.getString("metode")+", Keterangan : "+rsracikan.getString("keterangan"),
                                 rsracikan.getString("aturan_pakai")
@@ -2426,7 +2508,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 rs2=ps2.executeQuery();
                                 total=0;
                                 while(rs2.next()){
-                                    tabMode.addRow(new String[]{
+                                    tabMode.addRow(new Object[]{
                                         "","   "+rs2.getString("nama_brng"),rs2.getString("jml")+"  x  "+Valid.SetAngka(rs2.getDouble("biaya_obat"))+
                                         " + "+Valid.SetAngka(rs2.getDouble("embalase"))+" + "+Valid.SetAngka(rs2.getDouble("tuslah"))+" = "+Valid.SetAngka(rs2.getDouble("total")),
                                         ""
@@ -2456,12 +2538,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         }
                     }
                     if(total>0){
-                        tabMode.addRow(new String[]{"","","Total Biaya Resep = "+ Valid.SetAngka(total),""}); 
+                        tabMode.addRow(new Object[]{"","","Total Biaya Resep = "+ Valid.SetAngka(total),""}); 
                     }
                 }                
                 rs.last();
                 if(rs.getRow()>0){
-                    tabMode.addRow(new String[]{">>","Jumlah Total Biaya Resep",Valid.SetAngka(jumlahtotal),""}); 
+                    tabMode.addRow(new Object[]{">>","Jumlah Total Biaya Resep",Valid.SetAngka(jumlahtotal),""}); 
                 }
                 LCount.setText(""+rs.getRow());
             } catch(Exception ex){
@@ -2566,6 +2648,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     public void isCek(){
+        ppKirimWAPengerjaan.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
+        ppKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
         BtnSimpan.setEnabled(akses.getresep_obat());
         BtnHapus.setEnabled(akses.getresep_obat());
         BtnPrint.setEnabled(akses.getresep_obat());
@@ -2590,7 +2674,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 ps2.setString(6,TNoRw.getText());
                 rs2=ps2.executeQuery();
                 while(rs2.next()){
-                    tabmodeUbahRacikan.addRow(new String[]{
+                    tabmodeUbahRacikan.addRow(new Object[]{
                         rs2.getString("tgl_perawatan"),rs2.getString("jam"),rs2.getString("no_rawat"),
                         rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                         Sequel.cariIsi("select aturan from aturan_pakai where tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' and "+
@@ -2627,7 +2711,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 ps2.setString(3,TNoRw.getText());
                 rs2=ps2.executeQuery();
                 while(rs2.next()){
-                    tabmodeUbahRacikan2.addRow(new String[]{
+                    tabmodeUbahRacikan2.addRow(new Object[]{
                         rs2.getString("tgl_perawatan"),rs2.getString("jam"),rs2.getString("no_rawat"),
                         rs2.getString("no_racik"),rs2.getString("nama_racik"),rs2.getString("aturan_pakai")
                     });
