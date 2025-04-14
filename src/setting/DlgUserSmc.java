@@ -733,9 +733,9 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if (tabMode.getRowCount() != 0) {
             if (copyhakakses.equals("copy")) {
                 if (userdicopy.equals(tbUser.getValueAt(tbUser.getSelectedRow(), 0).toString())) {
-                    JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
                     userdicopy = "";
                     copyhakakses = "";
+                    JOptionPane.showMessageDialog(null, "Copy hak akses gagal karena user dicopy dan user tujuan yang dipilih sama..!!");
                 } else {
                     JCheckBox checkbox = new JCheckBox("Hanya copy hak akses yang aktif");
                     int reply = JOptionPane.showConfirmDialog(null, new Object[] {"Eeiiiiiits, udah bener belum data copy hak aksesnya..??", checkbox}, "Konfirmasi", JOptionPane.YES_NO_OPTION);
