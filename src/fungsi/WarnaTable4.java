@@ -18,7 +18,7 @@ import javax.swing.table.TableCellRenderer;
 public class WarnaTable4 extends JTextArea implements TableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-        this.setText((String)value);
+         this.setText(value.toString());
         this.setWrapStyleWord(true);                    
         this.setLineWrap(true);  
         if (row % 2 == 1){

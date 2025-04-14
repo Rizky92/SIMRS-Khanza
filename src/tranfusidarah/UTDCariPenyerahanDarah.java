@@ -1456,13 +1456,13 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             rs2=pscekmedis.executeQuery();
                             if(rs2.next()){
                                 no=1;
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","","No","Kode Barang","Penggunaan BHP Medis","Jumlah","Satuan","Harga","Total"
                                 });
                             }
                             rs2.beforeFirst();
                             while(rs2.next()){
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","",no+". ",rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                     rs2.getString("jml"),rs2.getString("kode_sat"),Valid.SetAngka(rs2.getDouble("harga")),
                                     Valid.SetAngka(rs2.getDouble("total"))
@@ -1493,13 +1493,13 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             rs2=psceknonmedis.executeQuery();
                             if(rs2.next()){
                                 no=1;                                
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","","No","Kode Barang","Penggunaan BHP Non Medis","Jumlah","Satuan","Harga","Total"
                                 });
                             }
                             rs2.beforeFirst();
                             while(rs2.next()){
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","",no+". ",rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                     rs2.getString("jml"),rs2.getString("kode_sat"),Valid.SetAngka(rs2.getDouble("harga")),
                                     Valid.SetAngka(rs2.getDouble("total"))
@@ -1530,13 +1530,13 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             rs2=pscekmedis.executeQuery();
                             if(rs2.next()){
                                 no=1;                                
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","","No","Kode Barang","Penggunaan BHP Medis","Jumlah","Satuan","Harga","Total"
                                 });
                             }
                             rs2.beforeFirst();
                             while(rs2.next()){
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","",no+". ",rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                     rs2.getString("jml"),rs2.getString("kode_sat"),Valid.SetAngka(rs2.getDouble("harga")),
                                     Valid.SetAngka(rs2.getDouble("total"))
@@ -1567,13 +1567,13 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             rs2=psceknonmedis.executeQuery();
                             if(rs2.next()){
                                 no=1;                                
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","","No","Kode Barang","Penggunaan BHP Non Medis","Jumlah","Satuan","Harga","Total"
                                 });
                             }
                             rs2.beforeFirst();
                             while(rs2.next()){
-                                tabMode.addRow(new String[]{
+                                tabMode.addRow(new Object[]{
                                     "","",no+". ",rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                     rs2.getString("jml"),rs2.getString("kode_sat"),Valid.SetAngka(rs2.getDouble("harga")),
                                     Valid.SetAngka(rs2.getDouble("total"))

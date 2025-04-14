@@ -55,11 +55,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    public  DlgCariObat dlgobtjalan=new DlgCariObat(null,false);
+    private riwayatobat Trackobat=new riwayatobat();
     public  DlgCariObat2 dlgobt=new DlgCariObat2(null,false);
     public  DlgCariObat3 dlgobt2=new DlgCariObat3(null,false);
-    private riwayatobat Trackobat=new riwayatobat();
-    private DlgCariPasien pasien=new DlgCariPasien(null,false);
     private String bangsal="",lokasi="",tgl="",pas="",sql="",status="";
     private PreparedStatement ps,psrekening;
     private ResultSet rs,rsrekening;
@@ -69,7 +67,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="";
     private Jurnal jur=new Jurnal();
     private final Properties prop = new Properties();
-    private DlgCariBangsal depo = new DlgCariBangsal(null, false);
     private int jmlparsial=0;
     private boolean sukses=true,hapusdata=true;
     
@@ -168,48 +165,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             });
         } 
                  
-        dlgobt.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgPemberianObat")){
-                    tampilPO();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        dlgobtjalan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgPemberianObat")){
-                    tampilPO();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
         dlgobt2.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -231,7 +186,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
-        pasien.addWindowListener(new WindowListener() {
+        dlgobt.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
             @Override
@@ -239,10 +194,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgPemberianObat")){
-                    if(pasien.getTable().getSelectedRow()!= -1){                   
-                        TCariPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),0).toString());
-                    } 
-                    TCariPasien.requestFocus();
+                    tampilPO();
                 }
             }
             @Override
@@ -251,51 +203,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             public void windowDeiconified(WindowEvent e) {}
             @Override
             public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        pasien.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgPemberianObat")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        pasien.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        }); 
-        
-        depo.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-
-            @Override
-            public void windowClosing(WindowEvent e) {}
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (depo.getTable().getSelectedRow() != -1) {
-                    lokasi=depo.getTable().getValueAt(depo.getTable().getSelectedRow(),0).toString();
-                    tampilPO2();
-                }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {}
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-                depo.emptTeks();
-            }
-
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
@@ -483,7 +390,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -506,6 +413,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPemberianObat.setAutoCreateRowSorter(true);
         tbPemberianObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemberianObat.setComponentPopupMenu(Popup2);
         tbPemberianObat.setName("tbPemberianObat"); // NOI18N
@@ -641,7 +549,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel14);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -654,7 +562,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -778,7 +686,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         jLabel7.setBounds(-2, 42, 80, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2019" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1160,6 +1068,45 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
     private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek4ActionPerformed
         akses.setform("DlgPemberianObat");
+        DlgCariPasien pasien=new DlgCariPasien(null,false);
+        pasien.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(akses.getform().equals("DlgPemberianObat")){
+                    if(pasien.getTable().getSelectedRow()!= -1){                   
+                        TCariPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),0).toString());
+                    } 
+                    TCariPasien.requestFocus();
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        pasien.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(akses.getform().equals("DlgPemberianObat")){
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        pasien.dispose();
+                    }
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        }); 
         pasien.emptTeks();    
         pasien.isCek();
         pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1299,6 +1246,36 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_ppNoRawatActionPerformed
 
     private void ppLokasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppLokasiBtnPrintActionPerformed
+        DlgCariBangsal depo = new DlgCariBangsal(null, false);
+        depo.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosing(WindowEvent e) {}
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (depo.getTable().getSelectedRow() != -1) {
+                    lokasi=depo.getTable().getValueAt(depo.getTable().getSelectedRow(),0).toString();
+                    tampilPO2();
+                }
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                depo.emptTeks();
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         depo.isCek();
         depo.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
         depo.setLocationRelativeTo(internalFrame1);
@@ -1712,6 +1689,27 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             dlgobt.setLocationRelativeTo(internalFrame1);
             dlgobt.setVisible(true);
         }else if(status.equals("ralan")){
+            DlgCariObat dlgobtjalan=new DlgCariObat(null,false);
+            dlgobtjalan.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(akses.getform().equals("DlgPemberianObat")){
+                        tampilPO();
+                    }
+                }
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });
             dlgobtjalan.setNoRm2(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),DTPBeri.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),ChkJln.isSelected());
             dlgobtjalan.isCek();
             if(!namadokter.equals("")){
