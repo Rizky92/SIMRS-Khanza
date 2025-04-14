@@ -6723,7 +6723,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
              file.createNewFile();
              fileWriter = new FileWriter(file);
              StringBuilder iyembuilder = new StringBuilder();
-             psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by nama_bayar");
+             psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
              try{
                  rsakunbayar=psakunbayar.executeQuery();
                  while(rsakunbayar.next()){      
@@ -6819,7 +6819,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
              file.createNewFile();
              fileWriter = new FileWriter(file);
              StringBuilder iyembuilder = new StringBuilder();
-             psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by nama_bayar");
+             psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
              try{
                  rsakunbayar=psakunbayar.executeQuery();
                  while(rsakunbayar.next()){      
