@@ -665,7 +665,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
                 NoSurat.getText(), TNoRw.getText(), Valid.getTglSmc(TanggalAwal),
                 Valid.getTglSmc(TanggalAkhir), KdDokter.getText(), LamaSakit.getText()
             )) {
-                tabMode.addRow(new String[] {
+                tabMode.addRow(new Object[] {
                     NoSurat.getText(), TNoRw.getText(), TNoRM.getText(), TPasien.getText(), Valid.getTglSmc(TanggalAwal),
                     Valid.getTglSmc(TanggalAkhir), LamaSakit.getText(), KdDokter.getText(), NmDokter.getText()
                 });
@@ -1016,7 +1016,7 @@ public final class SuratKeteranganRawatInap extends javax.swing.JDialog {
             ps.setString(8, "%" + TCari.getText() + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    tabMode.addRow(new String[] {
+                    tabMode.addRow(new Object[] {
                         rs.getString("no_surat"), rs.getString("no_rawat"), rs.getString("no_rkm_medis"),
                         rs.getString("nm_pasien"), rs.getString("tanggalawal"), rs.getString("tanggalakhir"),
                         rs.getString("lamasakit"), rs.getString("kd_dokter"), rs.getString("nm_dokter")

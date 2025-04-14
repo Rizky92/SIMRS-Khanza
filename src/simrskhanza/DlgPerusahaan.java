@@ -733,7 +733,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                 if (!Password.getText().isBlank()) {
                     Sequel.executeRawSmc("insert into password_perusahaan_pasien values (?, aes_encrypt(?, 'windi'))", Kd.getText(), Password.getText());
                 }
-                tabMode.addRow(new String[] {
+                tabMode.addRow(new Object[] {
                     Kd.getText(), Nm.getText(), Alamat.getText(), Kota.getText(), Telp.getText(), Email.getText(), NPWP.getText(), Password.getText()
                 });
                 LCount.setText(String.valueOf(tabMode.getRowCount()));
