@@ -691,7 +691,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             if(Sequel.menyimpantf("satu_sehat_mapping_lab","?,?,?,?,?,?,?","Mapping Tindakan Radiologi",7,new String[]{
                 IDTemplate.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText()
             })==true){
-                tabMode.addRow(new String[]{
+                tabMode.addRow(new Object[]{
                     PeriksaCode.getText(),PeriksaSystem.getText(),IDTemplate.getText(),NamaPemeriksaan.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText()
                 });
                 emptTeks();
