@@ -89,6 +89,7 @@ import permintaan.DlgPermintaanRadiologi;
 import permintaan.DlgPermintaanRanap;
 import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMCatatanAnastesiSedasi;
+import rekammedis.RMCatatanPengkajianPaskaOperasi;
 import rekammedis.RMCatatanPersalinan;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
@@ -96,10 +97,12 @@ import rekammedis.RMChecklistPemberianFibrinolitik;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
+import rekammedis.RMDataCatatanCairanHemodialisa;
 import rekammedis.RMDataCatatanCekGDS;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import rekammedis.RMDataCatatanObservasiCHBP;
+import rekammedis.RMDataCatatanObservasiHemodialisa;
 import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataMonitoringAsuhanGizi;
@@ -159,9 +162,13 @@ import rekammedis.RMSkriningAdiksiNikotin;
 import rekammedis.RMSkriningAnemia;
 import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningHipertensi;
+import rekammedis.RMSkriningIndraPendengaran;
 import rekammedis.RMSkriningInstrumenSDQ;
 import rekammedis.RMSkriningKankerKolorektal;
 import rekammedis.RMSkriningKekerasanPadaPerempuan;
+import rekammedis.RMSkriningKesehatanGigiMulutBalita;
+import rekammedis.RMSkriningKesehatanGigiMulutDewasa;
+import rekammedis.RMSkriningKesehatanGigiMulutLansia;
 import rekammedis.RMSkriningKesehatanGigiMulutRemaja;
 import rekammedis.RMSkriningKesehatanPenglihatan;
 import rekammedis.RMSkriningMerokokUsiaSekolahRemaja;
@@ -172,6 +179,7 @@ import rekammedis.RMSkriningObesitas;
 import rekammedis.RMSkriningPUMA;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
+import rekammedis.RMSkriningRisikoKankerServiks;
 import rekammedis.RMSkriningSRQ;
 import rekammedis.RMSkriningTBC;
 import rekammedis.RMSkriningTalasemia;
@@ -217,8 +225,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private double biaya=0,biayabaru=0,biayalama=0;
     private String kdigd="",nosisrute="",aktifkanparsial="no",URUTNOREG="",terbitsep="",
             status="Baru",alamatperujuk="-",umur="0",sttsumur="Th",IPPRINTERTRACER="",norawatdipilih="",normdipilih="",
-            validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi"),
-            validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),variabel="";
+            validasiregistrasi="No",validasicatatan="No";
     private char ESC = 27;
     // ganti kertas
     private char[] FORM_FEED = {12};
@@ -664,6 +671,24 @@ public final class DlgIGD extends javax.swing.JDialog {
         } catch (Exception ex) {
             IPPRINTERTRACER="";
             URUTNOREG="";
+        }
+        
+        try {
+            validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
+            if(validasiregistrasi==null){
+                validasiregistrasi="No";
+            }
+        } catch (Exception e) {
+            validasiregistrasi="No";
+        }
+        
+        try {
+            Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan");
+            if(validasicatatan==null){
+                validasicatatan="No";
+            }
+        } catch (Exception e) {
+            validasicatatan="No";
         }
     }
     
@@ -6773,7 +6798,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            variabel="Atas Persetujuan Dokter";
+            String variabel="Atas Persetujuan Dokter";
             if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
                 variabel="MRS";
             }
@@ -9676,7 +9701,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDokter.getText());
+                String variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDokter.getText());
                 if(!variabel.equals("")){
                     akses.setform("DlgReg");
                     ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
@@ -9702,7 +9727,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDokter.getText());
+                String variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDokter.getText());
                 if(!variabel.equals("")){
                     akses.setform("DlgReg");
                     ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
@@ -9748,7 +9773,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                variabel=Sequel.cariIsi("select maping_dokter_pcare.kd_dokter_pcare from maping_dokter_pcare where maping_dokter_pcare.kd_dokter=?",KdDokter.getText());
+                String variabel=Sequel.cariIsi("select maping_dokter_pcare.kd_dokter_pcare from maping_dokter_pcare where maping_dokter_pcare.kd_dokter=?",KdDokter.getText());
                 if(!variabel.equals("")){
                     akses.setform("DlgReg");
                     ICareRiwayatPerawatanFKTP dlgki=new ICareRiwayatPerawatanFKTP(null,false);
@@ -9774,7 +9799,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                variabel=Sequel.cariIsi("select maping_dokter_pcare.kd_dokter_pcare from maping_dokter_pcare where maping_dokter_pcare.kd_dokter=?",KdDokter.getText());
+                String variabel=Sequel.cariIsi("select maping_dokter_pcare.kd_dokter_pcare from maping_dokter_pcare where maping_dokter_pcare.kd_dokter=?",KdDokter.getText());
                 if(!variabel.equals("")){
                     akses.setform("DlgReg");
                     ICareRiwayatPerawatanFKTP dlgki=new ICareRiwayatPerawatanFKTP(null,false);
@@ -11604,7 +11629,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCatatanCekGDSActionPerformed
+    private void MnPelaksanaanInformasiEdukasiActionPerformed(java.awt.event.ActionEvent evt) {                                                
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -11693,6 +11718,189 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());  
             }                
+        }
+    }
+    
+    private void MnCatatanObservasiHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataCatatanObservasiHemodialisa form=new RMDataCatatanObservasiHemodialisa(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+    
+    private void MnSkriningKesehatanGigiMulutDewasaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningKesehatanGigiMulutDewasa form=new RMSkriningKesehatanGigiMulutDewasa(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnSkriningKesehatanGigiMulutBalitaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningKesehatanGigiMulutBalita form=new RMSkriningKesehatanGigiMulutBalita(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnSkriningRisikoKankerServiksActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningRisikoKankerServiks form=new RMSkriningRisikoKankerServiks(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnCatatanCairanHemodialisaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataCatatanCairanHemodialisa form=new RMDataCatatanCairanHemodialisa(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+    
+    private void MnSkriningKesehatanGigiMulutLansiaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningKesehatanGigiMulutLansia form=new RMSkriningKesehatanGigiMulutLansia(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnSkriningIndraPendengaranActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningIndraPendengaran form=new RMSkriningIndraPendengaran(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());  
+            }                
+        }
+    }
+    
+    private void MnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreOpActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
+            TNoRM.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMCatatanPengkajianPaskaOperasi form=new RMCatatanPengkajianPaskaOperasi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
         }
     }
     
@@ -12026,7 +12234,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                                   MnDataOperasi,MnSkriningMerokokUsiaSekolahRemaja,MnSkriningKekerasanPadaWanita,MnSkriningObesitas,MnSkriningRisikoKankerPayudara,MnSkriningRisikoKankerParu,MnSkriningKesehatanGigiMulutRemaja,
                                   MnSkriningTBC,MnCatatanAnastesiSedasi,MnSkriningPUMA,MnSkriningAdiksiNikotin,MnSkriningThalassemia,MnSkriningInstrumenSDQ,MnSkriningInstrumenSRQ,MnChecklistPemberianFibrinolitik,
                                   MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus,MnLaporanTindakan,
-                                  MnPelaksanaanInformasiEdukasi,MnSkriningAnemia,MnSkriningHipertensi,MnSkriningKesehatanPenglihatan;
+                                  MnPelaksanaanInformasiEdukasi,MnSkriningAnemia,MnSkriningHipertensi,MnSkriningKesehatanPenglihatan,MnCatatanObservasiHemodialisa,MnSkriningKesehatanGigiMulutDewasa,
+                                  MnSkriningKesehatanGigiMulutBalita,MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi;
     private javax.swing.JMenu MnRMSkrining,MnEdukasi;
     
     private void tampil() {
@@ -12106,6 +12315,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         nmpnj.setText("");
         labelKeterangan.setText("");
         labelKeterangan.setForeground(new Color(50, 50, 50));
+        tbPetugas.clearSelection();
     }
 
     private void getData() {
@@ -12484,6 +12694,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPenilaianPasienImunitasRendah.setEnabled(akses.getpenilaian_pasien_imunitas_rendah());
         MnCatatanKeseimbanganCairan.setEnabled(akses.getbalance_cairan());
         MnCatatanObservasiInduksiPersalinan.setEnabled(akses.getcatatan_observasi_induksi_persalinan());
+        MnCatatanObservasiHemodialisa.setEnabled(akses.getcatatan_observasi_hemodialisa());
+        MnCatatanCairanHemodialisa.setEnabled(akses.getcatatan_cairan_hemodialisa());
         MnChecklistPemberianFibrinolitik.setEnabled(akses.getchecklist_pemberian_fibrinolitik());
         MnSkriningMerokokUsiaSekolahRemaja.setEnabled(akses.getskrining_perilaku_merokok_sekolah_remaja());
         MnSkriningKekerasanPadaWanita.setEnabled(akses.getskrining_kekerasan_pada_perempuan());
@@ -12491,6 +12703,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSkriningRisikoKankerPayudara.setEnabled(akses.getskrining_risiko_kanker_payudara());
         MnSkriningRisikoKankerParu.setEnabled(akses.getskrining_risiko_kanker_paru());
         MnSkriningKesehatanGigiMulutRemaja.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja());
+        MnSkriningKesehatanGigiMulutDewasa.setEnabled(akses.getskrining_kesehatan_gigi_mulut_dewasa());
+        MnSkriningKesehatanGigiMulutBalita.setEnabled(akses.getskrining_kesehatan_gigi_mulut_balita());
+        MnSkriningKesehatanGigiMulutLansia.setEnabled(akses.getskrining_kesehatan_gigi_mulut_lansia());
         MnCatatanAnastesiSedasi.setEnabled(akses.getcatatan_anestesi_sedasi());
         MnSkriningTBC.setEnabled(akses.getskrining_tbc());
         MnSkriningPUMA.setEnabled(akses.getskrining_puma());
@@ -12508,6 +12723,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSkriningAnemia.setEnabled(akses.getskrining_anemia());
         MnSkriningHipertensi.setEnabled(akses.getskrining_hipertensi());
         MnSkriningKesehatanPenglihatan.setEnabled(akses.getskrining_kesehatan_penglihatan());
+        MnSkriningIndraPendengaran.setEnabled(akses.getskrining_indra_pendengaran());
+        MnSkriningRisikoKankerServiks.setEnabled(akses.getskrining_risiko_kanker_serviks());
+        MnCatatanPengkajianPaskaOperasi.setEnabled(akses.getcatatan_pengkajian_paska_operasi());
     }
     
     private void isNumber(){
@@ -12806,6 +13024,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnCatatanObservasiInduksiPersalinan.setPreferredSize(new java.awt.Dimension(210, 26));
         MnCatatanObservasiInduksiPersalinan.addActionListener(this::MnCatatanObservasiInduksiPersalinanActionPerformed);
         
+        MnCatatanObservasiHemodialisa = new javax.swing.JMenuItem();
+        MnCatatanObservasiHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanObservasiHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnCatatanObservasiHemodialisa.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanObservasiHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCatatanObservasiHemodialisa.setText("Observasi Hemodialisa");
+        MnCatatanObservasiHemodialisa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanObservasiHemodialisa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanObservasiHemodialisa.setName("MnCatatanObservasiHemodialisa");
+        MnCatatanObservasiHemodialisa.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnCatatanObservasiHemodialisa.addActionListener(this::MnCatatanObservasiHemodialisaActionPerformed);
+        
+        MnCatatanCairanHemodialisa = new javax.swing.JMenuItem();
+        MnCatatanCairanHemodialisa.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanCairanHemodialisa.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnCatatanCairanHemodialisa.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanCairanHemodialisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCatatanCairanHemodialisa.setText("Catatan Cairan Hemodialisa");
+        MnCatatanCairanHemodialisa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanCairanHemodialisa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanCairanHemodialisa.setName("MnCatatanCairanHemodialisa");
+        MnCatatanCairanHemodialisa.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnCatatanCairanHemodialisa.addActionListener(this::MnCatatanCairanHemodialisaActionPerformed);
+        
         MnChecklistPemberianFibrinolitik = new javax.swing.JMenuItem();
         MnChecklistPemberianFibrinolitik.setBackground(new java.awt.Color(255, 255, 254));
         MnChecklistPemberianFibrinolitik.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -12889,6 +13131,42 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSkriningKesehatanGigiMulutRemaja.setName("MnSkriningKesehatanGigiMulutRemaja");
         MnSkriningKesehatanGigiMulutRemaja.setPreferredSize(new java.awt.Dimension(280, 26));
         MnSkriningKesehatanGigiMulutRemaja.addActionListener(this::MnSkriningKesehatanGigiMulutRemajaActionPerformed);
+        
+        MnSkriningKesehatanGigiMulutDewasa = new javax.swing.JMenuItem();
+        MnSkriningKesehatanGigiMulutDewasa.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningKesehatanGigiMulutDewasa.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningKesehatanGigiMulutDewasa.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningKesehatanGigiMulutDewasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningKesehatanGigiMulutDewasa.setText("Skrining Kesehatan Gigi & Mulut Usia Dewasa");
+        MnSkriningKesehatanGigiMulutDewasa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningKesehatanGigiMulutDewasa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningKesehatanGigiMulutDewasa.setName("MnSkriningKesehatanGigiMulutDewasa");
+        MnSkriningKesehatanGigiMulutDewasa.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningKesehatanGigiMulutDewasa.addActionListener(this::MnSkriningKesehatanGigiMulutDewasaActionPerformed);
+        
+        MnSkriningKesehatanGigiMulutBalita = new javax.swing.JMenuItem();
+        MnSkriningKesehatanGigiMulutBalita.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningKesehatanGigiMulutBalita.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningKesehatanGigiMulutBalita.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningKesehatanGigiMulutBalita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningKesehatanGigiMulutBalita.setText("Skrining Kesehatan Gigi & Mulut Balita");
+        MnSkriningKesehatanGigiMulutBalita.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningKesehatanGigiMulutBalita.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningKesehatanGigiMulutBalita.setName("MnSkriningKesehatanGigiMulutBalita");
+        MnSkriningKesehatanGigiMulutBalita.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningKesehatanGigiMulutBalita.addActionListener(this::MnSkriningKesehatanGigiMulutBalitaActionPerformed);
+        
+        MnSkriningKesehatanGigiMulutLansia = new javax.swing.JMenuItem();
+        MnSkriningKesehatanGigiMulutLansia.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningKesehatanGigiMulutLansia.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningKesehatanGigiMulutLansia.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningKesehatanGigiMulutLansia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningKesehatanGigiMulutLansia.setText("Skrining Kesehatan Gigi & Mulut Lansia");
+        MnSkriningKesehatanGigiMulutLansia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningKesehatanGigiMulutLansia.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningKesehatanGigiMulutLansia.setName("MnSkriningKesehatanGigiMulutLansia");
+        MnSkriningKesehatanGigiMulutLansia.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningKesehatanGigiMulutLansia.addActionListener(this::MnSkriningKesehatanGigiMulutLansiaActionPerformed);
         
         MnSkriningTBC = new javax.swing.JMenuItem();
         MnSkriningTBC.setBackground(new java.awt.Color(255, 255, 254));
@@ -12995,7 +13273,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnLaporanTindakan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnLaporanTindakan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnLaporanTindakan.setName("MnLaporanTindakan");
-        MnLaporanTindakan.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnLaporanTindakan.setPreferredSize(new java.awt.Dimension(200, 26));
         MnLaporanTindakan.addActionListener(this::MnLaporanTindakanActionPerformed);
         
         MnCatatanAnastesiSedasi = new javax.swing.JMenuItem();
@@ -13094,6 +13372,42 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSkriningKesehatanPenglihatan.setPreferredSize(new java.awt.Dimension(280, 26));
         MnSkriningKesehatanPenglihatan.addActionListener(this::MnSkriningKesehatanPenglihatanActionPerformed);
         
+        MnSkriningIndraPendengaran = new javax.swing.JMenuItem();
+        MnSkriningIndraPendengaran.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningIndraPendengaran.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningIndraPendengaran.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningIndraPendengaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningIndraPendengaran.setText("Skrining Indra Pendengaran");
+        MnSkriningIndraPendengaran.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningIndraPendengaran.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningIndraPendengaran.setName("MnSkriningIndraPendengaran");
+        MnSkriningIndraPendengaran.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningIndraPendengaran.addActionListener(this::MnSkriningIndraPendengaranActionPerformed);
+        
+        MnSkriningRisikoKankerServiks = new javax.swing.JMenuItem();
+        MnSkriningRisikoKankerServiks.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningRisikoKankerServiks.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningRisikoKankerServiks.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningRisikoKankerServiks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningRisikoKankerServiks.setText("Skrining Risiko Kanker Serviks");
+        MnSkriningRisikoKankerServiks.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningRisikoKankerServiks.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningRisikoKankerServiks.setName("MnSkriningRisikoKankerServiks");
+        MnSkriningRisikoKankerServiks.setPreferredSize(new java.awt.Dimension(280, 26));
+        MnSkriningRisikoKankerServiks.addActionListener(this::MnSkriningRisikoKankerServiksActionPerformed);
+        
+        MnCatatanPengkajianPaskaOperasi = new javax.swing.JMenuItem();
+        MnCatatanPengkajianPaskaOperasi.setBackground(new java.awt.Color(255, 255, 254));
+        MnCatatanPengkajianPaskaOperasi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnCatatanPengkajianPaskaOperasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnCatatanPengkajianPaskaOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnCatatanPengkajianPaskaOperasi.setText("Catatan Pengkajian Paska Operasi");
+        MnCatatanPengkajianPaskaOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCatatanPengkajianPaskaOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCatatanPengkajianPaskaOperasi.setName("MnCatatanPengkajianPaskaOperasi");
+        MnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnCatatanPengkajianPaskaOperasi.addActionListener(this::MnCatatanPengkajianPaskaOperasiActionPerformed);
+        
         MnRMSkrining = new javax.swing.JMenu();
         MnRMSkrining.setBackground(new java.awt.Color(255, 255, 254));
         MnRMSkrining.setForeground(new java.awt.Color(50, 50, 50));
@@ -13128,6 +13442,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMOperasi.add(MnSkorAldrettePascaAnestesi);
         MnRMOperasi.add(MnSkorStewardPascaAnestesi);
         MnRMOperasi.add(MnSkorBromagePascaAnestesi);
+        MnRMOperasi.add(MnCatatanPengkajianPaskaOperasi);
         
         MnRMIGD.add(MnHasilPemeriksaanEKG);
         MnRMIGD.add(MnHasilPemeriksaanECHO);
@@ -13175,6 +13490,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMCatatanMonitoring.add(MnCatatanObservasiIGD);
         MnRMCatatanMonitoring.add(MnCatatanObservasiCHBP);
         MnRMCatatanMonitoring.add(MnCatatanObservasiInduksiPersalinan);
+        MnRMCatatanMonitoring.add(MnCatatanObservasiHemodialisa);
+        MnRMCatatanMonitoring.add(MnCatatanCairanHemodialisa);
         MnRMCatatanMonitoring.add(MnChecklistPemberianFibrinolitik);
         MnRMCatatanMonitoring.add(MnLaporanTindakan);
         
@@ -13183,7 +13500,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMSkrining.add(MnSkriningObesitas);
         MnRMSkrining.add(MnSkriningRisikoKankerPayudara);
         MnRMSkrining.add(MnSkriningRisikoKankerParu);
+        MnRMSkrining.add(MnSkriningRisikoKankerServiks);
         MnRMSkrining.add(MnSkriningKesehatanGigiMulutRemaja);
+        MnRMSkrining.add(MnSkriningKesehatanGigiMulutBalita);
+        MnRMSkrining.add(MnSkriningKesehatanGigiMulutDewasa);
+        MnRMSkrining.add(MnSkriningKesehatanGigiMulutLansia);
         MnRMSkrining.add(MnSkriningTBC);
         MnRMSkrining.add(MnSkriningPUMA);
         MnRMSkrining.add(MnSkriningAdiksiNikotin);
@@ -13195,6 +13516,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnRMSkrining.add(MnSkriningAnemia);
         MnRMSkrining.add(MnSkriningHipertensi);
         MnRMSkrining.add(MnSkriningKesehatanPenglihatan);
+        MnRMSkrining.add(MnSkriningIndraPendengaran);
         
         MnEdukasi.add(MnEdukasiPasienKeluarga);
         MnEdukasi.add(MnPelaksanaanInformasiEdukasi);

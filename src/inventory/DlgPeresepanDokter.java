@@ -81,7 +81,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -1783,7 +1782,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             file=new File("./cache/peresepandokter.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
+            StringBuilder iyembuilder = new StringBuilder();
             ObjectNode rootnode = mapper.createObjectNode();
             
             if(kenaikan>0){
@@ -1936,7 +1935,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             fileWriter.write(rootnode.toString());
             fileWriter.flush();
             fileWriter.close();
-            iyem=null;          
+            iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi 2: "+e);
         }  
@@ -1958,31 +1957,18 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             }    
 
-            pilih=null;
             pilih=new boolean[z]; 
-            jumlah=null;
             jumlah=new double[z];
-            harga=null;
             harga=new double[z];
-            kodebarang=null;
             kodebarang=new String[z];
-            namabarang=null;
             namabarang=new String[z];
-            kodesatuan=null;
             kodesatuan=new String[z];
-            letakbarang=null;
             letakbarang=new String[z];
-            namajenis=null;
-            namajenis=new String[z];                   
-            namakategori=null;
+            namajenis=new String[z];
             namakategori=new String[z];
-            aturan=null;
             aturan=new String[z];           
-            industri=null;
             industri=new String[z];         
-            beli=null;
             beli=new double[z];
-            stok=null;
             stok=new double[z]; 
             z=0;        
             for(i=0;i<tbResep.getRowCount();i++){
@@ -2033,6 +2019,19 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     pilih[i],jumlah[i],aturan[i],kodebarang[i],namabarang[i],kodesatuan[i],letakbarang[i],harga[i],namajenis[i],industri[i],beli[i],stok[i],namakategori[i]
                 });
             }
+            
+            pilih=null; 
+            jumlah=null;
+            harga=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            namajenis=null;                   
+            aturan=null;          
+            industri=null;        
+            beli=null;
+            stok=null; 
 
             myObj = new FileReader("./cache/peresepandokter.iyem");
             root = mapper.readTree(myObj);
@@ -2284,39 +2283,22 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             }    
 
-            pilih=null;
             pilih=new boolean[z]; 
-            jumlah=null;
             jumlah=new double[z];
-            harga=null;
             harga=new double[z];
-            stok=null;
             stok=new double[z];
-            p1=null;
             p1=new double[z];
-            p2=null;
             p2=new double[z];
-            kodebarang=null;
             kodebarang=new String[z];
-            namabarang=null;
             namabarang=new String[z];
-            kodesatuan=null;
             kodesatuan=new String[z];
-            letakbarang=null;
             letakbarang=new String[z];
-            no=null;
             no=new String[z];
-            namajenis=null;
             namajenis=new String[z];        
-            industri=null;
             industri=new String[z];          
-            komposisi=null;
             komposisi=new String[z];        
-            beli=null;
             beli=new double[z];     
-            kapasitas=null;
             kapasitas=new double[z];   
-            kandungan=null;
             kandungan=new String[z];
             namakategori=null;
             namakategori=new String[z];
@@ -2380,6 +2362,24 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     jumlah[i],industri[i],komposisi[i],namakategori[i]
                 });
             }
+            
+            pilih=null; 
+            jumlah=null;
+            harga=null;
+            stok=null;
+            p1=null;
+            p2=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            no=null;
+            namajenis=null;        
+            industri=null;          
+            komposisi=null;        
+            beli=null;     
+            kapasitas=null;   
+            kandungan=null;
             
             myObj = new FileReader("./cache/peresepandokter.iyem");
             root = mapper.readTree(myObj);
@@ -3392,7 +3392,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 psresep.setString(1,no_resep);
                 rsobat=psresep.executeQuery();
                 while(rsobat.next()){
-                    tabModeResepRacikan.addRow(new String[]{
+                    tabModeResepRacikan.addRow(new Object[]{
                         rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
                         rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
                         rsobat.getString("keterangan")
@@ -4016,7 +4016,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 psresep.setString(1,no_resep);
                 rsobat=psresep.executeQuery();
                 while(rsobat.next()){
-                    tabModeResepRacikan.addRow(new String[]{
+                    tabModeResepRacikan.addRow(new Object[]{
                         rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
                         rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
                         rsobat.getString("keterangan")

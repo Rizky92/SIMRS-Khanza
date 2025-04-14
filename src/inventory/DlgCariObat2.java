@@ -77,9 +77,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private String signa1="1",signa2="1",kdObatSK="",requestJson="",nokunjungan="",URL="",otorisasi,sql="",no_batchcari="", tgl_kadaluarsacari="", 
                    no_fakturcari="",aktifkanbatch="no",aktifpcare="no",noresep="",Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",
                    Persediaan_Obat_Rawat_Inap="",hppfarmasi="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),
-                   VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="",iyem="";
+                   VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
     private WarnaTable2 warna=new WarnaTable2();
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
+    private DlgCariAturanPakai aturanpakai = null;
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
     private HttpHeaders headers;
@@ -1087,38 +1088,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         tbObat.setValueAt(0,tbObat.getSelectedRow(),10);
                     }   
                 }else if(i==13){
-                    DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
-        
-                    aturanpakai.addWindowListener(new WindowListener() {
-                        @Override
-                        public void windowOpened(WindowEvent e) {}
-                        @Override
-                        public void windowClosing(WindowEvent e) {}
-                        @Override
-                        public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){  
-                                if(TabRawat.getSelectedIndex()==0){
-                                    tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),13);
-                                }else if(TabRawat.getSelectedIndex()==1){
-                                    tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                                    tbObatRacikan.requestFocus();
-                                }   
-                            }   
-                            tbObat.requestFocus();
-                        }
-                        @Override
-                        public void windowIconified(WindowEvent e) {}
-                        @Override
-                        public void windowDeiconified(WindowEvent e) {}
-                        @Override
-                        public void windowActivated(WindowEvent e) {}
-                        @Override
-                        public void windowDeactivated(WindowEvent e) {}
-                    });
-                    
-                    aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                    aturanpakai.setLocationRelativeTo(internalFrame1);
-                    aturanpakai.setVisible(true);
+                    this.bukaAturanpakai();
                 }
             }             
         }
@@ -1651,38 +1621,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 if(i==5){
                     akses.setform("DlgCariObat");
-                    DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
-        
-                    aturanpakai.addWindowListener(new WindowListener() {
-                        @Override
-                        public void windowOpened(WindowEvent e) {}
-                        @Override
-                        public void windowClosing(WindowEvent e) {}
-                        @Override
-                        public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){  
-                                if(TabRawat.getSelectedIndex()==0){
-                                    tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),13);
-                                }else if(TabRawat.getSelectedIndex()==1){
-                                    tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                                    tbObatRacikan.requestFocus();
-                                }   
-                            }   
-                            tbObat.requestFocus();
-                        }
-                        @Override
-                        public void windowIconified(WindowEvent e) {}
-                        @Override
-                        public void windowDeiconified(WindowEvent e) {}
-                        @Override
-                        public void windowActivated(WindowEvent e) {}
-                        @Override
-                        public void windowDeactivated(WindowEvent e) {}
-                    });
-                    
-                    aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                    aturanpakai.setLocationRelativeTo(internalFrame1);
-                    aturanpakai.setVisible(true);
+                    this.bukaAturanpakai();
                 }else if(i==3){
                     if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")){
                         JOptionPane.showMessageDialog(null,"Silahkan masukkan nama racikan..!!");
@@ -2006,7 +1945,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             file=new File("./cache/beriobatranap.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
             ObjectNode rootnode = mapper.createObjectNode();
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
@@ -2274,7 +2212,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             fileWriter.write(rootnode.toString());
             fileWriter.flush();
             fileWriter.close();
-            iyem=null; 
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2289,37 +2226,21 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 }
             }
 
-            pilih=null;
             pilih=new boolean[jml]; 
-            jumlah=null;
             jumlah=new double[jml];
-            eb=null;
             eb=new double[jml];
-            ts=null;
             ts=new double[jml];
-            stok=null;
             stok=new double[jml];
-            harga=null;
             harga=new double[jml];
-            kodebarang=null;
             kodebarang=new String[jml];
-            namabarang=null;
             namabarang=new String[jml];
-            kodesatuan=null;
             kodesatuan=new String[jml];
-            letakbarang=null;
             letakbarang=new String[jml];
-            namajenis=null;                
             namajenis=new String[jml];        
-            industri=null;                
             industri=new String[jml];  
-            beli=null;
             beli=new double[jml];
-            aturan=null;
             aturan=new String[jml];
-            kategori=null;
             kategori=new String[jml];
-            golongan=null;
             golongan=new String[jml];
             nobatch=new String[jml];
             nofaktur=new String[jml];
@@ -2387,6 +2308,26 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                    beli[i],aturan[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i]
                 });
             }
+            
+            pilih=null;
+            jumlah=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            harga=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            namajenis=null;        
+            industri=null; 
+            beli=null;
+            aturan=null;
+            kategori=null;
+            golongan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
             
             myObj = new FileReader("./cache/beriobatranap.iyem");
             root = mapper.readTree(myObj);
@@ -2883,41 +2824,23 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 }
             }    
 
-            pilih=null;
             pilih=new boolean[z]; 
-            jumlah=null;
             jumlah=new double[z];
-            harga=null;
             harga=new double[z];
-            eb=null;
             eb=new double[z];
-            ts=null;
             ts=new double[z];
-            stok=null;
             stok=new double[z];
-            kodebarang=null;
             kodebarang=new String[z];
-            namabarang=null;
             namabarang=new String[z];
-            kodesatuan=null;
             kodesatuan=new String[z];
-            letakbarang=null;
             letakbarang=new String[z];
-            no=null;
             no=new String[z];
-            namajenis=null;
             namajenis=new String[z];        
-            industri=null;
             industri=new String[z];         
-            beli=null;
             beli=new double[z]; 
-            kategori=null;
             kategori=new String[z];
-            golongan=null;
             golongan=new String[z];        
-            kapasitas=null;
             kapasitas=new double[z];   
-            kandungan=null;
             kandungan=new double[z];
             nobatch=new String[z];
             nofaktur=new String[z];
@@ -2993,6 +2916,28 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     ts[i],industri[i],kategori[i],golongan[i],nobatch[i],nofaktur[i],kadaluarsa[i]
                 });
             }
+            
+            pilih=null;
+            jumlah=null;
+            harga=null;
+            eb=null;
+            ts=null;
+            stok=null;
+            kodebarang=null;
+            namabarang=null;
+            kodesatuan=null;
+            letakbarang=null;
+            no=null;
+            namajenis=null;       
+            industri=null;         
+            beli=null; 
+            kategori=null;
+            golongan=null;       
+            kapasitas=null;  
+            kandungan=null;
+            nobatch=null;
+            nofaktur=null;
+            kadaluarsa=null;
             
             myObj = new FileReader("./cache/beriobatranap.iyem");
             root = mapper.readTree(myObj);
@@ -3379,7 +3324,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 psobat.setString(1,no_resep);
                 rsobat=psobat.executeQuery();
                 while(rsobat.next()){
-                    tabModeObatRacikan.addRow(new String[]{
+                    tabModeObatRacikan.addRow(new Object[]{
                         rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
                         rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
                         rsobat.getString("keterangan")
@@ -4164,5 +4109,40 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         } 
+    }
+    
+    private void bukaAturanpakai() {
+        if (aturanpakai == null) {
+            aturanpakai=new DlgCariAturanPakai(null,false);
+            aturanpakai.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(aturanpakai.getTable().getSelectedRow()!= -1){  
+                        if(TabRawat.getSelectedIndex()==0){
+                            tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),13);
+                        }else if(TabRawat.getSelectedIndex()==1){
+                            tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
+                            tbObatRacikan.requestFocus();
+                        }   
+                    }   
+                    tbObat.requestFocus();
+                }
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });
+        }
+        aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+        aturanpakai.setLocationRelativeTo(internalFrame1);
+        aturanpakai.setVisible(true);
     }
 }
