@@ -31,6 +31,12 @@ public class DlgCopyResep extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        try {
+            TAMPILKANCOPYRESEPDOKTERLAIN=koneksiDB.TAMPILKANCOPYRESEPDOKTERLAIN();
+        } catch (Exception ex) {
+            TAMPILKANCOPYRESEPDOKTERLAIN="no";
+        }
+        
         Object[] row={"No.Resep","Tgl.Resep","Jam Resep","No.Rawat","No.RM","Pasien","Dokter Peresep","Kode Dokter","Status"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -56,8 +62,12 @@ public class DlgCopyResep extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(300);
             }else if(i==6){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                if (TAMPILKANCOPYRESEPDOKTERLAIN.equals("yes")) {
+                    column.setPreferredWidth(180);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             }else if(i==7){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -71,12 +81,6 @@ public class DlgCopyResep extends javax.swing.JDialog {
             aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
         } catch (Exception ex) {
             aktifkanparsial="no";
-        }
-        
-        try {
-            TAMPILKANCOPYRESEPDOKTERLAIN=koneksiDB.TAMPILKANCOPYRESEPDOKTERLAIN();
-        } catch (Exception ex) {
-            TAMPILKANCOPYRESEPDOKTERLAIN="no";
         }
     }
 
