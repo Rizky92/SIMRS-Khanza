@@ -1,2 +1,2 @@
-*.form linguist-generated=false
-*.jasper linguist-generated=false
+*.form linguist-generated
+*.jasper linguist-generated
