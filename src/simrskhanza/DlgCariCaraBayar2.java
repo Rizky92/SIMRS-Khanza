@@ -588,7 +588,7 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
             file=new File("./cache/penjab.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
+            StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select * from penjab where penjab.status='1' order by penjab.png_jawab");
             try{           
                 rs=ps.executeQuery();
@@ -608,10 +608,14 @@ public final class DlgCariCaraBayar2 extends javax.swing.JDialog {
                 }
             }
 
-            fileWriter.write("{\"penjab\":["+iyem.substring(0,iyem.length()-1)+"]}");
-            fileWriter.flush();
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"penjab\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+            
             fileWriter.close();
-            iyem=null;
+            iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
