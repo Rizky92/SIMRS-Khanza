@@ -35,38 +35,43 @@
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
                 <?php
-                    $action         = isset($_GET['action']) ? validTeks($_GET['action']) : null;
-                    $sukses         = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
-                    $codernik       = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
-                    $corona         = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
-                    $nosep          = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
-                    $carabayar      = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
-                    $_sql           = "select bridging_sep.no_sep, bridging_sep.no_kartu, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab from bridging_sep
-                                    join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join dokter on reg_periksa.kd_dokter = dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
-                                    join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'";
-                    $hasil          = bukaquery($_sql);
-                    $baris          = mysqli_fetch_array($hasil);
-                    $norawat        = $baris['no_rawat'];
-                    $no_rkm_medis   = $baris['no_rkm_medis'];
-                    $nokartu        = $baris['no_kartu'];
-                    $nm_pasien      = $baris['nm_pasien'];
-                    $umurdaftar     = $baris['umurdaftar'];
-                    $sttsumur       = $baris['sttsumur'];
-                    $tgl_lahir      = $baris['tgl_lahir'];
-                    $jk             = $baris['jk'];
-                    $almt_pj        = $baris['almt_pj'];
-                    $norawat        = $baris['no_rawat'];
+                    $action = isset($_GET['action']) ? validTeks($_GET['action']) : null;
+                    $sukses = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
+                    $codernik = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
+                    $corona = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
+                    $nosep = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
+                    $carabayar = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
+                    $_sql = <<<SQL
+                        select bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, reg_periksa.*, pasien.nm_pasien, pasien.jk,
+                        pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab from bridging_sep
+                        join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join dokter on reg_periksa.kd_dokter =
+                        dokter.kd_dokter join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join poliklinik on
+                        reg_periksa.kd_poli = poliklinik.kd_poli join penjab on reg_periksa.kd_pj = penjab.kd_pj
+                        where bridging_sep.no_sep = '$nosep'
+                        SQL;
+                    $hasil = bukaquery($_sql);
+                    $baris = mysqli_fetch_array($hasil);
+                    $norawat = $baris['no_rawat'];
+                    $no_rkm_medis = $baris['no_rkm_medis'];
+                    $nokartu = $baris['no_kartu'];
+                    $nm_pasien = $baris['nm_pasien'];
+                    $umurdaftar = $baris['umurdaftar'];
+                    $sttsumur = $baris['sttsumur'];
+                    $tgl_lahir = $baris['tgl_lahir'];
+                    $jk = $baris['jk'];
+                    $almt_pj = $baris['almt_pj'];
+                    $norawat = $baris['no_rawat'];
                     $tgl_registrasi = $baris['tgl_registrasi'];
-                    $jam_reg        = $baris['jam_reg'];
-                    $nm_poli        = $baris['nm_poli'];
-                    $nm_dokter      = getOne("select d.nm_dokter from bridging_sep s join maping_dokter_dpjpvclaim m on s.kddpjp = m.kd_dokter_bpjs join dokter d on m.kd_dokter = d.kd_dokter where s.no_sep = '$nosep'");
+                    $jam_reg = $baris['jam_reg'];
+                    $nm_poli = $baris['nm_poli'];
+                    $nm_dokter = getOne("select d.nm_dokter from bridging_sep s join maping_dokter_dpjpvclaim m on s.kddpjp = m.kd_dokter_bpjs join dokter d on m.kd_dokter = d.kd_dokter where s.no_sep = '$nosep'");
                     ['code_cbg' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery("select code_cbg, deskripsi from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
-
                     $status_lanjut = $baris['status_lanjut'];
                     $png_jawab = $baris['png_jawab'];
                     $sistole = '120';
                     $diastole = '90';
                     $jnsrawat = '1';
+                    $asalrujukan = $baris['asal_rujukan'];
                     if ($status_lanjut == 'Ranap') {
                         $jnsrawat = '1';
                         $tensi = explode('/', getOne("select tensi from pemeriksaan_ranap where no_rawat = '{$baris['no_rawat']}' order by tgl_perawatan desc, jam_rawat desc"));
@@ -116,6 +121,13 @@
                         }
                     } else {
                         $naikkelas = '';
+                    }
+
+                    $caramasuk = 'other';
+                    if ($asalrujukan == '1. Faskes 1') {
+                        $caramasuk = 'gp';
+                    } else if ($asalrujukan == '2. Faskes 2(RS)') {
+                        $caramasuk = 'hosp-trans';
                     }
                 ?>
                 <input type="hidden" name="no_rawat" value="<?= $norawat ?>">
@@ -1127,12 +1139,12 @@
                                             $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
                                             $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
-                                            $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik,
-                                            $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
-                                            $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                            $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use
+                                            $tarif_poli_eks, $nama_dokter, getKelasRS(), "3", "JKN", "#", $codernik, $prosedur_non_bedah,
+                                            $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang, $radiologi, $laboratorium,
+                                            $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi,
+                                            $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use, $caramasuk
                                         );
-                                        if (! $success) {
+                                        if (!$success) {
                                             echo $error;
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
