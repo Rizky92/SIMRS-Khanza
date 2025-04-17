@@ -197,7 +197,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             metode_pembayaran_bankmandiri=false,bank_tujuan_transfer_bankmandiri=false,kodetransaksi_tujuan_transfer_bankmandiri=false,konsultasi_medik=false,jawaban_konsultasi_medik=false,pcare_cek_alergi=false,
             pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,data_sasaran_usialansia=false,skrining_perilaku_merokok_sekolah_remaja=false,skrining_kekerasan_pada_perempuan=false,skrining_obesitas=false,
             skrining_risiko_kanker_payudara=false,skrining_risiko_kanker_paru=false,skrining_tbc=false,skrining_kesehatan_gigi_mulut_remaja=false,penilaian_awal_keperawatan_ranap_bayi=false,booking_mcu_perusahaan=false,
-            catatan_observasi_restrain_nonfarma=false,catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,skrining_puma=false,satu_sehat_kirim_careplan=false,satu_sehat_kirim_medicationstatement=false,
+            catatan_observasi_restrain_nonfarma=false,catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,paket_mcu=false,master_paket_mcu=false,skrining_puma=false,satu_sehat_kirim_careplan=false,satu_sehat_kirim_medicationstatement=false,
             skrining_adiksi_nikotin=false,skrining_thalassemia=false,skrining_instrumen_sdq=false,skrining_instrumen_srq=false,checklist_pemberian_fibrinolitik=false,skrining_kanker_kolorektal=false,dapur_pemesanan=false,
             bayar_pesan_dapur=false,hutang_dapur=false,titip_faktur_dapur=false,validasi_tagihan_dapur=false,surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,
             ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,
@@ -827,7 +827,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         metode_pembayaran_bankmandiri=false;bank_tujuan_transfer_bankmandiri=false;kodetransaksi_tujuan_transfer_bankmandiri=false;konsultasi_medik=false;jawaban_konsultasi_medik=false;pcare_cek_alergi=false;
         pcare_cek_prognosa=false;data_sasaran_usiaproduktif=false;data_sasaran_usialansia=false;skrining_perilaku_merokok_sekolah_remaja=false;skrining_kekerasan_pada_perempuan=false;skrining_obesitas=false;
         skrining_risiko_kanker_payudara=false;skrining_risiko_kanker_paru=false;skrining_tbc=false;skrining_kesehatan_gigi_mulut_remaja=false;penilaian_awal_keperawatan_ranap_bayi=false;booking_mcu_perusahaan=false;
-        catatan_observasi_restrain_nonfarma=false;catatan_observasi_ventilator=false;catatan_anestesi_sedasi=false;skrining_puma=false;satu_sehat_kirim_careplan=false;satu_sehat_kirim_medicationstatement=false;
+        catatan_observasi_restrain_nonfarma=false;catatan_observasi_ventilator=false;catatan_anestesi_sedasi=false;paket_mcu=false;master_paket_mcu=false;skrining_puma=false;satu_sehat_kirim_careplan=false;satu_sehat_kirim_medicationstatement=false;
         skrining_adiksi_nikotin=false;skrining_thalassemia=false;skrining_instrumen_sdq=false;skrining_instrumen_srq=false;checklist_pemberian_fibrinolitik=false;skrining_kanker_kolorektal=false;dapur_pemesanan=false;
         bayar_pesan_dapur=false;hutang_dapur=false;titip_faktur_dapur=false;validasi_tagihan_dapur=false;surat_pemesanan_dapur=false;pengajuan_barang_dapur=false;dapur_returbeli=false;hibah_dapur=false;
         ringkasan_penerimaan_dapur=false;ringkasan_pengajuan_dapur=false;ringkasan_pemesanan_dapur=false;ringkasan_returbeli_dapur=false;ringkasan_stokkeluar_dapur=false;dapur_stokkeluar_pertanggal=false;
@@ -1074,7 +1074,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                 "user.pcare_cek_alergi,user.pcare_cek_prognosa,user.data_sasaran_usiaproduktif,user.data_sasaran_usialansia,user.skrining_perilaku_merokok_sekolah_remaja,"+
                 "user.skrining_kekerasan_pada_perempuan,user.skrining_obesitas,user.skrining_risiko_kanker_payudara,user.skrining_risiko_kanker_paru,user.skrining_tbc,"+
                 "user.skrining_kesehatan_gigi_mulut_remaja,user.penilaian_awal_keperawatan_ranap_bayi,user.booking_mcu_perusahaan,user.catatan_observasi_restrain_nonfarma,"+
-                "user.catatan_observasi_ventilator,user.catatan_anestesi_sedasi,user.skrining_puma,user.satu_sehat_kirim_careplan,user.satu_sehat_kirim_medicationstatement,"+
+                "user.catatan_observasi_ventilator,user.catatan_anestesi_sedasi,paket_mcu,master_paket_mcu,user.skrining_puma,user.satu_sehat_kirim_careplan,user.satu_sehat_kirim_medicationstatement,"+
                 "user.skrining_adiksi_nikotin,user.skrining_thalassemia,user.skrining_instrumen_sdq,user.skrining_instrumen_srq,user.checklist_pemberian_fibrinolitik,"+
                 "user.skrining_kanker_kolorektal,user.dapur_pemesanan,user.bayar_pesan_dapur,user.hutang_dapur,user.titip_faktur_dapur,user.validasi_tagihan_dapur,"+
                 "user.surat_pemesanan_dapur,user.pengajuan_barang_dapur,user.dapur_returbeli,user.hibah_dapur,user.ringkasan_penerimaan_dapur,user.ringkasan_pengajuan_dapur,"+
@@ -1206,7 +1206,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                     skp_kriteria_penilaian=rs.getBoolean("skp_kriteria_penilaian");skp_penilaian=rs.getBoolean("skp_penilaian");referensi_poli_mobilejknfktp=rs.getBoolean("referensi_poli_mobilejknfktp");referensi_dokter_mobilejknfktp=rs.getBoolean("referensi_dokter_mobilejknfktp");skp_rekapitulasi_penilaian=rs.getBoolean("skp_rekapitulasi_penilaian");pembayaran_pihak_ke3_bankmandiri=rs.getBoolean("pembayaran_pihak_ke3_bankmandiri");metode_pembayaran_bankmandiri=rs.getBoolean("metode_pembayaran_bankmandiri");bank_tujuan_transfer_bankmandiri=rs.getBoolean("bank_tujuan_transfer_bankmandiri");
                     kodetransaksi_tujuan_transfer_bankmandiri=rs.getBoolean("kodetransaksi_tujuan_transfer_bankmandiri");konsultasi_medik=rs.getBoolean("konsultasi_medik");jawaban_konsultasi_medik=rs.getBoolean("jawaban_konsultasi_medik");pcare_cek_alergi=rs.getBoolean("pcare_cek_alergi");pcare_cek_prognosa=rs.getBoolean("pcare_cek_prognosa");data_sasaran_usiaproduktif=rs.getBoolean("data_sasaran_usiaproduktif");data_sasaran_usialansia=rs.getBoolean("data_sasaran_usialansia");skrining_perilaku_merokok_sekolah_remaja=rs.getBoolean("skrining_perilaku_merokok_sekolah_remaja");
                     skrining_kekerasan_pada_perempuan=rs.getBoolean("skrining_kekerasan_pada_perempuan");skrining_obesitas=rs.getBoolean("skrining_obesitas");skrining_risiko_kanker_payudara=rs.getBoolean("skrining_risiko_kanker_payudara");skrining_risiko_kanker_paru=rs.getBoolean("skrining_risiko_kanker_paru");skrining_tbc=rs.getBoolean("skrining_tbc");skrining_kesehatan_gigi_mulut_remaja=rs.getBoolean("skrining_kesehatan_gigi_mulut_remaja");penilaian_awal_keperawatan_ranap_bayi=rs.getBoolean("penilaian_awal_keperawatan_ranap_bayi");booking_mcu_perusahaan=rs.getBoolean("booking_mcu_perusahaan");
-                    catatan_observasi_restrain_nonfarma=rs.getBoolean("catatan_observasi_restrain_nonfarma");catatan_observasi_ventilator=rs.getBoolean("catatan_observasi_ventilator");catatan_anestesi_sedasi=rs.getBoolean("catatan_anestesi_sedasi");skrining_puma=rs.getBoolean("skrining_puma");satu_sehat_kirim_careplan=rs.getBoolean("satu_sehat_kirim_careplan");satu_sehat_kirim_medicationstatement=rs.getBoolean("satu_sehat_kirim_medicationstatement");skrining_adiksi_nikotin=rs.getBoolean("skrining_adiksi_nikotin");skrining_thalassemia=rs.getBoolean("skrining_thalassemia");skrining_instrumen_sdq=rs.getBoolean("skrining_instrumen_sdq");
+                    catatan_observasi_restrain_nonfarma=rs.getBoolean("catatan_observasi_restrain_nonfarma");catatan_observasi_ventilator=rs.getBoolean("catatan_observasi_ventilator");catatan_anestesi_sedasi=rs.getBoolean("catatan_anestesi_sedasi");paket_mcu=rs.getBoolean("paket_mcu");master_paket_mcu=rs.getBoolean("master_paket_mcu");skrining_puma=rs.getBoolean("skrining_puma");satu_sehat_kirim_careplan=rs.getBoolean("satu_sehat_kirim_careplan");satu_sehat_kirim_medicationstatement=rs.getBoolean("satu_sehat_kirim_medicationstatement");skrining_adiksi_nikotin=rs.getBoolean("skrining_adiksi_nikotin");skrining_thalassemia=rs.getBoolean("skrining_thalassemia");skrining_instrumen_sdq=rs.getBoolean("skrining_instrumen_sdq");
                     skrining_instrumen_srq=rs.getBoolean("skrining_instrumen_srq");checklist_pemberian_fibrinolitik=rs.getBoolean("checklist_pemberian_fibrinolitik");skrining_kanker_kolorektal=rs.getBoolean("skrining_kanker_kolorektal");dapur_pemesanan=rs.getBoolean("dapur_pemesanan");bayar_pesan_dapur=rs.getBoolean("bayar_pesan_dapur");hutang_dapur=rs.getBoolean("hutang_dapur");titip_faktur_dapur=rs.getBoolean("titip_faktur_dapur");validasi_tagihan_dapur=rs.getBoolean("validasi_tagihan_dapur");surat_pemesanan_dapur=rs.getBoolean("surat_pemesanan_dapur");pengajuan_barang_dapur=rs.getBoolean("pengajuan_barang_dapur");
                     dapur_returbeli=rs.getBoolean("dapur_returbeli");hibah_dapur=rs.getBoolean("hibah_dapur");ringkasan_penerimaan_dapur=rs.getBoolean("ringkasan_penerimaan_dapur");ringkasan_pengajuan_dapur=rs.getBoolean("ringkasan_pengajuan_dapur");ringkasan_pemesanan_dapur=rs.getBoolean("ringkasan_pemesanan_dapur");ringkasan_returbeli_dapur=rs.getBoolean("ringkasan_returbeli_dapur");ringkasan_stokkeluar_dapur=rs.getBoolean("ringkasan_stokkeluar_dapur");dapur_stokkeluar_pertanggal=rs.getBoolean("dapur_stokkeluar_pertanggal");sirkulasi_dapur=rs.getBoolean("sirkulasi_dapur");sirkulasi_dapur2=rs.getBoolean("sirkulasi_dapur2");
                     verifikasi_penerimaan_dapur=rs.getBoolean("verifikasi_penerimaan_dapur");nilai_penerimaan_vendor_dapur_perbulan=rs.getBoolean("nilai_penerimaan_vendor_dapur_perbulan");ringkasan_hutang_vendor_dapur=rs.getBoolean("ringkasan_hutang_vendor_dapur");pindah_kamar_pilihan_2=rs.getBoolean("pindah_kamar_pilihan_2");penilaian_psikologi_klinis=rs.getBoolean("penilaian_psikologi_klinis");penilaian_awal_medis_ranap_neonatus=rs.getBoolean("penilaian_awal_medis_ranap_neonatus");penilaian_derajat_dehidrasi=rs.getBoolean("penilaian_derajat_dehidrasi");ringkasan_jasa_tindakan_medis=rs.getBoolean("ringkasan_jasa_tindakan_medis");pendapatan_per_akun=rs.getBoolean("pendapatan_per_akun");
@@ -4659,6 +4659,14 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         
         if("[M]Catatan Anestesi-Sedasi".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Catatan Anestesi-Sedasi",catatan_anestesi_sedasi});
+        }
+        
+        if ("[M]Paket MCU".toLowerCase().contains(TCari.getText().toLowerCase())) {
+            tabMode.addRow(new Object[] {false, "[M]Paket MCU", paket_mcu});
+        }
+        
+        if ("[M]Master Paket MCU".toLowerCase().contains(TCari.getText().toLowerCase())) {
+            tabMode.addRow(new Object[] {false, "[M]Master Paket MCU", master_paket_mcu});
         }
         
         if("[M]Skrining PUMA".toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -9158,6 +9166,14 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[M]Catatan Anestesi-Sedasi".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","catatan_anestesi_sedasi='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if ("[M]Paket MCU".equals(tbUser.getValueAt(i, 1).toString())) {
+                Sequel.mengupdateSmc("user", "paket_mcu = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
+            }
+
+            if ("[M]Master Paket MCU".equals(tbUser.getValueAt(i, 1).toString())) {
+                Sequel.mengupdateSmc("user", "master_paket_mcu = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
             }
             
             if("[M]Skrining PUMA".equals(tbUser.getValueAt(i,1).toString())){

@@ -236,7 +236,7 @@ public final class akses {
             pcare_cek_alergi=false,pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,data_sasaran_usialansia=false,skrining_perilaku_merokok_sekolah_remaja=false,
             skrining_kekerasan_pada_perempuan=false,skrining_obesitas=false,skrining_risiko_kanker_payudara=false,skrining_risiko_kanker_paru=false,skrining_tbc=false,
             skrining_kesehatan_gigi_mulut_remaja=false,penilaian_awal_keperawatan_ranap_bayi=false,booking_mcu_perusahaan=false,catatan_observasi_restrain_nonfarma=false,
-            catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,skrining_puma=false,satu_sehat_kirim_careplan=false,satu_sehat_kirim_medicationstatement=false,
+            catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,paket_mcu=false,master_paket_mcu=false,skrining_puma=false,satu_sehat_kirim_careplan=false,satu_sehat_kirim_medicationstatement=false,
             skrining_adiksi_nikotin=false,skrining_thalassemia=false,skrining_instrumen_sdq=false,skrining_instrumen_srq=false,checklist_pemberian_fibrinolitik=false,
             skrining_kanker_kolorektal=false,dapur_pemesanan=false,bayar_pesan_dapur=false,hutang_dapur=false,titip_faktur_dapur=false,validasi_tagihan_dapur=false,
             surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,
@@ -1336,6 +1336,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=true;
                         akses.catatan_observasi_ventilator=true;
                         akses.catatan_anestesi_sedasi=true;
+                        akses.paket_mcu=true;
+                        akses.master_paket_mcu=true;
                         akses.skrining_puma=true;
                         akses.satu_sehat_kirim_careplan=true;
                         akses.satu_sehat_kirim_medicationstatement=true;
@@ -2464,6 +2466,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=rs2.getBoolean("catatan_observasi_restrain_nonfarma");
                         akses.catatan_observasi_ventilator=rs2.getBoolean("catatan_observasi_ventilator");
                         akses.catatan_anestesi_sedasi=rs2.getBoolean("catatan_anestesi_sedasi");
+                        akses.paket_mcu=rs2.getBoolean("paket_mcu");
+                        akses.master_paket_mcu=rs2.getBoolean("master_paket_mcu");
                         akses.skrining_puma=rs2.getBoolean("skrining_puma");
                         akses.satu_sehat_kirim_careplan=rs2.getBoolean("satu_sehat_kirim_careplan");
                         akses.satu_sehat_kirim_medicationstatement=rs2.getBoolean("satu_sehat_kirim_medicationstatement");
@@ -3606,6 +3610,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=false;
                         akses.catatan_observasi_ventilator=false;
                         akses.catatan_anestesi_sedasi=false;
+                        akses.paket_mcu=false;
+                        akses.master_paket_mcu=false;
                         akses.skrining_puma=false;
                         akses.satu_sehat_kirim_careplan=false;
                         akses.satu_sehat_kirim_medicationstatement=false;
@@ -4741,6 +4747,8 @@ public final class akses {
         akses.catatan_observasi_restrain_nonfarma=false;
         akses.catatan_observasi_ventilator=false;
         akses.catatan_anestesi_sedasi=false;
+        akses.paket_mcu=false;
+        akses.master_paket_mcu=false;
         akses.skrining_puma=false;
         akses.satu_sehat_kirim_careplan=false;
         akses.satu_sehat_kirim_medicationstatement=false;
@@ -5908,6 +5916,8 @@ public final class akses {
     public static boolean getcatatan_observasi_restrain_nonfarma(){return akses.catatan_observasi_restrain_nonfarma;}
     public static boolean getcatatan_observasi_ventilator(){return akses.catatan_observasi_ventilator;}
     public static boolean getcatatan_anestesi_sedasi(){return akses.catatan_anestesi_sedasi;}
+    public static boolean getpaket_mcu(){return akses.paket_mcu;}
+    public static boolean getmaster_paket_mcu(){return akses.master_paket_mcu;}
     public static boolean getskrining_puma(){return akses.skrining_puma;}
     public static boolean getsatu_sehat_kirim_careplan(){return akses.satu_sehat_kirim_careplan;}
     public static boolean getsatu_sehat_kirim_medicationstatement(){return akses.satu_sehat_kirim_medicationstatement;}

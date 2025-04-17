@@ -62,6 +62,7 @@ import permintaan.DlgPermintaanKonsultasiMedik;
 import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
+import rekammedis.MasterCariTemplatePaketMCU;
 import rekammedis.MasterCariTemplatePemeriksaan;
 import rekammedis.RMCari5SOAPTerakhir;
 import rekammedis.RMCatatanADIMEGizi;
@@ -212,6 +213,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);    
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);   
     private MasterCariTemplatePemeriksaan templatepemeriksaan = new MasterCariTemplatePemeriksaan(null, false);
+    private MasterCariTemplatePaketMCU templatemcu = new MasterCariTemplatePaketMCU(null, false);
     private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6,pstindakan,psset_tarif,psrekening;
     private ResultSet rs,rstindakan,rsset_tarif,rsrekening;
     private int i=0,jmlparsial=0,jml=0,index=0,tinggi=0;
@@ -1425,6 +1427,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         Btn5Soap = new widget.Button();
         BtnTemplatePemeriksaan = new widget.Button();
         BtnICareFKTL = new widget.Button();
+        BtnPaketMCU = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -2669,6 +2672,20 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         panelGlass12.add(BtnICareFKTL);
         BtnICareFKTL.setBounds(913, 70, 180, 23);
+
+        BtnPaketMCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPaketMCU.setMnemonic('4');
+        BtnPaketMCU.setText("Paket MCU");
+        BtnPaketMCU.setToolTipText("ALt+4");
+        BtnPaketMCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPaketMCU.setName("BtnPaketMCU"); // NOI18N
+        BtnPaketMCU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPaketMCUActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(BtnPaketMCU);
+        BtnPaketMCU.setBounds(913, 100, 180, 23);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -9300,6 +9317,31 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnICareFKTLActionPerformed
 
+    private void BtnPaketMCUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPaketMCUActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else if(TPegawai.getText().trim().equals("")||KdPeg.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dokter pemberi asuhan...!!!");
+            TCari.requestFocus();
+        }else{
+            jmlparsial=0;
+            if(aktifkanparsial.equals("yes")){
+                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",kd_pj);
+            }
+            if(jmlparsial>0){    
+                inputTemplate();
+            }else{
+                if(Sequel.cariRegistrasi(TNoRw.getText())>0){
+                    JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                    TCari.requestFocus();
+                }else{
+                    inputTemplate();
+                }
+            } 
+        }
+    }//GEN-LAST:event_BtnPaketMCUActionPerformed
+
     private void BtnPenilaianPsikologActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -10269,6 +10311,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnMonitoringAsuhanGizi;
     private widget.Button BtnMonitoringReaksiTranfusi;
     private widget.Button BtnObatBhp;
+    private widget.Button BtnPaketMCU;
     private widget.Button BtnPemantauanEWSNeonatus;
     private widget.Button BtnPemantauanMEOWS;
     private widget.Button BtnPemantauanPEWSAnak;
@@ -12651,6 +12694,12 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             templatepemeriksaan.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
+    }
+    
+    private void inputPaketMCU() {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        this.setCursor(Cursor.getDefaultCursor());
     }
     
     public void emptTeks(){
