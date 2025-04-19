@@ -1200,7 +1200,7 @@ public class koneksiDB {
     public static String TAMPILKANCOPYRESEPDOKTERLAIN(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=prop.getProperty("TAMPILKANCOPYRESEPDOKTERLAIN");
+            var=prop.getProperty("TAMPILKANCOPYRESEPDOKTERLAIN", "no");
         }catch(Exception e){
             var="no"; 
         }
