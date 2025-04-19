@@ -931,7 +931,10 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         } else if (jadwalHariSIMRS.isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, jadwal hari yang dipilih tidak sesuai!");
         } else {
-            if (Sequel.cariExistsSmc("select * from jadwal where jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ? and jadwal.jam_mulai = ? and jadwal.jam_selesai = ?")) {
+            if (Sequel.cariExistsSmc(
+                "select * from jadwal where jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ? and jadwal.jam_mulai = ? and jadwal.jam_selesai = ?",
+                jadwalHariSIMRS, kodePoliSIMRS, kodeDokterSIMRS, jamMulaiSIMRS, jamSelesaiSIMRS
+            )) {
                 Sequel.mengupdateSmc(
                     "jadwal", "jadwal.jam_mulai = ?, jadwal.jam_selesai = ?",
                     "jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ? and jadwal.jam_mulai = ? and jadwal.jam_selesai = ?",
