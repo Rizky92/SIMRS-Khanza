@@ -235,10 +235,10 @@ public class koneksiDB {
         }
     }
     
-    public static boolean SINRKONJADWALHFIS() {
+    public static boolean SINKRONJADWALHFIS() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("SINRKONJADWALHFIS").equalsIgnoreCase("yes");
+            return prop.getProperty("SINRKONJADWALHFIS", "no").equalsIgnoreCase("yes");
         } catch (Exception e) {
             return true;
         }
