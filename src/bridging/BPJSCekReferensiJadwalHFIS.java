@@ -454,6 +454,11 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 
         tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setName("tbKamar"); // NOI18N
+        tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKamarMouseClicked(evt);
+            }
+        });
         Scroll.setViewportView(tbKamar);
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
@@ -670,9 +675,9 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseIn5ActionPerformed
 
     private void BtnSimpanUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanUpdateActionPerformed
-        if(NmDokterUpdate.getText().trim().equals("")){
+        if(KodeDokterUpdate.getText().trim().equals("")){
             Valid.textKosong(KodeDokterUpdate,"Dokter");
-        }else if(NmPoliUpdate.getText().trim().equals("")){
+        }else if(KodePoliUpdate.getText().trim().equals("")){
             Valid.textKosong(KodePoliUpdate,"Poliklinik");
         }else{
             try {
@@ -702,6 +707,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                 nameNode = root.path("metadata");
                 if(nameNode.path("code").asText().equals("200")){
+                    updateJadwalSIMRS();
                     tampil();
                 }else {
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
@@ -758,9 +764,24 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 
     private void WindowUpdateWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowUpdateWindowActivated
         // TODO: Tarik jadwal SIMRS dari data jadwal HFIS yang dipilih
-        jamMulaiSIMRS = "";
-        jamSelesaiSIMRS = "";
+        jamMulaiSIMRS = tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString().substring(0, tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString().indexOf("-")) + ":00";
+        jamSelesaiSIMRS = tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString().substring(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString().indexOf("-") + 1) + ":00";
     }//GEN-LAST:event_WindowUpdateWindowActivated
+
+    private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
+        if (evt.getClickCount() >= 2) {
+            evt.consume();
+        } else {
+            if (evt.getClickCount() == 2) {
+                BtnEditActionPerformed(null);
+            }
+            /*if (tabMode.getRowCount() != 0) {
+                try {
+                } catch (java.lang.NullPointerException e) {
+                }
+            }*/
+        }
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     /**
     * @param args the command line arguments
@@ -901,7 +922,9 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                 break;
         }
         
-        if (kodeDokterSIMRS.isBlank()) {
+        if (jamMulaiSIMRS.isBlank() || jamSelesaiSIMRS.isBlank()) {
+            JOptionPane.showMessageDialog(null, "SIlahkan pilih jadwal yang mau diupdate terlebih dahulu!");
+        } else if (kodeDokterSIMRS.isBlank()) {
             JOptionPane.showMessageDialog(null, "Silahkan lakukan proses mapping DOKTER terlebih dahulu!");
         } else if (kodePoliSIMRS.isBlank()) {
             JOptionPane.showMessageDialog(null, "Silahkan lakukan proses mapping POLIKLINIK terlebih dahulu!");
@@ -912,7 +935,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                 Sequel.mengupdateSmc(
                     "jadwal", "jadwal.jam_mulai = ?, jadwal.jam_selesai = ?",
                     "jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ? and jadwal.jam_mulai = ? and jadwal.jam_selesai = ?",
-                    cmbJam1.getSelectedItem() + ":" + cmbMnt1.getSelectedItem(), cmbJam2.getSelectedItem() + ":" + cmbMnt2.getSelectedItem(),
+                    cmbJam1.getSelectedItem() + ":" + cmbMnt1.getSelectedItem() + ":00", cmbJam2.getSelectedItem() + ":" + cmbMnt2.getSelectedItem() + ":00",
                     jadwalHariSIMRS, kodePoliSIMRS, kodeDokterSIMRS, jamMulaiSIMRS, jamSelesaiSIMRS
                 );
             }
