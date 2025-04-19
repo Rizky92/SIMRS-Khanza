@@ -1,9 +1,9 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -379,6 +379,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep ..!!");
             }else if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),8).toString().equals("Sudah Terlayani")){
                 JOptionPane.showMessageDialog(rootPane,"Resep sudah terlayani, silahkan konfirmasi bagian farmasi ..!!");
+            } else if (!kddokter.equals(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(), 7).toString())) {
+                JOptionPane.showMessageDialog(null, "Maaf, tidak bisa mengubah resep dokter lain..!!");
             }else {
                 jmlparsial=0;
                 if(aktifkanparsial.equals("yes")){
@@ -415,6 +417,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep..!!");
             }else if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),8).toString().equals("Sudah Terlayani")){
                 JOptionPane.showMessageDialog(rootPane,"Resep sudah terlayani, silahkan konfirmasi bagian farmasi ..!!");
+            } else if (!kddokter.equals(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(), 7).toString())) {
+                JOptionPane.showMessageDialog(null, "Maaf, tidak bisa menghapus resep dokter lain..!!");
             }else {
                 Sequel.meghapus("resep_obat","no_resep",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString()); 
                 tampil();               
