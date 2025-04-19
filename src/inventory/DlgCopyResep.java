@@ -99,6 +99,8 @@ public class DlgCopyResep extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
+        label1 = new widget.Label();
+        textBox1 = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         BtnHapus = new widget.Button();
@@ -112,7 +114,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Resep Dokter Di Kunjungan Sebelumnya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Resep Dokter Di Kunjungan Sebelumnya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -134,7 +136,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(ChkTanggal);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-04-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -148,12 +150,21 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-04-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelisi1.add(DTPCari2);
+
+        label1.setText("Key word :");
+        label1.setName("label1"); // NOI18N
+        label1.setPreferredSize(new java.awt.Dimension(78, 23));
+        panelisi1.add(label1);
+
+        textBox1.setName("textBox1"); // NOI18N
+        textBox1.setPreferredSize(new java.awt.Dimension(150, 23));
+        panelisi1.add(textBox1);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('1');
@@ -462,9 +473,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel21;
     private widget.Label jLabel7;
+    private widget.Label label1;
     private widget.panelisi panelisi1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbPemisahan;
+    private widget.TextBox textBox1;
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
