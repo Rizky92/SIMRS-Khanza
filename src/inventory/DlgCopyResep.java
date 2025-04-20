@@ -100,7 +100,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
         label1 = new widget.Label();
-        textBox1 = new widget.TextBox();
+        TCari = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         BtnHapus = new widget.Button();
@@ -162,9 +162,9 @@ public class DlgCopyResep extends javax.swing.JDialog {
         label1.setPreferredSize(new java.awt.Dimension(78, 23));
         panelisi1.add(label1);
 
-        textBox1.setName("textBox1"); // NOI18N
-        textBox1.setPreferredSize(new java.awt.Dimension(150, 23));
-        panelisi1.add(textBox1);
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(150, 23));
+        panelisi1.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('1');
@@ -470,6 +470,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.CekBox ChkTanggal;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
+    private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel21;
     private widget.Label jLabel7;
@@ -477,7 +478,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.panelisi panelisi1;
     private widget.ScrollPane scrollPane1;
     private widget.Table tbPemisahan;
-    private widget.TextBox textBox1;
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
@@ -490,7 +490,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
                     " resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.tgl_peresepan between ? and ? and pasien.no_rkm_medis=? "+
-                    (TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")?"and resep_obat.kd_dokter=?":"")+
+                    (TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")?"and resep_obat.kd_dokter=?":"and (resep_obat.kd_dokter like ? or dokter.nm_dokter like ?)")+
                     " order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc");
             }else{
                 ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
@@ -499,7 +499,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
                     " resep_obat.tgl_peresepan<>'0000-00-00' and pasien.no_rkm_medis=? "+
-                    (TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")?"and resep_obat.kd_dokter=?":"")+
+                    (TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")?"and resep_obat.kd_dokter=?":"and (resep_obat.kd_dokter like ? or dokter.nm_dokter like ?)")+
                     " order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc");
             }
             try{
@@ -509,11 +509,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(3,norm);
                     if(TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")){
                         ps.setString(4,kddokter);
+                    } else {
+                        ps.setString(4, "%" + TCari.getText() + "%");
+                        ps.setString(5, "%" + TCari.getText() + "%");
                     }
                 }else{
                     ps.setString(1,norm);
                     if(TAMPILKANCOPYRESEPDOKTERLAIN.equals("no")){
                         ps.setString(2,kddokter);
+                    } else {
+                        ps.setString(2, "%" + TCari.getText() + "%");
+                        ps.setString(3, "%" + TCari.getText() + "%");
                     }
                 }                
                 rs=ps.executeQuery();
