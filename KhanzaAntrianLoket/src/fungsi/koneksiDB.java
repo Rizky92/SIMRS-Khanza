@@ -26,7 +26,7 @@ public final class koneksiDB {
         if(connection == null){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull");
+                dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST", EnkripsiAES.encrypt("localhost")))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT", EnkripsiAES.encrypt("3306")))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE", EnkripsiAES.encrypt("sik")))+"?zeroDateTimeBehavior=convertToNull");
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
                 connection=dataSource.getConnection();       
@@ -73,7 +73,7 @@ public final class koneksiDB {
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("HOSTHYBRIDWEB"));
+            var=EnkripsiAES.decrypt(prop.getProperty("HOSTHYBRIDWEB", EnkripsiAES.encrypt("localhost")));
         }catch(Exception e){
             var="localhost"; 
         }
@@ -83,7 +83,7 @@ public final class koneksiDB {
     public static String PORT(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("PORT"));
+            var=EnkripsiAES.decrypt(prop.getProperty("PORT", EnkripsiAES.encrypt("3306")));
         }catch(Exception e){
             var="3306"; 
         }
@@ -93,7 +93,7 @@ public final class koneksiDB {
     public static String DATABASE(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("DATABASE"));
+            var=EnkripsiAES.decrypt(prop.getProperty("DATABASE", EnkripsiAES.encrypt("sik")));
         }catch(Exception e){
             var="sik"; 
         }
