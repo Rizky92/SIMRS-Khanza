@@ -251,6 +251,10 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         tbBangsal = new widget.Table();
         jPanel1 = new javax.swing.JPanel();
         panelisi3 = new widget.panelisi();
+        label11 = new widget.Label();
+        DTPTgl1 = new widget.Tanggal();
+        label12 = new widget.Label();
+        DTPTgl2 = new widget.Tanggal();
         label19 = new widget.Label();
         NmCaraBayar = new widget.TextBox();
         BtnCaraBayarRalanDokter = new widget.Button();
@@ -534,6 +538,28 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         panelisi3.setPreferredSize(new java.awt.Dimension(100, 44));
         panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
 
+        label11.setText("Periode :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(53, 23));
+        panelisi3.add(label11);
+
+        DTPTgl1.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl1.setName("DTPTgl1"); // NOI18N
+        DTPTgl1.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi3.add(DTPTgl1);
+
+        label12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label12.setText("s.d.");
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(25, 23));
+        panelisi3.add(label12);
+
+        DTPTgl2.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl2.setMinimumSize(new java.awt.Dimension(90, 23));
+        DTPTgl2.setName("DTPTgl2"); // NOI18N
+        DTPTgl2.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi3.add(DTPTgl2);
+
         label19.setText("Cara Bayar :");
         label19.setName("label19"); // NOI18N
         label19.setPreferredSize(new java.awt.Dimension(70, 23));
@@ -802,11 +828,11 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         panelisi4.setPreferredSize(new java.awt.Dimension(100, 74));
         panelisi4.setLayout(null);
 
-        label32.setText("Tanggal :");
+        label32.setText("Tgl. Bayar :");
         label32.setName("label32"); // NOI18N
         label32.setPreferredSize(new java.awt.Dimension(35, 23));
         panelisi4.add(label32);
-        label32.setBounds(197, 10, 59, 23);
+        label32.setBounds(205, 10, 59, 23);
 
         label36.setText("Keterangan :");
         label36.setName("label36"); // NOI18N
@@ -860,7 +886,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             }
         });
         panelisi4.add(Tanggal);
-        Tanggal.setBounds(260, 10, 90, 23);
+        Tanggal.setBounds(269, 10, 90, 23);
 
         BtnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnPetugas.setMnemonic('1');
@@ -887,7 +913,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             }
         });
         panelisi4.add(Keterangan);
-        Keterangan.setBounds(78, 40, 272, 23);
+        Keterangan.setBounds(78, 40, 281, 23);
 
         label39.setText("Nomor J.M. :");
         label39.setName("label39"); // NOI18N
@@ -2003,6 +2029,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPetugas;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpanMandiri;
+    private widget.Tanggal DTPTgl1;
+    private widget.Tanggal DTPTgl2;
     private javax.swing.JDialog DlgBayarMandiri;
     private widget.TextBox KdCaraBayar;
     private widget.TextBox Keterangan;
@@ -2041,6 +2069,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label jLabel99;
     private javax.swing.JPanel jPanel1;
     private widget.TextBox kddokter;
+    private widget.Label label11;
+    private widget.Label label12;
     private widget.Label label16;
     private widget.Label label17;
     private widget.Label label19;
