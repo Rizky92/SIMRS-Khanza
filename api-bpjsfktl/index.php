@@ -871,7 +871,7 @@
                                                 $update        = bukaquery2("update referensi_mobilejkn_bpjs set status='Batal',validasi=now() where nobooking='".validTeks4($decode['kodebooking'],25)."'");
                                                 $batal         = null;
                                                 if (date('Y-m-d') >= $booking['tanggalperiksa']) {
-                                                    $batal = bukaquery2("update reg_periksa set reg_periksa.stts = 'batal' where reg_periksa.no_rawat = '$booking[no_rawat]'")
+                                                    $batal = bukaquery2("update reg_periksa set reg_periksa.stts = 'batal' where reg_periksa.no_rawat = '$booking[no_rawat]' and reg_periksa.kd_pj = 'BPJ' and (reg_periksa.status_bayar = 'Belum Bayar' or not exists(select * from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat))")
                                                 } else {
                                                     $batal = bukaquery2("delete from reg_periksa where no_rawat='".$booking['no_rawat']."'");
                                                 }
