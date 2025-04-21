@@ -851,14 +851,14 @@
                                                     )
                                                 );
                                                 http_response_code(201);
-                                            }else if(date("Y-m-d")>$booking['tanggalperiksa']){
+                                            /* }else if(date("Y-m-d")>$booking['tanggalperiksa']){
                                                 $response = array(
                                                     'metadata' => array(
                                                         'message' => 'Pembatalan Antrean tidak berlaku mundur',
                                                         'code' => 201
                                                     )
                                                 );  
-                                                http_response_code(201);
+                                                http_response_code(201); */
                                             }else if($booking['status']=='Checkin'){
                                                 $response = array(
                                                     'metadata' => array(
@@ -869,7 +869,12 @@
                                                 http_response_code(201);
                                             }else if($booking['status']=='Belum'){
                                                 $update        = bukaquery2("update referensi_mobilejkn_bpjs set status='Batal',validasi=now() where nobooking='".validTeks4($decode['kodebooking'],25)."'");
-                                                $batal         = bukaquery2("delete from reg_periksa where no_rawat='".$booking['no_rawat']."'");
+                                                $batal         = null;
+                                                if (date('Y-m-d') >= $booking['tanggalperiksa']) {
+                                                    $batal = bukaquery2("update reg_periksa set reg_periksa.stts = 'batal' where reg_periksa.no_rawat = '$booking[no_rawat]'")
+                                                } else {
+                                                    $batal = bukaquery2("delete from reg_periksa where no_rawat='".$booking['no_rawat']."'");
+                                                }
                                                 if($batal){
                                                     $response = array(
                                                         'metadata' => array(
