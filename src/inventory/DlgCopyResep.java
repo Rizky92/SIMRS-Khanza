@@ -77,6 +77,10 @@ public class DlgCopyResep extends javax.swing.JDialog {
         }
         tbPemisahan.setDefaultRenderer(Object.class, new WarnaTable());
         
+        label1.setVisible(TAMPILKANCOPYRESEPDOKTERLAIN.equals("yes"));
+        TCari.setVisible(TAMPILKANCOPYRESEPDOKTERLAIN.equals("yes"));
+        repaint();
+        
         try {
             aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
         } catch (Exception ex) {
