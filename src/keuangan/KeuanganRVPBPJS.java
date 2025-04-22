@@ -2303,7 +2303,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
 
     private void ppUmbalMonitoringKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUmbalMonitoringKlaimActionPerformed
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select distinct bridging_sep.tglsep froom bridging_sep " +
+            "select distinct bridging_sep.tglsep from bridging_sep " +
             "where bridging_sep.tglsep between ? and ? order by bridging_sep.tglsep"
         )) {
             ps.setString(1, Valid.getTglSmc(DTPTgl1));
