@@ -665,6 +665,7 @@ import keuangan.KeuanganPiutangBelumLunas;
 import keuangan.KeuanganPiutangLainLain;
 import keuangan.KeuanganPiutangObatBelumLunas;
 import keuangan.KeuanganRVPBPJS;
+import keuangan.KeuanganRVPBPJSSMC;
 import keuangan.KeuanganRekapJmDokter;
 import keuangan.KeuanganRekapPengajuanBiaya;
 import keuangan.KeuanganRekapPoliAnak;
@@ -17471,7 +17472,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void btnRVPPiutangBPJSActionPerformed(java.awt.event.ActionEvent evt) { 
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        KeuanganRVPBPJS rbpaketbhp=new KeuanganRVPBPJS(this,false);
+        KeuanganRVPBPJSSMC rbpaketbhp=new KeuanganRVPBPJSSMC(this,false);
         rbpaketbhp.isCek();
         rbpaketbhp.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         rbpaketbhp.setLocationRelativeTo(PanelUtama);
