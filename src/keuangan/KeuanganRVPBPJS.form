@@ -556,9 +556,6 @@
                       <Dimension value="[90, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DTPTgl1KeyPressed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.Label" name="label35">
                   <Properties>
@@ -578,9 +575,6 @@
                       <Dimension value="[90, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DTPTgl2KeyPressed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.Label" name="jLabel16">
                   <Properties>
@@ -605,9 +599,6 @@
                       <Dimension value="[195, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JenisPelayananKeyPressed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
