@@ -4739,7 +4739,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
             "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal on " +
             "bridging_sep_internal.no_sep = inacbg_grouping_stage1_internal.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
-            "bridging_sep.no_sep in (" + sepParams + ") order by piutang_pasien.tgl_piutang"
+            "bridging_sep_internal.no_sep in (" + sepParams + ") order by piutang_pasien.tgl_piutang"
         )) {
             int i = 1;
             for (Map.Entry<String, Double> entry: withSEP.entrySet()) {
