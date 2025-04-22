@@ -347,6 +347,7 @@ import inventaris.InventarisPermintaanPerbaikan;
 import inventaris.InventarisProdusen;
 import inventaris.InventarisRuang;
 import inventaris.InventarisSirkulasi;
+import inventaris.InventarisSirkulasiCSSD;
 import inventaris.InventarisSuplier;
 import inventaris.KeslingLimbahB3Medis;
 import inventaris.KeslingLimbahB3MedisCair;
