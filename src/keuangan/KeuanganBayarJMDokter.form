@@ -524,7 +524,7 @@
                     <Property name="text" type="java.lang.String" value="Periode :"/>
                     <Property name="name" type="java.lang.String" value="label11" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[53, 23]"/>
+                      <Dimension value="[47, 23]"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -834,9 +834,6 @@
                       <Dimension value="[100, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRalanActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.CekBox" name="chkRanap">
                   <Properties>
@@ -849,9 +846,6 @@
                       <Dimension value="[100, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRanapActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.CekBox" name="chkOperasi">
                   <Properties>
@@ -864,9 +858,6 @@
                       <Dimension value="[85, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkOperasiActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.CekBox" name="chkLaborat">
                   <Properties>
@@ -879,9 +870,6 @@
                       <Dimension value="[110, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkLaboratActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.CekBox" name="chkRadiologi">
                   <Properties>
@@ -894,9 +882,6 @@
                       <Dimension value="[90, 23]"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRadiologiActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="widget.Label" name="jLabel12">
                   <Properties>
