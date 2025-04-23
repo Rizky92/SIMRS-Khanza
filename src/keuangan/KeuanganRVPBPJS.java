@@ -576,7 +576,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         MnDetailPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnDetailPiutang.setText("Detail Piutang");
         MnDetailPiutang.setName("MnDetailPiutang"); // NOI18N
-        MnDetailPiutang.setPreferredSize(new java.awt.Dimension(160, 26));
+        MnDetailPiutang.setPreferredSize(new java.awt.Dimension(230, 26));
         MnDetailPiutang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnDetailPiutangActionPerformed(evt);
@@ -592,7 +592,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppBersihkan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppBersihkan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBersihkan.setName("ppBersihkan"); // NOI18N
-        ppBersihkan.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppBersihkan.setPreferredSize(new java.awt.Dimension(230, 26));
         ppBersihkan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppBersihkanActionPerformed(evt);
@@ -608,7 +608,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppPilihSemua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppPilihSemua.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPilihSemua.setName("ppPilihSemua"); // NOI18N
-        ppPilihSemua.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppPilihSemua.setPreferredSize(new java.awt.Dimension(230, 26));
         ppPilihSemua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPilihSemuaActionPerformed(evt);
@@ -624,7 +624,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppUmbal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppUmbal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppUmbal.setName("ppUmbal"); // NOI18N
-        ppUmbal.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppUmbal.setPreferredSize(new java.awt.Dimension(230, 26));
         ppUmbal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppUmbalActionPerformed(evt);
@@ -640,7 +640,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppUmbalMonitoringKlaim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppUmbalMonitoringKlaim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppUmbalMonitoringKlaim.setName("ppUmbalMonitoringKlaim"); // NOI18N
-        ppUmbalMonitoringKlaim.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppUmbalMonitoringKlaim.setPreferredSize(new java.awt.Dimension(230, 26));
         ppUmbalMonitoringKlaim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppUmbalMonitoringKlaimActionPerformed(evt);
