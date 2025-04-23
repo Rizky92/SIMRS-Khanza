@@ -620,7 +620,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppUmbal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppUmbal.setForeground(new java.awt.Color(50, 50, 50));
         ppUmbal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppUmbal.setText("Cek Umpan Balik");
+        ppUmbal.setText("Cek Umpan Balik dari File TXT");
         ppUmbal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppUmbal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppUmbal.setName("ppUmbal"); // NOI18N
