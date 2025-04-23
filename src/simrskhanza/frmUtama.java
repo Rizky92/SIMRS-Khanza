@@ -347,6 +347,7 @@ import inventaris.InventarisPermintaanPerbaikan;
 import inventaris.InventarisProdusen;
 import inventaris.InventarisRuang;
 import inventaris.InventarisSirkulasi;
+import inventaris.InventarisSirkulasiCSSD;
 import inventaris.InventarisSuplier;
 import inventaris.KeslingLimbahB3Medis;
 import inventaris.KeslingLimbahB3MedisCair;
@@ -22724,6 +22725,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnSirkulasiInventarisCSSDActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisSirkulasiCSSD ktginventaris=new InventarisSirkulasiCSSD(this,false);
+        ktginventaris.tampil();
+        ktginventaris.isCek();
+        ktginventaris.emptTeks();
+        ktginventaris.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        ktginventaris.setLocationRelativeTo(PanelUtama);
+        ktginventaris.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -23432,7 +23447,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianBayiBaruLahir,btnPengeluaranPengeluaran,btnSkriningDiabetesMelitus,btnLaporanTindakan,btnPelaksanaanInformasiEdukasi,btnLayananKedokteranFisikRehabilitasi,
             btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR,btnSkriningHipertensi,btnSkriningKesehatanPenglihatan,
             btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa,btnSkriningRisikoKankerServiks,btnCatatanCairanHemodialisa,btnSkriningKesehatanGigiMulutLansia,
-            btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi;
+            btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD;
     
     public void isWall(){
         try{            
@@ -24791,6 +24806,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getbarang_cssd()==true){
                 Panelmenu.add(btnBarangCSSD);
+                jmlmenu++;
+            }
+            
+            if(akses.getsirkulasi_cssd()==true){
+                Panelmenu.add(btnSirkulasiInventarisCSSD);
                 jmlmenu++;
             }
             
@@ -30373,6 +30393,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnBarangCSSD);
             jmlmenu++;
         } 
+        
+        if(akses.getsirkulasi_cssd()==true){
+            Panelmenu.add(btnSirkulasiInventarisCSSD);
+            jmlmenu++;
+        }
         
         if(akses.getpemakaian_air_pdam()==true){
             Panelmenu.add(btnPemakaianAirPDAM);
@@ -36420,6 +36445,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getbarang_cssd()==true){
             if(btnBarangCSSD.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBarangCSSD);
+                jmlmenu++;
+            }                
+        } 
+        
+        if(akses.getsirkulasi_cssd()==true){
+            if(btnSirkulasiInventarisCSSD.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSirkulasiInventarisCSSD);
                 jmlmenu++;
             }                
         } 
@@ -47727,6 +47759,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnCatatanPengkajianPaskaOperasi.setName("btnCatatanPengkajianPaskaOperasi");
         btnCatatanPengkajianPaskaOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnCatatanPengkajianPaskaOperasi.addActionListener(this::btnCatatanPengkajianPaskaOperasiActionPerformed);
+        
+        btnSirkulasiInventarisCSSD = new widget.ButtonBig();
+        btnSirkulasiInventarisCSSD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958343_disease_epidemic_infection_microscope virus_research_icon.png"))); 
+        btnSirkulasiInventarisCSSD.setText("Sirkulasi CSSD");
+        btnSirkulasiInventarisCSSD.setIconTextGap(0);
+        btnSirkulasiInventarisCSSD.setName("btnSirkulasiInventarisCSSD");
+        btnSirkulasiInventarisCSSD.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSirkulasiInventarisCSSD.addActionListener(this::btnSirkulasiInventarisCSSDActionPerformed);
     }
     
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
