@@ -2533,19 +2533,19 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
                 
-                // DOKTER ANESTESI
+                // DOKTER UMUM
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) " +
+                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) " +
                     "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
                     "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_anestesi = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
-                    "between ? and ? and operasi.biayadokter_anestesi > 0 and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anestesi " +
-                    "on bayar_operasi_dokter_anestesi.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_anestesi " +
-                    "and bayar_operasi_dokter_anestesi.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anestesi.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_dokter_anestesi.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
+                    "where operasi.dokter_umum = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "between ? and ? and operasi.biaya_dokter_umum > 0 and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_umum " +
+                    "on bayar_operasi_dokter_umum.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_umum " +
+                    "and bayar_operasi_dokter_umum.no_rawat = operasi.no_rawat and bayar_operasi_dokter_umum.kode_paket = operasi.kode_paket " +
+                    "and bayar_operasi_dokter_umum.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
                     "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
                     "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
@@ -2565,194 +2565,55 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr Anestesi", rs.getDouble("biayadokter_anestesi"), null
+                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr Umum", rs.getDouble("biaya_dokter_umum"), null
                             });
 
-                            total += rs.getDouble("biayadokter_anestesi");
+                            total += rs.getDouble("biaya_dokter_umum");
+                        }
+                    }
+                }
+                
+                // DOKTER PJ ANAK
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) " +
+                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
+                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
+                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
+                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
+                    "where operasi.dokter_pjanak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "between ? and ? and operasi.biaya_dokter_pjanak > 0 and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_pjanak " +
+                    "on bayar_operasi_dokter_pjanak.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_pjanak " +
+                    "and bayar_operasi_dokter_pjanak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_pjanak.kode_paket = operasi.kode_paket " +
+                    "and bayar_operasi_dokter_pjanak.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
+                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                )) {
+                    ps.setString(1, kddokter.getText());
+                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(5, "%" + TCari.getText() + "%");
+                        ps.setString(6, "%" + TCari.getText() + "%");
+                        ps.setString(7, "%" + TCari.getText() + "%");
+                        ps.setString(8, "%" + TCari.getText() + "%");
+                        ps.setString(9, "%" + TCari.getText() + "%");
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            tabMode.addRow(new Object[] {
+                                false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
+                                rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
+                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr PJ Anak", rs.getDouble("biaya_dokter_pjanak"), null
+                            });
+
+                            total += rs.getDouble("biaya_dokter_pjanak");
                         }
                     }
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
-            }
-            
-            
-            try {
-                psbiayadokter_anestesi = koneksi.prepareStatement(
-                    "select\n" +
-                        "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
-                    "from operasi\n" +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
-                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket\n" +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj\n" +
-                    "where operasi.dokter_anestesi = ?\n" +
-                    "and concat(reg_periksa.kd_pj, penjab.png_jawab) like ?\n" +
-                    "and operasi.biayadokter_anestesi > 0\n" +
-                    "and concat(operasi.no_rawat, operasi.kode_paket, operasi.tgl_operasi, operasi.dokter_anestesi) not in (\n" +
-                        "select concat(bayar_operasi_dokter_anestesi.no_rawat, bayar_operasi_dokter_anestesi.kode_paket, bayar_operasi_dokter_anestesi.tgl_operasi, bayar_jm_dokter.kd_dokter)\n" +
-                        "from bayar_jm_dokter join bayar_operasi_dokter_anestesi on bayar_operasi_dokter_anestesi.no_bayar = bayar_jm_dokter.no_bayar\n" +
-                    ")\n" +
-                    (cari.isEmpty() ? "" : "and (pasien.nm_pasien like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or operasi.tgl_operasi like ?)\n") +
-                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
-                );
-                psbiayadokter_anestesi.setString(1, kddokter.getText());               
-                psbiayadokter_anestesi.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                if (! cari.isEmpty()) {
-                    psbiayadokter_anestesi.setString(3, "%" + cari + "%");
-                    psbiayadokter_anestesi.setString(4, "%" + cari + "%");
-                    psbiayadokter_anestesi.setString(5, "%" + cari + "%");
-                    psbiayadokter_anestesi.setString(6, "%" + cari + "%");
-                    psbiayadokter_anestesi.setString(7, "%" + cari + "%");
-                }
-                
-                rsbiayadokter_anestesi = psbiayadokter_anestesi.executeQuery();
-                
-                while (rsbiayadokter_anestesi.next()) {
-                    tabMode.addRow(new Object[] {
-                        false,
-                        rsbiayadokter_anestesi.getString("tgl_operasi"),
-                        rsbiayadokter_anestesi.getString("jam_operasi"),
-                        rsbiayadokter_anestesi.getString("no_rawat"),
-                        rsbiayadokter_anestesi.getString("no_sep"),
-                        rsbiayadokter_anestesi.getString("no_rkm_medis"),
-                        rsbiayadokter_anestesi.getString("nm_pasien") + " (" + rsbiayadokter_anestesi.getString("kd_pj") + ")",
-                        rsbiayadokter_anestesi.getString("kode_paket"),
-                        rsbiayadokter_anestesi.getString("nm_perawatan"),     
-                        "Operasi " + rsbiayaoperator1.getString("status") + " dr Anestesi",
-                        rsbiayadokter_anestesi.getDouble("biayadokter_anestesi"),
-                        null
-                    });
-                    
-                    total += rsbiayadokter_anestesi.getDouble("biayadokter_anestesi");
-                }
-                
-                if (rsbiayadokter_anestesi != null) {
-                    rsbiayadokter_anestesi.close();
-                }
-                
-                if (psbiayadokter_anestesi != null) {
-                    psbiayadokter_anestesi.close();
-                }
-
-                psbiaya_dokter_umum = koneksi.prepareStatement(
-                    "select\n" +
-                        "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
-                    "from operasi\n" +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
-                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket\n" +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj\n" +
-                    "where operasi.dokter_umum = ?\n" +
-                    "and concat(reg_periksa.kd_pj, penjab.png_jawab) like ?\n" +
-                    "and operasi.biaya_dokter_umum > 0\n" +
-                    "and concat(operasi.no_rawat, operasi.kode_paket, operasi.tgl_operasi, operasi.dokter_umum) not in (\n" +
-                        "select concat(bayar_operasi_dokter_umum.no_rawat, bayar_operasi_dokter_umum.kode_paket, bayar_operasi_dokter_umum.tgl_operasi, bayar_jm_dokter.kd_dokter)\n" +
-                        "from bayar_jm_dokter join bayar_operasi_dokter_umum on bayar_operasi_dokter_umum.no_bayar = bayar_jm_dokter.no_bayar\n" +
-                    ")\n" +
-                    (cari.isEmpty() ? "" : "and (pasien.nm_pasien like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or operasi.tgl_operasi like ?)\n") +
-                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
-                );                
-                psbiaya_dokter_umum.setString(1, kddokter.getText());               
-                psbiaya_dokter_umum.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                if (! cari.isEmpty()) {
-                    psbiaya_dokter_umum.setString(3, "%" + cari + "%");
-                    psbiaya_dokter_umum.setString(4, "%" + cari + "%");
-                    psbiaya_dokter_umum.setString(5, "%" + cari + "%");
-                    psbiaya_dokter_umum.setString(6, "%" + cari + "%");
-                    psbiaya_dokter_umum.setString(7, "%" + cari + "%");
-                }
-                
-                rsbiaya_dokter_umum = psbiaya_dokter_umum.executeQuery();
-                
-                while (rsbiaya_dokter_umum.next()) {
-                    tabMode.addRow(new Object[] {
-                        false,
-                        rsbiaya_dokter_umum.getString("tgl_operasi"),
-                        rsbiaya_dokter_umum.getString("jam_operasi"),
-                        rsbiaya_dokter_umum.getString("no_rawat"),
-                        rsbiaya_dokter_umum.getString("no_sep"),
-                        rsbiaya_dokter_umum.getString("no_rkm_medis"),
-                        rsbiaya_dokter_umum.getString("nm_pasien") + " (" + rsbiaya_dokter_umum.getString("kd_pj") + ")",
-                        rsbiaya_dokter_umum.getString("kode_paket"),
-                        rsbiaya_dokter_umum.getString("nm_perawatan"),     
-                        "Operasi " + rsbiayaoperator1.getString("status") + " dr Umum",
-                        rsbiaya_dokter_umum.getDouble("biaya_dokter_umum"),
-                        null
-                    });
-                    
-                    total += rsbiaya_dokter_umum.getDouble("biaya_dokter_umum");
-                }
-                
-                if (rsbiaya_dokter_umum != null) {
-                    rsbiaya_dokter_umum.close();
-                }
-                
-                if (psbiaya_dokter_umum != null) {
-                    psbiaya_dokter_umum.close();
-                }
-
-                psbiaya_dokter_pjanak = koneksi.prepareStatement(
-                    "select\n" +
-                        "pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, reg_periksa.no_rkm_medis,\n" +
-                        "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep\n" +
-                    "from operasi\n" +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat\n" +
-                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n" +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket\n" +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj\n" +
-                    "where operasi.dokter_pjanak = ?\n" +
-                    "and concat(reg_periksa.kd_pj, penjab.png_jawab) like ?\n" +
-                    "and operasi.biaya_dokter_pjanak > 0\n" +
-                    "and concat(operasi.no_rawat, operasi.kode_paket, operasi.tgl_operasi, operasi.dokter_pjanak) not in (\n" +
-                        "select concat(bayar_operasi_dokter_pjanak.no_rawat, bayar_operasi_dokter_pjanak.kode_paket, bayar_operasi_dokter_pjanak.tgl_operasi, bayar_jm_dokter.kd_dokter)\n" +
-                        "from bayar_jm_dokter join bayar_operasi_dokter_pjanak on bayar_operasi_dokter_pjanak.no_bayar = bayar_jm_dokter.no_bayar\n" +
-                    ")\n" +
-                    (cari.isEmpty() ? "" : "and (pasien.nm_pasien like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or operasi.tgl_operasi like ?)\n") +
-                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
-                );
-                psbiaya_dokter_pjanak.setString(1, kddokter.getText());               
-                psbiaya_dokter_pjanak.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                if (! cari.isEmpty()) {
-                    psbiaya_dokter_pjanak.setString(3, "%" + cari + "%");
-                    psbiaya_dokter_pjanak.setString(4, "%" + cari + "%");
-                    psbiaya_dokter_pjanak.setString(5, "%" + cari + "%");
-                    psbiaya_dokter_pjanak.setString(6, "%" + cari + "%");
-                    psbiaya_dokter_pjanak.setString(7, "%" + cari + "%");
-                }
-                
-                rsbiaya_dokter_pjanak = psbiaya_dokter_pjanak.executeQuery();
-                
-                while (rsbiaya_dokter_pjanak.next()) {
-                    tabMode.addRow(new Object[] {
-                        false,
-                        rsbiaya_dokter_pjanak.getString("tgl_operasi"),
-                        rsbiaya_dokter_pjanak.getString("jam_operasi"),
-                        rsbiaya_dokter_pjanak.getString("no_rawat"),
-                        rsbiaya_dokter_pjanak.getString("no_sep"),
-                        rsbiaya_dokter_pjanak.getString("no_rkm_medis"),
-                        rsbiaya_dokter_pjanak.getString("nm_pasien") + " (" + rsbiaya_dokter_pjanak.getString("kd_pj") + ")",
-                        rsbiaya_dokter_pjanak.getString("kode_paket"),
-                        rsbiaya_dokter_pjanak.getString("nm_perawatan"),     
-                        "Operasi " + rsbiayaoperator1.getString("status") + " dr PJ Anak",
-                        rsbiaya_dokter_pjanak.getDouble("biaya_dokter_pjanak"),
-                        null
-                    });
-                    
-                    total += rsbiaya_dokter_pjanak.getDouble("biaya_dokter_pjanak");
-                }
-                
-                if (rsbiaya_dokter_pjanak != null) {
-                    rsbiaya_dokter_pjanak.close();
-                }
-                
-                if (psbiaya_dokter_pjanak != null) {
-                    psbiaya_dokter_pjanak.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi Operasi : " + e);
             }
         }
         
