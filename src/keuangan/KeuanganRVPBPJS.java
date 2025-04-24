@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -554,6 +555,8 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         DTPTgl2 = new widget.Tanggal();
         jLabel16 = new widget.Label();
         JenisPelayanan = new widget.ComboBox();
+        label1 = new widget.Label();
+        chkSudahKoding = new widget.CekBox();
         panelisi1 = new widget.panelisi();
         label17 = new widget.Label();
         TCari = new widget.TextBox();
@@ -875,6 +878,15 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         JenisPelayanan.setPreferredSize(new java.awt.Dimension(195, 23));
         panelisi5.add(JenisPelayanan);
 
+        label1.setText("    ");
+        label1.setName("label1"); // NOI18N
+        panelisi5.add(label1);
+
+        chkSudahKoding.setText("Tampilkan Sudah Dikoding");
+        chkSudahKoding.setName("chkSudahKoding"); // NOI18N
+        chkSudahKoding.setPreferredSize(new java.awt.Dimension(148, 23));
+        panelisi5.add(chkSudahKoding);
+
         jPanel1.add(panelisi5);
 
         panelisi1.setName("panelisi1"); // NOI18N
@@ -1090,6 +1102,9 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         TCari.setText("");
         kdptg.setText("");
         nmptg.setText("");
+        DTPTgl1.setDate(new Date());
+        DTPTgl2.setDate(new Date());
+        chkSudahKoding.setSelected(false);
         tampil();
 
 }//GEN-LAST:event_BtnAllActionPerformed
@@ -2363,6 +2378,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.TextBox TKd;
     private widget.Tanggal Tanggal;
     private widget.Button btnPetugas;
+    private widget.CekBox chkSudahKoding;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JLabel jLabel10;
     private widget.Label jLabel11;
@@ -2374,6 +2390,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.TextBox kdptg;
+    private widget.Label label1;
     private widget.Label label17;
     private widget.Label label19;
     private widget.Label label33;
@@ -2529,6 +2546,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private void tampil() {
         Valid.tabelKosong(tabMode);
         sisapiutang = 0;
+        String filterKoding = "";
+        if (chkSudahKoding.isSelected()) {
+            filterKoding = "inacbg_grouping.no_sep is not null and ";
+        }
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
             "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
@@ -2538,7 +2559,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             "reg_periksa.status_lanjut = (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) left join (select distinct * from (select " +
             "inacbg_grouping_stage1.no_sep, inacbg_grouping_stage1.tarif, 'stage1' as status from inacbg_grouping_stage1 union all select " +
             "inacbg_grouping_stage12.no_sep, inacbg_grouping_stage12.tarif, 'stage12' as status from inacbg_grouping_stage12) as inacbg_grouping) " +
-            "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+            "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where " + filterKoding + "piutang_pasien.status = 'Belum Lunas' and " +
             "piutang_pasien.tgl_piutang between ? and ? and reg_periksa.status_lanjut like ? and (piutang_pasien.no_rawat like ? " +
             "or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or bridging_sep.no_sep like ?) order by piutang_pasien.tgl_piutang"
         )) {
@@ -2578,11 +2599,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
             "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
             "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep_internal.no_sep, " +
-            "inacbg_grouping_stage1_internal.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
+            "inacbg_grouping.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
             "piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join " +
             "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
-            "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal on " +
-            "bridging_sep_internal.no_sep = inacbg_grouping_stage1_internal.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+            "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal as inacbg_grouping on " +
+            "bridging_sep_internal.no_sep = inacbg_grouping.no_sep where " + filterKoding + "piutang_pasien.status = 'Belum Lunas' and " +
             "piutang_pasien.tgl_piutang between ? and ? and reg_periksa.status_lanjut like ? and (piutang_pasien.no_rawat like ? " +
             "or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or bridging_sep_internal.no_sep like ?) order by " +
             "piutang_pasien.tgl_piutang"
