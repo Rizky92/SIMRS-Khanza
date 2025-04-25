@@ -532,7 +532,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari6ActionPerformed
 
     private void NoJurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoJurKeyPressed
-        Valid.pindah(evt, BtnKeluar, TglJurnal1);
+        Valid.pindah(evt, BtnKeluar, NoBukti);
     }//GEN-LAST:event_NoJurKeyPressed
 
     private void kdrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdrekKeyPressed
@@ -678,7 +678,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_formWindowOpened
 
     private void NoBuktiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoBuktiKeyPressed
-        // TODO add your handling code here:
+        Valid.pindah(evt, NoJur, TglJurnal1);
     }//GEN-LAST:event_NoBuktiKeyPressed
 
     /**
