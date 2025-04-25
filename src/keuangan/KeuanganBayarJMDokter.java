@@ -2168,7 +2168,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_jl_dr on " +
                     "rawat_jl_dr.no_rawat = reg_periksa.no_rawat join jns_perawatan on rawat_jl_dr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_jl_dr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
+                    "and rawat_jl_dr.tgl_perawatan between ? and ? and rawat_jl_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
                     "join bayar_rawat_jl_dr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_dr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_jl_dr.kd_dokter " +
                     "and bayar_rawat_jl_dr.no_rawat = rawat_jl_dr.no_rawat and bayar_rawat_jl_dr.kd_jenis_prw = rawat_jl_dr.kd_jenis_prw and " +
                     "bayar_rawat_jl_dr.tgl_perawatan = rawat_jl_dr.tgl_perawatan and bayar_rawat_jl_dr.jam_rawat = rawat_jl_dr.jam_rawat) " + (TCari.getText().isBlank()
@@ -2207,7 +2207,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_jl_drpr on " +
                     "rawat_jl_drpr.no_rawat = reg_periksa.no_rawat join jns_perawatan on rawat_jl_drpr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_jl_drpr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and rawat_jl_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
+                    "and rawat_jl_drpr.tgl_perawatan between ? and ? and rawat_jl_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
                     "join bayar_rawat_jl_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_drpr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_jl_drpr.kd_dokter " +
                     "and bayar_rawat_jl_drpr.no_rawat = rawat_jl_drpr.no_rawat and bayar_rawat_jl_drpr.kd_jenis_prw = rawat_jl_drpr.kd_jenis_prw and " +
                     "bayar_rawat_jl_drpr.tgl_perawatan = rawat_jl_drpr.tgl_perawatan and bayar_rawat_jl_drpr.jam_rawat = rawat_jl_drpr.jam_rawat) " + (TCari.getText().isBlank()
@@ -2253,7 +2253,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_inap_dr on " +
                     "rawat_inap_dr.no_rawat = reg_periksa.no_rawat join jns_perawatan_inap on rawat_inap_dr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_inap_dr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and rawat_inap_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
+                    "and rawat_inap_dr.tgl_perawatan between ? and ? and rawat_inap_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
                     "join bayar_rawat_inap_dr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_dr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_inap_dr.kd_dokter " +
                     "and bayar_rawat_inap_dr.no_rawat = rawat_inap_dr.no_rawat and bayar_rawat_inap_dr.kd_jenis_prw = rawat_inap_dr.kd_jenis_prw and " +
                     "bayar_rawat_inap_dr.tgl_perawatan = rawat_inap_dr.tgl_perawatan and bayar_rawat_inap_dr.jam_rawat = rawat_inap_dr.jam_rawat) " + (TCari.getText().isBlank()
@@ -2292,7 +2292,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_inap_drpr on " +
                     "rawat_inap_drpr.no_rawat = reg_periksa.no_rawat join jns_perawatan_inap on rawat_inap_drpr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_inap_drpr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and rawat_inap_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
+                    "and rawat_inap_drpr.tgl_perawatan between ? and ? and rawat_inap_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
                     "join bayar_rawat_inap_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_drpr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_inap_drpr.kd_dokter " +
                     "and bayar_rawat_inap_drpr.no_rawat = rawat_inap_drpr.no_rawat and bayar_rawat_inap_drpr.kd_jenis_prw = rawat_inap_drpr.kd_jenis_prw and " +
                     "bayar_rawat_inap_drpr.tgl_perawatan = rawat_inap_drpr.tgl_perawatan and bayar_rawat_inap_drpr.jam_rawat = rawat_inap_drpr.jam_rawat) " + (TCari.getText().isBlank()
@@ -2338,7 +2338,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator1 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.operator1 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biayaoperator1 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator1 " +
                     "on bayar_operasi_operator1.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator1 " +
                     "and bayar_operasi_operator1.no_rawat = operasi.no_rawat and bayar_operasi_operator1.kode_paket = operasi.kode_paket " +
@@ -2348,8 +2348,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2378,7 +2378,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator2 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.operator2 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biayaoperator2 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator2 " +
                     "on bayar_operasi_operator2.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator2 " +
                     "and bayar_operasi_operator2.no_rawat = operasi.no_rawat and bayar_operasi_operator2.kode_paket = operasi.kode_paket " +
@@ -2388,8 +2388,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2418,7 +2418,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator3 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.operator3 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biayaoperator3 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator3 " +
                     "on bayar_operasi_operator3.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator3 " +
                     "and bayar_operasi_operator3.no_rawat = operasi.no_rawat and bayar_operasi_operator3.kode_paket = operasi.kode_paket " +
@@ -2428,8 +2428,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2458,7 +2458,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_anak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.dokter_anak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biayadokter_anak > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anak " +
                     "on bayar_operasi_dokter_anak.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_anak " +
                     "and bayar_operasi_dokter_anak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anak.kode_paket = operasi.kode_paket " +
@@ -2468,8 +2468,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2498,7 +2498,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_anestesi = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.dokter_anestesi = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biayadokter_anestesi > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anestesi " +
                     "on bayar_operasi_dokter_anestesi.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_anestesi " +
                     "and bayar_operasi_dokter_anestesi.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anestesi.kode_paket = operasi.kode_paket " +
@@ -2508,8 +2508,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2538,7 +2538,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_umum = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.dokter_umum = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biaya_dokter_umum > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_umum " +
                     "on bayar_operasi_dokter_umum.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_umum " +
                     "and bayar_operasi_dokter_umum.no_rawat = operasi.no_rawat and bayar_operasi_dokter_umum.kode_paket = operasi.kode_paket " +
@@ -2548,8 +2548,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2578,7 +2578,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
                     "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_pjanak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where operasi.dokter_pjanak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
                     "between ? and ? and operasi.biaya_dokter_pjanak > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_pjanak " +
                     "on bayar_operasi_dokter_pjanak.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_pjanak " +
                     "and bayar_operasi_dokter_pjanak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_pjanak.kode_paket = operasi.kode_paket " +
@@ -2588,8 +2588,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 )) {
                     ps.setString(1, kddokter.getText());
                     ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
-                    ps.setString(3, Valid.getTglSmc(DTPTgl1));
-                    ps.setString(4, Valid.getTglSmc(DTPTgl2));
+                    ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
+                    ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
@@ -2625,7 +2625,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from periksa_lab join " +
                     "reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where periksa_lab.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi between ? and ? " +
+                    "where periksa_lab.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_lab.tgl_periksa between ? and ? " +
                     "and periksa_lab.tarif_tindakan_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab on " +
                     "bayar_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_lab.no_rawat = periksa_lab.no_rawat and " +
                     "bayar_periksa_lab.kd_jenis_prw = periksa_lab.kd_jenis_prw and bayar_periksa_lab.tgl_periksa = periksa_lab.tgl_periksa and " +
@@ -2668,7 +2668,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on " +
                     "reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on detail_periksa_lab.id_template = template_laboratorium.id_template " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where periksa_lab.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and detail_periksa_lab.bagian_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
+                    "and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
                     "join bayar_detail_periksa_lab on bayar_detail_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where " +
                     "bayar_detail_periksa_lab.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw " +
                     "and bayar_detail_periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab.jam = detail_periksa_lab.jam " +
@@ -2708,7 +2708,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from periksa_lab join " +
                     "reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                     "join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where periksa_lab.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi " +
+                    "where periksa_lab.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_lab.tgl_periksa " +
                     "between ? and ? and periksa_lab.tarif_perujuk > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab_perujuk " +
                     "on bayar_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_lab_perujuk.no_rawat = periksa_lab.no_rawat " +
                     "and bayar_periksa_lab_perujuk.kd_jenis_prw = periksa_lab.kd_jenis_prw and bayar_periksa_lab_perujuk.tgl_periksa = periksa_lab.tgl_periksa " +
@@ -2751,8 +2751,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on " +
                     "reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on detail_periksa_lab.id_template = template_laboratorium.id_template " +
                     "join penjab on reg_periksa.kd_pj = penjab.kd_pj where periksa_lab.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and reg_periksa.tgl_registrasi between ? and ? and detail_periksa_lab.bagian_perujuk > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_detail_periksa_lab_perujuk on bayar_detail_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_perujuk > 0 " + sql + "and not exists(select * from " +
+                    "bayar_jm_dokter join bayar_detail_periksa_lab_perujuk on bayar_detail_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where " +
                     "bayar_detail_periksa_lab_perujuk.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab_perujuk.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw " +
                     "and bayar_detail_periksa_lab_perujuk.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab_perujuk.jam = detail_periksa_lab.jam " +
                     "and bayar_detail_periksa_lab_perujuk.id_template = detail_periksa_lab.id_template and bayar_jm_dokter.kd_dokter = periksa_lab.dokter_perujuk) " +
@@ -2799,7 +2799,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "'1', '2')) limit 1) as no_sep from periksa_radiologi join reg_periksa on periksa_radiologi.no_rawat = reg_periksa.no_rawat " +
                     "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw " +
                     "= jns_perawatan_radiologi.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj where periksa_radiologi.kd_dokter = ? " +
-                    "and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi between ? and ? and " +
+                    "and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_radiologi.tgl_periksa between ? and ? and " +
                     "periksa_radiologi.tarif_tindakan_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_radiologi on " +
                     "bayar_periksa_radiologi.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_radiologi.no_rawat = periksa_radiologi.no_rawat " +
                     "and bayar_periksa_radiologi.kd_jenis_prw = periksa_radiologi.kd_jenis_prw and bayar_periksa_radiologi.tgl_periksa = periksa_radiologi.tgl_periksa " +
@@ -2839,7 +2839,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from periksa_radiologi join reg_periksa " +
                     "on periksa_radiologi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join jns_perawatan_radiologi " +
                     "on periksa_radiologi.kd_jenis_prw = jns_perawatan_radiologi.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj where " +
-                    "periksa_radiologi.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and reg_periksa.tgl_registrasi between ? and ? " +
+                    "periksa_radiologi.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_radiologi.tgl_periksa between ? and ? " +
                     "and periksa_radiologi.tarif_perujuk > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_radiologi_perujuk on " +
                     "bayar_periksa_radiologi_perujuk.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_radiologi_perujuk.no_rawat = periksa_radiologi.no_rawat " +
                     "and bayar_periksa_radiologi_perujuk.kd_jenis_prw = periksa_radiologi.kd_jenis_prw and bayar_periksa_radiologi_perujuk.tgl_periksa = periksa_radiologi.tgl_periksa " +
