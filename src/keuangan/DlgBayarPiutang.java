@@ -28,6 +28,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -946,13 +947,26 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
             if(tbKamar.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
                 sukses=true;
-                
-                if(Sequel.queryu2tf("delete from bayar_piutang where tgl_bayar=? and no_rkm_medis=? and no_rawat=? and kd_rek=? and kd_rek_kontra=?", 5,new String[]{
-                    tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString(),
-                    tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
-                })==true){
-                    Sequel.mengedit("piutang_pasien","no_rawat='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas'");                      
-                    Sequel.mengedit("detail_piutang_pasien","no_rawat='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"' and nama_bayar='"+Sequel.cariIsi("select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString())+"'","sisapiutang=sisapiutang+"+(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString())+Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())+Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString())));
+                if (Sequel.menghapustfSmc("bayar_piutang", "bayar_piutang.tgl_bayar = ? and bayar_piutang.no_rkm_medis = ? and bayar_piutang.no_rawat = ? and " +
+                    "bayar_piutang.kd_rek = ? and bayar_piutang.kd_rek_kontra = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(),
+                    tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 5).toString(),
+                    tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString()
+                )) {
+                    Sequel.mengupdateSmc("piutang_pasien", "piutang_pasien.status = 'Belum Lunas', piutang_pasien.sisapiutang = piutang_pasien.sisapiutang + ?",
+                        "piutang_pasien.no_rawat = ?", new BigDecimal(
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()) +
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString()) +
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString())
+                        ).toPlainString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 5).toString());
+                    Sequel.mengupdateSmc("detail_piutang_pasien", "detail_piutang_pasien.sisapiutang = detail_piutang_pasien.sisapiutang + ?",
+                        "detail_piutang_pasien.no_rawat = ? and detail_piutang_pasien.nama_bayar = (select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek = ?)",
+                        new BigDecimal(
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()) +
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString()) +
+                            Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString())
+                        ).toPlainString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 5).toString(),
+                        tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
+                    );
                     Sequel.deleteTampJurnal();
                     int selectedRow = tbKamar.getSelectedRow();
                     Sequel.insertTampJurnal(tbKamar.getValueAt(selectedRow, 7).toString(), "BAYAR PIUTANG", Double.parseDouble(tbKamar.getValueAt(selectedRow, 3).toString()) + Double.parseDouble(tbKamar.getValueAt(selectedRow, 8).toString()) + Double.parseDouble(tbKamar.getValueAt(selectedRow, 10).toString()), 0);
