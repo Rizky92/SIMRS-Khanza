@@ -790,9 +790,9 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         jLabel12.setPreferredSize(new java.awt.Dimension(55, 23));
         panelisi5.add(jLabel12);
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Piutang Belum Lunas", "Piutang Sudah Lunas", "Sudah Bayar Non Piutang", "Belum Terclosing Kasir" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Piutang Belum Lunas", "Piutang Sudah Lunas", "Sudah Bayar Non Piutang", "Sudah Bayar dan Piutang Lunas", "Belum Terclosing Kasir" }));
         cmbStatus.setName("cmbStatus"); // NOI18N
-        cmbStatus.setPreferredSize(new java.awt.Dimension(180, 23));
+        cmbStatus.setPreferredSize(new java.awt.Dimension(200, 23));
         panelisi5.add(cmbStatus);
 
         jPanel1.add(panelisi5, java.awt.BorderLayout.PAGE_START);
@@ -2154,29 +2154,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             case 1: sql = "and reg_periksa.status_bayar = 'Sudah Bayar' and exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat and piutang_pasien.status = 'Belum Lunas') "; break;
             case 2: sql = "and reg_periksa.status_bayar = 'Sudah Bayar' and exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat and piutang_pasien.status = 'Lunas') "; break;
             case 3: sql = "and reg_periksa.status_bayar = 'Sudah Bayar' and not exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat) "; break;
-            case 4: sql = "and reg_periksa.status_bayar = 'Belum Bayar' "; break;
+            case 4: sql = "and reg_periksa.status_bayar = 'Sudah Bayar' and (exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat and piutang_pasien.status = 'Lunas') or not exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat)) "; break;
+            case 5: sql = "and reg_periksa.status_bayar = 'Belum Bayar' "; break;
         }
         
         // TINDAKAN RALAN DOKTER
         if (chkRalan.isSelected()) {
             try {
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, rawat_jl_dr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_dr.tgl_perawatan, " +
-                    "rawat_jl_dr.jam_rawat, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, " +
-                    "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1 ) as no_sep " +
-                    "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_jl_dr on " +
-                    "rawat_jl_dr.no_rawat = reg_periksa.no_rawat join jns_perawatan on rawat_jl_dr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_jl_dr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and rawat_jl_dr.tgl_perawatan between ? and ? and rawat_jl_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_rawat_jl_dr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_dr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_jl_dr.kd_dokter " +
-                    "and bayar_rawat_jl_dr.no_rawat = rawat_jl_dr.no_rawat and bayar_rawat_jl_dr.kd_jenis_prw = rawat_jl_dr.kd_jenis_prw and " +
-                    "bayar_rawat_jl_dr.tgl_perawatan = rawat_jl_dr.tgl_perawatan and bayar_rawat_jl_dr.jam_rawat = rawat_jl_dr.jam_rawat) " + (TCari.getText().isBlank()
-                    ? "" : "and (pasien.nm_pasien like ? or jns_perawatan.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
-                    "or rawat_jl_dr.tgl_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan.nm_perawatan"
+                    "select rawat_jl_dr.tgl_perawatan, rawat_jl_dr.jam_rawat, rawat_jl_dr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, rawat_jl_dr.kd_jenis_prw, jns_perawatan.nm_perawatan, 'Rawat Jalan Dr' as status, " +
+                    "rawat_jl_dr.tarif_tindakandr from rawat_jl_dr join jns_perawatan on rawat_jl_dr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
+                    "join reg_periksa on rawat_jl_dr.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as " +
+                    "status_lanjut, row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, " +
+                    "bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on rawat_jl_dr.no_rawat = bridging_sep.no_rawat and " +
+                    "reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where rawat_jl_dr.kd_dokter = ? and " +
+                    "reg_periksa.kd_pj like ? and rawat_jl_dr.tgl_perawatan between ? and ? and rawat_jl_dr.tarif_tindakandr > 0 " + sql + "and " +
+                    "not exists(select * from bayar_jm_dokter join bayar_rawat_jl_dr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_dr.no_bayar " +
+                    "where bayar_jm_dokter.kd_dokter = rawat_jl_dr.kd_dokter and bayar_rawat_jl_dr.no_rawat = rawat_jl_dr.no_rawat and " +
+                    "bayar_rawat_jl_dr.kd_jenis_prw = rawat_jl_dr.kd_jenis_prw and bayar_rawat_jl_dr.tgl_perawatan = rawat_jl_dr.tgl_perawatan and " +
+                    "bayar_rawat_jl_dr.jam_rawat = rawat_jl_dr.jam_rawat) " + (TCari.getText().isBlank() ? "" : "and (rawat_jl_dr.no_rawat like ? or " +
+                    "bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or " +
+                    "rawat_jl_dr.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
                     if (!TCari.getText().isBlank()) {
@@ -2185,37 +2188,41 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Rawat Jalan Dr", rs.getDouble("tarif_tindakandr"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_tindakandr"), null
                             });
-
                             total += rs.getDouble("tarif_tindakandr");
                         }
                     }
                 }
                 
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, rawat_jl_drpr.tarif_tindakandr, jns_perawatan.nm_perawatan, rawat_jl_drpr.tgl_perawatan, " +
-                    "rawat_jl_drpr.jam_rawat, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, " +
-                    "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1 ) as no_sep " +
-                    "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_jl_drpr on " +
-                    "rawat_jl_drpr.no_rawat = reg_periksa.no_rawat join jns_perawatan on rawat_jl_drpr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_jl_drpr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and rawat_jl_drpr.tgl_perawatan between ? and ? and rawat_jl_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_rawat_jl_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_drpr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_jl_drpr.kd_dokter " +
-                    "and bayar_rawat_jl_drpr.no_rawat = rawat_jl_drpr.no_rawat and bayar_rawat_jl_drpr.kd_jenis_prw = rawat_jl_drpr.kd_jenis_prw and " +
-                    "bayar_rawat_jl_drpr.tgl_perawatan = rawat_jl_drpr.tgl_perawatan and bayar_rawat_jl_drpr.jam_rawat = rawat_jl_drpr.jam_rawat) " + (TCari.getText().isBlank()
-                    ? "" : "and (pasien.nm_pasien like ? or jns_perawatan.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
-                    "or rawat_jl_drpr.tgl_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan.nm_perawatan"
+                    "select rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, rawat_jl_drpr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, jns_perawatan.nm_perawatan, 'Rawat Jalan DrPr' as status, " +
+                    "rawat_jl_drpr.tarif_tindakandr from rawat_jl_drpr join jns_perawatan on rawat_jl_drpr.kd_jenis_prw = jns_perawatan.kd_jenis_prw " +
+                    "join reg_periksa on rawat_jl_drpr.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as " +
+                    "status_lanjut, row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, " +
+                    "bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on rawat_jl_drpr.no_rawat = bridging_sep.no_rawat and " +
+                    "reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where rawat_jl_drpr.kd_dokter = ? and " +
+                    "reg_periksa.kd_pj like ? and rawat_jl_drpr.tgl_perawatan between ? and ? and rawat_jl_drpr.tarif_tindakandr > 0 " + sql + "and " +
+                    "not exists(select * from bayar_jm_dokter join bayar_rawat_jl_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_jl_drpr.no_bayar " +
+                    "where bayar_jm_dokter.kd_dokter = rawat_jl_drpr.kd_dokter and bayar_rawat_jl_drpr.no_rawat = rawat_jl_drpr.no_rawat and " +
+                    "bayar_rawat_jl_drpr.kd_jenis_prw = rawat_jl_drpr.kd_jenis_prw and bayar_rawat_jl_drpr.tgl_perawatan = rawat_jl_drpr.tgl_perawatan and " +
+                    "bayar_rawat_jl_drpr.jam_rawat = rawat_jl_drpr.jam_rawat) " + (TCari.getText().isBlank() ? "" : "and (rawat_jl_drpr.no_rawat like ? or " +
+                    "bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or " +
+                    "rawat_jl_drpr.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
                     if (!TCari.getText().isBlank()) {
@@ -2224,15 +2231,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Rawat Jalan DrPr", rs.getDouble("tarif_tindakandr"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_tindakandr"), null
                             });
-
                             total += rs.getDouble("tarif_tindakandr");
                         }
                     }
@@ -2246,22 +2255,24 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if (chkRanap.isSelected()) {
             try {
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, rawat_inap_dr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_dr.tgl_perawatan, " +
-                    "rawat_inap_dr.jam_rawat, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, " +
-                    "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1 ) as no_sep " +
-                    "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_inap_dr on " +
-                    "rawat_inap_dr.no_rawat = reg_periksa.no_rawat join jns_perawatan_inap on rawat_inap_dr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_inap_dr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and rawat_inap_dr.tgl_perawatan between ? and ? and rawat_inap_dr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_rawat_inap_dr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_dr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_inap_dr.kd_dokter " +
-                    "and bayar_rawat_inap_dr.no_rawat = rawat_inap_dr.no_rawat and bayar_rawat_inap_dr.kd_jenis_prw = rawat_inap_dr.kd_jenis_prw and " +
-                    "bayar_rawat_inap_dr.tgl_perawatan = rawat_inap_dr.tgl_perawatan and bayar_rawat_inap_dr.jam_rawat = rawat_inap_dr.jam_rawat) " + (TCari.getText().isBlank()
-                    ? "" : "and (pasien.nm_pasien like ? or jns_perawatan_inap.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
-                    "or rawat_inap_dr.tgl_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan_inap.nm_perawatan"
+                    "select rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, rawat_inap_dr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, rawat_inap_dr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, 'Rawat Inap Dr' as status, " +
+                    "rawat_inap_dr.tarif_tindakandr from rawat_inap_dr join jns_perawatan_inap on rawat_inap_dr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
+                    "join reg_periksa on rawat_inap_dr.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as " +
+                    "status_lanjut, row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, " +
+                    "bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on rawat_inap_dr.no_rawat = bridging_sep.no_rawat and " +
+                    "reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where rawat_inap_dr.kd_dokter = ? and " +
+                    "reg_periksa.kd_pj like ? and rawat_inap_dr.tgl_perawatan between ? and ? and rawat_inap_dr.tarif_tindakandr > 0 " + sql + "and " +
+                    "not exists(select * from bayar_jm_dokter join bayar_rawat_inap_dr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_dr.no_bayar " +
+                    "where bayar_jm_dokter.kd_dokter = rawat_inap_dr.kd_dokter and bayar_rawat_inap_dr.no_rawat = rawat_inap_dr.no_rawat and " +
+                    "bayar_rawat_inap_dr.kd_jenis_prw = rawat_inap_dr.kd_jenis_prw and bayar_rawat_inap_dr.tgl_perawatan = rawat_inap_dr.tgl_perawatan and " +
+                    "bayar_rawat_inap_dr.jam_rawat = rawat_inap_dr.jam_rawat) " + (TCari.getText().isBlank() ? "" : "and (rawat_inap_dr.no_rawat like ? or " +
+                    "bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or " +
+                    "rawat_inap_dr.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan_inap.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
                     if (!TCari.getText().isBlank()) {
@@ -2270,37 +2281,41 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Rawat Inap Dr", rs.getDouble("tarif_tindakandr"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_tindakandr"), null
                             });
-
                             total += rs.getDouble("tarif_tindakandr");
                         }
                     }
                 }
                 
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, rawat_inap_drpr.tarif_tindakandr, jns_perawatan_inap.nm_perawatan, rawat_inap_drpr.tgl_perawatan, " +
-                    "rawat_inap_drpr.jam_rawat, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, " +
-                    "(select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1 ) as no_sep " +
-                    "from pasien join reg_periksa on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join rawat_inap_drpr on " +
-                    "rawat_inap_drpr.no_rawat = reg_periksa.no_rawat join jns_perawatan_inap on rawat_inap_drpr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where rawat_inap_drpr.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and rawat_inap_drpr.tgl_perawatan between ? and ? and rawat_inap_drpr.tarif_tindakandr > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_rawat_inap_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_drpr.no_bayar where bayar_jm_dokter.kd_dokter = rawat_inap_drpr.kd_dokter " +
-                    "and bayar_rawat_inap_drpr.no_rawat = rawat_inap_drpr.no_rawat and bayar_rawat_inap_drpr.kd_jenis_prw = rawat_inap_drpr.kd_jenis_prw and " +
-                    "bayar_rawat_inap_drpr.tgl_perawatan = rawat_inap_drpr.tgl_perawatan and bayar_rawat_inap_drpr.jam_rawat = rawat_inap_drpr.jam_rawat) " + (TCari.getText().isBlank()
-                    ? "" : "and (pasien.nm_pasien like ? or jns_perawatan_inap.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
-                    "or rawat_inap_drpr.tgl_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan_inap.nm_perawatan"
+                    "select rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, rawat_inap_drpr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, 'Rawat Inap DrPr' as status, " +
+                    "rawat_inap_drpr.tarif_tindakandr from rawat_inap_drpr join jns_perawatan_inap on rawat_inap_drpr.kd_jenis_prw = jns_perawatan_inap.kd_jenis_prw " +
+                    "join reg_periksa on rawat_inap_drpr.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as " +
+                    "status_lanjut, row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, " +
+                    "bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on rawat_inap_drpr.no_rawat = bridging_sep.no_rawat and " +
+                    "reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where rawat_inap_drpr.kd_dokter = ? and " +
+                    "reg_periksa.kd_pj like ? and rawat_inap_drpr.tgl_perawatan between ? and ? and rawat_inap_drpr.tarif_tindakandr > 0 " + sql + "and " +
+                    "not exists(select * from bayar_jm_dokter join bayar_rawat_inap_drpr on bayar_jm_dokter.no_bayar = bayar_rawat_inap_drpr.no_bayar " +
+                    "where bayar_jm_dokter.kd_dokter = rawat_inap_drpr.kd_dokter and bayar_rawat_inap_drpr.no_rawat = rawat_inap_drpr.no_rawat and " +
+                    "bayar_rawat_inap_drpr.kd_jenis_prw = rawat_inap_drpr.kd_jenis_prw and bayar_rawat_inap_drpr.tgl_perawatan = rawat_inap_drpr.tgl_perawatan and " +
+                    "bayar_rawat_inap_drpr.jam_rawat = rawat_inap_drpr.jam_rawat) " + (TCari.getText().isBlank() ? "" : "and (rawat_inap_drpr.no_rawat like ? or " +
+                    "bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or " +
+                    "rawat_inap_drpr.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ?) ") + "order by reg_periksa.tgl_registrasi, jns_perawatan_inap.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
                     if (!TCari.getText().isBlank()) {
@@ -2309,15 +2324,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Rawat Inap DrPr", rs.getDouble("tarif_tindakandr"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_tindakandr"), null
                             });
-
                             total += rs.getDouble("tarif_tindakandr");
                         }
                     }
@@ -2332,22 +2349,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             try {
                 // OPERATOR 1
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator1, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator1 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biayaoperator1 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator1 " +
-                    "on bayar_operasi_operator1.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator1 " +
-                    "and bayar_operasi_operator1.no_rawat = operasi.no_rawat and bayar_operasi_operator1.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_operator1.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' Op1') as status, operasi.biayaoperator1 from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.operator1 = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biayaoperator1 > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator1 on bayar_operasi_operator1.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.operator1 and bayar_operasi_operator1.no_rawat = operasi.no_rawat and bayar_operasi_operator1.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_operator1.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2356,15 +2373,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " Op1", rs.getDouble("biayaoperator1"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biayaoperator1"), null
                             });
-
                             total += rs.getDouble("biayaoperator1");
                         }
                     }
@@ -2372,22 +2391,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // OPERATOR 2
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator2, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator2 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biayaoperator2 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator2 " +
-                    "on bayar_operasi_operator2.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator2 " +
-                    "and bayar_operasi_operator2.no_rawat = operasi.no_rawat and bayar_operasi_operator2.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_operator2.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' Op2') as status, operasi.biayaoperator2 from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.operator2 = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biayaoperator2 > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator2 on bayar_operasi_operator2.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.operator2 and bayar_operasi_operator2.no_rawat = operasi.no_rawat and bayar_operasi_operator2.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_operator2.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2396,15 +2415,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " Op2", rs.getDouble("biayaoperator2"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biayaoperator2"), null
                             });
-
                             total += rs.getDouble("biayaoperator2");
                         }
                     }
@@ -2412,22 +2433,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // OPERATOR 3
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayaoperator3, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.operator3 = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biayaoperator3 > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator3 " +
-                    "on bayar_operasi_operator3.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.operator3 " +
-                    "and bayar_operasi_operator3.no_rawat = operasi.no_rawat and bayar_operasi_operator3.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_operator3.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' Op3') as status, operasi.biayaoperator3 from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.operator3 = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biayaoperator3 > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_operator3 on bayar_operasi_operator3.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.operator3 and bayar_operasi_operator3.no_rawat = operasi.no_rawat and bayar_operasi_operator3.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_operator3.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2436,15 +2457,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " Op3", rs.getDouble("biayaoperator3"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biayaoperator3"), null
                             });
-
                             total += rs.getDouble("biayaoperator3");
                         }
                     }
@@ -2452,22 +2475,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DOKTER ANAK
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anak, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_anak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biayadokter_anak > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anak " +
-                    "on bayar_operasi_dokter_anak.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_anak " +
-                    "and bayar_operasi_dokter_anak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anak.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_dokter_anak.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' dr Anak') as status, operasi.biayadokter_anak from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.dokter_anak = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biayadokter_anak > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anak on bayar_operasi_dokter_anak.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.dokter_anak and bayar_operasi_dokter_anak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anak.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_dokter_anak.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2476,15 +2499,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr Anak", rs.getDouble("biayadokter_anak"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biayadokter_anak"), null
                             });
-
                             total += rs.getDouble("biayadokter_anak");
                         }
                     }
@@ -2492,22 +2517,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DOKTER ANESTESI
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biayadokter_anestesi, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_anestesi = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biayadokter_anestesi > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anestesi " +
-                    "on bayar_operasi_dokter_anestesi.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_anestesi " +
-                    "and bayar_operasi_dokter_anestesi.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anestesi.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_dokter_anestesi.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' dr Anastesi') as status, operasi.biayadokter_anestesi from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.dokter_anestesi = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biayadokter_anestesi > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_anestesi on bayar_operasi_dokter_anestesi.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.dokter_anestesi and bayar_operasi_dokter_anestesi.no_rawat = operasi.no_rawat and bayar_operasi_dokter_anestesi.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_dokter_anestesi.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2516,15 +2541,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr Anastesi", rs.getDouble("biayadokter_anestesi"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biayadokter_anestesi"), null
                             });
-
                             total += rs.getDouble("biayadokter_anestesi");
                         }
                     }
@@ -2532,22 +2559,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DOKTER UMUM
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_umum, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_umum = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biaya_dokter_umum > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_umum " +
-                    "on bayar_operasi_dokter_umum.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_umum " +
-                    "and bayar_operasi_dokter_umum.no_rawat = operasi.no_rawat and bayar_operasi_dokter_umum.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_dokter_umum.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' dr Umum') as status, operasi.biaya_dokter_umum from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.dokter_umum = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biaya_dokter_umum > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_umum on bayar_operasi_dokter_umum.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.dokter_umum and bayar_operasi_dokter_umum.no_rawat = operasi.no_rawat and bayar_operasi_dokter_umum.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_dokter_umum.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2556,15 +2583,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr Umum", rs.getDouble("biaya_dokter_umum"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biaya_dokter_umum"), null
                             });
-
                             total += rs.getDouble("biaya_dokter_umum");
                         }
                     }
@@ -2572,22 +2601,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DOKTER PJ ANAK
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select pasien.nm_pasien, paket_operasi.nm_perawatan, operasi.biaya_dokter_pjanak, operasi.status, date(operasi.tgl_operasi) " +
-                    "as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, reg_periksa.kd_pj, operasi.kode_paket, reg_periksa.no_rawat, " +
-                    "reg_periksa.no_rkm_medis, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat " +
-                    "and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from operasi " +
-                    "join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where operasi.dokter_pjanak = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and operasi.tgl_operasi " +
-                    "between ? and ? and operasi.biaya_dokter_pjanak > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_pjanak " +
-                    "on bayar_operasi_dokter_pjanak.no_bayar = bayar_jm_dokter.no_bayar where bayar_jm_dokter.kd_dokter = operasi.dokter_pjanak " +
-                    "and bayar_operasi_dokter_pjanak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_pjanak.kode_paket = operasi.kode_paket " +
-                    "and bayar_operasi_dokter_pjanak.tgl_operasi = operasi.tgl_operasi) " + (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien " +
-                    "like ? or paket_operasi.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "operasi.tgl_operasi like ?) ") + "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
+                    "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
+                    "reg_periksa.no_rkm_medis, pasien.nm_pasien, reg_periksa.kd_pj, operasi.kode_paket, paket_operasi.nm_perawatan, concat('Operasi ', " +
+                    "operasi.status, ' dr PJ Anak') as status, operasi.biaya_dokter_pjanak from operasi join reg_periksa on operasi.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join paket_operasi on operasi.kode_paket = paket_operasi.kode_paket " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on operasi.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and " +
+                    "1 = bridging_sep.rn where operasi.dokter_pjanak = ? and reg_periksa.kd_pj like ? and operasi.tgl_operasi between ? and ? and operasi.biaya_dokter_pjanak > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_operasi_dokter_pjanak on bayar_operasi_dokter_pjanak.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_jm_dokter.kd_dokter = operasi.dokter_pjanak and bayar_operasi_dokter_pjanak.no_rawat = operasi.no_rawat and bayar_operasi_dokter_pjanak.kode_paket = operasi.kode_paket and " +
+                    "bayar_operasi_dokter_pjanak.tgl_operasi = operasi.tgl_operasi) "+ (TCari.getText().isBlank() ? "" : "and (operasi.no_rawat like ? or bridging_sep.no_sep like ? or " +
+                    "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) ") +
+                    "order by operasi.tgl_operasi, paket_operasi.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1) + " 00:00:00.000");
                     ps.setString(4, Valid.getTglSmc(DTPTgl2) + " 23:59:59.999");
                     if (!TCari.getText().isBlank()) {
@@ -2596,15 +2625,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kode_paket"),
-                                rs.getString("nm_perawatan"), "Operasi " + rs.getString("status") + " dr PJ Anak", rs.getDouble("biaya_dokter_pjanak"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("biaya_dokter_pjanak"), null
                             });
-
                             total += rs.getDouble("biaya_dokter_pjanak");
                         }
                     }
@@ -2619,39 +2650,43 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             try {
                 // TINDAKAN LABORAT PJ
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select periksa_lab.tarif_tindakan_dokter, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, " +
-                    "jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, " +
-                    "reg_periksa.kd_pj, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from periksa_lab join " +
-                    "reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where periksa_lab.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_lab.tgl_periksa between ? and ? " +
-                    "and periksa_lab.tarif_tindakan_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab on " +
+                    "select periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, periksa_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, concat('Laborat ', periksa_lab.status, " +
+                    "' PJ') as status, periksa_lab.tarif_tindakan_dokter from periksa_lab join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on periksa_lab.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut " +
+                    "and 1 = bridging_sep.rn where periksa_lab.kd_dokter = ? and reg_periksa.kd_pj like ? and periksa_lab.tgl_periksa between ? and ? and " +
+                    "periksa_lab.tarif_tindakan_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab on " +
                     "bayar_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_lab.no_rawat = periksa_lab.no_rawat and " +
                     "bayar_periksa_lab.kd_jenis_prw = periksa_lab.kd_jenis_prw and bayar_periksa_lab.tgl_periksa = periksa_lab.tgl_periksa and " +
-                    "bayar_periksa_lab.jam = periksa_lab.jam and bayar_jm_dokter.kd_dokter = periksa_lab.kd_dokter) " + (TCari.getText().isBlank() ? "" : 
-                    "and (pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
-                    "or periksa_lab.tgl_periksa like ?) ") + "order by periksa_lab.tgl_periksa, periksa_lab.jam, jns_perawatan_lab.nm_perawatan"
+                    "bayar_periksa_lab.jam = periksa_lab.jam and bayar_jm_dokter.kd_dokter = periksa_lab.kd_dokter) " + (TCari.getText().isBlank() ? "" :
+                    "and (periksa_lab.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or " +
+                    "reg_periksa.kd_pj like ? or periksa_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ") +
+                    "order by periksa_lab.tgl_periksa, periksa_lab.jam, jns_perawatan_lab.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
-                    if (! TCari.getText().isBlank()) {
+                    if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Laborat " + rs.getString("status") + " PJ", rs.getDouble("tarif_tindakan_dokter"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_tindakan_dokter"), null
                             });
-
                             total += rs.getDouble("tarif_tindakan_dokter");
                         }
                     }
@@ -2659,42 +2694,47 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DETAIL TINDAKAN LABORAT PJ
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select detail_periksa_lab.bagian_dokter, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, " +
-                    "reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, " +
-                    "detail_periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template, (select bridging_sep.no_sep from bridging_sep where " +
-                    "bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', " +
-                    "'1', '2')) limit 1) as no_sep from detail_periksa_lab join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat " +
-                    "and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa " +
-                    "and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on " +
-                    "reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on detail_periksa_lab.id_template = template_laboratorium.id_template " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where periksa_lab.kd_dokter = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_dokter > 0 " + sql + "and not exists(select * from bayar_jm_dokter " +
-                    "join bayar_detail_periksa_lab on bayar_detail_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where " +
-                    "bayar_detail_periksa_lab.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw " +
-                    "and bayar_detail_periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab.jam = detail_periksa_lab.jam " +
-                    "and bayar_detail_periksa_lab.id_template = detail_periksa_lab.id_template and bayar_jm_dokter.kd_dokter = periksa_lab.kd_dokter) " +
-                    (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien like ? or template_laboratorium.Pemeriksaan like ? or reg_periksa.no_rawat like ? " +
-                    "or reg_periksa.no_rkm_medis like ? or detail_periksa_lab.tgl_periksa like ?) ") + "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam"
+                    "select detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, detail_periksa_lab.kd_jenis_prw, template_laboratorium.Pemeriksaan, concat('Laborat ', periksa_lab.status, " +
+                    "' PJ Detail') as status, detail_periksa_lab.bagian_dokter, detail_periksa_lab.id_template from detail_periksa_lab join periksa_lab on " +
+                    "periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and " +
+                    "periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on " +
+                    "periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on " +
+                    "detail_periksa_lab.id_template = template_laboratorium.id_template left join (select bridging_sep.no_sep, bridging_sep.no_rawat, " +
+                    "if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, row_number() over (partition by bridging_sep.no_rawat, " +
+                    "bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on " +
+                    "detail_periksa_lab.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where " +
+                    "periksa_lab.kd_dokter = ? and reg_periksa.kd_pj like ? and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_dokter > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_detail_periksa_lab on bayar_detail_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_detail_periksa_lab.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and " +
+                    "bayar_detail_periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab.jam = detail_periksa_lab.jam and " +
+                    "bayar_detail_periksa_lab.id_template = detail_periksa_lab.id_template and bayar_jm_dokter.kd_dokter = periksa_lab.kd_dokter) " +
+                    (TCari.getText().isBlank() ? "" : "and (detail_periksa_lab.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or " +
+                    "pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or detail_periksa_lab.kd_jenis_prw like ? or detail_periksa_lab.id_template like ? or " +
+                    "template_laboratorium.Pemeriksaan like ?) ") + "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.id_template"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
-                    if (! TCari.getText().isBlank()) {
+                    if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
+                        ps.setString(12, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("Pemeriksaan"), "Laborat " + rs.getString("status") + " PJ Detail", rs.getDouble("bagian_dokter"), rs.getString("id_template")
+                                rs.getString("Pemeriksaan"), rs.getString("status"), rs.getDouble("bagian_dokter"), rs.getString("id_template")
                             });
-
                             total += rs.getDouble("bagian_dokter");
                         }
                     }
@@ -2702,39 +2742,43 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // TINDAKAN LABORAT PERUJUK
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select periksa_lab.tarif_perujuk, pasien.nm_pasien, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, periksa_lab.status, " +
-                    "jns_perawatan_lab.nm_perawatan, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, periksa_lab.kd_jenis_prw, " +
-                    "reg_periksa.kd_pj, (select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-                    "bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) limit 1) as no_sep from periksa_lab join " +
-                    "reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
-                    "join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw join penjab on reg_periksa.kd_pj = penjab.kd_pj " +
-                    "where periksa_lab.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? and periksa_lab.tgl_periksa " +
-                    "between ? and ? and periksa_lab.tarif_perujuk > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab_perujuk " +
-                    "on bayar_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_lab_perujuk.no_rawat = periksa_lab.no_rawat " +
-                    "and bayar_periksa_lab_perujuk.kd_jenis_prw = periksa_lab.kd_jenis_prw and bayar_periksa_lab_perujuk.tgl_periksa = periksa_lab.tgl_periksa " +
-                    "and bayar_periksa_lab_perujuk.jam = periksa_lab.jam and bayar_jm_dokter.kd_dokter = periksa_lab.dokter_perujuk) " + (TCari.getText().isBlank() ? "" :
-                    "and (pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
-                    "periksa_lab.tgl_periksa like ?) ") + "order by periksa_lab.tgl_periksa, periksa_lab.jam, jns_perawatan_lab.nm_perawatan"
+                    "select periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, periksa_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, concat('Laborat ', periksa_lab.status, " +
+                    "' Perujuk') as status, periksa_lab.tarif_perujuk from periksa_lab join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat " +
+                    "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join jns_perawatan_lab on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " +
+                    "left join (select bridging_sep.no_sep, bridging_sep.no_rawat, if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, " +
+                    "row_number() over (partition by bridging_sep.no_rawat, bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) " +
+                    "as rn from bridging_sep) as bridging_sep on periksa_lab.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut " +
+                    "and 1 = bridging_sep.rn where periksa_lab.dokter_perujuk = ? and reg_periksa.kd_pj like ? and periksa_lab.tgl_periksa between ? and ? and " +
+                    "periksa_lab.tarif_perujuk > 0 " + sql + "and not exists(select * from bayar_jm_dokter join bayar_periksa_lab_perujuk on " +
+                    "bayar_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where bayar_periksa_lab_perujuk.no_rawat = periksa_lab.no_rawat and " +
+                    "bayar_periksa_lab_perujuk.kd_jenis_prw = periksa_lab.kd_jenis_prw and bayar_periksa_lab_perujuk.tgl_periksa = periksa_lab.tgl_periksa and " +
+                    "bayar_periksa_lab_perujuk.jam = periksa_lab.jam and bayar_jm_dokter.kd_dokter = periksa_lab.dokter_perujuk) " + (TCari.getText().isBlank() ? "" :
+                    "and (periksa_lab.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or " +
+                    "reg_periksa.kd_pj like ? or periksa_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) ") +
+                    "order by periksa_lab.tgl_periksa, periksa_lab.jam, jns_perawatan_lab.nm_perawatan"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
-                    if (! TCari.getText().isBlank()) {
+                    if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
                                 rs.getString("no_rkm_medis"), rs.getString("nm_pasien") + " (" + rs.getString("kd_pj") + ")", rs.getString("kd_jenis_prw"),
-                                rs.getString("nm_perawatan"), "Laborat " + rs.getString("status") + " Perujuk", rs.getDouble("tarif_perujuk"), null
+                                rs.getString("nm_perawatan"), rs.getString("status"), rs.getDouble("tarif_perujuk"), null
                             });
-
                             total += rs.getDouble("tarif_perujuk");
                         }
                     }
@@ -2742,35 +2786,41 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 
                 // DETAIL TINDAKAN LABORAT PERUJUK
                 try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select detail_periksa_lab.bagian_perujuk, pasien.nm_pasien, periksa_lab.status, template_laboratorium.Pemeriksaan, " +
-                    "reg_periksa.kd_pj, reg_periksa.no_rawat, reg_periksa.no_rkm_medis, detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, " +
-                    "detail_periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template, (select bridging_sep.no_sep from bridging_sep where " +
-                    "bridging_sep.no_rawat = reg_periksa.no_rawat and bridging_sep.jnspelayanan = (if(reg_periksa.status_lanjut = 'Ranap', " +
-                    "'1', '2')) limit 1) as no_sep from detail_periksa_lab join periksa_lab on periksa_lab.no_rawat = detail_periksa_lab.no_rawat " +
-                    "and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa " +
-                    "and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on " +
-                    "reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on detail_periksa_lab.id_template = template_laboratorium.id_template " +
-                    "join penjab on reg_periksa.kd_pj = penjab.kd_pj where periksa_lab.dokter_perujuk = ? and concat(reg_periksa.kd_pj, penjab.png_jawab) like ? " +
-                    "and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_perujuk > 0 " + sql + "and not exists(select * from " +
-                    "bayar_jm_dokter join bayar_detail_periksa_lab_perujuk on bayar_detail_periksa_lab_perujuk.no_bayar = bayar_jm_dokter.no_bayar where " +
-                    "bayar_detail_periksa_lab_perujuk.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab_perujuk.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw " +
-                    "and bayar_detail_periksa_lab_perujuk.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab_perujuk.jam = detail_periksa_lab.jam " +
-                    "and bayar_detail_periksa_lab_perujuk.id_template = detail_periksa_lab.id_template and bayar_jm_dokter.kd_dokter = periksa_lab.dokter_perujuk) " +
-                    (TCari.getText().isBlank() ? "" : "and (pasien.nm_pasien like ? or template_laboratorium.Pemeriksaan like ? or reg_periksa.no_rawat like ? " +
-                    "or reg_periksa.no_rkm_medis like ? or detail_periksa_lab.tgl_periksa like ?) ") + "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam"
+                    "select detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
+                    "pasien.nm_pasien, reg_periksa.kd_pj, detail_periksa_lab.kd_jenis_prw, template_laboratorium.Pemeriksaan, concat('Laborat ', periksa_lab.status, " +
+                    "' Perujuk Detail') as status, detail_periksa_lab.bagian_perujuk, detail_periksa_lab.id_template from detail_periksa_lab join periksa_lab on " +
+                    "periksa_lab.no_rawat = detail_periksa_lab.no_rawat and periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and " +
+                    "periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and periksa_lab.jam = detail_periksa_lab.jam join reg_periksa on " +
+                    "periksa_lab.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join template_laboratorium on " +
+                    "detail_periksa_lab.id_template = template_laboratorium.id_template left join (select bridging_sep.no_sep, bridging_sep.no_rawat, " +
+                    "if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan') as status_lanjut, row_number() over (partition by bridging_sep.no_rawat, " +
+                    "bridging_sep.jnspelayanan order by bridging_sep.jnspelayanan, bridging_sep.no_sep desc) as rn from bridging_sep) as bridging_sep on " +
+                    "detail_periksa_lab.no_rawat = bridging_sep.no_rawat and reg_periksa.status_lanjut = bridging_sep.status_lanjut and 1 = bridging_sep.rn where " +
+                    "periksa_lab.dokter_perujuk = ? and reg_periksa.kd_pj like ? and detail_periksa_lab.tgl_periksa between ? and ? and detail_periksa_lab.bagian_perujuk > 0 " +
+                    sql + "and not exists(select * from bayar_jm_dokter join bayar_detail_periksa_lab on bayar_detail_periksa_lab.no_bayar = bayar_jm_dokter.no_bayar where " +
+                    "bayar_detail_periksa_lab.no_rawat = detail_periksa_lab.no_rawat and bayar_detail_periksa_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw and " +
+                    "bayar_detail_periksa_lab.tgl_periksa = detail_periksa_lab.tgl_periksa and bayar_detail_periksa_lab.jam = detail_periksa_lab.jam and " +
+                    "bayar_detail_periksa_lab.id_template = detail_periksa_lab.id_template and bayar_jm_dokter.kd_dokter = periksa_lab.dokter_perujuk) " +
+                    (TCari.getText().isBlank() ? "" : "and (detail_periksa_lab.no_rawat like ? or bridging_sep.no_sep like ? or reg_periksa.no_rkm_medis like ? or " +
+                    "pasien.nm_pasien like ? or reg_periksa.kd_pj like ? or detail_periksa_lab.kd_jenis_prw like ? or detail_periksa_lab.id_template like ? or " +
+                    "template_laboratorium.Pemeriksaan like ?) ") + "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.id_template"
                 )) {
                     ps.setString(1, kddokter.getText());
-                    ps.setString(2, "%" + KdCaraBayar.getText() + NmCaraBayar.getText() + "%");
+                    ps.setString(2, KdCaraBayar.getText() + "%");
                     ps.setString(3, Valid.getTglSmc(DTPTgl1));
                     ps.setString(4, Valid.getTglSmc(DTPTgl2));
-                    if (! TCari.getText().isBlank()) {
+                    if (!TCari.getText().isBlank()) {
                         ps.setString(5, "%" + TCari.getText() + "%");
                         ps.setString(6, "%" + TCari.getText() + "%");
                         ps.setString(7, "%" + TCari.getText() + "%");
                         ps.setString(8, "%" + TCari.getText() + "%");
                         ps.setString(9, "%" + TCari.getText() + "%");
+                        ps.setString(10, "%" + TCari.getText() + "%");
+                        ps.setString(11, "%" + TCari.getText() + "%");
+                        ps.setString(12, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
+                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
