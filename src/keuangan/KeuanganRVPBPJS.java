@@ -1809,10 +1809,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                         }
                                     }
 
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+(persenbayar *Valid.SetAngka(tabMode.getValueAt(i,8).toString()))+"'","kredit=kredit+'"+(persenbayar *Valid.SetAngka(tabMode.getValueAt(i,8).toString()))+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
+                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
                                     Sequel.menyimpan("tampjurnal_rvpbpjs","'"+koderekening+"','"+AkunBayar.getSelectedItem()+"','"+tabMode.getValueAt(i,10).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+koderekening+"'"); 
                                     sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","RVP PIUTANG BPJS"+", OLEH "+kdptg.getText()); 
-                                    
                                     if(sukses==true){
                                         //update RVP Rawat jalan
                                         if(Sequel.queryutf("update rawat_jl_dr set material=material*"+persenbayar+",tarif_tindakandr=tarif_tindakandr*"+persenbayar+",kso=kso*"+persenbayar+",menejemen=menejemen*"+persenbayar+",biaya_rawat=biaya_rawat*"+persenbayar+" where no_rawat='"+tabMode.getValueAt(i,1).toString()+"'")==false){
