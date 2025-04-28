@@ -2193,7 +2193,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2236,7 +2235,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2286,7 +2284,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2329,7 +2326,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_perawatan"), rs.getString("jam_rawat"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2378,7 +2374,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2420,7 +2415,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2462,7 +2456,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2504,7 +2497,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2546,7 +2538,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2588,7 +2579,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2630,7 +2620,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_operasi"), rs.getString("jam_operasi"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2681,7 +2670,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2729,7 +2717,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(12, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2773,7 +2760,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2821,7 +2807,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(12, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2874,7 +2859,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
@@ -2919,7 +2903,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         ps.setString(11, "%" + TCari.getText() + "%");
                     }
                     try (ResultSet rs = ps.executeQuery()) {
-                        System.out.println(ps.toString().substring(ps.toString().indexOf("select")));
                         while (rs.next()) {
                             tabMode.addRow(new Object[] {
                                 false, rs.getString("tgl_periksa"), rs.getString("jam"), rs.getString("no_rawat"), rs.getString("no_sep"),
