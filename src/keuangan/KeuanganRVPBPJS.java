@@ -891,7 +891,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         chkInternal.setText("SEP Internal");
         chkInternal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         chkInternal.setName("chkInternal"); // NOI18N
-        chkInternal.setPreferredSize(new java.awt.Dimension(110, 23));
+        chkInternal.setPreferredSize(new java.awt.Dimension(103, 23));
         panelisi5.add(chkInternal);
 
         jPanel1.add(panelisi5);
