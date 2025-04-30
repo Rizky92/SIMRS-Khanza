@@ -3,11 +3,11 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -28,8 +28,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
-import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgCariCaraBayar;
+import simrskhanza.DlgCariPoli;
 
 /**
  *
@@ -1404,9 +1404,9 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
-        TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabRawatMouseClicked(evt);
+        TabRawat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TabRawatKeyPressed(evt);
             }
         });
 
@@ -2987,7 +2987,17 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         
     }//GEN-LAST:event_Tgl2KeyPressed
 
-    private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 tampil();
@@ -2997,7 +3007,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 break;
             case 2:
                 tampil3();
-                break; 
+                break;
             case 3:
                 tampil4();
                 break;
@@ -3022,20 +3032,6 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             default:
                 break;
         }
-    }//GEN-LAST:event_TabRawatMouseClicked
-
-    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            TabRawatMouseClicked(null);
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            BtnCari.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            BtnKeluar.requestFocus();
-        }
-    }//GEN-LAST:event_TCariKeyPressed
-
-    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        TabRawatMouseClicked(null);
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -3057,6 +3053,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanDokter.setText("");
                 KdCaraBayarRalanDokter.setText("");
                 NmCaraBayarRalanDokter.setText("");
+                Valid.tabelKosong(tabModeRalanDokter);
                 break;
             case 1:
                 KdPetugasRalanParamedis.setText("");
@@ -3065,6 +3062,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanParamedis.setText("");
                 KdCaraBayarRalanParamedis.setText("");
                 NmCaraBayarRalanParamedis.setText("");
+                Valid.tabelKosong(tabModeRalanParamedis);
                 break;
             case 2:
                 KdDokterRalanDokterParamedis.setText("");
@@ -3075,6 +3073,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmPoliRalanDokterParamedis.setText("");
                 KdCaraBayarRalanDokterParamedis.setText("");
                 NmCaraBayarRalanDokterParamedis.setText("");
+                Valid.tabelKosong(tabModeRalanDokterParamedis);
                 break;
             case 3:
                 KdOperatorOperasi.setText("");
@@ -3083,18 +3082,21 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmAsistenOperasi.setText("");
                 KdCaraBayarOperasi.setText("");
                 NmCaraBayarOperasi.setText("");
+                Valid.tabelKosong(tabModeOperasi);
                 break;
             case 4:
                 KdDokterRanapDokter.setText("");
                 NmDokterRanapDokter.setText("");
                 KdCaraBayarRanapDokter.setText("");
                 NmCaraBayarRanapDokter.setText("");
+                Valid.tabelKosong(tabModeRanapDokter);
                 break;
             case 5:
                 KdPetugasRanapParamedis.setText("");
                 NmPetugasRanapParamedis.setText("");
                 KdCaraBayarRanapParamedis.setText("");
                 NmCaraBayarRanapParamedis.setText("");
+                Valid.tabelKosong(tabModeRanapParamedis);
                 break;
             case 6:
                 KdPetugasRanapDokterParamedis.setText("");
@@ -3103,6 +3105,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterRanapDokterParamedis.setText("");
                 KdCaraBayarRanapDokterParamedis.setText("");
                 NmCaraBayarRanapDokterParamedis.setText("");
+                Valid.tabelKosong(tabModeRanapDokterParamedis);
                 break;
            case 7:
                 KdPetugasRad.setText("");
@@ -3111,6 +3114,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukRad.setText("");
                 KdCaraBayarRad.setText("");
                 NmCaraBayarRad.setText("");
+                Valid.tabelKosong(tabModeRadiologi);
                 break;
             case 8:
                 KdPetugasLab.setText("");
@@ -3119,6 +3123,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukLab.setText("");
                 KdCaraBayarLab.setText("");
                 NmCaraBayarLab.setText("");
+                Valid.tabelKosong(tabModeLaborat);
                 break;
             case 9:
                 KdPetugasDetailLab.setText("");
@@ -3127,11 +3132,12 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 NmDokterPerujukDetailLab.setText("");
                 KdCaraBayarDetailLab.setText("");
                 NmCaraBayarDetailLab.setText("");
+                Valid.tabelKosong(tabModeDetailLaborat);
                 break;
             default:
                 break;
         }
-        TabRawatMouseClicked(null);
+        // TabRawatMouseClicked(null);
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -3313,6 +3319,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     private void BtnOperatorOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOperatorOperasiActionPerformed
         BtnDokterRalanDokterActionPerformed(null);
     }//GEN-LAST:event_BtnOperatorOperasiActionPerformed
+
+    private void TabRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabRawatKeyPressed
+        BtnCariActionPerformed(null);
+    }//GEN-LAST:event_TabRawatKeyPressed
 
     /**
     * @param args the command line arguments
