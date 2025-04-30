@@ -48,7 +48,6 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     private ResultSet rs;
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -504,14 +503,14 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
             file=new File("./cache/penjab.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
-            iyem="";
+            StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement("select * from penjab where penjab.status='1' order by penjab.png_jawab");
             try{           
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
                     tabMode.addRow(new Object[]{i,rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("nama_perusahaan"),rs.getString("alamat_asuransi"),rs.getString("no_telp"),rs.getString("attn")});
-                    iyem=iyem+"{\"KodeAsuransi\":\""+rs.getString("kd_pj")+"\",\"NamaAsuransi\":\""+rs.getString("png_jawab")+"\",\"PerusahaanAsuransi\":\""+rs.getString("nama_perusahaan")+"\",\"AlamatAsuransi\":\""+rs.getString("alamat_asuransi")+"\",\"NoTelp\":\""+rs.getString("no_telp")+"\",\"Attn\":\""+rs.getString("attn")+"\"},";
+                    iyembuilder=iyembuilder.append("{\"KodeAsuransi\":\"").append(rs.getString("kd_pj")).append("\",\"NamaAsuransi\":\"").append(rs.getString("png_jawab")).append("\",\"PerusahaanAsuransi\":\"").append(rs.getString("nama_perusahaan")).append("\",\"AlamatAsuransi\":\"").append(rs.getString("alamat_asuransi")).append("\",\"NoTelp\":\"").append(rs.getString("no_telp")).append("\",\"Attn\":\"").append(rs.getString("attn")).append("\"},");
                     i++;
                 }
             }catch(Exception e){
@@ -526,10 +525,14 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
                 }
             }
 
-            fileWriter.write("{\"penjab\":["+iyem.substring(0,iyem.length()-1)+"]}");
-            fileWriter.flush();
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"penjab\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+            
             fileWriter.close();
-            iyem=null;
+            iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
