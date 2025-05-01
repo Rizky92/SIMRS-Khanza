@@ -35,12 +35,9 @@ public class koneksiDB {
                     dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");
                     dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                     dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
-                    dataSource.setUseCompression(true);
                     // dataSource.setCachePreparedStatements(true);
-                    // dataSource.setPreparedStatementCacheSize(250);
-                    // dataSource.setPreparedStatementCacheSqlLimit(2048);
+                    dataSource.setUseCompression(true);
                     // dataSource.setAutoReconnectForPools(true);
-                    // dataSource.setUseServerPrepStmts(true);
                     // dataSource.setUseLocalSessionState(true);
                     // dataSource.setUseLocalTransactionState(true);
                     
