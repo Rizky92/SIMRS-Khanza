@@ -231,6 +231,8 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
         jLabel11 = new widget.Label();
         AkunBayar = new widget.ComboBox();
         BtnAll1 = new widget.Button();
+        lblNoTagihan = new widget.Label();
+        NoTagihan = new widget.TextBox();
         jPanel1 = new javax.swing.JPanel();
         panelisi3 = new widget.panelisi();
         label19 = new widget.Label();
@@ -504,6 +506,21 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
             }
         });
         panelisi4.add(BtnAll1);
+
+        lblNoTagihan.setText("No. Tagihan :");
+        lblNoTagihan.setName("lblNoTagihan"); // NOI18N
+        lblNoTagihan.setPreferredSize(new java.awt.Dimension(75, 23));
+        panelisi4.add(lblNoTagihan);
+
+        NoTagihan.setEditable(false);
+        NoTagihan.setName("NoTagihan"); // NOI18N
+        NoTagihan.setPreferredSize(new java.awt.Dimension(220, 23));
+        NoTagihan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NoTagihanKeyPressed(evt);
+            }
+        });
+        panelisi4.add(NoTagihan);
 
         internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
 
@@ -1016,6 +1033,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
             
             if(sukses==true){
+                isCek();
                 tampilperakun();
                 if(!notagihan.equals("")){
                     Sequel.queryu("update penagihan_piutang set status='Sudah Dibayar' where no_tagihan=?",notagihan);
@@ -1260,6 +1278,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         Valid.pindah(evt,BtnCloseHitungKapitasi,BtnHitungKapitasi);
     }//GEN-LAST:event_NilaiKapitasiPaketKeyPressed
 
+    private void NoTagihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoTagihanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoTagihanKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1292,6 +1314,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.TextBox LebihBayarPiutang;
     private javax.swing.JMenuItem MnDetailPiutang;
     private widget.TextBox NilaiKapitasiPaket;
+    private widget.TextBox NoTagihan;
     private widget.TextBox PersentaseBayarPaket;
     private widget.TextBox PiutangBelumDibayar;
     private widget.ScrollPane Scroll;
@@ -1316,6 +1339,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Label label17;
     private widget.Label label19;
     private widget.Label label32;
+    private widget.Label lblNoTagihan;
     private widget.TextBox nmpenjab;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
@@ -1401,70 +1425,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
     
     public void tampiltagihan(String notagihan) {
-        this.notagihan=notagihan;
-        Valid.tabelKosong(tabMode);
-        try{
-            ps=koneksi.prepareStatement("select akun_piutang.kd_rek,akun_piutang.nama_bayar,akun_bayar.nama_bayar,"+
-                    "penagihan_piutang.kd_pj from penagihan_piutang inner join akun_piutang on penagihan_piutang.kd_pj=akun_piutang.kd_pj "+
-                    "inner join akun_bayar on penagihan_piutang.kd_rek=akun_bayar.kd_rek where penagihan_piutang.no_tagihan=?");
-            try {
-                ps.setString(1,notagihan);
-                rs=ps.executeQuery();
-                if(rs.next()){
-                    kdpenjab.setText(rs.getString(1));
-                    nmpenjab.setText(rs.getString(2));
-                    AkunBayar.setSelectedItem(rs.getString(3));
-                    carabayar=rs.getString("kd_pj");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            sisapiutang=0;
-            ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
-                       "piutang_pasien.status,detail_piutang_pasien.totalpiutang,0, detail_piutang_pasien.sisapiutang, piutang_pasien.tgltempo,detail_piutang_pasien.nama_bayar "+
-                       "from piutang_pasien inner join pasien inner join reg_periksa inner join penjab inner join detail_piutang_pasien on  "+
-                       "piutang_pasien.no_rkm_medis=pasien.no_rkm_medis and piutang_pasien.no_rawat=reg_periksa.no_rawat and "+
-                       "reg_periksa.kd_pj=penjab.kd_pj and piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat where "+
-                       "detail_piutang_pasien.sisapiutang>=1 and detail_piutang_pasien.kd_pj='"+carabayar+"' and piutang_pasien.no_rawat in "+
-                       "(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang where detail_penagihan_piutang.no_tagihan=?) order by piutang_pasien.tgl_piutang");
-            try {
-                ps.setString(1,notagihan);
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan)+SUM(bayar_piutang.diskon_piutang)+SUM(bayar_piutang.tidak_terbayar),0) FROM bayar_piutang where bayar_piutang.no_rawat='"+rs.getString(1)+"' and bayar_piutang.kd_rek_kontra='"+kdpenjab.getText()+"'");
-                    tabMode.addRow(new Object[]{
-                        true,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
-                        cicilan,rs.getDouble(7),rs.getString(8),rs.getString(9),rs.getDouble(7),0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble(7)-cicilan;
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            LCount.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }
-    }
-    
-    public void tampiltagihanSmc(String notagihan) {
         this.notagihan = notagihan;
+        lblNoTagihan.setVisible(true);
+        NoTagihan.setVisible(true);
+        NoTagihan.setText(notagihan);
         Valid.tabelKosong(tabMode);
         try {
             try (PreparedStatement ps = koneksi.prepareStatement(
@@ -1499,12 +1463,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         tabMode.addRow(new Object[] {
-                            true, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5),
-                            rs.getDouble(6), rs.getDouble("besar_cicilan"), rs.getDouble(5) - (rs.getDouble(6) + rs.getDouble("besar_cicilan") + rs.getDouble(7)),
-                            rs.getString(8), rs.getString(9), rs.getDouble(7) - rs.getDouble("diskon"), rs.getDouble("diskon"), 0
+                            true, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("pasien"), rs.getString("status"),
+                            rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), rs.getDouble("totalpiutang") - (rs.getDouble("besar_cicilan") + rs.getDouble("sisapiutang")),
+                            rs.getString("tgltempo"), rs.getString("nama_bayar"), rs.getDouble("sisapiutang") - rs.getDouble("diskon"), rs.getDouble("diskon"), 0
                         });
-                        sisapiutang += rs.getDouble(7) - rs.getDouble("besar_cicilan");
-                        total += rs.getDouble(5) - rs.getDouble(6) + rs.getDouble("besar_cicilan");
+                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                        total += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") + rs.getDouble("besar_cicilan");
                     }
                 }
             }
@@ -1607,6 +1571,8 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     
     public void isCek(){
         TCari.requestFocus();
+        NoTagihan.setVisible(false);
+        lblNoTagihan.setVisible(false);
         BtnBayar.setEnabled(akses.getbayar_piutang());
     }
     
