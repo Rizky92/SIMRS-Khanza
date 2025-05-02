@@ -851,14 +851,14 @@
                                                     )
                                                 );
                                                 http_response_code(201);
-                                            }else if(date("Y-m-d")>$booking['tanggalperiksa']){
+                                            /* }else if(date("Y-m-d")>$booking['tanggalperiksa']){
                                                 $response = array(
                                                     'metadata' => array(
-                                                        'message' => 'Pembatalan Antrean tidak berlaku mundur',
+                                                        'message' => 'Pembatalan antrean tidak berlaku mundur',
                                                         'code' => 201
                                                     )
                                                 );  
-                                                http_response_code(201);
+                                                http_response_code(201); */
                                             }else if($booking['status']=='Checkin'){
                                                 $response = array(
                                                     'metadata' => array(
@@ -868,8 +868,12 @@
                                                 );
                                                 http_response_code(201);
                                             }else if($booking['status']=='Belum'){
-                                                $update        = bukaquery2("update referensi_mobilejkn_bpjs set status='Batal',validasi=now() where nobooking='".validTeks4($decode['kodebooking'],25)."'");
-                                                $batal         = bukaquery2("delete from reg_periksa where no_rawat='".$booking['no_rawat']."'");
+                                                $batal = null;
+                                                if (date('Y-m-d') >= $booking['tanggalperiksa']) {
+                                                    $batal = bukaquerySmc("update reg_periksa set reg_periksa.stts = 'batal' where reg_periksa.no_rawat = '$booking[no_rawat]' and reg_periksa.no_rkm_medis = '$booking[norm]' and reg_periksa.kd_pj = 'BPJ' and reg_periksa.status_lanjut = 'Ralan' and reg_periksa.status_bayar = 'Belum Bayar' and not exists(select * from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat)");
+                                                } else {
+                                                    $batal = bukaquerySmc("delete from reg_periksa where no_rawat='".$booking['no_rawat']."'");
+                                                }
                                                 if($batal){
                                                     $response = array(
                                                         'metadata' => array(
@@ -877,12 +881,13 @@
                                                             'code' => 200
                                                         )
                                                     );
+                                                    bukaquery2("update referensi_mobilejkn_bpjs set status='Batal',validasi=now() where nobooking='".validTeks4($decode['kodebooking'],25)."'");
                                                     bukaquery2("insert into referensi_mobilejkn_bpjs_batal values('$booking[norm]','$booking[no_rawat]','$booking[nomorreferensi]',now(),'".validTeks4($decode['keterangan'],50)."','Sudah','$booking[nobooking]')");
                                                     http_response_code(200);
                                                 }else{
                                                     $response = array(
                                                         'metadata' => array(
-                                                            'message' => "Maaf Terjadi Kesalahan, Hubungi Admnistrator..",
+                                                            'message' => "Tidak dapat membatalkan antrian. Silahkan hubungi Admnistrator..",
                                                             'code' => 201
                                                         )
                                                     );
