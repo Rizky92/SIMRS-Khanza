@@ -250,23 +250,25 @@ public final class akses {
             catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false;
     
     public static void setData(String user, String pass) {
-        try (
-            PreparedStatement ps = koneksi.prepareStatement("select * from admin where admin.usere=AES_ENCRYPT(?,'nur') and admin.passworde=AES_ENCRYPT(?,'windi')");
-            PreparedStatement ps2 = koneksi.prepareStatement("select * from user where user.id_user=AES_ENCRYPT(?,'nur') and user.password=AES_ENCRYPT(?,'windi')")
-        ) {
-            ps.setString(1,user);
-            ps.setString(2,pass);
-            ps2.setString(1,user);
-            ps2.setString(2,pass);
+        int retries = 2;
+        do {
             try (
-                ResultSet rs = ps.executeQuery();
-                ResultSet rs2 = ps2.executeQuery()
+                PreparedStatement ps = koneksi.prepareStatement("select * from admin where admin.usere=AES_ENCRYPT(?,'nur') and admin.passworde=AES_ENCRYPT(?,'windi')");
+                PreparedStatement ps2 = koneksi.prepareStatement("select * from user where user.id_user=AES_ENCRYPT(?,'nur') and user.password=AES_ENCRYPT(?,'windi')")
             ) {
-                rs.last();
-                rs2.last();
-                akses.jml1 = rs.getRow();
-                akses.jml2 = rs2.getRow();
-                if(rs.getRow()>=1){
+                ps.setString(1,user);
+                ps.setString(2,pass);
+                ps2.setString(1,user);
+                ps2.setString(2,pass);
+                try (
+                    ResultSet rs = ps.executeQuery();
+                    ResultSet rs2 = ps2.executeQuery()
+                ) {
+                    rs.last();
+                    rs2.last();
+                    akses.jml1 = rs.getRow();
+                    akses.jml2 = rs2.getRow();
+                    if(rs.getRow()>=1){
                         akses.kode="Admin Utama";
                         akses.penyakit=true;
                         akses.obat_penyakit=true;
@@ -549,7 +551,7 @@ public final class akses {
                         akses.grafik_kunjungan_ranaptahun=true;
                         akses.pcare_cek_rujukan=true;
                         akses.grafik_lab_ralantahun=true;
-                        akses.grafik_rad_ralantahun=true;;
+                        akses.grafik_rad_ralantahun=true;
                         akses.cek_entry_ralan=true;
                         akses.inacbg_klaim_baru_manual2=true;
                         akses.permintaan_medis=true;
@@ -1394,7 +1396,8 @@ public final class akses {
                         akses.catatan_pengkajian_paska_operasi=true;
                         akses.skrining_frailty_syndrome=true;
                         akses.sirkulasi_cssd=true;
-                    }else if(rs2.getRow()>=1){   
+                        break;
+                    }else if(rs2.getRow()>=1){  
                         rs2.beforeFirst();
                         rs2.next();
                         akses.kode=user;
@@ -2540,6 +2543,7 @@ public final class akses {
                             akses.tglSelesai = -1;
                             akses.edit = false;
                         }
+                        break;
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3670,11 +3674,18 @@ public final class akses {
                         akses.sirkulasi_cssd=false;
                         akses.edit=false;
                         akses.tglSelesai=-1;
+                        break;
                     }
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+                if (e.getMessage().contains("The last packet successfully received from the server")) {
+                    --retries;
+                } else {
+                    retries = 0;
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
-        }
+        } while (retries > 0);
     }
     
     public static void setLogOut(){
