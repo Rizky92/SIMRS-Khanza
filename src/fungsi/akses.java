@@ -249,29 +249,29 @@ public final class akses {
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
             catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false;
     
-    public static void setData(String user, String pass) {
-        int retries = 2;
-        do {
-            try (
+    public static void setData(String user, String pass){
+        int retries=2;
+        do{
+            try(
                 PreparedStatement ps=koneksi.prepareStatement("select * from admin where admin.usere=AES_ENCRYPT(?,'nur') and admin.passworde=AES_ENCRYPT(?,'windi')");
                 PreparedStatement ps2=koneksi.prepareStatement("select * from user where user.id_user=AES_ENCRYPT(?,'nur') and user.password=AES_ENCRYPT(?,'windi')")
-            ) {
-                ps.setString(1, user);
-                ps.setString(2, pass);
-                ps2.setString(1, user);
-                ps2.setString(2, pass);
-                try (
+            ){
+                ps.setString(1,user);
+                ps.setString(2,pass);
+                ps2.setString(1,user);
+                ps2.setString(2,pass);
+                try(
                     ResultSet rs=ps.executeQuery();
                     ResultSet rs2=ps2.executeQuery()
-                ) {
+                ){
                     rs.last();
                     rs2.last();
                     akses.jml1=rs.getRow();
                     akses.jml2=rs2.getRow();
-                    if (rs.getRow() >= 1) {
+                    if(rs.getRow()>=1){
                         akses.setAdminUtama("Admin Utama", true);
                         break;
-                    } else if (rs2.getRow() >= 1) {
+                    }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
                         akses.kode=user;
@@ -1418,20 +1418,20 @@ public final class akses {
                             akses.edit = false;
                         }
                         break;
-                    } else if ((rs.getRow() == 0) && (rs2.getRow() == 0)) {
+                    }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.setLogOut();
                         break;
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : " + e);
+            }catch(Exception e){
+                System.out.println("Notif : "+e);
                 if (e.getMessage().contains("The last packet successfully received from the server")) {
                     --retries;
                 } else {
-                    retries = 0;
+                    retries=0;
                 }
             }
-        } while (retries > 0);
+        }while(retries>0);
     }
     
     public static void setLogOut() {
