@@ -334,10 +334,11 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 }
             }
 
-            pssimpan = koneksi.prepareStatement("insert into antriloketsmc values(?, ?)");
+            pssimpan = koneksi.prepareStatement("insert into antriloketsmc values(?, concat(?, lpad(?, 3, '0')))");
             try {
                 pssimpan.setString(1, cmbloket.getSelectedItem().toString());
-                pssimpan.setString(2, cmbhuruf.getSelectedItem().toString() + Antrian.getText().trim());
+                pssimpan.setString(2, cmbhuruf.getSelectedItem().toString());
+                pssimpan.setString(3, Antrian.getText().trim());
                 pssimpan.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -347,9 +348,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 }
             }
 
-            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
+            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()");
             try {
-                psupdate.setString(1, cmbhuruf.getSelectedItem().toString() + Antrian.getText().trim());
+                psupdate.setString(1, cmbhuruf.getSelectedItem().toString());
+                psupdate.setString(2, Antrian.getText().trim());
                 psupdate.executeUpdate();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
