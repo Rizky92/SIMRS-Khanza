@@ -4445,10 +4445,11 @@ public final class RMMCU extends javax.swing.JDialog {
                     TD.setText(rs.getString("tensi"));
                     Nadi.setText(rs.getString("nadi"));
                     RR.setText(rs.getString("respirasi"));
-                    TinggiBadan.setText(rs.getString("tinggi"));
-                    BeratBadan.setText(rs.getString("berat"));
+                    TB.setText(rs.getString("tinggi"));
+                    BB.setText(rs.getString("berat"));
                     Suhu.setText(rs.getString("suhu_tubuh"));
                     Lainlain.setText(rs.getString("pemeriksaan"));
+                    isBMI();
                 }
             }
         } catch (Exception e) {
