@@ -558,8 +558,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         
         for (int i = 0; i < antrian.length(); i++) {
             try {
-                System.out.println(antrian.charAt(i));
-                System.out.println(urutsmc);
                 music = new BackgroundMusic(urutsmc[Integer.parseInt(antrian.substring(i, i + 1))]);
                 music.start();
                 Thread.sleep(1000);
