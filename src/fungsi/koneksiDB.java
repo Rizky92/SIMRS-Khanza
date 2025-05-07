@@ -306,6 +306,15 @@ public class koneksiDB {
         }
     }
     
+    public static boolean RETUROBATGUNAKANHARGAPEMBERIAN() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("RETUROBATGUNAKANHARGAPEMBERIAN").equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
