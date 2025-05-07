@@ -2643,6 +2643,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         }
         LCount.setText(Valid.SetAngka(sisapiutang));
+        totalnilai();
     }
     
     private void getdata(int pilih) {
