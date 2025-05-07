@@ -627,6 +627,14 @@
             return 0;
         }
     }
+
+    function bukaquerySmc($sql) {
+        $konektor = bukakoneksi();
+        mysqli_query($konektor, $sql);
+        $result = mysqli_affected_rows($konektor);
+        mysqli_close($konektor);
+        return $result;
+    }
     
     date_default_timezone_set('Asia/Jakarta');
     $month      = date('Y-m');
