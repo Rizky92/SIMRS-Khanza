@@ -247,7 +247,8 @@ public final class akses {
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
-            catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false;
+            catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
+            riwayat_surat_peringatan=false;
     
     public static void setData(String user, String pass){
         int retries=2;
@@ -1403,6 +1404,7 @@ public final class akses {
                         akses.sirkulasi_cssd=rs2.getBoolean("sirkulasi_cssd");
                         akses.lama_pelayanan_cssd=rs2.getBoolean("lama_pelayanan_cssd");
                         akses.catatan_observasi_bayi=rs2.getBoolean("catatan_observasi_bayi");
+                        akses.riwayat_surat_peringatan=rs2.getBoolean("riwayat_surat_peringatan");
                         akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
@@ -1414,8 +1416,6 @@ public final class akses {
                                     akses.tglSelesai = -1;
                                     akses.edit = false;
                                 }
-                        akses.lama_pelayanan_cssd=false;
-                        akses.catatan_observasi_bayi=false;
                             }
                         } catch (Exception e) {
                             akses.tglSelesai = -1;
@@ -2572,6 +2572,7 @@ public final class akses {
         akses.sirkulasi_cssd=isadmin;
         akses.lama_pelayanan_cssd=isadmin;
         akses.catatan_observasi_bayi=isadmin;
+        akses.riwayat_surat_peringatan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3743,6 +3744,7 @@ public final class akses {
     public static boolean getsirkulasi_cssd(){return akses.sirkulasi_cssd;}
     public static boolean getlama_pelayanan_cssd(){return akses.lama_pelayanan_cssd;}
     public static boolean getcatatan_observasi_bayi(){return akses.catatan_observasi_bayi;}
+    public static boolean getriwayat_surat_peringatan(){return akses.riwayat_surat_peringatan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
