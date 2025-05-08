@@ -2,24 +2,31 @@
 
 package keuangan;
 
+import bridging.ApiBPJS;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -29,10 +36,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.Scanner;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
  
 
 /**
@@ -127,7 +134,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                 "ksoradiologiranap","menejemenradiologiranap","biayaradiologiranap","jmdokteroperasiralan","jmparamedisoperasiralan",
                 "bhpoperasiralan","pendapatanoperasiralan","jmdokteroperasiranap","jmparamedisoperasiranap","bhpoperasiranap",
                 "pendapatanoperasiranap","obatlangsung","obatralan","hppobatralan","obatranap","hppobatranap","returobat",
-                "tambahanbiaya","potonganbiaya","kamar","reseppulang","harianranap","registrasi","service","ppnobat"
+                "tambahanbiaya","potonganbiaya","kamar","reseppulang","harianranap","registrasi","service","ppnobat", "Jenis SEP"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -153,7 +160,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -165,7 +172,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbBangsal.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 84; i++) {
+        for (i = 0; i < 85; i++) {
             TableColumn column = tbBangsal.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -197,6 +204,8 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                 column.setPreferredWidth(75);
             }else if(i==14){
                 column.setPreferredWidth(40);
+            }else if(i==84){
+                column.setPreferredWidth(75);
             }else{
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -516,6 +525,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppBersihkan = new javax.swing.JMenuItem();
         ppPilihSemua = new javax.swing.JMenuItem();
         ppUmbal = new javax.swing.JMenuItem();
+        ppUmbalMonitoringKlaim = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -539,6 +549,15 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         LCount2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         LCount3 = new javax.swing.JLabel();
+        panelisi5 = new widget.panelisi();
+        label34 = new widget.Label();
+        DTPTgl1 = new widget.Tanggal();
+        label35 = new widget.Label();
+        DTPTgl2 = new widget.Tanggal();
+        label1 = new widget.Label();
+        chkRalan = new widget.CekBox();
+        chkRanap = new widget.CekBox();
+        chkInternal = new widget.CekBox();
         panelisi1 = new widget.panelisi();
         label17 = new widget.Label();
         TCari = new widget.TextBox();
@@ -561,7 +580,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         MnDetailPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnDetailPiutang.setText("Detail Piutang");
         MnDetailPiutang.setName("MnDetailPiutang"); // NOI18N
-        MnDetailPiutang.setPreferredSize(new java.awt.Dimension(160, 26));
+        MnDetailPiutang.setPreferredSize(new java.awt.Dimension(230, 26));
         MnDetailPiutang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnDetailPiutangActionPerformed(evt);
@@ -577,7 +596,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppBersihkan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppBersihkan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppBersihkan.setName("ppBersihkan"); // NOI18N
-        ppBersihkan.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppBersihkan.setPreferredSize(new java.awt.Dimension(230, 26));
         ppBersihkan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppBersihkanActionPerformed(evt);
@@ -593,7 +612,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppPilihSemua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppPilihSemua.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPilihSemua.setName("ppPilihSemua"); // NOI18N
-        ppPilihSemua.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppPilihSemua.setPreferredSize(new java.awt.Dimension(230, 26));
         ppPilihSemua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPilihSemuaActionPerformed(evt);
@@ -605,17 +624,33 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         ppUmbal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppUmbal.setForeground(new java.awt.Color(50, 50, 50));
         ppUmbal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppUmbal.setText("Cek Umpan Balik");
+        ppUmbal.setText("Cek Umpan Balik dari File TXT");
         ppUmbal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppUmbal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppUmbal.setName("ppUmbal"); // NOI18N
-        ppUmbal.setPreferredSize(new java.awt.Dimension(160, 26));
+        ppUmbal.setPreferredSize(new java.awt.Dimension(230, 26));
         ppUmbal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppUmbalActionPerformed(evt);
             }
         });
         jPopupMenu1.add(ppUmbal);
+
+        ppUmbalMonitoringKlaim.setBackground(new java.awt.Color(255, 255, 254));
+        ppUmbalMonitoringKlaim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppUmbalMonitoringKlaim.setForeground(new java.awt.Color(50, 50, 50));
+        ppUmbalMonitoringKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppUmbalMonitoringKlaim.setText("Cek Umpan Balik Dari Monitoring Klaim");
+        ppUmbalMonitoringKlaim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppUmbalMonitoringKlaim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppUmbalMonitoringKlaim.setName("ppUmbalMonitoringKlaim"); // NOI18N
+        ppUmbalMonitoringKlaim.setPreferredSize(new java.awt.Dimension(230, 26));
+        ppUmbalMonitoringKlaim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppUmbalMonitoringKlaimActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppUmbalMonitoringKlaim);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -654,9 +689,9 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         panelisi4.setPreferredSize(new java.awt.Dimension(100, 44));
         panelisi4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
 
-        label33.setText("Tanggal :");
+        label33.setText("Tgl. Validasi :");
         label33.setName("label33"); // NOI18N
-        label33.setPreferredSize(new java.awt.Dimension(55, 23));
+        label33.setPreferredSize(new java.awt.Dimension(71, 23));
         panelisi4.add(label33);
 
         Tanggal.setDisplayFormat("dd-MM-yyyy");
@@ -736,8 +771,8 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 100));
-        jPanel1.setLayout(new java.awt.BorderLayout(1, 1));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 144));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         panelisi3.setName("panelisi3"); // NOI18N
         panelisi3.setPreferredSize(new java.awt.Dimension(99, 44));
@@ -807,7 +842,59 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         LCount3.setPreferredSize(new java.awt.Dimension(102, 23));
         panelisi3.add(LCount3);
 
-        jPanel1.add(panelisi3, java.awt.BorderLayout.CENTER);
+        jPanel1.add(panelisi3);
+
+        panelisi5.setName("panelisi5"); // NOI18N
+        panelisi5.setPreferredSize(new java.awt.Dimension(99, 44));
+        panelisi5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
+
+        label34.setText("Periode :");
+        label34.setName("label34"); // NOI18N
+        label34.setPreferredSize(new java.awt.Dimension(55, 23));
+        panelisi5.add(label34);
+
+        DTPTgl1.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl1.setName("DTPTgl1"); // NOI18N
+        DTPTgl1.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi5.add(DTPTgl1);
+
+        label35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label35.setText("s.d.");
+        label35.setName("label35"); // NOI18N
+        label35.setPreferredSize(new java.awt.Dimension(28, 23));
+        panelisi5.add(label35);
+
+        DTPTgl2.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl2.setName("DTPTgl2"); // NOI18N
+        DTPTgl2.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelisi5.add(DTPTgl2);
+
+        label1.setText("    ");
+        label1.setName("label1"); // NOI18N
+        panelisi5.add(label1);
+
+        chkRalan.setSelected(true);
+        chkRalan.setText("SEP Rawat Jalan");
+        chkRalan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        chkRalan.setName("chkRalan"); // NOI18N
+        chkRalan.setPreferredSize(new java.awt.Dimension(105, 23));
+        panelisi5.add(chkRalan);
+
+        chkRanap.setSelected(true);
+        chkRanap.setText("SEP Rawat Inap");
+        chkRanap.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        chkRanap.setName("chkRanap"); // NOI18N
+        chkRanap.setPreferredSize(new java.awt.Dimension(120, 23));
+        panelisi5.add(chkRanap);
+
+        chkInternal.setSelected(true);
+        chkInternal.setText("SEP Internal");
+        chkInternal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        chkInternal.setName("chkInternal"); // NOI18N
+        chkInternal.setPreferredSize(new java.awt.Dimension(103, 23));
+        panelisi5.add(chkInternal);
+
+        jPanel1.add(panelisi5);
 
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setPreferredSize(new java.awt.Dimension(55, 55));
@@ -940,7 +1027,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
         });
         panelisi1.add(BtnKeluar);
 
-        jPanel1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
+        jPanel1.add(panelisi1);
 
         internalFrame1.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
@@ -1020,6 +1107,11 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
+        kdptg.setText("");
+        nmptg.setText("");
+        chkRalan.setSelected(true);
+        chkRanap.setSelected(true);
+        chkInternal.setSelected(true);
         tampil();
 
 }//GEN-LAST:event_BtnAllActionPerformed
@@ -2230,6 +2322,41 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         tampilAkunBayar();
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
+    private void ppUmbalMonitoringKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUmbalMonitoringKlaimActionPerformed
+        String sql = "";
+        ArrayList<String> sep = new ArrayList<>();
+        try {
+            for (int i = 0; i < tbBangsal.getRowCount(); i++) {
+                sep.add(tbBangsal.getValueAt(i, 2).toString());
+                sql = sql.concat("?, ");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select distinct bridging_sep.tglsep from bridging_sep " +
+            "where bridging_sep.no_sep in (" + sql.substring(0, sql.length() - 2) + ") order by bridging_sep.tglsep"
+        )) {
+            for (int i = 0; i < sep.size(); i++) {
+                ps.setString(i + 1, sep.get(i));
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                Valid.tabelKosong(tabMode);
+                sisapiutang = 0;
+                while (rs.next()) {
+                    if (chkRalan.isSelected()) {
+                        monitoringKlaim(rs.getString("tglsep"), "2", sep);
+                    }
+                    if (chkRanap.isSelected()) {
+                        monitoringKlaim(rs.getString("tglsep"), "1", sep);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_ppUmbalMonitoringKlaimActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2255,6 +2382,8 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Button BtnCari1;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
+    private widget.Tanggal DTPTgl1;
+    private widget.Tanggal DTPTgl2;
     private javax.swing.JLabel LCount;
     private javax.swing.JLabel LCount1;
     private javax.swing.JLabel LCount2;
@@ -2265,6 +2394,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.TextBox TKd;
     private widget.Tanggal Tanggal;
     private widget.Button btnPetugas;
+    private widget.CekBox chkInternal;
+    private widget.CekBox chkRalan;
+    private widget.CekBox chkRanap;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JLabel jLabel10;
     private widget.Label jLabel11;
@@ -2275,20 +2407,25 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.TextBox kdptg;
+    private widget.Label label1;
     private widget.Label label17;
     private widget.Label label19;
     private widget.Label label33;
+    private widget.Label label34;
+    private widget.Label label35;
     private widget.TextBox nmptg;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
+    private widget.panelisi panelisi5;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppPilihSemua;
     private javax.swing.JMenuItem ppUmbal;
+    private javax.swing.JMenuItem ppUmbalMonitoringKlaim;
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){
+    /*private void tampil(){
         Valid.tabelKosong(tabMode);
         try{
             sisapiutang=0;
@@ -2421,6 +2558,92 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }*/
+    
+    private void tampil() {
+        Valid.tabelKosong(tabMode);
+        sisapiutang = 0;
+        String ralanranap = "";
+        if (chkRalan.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut = 'Ralan' ";
+        }
+        if (chkRanap.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut = 'Ranap' ";
+        }
+        if (chkRalan.isSelected() && chkRanap.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut in ('Ralan', 'Ranap') ";
+        }
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+            "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+            "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep.no_sep, inacbg_grouping.tarif, " +
+            "reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join " +
+            "reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join bridging_sep on bridging_sep.no_rawat = reg_periksa.no_rawat and " +
+            "reg_periksa.status_lanjut = (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) left join (select distinct * from (select " +
+            "inacbg_grouping_stage1.no_sep, inacbg_grouping_stage1.tarif, 'stage1' as status from inacbg_grouping_stage1 union all select " +
+            "inacbg_grouping_stage12.no_sep, inacbg_grouping_stage12.tarif, 'stage12' as status from inacbg_grouping_stage12) as inacbg_grouping) " +
+            "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+            "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or " +
+            "pasien.nm_pasien like ? or bridging_sep.no_sep like ?) order by piutang_pasien.tgl_piutang, bridging_sep.no_sep"
+        )) {
+            ps.setString(1, Valid.getTglSmc(DTPTgl1));
+            ps.setString(2, Valid.getTglSmc(DTPTgl2));
+            ps.setString(3, "%" + TCari.getText() + "%");
+            ps.setString(4, "%" + TCari.getText() + "%");
+            ps.setString(5, "%" + TCari.getText() + "%");
+            ps.setString(6, "%" + TCari.getText() + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {
+                        false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
+                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                        null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
+                    });
+                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        if (chkInternal.isSelected()) {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+                "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+                "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep_internal.no_sep, " +
+                "inacbg_grouping.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
+                "piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join " +
+                "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
+                "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal as inacbg_grouping on " +
+                "bridging_sep_internal.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+                "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or " +
+                "piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or bridging_sep_internal.no_sep like ?) order by " +
+                "piutang_pasien.tgl_piutang, bridging_sep_internal.no_sep"
+            )) {
+                ps.setString(1, Valid.getTglSmc(DTPTgl1));
+                ps.setString(2, Valid.getTglSmc(DTPTgl2));
+                ps.setString(3, "%" + TCari.getText() + "%");
+                ps.setString(4, "%" + TCari.getText() + "%");
+                ps.setString(5, "%" + TCari.getText() + "%");
+                ps.setString(6, "%" + TCari.getText() + "%");
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new Object[] {
+                            false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
+                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                            null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
+                        });
+                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+        LCount.setText(Valid.SetAngka(sisapiutang));
+        totalnilai();
     }
     
     private void getdata(int pilih) {
@@ -4489,4 +4712,153 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         }
     } 
+    
+    private void tampil(Map<String, Double> withSEP) {
+        String sepParams = "";
+        for (int i = 0; i < withSEP.size(); i++) {
+            sepParams = sepParams + "?, ";
+        }
+        sepParams = sepParams.substring(0, sepParams.length() - 2);
+        
+        String ralanranap = "";
+        if (chkRalan.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut = 'Ralan' ";
+        }
+        if (chkRanap.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut = 'Ranap' ";
+        }
+        if (chkRalan.isSelected() && chkRanap.isSelected()) {
+            ralanranap = "and reg_periksa.status_lanjut in ('Ralan', 'Ranap') ";
+        }
+        
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+            "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+            "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep.no_sep, inacbg_grouping.tarif, " +
+            "reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join " +
+            "reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join bridging_sep on bridging_sep.no_rawat = reg_periksa.no_rawat and " +
+            "reg_periksa.status_lanjut = (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) left join (select distinct * from (select " +
+            "inacbg_grouping_stage1.no_sep, inacbg_grouping_stage1.tarif, 'stage1' as status from inacbg_grouping_stage1 union all select " +
+            "inacbg_grouping_stage12.no_sep, inacbg_grouping_stage12.tarif, 'stage12' as status from inacbg_grouping_stage12) as inacbg_grouping) " +
+            "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' " + ralanranap +
+            "and bridging_sep.no_sep in (" + sepParams + ") order by piutang_pasien.tgl_piutang, bridging_sep.no_sep"
+        )) {
+            int i = 1;
+            for (Map.Entry<String, Double> entry: withSEP.entrySet()) {
+                ps.setString(i++, entry.getKey());
+            }
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    /*"P",
+                    "No.Rawat/No.tagihan",
+                    "No.SEP VClaim",
+                    "Tgl.Piutang",
+                    "Pasien",
+                    "Total Piutang",
+                    "Iur/Ekses",
+                    "Sudah Dibayar",
+                    "Sisa Piutang",
+                    "Tarif InaCBG",
+                    "Dibayar BPJS",
+                    "% Bayar",
+                    "Kerugian",
+                    "Lebih Bayar",
+                    "Status",*/
+                    tabMode.addRow(new Object[] {
+                        false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
+                        rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
+                        rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")),
+                        withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
+                        rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
+                    });
+                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        if (chkInternal.isSelected()) {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+                "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+                "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep_internal.no_sep, " +
+                "inacbg_grouping_stage1_internal.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
+                "piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join " +
+                "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
+                "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal on " +
+                "bridging_sep_internal.no_sep = inacbg_grouping_stage1_internal.no_sep where piutang_pasien.status = 'Belum Lunas' " + ralanranap +
+                "and bridging_sep_internal.no_sep in (" + sepParams + ") order by piutang_pasien.tgl_piutang, bridging_sep_internal.no_sep"
+            )) {
+                int i = 1;
+                for (Map.Entry<String, Double> entry: withSEP.entrySet()) {
+                    ps.setString(i++, entry.getKey());
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new Object[] {
+                            false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
+                            rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
+                            rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")),
+                            withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
+                            rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
+                        });
+                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+        
+        LCount.setText(Valid.SetAngka(sisapiutang));
+    }
+    
+    private void monitoringKlaim(String tanggal, String jenispelayanan, ArrayList<String> sepAwal) {
+        try {
+            Map<String, Double> sep = new HashMap<>();
+            String link = koneksiDB.URLAPIBPJS();
+            String URL = link + "/Monitoring/Klaim/Tanggal/" + tanggal + "/JnsPelayanan/" + jenispelayanan + "/Status/3";
+            System.out.println(URL);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+            ApiBPJS api = new ApiBPJS();
+            String utc = api.getCurrentTimestampAsString();
+            headers.add("X-Timestamp", utc);
+            headers.add("X-Signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+            HttpEntity requestEntity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            JsonNode nameNode = root.path("metaData");
+            System.out.println("code : " + nameNode.path("code").asText());
+            System.out.println("message : " + nameNode.path("message").asText());
+            if (nameNode.path("code").asText().equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                if (response.path("klaim").isArray()) {
+                    for (JsonNode list : response.path("klaim")) {
+                        if (sepAwal.contains(list.path("noSEP").asText())) {
+                            sep.put(list.path("noSEP").asText(), list.path("biaya").path("bySetujui").asDouble());
+                        }
+                    }
+                    System.out.println("list" + sep);
+                }
+            } else {
+                System.out.println(nameNode.path("message").asText());
+            }
+            if (!sep.isEmpty()) {
+                tampil(sep);
+            }
+        } catch (Exception ex) {
+            System.out.println("Notifikasi Peserta : " + ex);
+            if (ex.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+            }
+        }
+    }
 }
