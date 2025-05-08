@@ -270,7 +270,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         MnCatatanKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnCatatanKeseimbanganCairan.setText("Formulir Catatan Keseimbangan Cairan");
         MnCatatanKeseimbanganCairan.setName("MnCatatanKeseimbanganCairan"); // NOI18N
-        MnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(230, 26));
+        MnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(240, 26));
         MnCatatanKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnCatatanKeseimbanganCairanActionPerformed(evt);
@@ -457,7 +457,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -471,7 +471,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -567,7 +567,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-07-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-10-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);

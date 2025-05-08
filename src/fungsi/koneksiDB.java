@@ -32,40 +32,35 @@ public class koneksiDB {
             if (connection == null || connection.isClosed()) {
                 try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
                     prop.loadFromXML(fis);
-                    dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true&connectTimeout=5000&socketTimeout=10000");
+                    dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");
                     dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                     dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
-                    dataSource.setCachePreparedStatements(true);
-                    dataSource.setPreparedStatementCacheSize(250);
-                    dataSource.setPreparedStatementCacheSqlLimit(2048);
+                    // dataSource.setCachePreparedStatements(true);
                     dataSource.setUseCompression(true);
-                    dataSource.setAutoReconnectForPools(true);
-                    dataSource.setUseServerPrepStmts(true);
-                    dataSource.setUseLocalSessionState(true);
-                    dataSource.setUseLocalTransactionState(true);
+                    // dataSource.setAutoReconnectForPools(true);
+                    // dataSource.setUseLocalSessionState(true);
+                    // dataSource.setUseLocalTransactionState(true);
                     
                     int retries = 3;
                     while (retries > 0) {
                         try {
                             connection=dataSource.getConnection();
-                            System.out.println("  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
-                                    "	Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
-                                    "  Puskesmas yang  gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
+                            System.out.println("\n"+
+                                    "  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
+                                    "  Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
+                                    "  Puskesmas yang gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
                                     "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
                                     "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
-                                    "  software (Khanza.Soft Media).\n"+
-                                    "                                                                           \n"+
+                                    "  software (Khanza.Soft Media).\n\n"+
                                     "  #    ____  ___  __  __  ____   ____    _  __ _                              \n" +
                                     "  #   / ___||_ _||  \\/  ||  _ \\ / ___|  | |/ /| |__    __ _  _ __   ____ __ _ \n" +
                                     "  #   \\___ \\ | | | |\\/| || |_) |\\___ \\  | ' / | '_ \\  / _` || '_ \\ |_  // _` |\n" +
                                     "  #    ___) || | | |  | ||  _ <  ___) | | . \\ | | | || (_| || | | | / /| (_| |\n" +
                                     "  #   |____/|___||_|  |_||_| \\_\\|____/  |_|\\_\\|_| |_| \\__,_||_| |_|/___|\\__,_|\n" +
-                                    "  #                                                                           \n"+
-                                    "                                                                           \n"+
-                                    "  Licensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n"+
+                                    "  #                                                                           \n\n"+
+                                    "  Lisensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n"+
                                     "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+
-                                    "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto\n"+
-                                    "                                                                           ");
+                                    "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto");
                             break;
                         } catch (SQLException e) {
                             retries--;
@@ -98,6 +93,15 @@ public class koneksiDB {
             return prop.getProperty(propertyName, "");
         } catch (Exception e) {
             return "";
+        }
+    }
+    
+    public static String raw(String propertyName, String defaultValue) {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty(propertyName, defaultValue);
+        } catch (Exception e) {
+            return defaultValue;
         }
     }
     
