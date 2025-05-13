@@ -648,7 +648,7 @@ import keuangan.KeuanganBayarPemesananDapur;
 import keuangan.KeuanganBayarPemesananFarmasi;
 import keuangan.KeuanganBayarPemesananNonMedis;
 import keuangan.KeuanganBayarPesanToko;
-import keuangan.KeuanganBayarPiutangLain;
+import keuangan.KeuanganBayarPiutangPeminjamanUang;
 import keuangan.KeuanganBubes;
 import keuangan.KeuanganHutangAsetIventarisBelumLunas;
 import keuangan.KeuanganHutangDapurBelumLunas;
@@ -663,8 +663,8 @@ import keuangan.KeuanganPenagihanPiutangPasien;
 import keuangan.KeuanganPengajuanBiaya;
 import keuangan.KeuanganPersetujuanPengajuanBiaya;
 import keuangan.KeuanganPiutangBelumLunas;
-import keuangan.KeuanganPiutangLainLain;
 import keuangan.KeuanganPiutangObatBelumLunas;
+import keuangan.KeuanganPiutangPeminjamanUang;
 import keuangan.KeuanganRVPBPJS;
 import keuangan.KeuanganRekapJmDokter;
 import keuangan.KeuanganRekapPengajuanBiaya;
@@ -18625,7 +18625,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        KeuanganPiutangLainLain aplikasi=new KeuanganPiutangLainLain(this,false);
+        KeuanganPiutangPeminjamanUang aplikasi=new KeuanganPiutangPeminjamanUang(this,false);
         aplikasi.isCek();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
@@ -18648,7 +18648,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        KeuanganBayarPiutangLain aplikasi=new KeuanganBayarPiutangLain(this,false);
+        KeuanganBayarPiutangPeminjamanUang aplikasi=new KeuanganBayarPiutangPeminjamanUang(this,false);
         aplikasi.isCek();
         aplikasi.emptTeks();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
@@ -45277,7 +45277,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnPiutangLainLain = new widget.ButtonBig();
         btnPiutangLainLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_11001_cash_coins_money_pig_piggy bank_icon_48px.png"))); 
-        btnPiutangLainLain.setText("Piutang Lain-lain");
+        btnPiutangLainLain.setText("Piutang Peminjaman Uang");
         btnPiutangLainLain.setIconTextGap(0);
         btnPiutangLainLain.setName("btnPiutangLainLain"); 
         btnPiutangLainLain.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -45293,7 +45293,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnBayarPiutangLainLain = new widget.ButtonBig();
         btnBayarPiutangLainLain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/47679_card_credit_payment_icon.png")));
-        btnBayarPiutangLainLain.setText("Bayar Piutang Lain-lain");
+        btnBayarPiutangLainLain.setText("Bayar Piutang Peminjaman Uang");
         btnBayarPiutangLainLain.setIconTextGap(0);
         btnBayarPiutangLainLain.setName("btnBayarPiutangLainLain"); 
         btnBayarPiutangLainLain.setPreferredSize(new java.awt.Dimension(200, 90));
