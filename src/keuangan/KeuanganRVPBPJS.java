@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1189,7 +1191,6 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             Valid.textKosong(AkunBayar,"Akun Bayar");
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.AutoComitFalse();
             sukses=true;
             
             koderekening="";
@@ -1210,8 +1211,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             } 
             
             row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            ArrayList<Integer> rowsukses = new ArrayList<>();
+            
+            for(i=0;i<row;i++){
                 if(tabMode.getValueAt(i,0).toString().equals("true")&&(Valid.SetAngka(tabMode.getValueAt(i,10).toString())>0)){
+                    Sequel.AutoComitFalse();
                     if(Sequel.menyimpantf("bayar_piutang","?,?,?,?,?,?,?,?,?,?,?","Data",11,new String[]{
                         Valid.SetTgl(Tanggal.getSelectedItem()+""),Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tabMode.getValueAt(i,1).toString()),
                         tabMode.getValueAt(i,10).toString(),"diverifikasi oleh "+kdptg.getText(),tabMode.getValueAt(i,1).toString(),koderekening,Piutang_BPJS_RVP,"0",Diskon_Piutang,"0",Piutang_Tidak_Terbayar
@@ -1907,22 +1911,31 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     }else{
                         sukses=false;
                     }
+                    if (sukses) {
+                        Sequel.Commit();
+                    } else {
+                        tabMode.setValueAt(false, i, 0);
+                        sukses = false;
+                        Sequel.RollBack();
+                    }
+                    Sequel.AutoComitTrue();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(KeuanganRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (!sukses) {
+                        this.setCursor(Cursor.getDefaultCursor());
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                        break;
+                    }
                 }
             }
-            
-            if(sukses==true){
-                Sequel.Commit();
-            }else{
-                sukses=false;
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                Sequel.RollBack();
-            }
-            
-            Sequel.AutoComitTrue();
-            
+            /*
             if(sukses==true){
                 tampil();
             }
+            */
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnBayarActionPerformed
