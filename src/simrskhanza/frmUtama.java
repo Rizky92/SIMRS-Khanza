@@ -581,6 +581,7 @@ import keuangan.DlgJurnal;
 import keuangan.DlgJurnalHarian;
 import keuangan.DlgKategoriPemasukan;
 import keuangan.DlgKategoriPengeluaran;
+import keuangan.DlgKategoriPiutangJasaPerusahaan;
 import keuangan.DlgLabaRugi;
 import keuangan.DlgLhtBRIVA;
 import keuangan.DlgLhtBankJabar;
@@ -22808,6 +22809,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnKategoriPiutangJasaPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgKategoriPiutangJasaPerusahaan aplikasi=new DlgKategoriPiutangJasaPerusahaan(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -23517,7 +23530,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR,btnSkriningHipertensi,btnSkriningKesehatanPenglihatan,
             btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa,btnSkriningRisikoKankerServiks,btnCatatanCairanHemodialisa,btnSkriningKesehatanGigiMulutLansia,
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
-            btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU;
+            btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan;
     
     public void isWall(){
         try{            
@@ -25816,6 +25829,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpemasukan_lain()==true){
                 Panelmenu.add(btnPemasukanLain);
+                jmlmenu++;
+            }
+            
+            if(akses.getkategori_piutang_jasa_perusahaan()==true){
+                Panelmenu.add(btnKategoriPiutangJasaPerusahaan);
                 jmlmenu++;
             }
 
@@ -31399,9 +31417,9 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPengaturanRekening);   
             jmlmenu++;
         } 
-
-        if(akses.getkategori_pengeluaran_harian()==true){
-            Panelmenu.add(btnKategoriPengeluaranHarian);
+        
+        if(akses.getkategori_piutang_jasa_perusahaan()==true){
+            Panelmenu.add(btnKategoriPiutangJasaPerusahaan);
             jmlmenu++;
         }
 
@@ -31417,6 +31435,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getpemasukan_lain()==true){
             Panelmenu.add(btnPemasukanLain);
+            jmlmenu++;
+        }
+
+        if(akses.getkategori_pengeluaran_harian()==true){
+            Panelmenu.add(btnKategoriPengeluaranHarian);
             jmlmenu++;
         }
 
@@ -37870,6 +37893,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpemasukan_lain()==true){
             if(btnPemasukanLain.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPemasukanLain);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getkategori_piutang_jasa_perusahaan()==true){
+            if(btnKategoriPiutangJasaPerusahaan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKategoriPiutangJasaPerusahaan);
                 jmlmenu++;
             }                
         }
@@ -47962,6 +47992,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRiwayatSuratPeringatan.setName("btnRiwayatSuratPeringatan");
         btnRiwayatSuratPeringatan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatSuratPeringatan.addActionListener(this::btnRiwayatSuratPeringatanActionPerformed);
+        
+        btnKategoriPiutangJasaPerusahaan = new widget.ButtonBig();
+        btnKategoriPiutangJasaPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7013428_business_calculation_mathematics_calculator_icon.png"))); 
+        btnKategoriPiutangJasaPerusahaan.setText("Kategori Piutang Jasa Perusahaan");
+        btnKategoriPiutangJasaPerusahaan.setIconTextGap(0);
+        btnKategoriPiutangJasaPerusahaan.setName("btnKategoriPiutangJasaPerusahaan");
+        btnKategoriPiutangJasaPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKategoriPiutangJasaPerusahaan.addActionListener(this::btnKategoriPiutangJasaPerusahaanActionPerformed);
     }
     
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
