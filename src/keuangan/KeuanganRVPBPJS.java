@@ -2605,11 +2605,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
                         false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
-                        null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
+                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
+                        rs.getDouble("tarif"), null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, ""
                     });
-                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                    sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
                 }
             }
         } catch (Exception e) {
@@ -2640,11 +2641,12 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     while (rs.next()) {
                         tabMode.addRow(new Object[] {
                             false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
-                            null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
+                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
+                            rs.getDouble("tarif"), null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, "Internal"
                         });
-                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                        sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
                     }
                 }
             } catch (Exception e) {
@@ -4777,13 +4779,13 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     tabMode.addRow(new Object[] {
                         false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
                         rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
-                        rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")),
+                        rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
                         withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
                         rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
                     });
-                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                    sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
                 }
             }
         } catch (Exception e) {
@@ -4811,13 +4813,13 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         tabMode.addRow(new Object[] {
                             false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
                             rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
-                            rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")),
+                            rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
                             withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
                             rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
                         });
-                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                        sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
                     }
                 }
             } catch (Exception e) {
