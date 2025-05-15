@@ -1211,8 +1211,6 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             } 
             
             row=tabMode.getRowCount();
-            ArrayList<Integer> rowsukses = new ArrayList<>();
-            
             for(i=0;i<row;i++){
                 if(tabMode.getValueAt(i,0).toString().equals("true")&&(Valid.SetAngka(tabMode.getValueAt(i,10).toString())>0)){
                     Sequel.AutoComitFalse();
@@ -1919,11 +1917,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         Sequel.RollBack();
                     }
                     Sequel.AutoComitTrue();
-                    try {
+                    /*try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(KeuanganRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    }*/
                     if (!sukses) {
                         this.setCursor(Cursor.getDefaultCursor());
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
@@ -1931,11 +1929,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     }
                 }
             }
-            /*
             if(sukses==true){
                 tampil();
             }
-            */
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnBayarActionPerformed
