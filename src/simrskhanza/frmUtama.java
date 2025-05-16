@@ -664,6 +664,7 @@ import keuangan.KeuanganPenagihanPiutangPasien;
 import keuangan.KeuanganPengajuanBiaya;
 import keuangan.KeuanganPersetujuanPengajuanBiaya;
 import keuangan.KeuanganPiutangBelumLunas;
+import keuangan.KeuanganPiutangJasaPerusahaan;
 import keuangan.KeuanganPiutangObatBelumLunas;
 import keuangan.KeuanganPiutangPeminjamanUang;
 import keuangan.KeuanganRVPBPJS;
