@@ -1234,140 +1234,169 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             Sequel.deleteTampJurnal();
                             //tindakan ralan
                             if(Valid.SetAngka(tabMode.getValueAt(i,16).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "BEBAN JASA SARANA TINDAKAN RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 16).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "UTANG JASA SARANA TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 16).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "BEBAN JASA SARANA TINDAKAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 16).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "UTANG JASA SARANA TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 16).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,18).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "BEBAN JASA MEDIK DOKTER TINDAKAN RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 18).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "UTANG JASA MEDIK DOKTER TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 18).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "BEBAN JASA MEDIK DOKTER TINDAKAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 18).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "UTANG JASA MEDIK DOKTER TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 18).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,19).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "BEBAN JASA MEDIK PARAMEDIS TINDAKAN RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 19).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "UTANG JASA MEDIK PARAMEDIS TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 19).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "BEBAN JASA MEDIK PARAMEDIS TINDAKAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 19).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "UTANG JASA MEDIK PARAMEDIS TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 19).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,20).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "BEBAN KSO TINDAKAN RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 20).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "UTANG KSO TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 20).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "BEBAN KSO TINDAKAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 20).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "UTANG KSO TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 20).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,21).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "BEBAN JASA MENEJEMEN TINDAKAN RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 21).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "UTANG JASA MENEJEMEN TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 21).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "BEBAN JASA MENEJEMEN TINDAKAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 21).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "UTANG JASA MENEJEMEN TINDAKAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 21).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,22).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", "0", Valid.SetAngka(tabMode.getValueAt(i, 22).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "PENDAPATAN RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 22).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 22).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "PENDAPATAN RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 22).toString()), 0);
                             }
                             //tindakan ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,23).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "BEBAN JASA SARANA TINDAKAN RANAP", "0", Valid.SetAngka(tabMode.getValueAt(i, 23).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "UTANG JASA SARANA TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 23).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "BEBAN JASA SARANA TINDAKAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 23).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "UTANG JASA SARANA TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 23).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,25).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "BEBAN JASA MEDIK DOKTER TINDAKAN RANAP", "0", Valid.SetAngka(tabMode.getValueAt(i, 25).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "UTANG JASA MEDIK DOKTER TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 25).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "BEBAN JASA MEDIK DOKTER TINDAKAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 25).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "UTANG JASA MEDIK DOKTER TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 25).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,26).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "BEBAN JASA MEDIK PARAMEDIS TINDAKAN RANAP", "0", Valid.SetAngka(tabMode.getValueAt(i, 26).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "UTANG JASA MEDIK PARAMEDIS TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 26).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "BEBAN JASA MEDIK PARAMEDIS TINDAKAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 26).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "UTANG JASA MEDIK PARAMEDIS TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 26).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,27).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "BEBAN KSO TINDAKAN RANAP", "0", Valid.SetAngka(tabMode.getValueAt(i, 27).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "UTANG KSO TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 27).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "BEBAN KSO TINDAKAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 27).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "UTANG KSO TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 27).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,28).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "BEBAN JASA MENEJEMEN TINDAKAN RANAP", "0", Valid.SetAngka(tabMode.getValueAt(i, 28).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "UTANG JASA MENEJEMEN TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 28).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "BEBAN JASA MENEJEMEN TINDAKAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 28).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "UTANG JASA MENEJEMEN TINDAKAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 28).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,29).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", "0", Valid.SetAngka(tabMode.getValueAt(i, 29).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "PENDAPATAN RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 29).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 29).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "PENDAPATAN RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 29).toString()), 0);
                             }
                             //laborat ralan
                             if(Valid.SetAngka(tabMode.getValueAt(i,30).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "BEBAN JASA SARANA LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 30).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "UTANG JASA SARANA LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 30).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "BEBAN JASA SARANA LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 30).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "UTANG JASA SARANA LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 30).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,32).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "BEBAN JASA PERUJUK LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 32).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "UTANG JASA PERUJUK LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 32).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "BEBAN JASA PERUJUK LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 32).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "UTANG JASA PERUJUK LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 32).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,33).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "BEBAN JASA MEDIK DOKTER LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 33).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "UTANG JASA MEDIK DOKTER LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 33).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "BEBAN JASA MEDIK DOKTER LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 33).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "UTANG JASA MEDIK DOKTER LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 33).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,34).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "BEBAN JASA MEDIK PETUGAS LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 34).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "UTANG JASA MEDIK PETUGAS LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 34).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "BEBAN JASA MEDIK PETUGAS LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 34).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "UTANG JASA MEDIK PETUGAS LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 34).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,35).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "BEBAN KSO LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 35).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "UTANG KSO LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 35).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "BEBAN KSO LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 35).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "UTANG KSO LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 35).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,36).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "BEBAN JASA MENEJEMEN LABORAT RALAN", "0", Valid.SetAngka(tabMode.getValueAt(i, 36).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "UTANG JASA MENEJEMEN LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 36).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "BEBAN JASA MENEJEMEN LABORAT RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 36).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "UTANG JASA MENEJEMEN LABORAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 36).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,37).toString())>0){
-                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", "0", Valid.SetAngka(tabMode.getValueAt(i, 37).toString()));
-                                Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "PENDAPATAN LABORAT RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 37).toString()), "0");
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 37).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "PENDAPATAN LABORAT RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 37).toString()), 0);
                             }
                             //laborat ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,38).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Sarana_Laborat_Ranap+"','Beban_Jasa_Sarana_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,38).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,38).toString())+"'","kd_rek='"+Beban_Jasa_Sarana_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Sarana_Laborat_Ranap+"','Utang_Jasa_Sarana_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,38).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,38).toString())+"'","kd_rek='"+Utang_Jasa_Sarana_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ranap, "BEBAN JASA SARANA LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 38).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ranap, "UTANG JASA SARANA LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 38).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,40).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Perujuk_Laborat_Ranap+"','Beban_Jasa_Perujuk_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,40).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,40).toString())+"'","kd_rek='"+Beban_Jasa_Perujuk_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Perujuk_Laborat_Ranap+"','Utang_Jasa_Perujuk_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,40).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,40).toString())+"'","kd_rek='"+Utang_Jasa_Perujuk_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ranap, "BEBAN JASA PERUJUK LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 40).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ranap, "UTANG JASA PERUJUK LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 40).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,41).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Dokter_Laborat_Ranap+"','Beban_Jasa_Medik_Dokter_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,41).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,41).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Dokter_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Dokter_Laborat_Ranap+"','Utang_Jasa_Medik_Dokter_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,41).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,41).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Dokter_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ranap, "BEBAN JASA MEDIK DOKTER LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 41).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ranap, "UTANG JASA MEDIK DOKTER LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 41).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,42).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Petugas_Laborat_Ranap+"','Beban_Jasa_Medik_Petugas_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,42).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,42).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Petugas_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Petugas_Laborat_Ranap+"','Utang_Jasa_Medik_Petugas_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,42).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,42).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Petugas_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ranap, "BEBAN JASA MEDIK PETUGAS LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 42).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ranap, "UTANG JASA MEDIK PETUGAS LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 42).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,43).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Kso_Laborat_Ranap+"','Beban_Kso_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,43).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,43).toString())+"'","kd_rek='"+Beban_Kso_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Kso_Laborat_Ranap+"','Utang_Kso_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,43).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,43).toString())+"'","kd_rek='"+Utang_Kso_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ranap, "BEBAN KSO LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 43).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ranap, "UTANG KSO LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 43).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,44).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Menejemen_Laborat_Ranap+"','Beban_Jasa_Menejemen_Laborat_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,44).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,44).toString())+"'","kd_rek='"+Beban_Jasa_Menejemen_Laborat_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Menejemen_Laborat_Ranap+"','Utang_Jasa_Menejemen_Laborat_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,44).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,44).toString())+"'","kd_rek='"+Utang_Jasa_Menejemen_Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ranap, "BEBAN JASA MENEJEMEN LABORAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 44).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ranap, "UTANG JASA MENEJEMEN LABORAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 44).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,45).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,45).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,45).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Laborat_Ranap+"','PENDAPATAN LABORAT RAWAT INAP','"+Valid.SetAngka(tabMode.getValueAt(i,45).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,45).toString())+"'","kd_rek='"+Laborat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 45).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Laborat_Ranap, "PENDAPATAN LABORAT RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 45).toString()), 0);
                             }
                             //radiologi ralan
                             if(Valid.SetAngka(tabMode.getValueAt(i,46).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Sarana_Radiologi_Ralan+"','Beban_Jasa_Sarana_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,46).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,46).toString())+"'","kd_rek='"+Beban_Jasa_Sarana_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Sarana_Radiologi_Ralan+"','Utang_Jasa_Sarana_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,46).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,46).toString())+"'","kd_rek='"+Utang_Jasa_Sarana_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ralan, "BEBAN JASA SARANA RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 46).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ralan, "UTANG JASA SARANA RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 46).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,48).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Perujuk_Radiologi_Ralan+"','Beban_Jasa_Perujuk_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,48).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,48).toString())+"'","kd_rek='"+Beban_Jasa_Perujuk_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Perujuk_Radiologi_Ralan+"','Utang_Jasa_Perujuk_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,48).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,48).toString())+"'","kd_rek='"+Utang_Jasa_Perujuk_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ralan, "BEBAN JASA PERUJUK RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 48).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ralan, "UTANG JASA PERUJUK RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 48).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,49).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Dokter_Radiologi_Ralan+"','Beban_Jasa_Medik_Dokter_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,49).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,49).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Dokter_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Dokter_Radiologi_Ralan+"','Utang_Jasa_Medik_Dokter_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,49).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,49).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Dokter_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ralan, "BEBAN JASA MEDIK DOKTER RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 49).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "UTANG JASA MEDIK DOKTER RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 49).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,50).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Petugas_Radiologi_Ralan+"','Beban_Jasa_Medik_Petugas_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,50).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,50).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Petugas_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Petugas_Radiologi_Ralan+"','Utang_Jasa_Medik_Petugas_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,50).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,50).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Petugas_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ralan, "BEBAN JASA MEDIK PETUGAS RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 50).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ralan, "UTANG JASA MEDIK PETUGAS RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 50).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,51).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Kso_Radiologi_Ralan+"','Beban_Kso_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,51).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,51).toString())+"'","kd_rek='"+Beban_Kso_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Kso_Radiologi_Ralan+"','Utang_Kso_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,51).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,51).toString())+"'","kd_rek='"+Utang_Kso_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ralan, "BEBAN KSO RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 51).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ralan, "UTANG KSO RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 51).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,52).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Menejemen_Radiologi_Ralan+"','Beban_Jasa_Menejemen_Radiologi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,52).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,52).toString())+"'","kd_rek='"+Beban_Jasa_Menejemen_Radiologi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Menejemen_Radiologi_Ralan+"','Utang_Jasa_Menejemen_Radiologi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,52).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,52).toString())+"'","kd_rek='"+Utang_Jasa_Menejemen_Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ralan, "BEBAN JASA MENEJEMEN RADIOLOGI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 52).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ralan, "UTANG JASA MENEJEMEN RADIOLOGI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 52).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,53).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,53).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,53).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Radiologi_Ralan+"','PENDAPATAN RADIOLOGI RAWAT JALAN','"+Valid.SetAngka(tabMode.getValueAt(i,53).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,53).toString())+"'","kd_rek='"+Radiologi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 53).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "PENDAPATAN RADIOLOGI RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 53).toString()), 0);
+                            }
+                            //radiologi ranap
+                            if(Valid.SetAngka(tabMode.getValueAt(i,54).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ranap, "BEBAN JASA SARANA RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 54).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ranap, "UTANG JASA SARANA RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 54).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,56).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ranap, "BEBAN JASA PERUJUK RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 56).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ranap, "UTANG JASA PERUJUK RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 56).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,57).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ranap, "BEBAN JASA MEDIK DOKTER RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 57).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "UTANG JASA MEDIK DOKTER RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 57).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,58).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ranap, "BEBAN JASA MEDIK PETUGAS RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 58).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ranap, "UTANG JASA MEDIK PETUGAS RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 58).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,59).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ranap, "BEBAN KSO RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 59).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ranap, "UTANG KSO RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 59).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,60).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ranap, "BEBAN JASA MENEJEMEN RADIOLOGI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 60).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ranap, "UTANG JASA MENEJEMEN RADIOLOGI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 60).toString()), 0);
+                            }
+                            if(Valid.SetAngka(tabMode.getValueAt(i,61).toString())>0){
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 61).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Radiologi_Ranap, "PENDAPATAN RADIOLOGI RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 61).toString()), 0);
                             }
                             //radiologi ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,54).toString())>0){
