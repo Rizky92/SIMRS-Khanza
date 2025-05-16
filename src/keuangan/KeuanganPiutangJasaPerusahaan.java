@@ -69,7 +69,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
              }
               
              Class[] types = new Class[] {
-                java.lang.String.class,java.lang.String.class,java.lang.Double.class,java.lang.Double.class,
+                java.lang.String.class,java.lang.String.class,java.lang.Double.class,java.lang.String.class,
                 java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Double.class 
              };
              @Override
@@ -106,8 +106,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class,warna);
 
         NoPemesanan.setDocument(new batasInput((byte)20).getKata(NoPemesanan));
-        KdPerusahaan.setDocument(new batasInput((byte)5).getKata(KdPerusahaan));
-        kdptg.setDocument(new batasInput((byte)20).getKata(kdptg));        
+        Keterangan.setDocument(new batasInput((int)100).getKata(Keterangan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -182,7 +181,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         BtnPerusahaan = new widget.Button();
         btnPetugas = new widget.Button();
         label14 = new widget.Label();
-        Departemen = new widget.TextBox();
+        Keterangan = new widget.TextBox();
         label18 = new widget.Label();
         Tanggal1 = new widget.Tanggal();
         panelisi1 = new widget.panelisi();
@@ -306,6 +305,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         panelisi3.add(label13);
         label13.setBounds(381, 40, 77, 23);
 
+        KdPerusahaan.setEditable(false);
         KdPerusahaan.setName("KdPerusahaan"); // NOI18N
         KdPerusahaan.setPreferredSize(new java.awt.Dimension(80, 23));
         KdPerusahaan.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -322,6 +322,7 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         panelisi3.add(label16);
         label16.setBounds(0, 40, 75, 23);
 
+        kdptg.setEditable(false);
         kdptg.setName("kdptg"); // NOI18N
         kdptg.setPreferredSize(new java.awt.Dimension(80, 23));
         kdptg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -376,10 +377,10 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
         panelisi3.add(label14);
         label14.setBounds(0, 70, 75, 23);
 
-        Departemen.setName("Departemen"); // NOI18N
-        Departemen.setPreferredSize(new java.awt.Dimension(207, 23));
-        panelisi3.add(Departemen);
-        Departemen.setBounds(79, 70, 691, 23);
+        Keterangan.setName("Keterangan"); // NOI18N
+        Keterangan.setPreferredSize(new java.awt.Dimension(207, 23));
+        panelisi3.add(Keterangan);
+        Keterangan.setBounds(79, 70, 691, 23);
 
         label18.setText("Jatuh Tempo :");
         label18.setName("label18"); // NOI18N
@@ -891,10 +892,11 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }//GEN-LAST:event_tbDokterPropertyChange
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        /*if(tbDokter.getRowCount()!=0){
+        if(tbDokter.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                try {                  
-                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==9)){                       
+                try {      
+                    ////"Kode","Kategori","Jml","Harga(Rp)","Subtotal(Rp)","Disk(%)","Diskon(Rp)","Total(Rp)"
+                   if((tbDokter.getSelectedColumn()==2)||(tbDokter.getSelectedColumn()==3)||(tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)){                       
                         getData();  
                         TCari.setText("");
                         TCari.requestFocus();                                                
@@ -943,26 +945,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                    }else if(tbDokter.getSelectedColumn()==1){
                        getData();  
                    }
-            }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-                if(tbDokter.getSelectedColumn()==1){
-                    y=0;
-                    try {
-                        y=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());                        
-                    } catch (Exception e) {
-                        y=0;
-                    }
-                    if(y>0){
-                        datakonversi.setSatuanKecil(tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
-                        datakonversi.isCek();
-                        datakonversi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight());
-                        datakonversi.setLocationRelativeTo(internalFrame1);
-                        datakonversi.setVisible(true);                        
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Silahkan masukkan jumlah pemesanan terelebih dahulu..!!");
-                    }
-                }
             }
-        }*/
+        }
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -1132,8 +1116,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.Button BtnTambah;
-    private widget.TextBox Departemen;
     private widget.TextBox KdPerusahaan;
+    private widget.TextBox Keterangan;
     private widget.Label LSubtotal;
     private widget.TextBox Meterai;
     private widget.TextBox NmPerusahaan;
@@ -1234,7 +1218,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             index=0;        
             for(i=0;i<row;i++){
                 try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
+                    if(Double.parseDouble(tbDokter.getValueAt(i,2).toString())>0){
                         kode[index]=tbDokter.getValueAt(i,0).toString();
                         kategori[index]=tbDokter.getValueAt(i,1).toString();
                         try {
