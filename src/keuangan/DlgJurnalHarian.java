@@ -761,9 +761,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             try (ResultSet rs = ps.executeQuery()) {
                 ttldebet = 0;
                 ttlkredit = 0;
+                String waktujurnal = "";
                 while (rs.next()) {
                     ttldebet += rs.getDouble("debet");
                     ttlkredit += rs.getDouble("kredit");
+                    if (!waktujurnal.isBlank() && !(rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal")).equals(waktujurnal)) {
+                        tabMode.addRow(new Object[] {"", "", "", "", null, null});
+                    }
                     if (rs.getDouble("kredit") > 0) {
                         tabMode.addRow(new Object[] {
                             rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal"), rs.getString("kd_rek"), "     " + rs.getString("nm_rek"),
@@ -777,23 +781,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             rs.getDouble("debet"), rs.getDouble("kredit")
                         });
                     }
+                    waktujurnal = rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal");
                 }
                 if (ttldebet > 0 || ttlkredit > 0) {
                     tabMode.addRow(new Object[] {"", "", "", "", null, null});
                     tabMode.addRow(new Object[] {"Jumlah Total :", "", "", "", ttldebet, ttlkredit});
                     debet.setText(Valid.SetAngka(ttldebet));
                     kredit.setText(Valid.SetAngka(ttlkredit));
-                }
-                int row = tabMode.getRowCount();
-                for (int i = 0; i < row; i++) {
-                    try {
-                        tanggal1 = tbDokter.getValueAt(i, 0).toString();
-                        tanggal2 = tbDokter.getValueAt(i - 1, 0).toString();
-                        if ((!tanggal1.equals(tanggal2)) && (!tanggal2.equals(""))) {
-                            tabMode.insertRow(i, new Object[] {"", "", "", "", null, null});
-                        }
-                    } catch (Exception e) {
-                    }
                 }
             }
         } catch (Exception e) {
