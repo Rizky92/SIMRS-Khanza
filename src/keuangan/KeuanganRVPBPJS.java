@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1211,6 +1212,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             } 
             
             row=tabMode.getRowCount();
+            boolean lanjutHinggaSelesai = false,
+                    adaError = false;
+            JCheckBox bLanjut = new JCheckBox();
+            bLanjut.setText("Lanjutkan untuk semua piutang, lewati yang error");
             for(i=0;i<row;i++){
                 if(tabMode.getValueAt(i,0).toString().equals("true")&&(Valid.SetAngka(tabMode.getValueAt(i,10).toString())>0)){
                     Sequel.AutoComitFalse();
@@ -1918,20 +1923,35 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     }
                     Sequel.AutoComitTrue();
                     /*try {
-                        Thread.sleep(1000);
+                        Thread.sleep(700);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(KeuanganRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
                     }*/
                     if (!sukses) {
-                        this.setCursor(Cursor.getDefaultCursor());
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        break;
+                        adaError = true;
+                        if (lanjutHinggaSelesai) {
+                            sukses = true;
+                        } else {
+                            if (JOptionPane.showConfirmDialog(
+                                null, new Object[] {
+                                    "Terjadi kesalahan pada saat pemrosesan data, apakah tetap mau dilanjut?",
+                                    bLanjut
+                                }, "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION
+                            ) {
+                                if (bLanjut.isSelected()) {
+                                    lanjutHinggaSelesai = true;
+                                    sukses = true;
+                                }
+                            } else {
+                                this.setCursor(Cursor.getDefaultCursor());
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                                break;
+                            }
+                        }
                     }
                 }
             }
-            if(sukses==true){
-                tampil();
-            }
+            tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnBayarActionPerformed
@@ -2044,8 +2064,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private void ppPilihSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihSemuaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         for(i=0;i<tbBangsal.getRowCount();i++){
-            tbBangsal.setValueAt(true,i,0);
-            getdata(i);
+            if (Valid.SetAngka(tbBangsal.getValueAt(i, 9).toString()) > 0) {
+                tbBangsal.setValueAt(true,i,0);
+                getdata(i);
+            }
         }
         totalnilai();
         this.setCursor(Cursor.getDefaultCursor());
@@ -2332,37 +2354,43 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
     private void ppUmbalMonitoringKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUmbalMonitoringKlaimActionPerformed
-        String sql = "";
-        ArrayList<String> sep = new ArrayList<>();
-        try {
-            for (int i = 0; i < tbBangsal.getRowCount(); i++) {
-                sep.add(tbBangsal.getValueAt(i, 2).toString());
-                sql = sql.concat("?, ");
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Tidak ada data yang bisa dilakukan pencarian!");
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            String sql = "";
+            ArrayList<String> sep = new ArrayList<>();
+            try {
+                for (int i = 0; i < tbBangsal.getRowCount(); i++) {
+                    sep.add(tbBangsal.getValueAt(i, 2).toString());
+                    sql = sql.concat("?, ");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select distinct bridging_sep.tglsep from bridging_sep " +
-            "where bridging_sep.no_sep in (" + sql.substring(0, sql.length() - 2) + ") order by bridging_sep.tglsep"
-        )) {
-            for (int i = 0; i < sep.size(); i++) {
-                ps.setString(i + 1, sep.get(i));
-            }
-            try (ResultSet rs = ps.executeQuery()) {
-                Valid.tabelKosong(tabMode);
-                sisapiutang = 0;
-                while (rs.next()) {
-                    if (chkRalan.isSelected()) {
-                        monitoringKlaim(rs.getString("tglsep"), "2", sep);
-                    }
-                    if (chkRanap.isSelected()) {
-                        monitoringKlaim(rs.getString("tglsep"), "1", sep);
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select distinct bridging_sep.tglsep from bridging_sep " +
+                "where bridging_sep.no_sep in (" + sql.substring(0, sql.length() - 2) + ") order by bridging_sep.tglsep"
+            )) {
+                for (int i = 0; i < sep.size(); i++) {
+                    ps.setString(i + 1, sep.get(i));
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    Valid.tabelKosong(tabMode);
+                    sisapiutang = 0;
+                    while (rs.next()) {
+                        if (chkRalan.isSelected()) {
+                            monitoringKlaim(rs.getString("tglsep"), "2", sep);
+                        }
+                        if (chkRanap.isSelected()) {
+                            monitoringKlaim(rs.getString("tglsep"), "1", sep);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppUmbalMonitoringKlaimActionPerformed
 
@@ -2605,12 +2633,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
                         false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
-                        rs.getDouble("tarif"), null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                        0, 0, ""
+                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                        null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
                     });
-                    sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
+                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
                 }
             }
         } catch (Exception e) {
@@ -2641,12 +2668,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     while (rs.next()) {
                         tabMode.addRow(new Object[] {
                             false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
-                            rs.getDouble("tarif"), null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, "Internal"
+                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                            null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
                         });
-                        sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
+                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
                     }
                 }
             } catch (Exception e) {
@@ -4779,13 +4805,13 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     tabMode.addRow(new Object[] {
                         false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
                         rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
-                        rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
+                        rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")),
                         withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
                         rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
                     });
-                    sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
+                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
                 }
             }
         } catch (Exception e) {
@@ -4813,13 +4839,13 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         tabMode.addRow(new Object[] {
                             false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"),
                             rs.getString("namapasien"), rs.getDouble("totalpiutang"), rs.getDouble("uangmuka"),
-                            rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan")),
+                            rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")),
                             withSEP.get(rs.getString("no_sep")), null, 0, 0, 0, rs.getString("status_lanjut"),
                             rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
                         });
-                        sisapiutang += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan");
+                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
                     }
                 }
             } catch (Exception e) {

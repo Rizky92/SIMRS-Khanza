@@ -851,13 +851,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis..!!!!");
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.AutoComitFalse();
             sukses=true;
             row=tabMode.getRowCount();
             for(i=0;i<row;i++){  
                 if(tabMode.getValueAt(i,0).toString().equals("true")){
-                    Sequel.mengedit("piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
-                    Sequel.mengedit("detail_piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"' and nama_bayar='"+Sequel.cariIsi("select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek=?",tabMode.getValueAt(i,83).toString())+"'","sisapiutang='"+tabMode.getValueAt(i,8).toString()+"'");
+                    Sequel.AutoComitFalse();
+                    Sequel.mengupdateSmc("piutang_pasien", "status = 'Belum Lunas', sisapiutang = sisapiutang + ?", "no_rawat = ?", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString());
+                    Sequel.mengupdateSmc("detail_piutang_pasien", "sisapiutang = sisapiutang + ?", "no_rawat = ? and nama_bayar = (select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek = ?)", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString(), tabMode.getValueAt(i, 83).toString());
                     if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())>=100){
                         Sequel.queryu("delete from tampjurnal_rvpbpjs"); 
                         Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,83).toString()+"','PIUTANG BPJS','"+tabMode.getValueAt(i,8).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,8).toString()+"'","kd_rek='"+tabMode.getValueAt(i,83).toString()+"'");     
@@ -1532,22 +1532,19 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             sukses=false;
                         }
                     }
+                    if (sukses) {
+                        Sequel.Commit();
+                    } else {
+                        sukses = false;
+                        Sequel.RollBack();
+                    }
+                    Sequel.AutoComitTrue();
                 }
             }
-            
-            if(sukses==true){
-                Sequel.Commit();
-            }else{
-                sukses=false;
+            if (!sukses) {
                 JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                Sequel.RollBack();
             }
-            
-            Sequel.AutoComitTrue();
-            
-            if(sukses==true){
-                tampil();
-            }
+            tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
