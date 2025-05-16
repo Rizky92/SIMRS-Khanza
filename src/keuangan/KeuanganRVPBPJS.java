@@ -2364,28 +2364,23 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             try {
                 for (int i = 0; i < tbBangsal.getRowCount(); i++) {
                     sep.add(tbBangsal.getValueAt(i, 2).toString());
-                    sql = sql.concat("?, ");
+                    sql = sql.concat("'" + tbBangsal.getValueAt(i, 2).toString() + "', ");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            try (PreparedStatement ps = koneksi.prepareStatement(
+            try (ResultSet rs = koneksi.createStatement().executeQuery(
                 "select distinct bridging_sep.tglsep from bridging_sep " +
                 "where bridging_sep.no_sep in (" + sql.substring(0, sql.length() - 2) + ") order by bridging_sep.tglsep"
             )) {
-                for (int i = 0; i < sep.size(); i++) {
-                    ps.setString(i + 1, sep.get(i));
-                }
-                try (ResultSet rs = ps.executeQuery()) {
-                    Valid.tabelKosong(tabMode);
-                    sisapiutang = 0;
-                    while (rs.next()) {
-                        if (chkRalan.isSelected()) {
-                            monitoringKlaim(rs.getString("tglsep"), "2", sep);
-                        }
-                        if (chkRanap.isSelected()) {
-                            monitoringKlaim(rs.getString("tglsep"), "1", sep);
-                        }
+                Valid.tabelKosong(tabMode);
+                sisapiutang = 0;
+                while (rs.next()) {
+                    if (chkRalan.isSelected()) {
+                        monitoringKlaim(rs.getString("tglsep"), "2", sep);
+                    }
+                    if (chkRanap.isSelected()) {
+                        monitoringKlaim(rs.getString("tglsep"), "1", sep);
                     }
                 }
             } catch (Exception e) {
