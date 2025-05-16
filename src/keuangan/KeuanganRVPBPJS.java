@@ -1398,139 +1398,110 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                 Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 61).toString()));
                                 Sequel.insertOrUpdateTampJurnal(Radiologi_Ranap, "PENDAPATAN RADIOLOGI RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 61).toString()), 0);
                             }
-                            //radiologi ranap
-                            if(Valid.SetAngka(tabMode.getValueAt(i,54).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Sarana_Radiologi_Ranap+"','Beban_Jasa_Sarana_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,54).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,54).toString())+"'","kd_rek='"+Beban_Jasa_Sarana_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Sarana_Radiologi_Ranap+"','Utang_Jasa_Sarana_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,54).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,54).toString())+"'","kd_rek='"+Utang_Jasa_Sarana_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,56).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Perujuk_Radiologi_Ranap+"','Beban_Jasa_Perujuk_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,56).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,56).toString())+"'","kd_rek='"+Beban_Jasa_Perujuk_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Perujuk_Radiologi_Ranap+"','Utang_Jasa_Perujuk_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,56).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,56).toString())+"'","kd_rek='"+Utang_Jasa_Perujuk_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,57).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Dokter_Radiologi_Ranap+"','Beban_Jasa_Medik_Dokter_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,57).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,57).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Dokter_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Dokter_Radiologi_Ranap+"','Utang_Jasa_Medik_Dokter_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,57).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,57).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Dokter_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,58).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Petugas_Radiologi_Ranap+"','Beban_Jasa_Medik_Petugas_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,58).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,58).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Petugas_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Petugas_Radiologi_Ranap+"','Utang_Jasa_Medik_Petugas_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,58).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,58).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Petugas_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,59).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Kso_Radiologi_Ranap+"','Beban_Kso_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,59).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,59).toString())+"'","kd_rek='"+Beban_Kso_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Kso_Radiologi_Ranap+"','Utang_Kso_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,59).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,59).toString())+"'","kd_rek='"+Utang_Kso_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,60).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Menejemen_Radiologi_Ranap+"','Beban_Jasa_Menejemen_Radiologi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,60).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,60).toString())+"'","kd_rek='"+Beban_Jasa_Menejemen_Radiologi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Menejemen_Radiologi_Ranap+"','Utang_Jasa_Menejemen_Radiologi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,60).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,60).toString())+"'","kd_rek='"+Utang_Jasa_Menejemen_Radiologi_Ranap+"'");   
-                            }
-                            if(Valid.SetAngka(tabMode.getValueAt(i,61).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,61).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,61).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Radiologi_Ranap+"','PENDAPATAN RADIOLOGI RAWAT INAP','"+Valid.SetAngka(tabMode.getValueAt(i,61).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,61).toString())+"'","kd_rek='"+Radiologi_Ranap+"'");   
-                            }
                             //operasi ralan
                             if(Valid.SetAngka(tabMode.getValueAt(i,62).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Dokter_Operasi_Ralan+"','Beban_Jasa_Medik_Dokter_Operasi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,62).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,62).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Dokter_Operasi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Dokter_Operasi_Ralan+"','Utang_Jasa_Medik_Dokter_Operasi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,62).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,62).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Dokter_Operasi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ralan, "BEBAN JASA MEDIK DOKTER OPERASI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 62).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ralan, "UTANG JASA MEDIK DOKTER OPERASI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 62).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,63).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Paramedis_Operasi_Ralan+"','Beban_Jasa_Medik_Paramedis_Operasi_Ralan','0','"+Valid.SetAngka(tabMode.getValueAt(i,63).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,63).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Paramedis_Operasi_Ralan+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Paramedis_Operasi_Ralan+"','Utang_Jasa_Medik_Paramedis_Operasi_Ralan','"+Valid.SetAngka(tabMode.getValueAt(i,63).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,63).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Paramedis_Operasi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ralan, "BEBAN JASA MEDIK PARAMEDIS OPERASI RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 63).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ralan, "UTANG JASA MEDIK PARAMEDIS OPERASI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 63).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,65).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG RAWAT JALAN','0','"+(Valid.SetAngka(tabMode.getValueAt(i,64).toString())+Valid.SetAngka(tabMode.getValueAt(i,65).toString()))+"'","kredit=kredit+'"+(Valid.SetAngka(tabMode.getValueAt(i,64).toString())+Valid.SetAngka(tabMode.getValueAt(i,65).toString()))+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Operasi_Ralan+"','PENDAPATAN OPERASI RAWAT JALAN','"+(Valid.SetAngka(tabMode.getValueAt(i,64).toString())+Valid.SetAngka(tabMode.getValueAt(i,65).toString()))+"','0'","debet=debet+'"+(Valid.SetAngka(tabMode.getValueAt(i,64).toString())+Valid.SetAngka(tabMode.getValueAt(i,65).toString()))+"'","kd_rek='"+Operasi_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 65).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Operasi_Ralan, "PENDAPATAN OPERASI RAWAT JALAN", Valid.SetAngka(tabMode.getValueAt(i, 65).toString()), 0);
                             }
                             //operasi ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,66).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Dokter_Operasi_Ranap+"','Beban_Jasa_Medik_Dokter_Operasi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,66).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,66).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Dokter_Operasi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Dokter_Operasi_Ranap+"','Utang_Jasa_Medik_Dokter_Operasi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,66).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,66).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Dokter_Operasi_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ranap, "BEBAN JASA MEDIK DOKTER OPERASI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 66).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "UTANG JASA MEDIK DOKTER OPERASI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 66).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,67).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Beban_Jasa_Medik_Paramedis_Operasi_Ranap+"','Beban_Jasa_Medik_Paramedis_Operasi_Ranap','0','"+Valid.SetAngka(tabMode.getValueAt(i,67).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,67).toString())+"'","kd_rek='"+Beban_Jasa_Medik_Paramedis_Operasi_Ranap+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Utang_Jasa_Medik_Paramedis_Operasi_Ranap+"','Utang_Jasa_Medik_Paramedis_Operasi_Ranap','"+Valid.SetAngka(tabMode.getValueAt(i,67).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,67).toString())+"'","kd_rek='"+Utang_Jasa_Medik_Paramedis_Operasi_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ranap, "BEBAN JASA MEDIK PARAMEDIS OPERASI RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 67).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ranap, "UTANG JASA MEDIK PARAMEDIS OPERASI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 67).toString()), 0);
                             }
                             if(Valid.SetAngka(tabMode.getValueAt(i,69).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+(Valid.SetAngka(tabMode.getValueAt(i,68).toString())+Valid.SetAngka(tabMode.getValueAt(i,69).toString()))+"'","kredit=kredit+'"+(Valid.SetAngka(tabMode.getValueAt(i,68).toString())+Valid.SetAngka(tabMode.getValueAt(i,69).toString()))+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Operasi_Ranap+"','PENDAPATAN OPERASI RAWAT INAP','"+(Valid.SetAngka(tabMode.getValueAt(i,68).toString())+Valid.SetAngka(tabMode.getValueAt(i,69).toString()))+"','0'","debet=debet+'"+(Valid.SetAngka(tabMode.getValueAt(i,68).toString())+Valid.SetAngka(tabMode.getValueAt(i,69).toString()))+"'","kd_rek='"+Operasi_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 69).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Operasi_Ranap, "PENDAPATAN OPERASI RAWAT INAP", Valid.SetAngka(tabMode.getValueAt(i, 69).toString()), 0);
                             }
                             //kamar
                             if(Valid.SetAngka(tabMode.getValueAt(i,78).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,78).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,78).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Kamar_Inap+"','PENDAPATAN KAMAR INAP','"+Valid.SetAngka(tabMode.getValueAt(i,78).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,78).toString())+"'","kd_rek='"+Kamar_Inap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 78).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Kamar_Inap, "PENDAPATAN KAMAR INAP", Valid.SetAngka(tabMode.getValueAt(i, 78).toString()), 0);
                             }
                             //harian
                             if(Valid.SetAngka(tabMode.getValueAt(i,80).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,80).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,80).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Harian_Ranap+"','PENDAPATAN HARIAN KAMAR INAP','"+Valid.SetAngka(tabMode.getValueAt(i,80).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,80).toString())+"'","kd_rek='"+Harian_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 80).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Harian_Ranap, "PENDAPATAN HARIAN KAMAR INAP", Valid.SetAngka(tabMode.getValueAt(i, 80).toString()), 0);
                             }
                             //registrasi
                             if(Valid.SetAngka(tabMode.getValueAt(i,81).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 81).toString()));
                                 if(tbBangsal.getValueAt(i,14).toString().equals("Ralan")){
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Registrasi_Ralan+"','PENDAPATAN REGISTRASI RALAN','"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"'","kd_rek='"+Registrasi_Ralan+"'");
+                                    Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "PENDAPATAN REGISTRASI RALAN", Valid.SetAngka(tabMode.getValueAt(i, 81).toString()), 0);
                                 }else{
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Registrasi_Ranap+"','PENDAPATAN REGISTRASI RALAN','"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,81).toString())+"'","kd_rek='"+Registrasi_Ranap+"'");
-                                }
+                                    Sequel.insertOrUpdateTampJurnal(Registrasi_Ranap, "PENDAPATAN REGISTRASI RANAP", Valid.SetAngka(tabMode.getValueAt(i, 81).toString()), 0);
+                                }    
                             }
                             //tambahan biaya
                             if(Valid.SetAngka(tabMode.getValueAt(i,76).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 76).toString()));
                                 if(tbBangsal.getValueAt(i,14).toString().equals("Ralan")){
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Tambahan_Ralan+"','PENDAPATAN TAMBAHAN RALAN','"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"'","kd_rek='"+Tambahan_Ralan+"'");
+                                    Sequel.insertOrUpdateTampJurnal(Tambahan_Ralan, "TAMBAHAN RALAN", Valid.SetAngka(tabMode.getValueAt(i, 76).toString()), 0);
                                 }else{
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Tambahan_Ranap+"','PENDAPATAN TAMBAHAN RANAP','"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,76).toString())+"'","kd_rek='"+Tambahan_Ranap+"'");
-                                }
+                                    Sequel.insertOrUpdateTampJurnal(Tambahan_Ranap, "TAMBAHAN RANAP", Valid.SetAngka(tabMode.getValueAt(i, 76).toString()), 0);
+                                }    
                             }
                             //potongan biaya
                             if(Valid.SetAngka(tabMode.getValueAt(i,77).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", Valid.SetAngka(tabMode.getValueAt(i, 77).toString()), 0);
                                 if(tbBangsal.getValueAt(i,14).toString().equals("Ralan")){
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Potongan_Ralan+"','POTONGAN RALAN','0','"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"'","kd_rek='"+Potongan_Ralan+"'");
+                                    Sequel.insertOrUpdateTampJurnal(Potongan_Ralan, "POTONGAN RALAN", 0, Valid.SetAngka(tabMode.getValueAt(i, 77).toString()));
                                 }else{
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Potongan_Ranap+"','POTONGAN RANAP','0','"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,77).toString())+"'","kd_rek='"+Potongan_Ranap+"'");
-                                }
+                                    Sequel.insertOrUpdateTampJurnal(Potongan_Ranap, "POTONGAN RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 77).toString()));
+                                }    
                             }
                             //resep pulang
                             if(Valid.SetAngka(tabMode.getValueAt(i,79).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,79).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,79).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Resep_Pulang_Ranap+"','PENDAPATAN RESEP PULANG','"+Valid.SetAngka(tabMode.getValueAt(i,79).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,79).toString())+"'","kd_rek='"+Resep_Pulang_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 79).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Resep_Pulang_Ranap, "PENDAPATAN RESEP PULANG", Valid.SetAngka(tabMode.getValueAt(i, 79).toString()), 0);
                             }
                             //obat langsung
                             if(Valid.SetAngka(tabMode.getValueAt(i,70).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 70).toString()));
                                 if(tbBangsal.getValueAt(i,14).toString().equals("Ralan")){
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Obat_Ralan+"','OBAT LANGSUNG RALAN','"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"'","kd_rek='"+Obat_Ralan+"'");
+                                    Sequel.insertOrUpdateTampJurnal(Obat_Ralan, "OBAT LANGSUNG RALAN", Valid.SetAngka(tabMode.getValueAt(i, 70).toString()), 0);
                                 }else{
-                                    Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Obat_Ranap+"','OBAT LANGSUNG RANAP','"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,70).toString())+"'","kd_rek='"+Obat_Ranap+"'");
-                                }
+                                    Sequel.insertOrUpdateTampJurnal(Obat_Ranap, "OBAT LANGSUNG RANAP", Valid.SetAngka(tabMode.getValueAt(i, 70).toString()), 0);
+                                }    
                             }
                             //obat ralan
                             if(Valid.SetAngka(tabMode.getValueAt(i,71).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,71).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,71).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Obat_Ralan+"','PENDAPATAN OBAT RALAN','"+Valid.SetAngka(tabMode.getValueAt(i,71).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,71).toString())+"'","kd_rek='"+Obat_Ralan+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 71).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Obat_Ralan, "PENDAPATAN OBAT RALAN", Valid.SetAngka(tabMode.getValueAt(i, 71).toString()), 0);
                             }
                             //obat ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,73).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,73).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,73).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Obat_Ranap+"','PENDAPATAN OBAT RANAP','"+Valid.SetAngka(tabMode.getValueAt(i,73).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,73).toString())+"'","kd_rek='"+Obat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 73).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Obat_Ranap, "PENDAPATAN OBAT RANAP", Valid.SetAngka(tabMode.getValueAt(i, 73).toString()), 0);
                             }
                             //retur obat ranap
                             if(Valid.SetAngka(tabMode.getValueAt(i,75).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','"+Valid.SetAngka(tabMode.getValueAt(i,75).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,75).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Retur_Obat_Ranap+"','PENDAPATAN OBAT RANAP','0','"+Valid.SetAngka(tabMode.getValueAt(i,75).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,75).toString())+"'","kd_rek='"+Retur_Obat_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", Valid.SetAngka(tabMode.getValueAt(i, 75).toString()), 0);
+                                Sequel.insertOrUpdateTampJurnal(Retur_Obat_Ranap, "PENDAPATAN OBAT RANAP", 0, Valid.SetAngka(tabMode.getValueAt(i, 75).toString()));
                             }
                             //service
                             if(Valid.SetAngka(tabMode.getValueAt(i,82).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,82).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,82).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Service_Ranap+"','PENDAPATAN SERVICE INAP','"+Valid.SetAngka(tabMode.getValueAt(i,82).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,82).toString())+"'","kd_rek='"+Service_Ranap+"'");   
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 82).toString()));
+                                Sequel.insertOrUpdateTampJurnal(Service_Ranap, "PENDAPATAN SERVICE RANAP", Valid.SetAngka(tabMode.getValueAt(i, 82).toString()), 0);
                             }
                             //PPN Obat
                             if(Valid.SetAngka(tabMode.getValueAt(i,83).toString())>0){
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Piutang_BPJS_RVP+"','PIUTANG BPJS','0','"+Valid.SetAngka(tabMode.getValueAt(i,83).toString())+"'","kredit=kredit+'"+Valid.SetAngka(tabMode.getValueAt(i,83).toString())+"'","kd_rek='"+Piutang_BPJS_RVP+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+PPN_Keluaran+"','PPN KELUARAN','"+Valid.SetAngka(tabMode.getValueAt(i,83).toString())+"','0'","debet=debet+'"+Valid.SetAngka(tabMode.getValueAt(i,83).toString())+"'","kd_rek='"+PPN_Keluaran+"'");
+                                Sequel.insertOrUpdateTampJurnal(Piutang_BPJS_RVP, "PIUTANG BPJS", 0, Valid.SetAngka(tabMode.getValueAt(i, 83).toString()));
+                                Sequel.insertOrUpdateTampJurnal(PPN_Keluaran, "PPN KELUARAN", Valid.SetAngka(tabMode.getValueAt(i, 83).toString()), 0);
                             }
                             //jurnal pembatalan beban, utang, piutang, pendapatan
-                            sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","RVP PIUTANG PASIEN BPJS, OLEH "+kdptg.getText());     
+                            sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","RVP PIUTANG PASIEN BPJS, OLEH "+kdptg.getText());     
                             
                             if(sukses==true){
                                 Sequel.queryu("delete from tampjurnal_rvpbpjs");
