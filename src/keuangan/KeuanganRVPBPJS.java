@@ -1922,13 +1922,14 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                         Sequel.RollBack();
                     }
                     Sequel.AutoComitTrue();
-                    /*try {
-                        Thread.sleep(700);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(KeuanganRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
-                    }*/
+                    if (row > 500) {
+                        try {
+                            Thread.sleep(700);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(KeuanganRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     if (!sukses) {
-                        adaError = true;
                         if (lanjutHinggaSelesai) {
                             sukses = true;
                         } else {
@@ -2633,7 +2634,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
                         false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
                         null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
                     });
@@ -2668,7 +2669,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                     while (rs.next()) {
                         tabMode.addRow(new Object[] {
                             false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
                             null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
                         });

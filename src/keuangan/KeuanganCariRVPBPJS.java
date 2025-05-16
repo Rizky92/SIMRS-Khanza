@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -1537,8 +1539,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     } else {
                         sukses = false;
                         Sequel.RollBack();
+                        break;
                     }
                     Sequel.AutoComitTrue();
+                    if (row > 500) {
+                        try {
+                            Thread.sleep(700);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(KeuanganCariRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
             }
             if (!sukses) {
