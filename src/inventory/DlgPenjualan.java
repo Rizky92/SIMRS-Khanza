@@ -4329,7 +4329,9 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if(sukses==true){
                 Sequel.deleteTampJurnal();
                 Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
-                Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                if(besarppnobat>0){
+                    Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                }   
                 Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
                 Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
                 Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);

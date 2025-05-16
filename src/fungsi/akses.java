@@ -248,7 +248,7 @@ public final class akses {
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
             catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
-            riwayat_surat_peringatan=false;
+            riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false;
     
     public static void setData(String user, String pass){
         int retries=2;
@@ -1405,7 +1405,9 @@ public final class akses {
                         akses.lama_pelayanan_cssd=rs2.getBoolean("lama_pelayanan_cssd");
                         akses.catatan_observasi_bayi=rs2.getBoolean("catatan_observasi_bayi");
                         akses.riwayat_surat_peringatan=rs2.getBoolean("riwayat_surat_peringatan");
-                        akses.laporan_tindakan=rs2.getBoolean("laporan_tindakan");
+                        akses.master_kesimpulan_anjuran_mcu=rs2.getBoolean("master_kesimpulan_anjuran_mcu");
+                        akses.kategori_piutang_jasa_perusahaan=rs2.getBoolean("kategori_piutang_jasa_perusahaan");
+                        akses.piutang_jasa_perusahaan=rs2.getBoolean("piutang_jasa_perusahaan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -1417,9 +1419,6 @@ public final class akses {
                                     akses.edit = false;
                                 }
                             }
-                        } catch (Exception e) {
-                            akses.tglSelesai = -1;
-                            akses.edit = false;
                         }
                         break;
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
@@ -1427,15 +1426,15 @@ public final class akses {
                         break;
                     }
                 }
-            }catch(Exception e){
-                System.out.println("Notif : "+e);
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
                 if (e.getMessage().contains("The last packet successfully received from the server")) {
                     --retries;
                 } else {
-                    retries=0;
+                    retries = 0;
                 }
             }
-        }while(retries>0);
+        }while(retries > 0);
     }
     
     public static void setLogOut() {
@@ -2573,6 +2572,9 @@ public final class akses {
         akses.lama_pelayanan_cssd=isadmin;
         akses.catatan_observasi_bayi=isadmin;
         akses.riwayat_surat_peringatan=isadmin;
+        akses.master_kesimpulan_anjuran_mcu=isadmin;
+        akses.kategori_piutang_jasa_perusahaan=isadmin;
+        akses.piutang_jasa_perusahaan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3745,6 +3747,9 @@ public final class akses {
     public static boolean getlama_pelayanan_cssd(){return akses.lama_pelayanan_cssd;}
     public static boolean getcatatan_observasi_bayi(){return akses.catatan_observasi_bayi;}
     public static boolean getriwayat_surat_peringatan(){return akses.riwayat_surat_peringatan;}
+    public static boolean getmaster_kesimpulan_anjuran_mcu(){return akses.master_kesimpulan_anjuran_mcu;}
+    public static boolean getkategori_piutang_jasa_perusahaan(){return akses.kategori_piutang_jasa_perusahaan;}
+    public static boolean getpiutang_jasa_perusahaan(){return akses.piutang_jasa_perusahaan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
