@@ -484,6 +484,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -7509,20 +7510,21 @@ public class frmUtama extends javax.swing.JFrame {
         MenuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         MenuBar.setForeground(new java.awt.Color(50, 50, 50));
         MenuBar.setToolTipText("");
+        MenuBar.setAlignmentY(0.5F);
+        MenuBar.setFont(MenuBar.getFont());
         MenuBar.setName("MenuBar"); // NOI18N
-        MenuBar.setPreferredSize(new java.awt.Dimension(227, 25));
 
         jMenu1.setBackground(new java.awt.Color(204, 0, 51));
         jMenu1.setBorder(null);
         jMenu1.setForeground(new java.awt.Color(255, 255, 253));
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/85.png"))); // NOI18N
         jMenu1.setMnemonic('A');
-        jMenu1.setText("Program");
+        jMenu1.setText("  Program  ");
         jMenu1.setToolTipText("Alt+A");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu1.setBorderPainted(false);
+        jMenu1.setFont(jMenu1.getFont());
         jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu1.setMargin(null);
         jMenu1.setName("jMenu1"); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(80, 26));
 
         MnLogin.setBackground(new java.awt.Color(255, 255, 254));
         MnLogin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -7600,15 +7602,15 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu5.setBackground(new java.awt.Color(20, 0, 20));
         jMenu5.setBorder(null);
         jMenu5.setForeground(new java.awt.Color(255, 255, 253));
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/PatientMale.png"))); // NOI18N
         jMenu5.setMnemonic('P');
-        jMenu5.setText("Presensi Pegawai");
+        jMenu5.setText("  Presensi  ");
         jMenu5.setToolTipText("Alt+P");
-        jMenu5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu5.setBorderPainted(false);
+        jMenu5.setFont(jMenu5.getFont());
         jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jMenu5.setIconTextGap(3);
+        jMenu5.setMargin(null);
         jMenu5.setName("jMenu5"); // NOI18N
-        jMenu5.setPreferredSize(new java.awt.Dimension(126, 26));
 
         MnBelumDatang1.setBackground(new java.awt.Color(255, 255, 254));
         MnBelumDatang1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -7700,14 +7702,13 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu6.setBackground(new java.awt.Color(20, 0, 20));
         jMenu6.setBorder(null);
         jMenu6.setForeground(new java.awt.Color(255, 255, 253));
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Bar Chart.png"))); // NOI18N
         jMenu6.setMnemonic('I');
-        jMenu6.setText("Informasi");
+        jMenu6.setText("  Informasi  ");
         jMenu6.setToolTipText("Alt+I");
-        jMenu6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu6.setFont(jMenu6.getFont());
         jMenu6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu6.setMargin(null);
         jMenu6.setName("jMenu6"); // NOI18N
-        jMenu6.setPreferredSize(new java.awt.Dimension(88, 26));
 
         MnRekapBulanan1.setBackground(new java.awt.Color(255, 255, 254));
         MnRekapBulanan1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -8032,14 +8033,14 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu7.setBackground(new java.awt.Color(20, 0, 20));
         jMenu7.setBorder(null);
         jMenu7.setForeground(new java.awt.Color(255, 255, 253));
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/My-Tickets24.png"))); // NOI18N
         jMenu7.setMnemonic('N');
-        jMenu7.setText("Anjungan & Antrian");
+        jMenu7.setText("  Anjungan & Antrian  ");
         jMenu7.setToolTipText("Alt+N");
-        jMenu7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu7.setBorderPainted(false);
+        jMenu7.setFont(jMenu7.getFont());
         jMenu7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu7.setMargin(null);
         jMenu7.setName("jMenu7"); // NOI18N
-        jMenu7.setPreferredSize(new java.awt.Dimension(137, 26));
 
         MnAnjungan.setBackground(new java.awt.Color(255, 255, 254));
         MnAnjungan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -8294,14 +8295,14 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setBackground(new java.awt.Color(20, 0, 20));
         jMenu4.setBorder(null);
         jMenu4.setForeground(new java.awt.Color(255, 255, 253));
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/63.png"))); // NOI18N
         jMenu4.setMnemonic('G');
-        jMenu4.setText("Tentang Program");
+        jMenu4.setText("  Tentang  ");
         jMenu4.setToolTipText("Alt+G");
-        jMenu4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jMenu4.setBorderPainted(false);
+        jMenu4.setFont(jMenu4.getFont());
         jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jMenu4.setMargin(null);
         jMenu4.setName("jMenu4"); // NOI18N
-        jMenu4.setPreferredSize(new java.awt.Dimension(121, 26));
         jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
