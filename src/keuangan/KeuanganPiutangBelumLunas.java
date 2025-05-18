@@ -984,10 +984,10 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                 Double.parseDouble(tabMode.getValueAt(i, 12).toString()) +
                                 Double.parseDouble(tabMode.getValueAt(i, 13).toString())
                             ).toPlainString();
-                            Sequel.mengupdateSmc("detail_piutang_pasien", "detail_piutang_pasien.sisapiutang = detail_piutang_pasien.sisapiutang - ?", "detail_piutang_pasien.no_rawat = ? and detail_piutang_pasien.nama_bayar = ?", ssisapiutang, tabMode.getValueAt(i, 1).toString(), nmpenjab.getText());
-                            Sequel.mengupdateSmc("piutang_pasien", "piutang_pasien.sisapiutang = piutang_pasien.sisapiutang - ?", "piutang_pasien.no_rawat = ?", ssisapiutang, tabMode.getValueAt(i, 1).toString());
+                            Sequel.mengupdateSmc("detail_piutang_pasien", "sisapiutang = sisapiutang - ?", "no_rawat = ? and nama_bayar = ?", ssisapiutang, tabMode.getValueAt(i, 1).toString(), nmpenjab.getText());
+                            Sequel.mengupdateSmc("piutang_pasien", "sisapiutang = sisapiutang - ?", "no_rawat = ?", ssisapiutang, tabMode.getValueAt(i, 1).toString());
                             if (Sequel.cariDoubleSmc("select ifnull(sum(piutang_pasien.sisapiutang), 0) from piutang_pasien where piutang_pasien.no_rawat = ?", tabMode.getValueAt(i, 1).toString()) <= 1) {
-                                Sequel.mengupdateSmc("piutang_pasien", "piutang_pasien.status = 'Lunas'", "piutang_pasien.no_rawat = ?", tabMode.getValueAt(i, 1).toString());
+                                Sequel.mengupdateSmc("piutang_pasien", "status = 'Lunas'", "no_rawat = ?", tabMode.getValueAt(i, 1).toString());
                             }
                             Sequel.deleteTampJurnal();
                             Sequel.insertTampJurnal(kdpenjab.getText(), "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
