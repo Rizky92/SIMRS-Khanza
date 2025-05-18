@@ -11,7 +11,11 @@
  */
 package simrskhanza;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import fungsi.sekuel;
+import java.awt.Color;
+import javax.swing.UIManager;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -31,5 +35,43 @@ public class SIMRSKhanza {
 
             sekuel.nyalakanBatasEdit();
         });
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+            System.setProperty("flatlaf.animation", "true");
+            UIManager.put("TabbedPane.showTabSeparators", false);
+            UIManager.put("TabbedPane.tabSeparatorsFullHeight", false);
+            UIManager.put("TabbedPane.cardTabArc", 0);
+            UIManager.put("ScrollBar.showButtons", true);
+            UIManager.put("ScrollBar.width", 16);
+            UIManager.put("ScrollPane.smoothScrolling", 1);
+            UIManager.put("Table.alternateRowColor", new java.awt.Color(255, 240, 240));
+            UIManager.put("Table.foreground", new java.awt.Color(50, 50, 50));
+            UIManager.put("Table.background", new java.awt.Color(255, 255, 255));
+            UIManager.put("Table.gridColor", new java.awt.Color(226, 231, 221));
+            UIManager.put("Table.showHorizontalLines", false);
+            UIManager.put("Table.showVerticalLines", true);
+            UIManager.put("Table.rowHeight", 26);
+            UIManager.put("Table.cellMargins", new java.awt.Insets(2, 4, 2, 4));
+            // UIManager.put("Table.intercellSpacing", new java.awt.Dimension(1, 1));
+            UIManager.put("Component.arrowType", "chevron");
+            UIManager.put("Component.innerFocusWidth", 1);
+            UIManager.put("TextBox.focusWidth", 3);
+            UIManager.put("Component.focusWidth", 1);
+            UIManager.put("buttonType", "borderless");
+            UIManager.put("Button.innerFocusWidth", 1);
+            UIManager.put("Button.arc", 6);
+            UIManager.put("Component.arc", 6);
+            UIManager.put("CheckBox.arc", 6);
+            UIManager.put("ProgressBar.arc", 6);
+            UIManager.put("TextBox.arc", 6);
+            UIManager.put("PasswordField.showCapsLock", true);
+            UIManager.put("PasswordField.showRevealButton", false);
+            UIManager.put("TextArea.selectionForeground", new java.awt.Color(255, 255, 255));
+            UIManager.put("TextArea.selectionBackground", new java.awt.Color(38, 117, 191));
+            UIManager.put("TextField.selectionForeground", new java.awt.Color(255, 255, 255));
+            UIManager.put("TextField.selectionBackground", new java.awt.Color(38, 117, 191));
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
     }
 }
