@@ -25,12 +25,11 @@ public class SIMRSKhanza {
      */
     public static void main(String[] args) {
         WidgetUtilities.invokeLater(() -> {
-           frmUtama utama=frmUtama.getInstance();
-           utama.isWall();
-           utama.setVisible(true);
-           
+            frmUtama utama = frmUtama.getInstance();
+            utama.isWall();
+            utama.setVisible(true);
+
             sekuel.nyalakanBatasEdit();
-        }); 
+        });
     }
-    
 }
