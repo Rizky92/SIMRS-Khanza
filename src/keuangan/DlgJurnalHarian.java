@@ -746,7 +746,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             "where jurnal.no_jurnal like ? and jurnal.no_bukti like ? and jurnal.tgl_jurnal between ? and ? " +
             "and detailjurnal.kd_rek like ? and (jurnal.no_jurnal like ? or jurnal.no_bukti like ? or " +
             "jurnal.keterangan like ? or detailjurnal.kd_rek like ? or rekening.nm_rek like ?) order by " +
-            "jurnal.tgl_jurnal asc, jurnal.jam_jurnal asc, jurnal.no_jurnal asc, detailjurnal.debet desc"
+            "jurnal.tgl_jurnal asc, jurnal.jam_jurnal asc, jurnal.no_jurnal asc, detailjurnal.debet desc, detailjurnal.kredit desc"
         )) {
             ps.setString(1, NoJur.getText().trim() + "%");
             ps.setString(2, NoBukti.getText().trim() + "%");
