@@ -30,9 +30,6 @@ public class SIMRSKhanza {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
             System.setProperty("flatlaf.animation", "true");
-            UIManager.put("MenuBar.itemMargins", new java.awt.Insets(4, 16, 4, 16));
-            UIManager.put("MenuBar.selectionInsets", new java.awt.Insets(1, 4, 1, 4));
-            UIManager.put("MenuBar.selectionEmbeddedInsets", new java.awt.Insets(1, 4, 1, 4));
             UIManager.put("MenuBar.selectionArc", 6);
             UIManager.put("TabbedPane.showTabSeparators", false);
             UIManager.put("TabbedPane.tabSeparatorsFullHeight", false);
