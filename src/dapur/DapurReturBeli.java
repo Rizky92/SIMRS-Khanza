@@ -790,9 +790,15 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Retur_Beli_Dapur, "RETUR PEMBELIAN", 0, ttl);
-                    Sequel.insertTampJurnal(Kontra_Retur_Beli_Dapur, "KONTRA RETUR PEMBELIAN", ttl, 0);
-                    sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PEMBELIAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                    if (!Sequel.insertTampJurnal(Retur_Beli_Dapur, "RETUR PEMBELIAN", 0, ttl)) {
+                        sukses = false;
+                    }
+                    if (!Sequel.insertTampJurnal(Kontra_Retur_Beli_Dapur, "KONTRA RETUR PEMBELIAN", ttl, 0)) {
+                        sukses = false;
+                    }
+                    if (sukses) {
+                        sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PEMBELIAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

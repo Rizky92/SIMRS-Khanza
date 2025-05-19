@@ -771,9 +771,15 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       }
                       
                       Sequel.deleteTampJurnal();
-                      Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Dapur from set_akun2"), "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("totalhibah"));
-                      Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Dapur from set_akun2"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
-                      sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG DAPUR, OLEH "+akses.getkode());  
+                      if (!Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Dapur from set_akun2"), "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("totalhibah"))) {
+                          sukses = false;
+                      }
+                      if (!Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Dapur from set_akun2"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)) {
+                          sukses = false;
+                      }
+                      if (sukses) {
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG DAPUR, OLEH "+akses.getkode());  
+                      }
                       
                       if(sukses==true){
                           Sequel.queryu2("delete from dapur_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});

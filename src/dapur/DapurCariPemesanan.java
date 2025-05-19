@@ -965,12 +965,20 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 }
                 
                 Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"));
-                if (rs.getDouble("ppn") > 0) {
-                    Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"));
+                if (!Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"))) {
+                    sukses = false;
                 }
-                Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0);
-                sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                if (rs.getDouble("ppn") > 0) {
+                    if (!Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"))) {
+                        sukses = false;
+                    }
+                }
+                if (!Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0)) {
+                    sukses = false;
+                }
+                if (sukses) {
+                    sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                    Sequel.queryu2("delete from dapurpemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});

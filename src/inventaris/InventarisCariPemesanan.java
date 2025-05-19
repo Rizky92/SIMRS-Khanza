@@ -974,14 +974,22 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 sukses=true;
 
                 Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("total"));
+                if (!Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("total"))) {
+                    sukses = false;
+                }
 
                 if(rs.getDouble("ppn")>0){
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Aset Inventaris", 0, rs.getDouble("ppn"));
+                    if (!Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Aset Inventaris", 0, rs.getDouble("ppn"))) {
+                        sukses = false;
+                    }
                 }
                 
-                Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", rs.getDouble("tagihan"), 0);
-                sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PENERIMAAN BARANG ASET/INVENTARIS"+", OLEH "+akses.getkode());
+                if (!Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", rs.getDouble("tagihan"), 0)) {
+                    sukses = false;
+                }
+                if (sukses) {
+                    sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PENERIMAAN BARANG ASET/INVENTARIS"+", OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                    Sequel.queryu2("delete from inventaris_pemesanan where no_faktur=?",1,new String[]{rs.getString("no_faktur")});

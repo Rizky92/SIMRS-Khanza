@@ -622,25 +622,45 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ranap")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){
-                        Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual);
-                        Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0);            
+                        if (!Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual)) {
+                            sukses = false;
+                        }
+                        if (!Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0)) {
+                            sukses = false;
+                        }
                     }
                     if(ttlhpp>0){
-                        Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
-                        Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0);
+                        if (!Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp)) {
+                            sukses = false;
+                        }
+                        if (!Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0)) {
+                            sukses = false;
+                        }
                     }
-                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());     
+                    if (sukses) {
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());     
+                    }
                 }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ralan")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){
-                        Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual);
-                        Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0);             
+                        if (!Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual)) {
+                            sukses = false;
+                        }
+                        if (!Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0)) {
+                            sukses = false;
+                        }
                     }
                     if(ttlhpp>0){
-                        Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
-                        Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0);                             
+                        if (!Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp)) {
+                            sukses = false;
+                        }
+                        if (!Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0)) {
+                            sukses = false;
+                        }
                     }
-                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());     
+                    if (sukses) {
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());     
+                    }
                 }
             }
 
