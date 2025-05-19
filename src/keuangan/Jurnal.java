@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -25,6 +27,66 @@ public class Jurnal {
     private PreparedStatement ps2, ps, pscek;
     private String nojur = "";
     private boolean sukses = true;
+    private Map<String, Double> detailDebet = new HashMap<>(),
+                                detailKredit = new HashMap<>();
+    
+    public boolean tampung(String kodeRekening, double debet, double kredit) {
+        double td = 0, tk = 0;
+        if (debet <= 0 || kredit <= 0) {
+            return false;
+        }
+        
+        if (debet > 0) {
+            if (detailDebet.containsKey(kodeRekening)) {
+                td = detailDebet.put(kodeRekening, detailDebet.getOrDefault(kodeRekening, 0d) + kredit);
+            } else {
+                td = detailDebet.putIfAbsent(kodeRekening, debet);
+            }
+        }
+        if (kredit > 0) {
+            if (detailKredit.containsKey(kodeRekening)) {
+                tk = detailKredit.put(kodeRekening, detailKredit.getOrDefault(kodeRekening, 0d) + kredit);
+            } else {
+                tk = detailKredit.putIfAbsent(kodeRekening, kredit);
+            }
+        }
+        
+        return !(td == 0 && tk == 0);
+    }
+    
+    public boolean tampung(String kodeRekening, String debet, String kredit) {
+        return tampung(kodeRekening, Double.parseDouble(debet), Double.parseDouble(kredit));
+    }
+    
+    public boolean simpanJurnalSMC(String noBukti, String jenis, String keterangan) {
+        if (detailDebet.isEmpty() || detailKredit.isEmpty()) {
+            return false;
+        }
+        
+        double ttlDebet = 0, ttlKredit = 0;
+        for (Map.Entry<String, Double> entry: detailDebet.entrySet()) {
+            ttlDebet += entry.getValue();
+        }
+        for (Map.Entry<String, Double> entry: detailKredit.entrySet()) {
+            ttlKredit += entry.getValue();
+        }
+        if (ttlDebet == 0 && ttlKredit == 0) {
+            return false;
+        }
+        
+        sukses = true;
+        nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", Sequel.cariIsiSmc("select current_date()"));
+        
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "insert into jurnal values(?, ?, ?, ?, ?, ?)"
+        )) {
+            
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        return true;
+    }
     
     public boolean simpanJurnalRVPBPJS(String nobukti, String jenis, String keterangan) {
         try {
