@@ -79,6 +79,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         DlgDisplay = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
@@ -88,6 +89,19 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1 = new widget.InternalFrame();
         labelantri1 = new widget.Label();
         labelLoket = new widget.Label();
+        DlgDisplaySMC = new javax.swing.JDialog();
+        internalFrame6 = new widget.InternalFrame();
+        paneliklan1 = new usu.widget.glass.PanelGlass();
+        internalFrame2 = new widget.InternalFrame();
+        AntrianDipanggil = new widget.Label();
+        panelBiasa1 = new widget.PanelBiasa();
+        AntrianA = new widget.Label();
+        AntrianB = new widget.Label();
+        AntrianC = new widget.Label();
+        AntrianD = new widget.Label();
+        AntrianE = new widget.Label();
+        AntrianF = new widget.Label();
+        panelBiasa2 = new widget.PanelBiasa();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         BtnDisplay = new widget.Button();
@@ -169,6 +183,97 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1.add(labelLoket);
 
         DlgDisplay.getContentPane().add(form1, java.awt.BorderLayout.LINE_END);
+
+        DlgDisplaySMC.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgDisplaySMC.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        DlgDisplaySMC.setName("DlgDisplaySMC"); // NOI18N
+
+        internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
+        internalFrame6.setBorder(null);
+        internalFrame6.setName("internalFrame6"); // NOI18N
+        internalFrame6.setPreferredSize(new java.awt.Dimension(500, 110));
+        internalFrame6.setWarnaBawah(new java.awt.Color(250, 255, 250));
+        internalFrame6.setLayout(new java.awt.BorderLayout(8, 0));
+
+        paneliklan1.setBackground(new java.awt.Color(250, 255, 250));
+        paneliklan1.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/coba.gif"))); // NOI18N
+        paneliklan1.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
+        paneliklan1.setPreferredSize(new java.awt.Dimension(200, 140));
+        paneliklan1.setRound(false);
+        paneliklan1.setWarna(new java.awt.Color(250, 255, 250));
+        paneliklan1.setLayout(null);
+        internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
+
+        internalFrame2.setName("internalFrame2"); // NOI18N
+        internalFrame2.setPreferredSize(new java.awt.Dimension(500, 150));
+        internalFrame2.setLayout(new java.awt.BorderLayout(0, 6));
+
+        AntrianDipanggil.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50)), "No. Antrian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 48), new java.awt.Color(50, 100, 50))); // NOI18N
+        AntrianDipanggil.setForeground(new java.awt.Color(50, 100, 50));
+        AntrianDipanggil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianDipanggil.setText("C001");
+        AntrianDipanggil.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianDipanggil.setFont(new java.awt.Font("Tahoma", 1, 90)); // NOI18N
+        AntrianDipanggil.setName("AntrianDipanggil"); // NOI18N
+        AntrianDipanggil.setPreferredSize(new java.awt.Dimension(186, 200));
+        internalFrame2.add(AntrianDipanggil, java.awt.BorderLayout.PAGE_START);
+
+        panelBiasa1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Antrian Sebelumnya", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 30), new java.awt.Color(60, 130, 90))); // NOI18N
+        panelBiasa1.setName("panelBiasa1"); // NOI18N
+        panelBiasa1.setLayout(new java.awt.GridLayout(6, 1));
+
+        AntrianA.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianA.setText("A001");
+        AntrianA.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianA.setName("AntrianA"); // NOI18N
+        panelBiasa1.add(AntrianA);
+
+        AntrianB.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianB.setText("B001");
+        AntrianB.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianB.setName("AntrianB"); // NOI18N
+        panelBiasa1.add(AntrianB);
+
+        AntrianC.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianC.setText("C001");
+        AntrianC.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianC.setName("AntrianC"); // NOI18N
+        panelBiasa1.add(AntrianC);
+
+        AntrianD.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianD.setText("D001");
+        AntrianD.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianD.setName("AntrianD"); // NOI18N
+        panelBiasa1.add(AntrianD);
+
+        AntrianE.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianE.setText("E001");
+        AntrianE.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianE.setName("AntrianE"); // NOI18N
+        panelBiasa1.add(AntrianE);
+
+        AntrianF.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianF.setText("F001");
+        AntrianF.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianF.setName("AntrianF"); // NOI18N
+        panelBiasa1.add(AntrianF);
+
+        internalFrame2.add(panelBiasa1, java.awt.BorderLayout.CENTER);
+
+        panelBiasa2.setName("panelBiasa2"); // NOI18N
+        panelBiasa2.setPreferredSize(new java.awt.Dimension(20, 20));
+        panelBiasa2.setLayout(new java.awt.GridLayout(6, 1));
+        internalFrame2.add(panelBiasa2, java.awt.BorderLayout.PAGE_END);
+
+        internalFrame6.add(internalFrame2, java.awt.BorderLayout.EAST);
+
+        DlgDisplaySMC.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -419,24 +524,37 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Antrian;
+    private widget.Label AntrianA;
+    private widget.Label AntrianB;
+    private widget.Label AntrianC;
+    private widget.Label AntrianD;
+    private widget.Label AntrianDipanggil;
+    private widget.Label AntrianE;
+    private widget.Label AntrianF;
     private widget.Button BtnAntri1;
     private widget.Button BtnBatal1;
     private widget.Button BtnBatal2;
     private widget.Button BtnDisplay;
     private widget.Button BtnKeluar;
     private javax.swing.JDialog DlgDisplay;
+    private javax.swing.JDialog DlgDisplaySMC;
     private widget.ComboBox cmbhuruf;
     private widget.ComboBox cmbloket;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame5;
+    private widget.InternalFrame internalFrame6;
     private widget.Label label1;
     private widget.Label label2;
     private widget.Label label3;
     private widget.Label labelLoket;
     private widget.Label labelantri1;
     private widget.Label labelruntext;
+    private widget.PanelBiasa panelBiasa1;
+    private widget.PanelBiasa panelBiasa2;
     private usu.widget.glass.PanelGlass paneliklan;
+    private usu.widget.glass.PanelGlass paneliklan1;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     private javax.swing.JPanel panelruntext;
