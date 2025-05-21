@@ -9,6 +9,8 @@ import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -59,6 +61,18 @@ public final class koneksiDB {
             return prop.getProperty("ANTRIANPREFIXHURUF", "no").trim().equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
+        }
+    }
+    
+    public static String[] PREFIXHURUFAKTIF() {
+        if (!ANTRIANPREFIXHURUF()) {
+            return null;
+        }
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("PREFIXHURUFAKTIF", "").trim().replaceAll("\\s+", "").split(",");
+        } catch (Exception e) {
+            return null;
         }
     }
     
