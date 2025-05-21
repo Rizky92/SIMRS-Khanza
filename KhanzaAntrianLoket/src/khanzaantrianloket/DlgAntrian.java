@@ -68,19 +68,79 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             panelBiasa1.remove(AntrianF);
             cmbhuruf.removeAllItems();
             int col = 0;
+            java.awt.GridBagConstraints gbc;
             for (String huruf : PREFIXHURUFAKTIF) {
                 switch (huruf) {
-                    case "A": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianA); ++col; break;
-                    case "B": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianB); ++col; break;
-                    case "C": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianC); ++col; break;
-                    case "D": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianD); ++col; break;
-                    case "E": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianE); ++col; break;
-                    case "F": cmbhuruf.addItem(huruf); panelBiasa1.add(AntrianF); ++col; break;
+                    case "A":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 0;
+                        gbc.gridy = 0;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianA, gbc);
+                        ++col;
+                        break;
+                    case "B":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 1;
+                        gbc.gridy = 0;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianB, gbc);
+                        ++col;
+                        break;
+                    case "C":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 2;
+                        gbc.gridy = 0;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianC, gbc);
+                        ++col;
+                        break;
+                    case "D":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 0;
+                        gbc.gridy = 1;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianD, gbc);
+                        ++col;
+                        break;
+                    case "E":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 1;
+                        gbc.gridy = 1;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianE, gbc);
+                        ++col;
+                        break;
+                    case "F":
+                        cmbhuruf.addItem(huruf);
+                        gbc = new java.awt.GridBagConstraints();
+                        gbc.gridx = 2;
+                        gbc.gridy = 1;
+                        gbc.fill = java.awt.GridBagConstraints.BOTH;
+                        gbc.weightx = 1.0;
+                        gbc.weighty = 1.0;
+                        panelBiasa1.add(AntrianF, gbc);
+                        ++col;
+                        break;
                 }
             }
-            
             if (col > 3) {
-                panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getPreferredSize().width, 240));
+                panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getWidth(), 240));
             }
             repaint();
         }
@@ -235,39 +295,107 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         internalFrame6.add(internalFrame2, java.awt.BorderLayout.EAST);
 
         panelBiasa1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Antrian Terakhir", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 30), new java.awt.Color(60, 130, 90))); // NOI18N
-        panelBiasa1.setMinimumSize(new java.awt.Dimension(349, 140));
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(349, 140));
-        panelBiasa1.setLayout(new java.awt.GridLayout(2, 3));
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(120, 160));
+        java.awt.GridBagLayout panelBiasa1Layout = new java.awt.GridBagLayout();
+        panelBiasa1Layout.columnWidths = new int[] {1, 1, 1};
+        panelBiasa1Layout.rowHeights = new int[] {1, 1};
+        panelBiasa1.setLayout(panelBiasa1Layout);
 
         AntrianA.setForeground(new java.awt.Color(60, 130, 90));
         AntrianA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianA.setText("A");
+        AntrianA.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianA.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianA);
+        AntrianA.setMaximumSize(null);
+        AntrianA.setMinimumSize(null);
+        AntrianA.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianA, gridBagConstraints);
 
         AntrianB.setForeground(new java.awt.Color(60, 130, 90));
         AntrianB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianB.setText("B");
+        AntrianB.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianB.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianB);
+        AntrianB.setMaximumSize(null);
+        AntrianB.setMinimumSize(null);
+        AntrianB.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianB, gridBagConstraints);
 
         AntrianC.setForeground(new java.awt.Color(60, 130, 90));
         AntrianC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianC.setText("C");
+        AntrianC.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianC.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianC);
+        AntrianC.setMaximumSize(null);
+        AntrianC.setMinimumSize(null);
+        AntrianC.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianC, gridBagConstraints);
 
         AntrianD.setForeground(new java.awt.Color(60, 130, 90));
         AntrianD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianD.setText("D");
+        AntrianD.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianD.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianD);
+        AntrianD.setMaximumSize(null);
+        AntrianD.setMinimumSize(null);
+        AntrianD.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianD, gridBagConstraints);
 
         AntrianE.setForeground(new java.awt.Color(60, 130, 90));
         AntrianE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianE.setText("E");
+        AntrianE.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianE.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianE);
+        AntrianE.setMaximumSize(null);
+        AntrianE.setMinimumSize(null);
+        AntrianE.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianE, gridBagConstraints);
 
         AntrianF.setForeground(new java.awt.Color(60, 130, 90));
         AntrianF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianF.setText("F");
+        AntrianF.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianF.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        panelBiasa1.add(AntrianF);
+        AntrianF.setMaximumSize(null);
+        AntrianF.setMinimumSize(null);
+        AntrianF.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianF, gridBagConstraints);
 
         internalFrame6.add(panelBiasa1, java.awt.BorderLayout.PAGE_END);
 
