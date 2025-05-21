@@ -53,6 +53,24 @@ public final class koneksiDB {
         return connection;        
     }
     
+    public static boolean ANTRIANPREFIXHURUF() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("ANTRIANPREFIXHURUF", "no").trim().equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public static String ANTRIAN() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("ANTRIAN", "").trim().toLowerCase();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
     public static String cariCepat(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
