@@ -34,12 +34,12 @@ import javax.swing.Timer;
  * @author perpustakaan
  */
 public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
-    private final Connection koneksi = koneksiDB.condb();
+    private Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final boolean ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
     private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
     private final String ANTRIAN = koneksiDB.ANTRIAN();
-    private final SimpleDateFormat df = new SimpleDateFormat("ss");
+    private final SimpleDateFormat df = new SimpleDateFormat("s");
     private BackgroundMusic music;
     private int i;
     private String antri = "", loket = "";
@@ -70,71 +70,51 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             int col = 0;
             java.awt.GridBagConstraints gbc;
             for (String huruf : PREFIXHURUFAKTIF) {
+                gbc = new java.awt.GridBagConstraints();
+                gbc.fill = java.awt.GridBagConstraints.BOTH;
+                gbc.weightx = 1.0;
+                gbc.weighty = 1.0;
                 switch (huruf) {
                     case "A":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 0;
                         gbc.gridy = 0;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianA, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                     case "B":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 1;
                         gbc.gridy = 0;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianB, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                     case "C":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 2;
                         gbc.gridy = 0;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianC, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                     case "D":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 0;
                         gbc.gridy = 1;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianD, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                     case "E":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 1;
                         gbc.gridy = 1;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianE, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                     case "F":
-                        cmbhuruf.addItem(huruf);
-                        gbc = new java.awt.GridBagConstraints();
                         gbc.gridx = 2;
                         gbc.gridy = 1;
-                        gbc.fill = java.awt.GridBagConstraints.BOTH;
-                        gbc.weightx = 1.0;
-                        gbc.weighty = 1.0;
                         panelBiasa1.add(AntrianF, gbc);
+                        cmbhuruf.addItem(huruf);
                         ++col;
                         break;
                 }
@@ -275,20 +255,20 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         paneliklan1.setLayout(null);
         internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
 
-        internalFrame2.setPreferredSize(new java.awt.Dimension(650, 150));
+        internalFrame2.setPreferredSize(new java.awt.Dimension(550, 150));
         internalFrame2.setLayout(new java.awt.GridLayout(2, 1));
 
         DisplayAntrian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "No. Antrian", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
         DisplayAntrian.setForeground(new java.awt.Color(50, 100, 50));
         DisplayAntrian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DisplayAntrian.setFont(new java.awt.Font("Tahoma", 1, 90)); // NOI18N
+        DisplayAntrian.setFont(new java.awt.Font("Tahoma", 1, 108)); // NOI18N
         DisplayAntrian.setPreferredSize(new java.awt.Dimension(186, 200));
         internalFrame2.add(DisplayAntrian);
 
         DisplayLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "Loket", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
         DisplayLoket.setForeground(new java.awt.Color(50, 100, 50));
         DisplayLoket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DisplayLoket.setFont(new java.awt.Font("Tahoma", 1, 90)); // NOI18N
+        DisplayLoket.setFont(new java.awt.Font("Tahoma", 1, 108)); // NOI18N
         DisplayLoket.setPreferredSize(new java.awt.Dimension(186, 200));
         internalFrame2.add(DisplayLoket);
 
@@ -610,8 +590,10 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         } else {
             paneliklan.repaint();
             String oldText = labelruntext.getText();
-            String newText = oldText.substring(1) + oldText.substring(0, 1);
-            labelruntext.setText(newText);
+            if (oldText.length() > 0) {
+                String newText = oldText.substring(1) + oldText.substring(0, 1);
+                labelruntext.setText(newText);
+            }
         }
     }
     
@@ -705,10 +687,9 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    private void panggilSmc(String antrian) {
+    private void panggilHurufSmc(String antrian) {
         if (antrian.isBlank()) return;
         try {
-            System.out.println(antrian.substring(0, 1));
             music = new BackgroundMusic("./suarasmc/" + antrian.substring(0, 1) + ".mp3");
             music.start();
             Thread.sleep(1000);
@@ -734,9 +715,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private void jam() {
         ActionListener taskPerformer = (ActionEvent event) -> {
             Date now = Calendar.getInstance().getTime();
-            String ss = df.format(now);
-            int s = Integer.parseInt(ss);
-            System.out.println("Detik : " + ss);
+            int s = Integer.parseInt(df.format(now));
             
             if (s % 5 == 0) {
                 antri = ""; loket = "";
@@ -757,6 +736,9 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
+                    if (e.getMessage().contains("connection closed.")) {
+                        koneksi = koneksiDB.condb();
+                    }
                 }
                 
                 if (panelBiasa1.isVisible()) {
@@ -775,6 +757,9 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                         }
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
+                        if (e.getMessage().contains("connection closed.")) {
+                            koneksi = koneksiDB.condb();
+                        }
                     }
                 }
             }
@@ -785,7 +770,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     music.start();
                     Thread.sleep(1500);
                     if (ANTRIANPREFIXHURUF) {
-                        panggilSmc(antri);
+                        panggilHurufSmc(antri);
                     } else {
                         panggil(antri);
                     }

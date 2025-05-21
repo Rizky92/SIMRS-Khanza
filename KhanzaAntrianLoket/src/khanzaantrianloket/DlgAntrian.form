@@ -289,7 +289,7 @@
             <Container class="widget.InternalFrame" name="internalFrame2">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[650, 150]"/>
+                  <Dimension value="[550, 150]"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -323,7 +323,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="90" style="1"/>
+                      <Font name="Tahoma" size="108" style="1"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[186, 200]"/>
@@ -350,7 +350,7 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="90" style="1"/>
+                      <Font name="Tahoma" size="108" style="1"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[186, 200]"/>
