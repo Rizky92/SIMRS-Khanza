@@ -74,49 +74,23 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                 gbc.fill = java.awt.GridBagConstraints.BOTH;
                 gbc.weightx = 1.0;
                 gbc.weighty = 1.0;
+                
+                switch (col) {
+                    case 0: gbc.gridx = 0; gbc.gridy = 0; break;
+                    case 1: gbc.gridx = 1; gbc.gridy = 0; break;
+                    case 2: gbc.gridx = 2; gbc.gridy = 0; break;
+                    case 3: gbc.gridx = 0; gbc.gridy = 1; break;
+                    case 4: gbc.gridx = 1; gbc.gridy = 1; break;
+                    case 5: gbc.gridx = 2; gbc.gridy = 1; break;
+                }
+                
                 switch (huruf) {
-                    case "A":
-                        gbc.gridx = 0;
-                        gbc.gridy = 0;
-                        panelBiasa1.add(AntrianA, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
-                    case "B":
-                        gbc.gridx = 1;
-                        gbc.gridy = 0;
-                        panelBiasa1.add(AntrianB, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
-                    case "C":
-                        gbc.gridx = 2;
-                        gbc.gridy = 0;
-                        panelBiasa1.add(AntrianC, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
-                    case "D":
-                        gbc.gridx = 0;
-                        gbc.gridy = 1;
-                        panelBiasa1.add(AntrianD, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
-                    case "E":
-                        gbc.gridx = 1;
-                        gbc.gridy = 1;
-                        panelBiasa1.add(AntrianE, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
-                    case "F":
-                        gbc.gridx = 2;
-                        gbc.gridy = 1;
-                        panelBiasa1.add(AntrianF, gbc);
-                        cmbhuruf.addItem(huruf);
-                        ++col;
-                        break;
+                    case "A": panelBiasa1.add(AntrianA, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "B": panelBiasa1.add(AntrianB, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "C": panelBiasa1.add(AntrianC, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "D": panelBiasa1.add(AntrianD, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "E": panelBiasa1.add(AntrianE, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "F": panelBiasa1.add(AntrianF, gbc); cmbhuruf.addItem(huruf); ++col; break;
                 }
             }
             if (col > 3) {
@@ -238,7 +212,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         DlgDisplaySMC.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1366, 768));
         DlgDisplaySMC.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        DlgDisplaySMC.setPreferredSize(new java.awt.Dimension(1366, 768));
 
         internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
         internalFrame6.setBorder(null);
