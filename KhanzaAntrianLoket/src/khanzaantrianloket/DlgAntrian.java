@@ -482,7 +482,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
             Antrian.getText().trim()
         );
-        Sequel.mengupdateSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
+        Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
             cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
             Antrian.getText().trim()
         );
