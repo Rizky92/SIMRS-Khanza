@@ -47,6 +47,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -552,6 +553,70 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak..!!");
+        }
+    }
+    
+    public void deleteTemporaryBesar() {
+        try (PreparedStatement ps = connect.prepareStatement("delete from temporary_besar where userid = ? and ipaddress = ?")) {
+            ps.setString(1, akses.getkode());
+            ps.setString(2, akses.getalamatip());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void temporaryBesar(int no, String... values) {
+        String sql = "insert into temporary_besar values(?, ?, ?";
+        for (int i = 0; i < 79; i++) {
+            if (i < values.length) {
+                sql = sql.concat("?, ");
+            } else {
+                sql = sql.concat("'', ");
+            }
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
+            ps.setString(1, akses.getkode());
+            ps.setString(2, akses.getalamatip());
+            ps.setInt(3, no);
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 4, values[i]);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void temporaryBesarBatch(TableModel tabMode, int batches) {
+        String sql = "insert into temporary_besar values(?, ?, ?, ";
+        int columns = tabMode.getColumnCount() - 1,
+            rows = tabMode.getRowCount();
+        for (int i = 0; i < 79; i++) {
+            if (i < columns) {
+                sql = sql.concat("?, ");
+            } else {
+                sql = sql.concat("'', ");
+            }
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
+            for (int i = 0; i < rows; i++) {
+                ps.setString(1, akses.getkode());
+                ps.setString(2, akses.getalamatip());
+                ps.setInt(3, (Integer) tabMode.getValueAt(i, 0));
+                for (int r = 1; r <= columns; r++) {
+                    ps.setString(r + 4, tabMode.getValueAt(i, r).toString());
+                }
+                if (i != 0 && (i % batches == 0 || rows - i == 1)) {
+                    ps.executeLargeBatch();
+                } else {
+                    ps.addBatch();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 

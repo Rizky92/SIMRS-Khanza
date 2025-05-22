@@ -4523,6 +4523,10 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabModeOperasi.getRowCount()!=0){
+            /*
+            Sequel.deleteTemporaryBesar();
+            Sequel.temporaryBesarBatch(tabModeOperasi, 100);
+            */
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
