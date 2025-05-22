@@ -2482,7 +2482,7 @@ public final class sekuel {
             
     }
     
-    private void SimpanTrack(String sql){
+    private void SimpanTrack(String sql) {
         
     }
     
