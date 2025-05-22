@@ -43,8 +43,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
             status="Belum Dibayar",pilihanetiket="",hppfarmasi="",kode_akun_bayar="",tampilkan_ppnobat_ralan="",PPN_Keluaran="";
     private PreparedStatement ps,psstok,pscaribatch;
     private ResultSet rs,rsstok;
-    private String[] no,kodebarang,kandungan,namabarang,kategori,satuan,aturanpakai,nobatch,nofaktur,kadaluarsa;
-    private double[] harga,hbeli,jumlah,kps,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
     private WarnaTable2 warna=new WarnaTable2();
     private String notapenjualan="No",aktifkanbatch="no";
     private WarnaTable2 warna2=new WarnaTable2();
@@ -2545,6 +2543,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     // End of variables declaration//GEN-END:variables
 
     private void tampil1() {
+        String[] no,kodebarang,namabarang,kategori,satuan,aturanpakai,nobatch,nofaktur,kadaluarsa;
+        double[] harga,hbeli,jumlah,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
         row=tabMode.getRowCount();
         jml=0;
         for(i=0;i<row;i++){
@@ -2735,6 +2735,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
     
     private void tampil2() {
+        String[] no,kodebarang,namabarang,kategori,satuan,aturanpakai,nobatch,nofaktur,kadaluarsa;
+        double[] harga,hbeli,jumlah,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
         row=tabMode.getRowCount();
         jml=0;
         for(i=0;i<row;i++){
@@ -2940,6 +2942,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     
     private void tampil3() {
         try{
+            String[] no,kodebarang,kandungan,namabarang,kategori,satuan,nobatch,nofaktur,kadaluarsa;
+            double[] harga,hbeli,jumlah,kps,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
             row=tabModeDetailRacikan.getRowCount();
             jml=0;
             for(i=0;i<row;i++){
@@ -3202,6 +3206,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     
     private void tampil4() {
         try{
+            String[] no,kodebarang,kandungan,namabarang,kategori,satuan,nobatch,nofaktur,kadaluarsa;
+            double[] harga,hbeli,jumlah,kps,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
             row=tabModeDetailRacikan.getRowCount();
             jml=0;
             for(i=0;i<row;i++){
@@ -4329,7 +4335,9 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if(sukses==true){
                 Sequel.deleteTampJurnal();
                 Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
-                Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                if(besarppnobat>0){
+                    Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                }   
                 Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
                 Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
                 Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
