@@ -26,7 +26,7 @@ public class Jurnal {
     private String nojur = "";
     private boolean sukses = true;
     
-    public boolean simpanJurnalRVPBPJS(String nobukti, String jenis, String keterangan) {
+    public synchronized boolean simpanJurnalRVPBPJS(String nobukti, String jenis, String keterangan) {
         try (ResultSet rscek = koneksi.createStatement().executeQuery(
             "select count(*) as jml, current_date() as tanggal, current_time() as jam, round(sum(debet) - sum(kredit), 0) as selisih from tampjurnal_rvpbpjs"
         )) {
