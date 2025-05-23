@@ -12,8 +12,6 @@
 
 package fungsi;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,7 +37,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -591,8 +588,15 @@ public final class sekuel {
     
     public void temporaryBesarBatch(TableModel tabMode, int batches) {
         String sql = "insert into temporary_besar values(?, ?, ?, ";
-        int columns = tabMode.getColumnCount() - 1,
+        
+        int columns = tabMode.getColumnCount(),
             rows = tabMode.getRowCount();
+        
+        if (rows == 0) {
+            JOptionPane.showMessageDialog(null, "Tidak ada data yang bisa diproses!");
+            return;
+        }
+        
         for (int i = 0; i < 79; i++) {
             if (i < columns) {
                 sql = sql.concat("?, ");
@@ -602,19 +606,20 @@ public final class sekuel {
         }
         
         try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
-            for (int i = 0; i < rows; i++) {
+            for (int r = 0; r < rows; r++) {
                 ps.setString(1, akses.getkode());
                 ps.setString(2, akses.getalamatip());
-                ps.setInt(3, (Integer) tabMode.getValueAt(i, 0));
-                for (int r = 1; r <= columns; r++) {
-                    ps.setString(r + 4, tabMode.getValueAt(i, r).toString());
+                ps.setInt(3, r + 1);
+                for (int c = 0; c < columns; c++) {
+                    ps.setString(c + 4, tabMode.getValueAt(r, c).toString());
                 }
-                if (i != 0 && (i % batches == 0 || rows - i == 1)) {
+                if (r != 0 && r % batches == 0) {
                     ps.executeLargeBatch();
                 } else {
                     ps.addBatch();
                 }
             }
+            ps.executeLargeBatch();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }

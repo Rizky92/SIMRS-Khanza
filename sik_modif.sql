@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE `khanza`.`antriloketsmc`  (
+CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
   `loket` int(11) NOT NULL,
   `antrian` varchar(6) NOT NULL,
   INDEX `loket`(`loket`) USING BTREE,
@@ -457,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `tempinacbg`  (
 
 CREATE TABLE IF NOT EXISTS `temporary_besar` (
 	`userid` varchar(30) NOT NULL,
-	ipaddress varchar(30) NOT NULL,
+	`ipaddress` varchar(30) NOT NULL,
 	`no` int(10) UNSIGNED DEFAULT 1,
 	`temp1` varchar(500) NULL DEFAULT NULL,
 	`temp2` varchar(500) NULL DEFAULT NULL,

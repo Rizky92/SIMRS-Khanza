@@ -4523,22 +4523,20 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabModeOperasi.getRowCount()!=0){
-            /*
             Sequel.deleteTemporaryBesar();
             Sequel.temporaryBesarBatch(tabModeOperasi, 100);
-            */
             Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+"")+" 00:00:00");
-            param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+"")+" 23:59:59");
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(KdOperatorOperasi.getText().equals("")&&NmOperatorOperasi.getText().equals("")&&KdAsistenOperasi.getText().equals("")&&NmAsistenOperasi.getText().equals("")&&KdCaraBayarOperasi.getText().equals("")&&NmCaraBayarOperasi.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+            param.put("userid", akses.getkode());
+            param.put("ipaddress", akses.getalamatip());
+            Valid.reportSmc("rptDetailTindakanOperasiSMC.jasper", "report", "::[ Detail Tindakan Operasi ]::", param);
+            /*if(KdOperatorOperasi.getText().equals("")&&NmOperatorOperasi.getText().equals("")&&KdAsistenOperasi.getText().equals("")&&NmAsistenOperasi.getText().equals("")&&KdCaraBayarOperasi.getText().equals("")&&NmCaraBayarOperasi.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptDetailTindakanOperasi.jasper","report","::[ Detail Tindakan Operasi ]::",
                        "select operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
                        "operasi.kode_paket,paket_operasi.nm_perawatan,operasi.tgl_operasi, "+
@@ -4926,7 +4924,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                            "reg_periksa.status_bayar='Belum Bayar' and operasi.tgl_operasi between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(operasi.operator1,operator1.nm_dokter) like '%"+KdOperatorOperasi.getText()+NmOperatorOperasi.getText()+"%' and concat(operasi.asisten_operator1,asisten_operator1.nama) like '%"+KdAsistenOperasi.getText()+NmAsistenOperasi.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarOperasi.getText()+NmCaraBayarOperasi.getText()+"%' and dokter_anestesi.nm_dokter like '%"+TCari.getText().trim()+"%' "+
                            "order by operasi.no_rawat desc",param); 
                 }   
-            }
+            }*/
         }
     }
 
