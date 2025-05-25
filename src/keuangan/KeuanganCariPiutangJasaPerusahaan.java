@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -36,7 +37,9 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     private int i=0;
     private boolean sukses=true;
-
+    private String Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"),
+                   Pendapatan_Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2");
+    
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -113,6 +116,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppCetakNota = new javax.swing.JMenuItem();
         ppHapus = new javax.swing.JMenuItem();
+        MnDetailCicilan = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -184,6 +188,21 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppHapus);
+
+        MnDetailCicilan.setBackground(new java.awt.Color(255, 255, 254));
+        MnDetailCicilan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnDetailCicilan.setForeground(new java.awt.Color(50, 50, 50));
+        MnDetailCicilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnDetailCicilan.setText("Bayar Piutang");
+        MnDetailCicilan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MnDetailCicilan.setName("MnDetailCicilan"); // NOI18N
+        MnDetailCicilan.setPreferredSize(new java.awt.Dimension(190, 25));
+        MnDetailCicilan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDetailCicilanActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnDetailCicilan);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -769,8 +788,8 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
                 if(nilaipiutang>0){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Sequel.cariIsiSmc("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"), "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
-                    Sequel.insertOrUpdateTampJurnal(Sequel.cariIsiSmc("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2"), "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
+                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
+                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
                     sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
                 }
 
@@ -789,6 +808,34 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }
 }//GEN-LAST:event_ppHapusActionPerformed
+
+    private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else if(tbDokter.getSelectedRow()<= -1){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
+        }else{
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Piutang");
+            }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("Sudah Lunas")){
+                JOptionPane.showMessageDialog(null,"Maaf, Piutang sudah lunas..!!");
+            }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                KeuanganBayarPiutangJasaPerusahaan bayarpiutang=new KeuanganBayarPiutangJasaPerusahaan(null,false);
+                bayarpiutang.emptTeks();
+                String kodeperusahaan=Sequel.cariIsi("select piutang_jasa_perusahaan.kode_perusahaan from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                String namaperusahaan=Sequel.cariIsi("select perusahaan_pasien.nama_perusahaan from perusahaan_pasien where perusahaan_pasien.kode_perusahaan=?",kodeperusahaan);
+                bayarpiutang.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),kodeperusahaan,namaperusahaan);
+                bayarpiutang.tampil();
+                bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
+                bayarpiutang.setLocationRelativeTo(this);
+                bayarpiutang.setAlwaysOnTop(false);
+                bayarpiutang.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnDetailCicilanActionPerformed
 
     /**
     * @param args the command line arguments
@@ -815,6 +862,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Button BtnPrint;
     private widget.TextBox KdPerusahaan;
     private widget.TextBox KdPetugas;
+    private javax.swing.JMenuItem MnDetailCicilan;
     private widget.TextBox NmPerusahaan;
     private widget.TextBox NmPetugas;
     private widget.TextBox NoPiutang;
@@ -996,14 +1044,16 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 
     public void isCek(){
-        //MnDetailCicilan.setEnabled(akses.getbayar_piutang());
+        MnDetailCicilan.setEnabled(akses.getbayar_piutang_jasa_perusahaan());
         BtnPrint.setEnabled(akses.getpiutang_jasa_perusahaan());
         ppCetakNota.setEnabled(akses.getpiutang_jasa_perusahaan());
-        if(akses.getkode().equals("Admin Utama")){
-            ppHapus.setEnabled(true);
-        }else{
-            ppHapus.setEnabled(false);
-        }
+        ppHapus.setEnabled(akses.getpiutang_jasa_perusahaan());
     }
-
+ 
+    public void cariNoTagihan(String notagihan,Date Taggal){
+        NoPiutang.setText(notagihan);
+        TglPiutang1.setDate(Taggal);
+        TglPiutang2.setDate(Taggal);
+        tampil();
+    }
 }

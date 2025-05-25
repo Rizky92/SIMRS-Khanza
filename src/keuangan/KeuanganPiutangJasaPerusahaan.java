@@ -50,6 +50,8 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
     private FileReader myObj;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private Jurnal jur=new Jurnal();
+    private String Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"),
+                   Pendapatan_Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2");
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -1043,8 +1045,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Sequel.cariIsiSmc("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"), "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
-                    Sequel.insertOrUpdateTampJurnal(Sequel.cariIsiSmc("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2"), "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
+                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
+                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
                     sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){
@@ -1519,7 +1521,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(piutang_jasa_perusahaan.no_piutang,3),signed)),0) from piutang_jasa_perusahaan where piutang_jasa_perusahaan.tgl_piutang='"+Valid.SetTgl(TanggalPiutang.getSelectedItem()+"")+"' ",
-                "PJP"+TanggalPiutang.getSelectedItem().toString().substring(8,10)+TanggalPiutang.getSelectedItem().toString().substring(3,5)+TanggalPiutang.getSelectedItem().toString().substring(0,2),3,NoPiutang);
+                "PJP"+TanggalPiutang.getSelectedItem().toString().substring(6,10)+TanggalPiutang.getSelectedItem().toString().substring(3,5)+TanggalPiutang.getSelectedItem().toString().substring(0,2),3,NoPiutang); 
     }
 
     public DefaultTableModel tabMode(){
