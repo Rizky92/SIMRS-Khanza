@@ -259,7 +259,7 @@ public class Jurnal {
         return tampung(kdrek, Double.parseDouble(debet), Double.parseDouble(kredit));
     }
 
-    public synchronized boolean simpanJurnalRVPSMC(String nobukti, String jenis, String keterangan) {
+    public synchronized boolean simpanJurnalSMC(String nobukti, String jenis, String keterangan) {
         if (detailDebet.isEmpty() || detailKredit.isEmpty()) {
             return false;
         }

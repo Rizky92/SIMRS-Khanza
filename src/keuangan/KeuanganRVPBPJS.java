@@ -1247,7 +1247,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             }
                             if (sukses) sukses = jur.tampung(Piutang_BPJS_RVP, "0", tabMode.getValueAt(i, 8).toString());
                             if (sukses) sukses = jur.tampung(koderekening, tabMode.getValueAt(i, 10).toString(), "0");
-                            if (sukses) sukses = jur.simpanJurnalRVPSMC(tabMode.getValueAt(i, 1).toString(), "U", "BAYAR PIUTANG BPJS, OLEH " + akses.getkode());
+                            if (sukses) sukses = jur.simpanJurnalSMC(tabMode.getValueAt(i, 1).toString(), "U", "BAYAR PIUTANG BPJS, OLEH " + akses.getkode());
                         }else if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())<100){
                             rvp_materialralan = Valid.SetAngka(tabMode.getValueAt(i,16).toString()); rvp_tarif_tindakandrralan = Valid.SetAngka(tabMode.getValueAt(i,18).toString()); rvp_tarif_tindakanprralan = Valid.SetAngka(tabMode.getValueAt(i,19).toString());
                             rvp_ksoralan = Valid.SetAngka(tabMode.getValueAt(i,20).toString()); rvp_menejemenralan = Valid.SetAngka(tabMode.getValueAt(i,21).toString()); rvp_biaya_rawatralan = Valid.SetAngka(tabMode.getValueAt(i,22).toString());
@@ -1543,7 +1543,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                 if (sukses) sukses = jur.tampung(PPN_Keluaran, rvp_ppnobat, 0);
                             }
                             //jurnal pembatalan beban, utang, piutang, pendapatan
-                            if (sukses) sukses = jur.simpanJurnalRVPSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
+                            if (sukses) sukses = jur.simpanJurnalSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
                             
                             if(sukses==true){
                                 double persen = Valid.SetAngka(tabMode.getValueAt(i, 11).toString());
@@ -1838,7 +1838,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                     if (sukses) sukses = jur.tampung(PPN_Keluaran, 0, rvp_ppnobat);
                                 }
                                 //jurnal pembatalan beban, utang, piutang, pendapatan
-                                if (sukses) sukses = jur.simpanJurnalRVPSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
+                                if (sukses) sukses = jur.simpanJurnalSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
                                 
                                 if(sukses==true){
                                     //jurnal kerugian 
@@ -1888,7 +1888,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                                     }
                                     if (sukses) sukses = jur.tampung(Piutang_BPJS_RVP, "0", tabMode.getValueAt(i, 10).toString());
                                     if (sukses) sukses = jur.tampung(koderekening, tabMode.getValueAt(i, 10).toString(), "0");
-                                    if (sukses) sukses = jur.simpanJurnalRVPSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
+                                    if (sukses) sukses = jur.simpanJurnalSMC(tabMode.getValueAt(i, 1).toString(), "U", "RVP PIUTANG PASIEN BPJS, OLEH " + akses.getkode());
                                     if(sukses==true){
                                         //update RVP Rawat jalan
                                         if(Sequel.queryutf("update rawat_jl_dr set material=material*"+persenbayar+",tarif_tindakandr=tarif_tindakandr*"+persenbayar+",kso=kso*"+persenbayar+",menejemen=menejemen*"+persenbayar+",biaya_rawat=biaya_rawat*"+persenbayar+" where no_rawat='"+tabMode.getValueAt(i,1).toString()+"'")==false){

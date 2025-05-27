@@ -43,7 +43,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
 
     /**
      * Creates new form DlgProgramStudi
-     * 
+     *
      * @param parent
      * @param modal
      */
@@ -917,31 +917,31 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
                     rs2 = psdetailpengeluaran.executeQuery();
                     total = 0;
                     while (rs2.next()) {
-                        Trackbarang.catatRiwayat(rs2.getString("kode_brng"), rs2.getDouble("jumlah"), 0, "Stok Keluar",
-                                akses.getkode(), "Hapus");
-                        Sequel.mengedit("dapurbarang", "kode_brng=?", "stok=stok+?", 2, new String[] {
-                                rs2.getString("jumlah"), rs2.getString("kode_brng")
-                        });
-                        total = total + rs2.getDouble("total");
+                        Trackbarang.catatRiwayat(rs2.getString("kode_brng"), rs2.getDouble("jumlah"), 0, "Stok Keluar", akses.getkode(), "Hapus");
+                        if (Sequel.mengedittf("dapurbarang", "kode_brng=?", "stok=stok+?", 2, new String[] {rs2.getString("jumlah"), rs2.getString("kode_brng")})) {
+                            total = total + rs2.getDouble("total");
+                        } else {
+                            sukses = false;
+                        }
                     }
-                    Sequel.deleteTampJurnal();;
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", 0, total);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", total, 0);
-                    sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), "U",
-                            "PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH" + ", OLEH " + akses.getkode());
-
-                    if (sukses == true) {
-                        Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?", 1,
-                                new String[] { tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString() });
+                    if (sukses) {
+                        jur.clear();
+                        if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), 0, total);
+                        if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"), total, 0);
+                        if (sukses) sukses = jur.simpanJurnalSMC(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), "U", "PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH, OLEH " + akses.getkode());
+                    }
+                    if(sukses){
+                        Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?", 1, new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString()});
                         Sequel.Commit();
-                        tampil();
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    }else{
                         Sequel.RollBack();
                     }
-
                     Sequel.AutoComitTrue();
+                    if (sukses) {
+                        tampil();
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    }
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
                 } finally {
