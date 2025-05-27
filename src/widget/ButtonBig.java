@@ -1,22 +1,18 @@
 package widget;
 
-import java.awt.Color;
-import usu.widget.glass.ButtonImageReflection;
+import javax.swing.JButton;
 
 /**
  *
  * @author usu
  */
-public class ButtonBig extends ButtonImageReflection {
-
-    /*
-     * Serial version UID
-     */
-    private static final long serialVersionUID = 1L;
-
+public class ButtonBig extends JButton {
     public ButtonBig() {
-        super();
-        setForeground(new Color(50,50,50));
-        setFont(new java.awt.Font("Tahoma", 0, 11));
+        setIconTextGap(16);
+        setHorizontalAlignment(CENTER);
+        setHorizontalTextPosition(CENTER);
+        setVerticalAlignment(CENTER);
+        setVerticalTextPosition(BOTTOM);
+        putClientProperty("JButton.buttonType", "borderless");
     }
 }
