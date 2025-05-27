@@ -878,7 +878,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(ppn>0){
                         if (sukses) sukses = jur.tampung(Sequel.cariIsi("select PPN_Masukan from set_akun"), ppn, 0);
                     }
-                    if (sukses) sukses = jur.tampung(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", 0, (ttl + ppn + meterai));
+                    if (sukses) sukses = jur.tampung(Kontra_Penerimaan_AsetInventaris, 0, (ttl + ppn + meterai));
                     if (sukses) sukses = jur.simpanJurnalSMC(NoFaktur.getText(),"U","PENERIMAAN BARANG ASET/INVENTARIS, OLEH "+akses.getkode());
                 }
 

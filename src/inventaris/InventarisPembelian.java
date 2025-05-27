@@ -815,7 +815,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(ppn>0){
                         if (sukses) sukses = jur.tampung(PPN_Masukan, ppn, 0);
                     }
-                    if (sukses) sukses = jur.tampung(akunbayar, "KAS KELUAR", 0, (ttl + ppn + meterai));
+                    if (sukses) sukses = jur.tampung(akunbayar, 0, (ttl + ppn + meterai));
                     if (sukses) sukses = jur.simpanJurnalSMC(NoFaktur.getText(),"U","PEMBELIAN ASET/INVETARIS, OLEH "+akses.getkode());
                 }
                 if(sukses){
