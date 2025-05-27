@@ -37,7 +37,6 @@ public class koneksiDB {
                     dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
                     // dataSource.setCachePreparedStatements(true);
                     dataSource.setUseCompression(true);
-                    // dataSource.setAutoReconnectForPools(true);
                     // dataSource.setUseLocalSessionState(true);
                     // dataSource.setUseLocalTransactionState(true);
                     
@@ -303,6 +302,27 @@ public class koneksiDB {
             return prop.getProperty("NOTIFWAFARMASIKEPASIEN", "no").toLowerCase().trim().equals("yes");
         } catch (Exception e) {
             return false;
+        }
+    }
+    
+    public static boolean ANTRIANPREFIXHURUF() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("ANTRIANPREFIXHURUF", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public static String[] PREFIXHURUFAKTIF() {
+        if (!ANTRIANPREFIXHURUF()) {
+            return null;
+        }
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("PREFIXHURUFAKTIF", "").trim().replaceAll("\\s+", "").split(",");
+        } catch (Exception e) {
+            return null;
         }
     }
     
