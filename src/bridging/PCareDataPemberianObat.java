@@ -631,7 +631,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                     if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());
                 }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ralan")){
-                    Sequel.deleteTampJurnal();
+                    jur.clear();
                     if(ttljual>0){
                         if (sukses) sukses = jur.tampung(Suspen_Piutang_Obat_Ralan, 0, ttljual);
                         if (sukses) sukses = jur.tampung(Obat_Ralan, ttljual, 0);

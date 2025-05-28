@@ -258,6 +258,14 @@ public class Jurnal {
     public boolean tampung(String kdrek, String debet, String kredit) {
         return tampung(kdrek, Double.parseDouble(debet), Double.parseDouble(kredit));
     }
+    
+    public boolean tampung(String kdrek, String nmrek, double debet, double kredit) {
+        return tampung(kdrek, debet, kredit);
+    }
+    
+    public boolean tampung(String kdrek, String nmrek, String debet, String kredit) {
+        return tampung(kdrek, debet, kredit);
+    }
 
     public synchronized boolean simpanJurnalSMC(String nobukti, String jenis, String keterangan) {
         if (detailDebet.isEmpty() || detailKredit.isEmpty()) {

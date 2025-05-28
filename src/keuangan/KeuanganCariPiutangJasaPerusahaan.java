@@ -39,7 +39,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private boolean sukses=true;
     private String Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"),
                    Pendapatan_Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2");
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -787,10 +787,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 double nilaipiutang=Sequel.cariIsiAngka("select piutang_jasa_perusahaan.totalpiutang from piutang_jasa_perusahaan where piutang_jasa_perusahaan.no_piutang=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
 
                 if(nilaipiutang>0){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
-                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
-                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
+                    jur.clear();
+                    if (sukses) sukses = jur.tampung(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
+                    if (sukses) sukses = jur.tampung(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
+                    if (sukses) sukses = jur.simpanJurnalSMC(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
                 }
 
                 if(sukses==true){
@@ -1049,7 +1049,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         ppCetakNota.setEnabled(akses.getpiutang_jasa_perusahaan());
         ppHapus.setEnabled(akses.getpiutang_jasa_perusahaan());
     }
- 
+
     public void cariNoTagihan(String notagihan,Date Taggal){
         NoPiutang.setText(notagihan);
         TglPiutang1.setDate(Taggal);
