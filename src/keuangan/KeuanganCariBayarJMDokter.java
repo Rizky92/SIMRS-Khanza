@@ -675,36 +675,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 }
                                 Sequel.deleteTampJurnal();
                                 if(rs.getDouble("rawatjalan")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, rs.getDouble("rawatjalan"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, rs.getDouble("rawatjalan"));
                                 }
                                 if(rs.getDouble("rawatinap")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, rs.getDouble("rawatinap"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, rs.getDouble("rawatinap"));
                                 }
                                 if(rs.getDouble("labrawatjalan")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", 0, rs.getDouble("labrawatjalan"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", 0, rs.getDouble("labrawatjalan"));
                                 }
                                 if(rs.getDouble("labrawatinap")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", 0, rs.getDouble("labrawatinap"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", 0, rs.getDouble("labrawatinap"));
                                 }
                                 if(rs.getDouble("radrawatjalan")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", 0, rs.getDouble("radrawatjalan"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", 0, rs.getDouble("radrawatjalan"));
                                 }
                                 if(rs.getDouble("radrawatinap")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", 0, rs.getDouble("radrawatinap"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", 0, rs.getDouble("radrawatinap"));
                                 }
                                 if(rs.getDouble("operasiralan")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", 0, rs.getDouble("operasiralan"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", 0, rs.getDouble("operasiralan"));
                                 }
                                 if(rs.getDouble("operasiranap")>0){
-                                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, rs.getDouble("operasiranap"));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, rs.getDouble("operasiranap"));
                                 }
                                 if(totaltagihan>0){
-                                    Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, totaltagihan);
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, totaltagihan);
                                 }
                                 if(rs.getDouble("besar_bayar")>0){
-                                    Sequel.insertOrUpdateTampJurnal(koderekening, rs.getString("nama_bayar"), totaltagihan + rs.getDouble("besar_bayar"), 0);
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, rs.getString("nama_bayar"), totaltagihan + rs.getDouble("besar_bayar"), 0);
                                 }
-                                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
+                                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
                             }
                             
                             if(sukses==true){

@@ -1023,11 +1023,11 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
                        if(sukses==true){
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(akunpengadaan, "PENGADAAN OBAT", 0, rs.getDouble("total2"));
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunpengadaan, "PENGADAAN OBAT", 0, rs.getDouble("total2"));
                            if(rs.getDouble("ppn")>0){
                            }
-                           Sequel.insertTampJurnal(rs.getString("kd_rek"), "AKUN BAYAR", rs.getDouble("tagihan"), 0);
-                           sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
+                           if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "AKUN BAYAR", rs.getDouble("tagihan"), 0);
+                           if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
                        }
 
                        if(sukses==true){

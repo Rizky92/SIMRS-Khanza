@@ -90,8 +90,8 @@ public class Jurnal {
                                         "from tampjurnal_smc where user_id = ? and ip = ?",
                                         nojur, akses.getkode(), akses.getalamatip()
                                     );
-                                    Sequel.deleteTampJurnal();
                                 }
+                                Sequel.deleteTampJurnal();
                             } catch (Exception ex) {
                                 sukses = false;
                                 System.out.println("Notifikasi : " + ex);

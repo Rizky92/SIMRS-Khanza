@@ -652,9 +652,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             }
                             Sequel.mengedit("piutang_jasa_perusahaan","no_piutang='"+tbBangsal.getValueAt(i,1).toString()+"'","sisapiutang=sisapiutang-"+tbBangsal.getValueAt(i,10).toString());
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", "0", tbBangsal.getValueAt(i,10).toString());
-                            Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i,10).toString(), "0");
-                            sukses=jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                            if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", "0", tbBangsal.getValueAt(i,10).toString());
+                            if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i,10).toString(), "0");
+                            if (sukses) sukses = jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
                         }else{
                             sukses=false;
                         }

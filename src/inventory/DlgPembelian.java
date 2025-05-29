@@ -1011,12 +1011,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }  
                         if(sukses==true){
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(Pengadaan_Obat, "PEMBELIAN", ttl, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Pengadaan_Obat, "PEMBELIAN", ttl, 0);
                             if(ppn>0){
-                                Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Obat", ppn, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Obat", ppn, 0);
                             }
-                            Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), 0, (ttl + ppn));
-                            sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());  
+                            if (sukses) sukses = Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), 0, (ttl + ppn));
+                            if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());  
                         }
                     }else{
                         sukses=false;

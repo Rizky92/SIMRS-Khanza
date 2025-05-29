@@ -788,9 +788,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
                 if(nilaipiutang>0){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
-                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
-                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", 0, nilaipiutang);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", nilaipiutang, 0);
+                    if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PIUTANG JASA PERUSAHAAN "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+", OLEH "+akses.getkode());
                 }
 
                 if(sukses==true){

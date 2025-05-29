@@ -1045,9 +1045,9 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
-                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
-                    sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
+                    if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){
                     Sequel.Commit();

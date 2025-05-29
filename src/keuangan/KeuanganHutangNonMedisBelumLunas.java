@@ -1234,8 +1234,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         Sequel.mengedit("ipsrspemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     } 
                                     Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG BARANG NON MEDIS", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG BARANG NON MEDIS", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }                           
@@ -1461,10 +1461,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }else{
                                     Sequel.deleteTampJurnal();
                                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                                        Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                                        if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                                     }
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG BARANG NON MEDIS", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG BARANG NON MEDIS", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     } 

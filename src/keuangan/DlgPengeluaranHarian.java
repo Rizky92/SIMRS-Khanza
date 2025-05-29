@@ -937,9 +937,9 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         KdKategori.getText(),Pengeluaran.getText(),KdPtg.getText(),Keterangan.getText()
                     })==true){
                         Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
-                        Sequel.insertTampJurnal(kontrakun, "Kontra", "0", Pengeluaran.getText()); 
-                        sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                        if (sukses) sukses = Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
+                        if (sukses) sukses = Sequel.insertTampJurnal(kontrakun, "Kontra", "0", Pengeluaran.getText()); 
+                        if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                     }else{
                         sukses=false;
                     }   
@@ -1016,11 +1016,11 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                                     }
                                     Sequel.deleteTampJurnal();
                                     if(total>0){
-                                        Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
+                                        if (sukses) sukses = Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
                                     }
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", "0", Pengeluaran.getText());
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", (Valid.SetAngka(Pengeluaran.getText()) + total), 0);
-                                    sukses=jur.simpanJurnal(Nomor.getText(),"U","PEMBATALAN PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", "0", Pengeluaran.getText());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", (Valid.SetAngka(Pengeluaran.getText()) + total), 0);
+                                    if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PEMBATALAN PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                                 } 
                             } catch (Exception e) {
                                 sukses=false;
@@ -1269,11 +1269,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             })==true){
                 Sequel.deleteTampJurnal();
                 if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                    Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                    if (sukses) sukses = Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                 }
-                Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
-                Sequel.insertTampJurnal(kontrakun, "Kontra", 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(Pengeluaran.getText())));
-                sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                if (sukses) sukses = Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
+                if (sukses) sukses = Sequel.insertTampJurnal(kontrakun, "Kontra", 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(Pengeluaran.getText())));
+                if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                 if(sukses==true){
                     if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
                             Nomor.getText(),kategori.norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),Pengeluaran.getText(),Nomor.getText(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Pengeluaran Harian","Baru"

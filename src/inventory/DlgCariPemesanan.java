@@ -1343,12 +1343,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
                          if(sukses==true){
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(Sequel.cariIsi("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", 0, rs.getDouble("total"));
+                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", 0, rs.getDouble("total"));
                             if(rs.getDouble("ppn")>0){
-                                Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Obat", 0, rs.getDouble("ppn"));
+                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Obat", 0, rs.getDouble("ppn"));
                             }
-                            Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", rs.getDouble("tagihan"), 0);
-                            sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode()); 
+                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", rs.getDouble("tagihan"), 0);
+                            if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode()); 
                          }
 
                          if(sukses==true){
