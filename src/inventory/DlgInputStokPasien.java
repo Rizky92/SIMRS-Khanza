@@ -825,14 +825,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
 
                         if(sukses==true){
-                            Sequel.deleteTampJurnal();
+                            jur.bersihkan();
                             if(ttljual>0){
-                                Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
-                                Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
+                                if (sukses) sukses = jur.tampung(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
+                                if (sukses) sukses = jur.tampung(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
                             }
                             if(ttlhpp>0){
-                                Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                                Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                                if (sukses) sukses = jur.tampung(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
+                                if (sukses) sukses = jur.tampung(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
                             }
                             sukses=jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());  
                         }                                                 

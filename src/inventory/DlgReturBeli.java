@@ -1040,9 +1040,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
                 if(sukses==true){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Ke_Suplayer from set_akun"), "RETUR PEMBELIAN", 0, ttlretur);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Ke_Suplayer from set_akun"), "KAS DI TANGAN", ttlretur, 0);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Retur_Ke_Suplayer from set_akun"), "RETUR PEMBELIAN", 0, ttlretur);
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Retur_Ke_Suplayer from set_akun"), "KAS DI TANGAN", ttlretur, 0);
                     sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){

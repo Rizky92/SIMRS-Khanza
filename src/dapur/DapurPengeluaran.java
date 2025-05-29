@@ -549,9 +549,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 } 
                 
                 if(sukses){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", ttl, 0);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", 0, ttl);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", ttl, 0);
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", 0, ttl);
                     sukses=jur.simpanJurnal(NoKeluar.getText(),"U","PENGGUNAAN BARANG DAPUR KERING DAN BASAH"+", OLEH "+akses.getkode());
                 }
                 

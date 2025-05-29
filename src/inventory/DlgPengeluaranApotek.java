@@ -765,9 +765,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         } 
                         if(sukses==true){
                             if(ttl>0){
-                                Sequel.deleteTampJurnal();
-                                Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl);
-                                Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0);
+                                jur.bersihkan();
+                                if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl);
+                                if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0);
                                 sukses=jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
                             }
                         }

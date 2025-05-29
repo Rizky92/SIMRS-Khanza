@@ -681,16 +681,16 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             tabMode.getValueAt(i,11).toString(),"diverifikasi oleh "+akses.getkode(),tabMode.getValueAt(i,1).toString(),koderekening,akunpiutang,tabMode.getValueAt(i,12).toString(),
                             Diskon_Piutang,tabMode.getValueAt(i,13).toString(),Piutang_Tidak_Terbayar
                         })==true){
-                            Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(akunpiutang, "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
+                            jur.bersihkan();
+                            if (sukses) sukses = jur.tampung(akunpiutang, "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
                             if(Double.parseDouble(tabMode.getValueAt(i,11).toString())>0){
-                                Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0");
+                                if (sukses) sukses = jur.tampung(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0");
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,12).toString())>0){
-                                Sequel.insertTampJurnal(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0");
+                                if (sukses) sukses = jur.tampung(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0");
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,13).toString())>0){
-                                Sequel.insertTampJurnal(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0");
+                                if (sukses) sukses = jur.tampung(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0");
                             }
                             sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());                   
                         }else{

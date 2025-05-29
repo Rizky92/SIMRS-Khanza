@@ -1299,12 +1299,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                     ttljual=Sequel.cariIsiAngka("select sum(detailjual.total) from detailjual where detailjual.nota_jual=?",rs.getString("nota_jual"));
                                     ttlhpp=Sequel.cariIsiAngka("select sum(detailjual.h_beli*detailjual.jumlah) from detailjual where detailjual.nota_jual=?",rs.getString("nota_jual"));
 
-                                    Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN", ttljual + rs.getDouble("ongkir"), 0);
-                                    Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", rs.getDouble("ppn"), 0);
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual + rs.getDouble("ongkir") + rs.getDouble("ppn"));
-                                    Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", 0, ttlhpp);
-                                    Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", ttlhpp, 0);
+                                    jur.bersihkan();
+                                    if (sukses) sukses = jur.tampung(Penjualan_Obat, "PENJUALAN", ttljual + rs.getDouble("ongkir"), 0);
+                                    if (sukses) sukses = jur.tampung(PPN_Keluaran, "PPN KELUARAN", rs.getDouble("ppn"), 0);
+                                    if (sukses) sukses = jur.tampung(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual + rs.getDouble("ongkir") + rs.getDouble("ppn"));
+                                    if (sukses) sukses = jur.tampung(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", 0, ttlhpp);
+                                    if (sukses) sukses = jur.tampung(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", ttlhpp, 0);
                                     sukses=jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
                                 }
                                 
@@ -1598,12 +1598,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                          }
                          if(sukses==true){
                             ttlhpp=Sequel.cariIsiAngka("select sum(detailjual.h_beli*detailjual.jumlah) from detailjual where detailjual.nota_jual=?",rs.getString("nota_jual"));
-                            Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttljual - rs.getDouble("ppn"));
-                            Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, rs.getDouble("ppn"));
-                            Sequel.insertTampJurnal(kdrek, "KAS DI TANGAN", ttljual, 0);
-                            Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
-                            Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
+                            jur.bersihkan();
+                            if (sukses) sukses = jur.tampung(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttljual - rs.getDouble("ppn"));
+                            if (sukses) sukses = jur.tampung(PPN_Keluaran, "PPN KELUARAN", 0, rs.getDouble("ppn"));
+                            if (sukses) sukses = jur.tampung(kdrek, "KAS DI TANGAN", ttljual, 0);
+                            if (sukses) sukses = jur.tampung(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
+                            if (sukses) sukses = jur.tampung(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
                             sukses=jur.simpanJurnal(rs.getString("nota_jual"),"U","PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode()); 
                          }
 

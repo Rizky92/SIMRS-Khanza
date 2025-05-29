@@ -719,9 +719,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }                        
                    
                 if(sukses){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(akunaset, "JENIS ASET INVENTARIS", sbttl, 0);
-                    Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", 0, sbttl);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(akunaset, "JENIS ASET INVENTARIS", sbttl, 0);
+                    if (sukses) sukses = jur.tampung(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", 0, sbttl);
                     sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN HIBAH ASET/INVENTARIS"+", OLEH "+akses.getkode());
                 }
                 

@@ -798,12 +798,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }   
                 
                 if(sukses){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(akunpembelian, "PEMBELIAN", (ttl + meterai), 0);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(akunpembelian, "PEMBELIAN", (ttl + meterai), 0);
                     if(ppn>0){
-                        Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Dapur", ppn, 0);
+                        if (sukses) sukses = jur.tampung(PPN_Masukan, "PPN Masukan Dapur", ppn, 0);
                     }
-                    Sequel.insertTampJurnal(akunbayar, "KAS KELUAR", 0, (ttl + ppn + meterai));
+                    if (sukses) sukses = jur.tampung(akunbayar, "KAS KELUAR", 0, (ttl + ppn + meterai));
                     sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN BARANG DAPUR KERING & BASAH "+", OLEH "+akses.getkode());
                 }
                 if(sukses){

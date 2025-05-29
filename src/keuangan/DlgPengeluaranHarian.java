@@ -936,9 +936,9 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         Nomor.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
                         KdKategori.getText(),Pengeluaran.getText(),KdPtg.getText(),Keterangan.getText()
                     })==true){
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
-                        Sequel.insertTampJurnal(kontrakun, "Kontra", "0", Pengeluaran.getText()); 
+                        jur.bersihkan();
+                        if (sukses) sukses = jur.tampung(akun, "Akun", Pengeluaran.getText(), "0");
+                        if (sukses) sukses = jur.tampung(kontrakun, "Kontra", "0", Pengeluaran.getText()); 
                         sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                     }else{
                         sukses=false;
@@ -1014,12 +1014,12 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                                         total=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
                                         Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
                                     }
-                                    Sequel.deleteTampJurnal();
+                                    jur.bersihkan();
                                     if(total>0){
-                                        Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
+                                        if (sukses) sukses = jur.tampung(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
                                     }
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", "0", Pengeluaran.getText());
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", (Valid.SetAngka(Pengeluaran.getText()) + total), 0);
+                                    if (sukses) sukses = jur.tampung(rs.getString("kd_rek"), "Akun", "0", Pengeluaran.getText());
+                                    if (sukses) sukses = jur.tampung(rs.getString("kd_rek2"), "Kontra Akun", (Valid.SetAngka(Pengeluaran.getText()) + total), 0);
                                     sukses=jur.simpanJurnal(Nomor.getText(),"U","PEMBATALAN PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                                 } 
                             } catch (Exception e) {
@@ -1267,12 +1267,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Nomor.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
                 KdKategori.getText(),Pengeluaran.getText(),KdPtg.getText(),Keterangan.getText()
             })==true){
-                Sequel.deleteTampJurnal();
+                jur.bersihkan();
                 if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                    Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                    if (sukses) sukses = jur.tampung(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                 }
-                Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
-                Sequel.insertTampJurnal(kontrakun, "Kontra", 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(Pengeluaran.getText())));
+                if (sukses) sukses = jur.tampung(akun, "Akun", Pengeluaran.getText(), "0");
+                if (sukses) sukses = jur.tampung(kontrakun, "Kontra", 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(Pengeluaran.getText())));
                 sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
                 if(sukses==true){
                     if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{

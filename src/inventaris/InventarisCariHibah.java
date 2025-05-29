@@ -796,9 +796,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       Sequel.AutoComitFalse();
                       sukses=true;
 
-                      Sequel.deleteTampJurnal();
-                      Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("totalhibah"));
-                      Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
+                      jur.bersihkan();
+                      if (sukses) sukses = jur.tampung(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("totalhibah"));
+                      if (sukses) sukses = jur.tampung(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
                       sukses=jur.simpanJurnal(rs.getString("no_hibah"),"U","PEMBATALAN HIBAH ASET/INVENTARIS "+", OLEH "+akses.getkode());
                       
                       if(sukses==true){

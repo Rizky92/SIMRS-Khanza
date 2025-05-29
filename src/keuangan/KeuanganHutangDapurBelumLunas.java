@@ -1232,9 +1232,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     }else{
                                         Sequel.mengedit("dapurpemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     } 
-                                    Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Dapur, "HUTANG BARANG DAPUR", tabMode.getValueAt(i, 10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i, 10).toString());
+                                    jur.bersihkan();
+                                    if (sukses) sukses = jur.tampung(Bayar_Pemesanan_Dapur, "HUTANG BARANG DAPUR", tabMode.getValueAt(i, 10).toString(), "0");
+                                    if (sukses) sukses = jur.tampung(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i, 10).toString());
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG DAPUR NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }                           
@@ -1457,12 +1457,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     })==false){
                                     sukses=false;
                                 }else{
-                                    Sequel.deleteTampJurnal();
+                                    jur.bersihkan();
                                     if (Valid.SetInteger(BiayaTransaksi.getText()) > 0) {
-                                        Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                                        if (sukses) sukses = jur.tampung(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                                     }
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Dapur, "HUTANG BARANG DAPUR", tabMode.getValueAt(i, 10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i, 10).toString()));
+                                    if (sukses) sukses = jur.tampung(Bayar_Pemesanan_Dapur, "HUTANG BARANG DAPUR", tabMode.getValueAt(i, 10).toString(), "0");
+                                    if (sukses) sukses = jur.tampung(koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i, 10).toString()));
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG DAPUR NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     } 

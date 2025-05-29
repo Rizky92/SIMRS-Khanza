@@ -1095,9 +1095,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                      if(sukses==true){
                         double sisaPiutangPasien = Sequel.cariDoubleSmc("select sisapiutang from piutang where nota_piutang = ?", rs.getString("nota_piutang"));
 
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, sisaPiutangPasien);
-                        Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", sisaPiutangPasien, 0);
+                        jur.bersihkan();
+                        if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, sisaPiutangPasien);
+                        if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", sisaPiutangPasien, 0);
                          sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
                      }
 

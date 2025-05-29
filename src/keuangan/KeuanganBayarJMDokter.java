@@ -1277,33 +1277,33 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
 
                             if(sukses==true){
-                                Sequel.deleteTampJurnal();
+                                form.jur.bersihkan();
                                 if(totalrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
                                 }
                                 if(totalrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
                                 }
                                 if(totallabrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
                                 }
                                 if(totallabrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
                                 }
                                 if(totalradrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
                                 }
                                 if(totalradrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
                                 }
                                 if(totaloperasirawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
                                 }
                                 if(totaloperasirawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
+                                    if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
                                 }
                                 if(bayar>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, bayar);
+                                    if (sukses) sukses = form.jur.tampung(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, bayar);
                                 }
                                 sukses=form.jur.simpanJurnal(NoTagihan.getText(),"U","PEMBAYARAN JASA MEDIS DOKTER "+kddokter.getText()+" "+nmdokter.getText()+", OLEH "+akses.getkode());
                             }
@@ -1802,36 +1802,36 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
 
                 if(sukses==true){
-                    Sequel.deleteTampJurnal();
+                    form.jur.bersihkan();
                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                        Sequel.insertTampJurnal(form.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                        if (sukses) sukses = form.jur.tampung(form.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                     }
                     if(totalrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
                     }
                     if(totalrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
                     }
                     if(totallabrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
                     }
                     if(totallabrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
                     }
                     if(totalradrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
                     }
                     if(totalradrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
                     }
                     if(totaloperasirawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
                     }
                     if(totaloperasirawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
+                        if (sukses) sukses = form.jur.tampung(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
                     }
                     if(bayar>0){
-                        Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + bayar);
+                        if (sukses) sukses = form.jur.tampung(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + bayar);
                     }
                     sukses=form.jur.simpanJurnal(NoTagihan.getText(),"U","PEMBAYARAN JASA MEDIS DOKTER "+kddokter.getText()+" "+nmdokter.getText()+", OLEH "+akses.getkode());
                     if(sukses==true){

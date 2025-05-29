@@ -825,9 +825,9 @@ public class DlgDeposit extends javax.swing.JDialog {
                         if(response.isArray()){
                            for(JsonNode list:response){
                                if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                                    Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0);
-                                    Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()));
+                                    jur.bersihkan();
+                                    if (sukses) sukses = jur.tampung(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0);
+                                    if (sukses) sukses = jur.tampung(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()));
                                     sukses=jur.simpanJurnal(Nomor.getText(),"U","DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode()); 
                                     if(sukses==true){
                                         sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','-','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','Uang Muka','"+BesarDeposit.getText()+"','"+BesarDeposit.getText()+"','Belum','"+akses.getkode()+"'","No.Deposit");
@@ -907,9 +907,9 @@ public class DlgDeposit extends javax.swing.JDialog {
                     if(Sequel.queryu2tf("delete from deposit where no_deposit=?", 1,new String[]{
                         tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                     })==true){
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Double.parseDouble(BesarDeposit.getText()), 0);
-                        Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(BesarDeposit.getText()));
+                        jur.bersihkan();
+                        if (sukses) sukses = jur.tampung(Uang_Muka_Ranap, "UANG MUKA RANAP", Double.parseDouble(BesarDeposit.getText()), 0);
+                        if (sukses) sukses = jur.tampung(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(BesarDeposit.getText()));
                         sukses=jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),"U","PEMBATALAN DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode()); 
                         if(sukses==true){
                             sukses=Sequel.queryu2tf("delete from tagihan_sadewa where no_nota=?",1,new String[]{tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()}); 
