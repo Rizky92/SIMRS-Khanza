@@ -92,7 +92,7 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7.setBounds(0, 8, 104, 17);
 
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-05-22");
+        jLabel17.setText("2025-05-28");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
         jLabel17.setBounds(107, 8, 120, 17);

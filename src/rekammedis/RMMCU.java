@@ -50,16 +50,16 @@ public final class RMMCU extends javax.swing.JDialog {
     private int i=0;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private String TANGGALMUNDUR="yes";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMMCU(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Tanggal","Informasi","Riwayat Peyakit Sekarang","Riwayat Penyakit Keluarga", 
+            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Tanggal","Informasi","Riwayat Peyakit Sekarang","Riwayat Penyakit Keluarga",
             "Riwayat Penyakit Dahulu","Alergi Makan & Obat","Keadaan Umum","Kesadaran","T.D.", "Nadi", "R.R.","T.B.","B.B.","Suhu","B.M.I.",
             "Klasifikasi B.M.I.","L.P.","Risiko Berdasar L.P.","Submandibula","Axilla","Supraklavikula","Leher","Inguinal","Oedema","Frontalis",
             "Maxilaris","Rambut","Palpebra","Sklera","Cornea","Buta Warna","Konjungtiva","Lensa","Pupil","Kacamata","Visus",
@@ -296,7 +296,7 @@ public final class RMMCU extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         RiwayatPenyakitSekarang.setDocument(new batasInput((int)2000).getKata(RiwayatPenyakitSekarang));
         RiwayatPenyakitKeluarga.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakitKeluarga));
@@ -337,7 +337,7 @@ public final class RMMCU extends javax.swing.JDialog {
         Kesimpulan.setDocument(new batasInput((int)1000).getKata(Kesimpulan));
         Anjuran.setDocument(new batasInput((int)1000).getKata(Anjuran));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -360,7 +360,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -368,10 +368,10 @@ public final class RMMCU extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){ 
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());   
-                }              
+                    NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -382,7 +382,7 @@ public final class RMMCU extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         BB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -397,7 +397,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 isBMI();
             }
         });
-        
+
         TB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -412,7 +412,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 isBMI();
             }
         });
-        
+
         IMT.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -427,7 +427,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 isLP();
             }
         });
-        
+
         LP.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -442,7 +442,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 isLP();
             }
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -460,7 +460,7 @@ public final class RMMCU extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -822,7 +822,7 @@ public final class RMMCU extends javax.swing.JDialog {
         MnPenilaianMCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianMCU.setForeground(new java.awt.Color(50, 50, 50));
         MnPenilaianMCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnPenilaianMCU.setText("Laporan Penilaian MCU");
+        MnPenilaianMCU.setText("Laporan Pengkajian MCU");
         MnPenilaianMCU.setName("MnPenilaianMCU"); // NOI18N
         MnPenilaianMCU.setPreferredSize(new java.awt.Dimension(180, 26));
         MnPenilaianMCU.addActionListener(new java.awt.event.ActionListener() {
@@ -844,7 +844,7 @@ public final class RMMCU extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Penilaian Medical Check Up (MCU) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pengkajian Medical Check Up (MCU) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -3225,7 +3225,7 @@ public final class RMMCU extends javax.swing.JDialog {
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
 
-        TabRawat.addTab("Input Penilaian", internalFrame2);
+        TabRawat.addTab("Input Pengkajian", internalFrame2);
 
         internalFrame3.setBorder(null);
         internalFrame3.setName("internalFrame3"); // NOI18N
@@ -3328,7 +3328,7 @@ public final class RMMCU extends javax.swing.JDialog {
 
         internalFrame3.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
 
-        TabRawat.addTab("Data Penilaian", internalFrame3);
+        TabRawat.addTab("Data Pengkajian", internalFrame3);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
@@ -3340,7 +3340,7 @@ public final class RMMCU extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,BtnDokter);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -3366,7 +3366,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 }
             }
         }
-    
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -3402,8 +3402,8 @@ public final class RMMCU extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -3443,7 +3443,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            }   
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -3472,7 +3472,7 @@ public final class RMMCU extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -3487,15 +3487,15 @@ public final class RMMCU extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -3628,7 +3628,7 @@ public final class RMMCU extends javax.swing.JDialog {
                                         "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").append(
@@ -3724,8 +3724,8 @@ public final class RMMCU extends javax.swing.JDialog {
                                 "</html>"
                             );
 
-                            f = new File("DataMCU.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataMCU.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='10000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3734,17 +3734,17 @@ public final class RMMCU extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA PEMERIKSAAN MCU<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA PEMERIKSAAN MCU<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -3877,7 +3877,7 @@ public final class RMMCU extends javax.swing.JDialog {
                                         "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").append(
@@ -3973,8 +3973,8 @@ public final class RMMCU extends javax.swing.JDialog {
                                 "</html>"
                             );
 
-                            f = new File("DataMCU.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataMCU.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='10000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3983,29 +3983,29 @@ public final class RMMCU extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA PEMERIKSAAN MCU<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA PEMERIKSAAN MCU<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"J.K.\";\"Tgl.Lahir\";\"Tanggal\";\"Informasi\";\"Riwayat Peyakit Sekarang\";\"Riwayat Penyakit Keluargan\";\"Riwayat Penyakit Dahulu\";\"Alergi Makan & Obat\";\"Keadaan Umum\";\"Kesadaran\";\"T.D.n\";\"Nadin\";\"R.R.\";\"T.B.\";\"B.B.\";\"Suhu\";\"B.M.I.\";\"Klasifikasi B.M.I.\";\"L.P.\";\"Risiko Berdasar L.P.\";\"Submandibula\";\"Axilla\";\"Supraklavikula\";\"Leher\";\"Inguinal\";\"Oedema\";\"Frontalis\";\"Maxilaris\";\"Rambut\";\"Palpebra\";\"Sklera\";\"Cornea\";\"Buta Warna\";\"Konjungtiva\";\"Lensa\";\"Pupil\";\"Menggunakan Kacamata\";\"Visus\";\"Luas Lapang Pandang\";\"Keterangan Luas Lapang Pandang\";\"Lubang Telinga\";\"Daun Telinga\";\"Selaput Pendengaran\";\"Proc.Mastoideus\";\"Septum Nasi\";\"Lubang Hidung\";\"Sinus\";\"Bibir\";\"Gusi\";\"Gigi\";\"Caries\";\"Lidah\";\"Faring\";\"Tonsil\";\"Kelenjar Limfe\";\"Kelenjar Gondok\";\"Gerakan Dada\";\"Vocal Fremitus\";\"Perkusi Dada\";\"Bunyi Napas\";\"Bunyi Tambahan\";\"Ictus Cordis\";\"Bunyi Jantung\";\"Batas\";\"Mamae\";\"Keterangan Mamae\";\"Inspeksi\";\"Palpasi\";\"Hepar\";\"Perkusi Abdomen\";\"Auskultasi\";\"Limpa\";\"Costovertebral\";\"Scoliosis\";\"Kondisi Kulit\";\"Penyakit Kulit\";\"Extrimitas Atas\";\"Keterangan Extrimitas Atas\";\"Extrimitas Bawah\";\"Keterangan Extrimitas Bawah\";\"Area Genitalia\";\"Keterangan Area Genitalia\";\"Anus & Perianal\";\"Keterangan Anus & Perianal\";\"Pemeriksaan Laboratoriumn\";\"Rontgen Thorax\";\"EKG\";\"Spirometri\";\"Audiometri\";\"Treadmill\";\"Romberg Test\";\"Back Strength\";\"ABI Tangan Kanan\";\"ABI Tangan Kiri\";\"ABI Kaki Kanan\";\"ABI Kaki Kiri\";\"Lain-lainn\";\"Merokokn\";\"Alkohol\";\"Kesimpulann\";\"Anjuran\";\"Kode Dokter\";\"Nama Dokter Penanggung Jawab\"\n"
-                            ); 
+                            );
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\";\"").append(tbObat.getValueAt(i,17).toString()).append("\";\"").append(tbObat.getValueAt(i,18).toString()).append("\";\"").append(tbObat.getValueAt(i,19).toString()).append("\";\"").append(tbObat.getValueAt(i,20).toString()).append("\";\"").append(tbObat.getValueAt(i,21).toString()).append("\";\"").append(tbObat.getValueAt(i,22).toString()).append("\";\"").append(tbObat.getValueAt(i,23).toString()).append("\";\"").append(tbObat.getValueAt(i,24).toString()).append("\";\"").append(tbObat.getValueAt(i,25).toString()).append("\";\"").append(tbObat.getValueAt(i,26).toString()).append("\";\"").append(tbObat.getValueAt(i,27).toString()).append("\";\"").append(tbObat.getValueAt(i,28).toString()).append("\";\"").append(tbObat.getValueAt(i,29).toString()).append("\";\"").append(tbObat.getValueAt(i,30).toString()).append("\";\"").append(tbObat.getValueAt(i,31).toString()).append("\";\"").append(tbObat.getValueAt(i,32).toString()).append("\";\"").append(tbObat.getValueAt(i,33).toString()).append("\";\"").append(tbObat.getValueAt(i,34).toString()).append("\";\"").append(tbObat.getValueAt(i,35).toString()).append("\";\"").append(tbObat.getValueAt(i,36).toString()).append("\";\"").append(tbObat.getValueAt(i,37).toString()).append("\";\"").append(tbObat.getValueAt(i,38).toString()).append("\";\"").append(tbObat.getValueAt(i,39).toString()).append("\";\"").append(tbObat.getValueAt(i,40).toString()).append("\";\"").append(tbObat.getValueAt(i,41).toString()).append("\";\"").append(tbObat.getValueAt(i,42).toString()).append("\";\"").append(tbObat.getValueAt(i,43).toString()).append("\";\"").append(tbObat.getValueAt(i,44).toString()).append("\";\"").append(tbObat.getValueAt(i,45).toString()).append("\";\"").append(tbObat.getValueAt(i,46).toString()).append("\";\"").append(tbObat.getValueAt(i,47).toString()).append("\";\"").append(tbObat.getValueAt(i,48).toString()).append("\";\"").append(tbObat.getValueAt(i,49).toString()).append("\";\"").append(tbObat.getValueAt(i,50).toString()).append("\";\"").append(tbObat.getValueAt(i,51).toString()).append("\";\"").append(tbObat.getValueAt(i,52).toString()).append("\";\"").append(tbObat.getValueAt(i,53).toString()).append("\";\"").append(tbObat.getValueAt(i,54).toString()).append("\";\"").append(tbObat.getValueAt(i,55).toString()).append("\";\"").append(tbObat.getValueAt(i,56).toString()).append("\";\"").append(tbObat.getValueAt(i,57).toString()).append("\";\"").append(tbObat.getValueAt(i,58).toString()).append("\";\"").append(tbObat.getValueAt(i,59).toString()).append("\";\"").append(tbObat.getValueAt(i,60).toString()).append("\";\"").append(tbObat.getValueAt(i,61).toString()).append("\";\"").append(tbObat.getValueAt(i,62).toString()).append("\";\"").append(tbObat.getValueAt(i,63).toString()).append("\";\"").append(tbObat.getValueAt(i,64).toString()).append("\";\"").append(tbObat.getValueAt(i,65).toString()).append("\";\"").append(tbObat.getValueAt(i,66).toString()).append("\";\"").append(tbObat.getValueAt(i,67).toString()).append("\";\"").append(tbObat.getValueAt(i,68).toString()).append("\";\"").append(tbObat.getValueAt(i,69).toString()).append("\";\"").append(tbObat.getValueAt(i,70).toString()).append("\";\"").append(tbObat.getValueAt(i,71).toString()).append("\";\"").append(tbObat.getValueAt(i,72).toString()).append("\";\"").append(tbObat.getValueAt(i,73).toString()).append("\";\"").append(tbObat.getValueAt(i,74).toString()).append("\";\"").append(tbObat.getValueAt(i,75).toString()).append("\";\"").append(tbObat.getValueAt(i,76).toString()).append("\";\"").append(tbObat.getValueAt(i,77).toString()).append("\";\"").append(tbObat.getValueAt(i,78).toString()).append("\";\"").append(tbObat.getValueAt(i,79).toString()).append("\";\"").append(tbObat.getValueAt(i,80).toString()).append("\";\"").append(tbObat.getValueAt(i,81).toString()).append("\";\"").append(tbObat.getValueAt(i,82).toString()).append("\";\"").append(tbObat.getValueAt(i,83).toString()).append("\";\"").append(tbObat.getValueAt(i,84).toString()).append("\";\"").append(tbObat.getValueAt(i,85).toString()).append("\";\"").append(tbObat.getValueAt(i,86).toString()).append("\";\"").append(tbObat.getValueAt(i,87).toString()).append("\";\"").append(tbObat.getValueAt(i,88).toString()).append("\";\"").append(tbObat.getValueAt(i,89).toString()).append("\";\"").append(tbObat.getValueAt(i,90).toString()).append("\";\"").append(tbObat.getValueAt(i,91).toString()).append("\";\"").append(tbObat.getValueAt(i,92).toString()).append("\";\"").append(tbObat.getValueAt(i,93).toString()).append("\";\"").append(tbObat.getValueAt(i,94).toString()).append("\";\"").append(tbObat.getValueAt(i,95).toString()).append("\";\"").append(tbObat.getValueAt(i,96).toString()).append("\";\"").append(tbObat.getValueAt(i,97).toString()).append("\";\"").append(tbObat.getValueAt(i,98).toString()).append("\";\"").append(tbObat.getValueAt(i,99).toString()).append("\";\"").append(tbObat.getValueAt(i,100).toString()).append("\";\"").append(tbObat.getValueAt(i,101).toString()).append("\";\"").append(tbObat.getValueAt(i,102).toString()).append("\";\"").append(tbObat.getValueAt(i,103).toString()).append("\";\"").append(tbObat.getValueAt(i,104).toString()).append("\";\"").append(tbObat.getValueAt(i,104).toString()).append("\"\n");
                             }
-                            f = new File("DataMCU.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataMCU.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
-                }   
+                        break;
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -4131,7 +4131,7 @@ public final class RMMCU extends javax.swing.JDialog {
     }//GEN-LAST:event_TBKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void RiwayatAlergiMakananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RiwayatAlergiMakananKeyPressed
@@ -4174,8 +4174,8 @@ public final class RMMCU extends javax.swing.JDialog {
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("norawat", tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString());
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),104).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),105).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),104).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()));            
-            Valid.reportSmc("rptCetakPenilaianAwalMCUSMC.jasper", "report", "::[ Laporan Penilaian Awal MCU ]::", param);
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),105).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),104).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()));
+            Valid.reportSmc("rptCetakPenilaianAwalMCUSMC.jasper", "report", "::[ Laporan Pengkajian Awal MCU ]::", param);
         }
     }//GEN-LAST:event_MnPenilaianMCUActionPerformed
 
@@ -5012,7 +5012,7 @@ public final class RMMCU extends javax.swing.JDialog {
                         "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "penilaian_mcu.kd_dokter like ? or dokter.nm_dokter like ?) order by penilaian_mcu.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -5025,7 +5025,7 @@ public final class RMMCU extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -5064,7 +5064,7 @@ public final class RMMCU extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -5173,15 +5173,15 @@ public final class RMMCU extends javax.swing.JDialog {
         Anjuran.setText("");
         TabRawat.setSelectedIndex(0);
         Informasi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
-            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()); 
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Informasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             RiwayatPenyakitSekarang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             RiwayatPenyakitKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
@@ -5315,14 +5315,14 @@ public final class RMMCU extends javax.swing.JDialog {
         }
         autoPopulate();
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_mcu());
         BtnHapus.setEnabled(akses.getpenilaian_mcu());
@@ -5336,8 +5336,8 @@ public final class RMMCU extends javax.swing.JDialog {
                 KdDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
             }
-        } 
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 TglAsuhan.setEditable(false);
@@ -5349,7 +5349,7 @@ public final class RMMCU extends javax.swing.JDialog {
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
-    
+
     private void hapus() {
         if(Sequel.queryu2tf("delete from penilaian_mcu where no_rawat=?",1,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -5368,7 +5368,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 "bunyi_tambahan=?,ictus_cordis=?,bunyi_jantung=?,batas=?,mamae=?,keterangan_mamae=?,inspeksi=?,palpasi=?,hepar=?,perkusi_abdomen=?,auskultasi=?,limpa=?,costovertebral=?,scoliosis=?,kondisi_kulit=?,penyakit_kulit=?,ekstrimitas_atas=?,ekstrimitas_atas_ket=?,"+
                 "ekstrimitas_bawah=?,ekstrimitas_bawah_ket=?,area_genitalia=?,keterangan_area_genitalia=?,anus_perianal=?,keterangan_anus_perianal=?,laborat=?,radiologi=?,ekg=?,spirometri=?,audiometri=?,treadmill=?,romberg_test=?,back_strength=?,abi_tangan_kanan=?,abi_tangan_kiri=?,"+
                 "abi_kaki_kanan=?,abi_kaki_kiri=?,lainlain=?,merokok=?,alkohol=?,kesimpulan=?,anjuran=?",102,new String[]{
-                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(), 
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(),
                 RiwayatPenyakitDahulu.getText(),RiwayatAlergiMakanan.getText(),KeadaanUmum.getSelectedItem().toString(),Kesadaran.getSelectedItem().toString(),TD.getText(),Nadi.getText(),RR.getText(),TB.getText(),BB.getText(),Suhu.getText(),IMT.getText(),KlasifikasiIMT.getText(),
                 LP.getText(),RisikoLP.getText(),Submandibula.getSelectedItem().toString(),Axila.getSelectedItem().toString(),Supraklavikula.getSelectedItem().toString(),Leher.getSelectedItem().toString(),Inguinal.getSelectedItem().toString(),Oedema.getSelectedItem().toString(),
                 NyeriTekanSinusFrontalis.getSelectedItem().toString(),NyeriTekananSinusMaxilaris.getSelectedItem().toString(),Rambut.getText(),Palpebra.getSelectedItem().toString(),Sklera.getSelectedItem().toString(),Cornea.getSelectedItem().toString(),
@@ -5496,7 +5496,7 @@ public final class RMMCU extends javax.swing.JDialog {
 
     private void simpan() {
         if(Sequel.menyimpantf("penilaian_mcu","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",101,new String[]{
-                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(), 
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(),
                 RiwayatPenyakitDahulu.getText(),RiwayatAlergiMakanan.getText(),KeadaanUmum.getSelectedItem().toString(),Kesadaran.getSelectedItem().toString(),TD.getText(),Nadi.getText(),RR.getText(),TB.getText(),BB.getText(),Suhu.getText(),IMT.getText(),KlasifikasiIMT.getText(),
                 LP.getText(),RisikoLP.getText(),Submandibula.getSelectedItem().toString(),Axila.getSelectedItem().toString(),Supraklavikula.getSelectedItem().toString(),Leher.getSelectedItem().toString(),Inguinal.getSelectedItem().toString(),Oedema.getSelectedItem().toString(),
                 NyeriTekanSinusFrontalis.getSelectedItem().toString(),NyeriTekananSinusMaxilaris.getSelectedItem().toString(),Rambut.getText(),Palpebra.getSelectedItem().toString(),Sklera.getSelectedItem().toString(),Cornea.getSelectedItem().toString(),
@@ -5511,7 +5511,7 @@ public final class RMMCU extends javax.swing.JDialog {
                 Audiometri.getText(),Treadmill.getText(),Romberg.getText(),Backstrength.getText(),AbiTanganKanan.getText(),AbiTanganKiri.getText(),AbiKakiKanan.getText(),AbiKakiKiri.getText(),Lainlain.getText(),Merokok.getText(),Alkohol.getText(),Kesimpulan.getText(),Anjuran.getText()
             })==true){
             tabMode.addRow(new Object[]{
-                TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Jk.getText(),TglLahir.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(), 
+                TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Jk.getText(),TglLahir.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Informasi.getSelectedItem().toString(),RiwayatPenyakitSekarang.getText(),RiwayatPenyakitKeluarga.getText(),
                 RiwayatPenyakitDahulu.getText(),RiwayatAlergiMakanan.getText(),KeadaanUmum.getSelectedItem().toString(),Kesadaran.getSelectedItem().toString(),TD.getText(),Nadi.getText(),RR.getText(),TB.getText(),BB.getText(),Suhu.getText(),IMT.getText(),KlasifikasiIMT.getText(),
                 LP.getText(),RisikoLP.getText(),Submandibula.getSelectedItem().toString(),Axila.getSelectedItem().toString(),Supraklavikula.getSelectedItem().toString(),Leher.getSelectedItem().toString(),Inguinal.getSelectedItem().toString(),Oedema.getSelectedItem().toString(),
                 NyeriTekanSinusFrontalis.getSelectedItem().toString(),NyeriTekananSinusMaxilaris.getSelectedItem().toString(),Rambut.getText(),Palpebra.getSelectedItem().toString(),Sklera.getSelectedItem().toString(),Cornea.getSelectedItem().toString(),
@@ -5530,7 +5530,7 @@ public final class RMMCU extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void isBMI(){
         try {
             if((!TB.getText().equals(""))&&(!BB.getText().equals(""))){
@@ -5561,7 +5561,7 @@ public final class RMMCU extends javax.swing.JDialog {
             KlasifikasiIMT.setText("");
         }
     }
-    
+
     private void isLP(){
         try {
             if((!LP.getText().equals(""))&&(!Jk.getText().equals(""))&&(!KlasifikasiIMT.getText().equals(""))){
@@ -5643,10 +5643,10 @@ public final class RMMCU extends javax.swing.JDialog {
             RisikoLP.setText("");
         }
     }
-    
+
     private void autoPopulate() {
         if (! Sequel.cariExistsSmc("select * from pemeriksaan_ralan where no_rawat = ?", TNoRw.getText())) return;
-        
+
         try (PreparedStatement ps = koneksi.prepareStatement("select * from pemeriksaan_ralan where no_rawat = ? order by tgl_perawatan desc, jam_rawat desc limit 1")) {
             ps.setString(1, TNoRw.getText());
             try (ResultSet rs = ps.executeQuery()) {
