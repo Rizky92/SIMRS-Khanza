@@ -203,6 +203,16 @@ ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS 
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_ibu`;
 
+ALTER TABLE `khanza`.`penilaian_mcu` MODIFY COLUMN `auskultasi` enum('Normal','Meningkat (>4x/menit)','Bising Usus Meningkat','Bising Usus Menurun','-') NOT NULL AFTER `perkusi_abdomen`;
+
+ALTER TABLE `khanza`.`penilaian_mcu` MODIFY COLUMN `bunyi_jantung` enum('Reguler','Irreguler','Korotkoff I, II','Gallop','Lain-lain') NOT NULL AFTER `ictus_cordis`;
+
+ALTER TABLE `khanza`.`penilaian_mcu` MODIFY COLUMN `bunyi_tambahan` enum('Tidak Ada','Wheezing','Tronkhi','Ronchi','-') NOT NULL AFTER `bunyi_napas`;
+
+ALTER TABLE `khanza`.`penilaian_mcu` MODIFY COLUMN `costovertebral` enum('Tidak Ada','Ada','Ada Di Kiri','Ada Di Kanan','-') NOT NULL AFTER `limpa`;
+
+ALTER TABLE `khanza`.`penilaian_mcu` MODIFY COLUMN `proc_mastoideus` enum('Tidak Ada','Ada','Normal','Tidak Normal','-') NOT NULL AFTER `selaput_pendengaran`;
+
 ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `email` varchar(50) NOT NULL DEFAULT '' AFTER `no_telp`;
 
 ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NOT NULL DEFAULT '' AFTER `attn`;
