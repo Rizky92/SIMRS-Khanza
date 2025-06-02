@@ -703,7 +703,11 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                             DisplayLoket.setText(loket);
                             System.out.print("Loket : " + loket + "; ");
                             System.out.println("Antrian : " + antri);
-                            i = Integer.parseInt(antri.substring(1)) + 1;
+                            if (ANTRIANPREFIXHURUF) {
+                                i = Integer.parseInt(antri.substring(1)) + 1;
+                            } else {
+                                i = Integer.parseInt(antri) + 1;
+                            }
                             Antrian.setText("" + i);
                         }
                     }

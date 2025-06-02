@@ -10884,7 +10884,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void MnAnjunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAnjunganActionPerformed
         try {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Runtime.getRuntime().exec("java -jar anjunganmandiri.jar");
+            Runtime.getRuntime().exec("java -jar anjunganmandiri2.jar");
             this.setCursor(Cursor.getDefaultCursor());
         } catch (Exception e) {
             System.out.print("Notifikasi : "+e);
