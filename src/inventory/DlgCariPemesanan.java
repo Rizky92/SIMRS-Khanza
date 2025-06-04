@@ -1612,27 +1612,27 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             
             if(!NoFaktur.getText().equals("")){
-                datanofaktur=" and pemesanan.no_faktur='"+NoFaktur.getText()+"' ";
+                datanofaktur=" and pemesanan.no_faktur like '%"+NoFaktur.getText()+"%' ";
             }
             
             if(!nmsup.getText().equals("")){
-                datasuplier=" and datasuplier.nama_suplier='"+nmsup.getText()+"' ";
+                datasuplier=" and datasuplier.nama_suplier like '%"+nmsup.getText()+"%' ";
             }
             
             if(!nmptg.getText().equals("")){
-                datapetugas=" and petugas.nama='"+nmptg.getText()+"' ";
+                datapetugas=" and petugas.nama like '%"+nmptg.getText()+"%' ";
             }
             
             if(!nmjenis.getText().equals("")){
-                datajenis=" and jenis.nama='"+nmjenis.getText()+"' ";
+                datajenis=" and jenis.nama like '%"+nmjenis.getText()+"%' ";
             }
             
             if(!nmbar.getText().equals("")){
-                databarang=" and databarang.nama_brng='"+nmbar.getText()+"' ";
+                databarang=" and databarang.nama_brng like '%"+nmbar.getText()+"%' ";
             }
             
             if(!NmIF.getText().equals("")){
-                dataindustri=" and industrifarmasi.nama_industri='"+NmIF.getText()+"' ";
+                dataindustri=" and industrifarmasi.nama_industri like '%"+NmIF.getText()+"%' ";
             }
             
             if(!Status.getSelectedItem().toString().equals("Semua")){
