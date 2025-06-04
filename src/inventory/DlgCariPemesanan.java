@@ -1612,7 +1612,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             
             if(!NoFaktur.getText().equals("")){
-                datanofaktur=" and pemesanan.no_faktur='"+NoFaktur.getText()+"' ";
+                datanofaktur=" and pemesanan.no_faktur like '%"+NoFaktur.getText()+"%' ";
             }
             
             if(!nmsup.getText().equals("")){
