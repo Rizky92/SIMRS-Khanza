@@ -93,7 +93,11 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     case "F": panelBiasa1.add(AntrianF, gbc); cmbhuruf.addItem(huruf); ++col; break;
                 }
             }
-            if (col > 3) {
+            if (col <= 1) {
+                panelBiasa1.setVisible(false);
+            } else if (col > 1) {
+                panelBiasa1.setVisible(true);
+            } else if (col > 3) {
                 panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getWidth(), 240));
             }
             repaint();
@@ -704,7 +708,9 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                             System.out.print("Loket : " + loket + "; ");
                             System.out.println("Antrian : " + antri);
                             if (ANTRIANPREFIXHURUF) {
-                                i = Integer.parseInt(antri.substring(1)) + 1;
+                                if (cmbhuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
+                                    i = Integer.parseInt(antri.substring(1)) + 1;
+                                }
                             } else {
                                 i = Integer.parseInt(antri) + 1;
                             }
