@@ -728,7 +728,7 @@
 					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<box topPadding="4"/>
+				<box topPadding="4" rightPadding="8"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -780,6 +780,7 @@
 					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 				</reportElement>
+				<box rightPadding="8"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -836,7 +837,7 @@
 					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 				</reportElement>
-				<box bottomPadding="6">
+				<box bottomPadding="6" rightPadding="8">
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Top">
@@ -5750,253 +5751,6 @@
 				<text><![CDATA[I. ROMBERG TEST]]></text>
 			</staticText>
 		</band>
-		<band height="52" splitType="Prevent">
-			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
-			<staticText>
-				<reportElement x="0" y="0" width="539" height="18" uuid="3961643e-f60a-48e1-9db1-cd07960f343b">
-					<property name="com.jaspersoft.layout.grid.x" value="0"/>
-					<property name="com.jaspersoft.layout.grid.y" value="0"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="6"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<box topPadding="4" leftPadding="2"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[K. ANKLE BRACHIAL INDEX]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="18" width="60" height="14" uuid="b99c4402-e412-4662-94fe-f77667ae7e63">
-					<property name="com.jaspersoft.layout.grid.x" value="0"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box leftPadding="12"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tangan Kiri]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="60" y="18" width="5" height="14" uuid="824cc3eb-1b7c-4c4a-9428-4cf77bae755f">
-					<property name="com.jaspersoft.layout.grid.x" value="1"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="65" y="18" width="205" height="14" uuid="d0399505-b75b-4a71-9d5f-d130fd065ad8">
-					<property name="com.jaspersoft.layout.grid.x" value="2"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<box>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{abi_tangan_kiri}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="270" y="18" width="66" height="14" uuid="64214d04-1590-47b2-a372-7fbe6badcdc6">
-					<property name="com.jaspersoft.layout.grid.x" value="3"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box leftPadding="12"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Tangan Kanan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="336" y="18" width="5" height="14" uuid="bbbc9fc4-79c0-49ce-b64d-dccd292a2736">
-					<property name="com.jaspersoft.layout.grid.x" value="4"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="341" y="18" width="198" height="14" uuid="6e46ea11-bb01-4af5-8acd-4f18abf50a8c">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="5"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-				</reportElement>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{abi_tangan_kanan}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="32" width="60" height="20" uuid="2a1e4b76-f235-4942-8913-c1ee62593c32">
-					<property name="com.jaspersoft.layout.grid.x" value="0"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box leftPadding="12" bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Kaki Kiri]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="60" y="32" width="5" height="20" uuid="013e2d35-9157-4eaa-979a-2b093457d804">
-					<property name="com.jaspersoft.layout.grid.x" value="1"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="65" y="32" width="205" height="20" uuid="0450d80e-094c-4557-bf16-41072664f8e0">
-					<property name="com.jaspersoft.layout.grid.x" value="2"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-				</reportElement>
-				<box bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{abi_kaki_kiri}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="270" y="32" width="66" height="20" isPrintWhenDetailOverflows="true" uuid="658a25f1-97a4-4a71-881e-72924895cea7">
-					<property name="com.jaspersoft.layout.grid.x" value="3"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<box leftPadding="12" bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Kaki Kanan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="336" y="32" width="5" height="20" uuid="d8438b18-766d-49fe-8a30-21c1f8fbe0d0">
-					<property name="com.jaspersoft.layout.grid.x" value="4"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="true"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="341" y="32" width="198" height="20" uuid="7e9d2ac5-5f3d-4391-b758-4d1688bbfd81">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="5"/>
-					<property name="com.jaspersoft.layout.grid.y" value="2"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-				</reportElement>
-				<box bottomPadding="6">
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{abi_kaki_kanan}]]></textFieldExpression>
-			</textField>
-		</band>
 		<band height="32" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
 			<textField>
@@ -6037,7 +5791,7 @@
 					<font fontName="Tahoma" size="8" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[L. LAIN-LAIN]]></text>
+				<text><![CDATA[K. LAIN-LAIN]]></text>
 			</staticText>
 		</band>
 		<band height="44" splitType="Prevent">
@@ -6059,7 +5813,7 @@
 					<font fontName="Tahoma" size="8" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[M. RIWAYAT MEROKOK DAN KONSUMSI ALKOHOL]]></text>
+				<text><![CDATA[L. RIWAYAT MEROKOK DAN KONSUMSI ALKOHOL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="16" width="269" height="12" uuid="3d629fea-f8e6-412d-a73b-5650a5b97db4">
@@ -6164,7 +5918,7 @@
 					<font fontName="Tahoma" size="8" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[N. KESIMPULAN]]></text>
+				<text><![CDATA[M. KESIMPULAN]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="ContainerHeight" x="0" y="18" width="539" height="14" uuid="d754215f-7d62-48f6-ad3c-e560640ab336">
@@ -6229,7 +5983,7 @@
 					<font fontName="Tahoma" size="8" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[O. ANJURAN]]></text>
+				<text><![CDATA[N. ANJURAN]]></text>
 			</staticText>
 		</band>
 		<band height="112">
