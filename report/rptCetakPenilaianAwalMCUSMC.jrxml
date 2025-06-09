@@ -5753,7 +5753,7 @@
 		</band>
 		<band height="32" splitType="Prevent">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="ContainerHeight" x="0" y="18" width="539" height="14" uuid="5d68c439-8964-4435-a1a2-b853997a040b">
 					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
