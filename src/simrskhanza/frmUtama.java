@@ -669,6 +669,7 @@ import keuangan.KeuanganPiutangJasaPerusahaan;
 import keuangan.KeuanganPiutangJasaPerusahaanBelumLunas;
 import keuangan.KeuanganPiutangObatBelumLunas;
 import keuangan.KeuanganPiutangPeminjamanUang;
+import keuangan.KeuanganPiutangPeminjamanUangBelumLunas;
 import keuangan.KeuanganRVPBPJS;
 import keuangan.KeuanganRekapJmDokter;
 import keuangan.KeuanganRekapPengajuanBiaya;
@@ -22860,6 +22861,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnPiutangPeminjamanUangBelumLunasActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        KeuanganPiutangPeminjamanUangBelumLunas form=new KeuanganPiutangPeminjamanUangBelumLunas(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     
     /**
     * @param args the command line arguments
@@ -23570,7 +23583,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkriningKesehatanGigiMulutBalita,btnSkriningAnemia,btnPermintaanLayananProgramKFR,btnLayananProgramKFR,btnSkriningHipertensi,btnSkriningKesehatanPenglihatan,
             btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa,btnSkriningRisikoKankerServiks,btnCatatanCairanHemodialisa,btnSkriningKesehatanGigiMulutLansia,
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
-            btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas;
+            btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
+            btnPiutangPeminjamanUangBelumLunas;
     
     public void isWall(){
         try{            
@@ -26105,6 +26119,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if((akses.getpiutang_lainlain()==true)||(akses.getbayar_piutang_lain()==true)){
                 Panelmenu.add(btnPiutangLainLain);
+                jmlmenu++;
+            }
+            
+            if(akses.getpiutang_peminjaman_uang_belum_lunas()==true){
+                Panelmenu.add(btnPiutangPeminjamanUangBelumLunas);
                 jmlmenu++;
             }
             
@@ -31726,6 +31745,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if((akses.getpiutang_lainlain()==true)||(akses.getbayar_piutang_lain()==true)){
             Panelmenu.add(btnPiutangLainLain);
+            jmlmenu++;
+        }
+        
+        if(akses.getpiutang_peminjaman_uang_belum_lunas()==true){
+            Panelmenu.add(btnPiutangPeminjamanUangBelumLunas);
             jmlmenu++;
         }
         
@@ -38295,6 +38319,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnPiutangLainLain);
                 jmlmenu++;
             }                
+        }
+        
+        if(akses.getpiutang_peminjaman_uang_belum_lunas()==true){
+            if(btnPiutangPeminjamanUangBelumLunas.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPiutangPeminjamanUangBelumLunas);
+                jmlmenu++;
+            }  
         }
         
         if(akses.getbayar_piutang_lain()==true){
@@ -48118,6 +48149,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPiutangJasaPerusahaanBelumLunas.setName("btnPiutangJasaPerusahaanBelumLunas");
         btnPiutangJasaPerusahaanBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPiutangJasaPerusahaanBelumLunas.addActionListener(this::btnPiutangJasaPerusahaanBelumLunasActionPerformed);
+        
+        btnPiutangPeminjamanUangBelumLunas = new widget.ButtonBig();
+        btnPiutangPeminjamanUangBelumLunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554856_money_finance_business_office_marketing_icon.png"))); 
+        btnPiutangPeminjamanUangBelumLunas.setText("Piutang Peminjaman Uang Belum Lunas");
+        btnPiutangPeminjamanUangBelumLunas.setIconTextGap(0);
+        btnPiutangPeminjamanUangBelumLunas.setName("btnPiutangPeminjamanUangBelumLunas");
+        btnPiutangPeminjamanUangBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPiutangPeminjamanUangBelumLunas.addActionListener(this::btnPiutangPeminjamanUangBelumLunasActionPerformed);
     }
     
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
