@@ -899,6 +899,7 @@ import rekammedis.RMHasilEndoskopiHidung;
 import rekammedis.RMHasilEndoskopiTelinga;
 import rekammedis.RMHasilPemeriksaanEKG;
 import rekammedis.RMHasilPemeriksaanEcho;
+import rekammedis.RMHasilPemeriksaanSlitLamp;
 import rekammedis.RMHasilPemeriksaanUSG;
 import rekammedis.RMHasilPemeriksaanUSGGynecologi;
 import rekammedis.RMHasilPemeriksaanUSGNeonatus;
@@ -22886,6 +22887,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnHasilPemeriksaanSlitLampActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMHasilPemeriksaanSlitLamp form=new RMHasilPemeriksaanSlitLamp(this,false);
+        form.isCek();
+        form.emptTeks();
+        form.setTampil();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
     
     /**
     * @param args the command line arguments
@@ -23597,7 +23611,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnCatatanObservasiHemodialisa,btnSkriningKesehatanGigiMulutDewasa,btnSkriningRisikoKankerServiks,btnCatatanCairanHemodialisa,btnSkriningKesehatanGigiMulutLansia,
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
-            btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi;
+            btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp;
     
     public void isWall(){
         try{            
@@ -27571,6 +27585,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.gethasil_pemeriksaan_ekg()==true){
                 Panelmenu.add(btnHasilPemeriksaanEKG);
+                jmlmenu++;
+            }
+            
+            if(akses.gethasil_pemeriksaan_slit_lamp()==true){
+                Panelmenu.add(btnHasilPemeriksaanSlitLamp);
                 jmlmenu++;
             }
             
@@ -33185,6 +33204,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
         if(akses.gethasil_pemeriksaan_ekg()==true){
             Panelmenu.add(btnHasilPemeriksaanEKG);
+            jmlmenu++;
+        }
+        
+        if(akses.gethasil_pemeriksaan_slit_lamp()==true){
+            Panelmenu.add(btnHasilPemeriksaanSlitLamp);
             jmlmenu++;
         }
         
@@ -40338,6 +40362,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.gethasil_pemeriksaan_slit_lamp()==true){
+            if(btnHasilPemeriksaanSlitLamp.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnHasilPemeriksaanSlitLamp);
+                jmlmenu++;
+            }
+        }
+        
         if(akses.gethasil_pemeriksaan_echo()==true){
             if(btnHasilPemeriksaanECHO.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnHasilPemeriksaanECHO);
@@ -46886,7 +46917,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnChecklistKesiapanAnestesi = new widget.ButtonBig();
         btnChecklistKesiapanAnestesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7479646_questionnaire_survey_checklist_list_clipboard_icon.png"))); 
-        btnChecklistKesiapanAnestesi.setText("Checklist Kesiapan Anestesi");
+        btnChecklistKesiapanAnestesi.setText("Check List Kesiapan Anestesi");
         btnChecklistKesiapanAnestesi.setIconTextGap(0);
         btnChecklistKesiapanAnestesi.setName("btnChecklistKesiapanAnestesi"); 
         btnChecklistKesiapanAnestesi.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -47203,6 +47234,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnHasilPemeriksaanEKG.setName("btnHasilPemeriksaanEKG"); 
         btnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(200, 90));
         btnHasilPemeriksaanEKG.addActionListener(this::btnHasilPemeriksaanEKGActionPerformed);
+        
+        btnHasilPemeriksaanSlitLamp = new widget.ButtonBig();
+        btnHasilPemeriksaanSlitLamp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5173015_eye_focus_internet_scan_security_icon.png")));
+        btnHasilPemeriksaanSlitLamp.setText("Hasil Pemeriksaan Slit Lamp");
+        btnHasilPemeriksaanSlitLamp.setIconTextGap(0);
+        btnHasilPemeriksaanSlitLamp.setName("btnHasilPemeriksaanSlitLamp"); 
+        btnHasilPemeriksaanSlitLamp.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnHasilPemeriksaanSlitLamp.addActionListener(this::btnHasilPemeriksaanSlitLampActionPerformed);
         
         btnHasilPemeriksaanECHO = new widget.ButtonBig();
         btnHasilPemeriksaanECHO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2104702_beat_health_healthcare_heart_heartbeat_icon.png")));
@@ -47878,7 +47917,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnChecklistPemberianFibrinolitik = new widget.ButtonBig();
         btnChecklistPemberianFibrinolitik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2620524_cv_employee_job_seeker_unemployee_icon.png"))); 
-        btnChecklistPemberianFibrinolitik.setText("Checklist Pemberian Fibrinolitik");
+        btnChecklistPemberianFibrinolitik.setText("Check List Pemberian Fibrinolitik");
         btnChecklistPemberianFibrinolitik.setIconTextGap(0);
         btnChecklistPemberianFibrinolitik.setName("btnChecklistPemberianFibrinolitik"); 
         btnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(200, 90));

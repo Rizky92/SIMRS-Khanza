@@ -1564,7 +1564,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.add(chkCatatanKeperawatanRanap);
 
         chkChecklistPemberianFibrinolitik.setSelected(true);
-        chkChecklistPemberianFibrinolitik.setText("Checklist Pemberian Fibrinolitik");
+        chkChecklistPemberianFibrinolitik.setText("Check List Pemberian Fibrinolitik");
         chkChecklistPemberianFibrinolitik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         chkChecklistPemberianFibrinolitik.setName("chkChecklistPemberianFibrinolitik"); // NOI18N
         chkChecklistPemberianFibrinolitik.setOpaque(false);
@@ -14799,7 +14799,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Pre Operasi : "+e);
+            System.out.println("Notif Check List Pre Operasi : "+e);
         }
     }
     
@@ -14900,7 +14900,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Pre Operasi : "+e);
+            System.out.println("Notif Check List Pre Operasi : "+e);
         }
     }
     
@@ -15034,7 +15034,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Pre Operasi : "+e);
+            System.out.println("Notif Check List Pre Operasi : "+e);
         }
     }
     
@@ -15157,7 +15157,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Pre Operasi : "+e);
+            System.out.println("Notif Check List Pre Operasi : "+e);
         }
     }
     
@@ -15284,7 +15284,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Pre Operasi : "+e);
+            System.out.println("Notif Check List Pre Operasi : "+e);
         }
     }
     
@@ -23109,7 +23109,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Masuk HCU : "+e);
+            System.out.println("Notif Check List Masuk HCU : "+e);
         }
     }
     
@@ -23234,7 +23234,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Keluar HCU : "+e);
+            System.out.println("Notif Check List Keluar HCU : "+e);
         }
     }
     
@@ -23644,7 +23644,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Masuk ICU : "+e);
+            System.out.println("Notif Check List Masuk ICU : "+e);
         }
     }
     
@@ -23768,7 +23768,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Keluar HCU : "+e);
+            System.out.println("Notif Check List Keluar HCU : "+e);
         }
     }
     
@@ -24025,7 +24025,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Masuk HCU : "+e);
+            System.out.println("Notif Check List Masuk HCU : "+e);
         }
     }
     
@@ -31725,7 +31725,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         htmlContent.append(
                           "<tr class='isi'>").append( 
                             "<td valign='top' width='2%'></td>").append(        
-                            "<td valign='top' width='18%'>Checklist Pemberian Fibrinolitik</td>").append(
+                            "<td valign='top' width='18%'>Check List Pemberian Fibrinolitik</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"

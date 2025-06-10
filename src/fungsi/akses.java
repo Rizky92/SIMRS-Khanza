@@ -248,7 +248,7 @@ public final class akses {
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
             catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
-            piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false;
+            piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1412,6 +1412,7 @@ public final class akses {
                         akses.piutang_jasa_perusahaan_belum_lunas=rs2.getBoolean("piutang_jasa_perusahaan_belum_lunas");
                         akses.checklist_kesiapan_anestesi=rs2.getBoolean("checklist_kesiapan_anestesi");
                         akses.piutang_peminjaman_uang_belum_lunas=rs2.getBoolean("piutang_peminjaman_uang_belum_lunas");
+                        akses.hasil_pemeriksaan_slit_lamp=rs2.getBoolean("hasil_pemeriksaan_slit_lamp");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2583,6 +2584,7 @@ public final class akses {
         akses.piutang_jasa_perusahaan_belum_lunas=isadmin;
         akses.checklist_kesiapan_anestesi=isadmin;
         akses.piutang_peminjaman_uang_belum_lunas=isadmin;
+        akses.hasil_pemeriksaan_slit_lamp=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3762,6 +3764,7 @@ public final class akses {
     public static boolean getpiutang_jasa_perusahaan_belum_lunas(){return akses.piutang_jasa_perusahaan_belum_lunas;}
     public static boolean getchecklist_kesiapan_anestesi(){return akses.checklist_kesiapan_anestesi;}
     public static boolean getpiutang_peminjaman_uang_belum_lunas(){return akses.piutang_peminjaman_uang_belum_lunas;}
+    public static boolean gethasil_pemeriksaan_slit_lamp(){return akses.hasil_pemeriksaan_slit_lamp;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
@@ -3772,4 +3775,4 @@ public final class akses {
             akses.edit = false;
         }
     }
-}   
+}
