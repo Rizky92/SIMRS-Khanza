@@ -69,7 +69,8 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     /** Creates new form DlgResepObat 
      *@param parent
-     *@param modal*/
+     *@param modal
+     */
     public DlgResepObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

@@ -618,7 +618,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 sukses=false;
             }
             
-            if (sukses) {
+            if(sukses==true){
                 if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ranap")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){

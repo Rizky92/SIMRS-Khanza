@@ -53,14 +53,10 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(628,674);
 
-        tabMode = new DefaultTableModel(null, new Object[] {
-            "P", "No.Rawat", "No.RM", "Nama Pasien", "No.HP", "No.Kartu", "NIK", "Tanggal", "Poliklinik", "Dokter",
-            "Jam Praktek", "Jenis Kunjungan", "Nomor Referensi", "Status", "Validasi Checkin", "No.Booking"
+        tabMode=new DefaultTableModel(null,new Object[]{
+            "P","No.Rawat","No.RM","Nama Pasien","No.HP","No.Kartu","NIK","Tanggal","Poliklinik","Dokter","Jam Praktek","Jenis Kunjungan","Nomor Referensi","Status","Validasi Checkin","No.Booking"
         }) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return colIndex == 0;
-            }
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){return colIndex==0;}
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -77,9 +73,9 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
         for (i = 0; i < 16; i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
-            if (i == 0) {
+            if(i==0){
                 column.setPreferredWidth(20);
-            } else if(i==1){
+            }else if(i==1){
                 column.setPreferredWidth(110);
             }else if(i==2){
                 column.setPreferredWidth(70);
@@ -439,10 +435,10 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tbJnsPerawatan.getRowCount()==0){
+        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
-        }else if(tbJnsPerawatan.getRowCount()!=0){
+        }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){  

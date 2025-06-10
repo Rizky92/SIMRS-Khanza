@@ -965,7 +965,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 //response = root.path("response");
                 if(response.path("klaim").isArray()){
                     for(JsonNode list:response.path("klaim")){
-                        pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep = ?");
+                        pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep=?");
                         try {
                             pssep.setString(1,list.path("noSEP").asText());
                             rssep=pssep.executeQuery();

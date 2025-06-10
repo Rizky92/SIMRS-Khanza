@@ -67,21 +67,23 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private ResultSet rsobat,carikapasitas,rs2;
     private double y=0,kenaikan=0,ttl=0,ppnobat=0,jumlahracik=0,persenracik=0,kapasitasracik=0;
     private int i=0,z=0,row2=0,r=0;
-    private boolean ubah=false,copy=false,sukses=true,load=false;
+    private boolean ubah=false,copy=false,sukses=true;
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
-    private DlgCariTemplateResep cariTemplateResep = new DlgCariTemplateResep(null, false);
     private String noracik="",aktifkanbatch="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "";
-    private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
+            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no";
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
+    private boolean load=false;
+    private String kodeunit = "";
+    private DlgCariTemplateResep cariTemplateResep = new DlgCariTemplateResep(null, false);
+    private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
     private Map<String, Object> map;
     private ArrayList<String> arrlist = new ArrayList<>();
     /** Creates new form DlgPenyakit
@@ -210,11 +212,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 "Komposisi","Kategori Obat"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                if (colIndex == 9 || colIndex == 11 || colIndex == 12 || colIndex == 13) {
-                    return true;
+                boolean a = false;
+                if ((colIndex==9)||(colIndex==11)||(colIndex==12)||(colIndex==13)) {
+                    a=true;
                 }
-                
-                return false;
+                return a;
              }             
              Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
@@ -301,7 +303,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             });
         }
-
+        
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -329,17 +331,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 JTable table = cariTemplateResep.getTable();
-                
                 if (table.getSelectedRow() == -1) {
                     return;
                 }
-                
                 if (table.getValueAt(table.getSelectedRow(), 0).toString().isBlank()) {
                     JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pada kolom nama template resep yang mau dipilih...!!");
-                    
                     return;
                 }
-                
                 textTemplateResep.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
                 tampilkanTemplateObat(table.getValueAt(table.getSelectedRow(), 0).toString());
             }
@@ -754,7 +752,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-02-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1120,7 +1118,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         hitungResep();
                         TCari.requestFocus();
                     } 
-                }
+                }   
             } catch (Exception e) {
             }
         }
@@ -1165,53 +1163,27 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 ChkJln.setSelected(false);    
                 Sequel.AutoComitFalse();
                 sukses=true;
-                int coba = 0, maxCoba = 10;
                 if(ubah==false){
-                    if (checkboxSimpanTemplateResep.isSelected() && ! textTemplateResep.getText().isBlank()) {
-                        while (Sequel.menyimpantfSmc(
-                            "resep_obat",
+                    int coba = 1, maxCoba = 10;
+                    if (checkboxSimpanTemplateResep.isSelected() && !textTemplateResep.getText().isBlank()) {
+                        while (!(sukses = Sequel.menyimpantfSmc("resep_obat",
                             "no_resep, tgl_perawatan, jam, no_rawat, kd_dokter, tgl_peresepan, jam_peresepan, status, tgl_penyerahan, jam_penyerahan, nama_template",
-                            new String[] {
-                                NoResep.getText(),
-                                "0000-00-00",
-                                "00:00:00",
-                                TNoRw.getText(),
-                                KdDokter.getText(),
-                                Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                status,
-                                "0000-00-00",
-                                "00:00:00",
-                                textTemplateResep.getText()
-                            }) == false && coba++ < maxCoba) {
-                            autonomor(coba + 1);
-                            sukses = coba < maxCoba;
-                        }
-                        if (sukses == true) {
-                            simpandata();
+                            NoResep.getText(), "0000-00-00", "00:00:00", TNoRw.getText(), KdDokter.getText(), Valid.getTglSmc(DTPBeri),
+                            Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), status, "0000-00-00", "00:00:00", textTemplateResep.getText()
+                        )) && coba < maxCoba) {
+                            autonomor(coba++);
                         }
                     } else {
-                        while (Sequel.menyimpantfSmc(
-                            "resep_obat",
+                        while (!(sukses = Sequel.menyimpantfSmc("resep_obat",
                             "no_resep, tgl_perawatan, jam, no_rawat, kd_dokter, tgl_peresepan, jam_peresepan, status, tgl_penyerahan, jam_penyerahan",
-                            new String[] {
-                                NoResep.getText(),
-                                "0000-00-00",
-                                "00:00:00",
-                                TNoRw.getText(),
-                                KdDokter.getText(),
-                                Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                status,
-                                "0000-00-00",
-                                "00:00:00"
-                            }) == false && coba++ < maxCoba) {
-                            autonomor(coba + 1);
-                            sukses = coba < maxCoba;
+                            NoResep.getText(), "0000-00-00", "00:00:00", TNoRw.getText(), KdDokter.getText(), Valid.getTglSmc(DTPBeri),
+                            Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), status, "0000-00-00", "00:00:00"
+                        )) && coba < maxCoba) {
+                            autonomor(coba++);
                         }
-                        if (sukses == true) {
-                            simpandata();
-                        }
+                    }
+                    if (sukses) {
+                        simpandata();
                     }
                 }else if(ubah==true){
                     if (Sequel.cariExistsSmc("select * from resep_obat where no_resep = ? and tgl_perawatan = '0000-00-00'", NoResep.getText())) {
@@ -1330,9 +1302,11 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     dispose();
                 }else{
                     Sequel.RollBack();
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
                 Sequel.AutoComitTrue();
+                if (!sukses) {
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                }
                 ChkJln.setSelected(true);
             }                
         }
@@ -1393,6 +1367,17 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Valid.pindah(evt,NoResep,BtnSimpan);
         }
     }//GEN-LAST:event_KdDokterKeyPressed
+
+    private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
+        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.isCek();
+        dokter.setLocationRelativeTo(internalFrame1);
+        dokter.setVisible(true);
+    }//GEN-LAST:event_btnDokterActionPerformed
+
+    private void btnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDokterKeyPressed
+        Valid.pindah(evt,KdDokter,BtnSimpan);
+    }//GEN-LAST:event_btnDokterKeyPressed
 
     private void NoResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepKeyPressed
         Valid.pindah(evt,cmbDtk,KdDokter);
@@ -1673,17 +1658,6 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }//GEN-LAST:event_checkboxSimpanTemplateResepItemStateChanged
 
-    private void btnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDokterKeyPressed
-        Valid.pindah(evt,KdDokter,BtnSimpan);
-    }//GEN-LAST:event_btnDokterKeyPressed
-
-    private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        dokter.isCek();
-        dokter.setLocationRelativeTo(internalFrame1);
-        dokter.setVisible(true);
-    }//GEN-LAST:event_btnDokterActionPerformed
-
     /**
     * @param args the command line arguments
     */
@@ -1781,7 +1755,6 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
             ObjectNode rootnode = mapper.createObjectNode();
-            
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     qrystokkosong="";
@@ -1842,7 +1815,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }  
                     rootnode.set("peresepandokter", arraynode);
                 }catch(Exception e){
-                    System.out.println("Notifikasi 1a: "+e);
+                    System.out.println("Notifikasi : "+e);
                 }finally{
                     if(rsobat != null){
                         rsobat.close();
@@ -1917,7 +1890,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }  
                     rootnode.set("peresepandokter", arraynode);
                 }catch(Exception e){
-                    System.out.println("Notifikasi 1b: "+e);
+                    System.out.println("Notifikasi : "+e);
                 }finally{
                     if(rsobat != null){
                         rsobat.close();
@@ -1948,8 +1921,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         try{
             boolean[] pilih; 
-            double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
-            String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,namakategori;
+            double[] jumlah,harga,beli,stok;
+            String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,namakategori;
             z=0;
             for(i=0;i<tbResep.getRowCount();i++){
                 if(!tbResep.getValueAt(i,1).toString().equals("")){
@@ -1964,7 +1937,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             namabarang=new String[z];
             kodesatuan=new String[z];
             letakbarang=new String[z];
-            namajenis=new String[z];
+            namajenis=new String[z];                   
             namakategori=new String[z];
             aturan=new String[z];           
             industri=new String[z];         
@@ -2038,36 +2011,16 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             response = root.path("peresepandokter");
             String hargaobat = "";
             switch (Jeniskelas.getSelectedItem().toString()) {
-                case "Rawat Jalan":
-                    hargaobat = "HargaRalan";
-                    break;
-                case "Beli Luar":
-                    hargaobat = "HargaBeliLuar";
-                    break;
-                case "Karyawan":
-                    hargaobat = "HargaKaryawan";
-                    break;
-                case "Utama/BPJS":
-                    hargaobat = "HargaUtama";
-                    break;
-                case "Kelas 1":
-                    hargaobat = "HargaKelas1";
-                    break;
-                case "Kelas 2":
-                    hargaobat = "HargaKelas2";
-                    break;
-                case "Kelas 3":
-                    hargaobat = "HargaKelas3";
-                    break;
-                case "VIP":
-                    hargaobat = "HargaVIP";
-                    break;
-                case "VVIP":
-                    hargaobat = "HargaVVIP";
-                    break;
-                default:
-                    hargaobat = "HargaBeli";
-                    break;
+                case "Rawat Jalan": hargaobat = "HargaRalan"; break;
+                case "Beli Luar": hargaobat = "HargaBeliLuar"; break;
+                case "Karyawan": hargaobat = "HargaKaryawan"; break;
+                case "Utama/BPJS": hargaobat = "HargaUtama"; break;
+                case "Kelas 1": hargaobat = "HargaKelas1"; break;
+                case "Kelas 2": hargaobat = "HargaKelas2"; break;
+                case "Kelas 3": hargaobat = "HargaKelas3"; break;
+                case "VIP": hargaobat = "HargaVIP"; break;
+                case "VVIP": hargaobat = "HargaVVIP"; break;
+                default: hargaobat = "HargaBeli"; break;
             }
             if(response.isArray()){
                 if (AKTIFKANFILTERRESEPPERJENISOBAT && pcFilterPerJenisObat.isSelected() && !arrlist.isEmpty()) {
@@ -2157,12 +2110,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         } 
     }
     
-    public void setNoRm(String norwt, Date tanggal, String jam, String menit, String detik, String KodeDokter, String NamaDokter, String status, String kodeunit) {
-        this.kodeunit = kodeunit;
-        setNoRm(norwt, tanggal, jam, menit, detik, KodeDokter, NamaDokter, status);
-    }
-    
-    public void setNoRm(String norwt, Date tanggal, String jam, String menit, String detik, String KodeDokter, String NamaDokter, String status) {
+    public void setNoRm(String norwt,Date tanggal, String jam,String menit,String detik,String KodeDokter,String NamaDokter,String status) {        
         TNoRw.setText(norwt);
         Sequel.cariIsi("select concat(pasien.no_rkm_medis,' ',pasien.nm_pasien,' (',pasien.umur,')') from reg_periksa inner join pasien "+
                     " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where no_rawat=? ",TPasien,TNoRw.getText());
@@ -2179,6 +2127,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         SetHarga();
         ubah=false;
         copy=false;
+    }
+    
+    public void setNoRm(String norwt, Date tanggal, String jam, String menit, String detik, String KodeDokter, String NamaDokter, String status, String kodeunit) {
+        this.kodeunit = kodeunit;
+        setNoRm(norwt, tanggal, jam, menit, detik, KodeDokter, NamaDokter, status);
     }
     
     public void setNoRm(String norwt,String KodeDokter,String NamaDokter,String Pasien,String kodepj,String status) {        
@@ -2276,9 +2229,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     
     public void tampildetailracikanresep() {   
         try {
-            boolean[] pilih; 
             double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
-            String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,namakategori;
+            String[] no,kodebarang,namabarang,kodesatuan,kandungan,namajenis,industri,komposisi,namakategori;
             z=0;
             for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
                 if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,13).toString())>0){
@@ -2385,36 +2337,16 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             response = root.path("peresepandokter");
             String hargaobat = "";
             switch (Jeniskelas.getSelectedItem().toString()) {
-                case "Rawat Jalan":
-                    hargaobat = "HargaRalan";
-                    break;
-                case "Beli Luar":
-                    hargaobat = "HargaBeliLuar";
-                    break;
-                case "Karyawan":
-                    hargaobat = "HargaKaryawan";
-                    break;
-                case "Utama/BPJS":
-                    hargaobat = "HargaUtama";
-                    break;
-                case "Kelas 1":
-                    hargaobat = "HargaKelas1";
-                    break;
-                case "Kelas 2":
-                    hargaobat = "HargaKelas2";
-                    break;
-                case "Kelas 3":
-                    hargaobat = "HargaKelas3";
-                    break;
-                case "VIP":
-                    hargaobat = "HargaVIP";
-                    break;
-                case "VVIP":
-                    hargaobat = "HargaVVIP";
-                    break;
-                default:
-                    hargaobat = "HargaBeli";
-                    break;
+                case "Rawat Jalan": hargaobat = "HargaRalan"; break;
+                case "Beli Luar": hargaobat = "HargaBeliLuar"; break;
+                case "Karyawan": hargaobat = "HargaKaryawan"; break;
+                case "Utama/BPJS": hargaobat = "HargaUtama"; break;
+                case "Kelas 1": hargaobat = "HargaKelas1"; break;
+                case "Kelas 2": hargaobat = "HargaKelas2"; break;
+                case "Kelas 3": hargaobat = "HargaKelas3"; break;
+                case "VIP": hargaobat = "HargaVIP"; break;
+                case "VVIP": hargaobat = "HargaVVIP"; break;
+                default: hargaobat = "HargaBeli"; break;
             }
             if(response.isArray()){
                 if (AKTIFKANFILTERRESEPPERJENISOBAT && pcFilterPerJenisObat.isSelected() && !arrlist.isEmpty()) {
@@ -2516,33 +2448,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 templateRacikanKosong = false;
 
         switch (Jeniskelas.getSelectedItem().toString().toLowerCase()) {
-            case "karyawan":
-                hargaKelas = "karyawan";
-                break;
-            case "rawat jalan":
-                hargaKelas = "ralan";
-                break;
-            case "beli luar":
-                hargaKelas = "beliluar";
-                break;
-            case "utama/bpjs":
-                hargaKelas = "utama";
-                break;
-            case "kelas 1":
-                hargaKelas = "kelas1";
-                break;
-            case "kelas 2":
-                hargaKelas = "kelas2";
-                break;
-            case "kelas 3":
-                hargaKelas = "kelas3";
-                break;
-            case "vip":
-                hargaKelas = "vip";
-                break;
-            case "vvip":
-                hargaKelas = "vvip";
-                break;
+            case "karyawan": hargaKelas = "karyawan"; break;
+            case "rawat jalan": hargaKelas = "ralan"; break;
+            case "beli luar": hargaKelas = "beliluar"; break;
+            case "utama/bpjs": hargaKelas = "utama"; break;
+            case "kelas 1": hargaKelas = "kelas1"; break;
+            case "kelas 2": hargaKelas = "kelas2"; break;
+            case "kelas 3": hargaKelas = "kelas3"; break;
+            case "vip": hargaKelas = "vip"; break;
+            case "vvip": hargaKelas = "vvip"; break;
         }
 
         try {

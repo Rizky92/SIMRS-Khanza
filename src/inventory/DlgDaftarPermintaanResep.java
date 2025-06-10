@@ -42,7 +42,6 @@ import support.kirimwa.DlgKirimWA;
 
 public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4,tabMode5,tabMode6,tabMode7,tabMode8;
-    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -54,6 +53,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
     private BackgroundMusic music;
     private boolean aktif=false,semua,ceksukses=false;
+    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
     
     /** Creates new form 
      * @param parent
@@ -403,6 +403,13 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         
         if(alarm.equals("yes")){
             jam();
+        }
+        
+        try {
+            DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+            DEPOAKTIFOBAT = "";
         }
         
         ChkAccor.setSelected(false);

@@ -396,7 +396,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
         jLabel19.setBounds(6, 10, 54, 23);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-08-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-08-2020" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -412,7 +412,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
         jLabel21.setBounds(160, 10, 23, 23);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-08-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-08-2020" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -531,7 +531,7 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
         FormInput.add(label8);
         label8.setBounds(373, 10, 200, 23);
 
-        tgl_permintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-08-2023 15:59:10" }));
+        tgl_permintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-08-2020" }));
         tgl_permintaan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tgl_permintaan.setName("tgl_permintaan"); // NOI18N
         tgl_permintaan.setOpaque(false);
@@ -1292,7 +1292,6 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
 
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
-            Valid.SetTgl2(tgl_permintaan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
              nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());   
              no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());   
              nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString()); 
@@ -1302,6 +1301,7 @@ private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
              nip.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
              nama_petugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
              departemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
+             Valid.SetTgl2(tgl_permintaan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
              deskripsi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
         }
     }

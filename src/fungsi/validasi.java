@@ -60,6 +60,7 @@ import widget.Button;
 import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
+import java.io.File;
 import widget.TextBox;
 /**
  *
@@ -311,6 +312,36 @@ public final class validasi {
         }
         
         return base;
+    }
+    
+    public double setAngkaSmc(String value) {
+        if (value.isBlank()) {
+            return 0;
+        }
+        
+        try {
+            return Double.parseDouble(value);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
+    public String SetTglJam(String original, String pattern) {
+        original = original.replaceAll("'", "");
+        String out = "";
+        
+        SimpleDateFormat dfIn = new SimpleDateFormat(pattern);
+        SimpleDateFormat dfOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        try {
+            Date date = dfIn.parse(original);
+            
+            out = dfOut.format(date);
+        } catch (ParseException ex) {
+            System.out.println("Notif : " + ex);
+        }
+        
+        return out;
     }
     
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
@@ -1045,49 +1076,6 @@ public final class validasi {
         }
     }
     
-    public void viewReport(String namaReport, String judul, Map params) {
-        String currentDir = System.getProperties().getProperty("user.dir");
-
-        File dir = new File(currentDir);
-
-        File report = null;
-        
-        if (dir.isDirectory()) {
-            for (String file: dir.list()) {
-                report = new File(currentDir + File.separatorChar + file + File.separatorChar + namaReport);
-                
-                if (report.isFile()) {
-                    System.out.println("Found report file at: " + report.toString());
-                    break;
-                }
-            }
-        }
-        
-        if (report == null) {
-            JOptionPane.showMessageDialog(null, "File tidak ditemukan!");
-            return;
-        }
-        
-        try {
-            JasperReport jr = (JasperReport) JRLoader.loadObject(report);            
-            JasperPrint jp = JasperFillManager.fillReport(jr, params, connect);
-            JasperViewer jv = new JasperViewer(jp, false);
-            
-            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-            
-            jv.setTitle(judul);
-            jv.setSize(screen.width - 50, screen.height - 50);
-            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-            jv.setLocationRelativeTo(null);
-            jv.setVisible(true);
-        } catch (Exception e) {
-            System.out.println("Report can't view because: " + e);
-            e.printStackTrace();
-            
-            JOptionPane.showMessageDialog(null, "Tidak bisa menampilkan hasil cetak!");
-        }
-    }
-    
     public void MyReportqrypdf(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
@@ -1549,25 +1537,6 @@ public final class validasi {
         return s;
     }
     
-    public String SetTglJam(String original, String pattern)
-    {
-        original = original.replaceAll("'", "");
-        String out = "";
-        
-        SimpleDateFormat dfIn = new SimpleDateFormat(pattern);
-        SimpleDateFormat dfOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        try {
-            Date date = dfIn.parse(original);
-            
-            out = dfOut.format(date);
-        } catch (ParseException ex) {
-            System.out.println("Notif : " + ex);
-        }
-        
-        return out;
-    }
-    
     public String SetTglJam(String original){
         original=original.replaceAll("'","");
         s = "";
@@ -1708,18 +1677,6 @@ public final class validasi {
         return x;
     }
     
-    public double setAngkaSmc(String value) {
-        if (value.isBlank()) {
-            return 0;
-        }
-        
-        try {
-            return Double.parseDouble(value);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-    
     public int SetInteger(String txt){
         int x;   
         try {
@@ -1752,42 +1709,49 @@ public final class validasi {
         }
     }
     
-    public String terbilang(double angka)
-    {
-        if (angka < 12) {
-            return nomina[(int) angka];
+    public String terbilang(double angka){
+        if(angka<12)
+        {
+          return nomina[(int)angka];
         }
-
-        if (angka >= 12 && angka <= 19) {
-            return nomina[(int) angka % 10] + " belas ";
+        
+        if(angka>=12 && angka <=19)
+        {
+            return nomina[(int)angka%10] +" belas ";
         }
-
-        if (angka >= 20 && angka <= 99) {
-            return nomina[(int) angka / 10] + " puluh " + nomina[(int) angka % 10];
+        
+        if(angka>=20 && angka <=99)
+        {
+            return nomina[(int)angka/10] +" puluh "+nomina[(int)angka%10];
         }
-
-        if (angka >= 100 && angka <= 199) {
-            return "seratus " + terbilang(angka % 100);
+        
+        if(angka>=100 && angka <=199)
+        {
+            return "seratus "+ terbilang(angka%100);
         }
-
-        if (angka >= 200 && angka <= 999) {
-            return nomina[(int) angka / 100] + " ratus " + terbilang(angka % 100);
+        
+        if(angka>=200 && angka <=999)
+        {
+            return nomina[(int)angka/100]+" ratus "+terbilang(angka%100);
         }
-
-        if (angka >= 1_000 && angka <= 1_999) {
-            return "seribu " + terbilang(angka % 1_000);
+        
+        if(angka>=1000 && angka <=1999)
+        {
+            return "seribu "+ terbilang(angka%1000);
         }
-
-        if (angka >= 2_000 && angka <= 999_999) {
-            return terbilang((int) angka / 1_000) + " ribu " + terbilang(angka % 1_000);
+        
+        if(angka >= 2000 && angka <=999999)
+        {
+            return terbilang((int)angka/1000)+" ribu "+ terbilang(angka%1000);
         }
-
-        if (angka >= 1_000_000 && angka <= 999_999_999) {
-            return terbilang((int) angka / 1000000) + " juta " + terbilang(angka % 1000000);
+        
+        if(angka >= 1000000 && angka <=999999999)
+        {
+            return terbilang((int)angka/1000000)+" juta "+ terbilang(angka%1000000);
         }
-
+        
         return "";
-    }
+    }  
     
     public int daysOld(String path) {
         file=new File(path);

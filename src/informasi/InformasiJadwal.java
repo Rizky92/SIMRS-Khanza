@@ -34,9 +34,9 @@ import javax.swing.table.TableColumn;
  */
 public class InformasiJadwal extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private Connection koneksi=koneksiDB.condb();
+    private validasi Valid=new validasi();
     private final ObjectMapper map = new ObjectMapper();
-    private final Connection koneksi=koneksiDB.condb();
-    private final validasi Valid=new validasi();
     private JsonNode root;
 
     /** Creates new form DlgJadwal
