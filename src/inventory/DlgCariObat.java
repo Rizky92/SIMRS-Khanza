@@ -1651,14 +1651,14 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     }
                     
                     if(sukses){
-                        Sequel.deleteTampJurnal();
+                        jur.bersihkan();
                         if(ttljual>0){
-                            Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", ttljual, 0);
-                            Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", 0, ttljual);
+                            if (sukses) sukses = jur.tampung(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", ttljual, 0);
+                            if (sukses) sukses = jur.tampung(Obat_Ralan, "Pendapatan Obat Rawat Jalan", 0, ttljual);
                         }
                         if(ttlhpp>0){
-                            Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", ttlhpp, 0);
-                            Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", 0, ttlhpp);
+                            if (sukses) sukses = jur.tampung(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", ttlhpp, 0);
+                            if (sukses) sukses = jur.tampung(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", 0, ttlhpp);
                         }
                         if((ttljual>0)||(ttlhpp>0)){
                             sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());     

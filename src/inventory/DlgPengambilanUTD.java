@@ -562,9 +562,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }  
                 
                 if(sukses==true){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Utd from set_akun"), "PENGAMBILAN BHP MEDIS UTD", subtotal, 0);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", 0, subtotal);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Pengambilan_Utd from set_akun"), "PENGAMBILAN BHP MEDIS UTD", subtotal, 0);
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", 0, subtotal);
                     sukses=jur.simpanJurnal(Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-","/"),"U","PENGAMBILAN BHP MEDIS UTD DARI "+nmdari.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                     

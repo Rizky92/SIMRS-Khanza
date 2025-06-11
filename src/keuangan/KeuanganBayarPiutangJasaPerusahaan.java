@@ -710,9 +710,9 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                             Sequel.mengedit("piutang_jasa_perusahaan","no_piutang='"+NoPiutang.getText()+"'","status='Sudah Lunas'");
                         }
                         Sequel.mengedit("piutang_jasa_perusahaan","no_piutang='"+NoPiutang.getText()+"'","sisapiutang=sisapiutang-"+Cicilan.getText());
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", "0", Cicilan.getText());
-                        Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), Cicilan.getText(), "0");
+                        jur.bersihkan();
+                        if (sukses) sukses = jur.tampung(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", "0", Cicilan.getText());
+                        if (sukses) sukses = jur.tampung(koderekening, AkunBayar.getSelectedItem().toString(), Cicilan.getText(), "0");
                         sukses=jur.simpanJurnal(NoPiutang.getText(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
                 }else{
                     sukses=false;
@@ -755,9 +755,9 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
             })==true){
                 Sequel.mengedit("piutang_jasa_perusahaan","no_piutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisapiutang=sisapiutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0");
-                Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
+                jur.bersihkan();
+                if (sukses) sukses = jur.tampung(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0");
+                if (sukses) sukses = jur.tampung(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
                 sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PEMBATALAN BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
             }else{
                 sukses=false;

@@ -201,6 +201,14 @@ public final class sekuel {
         return "";
     }
     
+    public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, Date tanggal, int next) {
+        return autonomorSmc(prefix, separator, table, kolom, panjang, pad, new SimpleDateFormat("yyyy-MM-dd").format(tanggal), next);
+    }
+    
+    public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, Date tanggal) {
+        return autonomorSmc(prefix, separator, table, kolom, panjang, pad, new SimpleDateFormat("yyyy-MM-dd").format(tanggal), 1);
+    }
+    
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
         return autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, 1);
     }
@@ -658,79 +666,6 @@ public final class sekuel {
         }
     }
 
-    public void deleteTampJurnal() {
-        try (PreparedStatement ps = connect.prepareStatement("delete from tampjurnal_smc where user_id = ? and ip = ?")) {
-            ps.setString(1, akses.getkode());
-            ps.setString(2, akses.getalamatip());
-            ps.executeUpdate();
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("delete")));
-        } catch (HeadlessException | SQLException e) {
-            System.out.println("Notifikasi : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal memproses data!");
-        }
-    }
-
-    public void insertTampJurnal(String kdRek, String nmRek, double d, double k) {
-        try (PreparedStatement ps = connect.prepareStatement("insert into tampjurnal_smc (kd_rek, nm_rek, debet, kredit, user_id, ip) values (?, ?, ?, ?, ?, ?)")) {
-            ps.setString(1, kdRek);
-            ps.setString(2, nmRek);
-            ps.setDouble(3, d);
-            ps.setDouble(4, k);
-            ps.setString(5, akses.getkode());
-            ps.setString(6, akses.getalamatip());
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
-            }
-        } catch (SQLException e) {
-            System.out.println("Notif: " + e);
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!\nKemungkinan ada rekening yang sama dimasukkan sebelumnya!");
-        }
-    }
-
-    public void insertTampJurnal(String kdRek, String nmRek, String d, String k) {
-        this.insertTampJurnal(kdRek, nmRek, parseDouble(d), parseDouble(k));
-    }
-
-    public void insertOrUpdateTampJurnal(String kdRek, String nmRek, double d, double k) {
-        if (d == 0 && k == 0) {
-            return;
-        }
-
-        try (PreparedStatement ps = connect.prepareStatement("insert into tampjurnal_smc (kd_rek, nm_rek, debet, kredit, user_id, ip) values (?, ?, ?, ?, ?, ?)")) {
-            ps.setString(1, kdRek);
-            ps.setString(2, nmRek);
-            ps.setDouble(3, d);
-            ps.setDouble(4, k);
-            ps.setString(5, akses.getkode());
-            ps.setString(6, akses.getalamatip());
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
-            }
-        } catch (SQLException e) {
-            try (PreparedStatement ps = connect.prepareStatement("update tampjurnal_smc set debet = debet + ?, kredit = kredit + ? where kd_rek = ? and user_id = ? and ip = ?")) {
-                ps.setDouble(1, d);
-                ps.setDouble(2, k);
-                ps.setString(3, kdRek);
-                ps.setString(4, akses.getkode());
-                ps.setString(5, akses.getalamatip());
-                if (ps.executeUpdate() > 0) {
-                    track = ps.toString();
-                    SimpanTrack(track.substring(track.indexOf("update")));
-                }
-            } catch (SQLException ex) {
-                System.out.println("Notif : " + ex);
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!\nKemungkinan ada rekening yang sama dimasukkan sebelumnya!");
-            }
-        }
-    }
-
-    public void insertOrUpdateTampJurnal(String kdRek, String nmRek, String d, String k) {
-        this.insertOrUpdateTampJurnal(kdRek, nmRek, parseDouble(d), parseDouble(k));
-    }
-
     public void logTaskid(String norawat, String kodebooking, String jenisPasien, String taskid, String request, String code, String message, String response, String wakturs) {
         try (PreparedStatement ps = connect.prepareStatement(
             "insert into referensi_mobilejkn_bpjs_taskid_response2 (no_rawat, kodebooking, jenispasien, taskid, request, code, message, response, waktu, waktu_rs) values (?, ?, ?, ?, ?, ?, ?, ?, now(), ?)"
@@ -747,6 +682,21 @@ public final class sekuel {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void simpanTrackSmc(String... tracks) {
+        if (AKTIFKANTRACKSQL.equals("yes")) {
+            try (PreparedStatement ps = connect.prepareStatement("insert into trackersql values(now(), ?, ?)")) {
+                for (String track : tracks) {
+                    ps.setString(1, akses.getalamatip() + " " + track);
+                    ps.setString(2, akses.getkode());
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
         }
     }
     
