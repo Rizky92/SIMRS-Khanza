@@ -1047,11 +1047,11 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                         ttlhpp=Sequel.cariIsiAngka("select sum(h_beli*jumlah) from toko_detail_jual where nota_jual=?",rs.getString("nota_jual"));
 
                         Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN", ttljual, 0);
-                        Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual);
-                        Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", 0, ttlhpp);
-                        Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", ttlhpp, 0);
-                        sukses=jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+                        if (sukses) sukses = Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN", ttljual, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual);
+                        if (sukses) sukses = Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", 0, ttlhpp);
+                        if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", ttlhpp, 0);
+                        if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
                   } 
 
                   if(sukses==true){

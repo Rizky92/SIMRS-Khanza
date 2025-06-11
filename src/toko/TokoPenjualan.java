@@ -1569,11 +1569,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
         if(sukses==true){
             Sequel.deleteTampJurnal();
-            Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN TOKO", 0, tagihanppn);
-            Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), tagihanppn, 0);
-            Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", ttlhpp, 0);
-            Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", 0, ttlhpp);
-            sukses=jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());   
+            if (sukses) sukses = Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN TOKO", 0, tagihanppn);
+            if (sukses) sukses = Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), tagihanppn, 0);
+            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", ttlhpp, 0);
+            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", 0, ttlhpp);
+            if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());   
         }
     }
     
