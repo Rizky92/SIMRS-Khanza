@@ -108,6 +108,9 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        KeteranganLainnya.setDocument(new batasInput((int)1000).getKata(KeteranganLainnya));
+        TeknikAnestesi.setDocument(new batasInput((int)30).getKata(TeknikAnestesi));
+        Tindakan.setDocument(new batasInput((int)100).getKata(Tindakan));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -227,9 +230,9 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
         jLabel65 = new widget.Label();
         GasMedis1 = new widget.ComboBox();
         jLabel24 = new widget.Label();
-        KodePetugas1 = new widget.TextBox();
+        Tindakan = new widget.TextBox();
         jLabel25 = new widget.Label();
-        KodePetugas2 = new widget.TextBox();
+        TeknikAnestesi = new widget.TextBox();
         BtnPetugas = new widget.Button();
         NamaPetugas = new widget.TextBox();
         KodePetugas = new widget.TextBox();
@@ -807,6 +810,7 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
         jLabel63.setBounds(30, 150, 580, 23);
 
         Listrik1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        Listrik1.setSelectedIndex(1);
         Listrik1.setName("Listrik1"); // NOI18N
         Listrik1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -838,20 +842,30 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
         FormInput.add(jLabel24);
         jLabel24.setBounds(206, 40, 65, 23);
 
-        KodePetugas1.setHighlighter(null);
-        KodePetugas1.setName("KodePetugas1"); // NOI18N
-        FormInput.add(KodePetugas1);
-        KodePetugas1.setBounds(275, 40, 310, 23);
+        Tindakan.setHighlighter(null);
+        Tindakan.setName("Tindakan"); // NOI18N
+        Tindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TindakanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Tindakan);
+        Tindakan.setBounds(275, 40, 310, 23);
 
         jLabel25.setText("Teknik Anestesi :");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
         jLabel25.setBounds(585, 40, 100, 23);
 
-        KodePetugas2.setHighlighter(null);
-        KodePetugas2.setName("KodePetugas2"); // NOI18N
-        FormInput.add(KodePetugas2);
-        KodePetugas2.setBounds(689, 40, 100, 23);
+        TeknikAnestesi.setHighlighter(null);
+        TeknikAnestesi.setName("TeknikAnestesi"); // NOI18N
+        TeknikAnestesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TeknikAnestesiKeyPressed(evt);
+            }
+        });
+        FormInput.add(TeknikAnestesi);
+        TeknikAnestesi.setBounds(689, 40, 100, 23);
 
         BtnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnPetugas.setMnemonic('2');
@@ -2027,7 +2041,7 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-       Valid.pindah(evt,Tanggal,Listrik1);
+       Valid.pindah(evt,TeknikAnestesi,Listrik1);
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void Listrik3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Listrik3KeyPressed
@@ -2043,11 +2057,11 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     }//GEN-LAST:event_Listrik4KeyPressed
 
     private void Listrik2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Listrik2KeyPressed
-        Valid.pindah(evt,Listrik4,GasMedis1);
+        Valid.pindah(evt,Listrik1,Listrik3);
     }//GEN-LAST:event_Listrik2KeyPressed
 
     private void Listrik1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Listrik1KeyPressed
-        Valid.pindah(evt,BtnDokter,Listrik4);
+        Valid.pindah(evt,BtnDokter,Listrik2);
     }//GEN-LAST:event_Listrik1KeyPressed
 
     private void GasMedis1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GasMedis1KeyPressed
@@ -2198,6 +2212,14 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
         //Valid.pindah2(evt,Tindakan,BtnSimpan);
     }//GEN-LAST:event_KeteranganLainnyaKeyPressed
 
+    private void TindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakanKeyPressed
+        Valid.pindah(evt,Tanggal,TeknikAnestesi);
+    }//GEN-LAST:event_TindakanKeyPressed
+
+    private void TeknikAnestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TeknikAnestesiKeyPressed
+        Valid.pindah(evt,Tindakan,BtnDokter);
+    }//GEN-LAST:event_TeknikAnestesiKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -2248,8 +2270,6 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     private widget.TextArea KeteranganLainnya;
     private widget.TextBox KodeDokter;
     private widget.TextBox KodePetugas;
-    private widget.TextBox KodePetugas1;
-    private widget.TextBox KodePetugas2;
     private widget.Label LCount;
     private widget.ComboBox LainLain1;
     private widget.ComboBox LainLain2;
@@ -2286,7 +2306,9 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     private widget.TextBox TPasien;
     private widget.Tanggal Tanggal;
     private widget.TextBox TanggalRegistrasi;
+    private widget.TextBox TeknikAnestesi;
     private widget.TextBox TglLahir;
+    private widget.TextBox Tindakan;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
     private widget.Label jLabel19;
@@ -2471,13 +2493,48 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
     
     public void emptTeks() {
         Listrik1.setSelectedIndex(1);
-        Listrik4.setSelectedIndex(1);
         Listrik2.setSelectedIndex(1);
-        GasMedis1.setSelectedIndex(1);
         Listrik3.setSelectedIndex(1);
+        Listrik4.setSelectedIndex(1);
+        GasMedis1.setSelectedIndex(1);
         GasMedis2.setSelectedIndex(1);
+        GasMedis3.setSelectedIndex(1);
+        GasMedis4.setSelectedIndex(1);
+        GasMedis5.setSelectedIndex(1);
+        GasMedis6.setSelectedIndex(1);
+        MesinAnestesi1.setSelectedIndex(1);
+        MesinAnestesi2.setSelectedIndex(1);
+        MesinAnestesi3.setSelectedIndex(1);
+        MesinAnestesi4.setSelectedIndex(1);
+        MesinAnestesi5.setSelectedIndex(1);
+        JalanNapas1.setSelectedIndex(1);
+        JalanNapas2.setSelectedIndex(1);
+        JalanNapas3.setSelectedIndex(1);
+        JalanNapas4.setSelectedIndex(1);
+        JalanNapas5.setSelectedIndex(1);
+        JalanNapas6.setSelectedIndex(1);
+        JalanNapas7.setSelectedIndex(1);
+        JalanNapas8.setSelectedIndex(1);
+        JalanNapas9.setSelectedIndex(1);
+        LainLain1.setSelectedIndex(1);
+        LainLain2.setSelectedIndex(1);
+        LainLain3.setSelectedIndex(1);
+        LainLain4.setSelectedIndex(1);
+        LainLain5.setSelectedIndex(1);
+        LainLain6.setSelectedIndex(1);
+        LainLain7.setSelectedIndex(1);
+        LainLain8.setSelectedIndex(1);
+        ObatObat1.setSelectedIndex(1);
+        ObatObat2.setSelectedIndex(1);
+        ObatObat3.setSelectedIndex(1);
+        ObatObat4.setSelectedIndex(1);
+        ObatObat5.setSelectedIndex(1);
+        ObatObat6.setSelectedIndex(1);
         Tanggal.setDate(new Date());
-        Listrik1.requestFocus();
+        KeteranganLainnya.setText("");
+        Tindakan.setText("");
+        TeknikAnestesi.setText("");
+        Tindakan.requestFocus();
     } 
 
     private void getData() {
