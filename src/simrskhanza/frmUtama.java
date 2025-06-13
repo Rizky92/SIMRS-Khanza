@@ -1373,6 +1373,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPaketOperasi = new widget.ButtonBig();
         btnTagihanOperasi = new widget.ButtonBig();
         BtnJadwal = new widget.ButtonBig();
+        BtnCutiDokter = new widget.ButtonBig();
         btnMerkInventaris = new widget.ButtonBig();
         btnRuangInventaris = new widget.ButtonBig();
         btnBarangInventaris = new widget.ButtonBig();
@@ -2824,6 +2825,17 @@ public class frmUtama extends javax.swing.JFrame {
         BtnJadwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnJadwalActionPerformed(evt);
+            }
+        });
+
+        BtnCutiDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/informasidokter.png")));
+        BtnCutiDokter.setText("Cuti Dokter");
+        BtnCutiDokter.setIconTextGap(0);
+        BtnCutiDokter.setName("BtnCutiDokter"); // NOI18N
+        BtnCutiDokter.setPreferredSize(new java.awt.Dimension(200, 90));
+        BtnCutiDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCutiDokterActionPerformed(evt);
             }
         });
 
@@ -9486,6 +9498,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnJadwalActionPerformed
+
+    private void BtnCutiDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCutiDokterActionPerformed
+        
+        isTutup();
+        DlgCutiDokter cutiDokter = new DlgCutiDokter(this, false);
+        cutiDokter.emptTeks();
+        cutiDokter.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        cutiDokter.setLocationRelativeTo(PanelUtama);
+        cutiDokter.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnCutiDokterActionPerformed
 
     private void btnMerkInventarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMerkInventarisActionPerformed
         
@@ -22928,6 +22952,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCancel;
     private widget.ButtonBig BtnClose;
+    private widget.ButtonBig BtnCutiDokter;
     private widget.ButtonBig BtnDpjp;
     private widget.ButtonBig BtnJadwal;
     private widget.ButtonBig BtnLog;
@@ -23749,6 +23774,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
             if(akses.getjadwal_praktek()==true){                
                 Panelmenu.add(BtnJadwal);
+                jmlmenu++;
+            }
+
+            if(akses.getcuti_dokter()==true){
+                Panelmenu.add(BtnCutiDokter);
                 jmlmenu++;
             }
 
@@ -29422,6 +29452,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
 
+        if(akses.getcuti_dokter()==true){                
+            Panelmenu.add(BtnCutiDokter);
+            jmlmenu++;
+        }
+
         if(akses.getregistrasi()==true){
             Panelmenu.add(btnRegistrasi);
             jmlmenu++;
@@ -35043,6 +35078,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getjadwal_praktek()==true){   
             if(BtnJadwal.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(BtnJadwal);
+                jmlmenu++;
+            }                
+        }
+
+        if(akses.getcuti_dokter()==true){
+            if(BtnCutiDokter.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(BtnCutiDokter);
                 jmlmenu++;
             }                
         }
