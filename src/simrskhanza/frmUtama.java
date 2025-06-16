@@ -510,6 +510,7 @@ import kepegawaian.DlgBelum;
 import kepegawaian.DlgBerkasKepegawaian;
 import kepegawaian.DlgBulanan;
 import kepegawaian.DlgBulanan2;
+import kepegawaian.DlgCutiDokter;
 import kepegawaian.DlgDokter;
 import kepegawaian.DlgHarian;
 import kepegawaian.DlgJadwal;
