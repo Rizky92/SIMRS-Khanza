@@ -1393,9 +1393,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
         if(sukses==true){
             Sequel.deleteTampJurnal();
-            Sequel.insertTampJurnal(Piutang_Toko, "PIUTANG TOKO", (tagihan-uangmuka), 0);
-            Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", 0, (tagihan-uangmuka));
-            sukses=jur.simpanJurnal(NoNota.getText(),"U","PIUTANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());     
+            if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Toko, "PIUTANG TOKO", (tagihan-uangmuka), 0);
+            if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", 0, (tagihan-uangmuka));
+            if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PIUTANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());     
          }
     }
 

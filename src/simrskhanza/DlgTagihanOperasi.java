@@ -2822,41 +2822,41 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     if(status.equals("Ranap")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Operasi_Ranap, "Suspen Piutang Operasi Ranap", ttlpendapatan, 0);
-                            Sequel.insertOrUpdateTampJurnal(Operasi_Ranap, "Pendapatan Operasi Rawat Inap", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Operasi_Ranap, "Suspen Piutang Operasi Ranap", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Operasi_Ranap, "Pendapatan Operasi Rawat Inap", 0, ttlpendapatan);
                         }
                         if(ttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ranap, "Beban Jasa Medik Dokter Operasi Ranap", ttljmdokter, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, ttljmdokter);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ranap, "Beban Jasa Medik Dokter Operasi Ranap", ttljmdokter, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, ttljmdokter);
                         }
                         if(ttljmpetugas>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ranap, "Beban Jasa Medik Petugas Operasi Ranap", ttljmpetugas, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ranap, "Utang Jasa Medik Petugas Operasi Ranap", 0, ttljmpetugas);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ranap, "Beban Jasa Medik Petugas Operasi Ranap", ttljmpetugas, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ranap, "Utang Jasa Medik Petugas Operasi Ranap", 0, ttljmpetugas);
                         }
                         if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_Obat_Operasi_Ranap, "HPP Persediaan Operasi Rawat Inap", ttlbhp, 0);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Kamar_Operasi_Ranap, "Persediaan BHP Operasi Ranap", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Operasi_Ranap, "HPP Persediaan Operasi Rawat Inap", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Kamar_Operasi_Ranap, "Persediaan BHP Operasi Ranap", 0, ttlbhp);
                         }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());                                              
+                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());                                              
                     }else if(status.equals("Ralan")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Operasi_Ralan, "Suspen Piutang Operasi Ralan", ttlpendapatan, 0);
-                            Sequel.insertOrUpdateTampJurnal(Operasi_Ralan, "Pendapatan Operasi Rawat Jalan", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Operasi_Ralan, "Suspen Piutang Operasi Ralan", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Operasi_Ralan, "Pendapatan Operasi Rawat Jalan", 0, ttlpendapatan);
                         }
                         if(ttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ralan, "Beban Jasa Medik Dokter Operasi Ralan", ttljmdokter, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", 0, ttljmdokter);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Beban_Jasa_Medik_Dokter_Operasi_Ralan, "Beban Jasa Medik Dokter Operasi Ralan", ttljmdokter, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", 0, ttljmdokter);
                         }
                         if(ttljmpetugas>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ralan, "Beban Jasa Medik Petugas Operasi Ralan", ttljmpetugas, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ralan, "Utang Jasa Medik Petugas Operasi Ralan", 0, ttljmpetugas);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Beban_Jasa_Medik_Paramedis_Operasi_Ralan, "Beban Jasa Medik Petugas Operasi Ralan", ttljmpetugas, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Utang_Jasa_Medik_Paramedis_Operasi_Ralan, "Utang Jasa Medik Petugas Operasi Ralan", 0, ttljmpetugas);
                         }
                         if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_Obat_Operasi_Ralan, "HPP Persediaan Operasi Rawat Jalan", ttlbhp, 0);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Kamar_Operasi_Ralan, "Persediaan BHP Operasi Ralan", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Operasi_Ralan, "HPP Persediaan Operasi Rawat Jalan", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Kamar_Operasi_Ralan, "Persediaan BHP Operasi Ralan", 0, ttlbhp);
                         }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());                                              
+                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());                                              
                     }
                 }
                     

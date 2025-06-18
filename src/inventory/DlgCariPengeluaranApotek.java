@@ -1384,10 +1384,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       double totalPengeluaranObat = Sequel.cariDoubleSmc("select sum(total) from detail_pengeluaran_obat_bhp where no_keluar = ?", rs.getString("no_keluar"));
 
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(stokKeluarMedis, "PERSEDIAAN BARANG", totalPengeluaranObat, 0);
-                    Sequel.insertTampJurnal(kontraStokKeluarMedis, "KONTRA PERSEDIAAN BARANG", 0, totalPengeluaranObat);
+                    if (sukses) sukses = Sequel.insertTampJurnal(stokKeluarMedis, "PERSEDIAAN BARANG", totalPengeluaranObat, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(kontraStokKeluarMedis, "KONTRA PERSEDIAAN BARANG", 0, totalPengeluaranObat);
                     
-                     sukses=jur.simpanJurnal(rs.getString("no_keluar"),"U","PEMBATALAN STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());  
+                     if (sukses) sukses = jur.simpanJurnal(rs.getString("no_keluar"),"U","PEMBATALAN STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());  
                   } 
               }    
               if(sukses==true){

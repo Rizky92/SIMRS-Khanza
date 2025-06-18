@@ -1434,15 +1434,15 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     if(sukses){
                         Sequel.deleteTampJurnal();
                         if(ttljual>0){
-                            Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
-                            Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
                         }
                         if(ttlhpp>0){
-                            Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                            Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
                         }
                         if((ttljual>0)||(ttlhpp>0)){
-                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());     
+                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());     
                         }
                     }
                     

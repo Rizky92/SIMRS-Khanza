@@ -720,9 +720,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                    
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", sbttl, 0);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", 0, sbttl);
-                    sukses=jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());  
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", sbttl, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", 0, sbttl);
+                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());  
                 }
                 
                 if(sukses==true){
