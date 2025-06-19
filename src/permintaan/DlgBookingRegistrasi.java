@@ -1536,7 +1536,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 6).toString(),
                             tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 10).toString(), tbObat.getValueAt(i, 24).toString()
                         )) {
-                            Sequel.menghapusSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
+                            Sequel.menghapusIgnoreSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
                                 tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 6).toString(),
                                 tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 10).toString()
                             );
