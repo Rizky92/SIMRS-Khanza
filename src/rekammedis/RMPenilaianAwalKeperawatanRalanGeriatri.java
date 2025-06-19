@@ -398,10 +398,10 @@ public final class RMPenilaianAwalKeperawatanRalanGeriatri extends javax.swing.J
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
         BMI.setDocument(new batasInput((byte)5).getKata(BMI));
-        KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
-        RPD.setDocument(new batasInput((int)100).getKata(RPD));
-        RPK.setDocument(new batasInput((int)100).getKata(RPK));
-        RPO.setDocument(new batasInput((int)100).getKata(RPO));
+        // KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
+        // RPD.setDocument(new batasInput((int)100).getKata(RPD));
+        // RPK.setDocument(new batasInput((int)100).getKata(RPK));
+        // RPO.setDocument(new batasInput((int)100).getKata(RPO));
         Alergi.setDocument(new batasInput((int)25).getKata(Alergi));
         KetBantu.setDocument(new batasInput((int)50).getKata(KetBantu));
         KetProthesa.setDocument(new batasInput((int)50).getKata(KetProthesa));
@@ -416,7 +416,7 @@ public final class RMPenilaianAwalKeperawatanRalanGeriatri extends javax.swing.J
         Durasi.setDocument(new batasInput((int)25).getKata(Durasi));
         KetNyeri.setDocument(new batasInput((int)40).getKata(KetNyeri));
         KetDokter.setDocument(new batasInput((int)15).getKata(KetDokter));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         KeteranganPenerjamahLainnya.setDocument(new batasInput((int)30).getKata(KeteranganPenerjamahLainnya));
         KeteranganHambatanPembelajaran.setDocument(new batasInput((int)30).getKata(KeteranganHambatanPembelajaran));
         KeteranganKesediaanMenerimaInformasi.setDocument(new batasInput((int)30).getKata(KeteranganKesediaanMenerimaInformasi));

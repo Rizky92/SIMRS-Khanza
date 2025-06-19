@@ -184,23 +184,23 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RPS.setDocument(new batasInput((int)2000).getKata(RPS));
-        RPK.setDocument(new batasInput((int)1000).getKata(RPK));
-        RPD.setDocument(new batasInput((int)1000).getKata(RPD));
-        RPO.setDocument(new batasInput((int)1000).getKata(RPO));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RPS.setDocument(new batasInput((int)2000).getKata(RPS));
+        // RPK.setDocument(new batasInput((int)1000).getKata(RPK));
+        // RPD.setDocument(new batasInput((int)1000).getKata(RPD));
+        // RPO.setDocument(new batasInput((int)1000).getKata(RPO));
         Alergi.setDocument(new batasInput((int)50).getKata(Alergi));
-        Penampilan.setDocument(new batasInput((int)200).getKata(Penampilan));
-        Pembicaraan.setDocument(new batasInput((int)200).getKata(Pembicaraan));
-        Psikomotor.setDocument(new batasInput((int)200).getKata(Psikomotor));
-        Sikap.setDocument(new batasInput((int)200).getKata(Sikap));
-        Mood.setDocument(new batasInput((int)200).getKata(Mood));
-        Fungsikognitif.setDocument(new batasInput((int)200).getKata(Fungsikognitif));
-        Gangguanpersepsi.setDocument(new batasInput((int)200).getKata(Gangguanpersepsi));
-        Prosespikir.setDocument(new batasInput((int)200).getKata(Prosespikir));
-        Pengendalianimpuls.setDocument(new batasInput((int)200).getKata(Pengendalianimpuls));
-        Tilikan.setDocument(new batasInput((int)200).getKata(Tilikan));
-        RTA.setDocument(new batasInput((int)200).getKata(RTA));
+        // Penampilan.setDocument(new batasInput((int)200).getKata(Penampilan));
+        // Pembicaraan.setDocument(new batasInput((int)200).getKata(Pembicaraan));
+        // Psikomotor.setDocument(new batasInput((int)200).getKata(Psikomotor));
+        // Sikap.setDocument(new batasInput((int)200).getKata(Sikap));
+        // Mood.setDocument(new batasInput((int)200).getKata(Mood));
+        // Fungsikognitif.setDocument(new batasInput((int)200).getKata(Fungsikognitif));
+        // Gangguanpersepsi.setDocument(new batasInput((int)200).getKata(Gangguanpersepsi));
+        // Prosespikir.setDocument(new batasInput((int)200).getKata(Prosespikir));
+        // Pengendalianimpuls.setDocument(new batasInput((int)200).getKata(Pengendalianimpuls));
+        // Tilikan.setDocument(new batasInput((int)200).getKata(Tilikan));
+        // RTA.setDocument(new batasInput((int)200).getKata(RTA));
         GCS.setDocument(new batasInput((byte)10).getKata(GCS));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
         Nadi.setDocument(new batasInput((byte)5).getKata(Nadi));
@@ -209,11 +209,11 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         SPO.setDocument(new batasInput((byte)5).getKata(SPO));
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
-        KetFisik.setDocument(new batasInput((int)1000).getKata(KetFisik));
-        Penunjang.setDocument(new batasInput((int)1000).getKata(Penunjang));
-        Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
-        Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
-        Konsul.setDocument(new batasInput((int)500).getKata(Konsul));
+        // KetFisik.setDocument(new batasInput((int)1000).getKata(KetFisik));
+        // Penunjang.setDocument(new batasInput((int)1000).getKata(Penunjang));
+        // Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
+        // Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
+        // Konsul.setDocument(new batasInput((int)500).getKata(Konsul));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

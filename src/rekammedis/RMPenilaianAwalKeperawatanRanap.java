@@ -453,10 +453,10 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KetAnamnesis.setDocument(new batasInput((byte)30).getKata(KetAnamnesis));
-        RPS.setDocument(new batasInput((int)300).getKata(RPS));
-        RPD.setDocument(new batasInput((int)300).getKata(RPD));
-        RPK.setDocument(new batasInput((int)100).getKata(RPK));
-        RPO.setDocument(new batasInput((int)100).getKata(RPO));
+        // RPS.setDocument(new batasInput((int)300).getKata(RPS));
+        // RPD.setDocument(new batasInput((int)300).getKata(RPD));
+        // RPK.setDocument(new batasInput((int)100).getKata(RPK));
+        // RPO.setDocument(new batasInput((int)100).getKata(RPO));
         RPembedahan.setDocument(new batasInput((byte)40).getKata(RPembedahan));
         RDirawatRS.setDocument(new batasInput((byte)40).getKata(RDirawatRS));
         RTranfusi.setDocument(new batasInput((byte)40).getKata(RTranfusi));
@@ -517,7 +517,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         KetPadaDokter.setDocument(new batasInput((byte)10).getKata(KetPadaDokter));
         KeteranganDiagnosaKhususGizi.setDocument(new batasInput((byte)50).getKata(KeteranganDiagnosaKhususGizi));
         KeteranganDiketahuiDietisen.setDocument(new batasInput((byte)10).getKata(KeteranganDiketahuiDietisen));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

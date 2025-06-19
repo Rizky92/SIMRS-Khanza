@@ -439,7 +439,7 @@ public final class RMPenilaianAwalKeperawatanKebidanan extends javax.swing.JDial
         KeteranganUSG.setDocument(new batasInput((byte)50).getKata(KeteranganUSG));
         KeteranganLaboratorium.setDocument(new batasInput((byte)50).getKata(KeteranganLaboratorium));
         KeteranganLakmus.setDocument(new batasInput((byte)50).getKata(KeteranganLakmus));
-        KeluhanUtama.setDocument(new batasInput((int)1000).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)1000).getKata(KeluhanUtama));
         Umur.setDocument(new batasInput((byte)10).getKata(Umur));
         Lama.setDocument(new batasInput((byte)10).getKata(Lama));
         Banyaknya.setDocument(new batasInput((byte)10).getKata(Banyaknya));
@@ -473,8 +473,8 @@ public final class RMPenilaianAwalKeperawatanKebidanan extends javax.swing.JDial
         Durasi.setDocument(new batasInput((byte)5).getKata(Durasi));
         KetNyeri.setDocument(new batasInput((byte)40).getKata(KetNyeri));
         KetDokter.setDocument(new batasInput((byte)10).getKata(KetDokter));
-        Masalah.setDocument(new batasInput((int)1000).getKata(Masalah));
-        Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
+        // Masalah.setDocument(new batasInput((int)1000).getKata(Masalah));
+        // Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
         TempatPersalinan.setDocument(new batasInput((byte)30).getKata(TempatPersalinan));
         UsiaHamil.setDocument(new batasInput((byte)20).getKata(UsiaHamil));
         JenisPersalinan.setDocument(new batasInput((byte)20).getKata(JenisPersalinan));

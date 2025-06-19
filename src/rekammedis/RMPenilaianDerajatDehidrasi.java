@@ -124,7 +124,7 @@ public final class RMPenilaianDerajatDehidrasi extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KdDokter.setDocument(new batasInput((byte)20).getKata(KdDokter));
-        HasilPenilaian.setDocument(new batasInput((int)200).getKata(HasilPenilaian));
+        // HasilPenilaian.setDocument(new batasInput((int)200).getKata(HasilPenilaian));
         TCari.setDocument(new batasInput((int)124).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

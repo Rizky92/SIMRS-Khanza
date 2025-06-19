@@ -358,7 +358,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
         BMI.setDocument(new batasInput((byte)5).getKata(BMI));
-        KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
         Alergi.setDocument(new batasInput((int)25).getKata(Alergi));
         KetBantu.setDocument(new batasInput((int)50).getKata(KetBantu));
         KetProthesa.setDocument(new batasInput((int)50).getKata(KetProthesa));
@@ -372,7 +372,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         Frekuensi.setDocument(new batasInput((int)25).getKata(Frekuensi));
         KetNyeri.setDocument(new batasInput((int)40).getKata(KetNyeri));
         KetDokter.setDocument(new batasInput((int)15).getKata(KetDokter));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         KetRiwayatPenyakit.setDocument(new batasInput((int)30).getKata(KetRiwayatPenyakit));
         KetRiwayatPerawatan.setDocument(new batasInput((int)50).getKata(KetRiwayatPerawatan));
         KetKebiasaanLain.setDocument(new batasInput((int)30).getKata(KetKebiasaanLain));

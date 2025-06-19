@@ -141,7 +141,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         Nadi.setDocument(new batasInput((int)5).getKata(Nadi));
         RR.setDocument(new batasInput((int)5).getKata(RR));
         KeteranganNonRestrainFarmakologi.setDocument(new batasInput((int)50).getKata(KeteranganNonRestrainFarmakologi));
-        RestrainFarmakologi.setDocument(new batasInput((int)200).getKata(RestrainFarmakologi));
+        // RestrainFarmakologi.setDocument(new batasInput((int)200).getKata(RestrainFarmakologi));
         Keluarga.setDocument(new batasInput((int)100).getKata(Keluarga));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
