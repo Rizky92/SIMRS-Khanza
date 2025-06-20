@@ -1528,17 +1528,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbObat.getRowCount();i++){
+        for (i = tbObat.getRowCount() - 1; i >= 0; i--) { // loop mundur
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 if (BOOKINGLANGSUNGREGISTRASI) {
                     if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
-                        if (Sequel.menghapustfSmc("reg_periksa", "no_rkm_medis = ? and tgl_registrasi = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ? and no_reg = ?",
-                            tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 6).toString(),
-                            tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 10).toString(), tbObat.getValueAt(i, 24).toString()
+                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
+                            tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(),
+                            tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 24).toString()
                         )) {
-                            Sequel.menghapusIgnoreSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
-                                tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 6).toString(),
-                                tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 10).toString()
+                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rkm_medis = ? and tgl_registrasi = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
+                                tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(),
+                                tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 24).toString()
                             );
                             tabMode.removeRow(i);
                         }
@@ -1920,12 +1920,22 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void isBooking() {
-        if (BOOKINGLANGSUNGREGISTRASI) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(TanggalPeriksa.getDate());
-            String hari = "";
-
-            switch (cal.get(Calendar.DAY_OF_WEEK)) {
+        if (!BOOKINGLANGSUNGREGISTRASI) {
+            if(Sequel.menyimpantf("booking_registrasi","?,?,?,?,?,?,?,?,?,?,?","Pasien dan Tanggal",11,new String[]{
+                 Valid.SetTgl(TanggalBooking.getSelectedItem()+""),TanggalBooking.getSelectedItem().toString().substring(11,19),TNoRM.getText(),
+                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),KdDokter.getText(),
+                 KdPoli.getText(),NoReg.getText(),kdpnj.getText(),"0",
+                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+" "+TanggalBooking.getSelectedItem().toString().substring(11,19),
+                 "Belum"
+               })==true){
+                emptTeks();
+                tampil();
+            } 
+        } else {
+            String namaPJ = "", alamatPJ = "", hubunganPJ = "", biayaReg = Sequel.cariIsiSmc("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli = ?", KdPoli.getText()),
+                   statusDaftar = "", umurDaftar = "0", statusUmur = "Th", statusPoli = "", umurPasienRM = "", hari = "", jampraktek = "";
+            
+            switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
                 case 1: hari = "AKHAD"; break;
                 case 2: hari = "SENIN"; break;
                 case 3: hari = "SELASA"; break;
@@ -1934,11 +1944,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 case 6: hari = "JUMAT"; break;
                 case 7: hari = "SABTU"; break;
             }
-
-            String jampraktek = Sequel.cariIsiSmc("select jadwal.jam_mulai from jadwal where jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ?", hari, KdPoli.getText(), KdDokter.getText());
             
-            String namaPJ = "", alamatPJ = "", hubunganPJ = "", biayaReg = Sequel.cariIsiSmc("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli = ?", KdPoli.getText()),
-                   statusDaftar = "", umurDaftar = "0", statusUmur = "Th", statusPoli = "", umurPasienRM = "";
+            jampraktek = Sequel.cariIsiSmc("select jadwal.jam_mulai from jadwal where jadwal.hari_kerja = ? and jadwal.kd_poli = ? and jadwal.kd_dokter = ?", hari, KdPoli.getText(), KdDokter.getText());
             
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select pasien.namakeluarga, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as almt, pasien.keluarga, " +
@@ -1981,11 +1988,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            
             isNomer();
-            
             no_rawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
-            
             if (Sequel.menyimpantfSmc("reg_periksa", null, NoReg.getText(), no_rawat, Valid.getTglSmc(TanggalPeriksa), jampraktek,
                 KdDokter.getText(), TNoRM.getText(), KdPoli.getText(), namaPJ, alamatPJ, hubunganPJ, biayaReg, "Belum", statusDaftar,
                 "Ralan", kdpnj.getText(), umurDaftar, statusUmur, "Belum bayar", statusPoli
@@ -1998,17 +2002,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 emptTeks();
                 tampil();
             }
-        } else {
-            if(Sequel.menyimpantf("booking_registrasi","?,?,?,?,?,?,?,?,?,?,?","Pasien dan Tanggal",11,new String[]{
-                 Valid.SetTgl(TanggalBooking.getSelectedItem()+""),TanggalBooking.getSelectedItem().toString().substring(11,19),TNoRM.getText(),
-                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),KdDokter.getText(),
-                 KdPoli.getText(),NoReg.getText(),kdpnj.getText(),"0",
-                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+" "+TanggalBooking.getSelectedItem().toString().substring(11,19),
-                 "Belum"
-               })==true){
-                emptTeks();
-                tampil();
-            } 
         }
     }
 }

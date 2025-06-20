@@ -64,6 +64,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -18642,6 +18644,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
         if (tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString().equals("BPJ")) {
             JOptionPane.showMessageDialog(null, "Maaf, hanya dibolehkan untuk pasien Non BPJS...!!!!");
+            return;
+        }
+        
+        if (!tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()))) {
+            JOptionPane.showMessageDialog(null, "Checkin Registrasi hanya bisa dilakukan untuk pasien yang datang pada hari ini..!!");
             return;
         }
 
