@@ -128,16 +128,12 @@ public final class RMPenilaianPsikologi extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KetAlloAuto.setDocument(new batasInput((int)2000).getKata(KetAlloAuto));
-        Ciriyangmenyolok.setDocument(new batasInput((int)1000).getKata(Ciriyangmenyolok));
-        Hasilpsikotes.setDocument(new batasInput((int)2000).getKata(Hasilpsikotes));
-        Kepribadian.setDocument(new batasInput((int)3000).getKata(Kepribadian));
-        Psikodinamika.setDocument(new batasInput((int)3000).getKata(Psikodinamika));
-        Kesimpulanpsikolog.setDocument(new batasInput((int)50).getKata(Kesimpulanpsikolog));
-        Hasilpsikotes.setDocument(new batasInput((int)3000).getKata(Hasilpsikotes));
-        Kepribadian.setDocument(new batasInput((int)500).getKata(Kepribadian));
-        Psikodinamika.setDocument(new batasInput((int)5000).getKata(Psikodinamika));
-        Kesimpulanpsikolog.setDocument(new batasInput((int)1000).getKata(Kesimpulanpsikolog));
+        // KetAlloAuto.setDocument(new batasInput((int)2000).getKata(KetAlloAuto));
+        // Ciriyangmenyolok.setDocument(new batasInput((int)1000).getKata(Ciriyangmenyolok));
+        // Hasilpsikotes.setDocument(new batasInput((int)2000).getKata(Hasilpsikotes));
+        // Kepribadian.setDocument(new batasInput((int)3000).getKata(Kepribadian));
+        // Psikodinamika.setDocument(new batasInput((int)3000).getKata(Psikodinamika));
+        // Kesimpulanpsikolog.setDocument(new batasInput((int)1000).getKata(Kesimpulanpsikolog));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

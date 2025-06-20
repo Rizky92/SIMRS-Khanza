@@ -130,8 +130,8 @@ public final class RMPenilaianLanjutanRisikoJatuhAnak extends javax.swing.JDialo
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
-        HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
-        Saran.setDocument(new batasInput((int)200).getKata(Saran));
+        // HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
+        // Saran.setDocument(new batasInput((int)200).getKata(Saran));
         TCari.setDocument(new batasInput((int)124).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
