@@ -24,6 +24,7 @@
     <entry key="NOTIFWAFARMASIKEPASIEN">no</entry>
     <entry key="ANTRIANPREFIXHURUF">yes</entry>
     <entry key="PREFIXHURUFAKTIF">A, B, C, D, E, F</entry>
+    <entry key="BOOKINGLANGSUNGREGISTRASI">yes</entry>
 
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>

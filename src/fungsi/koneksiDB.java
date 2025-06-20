@@ -329,7 +329,7 @@ public class koneksiDB {
     public static boolean BOOKINGLANGSUNGREGISTRASI() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("BOOKINGLANGSUNGREGISTRASI", "yes").trim().equalsIgnoreCase("yes");
+            return prop.getProperty("BOOKINGLANGSUNGREGISTRASI", "no").trim().equalsIgnoreCase("yes");
         } catch (Exception e) {
             return false;
         }
