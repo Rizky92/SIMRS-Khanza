@@ -376,9 +376,9 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         tbRencanaDetail.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
-        RPD.setDocument(new batasInput((int)100).getKata(RPD));
-        RPO.setDocument(new batasInput((int)100).getKata(RPO));
+        // KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
+        // RPD.setDocument(new batasInput((int)100).getKata(RPD));
+        // RPO.setDocument(new batasInput((int)100).getKata(RPO));
         Gravida.setDocument(new batasInput((byte)20).getKata(Gravida));
         Para.setDocument(new batasInput((byte)20).getKata(Para));
         Abortus.setDocument(new batasInput((byte)20).getKata(Abortus));
@@ -407,7 +407,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         KetNyeri.setDocument(new batasInput((int)40).getKata(KetNyeri));
         KetDokter.setDocument(new batasInput((byte)15).getKata(KetDokter));
         KetLapor.setDocument(new batasInput((int)15).getKata(KetLapor));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

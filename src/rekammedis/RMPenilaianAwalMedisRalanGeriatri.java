@@ -181,13 +181,13 @@ public final class RMPenilaianAwalMedisRalanGeriatri extends javax.swing.JDialog
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RPS.setDocument(new batasInput((int)2000).getKata(RPS));
-        RPD.setDocument(new batasInput((int)1000).getKata(RPD));
-        RPO.setDocument(new batasInput((int)1000).getKata(RPO));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RPS.setDocument(new batasInput((int)2000).getKata(RPS));
+        // RPD.setDocument(new batasInput((int)1000).getKata(RPD));
+        // RPO.setDocument(new batasInput((int)1000).getKata(RPO));
         Alergi.setDocument(new batasInput((int)50).getKata(Alergi));
-        KondisiUmum.setDocument(new batasInput((int)1000).getKata(KondisiUmum));
-        KondisiSosial.setDocument(new batasInput((int)500).getKata(KondisiSosial));
+        // KondisiUmum.setDocument(new batasInput((int)1000).getKata(KondisiUmum));
+        // KondisiSosial.setDocument(new batasInput((int)500).getKata(KondisiSosial));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
         Nadi.setDocument(new batasInput((byte)5).getKata(Nadi));
         Suhu.setDocument(new batasInput((byte)5).getKata(Suhu));
@@ -196,16 +196,16 @@ public final class RMPenilaianAwalMedisRalanGeriatri extends javax.swing.JDialog
         KeteranganThoraks.setDocument(new batasInput((byte)100).getKata(KeteranganThoraks));
         KeteranganAbdomen.setDocument(new batasInput((byte)100).getKata(KeteranganAbdomen));
         KeteranganEkstremitas.setDocument(new batasInput((byte)100).getKata(KeteranganEkstremitas));
-        Lainnya.setDocument(new batasInput((int)1000).getKata(Lainnya));
-        Lab.setDocument(new batasInput((int)1000).getKata(Lab));
-        Rad.setDocument(new batasInput((int)1000).getKata(Rad));
-        PenunjangLain.setDocument(new batasInput((int)1000).getKata(PenunjangLain));
-        Diagnosis.setDocument(new batasInput((int)500).getKata(Diagnosis));
-        Diagnosis2.setDocument(new batasInput((int)500).getKata(Diagnosis2));
-        Permasalahan.setDocument(new batasInput((int)500).getKata(Permasalahan));
-        Tindakan.setDocument(new batasInput((int)500).getKata(Tindakan));
-        Terapi.setDocument(new batasInput((int)500).getKata(Terapi));
-        Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
+        // Lainnya.setDocument(new batasInput((int)1000).getKata(Lainnya));
+        // Lab.setDocument(new batasInput((int)1000).getKata(Lab));
+        // Rad.setDocument(new batasInput((int)1000).getKata(Rad));
+        // PenunjangLain.setDocument(new batasInput((int)1000).getKata(PenunjangLain));
+        // Diagnosis.setDocument(new batasInput((int)500).getKata(Diagnosis));
+        // Diagnosis2.setDocument(new batasInput((int)500).getKata(Diagnosis2));
+        // Permasalahan.setDocument(new batasInput((int)500).getKata(Permasalahan));
+        // Tindakan.setDocument(new batasInput((int)500).getKata(Tindakan));
+        // Terapi.setDocument(new batasInput((int)500).getKata(Terapi));
+        // Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

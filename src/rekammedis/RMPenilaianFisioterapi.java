@@ -179,9 +179,9 @@ public final class RMPenilaianFisioterapi extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
-        RiwayatPenyakitSekarang.setDocument(new batasInput((int)100).getKata(RiwayatPenyakitSekarang));
-        RiwayatPenyakitDahulu.setDocument(new batasInput((int)100).getKata(RiwayatPenyakitDahulu));
+        // KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
+        // RiwayatPenyakitSekarang.setDocument(new batasInput((int)100).getKata(RiwayatPenyakitSekarang));
+        // RiwayatPenyakitDahulu.setDocument(new batasInput((int)100).getKata(RiwayatPenyakitDahulu));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
         HR.setDocument(new batasInput((byte)5).getKata(HR));
         RR.setDocument(new batasInput((byte)5).getKata(RR));
@@ -201,18 +201,18 @@ public final class RMPenilaianFisioterapi extends javax.swing.JDialog {
         KetDeformitas.setDocument(new batasInput((byte)50).getKata(KetDeformitas));
         KetResikoJatuh.setDocument(new batasInput((byte)50).getKata(KetResikoJatuh));
         LainlainFungsioal.setDocument(new batasInput((byte)70).getKata(LainlainFungsioal));
-        KetFisik.setDocument(new batasInput((int)2000).getKata(KetFisik));
-        PemeriksaanMuscu.setDocument(new batasInput((int)200).getKata(PemeriksaanMuscu));
-        PemeriksaanNeuro.setDocument(new batasInput((int)200).getKata(PemeriksaanNeuro));
-        PemeriksaanCardio.setDocument(new batasInput((int)200).getKata(PemeriksaanCardio));
-        PemeriksaanInte.setDocument(new batasInput((int)200).getKata(PemeriksaanInte));
-        PengukuranMuscu.setDocument(new batasInput((int)200).getKata(PengukuranMuscu));
-        PengukuranNeuro.setDocument(new batasInput((int)200).getKata(PengukuranNeuro));
-        PengukuranCardio.setDocument(new batasInput((int)200).getKata(PengukuranCardio));
-        PengukuranInte.setDocument(new batasInput((int)200).getKata(PengukuranInte));
-        Penunjang.setDocument(new batasInput((int)500).getKata(Penunjang));
-        Diagnosis.setDocument(new batasInput((int)100).getKata(Diagnosis));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // KetFisik.setDocument(new batasInput((int)2000).getKata(KetFisik));
+        // PemeriksaanMuscu.setDocument(new batasInput((int)200).getKata(PemeriksaanMuscu));
+        // PemeriksaanNeuro.setDocument(new batasInput((int)200).getKata(PemeriksaanNeuro));
+        // PemeriksaanCardio.setDocument(new batasInput((int)200).getKata(PemeriksaanCardio));
+        // PemeriksaanInte.setDocument(new batasInput((int)200).getKata(PemeriksaanInte));
+        // PengukuranMuscu.setDocument(new batasInput((int)200).getKata(PengukuranMuscu));
+        // PengukuranNeuro.setDocument(new batasInput((int)200).getKata(PengukuranNeuro));
+        // PengukuranCardio.setDocument(new batasInput((int)200).getKata(PengukuranCardio));
+        // PengukuranInte.setDocument(new batasInput((int)200).getKata(PengukuranInte));
+        // Penunjang.setDocument(new batasInput((int)500).getKata(Penunjang));
+        // Diagnosis.setDocument(new batasInput((int)100).getKata(Diagnosis));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
