@@ -63,7 +63,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
                 "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
                 "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
-                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP"    
+                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "no_rawat"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -82,7 +82,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                  java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                  java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                  java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class
+                 java.lang.Object.class, java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -95,7 +95,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 27; i++) {
+        for (i = 0; i < 28; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -159,6 +159,9 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
             }else if(i==23){
                 column.setWidth(70);
             }else if(i==24){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==27){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else{
@@ -1309,8 +1312,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         Sequel.mengedit3("skdp_bpjs","no_rkm_medis=? and tanggal_datang=?","status='Sudah Periksa'",2,new String[]{
                             tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString()
                         });
-                        Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=?",2,new String[]{
-                            tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString()
+                        Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=? and kd_dokter = ? and kd_poli = ?",4,new String[]{
+                            tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString(), tbObat.getValueAt(i, 6).toString(),
+                                tbObat.getValueAt(i, 8).toString()
                         });
                     }
                 }
@@ -1532,14 +1536,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 if (BOOKINGLANGSUNGREGISTRASI) {
                     if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
-                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
+                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ?",
                             tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(),
-                            tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 24).toString()
+                            tbObat.getValueAt(i, 8).toString()
                         )) {
-                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rkm_medis = ? and tgl_registrasi = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ?",
-                                tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(),
-                                tbObat.getValueAt(i, 8).toString(), tbObat.getValueAt(i, 24).toString()
-                            );
+                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rawat = ?", tbObat.getValueAt(i, 27).toString());
                             tabMode.removeRow(i);
                         }
                     } else {
@@ -1547,7 +1548,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         break;
                     }
                 } else {
-                    if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
+                    if (Sequel.menghapustfSmc("booking_registrasi",
+                        "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ?",
+                        tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(), tbObat.getValueAt(i, 8).toString()
+                    )) {
                         tabMode.removeRow(i);
                     }
                 }
@@ -1731,7 +1735,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "pasien.kabupatenpj,pasien.propinsipj,pasien.keluarga,TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) as tahun, "+
                     "(TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12)) as bulan, "+
                     "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(pasien.tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, pasien.tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, pasien.tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari, "+
-                    "booking_registrasi.limit_reg,booking_registrasi.status,booking_registrasi.kd_pj,penjab.png_jawab "+
+                    "booking_registrasi.limit_reg,booking_registrasi.status,booking_registrasi.kd_pj,penjab.png_jawab, booking_registrasi.no_rawat "+
                     "from booking_registrasi inner join pasien on booking_registrasi.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on booking_registrasi.kd_dokter=dokter.kd_dokter "+
                     "inner join poliklinik on booking_registrasi.kd_poli=poliklinik.kd_poli "+
@@ -1758,7 +1762,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rs.getString("kecamatanpj"),rs.getString("kabupatenpj"),rs.getString("propinsipj"),
                         rs.getString("keluarga"),rs.getString("kd_pj"),rs.getString("tahun"),rs.getString("bulan"),
                         rs.getString("hari"),rs.getString("limit_reg").replaceAll("0","Offline").replace("1","Online"),
-                        rs.getString("status"),rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("no_tlp")
+                        rs.getString("status"),rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("no_tlp"), rs.getString("no_rawat")
                     });                    
                 }
             } catch (Exception e) {
@@ -1921,12 +1925,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
     private void isBooking() {
         if (!BOOKINGLANGSUNGREGISTRASI) {
-            if(Sequel.menyimpantf("booking_registrasi","?,?,?,?,?,?,?,?,?,?,?","Pasien dan Tanggal",11,new String[]{
+            if(Sequel.menyimpantf("booking_registrasi","?,?,?,?,?,?,?,?,?,?,?,?","Pasien dan Tanggal",11,new String[]{
                  Valid.SetTgl(TanggalBooking.getSelectedItem()+""),TanggalBooking.getSelectedItem().toString().substring(11,19),TNoRM.getText(),
                  Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),KdDokter.getText(),
                  KdPoli.getText(),NoReg.getText(),kdpnj.getText(),"0",
                  Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+" "+TanggalBooking.getSelectedItem().toString().substring(11,19),
-                 "Belum"
+                 "Belum",null
                })==true){
                 emptTeks();
                 tampil();
@@ -1997,10 +2001,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasienRM, TNoRM.getText());
                 Sequel.menyimpanSmc("booking_registrasi", null, Valid.getTglSmc(TanggalBooking), jam(),
                     TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
-                    kdpnj.getText(), "0", null, "Belum"
+                    kdpnj.getText(), "0", null, "Belum", no_rawat
                 );
                 emptTeks();
                 tampil();
+            } else {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan booking registrasi..!!");
             }
         }
     }

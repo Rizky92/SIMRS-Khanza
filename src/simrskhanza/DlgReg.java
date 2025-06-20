@@ -18666,10 +18666,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
                     tbPetugas.setValueAt(tglsekarang.substring(11), tbPetugas.getSelectedRow(), 4);
                     if (BOOKINGLANGSUNGREGISTRASI) {
-                        Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and kd_pj = ? and no_reg = ?",
-                            tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 7).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 5).toString(),
-                            tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 21).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 1).toString()
-                        );
+                        Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
                     }
                 }
             }
