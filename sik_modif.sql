@@ -54,6 +54,14 @@ ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspel
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp`) USING BTREE;
 
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_input` varchar(10) NULL DEFAULT '0' AFTER `nip`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ufg` varchar(10) NULL DEFAULT '0' AFTER `ttl_input`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_output` varchar(10) NULL DEFAULT '0' AFTER `ufg`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `balance` varchar(10) NULL DEFAULT '0' AFTER `ttl_output`;
+
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `infus` double NOT NULL DEFAULT 0 AFTER `jam_rawat`;
 
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `tranfusi` double NOT NULL DEFAULT 0 AFTER `infus`;
