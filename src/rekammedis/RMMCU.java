@@ -4584,8 +4584,12 @@ public final class RMMCU extends javax.swing.JDialog {
                 public void windowClosed(WindowEvent e) {
                     for (int i = 0; i < form.getTable().getRowCount(); i++) {
                         if ((Boolean) form.getTable().getValueAt(i, 0).equals(true)) {
-                            Kesimpulan.append("- " + form.getTable().getValueAt(i, 1).toString()+"\n");
-                            Anjuran.append("- " + form.getTable().getValueAt(i, 2).toString()+"\n");
+                            if (!form.getTable().getValueAt(i, 1).toString().trim().isBlank()) {
+                                Kesimpulan.append("- " + form.getTable().getValueAt(i, 1).toString()+"\n");
+                            }
+                            if (!form.getTable().getValueAt(i, 2).toString().trim().isBlank()) {
+                                Anjuran.append("- " + form.getTable().getValueAt(i, 2).toString()+"\n");
+                            }
                         }
                     }
                     Kesimpulan.requestFocus();

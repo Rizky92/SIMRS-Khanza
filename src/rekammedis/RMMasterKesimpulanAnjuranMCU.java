@@ -22,6 +22,7 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -389,16 +390,14 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
 }//GEN-LAST:event_AnjuranKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(Kesimpulan.getText().trim().equals("")){
-            Valid.textKosong(Kesimpulan,"Kesimpulan");
-        }else if(Anjuran.getText().trim().equals("")){
-            Valid.textKosong(Anjuran,"Anjuran");
-        }else{
+        if(!Kesimpulan.getText().trim().equals("")||!Anjuran.getText().trim().equals("")){
             if(Sequel.menyimpantf("master_kesimpulan_anjuran_mcu","'"+Kesimpulan.getText()+"','"+Anjuran.getText()+"'","Kesimpulan & Anjuran")==true){
                 tabMode.addRow(new Object[]{Kesimpulan.getText(),Anjuran.getText()});
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong..!!");
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -441,11 +440,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if(Kesimpulan.getText().trim().equals("")){
-            Valid.textKosong(Kesimpulan,"Kesimpulan");
-        }else if(Anjuran.getText().trim().equals("")){
-            Valid.textKosong(Anjuran,"Anjuran");
-        }else{
+        if(!Kesimpulan.getText().trim().equals("")||!Anjuran.getText().trim().equals("")){
             if(tbSpesialis.getSelectedRow()> -1){
                 if(Sequel.mengedittf("master_kesimpulan_anjuran_mcu","kesimpulan=? and anjuran=?","kesimpulan=?,anjuran=?",4,new String[]{
                     Kesimpulan.getText(),Anjuran.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString(),
@@ -456,6 +451,8 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
                     emptTeks();
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, data tidak boleh kosong..!!");
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
