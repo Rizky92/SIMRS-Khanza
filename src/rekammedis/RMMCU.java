@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -4578,27 +4579,17 @@ public final class RMMCU extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
         }else{
             RMCariKesimpulanAnjuranMCU form=new RMCariKesimpulanAnjuranMCU(null,false);
-            form.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {}
-                @Override
-                public void windowClosing(WindowEvent e) {}
+            form.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(form.getTable().getSelectedRow()!= -1){
-                        Kesimpulan.append(form.getTable().getValueAt(form.getTable().getSelectedRow(),0).toString()+", ");
-                        Anjuran.append(form.getTable().getValueAt(form.getTable().getSelectedRow(),1).toString()+", ");
-                        Kesimpulan.requestFocus();
+                    for (int i = 0; i < form.getTable().getRowCount(); i++) {
+                        if ((Boolean) form.getTable().getValueAt(i, 0).equals(true)) {
+                            Kesimpulan.append("- " + form.getTable().getValueAt(i, 1).toString()+"\n");
+                            Anjuran.append("- " + form.getTable().getValueAt(i, 2).toString()+"\n");
+                        }
                     }
+                    Kesimpulan.requestFocus();
                 }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
             });
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
