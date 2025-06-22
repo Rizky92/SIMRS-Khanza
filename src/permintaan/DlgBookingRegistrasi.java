@@ -1540,7 +1540,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(),
                             tbObat.getValueAt(i, 8).toString()
                         )) {
-                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rawat = ?", tbObat.getValueAt(i, 27).toString());
+                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rawat = ? and status_lanjut = 'Ralan' and stts = 'Belum' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)", tbObat.getValueAt(i, 27).toString());
                             tabMode.removeRow(i);
                         }
                     } else {
@@ -1552,7 +1552,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ?",
                         tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(), tbObat.getValueAt(i, 8).toString()
                     )) {
-                        tabMode.removeRow(i);
+                        tabMode.removeRow(i); 
                     }
                 }
             }
@@ -1925,16 +1925,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
     private void isBooking() {
         if (!BOOKINGLANGSUNGREGISTRASI) {
-            if(Sequel.menyimpantf("booking_registrasi","?,?,?,?,?,?,?,?,?,?,?,?","Pasien dan Tanggal",11,new String[]{
-                 Valid.SetTgl(TanggalBooking.getSelectedItem()+""),TanggalBooking.getSelectedItem().toString().substring(11,19),TNoRM.getText(),
-                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),KdDokter.getText(),
-                 KdPoli.getText(),NoReg.getText(),kdpnj.getText(),"0",
-                 Valid.SetTgl(TanggalPeriksa.getSelectedItem()+"")+" "+TanggalBooking.getSelectedItem().toString().substring(11,19),
-                 "Belum",null
-               })==true){
+            if (Sequel.menyimpantfSmc("booking_registrasi", null,
+                Valid.getTglSmc(TanggalBooking), Valid.getJamSmc(TanggalBooking), TNoRM.getText(),
+                Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
+                kdpnj.getText(), "0", Valid.getTglSmc(TanggalPeriksa) + " " + Valid.getJamSmc(TanggalBooking),
+                "Belum", null
+            )) {
                 emptTeks();
                 tampil();
-            } 
+            }
         } else {
             String namaPJ = "", alamatPJ = "", hubunganPJ = "", biayaReg = Sequel.cariIsiSmc("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli = ?", KdPoli.getText()),
                    statusDaftar = "", umurDaftar = "0", statusUmur = "Th", statusPoli = "", umurPasienRM = "", hari = "", jampraktek = "";
