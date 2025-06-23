@@ -39,6 +39,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
+import widget.TextBox;
 
 
 /**
@@ -133,14 +134,23 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
         Minum.setDocument(new batasInput(10).getOnlyAngka(Minum));
+        Minum.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Infus.setDocument(new batasInput(10).getOnlyAngka(Infus));
+        Infus.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Tranfusi.setDocument(new batasInput(10).getOnlyAngka(Tranfusi));
+        Tranfusi.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Priming.setDocument(new batasInput(10).getOnlyAngka(Priming));
+        Priming.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         WashOut.setDocument(new batasInput(10).getOnlyAngka(WashOut));
+        WashOut.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Urine.setDocument(new batasInput(10).getOnlyAngka(Urine));
+        Urine.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Pendarahan.setDocument(new batasInput(10).getOnlyAngka(Pendarahan));
+        Pendarahan.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Muntah.setDocument(new batasInput(10).getOnlyAngka(Muntah));
+        Muntah.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         UFG.setDocument(new batasInput(10).getOnlyAngka(UFG));
+        UFG.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
@@ -1404,42 +1414,34 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }//GEN-LAST:event_MnCatatanCairanHemodialisaActionPerformed
 
     private void MinumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinumKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,btnPetugas,Infus);
     }//GEN-LAST:event_MinumKeyPressed
 
     private void TranfusiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TranfusiKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Infus,Priming);
     }//GEN-LAST:event_TranfusiKeyPressed
 
     private void WashOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_WashOutKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Priming,Urine);
     }//GEN-LAST:event_WashOutKeyPressed
 
     private void InfusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InfusKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Minum,Tranfusi);
     }//GEN-LAST:event_InfusKeyPressed
 
     private void PrimingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PrimingKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Tranfusi,WashOut);
     }//GEN-LAST:event_PrimingKeyPressed
 
     private void UrineKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UrineKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,WashOut,Pendarahan);
     }//GEN-LAST:event_UrineKeyPressed
 
     private void PendarahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PendarahanKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Urine,Muntah);
     }//GEN-LAST:event_PendarahanKeyPressed
 
     private void MuntahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MuntahKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Pendarahan,UFG);
     }//GEN-LAST:event_MuntahKeyPressed
 
@@ -1448,7 +1450,6 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void UFGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UFGKeyPressed
-        hitungBalanceCairan();
         Valid.pindah(evt,Muntah,Keterangan);
     }//GEN-LAST:event_UFGKeyPressed
 
@@ -1835,6 +1836,6 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private void hitungBalanceCairan() {
         TtlInput.setText(String.valueOf(Valid.SetAngka(Minum.getText().trim()) + Valid.SetAngka(Infus.getText().trim()) + Valid.SetAngka(Tranfusi.getText().trim()) + Valid.SetAngka(Priming.getText().trim()) + Valid.SetAngka(WashOut.getText().trim())));
         TtlOutput.setText(String.valueOf(Valid.SetAngka(Urine.getText().trim()) + Valid.SetAngka(Pendarahan.getText().trim()) + Valid.SetAngka(Muntah.getText().trim()) + Valid.SetAngka(UFG.getText().trim())));
-        Balance.setText(String.valueOf(Valid.SetAngka(TtlInput.getText().trim()) + Valid.SetAngka(TtlOutput.getText().trim())));
+        Balance.setText(String.valueOf(Valid.SetAngka(TtlInput.getText().trim()) - Valid.SetAngka(TtlOutput.getText().trim())));
     }
 }

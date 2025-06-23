@@ -13382,7 +13382,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             "select catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat,catatan_cairan_hemodialisa.minum,"+
                             "catatan_cairan_hemodialisa.infus,catatan_cairan_hemodialisa.tranfusi,catatan_cairan_hemodialisa.sisa_priming,catatan_cairan_hemodialisa.wash_out,"+
                             "catatan_cairan_hemodialisa.urine,catatan_cairan_hemodialisa.pendarahan,catatan_cairan_hemodialisa.muntah,catatan_cairan_hemodialisa.keterangan,"+
-                            "catatan_cairan_hemodialisa.nip,petugas.nama from catatan_cairan_hemodialisa inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip "+
+                            "catatan_cairan_hemodialisa.nip,petugas.nama,catatan_cairan_hemodialisa.ttl_input,catatan_cairan_hemodialisa.ufg,catatan_cairan_hemodialisa.ttl_output,"+
+                            "catatan_cairan_hemodialisa.balance from catatan_cairan_hemodialisa inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip "+
                             "where catatan_cairan_hemodialisa.no_rawat='"+norawat+"' order by catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
@@ -13404,9 +13405,13 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' bgcolor='#FFFAF8'>Transfusi</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Sisa Priming</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Wash Out</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Ttl.Input</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Urine</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Pendarahan</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Muntah</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>UFG</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Ttl.Output</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Balance</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Keterangan</td>").append(
                                  "</tr>"
                         );
@@ -13421,9 +13426,13 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' align='center'>").append(rs2.getString("tranfusi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("sisa_priming")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("wash_out")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ttl_input")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("urine")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("pendarahan")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("muntah")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ufg")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ttl_output")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("balance")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("keterangan")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>");                                        
