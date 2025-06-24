@@ -6585,7 +6585,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                 append("</tr>").
                                                 append("<tr class='isi'>").
                                                         append("<td valign='top' width='2%'></td>").
-                                                        append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='75' height='25'/></td>").
+                                                        append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='100%' height='40'/></td>").
                                                         append("<td valign='middle' width='1%' align='center'></td>").
                                                         append("<td valign='middle' width='79%' align='center'>- UU ITE No 11 Tahun 2008 Pasal 5 Ayat 1 <br>&nbsp;&nbsp;'Informasi Elektronik dan/atau Dokumen Elektronik dan/atau hasil cetaknya merupakan alat bukti hukum yang sah'<br>- Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan BSRe</td>").
                                                 append("</tr>");
@@ -6625,7 +6625,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                     append("</tr>").
                                                     append("<tr class='isi'>").
                                                             append("<td valign='top' width='2%'></td>").
-                                                            append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='75' height='25'/></td>").
+                                                            append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='100%' height='40'/></td>").
                                                             append("<td valign='middle' width='1%' align='center'></td>").
                                                             append("<td valign='middle' width='79%' align='center'>- UU ITE No 11 Tahun 2008 Pasal 5 Ayat 1 <br>&nbsp;&nbsp;'Informasi Elektronik dan/atau Dokumen Elektronik dan/atau hasil cetaknya merupakan alat bukti hukum yang sah'<br>- Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan BSRe</td>").
                                                     append("</tr>");    
@@ -6638,7 +6638,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                     append("</tr>").
                                                     append("<tr class='isi'>").
                                                             append("<td valign='top' width='2%'></td>").
-                                                            append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='75' height='25'/></td>").
+                                                            append("<td valign='middle' width='18%'><img alt='Gambar BSRE' src='").append((getClass().getResource("/picture/bsre.jpg"))).append("' width='100%' height='40'/></td>").
                                                             append("<td valign='middle' width='1%' align='center'></td>").
                                                             append("<td valign='middle' width='79%' align='center'>- UU ITE No 11 Tahun 2008 Pasal 5 Ayat 1 <br>&nbsp;&nbsp;'Informasi Elektronik dan/atau Dokumen Elektronik dan/atau hasil cetaknya merupakan alat bukti hukum yang sah'<br>- Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan BSRe</td>").
                                                     append("</tr>");
@@ -13382,7 +13382,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             "select catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat,catatan_cairan_hemodialisa.minum,"+
                             "catatan_cairan_hemodialisa.infus,catatan_cairan_hemodialisa.tranfusi,catatan_cairan_hemodialisa.sisa_priming,catatan_cairan_hemodialisa.wash_out,"+
                             "catatan_cairan_hemodialisa.urine,catatan_cairan_hemodialisa.pendarahan,catatan_cairan_hemodialisa.muntah,catatan_cairan_hemodialisa.keterangan,"+
-                            "catatan_cairan_hemodialisa.nip,petugas.nama from catatan_cairan_hemodialisa inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip "+
+                            "catatan_cairan_hemodialisa.nip,petugas.nama,catatan_cairan_hemodialisa.ttl_input,catatan_cairan_hemodialisa.ufg,catatan_cairan_hemodialisa.ttl_output,"+
+                            "catatan_cairan_hemodialisa.balance from catatan_cairan_hemodialisa inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip "+
                             "where catatan_cairan_hemodialisa.no_rawat='"+norawat+"' order by catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
@@ -13395,8 +13396,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "<tr align='center'>").append(
                                     "<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>").append(
                                     "<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>").append(
-                                    "<td valign='top' width='58%' bgcolor='#FFFAF8' colspan='9'>Catatan</td>").append(
-                                    "<td valign='middle' width='23%' bgcolor='#FFFAF8' rowspan='2'>Perawat/Paramedis</td>").append(
+                                    "<td valign='top' width='67%' bgcolor='#FFFAF8' colspan='13'>Catatan</td>").append(
+                                    "<td valign='middle' width='14%' bgcolor='#FFFAF8' rowspan='2'>Perawat/Paramedis</td>").append(
                                  "</tr>").append(
                                  "<tr align='center'>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Minum</td>").append(
@@ -13404,9 +13405,13 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' bgcolor='#FFFAF8'>Transfusi</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Sisa Priming</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Wash Out</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Ttl.Input</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Urine</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Pendarahan</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Muntah</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>UFG</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Ttl.Output</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>Balance</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Keterangan</td>").append(
                                  "</tr>"
                         );
@@ -13421,11 +13426,15 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' align='center'>").append(rs2.getString("tranfusi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("sisa_priming")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("wash_out")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ttl_input")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("urine")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("pendarahan")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("muntah")).append("</td>").append(
-                                    "<td valign='top'>").append(rs2.getString("keterangan")).append("</td>").append(
-                                    "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ufg")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ttl_output")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("balance")).append("</td>").append(
+                                    "<td valign='top' width='150'>").append(rs2.getString("keterangan")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>");                                        
                             w++;
                         }while(rs2.next());
@@ -17165,7 +17174,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             "select catatan_observasi_hemodialisa.tgl_perawatan,catatan_observasi_hemodialisa.jam_rawat,catatan_observasi_hemodialisa.qb,catatan_observasi_hemodialisa.qd,"+
                             "catatan_observasi_hemodialisa.tekanan_arteri,catatan_observasi_hemodialisa.tekanan_vena,catatan_observasi_hemodialisa.tmp,catatan_observasi_hemodialisa.ufr,catatan_observasi_hemodialisa.tensi,"+
                             "catatan_observasi_hemodialisa.nadi,catatan_observasi_hemodialisa.suhu,catatan_observasi_hemodialisa.spo2,catatan_observasi_hemodialisa.tindakan,catatan_observasi_hemodialisa.ufg,"+
-                            "catatan_observasi_hemodialisa.nip,petugas.nama from catatan_observasi_hemodialisa inner join petugas on catatan_observasi_hemodialisa.nip=petugas.nip "+
+                            "catatan_observasi_hemodialisa.nip,petugas.nama,catatan_observasi_hemodialisa.rr,catatan_observasi_hemodialisa.ufv from catatan_observasi_hemodialisa inner join petugas on catatan_observasi_hemodialisa.nip=petugas.nip "+
                             "where catatan_observasi_hemodialisa.no_rawat='"+norawat+"' order by catatan_observasi_hemodialisa.tgl_perawatan,catatan_observasi_hemodialisa.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
@@ -17178,9 +17187,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "<tr align='center'>").append(
                                     "<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>").append(
                                     "<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>").append(
-                                    "<td valign='top' width='35%' bgcolor='#FFFAF8' colspan='10'>Monitoring</td>").append(
-                                    "<td valign='middle' width='23%' bgcolor='#FFFAF8' rowspan='2'>Tindakan</td>").append(
-                                    "<td valign='middle' width='23%' bgcolor='#FFFAF8' rowspan='2'>Perawat/Paramedis</td>").append(
+                                    "<td valign='top' width='41%' bgcolor='#FFFAF8' colspan='12'>Monitoring</td>").append(
+                                    "<td valign='middle' width='20%' bgcolor='#FFFAF8' rowspan='2'>Tindakan</td>").append(
+                                    "<td valign='middle' width='20%' bgcolor='#FFFAF8' rowspan='2'>Perawat/Paramedis</td>").append(
                                  "</tr>").append(
                                  "<tr align='center'>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>QB</td>").append(
@@ -17193,6 +17202,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' bgcolor='#FFFAF8'>Nadi</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>Suhu</td>").append(
                                     "<td valign='top' bgcolor='#FFFAF8'>SpO2</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>RR</td>").append(
+                                    "<td valign='top' bgcolor='#FFFAF8'>UFV</td>").append(
                                  "</tr>"
                         );
                         w=1;
@@ -17211,6 +17222,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<td valign='top' align='center'>").append(rs2.getString("nadi")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("suhu")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("spo2")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("rr")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(rs2.getString("ufv")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("tindakan")).append("</td>").append(
                                     "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>");                                        
