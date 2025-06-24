@@ -52,10 +52,6 @@ ALTER TABLE `booking_registrasi` MODIFY COLUMN IF EXISTS `status` enum('Terdafta
 
 ALTER TABLE `booking_registrasi` ADD COLUMN IF NOT EXISTS `no_rawat` varchar(17) NULL DEFAULT NULL AFTER `status`;
 
-ALTER TABLE `booking_registrasi` DROP INDEX IF EXISTS `PRIMARY`;
-
-ALTER TABLE `booking_registrasi` ADD PRIMARY KEY IF NOT EXISTS (`no_rkm_medis`, `tanggal_periksa`, `kd_dokter`, `kd_poli`) USING BTREE;
-
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;
