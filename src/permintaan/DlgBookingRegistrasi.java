@@ -1253,9 +1253,8 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                         Sequel.mengedit3("skdp_bpjs","no_rkm_medis=? and tanggal_datang=?","status='Sudah Periksa'",2,new String[]{
                             tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString()
                         });
-                        Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=? and kd_dokter = ? and kd_poli = ?",4,new String[]{
-                            tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString(), tbObat.getValueAt(i, 6).toString(),
-                                tbObat.getValueAt(i, 8).toString()
+                        Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=?",2,new String[]{
+                            tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,5).toString()
                         });
                     }
                 }
@@ -1486,7 +1485,11 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                         if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
                             tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
                         )) {
-                            Sequel.menghapusIgnoreSmc("reg_periksa", "no_rawat = ? and status_lanjut = 'Ralan' and stts = 'Belum' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)", tbObat.getValueAt(i, 27).toString());
+                            Sequel.menghapusIgnoreSmc("reg_periksa",
+                                "no_rawat = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
+                                "not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
+                                tbObat.getValueAt(i, 27).toString()
+                            );
                             tabMode.removeRow(i);
                         }
                     } else {
@@ -1495,10 +1498,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                         break;
                     }
                 } else {
-                    if (Sequel.menghapustfSmc("booking_registrasi",
-                        "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ?",
-                        tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 6).toString(), tbObat.getValueAt(i, 8).toString()
-                    )) {
+                    if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
                         tabMode.removeRow(i);
                     }
                 }
