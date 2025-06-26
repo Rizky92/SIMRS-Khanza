@@ -998,7 +998,7 @@ public class koneksiDB {
     public static String URUTNOREG(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("URUTNOREG");
+            var=prop.getProperty("URUTNOREG", "");
         }catch(Exception e){
             var=""; 
         }
@@ -1008,7 +1008,7 @@ public class koneksiDB {
     public static String JADWALDOKTERDIREGISTRASI(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("JADWALDOKTERDIREGISTRASI");
+            var=prop.getProperty("JADWALDOKTERDIREGISTRASI", "no");
         }catch(Exception e){
             var=""; 
         }
