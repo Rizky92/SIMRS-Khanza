@@ -10180,7 +10180,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
-    private void BtnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenilaianPreOperasiActionPerformed
+    private void BtnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -11829,18 +11829,15 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
 
     private void jam2() {
-        ActionListener taskPerformer = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Date now = Calendar.getInstance().getTime();
-                if (ChkJln.isSelected()) {
-                    String jam = new SimpleDateFormat("HH:mm:ss").format(now);
-
-                    DTPTgl.setDate(now);
-                    cmbJam.setSelectedItem(jam.substring(0, 2));
-                    cmbMnt.setSelectedItem(jam.substring(3, 5));
-                    cmbDtk.setSelectedItem(jam.substring(6, 8));
-                }
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            Date now = Calendar.getInstance().getTime();
+            if (ChkJln.isSelected()) {
+                String jam = new SimpleDateFormat("HH:mm:ss").format(now);
+                
+                DTPTgl.setDate(now);
+                cmbJam.setSelectedItem(jam.substring(0, 2));
+                cmbMnt.setSelectedItem(jam.substring(3, 5));
+                cmbDtk.setSelectedItem(jam.substring(6, 8));
             }
         };
 
