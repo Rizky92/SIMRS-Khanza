@@ -48,6 +48,10 @@ ALTER TABLE `booking_operasi` ADD COLUMN IF NOT EXISTS `catatan` varchar(500) NU
 
 ALTER TABLE `booking_operasi` ADD INDEX IF NOT EXISTS `booking_operasi_catatan_IDX`(`catatan`) USING BTREE;
 
+ALTER TABLE `booking_registrasi` MODIFY COLUMN IF EXISTS `status` enum('Terdaftar','Belum','Batal','Dokter Berhalangan','Checkin') NULL DEFAULT NULL AFTER `waktu_kunjungan`;
+
+ALTER TABLE `booking_registrasi` ADD COLUMN IF NOT EXISTS `no_rawat` varchar(17) NULL DEFAULT NULL AFTER `status`;
+
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;

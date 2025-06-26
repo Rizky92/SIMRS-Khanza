@@ -58,6 +58,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -280,6 +282,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private String nosisrute="",aktifkanparsial="no",BASENOREG="",TANGGALMUNDUR="yes",
             URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",terbitsep="",
             validasiregistrasi="No",validasicatatan="No",norawatdipilih="",normdipilih="";
+    private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI();
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private char ESC = 27;
     // ganti kertas
@@ -18711,7 +18714,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnUpdateJamRegistrasiNonBPJS.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnUpdateJamRegistrasiNonBPJS.setForeground(new java.awt.Color(50, 50, 50));
         MnUpdateJamRegistrasiNonBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
-        MnUpdateJamRegistrasiNonBPJS.setText("Update Jam Registrasi Non BPJS");
+        MnUpdateJamRegistrasiNonBPJS.setText("Checkin Booking Registrasi Non BPJS");
         MnUpdateJamRegistrasiNonBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnUpdateJamRegistrasiNonBPJS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnUpdateJamRegistrasiNonBPJS.setName("MnUpdateJamRegistrasiNonBPJS");
@@ -18785,27 +18788,32 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             return;
         }
 
-        String kodePJ = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString();
-        String noRawat = tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString();
-
-        if (kodePJ.equals("BPJ")) {
+        if (tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 22).toString().equals("BPJ")) {
             JOptionPane.showMessageDialog(null, "Maaf, hanya dibolehkan untuk pasien Non BPJS...!!!!");
+            return;
+        }
+        
+        if (!tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()))) {
+            JOptionPane.showMessageDialog(null, "Checkin Registrasi hanya bisa dilakukan untuk pasien yang datang pada hari ini..!!");
             return;
         }
 
         if (akses.getadmin()) {
-            Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
+            Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
         } else {
             if (
-                Sequel.cariExistsSmc("select * from pemeriksaan_ralan where no_rawat = ?", noRawat) ||
-                Sequel.cariIsiSmc("select stts from reg_periksa where no_rawat = ?", noRawat).equalsIgnoreCase("sudah")
+                Sequel.cariExistsSmc("select * from pemeriksaan_ralan where no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()) ||
+                Sequel.cariIsiSmc("select stts from reg_periksa where no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()).equalsIgnoreCase("sudah")
             ) {
                 JOptionPane.showMessageDialog(null, "Maaf, pasien sudah menerima pelayanan...!!!!");
             } else {
                 String tglsekarang = Sequel.ambiltanggalsekarang();
                 if (Sequel.cekTanggal48jam(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString() + " " + tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 4).toString(), tglsekarang)) {
-                    Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", noRawat);
+                    Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
                     tbPetugas.setValueAt(tglsekarang.substring(11), tbPetugas.getSelectedRow(), 4);
+                    if (BOOKINGLANGSUNGREGISTRASI) {
+                        Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
+                    }
                 }
             }
         }
