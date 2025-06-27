@@ -25,6 +25,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -1797,55 +1798,18 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }
 
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            Date now = Calendar.getInstance().getTime();
+            if (ChkKejadian.isSelected()) {
+                String jam = new SimpleDateFormat("HH:mm:ss").format(now);
                 
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkKejadian.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkKejadian.isSelected()==false){
-                    nilai_jam =Jam.getSelectedIndex();
-                    nilai_menit =Menit.getSelectedIndex();
-                    nilai_detik =Detik.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                Jam.setSelectedItem(jam);
-                Menit.setSelectedItem(menit);
-                Detik.setSelectedItem(detik);
+                Tanggal.setDate(now);
+                Jam.setSelectedItem(jam.substring(0, 2));
+                Menit.setSelectedItem(jam.substring(3, 5));
+                Detik.setSelectedItem(jam.substring(6, 8));
             }
         };
-        // Timer
+
         new Timer(1000, taskPerformer).start();
     }
 
@@ -1854,10 +1818,12 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             "no_rawat = ?, tgl_perawatan = ?, jam_rawat = ?, qb = ?, qd = ?, tekanan_arteri = ?, " +
             "tekanan_vena = ?, tmp = ?, ufr = ?, tensi = ?, nadi = ?, suhu = ?, spo2 = ?, tindakan = ?, " +
             "ufg = ?, rr = ?, ufv = ?, nip = ?", "no_rawat = ? and tgl_perawatan = ? and jam_rawat = ?",
-            TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), QB.getText(), QD.getText(), Arteri.getText(),
-            Vena.getText(), TMP.getText(), UFR.getText(), Tensi.getText(), Nadi.getText(), Suhu.getText(), Tindakan.getText(),
-            UFG.getText(), RR.getText(), UFV.getText(), NIP.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
-            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10), tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
+            TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), QB.getText(),
+            QD.getText(), Arteri.getText(), Vena.getText(), TMP.getText(), UFR.getText(), Tensi.getText(),
+            Nadi.getText(), Suhu.getText(), SpO2.getText(), Tindakan.getText(), UFG.getText(), RR.getText(),
+            UFV.getText(), NIP.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
+            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10),
+            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
         )) {
             tbObat.setValueAt(TNoRw.getText(), tbObat.getSelectedRow(), 0);
             tbObat.setValueAt(TNoRM.getText(), tbObat.getSelectedRow(), 1);
