@@ -249,7 +249,7 @@ public final class akses {
             catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
-            hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false;
+            hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1419,6 +1419,7 @@ public final class akses {
                         akses.poli_asal_pasien_ranap=rs2.getBoolean("poli_asal_pasien_ranap");
                         akses.pemberi_hutang_lain=rs2.getBoolean("pemberi_hutang_lain");
                         akses.dokter_asal_pasien_ranap=rs2.getBoolean("dokter_asal_pasien_ranap");
+                        akses.duta_parkir_rekap_keluar=rs2.getBoolean("duta_parkir_rekap_keluar");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2596,6 +2597,7 @@ public final class akses {
         akses.poli_asal_pasien_ranap=isadmin;
         akses.pemberi_hutang_lain=isadmin;
         akses.dokter_asal_pasien_ranap=isadmin;
+        akses.duta_parkir_rekap_keluar=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3781,6 +3783,7 @@ public final class akses {
     public static boolean getpoli_asal_pasien_ranap(){return akses.poli_asal_pasien_ranap;}
     public static boolean getpemberi_hutang_lain(){return akses.pemberi_hutang_lain;}
     public static boolean getdokter_asal_pasien_ranap(){return akses.dokter_asal_pasien_ranap;}
+    public static boolean getduta_parkir_rekap_keluar(){return akses.duta_parkir_rekap_keluar;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
