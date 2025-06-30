@@ -2092,6 +2092,7 @@ private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt
 
                     if(sukses==true){
                         Sequel.queryu("delete from laporan_operasi where no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1)+"' and tanggal='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0) +"'");
+                        jur.bersihkan();
                         if(status.equals("Ranap")){
                             jur.bersihkan();    
                             if(ttlpendapatan>0){
