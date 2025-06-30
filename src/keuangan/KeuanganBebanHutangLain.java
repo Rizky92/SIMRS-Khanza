@@ -784,7 +784,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                 if (sukses) sukses = jur.tampung(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString(), "0");
                 if (sukses) sukses = jur.tampung(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString());
                 if (sukses) sukses = jur.simpanJurnal(NoNota.getText(), "U", "PEMBATALAN PIUTANG LAIN-LAIN, OLEH "+akses.getkode());
-                }
             }else{
                 sukses=false;
             }
@@ -826,7 +825,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getDefaultCursor().getPredefinedCursor(Cursor.WAIT_CURSOR));
         BtnCariActionPerformed(evt);
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
