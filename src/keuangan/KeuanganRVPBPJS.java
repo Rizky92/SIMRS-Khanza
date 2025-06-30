@@ -38,6 +38,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import kepegawaian.DlgCariPetugas;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -101,7 +103,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                    jmdokteroperasiralan=0,jmparamedisoperasiralan=0,bhpoperasiralan=0,pendapatanoperasiralan=0,jmdokteroperasiranap=0,jmparamedisoperasiranap=0,bhpoperasiranap=0,pendapatanoperasiranap=0,
                    obatlangsung=0,obatralan=0,hppobatralan=0,obatranap=0,hppobatranap=0,returobat=0,tambahanbiaya=0,potonganbiaya=0,kamar=0,reseppulang=0,totalbiaya=0,registrasi=0,harianranap=0,rugihppralan=0,
                    rugihppranap=0,serviceranap=0,ttlpiutang=0,ttliur=0,ttlsudahdibayar=0,ttlsisapiutang=0,ttlinacbg=0,persenbayar=0,ppnobat=0;
-    private boolean sukses=true;
+    private boolean sukses=false,ceksukses=false;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private javax.swing.JFileChooser jfc = new JFileChooser();    
     private FileFilter excelFilter = new FileNameExtensionFilter("File CSV", "csv");
@@ -2457,225 +2459,105 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    /*private void tampil(){
-        Valid.tabelKosong(tabMode);
-        try{
-            sisapiutang=0;
-            ps=koneksi.prepareStatement(
-                   "select piutang_pasien.no_rawat,piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien) as namapasien, "+
-                   "piutang_pasien.totalpiutang,piutang_pasien.uangmuka,piutang_pasien.sisapiutang,bridging_sep.no_sep,inacbg_grouping_stage1.tarif, "+
-                   "reg_periksa.biaya_reg,reg_periksa.status_lanjut from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                   "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                   "inner join bridging_sep on bridging_sep.no_rawat=reg_periksa.no_rawat "+
-                   "left join inacbg_grouping_stage1 on bridging_sep.no_sep=inacbg_grouping_stage1.no_sep "+
-                   "where piutang_pasien.status='Belum Lunas' "+
-                   (TCari.getText().trim().equals("")?"":"and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? "+
-                   "or pasien.nm_pasien like ? or bridging_sep.no_sep like ? or reg_periksa.status_lanjut like ?)")+" order by piutang_pasien.tgl_piutang");
-            try {
-                if(!TCari.getText().equals("")){
-                    ps.setString(1,"%"+TCari.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                }
-                    
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan),0) FROM bayar_piutang where bayar_piutang.no_rawat=?",rs.getString("no_rawat"));
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString("no_rawat"),rs.getString("no_sep"),rs.getString("tgl_piutang"),rs.getString("namapasien"),
-                        rs.getDouble("totalpiutang"),rs.getDouble("uangmuka"),cicilan,(rs.getDouble("sisapiutang")-cicilan),
-                        rs.getDouble("tarif"),null,0,0,0,rs.getString("status_lanjut"),rs.getDouble("biaya_reg"),0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble("sisapiutang")-cicilan;
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            ps=koneksi.prepareStatement(
-                   "select piutang_pasien.no_rawat,piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien) as namapasien, "+
-                   "piutang_pasien.totalpiutang,piutang_pasien.uangmuka,piutang_pasien.sisapiutang,bridging_sep_internal.no_sep,inacbg_grouping_stage1_internal.tarif, "+
-                   "reg_periksa.biaya_reg,reg_periksa.status_lanjut from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                   "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                   "inner join bridging_sep_internal on bridging_sep_internal.no_rawat=reg_periksa.no_rawat "+
-                   "left join inacbg_grouping_stage1_internal on bridging_sep_internal.no_sep=inacbg_grouping_stage1_internal.no_sep "+
-                   "where piutang_pasien.status='Belum Lunas' "+
-                   (TCari.getText().trim().equals("")?"":"and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? "+
-                   "or pasien.nm_pasien like ? or bridging_sep_internal.no_sep like ? or reg_periksa.status_lanjut like ?)")+" order by piutang_pasien.tgl_piutang");
-            try {
-                if(!TCari.getText().equals("")){
-                    ps.setString(1,"%"+TCari.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                }
-                    
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan),0) FROM bayar_piutang where bayar_piutang.no_rawat=?",rs.getString("no_rawat"));
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString("no_rawat"),rs.getString("no_sep"),rs.getString("tgl_piutang"),rs.getString("namapasien"),
-                        rs.getDouble("totalpiutang"),rs.getDouble("uangmuka"),cicilan,(rs.getDouble("sisapiutang")-cicilan),
-                        rs.getDouble("tarif"),null,0,0,0,rs.getString("status_lanjut"),rs.getDouble("biaya_reg"),0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble("sisapiutang")-cicilan;
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            ps=koneksi.prepareStatement(
-                   "select piutang_pasien.no_rawat,piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien) as namapasien, "+
-                   "piutang_pasien.totalpiutang,piutang_pasien.uangmuka,piutang_pasien.sisapiutang,inacbg_klaim_baru2.no_sep,inacbg_grouping_stage12.tarif, "+
-                   "reg_periksa.biaya_reg,reg_periksa.status_lanjut from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                   "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                   "inner join inacbg_klaim_baru2 on inacbg_klaim_baru2.no_rawat=reg_periksa.no_rawat "+
-                   "left join inacbg_grouping_stage12 on inacbg_klaim_baru2.no_sep=inacbg_grouping_stage12.no_sep "+
-                   "where piutang_pasien.status='Belum Lunas' "+
-                   (TCari.getText().trim().equals("")?"":"and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? "+
-                   "or pasien.nm_pasien like ? or inacbg_klaim_baru2.no_sep like ? or reg_periksa.status_lanjut like ?)")+" order by piutang_pasien.tgl_piutang");
-            try {
-                if(!TCari.getText().equals("")){
-                    ps.setString(1,"%"+TCari.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                }
-                    
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan),0) FROM bayar_piutang where bayar_piutang.no_rawat=?",rs.getString("no_rawat"));
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString("no_rawat"),rs.getString("no_sep"),rs.getString("tgl_piutang"),rs.getString("namapasien"),
-                        rs.getDouble("totalpiutang"),rs.getDouble("uangmuka"),cicilan,(rs.getDouble("sisapiutang")-cicilan),
-                        rs.getDouble("tarif"),null,0,0,0,rs.getString("status_lanjut"),rs.getDouble("biaya_reg"),0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,0,0,0,0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble("sisapiutang")-cicilan;
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            LCount.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }
-    }*/
-    
-    private void tampil() {
-        Valid.tabelKosong(tabMode);
-        sisapiutang = 0;
-        String ralanranap = "";
-        if (chkRalan.isSelected()) {
-            ralanranap = "and reg_periksa.status_lanjut = 'Ralan' ";
-        }
-        if (chkRanap.isSelected()) {
-            ralanranap = "and reg_periksa.status_lanjut = 'Ranap' ";
-        }
-        if (chkRalan.isSelected() && chkRanap.isSelected()) {
-            ralanranap = "and reg_periksa.status_lanjut in ('Ralan', 'Ranap') ";
-        }
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
-            "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
-            "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep.no_sep, inacbg_grouping.tarif, " +
-            "reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join " +
-            "reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join bridging_sep on bridging_sep.no_rawat = reg_periksa.no_rawat and " +
-            "reg_periksa.status_lanjut = (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) left join (select distinct * from (select " +
-            "inacbg_grouping_stage1.no_sep, inacbg_grouping_stage1.tarif, 'stage1' as status from inacbg_grouping_stage1 union all select " +
-            "inacbg_grouping_stage12.no_sep, inacbg_grouping_stage12.tarif, 'stage12' as status from inacbg_grouping_stage12) as inacbg_grouping) " +
-            "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
-            "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or " +
-            "pasien.nm_pasien like ? or bridging_sep.no_sep like ?) order by piutang_pasien.tgl_piutang, bridging_sep.no_sep"
-        )) {
-            ps.setString(1, Valid.getTglSmc(DTPTgl1));
-            ps.setString(2, Valid.getTglSmc(DTPTgl2));
-            ps.setString(3, "%" + TCari.getText() + "%");
-            ps.setString(4, "%" + TCari.getText() + "%");
-            ps.setString(5, "%" + TCari.getText() + "%");
-            ps.setString(6, "%" + TCari.getText() + "%");
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
-                        null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
-                    });
-                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        
-        if (chkInternal.isSelected()) {
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
-                "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
-                "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep_internal.no_sep, " +
-                "inacbg_grouping.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
-                "piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join " +
-                "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
-                "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal as inacbg_grouping on " +
-                "bridging_sep_internal.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
-                "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or " +
-                "piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or bridging_sep_internal.no_sep like ?) order by " +
-                "piutang_pasien.tgl_piutang, bridging_sep_internal.no_sep"
-            )) {
-                ps.setString(1, Valid.getTglSmc(DTPTgl1));
-                ps.setString(2, Valid.getTglSmc(DTPTgl2));
-                ps.setString(3, "%" + TCari.getText() + "%");
-                ps.setString(4, "%" + TCari.getText() + "%");
-                ps.setString(5, "%" + TCari.getText() + "%");
-                ps.setString(6, "%" + TCari.getText() + "%");
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        tabMode.addRow(new Object[] {
-                            false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
-                            rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
-                            null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
-                        });
-                        sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+    private synchronized void tampil(){
+        if (!ceksukses) {
+            ceksukses = true;
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    Valid.tabelKosong(tabMode);
+                    sisapiutang = 0;
+                    String ralanranap = "";
+                    if (chkRalan.isSelected()) {
+                        ralanranap = "and reg_periksa.status_lanjut = 'Ralan' ";
                     }
+                    if (chkRanap.isSelected()) {
+                        ralanranap = "and reg_periksa.status_lanjut = 'Ranap' ";
+                    }
+                    if (chkRalan.isSelected() && chkRanap.isSelected()) {
+                        ralanranap = "and reg_periksa.status_lanjut in ('Ralan', 'Ranap') ";
+                    }
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+                        "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+                        "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep.no_sep, inacbg_grouping.tarif, " +
+                        "reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join " +
+                        "reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join bridging_sep on bridging_sep.no_rawat = reg_periksa.no_rawat and " +
+                        "reg_periksa.status_lanjut = (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) left join (select distinct * from (select " +
+                        "inacbg_grouping_stage1.no_sep, inacbg_grouping_stage1.tarif, 'stage1' as status from inacbg_grouping_stage1 union all select " +
+                        "inacbg_grouping_stage12.no_sep, inacbg_grouping_stage12.tarif, 'stage12' as status from inacbg_grouping_stage12) as inacbg_grouping) " +
+                        "as inacbg_grouping on bridging_sep.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+                        "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or " +
+                        "pasien.nm_pasien like ? or bridging_sep.no_sep like ?) order by piutang_pasien.tgl_piutang, bridging_sep.no_sep"
+                    )) {
+                        ps.setString(1, Valid.getTglSmc(DTPTgl1));
+                        ps.setString(2, Valid.getTglSmc(DTPTgl2));
+                        ps.setString(3, "%" + TCari.getText() + "%");
+                        ps.setString(4, "%" + TCari.getText() + "%");
+                        ps.setString(5, "%" + TCari.getText() + "%");
+                        ps.setString(6, "%" + TCari.getText() + "%");
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                Object[] row = new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
+                                    rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                                    null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
+                                };
+                                sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    
+                    if (chkInternal.isSelected()) {
+                        try (PreparedStatement ps = koneksi.prepareStatement(
+                            "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis, ' ', pasien.nm_pasien) as namapasien, " +
+                            "piutang_pasien.totalpiutang, piutang_pasien.uangmuka, ifnull((select sum(bayar_piutang.besar_cicilan) from bayar_piutang where " +
+                            "bayar_piutang.no_rawat = piutang_pasien.no_rawat), 0) as besar_cicilan, piutang_pasien.sisapiutang, bridging_sep_internal.no_sep, " +
+                            "inacbg_grouping.tarif, reg_periksa.biaya_reg, reg_periksa.status_lanjut from piutang_pasien join pasien on " +
+                            "piutang_pasien.no_rkm_medis = pasien.no_rkm_medis join reg_periksa on piutang_pasien.no_rawat = reg_periksa.no_rawat join " +
+                            "bridging_sep_internal on bridging_sep_internal.no_rawat = reg_periksa.no_rawat and reg_periksa.status_lanjut = (if( " +
+                            "bridging_sep_internal.jnspelayanan = '1', 'Ranap', 'Ralan')) left join inacbg_grouping_stage1_internal as inacbg_grouping on " +
+                            "bridging_sep_internal.no_sep = inacbg_grouping.no_sep where piutang_pasien.status = 'Belum Lunas' and " +
+                            "piutang_pasien.tgl_piutang between ? and ? " + ralanranap + "and (piutang_pasien.no_rawat like ? or " +
+                            "piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or bridging_sep_internal.no_sep like ?) order by " +
+                            "piutang_pasien.tgl_piutang, bridging_sep_internal.no_sep"
+                        )) {
+                            ps.setString(1, Valid.getTglSmc(DTPTgl1));
+                            ps.setString(2, Valid.getTglSmc(DTPTgl2));
+                            ps.setString(3, "%" + TCari.getText() + "%");
+                            ps.setString(4, "%" + TCari.getText() + "%");
+                            ps.setString(5, "%" + TCari.getText() + "%");
+                            ps.setString(6, "%" + TCari.getText() + "%");
+                            try (ResultSet rs = ps.executeQuery()) {
+                                while (rs.next()) {
+                                    Object[] row = new Object[] {
+                                        false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("tgl_piutang"), rs.getString("namapasien"), rs.getDouble("totalpiutang"),
+                                        rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), (rs.getDouble("totalpiutang") - rs.getDouble("besar_cicilan")), rs.getDouble("tarif"),
+                                        null, 0, 0, 0, rs.getString("status_lanjut"), rs.getDouble("biaya_reg"), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
+                                    };
+                                    sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
+                                    SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                    }
+                    SwingUtilities.invokeLater(() -> totalnilai());
+                    return null;
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            }
+                @Override
+                protected void done() {
+                    LCount.setText(Valid.SetAngka(sisapiutang));
+                    ceksukses = false;
+                }
+            }.execute();
         }
-        LCount.setText(Valid.SetAngka(sisapiutang));
-        totalnilai();
     }
     
     private void getdata(int pilih) {

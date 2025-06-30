@@ -13,6 +13,8 @@ package rekammedis;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -21,11 +23,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -55,19 +59,32 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        Object[] row={"Kesimpulan","Anjuran"};        
-        tabMode=new DefaultTableModel(null,row){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        Object[] row={"P", "Kesimpulan","Anjuran"};        
+        tabMode = new DefaultTableModel(null, row) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
+                }
+                return java.lang.String.class;
+            }
+            
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 0;
+            }
         };
         tbKamar.setModel(tabMode);
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(350);
+                column.setPreferredWidth(30);
             }else if(i==1){
+                column.setPreferredWidth(350);
+            }else if(i==2){
                 column.setPreferredWidth(350);
             }
         }
@@ -373,76 +390,58 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
-            file=new File("./cache/masteranjuranmcu.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            
-            ps=koneksi.prepareStatement("select * from master_kesimpulan_anjuran_mcu order by aturan ");
-            try {
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{rs.getString(1)});
-                    iyembuilder.append("{\"Kesimpulan\":\"").append(rs.getString(1)).append("\",\"Anjuran\":\"").append(rs.getString(2)).append("\"},");
+        try {
+            File file = new File("./cache/masteranjuranmcu.iyem");
+            try (
+                FileWriter fw = new FileWriter(file);
+                ResultSet rs = koneksi.createStatement().executeQuery("select * from master_kesimpulan_anjuran_mcu order by kesimpulan");
+            ) {
+                ObjectNode root = mapper.createObjectNode();
+                ArrayNode array = mapper.createArrayNode();
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {false, rs.getString(1), rs.getString(2)});
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("Kesimpulan", rs.getString(1));
+                    map.put("Anjuran", rs.getString(2));
+                    array.add(mapper.valueToTree(map));
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }   
-                
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"masteranjuranmcu\":["+iyembuilder+"]}");
-                fileWriter.flush();
+                root.set("masteranjuranmcu", array);
+                fw.write(mapper.writeValueAsString(root));
+                fw.flush();
             }
-            
-            fileWriter.close();
-            iyembuilder=null;
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+            LCount.setText(String.valueOf(tabMode.getRowCount()));
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
     }
     
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/masteranjuranmcu.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("masteranjuranmcu");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            list.path("Kesimpulan").asText(),list.path("Anjuran").asText()
+        Valid.tabelKosong(tabMode);
+        try (FileReader fr = new FileReader("./cache/masteranjuranmcu.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("masteranjuranmcu");
+            if (response.isArray()) {
+                if (TCari.getText().isBlank()) {
+                    for (JsonNode list : response) {
+                        tabMode.addRow(new Object[] {
+                            false, list.path("Kesimpulan").asText(), list.path("Anjuran").asText()
                         });
                     }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("Kesimpulan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Anjuran").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                            tabMode.addRow(new Object[]{
-                                list.path("Kesimpulan").asText(),list.path("Anjuran").asText()
+                } else {
+                    for (JsonNode list : response) {
+                        if (list.toString().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
+                            tabMode.addRow(new Object[] {
+                                false, list.path("Kesimpulan").asText(), list.path("Anjuran").asText()
                             });
                         }
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
+        } catch (FileNotFoundException e) {
+            tampil();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
 
     public void emptTeks() {
