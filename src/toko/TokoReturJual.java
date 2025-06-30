@@ -800,9 +800,9 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
 
                 if(sukses==true){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Retur_Jual_Toko,"RETUR PENJUALAN",ttl,0);
-                    Sequel.insertTampJurnal(Kontra_Retur_Jual_Toko,"KONTRA RETUR PENJUALAN",0,ttl);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(Retur_Jual_Toko,"RETUR PENJUALAN",ttl,0);
+                    if (sukses) sukses = jur.tampung(Kontra_Retur_Jual_Toko,"KONTRA RETUR PENJUALAN",0,ttl);
                     sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PENJUALAN TOKO"+", OLEH "+akses.getkode());
                 }
 

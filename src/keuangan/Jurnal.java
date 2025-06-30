@@ -4,14 +4,13 @@
  */
 package keuangan;
 
-import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
-import fungsi.validasi;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -19,202 +18,132 @@ import java.sql.ResultSet;
  */
 public class Jurnal {
     private final sekuel Sequel = new sekuel();
-    private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
-    private ResultSet rs, rscek;
-    private PreparedStatement ps2, ps, pscek;
-    private String nojur = "";
-    private boolean sukses = true;
-
-    public synchronized boolean simpanJurnal(String nobukti, String jenis, String keterangan) {
-        try {
-            pscek = koneksi.prepareStatement(
-                "select count(*) as jml, current_date() as tanggal, current_time() as jam, round(sum(debet) - sum(kredit), 0) as selisih, " +
-                "round(sum(debet), 0) as total_debet, round(sum(kredit), 0) as total_kredit " +
-                "from tampjurnal_smc where user_id = ? and ip = ?"
-            );
-            try {
-                pscek.setString(1, akses.getkode());
-                pscek.setString(2, akses.getalamatip());
-                rscek = pscek.executeQuery();
-                if (rscek.next()) {
-                    if (rscek.getInt("jml") > 0) {
-                        if (rscek.getInt("selisih") == 0) {
-                            nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                            try {
-                                sukses = true;
-                                ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
-                                try {
-                                    ps.setString(1, nojur);
-                                    ps.setString(2, nobukti);
-                                    ps.setString(3, rscek.getString("tanggal"));
-                                    ps.setString(4, rscek.getString("jam"));
-                                    ps.setString(5, jenis);
-                                    ps.setString(6, keterangan);
-                                    ps.executeUpdate();
-                                } catch (Exception e) {
-                                    sukses = false;
-                                    System.out.println("Notifikasi : " + e);
-                                } finally {
-                                    if (ps != null) {
-                                        ps.close();
-                                    }
-                                }
-
-                                if (sukses == false) {
-                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                                    sukses = true;
-                                    ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)");
-                                    try {
-                                        ps.setString(1, nojur);
-                                        ps.setString(2, nobukti);
-                                        ps.setString(3, rscek.getString("tanggal"));
-                                        ps.setString(4, rscek.getString("jam"));
-                                        ps.setString(5, jenis);
-                                        ps.setString(6, keterangan);
-                                        ps.executeUpdate();
-                                    } catch (Exception e) {
-                                        sukses = false;
-                                        System.out.println("Notifikasi : " + e);
-                                    } finally {
-                                        if (ps != null) {
-                                            ps.close();
-                                        }
-                                    }
-                                }
-
-                                if (sukses == true) {
-                                    sukses = Sequel.executeRawSmc(
-                                        "insert into detailjurnal " +
-                                        "select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, tampjurnal_smc.kredit " +
-                                        "from tampjurnal_smc where user_id = ? and ip = ?",
-                                        nojur, akses.getkode(), akses.getalamatip()
-                                    );
-                                    Sequel.deleteTampJurnal();
-                                }
-                            } catch (Exception ex) {
-                                sukses = false;
-                                System.out.println("Notifikasi : " + ex);
-                            }
-                        } else {
-                            System.out.println("Notif : Debet dan Kredit tidak sama!");
-                            System.out.println("Total Debet  : " + rscek.getBigDecimal("total_debet").toPlainString());
-                            System.out.println("Total Kredit : " + rscek.getBigDecimal("total_kredit").toPlainString());
-                            sukses = false;
-                        }
-                    } else {
-                        System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
-                    }
-                }
-            } catch (Exception e) {
-                sukses = false;
-                System.out.println("Notif : " + e);
-            } finally {
-                if (rscek != null) {
-                    rscek.close();
-                }
-                if (pscek != null) {
-                    pscek.close();
-                }
-            }
-        } catch (Exception e) {
-            sukses = false;
-            System.out.println("Notif : " + e);
-        }
-        return sukses;
+    private String nojur = "", nobukti = "", jenis = "", keterangan = "";
+    private HashMap<String, Double> detaildebet = new HashMap<>(),
+                                    detailkredit = new HashMap<>();
+    
+    public Jurnal() {}
+    
+    public Jurnal(String nobukti, String jenis, String keterangan) {
+        this.nobukti = nobukti;
+        this.jenis = jenis;
+        this.keterangan = keterangan;
     }
     
-    public synchronized boolean simpanJurnalRVPBPJS(String nobukti, String jenis, String keterangan) {
-        try (ResultSet rscek = koneksi.createStatement().executeQuery(
-            "select count(*) as jml, current_date() as tanggal, current_time() as jam, round(sum(debet) - sum(kredit), 0) as selisih from tampjurnal_rvpbpjs"
-        )) {
-            if (rscek.next()) {
-                if (rscek.getInt("jml") > 0) {
-                    if (rscek.getInt("selisih") == 0) {
-                        nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                        sukses = true;
-                        try (PreparedStatement ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)")) {
-                            ps.setString(1, nojur);
-                            ps.setString(2, nobukti);
-                            ps.setString(3, rscek.getString("tanggal"));
-                            ps.setString(4, rscek.getString("jam"));
-                            ps.setString(5, jenis);
-                            ps.setString(6, keterangan);
-                            ps.executeUpdate();
-                        } catch (Exception e) {
-                            System.out.println("Notif : " + e);
-                            sukses = false;
-                        }
-                        
-                        if (!sukses) {
-                            nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                            sukses = true;
-                            try (PreparedStatement ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)")) {
-                                ps.setString(1, nojur);
-                                ps.setString(2, nobukti);
-                                ps.setString(3, rscek.getString("tanggal"));
-                                ps.setString(4, rscek.getString("jam"));
-                                ps.setString(5, jenis);
-                                ps.setString(6, keterangan);
-                                ps.executeUpdate();
-                            } catch (Exception e) {
-                                System.out.println("Notif : " + e);
-                                sukses = false;
-                            }
-                        }
-                        
-                        if (!sukses) {
-                            nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), 2);
-                            sukses = true;
-                            try (PreparedStatement ps = koneksi.prepareStatement("insert into jurnal values(?, ?, ?, ?, ?, ?)")) {
-                                ps.setString(1, nojur);
-                                ps.setString(2, nobukti);
-                                ps.setString(3, rscek.getString("tanggal"));
-                                ps.setString(4, rscek.getString("jam"));
-                                ps.setString(5, jenis);
-                                ps.setString(6, keterangan);
-                                ps.executeUpdate();
-                            } catch (Exception e) {
-                                System.out.println("Notif : " + e);
-                                sukses = false;
-                            }
-                        }
-                        
-                        if (sukses) {
-                            try (ResultSet rs = koneksi.createStatement().executeQuery(
-                                "select kd_rek, nm_rek, debet, kredit from tampjurnal_rvpbpjs"
-                            )) {
-                                while (rs.next()) {
-                                    try (PreparedStatement ps = koneksi.prepareStatement("insert into detailjurnal values(?, ?, ?, ?)")) {
-                                        ps.setString(1, nojur);
-                                        ps.setString(2, rs.getString(1));
-                                        ps.setString(3, rs.getString(3));
-                                        ps.setString(4, rs.getString(4));
-                                        ps.executeUpdate();
-                                    } catch (Exception e) {
-                                        System.out.println("Notif : " + e);
-                                        sukses = false;
-                                    }
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : " + e);
-                                sukses = false;
-                            }
-                            Sequel.queryu2("delete from tampjurnal_rvpbpjs");
-                        }
-                    } else {
-                        System.out.println("Notif : Debet dan Kredit tidak sama!");
-                        sukses = false;
-                    }
-                } else {
-                    System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
-                    sukses = false;
-                }
+    public synchronized void bersihkan() {
+        detaildebet.clear();
+        detailkredit.clear();
+        System.out.println("cleared");
+        System.out.println("detaildebet status : " + detaildebet.toString());
+        System.out.println("detailkredit status : " + detailkredit.toString());
+    }
+    
+    public synchronized boolean tampung(String kdrek, String nmrek, double debet, double kredit) {
+        if (debet <= 0 && kredit <= 0) {
+            return false;
+        }
+        
+        if (debet > 0) {
+            if (detaildebet.containsKey(kdrek)) {
+                detaildebet.put(kdrek, detaildebet.get(kdrek) + debet);
+            } else {
+                detaildebet.put(kdrek, debet);
+            }
+        }
+        
+        if (kredit > 0) {
+            if (detailkredit.containsKey(kdrek)) {
+                detailkredit.put(kdrek, detailkredit.get(kdrek) + kredit);
+            } else {
+                detailkredit.put(kdrek, kredit);
+            }
+        }
+        
+        System.out.println("detaildebet status : " + detaildebet.toString());
+        System.out.println("detailkredit status : " + detailkredit.toString());
+        
+        return true;
+    }
+    
+    public synchronized boolean tampung(String kdrek, String nmrek, String debet, String kredit) {
+        double d = 0, k = 0;
+        try {
+            d = Double.parseDouble(debet);
+            k = Double.parseDouble(kredit);
+        } catch (Exception e) {
+            return false;
+        }
+        return this.tampung(kdrek, nmrek, d, k);
+    }
+    
+    public synchronized boolean tampung(Object kdrek, Object nmrek, Object debet, Object kredit) {
+        return this.tampung(kdrek.toString(), nmrek.toString(), debet.toString(), kredit.toString());
+    }
+    
+    public synchronized boolean simpanJurnal() {
+        // kalau debet atau kredit kosong, proses pencatatan jurnal pasti tidak valid
+        System.out.println("detaildebet status : " + detaildebet.toString());
+        System.out.println("detailkredit status : " + detailkredit.toString());
+        if (detaildebet.isEmpty() || detailkredit.isEmpty()) {
+            return false;
+        }
+        
+        int totaldebet = detaildebet.values().stream().reduce(0d, Double::sum).intValue(),
+            totalkredit = detailkredit.values().stream().reduce(0d, Double::sum).intValue();
+        
+        // cek jumlah debet/kredit kalau kosong maka 
+        if (totaldebet <= 0 || totalkredit <= 0 || totaldebet != totalkredit) {
+            return false;
+        }
+        
+        int next = 1, retry = 4;
+        boolean sukses = true;
+        // loop proses simpan, pastikan pencatatan jurnal mendapatkan no. jurnal yang sesuai
+        String tgl = Sequel.cariIsiSmc("select current_date()"), jam = Sequel.cariIsiSmc("select current_time()");
+        do {
+            nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", tgl, next);
+            sukses = Sequel.menyimpantfSmc("jurnal", null, nojur, nobukti, tgl, jam, jenis, keterangan);
+        } while (!sukses && next++ <= retry);
+        
+        // return cepat ketika gagal
+        if (!sukses) return false;
+        
+        try (PreparedStatement ps = koneksi.prepareStatement("insert into detailjurnal values (?, ?, ?, ?)")) {
+            int batches = 0;   // hitung jumlah batch
+            for (Map.Entry<String, Double> debet : detaildebet.entrySet()) {
+                ps.setString(1, nojur);
+                ps.setString(2, debet.getKey());
+                ps.setDouble(3, debet.getValue());
+                ps.setDouble(4, 0);
+                ps.addBatch();
+                ++batches;
+            }
+            for (Map.Entry<String, Double> kredit : detailkredit.entrySet()) {
+                ps.setString(1, nojur);
+                ps.setString(2, kredit.getKey());
+                ps.setDouble(3, 0);
+                ps.setDouble(4, kredit.getValue());
+                ps.addBatch();
+                ++batches;
+            }
+            int result = Arrays.stream(ps.executeBatch()).reduce(0, Integer::sum);
+            if (batches != result) {
+                return false;
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            return false;
         }
         
-        return sukses;
+        return true;
+    }
+
+    public boolean simpanJurnal(String nobukti, String jenis, String keterangan) {
+        this.nobukti = nobukti;
+        this.jenis = jenis;
+        this.keterangan = keterangan;
+        
+        return this.simpanJurnal();
     }
 }

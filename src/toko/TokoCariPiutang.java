@@ -1060,9 +1060,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
                   if(sukses==true){
                         ttlpiutang=rs.getDouble("sisapiutang");
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Piutang_Toko, "PIUTANG", 0, ttlpiutang);
-                        Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", ttlpiutang, 0);
+                        jur.bersihkan();
+                        if (sukses) sukses = jur.tampung(Piutang_Toko, "PIUTANG", 0, ttlpiutang);
+                        if (sukses) sukses = jur.tampung(Kontra_Piutang_Toko, "Persediaan Barang Toko", ttlpiutang, 0);
                         sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
                   } 
 

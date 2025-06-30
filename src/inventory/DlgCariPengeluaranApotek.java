@@ -1383,9 +1383,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       String kontraStokKeluarMedis = Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun");
                       double totalPengeluaranObat = Sequel.cariDoubleSmc("select sum(total) from detail_pengeluaran_obat_bhp where no_keluar = ?", rs.getString("no_keluar"));
 
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(stokKeluarMedis, "PERSEDIAAN BARANG", totalPengeluaranObat, 0);
-                    Sequel.insertTampJurnal(kontraStokKeluarMedis, "KONTRA PERSEDIAAN BARANG", 0, totalPengeluaranObat);
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(stokKeluarMedis, "PERSEDIAAN BARANG", totalPengeluaranObat, 0);
+                    if (sukses) sukses = jur.tampung(kontraStokKeluarMedis, "KONTRA PERSEDIAAN BARANG", 0, totalPengeluaranObat);
                     
                      sukses=jur.simpanJurnal(rs.getString("no_keluar"),"U","PEMBATALAN STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());  
                   } 

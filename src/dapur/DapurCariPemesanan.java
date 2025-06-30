@@ -964,12 +964,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }
                 
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"));
+                jur.bersihkan();
+                if (sukses) sukses = jur.tampung(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"));
                 if (rs.getDouble("ppn") > 0) {
-                    Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"));
+                    if (sukses) sukses = jur.tampung(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"));
                 }
-                Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0);
+                if (sukses) sukses = jur.tampung(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0);
                 sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
 
                 if(sukses==true){

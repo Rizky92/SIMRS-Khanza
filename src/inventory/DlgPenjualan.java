@@ -4333,14 +4333,14 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
         if(verifikasi_penjualan_di_kasir.equals("No")){
             if(sukses==true){
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
+                jur.bersihkan();
+                if (sukses) sukses = jur.tampung(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
                 if(besarppnobat>0){
-                    Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                    if (sukses) sukses = jur.tampung(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
                 }   
-                Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
-                Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
-                Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
+                if (sukses) sukses = jur.tampung(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
+                if (sukses) sukses = jur.tampung(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
+                if (sukses) sukses = jur.tampung(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
                 sukses=jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());     
                 if(sukses==true){
                     sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+NoNota.getText()+"','"+kdmem.getText()+"','"+nmmem.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(Tgl.getSelectedItem()+"")+
