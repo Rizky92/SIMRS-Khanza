@@ -515,10 +515,10 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         tbRiwayatKehamilan2.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
-        RPK.setDocument(new batasInput((int)100).getKata(RPK));
-        PSK.setDocument(new batasInput((int)100).getKata(PSK));
-        RBedah.setDocument(new batasInput((int)100).getKata(RBedah));
+        // KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
+        // RPK.setDocument(new batasInput((int)100).getKata(RPK));
+        // PSK.setDocument(new batasInput((int)100).getKata(PSK));
+        // RBedah.setDocument(new batasInput((int)100).getKata(RBedah));
         Alergi.setDocument(new batasInput((int)25).getKata(Alergi));
         KeteranganKomplikasiKehamilan.setDocument(new batasInput((int)30).getKata(KeteranganKomplikasiKehamilan));
         UmurMinarche.setDocument(new batasInput((int)10).getKata(UmurMinarche));
@@ -586,8 +586,8 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         KetPadaDokter.setDocument(new batasInput((int)10).getKata(KetPadaDokter));
         KeteranganDiagnosaKhususGizi.setDocument(new batasInput((int)50).getKata(KeteranganDiagnosaKhususGizi));
         KeteranganDiketahuiDietisen.setDocument(new batasInput((int)10).getKata(KeteranganDiketahuiDietisen));
-        Masalah.setDocument(new batasInput((int)1000).getKata(Masalah));
-        Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
+        // Masalah.setDocument(new batasInput((int)1000).getKata(Masalah));
+        // Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

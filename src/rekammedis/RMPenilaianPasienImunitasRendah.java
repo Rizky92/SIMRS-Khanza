@@ -126,13 +126,13 @@ public final class RMPenilaianPasienImunitasRendah extends javax.swing.JDialog {
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanYangDirasakan.setDocument(new batasInput((int)1000).getKata(KeluhanYangDirasakan));
-        RiwayatPenyakitKeluarga.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakitKeluarga));
+        // KeluhanYangDirasakan.setDocument(new batasInput((int)1000).getKata(KeluhanYangDirasakan));
+        // RiwayatPenyakitKeluarga.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakitKeluarga));
         RiwayatAlergi.setDocument(new batasInput((int)100).getKata(RiwayatAlergi));
         RiwayatVaksin.setDocument(new batasInput((int)100).getKata(RiwayatVaksin));
-        RiwayatPengobatan.setDocument(new batasInput((int)1000).getKata(RiwayatPengobatan));
-        DiagnosaUtama.setDocument(new batasInput((int)500).getKata(DiagnosaUtama));
-        DiagnosaTambahan.setDocument(new batasInput((int)500).getKata(DiagnosaTambahan));
+        // RiwayatPengobatan.setDocument(new batasInput((int)1000).getKata(RiwayatPengobatan));
+        // DiagnosaUtama.setDocument(new batasInput((int)500).getKata(DiagnosaUtama));
+        // DiagnosaTambahan.setDocument(new batasInput((int)500).getKata(DiagnosaTambahan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

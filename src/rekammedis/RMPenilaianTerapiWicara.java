@@ -219,9 +219,9 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        DiagnosaTerapiWicara.setDocument(new batasInput((int)100).getKata(DiagnosaTerapiWicara));
-        DiagnosaMedis.setDocument(new batasInput((int)100).getKata(DiagnosaMedis));
-        Anamnesa.setDocument(new batasInput((int)300).getKata(Anamnesa));
+        // DiagnosaTerapiWicara.setDocument(new batasInput((int)100).getKata(DiagnosaTerapiWicara));
+        // DiagnosaMedis.setDocument(new batasInput((int)100).getKata(DiagnosaMedis));
+        // Anamnesa.setDocument(new batasInput((int)300).getKata(Anamnesa));
         Suhu.setDocument(new batasInput((int)5).getKata(Suhu));
         RR.setDocument(new batasInput((int)5).getKata(RR));
         Nadi.setDocument(new batasInput((int)5).getKata(Nadi));
@@ -252,15 +252,15 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
         MaxillaFisiologis.setDocument(new batasInput((int)30).getKata(MaxillaFisiologis));
         DentalFisiologis.setDocument(new batasInput((int)30).getKata(DentalFisiologis));
         FaringFisiologis.setDocument(new batasInput((int)30).getKata(FaringFisiologis));
-        Menghisap.setDocument(new batasInput((int)150).getKata(Menghisap));
-        Mengunyah.setDocument(new batasInput((int)150).getKata(Mengunyah));
-        Meniup.setDocument(new batasInput((int)150).getKata(Meniup));
-        Subtitusi.setDocument(new batasInput((int)150).getKata(Subtitusi));
-        Omisi.setDocument(new batasInput((int)150).getKata(Omisi));
-        Distorsi.setDocument(new batasInput((int)150).getKata(Distorsi));
-        Adisi.setDocument(new batasInput((int)150).getKata(Adisi));
-        KemampuanMenelan.setDocument(new batasInput((int)150).getKata(KemampuanMenelan));
-        Pernapasan.setDocument(new batasInput((int)150).getKata(Pernapasan));
+        // Menghisap.setDocument(new batasInput((int)150).getKata(Menghisap));
+        // Mengunyah.setDocument(new batasInput((int)150).getKata(Mengunyah));
+        // Meniup.setDocument(new batasInput((int)150).getKata(Meniup));
+        // Subtitusi.setDocument(new batasInput((int)150).getKata(Subtitusi));
+        // Omisi.setDocument(new batasInput((int)150).getKata(Omisi));
+        // Distorsi.setDocument(new batasInput((int)150).getKata(Distorsi));
+        // Adisi.setDocument(new batasInput((int)150).getKata(Adisi));
+        // KemampuanMenelan.setDocument(new batasInput((int)150).getKata(KemampuanMenelan));
+        // Pernapasan.setDocument(new batasInput((int)150).getKata(Pernapasan));
         Pendengaran.setDocument(new batasInput((int)30).getKata(Pendengaran));
         Penglihatan.setDocument(new batasInput((int)30).getKata(Penglihatan));
         Kinesek.setDocument(new batasInput((int)30).getKata(Kinesek));
@@ -268,11 +268,11 @@ public final class RMPenilaianTerapiWicara extends javax.swing.JDialog {
         Tulisan.setDocument(new batasInput((int)30).getKata(Tulisan));
         Mimik.setDocument(new batasInput((int)30).getKata(Mimik));
         Gesture.setDocument(new batasInput((int)30).getKata(Gesture));
-        PenunjangMedis.setDocument(new batasInput((int)150).getKata(PenunjangMedis));
-        TujuanTerapiWicara.setDocument(new batasInput((int)150).getKata(TujuanTerapiWicara));
-        ProgramTerapiWicara.setDocument(new batasInput((int)150).getKata(ProgramTerapiWicara));
-        Edukasi.setDocument(new batasInput((int)150).getKata(Edukasi));
-        TindakLanjut.setDocument(new batasInput((int)150).getKata(TindakLanjut));
+        // PenunjangMedis.setDocument(new batasInput((int)150).getKata(PenunjangMedis));
+        // TujuanTerapiWicara.setDocument(new batasInput((int)150).getKata(TujuanTerapiWicara));
+        // ProgramTerapiWicara.setDocument(new batasInput((int)150).getKata(ProgramTerapiWicara));
+        // Edukasi.setDocument(new batasInput((int)150).getKata(Edukasi));
+        // TindakLanjut.setDocument(new batasInput((int)150).getKata(TindakLanjut));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         

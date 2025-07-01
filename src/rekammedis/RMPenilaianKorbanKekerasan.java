@@ -149,15 +149,15 @@ public final class RMPenilaianKorbanKekerasan extends javax.swing.JDialog {
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
         JumlahSaudara.setDocument(new batasInput((byte)2).getKata(JumlahSaudara));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KekerasanYangDialami.setDocument(new batasInput((int)350).getKata(KekerasanYangDialami));
+        // KekerasanYangDialami.setDocument(new batasInput((int)350).getKata(KekerasanYangDialami));
         TempatKejadian.setDocument(new batasInput((byte)40).getKata(TempatKejadian));
         LamaKekerasan.setDocument(new batasInput((byte)2).getKata(LamaKekerasan));
         JumlahSaudara.setDocument(new batasInput((byte)2).getKata(JumlahSaudara));
         SeberapaSeringPenganiayaan.setDocument(new batasInput((int)150).getKata(SeberapaSeringPenganiayaan));
         PemicuKekerasan.setDocument(new batasInput((int)150).getKata(PemicuKekerasan));
         SiapaYangMelakukanKekerasan.setDocument(new batasInput((int)50).getKata(SiapaYangMelakukanKekerasan));
-        DampakYangTerjadi.setDocument(new batasInput((int)200).getKata(DampakYangTerjadi));
-        TandaYangDidapatkan.setDocument(new batasInput((int)350).getKata(TandaYangDidapatkan));
+        // DampakYangTerjadi.setDocument(new batasInput((int)200).getKata(DampakYangTerjadi));
+        // TandaYangDidapatkan.setDocument(new batasInput((int)350).getKata(TandaYangDidapatkan));
         RiwayatKelainan.setDocument(new batasInput((int)50).getKata(RiwayatKelainan));
         PemeriksaanKepala.setDocument(new batasInput((int)50).getKata(PemeriksaanKepala));
         PemeriksaanThoraks.setDocument(new batasInput((int)50).getKata(PemeriksaanThoraks));

@@ -188,9 +188,9 @@ public final class RMPenilaianAwalMedisRalanBedahMulut extends javax.swing.JDial
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RPS.setDocument(new batasInput((int)2000).getKata(RPS));
-        RPK.setDocument(new batasInput((int)1000).getKata(RPK));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RPS.setDocument(new batasInput((int)2000).getKata(RPS));
+        // RPK.setDocument(new batasInput((int)1000).getKata(RPK));
         Alergi.setDocument(new batasInput((int)50).getKata(Alergi));
         TD.setDocument(new batasInput((int)8).getKata(TD));
         Nadi.setDocument(new batasInput((int)5).getKata(Nadi));
@@ -207,18 +207,18 @@ public final class RMPenilaianAwalMedisRalanBedahMulut extends javax.swing.JDial
         KeteranganDada.setDocument(new batasInput((int)30).getKata(KeteranganDada));
         KeteranganPerut.setDocument(new batasInput((int)30).getKata(KeteranganPerut));
         KeteranganEkstrimitas.setDocument(new batasInput((int)30).getKata(KeteranganEkstrimitas));
-        Wajah.setDocument(new batasInput((int)1000).getKata(Wajah));
-        IntraOral.setDocument(new batasInput((int)1000).getKata(IntraOral));
-        GigiGeligi.setDocument(new batasInput((int)1000).getKata(GigiGeligi));
-        Laborat.setDocument(new batasInput((int)300).getKata(Laborat));
-        Radiologi.setDocument(new batasInput((int)300).getKata(Radiologi));
-        Penunjang.setDocument(new batasInput((int)300).getKata(Penunjang));
-        AsesmenKerja.setDocument(new batasInput((int)500).getKata(AsesmenKerja));
-        AsesmenBanding.setDocument(new batasInput((int)500).getKata(AsesmenBanding));
-        Permasalahan.setDocument(new batasInput((int)1000).getKata(Permasalahan));
-        Terapi.setDocument(new batasInput((int)1000).getKata(Terapi));
-        Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
-        Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
+        // Wajah.setDocument(new batasInput((int)1000).getKata(Wajah));
+        // IntraOral.setDocument(new batasInput((int)1000).getKata(IntraOral));
+        // GigiGeligi.setDocument(new batasInput((int)1000).getKata(GigiGeligi));
+        // Laborat.setDocument(new batasInput((int)300).getKata(Laborat));
+        // Radiologi.setDocument(new batasInput((int)300).getKata(Radiologi));
+        // Penunjang.setDocument(new batasInput((int)300).getKata(Penunjang));
+        // AsesmenKerja.setDocument(new batasInput((int)500).getKata(AsesmenKerja));
+        // AsesmenBanding.setDocument(new batasInput((int)500).getKata(AsesmenBanding));
+        // Permasalahan.setDocument(new batasInput((int)1000).getKata(Permasalahan));
+        // Terapi.setDocument(new batasInput((int)1000).getKata(Terapi));
+        // Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
+        // Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         

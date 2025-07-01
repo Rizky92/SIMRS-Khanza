@@ -200,13 +200,13 @@ public final class RMPenilaianPsikologiKlinis extends javax.swing.JDialog {
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KetAlloAuto.setDocument(new batasInput((int)200).getKata(KetAlloAuto));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RiwayatPenyakit.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakit));
-        RiwayatKeluhan.setDocument(new batasInput((int)1000).getKata(RiwayatKeluhan));
+        // KetAlloAuto.setDocument(new batasInput((int)200).getKata(KetAlloAuto));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RiwayatPenyakit.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakit));
+        // RiwayatKeluhan.setDocument(new batasInput((int)1000).getKata(RiwayatKeluhan));
         AlasanPermasalahan.setDocument(new batasInput((int)100).getKata(AlasanPermasalahan));
         EkspektasiMasalah.setDocument(new batasInput((int)100).getKata(EkspektasiMasalah));
-        RiwayatHidupSingkat.setDocument(new batasInput((int)1000).getKata(RiwayatHidupSingkat));
+        // RiwayatHidupSingkat.setDocument(new batasInput((int)1000).getKata(RiwayatHidupSingkat));
         Penampilan.setDocument(new batasInput((int)150).getKata(Penampilan));
         EkspresiWajah.setDocument(new batasInput((int)150).getKata(EkspresiWajah));
         SuasanaHati.setDocument(new batasInput((int)150).getKata(SuasanaHati));
@@ -226,10 +226,10 @@ public final class RMPenilaianPsikologiKlinis extends javax.swing.JDialog {
         KontrolImpuls.setDocument(new batasInput((int)150).getKata(KontrolImpuls));
         NamaTes.setDocument(new batasInput((int)100).getKata(NamaTes));
         HasilTes.setDocument(new batasInput((int)200).getKata(HasilTes));
-        DinamikaPsikologis.setDocument(new batasInput((int)1000).getKata(DinamikaPsikologis));
-        DiagnosaPsikologis.setDocument(new batasInput((int)1000).getKata(DiagnosaPsikologis));
-        ManifestasiFungsiPsikologis.setDocument(new batasInput((int)1000).getKata(ManifestasiFungsiPsikologis));
-        RencanaIntervensi.setDocument(new batasInput((int)1000).getKata(RencanaIntervensi));
+        // DinamikaPsikologis.setDocument(new batasInput((int)1000).getKata(DinamikaPsikologis));
+        // DiagnosaPsikologis.setDocument(new batasInput((int)1000).getKata(DiagnosaPsikologis));
+        // ManifestasiFungsiPsikologis.setDocument(new batasInput((int)1000).getKata(ManifestasiFungsiPsikologis));
+        // RencanaIntervensi.setDocument(new batasInput((int)1000).getKata(RencanaIntervensi));
         TahapanIntevensi1.setDocument(new batasInput((int)100).getKata(TahapanIntevensi1));
         TargetTerapi1.setDocument(new batasInput((int)100).getKata(TargetTerapi1));
         TahapanIntevensi2.setDocument(new batasInput((int)100).getKata(TahapanIntevensi2));
@@ -244,7 +244,7 @@ public final class RMPenilaianPsikologiKlinis extends javax.swing.JDialog {
         TargetTerapi6.setDocument(new batasInput((int)100).getKata(TargetTerapi6));
         TahapanIntevensi7.setDocument(new batasInput((int)100).getKata(TahapanIntevensi7));
         TargetTerapi7.setDocument(new batasInput((int)100).getKata(TargetTerapi7));
-        Evaluasi.setDocument(new batasInput((int)1000).getKata(Evaluasi));
+        // Evaluasi.setDocument(new batasInput((int)1000).getKata(Evaluasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
