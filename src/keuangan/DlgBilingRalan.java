@@ -869,7 +869,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         MnCetakRegister1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakRegister1.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakRegister1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakRegister1.setText("Bukti Register 2 (UMUM /PERSONAL)");
+        MnCetakRegister1.setText("Bukti Register 2");
         MnCetakRegister1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnCetakRegister1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnCetakRegister1.setName("MnCetakRegister1"); // NOI18N
