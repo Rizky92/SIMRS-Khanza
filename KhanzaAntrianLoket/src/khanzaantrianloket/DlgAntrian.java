@@ -15,8 +15,6 @@ import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -376,6 +374,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
+        BtnDisplay.setMnemonic('D');
         BtnDisplay.setText("Display");
         BtnDisplay.setToolTipText("Alt+D");
         BtnDisplay.setIconTextGap(3);
@@ -384,6 +383,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi1.add(BtnDisplay);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setIconTextGap(3);
@@ -397,6 +397,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi5.setLayout(null);
 
         BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
+        BtnAntri.setMnemonic('7');
         BtnAntri.setText("Antri");
         BtnAntri.setToolTipText("Alt+7");
         BtnAntri.setIconTextGap(3);
@@ -406,6 +407,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         BtnAntri.setBounds(20, 90, 100, 30);
 
         BtnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnReset.setMnemonic('8');
         BtnReset.setText("Reset");
         BtnReset.setToolTipText("Alt+8");
         BtnReset.setIconTextGap(3);
@@ -431,6 +433,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         Antrian.setBounds(210, 12, 60, 24);
 
         BtnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnStop.setMnemonic('8');
         BtnStop.setText("Stop");
         BtnStop.setToolTipText("Alt+8");
         BtnStop.setIconTextGap(3);
