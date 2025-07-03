@@ -250,7 +250,7 @@ public final class akses {
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
-            surat_keterangan_layak_terbang=false;
+            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1422,6 +1422,7 @@ public final class akses {
                         akses.dokter_asal_pasien_ranap=rs2.getBoolean("dokter_asal_pasien_ranap");
                         akses.duta_parkir_rekap_keluar=rs2.getBoolean("duta_parkir_rekap_keluar");
                         akses.surat_keterangan_layak_terbang=rs2.getBoolean("surat_keterangan_layak_terbang");
+                        akses.bayar_beban_hutang_lain=rs2.getBoolean("bayar_beban_hutang_lain");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2601,6 +2602,7 @@ public final class akses {
         akses.dokter_asal_pasien_ranap=isadmin;
         akses.duta_parkir_rekap_keluar=isadmin;
         akses.surat_keterangan_layak_terbang=isadmin;
+        akses.bayar_beban_hutang_lain=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3788,6 +3790,7 @@ public final class akses {
     public static boolean getdokter_asal_pasien_ranap(){return akses.dokter_asal_pasien_ranap;}
     public static boolean getduta_parkir_rekap_keluar(){return akses.duta_parkir_rekap_keluar;}
     public static boolean getsurat_keterangan_layak_terbang(){return akses.surat_keterangan_layak_terbang;}
+    public static boolean getbayar_beban_hutang_lain(){return akses.bayar_beban_hutang_lain;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
