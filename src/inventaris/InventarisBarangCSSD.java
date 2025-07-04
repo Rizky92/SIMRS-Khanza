@@ -40,7 +40,7 @@ import javax.swing.table.TableColumn;
  * @author dosen
  */
 public class InventarisBarangCSSD extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+    private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi(); 
@@ -80,7 +80,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             }else if(i==3){
                 column.setPreferredWidth(120);
             }else if(i==4){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(120);
             }
         }
         tbSpesialis.setDefaultRenderer(Object.class, new WarnaTable());
@@ -192,7 +192,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Barang CSSD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Barang CSSD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -417,7 +417,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
         label1.setText("Jenis :");
         label1.setName("label1"); // NOI18N
         panelGlass7.add(label1);
-        label1.setBounds(510, 10, 60, 23);
+        label1.setBounds(510, 10, 50, 23);
 
         no_inventaris.setEditable(false);
         no_inventaris.setName("no_inventaris"); // NOI18N
@@ -448,7 +448,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
         panelGlass7.add(btnInv);
         btnInv.setBounds(480, 10, 25, 23);
 
-        KategoriBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Heacting Set", "Partus Set", "Set Bedah" }));
+        KategoriBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Heacting Set", "Partus Set", "Set Bedah", "Set Minor", "Set SC", "Set Kuret", "Set Hernia", "Set THT", "Set APP", "Set Histerektomi", "Set Tonsil", "Set Mata", "Set Pheco", "Set Bedah Mulut", "Set Othopedi Minor", "Set Bor Orthopedi", "Set Vaskuler", "Set Hemoroid", "Set Duk", "Set Instrumen Satuan", "Selang", "-" }));
         KategoriBarang.setName("KategoriBarang"); // NOI18N
         KategoriBarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -456,7 +456,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(KategoriBarang);
-        KategoriBarang.setBounds(573, 10, 140, 23);
+        KategoriBarang.setBounds(563, 10, 160, 23);
 
         label2.setText("No.Inventaris :");
         label2.setName("label2"); // NOI18N
@@ -709,17 +709,21 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang,"+
-                    "inventaris_ruang.nama_ruang,cssd_barang.jenis_barang from inventaris inner join inventaris_barang "+
-                    "inner join inventaris_ruang inner join cssd_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
-                    "and inventaris.id_ruang=inventaris_ruang.id_ruang and inventaris.no_inventaris=cssd_barang.no_inventaris where "+
-                    "inventaris.no_inventaris like ? or inventaris_barang.nama_barang like ? or inventaris_ruang.nama_ruang like ? or "+
-                    "cssd_barang.jenis_barang like ? order by cssd_barang.jenis_barang");
+                    "select inventaris.no_inventaris,inventaris_barang.kode_barang,inventaris_barang.nama_barang,"+
+                    "inventaris_ruang.nama_ruang,cssd_barang.jenis_barang "+
+                    "from inventaris inner join inventaris_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
+                    "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
+                    "inner join cssd_barang on inventaris.no_inventaris=cssd_barang.no_inventaris "+
+                    (TCari.getText().trim().equals("")?"":"where inventaris.no_inventaris like ? or "+
+                    "inventaris_barang.nama_barang like ? or inventaris_ruang.nama_ruang like ? or "+
+                    "cssd_barang.jenis_barang like ? ")+"order by cssd_barang.jenis_barang");
             try {
-                ps.setString(1,"%"+TCari.getText().trim()+"%");
-                ps.setString(2,"%"+TCari.getText().trim()+"%");
-                ps.setString(3,"%"+TCari.getText().trim()+"%");
-                ps.setString(4,"%"+TCari.getText().trim()+"%");
+                if(!TCari.getText().trim().equals("")){
+                    ps.setString(1,"%"+TCari.getText().trim()+"%");
+                    ps.setString(2,"%"+TCari.getText().trim()+"%");
+                    ps.setString(3,"%"+TCari.getText().trim()+"%");
+                    ps.setString(4,"%"+TCari.getText().trim()+"%");
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});

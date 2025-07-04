@@ -46,7 +46,7 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
+public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();    
@@ -67,7 +67,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
-    public KeuanganBayarPiutangLain(java.awt.Frame parent, boolean modal) {
+    public KeuanganBayarBebanHutangLain(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
@@ -262,7 +262,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Bayar Piutang Perusahaan/Lain-lain ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Bayar Beban Hutang Lain ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -498,7 +498,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(100, 194));
         FormInput.setLayout(null);
 
-        label34.setText("No.Nota :");
+        label34.setText("No.Hutang :");
         label34.setName("label34"); // NOI18N
         label34.setPreferredSize(new java.awt.Dimension(35, 23));
         FormInput.add(label34);
@@ -518,7 +518,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
             }
         });
         FormInput.add(NoNota);
-        NoNota.setBounds(79, 10, 180, 23);
+        NoNota.setBounds(79, 10, 160, 23);
 
         label36.setText("Keterangan :");
         label36.setName("label36"); // NOI18N
@@ -552,11 +552,11 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
         FormInput.add(Cicilan);
         Cicilan.setBounds(384, 40, 120, 23);
 
-        label16.setText("Peminjam :");
+        label16.setText("Pemberi Hutang :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(60, 23));
         FormInput.add(label16);
-        label16.setBounds(301, 10, 79, 23);
+        label16.setBounds(280, 10, 100, 23);
 
         KdPeminjam.setEditable(false);
         KdPeminjam.setName("KdPeminjam"); // NOI18N
@@ -638,7 +638,7 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnCari1);
-        BtnCari1.setBounds(261, 10, 28, 23);
+        BtnCari1.setBounds(241, 10, 28, 23);
 
         BtnAll1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
         BtnAll1.setMnemonic('M');
@@ -728,11 +728,16 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
                             Sequel.mengedit("piutang_lainlain","nota_piutang='"+NoNota.getText()+"'","status='Sudah Lunas'");
                         }   
                         Sequel.mengedit("piutang_lainlain","nota_piutang='"+NoNota.getText()+"'","sisapiutang=sisapiutang-"+Cicilan.getText());
-
-                        Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(kontraakun, namakontraakun, 0, Double.parseDouble(Cicilan.getText()));
-                        Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), Double.parseDouble(Cicilan.getText()), 0);
-                        sukses=jur.simpanJurnal(NoNota.getText(),"U","BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());                   
+                        Sequel.queryu("delete from tampjurnal");                    
+                        if(Sequel.menyimpantf2("tampjurnal","'"+kontraakun+"','"+namakontraakun+"','0','"+Cicilan.getText()+"'","Rekening")==false){
+                            sukses=false;
+                        }    
+                        if(Sequel.menyimpantf2("tampjurnal","'"+koderekening+"','"+AkunBayar.getSelectedItem()+"','"+Cicilan.getText()+"','0'","Rekening")==false){
+                            sukses=false;
+                        } 
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(NoNota.getText(),"U","BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                        }                   
                 }else{
                     sukses=false;
                 }  
@@ -792,10 +797,16 @@ public final class KeuanganBayarPiutangLain extends javax.swing.JDialog {
                     sukses=false;
                 }
                 Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisapiutang=sisapiutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());                      
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(kontraakun, namakontraakun, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()), 0);
-                Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()));
-                sukses=jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());     
+                Sequel.queryu("delete from tampjurnal");                    
+                if(Sequel.menyimpantf2("tampjurnal","'"+kontraakun+"','"+namakontraakun+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()+"','0'","Rekening")==false){
+                    sukses=false;
+                }   
+                if(Sequel.menyimpantf2("tampjurnal","'"+tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString()+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()+"','0','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()+"'","Rekening")==false){
+                    sukses=false;
+                } 
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                }     
             }else{
                 sukses=false;
             }
@@ -1088,7 +1099,7 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            KeuanganBayarPiutangLain dialog = new KeuanganBayarPiutangLain(new javax.swing.JFrame(), true);
+            KeuanganBayarBebanHutangLain dialog = new KeuanganBayarBebanHutangLain(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

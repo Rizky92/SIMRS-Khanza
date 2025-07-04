@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -34,7 +36,6 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int row=0,i;
-    private String koderekening="";
     private Jurnal jur=new Jurnal();
     private String Piutang_BPJS_RVP="",Kerugian_Klaim_BPJS_RVP="",Lebih_Bayar_Klaim_BPJS_RVP="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",
                    Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",
@@ -852,20 +853,20 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis..!!!!");
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.AutoComitFalse();
             sukses=true;
             row=tabMode.getRowCount();
             for(i=0;i<row;i++){  
                 if(tabMode.getValueAt(i,0).toString().equals("true")){
-                    Sequel.mengedit("piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
-                    Sequel.mengedit("detail_piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"' and nama_bayar='"+Sequel.cariIsi("select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek=?",tabMode.getValueAt(i,83).toString())+"'","sisapiutang='"+tabMode.getValueAt(i,8).toString()+"'");
+                    Sequel.AutoComitFalse();
+                    Sequel.mengupdateSmc("piutang_pasien", "status = 'Belum Lunas', sisapiutang = sisapiutang + ?", "no_rawat = ?", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString());
+                    Sequel.mengupdateSmc("detail_piutang_pasien", "sisapiutang = sisapiutang + ?", "no_rawat = ? and nama_bayar = (select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek = ?)", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString(), tabMode.getValueAt(i, 83).toString());
                     if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())>=100){
                         Sequel.queryu("delete from tampjurnal_rvpbpjs"); 
                         Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,83).toString()+"','PIUTANG BPJS','"+tabMode.getValueAt(i,8).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,8).toString()+"'","kd_rek='"+tabMode.getValueAt(i,83).toString()+"'");     
                         if(Valid.SetAngka(tabMode.getValueAt(i,13).toString())>0){
                             Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Lebih_Bayar_Klaim_BPJS_RVP+"','LEBIH BAYAR BPJS','"+tabMode.getValueAt(i,13).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,13).toString()+"'","kd_rek='"+Lebih_Bayar_Klaim_BPJS_RVP+"'"); 
                         }
-                        Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,82).toString()+"'","kd_rek='"+koderekening+"'"); 
+                        Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,82).toString()+"'"); 
                         sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());      
                     }else if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())<100){
                         Sequel.queryu("delete from tampjurnal_rvpbpjs");
@@ -1455,8 +1456,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     }
                                 }
                                 
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,83).toString()+"','PIUTANG BPJS','"+((Valid.SetAngka(tabMode.getValueAt(i,11).toString())/100) *Valid.SetAngka(tabMode.getValueAt(i,8).toString()))+"','0'","debet=debet+'"+((Valid.SetAngka(tabMode.getValueAt(i,11).toString())/100) *Valid.SetAngka(tabMode.getValueAt(i,8).toString()))+"'","kd_rek='"+tabMode.getValueAt(i,83).toString()+"'");     
-                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,82).toString()+"'","kd_rek='"+koderekening+"'"); 
+                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,83).toString()+"','PIUTANG BPJS','"+tabMode.getValueAt(i,10).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,83).toString()+"'");     
+                                Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,82).toString()+"'"); 
                                 sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());      
                     
                                 if(sukses==true){
@@ -1533,22 +1534,27 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             sukses=false;
                         }
                     }
+                    if (sukses) {
+                        Sequel.Commit();
+                    } else {
+                        sukses = false;
+                        Sequel.RollBack();
+                        break;
+                    }
+                    Sequel.AutoComitTrue();
+                    if (row > 500) {
+                        try {
+                            Thread.sleep(700);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(KeuanganCariRVPBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
             }
-            
-            if(sukses==true){
-                Sequel.Commit();
-            }else{
-                sukses=false;
+            if (!sukses) {
                 JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                Sequel.RollBack();
             }
-            
-            Sequel.AutoComitTrue();
-            
-            if(sukses==true){
-                tampil();
-            }
+            tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
