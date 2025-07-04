@@ -1109,9 +1109,11 @@ public class SuratKontrol extends javax.swing.JDialog {
                 if(Sequel.queryu2tf("delete from skdp_bpjs where tahun=? and no_antrian=?",2,new String[]{
                     tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()
                 })==true){
-                    Sequel.queryu2("delete from booking_registrasi where no_rkm_medis=? and tanggal_periksa=?",2,new String[]{
-                        tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()
-                    });
+                    if (JADIKANBOOKINGSURATKONTROL.equals("yes")) {
+                        Sequel.menghapusSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
+                            tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                        );
+                    }
                     tabMode.removeRow(tbObat.getSelectedRow());
                     LCount.setText(""+tabMode.getRowCount());
                     emptTeks();
@@ -1314,16 +1316,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         Valid.SetTgl(TanggalSurat.getSelectedItem()+""),NoSurat.getText(),KdDokter.getText(),Status.getSelectedItem().toString(),
                         tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()
                   })==true){
-                    Sequel.mengedit3("booking_registrasi","no_rkm_medis=? and tanggal_periksa=?","tanggal_booking=?,no_rkm_medis=?,tanggal_periksa=?,kd_dokter=?,kd_poli=?,no_reg=?",8,new String[]{
-                         Valid.SetTgl(TanggalSurat.getSelectedItem()+""),
-                        TNoRM.getText(),
-                         Valid.SetTgl(TanggalPeriksa.getSelectedItem()+""),
-                         KdDokter.getText(),
-                         KdPoli.getText(),
-                         NoReg.getText(),
-                         tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
-                         tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()
-                    });
+                    if (JADIKANBOOKINGSURATKONTROL.equals("yes")) {
+                        Sequel.mengupdateSmc("booking_registrasi",
+                            "tanggal_booking = ?, no_rkm_medis = ?, tanggal_periksa = ?, kd_dokter = ?, kd_poli = ?, no_reg = ?",
+                            "no_rkm_medis = ? and tanggal_periksa = ?",
+                            Valid.getTglSmc(TanggalSurat), TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
+                            tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                        );
+                    }
                     tbObat.setValueAt(TanggalPeriksa.getSelectedItem().toString().substring(6,10),tbObat.getSelectedRow(),0);
                     tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
                     tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);

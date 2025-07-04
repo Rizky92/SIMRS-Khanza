@@ -23,13 +23,6 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
-  `loket` int(11) NOT NULL,
-  `antrian` varchar(6) NOT NULL,
-  INDEX `loket`(`loket`) USING BTREE,
-  INDEX `antrian`(`antrian`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
@@ -44,9 +37,42 @@ CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   INDEX `antriloketcetak_smc_no_rkm_medis_IDX`(`no_rkm_medis`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
+  `loket` int(11) NOT NULL,
+  `antrian` varchar(6) NOT NULL,
+  INDEX `loket`(`loket`) USING BTREE,
+  INDEX `antrian`(`antrian`) USING BTREE
+) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `booking_operasi` ADD COLUMN IF NOT EXISTS `catatan` varchar(500) NULL DEFAULT NULL AFTER `kd_ruang_ok`;
 
 ALTER TABLE `booking_operasi` ADD INDEX IF NOT EXISTS `booking_operasi_catatan_IDX`(`catatan`) USING BTREE;
+
+ALTER TABLE `booking_registrasi` ADD COLUMN IF NOT EXISTS `no_rawat` varchar(17) NULL DEFAULT NULL AFTER `status`;
+
+ALTER TABLE `booking_registrasi` MODIFY COLUMN IF EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggal_periksa`;
+
+ALTER TABLE `booking_registrasi` MODIFY COLUMN IF EXISTS `status` enum('Terdaftar','Belum','Batal','Dokter Berhalangan','Checkin') NULL DEFAULT NULL AFTER `waktu_kunjungan`;
+
+ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_booking`(`tanggal_booking`) USING BTREE;
+
+ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tanggal_periksa`) USING BTREE;
+
+ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
+
+ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
+
+ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;
+
+ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp`) USING BTREE;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_input` varchar(10) NULL DEFAULT '0' AFTER `nip`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ufg` varchar(10) NULL DEFAULT '0' AFTER `ttl_input`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_output` varchar(10) NULL DEFAULT '0' AFTER `ufg`;
+
+ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `balance` varchar(10) NULL DEFAULT '0' AFTER `ttl_output`;
 
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `infus` double NOT NULL DEFAULT 0 AFTER `jam_rawat`;
 
@@ -63,6 +89,10 @@ ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `ngt` double N
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `iwl` double NOT NULL DEFAULT 0 AFTER `ngt`;
 
 ALTER TABLE `catatan_keseimbangan_cairan` MODIFY COLUMN IF EXISTS `keseimbangan` double NOT NULL DEFAULT 0 AFTER `iwl`;
+
+ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `rr` varchar(10) NULL DEFAULT NULL AFTER `nip`;
+
+ALTER TABLE `catatan_observasi_hemodialisa` ADD COLUMN IF NOT EXISTS `ufv` varchar(10) NULL DEFAULT NULL AFTER `rr`;
 
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `alamat` varchar(100) NULL DEFAULT NULL AFTER `nama_suplier`;
 
@@ -99,7 +129,7 @@ ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAUL
 CREATE TABLE IF NOT EXISTS `dokter_ttdbasah`  (
   `kd_dokter` varchar(20) NOT NULL,
   `gambar_ttd` longblob NULL DEFAULT NULL,
-  PRIMARY KEY (`kd_dokter`),
+  PRIMARY KEY (`kd_dokter`) USING BTREE,
   CONSTRAINT `dokter_ttdbasah_ibfk_1` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
@@ -158,12 +188,6 @@ ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAUL
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER `tgl_lahir`;
 
-CREATE DEFINER = `root`@`%` TRIGGER IF NOT EXISTS `set_password_user` AFTER INSERT ON `pasien` FOR EACH ROW insert into personal_pasien values(
-  new.no_rkm_medis,
-  '',
-  aes_encrypt(date_format(new.tgl_lahir, '%d%m%Y'), 'windi')
-);
-
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;
@@ -199,9 +223,15 @@ ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(25
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
 
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ibu` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_bayi`;
+ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `proc_mastoideus` enum('Tidak Ada','Ada','Normal','Tidak Normal','-') NOT NULL AFTER `selaput_pendengaran`;
 
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `gd_ayah` enum('A +','A -','B +','B -','AB +','AB -','O +','O -','-') NOT NULL AFTER `gd_ibu`;
+ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `bunyi_tambahan` enum('Tidak Ada','Wheezing','Tronkhi','Ronchi','-') NOT NULL AFTER `bunyi_napas`;
+
+ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `bunyi_jantung` enum('Reguler','Irreguler','Korotkoff I, II','Gallop','Lain-lain','-') NOT NULL AFTER `ictus_cordis`;
+
+ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `auskultasi` enum('Normal','Meningkat (>4x/menit)','Bising Usus Meningkat','Bising Usus Menurun','-') NOT NULL AFTER `perkusi_abdomen`;
+
+ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `costovertebral` enum('Tidak Ada','Ada','Ada Di Kiri','Ada Di Kanan','-') NOT NULL AFTER `limpa`;
 
 ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `email` varchar(50) NOT NULL DEFAULT '' AFTER `no_telp`;
 
@@ -211,28 +241,13 @@ ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `png_jawab` varchar(50) NOT NULL AF
 
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(100) NOT NULL AFTER `png_jawab`;
 
-ALTER TABLE `penyakit` MODIFY COLUMN `nm_penyakit` varchar(250) NULL DEFAULT NULL AFTER `kd_penyakit`;
+ALTER TABLE `penyakit` MODIFY COLUMN IF EXISTS `nm_penyakit` varchar(250) NULL DEFAULT NULL AFTER `kd_penyakit`;
 
 ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `email` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
 ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NULL DEFAULT NULL AFTER `email`;
 
 ALTER TABLE `perusahaan_pasien` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(120) NULL DEFAULT NULL AFTER `kode_perusahaan`;
-
-CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response`  (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `no_rawat` varchar(17) NULL DEFAULT NULL,
-  `jenispasien` enum('JKN','NON JKN') NULL DEFAULT NULL,
-  `taskid` char(2) NULL DEFAULT NULL,
-  `code` varchar(5) NULL DEFAULT NULL,
-  `message` varchar(200) NULL DEFAULT NULL,
-  `waktu` datetime NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_no_rawat_IDX`(`no_rawat`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_waktu_IDX`(`waktu`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_taskid_IDX`(`taskid`) USING BTREE,
-  INDEX `referensi_mobilejkn_bpjs_taskid_response_code_IDX`(`code`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -388,16 +403,16 @@ CREATE TABLE IF NOT EXISTS `set_akses_edit_sementara`  (
   PRIMARY KEY (`id_user`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
-
 CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ralan`  (
   `kd_poli` char(5) NOT NULL,
   `kd_pj` char(3) NOT NULL,
   `kdjns` char(4) NOT NULL,
   PRIMARY KEY (`kd_poli`, `kd_pj`, `kdjns`) USING BTREE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_poli_ibfk1` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik`(`kd_poli`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab`(`kd_pj`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis`(`kdjns`) ON UPDATE CASCADE ON DELETE CASCADE
+  INDEX `set_filter_jenis_resep_obat_ralan_kd_pj_ibfk1`(`kd_pj`) USING BTREE,
+  INDEX `set_filter_jenis_resep_obat_ralan_kdjns_ibfk1`(`kdjns`) USING BTREE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab` (`kd_pj`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kd_poli_ibfk1` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik` (`kd_poli`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ralan_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis` (`kdjns`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
@@ -405,10 +420,14 @@ CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
   `kd_pj` char(3) NOT NULL,
   `kdjns` char(4) NOT NULL,
   PRIMARY KEY (`kd_bangsal`, `kd_pj`, `kdjns`) USING BTREE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_bangsal_ibfk1` FOREIGN KEY (`kd_bangsal`) REFERENCES `bangsal`(`kd_bangsal`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab`(`kd_pj`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis`(`kdjns`) ON UPDATE CASCADE ON DELETE CASCADE
+  INDEX `set_filter_jenis_resep_obat_ranap_kd_pj_ibfk1`(`kd_pj`) USING BTREE,
+  INDEX `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1`(`kdjns`) USING BTREE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_bangsal_ibfk1` FOREIGN KEY (`kd_bangsal`) REFERENCES `bangsal` (`kd_bangsal`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kd_pj_ibfk1` FOREIGN KEY (`kd_pj`) REFERENCES `penjab` (`kd_pj`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_filter_jenis_resep_obat_ranap_kdjns_ibfk1` FOREIGN KEY (`kdjns`) REFERENCES `jenis` (`kdjns`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
 
@@ -416,15 +435,15 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` v
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` varchar(20) NULL DEFAULT NULL AFTER `kd_dokter`;
 
-ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY IF NOT EXISTS (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
-
-ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY IF NOT EXISTS (`no_surat`) USING BTREE;
 
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `no_surat` varchar(20) NOT NULL FIRST;
 
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `hubungan` enum('Suami','Istri','Anak','Ayah','Ibu','Saudara','Keponakan') NOT NULL AFTER `alamat`;
+
+ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY IF NOT EXISTS (`no_surat`) USING BTREE;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,
@@ -455,94 +474,92 @@ CREATE TABLE IF NOT EXISTS `tempinacbg`  (
   PRIMARY KEY (`coder_nik`, `cmg_code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `temporary_besar` (
-	`userid` varchar(30) NOT NULL,
-	`ipaddress` varchar(30) NOT NULL,
-	`no` int(10) UNSIGNED DEFAULT 1,
-	`temp1` varchar(500) NULL DEFAULT NULL,
-	`temp2` varchar(500) NULL DEFAULT NULL,
-	`temp3` varchar(500) NULL DEFAULT NULL,
-	`temp4` varchar(500) NULL DEFAULT NULL,
-	`temp5` varchar(500) NULL DEFAULT NULL,
-	`temp6` varchar(500) NULL DEFAULT NULL,
-	`temp7` varchar(500) NULL DEFAULT NULL,
-	`temp8` varchar(500) NULL DEFAULT NULL,
-	`temp9` varchar(500) NULL DEFAULT NULL,
-	`temp10` varchar(500) NULL DEFAULT NULL,
-	`temp11` varchar(500) NULL DEFAULT NULL,
-	`temp12` varchar(500) NULL DEFAULT NULL,
-	`temp13` varchar(500) NULL DEFAULT NULL,
-	`temp14` varchar(500) NULL DEFAULT NULL,
-	`temp15` varchar(500) NULL DEFAULT NULL,
-	`temp16` varchar(500) NULL DEFAULT NULL,
-	`temp17` varchar(500) NULL DEFAULT NULL,
-	`temp18` varchar(500) NULL DEFAULT NULL,
-	`temp19` varchar(500) NULL DEFAULT NULL,
-	`temp20` varchar(500) NULL DEFAULT NULL,
-	`temp21` varchar(500) NULL DEFAULT NULL,
-	`temp22` varchar(500) NULL DEFAULT NULL,
-	`temp23` varchar(500) NULL DEFAULT NULL,
-	`temp24` varchar(500) NULL DEFAULT NULL,
-	`temp25` varchar(500) NULL DEFAULT NULL,
-	`temp26` varchar(500) NULL DEFAULT NULL,
-	`temp27` varchar(500) NULL DEFAULT NULL,
-	`temp28` varchar(500) NULL DEFAULT NULL,
-	`temp29` varchar(500) NULL DEFAULT NULL,
-	`temp30` varchar(500) NULL DEFAULT NULL,
-	`temp31` varchar(500) NULL DEFAULT NULL,
-	`temp32` varchar(500) NULL DEFAULT NULL,
-	`temp33` varchar(500) NULL DEFAULT NULL,
-	`temp34` varchar(500) NULL DEFAULT NULL,
-	`temp35` varchar(500) NULL DEFAULT NULL,
-	`temp36` varchar(500) NULL DEFAULT NULL,
-	`temp37` varchar(500) NULL DEFAULT NULL,
-	`temp38` varchar(500) NULL DEFAULT NULL,
-	`temp39` varchar(500) NULL DEFAULT NULL,
-	`temp40` varchar(500) NULL DEFAULT NULL,
-	`temp41` varchar(500) NULL DEFAULT NULL,
-	`temp42` varchar(500) NULL DEFAULT NULL,
-	`temp43` varchar(500) NULL DEFAULT NULL,
-	`temp44` varchar(500) NULL DEFAULT NULL,
-	`temp45` varchar(500) NULL DEFAULT NULL,
-	`temp46` varchar(500) NULL DEFAULT NULL,
-	`temp47` varchar(500) NULL DEFAULT NULL,
-	`temp48` varchar(500) NULL DEFAULT NULL,
-	`temp49` varchar(500) NULL DEFAULT NULL,
-	`temp50` varchar(500) NULL DEFAULT NULL,
-	`temp51` varchar(500) NULL DEFAULT NULL,
-	`temp52` varchar(500) NULL DEFAULT NULL,
-	`temp53` varchar(500) NULL DEFAULT NULL,
-	`temp54` varchar(500) NULL DEFAULT NULL,
-	`temp55` varchar(500) NULL DEFAULT NULL,
-	`temp56` varchar(500) NULL DEFAULT NULL,
-	`temp57` varchar(500) NULL DEFAULT NULL,
-	`temp58` varchar(500) NULL DEFAULT NULL,
-	`temp59` varchar(500) NULL DEFAULT NULL,
-	`temp60` varchar(500) NULL DEFAULT NULL,
-	`temp61` varchar(500) NULL DEFAULT NULL,
-	`temp62` varchar(500) NULL DEFAULT NULL,
-	`temp63` varchar(500) NULL DEFAULT NULL,
-	`temp64` varchar(500) NULL DEFAULT NULL,
-	`temp65` varchar(500) NULL DEFAULT NULL,
-	`temp66` varchar(500) NULL DEFAULT NULL,
-	`temp67` varchar(500) NULL DEFAULT NULL,
-	`temp68` varchar(500) NULL DEFAULT NULL,
-	`temp69` varchar(500) NULL DEFAULT NULL,
-	`temp70` varchar(500) NULL DEFAULT NULL,
-	`temp71` varchar(500) NULL DEFAULT NULL,
-	`temp72` varchar(500) NULL DEFAULT NULL,
-	`temp73` varchar(500) NULL DEFAULT NULL,
-	`temp74` varchar(500) NULL DEFAULT NULL,
-	`temp75` varchar(500) NULL DEFAULT NULL,
-	`temp76` varchar(500) NULL DEFAULT NULL,
-	`temp77` varchar(500) NULL DEFAULT NULL,
-	`temp78` varchar(500) NULL DEFAULT NULL,
-	`temp79` varchar(500) NULL DEFAULT NULL,
-	INDEX `userid` (`userid`) USING BTREE,
-	INDEX `ipaddress` (`ipaddress`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci;
-
-ALTER TABLE `transfer_pasien_antar_ruang` MODIFY COLUMN IF EXISTS `diagnosa_utama` varchar(100) NULL DEFAULT NULL AFTER `ruang_selanjutnya`;
+CREATE TABLE IF NOT EXISTS `temporary_besar`  (
+  `userid` varchar(30) NOT NULL,
+  `ipaddress` varchar(30) NOT NULL,
+  `no` int(10) UNSIGNED NULL DEFAULT 1,
+  `temp1` varchar(500) NULL DEFAULT NULL,
+  `temp2` varchar(500) NULL DEFAULT NULL,
+  `temp3` varchar(500) NULL DEFAULT NULL,
+  `temp4` varchar(500) NULL DEFAULT NULL,
+  `temp5` varchar(500) NULL DEFAULT NULL,
+  `temp6` varchar(500) NULL DEFAULT NULL,
+  `temp7` varchar(500) NULL DEFAULT NULL,
+  `temp8` varchar(500) NULL DEFAULT NULL,
+  `temp9` varchar(500) NULL DEFAULT NULL,
+  `temp10` varchar(500) NULL DEFAULT NULL,
+  `temp11` varchar(500) NULL DEFAULT NULL,
+  `temp12` varchar(500) NULL DEFAULT NULL,
+  `temp13` varchar(500) NULL DEFAULT NULL,
+  `temp14` varchar(500) NULL DEFAULT NULL,
+  `temp15` varchar(500) NULL DEFAULT NULL,
+  `temp16` varchar(500) NULL DEFAULT NULL,
+  `temp17` varchar(500) NULL DEFAULT NULL,
+  `temp18` varchar(500) NULL DEFAULT NULL,
+  `temp19` varchar(500) NULL DEFAULT NULL,
+  `temp20` varchar(500) NULL DEFAULT NULL,
+  `temp21` varchar(500) NULL DEFAULT NULL,
+  `temp22` varchar(500) NULL DEFAULT NULL,
+  `temp23` varchar(500) NULL DEFAULT NULL,
+  `temp24` varchar(500) NULL DEFAULT NULL,
+  `temp25` varchar(500) NULL DEFAULT NULL,
+  `temp26` varchar(500) NULL DEFAULT NULL,
+  `temp27` varchar(500) NULL DEFAULT NULL,
+  `temp28` varchar(500) NULL DEFAULT NULL,
+  `temp29` varchar(500) NULL DEFAULT NULL,
+  `temp30` varchar(500) NULL DEFAULT NULL,
+  `temp31` varchar(500) NULL DEFAULT NULL,
+  `temp32` varchar(500) NULL DEFAULT NULL,
+  `temp33` varchar(500) NULL DEFAULT NULL,
+  `temp34` varchar(500) NULL DEFAULT NULL,
+  `temp35` varchar(500) NULL DEFAULT NULL,
+  `temp36` varchar(500) NULL DEFAULT NULL,
+  `temp37` varchar(500) NULL DEFAULT NULL,
+  `temp38` varchar(500) NULL DEFAULT NULL,
+  `temp39` varchar(500) NULL DEFAULT NULL,
+  `temp40` varchar(500) NULL DEFAULT NULL,
+  `temp41` varchar(500) NULL DEFAULT NULL,
+  `temp42` varchar(500) NULL DEFAULT NULL,
+  `temp43` varchar(500) NULL DEFAULT NULL,
+  `temp44` varchar(500) NULL DEFAULT NULL,
+  `temp45` varchar(500) NULL DEFAULT NULL,
+  `temp46` varchar(500) NULL DEFAULT NULL,
+  `temp47` varchar(500) NULL DEFAULT NULL,
+  `temp48` varchar(500) NULL DEFAULT NULL,
+  `temp49` varchar(500) NULL DEFAULT NULL,
+  `temp50` varchar(500) NULL DEFAULT NULL,
+  `temp51` varchar(500) NULL DEFAULT NULL,
+  `temp52` varchar(500) NULL DEFAULT NULL,
+  `temp53` varchar(500) NULL DEFAULT NULL,
+  `temp54` varchar(500) NULL DEFAULT NULL,
+  `temp55` varchar(500) NULL DEFAULT NULL,
+  `temp56` varchar(500) NULL DEFAULT NULL,
+  `temp57` varchar(500) NULL DEFAULT NULL,
+  `temp58` varchar(500) NULL DEFAULT NULL,
+  `temp59` varchar(500) NULL DEFAULT NULL,
+  `temp60` varchar(500) NULL DEFAULT NULL,
+  `temp61` varchar(500) NULL DEFAULT NULL,
+  `temp62` varchar(500) NULL DEFAULT NULL,
+  `temp63` varchar(500) NULL DEFAULT NULL,
+  `temp64` varchar(500) NULL DEFAULT NULL,
+  `temp65` varchar(500) NULL DEFAULT NULL,
+  `temp66` varchar(500) NULL DEFAULT NULL,
+  `temp67` varchar(500) NULL DEFAULT NULL,
+  `temp68` varchar(500) NULL DEFAULT NULL,
+  `temp69` varchar(500) NULL DEFAULT NULL,
+  `temp70` varchar(500) NULL DEFAULT NULL,
+  `temp71` varchar(500) NULL DEFAULT NULL,
+  `temp72` varchar(500) NULL DEFAULT NULL,
+  `temp73` varchar(500) NULL DEFAULT NULL,
+  `temp74` varchar(500) NULL DEFAULT NULL,
+  `temp75` varchar(500) NULL DEFAULT NULL,
+  `temp76` varchar(500) NULL DEFAULT NULL,
+  `temp77` varchar(500) NULL DEFAULT NULL,
+  `temp78` varchar(500) NULL DEFAULT NULL,
+  `temp79` varchar(500) NULL DEFAULT NULL,
+  INDEX `userid`(`userid`) USING BTREE,
+  INDEX `ipaddress`(`ipaddress`) USING BTREE
+) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','false') NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
 

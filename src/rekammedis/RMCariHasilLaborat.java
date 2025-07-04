@@ -46,7 +46,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"P","Tanggal","Jam","Hasil Pemeriksaan"};
+        Object[] row={"P","Tanggal","Jam","Hasil Pemeriksaan", "Nama Tindakan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -56,7 +56,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -67,7 +67,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (z= 0; z < 4; z++) {
+        for (z= 0; z < 5; z++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(z);
             if(z==0){
                 column.setPreferredWidth(20);
@@ -76,7 +76,9 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
             }else if(z==2){
                 column.setPreferredWidth(50);
             }else if(z==3){
-                column.setPreferredWidth(730);
+                column.setPreferredWidth(500);
+            }else if(z==4){
+                column.setPreferredWidth(200);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -426,10 +428,11 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select detail_periksa_lab.tgl_periksa,detail_periksa_lab.jam,template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai "+
-                    "from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template where "+
+                    "select detail_periksa_lab.tgl_periksa,detail_periksa_lab.jam,template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai, jns_perawatan_lab.nm_perawatan "+
+                    "from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template join "+
+                    "jns_perawatan_lab on detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where " +
                     "detail_periksa_lab.no_rawat=? and (detail_periksa_lab.tgl_periksa like ? or template_laboratorium.Pemeriksaan like ?) "+sql+
-                    "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam");
+                    "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template");
             try{
                 ps.setString(1,norawat);
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -437,7 +440,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[] {
-                        false,rs.getString(1),rs.getString(2),rs.getString(3)+" : "+rs.getString(4)
+                        false,rs.getString(1),rs.getString(2),rs.getString(3)+" : "+rs.getString(4), rs.getString(5)
                     });
                 }
             }catch(Exception ex){
