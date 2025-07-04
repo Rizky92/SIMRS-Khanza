@@ -589,8 +589,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Input Penilaian">
-                    <Property name="tabTitle" type="java.lang.String" value="Input Penilaian"/>
+                  <JTabbedPaneConstraints tabName="Input Pengkajian">
+                    <Property name="tabTitle" type="java.lang.String" value="Input Pengkajian"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -5043,7 +5043,7 @@
                         <Component class="widget.Label" name="jLabel167">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VI. PENILAIAN TINGKAT NYERI"/>
+                            <Property name="text" type="java.lang.String" value="VI. PENGKAJIAN TINGKAT NYERI"/>
                             <Property name="name" type="java.lang.String" value="jLabel167" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -5496,7 +5496,7 @@
                         <Component class="widget.Label" name="jLabel180">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VII. PENILAIAN RESIKO JATUH"/>
+                            <Property name="text" type="java.lang.String" value="VII. PENGKAJIAN RESIKO JATUH"/>
                             <Property name="name" type="java.lang.String" value="jLabel180" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -6235,7 +6235,7 @@
                         <Component class="widget.Label" name="jLabel210">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="ASESMEN/PENILAIAN KEBIDANAN :"/>
+                            <Property name="text" type="java.lang.String" value="ASESMEN/PENGKAJIAN KEBIDANAN :"/>
                             <Property name="name" type="java.lang.String" value="jLabel210" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -6339,8 +6339,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Data Penilaian">
-                    <Property name="tabTitle" type="java.lang.String" value="Data Penilaian"/>
+                  <JTabbedPaneConstraints tabName="Data Pengkajian">
+                    <Property name="tabTitle" type="java.lang.String" value="Data Pengkajian"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -6699,7 +6699,7 @@
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder justification="1" position="2" title="Asesmen/Penilaian Kebidanan :">
+                                <TitledBorder justification="1" position="2" title="Asesmen/Pengkajian Kebidanan :">
                                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                                     <LineBorder>
                                       <Color PropertyName="color" blue="fe" green="ff" red="ff" type="rgb"/>

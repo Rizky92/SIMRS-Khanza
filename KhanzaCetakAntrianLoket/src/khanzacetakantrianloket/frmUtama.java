@@ -232,6 +232,6 @@ public class frmUtama extends javax.swing.JFrame {
     }
     
     private void autonomer(){
-        LabelNomor.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(nomor), 0) + 1, greatest(length(ifnull(max(nomor), 0) + 1), 3), '0') from antriloketcetak_smc where tanggal = current_date()"));
+        LabelNomor.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(nomor, signed)), 0) + 1, greatest(length(ifnull(max(nomor), 0) + 1), 3), '0') from antriloketcetak_smc where tanggal = current_date()"));
     }
 }

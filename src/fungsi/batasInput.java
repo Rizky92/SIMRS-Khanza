@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
 /**
@@ -183,6 +184,33 @@ public PlainDocument getNilai(final JTextField inputan) {
                 }
             }
         };return filter;
+    }
+    
+    public PlainDocument getTensi(final JTextComponent inputan) {
+        return new PlainDocument() {
+            @Override
+            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+                StringBuffer buf = new StringBuffer();
+                int c = 0;
+                char[] upp = str.toCharArray();
+                for (int i = 0; i < upp.length; i++) {
+                    upp[i] = Character.toUpperCase(upp[i]);
+                    boolean isOnlyAngka = Character.isDigit(upp[i]);
+                    boolean isOnlyTitik = Character.valueOf(upp[i]).toString().equals(".");
+                    boolean isOnlyStrip = Character.valueOf(upp[i]).toString().equals("-");
+                    boolean isOnlyGaring = Character.valueOf(upp[i]).toString().equals("/");
+                    if (isOnlyAngka || isOnlyTitik || isOnlyStrip || isOnlyGaring) {
+                        upp[c] = upp[i];
+                        c++;
+                    }
+                }
+                buf.append(upp, 0, c);
+                int x = inputan.getText().length();
+                if (x < length) {
+                    super.insertString(offs, new String(buf), a);
+                }
+            }
+        };
     }
    
     public PlainDocument getKata(final JTextArea inputan){

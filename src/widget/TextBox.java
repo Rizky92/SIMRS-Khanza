@@ -2,6 +2,8 @@
 package widget;
 
 import java.awt.Color;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import usu.widget.glass.TextBoxGlass;
 
 /**
@@ -18,5 +20,25 @@ public class TextBox extends TextBoxGlass {
         setBackground(new Color(255,255,255));
         setHorizontalAlignment(LEFT);
         setSize(WIDTH,23);
+    }
+    
+    @FunctionalInterface
+    public interface CustomDocumentListener extends DocumentListener {
+        void changed(DocumentEvent e);
+
+        @Override
+        default void changedUpdate(DocumentEvent e) {
+            changed(e);
+        }
+
+        @Override
+        default void removeUpdate(DocumentEvent e) {
+            changed(e);
+        }
+
+        @Override
+        default void insertUpdate(DocumentEvent e) {
+            changed(e);
+        }
     }
 }

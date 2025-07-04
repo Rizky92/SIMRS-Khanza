@@ -12,8 +12,6 @@
 
 package fungsi;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,7 +37,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -47,6 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -357,10 +355,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("insert")));
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
@@ -380,9 +377,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("insert")));
             if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
                 return true;
             }
         } catch (Exception e) {
@@ -404,9 +401,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("insert")));
             if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
                 return true;
             }
         } catch (Exception e) {
@@ -428,10 +425,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("update")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("update")));
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
@@ -448,9 +444,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("update")));
             if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("update")));
                 return true;
             }
         } catch (Exception e) {
@@ -469,10 +465,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("delete")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("delete")));
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             if (e.getMessage().contains("constraint")) {
@@ -480,6 +475,25 @@ public final class sekuel {
             } else {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!");
             }
+        }
+    }
+    
+    public void menghapusIgnoreSmc(String table, String where, String... values) {
+        String sql = "delete from " + table + " where " + where;
+        if (where == null || where.isBlank()) {
+            sql = "delete from " + table;
+        }
+
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 1, values[i]);
+            }
+            if (ps.executeUpdate() > 0) {
+                track = ps.toString();
+                SimpanTrack(track.substring(track.indexOf("delete")));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 
@@ -497,9 +511,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("delete")));
             if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("delete")));
                 return true;
             }
         } catch (Exception e) {
@@ -513,9 +527,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf(sql.substring(0, 8))));
             if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf(sql.substring(0, 8))));
                 return true;
             }
         } catch (Exception e) {
@@ -552,6 +566,78 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak..!!");
+        }
+    }
+    
+    public void deleteTemporaryBesar() {
+        try (PreparedStatement ps = connect.prepareStatement("delete from temporary_besar where userid = ? and ipaddress = ?")) {
+            ps.setString(1, akses.getkode());
+            ps.setString(2, akses.getalamatip());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void temporaryBesar(int no, String... values) {
+        String sql = "insert into temporary_besar values(?, ?, ?";
+        for (int i = 0; i < 79; i++) {
+            if (i < values.length) {
+                sql = sql.concat("?, ");
+            } else {
+                sql = sql.concat("'', ");
+            }
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
+            ps.setString(1, akses.getkode());
+            ps.setString(2, akses.getalamatip());
+            ps.setInt(3, no);
+            for (int i = 0; i < values.length; i++) {
+                ps.setString(i + 4, values[i]);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void temporaryBesarBatch(TableModel tabMode, int batches) {
+        String sql = "insert into temporary_besar values(?, ?, ?, ";
+        
+        int columns = tabMode.getColumnCount(),
+            rows = tabMode.getRowCount();
+        
+        if (rows == 0) {
+            JOptionPane.showMessageDialog(null, "Tidak ada data yang bisa diproses!");
+            return;
+        }
+        
+        for (int i = 0; i < 79; i++) {
+            if (i < columns) {
+                sql = sql.concat("?, ");
+            } else {
+                sql = sql.concat("'', ");
+            }
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql.substring(0, sql.length() - 2).concat(")"))) {
+            for (int r = 0; r < rows; r++) {
+                ps.setString(1, akses.getkode());
+                ps.setString(2, akses.getalamatip());
+                ps.setInt(3, r + 1);
+                for (int c = 0; c < columns; c++) {
+                    ps.setString(c + 4, tabMode.getValueAt(r, c).toString());
+                }
+                if (r != 0 && r % batches == 0) {
+                    ps.executeLargeBatch();
+                } else {
+                    ps.addBatch();
+                }
+            }
+            ps.executeLargeBatch();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 
@@ -609,10 +695,9 @@ public final class sekuel {
             ps.setDouble(4, k);
             ps.setString(5, akses.getkode());
             ps.setString(6, akses.getalamatip());
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("insert")));
+            ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Notif: " + e);
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data!\nKemungkinan ada rekening yang sama dimasukkan sebelumnya!");
@@ -635,10 +720,9 @@ public final class sekuel {
             ps.setDouble(4, k);
             ps.setString(5, akses.getkode());
             ps.setString(6, akses.getalamatip());
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("insert")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("insert")));
+            ps.executeUpdate();
         } catch (SQLException e) {
             try (PreparedStatement ps = connect.prepareStatement("update tampjurnal_smc set debet = debet + ?, kredit = kredit + ? where kd_rek = ? and user_id = ? and ip = ?")) {
                 ps.setDouble(1, d);
@@ -646,10 +730,9 @@ public final class sekuel {
                 ps.setString(3, kdRek);
                 ps.setString(4, akses.getkode());
                 ps.setString(5, akses.getalamatip());
-                if (ps.executeUpdate() > 0) {
-                    track = ps.toString();
-                    SimpanTrack(track.substring(track.indexOf("update")));
-                }
+                track = ps.toString();
+                SimpanTrack(track.substring(track.indexOf("update")));
+                ps.executeUpdate();
             } catch (SQLException ex) {
                 System.out.println("Notif : " + ex);
                 JOptionPane.showMessageDialog(null, "Gagal menyimpan data!\nKemungkinan ada rekening yang sama dimasukkan sebelumnya!");

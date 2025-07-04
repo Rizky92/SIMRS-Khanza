@@ -20,6 +20,8 @@
 **/*.wps
 **/*.log
 **/*.sql
+**/*.xls
+**/*.xlsx
 **/*.[*]~
 !sik_bridging_lab.sql
 !sik_bridging_radiologi.sql

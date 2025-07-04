@@ -62,7 +62,7 @@ public class DlgCariPiutang extends javax.swing.JDialog {
         }
         
         tabMode=new DefaultTableModel(null,new Object[]{
-                "No.Nota","Tanggal","Petugas","Pasien","Catatan","Jenis","OngKir","Uang Muka","Piutang","",""
+                "No.Nota","Tanggal","Petugas","Pasien","Catatan","Jenis","PPN","OngKir","Uang Muka","Piutang",""
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -1054,7 +1054,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }else{
           try {
               ps=koneksi.prepareStatement(
-                      "select nota_piutang, kd_bangsal from piutang where nota_piutang=?");
+                      "select piutang.nota_piutang, piutang.kd_bangsal from piutang where piutang.nota_piutang=?");
               try {
                  ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                  rs=ps.executeQuery();
@@ -1062,7 +1062,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                      Sequel.AutoComitFalse();
                      sukses=true;
                      ps2=koneksi.prepareStatement(
-                          "select kode_brng,jumlah,no_batch,no_faktur from detailpiutang where nota_piutang=? ");
+                          "select detailpiutang.kode_brng,detailpiutang.jumlah,detailpiutang.no_batch,detailpiutang.no_faktur from detailpiutang where detailpiutang.nota_piutang=? ");
                      try {
                          ps2.setString(1,rs.getString(1));
                          rs2=ps2.executeQuery();
@@ -1075,7 +1075,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jumlah") +"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'", 
                                               "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
                              }else{
-                                 Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Piutang",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("nota_piutang"));
+                                Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Piutang",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("nota_piutang"));
                                 Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jumlah") +"','',''", 
                                               "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
                              } 
@@ -1479,7 +1479,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     "select piutang.nota_piutang, piutang.tgl_piutang, "+
                     "piutang.nip,petugas.nama, "+
                     "piutang.no_rkm_medis,piutang.nm_pasien, "+
-                    "piutang.catatan,piutang.jns_jual,piutang.ongkir,"+
+                    "piutang.catatan,piutang.jns_jual,piutang.ppn,piutang.ongkir,"+
                     "piutang.uangmuka,piutang.sisapiutang,piutang.tgltempo,bangsal.nm_bangsal  "+
                     "from piutang inner join petugas on piutang.nip=petugas.nip "+
                     "inner join bangsal on piutang.kd_bangsal=bangsal.kd_bangsal "+
@@ -1499,7 +1499,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        rs.getString(1),rs.getString(2),rs.getString(3)+", "+rs.getString(4),rs.getString(5)+", "+rs.getString(6),rs.getString(7),rs.getString(8),df2.format(rs.getDouble(9)),df2.format(rs.getDouble(10)),df2.format(rs.getDouble(11)),"",""
+                        rs.getString(1),rs.getString(2),rs.getString(3)+", "+rs.getString(4),rs.getString(5)+", "+rs.getString(6),rs.getString(7),rs.getString(8),df2.format(rs.getDouble(9)),df2.format(rs.getDouble(10)),df2.format(rs.getDouble(11)),df2.format(rs.getDouble(12)),""
                     });
                     
                     tabMode.addRow(new Object[]{"","No.Batch","No.Faktur","Piutang di "+rs.getString(13),"Satuan","Harga","Jml","Subtotal","Disk(%)","Diskon(Rp)","Total"});
@@ -1548,15 +1548,15 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                         
                     cicilan=Sequel.cariIsiAngka("select (sum(bayar_piutang.besar_cicilan)+sum(bayar_piutang.diskon_piutang)+sum(bayar_piutang.tidak_terbayar)) from bayar_piutang where bayar_piutang.no_rawat='"+rs.getString(1)+"' ");
-                    sisapiutang=rs.getDouble(11)-cicilan;
+                    sisapiutang=rs.getDouble(12)-cicilan;
                     if(sisapiutang<1){
                         status="Lunas";
                     }else if(sisapiutang>1){
-                        telat=Sequel.cariIsiAngka("select TO_DAYS('"+rs.getString(12)+"')-TO_DAYS(current_date()) as day");                                                
+                        telat=Sequel.cariIsiAngka("select TO_DAYS('"+rs.getString(13)+"')-TO_DAYS(current_date()) as day");                                                
                         status="Belum Lunas"+(telat<0?", Telat Bayar":"");
                     }
                     tabMode.addRow(new Object[]{"","Total",":","","",""," ",df2.format(subttlall),"",df2.format(subttldisc),df2.format(subttljual)});    
-                    tabMode.addRow(new Object[]{"","Jatuh Tempo",": "+rs.getString(12),"Cicilan+Diskon Bayar+Tidak Terbayar",":","","","","","",df2.format(cicilan)});  
+                    tabMode.addRow(new Object[]{"","Jatuh Tempo",": "+rs.getString(13),"Cicilan+Diskon Bayar+Tidak Terbayar",":","","","","","",df2.format(cicilan)});  
                     tabMode.addRow(new Object[]{"","Status",": "+status,"Sisa Piutang",":","","","","","",df2.format(sisapiutang)}); 
                 }  
             } catch (Exception e) {
