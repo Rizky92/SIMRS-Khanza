@@ -84,10 +84,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                    tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan=0,stokbarang=0,ttl=0,ppnobat=0,ttlhpp,ttljual;
     private int i=0,z=0,row=0,row2,r;
     private Jurnal jur=new Jurnal();
-    private boolean[] pilih,kronis;
-    private double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
-    private int[] obatKronisSisaHari;
-    private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,obatKronisPemberianSelanjutnya;
     private String signa1="1",signa2="1",nokunjungan="",kdObatSK="",requestJson="",URL="",otorisasi,sql="",aktifpcare="no",no_batchcari="", tgl_kadaluarsacari="", no_fakturcari="", aktifkanbatch="no",kodedokter="",namadokter="",noresep="",bangsal="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),tampilkan_ppnobat_ralan="",
                    Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="", kolomHarga = "ralan";
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
@@ -2512,6 +2508,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void tampilcacheberiobat() { 
         try{
+            boolean[] pilih,kronis;
+            double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
+            int[] obatKronisSisaHari;
+            String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,obatKronisPemberianSelanjutnya;
             z=0;
             for(i=0;i<tbObat.getRowCount();i++){
                 if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){
@@ -3559,58 +3559,19 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }
     
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                // Membuat Date
-                //Date dt = new Date();
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkJln.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkJln.isSelected()==false){
-                    nilai_jam =cmbJam.getSelectedIndex();
-                    nilai_menit =cmbMnt.getSelectedIndex();
-                    nilai_detik =cmbDtk.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                cmbJam.setSelectedItem(jam);
-                cmbMnt.setSelectedItem(menit);
-                cmbDtk.setSelectedItem(detik);
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            Date now = Calendar.getInstance().getTime();
+            if (ChkJln.isSelected()) {
+                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
+                
+                DTPTgl.setDate(now);
+                cmbJam.setSelectedItem(jam.substring(0, 2));
+                cmbMnt.setSelectedItem(jam.substring(3, 5));
+                cmbDtk.setSelectedItem(jam.substring(6, 8));
             }
         };
         // Timer
-        new Timer(1000, taskPerformer).start();
+        new Timer(500, taskPerformer).start();
     }
     
     public void setDokter(String kodedokter,String namadokter){
@@ -3624,6 +3585,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }
         
         try {
+            boolean[] pilih,kronis;
+            double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
+            int[] obatKronisSisaHari;
+            String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,obatKronisPemberianSelanjutnya;
             z=0;
             for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
                 if(Valid.SetAngka(tbDetailObatRacikan.getValueAt(i,10).toString())>0){
@@ -3631,7 +3596,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 }
             }    
 
-            pilih=new boolean[z]; 
             jumlah=new double[z];
             harga=new double[z];
             eb=new double[z];
@@ -3640,7 +3604,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             kodebarang=new String[z];
             namabarang=new String[z];
             kodesatuan=new String[z];
-            letakbarang=new String[z];
             no=new String[z];
             namajenis=new String[z];        
             industri=new String[z];         
@@ -3730,8 +3693,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     kronis[i],obatKronisSisaHari[i],obatKronisPemberianSelanjutnya[i]
                 });
             }
-
-            pilih=null; 
+            
             jumlah=null;
             harga=null;
             eb=null;
@@ -3740,7 +3702,6 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             kodebarang=null;
             namabarang=null;
             kodesatuan=null;
-            letakbarang=null;
             no=null;
             namajenis=null;       
             industri=null;        

@@ -29,6 +29,8 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -46,7 +48,7 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private String status="",Diskon_Piutang="",Piutang_Tidak_Terbayar="",Lebih_Bayar_Piutang="";
     private double total=0,lebihbayar=0;
-    private boolean sukses=true;
+    private boolean sukses=false,ceksukses=false;
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
@@ -62,7 +64,7 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         
-        WindowHitungPaket.setSize(320,200);
+        WindowHitungPaket.setSize(320,230);
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "P","No.Rawat/No.Tagihan","Tgl.Piutang","Pasien","Status","Total Piutang",
@@ -221,6 +223,8 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
         jLabel39 = new widget.Label();
         PiutangBelumDibayar = new widget.TextBox();
         jLabel44 = new widget.Label();
+        jLabel45 = new widget.Label();
+        PilihanKekurangan = new widget.ComboBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
@@ -345,7 +349,7 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
             }
         });
         panelisi5.add(BtnCloseHitungKapitasi);
-        BtnCloseHitungKapitasi.setBounds(200, 135, 100, 30);
+        BtnCloseHitungKapitasi.setBounds(200, 165, 100, 30);
 
         BtnHitungKapitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/gaji.png"))); // NOI18N
         BtnHitungKapitasi.setMnemonic('S');
@@ -358,7 +362,7 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
             }
         });
         panelisi5.add(BtnHitungKapitasi);
-        BtnHitungKapitasi.setBounds(10, 135, 100, 30);
+        BtnHitungKapitasi.setBounds(10, 165, 100, 30);
 
         jLabel43.setText("Lebih Bayar Piutang :");
         jLabel43.setName("jLabel43"); // NOI18N
@@ -415,7 +419,18 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
         jLabel44.setText("%");
         jLabel44.setName("jLabel44"); // NOI18N
         panelisi5.add(jLabel44);
-        jLabel44.setBounds(280, 70, 50, 23);
+        jLabel44.setBounds(281, 70, 50, 23);
+
+        jLabel45.setText("Kekurangan Jadikan :");
+        jLabel45.setName("jLabel45"); // NOI18N
+        panelisi5.add(jLabel45);
+        jLabel45.setBounds(0, 130, 140, 23);
+
+        PilihanKekurangan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diskon", "Tidak Terbayar", "Kekurangan Bayar" }));
+        PilihanKekurangan.setName("PilihanKekurangan"); // NOI18N
+        PilihanKekurangan.setPreferredSize(new java.awt.Dimension(45, 23));
+        panelisi5.add(PilihanKekurangan);
+        PilihanKekurangan.setBounds(144, 130, 150, 23);
 
         internalFrame8.add(panelisi5, java.awt.BorderLayout.CENTER);
 
@@ -1225,10 +1240,22 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             LebihBayarPiutang.setText("0");
             for(i=0;i<tbBangsal.getRowCount();i++){
                 try {
-                    tbBangsal.setValueAt(
-                        Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))-
-                        ((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))*(Double.parseDouble(PersentaseBayarPaket.getText())/100)))
-                    ,i,13);
+                    if(PilihanKekurangan.getSelectedIndex()==0){
+                        tbBangsal.setValueAt(
+                            Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))-
+                            ((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))*(Double.parseDouble(PersentaseBayarPaket.getText())/100)))
+                        ,i,12);
+                        tbBangsal.setValueAt(0,i,13);
+                    }else if(PilihanKekurangan.getSelectedIndex()==1){
+                        tbBangsal.setValueAt(0,i,12);
+                        tbBangsal.setValueAt(
+                            Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))-
+                            ((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-(Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+Double.parseDouble(tbBangsal.getValueAt(i,7).toString())))*(Double.parseDouble(PersentaseBayarPaket.getText())/100)))
+                        ,i,13);
+                    }else if(PilihanKekurangan.getSelectedIndex()==2){
+                        tbBangsal.setValueAt(0,i,12);
+                        tbBangsal.setValueAt(0,i,13);
+                    }   
                     tbBangsal.setValueAt(
                         Math.round((Double.parseDouble(tbBangsal.getValueAt(i,5).toString())-
                         (Double.parseDouble(tbBangsal.getValueAt(i,6).toString())+
@@ -1288,6 +1315,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem MnDetailPiutang;
     private widget.TextBox NilaiKapitasiPaket;
     private widget.TextBox PersentaseBayarPaket;
+    private widget.ComboBox PilihanKekurangan;
     private widget.TextBox PiutangBelumDibayar;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -1305,6 +1333,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Label jLabel42;
     private widget.Label jLabel43;
     private widget.Label jLabel44;
+    private widget.Label jLabel45;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.TextBox kdpenjab;
@@ -1322,93 +1351,122 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){
-        Valid.tabelKosong(tabMode);
-        try{
-            sisapiutang=0;
-            ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
-                       "piutang_pasien.status,piutang_pasien.totalpiutang, piutang_pasien.uangmuka, piutang_pasien.sisapiutang, piutang_pasien.tgltempo,penjab.png_jawab "+
-                       "from piutang_pasien inner join pasien inner join reg_periksa inner join penjab on  "+
-                       "piutang_pasien.no_rkm_medis=pasien.no_rkm_medis and "+
-                       "piutang_pasien.no_rawat=reg_periksa.no_rawat and "+
-                       "reg_periksa.kd_pj=penjab.kd_pj where piutang_pasien.status='Belum Lunas' "+
-                       (TCari.getText().trim().equals("")?"":" and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or "+
-                       "pasien.nm_pasien like ? or piutang_pasien.status like ?)")+" order by piutang_pasien.tgl_piutang");
-            try {
-                if(!TCari.getText().trim().equals("")){
-                    ps.setString(1,"%"+TCari.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
+    private synchronized void tampil(){
+        if(ceksukses==false){
+            ceksukses=true;
+            Valid.tabelKosong(tabMode);
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try{
+                        sisapiutang=0;
+                        ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
+                                   "piutang_pasien.status,piutang_pasien.totalpiutang, piutang_pasien.uangmuka, piutang_pasien.sisapiutang, piutang_pasien.tgltempo,penjab.png_jawab "+
+                                   "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
+                                   "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
+                                   "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+                                   "where piutang_pasien.status='Belum Lunas' "+
+                                   (TCari.getText().trim().equals("")?"":" and (piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or "+
+                                   "pasien.nm_pasien like ? or piutang_pasien.status like ?)")+" order by piutang_pasien.tgl_piutang");
+                        try {
+                            if(!TCari.getText().trim().equals("")){
+                                ps.setString(1,"%"+TCari.getText()+"%");
+                                ps.setString(2,"%"+TCari.getText()+"%");
+                                ps.setString(3,"%"+TCari.getText()+"%");
+                                ps.setString(4,"%"+TCari.getText()+"%");
+                            }
+
+                            rs=ps.executeQuery();
+                            while(rs.next()){
+                                cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan)+SUM(bayar_piutang.diskon_piutang)+SUM(bayar_piutang.tidak_terbayar),0) FROM bayar_piutang where bayar_piutang.no_rawat=?",rs.getString(1));
+                                Object[] row = new Object[]{
+                                    false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
+                                    cicilan,(rs.getDouble(7)-cicilan),rs.getString(8),rs.getString(9),(rs.getDouble(7)-cicilan),0,0
+                                };
+                                sisapiutang=sisapiutang+rs.getDouble(7)-cicilan;
+                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                    }catch(Exception e){
+                        System.out.println("Notifikasi : "+e);
+                    }
+                    return null;
                 }
-                    
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan)+SUM(bayar_piutang.diskon_piutang)+SUM(bayar_piutang.tidak_terbayar),0) FROM bayar_piutang where bayar_piutang.no_rawat=?",rs.getString(1));
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
-                        cicilan,(rs.getDouble(7)-cicilan),rs.getString(8),rs.getString(9),(rs.getDouble(7)-cicilan),0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble(7)-cicilan;
+
+                @Override
+                protected void done() {
+                    LCount.setText(Valid.SetAngka(sisapiutang));
+                    ceksukses = false;
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            LCount.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+            }.execute();
         }
     }
 
-    private void tampilperakun() {
-        Valid.tabelKosong(tabMode);
-        try{
-            sisapiutang=0;
-            ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
-                       "piutang_pasien.status,detail_piutang_pasien.totalpiutang,0, detail_piutang_pasien.sisapiutang, piutang_pasien.tgltempo,detail_piutang_pasien.nama_bayar "+
-                       "from piutang_pasien inner join pasien inner join reg_periksa inner join penjab inner join detail_piutang_pasien on  "+
-                       "piutang_pasien.no_rkm_medis=pasien.no_rkm_medis and piutang_pasien.no_rawat=reg_periksa.no_rawat and "+
-                       "reg_periksa.kd_pj=penjab.kd_pj and piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat where "+
-                       "detail_piutang_pasien.sisapiutang>=1 and detail_piutang_pasien.nama_bayar like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or "+
-                       "pasien.nm_pasien like ? or piutang_pasien.status like ?) order by piutang_pasien.tgl_piutang");
-            try {
-                ps.setString(1,"%"+nmpenjab.getText()+"%");
-                ps.setString(2,"%"+TCari.getText()+"%");
-                ps.setString(3,"%"+TCari.getText()+"%");
-                ps.setString(4,"%"+TCari.getText()+"%");
-                ps.setString(5,"%"+TCari.getText()+"%");
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan)+SUM(bayar_piutang.diskon_piutang)+SUM(bayar_piutang.tidak_terbayar),0) FROM bayar_piutang where bayar_piutang.no_rawat='"+rs.getString(1)+"' and bayar_piutang.kd_rek_kontra='"+kdpenjab.getText()+"'");
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
-                        cicilan,rs.getDouble(7),rs.getString(8),rs.getString(9),rs.getDouble(7),0,0
-                    });
-                    sisapiutang=sisapiutang+rs.getDouble(7)-cicilan;
+    private synchronized void tampilperakun() {
+        if(ceksukses==false){
+            ceksukses=true;
+            Valid.tabelKosong(tabMode);
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try{
+                        sisapiutang=0;
+                        ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
+                                   "piutang_pasien.status,detail_piutang_pasien.totalpiutang,0, detail_piutang_pasien.sisapiutang, piutang_pasien.tgltempo,detail_piutang_pasien.nama_bayar "+
+                                   "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
+                                   "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
+                                   "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+                                   "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
+                                   "where detail_piutang_pasien.sisapiutang>=1 and detail_piutang_pasien.nama_bayar like ? and "+
+                                   "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or "+
+                                   "pasien.nm_pasien like ? or piutang_pasien.status like ?) order by piutang_pasien.tgl_piutang");
+                        try {
+                            ps.setString(1,"%"+nmpenjab.getText()+"%");
+                            ps.setString(2,"%"+TCari.getText()+"%");
+                            ps.setString(3,"%"+TCari.getText()+"%");
+                            ps.setString(4,"%"+TCari.getText()+"%");
+                            ps.setString(5,"%"+TCari.getText()+"%");
+                            rs=ps.executeQuery();
+                            while(rs.next()){
+                                cicilan=Sequel.cariIsiAngka("SELECT ifnull(SUM(bayar_piutang.besar_cicilan)+SUM(bayar_piutang.diskon_piutang)+SUM(bayar_piutang.tidak_terbayar),0) FROM bayar_piutang where bayar_piutang.no_rawat='"+rs.getString(1)+"' and bayar_piutang.kd_rek_kontra='"+kdpenjab.getText()+"'");
+                                Object[] row = new Object[]{
+                                    false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),
+                                    cicilan,rs.getDouble(7),rs.getString(8),rs.getString(9),rs.getDouble(7),0,0
+                                };
+                                sisapiutang=sisapiutang+rs.getDouble(7)-cicilan;
+                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        } finally{
+                            if(rs!=null){
+                                rs.close();
+                            }
+                            if(ps!=null){
+                                ps.close();
+                            }
+                        }
+                    }catch(Exception e){
+                        System.out.println("Notifikasi : "+e);
+                    }
+                    return null;
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
+
+                @Override
+                protected void done() {
+                    LCount.setText(Valid.SetAngka(sisapiutang));
+                    ceksukses = false;
                 }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            
-            LCount.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+            }.execute();
         }
     }
     
@@ -1442,10 +1500,11 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
             sisapiutang=0;
             ps=koneksi.prepareStatement("select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, concat(piutang_pasien.no_rkm_medis,' ',pasien.nm_pasien), "+
                        "piutang_pasien.status,detail_piutang_pasien.totalpiutang,0, detail_piutang_pasien.sisapiutang, piutang_pasien.tgltempo,detail_piutang_pasien.nama_bayar "+
-                       "from piutang_pasien inner join pasien inner join reg_periksa inner join penjab inner join detail_piutang_pasien on  "+
-                       "piutang_pasien.no_rkm_medis=pasien.no_rkm_medis and piutang_pasien.no_rawat=reg_periksa.no_rawat and "+
-                       "reg_periksa.kd_pj=penjab.kd_pj and piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat where "+
-                       "detail_piutang_pasien.sisapiutang>=1 and detail_piutang_pasien.kd_pj='"+carabayar+"' and piutang_pasien.no_rawat in "+
+                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
+                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
+                       "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
+                       "where detail_piutang_pasien.sisapiutang>=1 and detail_piutang_pasien.kd_pj='"+carabayar+"' and piutang_pasien.no_rawat in "+
                        "(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang where detail_penagihan_piutang.no_tagihan=?) order by piutang_pasien.tgl_piutang");
             try {
                 ps.setString(1,notagihan);

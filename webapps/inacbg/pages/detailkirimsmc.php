@@ -528,6 +528,24 @@
                                     <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
                                 </td>
                             </tr>
+                            <tr class="head">
+                                <td width="41%">Dializer Single Use</td>
+                                <td>:</td>
+                                <td width="57%">
+                                    <?php
+                                        $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
+                                    ?>
+                                    <select name="dializer_single_use" class="text2" style="font-family: Tahoma">
+                                        <?php if ($dializer_single_use): ?>
+                                            <option value="1" selected>Ya</Option>
+                                        <?php else: ?>
+                                            <option value="0" selected>Tidak</Option>
+                                        <?php endif; ?>
+                                        <option value="1">Ya</Option>
+                                        <option value="0">Tidak</Option>
+                                    </select>
+                                </td>
+                            </tr>
                             <?php
                                 $querybilling = bukaquery("select 
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
@@ -1030,8 +1048,7 @@
                             $diskon_sewa_alat          = validTeks(trim($_POST['diskon_sewa_alat']));
                             $tarif_poli_eks            = validTeks(trim($_POST['tarif_poli_eks']));
                             $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
-
-                            $dializer_single_use   = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
+                            $dializer_single_use       = validTeks(trim($_POST['dializer_single_use']));
 
                             $totalbillingsementara
                                 = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)

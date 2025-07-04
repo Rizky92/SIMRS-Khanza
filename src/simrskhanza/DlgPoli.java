@@ -293,13 +293,13 @@ public final class DlgPoli extends javax.swing.JDialog {
         label34.setName("label34"); // NOI18N
         label34.setPreferredSize(new java.awt.Dimension(35, 23));
         panelisi4.add(label34);
-        label34.setBounds(0, 12, 85, 23);
+        label34.setBounds(0, 12, 75, 23);
 
         label32.setText("Registrasi Baru :");
         label32.setName("label32"); // NOI18N
         label32.setPreferredSize(new java.awt.Dimension(35, 23));
         panelisi4.add(label32);
-        label32.setBounds(194, 12, 110, 23);
+        label32.setBounds(184, 12, 110, 23);
 
         Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
@@ -309,7 +309,7 @@ public final class DlgPoli extends javax.swing.JDialog {
             }
         });
         panelisi4.add(Kd);
-        Kd.setBounds(89, 12, 100, 23);
+        Kd.setBounds(79, 12, 100, 23);
 
         By.setText("0");
         By.setHighlighter(null);
@@ -320,13 +320,13 @@ public final class DlgPoli extends javax.swing.JDialog {
             }
         });
         panelisi4.add(By);
-        By.setBounds(308, 12, 100, 23);
+        By.setBounds(298, 12, 100, 23);
 
         label36.setText("Nama Unit :");
         label36.setName("label36"); // NOI18N
         label36.setPreferredSize(new java.awt.Dimension(35, 23));
         panelisi4.add(label36);
-        label36.setBounds(0, 42, 85, 23);
+        label36.setBounds(0, 42, 75, 23);
 
         Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
@@ -336,7 +336,7 @@ public final class DlgPoli extends javax.swing.JDialog {
             }
         });
         panelisi4.add(Nm);
-        Nm.setBounds(89, 42, 528, 23);
+        Nm.setBounds(79, 42, 538, 23);
 
         label33.setText("Registrasi Lama :");
         label33.setName("label33"); // NOI18N
@@ -565,9 +565,13 @@ public final class DlgPoli extends javax.swing.JDialog {
         }else if(Nm.getText().trim().equals("")){
             Valid.textKosong(Nm,"Nama Unit");
         }else{
-            Sequel.menyimpan("poliklinik","'"+Kd.getText()+"','"+Nm.getText()+"','"+By.getText()+"','"+ByLm.getText()+"','1'","Kode Unit");
-            BtnCariActionPerformed(evt);
-            emptTeks();
+            if(Sequel.menyimpantf("poliklinik","'"+Kd.getText()+"','"+Nm.getText()+"','"+By.getText()+"','"+ByLm.getText()+"','1'","Kode Unit")==true){
+                tabMode.addRow(new Object[]{
+                    false,Kd.getText(),Nm.getText(),Double.parseDouble(By.getText()),Double.parseDouble(ByLm.getText())
+                });
+                LCount.setText(""+tabMode.getRowCount());
+                emptTeks();
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -617,11 +621,15 @@ public final class DlgPoli extends javax.swing.JDialog {
         }else if(Nm.getText().trim().equals("")){
             Valid.textKosong(Nm,"Nama Unit");
         }else{
-            Valid.editTable(tabMode,"poliklinik","kd_poli",Kd2,"registrasi='"+By.getText()+
-                    "',nm_poli='"+Nm.getText()+"',registrasilama='"+ByLm.getText()+
-                    "',kd_poli='"+Kd.getText()+"'");
-            if(tabMode.getRowCount()!=0){BtnCariActionPerformed(evt);}
-            emptTeks();
+            if(tbKamar.getSelectedRow()!= -1){
+                if(Valid.editTabletf(tabMode,"poliklinik","kd_poli",Kd2,"registrasi='"+By.getText()+"',nm_poli='"+Nm.getText()+"',registrasilama='"+ByLm.getText()+"',kd_poli='"+Kd.getText()+"'")==true){
+                    tbKamar.setValueAt(Kd.getText(),tbKamar.getSelectedRow(),1);
+                    tbKamar.setValueAt(Nm.getText(),tbKamar.getSelectedRow(),2);
+                    tbKamar.setValueAt(Double.parseDouble(By.getText()),tbKamar.getSelectedRow(),3);
+                    tbKamar.setValueAt(Double.parseDouble(ByLm.getText()),tbKamar.getSelectedRow(),4);
+                    emptTeks();
+                }
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 

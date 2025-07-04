@@ -955,7 +955,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         FormMenu.add(BtnRiwayatPasien);
 
         BtnPenilaianPreInduksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnPenilaianPreInduksi.setText("Penilaian Pre Induksi");
+        BtnPenilaianPreInduksi.setText("Pengkajian Pre Induksi");
         BtnPenilaianPreInduksi.setFocusPainted(false);
         BtnPenilaianPreInduksi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPenilaianPreInduksi.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -1057,7 +1057,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         FormMenu.add(BtnChecklistPostOperasi);
 
         BtnPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnPreOperasi.setText("Penilaian Pre Operasi");
+        BtnPreOperasi.setText("Pengkajian Pre Operasi");
         BtnPreOperasi.setFocusPainted(false);
         BtnPreOperasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPreOperasi.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -1091,7 +1091,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         FormMenu.add(BtnCatatanAnastesiSedasi);
 
         BtnPreAnastesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnPreAnastesi.setText("Penilaian Pre Anestesi");
+        BtnPreAnastesi.setText("Pengkajian Pre Anestesi");
         BtnPreAnastesi.setFocusPainted(false);
         BtnPreAnastesi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPreAnastesi.setGlassColor(new java.awt.Color(255, 255, 255));
