@@ -39,6 +39,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
+import widget.TextBox;
 
 
 /**
@@ -68,7 +69,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tgl.Lahir","Tanggal","Jam","Minum","Infus",
-            "Transfusi","Sisa Priming","Wash Out","Urine","Pendarahan","Muntah","Keterangan","NIP","Nama Petugas"
+            "Transfusi","Sisa Priming","Wash Out","Ttl.Input","Urine","Pendarahan","Muntah","UFG","Ttl.Output","Balance","Keterangan","NIP","Nama Petugas"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -78,7 +79,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 19; i++) {
+        for (i = 0; i < 23; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -107,16 +108,24 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }else if(i==12){
                 column.setPreferredWidth(60);
             }else if(i==13){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(60);
             }else if(i==14){
-                column.setPreferredWidth(70);
-            }else if(i==15){
                 column.setPreferredWidth(50);
+            }else if(i==15){
+                column.setPreferredWidth(70);
             }else if(i==16){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(50);
             }else if(i==17){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(50);
             }else if(i==18){
+                column.setPreferredWidth(70);
+            }else if(i==19){
+                column.setPreferredWidth(70);
+            }else if(i==20){
+                column.setPreferredWidth(150);
+            }else if(i==21){
+                column.setPreferredWidth(90);
+            }else if(i==22){
                 column.setPreferredWidth(150);
             }
         }
@@ -124,14 +133,24 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
-        Minum.setDocument(new batasInput((byte)10).getKata(Minum));
-        Infus.setDocument(new batasInput((byte)10).getKata(Infus));
-        Tranfusi.setDocument(new batasInput((byte)10).getKata(Tranfusi));
-        Priming.setDocument(new batasInput((byte)10).getKata(Priming));
-        WashOut.setDocument(new batasInput((byte)10).getKata(WashOut));
-        Urine.setDocument(new batasInput((byte)10).getKata(Urine));
-        Pendarahan.setDocument(new batasInput((byte)10).getKata(Pendarahan));
-        Muntah.setDocument(new batasInput((byte)10).getKata(Muntah));
+        Minum.setDocument(new batasInput(10).getOnlyAngka(Minum));
+        Minum.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Infus.setDocument(new batasInput(10).getOnlyAngka(Infus));
+        Infus.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Tranfusi.setDocument(new batasInput(10).getOnlyAngka(Tranfusi));
+        Tranfusi.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Priming.setDocument(new batasInput(10).getOnlyAngka(Priming));
+        Priming.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        WashOut.setDocument(new batasInput(10).getOnlyAngka(WashOut));
+        WashOut.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Urine.setDocument(new batasInput(10).getOnlyAngka(Urine));
+        Urine.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Pendarahan.setDocument(new batasInput(10).getOnlyAngka(Pendarahan));
+        Pendarahan.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        Muntah.setDocument(new batasInput(10).getOnlyAngka(Muntah));
+        Muntah.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
+        UFG.setDocument(new batasInput(10).getOnlyAngka(UFG));
+        UFG.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
@@ -284,6 +303,14 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         Muntah = new widget.TextBox();
         jLabel26 = new widget.Label();
         Keterangan = new widget.TextBox();
+        jLabel25 = new widget.Label();
+        UFG = new widget.TextBox();
+        TtlInput = new widget.TextBox();
+        jLabel27 = new widget.Label();
+        jLabel30 = new widget.Label();
+        TtlOutput = new widget.TextBox();
+        Balance = new widget.TextBox();
+        jLabel14 = new widget.Label();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -484,7 +511,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -498,7 +525,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -559,7 +586,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 154));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 184));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
@@ -594,7 +621,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-03-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-06-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -723,7 +750,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Minum);
-        Minum.setBounds(74, 70, 65, 23);
+        Minum.setBounds(74, 70, 70, 23);
 
         Tranfusi.setFocusTraversalPolicyProvider(true);
         Tranfusi.setName("Tranfusi"); // NOI18N
@@ -733,17 +760,17 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Tranfusi);
-        Tranfusi.setBounds(385, 70, 65, 23);
+        Tranfusi.setBounds(319, 70, 70, 23);
 
         jLabel20.setText("Transfusi :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(328, 70, 53, 23);
+        jLabel20.setBounds(262, 70, 53, 23);
 
         jLabel22.setText("Wash Out :");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(640, 70, 80, 23);
+        jLabel22.setBounds(536, 70, 59, 23);
 
         WashOut.setFocusTraversalPolicyProvider(true);
         WashOut.setName("WashOut"); // NOI18N
@@ -753,12 +780,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(WashOut);
-        WashOut.setBounds(724, 70, 65, 23);
+        WashOut.setBounds(599, 70, 70, 23);
 
         jLabel23.setText("Infus :");
         jLabel23.setName("jLabel23"); // NOI18N
         FormInput.add(jLabel23);
-        jLabel23.setBounds(176, 70, 40, 23);
+        jLabel23.setBounds(148, 70, 35, 23);
 
         Infus.setFocusTraversalPolicyProvider(true);
         Infus.setName("Infus"); // NOI18N
@@ -768,7 +795,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Infus);
-        Infus.setBounds(220, 70, 65, 23);
+        Infus.setBounds(187, 70, 70, 23);
 
         Priming.setFocusTraversalPolicyProvider(true);
         Priming.setName("Priming"); // NOI18N
@@ -778,12 +805,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Priming);
-        Priming.setBounds(560, 70, 65, 23);
+        Priming.setBounds(462, 70, 70, 23);
 
         jLabel28.setText("Sisa Priming :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(476, 70, 80, 23);
+        jLabel28.setBounds(393, 70, 65, 23);
 
         jLabel29.setText("Urine :");
         jLabel29.setName("jLabel29"); // NOI18N
@@ -798,12 +825,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Urine);
-        Urine.setBounds(74, 100, 65, 23);
+        Urine.setBounds(74, 100, 80, 23);
 
         jLabel13.setText("Pendarahan :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(163, 100, 80, 23);
+        jLabel13.setBounds(173, 100, 67, 23);
 
         Pendarahan.setFocusTraversalPolicyProvider(true);
         Pendarahan.setName("Pendarahan"); // NOI18N
@@ -813,12 +840,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Pendarahan);
-        Pendarahan.setBounds(247, 100, 65, 23);
+        Pendarahan.setBounds(244, 100, 80, 23);
 
         jLabel24.setText("Muntah :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
-        jLabel24.setBounds(321, 100, 70, 23);
+        jLabel24.setBounds(328, 100, 67, 23);
 
         Muntah.setFocusTraversalPolicyProvider(true);
         Muntah.setName("Muntah"); // NOI18N
@@ -828,12 +855,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Muntah);
-        Muntah.setBounds(395, 100, 65, 23);
+        Muntah.setBounds(399, 100, 80, 23);
 
-        jLabel26.setText("Keterangan :");
+        jLabel26.setText("Balance :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
-        jLabel26.setBounds(476, 100, 80, 23);
+        jLabel26.setBounds(0, 130, 70, 23);
 
         Keterangan.setFocusTraversalPolicyProvider(true);
         Keterangan.setName("Keterangan"); // NOI18N
@@ -843,7 +870,54 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             }
         });
         FormInput.add(Keterangan);
-        Keterangan.setBounds(560, 100, 229, 23);
+        Keterangan.setBounds(229, 130, 560, 23);
+
+        jLabel25.setText("UFG :");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(483, 100, 67, 23);
+
+        UFG.setFocusTraversalPolicyProvider(true);
+        UFG.setName("UFG"); // NOI18N
+        UFG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UFGKeyPressed(evt);
+            }
+        });
+        FormInput.add(UFG);
+        UFG.setBounds(554, 100, 80, 23);
+
+        TtlInput.setEditable(false);
+        TtlInput.setFocusTraversalPolicyProvider(true);
+        TtlInput.setName("TtlInput"); // NOI18N
+        FormInput.add(TtlInput);
+        TtlInput.setBounds(714, 70, 75, 23);
+
+        jLabel27.setText("Input :");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(673, 70, 37, 23);
+
+        jLabel30.setText("Output :");
+        jLabel30.setName("jLabel30"); // NOI18N
+        FormInput.add(jLabel30);
+        jLabel30.setBounds(638, 100, 67, 23);
+
+        TtlOutput.setEditable(false);
+        TtlOutput.setFocusTraversalPolicyProvider(true);
+        TtlOutput.setName("TtlOutput"); // NOI18N
+        FormInput.add(TtlOutput);
+        TtlOutput.setBounds(709, 100, 80, 23);
+
+        Balance.setFocusTraversalPolicyProvider(true);
+        Balance.setName("Balance"); // NOI18N
+        FormInput.add(Balance);
+        Balance.setBounds(74, 130, 80, 23);
+
+        jLabel14.setText("Keterangan :");
+        jLabel14.setName("jLabel14"); // NOI18N
+        FormInput.add(jLabel14);
+        jLabel14.setBounds(158, 130, 67, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -931,7 +1005,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString())){
+                if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString())){
                     if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+" "+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),Sequel.ambiltanggalsekarang())==true){
                         hapus();
                     }
@@ -962,7 +1036,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else{
-                    if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString())){
+                    if(NIP.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString())){
                         if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+" "+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),Sequel.ambiltanggalsekarang())==true){
                             if(TanggalRegistrasi.getText().equals("")){
                                 TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
@@ -1029,52 +1103,59 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.R.M.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>JK</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Infus</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Transfusi</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sisa Priming</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Wash Out</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Urine</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pendarahan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Muntah</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
-                                "</tr>"
-                            );
+                            htmlContent
+                                .append("<tr class='isi'>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.R.M.</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>JK</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Infus</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Transfusi</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sisa Priming</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Wash Out</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ttl.Input</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Urine</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pendarahan</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Muntah</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>UFG</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ttl.Output</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Balance</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>")
+                                .append("</tr>");
                             for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                    "</tr>");
+                                htmlContent
+                                    .append("<tr class='isi'>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>")
+                                    .append("</tr>");
                             }
                             LoadHTML.setText(
                                 "<html>"+
@@ -1104,52 +1185,59 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
                         break;
                     case "Laporan 2 (WPS)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
-                                "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.R.M.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>JK</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Infus</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Transfusi</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sisa Priming</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Wash Out</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Urine</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pendarahan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Muntah</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>"+
-                                "</tr>"
-                            );
+                            htmlContent
+                                .append("<tr class='isi'>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.R.M.</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>JK</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Minum</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Infus</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Transfusi</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Sisa Priming</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Wash Out</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ttl.Input</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Urine</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pendarahan</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Muntah</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>UFG</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ttl.Output</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Balance</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIP</b></td>")
+                                    .append("<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Petugas</b></td>")
+                                .append("</tr>");
                             for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                       "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
-                                    "</tr>");
+                                htmlContent
+                                    .append("<tr class='isi'>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,0).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,1).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,2).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,3).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,4).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,5).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,6).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,7).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,8).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,9).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,10).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,11).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,12).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,13).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,14).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,15).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,16).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>")
+                                        .append("<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>")
+                                    .append("</tr>");
                             }
                             LoadHTML.setText(
                                 "<html>"+
@@ -1180,12 +1268,33 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
                             htmlContent.append(                             
-                                "\"No.Rawat\";\"No.R.M.\";\"Nama Pasien\";\"Umur\";\"JK\";\"Tgl.Lahir\";\"Tanggal\";\"Jam\";\"Minum\";\"Infus\";\"Transfusi\";\"Sisa Priming\";\"Wash Out\";\"Urine\";\"Pendarahan\";\"Muntah\";\"Keterangan\";\"NIP\";\"Nama Petugas\"\n"
+                                "\"No.Rawat\";\"No.R.M.\";\"Nama Pasien\";\"Umur\";\"JK\";\"Tgl.Lahir\";\"Tanggal\";\"Jam\";\"Minum\";\"Infus\";\"Transfusi\";\"Sisa Priming\";\"Wash Out\";\"Ttl.Input\";\"Urine\";\"Pendarahan\";\"Muntah\";\"UFG\";\"Ttl.Output\";\"Balance\";\"Keterangan\";\"NIP\";\"Nama Petugas\"\n"
                             ); 
                             for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\";\""+tbObat.getValueAt(i,11).toString()+"\";\""+tbObat.getValueAt(i,12).toString()+"\";\""+tbObat.getValueAt(i,13).toString()+"\";\""+tbObat.getValueAt(i,14).toString()+"\";\""+tbObat.getValueAt(i,15).toString()+"\";\""+tbObat.getValueAt(i,16).toString()+"\";\""+tbObat.getValueAt(i,17).toString()+"\";\""+tbObat.getValueAt(i,18).toString()+"\"\n"
-                                );
+                                htmlContent.append("\"")
+                                    .append(tbObat.getValueAt(i,0).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,1).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,2).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,3).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,4).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,5).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,6).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,7).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,8).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,9).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,10).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,11).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,12).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,13).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,14).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,15).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,16).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,17).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,18).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,19).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,20).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,21).toString()).append("\";\"")
+                                    .append(tbObat.getValueAt(i,22).toString()).append("\"\n");
                             }
                             f = new File("DataCatatanCairanHemodialisa.csv");            
                             bw = new BufferedWriter(new FileWriter(f));            
@@ -1368,12 +1477,16 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }//GEN-LAST:event_PendarahanKeyPressed
 
     private void MuntahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MuntahKeyPressed
-        Valid.pindah(evt,Pendarahan,Keterangan);
+        Valid.pindah(evt,Pendarahan,UFG);
     }//GEN-LAST:event_MuntahKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
         Valid.pindah(evt,Muntah,BtnSimpan);
     }//GEN-LAST:event_KeteranganKeyPressed
+
+    private void UFGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UFGKeyPressed
+        Valid.pindah(evt,Muntah,Keterangan);
+    }//GEN-LAST:event_UFGKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1392,6 +1505,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox Balance;
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
@@ -1430,6 +1544,9 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private widget.TextBox TanggalRegistrasi;
     private widget.TextBox TglLahir;
     private widget.TextBox Tranfusi;
+    private widget.TextBox TtlInput;
+    private widget.TextBox TtlOutput;
+    private widget.TextBox UFG;
     private widget.TextBox Umur;
     private widget.TextBox Urine;
     private widget.TextBox WashOut;
@@ -1437,6 +1554,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
+    private widget.Label jLabel14;
     private widget.Label jLabel16;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
@@ -1445,9 +1563,12 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private widget.Label jLabel22;
     private widget.Label jLabel23;
     private widget.Label jLabel24;
+    private widget.Label jLabel25;
     private widget.Label jLabel26;
+    private widget.Label jLabel27;
     private widget.Label jLabel28;
     private widget.Label jLabel29;
+    private widget.Label jLabel30;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1461,64 +1582,39 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
-            if(TCari.getText().toString().equals("")){
-                ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
-                    "pasien.jk,pasien.tgl_lahir,catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat,catatan_cairan_hemodialisa.minum,"+
-                    "catatan_cairan_hemodialisa.infus,catatan_cairan_hemodialisa.tranfusi,catatan_cairan_hemodialisa.sisa_priming,catatan_cairan_hemodialisa.wash_out,"+
-                    "catatan_cairan_hemodialisa.urine,catatan_cairan_hemodialisa.pendarahan,catatan_cairan_hemodialisa.muntah,catatan_cairan_hemodialisa.keterangan,"+
-                    "catatan_cairan_hemodialisa.nip,petugas.nama from catatan_cairan_hemodialisa inner join reg_periksa on catatan_cairan_hemodialisa.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip where "+
-                    "catatan_cairan_hemodialisa.tgl_perawatan between ? and ? order by catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat");
-            }else{
-                ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
-                    "pasien.jk,pasien.tgl_lahir,catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat,catatan_cairan_hemodialisa.minum,"+
-                    "catatan_cairan_hemodialisa.infus,catatan_cairan_hemodialisa.tranfusi,catatan_cairan_hemodialisa.sisa_priming,catatan_cairan_hemodialisa.wash_out,"+
-                    "catatan_cairan_hemodialisa.urine,catatan_cairan_hemodialisa.pendarahan,catatan_cairan_hemodialisa.muntah,catatan_cairan_hemodialisa.keterangan,"+
-                    "catatan_cairan_hemodialisa.nip,petugas.nama from catatan_cairan_hemodialisa inner join reg_periksa on catatan_cairan_hemodialisa.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_cairan_hemodialisa.nip=petugas.nip where "+
-                    "catatan_cairan_hemodialisa.tgl_perawatan between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or catatan_cairan_hemodialisa.nip like ? or petugas.nama like ?) "+
-                    "order by catatan_cairan_hemodialisa.tgl_perawatan,catatan_cairan_hemodialisa.jam_rawat ");
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select catatan_cairan_hemodialisa.*, reg_periksa.no_rkm_medis, reg_periksa.umurdaftar, reg_periksa.sttsumur, " +
+            "pasien.nm_pasien, pasien.tgl_lahir, pasien.jk, petugas.nama from catatan_cairan_hemodialisa join reg_periksa on " +
+            "catatan_cairan_hemodialisa.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+            "join petugas on catatan_cairan_hemodialisa.nip = petugas.nip where catatan_cairan_hemodialisa.tgl_perawatan between ? and ? " +
+            (TCari.getText().isBlank() ? "" : "and (catatan_cairan_hemodialisa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+            "pasien.nm_pasien like ? or catatan_cairan_hemodialisa.nip like ? or petugas.nama like ?) ") + "order by " +
+            "catatan_cairan_hemodialisa.tgl_perawatan, catatan_cairan_hemodialisa.jam_rawat"
+        )) {
+            ps.setString(1, Valid.getTglSmc(DTPCari1));
+            ps.setString(2, Valid.getTglSmc(DTPCari2));
+            if (!TCari.getText().isBlank()) {
+                ps.setString(3, "%" + TCari.getText() + "%");
+                ps.setString(4, "%" + TCari.getText() + "%");
+                ps.setString(5, "%" + TCari.getText() + "%");
+                ps.setString(6, "%" + TCari.getText() + "%");
+                ps.setString(7, "%" + TCari.getText() + "%");
             }
-                
-            try {
-                if(TCari.getText().trim().equals("")){
-                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                }else{
-                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    ps.setString(6,"%"+TCari.getText()+"%");
-                    ps.setString(7,"%"+TCari.getText()+"%");
-                }
-                    
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getDate("tgl_lahir"),
-                        rs.getDate("tgl_perawatan"),rs.getTime("jam_rawat"),rs.getString("minum"),rs.getString("infus"),rs.getString("tranfusi"),rs.getString("sisa_priming"),rs.getString("wash_out"),rs.getString("urine"),
-                        rs.getString("pendarahan"),rs.getString("muntah"),rs.getString("keterangan"),rs.getString("nip"),rs.getString("nama")
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {
+                        rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("umurdaftar") + " " + rs.getString("sttsumur"),
+                        rs.getString("jk"), rs.getDate("tgl_lahir"), rs.getDate("tgl_perawatan"), rs.getTime("jam_rawat"), rs.getString("minum"), rs.getString("infus"),
+                        rs.getString("tranfusi"), rs.getString("sisa_priming"), rs.getString("wash_out"), rs.getString("ttl_input"), rs.getString("urine"),
+                        rs.getString("pendarahan"), rs.getString("muntah"), rs.getString("ufg"), rs.getString("ttl_output"), rs.getString("balance"),
+                        rs.getString("keterangan"), rs.getString("nip"), rs.getString("nama")
                     });
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
     
     public void emptTeks() {
@@ -1527,12 +1623,17 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         Tranfusi.setText("");
         Priming.setText("");
         WashOut.setText("");
+        TtlInput.setText("");
         Urine.setText("");
         Pendarahan.setText("");
         Muntah.setText("");
+        UFG.setText("");
+        TtlOutput.setText("");
+        Balance.setText("");
         Keterangan.setText("");
         Tanggal.setDate(new Date());
         Minum.requestFocus();
+        tbObat.clearSelection();
     } 
 
     private void getData() {
@@ -1551,10 +1652,14 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             Tranfusi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Priming.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             WashOut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
-            Urine.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Pendarahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
-            Muntah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
-            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            TtlInput.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+            Urine.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            Pendarahan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            Muntah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            UFG.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            TtlOutput.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            Balance.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
         }
     }
@@ -1603,7 +1708,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,154));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,184));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
@@ -1643,85 +1748,56 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }
 
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            Date now = Calendar.getInstance().getTime();
+            if (ChkKejadian.isSelected()) {
+                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
                 
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkKejadian.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkKejadian.isSelected()==false){
-                    nilai_jam =Jam.getSelectedIndex();
-                    nilai_menit =Menit.getSelectedIndex();
-                    nilai_detik =Detik.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                Jam.setSelectedItem(jam);
-                Menit.setSelectedItem(menit);
-                Detik.setSelectedItem(detik);
+                Tanggal.setDate(now);
+                Jam.setSelectedItem(jam.substring(0, 2));
+                Menit.setSelectedItem(jam.substring(3, 5));
+                Detik.setSelectedItem(jam.substring(6, 8));
             }
         };
-        // Timer
+
         new Timer(1000, taskPerformer).start();
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("catatan_cairan_hemodialisa","tgl_perawatan=? and jam_rawat=? and no_rawat=?","no_rawat=?,tgl_perawatan=?,jam_rawat=?,minum=?,infus=?,"+
-            "tranfusi=?,sisa_priming=?,wash_out=?,urine=?,pendarahan=?,muntah=?,keterangan=?,nip=?",16,new String[]{
-            TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-            Minum.getText(),Infus.getText(),Tranfusi.getText(),Priming.getText(),WashOut.getText(),Urine.getText(),Pendarahan.getText(),Muntah.getText(),
-            Keterangan.getText(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
-        })==true){
-            tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
-            tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
-            tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
-            tbObat.setValueAt(Umur.getText(),tbObat.getSelectedRow(),3);
-            tbObat.setValueAt(JK.getText(),tbObat.getSelectedRow(),4);
-            tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),5);
-            tbObat.setValueAt(Valid.SetTgl(Tanggal.getSelectedItem()+""),tbObat.getSelectedRow(),6);
-            tbObat.setValueAt(Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),tbObat.getSelectedRow(),7);
-            tbObat.setValueAt(Minum.getText(),tbObat.getSelectedRow(),8);
-            tbObat.setValueAt(Infus.getText(),tbObat.getSelectedRow(),9);
-            tbObat.setValueAt(Tranfusi.getText(),tbObat.getSelectedRow(),10);
-            tbObat.setValueAt(Priming.getText(),tbObat.getSelectedRow(),11);
-            tbObat.setValueAt(WashOut.getText(),tbObat.getSelectedRow(),12);
-            tbObat.setValueAt(Urine.getText(),tbObat.getSelectedRow(),13);
-            tbObat.setValueAt(Pendarahan.getText(),tbObat.getSelectedRow(),14);
-            tbObat.setValueAt(Muntah.getText(),tbObat.getSelectedRow(),15);
-            tbObat.setValueAt(Keterangan.getText(),tbObat.getSelectedRow(),16);
-            tbObat.setValueAt(NIP.getText(),tbObat.getSelectedRow(),17);
-            tbObat.setValueAt(NamaPetugas.getText(),tbObat.getSelectedRow(),18);
+        if (Sequel.mengupdatetfSmc("catatan_cairan_hemodialisa",
+            "no_rawat = ?, tgl_perawatan = ?, jam_rawat = ?, minum = ?, " +
+            "infus = ?, tranfusi = ?, sisa_priming = ?, wash_out = ?, " +
+            "urine = ?, pendarahan = ?, muntah = ?, keterangan = ?, " +
+            "nip = ?, ttl_input = ?, ufg = ?, ttl_output = ?, balance = ?",
+            "no_rawat = ? and tgl_perawatan = ? and jam_rawat = ?",
+            TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(), Tranfusi.getText(),
+            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), NIP.getText(),
+            TtlInput.getText(), UFG.getText(), TtlOutput.getText(), Balance.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
+            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()
+        )) {
+            tbObat.setValueAt(TNoRw.getText(), tbObat.getSelectedRow(), 0);
+            tbObat.setValueAt(TNoRM.getText(), tbObat.getSelectedRow(), 1);
+            tbObat.setValueAt(TPasien.getText(), tbObat.getSelectedRow(), 2);
+            tbObat.setValueAt(Umur.getText(), tbObat.getSelectedRow(), 3);
+            tbObat.setValueAt(JK.getText(), tbObat.getSelectedRow(), 4);
+            tbObat.setValueAt(TglLahir.getText(), tbObat.getSelectedRow(), 5);
+            tbObat.setValueAt(Valid.getTglSmc(Tanggal), tbObat.getSelectedRow(), 6);
+            tbObat.setValueAt(Valid.getJamSmc(Jam, Menit, Detik), tbObat.getSelectedRow(), 7);
+            tbObat.setValueAt(Minum.getText(), tbObat.getSelectedRow(), 8);
+            tbObat.setValueAt(Infus.getText(), tbObat.getSelectedRow(), 9);
+            tbObat.setValueAt(Tranfusi.getText(), tbObat.getSelectedRow(), 10);
+            tbObat.setValueAt(Priming.getText(), tbObat.getSelectedRow(), 11);
+            tbObat.setValueAt(WashOut.getText(), tbObat.getSelectedRow(), 12);
+            tbObat.setValueAt(TtlInput.getText(), tbObat.getSelectedRow(), 13);
+            tbObat.setValueAt(Urine.getText(), tbObat.getSelectedRow(), 14);
+            tbObat.setValueAt(Pendarahan.getText(), tbObat.getSelectedRow(), 15);
+            tbObat.setValueAt(Muntah.getText(), tbObat.getSelectedRow(), 16);
+            tbObat.setValueAt(UFG.getText(), tbObat.getSelectedRow(), 17);
+            tbObat.setValueAt(TtlOutput.getText(), tbObat.getSelectedRow(), 18);
+            tbObat.setValueAt(Balance.getText(), tbObat.getSelectedRow(), 18);
+            tbObat.setValueAt(Keterangan.getText(), tbObat.getSelectedRow(), 20);
+            tbObat.setValueAt(NIP.getText(), tbObat.getSelectedRow(), 21);
+            tbObat.setValueAt(NamaPetugas.getText(), tbObat.getSelectedRow(), 22);
             emptTeks();
         }
     }
@@ -1739,21 +1815,25 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     }
 
     private void simpan() {
-        if(Sequel.menyimpantf("catatan_cairan_hemodialisa","?,?,?,?,?,?,?,?,?,?,?,?,?","Data",13,new String[]{
-                TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                Minum.getText(),Infus.getText(),Tranfusi.getText(),Priming.getText(),WashOut.getText(),Urine.getText(),Pendarahan.getText(),Muntah.getText(),
-                Keterangan.getText(),NIP.getText()
-        })==true){
-            tabMode.addRow(new Object[]{
-                TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Umur.getText(),JK.getText(),TglLahir.getText(),
-                Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                Minum.getText(),Infus.getText(),Tranfusi.getText(),Priming.getText(),WashOut.getText(),Urine.getText(),Pendarahan.getText(),Muntah.getText(),
-                Keterangan.getText(),NIP.getText(),NamaPetugas.getText()
+        if (Sequel.menyimpantfSmc("catatan_cairan_hemodialisa", null,
+            TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(), Tranfusi.getText(),
+            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), NIP.getText(),
+            TtlInput.getText(), UFG.getText(), TtlOutput.getText(), Balance.getText()
+        )) {
+            tabMode.addRow(new Object[] {
+                TNoRw.getText(), TNoRM.getText(), TPasien.getText(), Umur.getText(), JK.getText(), TglLahir.getText(),
+                Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(),
+                Tranfusi.getText(), Priming.getText(), WashOut.getText(), TtlInput.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), UFG.getText(), TtlOutput.getText(),
+                Balance.getText(), Keterangan.getText(), NIP.getText(), NamaPetugas.getText()
             });
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(String.valueOf(tabMode.getRowCount()));
             emptTeks();
-        } 
+        }
     }
-    
-    
+
+    private void hitungBalanceCairan() {
+        TtlInput.setText(String.valueOf(Valid.SetAngka(Minum.getText().trim()) + Valid.SetAngka(Infus.getText().trim()) + Valid.SetAngka(Tranfusi.getText().trim()) + Valid.SetAngka(Priming.getText().trim()) + Valid.SetAngka(WashOut.getText().trim())));
+        TtlOutput.setText(String.valueOf(Valid.SetAngka(Urine.getText().trim()) + Valid.SetAngka(Pendarahan.getText().trim()) + Valid.SetAngka(Muntah.getText().trim()) + Valid.SetAngka(UFG.getText().trim())));
+        Balance.setText(String.valueOf(Valid.SetAngka(TtlInput.getText().trim()) - Valid.SetAngka(TtlOutput.getText().trim())));
+    }
 }

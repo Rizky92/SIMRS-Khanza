@@ -93,7 +93,11 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     case "F": panelBiasa1.add(AntrianF, gbc); cmbhuruf.addItem(huruf); ++col; break;
                 }
             }
-            if (col > 3) {
+            if (col <= 1) {
+                panelBiasa1.setVisible(false);
+            } else if (col > 1) {
+                panelBiasa1.setVisible(true);
+            } else if (col > 3) {
                 panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getWidth(), 240));
             }
             repaint();
@@ -455,15 +459,16 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        int offset = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
         if (ANTRIANPREFIXHURUF) {
             isTampilSmc();
-            DlgDisplaySMC.setSize(screen.width, screen.height);
+            DlgDisplaySMC.setSize(screen.width - 4, screen.height - offset);
             DlgDisplaySMC.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
             DlgDisplaySMC.setAlwaysOnTop(false);
             DlgDisplaySMC.setVisible(true);
         } else {
             isTampil();
-            DlgDisplay.setSize(screen.width, screen.height);
+            DlgDisplay.setSize(screen.width - 4, screen.height - offset);
             DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
             DlgDisplay.setAlwaysOnTop(false);
             DlgDisplay.setVisible(true);
@@ -703,7 +708,13 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                             DisplayLoket.setText(loket);
                             System.out.print("Loket : " + loket + "; ");
                             System.out.println("Antrian : " + antri);
-                            i = Integer.parseInt(antri.substring(1)) + 1;
+                            if (ANTRIANPREFIXHURUF) {
+                                if (cmbhuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
+                                    i = Integer.parseInt(antri.substring(1)) + 1;
+                                }
+                            } else {
+                                i = Integer.parseInt(antri) + 1;
+                            }
                             Antrian.setText("" + i);
                         }
                     }

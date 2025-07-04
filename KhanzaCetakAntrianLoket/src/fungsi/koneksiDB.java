@@ -66,11 +66,11 @@ public class koneksiDB {
     }
     
     public static String PRINTERCETAKANTREAN() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+        try (FileInputStream fs = new FileInputStream("setting/cetakantrean.xml")) {
             prop.loadFromXML(fs);
             return prop.getProperty("PRINTERCETAKANTREAN");
         } catch (Exception e) {
-            try (FileInputStream fs2 = new FileInputStream("setting/cetakantrean.xml")) {
+            try (FileInputStream fs2 = new FileInputStream("setting/database.xml")) {
                 prop.loadFromXML(fs2);
                 return prop.getProperty("PRINTERCETAKANTREAN");
             } catch (Exception e2) {

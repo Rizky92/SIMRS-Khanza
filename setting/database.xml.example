@@ -21,10 +21,11 @@
     <entry key="KOMPILASIBERKASAPLIKASIPDF"></entry>
     <entry key="KOMPILASIBERKASMAXMEMORY">200</entry>
     <entry key="AKTIFKANFILTERRESEPPERJENISOBAT">88tE0ZUstuza/UrtfBYkFA==</entry>
+    <entry key="NOTIFWAFARMASIKEPASIEN">no</entry>
     <entry key="ANTRIANPREFIXHURUF">yes</entry>
     <entry key="PREFIXHURUFAKTIF">A, B, C, D, E, F</entry>
+    <entry key="BOOKINGLANGSUNGREGISTRASI">yes</entry>
 
-    <entry key="NOTIFWAFARMASIKEPASIEN">no</entry>
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="WANAME">AZHNccBwSmSho84f+X8GyQ==</entry>
@@ -222,4 +223,9 @@
     <entry key="URLAPISERTISIGN">https://api-stag.sertisign.id/v2/poa/signing-qr</entry>
     <entry key="APIKEYSERTISIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLDOKUMENSERTISIGN">https://sertisign.com/webhook</entry>
+    <entry key="HOSTDUTAPARKING">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASEDUTAPARKING">PvMIHTTN+Nnyzfbt2jiUvg==</entry>
+    <entry key="PORTDUTAPARKING">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERDUTAPARKING">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 </properties>
