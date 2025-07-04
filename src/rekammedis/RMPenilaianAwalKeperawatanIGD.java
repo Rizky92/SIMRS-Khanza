@@ -79,7 +79,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             "Pekerjaan","Pembayaran","Nilai-nilai Kebudayaan","Ket. Nilai-nilai Kebudayaan","Pendidikan Pasien","Pendidikan PJ","Ket. Pendidikan PJ",
             "Edukasi Diberikan Kepada","Ket. Edukasi Diberikan Kepada","Kemampuan Aktifitas Sehari-hari","Aktifitas","Alat bantu","Ket. Alat bantu",
             "Tingkat Nyeri","Provokes","Ket. Provokes","Kualitas","Ket. Kualitas","Lokasi","Menyebar","Skala Nyeri","Durasi","Nyeri Hilang","Ket. Hilang Nyeri","Lapor Ke Dokter",
-            "Jam Lapor","Cara Berjalan A","Cara Berjalan B","Cara Berjalan C","Hasil Penilaian Resiko Jatuh","Lapor Dokter","Ket. Lapor","Rencana","NIP","Nama Petugas"
+            "Jam Lapor","Cara Berjalan A","Cara Berjalan B","Cara Berjalan C","Hasil Pengkajian Resiko Jatuh","Lapor Dokter","Ket. Lapor","Rencana","NIP","Nama Petugas"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -764,7 +764,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Penilaian Awal Keperawatan IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pengkajian Awal Keperawatan IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -1542,7 +1542,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         jLabel97.setBounds(381, 980, 190, 23);
 
         jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel63.setText("VI. PENILAIAN RESIKO JATUH (GET UP AND GO)");
+        jLabel63.setText("VI. PENGKAJIAN RESIKO JATUH (GET UP AND GO)");
         jLabel63.setName("jLabel63"); // NOI18N
         FormInput.add(jLabel63);
         jLabel63.setBounds(10, 880, 380, 23);
@@ -2408,7 +2408,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
 
-        TabRawat.addTab("Input Penilaian", internalFrame2);
+        TabRawat.addTab("Input Pengkajian", internalFrame2);
 
         internalFrame3.setBorder(null);
         internalFrame3.setName("internalFrame3"); // NOI18N
@@ -2607,7 +2607,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
 
         internalFrame3.add(PanelAccor, java.awt.BorderLayout.EAST);
 
-        TabRawat.addTab("Data Penilaian", internalFrame3);
+        TabRawat.addTab("Data Pengkajian", internalFrame3);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
@@ -2825,7 +2825,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
                             "<td valign='middle' bgcolor='#FFFAFA' align='center' width='14%'><b>III. RIWAYAT PSIKOLOGIS - SOSIAL - EKONOMI - BUDAYA - SPIRITUAL</b></td>"+
                             "<td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'><b>IV. PENGKAJIAN FUNGSI</b></td>"+
                             "<td valign='middle' bgcolor='#FFFAFA' align='center' width='12%'><b>V. SKALA NYERI</b></td>"+
-                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='16%'><b>VI. PENILAIAN RESIKO JATUH (GET UP AND GO)</b></td>"+
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='16%'><b>VI. PENGKAJIAN RESIKO JATUH (GET UP AND GO)</b></td>"+
                             "<td valign='middle' bgcolor='#FFFAFA' align='center' width='11%'><b>MASALAH & RENCANA KEPERAWATAN</b></td>"+
                         "</tr>"
                     );
@@ -3114,7 +3114,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENILAIAN AWAL KEPERAWATAN IGD<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN IGD<br><br></font>"+        
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
@@ -3449,7 +3449,7 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
                 System.out.println("Notif : "+e);
             }
             param.put("rencana",masalahkeperawatanigd); 
-            Valid.MyReportqry("rptCetakPenilaianAwalKeperawatanIGD.jasper","report","::[ Laporan Penilaian Awal Keperawatan IGD ]::",
+            Valid.MyReportqry("rptCetakPenilaianAwalKeperawatanIGD.jasper","report","::[ Laporan Pengkajian Awal Keperawatan IGD ]::",
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_igd.tanggal,penilaian_awal_keperawatan_igd.informasi,"+
                         "penilaian_awal_keperawatan_igd.keluhan_utama,penilaian_awal_keperawatan_igd.rpd,penilaian_awal_keperawatan_igd.rpo,penilaian_awal_keperawatan_igd.status_kehamilan,penilaian_awal_keperawatan_igd.gravida,penilaian_awal_keperawatan_igd.para,"+
                         "penilaian_awal_keperawatan_igd.abortus,penilaian_awal_keperawatan_igd.hpht,penilaian_awal_keperawatan_igd.tekanan,penilaian_awal_keperawatan_igd.pupil,penilaian_awal_keperawatan_igd.neurosensorik,penilaian_awal_keperawatan_igd.integumen,penilaian_awal_keperawatan_igd.turgor,"+ 

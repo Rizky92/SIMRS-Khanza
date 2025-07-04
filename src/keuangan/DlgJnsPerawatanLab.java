@@ -949,26 +949,24 @@ public final class DlgJnsPerawatanLab extends javax.swing.JDialog {
         if(tabMode.getRowCount()!=0){
             if (! kodeTindakanDicopy.isBlank()) {
                 if (kodeTindakanDicopy.equals(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString())) {
-                    JOptionPane.showMessageDialog(rootPane, "Maaf, tarif yang dipilih tidak boleh sama...!!!");
                     kodeTindakanDicopy = "";
+                    JOptionPane.showMessageDialog(rootPane, "Maaf, tarif yang dipilih tidak boleh sama...!!!");
                 } else {
-                    try (PreparedStatement ps = koneksi.prepareStatement(
+                    if (Sequel.executeRawSmc(
                         "insert into template_laboratorium (kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, " +
                         "nilai_rujukan_pa, bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut) " +
                         "select ? as kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld, nilai_rujukan_la, nilai_rujukan_pd, nilai_rujukan_pa, " +
                         "bagian_rs, bhp, bagian_perujuk, bagian_dokter, bagian_laborat, kso, menejemen, biaya_item, urut " +
-                        "from template_laboratorium where kd_jenis_prw = ?"
+                        "from template_laboratorium where kd_jenis_prw = ?",
+                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString(),
+                        kodeTindakanDicopy
                     )) {
-                        ps.setString(1, tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
-                        ps.setString(2, kodeTindakanDicopy);
-                        ps.executeUpdate();
-                        JOptionPane.showMessageDialog(rootPane, "Copy Template lab berhasil...!!!");
-                        kodeTindakanDicopy = "";
-                        tbJnsPerawatan.clearSelection();
-                    } catch (Exception e) {
-                        System.out.println("Notif : " + e);
-                        JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat mengcopy template lab...!!!\nPastikan data yang dicopy sudah benar.");
+                        JOptionPane.showMessageDialog(null, "Copy Template lab berhasil...!!!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengcopy template lab...!!!\nPastikan data yang dicopy sudah benar.");
                     }
+                    kodeTindakanDicopy = "";
+                    tbJnsPerawatan.clearSelection();
                 }
             } else {
                 try {

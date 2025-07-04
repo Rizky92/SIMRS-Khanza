@@ -42,7 +42,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="::[ Penilaian Awal Keperawatan Rawat Inap Neonatus ]::">
+            <TitledBorder title="::[ Pengkajian Awal Keperawatan Rawat Inap Neonatus ]::">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
@@ -245,8 +245,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Input Penilaian">
-                    <Property name="tabTitle" type="java.lang.String" value="Input Penilaian"/>
+                  <JTabbedPaneConstraints tabName="Input Pengkajian">
+                    <Property name="tabTitle" type="java.lang.String" value="Input Pengkajian"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -750,7 +750,7 @@
                         <Component class="widget.Label" name="jLabel271">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VII. PENILAIAN TINGKAT NYERI (SKALA NIPS)"/>
+                            <Property name="text" type="java.lang.String" value="VII. PENGKAJIAN TINGKAT NYERI (SKALA NIPS)"/>
                             <Property name="name" type="java.lang.String" value="jLabel271" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -7311,7 +7311,7 @@
                         <Component class="widget.Label" name="jLabel242">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VI. PENILAIAN RISIKO JATUH (SKALA HUMPTY DUMPTY)"/>
+                            <Property name="text" type="java.lang.String" value="VI. PENGKAJIAN RISIKO JATUH (SKALA HUMPTY DUMPTY)"/>
                             <Property name="name" type="java.lang.String" value="jLabel242" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -8323,8 +8323,8 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Data Penilaian">
-                    <Property name="tabTitle" type="java.lang.String" value="Data Penilaian"/>
+                  <JTabbedPaneConstraints tabName="Data Pengkajian">
+                    <Property name="tabTitle" type="java.lang.String" value="Data Pengkajian"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

@@ -891,7 +891,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     getData();
                                 }else{
                                     sukses=false;
-                                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                                     Sequel.RollBack();
                                 }
                                 Sequel.AutoComitTrue();
@@ -914,6 +913,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(sukses==true){
                     JOptionPane.showMessageDialog(null, "Proses simpan selesai...!!");
                     dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
             }
         }        
