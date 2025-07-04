@@ -246,7 +246,7 @@ public final class akses {
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
             layanan_program_kfr=false,skrining_hipertensi=false,skrining_kesehatan_penglihatan=false,catatan_observasi_hemodialisa=false,skrining_kesehatan_gigi_mulut_dewasa=false,
             skrining_risiko_kanker_serviks=false,catatan_cairan_hemodialisa=false,skrining_kesehatan_gigi_mulut_lansia=false,skrining_indra_pendengaran=false,
-            catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
+            catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,gabung_kamar_inap=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
@@ -1423,6 +1423,7 @@ public final class akses {
                         akses.duta_parkir_rekap_keluar=rs2.getBoolean("duta_parkir_rekap_keluar");
                         akses.surat_keterangan_layak_terbang=rs2.getBoolean("surat_keterangan_layak_terbang");
                         akses.bayar_beban_hutang_lain=rs2.getBoolean("bayar_beban_hutang_lain");
+                        akses.gabung_kamar_inap=rs2.getBoolean("gabung_kamar_inap");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2596,6 +2597,7 @@ public final class akses {
         akses.piutang_peminjaman_uang_belum_lunas=isadmin;
         akses.hasil_pemeriksaan_slit_lamp=isadmin;
         akses.hasil_pemeriksaan_oct=isadmin;
+        akses.gabung_kamar_inap=isadmin;
         akses.beban_hutang_lain=isadmin;
         akses.poli_asal_pasien_ranap=isadmin;
         akses.pemberi_hutang_lain=isadmin;
@@ -3772,6 +3774,7 @@ public final class akses {
     public static boolean getcatatan_pengkajian_paska_operasi(){return akses.catatan_pengkajian_paska_operasi;}
     public static boolean getskrining_frailty_syndrome(){return akses.skrining_frailty_syndrome;}
     public static boolean getsirkulasi_cssd(){return akses.sirkulasi_cssd;}
+    public static boolean getgabung_kamar_inap(){return akses.gabung_kamar_inap;}
     public static boolean getlama_pelayanan_cssd(){return akses.lama_pelayanan_cssd;}
     public static boolean getcatatan_observasi_bayi(){return akses.catatan_observasi_bayi;}
     public static boolean getriwayat_surat_peringatan(){return akses.riwayat_surat_peringatan;}
