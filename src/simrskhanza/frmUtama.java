@@ -1073,6 +1073,7 @@ import surat.SuratIndeks;
 import surat.SuratKeluar;
 import surat.SuratKeteranganBebasTBC;
 import surat.SuratKeteranganCovid;
+import surat.SuratKeteranganLayakTerbang;
 import surat.SuratKeteranganRawatInap;
 import surat.SuratKeteranganSehat;
 import surat.SuratKewaspadaanKesehatan;
@@ -22980,6 +22981,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnSuratKeteranganLayakTerbangActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratKeteranganLayakTerbang aplikasi=new SuratKeteranganLayakTerbang(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -23691,7 +23704,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
-            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking;
+            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang;
     
     public void isWall(){
         try{            
@@ -28997,6 +29010,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsurat_bebas_tato()==true){
                 Panelmenu.add(btnSuratBebasTato);
+                jmlmenu++;
+            }
+            
+            if(akses.getsurat_keterangan_layak_terbang()==true){
+                Panelmenu.add(btnSuratKeteranganLayakTerbang);
                 jmlmenu++;
             }
             
@@ -34643,6 +34661,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getsurat_bebas_tato()==true){
             Panelmenu.add(btnSuratBebasTato);
+            jmlmenu++;
+        }
+        
+        if(akses.getsurat_keterangan_layak_terbang()==true){
+            Panelmenu.add(btnSuratKeteranganLayakTerbang);
             jmlmenu++;
         }
         
@@ -42367,6 +42390,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getsurat_keterangan_layak_terbang()==true){
+            if(btnSuratKeteranganLayakTerbang.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratKeteranganLayakTerbang);
+                jmlmenu++;
+            }
+        }
+        
         if(akses.getsurat_kewaspadaan_kesehatan()==true){
             if(btnSuratKewaspadaanKesehatan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSuratKewaspadaanKesehatan);
@@ -48458,12 +48488,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnBebanHutangLain.addActionListener(this::btnBebanHutangLainActionPerformed);
         
         btnRekapKeluarDutaParking = new widget.ButtonBig();
-        btnRekapKeluarDutaParking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8333859_wish_list_checklist_icon.png"))); 
+        btnRekapKeluarDutaParking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/22989_cabriolet_car_mazda_red_transport_icon.png"))); 
         btnRekapKeluarDutaParking.setText("Rekap Keluar Duta Parking");
         btnRekapKeluarDutaParking.setIconTextGap(0);
         btnRekapKeluarDutaParking.setName("btnRekapKeluarDutaParking");
         btnRekapKeluarDutaParking.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapKeluarDutaParking.addActionListener(this::btnRekapKeluarDutaParkingActionPerformed);
+        
+        btnSuratKeteranganLayakTerbang = new widget.ButtonBig();
+        btnSuratKeteranganLayakTerbang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088199_plane_prohibit_travel_warning_icon.png"))); 
+        btnSuratKeteranganLayakTerbang.setText("Surat Keterangan Layak Terbang");
+        btnSuratKeteranganLayakTerbang.setIconTextGap(0);
+        btnSuratKeteranganLayakTerbang.setName("btnSuratKeteranganLayakTerbang");
+        btnSuratKeteranganLayakTerbang.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratKeteranganLayakTerbang.addActionListener(this::btnSuratKeteranganLayakTerbangActionPerformed);
     }
     
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
