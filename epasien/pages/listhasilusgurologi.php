@@ -16,7 +16,7 @@
                     <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <div class='card'>
                             <div class='header'>
-                                <h2><center>HASIL USG UROLOGI</center></h2>
+                                <h2><center>HASIL PEMERIKSAAN USG UROLOGI</center></h2>
                             </div>
                             <div class='body' align='center'>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
@@ -54,7 +54,7 @@
                 "select hasil_pemeriksaan_usg_urologi_gambar.photo from hasil_pemeriksaan_usg_urologi_gambar where hasil_pemeriksaan_usg_urologi_gambar.no_rawat='".$norawat."'"
             );
             if($rsquerygambarusg= mysqli_fetch_array($querygambarusg)){
-                $src = 'data: '.@mime_content_type("http://".host()."/webapps/hasilpemeriksaanusgurologi/".$rsquerygambarusg["photo"]).';base64,'.base64_encode(file_get_contents("http://".host()."/webapps/hasilpemeriksaanusgurologi/".$rsquerygambarusg["photo"]));
+                $src = 'data: image/jpeg;base64,'.base64_encode(file_get_contents("http://".host()."/webapps/hasilpemeriksaanusgurologi/".$rsquerygambarusg["photo"]));
                 echo "              <tr>
                                         <td valign='middle' colspan='3'><img alt='Gambar USG' src='$src' width='100%' height='500px'/></td>
                                     </tr>";

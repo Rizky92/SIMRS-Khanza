@@ -13,58 +13,99 @@ package khanzaantrianloket;
 
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.IOException;
+import fungsi.sekuel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
  * @author perpustakaan
  */
-public class DlgAntrian extends javax.swing.JDialog implements ActionListener{    
-    private final Connection koneksi = koneksiDB.condb();
-    private static final Properties prop = new Properties();
-    private String antri = "0", loket = "0", nol_detik, detik;
-    private PreparedStatement pshapus, pssimpan, pscari, psupdate;
-    private ResultSet rs;
+public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
+    private Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final boolean ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
+    private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
+    private final String ANTRIAN = koneksiDB.ANTRIAN();
+    private final SimpleDateFormat df = new SimpleDateFormat("s");
     private BackgroundMusic music;
-    private int nilai_detik;
-    private String[] urut={"","./suara/satu.mp3","./suara/dua.mp3","./suara/tiga.mp3","./suara/empat.mp3",
-                       "./suara/lima.mp3","./suara/enam.mp3","./suara/tujuh.mp3","./suara/delapan.mp3",
-                       "./suara/sembilan.mp3","./suara/sepuluh.mp3","./suara/sebelas.mp3"};
-        
+    private int i;
+    private String antri = "", loket = "";
+    private String[] urut = {"", "./suara/satu.mp3", "./suara/dua.mp3", "./suara/tiga.mp3", "./suara/empat.mp3", "./suara/lima.mp3", "./suara/enam.mp3", "./suara/tujuh.mp3", "./suara/delapan.mp3", "./suara/sembilan.mp3", "./suara/sepuluh.mp3", "./suara/sebelas.mp3"},
+                     urutsmc = {"./suarasmc/0.mp3", "./suarasmc/1.mp3", "./suarasmc/2.mp3", "./suarasmc/3.mp3", "./suarasmc/4.mp3", "./suarasmc/5.mp3", "./suarasmc/6.mp3", "./suarasmc/7.mp3", "./suarasmc/8.mp3", "./suarasmc/9.mp3"};
+
     /** Creates new form DlgBiling
      * @param parent
      * @param modal */
-    public DlgAntrian(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DlgAntrian() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
         
-        this.setSize(350,400);
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+        this.setSize(350, 400);
         
+        panelBiasa1.setVisible(ANTRIANPREFIXHURUF);
+        label3.setVisible(ANTRIANPREFIXHURUF);
+        cmbhuruf.setVisible(ANTRIANPREFIXHURUF);
+        
+        if (ANTRIANPREFIXHURUF) {
+            panelBiasa1.remove(AntrianA);
+            panelBiasa1.remove(AntrianB);
+            panelBiasa1.remove(AntrianC);
+            panelBiasa1.remove(AntrianD);
+            panelBiasa1.remove(AntrianE);
+            panelBiasa1.remove(AntrianF);
+            cmbhuruf.removeAllItems();
+            int col = 0;
+            java.awt.GridBagConstraints gbc;
+            for (String huruf : PREFIXHURUFAKTIF) {
+                gbc = new java.awt.GridBagConstraints();
+                gbc.fill = java.awt.GridBagConstraints.BOTH;
+                gbc.weightx = 1.0;
+                gbc.weighty = 1.0;
+                
+                switch (col) {
+                    case 0: gbc.gridx = 0; gbc.gridy = 0; break;
+                    case 1: gbc.gridx = 1; gbc.gridy = 0; break;
+                    case 2: gbc.gridx = 2; gbc.gridy = 0; break;
+                    case 3: gbc.gridx = 0; gbc.gridy = 1; break;
+                    case 4: gbc.gridx = 1; gbc.gridy = 1; break;
+                    case 5: gbc.gridx = 2; gbc.gridy = 1; break;
+                }
+                
+                switch (huruf) {
+                    case "A": panelBiasa1.add(AntrianA, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "B": panelBiasa1.add(AntrianB, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "C": panelBiasa1.add(AntrianC, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "D": panelBiasa1.add(AntrianD, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "E": panelBiasa1.add(AntrianE, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                    case "F": panelBiasa1.add(AntrianF, gbc); cmbhuruf.addItem(huruf); ++col; break;
+                }
+            }
+            if (col <= 1) {
+                panelBiasa1.setVisible(false);
+            } else if (col > 1) {
+                panelBiasa1.setVisible(true);
+            } else if (col > 3) {
+                panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getWidth(), 240));
+            }
+            repaint();
+        }
         jam();
-        javax.swing.Timer timer = new javax.swing.Timer(100, this);
+        Timer timer = new Timer(100, this);
         timer.start();
     }
-    int i;
-    
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -74,6 +115,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         DlgDisplay = new javax.swing.JDialog();
         internalFrame5 = new widget.InternalFrame();
@@ -83,26 +125,39 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1 = new widget.InternalFrame();
         labelantri1 = new widget.Label();
         labelLoket = new widget.Label();
+        DlgDisplaySMC = new javax.swing.JDialog();
+        internalFrame6 = new widget.InternalFrame();
+        paneliklan1 = new usu.widget.glass.PanelGlass();
+        internalFrame2 = new widget.InternalFrame();
+        DisplayAntrian = new widget.Label();
+        DisplayLoket = new widget.Label();
+        panelBiasa1 = new widget.PanelBiasa();
+        AntrianA = new widget.Label();
+        AntrianB = new widget.Label();
+        AntrianC = new widget.Label();
+        AntrianD = new widget.Label();
+        AntrianE = new widget.Label();
+        AntrianF = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         BtnDisplay = new widget.Button();
         BtnKeluar = new widget.Button();
         panelisi5 = new widget.panelisi();
-        BtnAntri1 = new widget.Button();
-        BtnBatal1 = new widget.Button();
+        BtnAntri = new widget.Button();
+        BtnReset = new widget.Button();
         label1 = new widget.Label();
         cmbloket = new widget.ComboBox();
         label2 = new widget.Label();
         Antrian = new widget.TextBox();
-        BtnBatal2 = new widget.Button();
+        BtnStop = new widget.Button();
+        label3 = new widget.Label();
+        cmbhuruf = new widget.ComboBox();
 
         DlgDisplay.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgDisplay.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        DlgDisplay.setName("DlgDisplay"); // NOI18N
 
         internalFrame5.setBackground(new java.awt.Color(250, 255, 250));
         internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ Informasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
-        internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setPreferredSize(new java.awt.Dimension(500, 110));
         internalFrame5.setWarnaBawah(new java.awt.Color(250, 255, 250));
         internalFrame5.setLayout(new java.awt.BorderLayout());
@@ -117,7 +172,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         internalFrame5.add(paneliklan, java.awt.BorderLayout.CENTER);
 
         panelruntext.setBackground(new java.awt.Color(250, 255, 250));
-        panelruntext.setName("panelruntext"); // NOI18N
         panelruntext.setPreferredSize(new java.awt.Dimension(100, 100));
         panelruntext.setLayout(new java.awt.BorderLayout());
 
@@ -125,7 +179,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         labelruntext.setForeground(new java.awt.Color(50, 100, 50));
         labelruntext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelruntext.setFont(new java.awt.Font("Tahoma", 0, 35)); // NOI18N
-        labelruntext.setName("labelruntext"); // NOI18N
         labelruntext.setPreferredSize(new java.awt.Dimension(853, 50));
         panelruntext.add(labelruntext, java.awt.BorderLayout.CENTER);
 
@@ -135,8 +188,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         form1.setBackground(new java.awt.Color(250, 255, 250));
         form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), " Antrian Registrasi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 45), new java.awt.Color(50, 100, 50))); // NOI18N
-        form1.setName("form1"); // NOI18N
-        form1.setPreferredSize(new java.awt.Dimension(550, 150));
+        form1.setPreferredSize(new java.awt.Dimension(650, 150));
         form1.setWarnaBawah(new java.awt.Color(250, 255, 250));
         form1.setLayout(new java.awt.GridLayout(2, 0));
 
@@ -146,7 +198,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         labelantri1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelantri1.setText("1");
         labelantri1.setFont(new java.awt.Font("Tahoma", 1, 200)); // NOI18N
-        labelantri1.setName("labelantri1"); // NOI18N
         labelantri1.setPreferredSize(new java.awt.Dimension(300, 50));
         form1.add(labelantri1);
 
@@ -157,31 +208,168 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         labelLoket.setText("1");
         labelLoket.setFocusable(false);
         labelLoket.setFont(new java.awt.Font("Tahoma", 1, 200)); // NOI18N
-        labelLoket.setName("labelLoket"); // NOI18N
         labelLoket.setPreferredSize(new java.awt.Dimension(150, 50));
         form1.add(labelLoket);
 
         DlgDisplay.getContentPane().add(form1, java.awt.BorderLayout.LINE_END);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        DlgDisplaySMC.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1366, 768));
+        DlgDisplaySMC.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+
+        internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
+        internalFrame6.setBorder(null);
+        internalFrame6.setPreferredSize(new java.awt.Dimension(500, 110));
+        internalFrame6.setWarnaBawah(new java.awt.Color(250, 255, 250));
+        internalFrame6.setLayout(new java.awt.BorderLayout(8, 0));
+
+        paneliklan1.setBackground(new java.awt.Color(250, 255, 250));
+        paneliklan1.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/coba.gif"))); // NOI18N
+        paneliklan1.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
+        paneliklan1.setPreferredSize(new java.awt.Dimension(200, 140));
+        paneliklan1.setRound(false);
+        paneliklan1.setWarna(new java.awt.Color(250, 255, 250));
+        paneliklan1.setLayout(null);
+        internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
+
+        internalFrame2.setPreferredSize(new java.awt.Dimension(550, 150));
+        internalFrame2.setLayout(new java.awt.GridLayout(2, 1));
+
+        DisplayAntrian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "No. Antrian", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
+        DisplayAntrian.setForeground(new java.awt.Color(50, 100, 50));
+        DisplayAntrian.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DisplayAntrian.setFont(new java.awt.Font("Tahoma", 1, 108)); // NOI18N
+        DisplayAntrian.setPreferredSize(new java.awt.Dimension(186, 200));
+        internalFrame2.add(DisplayAntrian);
+
+        DisplayLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "Loket", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
+        DisplayLoket.setForeground(new java.awt.Color(50, 100, 50));
+        DisplayLoket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DisplayLoket.setFont(new java.awt.Font("Tahoma", 1, 108)); // NOI18N
+        DisplayLoket.setPreferredSize(new java.awt.Dimension(186, 200));
+        internalFrame2.add(DisplayLoket);
+
+        internalFrame6.add(internalFrame2, java.awt.BorderLayout.EAST);
+
+        panelBiasa1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Antrian Terakhir", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 30), new java.awt.Color(60, 130, 90))); // NOI18N
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(120, 160));
+        java.awt.GridBagLayout panelBiasa1Layout = new java.awt.GridBagLayout();
+        panelBiasa1Layout.columnWidths = new int[] {1, 1, 1};
+        panelBiasa1Layout.rowHeights = new int[] {1, 1};
+        panelBiasa1.setLayout(panelBiasa1Layout);
+
+        AntrianA.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianA.setText("A");
+        AntrianA.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianA.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianA.setMaximumSize(null);
+        AntrianA.setMinimumSize(null);
+        AntrianA.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianA, gridBagConstraints);
+
+        AntrianB.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianB.setText("B");
+        AntrianB.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianB.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianB.setMaximumSize(null);
+        AntrianB.setMinimumSize(null);
+        AntrianB.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianB, gridBagConstraints);
+
+        AntrianC.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianC.setText("C");
+        AntrianC.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianC.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianC.setMaximumSize(null);
+        AntrianC.setMinimumSize(null);
+        AntrianC.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianC, gridBagConstraints);
+
+        AntrianD.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianD.setText("D");
+        AntrianD.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianD.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianD.setMaximumSize(null);
+        AntrianD.setMinimumSize(null);
+        AntrianD.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianD, gridBagConstraints);
+
+        AntrianE.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianE.setText("E");
+        AntrianE.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianE.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianE.setMaximumSize(null);
+        AntrianE.setMinimumSize(null);
+        AntrianE.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianE, gridBagConstraints);
+
+        AntrianF.setForeground(new java.awt.Color(60, 130, 90));
+        AntrianF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AntrianF.setText("F");
+        AntrianF.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AntrianF.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
+        AntrianF.setMaximumSize(null);
+        AntrianF.setMinimumSize(null);
+        AntrianF.setPreferredSize(new java.awt.Dimension(1, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBiasa1.add(AntrianF, gridBagConstraints);
+
+        internalFrame6.add(panelBiasa1, java.awt.BorderLayout.PAGE_END);
+
+        DlgDisplaySMC.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(350, 400));
+        setPreferredSize(new java.awt.Dimension(350, 400));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
         });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Antrian Registrasi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
-        internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
-        panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setPreferredSize(new java.awt.Dimension(55, 55));
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
@@ -190,13 +378,8 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         BtnDisplay.setText("Display");
         BtnDisplay.setToolTipText("Alt+D");
         BtnDisplay.setIconTextGap(3);
-        BtnDisplay.setName("BtnDisplay"); // NOI18N
         BtnDisplay.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnDisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDisplayActionPerformed(evt);
-            }
-        });
+        BtnDisplay.addActionListener(this::BtnDisplayActionPerformed);
         panelisi1.add(BtnDisplay);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
@@ -204,85 +387,68 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setIconTextGap(3);
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
+        BtnKeluar.addActionListener(this::BtnKeluarActionPerformed);
         panelisi1.add(BtnKeluar);
 
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
-        panelisi5.setName("panelisi5"); // NOI18N
         panelisi5.setPreferredSize(new java.awt.Dimension(12, 44));
         panelisi5.setLayout(null);
 
-        BtnAntri1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
-        BtnAntri1.setMnemonic('7');
-        BtnAntri1.setText("Antri");
-        BtnAntri1.setToolTipText("Alt+7");
-        BtnAntri1.setIconTextGap(3);
-        BtnAntri1.setName("BtnAntri1"); // NOI18N
-        BtnAntri1.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAntri1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAntri1ActionPerformed(evt);
-            }
-        });
-        panelisi5.add(BtnAntri1);
-        BtnAntri1.setBounds(20, 60, 100, 30);
+        BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
+        BtnAntri.setMnemonic('7');
+        BtnAntri.setText("Antri");
+        BtnAntri.setToolTipText("Alt+7");
+        BtnAntri.setIconTextGap(3);
+        BtnAntri.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnAntri.addActionListener(this::BtnAntriActionPerformed);
+        panelisi5.add(BtnAntri);
+        BtnAntri.setBounds(20, 90, 100, 30);
 
-        BtnBatal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnBatal1.setMnemonic('8');
-        BtnBatal1.setText("Reset");
-        BtnBatal1.setToolTipText("Alt+8");
-        BtnBatal1.setIconTextGap(3);
-        BtnBatal1.setName("BtnBatal1"); // NOI18N
-        BtnBatal1.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBatal1ActionPerformed(evt);
-            }
-        });
-        panelisi5.add(BtnBatal1);
-        BtnBatal1.setBounds(130, 60, 100, 30);
+        BtnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnReset.setMnemonic('8');
+        BtnReset.setText("Reset");
+        BtnReset.setToolTipText("Alt+8");
+        BtnReset.setIconTextGap(3);
+        BtnReset.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnReset.addActionListener(this::BtnResetActionPerformed);
+        panelisi5.add(BtnReset);
+        BtnReset.setBounds(130, 90, 100, 30);
 
         label1.setText("Antrian :");
-        label1.setName("label1"); // NOI18N
         panelisi5.add(label1);
         label1.setBounds(145, 12, 60, 23);
 
         cmbloket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cmbloket.setName("cmbloket"); // NOI18N
         panelisi5.add(cmbloket);
         cmbloket.setBounds(65, 12, 60, 23);
 
         label2.setText("Loket :");
-        label2.setName("label2"); // NOI18N
         panelisi5.add(label2);
         label2.setBounds(0, 12, 60, 23);
 
         Antrian.setText("1");
-        Antrian.setName("Antrian"); // NOI18N
         panelisi5.add(Antrian);
         Antrian.setBounds(210, 12, 60, 24);
 
-        BtnBatal2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal2.setMnemonic('8');
-        BtnBatal2.setText("Stop");
-        BtnBatal2.setToolTipText("Alt+8");
-        BtnBatal2.setIconTextGap(3);
-        BtnBatal2.setName("BtnBatal2"); // NOI18N
-        BtnBatal2.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBatal2ActionPerformed(evt);
-            }
-        });
-        panelisi5.add(BtnBatal2);
-        BtnBatal2.setBounds(20, 100, 100, 30);
+        BtnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnStop.setMnemonic('8');
+        BtnStop.setText("Stop");
+        BtnStop.setToolTipText("Alt+8");
+        BtnStop.setIconTextGap(3);
+        BtnStop.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnStop.addActionListener(this::BtnStopActionPerformed);
+        panelisi5.add(BtnStop);
+        BtnStop.setBounds(20, 130, 100, 30);
+
+        label3.setText("Huruf :");
+        panelisi5.add(label3);
+        label3.setBounds(0, 42, 60, 23);
+
+        cmbhuruf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", " " }));
+        panelisi5.add(cmbhuruf);
+        cmbhuruf.setBounds(65, 42, 60, 23);
 
         internalFrame1.add(panelisi5, java.awt.BorderLayout.CENTER);
 
@@ -293,289 +459,318 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        isTampil();
-        DlgDisplay.setSize(screen.width, screen.height);
-        DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        DlgDisplay.setAlwaysOnTop(false);
-        DlgDisplay.setVisible(true);
+        int offset = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
+        if (ANTRIANPREFIXHURUF) {
+            isTampilSmc();
+            DlgDisplaySMC.setSize(screen.width - 4, screen.height - offset);
+            DlgDisplaySMC.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+            DlgDisplaySMC.setAlwaysOnTop(false);
+            DlgDisplaySMC.setVisible(true);
+        } else {
+            isTampil();
+            DlgDisplay.setSize(screen.width - 4, screen.height - offset);
+            DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+            DlgDisplay.setAlwaysOnTop(false);
+            DlgDisplay.setVisible(true);
+        }
     }//GEN-LAST:event_BtnDisplayActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
-    private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
-        try {
-            pshapus = koneksi.prepareStatement("delete from antriloket");
-            try {
-                pshapus.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (pshapus != null) {
-                    pshapus.close();
-                }
-            }
+    private void BtnAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntriActionPerformed
+        Sequel.menghapusSmc("antriloketsmc");
+        Sequel.executeRawSmc(
+            "insert into antriloketsmc values (?, concat(?, lpad(?, 3, '0')))",
+            cmbloket.getSelectedItem().toString(),
+            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
+            Antrian.getText().trim()
+        );
+        Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
+            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
+            Antrian.getText().trim()
+        );
+    }//GEN-LAST:event_BtnAntriActionPerformed
 
-            pssimpan = koneksi.prepareStatement("insert into antriloket values(?, ?)");
-            try {
-                pssimpan.setString(1, cmbloket.getSelectedItem().toString());
-                pssimpan.setString(2, Antrian.getText().trim());
-                pssimpan.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (pssimpan != null) {
-                    pssimpan.close();
-                }
-            }
-
-            psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
-            try {
-                psupdate.setInt(1, Integer.parseInt(Antrian.getText().trim()));
-                psupdate.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (psupdate != null) {
-                    psupdate.close();
-                }
-            }
-            System.out.println("Loket : " + cmbloket.getSelectedItem().toString() + " Antrian : " + Antrian.getText());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_BtnAntri1ActionPerformed
-
-    private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
+    private void BtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetActionPerformed
         Antrian.setText("1");
-    }//GEN-LAST:event_BtnBatal1ActionPerformed
+    }//GEN-LAST:event_BtnResetActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        System.exit(0);
-    }//GEN-LAST:event_formWindowClosed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
-    }//GEN-LAST:event_formWindowActivated
+    private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
+        Sequel.menghapusSmc("antriloketsmc");
+    }//GEN-LAST:event_BtnStopActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        BtnDisplayActionPerformed(null);
+        if (ANTRIAN.equals("player")) {
+            BtnDisplayActionPerformed(null);
+        }
     }//GEN-LAST:event_formWindowOpened
 
-    private void BtnBatal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal2ActionPerformed
-        try {
-            pshapus = koneksi.prepareStatement("delete from antriloket");
-            try {
-                pshapus.executeUpdate();
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-            } finally {
-                if (pshapus != null) {
-                    pshapus.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_BtnBatal2ActionPerformed
-
-
-
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgAntrian dialog = new DlgAntrian(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            DlgAntrian window = new DlgAntrian();
+            window.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
+                public void windowClosing(WindowEvent e) {
                     System.exit(0);
                 }
             });
-            dialog.setVisible(true);
+            window.setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Antrian;
-    private widget.Button BtnAntri1;
-    private widget.Button BtnBatal1;
-    private widget.Button BtnBatal2;
+    private widget.Label AntrianA;
+    private widget.Label AntrianB;
+    private widget.Label AntrianC;
+    private widget.Label AntrianD;
+    private widget.Label AntrianE;
+    private widget.Label AntrianF;
+    private widget.Button BtnAntri;
     private widget.Button BtnDisplay;
     private widget.Button BtnKeluar;
+    private widget.Button BtnReset;
+    private widget.Button BtnStop;
+    private widget.Label DisplayAntrian;
+    private widget.Label DisplayLoket;
     private javax.swing.JDialog DlgDisplay;
+    private javax.swing.JDialog DlgDisplaySMC;
+    private widget.ComboBox cmbhuruf;
     private widget.ComboBox cmbloket;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame5;
+    private widget.InternalFrame internalFrame6;
     private widget.Label label1;
     private widget.Label label2;
+    private widget.Label label3;
     private widget.Label labelLoket;
     private widget.Label labelantri1;
     private widget.Label labelruntext;
+    private widget.PanelBiasa panelBiasa1;
     private usu.widget.glass.PanelGlass paneliklan;
+    private usu.widget.glass.PanelGlass paneliklan1;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     private javax.swing.JPanel panelruntext;
     // End of variables declaration//GEN-END:variables
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        paneliklan.repaint();
-        String oldText = labelruntext.getText();
-        String newText = oldText.substring(1) + oldText.substring(0, 1);
-        labelruntext.setText( newText );
+        if (ANTRIANPREFIXHURUF) {
+            paneliklan1.repaint();
+        } else {
+            paneliklan.repaint();
+            String oldText = labelruntext.getText();
+            if (oldText.length() > 0) {
+                String newText = oldText.substring(1) + oldText.substring(0, 1);
+                labelruntext.setText(newText);
+            }
+        }
     }
     
-    private  void isTampil(){
-        try{
-            ResultSet rs=koneksi.createStatement().executeQuery("select teks, aktifkan, gambar from runtext");
-            while(rs.next()){
-                labelruntext.setText(rs.getString(1));
-                if(rs.getString(2).equals("Yes")){
-                    Blob blob = rs.getBlob(3);
-                    paneliklan.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));                    
+    private void isTampil() {
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select aktifkan, gambar, teks from runtext")) {
+            if (rs.next()) {
+                if (rs.getString(1).equals("Yes")) {
+                    Blob gambar = rs.getBlob(2);
+                    paneliklan.setBackgroundImage(new ImageIcon(gambar.getBytes(1, (int) gambar.length())));
+                }
+                labelruntext.setText(rs.getString(3));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void isTampilSmc() {
+        try (ResultSet rs = koneksi.createStatement().executeQuery("select aktifkan, gambar from runtext")) {
+            if (rs.next()) {
+                if (rs.getString(1).equals("Yes")) {
+                    Blob gambar = rs.getBlob(2);
+                    paneliklan1.setBackgroundImage(new ImageIcon(gambar.getBytes(1, (int) gambar.length())));
                 }
             }
-        }catch(SQLException e){
-            System.out.println(e+"Error : Silahkan Set Aplikasi");
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-    } 
-    
-    private void panggil(int antrian){        
-        if (antrian < 12){
+    }
+
+    private void panggil(String nomor) {
+        int antrian = Integer.parseInt(nomor);
+        if (antrian < 12) {
             try {
                 music = new BackgroundMusic(urut[antrian]);
                 music.start();
-                Thread.sleep(1000);                
-            } catch (InterruptedException ex) {
-                System.out.println(ex);
-            }            
-        }else if (antrian < 20){
-            try {
-                music = new BackgroundMusic(urut[antrian-10]);
-                music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+        } else if (antrian < 20) {
+            try {
+                music = new BackgroundMusic(urut[antrian - 10]);
+                music.start();
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
             try {
                 music = new BackgroundMusic("./suara/belas.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-        }else if (antrian < 100){
+        } else if (antrian < 100) {
             try {
-                music = new BackgroundMusic(urut[antrian/10]);
+                music = new BackgroundMusic(urut[antrian / 10]);
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
             try {
                 music = new BackgroundMusic("./suara/puluh.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
-            panggil(antrian%10);
-        }else if (antrian < 200){
+            panggil(String.valueOf(antrian % 10));
+        } else if (antrian < 200) {
             try {
                 music = new BackgroundMusic("./suara/seratus.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
-            panggil(antrian-100);
-        }else if (antrian < 1000){
-            panggil(antrian/100);
-            
+            panggil(String.valueOf(antrian - 100));
+        } else if (antrian < 1000) {
+            panggil(String.valueOf(antrian / 100));
             try {
                 music = new BackgroundMusic("./suara/ratus.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
-            panggil(antrian%100);
+            panggil(String.valueOf(antrian % 100));
         }
     }
-    
-    private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                nol_detik = "";                
-                Date now = Calendar.getInstance().getTime();
-                nilai_detik = now.getSeconds();
-                if (nilai_detik <= 9) {
-                    nol_detik = "0";
+
+    private void panggilHurufSmc(String antrian) {
+        if (antrian.isBlank()) return;
+        try {
+            music = new BackgroundMusic("./suarasmc/" + antrian.substring(0, 1) + ".mp3");
+            music.start();
+            Thread.sleep(1000);
+            panggilAngkaSmc(antrian.substring(1));
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    private void panggilAngkaSmc(String antrian) {
+        if (antrian.isBlank()) return;
+        for (int i = 0; i < antrian.length(); i++) {
+            try {
+                music = new BackgroundMusic(urutsmc[Integer.parseInt(antrian.substring(i, i + 1))]);
+                music.start();
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+    }
+
+    private void jam() {
+        ActionListener taskPerformer = (ActionEvent event) -> {
+            Date now = Calendar.getInstance().getTime();
+            int s = Integer.parseInt(df.format(now));
+            
+            if (s % 5 == 0) {
+                antri = ""; loket = "";
+                try (ResultSet rs = koneksi.createStatement().executeQuery("select antrian, loket from antriloketsmc")) {
+                    if (rs.next()) {
+                        antri = rs.getString(1);
+                        loket = rs.getString(2);
+                        if (!antri.isBlank() && !loket.isBlank()) {
+                            labelantri1.setText(antri);
+                            labelLoket.setText(loket);
+                            DisplayAntrian.setText(antri);
+                            DisplayLoket.setText(loket);
+                            System.out.print("Loket : " + loket + "; ");
+                            System.out.println("Antrian : " + antri);
+                            if (ANTRIANPREFIXHURUF) {
+                                if (cmbhuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
+                                    i = Integer.parseInt(antri.substring(1)) + 1;
+                                }
+                            } else {
+                                i = Integer.parseInt(antri) + 1;
+                            }
+                            Antrian.setText("" + i);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                    if (e.getMessage().contains("connection closed.")) {
+                        koneksi = koneksiDB.condb();
+                    }
                 }
                 
-                detik = nol_detik + Integer.toString(nilai_detik);
-                System.out.println("detik : "+detik);
-                if(detik.equals("05")||detik.equals("10")||detik.equals("15")||detik.equals("20")||detik.equals("25")||detik.equals("30")||detik.equals("35")||detik.equals("40")||detik.equals("45")||detik.equals("50")||detik.equals("55")||detik.equals("00")){                    
-                    antri="";
-                    loket="";
-                    try {
-                        pscari=koneksi.prepareStatement("select antrian,loket from antriloket");
-                        try {
-                            rs=pscari.executeQuery();
-                            if(rs.next()){
-                                antri=rs.getString("antrian");
-                                loket=rs.getString("loket");
+                if (panelBiasa1.isVisible()) {
+                    try (ResultSet rs = koneksi.createStatement().executeQuery(
+                        "select left(nomor, 1), max(nomor) from antriloketcetak_smc where tanggal = current_date() and jam_panggil is not null group by left(nomor, 1)"
+                    )) {
+                        while (rs.next()) {
+                            switch (rs.getString(1)) {
+                                case "A": AntrianA.setText(rs.getString(2)); break;
+                                case "B": AntrianB.setText(rs.getString(2)); break;
+                                case "C": AntrianC.setText(rs.getString(2)); break;
+                                case "D": AntrianD.setText(rs.getString(2)); break;
+                                case "E": AntrianE.setText(rs.getString(2)); break;
+                                case "F": AntrianF.setText(rs.getString(2)); break;
                             }
-                        } catch (Exception z) {
-                            System.out.println("Notif : "+z);
-                        } finally{
-                            if(rs!=null){
-                                rs.close();
-                            }
-                            if(pscari!=null){
-                                pscari.close();
-                            }
-                        }  
-                    } catch (Exception ez) {
-                        System.out.println(ez);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.getMessage().contains("connection closed.")) {
+                            koneksi = koneksiDB.condb();
+                        }
                     }
-                    if(!antri.equals("")){
-                        Antrian.setText(antri);                    
-                        labelLoket.setText(loket);
-                        labelantri1.setText(antri);
-                        if(prop.getProperty("ANTRIAN").equals("player")){
-                            try {
-                                music=new BackgroundMusic("./suara/nomor-urut.mp3");
-                                music.start();
-                                Thread.sleep(1500);
-                                panggil(Integer.parseInt(antri));
-                                music=new BackgroundMusic("./suara/loket.mp3");
-                                music.start();
-                                Thread.sleep(1500);
-                                panggil(Integer.parseInt(loket));
-                            } catch (InterruptedException ex) {
-                               System.out.println(e);
-                            }
-                        }                               
-
-                        i=Integer.parseInt(antri)+1;
-                        Antrian.setText(""+i);
-                    }                          
+                }
+            }
+            
+            if (!antri.isBlank() && !loket.isBlank() && s % 5 == 1 && ANTRIAN.equals("player")) {
+                try {
+                    music = new BackgroundMusic("./suarasmc/nomor-urut.mp3");
+                    music.start();
+                    Thread.sleep(1500);
+                    if (ANTRIANPREFIXHURUF) {
+                        panggilHurufSmc(antri);
+                    } else {
+                        panggil(antri);
+                    }
+                    music = new BackgroundMusic("./suarasmc/loket.mp3");
+                    music.start();
+                    Thread.sleep(1500);
+                    if (ANTRIANPREFIXHURUF) {
+                        panggilAngkaSmc(loket);
+                    } else {
+                        panggil(loket);
+                    }
+                } catch (InterruptedException ex) {
+                    System.out.println(ex);
                 }
             }
         };
-        // Timer
         new Timer(1000, taskPerformer).start();
     }
-
 }

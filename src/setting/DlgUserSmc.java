@@ -739,7 +739,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 } else {
                     JCheckBox checkbox = new JCheckBox("Hanya copy hak akses yang aktif");
                     int reply = JOptionPane.showConfirmDialog(null, new Object[] {"Eeiiiiiits, udah bener belum data copy hak aksesnya..??", checkbox}, "Konfirmasi", JOptionPane.YES_NO_OPTION);
-                    boolean selected = checkbox.isSelected();
+                    boolean copyHakAksesAktif = checkbox.isSelected();
                     if (reply == JOptionPane.YES_OPTION) {
                         String sqlupdate = "";
                         try (PreparedStatement ps = koneksi.prepareStatement("select * from user where aes_decrypt(id_user, 'nur') = ?")) {
@@ -751,14 +751,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         try (ResultSet rs2 = ps2.executeQuery()) {
                                             while (rs2.next()) {
                                                 rs.getString(rs2.getString("column_name"));
-                                                if (!selected) {
-                                                    if (rs.wasNull()) {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = 'false', ";
-                                                    } else {
-                                                        sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
-                                                    }
+                                                if (rs.wasNull()) {
+                                                    sqlupdate = sqlupdate + rs2.getString("column_name") + " = 'false', ";
                                                 } else {
-                                                    if (rs.getString(rs2.getString("column_name")).equals("true")) {
+                                                    if (copyHakAksesAktif) {
+                                                        if (rs.getString(rs2.getString("column_name")).equals("true")) {
+                                                            sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
+                                                        }
+                                                    } else {
                                                         sqlupdate = sqlupdate + rs2.getString("column_name") + " = '" + rs.getString(rs2.getString("column_name")) + "', ";
                                                     }
                                                 }

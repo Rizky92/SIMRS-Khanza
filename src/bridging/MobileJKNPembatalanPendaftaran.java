@@ -449,8 +449,8 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
                    "referensi_mobilejkn_bpjs_batal.nomorreferensi LIKE ? OR referensi_mobilejkn_bpjs_batal.keterangan LIKE ?) ")+
                    "ORDER BY referensi_mobilejkn_bpjs_batal.tanggalbatal");
             try {
-                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+" 00:00:00"));
-                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+" 23:59:59"));
+                ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem().toString())+" 00:00:00.000");
+                ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem().toString())+" 23:59:59.999");
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
