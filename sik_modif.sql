@@ -929,6 +929,14 @@ ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpo` TEX
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rencana` TEXT DEFAULT NULL;
 
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `alat_bantu_dipakai` enum('Tidak Ada','Kacamata','Prothesa','Alat Bantu Dengar','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
+
 ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
