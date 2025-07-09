@@ -15,6 +15,7 @@ import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,6 +73,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             for (String huruf : PREFIXHURUFAKTIF) {
                 gbc = new java.awt.GridBagConstraints();
                 gbc.fill = java.awt.GridBagConstraints.BOTH;
+                gbc.ipady = 10;
                 gbc.weightx = 1.0;
                 gbc.weighty = 1.0;
                 
@@ -97,8 +99,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                 panelBiasa1.setVisible(false);
             } else if (col > 1) {
                 panelBiasa1.setVisible(true);
-            } else if (col > 3) {
-                panelBiasa1.setPreferredSize(new Dimension(panelBiasa1.getWidth(), 240));
             }
             repaint();
         }
@@ -232,7 +232,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         paneliklan1.setLayout(null);
         internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
 
-        internalFrame2.setPreferredSize(new java.awt.Dimension(550, 150));
+        internalFrame2.setPreferredSize(new java.awt.Dimension(500, 150));
         internalFrame2.setLayout(new java.awt.GridLayout(2, 1));
 
         DisplayAntrian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "No. Antrian", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
@@ -252,11 +252,8 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         internalFrame6.add(internalFrame2, java.awt.BorderLayout.EAST);
 
         panelBiasa1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Antrian Terakhir", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 30), new java.awt.Color(60, 130, 90))); // NOI18N
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(120, 160));
-        java.awt.GridBagLayout panelBiasa1Layout = new java.awt.GridBagLayout();
-        panelBiasa1Layout.columnWidths = new int[] {1, 1, 1};
-        panelBiasa1Layout.rowHeights = new int[] {1, 1};
-        panelBiasa1.setLayout(panelBiasa1Layout);
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(120, 200));
+        panelBiasa1.setLayout(new java.awt.GridBagLayout());
 
         AntrianA.setForeground(new java.awt.Color(60, 130, 90));
         AntrianA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -265,11 +262,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianA.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianA.setMaximumSize(null);
         AntrianA.setMinimumSize(null);
-        AntrianA.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianA.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianA, gridBagConstraints);
@@ -281,11 +279,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianB.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianB.setMaximumSize(null);
         AntrianB.setMinimumSize(null);
-        AntrianB.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianB.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianB, gridBagConstraints);
@@ -297,11 +296,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianC.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianC.setMaximumSize(null);
         AntrianC.setMinimumSize(null);
-        AntrianC.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianC.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianC, gridBagConstraints);
@@ -313,11 +313,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianD.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianD.setMaximumSize(null);
         AntrianD.setMinimumSize(null);
-        AntrianD.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianD.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianD, gridBagConstraints);
@@ -329,11 +330,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianE.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianE.setMaximumSize(null);
         AntrianE.setMinimumSize(null);
-        AntrianE.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianE.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianE, gridBagConstraints);
@@ -345,11 +347,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianF.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
         AntrianF.setMaximumSize(null);
         AntrianF.setMinimumSize(null);
-        AntrianF.setPreferredSize(new java.awt.Dimension(1, 80));
+        AntrianF.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianF, gridBagConstraints);
@@ -462,13 +465,13 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         int offset = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
         if (ANTRIANPREFIXHURUF) {
             isTampilSmc();
-            DlgDisplaySMC.setSize(screen.width - 4, screen.height - offset);
+            DlgDisplaySMC.setSize(screen.width, screen.height - offset - 16);
             DlgDisplaySMC.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
             DlgDisplaySMC.setAlwaysOnTop(false);
             DlgDisplaySMC.setVisible(true);
         } else {
             isTampil();
-            DlgDisplay.setSize(screen.width - 4, screen.height - offset);
+            DlgDisplay.setSize(screen.width, screen.height - offset - 16);
             DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
             DlgDisplay.setAlwaysOnTop(false);
             DlgDisplay.setVisible(true);
