@@ -131,13 +131,13 @@ public final class RMPenilaianPasienPenyakitMenular extends javax.swing.JDialog 
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
         KeteranganRiwayatKontak.setDocument(new batasInput((int)70).getKata(KeteranganRiwayatKontak));
         KeteranganTransmisiPenularan.setDocument(new batasInput((int)70).getKata(KeteranganTransmisiPenularan));
-        KeluhanYangDirasakan.setDocument(new batasInput((int)1000).getKata(KeluhanYangDirasakan));
-        RiwayatPenyakitKeluarga.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakitKeluarga));
+        // KeluhanYangDirasakan.setDocument(new batasInput((int)1000).getKata(KeluhanYangDirasakan));
+        // RiwayatPenyakitKeluarga.setDocument(new batasInput((int)1000).getKata(RiwayatPenyakitKeluarga));
         RiwayatAlergi.setDocument(new batasInput((int)100).getKata(RiwayatAlergi));
         RiwayatVaksin.setDocument(new batasInput((int)100).getKata(RiwayatVaksin));
-        RiwayatPengobatan.setDocument(new batasInput((int)1000).getKata(RiwayatPengobatan));
-        DiagnosaUtama.setDocument(new batasInput((int)500).getKata(DiagnosaUtama));
-        DiagnosaTambahan.setDocument(new batasInput((int)500).getKata(DiagnosaTambahan));
+        // RiwayatPengobatan.setDocument(new batasInput((int)1000).getKata(RiwayatPengobatan));
+        // DiagnosaUtama.setDocument(new batasInput((int)500).getKata(DiagnosaUtama));
+        // DiagnosaTambahan.setDocument(new batasInput((int)500).getKata(DiagnosaTambahan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

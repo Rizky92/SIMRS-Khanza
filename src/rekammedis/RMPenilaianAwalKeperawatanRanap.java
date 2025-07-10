@@ -453,10 +453,10 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KetAnamnesis.setDocument(new batasInput((byte)30).getKata(KetAnamnesis));
-        RPS.setDocument(new batasInput((int)300).getKata(RPS));
-        RPD.setDocument(new batasInput((int)300).getKata(RPD));
-        RPK.setDocument(new batasInput((int)100).getKata(RPK));
-        RPO.setDocument(new batasInput((int)100).getKata(RPO));
+        // RPS.setDocument(new batasInput((int)300).getKata(RPS));
+        // RPD.setDocument(new batasInput((int)300).getKata(RPD));
+        // RPK.setDocument(new batasInput((int)100).getKata(RPK));
+        // RPO.setDocument(new batasInput((int)100).getKata(RPO));
         RPembedahan.setDocument(new batasInput((byte)40).getKata(RPembedahan));
         RDirawatRS.setDocument(new batasInput((byte)40).getKata(RDirawatRS));
         RTranfusi.setDocument(new batasInput((byte)40).getKata(RTranfusi));
@@ -517,7 +517,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         KetPadaDokter.setDocument(new batasInput((byte)10).getKata(KetPadaDokter));
         KeteranganDiagnosaKhususGizi.setDocument(new batasInput((byte)50).getKata(KeteranganDiagnosaKhususGizi));
         KeteranganDiketahuiDietisen.setDocument(new batasInput((byte)10).getKata(KeteranganDiketahuiDietisen));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -1852,8 +1852,8 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(44, 250, 156, 23);
 
-        AlatBantuDipakai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kacamata", "Prothesa", "Alat Bantu Dengar", "Lain-lain" }));
-        AlatBantuDipakai.setSelectedIndex(3);
+        AlatBantuDipakai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada", "Kacamata", "Prothesa", "Alat Bantu Dengar", "Lain-lain" }));
+        AlatBantuDipakai.setSelectedIndex(0);
         AlatBantuDipakai.setName("AlatBantuDipakai"); // NOI18N
         AlatBantuDipakai.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3775,7 +3775,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         FormInput.add(jLabel204);
         jLabel204.setBounds(510, 1570, 60, 23);
 
-        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Proses Penyakit", "Benturan", "Lain-lain" }));
+        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Proses Penyakit", "Benturan", "Lain-lain" }));
         Provokes.setName("Provokes"); // NOI18N
         Provokes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3800,7 +3800,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         FormInput.add(jLabel205);
         jLabel205.setBounds(370, 1600, 55, 23);
 
-        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
+        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
         Quality.setName("Quality"); // NOI18N
         Quality.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3897,7 +3897,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         FormInput.add(jLabel212);
         jLabel212.setBounds(815, 1680, 35, 23);
 
-        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Istirahat", "Medengar Musik", "Minum Obat" }));
+        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Istirahat", "Medengar Musik", "Minum Obat" }));
         NyeriHilang.setName("NyeriHilang"); // NOI18N
         NyeriHilang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -8888,7 +8888,9 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
             }
             KeteranganEdukasiPsikologis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),119).toString().replaceAll(EdukasiPsikolgis.getSelectedItem().toString()+", ",""));
             Nyeri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),120).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),121).toString().contains("Proses Penyakit")){
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),121).toString().contains("-")){
+                Provokes.setSelectedItem("-");
+            }else if(tbObat.getValueAt(tbObat.getSelectedRow(),121).toString().contains("Proses Penyakit")){
                 Provokes.setSelectedItem("Proses Penyakit");
             }else if(tbObat.getValueAt(tbObat.getSelectedRow(),121).toString().contains("Benturan")){
                 Provokes.setSelectedItem("Benturan");
@@ -8896,7 +8898,9 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
                 Provokes.setSelectedItem("Lain-lain");
             }
             KetProvokes.setText(tbObat.getValueAt(tbObat.getSelectedRow(),121).toString().replaceAll(Provokes.getSelectedItem().toString()+", ",""));
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),122).toString().contains("Seperti Tertusuk")){
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),122).toString().contains("-")){
+                Quality.setSelectedItem("-");
+            }else if(tbObat.getValueAt(tbObat.getSelectedRow(),122).toString().contains("Seperti Tertusuk")){
                 Quality.setSelectedItem("Seperti Tertusuk");
             }else if(tbObat.getValueAt(tbObat.getSelectedRow(),122).toString().contains("Berdenyut")){
                 Quality.setSelectedItem("Berdenyut");
@@ -8914,7 +8918,9 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
             Menyebar.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),124).toString());
             SkalaNyeri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),125).toString());
             Durasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),126).toString());
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),127).toString().contains("Istirahat")){
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),127).toString().contains("-")){
+                NyeriHilang.setSelectedItem("-");
+            }else if(tbObat.getValueAt(tbObat.getSelectedRow(),127).toString().contains("Istirahat")){
                 NyeriHilang.setSelectedItem("Istirahat");
             }else if(tbObat.getValueAt(tbObat.getSelectedRow(),127).toString().contains("Medengar Musik")){
                 NyeriHilang.setSelectedItem("Medengar Musik");
