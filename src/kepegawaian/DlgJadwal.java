@@ -225,6 +225,20 @@ public class DlgJadwal extends javax.swing.JDialog {
         BtnPoli = new widget.Button();
         jLabel12 = new widget.Label();
         Kuota = new widget.TextBox();
+        PanelAccor = new widget.PanelBiasa();
+        ChkAccor = new widget.CekBox();
+        panelBiasa2 = new widget.PanelBiasa();
+        Scroll1 = new widget.ScrollPane();
+        tbKamar = new widget.Table();
+        panelGlass6 = new widget.panelisi();
+        jLabel19 = new widget.Label();
+        KdPoli1 = new widget.TextBox();
+        NmPoli = new widget.TextBox();
+        BtnPoli1 = new widget.Button();
+        jLabel20 = new widget.Label();
+        Tanggal = new widget.Tanggal();
+        BtnCari1 = new widget.Button();
+        jLabel17 = new widget.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -634,6 +648,110 @@ public class DlgJadwal extends javax.swing.JDialog {
 
         internalFrame1.add(panelBiasa1, java.awt.BorderLayout.PAGE_START);
 
+        PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
+        PanelAccor.setName("PanelAccor"); // NOI18N
+        PanelAccor.setPreferredSize(new java.awt.Dimension(600, 43));
+        PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
+
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
+        ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setSelected(true);
+        ChkAccor.setFocusable(false);
+        ChkAccor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setName("ChkAccor"); // NOI18N
+        ChkAccor.setPreferredSize(new java.awt.Dimension(15, 20));
+        ChkAccor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkAccorActionPerformed(evt);
+            }
+        });
+        PanelAccor.add(ChkAccor, java.awt.BorderLayout.WEST);
+
+        panelBiasa2.setName("panelBiasa2"); // NOI18N
+        panelBiasa2.setLayout(new java.awt.BorderLayout());
+
+        Scroll1.setName("Scroll1"); // NOI18N
+        Scroll1.setOpaque(true);
+
+        tbKamar.setAutoCreateRowSorter(true);
+        tbKamar.setName("tbKamar"); // NOI18N
+        Scroll1.setViewportView(tbKamar);
+
+        panelBiasa2.add(Scroll1, java.awt.BorderLayout.CENTER);
+
+        panelGlass6.setName("panelGlass6"); // NOI18N
+        panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
+        panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 5, 9));
+
+        jLabel19.setText("Poli :");
+        jLabel19.setName("jLabel19"); // NOI18N
+        jLabel19.setPreferredSize(new java.awt.Dimension(37, 23));
+        panelGlass6.add(jLabel19);
+
+        KdPoli1.setEditable(false);
+        KdPoli1.setHighlighter(null);
+        KdPoli1.setName("KdPoli1"); // NOI18N
+        KdPoli1.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass6.add(KdPoli1);
+
+        NmPoli.setEditable(false);
+        NmPoli.setName("NmPoli"); // NOI18N
+        NmPoli.setPreferredSize(new java.awt.Dimension(150, 23));
+        panelGlass6.add(NmPoli);
+
+        BtnPoli1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPoli1.setMnemonic('3');
+        BtnPoli1.setToolTipText("ALt+3");
+        BtnPoli1.setName("BtnPoli1"); // NOI18N
+        BtnPoli1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnPoli1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPoli1ActionPerformed(evt);
+            }
+        });
+        panelGlass6.add(BtnPoli1);
+
+        jLabel20.setText("Tanggal :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        jLabel20.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass6.add(jLabel20);
+
+        Tanggal.setDisplayFormat("dd-MM-yyyy");
+        Tanggal.setName("Tanggal"); // NOI18N
+        Tanggal.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass6.add(Tanggal);
+
+        BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari1.setMnemonic('6');
+        BtnCari1.setToolTipText("Alt+6");
+        BtnCari1.setName("BtnCari1"); // NOI18N
+        BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCari1ActionPerformed(evt);
+            }
+        });
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCari1KeyPressed(evt);
+            }
+        });
+        panelGlass6.add(BtnCari1);
+
+        jLabel17.setName("jLabel17"); // NOI18N
+        jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
+        panelGlass6.add(jLabel17);
+
+        panelBiasa2.add(panelGlass6, java.awt.BorderLayout.PAGE_END);
+
+        PanelAccor.add(panelBiasa2, java.awt.BorderLayout.CENTER);
+
+        internalFrame1.add(PanelAccor, java.awt.BorderLayout.EAST);
+
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -925,6 +1043,42 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         Valid.pindah(evt,cmbDtk2,KdPoli);
     }//GEN-LAST:event_KuotaKeyPressed
 
+    private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
+        if(tbDokter.getSelectedRow()!= -1){
+            isPhoto();
+            panggilPhoto();
+        }else{
+            ChkAccor.setSelected(false);
+            JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data yang mau ditampilkan...!!!!");
+        }
+    }//GEN-LAST:event_ChkAccorActionPerformed
+
+    private void BtnPoli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPoli1ActionPerformed
+        i=1;
+        poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        poli.setLocationRelativeTo(internalFrame1);
+        poli.setVisible(true);
+    }//GEN-LAST:event_BtnPoli1ActionPerformed
+
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        if(KdPoli.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih poli terlebih dahulu...!!");
+            BtnPoli.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnCari1ActionPerformed
+
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCariActionPerformed(null);
+        }else{
+            Valid.pindah(evt,BtnKeluar,BtnPrint);
+        }
+    }//GEN-LAST:event_BtnCari1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -945,18 +1099,26 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
+    private widget.Button BtnCari1;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPoli;
+    private widget.Button BtnPoli1;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.CekBox ChkAccor;
     private widget.TextBox KdPoli;
+    private widget.TextBox KdPoli1;
     private widget.TextBox Kuota;
     private widget.Label LCount;
+    private widget.TextBox NmPoli;
+    private widget.PanelBiasa PanelAccor;
     private widget.ScrollPane Scroll;
+    private widget.ScrollPane Scroll1;
     private widget.TextBox TCari;
     private widget.TextBox TPoli;
+    private widget.Tanggal Tanggal;
     private widget.Button btnDokter;
     private widget.ComboBox cmbDtk1;
     private widget.ComboBox cmbDtk2;
@@ -969,6 +1131,9 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
+    private widget.Label jLabel17;
+    private widget.Label jLabel19;
+    private widget.Label jLabel20;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
@@ -978,9 +1143,12 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.TextBox kddokter;
     private widget.TextBox nmdokter;
     private widget.PanelBiasa panelBiasa1;
+    private widget.PanelBiasa panelBiasa2;
+    private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.Table tbJadwal;
+    private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
