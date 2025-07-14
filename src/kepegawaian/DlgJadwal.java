@@ -1515,7 +1515,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             panelBiasa2.setVisible(true);
-            PanelAccor.setPreferredSize(new Dimension(700,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(Valid.clamp(internalFrame1.getWidth() - tbKamar.getWidth() - 10, 730, internalFrame1.getWidth() - 100),HEIGHT));
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){    
             ChkAccor.setVisible(false);

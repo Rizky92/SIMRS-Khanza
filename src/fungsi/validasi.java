@@ -313,6 +313,25 @@ public final class validasi {
         return base;
     }
     
+    public int clamp(int base, int min, int max) {
+        System.out.println("base : " + base);
+        System.out.print("base < min = (" + base + " < " + min + "): ");
+        if (base < min) {
+            System.out.println(base < min);
+            return min;
+        }
+        System.out.println("false");
+        
+        System.out.print("base > max = (" + base + " > " + max + "): ");
+        if (base > max) {
+            System.out.println(base > max);
+            return max;
+        }
+        System.out.println("false");
+        
+        return base;
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
