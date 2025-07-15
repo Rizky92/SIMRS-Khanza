@@ -35,44 +35,44 @@ git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-kha
 
 2. Download [kumpulan library](https://drive.google.com/drive/folders/1bLKuw8l9k5ElC5dxxlrXijACPLtNmCTg?usp=sharing) yang digunakan oleh projek ini karena ada beberapa perbedaan dengan library bawaan SIMRS Khanza. Kemudian extract librarynya.
 
-2. Setelah clone selesai, masuk ke folder projek, kemudian buka file `nbproject/project.properties` menggunakan text editor kemudian cari `path.file-reference`. Ganti nilai ini dengan path ke folder tempat library di extract.
+3. Setelah clone selesai, masuk ke folder projek, kemudian buka file `nbproject/project.properties` menggunakan text editor kemudian cari `path.file-reference`. Ganti nilai ini dengan path ke folder tempat library di extract.
 
 ![path.file-reference di file project.properties](docs/Screenshot_27.png)
 
-3. Buka projek dalam Apache NetBeans, kemudian buka properties. Pada bagian library, pastikan `Project Platform` menggunakan JDK [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true).
+4. Buka projek dalam Apache NetBeans, kemudian buka properties. Pada bagian library, pastikan `Project Platform` menggunakan JDK [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true).
 
 ![Project Platform menggunakan Liberica JDK 17](docs/Screenshot_25.png)
 
-4. Import `sik.sql` ke database bernama `sik`. Pastikan database dalam keadaan ***KOSONG***. Apabila database belum ada, silahkan buat terlebih dahulu.
+5. Import `sik.sql` ke database bernama `sik`. Pastikan database dalam keadaan ***KOSONG***. Apabila database belum ada, silahkan buat terlebih dahulu.
 
 ```bash
 mysql -u root sik < sik.sql
 ```
 
-5. Import `sik_modif.sql` ke database bernama `sik`.
+6. Import `sik_modif.sql` ke database bernama `sik`.
 
 ```bash
 mysql -u root sik < sik_modif.sql
 ```
 
-6. Dalam folder projek, masuk ke folder `setting`, copy file `database.xml.example` di tempat menjadi `database.xml`.
+7. Dalam folder projek, masuk ke folder `setting`, copy file `database.xml.example` di tempat menjadi `database.xml`.
 
 ![Copy file database.xml.example menjadi database.xml di folder yang sama](docs/Screenshot_28.png)
 
-7. Install [Jaspersoft Studio 6.8.0](https://drive.google.com/file/d/1l2jNOd7gqmpQK_7NZBNxmUBLI7IwwKQ3/view?usp=drive_link). Setelah instalasi selesai, buka Jaspersoft Studio, kemudian masuk ke menu `File > Import` dan pilih `Project from Folder or Archive`.
+8. Install [Jaspersoft Studio 6.8.0](https://drive.google.com/file/d/1l2jNOd7gqmpQK_7NZBNxmUBLI7IwwKQ3/view?usp=drive_link). Setelah instalasi selesai, buka Jaspersoft Studio, kemudian masuk ke menu `File > Import` dan pilih `Project from Folder or Archive`.
 
 ![Import folder report di Jaspersoft Studio](docs/Screenshot_29.png)
 
 ![Pilih "Project from Folder or Archive"](docs/Screenshot_30.png)
 
-8. Pilih `Directory`, kemudian arahkan ke folder `report` dalam folder projek SIMRS Khanza. Lalu klik `Finish`.
+9. Pilih `Directory`, kemudian arahkan ke folder `report` dalam folder projek SIMRS Khanza. Lalu klik `Finish`.
 
 ![Pilih Directory dan arahkan ke folder report](docs/Screenshot_31.png)
 
-9. Setelah projek `report` terbuka, klik kanan `report` dan pilih `Compile Report`
+10. Setelah projek `report` terbuka, klik kanan `report` dan pilih `Compile Report`
 
 ![Compile Report](docs/Screenshot_32.png)
 
-10. Kembali ke NetBeans. Pastikan projek sudah tidak ada tanda warning. Kemudian klik kanan lalu pilih `Run`.
+11. Kembali ke NetBeans. Pastikan projek sudah tidak ada tanda warning. Kemudian klik kanan lalu pilih `Run`.
 
 ![Run project](docs/Screenshot_33.png)
