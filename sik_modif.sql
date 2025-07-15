@@ -863,7 +863,21 @@ ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `keluhan_u
 
 ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
 
+ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat', 'Tidak ada nyeri', 'Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
+
 ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `masalah` TEXT NOT NULL;
 
@@ -876,6 +890,12 @@ ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS
 ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `psk` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rp` TEXT NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `masalah` TEXT NOT NULL;
 
@@ -891,6 +911,12 @@ ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpk` TEXT
 
 ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
 
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
+
 ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
@@ -903,6 +929,12 @@ ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpo` TEX
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
 
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
+
 ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
@@ -911,11 +943,23 @@ ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS 
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
 
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
+
 ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rkd_keluhan` TEXT NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
 
 ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
 
@@ -1586,5 +1630,11 @@ ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `perencanaan_terap
 ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
 
 ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `tindak_lanjut` TEXT NOT NULL;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
 
 SET FOREIGN_KEY_CHECKS=1;
