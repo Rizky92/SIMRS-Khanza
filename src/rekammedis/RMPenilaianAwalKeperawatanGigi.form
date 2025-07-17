@@ -1448,11 +1448,12 @@
                         <Component class="widget.ComboBox" name="NyeriHilang">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Istirahat"/>
-                                <StringItem index="1" value="Medengar Musik"/>
-                                <StringItem index="2" value="Minum Obat"/>
-                                <StringItem index="3" value="Tidak ada nyeri"/>
+                              <StringArray count="5">
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="Istirahat"/>
+                                <StringItem index="2" value="Medengar Musik"/>
+                                <StringItem index="3" value="Minum Obat"/>
+                                <StringItem index="4" value="Tidak ada nyeri"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="NyeriHilang" noResource="true"/>
