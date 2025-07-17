@@ -221,7 +221,221 @@ CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
 
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
 
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` varchar(300) NOT NULL AFTER `rps`;
+ALTER TABLE `pengkajian_restrain` MODIFY COLUMN IF EXISTS `restrain_farmakologi` text NULL DEFAULT NULL AFTER `restrain_non_farmakologi_keterangan`;
+
+ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `bmi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat','Tidak ada nyeri','Lain-lain') NOT NULL AFTER `frekuensi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `palatum`;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `panggul`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `masalah` text NOT NULL AFTER `ket_dokter`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `masalah`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `keluhan` text NOT NULL AFTER `cara_masuk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `keluhan`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `psk` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rp` text NOT NULL AFTER `psk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `penilaian_nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `penilaian_nyeri_ket_penyebab`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `penilaian_nyeri_waktu`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `masalah` text NOT NULL AFTER `skrining_gizi_jam_diketahui_dietisen`;
+
+ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `masalah`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `bmi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `oftalmoskopikiri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `bmi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `ket_dokter`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `ld`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `ket_dokter`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `bmi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `fraily_phenotype_status`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `informasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rkd_keluhan` text NOT NULL AFTER `rkd_sakit_sejak`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `ket_dokter`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rencana` text NOT NULL AFTER `ket_kk_kebutuhan_edukasi`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `cara_masuk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `alat_bantu_dipakai` enum('Tidak Ada','Kacamata','Prothesa','Alat Bantu Dengar','Lain-lain') NOT NULL AFTER `riwayat_dirawat_dirs`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `penilaian_nyeri`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `penilaian_nyeri_ket_penyebab`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `penilaian_nyeri_waktu`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rencana` text NULL DEFAULT NULL AFTER `skrining_gizi_jam_diketahui_dietisen`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `tiba_diruang_rawat`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `perawatan_lanjutan_dirumah` text NOT NULL AFTER `kondisi_klinis_pulang`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rencana` text NULL DEFAULT NULL AFTER `transportasi_digunakan`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `keluhan_utama` text NULL DEFAULT NULL AFTER `hubungan_dengan_pasien`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `perawatan_lanjutan_dirumah` text NOT NULL AFTER `kondisi_klinis_pulang`;
+
+ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `rencana` text NULL DEFAULT NULL AFTER `transportasi_digunakan`;
+
+ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `pemeriksaan_fisik_lainnya` text NULL DEFAULT NULL AFTER `keterangan_denyut_femoral`;
+
+ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `pemeriksaan_penunjang` text NULL DEFAULT NULL AFTER `pemeriksaan_fisik_lainnya`;
+
+ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `diagnosa` text NULL DEFAULT NULL AFTER `pemeriksaan_penunjang`;
+
+ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `tatalaksana` text NULL DEFAULT NULL AFTER `diagnosa`;
+
+ALTER TABLE `penilaian_dehidrasi` MODIFY COLUMN IF EXISTS `hasil_penilaian` text NULL DEFAULT NULL AFTER `penilaian_totalnilai`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `informasi`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_musculoskeletal` text NOT NULL AFTER `ket_fisik`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_neuromuscular` text NOT NULL AFTER `pemeriksaan_musculoskeletal`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_cardiopulmonal` text NOT NULL AFTER `pemeriksaan_neuromuscular`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_integument` text NOT NULL AFTER `pemeriksaan_cardiopulmonal`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_musculoskeletal` text NOT NULL AFTER `pemeriksaan_integument`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_neuromuscular` text NOT NULL AFTER `pengukuran_musculoskeletal`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_cardiopulmonal` text NOT NULL AFTER `pengukuran_neuromuscular`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_integument` text NOT NULL AFTER `pengukuran_cardiopulmonal`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `penunjang` text NOT NULL AFTER `pengukuran_integument`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `diagnosis_fisio` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rencana_terapi` text NOT NULL AFTER `diagnosis_fisio`;
+
+ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `kekerasan_yang_dialami` text NULL DEFAULT NULL AFTER `hubungan_orang_terdekat`;
+
+ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `dampak_kekerasan` text NULL DEFAULT NULL AFTER `yang_melakukan_kekerasan`;
+
+ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `tanda_tanda_didapatkan` text NULL DEFAULT NULL AFTER `dampak_kekerasan`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_anak` MODIFY COLUMN IF EXISTS `hasil_skrining` text NULL DEFAULT NULL AFTER `penilaian_humptydumpty_totalnilai`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_anak` MODIFY COLUMN IF EXISTS `saran` text NULL DEFAULT NULL AFTER `hasil_skrining`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_dewasa` MODIFY COLUMN IF EXISTS `hasil_skrining` text NULL DEFAULT NULL AFTER `penilaian_jatuhmorse_totalnilai`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_dewasa` MODIFY COLUMN IF EXISTS `saran` text NULL DEFAULT NULL AFTER `hasil_skrining`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_geriatri` MODIFY COLUMN IF EXISTS `hasil_skrining` text NULL DEFAULT NULL AFTER `penilaian_jatuh_totalnilai`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_geriatri` MODIFY COLUMN IF EXISTS `saran` text NULL DEFAULT NULL AFTER `hasil_skrining`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_lansia` MODIFY COLUMN IF EXISTS `hasil_skrining` text NULL DEFAULT NULL AFTER `penilaian_jatuhmorse_totalnilai`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_lansia` MODIFY COLUMN IF EXISTS `saran` text NULL DEFAULT NULL AFTER `hasil_skrining`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_psikiatri` MODIFY COLUMN IF EXISTS `hasil_skrining` text NULL DEFAULT NULL AFTER `penilaian_jatuhedmonson_totalnilai`;
+
+ALTER TABLE `penilaian_lanjutan_resiko_jatuh_psikiatri` MODIFY COLUMN IF EXISTS `saran` text NULL DEFAULT NULL AFTER `hasil_skrining`;
 
 ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `proc_mastoideus` enum('Tidak Ada','Ada','Normal','Tidak Normal','-') NOT NULL AFTER `selaput_pendengaran`;
 
@@ -232,6 +446,580 @@ ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `bunyi_jantung` enum('Regule
 ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `auskultasi` enum('Normal','Meningkat (>4x/menit)','Bising Usus Meningkat','Bising Usus Menurun','-') NOT NULL AFTER `perkusi_abdomen`;
 
 ALTER TABLE `penilaian_mcu` MODIFY COLUMN IF EXISTS `costovertebral` enum('Tidak Ada','Ada','Ada Di Kiri','Ada Di Kanan','-') NOT NULL AFTER `limpa`;
+
+ALTER TABLE `penilaian_medis_hemodialisa` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `anti_hcv`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `konsulrujuk` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `konsul` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `muskulos`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `ket_lokalis`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `pemeriksaan` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `wajah` text NOT NULL AFTER `keterangan_ekstremitas`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `intra` text NOT NULL AFTER `wajah`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `gigigeligi` text NOT NULL AFTER `intra`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `gigigeligi`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `penunjang` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `keluhan_utama` text NULL DEFAULT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `gejala_menyertai` text NULL DEFAULT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `faktor_pencetus` text NULL DEFAULT NULL AFTER `gejala_menyertai`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `keterangan_riwayat_penyakit_dahulu` text NULL DEFAULT NULL AFTER `riwayat_penyakit_dahulu`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `riwayat_kehamilan` text NULL DEFAULT NULL AFTER `keterangan_riwayat_penyakit_dahulu`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `riwayat_obat_diminum` text NULL DEFAULT NULL AFTER `keterangan_riwayat_pekerjaan`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `status_lokalisata` text NULL DEFAULT NULL AFTER `keterangan_status_kelainan_anggota_gerak`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `laborat` text NULL DEFAULT NULL AFTER `psikiatrik_insight`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `radiologi` text NULL DEFAULT NULL AFTER `laborat`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `ekg` text NULL DEFAULT NULL AFTER `radiologi`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `diagnosis` text NULL DEFAULT NULL AFTER `ekg`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `permasalahan` text NULL DEFAULT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `instruksi_medis` text NULL DEFAULT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `rencana_target` text NULL DEFAULT NULL AFTER `instruksi_medis`;
+
+ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `edukasi` text NULL DEFAULT NULL AFTER `fisik_pulang_rr`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `kondisi_umum` text NOT NULL AFTER `rr`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `kondisi_sosial` text NOT NULL AFTER `status_psikologis_gds`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `status_nutrisi`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `lainnya`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `pemeriksaan` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `konsul` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpo`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `statusderma` text NOT NULL AFTER `gcs`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `pemeriksaan` text NOT NULL AFTER `statusderma`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `diagnosisbdg` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `keterangan_muskulos`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `lainnya`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `penunjanglain` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjanglain`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `muskulos`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `ket_lokalis`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `pemeriksaan` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `muskulos`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `ket_lokalis`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `pemeriksaan` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `pemeriksaan`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `kondisi` text NOT NULL AFTER `alergi`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `lainnya` text NOT NULL AFTER `keterangan_ekstremitas`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `lainnya`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rad` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `penunjanglain` text NOT NULL AFTER `rad`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjanglain`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `diagnosis2` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `permasalahan` text NOT NULL AFTER `diagnosis2`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `terapi` text NOT NULL AFTER `permasalahan`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `tindakan` text NOT NULL AFTER `terapi`;
+
+ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tindakan`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `penampilan` text NOT NULL AFTER `alergi`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `pembicaraan` text NOT NULL AFTER `penampilan`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `psikomotor` text NOT NULL AFTER `pembicaraan`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `sikap` text NOT NULL AFTER `psikomotor`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `mood` text NOT NULL AFTER `sikap`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `fungsi_kognitif` text NOT NULL AFTER `mood`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `gangguan_persepsi` text NOT NULL AFTER `fungsi_kognitif`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `proses_pikir` text NOT NULL AFTER `gangguan_persepsi`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `pengendalian_impuls` text NOT NULL AFTER `proses_pikir`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `tilikan` text NOT NULL AFTER `pengendalian_impuls`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rta` text NOT NULL AFTER `tilikan`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `ket_fisik` text NOT NULL AFTER `kulit`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `penunjang` text NOT NULL AFTER `ket_fisik`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `tata` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `konsulrujuk` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `keluhan_utama` text NULL DEFAULT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `rps` text NULL DEFAULT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `rpd` text NULL DEFAULT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `lainnya` text NULL DEFAULT NULL AFTER `keterangan_muskulos`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `diagnosa_medis` text NULL DEFAULT NULL AFTER `kebutuhan_fungsional`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `diagnosa_fungsi` text NULL DEFAULT NULL AFTER `diagnosa_medis`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `penunjang_lain` text NULL DEFAULT NULL AFTER `diagnosa_fungsi`;
+
+ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `edukasi` text NULL DEFAULT NULL AFTER `terapi_lainnya`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `diagnosisbanding` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tatalaksana`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjang`;
+
+ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `keluhan_utama` text NOT NULL AFTER `hubungan`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpk` text NOT NULL AFTER `rpd`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpo` text NOT NULL AFTER `rpk`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `pemeriksaan_regional` text NOT NULL AFTER `kelainan_lainnya`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `lab` text NOT NULL AFTER `pemeriksaan_regional`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `radiologi` text NOT NULL AFTER `lab`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `penunjanglainnya` text NOT NULL AFTER `radiologi`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `diagnosis` text NOT NULL AFTER `penunjanglainnya`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `tata` text NOT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `tata`;
+
+ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluhan` text NULL DEFAULT NULL AFTER `kebutuhan_ruang_perawatan`;
+
+ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluarga` text NULL DEFAULT NULL AFTER `riwayat_penyakit_keluhan`;
+
+ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_pengobatan` text NULL DEFAULT NULL AFTER `riwayat_vaksinasi`;
+
+ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `diagnosa_utama` text NULL DEFAULT NULL AFTER `riwayat_pengobatan`;
+
+ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `diagnosa_tambahan` text NULL DEFAULT NULL AFTER `diagnosa_utama`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `keluhan` text NULL DEFAULT NULL AFTER `keterangan_tempat_kejadian`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `riwayat_penyakit_sekarang` text NULL DEFAULT NULL AFTER `keluhan`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `pengobatan_sebelum_igd` text NULL DEFAULT NULL AFTER `urine`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `diagnosis` text NULL DEFAULT NULL AFTER `pengobatan_sebelum_igd`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `pemeriksaan_penunjang` text NULL DEFAULT NULL AFTER `diagnosis`;
+
+ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `penatalaksanaan_diberikan` text NULL DEFAULT NULL AFTER `pemeriksaan_penunjang`;
+
+ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `keluhan_yang_dirasakan_saat_ini` text NULL DEFAULT NULL AFTER `kebutuhan_ruang_rawat`;
+
+ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluarga` text NULL DEFAULT NULL AFTER `keluhan_yang_dirasakan_saat_ini`;
+
+ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `riwayat_pengobatan` text NULL DEFAULT NULL AFTER `riwayat_vaksinasi`;
+
+ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `diagnosa_utama` text NULL DEFAULT NULL AFTER `riwayat_pengobatan`;
+
+ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `diagnosa_tambahan` text NULL DEFAULT NULL AFTER `diagnosa_utama`;
+
+ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `diagnosa` text NOT NULL AFTER `tanggal`;
+
+ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `rps` text NOT NULL AFTER `diagnosa`;
+
+ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `rpd` text NOT NULL AFTER `rps`;
+
+ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `kebutuhan_spiritual_pasien` text NULL DEFAULT NULL AFTER `tanda_klinis_menjelang_kematian`;
+
+ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `perencanaan` text NULL DEFAULT NULL AFTER `asesmen`;
+
+ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `infus_perifier` text NULL DEFAULT NULL AFTER `perencanaan`;
+
+ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `intubasi_keterangan` text NULL DEFAULT NULL AFTER `intubasi_tracheostomi`;
+
+ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `teknik_regional_obat_obatan` text NULL DEFAULT NULL AFTER `teknik_regional_kateter_viksasi`;
+
+ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `teknik_regional_komplikasi` text NULL DEFAULT NULL AFTER `teknik_regional_obat_obatan`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `ringkasan_klinik` text NULL DEFAULT NULL AFTER `kd_dokter`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `pemeriksaan_fisik` text NULL DEFAULT NULL AFTER `ringkasan_klinik`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `pemeriksaan_diagnostik` text NULL DEFAULT NULL AFTER `pemeriksaan_fisik`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `diagnosa_pre_operasi` text NULL DEFAULT NULL AFTER `pemeriksaan_diagnostik`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `rencana_tindakan_bedah` text NULL DEFAULT NULL AFTER `diagnosa_pre_operasi`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `hal_hal_yang_perludi_persiapkan` text NULL DEFAULT NULL AFTER `rencana_tindakan_bedah`;
+
+ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `terapi_pre_operasi` text NULL DEFAULT NULL AFTER `hal_hal_yang_perludi_persiapkan`;
+
+ALTER TABLE `penilaian_psikologi` MODIFY COLUMN IF EXISTS `ciri_menyolok` text NOT NULL AFTER `penggunaan_kata`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `ket_anamnesis` text NULL DEFAULT NULL AFTER `tujuan_pemeriksaan`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `keluhan_utama` text NULL DEFAULT NULL AFTER `ket_anamnesis`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_penyakit` text NULL DEFAULT NULL AFTER `keluhan_utama`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_keluhan` text NULL DEFAULT NULL AFTER `riwayat_penyakit`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_hidup_singkat` text NULL DEFAULT NULL AFTER `permasalahan_ekspektasi`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `dinamika_psikologis` text NULL DEFAULT NULL AFTER `psikotes_hasil`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `diagnosa_psikologis` text NULL DEFAULT NULL AFTER `dinamika_psikologis`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `manifestasi_fungsi_psikologis` text NULL DEFAULT NULL AFTER `diagnosa_psikologis`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `rencana_intervensi` text NULL DEFAULT NULL AFTER `manifestasi_fungsi_psikologis`;
+
+ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `evaluasi` text NULL DEFAULT NULL AFTER `target_terapi7`;
+
+ALTER TABLE `penilaian_tambahan_beresiko_melarikan_diri` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` text NULL DEFAULT NULL AFTER `dinamis_skortotal`;
+
+ALTER TABLE `penilaian_tambahan_bunuh_diri` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` text NULL DEFAULT NULL AFTER `dinamis_skortotal`;
+
+ALTER TABLE `penilaian_tambahan_perilaku_kekerasan` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` text NULL DEFAULT NULL AFTER `dinamis_skortotal`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `diagnosa_terapi_wicara` text NULL DEFAULT NULL AFTER `tanggal`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `diagnosa_medis` text NULL DEFAULT NULL AFTER `diagnosa_terapi_wicara`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `anamnesa` text NOT NULL AFTER `diagnosa_medis`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_menghisap` text NOT NULL AFTER `organ_wicara_fisiologis_faring`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_mengunyah` text NOT NULL AFTER `aktifitas_oral_menghisap`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_meniup` text NOT NULL AFTER `aktifitas_oral_mengunyah`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_subtitusi` text NOT NULL AFTER `aktifitas_oral_meniup`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_omisi` text NOT NULL AFTER `kemampuan_artikulasi_subtitusi`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_distorsi` text NOT NULL AFTER `kemampuan_artikulasi_omisi`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_adisi` text NOT NULL AFTER `kemampuan_artikulasi_distorsi`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_menelan` text NOT NULL AFTER `kemampuan_irama_kelancaran`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `pernafasan` text NOT NULL AFTER `kemampuan_menelan`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `penunjang_medis` text NOT NULL AFTER `tingkat_komunikasi_enkoding_gesture`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `perencanaan_terapi_tujuan` text NOT NULL AFTER `penunjang_medis`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `perencanaan_terapi_program` text NOT NULL AFTER `perencanaan_terapi_tujuan`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `edukasi` text NOT NULL AFTER `perencanaan_terapi_program`;
+
+ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `tindak_lanjut` text NOT NULL AFTER `edukasi`;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL AFTER `nyeri`;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL AFTER `ket_provokes`;
+
+ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL AFTER `durasi`;
 
 ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `email` varchar(50) NOT NULL DEFAULT '' AFTER `no_telp`;
 
@@ -870,795 +1658,5 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
-
-ALTER TABLE `pengkajian_restrain` MODIFY COLUMN IF EXISTS `restrain_farmakologi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_bayi` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_gigi` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat', 'Tidak ada nyeri', 'Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_igd` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `masalah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `keluhan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `psk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rp` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `masalah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_kebidanan_ranap` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_mata` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_geriatri` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rkd_keluhan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ralan_psikiatri` MODIFY COLUMN IF EXISTS `rencana` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `rencana` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `alat_bantu_dipakai` enum('Tidak Ada','Kacamata','Prothesa','Alat Bantu Dengar','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_penyebab` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_kualitas` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap` MODIFY COLUMN IF EXISTS `penilaian_nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `perawatan_lanjutan_dirumah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_bayi` MODIFY COLUMN IF EXISTS `rencana` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `perawatan_lanjutan_dirumah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_awal_keperawatan_ranap_neonatus` MODIFY COLUMN IF EXISTS `rencana` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_hemodialisa` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_igd` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `gejala_menyertai` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `faktor_pencetus` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `keterangan_riwayat_penyakit_dahulu` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `riwayat_kehamilan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `riwayat_obat_diminum` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `status_lokalisata` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `laborat` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `radiologi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `ekg` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `diagnosis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `permasalahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `instruksi_medis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `rencana_target` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_gawat_darurat_psikiatri` MODIFY COLUMN IF EXISTS `edukasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_anak` MODIFY COLUMN IF EXISTS `konsul` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `pemeriksaan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `wajah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `intra` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `gigigeligi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `penunjang` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_bedah_mulut` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan` MODIFY COLUMN IF EXISTS `konsulrujuk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `kondisi_umum` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `kondisi_sosial` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `pemeriksaan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_geriatri` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kandungan` MODIFY COLUMN IF EXISTS `konsul` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `statusderma` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `pemeriksaan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_kulitdankelamin` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `diagnosisbdg` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_mata` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `penunjanglain` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_neurologi` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `pemeriksaan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_orthopedi` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `pemeriksaan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_paru` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `kondisi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `lainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `rad` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `penunjanglain` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `diagnosis2` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `permasalahan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `tindakan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_penyakit_dalam` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `penampilan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `pembicaraan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `psikomotor` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `sikap` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `mood` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `fungsi_kognitif` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `gangguan_persepsi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `proses_pikir` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `pengendalian_impuls` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `tilikan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `rta` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `ket_fisik` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `penunjang` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `tata` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_psikiatrik` MODIFY COLUMN IF EXISTS `konsulrujuk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `rps` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `rpd` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `lainnya` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `diagnosa_medis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `diagnosa_fungsi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `penunjang_lain` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_rehab_medik` MODIFY COLUMN IF EXISTS `edukasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `diagnosisbanding` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ralan_tht` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpk` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `rpo` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_kandungan` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `pemeriksaan_regional` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `lab` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `radiologi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `penunjanglainnya` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `diagnosis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `tata` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_medis_ranap_neonatus` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `pemeriksaan_fisik_lainnya` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `pemeriksaan_penunjang` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `diagnosa` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_bayi_baru_lahir` MODIFY COLUMN IF EXISTS `tatalaksana` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_dehidrasi` MODIFY COLUMN IF EXISTS `hasil_penilaian` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_musculoskeletal` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_neuromuscular` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_cardiopulmonal` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pemeriksaan_integument` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_musculoskeletal` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_neuromuscular` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_cardiopulmonal` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `pengukuran_integument` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `penunjang` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `diagnosis_fisio` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_fisioterapi` MODIFY COLUMN IF EXISTS `rencana_terapi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `kekerasan_yang_dialami` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `dampak_kekerasan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_korban_kekerasan` MODIFY COLUMN IF EXISTS `tanda_tanda_didapatkan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_anak` MODIFY COLUMN IF EXISTS `hasil_skrining` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_anak` MODIFY COLUMN IF EXISTS `saran` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_dewasa` MODIFY COLUMN IF EXISTS `hasil_skrining` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_dewasa` MODIFY COLUMN IF EXISTS `saran` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_geriatri` MODIFY COLUMN IF EXISTS `hasil_skrining` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_geriatri` MODIFY COLUMN IF EXISTS `saran` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_lansia` MODIFY COLUMN IF EXISTS `hasil_skrining` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_lansia` MODIFY COLUMN IF EXISTS `saran` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_psikiatri` MODIFY COLUMN IF EXISTS `hasil_skrining` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_lanjutan_resiko_jatuh_psikiatri` MODIFY COLUMN IF EXISTS `saran` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluhan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluarga` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `riwayat_pengobatan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `diagnosa_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_imunitas_rendah` MODIFY COLUMN IF EXISTS `diagnosa_tambahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `keluhan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `riwayat_penyakit_sekarang` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `pengobatan_sebelum_igd` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `diagnosis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `pemeriksaan_penunjang` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_keracunan` MODIFY COLUMN IF EXISTS `penatalaksanaan_diberikan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `keluhan_yang_dirasakan_saat_ini` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `riwayat_penyakit_keluarga` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `riwayat_pengobatan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `diagnosa_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_penyakit_menular` MODIFY COLUMN IF EXISTS `diagnosa_tambahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `diagnosa` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `rps` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `rpd` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_pasien_terminal` MODIFY COLUMN IF EXISTS `kebutuhan_spiritual_pasien` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `perencanaan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `infus_perifier` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `intubasi_keterangan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `teknik_regional_obat_obatan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_induksi` MODIFY COLUMN IF EXISTS `teknik_regional_komplikasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `ringkasan_klinik` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `pemeriksaan_fisik` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `pemeriksaan_diagnostik` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `diagnosa_pre_operasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `rencana_tindakan_bedah` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `hal_hal_yang_perludi_persiapkan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_pre_operasi` MODIFY COLUMN IF EXISTS `terapi_pre_operasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi` MODIFY COLUMN IF EXISTS `ciri_menyolok` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `ket_anamnesis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `keluhan_utama` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_penyakit` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_keluhan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `riwayat_hidup_singkat` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `dinamika_psikologis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `diagnosa_psikologis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `manifestasi_fungsi_psikologis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `rencana_intervensi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_psikologi_klinis` MODIFY COLUMN IF EXISTS `evaluasi` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_tambahan_bunuh_diri` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_tambahan_beresiko_melarikan_diri` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_tambahan_perilaku_kekerasan` MODIFY COLUMN IF EXISTS `faktor_faktor_pencegahan` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `diagnosa_terapi_wicara` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `diagnosa_medis` TEXT DEFAULT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `anamnesa` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_menghisap` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_mengunyah` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `aktifitas_oral_meniup` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_subtitusi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_omisi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_distorsi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_artikulasi_adisi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `kemampuan_menelan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `pernafasan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `penunjang_medis` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `perencanaan_terapi_tujuan` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `perencanaan_terapi_program` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `edukasi` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_terapi_wicara` MODIFY COLUMN IF EXISTS `tindak_lanjut` TEXT NOT NULL;
-
-ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `provokes` enum('-','Proses Penyakit','Benturan','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `quality` enum('-','Seperti Tertusuk','Berdenyut','Teriris','Tertindih','Tertiban','Lain-lain') NOT NULL;
-
-ALTER TABLE `penilaian_ulang_nyeri` MODIFY COLUMN IF EXISTS `nyeri_hilang` enum('-','Istirahat','Medengar Musik','Minum Obat') NOT NULL;
 
 SET FOREIGN_KEY_CHECKS=1;
