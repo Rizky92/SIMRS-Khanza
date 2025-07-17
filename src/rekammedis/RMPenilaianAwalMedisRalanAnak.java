@@ -158,11 +158,11 @@ public final class RMPenilaianAwalMedisRalanAnak extends javax.swing.JDialog {
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RPS.setDocument(new batasInput((int)2000).getKata(RPS));
-        RPK.setDocument(new batasInput((int)2000).getKata(RPK));
-        RPD.setDocument(new batasInput((int)1000).getKata(RPD));
-        RPO.setDocument(new batasInput((int)1000).getKata(RPO));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RPS.setDocument(new batasInput((int)2000).getKata(RPS));
+        // RPK.setDocument(new batasInput((int)2000).getKata(RPK));
+        // RPD.setDocument(new batasInput((int)1000).getKata(RPD));
+        // RPO.setDocument(new batasInput((int)1000).getKata(RPO));
         Alergi.setDocument(new batasInput((int)50).getKata(Alergi));
         GCS.setDocument(new batasInput((byte)10).getKata(GCS));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
@@ -172,12 +172,12 @@ public final class RMPenilaianAwalMedisRalanAnak extends javax.swing.JDialog {
         SPO.setDocument(new batasInput((byte)5).getKata(SPO));
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
-        KetFisik.setDocument(new batasInput((int)5000).getKata(KetFisik));
-        KetLokalis.setDocument(new batasInput((int)3000).getKata(KetLokalis));
-        Penunjang.setDocument(new batasInput((int)3000).getKata(Penunjang));
-        Diagnosis.setDocument(new batasInput((int)500).getKata(Diagnosis));
-        Tatalaksana.setDocument(new batasInput((int)5000).getKata(Tatalaksana));
-        Konsul.setDocument(new batasInput((int)1000).getKata(Konsul));
+        // KetFisik.setDocument(new batasInput((int)5000).getKata(KetFisik));
+        // KetLokalis.setDocument(new batasInput((int)3000).getKata(KetLokalis));
+        // Penunjang.setDocument(new batasInput((int)3000).getKata(Penunjang));
+        // Diagnosis.setDocument(new batasInput((int)500).getKata(Diagnosis));
+        // Tatalaksana.setDocument(new batasInput((int)5000).getKata(Tatalaksana));
+        // Konsul.setDocument(new batasInput((int)1000).getKata(Konsul));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

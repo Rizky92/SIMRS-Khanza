@@ -185,7 +185,7 @@ public final class RMPenilaianTambahanMelarikanDiri extends javax.swing.JDialog 
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
-        FaktorPencegahan.setDocument(new batasInput((int)500).getKata(FaktorPencegahan));
+        // FaktorPencegahan.setDocument(new batasInput((int)500).getKata(FaktorPencegahan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

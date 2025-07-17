@@ -607,7 +607,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         DiperolehDari.setDocument(new batasInput((int)30).getKata(DiperolehDari));
         HubunganDenganPasien.setDocument(new batasInput((int)30).getKata(HubunganDenganPasien));
-        KeluhanUtama.setDocument(new batasInput((int)300).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)300).getKata(KeluhanUtama));
         PrenatalG.setDocument(new batasInput((int)10).getKata(PrenatalG));
         PrenatalP.setDocument(new batasInput((int)10).getKata(PrenatalP));
         PrenatalA.setDocument(new batasInput((int)10).getKata(PrenatalA));
@@ -703,8 +703,8 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         KeteranganSkriningGizi.setDocument(new batasInput((int)50).getKata(KeteranganSkriningGizi));
         LamaRatarata.setDocument(new batasInput((int)3).getKata(LamaRatarata));
         KondisiPulang.setDocument(new batasInput((int)100).getKata(KondisiPulang));
-        PerawatanLanjutan.setDocument(new batasInput((int)300).getKata(PerawatanLanjutan));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // PerawatanLanjutan.setDocument(new batasInput((int)300).getKata(PerawatanLanjutan));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

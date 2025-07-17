@@ -452,10 +452,10 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         KeteranganAnus.setDocument(new batasInput((byte)40).getKata(KeteranganAnus));
         KeteranganRefleks.setDocument(new batasInput((byte)40).getKata(KeteranganRefleks));
         KeteranganDenyutFemoral.setDocument(new batasInput((byte)40).getKata(KeteranganDenyutFemoral));
-        PemeriksaanLainnya.setDocument(new batasInput((int)300).getKata(PemeriksaanLainnya));
-        PemeriksaanPenunjang.setDocument(new batasInput((int)500).getKata(PemeriksaanPenunjang));
-        Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
-        Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
+        // PemeriksaanLainnya.setDocument(new batasInput((int)300).getKata(PemeriksaanLainnya));
+        // PemeriksaanPenunjang.setDocument(new batasInput((int)500).getKata(PemeriksaanPenunjang));
+        // Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
+        // Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
