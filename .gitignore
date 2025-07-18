@@ -1,31 +1,47 @@
-/.vscode
-/build
-/dist
-/lib
-/setting/database*.xml
-/setting/database*.ini
-**/*.DS_Store
-**/.DS_Store
-**/*.html_files
+# IDE-Generated directories
+.vscode
+
+# Generated files
+*.*~*
+*.css
+*.csv
 *.DS_Store
-.DS_Store
-**/*.*~
-**/*.~*
-**/*.html
-**/*.pdf
-**/*.exe
-**/*.jar
-**/*.css
-**/*.csv
-**/*.wps
-**/*.log
-**/*.sql
-**/*.xls
-**/*.xlsx
-**/*.[*]~
+*.exe
+*.html
+*.html_files
+*.jar
+*.log
+*.pdf
+*.sql
+*.wps
+*.xls
+*.xlsx
+*.jasper
+
+# Webapps upload/temp folder
+webapps/**/upload/*
+webapps/**/temp/*
+webapps/**/berkas/*
+
+# Project-generated directories
+build
+dist
+lib
+nbproject/*
+
+# Config files
+setting/*.ini
+setting/*.xml
+
+# don't ignore these files, they're necessary.
+!nbproject/project.properties
+!nbproject/project.xml
 !sik_bridging_lab.sql
 !sik_bridging_radiologi.sql
 !sik_eklaim_icd10.sql
 !sik_modif.sql
 !sik_satu_sehat_referensi.sql
 !sik.sql
+!webapps/**/upload/index.php
+!webapps/**/temp/index.php
+!webapps/**/berkas/index.php
