@@ -1,4 +1,31 @@
-/build
-/dist
-/lib
-!.gitignore
+# Root level ignore
+/*.css
+/*.html
+/*.html_files
+
+*.DS_Store
+*.*~*
+*.csv
+*.exe
+*.jar
+*.log
+*.pdf
+*.sql
+*.wps
+*.xls
+*.xlsx
+
+/.vscode
+/build/
+/dist/
+/lib/
+setting/*.ini
+setting/*.xml
+
+# Don't ignore these
+!sik_bridging_lab.sql
+!sik_bridging_radiologi.sql
+!sik_eklaim_icd10.sql
+!sik_modif.sql
+!sik_satu_sehat_referensi.sql
+!sik.sql
