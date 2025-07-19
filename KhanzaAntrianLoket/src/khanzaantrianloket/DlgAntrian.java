@@ -14,8 +14,8 @@ package khanzaantrianloket;
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +28,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 /**
  *
@@ -53,8 +55,9 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     public DlgAntrian() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        
-        this.setSize(350, 400);
+        if (!UIManager.getLookAndFeelDefaults().containsKey("Button.hoverForeground")) {
+            UIManager.put("Button.hoverForeground", new Color(50, 50, 50));
+        }
         
         panelBiasa1.setVisible(ANTRIANPREFIXHURUF);
         label3.setVisible(ANTRIANPREFIXHURUF);
@@ -97,8 +100,13 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
             if (col <= 1) {
                 panelBiasa1.setVisible(false);
-            } else if (col > 1) {
+            } else {
                 panelBiasa1.setVisible(true);
+                if (col <= 3) {
+                    panelBiasa1.setPreferredSize(new Dimension(120, 120));
+                } else {
+                    panelBiasa1.setPreferredSize(new Dimension(120, 200));
+                }
             }
             repaint();
         }
@@ -138,6 +146,8 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianD = new widget.Label();
         AntrianE = new widget.Label();
         AntrianF = new widget.Label();
+        panelBiasa2 = new widget.PanelBiasa();
+        btnexit = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         BtnDisplay = new widget.Button();
@@ -214,14 +224,17 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         DlgDisplay.getContentPane().add(form1, java.awt.BorderLayout.LINE_END);
 
         DlgDisplaySMC.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1366, 768));
-        DlgDisplaySMC.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        DlgDisplaySMC.setAlwaysOnTop(true);
+        DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1280, 720));
+        DlgDisplaySMC.setModal(true);
+        DlgDisplaySMC.setUndecorated(true);
+        DlgDisplaySMC.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
         internalFrame6.setBorder(null);
         internalFrame6.setPreferredSize(new java.awt.Dimension(500, 110));
         internalFrame6.setWarnaBawah(new java.awt.Color(250, 255, 250));
-        internalFrame6.setLayout(new java.awt.BorderLayout(8, 0));
+        internalFrame6.setLayout(new java.awt.GridBagLayout());
 
         paneliklan1.setBackground(new java.awt.Color(250, 255, 250));
         paneliklan1.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/coba.gif"))); // NOI18N
@@ -230,9 +243,15 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         paneliklan1.setRound(false);
         paneliklan1.setWarna(new java.awt.Color(250, 255, 250));
         paneliklan1.setLayout(null);
-        internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        internalFrame6.add(paneliklan1, gridBagConstraints);
 
-        internalFrame2.setPreferredSize(new java.awt.Dimension(500, 150));
+        internalFrame2.setPreferredSize(new java.awt.Dimension(470, 150));
         internalFrame2.setLayout(new java.awt.GridLayout(2, 1));
 
         DisplayAntrian.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 100, 50), 2), "No. Antrian", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 36), new java.awt.Color(50, 100, 50))); // NOI18N
@@ -249,7 +268,12 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         DisplayLoket.setPreferredSize(new java.awt.Dimension(186, 200));
         internalFrame2.add(DisplayLoket);
 
-        internalFrame6.add(internalFrame2, java.awt.BorderLayout.EAST);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
+        internalFrame6.add(internalFrame2, gridBagConstraints);
 
         panelBiasa1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Antrian Terakhir", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 30), new java.awt.Color(60, 130, 90))); // NOI18N
         panelBiasa1.setPreferredSize(new java.awt.Dimension(120, 200));
@@ -267,7 +291,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianA, gridBagConstraints);
@@ -284,7 +307,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianB, gridBagConstraints);
@@ -301,7 +323,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianC, gridBagConstraints);
@@ -318,7 +339,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianD, gridBagConstraints);
@@ -335,7 +355,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianE, gridBagConstraints);
@@ -352,12 +371,32 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipady = 10;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         panelBiasa1.add(AntrianF, gridBagConstraints);
 
-        internalFrame6.add(panelBiasa1, java.awt.BorderLayout.PAGE_END);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        internalFrame6.add(panelBiasa1, gridBagConstraints);
+
+        panelBiasa2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 30, 0));
+
+        btnexit.setText("Keluar");
+        btnexit.addActionListener(this::btnexitActionPerformed);
+        panelBiasa2.add(btnexit);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.03;
+        internalFrame6.add(panelBiasa2, gridBagConstraints);
 
         DlgDisplaySMC.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
@@ -461,19 +500,17 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int offset = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration()).bottom;
         if (ANTRIANPREFIXHURUF) {
             isTampilSmc();
-            DlgDisplaySMC.setSize(screen.width, screen.height - offset - 16);
+            DlgDisplaySMC.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+            DlgDisplaySMC.setLocation(0, 0);
             DlgDisplaySMC.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-            DlgDisplaySMC.setAlwaysOnTop(false);
             DlgDisplaySMC.setVisible(true);
         } else {
             isTampil();
-            DlgDisplay.setSize(screen.width, screen.height - offset - 16);
+            DlgDisplay.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+            DlgDisplaySMC.setLocation(0, 0);
             DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-            DlgDisplay.setAlwaysOnTop(false);
             DlgDisplay.setVisible(true);
         }
     }//GEN-LAST:event_BtnDisplayActionPerformed
@@ -510,6 +547,10 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
+        DlgDisplaySMC.dispose();
+    }//GEN-LAST:event_btnexitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -543,6 +584,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private widget.Label DisplayLoket;
     private javax.swing.JDialog DlgDisplay;
     private javax.swing.JDialog DlgDisplaySMC;
+    private widget.Button btnexit;
     private widget.ComboBox cmbhuruf;
     private widget.ComboBox cmbloket;
     private widget.InternalFrame form1;
@@ -557,6 +599,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private widget.Label labelantri1;
     private widget.Label labelruntext;
     private widget.PanelBiasa panelBiasa1;
+    private widget.PanelBiasa panelBiasa2;
     private usu.widget.glass.PanelGlass paneliklan;
     private usu.widget.glass.PanelGlass paneliklan1;
     private widget.panelisi panelisi1;
