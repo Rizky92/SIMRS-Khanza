@@ -209,7 +209,8 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             skrining_indra_pendengaran=false,catatan_pengkajian_paska_operasi=false,skrining_frailty_syndrome=false,sirkulasi_cssd=false,lama_pelayanan_cssd=false,catatan_observasi_bayi=false,
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan_belum_lunas=false,
             checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,
-            pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false;
+            pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,
+            antrian_di_registrasi=false;
 
     /** Creates new form DlgUser
      * @param parent
@@ -1427,6 +1428,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         
         if("[A]Pindah Kamar Pilihan 2".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[A]Pindah Kamar Pilihan 2",pindah_kamar_pilihan_2});
+        }
+        
+        if ("[A]Antrian Loket Di Registrasi".toLowerCase().contains(TCari.getText().toLowerCase())) {
+            tabMode.addRow(new Object[] {false, "[A]Antrian Loket Di Registrasi", antrian_di_registrasi});
         }
 
         if("[B]Barcode Ralan".toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -3960,7 +3965,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[L]Rekap Keluar Duta Parking".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Rekap Keluar Duta Parking",duta_parkir_rekap_keluar});
         }
-
+        
         if("[M]Pasien".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Pasien",pasien});
         }
@@ -6010,6 +6015,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             
             if("[A]Pindah Kamar Pilihan 2".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pindah_kamar_pilihan_2='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+            
+            if("[A]Antrian Loket Di Registrasi".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengupdateSmc("user", "antrian_di_registrasi = ?", "id_user = aes_encrypt(?, 'nur')", tbUser.getValueAt(i, 2).toString(), TKd.getText());
             }
 
             if("[B]Barcode Ralan".equals(tbUser.getValueAt(i,1).toString())){
