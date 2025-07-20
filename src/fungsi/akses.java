@@ -1424,7 +1424,7 @@ public final class akses {
                         akses.surat_keterangan_layak_terbang=rs2.getBoolean("surat_keterangan_layak_terbang");
                         akses.bayar_beban_hutang_lain=rs2.getBoolean("bayar_beban_hutang_lain");
                         akses.surat_persetujuan_pemeriksaan_hiv=rs2.getBoolean("surat_persetujuan_pemeriksaan_hiv");
-                        akses.surat_persetujuan_pemeriksaan_hiv = rs2.getBoolean("antrian_di_registrasi");
+                        akses.antrian_di_registrasi = rs2.getBoolean("antrian_di_registrasi");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
