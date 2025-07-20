@@ -28,6 +28,120 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
 
         internalFrame1 = new widget.InternalFrame();
         PanelInput = new javax.swing.JPanel();
+        Scroll1 = new widget.ScrollPane();
+        panelBiasa1 = new widget.PanelBiasa();
+        FormInput = new widget.PanelBiasa();
+        jLabel3 = new widget.Label();
+        jLabel4 = new widget.Label();
+        TTmp = new widget.TextBox();
+        CmbJk = new widget.ComboBox();
+        TNm = new widget.TextBox();
+        jLabel8 = new widget.Label();
+        CMbGd = new widget.ComboBox();
+        jLabel9 = new widget.Label();
+        jLabel13 = new widget.Label();
+        DTPLahir = new widget.Tanggal();
+        jLabel18 = new widget.Label();
+        cmbAgama = new widget.ComboBox();
+        jLabel19 = new widget.Label();
+        CmbStts = new widget.ComboBox();
+        jLabel20 = new widget.Label();
+        jLabel21 = new widget.Label();
+        Pekerjaan = new widget.TextBox();
+        jLabel12 = new widget.Label();
+        Alamat = new widget.TextBox();
+        TTlp = new widget.TextBox();
+        TNo = new widget.TextBox();
+        jLabel15 = new widget.Label();
+        TKtp = new widget.TextBox();
+        DTPDaftar = new widget.Tanggal();
+        jLabel22 = new widget.Label();
+        jLabel23 = new widget.Label();
+        jLabel24 = new widget.Label();
+        CMbPnd = new widget.ComboBox();
+        Saudara = new widget.TextBox();
+        jLabel25 = new widget.Label();
+        Kdpnj = new widget.TextBox();
+        nmpnj = new widget.TextBox();
+        BtnPenjab = new widget.Button();
+        Kelurahan = new widget.TextBox();
+        Kecamatan = new widget.TextBox();
+        Kabupaten = new widget.TextBox();
+        BtnKelurahan = new widget.Button();
+        BtnKecamatan = new widget.Button();
+        BtnKabupaten = new widget.Button();
+        ChkDaftar = new widget.CekBox();
+        jLabel14 = new widget.Label();
+        NmIbu = new widget.TextBox();
+        jLabel26 = new widget.Label();
+        jLabel27 = new widget.Label();
+        PekerjaanPj = new widget.TextBox();
+        jLabel28 = new widget.Label();
+        jLabel29 = new widget.Label();
+        AlamatPj = new widget.TextBox();
+        KecamatanPj = new widget.TextBox();
+        BtnKecamatanPj = new widget.Button();
+        KabupatenPj = new widget.TextBox();
+        BtnKabupatenPj = new widget.Button();
+        BtnKelurahanPj = new widget.Button();
+        KelurahanPj = new widget.TextBox();
+        jLabel30 = new widget.Label();
+        TNoPeserta = new widget.TextBox();
+        ChkRM = new widget.CekBox();
+        TUmurTh = new widget.TextBox();
+        jLabel31 = new widget.Label();
+        TUmurBl = new widget.TextBox();
+        jLabel32 = new widget.Label();
+        TUmurHr = new widget.TextBox();
+        jLabel33 = new widget.Label();
+        jLabel34 = new widget.Label();
+        nmsukubangsa = new widget.TextBox();
+        BtnSuku = new widget.Button();
+        nmbahasa = new widget.TextBox();
+        BtnBahasa = new widget.Button();
+        jLabel36 = new widget.Label();
+        jLabel37 = new widget.Label();
+        nmperusahaan = new widget.TextBox();
+        BtnPerusahaan = new widget.Button();
+        chkTNI = new widget.CekBox();
+        LabelGolonganTNI = new widget.Label();
+        nmgolongantni = new widget.TextBox();
+        BtnGolonganTNI = new widget.Button();
+        BtnSatuanTNI = new widget.Button();
+        nmsatuantni = new widget.TextBox();
+        LabelSatuanTNI = new widget.Label();
+        LabelPangkatTNI = new widget.Label();
+        nmpangkattni = new widget.TextBox();
+        BtnPangkatTNI = new widget.Button();
+        LabelJabatanTNI = new widget.Label();
+        nmjabatantni = new widget.TextBox();
+        BtnJabatanTNI = new widget.Button();
+        chkPolri = new widget.CekBox();
+        LabelGolonganPolri = new widget.Label();
+        nmgolonganpolri = new widget.TextBox();
+        BtnGolonganPolri = new widget.Button();
+        BtnSatuanPolri = new widget.Button();
+        nmsatuanpolri = new widget.TextBox();
+        LabelSatuanPolri = new widget.Label();
+        LabelPangkatPolri = new widget.Label();
+        nmpangkatpolri = new widget.TextBox();
+        BtnPangkatPolri = new widget.Button();
+        BtnJabatanPolri = new widget.Button();
+        nmjabatanpolri = new widget.TextBox();
+        LabelJabatanPolri = new widget.Label();
+        BtnPropinsi = new widget.Button();
+        Propinsi = new widget.TextBox();
+        PropinsiPj = new widget.TextBox();
+        btnPropinsiPj = new widget.Button();
+        jLabel38 = new widget.Label();
+        nmcacat = new widget.TextBox();
+        BtnCacat = new widget.Button();
+        jLabel39 = new widget.Label();
+        EMail = new widget.TextBox();
+        jLabel40 = new widget.Label();
+        NIP = new widget.TextBox();
+        ChkAlamatPJ = new widget.CekBox();
+        CmbKeluarga = new widget.ComboBox();
         panelGlass6 = new widget.panelisi();
         jLabel16 = new widget.Label();
         NoKartu = new widget.TextBox();
@@ -51,6 +165,1079 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         PanelInput.setOpaque(false);
         PanelInput.setPreferredSize(new java.awt.Dimension(200, 917));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
+
+        Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Scroll1.setName("Scroll1"); // NOI18N
+        Scroll1.setOpaque(true);
+
+        panelBiasa1.setName("panelBiasa1"); // NOI18N
+
+        FormInput.setBorder(null);
+        FormInput.setName("FormInput"); // NOI18N
+        FormInput.setPreferredSize(new java.awt.Dimension(560, 168));
+        FormInput.setLayout(null);
+
+        jLabel3.setText("No.Rekam Medis :");
+        jLabel3.setName("jLabel3"); // NOI18N
+        FormInput.add(jLabel3);
+        jLabel3.setBounds(4, 12, 95, 23);
+
+        jLabel4.setText("Nama Pasien :");
+        jLabel4.setName("jLabel4"); // NOI18N
+        FormInput.add(jLabel4);
+        jLabel4.setBounds(4, 42, 95, 23);
+
+        TTmp.setName("TTmp"); // NOI18N
+        TTmp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TTmpKeyPressed(evt);
+            }
+        });
+        FormInput.add(TTmp);
+        TTmp.setBounds(102, 102, 187, 23);
+
+        CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LAKI-LAKI", "PEREMPUAN" }));
+        CmbJk.setName("CmbJk"); // NOI18N
+        CmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CmbJkKeyPressed(evt);
+            }
+        });
+        FormInput.add(CmbJk);
+        CmbJk.setBounds(102, 72, 110, 23);
+
+        TNm.setHighlighter(null);
+        TNm.setName("TNm"); // NOI18N
+        TNm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNmKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNm);
+        TNm.setBounds(102, 42, 290, 23);
+
+        jLabel8.setText("J.K. :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        FormInput.add(jLabel8);
+        jLabel8.setBounds(4, 72, 95, 23);
+
+        CMbGd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "AB", "O" }));
+        CMbGd.setName("CMbGd"); // NOI18N
+        CMbGd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CMbGdKeyPressed(evt);
+            }
+        });
+        FormInput.add(CMbGd);
+        CMbGd.setBounds(322, 72, 70, 23);
+
+        jLabel9.setText("Gol. Darah :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        FormInput.add(jLabel9);
+        jLabel9.setBounds(247, 72, 72, 23);
+
+        jLabel13.setText("Tmp/Tgl. Lahir :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(4, 102, 95, 23);
+
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-07-2025" }));
+        DTPLahir.setDisplayFormat("dd-MM-yyyy");
+        DTPLahir.setName("DTPLahir"); // NOI18N
+        DTPLahir.setOpaque(false);
+        DTPLahir.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                DTPLahirItemStateChanged(evt);
+            }
+        });
+        DTPLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPLahirKeyPressed(evt);
+            }
+        });
+        FormInput.add(DTPLahir);
+        DTPLahir.setBounds(292, 102, 100, 23);
+
+        jLabel18.setText("Agama :");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(402, 12, 90, 23);
+
+        cmbAgama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDHA", "KONG HU CHU", "-" }));
+        cmbAgama.setLightWeightPopupEnabled(false);
+        cmbAgama.setName("cmbAgama"); // NOI18N
+        cmbAgama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbAgamaKeyPressed(evt);
+            }
+        });
+        FormInput.add(cmbAgama);
+        cmbAgama.setBounds(496, 12, 130, 23);
+
+        jLabel19.setText("Stts. Nikah :");
+        jLabel19.setName("jLabel19"); // NOI18N
+        FormInput.add(jLabel19);
+        jLabel19.setBounds(629, 12, 100, 23);
+
+        CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "BELUM MENIKAH", "JANDA", "DUDHA" }));
+        CmbStts.setLightWeightPopupEnabled(false);
+        CmbStts.setName("CmbStts"); // NOI18N
+        CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CmbSttsKeyPressed(evt);
+            }
+        });
+        FormInput.add(CmbStts);
+        CmbStts.setBounds(733, 12, 140, 23);
+
+        jLabel20.setText("Alamat Pasien :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(402, 162, 90, 23);
+
+        jLabel21.setText("No.Telp :");
+        jLabel21.setName("jLabel21"); // NOI18N
+        FormInput.add(jLabel21);
+        jLabel21.setBounds(402, 102, 90, 23);
+
+        Pekerjaan.setName("Pekerjaan"); // NOI18N
+        Pekerjaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PekerjaanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Pekerjaan);
+        Pekerjaan.setBounds(496, 132, 150, 23);
+
+        jLabel12.setText("Pekerjaan :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(402, 132, 90, 23);
+
+        Alamat.setText("ALAMAT");
+        Alamat.setHighlighter(null);
+        Alamat.setName("Alamat"); // NOI18N
+        Alamat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                AlamatMouseMoved(evt);
+            }
+        });
+        Alamat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AlamatMouseExited(evt);
+            }
+        });
+        Alamat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AlamatKeyPressed(evt);
+            }
+        });
+        FormInput.add(Alamat);
+        Alamat.setBounds(496, 162, 377, 23);
+
+        TTlp.setHighlighter(null);
+        TTlp.setName("TTlp"); // NOI18N
+        TTlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TTlpKeyPressed(evt);
+            }
+        });
+        FormInput.add(TTlp);
+        TTlp.setBounds(496, 102, 150, 23);
+
+        TNo.setEditable(false);
+        TNo.setBackground(new java.awt.Color(245, 250, 240));
+        TNo.setHighlighter(null);
+        TNo.setName("TNo"); // NOI18N
+        TNo.setOpaque(true);
+        TNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNo);
+        TNo.setBounds(102, 12, 160, 23);
+
+        jLabel15.setText("No.KTP/SIM :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        FormInput.add(jLabel15);
+        jLabel15.setBounds(659, 132, 80, 23);
+
+        TKtp.setName("TKtp"); // NOI18N
+        TKtp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TKtpKeyPressed(evt);
+            }
+        });
+        FormInput.add(TKtp);
+        TKtp.setBounds(743, 132, 130, 23);
+
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-07-2025" }));
+        DTPDaftar.setDisplayFormat("dd-MM-yyyy");
+        DTPDaftar.setName("DTPDaftar"); // NOI18N
+        DTPDaftar.setOpaque(false);
+        DTPDaftar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPDaftarKeyPressed(evt);
+            }
+        });
+        FormInput.add(DTPDaftar);
+        DTPDaftar.setBounds(753, 102, 93, 23);
+
+        jLabel22.setText("Pertama Daftar :");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(649, 102, 100, 23);
+
+        jLabel23.setText("Umur :");
+        jLabel23.setName("jLabel23"); // NOI18N
+        FormInput.add(jLabel23);
+        jLabel23.setBounds(4, 132, 95, 23);
+
+        jLabel24.setText("Pendidikan :");
+        jLabel24.setName("jLabel24"); // NOI18N
+        FormInput.add(jLabel24);
+        jLabel24.setBounds(247, 132, 72, 23);
+
+        CMbPnd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "TS", "TK", "SD", "SMP", "SMA", "SLTA/SEDERAJAT", "D1", "D2", "D3", "D4", "S1", "S2", "S3" }));
+        CMbPnd.setName("CMbPnd"); // NOI18N
+        CMbPnd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CMbPndKeyPressed(evt);
+            }
+        });
+        FormInput.add(CMbPnd);
+        CMbPnd.setBounds(322, 132, 70, 23);
+
+        Saudara.setName("Saudara"); // NOI18N
+        Saudara.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SaudaraKeyPressed(evt);
+            }
+        });
+        FormInput.add(Saudara);
+        Saudara.setBounds(102, 222, 290, 23);
+
+        jLabel25.setText("Askes/Asuransi :");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(402, 42, 90, 23);
+
+        Kdpnj.setText("-");
+        Kdpnj.setHighlighter(null);
+        Kdpnj.setName("Kdpnj"); // NOI18N
+        Kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KdpnjKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kdpnj);
+        Kdpnj.setBounds(496, 42, 80, 23);
+
+        nmpnj.setEditable(false);
+        nmpnj.setText("-");
+        nmpnj.setName("nmpnj"); // NOI18N
+        FormInput.add(nmpnj);
+        nmpnj.setBounds(578, 42, 265, 23);
+
+        BtnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPenjab.setMnemonic('1');
+        BtnPenjab.setToolTipText("ALt+1");
+        BtnPenjab.setName("BtnPenjab"); // NOI18N
+        BtnPenjab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenjabActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnPenjab);
+        BtnPenjab.setBounds(845, 42, 28, 23);
+
+        Kelurahan.setText("KELURAHAN");
+        Kelurahan.setHighlighter(null);
+        Kelurahan.setName("Kelurahan"); // NOI18N
+        Kelurahan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KelurahanMouseMoved(evt);
+            }
+        });
+        Kelurahan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KelurahanMouseExited(evt);
+            }
+        });
+        Kelurahan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KelurahanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kelurahan);
+        Kelurahan.setBounds(496, 192, 152, 23);
+
+        Kecamatan.setText("KECAMATAN");
+        Kecamatan.setHighlighter(null);
+        Kecamatan.setName("Kecamatan"); // NOI18N
+        Kecamatan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KecamatanMouseMoved(evt);
+            }
+        });
+        Kecamatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KecamatanMouseExited(evt);
+            }
+        });
+        Kecamatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KecamatanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kecamatan);
+        Kecamatan.setBounds(690, 192, 152, 23);
+
+        Kabupaten.setText("KABUPATEN");
+        Kabupaten.setHighlighter(null);
+        Kabupaten.setName("Kabupaten"); // NOI18N
+        Kabupaten.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KabupatenMouseMoved(evt);
+            }
+        });
+        Kabupaten.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KabupatenMouseExited(evt);
+            }
+        });
+        Kabupaten.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KabupatenKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kabupaten);
+        Kabupaten.setBounds(496, 222, 152, 23);
+
+        BtnKelurahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKelurahan.setMnemonic('2');
+        BtnKelurahan.setToolTipText("ALt+2");
+        BtnKelurahan.setName("BtnKelurahan"); // NOI18N
+        BtnKelurahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKelurahanActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKelurahan);
+        BtnKelurahan.setBounds(651, 192, 28, 23);
+
+        BtnKecamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKecamatan.setMnemonic('3');
+        BtnKecamatan.setToolTipText("ALt+3");
+        BtnKecamatan.setName("BtnKecamatan"); // NOI18N
+        BtnKecamatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKecamatanActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKecamatan);
+        BtnKecamatan.setBounds(845, 192, 28, 23);
+
+        BtnKabupaten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKabupaten.setMnemonic('4');
+        BtnKabupaten.setToolTipText("ALt+4");
+        BtnKabupaten.setName("BtnKabupaten"); // NOI18N
+        BtnKabupaten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKabupatenActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKabupaten);
+        BtnKabupaten.setBounds(651, 222, 28, 23);
+
+        ChkDaftar.setBorder(null);
+        ChkDaftar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkDaftar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkDaftar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkDaftar.setName("ChkDaftar"); // NOI18N
+        ChkDaftar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkDaftarItemStateChanged(evt);
+            }
+        });
+        FormInput.add(ChkDaftar);
+        ChkDaftar.setBounds(850, 102, 23, 23);
+
+        jLabel14.setText("Nama Ibu :");
+        jLabel14.setName("jLabel14"); // NOI18N
+        FormInput.add(jLabel14);
+        jLabel14.setBounds(4, 162, 95, 23);
+
+        NmIbu.setName("NmIbu"); // NOI18N
+        NmIbu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NmIbuKeyPressed(evt);
+            }
+        });
+        FormInput.add(NmIbu);
+        NmIbu.setBounds(102, 162, 290, 23);
+
+        jLabel26.setText("Png. Jawab :");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(4, 192, 95, 23);
+
+        jLabel27.setText("Nama P.J. :");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(4, 222, 95, 23);
+
+        PekerjaanPj.setName("PekerjaanPj"); // NOI18N
+        PekerjaanPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PekerjaanPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(PekerjaanPj);
+        PekerjaanPj.setBounds(102, 252, 290, 23);
+
+        jLabel28.setText("Pekerjaan P.J. :");
+        jLabel28.setName("jLabel28"); // NOI18N
+        FormInput.add(jLabel28);
+        jLabel28.setBounds(4, 252, 95, 23);
+
+        jLabel29.setText("Alamat P.J. :");
+        jLabel29.setName("jLabel29"); // NOI18N
+        FormInput.add(jLabel29);
+        jLabel29.setBounds(402, 252, 90, 23);
+
+        AlamatPj.setText("ALAMAT");
+        AlamatPj.setHighlighter(null);
+        AlamatPj.setName("AlamatPj"); // NOI18N
+        AlamatPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                AlamatPjMouseMoved(evt);
+            }
+        });
+        AlamatPj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AlamatPjMouseExited(evt);
+            }
+        });
+        AlamatPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AlamatPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(AlamatPj);
+        AlamatPj.setBounds(496, 252, 346, 23);
+
+        KecamatanPj.setText("KECAMATAN");
+        KecamatanPj.setHighlighter(null);
+        KecamatanPj.setName("KecamatanPj"); // NOI18N
+        KecamatanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KecamatanPjMouseMoved(evt);
+            }
+        });
+        KecamatanPj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KecamatanPjMouseExited(evt);
+            }
+        });
+        KecamatanPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KecamatanPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(KecamatanPj);
+        KecamatanPj.setBounds(690, 282, 152, 23);
+
+        BtnKecamatanPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKecamatanPj.setMnemonic('3');
+        BtnKecamatanPj.setToolTipText("ALt+3");
+        BtnKecamatanPj.setName("BtnKecamatanPj"); // NOI18N
+        BtnKecamatanPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKecamatanPjActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKecamatanPj);
+        BtnKecamatanPj.setBounds(845, 282, 28, 23);
+
+        KabupatenPj.setText("KABUPATEN");
+        KabupatenPj.setHighlighter(null);
+        KabupatenPj.setName("KabupatenPj"); // NOI18N
+        KabupatenPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KabupatenPjMouseMoved(evt);
+            }
+        });
+        KabupatenPj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KabupatenPjMouseExited(evt);
+            }
+        });
+        KabupatenPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KabupatenPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(KabupatenPj);
+        KabupatenPj.setBounds(496, 312, 152, 23);
+
+        BtnKabupatenPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKabupatenPj.setMnemonic('4');
+        BtnKabupatenPj.setToolTipText("ALt+4");
+        BtnKabupatenPj.setName("BtnKabupatenPj"); // NOI18N
+        BtnKabupatenPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKabupatenPjActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKabupatenPj);
+        BtnKabupatenPj.setBounds(651, 312, 28, 23);
+
+        BtnKelurahanPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnKelurahanPj.setMnemonic('2');
+        BtnKelurahanPj.setToolTipText("ALt+2");
+        BtnKelurahanPj.setName("BtnKelurahanPj"); // NOI18N
+        BtnKelurahanPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKelurahanPjActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnKelurahanPj);
+        BtnKelurahanPj.setBounds(651, 282, 28, 23);
+
+        KelurahanPj.setText("KELURAHAN");
+        KelurahanPj.setHighlighter(null);
+        KelurahanPj.setName("KelurahanPj"); // NOI18N
+        KelurahanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KelurahanPjMouseMoved(evt);
+            }
+        });
+        KelurahanPj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KelurahanPjMouseExited(evt);
+            }
+        });
+        KelurahanPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KelurahanPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(KelurahanPj);
+        KelurahanPj.setBounds(496, 282, 152, 23);
+
+        jLabel30.setText("No.Peserta :");
+        jLabel30.setName("jLabel30"); // NOI18N
+        FormInput.add(jLabel30);
+        jLabel30.setBounds(392, 72, 100, 23);
+
+        TNoPeserta.setHighlighter(null);
+        TNoPeserta.setName("TNoPeserta"); // NOI18N
+        TNoPeserta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoPesertaKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNoPeserta);
+        TNoPeserta.setBounds(496, 72, 150, 23);
+
+        ChkRM.setBorder(null);
+        ChkRM.setSelected(true);
+        ChkRM.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkRM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkRM.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkRM.setName("ChkRM"); // NOI18N
+        ChkRM.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkRMItemStateChanged(evt);
+            }
+        });
+        FormInput.add(ChkRM);
+        ChkRM.setBounds(266, 12, 23, 23);
+
+        TUmurTh.setName("TUmurTh"); // NOI18N
+        TUmurTh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TUmurThKeyPressed(evt);
+            }
+        });
+        FormInput.add(TUmurTh);
+        TUmurTh.setBounds(102, 132, 35, 23);
+
+        jLabel31.setText("Th");
+        jLabel31.setName("jLabel31"); // NOI18N
+        FormInput.add(jLabel31);
+        jLabel31.setBounds(131, 132, 20, 23);
+
+        TUmurBl.setName("TUmurBl"); // NOI18N
+        TUmurBl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TUmurBlKeyPressed(evt);
+            }
+        });
+        FormInput.add(TUmurBl);
+        TUmurBl.setBounds(153, 132, 35, 23);
+
+        jLabel32.setText("Bl");
+        jLabel32.setName("jLabel32"); // NOI18N
+        FormInput.add(jLabel32);
+        jLabel32.setBounds(178, 132, 20, 23);
+
+        TUmurHr.setName("TUmurHr"); // NOI18N
+        TUmurHr.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TUmurHrKeyPressed(evt);
+            }
+        });
+        FormInput.add(TUmurHr);
+        TUmurHr.setBounds(200, 132, 35, 23);
+
+        jLabel33.setText("Hr");
+        jLabel33.setName("jLabel33"); // NOI18N
+        FormInput.add(jLabel33);
+        jLabel33.setBounds(229, 132, 20, 23);
+
+        jLabel34.setText("Suku/Bangsa :");
+        jLabel34.setName("jLabel34"); // NOI18N
+        FormInput.add(jLabel34);
+        jLabel34.setBounds(4, 282, 95, 23);
+
+        nmsukubangsa.setEditable(false);
+        nmsukubangsa.setName("nmsukubangsa"); // NOI18N
+        FormInput.add(nmsukubangsa);
+        nmsukubangsa.setBounds(102, 282, 259, 23);
+
+        BtnSuku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSuku.setMnemonic('1');
+        BtnSuku.setToolTipText("ALt+1");
+        BtnSuku.setName("BtnSuku"); // NOI18N
+        BtnSuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSukuActionPerformed(evt);
+            }
+        });
+        BtnSuku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSukuKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnSuku);
+        BtnSuku.setBounds(364, 282, 28, 23);
+
+        nmbahasa.setEditable(false);
+        nmbahasa.setName("nmbahasa"); // NOI18N
+        FormInput.add(nmbahasa);
+        nmbahasa.setBounds(102, 312, 259, 23);
+
+        BtnBahasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnBahasa.setMnemonic('1');
+        BtnBahasa.setToolTipText("ALt+1");
+        BtnBahasa.setName("BtnBahasa"); // NOI18N
+        BtnBahasa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBahasaActionPerformed(evt);
+            }
+        });
+        BtnBahasa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnBahasaKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnBahasa);
+        BtnBahasa.setBounds(364, 312, 28, 23);
+
+        jLabel36.setText("Bahasa Dipakai :");
+        jLabel36.setName("jLabel36"); // NOI18N
+        FormInput.add(jLabel36);
+        jLabel36.setBounds(4, 312, 95, 23);
+
+        jLabel37.setText("Instansi Pasien :");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(402, 342, 90, 23);
+
+        nmperusahaan.setEditable(false);
+        nmperusahaan.setName("nmperusahaan"); // NOI18N
+        FormInput.add(nmperusahaan);
+        nmperusahaan.setBounds(496, 342, 152, 23);
+
+        BtnPerusahaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPerusahaan.setMnemonic('1');
+        BtnPerusahaan.setToolTipText("ALt+1");
+        BtnPerusahaan.setName("BtnPerusahaan"); // NOI18N
+        BtnPerusahaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPerusahaanActionPerformed(evt);
+            }
+        });
+        BtnPerusahaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPerusahaanKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnPerusahaan);
+        BtnPerusahaan.setBounds(651, 342, 28, 23);
+
+        chkTNI.setText("Anggota TNI :");
+        chkTNI.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        chkTNI.setName("chkTNI"); // NOI18N
+        chkTNI.setOpaque(false);
+        chkTNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTNIActionPerformed(evt);
+            }
+        });
+        FormInput.add(chkTNI);
+        chkTNI.setBounds(4, 377, 95, 23);
+
+        LabelGolonganTNI.setText("Golongan :");
+        LabelGolonganTNI.setName("LabelGolonganTNI"); // NOI18N
+        FormInput.add(LabelGolonganTNI);
+        LabelGolonganTNI.setBounds(4, 402, 103, 23);
+
+        nmgolongantni.setEditable(false);
+        nmgolongantni.setName("nmgolongantni"); // NOI18N
+        FormInput.add(nmgolongantni);
+        nmgolongantni.setBounds(111, 402, 250, 23);
+
+        BtnGolonganTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnGolonganTNI.setMnemonic('1');
+        BtnGolonganTNI.setToolTipText("ALt+1");
+        BtnGolonganTNI.setEnabled(false);
+        BtnGolonganTNI.setName("BtnGolonganTNI"); // NOI18N
+        BtnGolonganTNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGolonganTNIActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnGolonganTNI);
+        BtnGolonganTNI.setBounds(364, 402, 28, 23);
+
+        BtnSatuanTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSatuanTNI.setMnemonic('1');
+        BtnSatuanTNI.setToolTipText("ALt+1");
+        BtnSatuanTNI.setEnabled(false);
+        BtnSatuanTNI.setName("BtnSatuanTNI"); // NOI18N
+        BtnSatuanTNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSatuanTNIActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnSatuanTNI);
+        BtnSatuanTNI.setBounds(364, 432, 28, 23);
+
+        nmsatuantni.setEditable(false);
+        nmsatuantni.setName("nmsatuantni"); // NOI18N
+        FormInput.add(nmsatuantni);
+        nmsatuantni.setBounds(111, 432, 250, 23);
+
+        LabelSatuanTNI.setText("Kesatuan :");
+        LabelSatuanTNI.setName("LabelSatuanTNI"); // NOI18N
+        FormInput.add(LabelSatuanTNI);
+        LabelSatuanTNI.setBounds(4, 432, 103, 23);
+
+        LabelPangkatTNI.setText("Pangkat :");
+        LabelPangkatTNI.setName("LabelPangkatTNI"); // NOI18N
+        FormInput.add(LabelPangkatTNI);
+        LabelPangkatTNI.setBounds(4, 462, 103, 23);
+
+        nmpangkattni.setEditable(false);
+        nmpangkattni.setName("nmpangkattni"); // NOI18N
+        FormInput.add(nmpangkattni);
+        nmpangkattni.setBounds(111, 462, 250, 23);
+
+        BtnPangkatTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPangkatTNI.setMnemonic('1');
+        BtnPangkatTNI.setToolTipText("ALt+1");
+        BtnPangkatTNI.setEnabled(false);
+        BtnPangkatTNI.setName("BtnPangkatTNI"); // NOI18N
+        BtnPangkatTNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPangkatTNIActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnPangkatTNI);
+        BtnPangkatTNI.setBounds(364, 462, 28, 23);
+
+        LabelJabatanTNI.setText("Jabatan :");
+        LabelJabatanTNI.setName("LabelJabatanTNI"); // NOI18N
+        FormInput.add(LabelJabatanTNI);
+        LabelJabatanTNI.setBounds(4, 492, 103, 23);
+
+        nmjabatantni.setEditable(false);
+        nmjabatantni.setName("nmjabatantni"); // NOI18N
+        FormInput.add(nmjabatantni);
+        nmjabatantni.setBounds(111, 492, 250, 23);
+
+        BtnJabatanTNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnJabatanTNI.setMnemonic('1');
+        BtnJabatanTNI.setToolTipText("ALt+1");
+        BtnJabatanTNI.setEnabled(false);
+        BtnJabatanTNI.setName("BtnJabatanTNI"); // NOI18N
+        BtnJabatanTNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJabatanTNIActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnJabatanTNI);
+        BtnJabatanTNI.setBounds(364, 492, 28, 23);
+
+        chkPolri.setText("Anggota POLRI :");
+        chkPolri.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        chkPolri.setName("chkPolri"); // NOI18N
+        chkPolri.setOpaque(false);
+        chkPolri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPolriActionPerformed(evt);
+            }
+        });
+        FormInput.add(chkPolri);
+        chkPolri.setBounds(425, 377, 130, 23);
+
+        LabelGolonganPolri.setText("Golongan :");
+        LabelGolonganPolri.setName("LabelGolonganPolri"); // NOI18N
+        FormInput.add(LabelGolonganPolri);
+        LabelGolonganPolri.setBounds(433, 402, 133, 23);
+
+        nmgolonganpolri.setEditable(false);
+        nmgolonganpolri.setName("nmgolonganpolri"); // NOI18N
+        FormInput.add(nmgolonganpolri);
+        nmgolonganpolri.setBounds(570, 402, 273, 23);
+
+        BtnGolonganPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnGolonganPolri.setMnemonic('1');
+        BtnGolonganPolri.setToolTipText("ALt+1");
+        BtnGolonganPolri.setEnabled(false);
+        BtnGolonganPolri.setName("BtnGolonganPolri"); // NOI18N
+        BtnGolonganPolri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGolonganPolriActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnGolonganPolri);
+        BtnGolonganPolri.setBounds(845, 402, 28, 23);
+
+        BtnSatuanPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSatuanPolri.setMnemonic('1');
+        BtnSatuanPolri.setToolTipText("ALt+1");
+        BtnSatuanPolri.setEnabled(false);
+        BtnSatuanPolri.setName("BtnSatuanPolri"); // NOI18N
+        BtnSatuanPolri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSatuanPolriActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnSatuanPolri);
+        BtnSatuanPolri.setBounds(845, 432, 28, 23);
+
+        nmsatuanpolri.setEditable(false);
+        nmsatuanpolri.setName("nmsatuanpolri"); // NOI18N
+        FormInput.add(nmsatuanpolri);
+        nmsatuanpolri.setBounds(570, 432, 273, 23);
+
+        LabelSatuanPolri.setText("Kesatuan :");
+        LabelSatuanPolri.setName("LabelSatuanPolri"); // NOI18N
+        FormInput.add(LabelSatuanPolri);
+        LabelSatuanPolri.setBounds(433, 432, 133, 23);
+
+        LabelPangkatPolri.setText("Pangkat :");
+        LabelPangkatPolri.setName("LabelPangkatPolri"); // NOI18N
+        FormInput.add(LabelPangkatPolri);
+        LabelPangkatPolri.setBounds(433, 462, 133, 23);
+
+        nmpangkatpolri.setEditable(false);
+        nmpangkatpolri.setName("nmpangkatpolri"); // NOI18N
+        FormInput.add(nmpangkatpolri);
+        nmpangkatpolri.setBounds(570, 462, 273, 23);
+
+        BtnPangkatPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPangkatPolri.setMnemonic('1');
+        BtnPangkatPolri.setToolTipText("ALt+1");
+        BtnPangkatPolri.setEnabled(false);
+        BtnPangkatPolri.setName("BtnPangkatPolri"); // NOI18N
+        BtnPangkatPolri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPangkatPolriActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnPangkatPolri);
+        BtnPangkatPolri.setBounds(845, 462, 28, 23);
+
+        BtnJabatanPolri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnJabatanPolri.setMnemonic('1');
+        BtnJabatanPolri.setToolTipText("ALt+1");
+        BtnJabatanPolri.setEnabled(false);
+        BtnJabatanPolri.setName("BtnJabatanPolri"); // NOI18N
+        BtnJabatanPolri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnJabatanPolriActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnJabatanPolri);
+        BtnJabatanPolri.setBounds(845, 492, 28, 23);
+
+        nmjabatanpolri.setEditable(false);
+        nmjabatanpolri.setName("nmjabatanpolri"); // NOI18N
+        FormInput.add(nmjabatanpolri);
+        nmjabatanpolri.setBounds(570, 492, 273, 23);
+
+        LabelJabatanPolri.setText("Jabatan :");
+        LabelJabatanPolri.setName("LabelJabatanPolri"); // NOI18N
+        FormInput.add(LabelJabatanPolri);
+        LabelJabatanPolri.setBounds(433, 492, 133, 23);
+
+        BtnPropinsi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPropinsi.setMnemonic('4');
+        BtnPropinsi.setToolTipText("ALt+4");
+        BtnPropinsi.setName("BtnPropinsi"); // NOI18N
+        BtnPropinsi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPropinsiActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnPropinsi);
+        BtnPropinsi.setBounds(845, 222, 28, 23);
+
+        Propinsi.setText("PROPINSI");
+        Propinsi.setHighlighter(null);
+        Propinsi.setName("Propinsi"); // NOI18N
+        Propinsi.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PropinsiMouseMoved(evt);
+            }
+        });
+        Propinsi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PropinsiMouseExited(evt);
+            }
+        });
+        Propinsi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PropinsiKeyPressed(evt);
+            }
+        });
+        FormInput.add(Propinsi);
+        Propinsi.setBounds(690, 222, 152, 23);
+
+        PropinsiPj.setText("PROPINSI");
+        PropinsiPj.setHighlighter(null);
+        PropinsiPj.setName("PropinsiPj"); // NOI18N
+        PropinsiPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PropinsiPjMouseMoved(evt);
+            }
+        });
+        PropinsiPj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PropinsiPjMouseExited(evt);
+            }
+        });
+        PropinsiPj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PropinsiPjKeyPressed(evt);
+            }
+        });
+        FormInput.add(PropinsiPj);
+        PropinsiPj.setBounds(690, 312, 152, 23);
+
+        btnPropinsiPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnPropinsiPj.setMnemonic('4');
+        btnPropinsiPj.setToolTipText("ALt+4");
+        btnPropinsiPj.setName("btnPropinsiPj"); // NOI18N
+        btnPropinsiPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPropinsiPjActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnPropinsiPj);
+        btnPropinsiPj.setBounds(845, 312, 28, 23);
+
+        jLabel38.setText("Cacat Fisik :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(4, 342, 95, 23);
+
+        nmcacat.setEditable(false);
+        nmcacat.setName("nmcacat"); // NOI18N
+        FormInput.add(nmcacat);
+        nmcacat.setBounds(102, 342, 259, 23);
+
+        BtnCacat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnCacat.setMnemonic('1');
+        BtnCacat.setToolTipText("ALt+1");
+        BtnCacat.setName("BtnCacat"); // NOI18N
+        BtnCacat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCacatActionPerformed(evt);
+            }
+        });
+        BtnCacat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCacatKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnCacat);
+        BtnCacat.setBounds(364, 342, 28, 23);
+
+        jLabel39.setText("Email :");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(648, 72, 60, 23);
+
+        EMail.setHighlighter(null);
+        EMail.setName("EMail"); // NOI18N
+        EMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EMailKeyPressed(evt);
+            }
+        });
+        FormInput.add(EMail);
+        EMail.setBounds(712, 72, 161, 23);
+
+        jLabel40.setText("NIP/NRP :");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(679, 342, 70, 23);
+
+        NIP.setHighlighter(null);
+        NIP.setName("NIP"); // NOI18N
+        NIP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NIPKeyPressed(evt);
+            }
+        });
+        FormInput.add(NIP);
+        NIP.setBounds(753, 342, 120, 23);
+
+        ChkAlamatPJ.setBorder(null);
+        ChkAlamatPJ.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkAlamatPJ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAlamatPJ.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAlamatPJ.setName("ChkAlamatPJ"); // NOI18N
+        ChkAlamatPJ.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkAlamatPJItemStateChanged(evt);
+            }
+        });
+        FormInput.add(ChkAlamatPJ);
+        ChkAlamatPJ.setBounds(845, 252, 28, 23);
+
+        CmbKeluarga.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AYAH", "IBU", "ISTRI", "SUAMI", "SAUDARA", "ANAK", "DIRI SENDIRI", "LAIN-LAIN" }));
+        CmbKeluarga.setName("CmbKeluarga"); // NOI18N
+        CmbKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CmbKeluargaKeyPressed(evt);
+            }
+        });
+        FormInput.add(CmbKeluarga);
+        CmbKeluarga.setBounds(102, 192, 290, 23);
+
+        panelBiasa1.add(FormInput);
+
+        Scroll1.setViewportView(panelBiasa1);
+
+        PanelInput.add(Scroll1, java.awt.BorderLayout.CENTER);
 
         panelGlass6.setName("panelGlass6"); // NOI18N
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
@@ -189,16 +1376,1000 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
+    private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
+        Valid.pindah(evt,CMbGd,DTPLahir);
+    }//GEN-LAST:event_TTmpKeyPressed
+
+    private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
+        Valid.pindah(evt,TNm,CMbGd);
+    }//GEN-LAST:event_CmbJkKeyPressed
+
+    private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            TCari.setText(TNm.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TCari.setText(TNm.getText());
+            if(TNm.getText().toLowerCase().contains("tn.")){
+                CmbJk.setSelectedItem("LAKI-LAKI");
+            }else if(TNm.getText().toLowerCase().contains("sdr.")){
+                CmbJk.setSelectedItem("LAKI-LAKI");
+            }else if(TNm.getText().toLowerCase().contains("ny.")){
+                CmbJk.setSelectedItem("PEREMPUAN");
+            }else if(TNm.getText().toLowerCase().contains("nn.")){
+                CmbJk.setSelectedItem("PEREMPUAN");
+            }
+            CmbJk.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TNo.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            TCari.requestFocus();
+        }
+    }//GEN-LAST:event_TNmKeyPressed
+
+    private void CMbGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbGdKeyPressed
+        Valid.pindah(evt,CmbJk,TTmp);
+    }//GEN-LAST:event_CMbGdKeyPressed
+
+    private void DTPLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPLahirItemStateChanged
+        lahir = DTPLahir.getDate();
+        birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        p = Period.between(birthday,today);
+        TUmurTh.setText(String.valueOf(p.getYears()));
+        TUmurBl.setText(String.valueOf(p.getMonths()));
+        TUmurHr.setText(String.valueOf(p.getDays()));
+    }//GEN-LAST:event_DTPLahirItemStateChanged
+
+    private void DTPLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPLahirKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TUmurTh.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TTmp.requestFocus();
+        }
+    }//GEN-LAST:event_DTPLahirKeyPressed
+
+    private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
+        Valid.pindah(evt,BtnCacat,CmbStts);
+    }//GEN-LAST:event_cmbAgamaKeyPressed
+
+    private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
+        Valid.pindah(evt,cmbAgama,Kdpnj);
+    }//GEN-LAST:event_CmbSttsKeyPressed
+
+    private void PekerjaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PekerjaanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(tampilkantni.equals("Yes")){
+                if(Pekerjaan.getText().toLowerCase().contains("tni")){
+                    chkTNI.setSelected(true);
+                }
+                if(nmpnj.getText().toLowerCase().contains("tni")){
+                    chkTNI.setSelected(true);
+                }
+                if(Pekerjaan.getText().toLowerCase().contains("polri")){
+                    chkPolri.setSelected(true);
+                }
+                if(nmpnj.getText().toLowerCase().contains("polri")){
+                    chkPolri.setSelected(true);
+                }
+            }
+            TKtp.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TTlp.requestFocus();
+        }
+    }//GEN-LAST:event_PekerjaanKeyPressed
+
+    private void AlamatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseMoved
+        if(Alamat.getText().equals("ALAMAT")){
+            Alamat.setText("");
+        }
+    }//GEN-LAST:event_AlamatMouseMoved
+
+    private void AlamatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseExited
+        if(Alamat.getText().equals("")){
+            Alamat.setText("ALAMAT");
+        }
+    }//GEN-LAST:event_AlamatMouseExited
+
+    private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Alamat.getText().equals("")){
+                Alamat.setText("ALAMAT");
+            }
+            if(Kelurahan.getText().equals("KELURAHAN")){
+                Kelurahan.setText("");
+            }
+            Kelurahan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Alamat.getText().equals("")){
+                Alamat.setText("ALAMAT");
+            }
+            TKtp.requestFocus();
+        }
+    }//GEN-LAST:event_AlamatKeyPressed
+
+    private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlpKeyPressed
+        Valid.pindah(evt,EMail,Pekerjaan);
+    }//GEN-LAST:event_TTlpKeyPressed
+
+    private void TNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            TCari.setText(TNo.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TNm.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            KabupatenPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            TCari.requestFocus();
+        }
+    }//GEN-LAST:event_TNoKeyPressed
+
+    private void TKtpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKtpKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Alamat.getText().equals("ALAMAT")){
+                Alamat.setText("");
+            }
+            Alamat.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Pekerjaan.requestFocus();
+        }
+    }//GEN-LAST:event_TKtpKeyPressed
+
+    private void DTPDaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPDaftarKeyPressed
+        Valid.pindah2(evt,Pekerjaan,BtnSimpan);
+    }//GEN-LAST:event_DTPDaftarKeyPressed
+
+    private void CMbPndKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbPndKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            NmIbu.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TUmurTh.requestFocus();
+        }
+    }//GEN-LAST:event_CMbPndKeyPressed
+
+    private void SaudaraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SaudaraKeyPressed
+        Valid.pindah(evt,CmbKeluarga,PekerjaanPj);
+    }//GEN-LAST:event_SaudaraKeyPressed
+
+    private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdpnjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",nmpnj,Kdpnj.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnPenjabActionPerformed(null);
+        }else{
+            Valid.pindah(evt,CmbStts,TNoPeserta);
+        }
+    }//GEN-LAST:event_KdpnjKeyPressed
+
+    private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
+        akses.setform("DlgPasien");
+        penjab.isCek();
+        penjab.onCari();
+        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        penjab.setLocationRelativeTo(internalFrame1);
+        penjab.setVisible(true);
+    }//GEN-LAST:event_BtnPenjabActionPerformed
+
+    private void KelurahanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseMoved
+        if(Kelurahan.getText().equals("KELURAHAN")){
+            Kelurahan.setText("");
+        }
+    }//GEN-LAST:event_KelurahanMouseMoved
+
+    private void KelurahanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseExited
+        if(Kelurahan.getText().equals("")){
+            Kelurahan.setText("KELURAHAN");
+        }
+    }//GEN-LAST:event_KelurahanMouseExited
+
+    private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Kelurahan.getText().equals("")){
+                Kelurahan.setText("KELURAHAN");
+            }
+            if(Kecamatan.getText().equals("KECAMATAN")){
+                Kecamatan.setText("");
+            }
+            Kecamatan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Kelurahan.getText().equals("")){
+                Kelurahan.setText("KELURAHAN");
+            }
+            if(Alamat.getText().equals("ALAMAT")){
+                Alamat.setText("");
+            }
+            Alamat.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdKec.getText().trim().equals("")||Kecamatan.getText().trim().equals("")||Kecamatan.getText().trim().equals("KECAMATAN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kecamatan dulu..!!");
+                BtnKelurahan.requestFocus();
+            }else{
+                pilih=1;
+                kelurahanref.setPropinsi(KdKec.getText(),Kecamatan.getText());
+                kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kelurahanref.setLocationRelativeTo(internalFrame1);
+                kelurahanref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KelurahanKeyPressed
+
+    private void KecamatanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseMoved
+        if(Kecamatan.getText().equals("KECAMATAN")){
+            Kecamatan.setText("");
+        }
+    }//GEN-LAST:event_KecamatanMouseMoved
+
+    private void KecamatanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseExited
+        if(Kecamatan.getText().equals("")){
+            Kecamatan.setText("KECAMATAN");
+        }
+    }//GEN-LAST:event_KecamatanMouseExited
+
+    private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Kecamatan.getText().equals("")){
+                Kecamatan.setText("KECAMATAN");
+            }
+            if(Kabupaten.getText().equals("KABUPATEN")){
+                Kabupaten.setText("");
+            }
+            Kabupaten.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Kecamatan.getText().equals("")){
+                Kecamatan.setText("KECAMATAN");
+            }
+            if(Kelurahan.getText().equals("KELURAHAN")){
+                Kelurahan.setText("");
+            }
+            Kelurahan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdKab.getText().trim().equals("")||Kabupaten.getText().trim().equals("")||Kabupaten.getText().trim().equals("KABUPATEN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kabupaten dulu..!!");
+                BtnKabupaten.requestFocus();
+            }else{
+                pilih=1;
+                kecamatanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
+                kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kecamatanref.setLocationRelativeTo(internalFrame1);
+                kecamatanref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KecamatanKeyPressed
+
+    private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseMoved
+        if(Kabupaten.getText().equals("KABUPATEN")){
+            Kabupaten.setText("");
+        }
+    }//GEN-LAST:event_KabupatenMouseMoved
+
+    private void KabupatenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseExited
+        if(Kabupaten.getText().equals("")){
+            Kabupaten.setText("KABUPATEN");
+        }
+    }//GEN-LAST:event_KabupatenMouseExited
+
+    private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Kabupaten.getText().equals("")){
+                Kabupaten.setText("KABUPATEN");
+            }
+            if(Propinsi.getText().equals("PROPINSI")){
+                Propinsi.setText("");
+            }
+            Propinsi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Kabupaten.getText().equals("")){
+                Kabupaten.setText("KABUPATEN");
+            }
+            if(Kecamatan.getText().equals("KECAMATAN")){
+                Kecamatan.setText("");
+            }
+            Kecamatan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdProp.getText().trim().equals("")||Propinsi.getText().trim().equals("")||Propinsi.getText().trim().equals("PROPINSI")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih propinsi dulu..!!");
+                BtnPropinsi.requestFocus();
+            }else{
+                pilih=1;
+                kabupatenref.setPropinsi(KdProp.getText(),Propinsi.getText());
+                kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kabupatenref.setLocationRelativeTo(internalFrame1);
+                kabupatenref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KabupatenKeyPressed
+
+    private void BtnKelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanActionPerformed
+        akses.setform("DlgPasien");
+        pilih=1;
+        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kel.setLocationRelativeTo(internalFrame1);
+        kel.setVisible(true);
+    }//GEN-LAST:event_BtnKelurahanActionPerformed
+
+    private void BtnKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanActionPerformed
+        akses.setform("DlgPasien");
+        pilih=1;
+        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kec.setLocationRelativeTo(internalFrame1);
+        kec.setVisible(true);
+    }//GEN-LAST:event_BtnKecamatanActionPerformed
+
+    private void BtnKabupatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenActionPerformed
+        akses.setform("DlgPasien");
+        pilih=1;
+        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kab.setLocationRelativeTo(internalFrame1);
+        kab.setVisible(true);
+    }//GEN-LAST:event_BtnKabupatenActionPerformed
+
+    private void ChkDaftarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkDaftarItemStateChanged
+        if(ChkDaftar.isSelected()==true){
+            DTPDaftar.setEditable(true);
+        }else if(ChkDaftar.isSelected()==false){
+            DTPDaftar.setEditable(false);
+        }
+        DTPDaftar.requestFocus();
+    }//GEN-LAST:event_ChkDaftarItemStateChanged
+
+    private void NmIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmIbuKeyPressed
+        Valid.pindah(evt,CMbPnd,CmbKeluarga);
+    }//GEN-LAST:event_NmIbuKeyPressed
+
+    private void PekerjaanPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PekerjaanPjKeyPressed
+        Valid.pindah(evt,Saudara,BtnSuku);
+    }//GEN-LAST:event_PekerjaanPjKeyPressed
+
+    private void AlamatPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatPjMouseMoved
+        if(AlamatPj.getText().equals("ALAMAT")){
+            AlamatPj.setText("");
+        }
+    }//GEN-LAST:event_AlamatPjMouseMoved
+
+    private void AlamatPjMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatPjMouseExited
+        if(AlamatPj.getText().equals("")){
+            AlamatPj.setText("ALAMAT");
+        }
+    }//GEN-LAST:event_AlamatPjMouseExited
+
+    private void AlamatPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatPjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(AlamatPj.getText().equals("")){
+                AlamatPj.setText("ALAMAT");
+            }
+            if(KelurahanPj.getText().equals("KELURAHAN")){
+                KelurahanPj.setText("");
+            }
+            KelurahanPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(AlamatPj.getText().equals("")){
+                AlamatPj.setText("ALAMAT");
+            }
+            if(Propinsi.getText().equals("PROPINSI")){
+                Propinsi.setText("");
+            }
+            Propinsi.requestFocus();
+        }
+    }//GEN-LAST:event_AlamatPjKeyPressed
+
+    private void KecamatanPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanPjMouseMoved
+        if(KecamatanPj.getText().equals("KECAMATAN")){
+            KecamatanPj.setText("");
+        }
+    }//GEN-LAST:event_KecamatanPjMouseMoved
+
+    private void KecamatanPjMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanPjMouseExited
+        if(KecamatanPj.getText().equals("")){
+            KecamatanPj.setText("KECAMATAN");
+        }
+    }//GEN-LAST:event_KecamatanPjMouseExited
+
+    private void KecamatanPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanPjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(KecamatanPj.getText().equals("")){
+                KecamatanPj.setText("KECAMATAN");
+            }
+            if(KabupatenPj.getText().equals("KABUPATEN")){
+                KabupatenPj.setText("");
+            }
+            KabupatenPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(KecamatanPj.getText().equals("")){
+                KecamatanPj.setText("KECAMATAN");
+            }
+            if(KelurahanPj.getText().equals("KELURAHAN")){
+                KelurahanPj.setText("");
+            }
+            KelurahanPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdKab.getText().trim().equals("")||KabupatenPj.getText().trim().equals("")||KabupatenPj.getText().trim().equals("KABUPATEN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kabupaten dulu..!!");
+                BtnKabupaten.requestFocus();
+            }else{
+                pilih=2;
+                kecamatanref.setPropinsi(KdKab.getText(),KabupatenPj.getText());
+                kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kecamatanref.setLocationRelativeTo(internalFrame1);
+                kecamatanref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KecamatanPjKeyPressed
+
+    private void BtnKecamatanPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanPjActionPerformed
+        akses.setform("DlgPasien");
+        pilih=3;
+        kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kec.setLocationRelativeTo(internalFrame1);
+        kec.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKecamatanPjActionPerformed
+
+    private void KabupatenPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenPjMouseMoved
+        if(KabupatenPj.getText().equals("KABUPATEN")){
+            KabupatenPj.setText("");
+        }
+    }//GEN-LAST:event_KabupatenPjMouseMoved
+
+    private void KabupatenPjMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenPjMouseExited
+        if(KabupatenPj.getText().equals("")){
+            KabupatenPj.setText("KABUPATEN");
+        }
+    }//GEN-LAST:event_KabupatenPjMouseExited
+
+    private void KabupatenPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenPjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(KabupatenPj.getText().equals("")){
+                KabupatenPj.setText("KABUPATEN");
+            }
+            if(PropinsiPj.getText().equals("PROPINSI")){
+                PropinsiPj.setText("");
+            }
+            PropinsiPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(KabupatenPj.getText().equals("")){
+                KabupatenPj.setText("KABUPATEN");
+            }
+            if(KecamatanPj.getText().equals("KECAMATAN")){
+                KecamatanPj.setText("");
+            }
+            KecamatanPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdProp.getText().trim().equals("")||PropinsiPj.getText().trim().equals("")||PropinsiPj.getText().trim().equals("PROPINSI")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih propinsi dulu..!!");
+                BtnPropinsi.requestFocus();
+            }else{
+                pilih=2;
+                kabupatenref.setPropinsi(KdProp.getText(),PropinsiPj.getText());
+                kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kabupatenref.setLocationRelativeTo(internalFrame1);
+                kabupatenref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KabupatenPjKeyPressed
+
+    private void BtnKabupatenPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenPjActionPerformed
+        akses.setform("DlgPasien");
+        pilih=3;
+        kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kab.setLocationRelativeTo(internalFrame1);
+        kab.setVisible(true);
+    }//GEN-LAST:event_BtnKabupatenPjActionPerformed
+
+    private void BtnKelurahanPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanPjActionPerformed
+        akses.setform("DlgPasien");
+        pilih=3;
+        kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kel.setLocationRelativeTo(internalFrame1);
+        kel.setVisible(true);
+    }//GEN-LAST:event_BtnKelurahanPjActionPerformed
+
+    private void KelurahanPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanPjMouseMoved
+        if(KelurahanPj.getText().equals("KELURAHAN")){
+            KelurahanPj.setText("");
+        }
+    }//GEN-LAST:event_KelurahanPjMouseMoved
+
+    private void KelurahanPjMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanPjMouseExited
+        if(KelurahanPj.getText().equals("")){
+            KelurahanPj.setText("KELURAHAN");
+        }
+    }//GEN-LAST:event_KelurahanPjMouseExited
+
+    private void KelurahanPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanPjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(KelurahanPj.getText().equals("")){
+                KelurahanPj.setText("KELURAHAN");
+            }
+            if(KecamatanPj.getText().equals("KECAMATAN")){
+                KecamatanPj.setText("");
+            }
+            KecamatanPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(KelurahanPj.getText().equals("")){
+                KelurahanPj.setText("KELURAHAN");
+            }
+            if(AlamatPj.getText().equals("ALAMAT")){
+                AlamatPj.setText("");
+            }
+            AlamatPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            if(KdKec.getText().trim().equals("")||KecamatanPj.getText().trim().equals("")||KecamatanPj.getText().trim().equals("KECAMATAN")){
+                JOptionPane.showMessageDialog(null,"Silahkan pilih kecamatan dulu..!!");
+                BtnKelurahan.requestFocus();
+            }else{
+                pilih=2;
+                kelurahanref.setPropinsi(KdKec.getText(),KecamatanPj.getText());
+                kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                kelurahanref.setLocationRelativeTo(internalFrame1);
+                kelurahanref.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_KelurahanPjKeyPressed
+
+    private void TNoPesertaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoPesertaKeyPressed
+        Valid.pindah(evt,Kdpnj,EMail);
+    }//GEN-LAST:event_TNoPesertaKeyPressed
+
+    private void ChkRMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkRMItemStateChanged
+        if(ChkRM.isSelected()==true){
+            TNo.setEditable(false);
+            TNo.setBackground(new Color(245,250,240));
+            autoNomor();
+        }else if(ChkRM.isSelected()==false){
+            TNo.setEditable(true);
+            TNo.setBackground(new Color(250,255,245));
+        }
+    }//GEN-LAST:event_ChkRMItemStateChanged
+
+    private void TUmurThKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUmurThKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            //       CmbUmur.requestFocus();
+            try {
+                Valid.SetTgl(DTPLahir,Sequel.cariIsi("select DATE_SUB('"+Valid.SetTgl(DTPLahir.getSelectedItem()+"")+"', interval "+TUmurTh.getText()+" year)"));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            TUmurBl.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            DTPLahir.requestFocus();
+        }
+    }//GEN-LAST:event_TUmurThKeyPressed
+
+    private void TUmurBlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUmurBlKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TUmurHr.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TUmurTh.requestFocus();
+        }
+    }//GEN-LAST:event_TUmurBlKeyPressed
+
+    private void TUmurHrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUmurHrKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            CMbPnd.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            TUmurBl.requestFocus();
+        }
+    }//GEN-LAST:event_TUmurHrKeyPressed
+
+    private void BtnSukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSukuActionPerformed
+        akses.setform("DlgPasien");
+        suku.isCek();
+        suku.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        suku.setLocationRelativeTo(internalFrame1);
+        suku.setVisible(true);
+    }//GEN-LAST:event_BtnSukuActionPerformed
+
+    private void BtnSukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSukuKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnSukuActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            PekerjaanPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnBahasa.requestFocus();
+        }
+    }//GEN-LAST:event_BtnSukuKeyPressed
+
+    private void BtnBahasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBahasaActionPerformed
+        akses.setform("DlgPasien");
+        bahasa.isCek();
+        bahasa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        bahasa.setLocationRelativeTo(internalFrame1);
+        bahasa.setVisible(true);
+    }//GEN-LAST:event_BtnBahasaActionPerformed
+
+    private void BtnBahasaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBahasaKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnBahasaActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnSuku.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCacat.requestFocus();
+        }
+    }//GEN-LAST:event_BtnBahasaKeyPressed
+
+    private void BtnPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerusahaanActionPerformed
+        akses.setform("DlgPasien");
+        perusahaan.isCek();
+        perusahaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        perusahaan.setLocationRelativeTo(internalFrame1);
+        perusahaan.setVisible(true);
+    }//GEN-LAST:event_BtnPerusahaanActionPerformed
+
+    private void BtnPerusahaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPerusahaanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnPerusahaanActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(PropinsiPj.getText().equals("PROPINSI")){
+                PropinsiPj.setText("");
+            }
+            PropinsiPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            NIP.requestFocus();
+        }
+    }//GEN-LAST:event_BtnPerusahaanKeyPressed
+
+    private void chkTNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTNIActionPerformed
+        if(chkTNI.isSelected()==true){
+            chkPolri.setSelected(false);
+            kdgolonganpolri.setText("");
+            nmgolonganpolri.setText("");
+            kdsatuanpolri.setText("");
+            nmsatuanpolri.setText("");
+            kdpangkatpolri.setText("");
+            nmpangkatpolri.setText("");
+            kdjabatanpolri.setText("");
+            nmjabatanpolri.setText("");
+            BtnGolonganPolri.setEnabled(false);
+            BtnSatuanPolri.setEnabled(false);
+            BtnJabatanPolri.setEnabled(false);
+            BtnPangkatPolri.setEnabled(false);
+            BtnGolonganTNI.setEnabled(true);
+            BtnSatuanTNI.setEnabled(true);
+            BtnJabatanTNI.setEnabled(true);
+            BtnPangkatTNI.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkTNIActionPerformed
+
+    private void BtnGolonganTNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGolonganTNIActionPerformed
+        akses.setform("DlgPasien");
+        golongantni.isCek();
+        golongantni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        golongantni.setLocationRelativeTo(internalFrame1);
+        golongantni.setVisible(true);
+    }//GEN-LAST:event_BtnGolonganTNIActionPerformed
+
+    private void BtnSatuanTNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanTNIActionPerformed
+        akses.setform("DlgPasien");
+        satuantni.isCek();
+        satuantni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        satuantni.setLocationRelativeTo(internalFrame1);
+        satuantni.setVisible(true);
+    }//GEN-LAST:event_BtnSatuanTNIActionPerformed
+
+    private void BtnPangkatTNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPangkatTNIActionPerformed
+        akses.setform("DlgPasien");
+        pangkattni.isCek();
+        pangkattni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pangkattni.setLocationRelativeTo(internalFrame1);
+        pangkattni.setVisible(true);
+    }//GEN-LAST:event_BtnPangkatTNIActionPerformed
+
+    private void BtnJabatanTNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJabatanTNIActionPerformed
+        akses.setform("DlgPasien");
+        jabatantni.isCek();
+        jabatantni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        jabatantni.setLocationRelativeTo(internalFrame1);
+        jabatantni.setVisible(true);
+    }//GEN-LAST:event_BtnJabatanTNIActionPerformed
+
+    private void chkPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPolriActionPerformed
+        if(chkPolri.isSelected()==true){
+            chkTNI.setSelected(false);
+            kdgolongantni.setText("");
+            nmgolongantni.setText("");
+            kdsatuantni.setText("");
+            nmsatuantni.setText("");
+            kdpangkattni.setText("");
+            nmpangkattni.setText("");
+            kdjabatantni.setText("");
+            nmjabatantni.setText("");
+            BtnGolonganPolri.setEnabled(true);
+            BtnSatuanPolri.setEnabled(true);
+            BtnJabatanPolri.setEnabled(true);
+            BtnPangkatPolri.setEnabled(true);
+            BtnGolonganTNI.setEnabled(false);
+            BtnSatuanTNI.setEnabled(false);
+            BtnJabatanTNI.setEnabled(false);
+            BtnPangkatTNI.setEnabled(false);
+        }
+    }//GEN-LAST:event_chkPolriActionPerformed
+
+    private void BtnGolonganPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGolonganPolriActionPerformed
+        akses.setform("DlgPasien");
+        golonganpolri.isCek();
+        golonganpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        golonganpolri.setLocationRelativeTo(internalFrame1);
+        golonganpolri.setVisible(true);
+    }//GEN-LAST:event_BtnGolonganPolriActionPerformed
+
+    private void BtnSatuanPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanPolriActionPerformed
+        akses.setform("DlgPasien");
+        satuanpolri.isCek();
+        satuanpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        satuanpolri.setLocationRelativeTo(internalFrame1);
+        satuanpolri.setVisible(true);
+    }//GEN-LAST:event_BtnSatuanPolriActionPerformed
+
+    private void BtnPangkatPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPangkatPolriActionPerformed
+        akses.setform("DlgPasien");
+        pangkatpolri.isCek();
+        pangkatpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pangkatpolri.setLocationRelativeTo(internalFrame1);
+        pangkatpolri.setVisible(true);
+    }//GEN-LAST:event_BtnPangkatPolriActionPerformed
+
+    private void BtnJabatanPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJabatanPolriActionPerformed
+        akses.setform("DlgPasien");
+        jabatanpolri.isCek();
+        jabatanpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        jabatanpolri.setLocationRelativeTo(internalFrame1);
+        jabatanpolri.setVisible(true);
+    }//GEN-LAST:event_BtnJabatanPolriActionPerformed
+
+    private void BtnPropinsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPropinsiActionPerformed
+        akses.setform("DlgPasien");
+        pilih=1;
+        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        prop.setLocationRelativeTo(internalFrame1);
+        prop.setVisible(true);
+    }//GEN-LAST:event_BtnPropinsiActionPerformed
+
+    private void PropinsiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PropinsiMouseMoved
+        if(Propinsi.getText().equals("PROPINSI")){
+            Propinsi.setText("");
+        }
+    }//GEN-LAST:event_PropinsiMouseMoved
+
+    private void PropinsiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PropinsiMouseExited
+        if(Propinsi.getText().equals("")){
+            Propinsi.setText("PROPINSI");
+        }
+    }//GEN-LAST:event_PropinsiMouseExited
+
+    private void PropinsiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PropinsiKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Propinsi.getText().equals("")){
+                Propinsi.setText("PROPINSI");
+            }
+            if(AlamatPj.getText().equals("ALAMAT")){
+                AlamatPj.setText("");
+            }
+            AlamatPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Propinsi.getText().equals("")){
+                Propinsi.setText("PROPINSI");
+            }
+            if(Kabupaten.getText().equals("KABUPATEN")){
+                Kabupaten.setText("");
+            }
+            Kabupaten.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            pilih=1;
+            propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            propinsiref.setLocationRelativeTo(internalFrame1);
+            propinsiref.setVisible(true);
+        }
+    }//GEN-LAST:event_PropinsiKeyPressed
+
+    private void PropinsiPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PropinsiPjMouseMoved
+        if(PropinsiPj.getText().equals("PROPINSI")){
+            PropinsiPj.setText("");
+        }
+    }//GEN-LAST:event_PropinsiPjMouseMoved
+
+    private void PropinsiPjMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PropinsiPjMouseExited
+        if(PropinsiPj.getText().equals("")){
+            PropinsiPj.setText("PROPINSI");
+        }
+    }//GEN-LAST:event_PropinsiPjMouseExited
+
+    private void PropinsiPjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PropinsiPjKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(PropinsiPj.getText().equals("")){
+                PropinsiPj.setText("PROPINSI");
+            }
+            BtnPerusahaan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(PropinsiPj.getText().equals("")){
+                PropinsiPj.setText("PROPINSI");
+            }
+            if(KabupatenPj.getText().equals("KABUPATEN")){
+                KabupatenPj.setText("");
+            }
+            KabupatenPj.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            pilih=2;
+            propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            propinsiref.setLocationRelativeTo(internalFrame1);
+            propinsiref.setVisible(true);
+        }
+    }//GEN-LAST:event_PropinsiPjKeyPressed
+
+    private void btnPropinsiPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPropinsiPjActionPerformed
+        akses.setform("DlgPasien");
+        pilih=3;
+        prop.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        prop.setLocationRelativeTo(internalFrame1);
+        prop.setVisible(true);
+    }//GEN-LAST:event_btnPropinsiPjActionPerformed
+
+    private void BtnCacatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCacatActionPerformed
+        akses.setform("DlgPasien");
+        cacat.isCek();
+        cacat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        cacat.setLocationRelativeTo(internalFrame1);
+        cacat.setVisible(true);
+    }//GEN-LAST:event_BtnCacatActionPerformed
+
+    private void BtnCacatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCacatKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCacatActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnBahasa.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            cmbAgama.requestFocus();
+        }
+    }//GEN-LAST:event_BtnCacatKeyPressed
+
+    private void EMailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EMailKeyPressed
+        Valid.pindah(evt,TNoPeserta,TTlp);
+    }//GEN-LAST:event_EMailKeyPressed
+
+    private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKeyPressed
+        Valid.pindah(evt,BtnPerusahaan,BtnSimpan);
+    }//GEN-LAST:event_NIPKeyPressed
+
+    private void ChkAlamatPJItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkAlamatPJItemStateChanged
+        if(ChkAlamatPJ.isSelected()==true){
+            AlamatPj.setText(Alamat.getText());
+            KelurahanPj.setText(Kelurahan.getText());
+            KecamatanPj.setText(Kecamatan.getText());
+            KabupatenPj.setText(Kabupaten.getText());
+            PropinsiPj.setText(Propinsi.getText());
+        }else{
+            AlamatPj.setText("ALAMAT");
+            KelurahanPj.setText("KELURAHAN");
+            KecamatanPj.setText("KECAMATAN");
+            KabupatenPj.setText("KABUPATEN");
+            PropinsiPj.setText("PROPINSI");
+        }
+    }//GEN-LAST:event_ChkAlamatPJItemStateChanged
+
+    private void CmbKeluargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbKeluargaKeyPressed
+        Valid.pindah(evt,NmIbu,Saudara);
+    }//GEN-LAST:event_CmbKeluargaKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox Alamat;
+    private widget.TextBox AlamatPj;
+    private widget.Button BtnBahasa;
+    private widget.Button BtnCacat;
     private widget.Button BtnCari;
+    private widget.Button BtnGolonganPolri;
+    private widget.Button BtnGolonganTNI;
+    private widget.Button BtnJabatanPolri;
+    private widget.Button BtnJabatanTNI;
+    private widget.Button BtnKabupaten;
+    private widget.Button BtnKabupatenPj;
+    private widget.Button BtnKecamatan;
+    private widget.Button BtnKecamatanPj;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKelurahan;
+    private widget.Button BtnKelurahanPj;
+    private widget.Button BtnPangkatPolri;
+    private widget.Button BtnPangkatTNI;
+    private widget.Button BtnPenjab;
+    private widget.Button BtnPerusahaan;
     private widget.Button BtnPrint;
+    private widget.Button BtnPropinsi;
+    private widget.Button BtnSatuanPolri;
+    private widget.Button BtnSatuanTNI;
     private widget.Button BtnSimpan;
+    private widget.Button BtnSuku;
+    private widget.ComboBox CMbGd;
+    private widget.ComboBox CMbPnd;
+    private widget.CekBox ChkAlamatPJ;
+    private widget.CekBox ChkDaftar;
+    private widget.CekBox ChkRM;
+    private widget.ComboBox CmbJk;
+    private widget.ComboBox CmbKeluarga;
+    private widget.ComboBox CmbStts;
+    private widget.Tanggal DTPDaftar;
+    private widget.Tanggal DTPLahir;
+    private widget.TextBox EMail;
+    private widget.PanelBiasa FormInput;
+    private widget.TextBox Kabupaten;
+    private widget.TextBox KabupatenPj;
+    private widget.TextBox Kdpnj;
+    private widget.TextBox Kecamatan;
+    private widget.TextBox KecamatanPj;
+    private widget.TextBox Kelurahan;
+    private widget.TextBox KelurahanPj;
+    private widget.Label LabelGolonganPolri;
+    private widget.Label LabelGolonganTNI;
+    private widget.Label LabelJabatanPolri;
+    private widget.Label LabelJabatanTNI;
+    private widget.Label LabelPangkatPolri;
+    private widget.Label LabelPangkatTNI;
+    private widget.Label LabelSatuanPolri;
+    private widget.Label LabelSatuanTNI;
+    private widget.TextBox NIP;
+    private widget.TextBox NmIbu;
     private widget.TextBox NoKartu;
     private javax.swing.JPanel PanelInput;
+    private widget.TextBox Pekerjaan;
+    private widget.TextBox PekerjaanPj;
+    private widget.TextBox Propinsi;
+    private widget.TextBox PropinsiPj;
+    private widget.TextBox Saudara;
+    private widget.ScrollPane Scroll1;
+    private widget.TextBox TKtp;
+    private widget.TextBox TNm;
+    private widget.TextBox TNo;
+    private widget.TextBox TNoPeserta;
+    private widget.TextBox TTlp;
+    private widget.TextBox TTmp;
+    private widget.TextBox TUmurBl;
+    private widget.TextBox TUmurHr;
+    private widget.TextBox TUmurTh;
+    private widget.Button btnPropinsiPj;
+    private widget.CekBox chkPolri;
+    private widget.CekBox chkTNI;
+    private widget.ComboBox cmbAgama;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel12;
+    private widget.Label jLabel13;
+    private widget.Label jLabel14;
+    private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.Label jLabel18;
+    private widget.Label jLabel19;
+    private widget.Label jLabel20;
+    private widget.Label jLabel21;
+    private widget.Label jLabel22;
+    private widget.Label jLabel23;
+    private widget.Label jLabel24;
+    private widget.Label jLabel25;
+    private widget.Label jLabel26;
+    private widget.Label jLabel27;
+    private widget.Label jLabel28;
+    private widget.Label jLabel29;
+    private widget.Label jLabel3;
+    private widget.Label jLabel30;
+    private widget.Label jLabel31;
+    private widget.Label jLabel32;
+    private widget.Label jLabel33;
+    private widget.Label jLabel34;
+    private widget.Label jLabel36;
+    private widget.Label jLabel37;
+    private widget.Label jLabel38;
+    private widget.Label jLabel39;
+    private widget.Label jLabel4;
+    private widget.Label jLabel40;
+    private widget.Label jLabel8;
+    private widget.Label jLabel9;
+    private widget.TextBox nmbahasa;
+    private widget.TextBox nmcacat;
+    private widget.TextBox nmgolonganpolri;
+    private widget.TextBox nmgolongantni;
+    private widget.TextBox nmjabatanpolri;
+    private widget.TextBox nmjabatantni;
+    private widget.TextBox nmpangkatpolri;
+    private widget.TextBox nmpangkattni;
+    private widget.TextBox nmperusahaan;
+    private widget.TextBox nmpnj;
+    private widget.TextBox nmsatuanpolri;
+    private widget.TextBox nmsatuantni;
+    private widget.TextBox nmsukubangsa;
+    private widget.PanelBiasa panelBiasa1;
     private widget.panelisi panelGlass6;
     // End of variables declaration//GEN-END:variables
 }
