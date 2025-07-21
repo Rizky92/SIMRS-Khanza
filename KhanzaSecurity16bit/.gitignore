@@ -1,7 +1,13 @@
 # Root level ignore
+/.vscode/
 /*.css
 /*.html
 /*.html_files
+/build/
+/dist/
+/lib/
+/setting/*.ini
+/setting/*.xml
 
 *.DS_Store
 *.*~*
@@ -14,13 +20,6 @@
 *.wps
 *.xls
 *.xlsx
-
-/.vscode
-/build/
-/dist/
-/lib/
-setting/*.ini
-setting/*.xml
 
 # Don't ignore these
 !sik_bridging_lab.sql
