@@ -250,7 +250,7 @@ public final class akses {
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
-            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false;
+            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,skrining_instrumen_acrs=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1424,6 +1424,7 @@ public final class akses {
                         akses.surat_keterangan_layak_terbang=rs2.getBoolean("surat_keterangan_layak_terbang");
                         akses.bayar_beban_hutang_lain=rs2.getBoolean("bayar_beban_hutang_lain");
                         akses.surat_persetujuan_pemeriksaan_hiv=rs2.getBoolean("surat_persetujuan_pemeriksaan_hiv");
+                        akses.skrining_instrumen_acrs=rs2.getBoolean("skrining_instrumen_acrs");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2604,7 +2605,8 @@ public final class akses {
         akses.duta_parkir_rekap_keluar=isadmin;
         akses.surat_keterangan_layak_terbang=isadmin;
         akses.bayar_beban_hutang_lain=isadmin;
-        akses.surat_persetujuan_pemeriksaan_hiv=false;
+        akses.surat_persetujuan_pemeriksaan_hiv=isadmin;
+        akses.skrining_instrumen_acrs=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3794,6 +3796,7 @@ public final class akses {
     public static boolean getsurat_keterangan_layak_terbang(){return akses.surat_keterangan_layak_terbang;}
     public static boolean getbayar_beban_hutang_lain(){return akses.bayar_beban_hutang_lain;}
     public static boolean getsurat_persetujuan_pemeriksaan_hiv(){return akses.surat_persetujuan_pemeriksaan_hiv;}
+    public static boolean getskrining_instrumen_acrs(){return akses.skrining_instrumen_acrs;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
