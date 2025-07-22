@@ -69,10 +69,8 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Kode Petugas","Nama Petugas","Tanggal",
-            "SRQ1","N.SRQ1","SRQ2","N.SRQ2","SRQ3","N.SRQ3","SRQ4","N.SRQ4","SRQ5","N.SRQ5",
-            "SRQ6","N.SRQ6","SRQ7","N.SRQ7","SRQ8","N.SRQ8","SRQ9","N.SRQ9","SRQ10","N.SRQ10",
-            "SRQ11","N.SRQ11","SRQ12","N.SRQ12","SRQ13","N.SRQ13","SRQ14","N.SRQ14","SRQ15","N.SRQ15",
-            "SRQ16","N.SRQ16","SRQ17","N.SRQ17","SRQ18","N.SRQ18","SRQ19","N.SRQ19","SRQ20","N.SRQ20",
+            "ACRS1","N.ACRS1","ACRS2","N.ACRS2","ACRS3","N.ACRS3","ACRS4","N.ACRS4","ACRS5","N.ACRS5",
+            "ACRS6","N.ACRS6","ACRS7","N.ACRS7","ACRS8","N.ACRS8","ACRS9","N.ACRS9","ACRS10","N.ACRS10",
             "N.Total","Kesimpulan"
             
         }){
@@ -84,7 +82,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 50; i++) {
+        for (i = 0; i < 30; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -93,7 +91,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }else if(i==2){
                 column.setPreferredWidth(150);
             }else if(i==3){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==4){
                 column.setPreferredWidth(35);
             }else if(i==5){
@@ -103,88 +101,48 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }else if(i==7){
                 column.setPreferredWidth(115);
             }else if(i==8){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==9){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==10){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==11){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==12){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==13){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==14){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==15){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==16){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==17){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==18){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==19){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==20){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==21){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==22){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==23){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==24){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==25){
-                column.setPreferredWidth(48);
+                column.setPreferredWidth(55);
             }else if(i==26){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(85);
             }else if(i==27){
-                column.setPreferredWidth(52);
+                column.setPreferredWidth(60);
             }else if(i==28){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(60);
             }else if(i==29){
-                column.setPreferredWidth(52);
-            }else if(i==30){
-                column.setPreferredWidth(65);
-            }else if(i==31){
-                column.setPreferredWidth(52);
-            }else if(i==32){
-                column.setPreferredWidth(65);
-            }else if(i==33){
-                column.setPreferredWidth(52);
-            }else if(i==34){
-                column.setPreferredWidth(65);
-            }else if(i==35){
-                column.setPreferredWidth(52);
-            }else if(i==36){
-                column.setPreferredWidth(65);
-            }else if(i==37){
-                column.setPreferredWidth(52);
-            }else if(i==38){
-                column.setPreferredWidth(65);
-            }else if(i==39){
-                column.setPreferredWidth(52);
-            }else if(i==40){
-                column.setPreferredWidth(65);
-            }else if(i==41){
-                column.setPreferredWidth(52);
-            }else if(i==42){
-                column.setPreferredWidth(65);
-            }else if(i==43){
-                column.setPreferredWidth(52);
-            }else if(i==44){
-                column.setPreferredWidth(65);
-            }else if(i==45){
-                column.setPreferredWidth(52);
-            }else if(i==46){
-                column.setPreferredWidth(65);
-            }else if(i==47){
-                column.setPreferredWidth(52);
-            }else if(i==48){
-                column.setPreferredWidth(52);
-            }else if(i==49){
                 column.setPreferredWidth(250);
             }
         }
@@ -282,7 +240,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnSkriningInstrumenSRQ = new javax.swing.JMenuItem();
+        MnSkriningInstrumenACRS = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         LoadHTML = new widget.editorpane();
         Jk = new widget.TextBox();
@@ -391,19 +349,19 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
-        MnSkriningInstrumenSRQ.setBackground(new java.awt.Color(255, 255, 254));
-        MnSkriningInstrumenSRQ.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSkriningInstrumenSRQ.setForeground(new java.awt.Color(50, 50, 50));
-        MnSkriningInstrumenSRQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSkriningInstrumenSRQ.setText("Formulir Skrining SRQ");
-        MnSkriningInstrumenSRQ.setName("MnSkriningInstrumenSRQ"); // NOI18N
-        MnSkriningInstrumenSRQ.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnSkriningInstrumenSRQ.addActionListener(new java.awt.event.ActionListener() {
+        MnSkriningInstrumenACRS.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningInstrumenACRS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSkriningInstrumenACRS.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningInstrumenACRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSkriningInstrumenACRS.setText("Formulir Skrining ACRS");
+        MnSkriningInstrumenACRS.setName("MnSkriningInstrumenACRS"); // NOI18N
+        MnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnSkriningInstrumenACRS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSkriningInstrumenSRQActionPerformed(evt);
+                MnSkriningInstrumenACRSActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(MnSkriningInstrumenSRQ);
+        jPopupMenu1.add(MnSkriningInstrumenACRS);
 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
@@ -915,7 +873,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS1);
-        ACRS1.setBounds(600, 90, 100, 23);
+        ACRS1.setBounds(570, 90, 130, 23);
 
         ACRS2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS2.setName("ACRS2"); // NOI18N
@@ -930,7 +888,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS2);
-        ACRS2.setBounds(600, 120, 100, 23);
+        ACRS2.setBounds(570, 120, 130, 23);
 
         ACRS3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS3.setName("ACRS3"); // NOI18N
@@ -945,7 +903,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS3);
-        ACRS3.setBounds(600, 150, 100, 23);
+        ACRS3.setBounds(570, 150, 130, 23);
 
         ACRS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS4.setName("ACRS4"); // NOI18N
@@ -960,7 +918,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS4);
-        ACRS4.setBounds(600, 180, 100, 23);
+        ACRS4.setBounds(570, 180, 130, 23);
 
         ACRS5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS5.setName("ACRS5"); // NOI18N
@@ -975,7 +933,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS5);
-        ACRS5.setBounds(600, 210, 100, 23);
+        ACRS5.setBounds(570, 210, 130, 23);
 
         ACRS6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS6.setName("ACRS6"); // NOI18N
@@ -990,7 +948,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS6);
-        ACRS6.setBounds(600, 240, 100, 23);
+        ACRS6.setBounds(570, 240, 130, 23);
 
         ACRS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS7.setName("ACRS7"); // NOI18N
@@ -1005,7 +963,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS7);
-        ACRS7.setBounds(600, 270, 100, 23);
+        ACRS7.setBounds(570, 270, 130, 23);
 
         ACRS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS8.setName("ACRS8"); // NOI18N
@@ -1020,7 +978,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS8);
-        ACRS8.setBounds(600, 300, 100, 23);
+        ACRS8.setBounds(570, 300, 130, 23);
 
         ACRS9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS9.setName("ACRS9"); // NOI18N
@@ -1035,7 +993,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS9);
-        ACRS9.setBounds(600, 330, 100, 23);
+        ACRS9.setBounds(570, 330, 130, 23);
 
         ACRS10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
         ACRS10.setName("ACRS10"); // NOI18N
@@ -1050,7 +1008,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         });
         FormInput.add(ACRS10);
-        ACRS10.setBounds(600, 360, 100, 23);
+        ACRS10.setBounds(570, 360, 130, 23);
 
         jLabel130.setText("Nilai :");
         jLabel130.setName("jLabel130"); // NOI18N
@@ -1239,7 +1197,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         jLabel117.setBounds(62, 300, 450, 23);
 
         jLabel118.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel118.setText("Suasana hatinya mudah berubah dengan cepat dan dastric ?");
+        jLabel118.setText("Suasana hatinya mudah berubah dengan cepat dan drastris ?");
         jLabel118.setName("jLabel118"); // NOI18N
         FormInput.add(jLabel118);
         jLabel118.setBounds(62, 330, 450, 23);
@@ -1417,46 +1375,26 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>KodePetugas</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NamaPetugas</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ1</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ1</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ2</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ2</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ3</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ3</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ4</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ4</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ5</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ5</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ6</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ6</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ7</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ7</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ8</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ8</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ9</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ9</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ10</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ10</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ11</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ11</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ12</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ12</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ13</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ13</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ14</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ14</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ15</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ15</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ16</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ16</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ17</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ17</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ18</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ18</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ19</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ19</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>SRQ20</b></td>"+
-                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.SRQ20</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS2</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS2</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS3</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS3</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS4</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS4</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS6</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS6</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS7</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS7</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS8</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS8</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS9</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS9</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>ACRS10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.ACRS10</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N.Total</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kesimpulan</b></td>"+
                     "</tr>"
@@ -1494,31 +1432,11 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,27).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,28).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,29).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,30).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,31).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,33).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,34).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,35).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,36).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,37).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,38).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,39).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,40).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,41).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,42).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,43).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,44).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,45).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,46).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,47).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,48).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,49).toString()+"</td>"+
                         "</tr>");
                 }
                 LoadHTML.setText(
                     "<html>"+
-                      "<table width='3000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                      "<table width='1900px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
                        htmlContent.toString()+
                       "</table>"+
                     "</html>"
@@ -1539,17 +1457,17 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataSkriningInstrumenSRQ.html");            
+                File f = new File("DataSkriningInstrumenACRS.html");            
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                            "<table width='3000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                            "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                 "<tr class='isi2'>"+
                                     "<td valign='top' align='center'>"+
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN SRQ<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN ACRS<br><br></font>"+        
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -1672,7 +1590,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnPetugasKeyPressed
 
-    private void MnSkriningInstrumenSRQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkriningInstrumenSRQActionPerformed
+    private void MnSkriningInstrumenACRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSkriningInstrumenACRSActionPerformed
         if(tbObat.getSelectedRow()>-1){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1684,21 +1602,17 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
-            Valid.MyReportqry("rptFormulirSkriningInstrumenSRQ.jasper","report","::[ Formulir Skrining Instrumen SRQ ]::",
+            Valid.MyReportqry("rptFormulirSkriningInstrumenACRS.jasper","report","::[ Formulir Skrining Instrumen ACRS ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_acrs.nip,petugas.nama,skrining_instrumen_acrs.tanggal,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
-                    "skrining_instrumen_acrs.pernyataansrq1,skrining_instrumen_acrs.nilai_srq1,skrining_instrumen_acrs.pernyataansrq2,skrining_instrumen_acrs.nilai_srq2,skrining_instrumen_acrs.pernyataansrq3,"+
-                    "skrining_instrumen_acrs.nilai_srq3,skrining_instrumen_acrs.pernyataansrq4,skrining_instrumen_acrs.nilai_srq4,skrining_instrumen_acrs.pernyataansrq5,skrining_instrumen_acrs.nilai_srq5,"+
-                    "skrining_instrumen_acrs.pernyataansrq6,skrining_instrumen_acrs.nilai_srq6,skrining_instrumen_acrs.pernyataansrq7,skrining_instrumen_acrs.nilai_srq7,skrining_instrumen_acrs.pernyataansrq8,"+
-                    "skrining_instrumen_acrs.nilai_srq8,skrining_instrumen_acrs.pernyataansrq9,skrining_instrumen_acrs.nilai_srq9,skrining_instrumen_acrs.pernyataansrq10,skrining_instrumen_acrs.nilai_srq10,"+
-                    "skrining_instrumen_acrs.pernyataansrq11,skrining_instrumen_acrs.nilai_srq11,skrining_instrumen_acrs.pernyataansrq12,skrining_instrumen_acrs.nilai_srq12,skrining_instrumen_acrs.pernyataansrq13,"+
-                    "skrining_instrumen_acrs.nilai_srq13,skrining_instrumen_acrs.pernyataansrq14,skrining_instrumen_acrs.nilai_srq14,skrining_instrumen_acrs.pernyataansrq15,skrining_instrumen_acrs.nilai_srq15,"+
-                    "skrining_instrumen_acrs.pernyataansrq16,skrining_instrumen_acrs.nilai_srq16,skrining_instrumen_acrs.pernyataansrq17,skrining_instrumen_acrs.nilai_srq17,skrining_instrumen_acrs.pernyataansrq18,"+
-                    "skrining_instrumen_acrs.nilai_srq18,skrining_instrumen_acrs.pernyataansrq19,skrining_instrumen_acrs.nilai_srq19,skrining_instrumen_acrs.pernyataansrq20,skrining_instrumen_acrs.nilai_srq20,"+
-                    "skrining_instrumen_acrs.nilai_total_srq,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
+                    "skrining_instrumen_acrs.pernyataanacrs1,skrining_instrumen_acrs.nilai_acrs1,skrining_instrumen_acrs.pernyataanacrs2,skrining_instrumen_acrs.nilai_acrs2,skrining_instrumen_acrs.pernyataanacrs3,"+
+                    "skrining_instrumen_acrs.nilai_acrs3,skrining_instrumen_acrs.pernyataanacrs4,skrining_instrumen_acrs.nilai_acrs4,skrining_instrumen_acrs.pernyataanacrs5,skrining_instrumen_acrs.nilai_acrs5,"+
+                    "skrining_instrumen_acrs.pernyataanacrs6,skrining_instrumen_acrs.nilai_acrs6,skrining_instrumen_acrs.pernyataanacrs7,skrining_instrumen_acrs.nilai_acrs7,skrining_instrumen_acrs.pernyataanacrs8,"+
+                    "skrining_instrumen_acrs.nilai_acrs8,skrining_instrumen_acrs.pernyataanacrs9,skrining_instrumen_acrs.nilai_acrs9,skrining_instrumen_acrs.pernyataanacrs10,skrining_instrumen_acrs.nilai_acrs10,"+
+                    "skrining_instrumen_acrs.nilai_total_acrs,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_instrumen_acrs.nip=petugas.nip "+
                     "where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
         }
-    }//GEN-LAST:event_MnSkriningInstrumenSRQActionPerformed
+    }//GEN-LAST:event_MnSkriningInstrumenACRSActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
@@ -1846,7 +1760,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
     private widget.ComboBox Menit;
-    private javax.swing.JMenuItem MnSkriningInstrumenSRQ;
+    private javax.swing.JMenuItem MnSkriningInstrumenACRS;
     private widget.TextBox NilaiACRS1;
     private widget.TextBox NilaiACRS10;
     private widget.TextBox NilaiACRS2;
@@ -1930,29 +1844,21 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
            if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_acrs.nip,petugas.nama,skrining_instrumen_acrs.tanggal,"+
-                    "skrining_instrumen_acrs.pernyataansrq1,skrining_instrumen_acrs.nilai_srq1,skrining_instrumen_acrs.pernyataansrq2,skrining_instrumen_acrs.nilai_srq2,skrining_instrumen_acrs.pernyataansrq3,"+
-                    "skrining_instrumen_acrs.nilai_srq3,skrining_instrumen_acrs.pernyataansrq4,skrining_instrumen_acrs.nilai_srq4,skrining_instrumen_acrs.pernyataansrq5,skrining_instrumen_acrs.nilai_srq5,"+
-                    "skrining_instrumen_acrs.pernyataansrq6,skrining_instrumen_acrs.nilai_srq6,skrining_instrumen_acrs.pernyataansrq7,skrining_instrumen_acrs.nilai_srq7,skrining_instrumen_acrs.pernyataansrq8,"+
-                    "skrining_instrumen_acrs.nilai_srq8,skrining_instrumen_acrs.pernyataansrq9,skrining_instrumen_acrs.nilai_srq9,skrining_instrumen_acrs.pernyataansrq10,skrining_instrumen_acrs.nilai_srq10,"+
-                    "skrining_instrumen_acrs.pernyataansrq11,skrining_instrumen_acrs.nilai_srq11,skrining_instrumen_acrs.pernyataansrq12,skrining_instrumen_acrs.nilai_srq12,skrining_instrumen_acrs.pernyataansrq13,"+
-                    "skrining_instrumen_acrs.nilai_srq13,skrining_instrumen_acrs.pernyataansrq14,skrining_instrumen_acrs.nilai_srq14,skrining_instrumen_acrs.pernyataansrq15,skrining_instrumen_acrs.nilai_srq15,"+
-                    "skrining_instrumen_acrs.pernyataansrq16,skrining_instrumen_acrs.nilai_srq16,skrining_instrumen_acrs.pernyataansrq17,skrining_instrumen_acrs.nilai_srq17,skrining_instrumen_acrs.pernyataansrq18,"+
-                    "skrining_instrumen_acrs.nilai_srq18,skrining_instrumen_acrs.pernyataansrq19,skrining_instrumen_acrs.nilai_srq19,skrining_instrumen_acrs.pernyataansrq20,skrining_instrumen_acrs.nilai_srq20,"+
-                    "skrining_instrumen_acrs.nilai_total_srq,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
+                    "skrining_instrumen_acrs.pernyataanacrs1,skrining_instrumen_acrs.nilai_acrs1,skrining_instrumen_acrs.pernyataanacrs2,skrining_instrumen_acrs.nilai_acrs2,skrining_instrumen_acrs.pernyataanacrs3,"+
+                    "skrining_instrumen_acrs.nilai_acrs3,skrining_instrumen_acrs.pernyataanacrs4,skrining_instrumen_acrs.nilai_acrs4,skrining_instrumen_acrs.pernyataanacrs5,skrining_instrumen_acrs.nilai_acrs5,"+
+                    "skrining_instrumen_acrs.pernyataanacrs6,skrining_instrumen_acrs.nilai_acrs6,skrining_instrumen_acrs.pernyataanacrs7,skrining_instrumen_acrs.nilai_acrs7,skrining_instrumen_acrs.pernyataanacrs8,"+
+                    "skrining_instrumen_acrs.nilai_acrs8,skrining_instrumen_acrs.pernyataanacrs9,skrining_instrumen_acrs.nilai_acrs9,skrining_instrumen_acrs.pernyataanacrs10,skrining_instrumen_acrs.nilai_acrs10,"+
+                    "skrining_instrumen_acrs.nilai_total_acrs,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_instrumen_acrs.nip=petugas.nip "+
                     "where skrining_instrumen_acrs.tanggal between ? and ? order by skrining_instrumen_acrs.tanggal ");
             }else{
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_acrs.nip,petugas.nama,skrining_instrumen_acrs.tanggal,"+
-                    "skrining_instrumen_acrs.pernyataansrq1,skrining_instrumen_acrs.nilai_srq1,skrining_instrumen_acrs.pernyataansrq2,skrining_instrumen_acrs.nilai_srq2,skrining_instrumen_acrs.pernyataansrq3,"+
-                    "skrining_instrumen_acrs.nilai_srq3,skrining_instrumen_acrs.pernyataansrq4,skrining_instrumen_acrs.nilai_srq4,skrining_instrumen_acrs.pernyataansrq5,skrining_instrumen_acrs.nilai_srq5,"+
-                    "skrining_instrumen_acrs.pernyataansrq6,skrining_instrumen_acrs.nilai_srq6,skrining_instrumen_acrs.pernyataansrq7,skrining_instrumen_acrs.nilai_srq7,skrining_instrumen_acrs.pernyataansrq8,"+
-                    "skrining_instrumen_acrs.nilai_srq8,skrining_instrumen_acrs.pernyataansrq9,skrining_instrumen_acrs.nilai_srq9,skrining_instrumen_acrs.pernyataansrq10,skrining_instrumen_acrs.nilai_srq10,"+
-                    "skrining_instrumen_acrs.pernyataansrq11,skrining_instrumen_acrs.nilai_srq11,skrining_instrumen_acrs.pernyataansrq12,skrining_instrumen_acrs.nilai_srq12,skrining_instrumen_acrs.pernyataansrq13,"+
-                    "skrining_instrumen_acrs.nilai_srq13,skrining_instrumen_acrs.pernyataansrq14,skrining_instrumen_acrs.nilai_srq14,skrining_instrumen_acrs.pernyataansrq15,skrining_instrumen_acrs.nilai_srq15,"+
-                    "skrining_instrumen_acrs.pernyataansrq16,skrining_instrumen_acrs.nilai_srq16,skrining_instrumen_acrs.pernyataansrq17,skrining_instrumen_acrs.nilai_srq17,skrining_instrumen_acrs.pernyataansrq18,"+
-                    "skrining_instrumen_acrs.nilai_srq18,skrining_instrumen_acrs.pernyataansrq19,skrining_instrumen_acrs.nilai_srq19,skrining_instrumen_acrs.pernyataansrq20,skrining_instrumen_acrs.nilai_srq20,"+
-                    "skrining_instrumen_acrs.nilai_total_srq,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
+                    "skrining_instrumen_acrs.pernyataanacrs1,skrining_instrumen_acrs.nilai_acrs1,skrining_instrumen_acrs.pernyataanacrs2,skrining_instrumen_acrs.nilai_acrs2,skrining_instrumen_acrs.pernyataanacrs3,"+
+                    "skrining_instrumen_acrs.nilai_acrs3,skrining_instrumen_acrs.pernyataanacrs4,skrining_instrumen_acrs.nilai_acrs4,skrining_instrumen_acrs.pernyataanacrs5,skrining_instrumen_acrs.nilai_acrs5,"+
+                    "skrining_instrumen_acrs.pernyataanacrs6,skrining_instrumen_acrs.nilai_acrs6,skrining_instrumen_acrs.pernyataanacrs7,skrining_instrumen_acrs.nilai_acrs7,skrining_instrumen_acrs.pernyataanacrs8,"+
+                    "skrining_instrumen_acrs.nilai_acrs8,skrining_instrumen_acrs.pernyataanacrs9,skrining_instrumen_acrs.nilai_acrs9,skrining_instrumen_acrs.pernyataanacrs10,skrining_instrumen_acrs.nilai_acrs10,"+
+                    "skrining_instrumen_acrs.nilai_total_acrs,skrining_instrumen_acrs.kesimpulan from skrining_instrumen_acrs inner join reg_periksa on skrining_instrumen_acrs.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on skrining_instrumen_acrs.nip=petugas.nip "+
                     "where skrining_instrumen_acrs.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
                     "pasien.nm_pasien like ? or skrining_instrumen_acrs.nip like ? or petugas.nama like ?) "+
@@ -1977,12 +1883,10 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),rs.getString("nama"),rs.getString("tanggal"),
-                        rs.getString("pernyataansrq1"),rs.getString("nilai_srq1"),rs.getString("pernyataansrq2"),rs.getString("nilai_srq2"),rs.getString("pernyataansrq3"),rs.getString("nilai_srq3"),rs.getString("pernyataansrq4"),
-                        rs.getString("nilai_srq4"),rs.getString("pernyataansrq5"),rs.getString("nilai_srq5"),rs.getString("pernyataansrq6"),rs.getString("nilai_srq6"),rs.getString("pernyataansrq7"),rs.getString("nilai_srq7"),
-                        rs.getString("pernyataansrq8"),rs.getString("nilai_srq8"),rs.getString("pernyataansrq9"),rs.getString("nilai_srq9"),rs.getString("pernyataansrq10"),rs.getString("nilai_srq10"),rs.getString("pernyataansrq11"),
-                        rs.getString("nilai_srq11"),rs.getString("pernyataansrq12"),rs.getString("nilai_srq12"),rs.getString("pernyataansrq13"),rs.getString("nilai_srq13"),rs.getString("pernyataansrq14"),rs.getString("nilai_srq14"),
-                        rs.getString("pernyataansrq15"),rs.getString("nilai_srq15"),rs.getString("pernyataansrq16"),rs.getString("nilai_srq16"),rs.getString("pernyataansrq17"),rs.getString("nilai_srq17"),rs.getString("pernyataansrq18"),
-                        rs.getString("nilai_srq18"),rs.getString("pernyataansrq19"),rs.getString("nilai_srq19"),rs.getString("pernyataansrq20"),rs.getString("nilai_srq20"),rs.getString("nilai_total_srq"),rs.getString("kesimpulan")
+                        rs.getString("pernyataanacrs1"),rs.getString("nilai_acrs1"),rs.getString("pernyataanacrs2"),rs.getString("nilai_acrs2"),rs.getString("pernyataanacrs3"),rs.getString("nilai_acrs3"),rs.getString("pernyataanacrs4"),
+                        rs.getString("nilai_acrs4"),rs.getString("pernyataanacrs5"),rs.getString("nilai_acrs5"),rs.getString("pernyataanacrs6"),rs.getString("nilai_acrs6"),rs.getString("pernyataanacrs7"),rs.getString("nilai_acrs7"),
+                        rs.getString("pernyataanacrs8"),rs.getString("nilai_acrs8"),rs.getString("pernyataanacrs9"),rs.getString("nilai_acrs9"),rs.getString("pernyataanacrs10"),rs.getString("nilai_acrs10"),rs.getString("nilai_total_acrs"),
+                        rs.getString("kesimpulan")
                     });
                 }
             } catch (Exception e) {
@@ -2023,7 +1927,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         ACRS10.setSelectedIndex(0);
         NilaiACRS10.setText("0");
         TotalNilai.setText("0");
-        Kesimpulan.setText("");
+        Kesimpulan.setText("Kondisi Normal");
         Tanggal.setDate(new Date());
         ACRS1.requestFocus();
     } 
@@ -2202,8 +2106,8 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("skrining_instrumen_acrs","no_rawat=?","no_rawat=?,tanggal=?,nip=?,pernyataansrq1=?,nilai_srq1=?,pernyataansrq2=?,nilai_srq2=?,pernyataansrq3=?,nilai_srq3=?,pernyataansrq4=?,nilai_srq4=?,pernyataansrq5=?,nilai_srq5=?,"+
-                "pernyataansrq6=?,nilai_srq6=?,pernyataansrq7=?,nilai_srq7=?,pernyataansrq8=?,nilai_srq8=?,pernyataansrq9=?,nilai_srq9=?,pernyataansrq10=?,nilai_srq10=?,kesimpulan=?",26,new String[]{
+        if(Sequel.mengedittf("skrining_instrumen_acrs","no_rawat=?","no_rawat=?,tanggal=?,nip=?,pernyataanacrs1=?,nilai_acrs1=?,pernyataanacrs2=?,nilai_acrs2=?,pernyataanacrs3=?,nilai_acrs3=?,pernyataanacrs4=?,nilai_acrs4=?,pernyataanacrs5=?,nilai_acrs5=?,"+
+                "pernyataanacrs6=?,nilai_acrs6=?,pernyataanacrs7=?,nilai_acrs7=?,pernyataanacrs8=?,nilai_acrs8=?,pernyataanacrs9=?,nilai_acrs9=?,pernyataanacrs10=?,nilai_acrs10=?,nilai_total_acrs=?,kesimpulan=?",26,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
                 ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
                 ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 

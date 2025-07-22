@@ -23008,8 +23008,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {  
+
+    private void btnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23020,7 +23020,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnSkriningInstrumenACRSActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23033,7 +23033,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     /**
     * @param args the command line arguments
     */
@@ -23745,7 +23745,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
-            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV;
+            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS;
 
     public void isWall(){
         try{
@@ -28301,6 +28301,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
 
+            if(akses.getskrining_instrumen_acrs()==true){
+                Panelmenu.add(btnSkriningInstrumenACRS);
+                jmlmenu++;
+            }
+
             if(akses.getskrining_kanker_kolorektal()==true){
                 Panelmenu.add(btnSkriningKankerKolorektal);
                 jmlmenu++;
@@ -29118,7 +29123,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnPenolakanAnjuranMedis);
                 jmlmenu++;
             }
-            
+
             if(akses.getsurat_persetujuan_pemeriksaan_hiv()==true){
                 Panelmenu.add(btnPersetujuanPemeriksaanHIV);
                 jmlmenu++;
@@ -33965,6 +33970,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
 
+        if(akses.getskrining_instrumen_acrs()==true){
+            Panelmenu.add(btnSkriningInstrumenACRS);
+            jmlmenu++;
+        }
+
         if(akses.getskrining_kanker_kolorektal()==true){
             Panelmenu.add(btnSkriningKankerKolorektal);
             jmlmenu++;
@@ -34779,7 +34789,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPenolakanAnjuranMedis);
             jmlmenu++;
         }
-        
+
         if(akses.getsurat_persetujuan_pemeriksaan_hiv()==true){
             Panelmenu.add(btnPersetujuanPemeriksaanHIV);
             jmlmenu++;
@@ -41230,6 +41240,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
         }
 
+        if(akses.getskrining_instrumen_acrs()==true){
+            if(btnSkriningInstrumenACRS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningInstrumenACRS);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getskrining_kanker_kolorektal()==true){
             if(btnSkriningKankerKolorektal.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningKankerKolorektal);
@@ -42539,12 +42556,12 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             if(btnPenolakanAnjuranMedis.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenolakanAnjuranMedis);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getsurat_persetujuan_pemeriksaan_hiv()==true){
             if(btnPersetujuanPemeriksaanHIV.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
-                Panelmenu.add(btnPersetujuanPemeriksaanHIV);                 
+                Panelmenu.add(btnPersetujuanPemeriksaanHIV);
                 jmlmenu++;
             }
         }
@@ -47161,15 +47178,15 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenolakanAnjuranMedis.setName("btnPenolakanAnjuranMedis");
         btnPenolakanAnjuranMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenolakanAnjuranMedis.addActionListener(this::btnPenolakanAnjuranMedisActionPerformed);
-        
+
         btnPersetujuanPemeriksaanHIV = new widget.ButtonBig();
         btnPersetujuanPemeriksaanHIV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217201_corona_coronavirus_test_tube_virus_icon.png")));
         btnPersetujuanPemeriksaanHIV.setText("Persetujuan Pemeriksaan HIV");
         btnPersetujuanPemeriksaanHIV.setIconTextGap(0);
-        btnPersetujuanPemeriksaanHIV.setName("btnPersetujuanPemeriksaanHIV"); 
+        btnPersetujuanPemeriksaanHIV.setName("btnPersetujuanPemeriksaanHIV");
         btnPersetujuanPemeriksaanHIV.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPemeriksaanHIV.addActionListener(this::btnPersetujuanPemeriksaanHIVActionPerformed);
-        
+
         btnLaporanTahunanPenolakanAnjuranMedis = new widget.ButtonBig();
         btnLaporanTahunanPenolakanAnjuranMedis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9929050_analysis_graph_growth_report_statistics_icon.png")));
         btnLaporanTahunanPenolakanAnjuranMedis.setText("Laporan Tahunan Penolakan Anjuran Medis");
@@ -48593,6 +48610,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSuratKeteranganLayakTerbang.setName("btnSuratKeteranganLayakTerbang");
         btnSuratKeteranganLayakTerbang.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratKeteranganLayakTerbang.addActionListener(this::btnSuratKeteranganLayakTerbangActionPerformed);
+
+        btnSkriningInstrumenACRS = new widget.ButtonBig();
+        btnSkriningInstrumenACRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3231124_boy_brother_cartoon_child_family_icon.png")));
+        btnSkriningInstrumenACRS.setText("Skrining Instrumen ACRS");
+        btnSkriningInstrumenACRS.setIconTextGap(0);
+        btnSkriningInstrumenACRS.setName("btnSkriningInstrumenACRS");
+        btnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningInstrumenACRS.addActionListener(this::btnSkriningInstrumenACRSActionPerformed);
     }
 
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
