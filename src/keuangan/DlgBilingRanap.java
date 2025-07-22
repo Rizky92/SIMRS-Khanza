@@ -55,6 +55,7 @@ import java.io.FileWriter;
 import java.util.Calendar;
 import javax.swing.Timer;
 import simrskhanza.DlgCariCaraBayar;
+import simrskhanza.DlgCariPeriksaLabMB;
 import simrskhanza.DlgCariPeriksaLabPA;
 import simrskhanza.DlgInputResepPulang;
 import simrskhanza.DlgPeriksaLaboratoriumMB;
@@ -4572,7 +4573,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_MnPeriksaLabMBActionPerformed
 
     private void MnCariPeriksaLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCariPeriksaLabMBActionPerformed
-        // TODO add your handling code here:
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        }else{           
+            DlgCariPeriksaLabMB periksalab=new DlgCariPeriksaLabMB(null,false);
+            periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            periksalab.setLocationRelativeTo(internalFrame1);
+            periksalab.SetNoRw(TNoRw.getText());  
+            periksalab.setAlwaysOnTop(false);
+            periksalab.setVisible(true);
+        }
     }//GEN-LAST:event_MnCariPeriksaLabMBActionPerformed
 
 
