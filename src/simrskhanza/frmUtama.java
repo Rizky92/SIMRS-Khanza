@@ -1084,6 +1084,7 @@ import surat.SuratKontrol;
 import surat.SuratMap;
 import surat.SuratMasuk;
 import surat.SuratPenolakanAnjuranMedis;
+import surat.SuratPernyataanMemilihDPJP;
 import surat.SuratPernyataanPasienUmum;
 import surat.SuratPersetujuanPemeriksaanHIV;
 import surat.SuratPersetujuanPenolakanTindakan;
@@ -23033,6 +23034,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnSuratPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {  
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPernyataanMemilihDPJP aplikasi=new SuratPernyataanMemilihDPJP(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
 
     /**
     * @param args the command line arguments
@@ -23745,7 +23758,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnSkriningIndraPendengaran,btnCatatanPengkajianPaskaOperasi,btnSirkulasiInventarisCSSD,btnSkriningFrailtySyndrome,btnLamaPelayananCSSD,btnCatatanObservasiBayi,
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
-            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS;
+            btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS,
+            btnSuratPernyataanMemilihDPJP;
 
     public void isWall(){
         try{
@@ -29131,6 +29145,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
             if (akses.gettemplate_persetujuan_penolakan_tindakan()) {
                 Panelmenu.add(btnTemplatePersetujuanPenolakanTindakan);
+                jmlmenu++;
+            }
+            
+            if(akses.getsurat_pernyataan_memilih_dpjp()==true){
+                Panelmenu.add(btnSuratPernyataanMemilihDPJP);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==16){
@@ -34792,6 +34811,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getsurat_persetujuan_pemeriksaan_hiv()==true){
             Panelmenu.add(btnPersetujuanPemeriksaanHIV);
+            jmlmenu++;
+        }
+        
+        if(akses.getsurat_pernyataan_memilih_dpjp()==true){
+            Panelmenu.add(btnSuratPernyataanMemilihDPJP);
             jmlmenu++;
         }
 
@@ -42565,6 +42589,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
+        
+        if(akses.getsurat_pernyataan_memilih_dpjp()==true){
+            if(btnSuratPernyataanMemilihDPJP.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPernyataanMemilihDPJP);                 
+                jmlmenu++;
+            }
+        }
 
         if(akses.getruang_perpustakaan()==true){
             if(btnRuangPerpustakaan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -46322,6 +46353,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPersetujuanPenolakanTindakan.setName("btnPersetujuanPenolakanTindakan");
         btnPersetujuanPenolakanTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPenolakanTindakan.addActionListener(this::btnPersetujuanPenolakanTindakanActionPerformed);
+        
+        btnSuratPernyataanMemilihDPJP = new widget.ButtonBig();
+        btnSuratPernyataanMemilihDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898997_avatar_doctor_man_mask_user_icon.png"))); 
+        btnSuratPernyataanMemilihDPJP.setText("Surat Pernyataan Memilih DPJP");
+        btnSuratPernyataanMemilihDPJP.setIconTextGap(0);
+        btnSuratPernyataanMemilihDPJP.setName("btnSuratPernyataanMemilihDPJP");
+        btnSuratPernyataanMemilihDPJP.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPernyataanMemilihDPJP.addActionListener(this::btnSuratPernyataanMemilihDPJPActionPerformed);
 
         btnPenilaianAwalMedisRalanPsikiatri = new widget.ButtonBig();
         btnPenilaianAwalMedisRalanPsikiatri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5856674_bacteria_brain_disease_encephalitis_healthy_icon.png")));
