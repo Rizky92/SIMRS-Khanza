@@ -26,7 +26,9 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrollPane1 = new widget.ScrollPane();
         internalFrame1 = new widget.InternalFrame();
+        scrollPane2 = new widget.ScrollPane();
         PanelInput = new javax.swing.JPanel();
         FormPasien = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
@@ -143,10 +145,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormSEP = new widget.PanelBiasa();
         jLabel5 = new widget.Label();
         TNoRw = new widget.TextBox();
-        TPasien = new widget.TextBox();
-        TNoRM = new widget.TextBox();
-        jLabel6 = new widget.Label();
-        NoKartu1 = new widget.TextBox();
         jLabel35 = new widget.Label();
         TanggalSEP = new widget.Tanggal();
         jLabel41 = new widget.Label();
@@ -171,15 +169,10 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         jLabel44 = new widget.Label();
         jLabel45 = new widget.Label();
         Catatan = new widget.TextBox();
-        JenisPelayanan = new widget.ComboBox();
         LabelKelas = new widget.Label();
         Kelas = new widget.ComboBox();
         jLabel46 = new widget.Label();
         LakaLantas = new widget.ComboBox();
-        jLabel47 = new widget.Label();
-        TglLahir = new widget.TextBox();
-        jLabel48 = new widget.Label();
-        JK = new widget.TextBox();
         jLabel49 = new widget.Label();
         JenisPeserta = new widget.TextBox();
         jLabel50 = new widget.Label();
@@ -190,15 +183,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         Eksekutif = new widget.ComboBox();
         LabelKelas1 = new widget.Label();
         COB = new widget.ComboBox();
-        jLabel53 = new widget.Label();
-        NoTelp = new widget.TextBox();
         Katarak = new widget.ComboBox();
         jLabel54 = new widget.Label();
         jLabel55 = new widget.Label();
         TanggalKKL = new widget.Tanggal();
         jLabel56 = new widget.Label();
         NoSKDP = new widget.TextBox();
-        btnSPRI = new widget.Button();
         LabelPoli2 = new widget.Label();
         KdDPJP = new widget.TextBox();
         NmDPJP = new widget.TextBox();
@@ -244,14 +234,27 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         btnSuplesi = new widget.Button();
         jLabel66 = new widget.Label();
         NoLP = new widget.TextBox();
+        CmbHuruf = new widget.ComboBox();
+        labelAntrian = new widget.Label();
+        TNoAntrian = new widget.TextBox();
+        labelLoket = new widget.Label();
+        CmbLoket = new widget.ComboBox();
+        BtnAntri = new widget.Button();
+        BtnStop = new widget.Button();
+        JenisPelayanan = new widget.TextBox();
+        jLabel6 = new widget.Label();
+        TNoReg = new widget.TextBox();
+        jLabel67 = new widget.Label();
         panelGlass6 = new widget.panelisi();
-        jLabel16 = new widget.Label();
+        JenisKeyword = new widget.ComboBox();
         NoKartu = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
         BtnSimpan = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
+
+        scrollPane1.setName("scrollPane1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(null);
@@ -264,14 +267,17 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         internalFrame1.setPreferredSize(new java.awt.Dimension(212, 600));
         internalFrame1.setLayout(new java.awt.BorderLayout());
 
+        scrollPane2.setName("scrollPane2"); // NOI18N
+
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(200, 580));
+        PanelInput.setPreferredSize(null);
         PanelInput.setLayout(new javax.swing.BoxLayout(PanelInput, javax.swing.BoxLayout.Y_AXIS));
 
         FormPasien.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)), "::[ Kelengkapan Data Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormPasien.setMinimumSize(new java.awt.Dimension(880, 540));
         FormPasien.setName("FormPasien"); // NOI18N
-        FormPasien.setPreferredSize(new java.awt.Dimension(900, 550));
+        FormPasien.setPreferredSize(new java.awt.Dimension(880, 540));
         FormPasien.setLayout(null);
 
         jLabel3.setText("No.Rekam Medis :");
@@ -338,7 +344,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(jLabel13);
         jLabel13.setBounds(4, 110, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-07-2025" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -469,7 +475,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(TKtp);
         TKtp.setBounds(743, 140, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-07-2025" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -1332,9 +1338,10 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
 
         PanelInput.add(FormPasien);
 
-        FormSEP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 241, 231)), "::[ Kelengkapan Data SEP, Registrasi & Kamar Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormSEP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 241, 231)), "::[ Kelengkapan Data Registrasi dan SEP Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormSEP.setMinimumSize(new java.awt.Dimension(880, 410));
         FormSEP.setName("FormSEP"); // NOI18N
-        FormSEP.setPreferredSize(new java.awt.Dimension(745, 600));
+        FormSEP.setPreferredSize(new java.awt.Dimension(880, 410));
         FormSEP.setLayout(null);
 
         jLabel5.setText("No.Rawat :");
@@ -1348,42 +1355,14 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormSEP.add(TNoRw);
         TNoRw.setBounds(93, 20, 152, 23);
 
-        TPasien.setBackground(new java.awt.Color(245, 250, 240));
-        TPasien.setHighlighter(null);
-        TPasien.setName("TPasien"); // NOI18N
-        FormSEP.add(TPasien);
-        TPasien.setBounds(359, 20, 368, 23);
-
-        TNoRM.setHighlighter(null);
-        TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TNoRMActionPerformed(evt);
-            }
-        });
-        FormSEP.add(TNoRM);
-        TNoRM.setBounds(247, 20, 110, 23);
-
-        jLabel6.setText("No.Kartu :");
-        jLabel6.setName("jLabel6"); // NOI18N
-        FormSEP.add(jLabel6);
-        jLabel6.setBounds(0, 80, 90, 23);
-
-        NoKartu1.setEditable(false);
-        NoKartu1.setBackground(new java.awt.Color(245, 250, 240));
-        NoKartu1.setHighlighter(null);
-        NoKartu1.setName("NoKartu1"); // NOI18N
-        FormSEP.add(NoKartu1);
-        NoKartu1.setBounds(93, 80, 152, 23);
-
-        jLabel35.setText("Tgl.SEP :");
+        jLabel35.setText("Tgl. Registrasi / SEP :");
         jLabel35.setName("jLabel35"); // NOI18N
         jLabel35.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel35);
-        jLabel35.setBounds(187, 110, 65, 23);
+        jLabel35.setBounds(206, 50, 127, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-07-2025" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -1394,16 +1373,16 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(TanggalSEP);
-        TanggalSEP.setBounds(255, 110, 95, 23);
+        TanggalSEP.setBounds(336, 50, 110, 23);
 
-        jLabel41.setText("Tgl.Rujuk :");
+        jLabel41.setText("Tgl. Rujukan :");
         jLabel41.setName("jLabel41"); // NOI18N
         jLabel41.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel41);
-        jLabel41.setBounds(0, 110, 90, 23);
+        jLabel41.setBounds(0, 50, 90, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-07-2025" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -1414,13 +1393,13 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(TanggalRujuk);
-        TanggalRujuk.setBounds(93, 110, 95, 23);
+        TanggalRujuk.setBounds(93, 50, 110, 23);
 
         jLabel42.setText("No.Rujukan :");
         jLabel42.setName("jLabel42"); // NOI18N
         jLabel42.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel42);
-        jLabel42.setBounds(444, 80, 70, 23);
+        jLabel42.setBounds(0, 80, 90, 23);
 
         NoRujukan.setHighlighter(null);
         NoRujukan.setName("NoRujukan"); // NOI18N
@@ -1430,7 +1409,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(NoRujukan);
-        NoRujukan.setBounds(517, 80, 150, 23);
+        NoRujukan.setBounds(93, 80, 137, 23);
 
         jLabel10.setText("PPK Pelayanan :");
         jLabel10.setName("jLabel10"); // NOI18N
@@ -1442,14 +1421,14 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         KdPPK.setHighlighter(null);
         KdPPK.setName("KdPPK"); // NOI18N
         FormSEP.add(KdPPK);
-        KdPPK.setBounds(93, 290, 75, 23);
+        KdPPK.setBounds(93, 290, 79, 23);
 
         NmPPK.setEditable(false);
         NmPPK.setBackground(new java.awt.Color(245, 250, 240));
         NmPPK.setHighlighter(null);
         NmPPK.setName("NmPPK"); // NOI18N
         FormSEP.add(NmPPK);
-        NmPPK.setBounds(170, 290, 180, 23);
+        NmPPK.setBounds(175, 290, 271, 23);
 
         btnPPKRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPPKRujukan.setMnemonic('X');
@@ -1466,45 +1445,45 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnPPKRujukan);
-        btnPPKRujukan.setBounds(352, 170, 28, 23);
+        btnPPKRujukan.setBounds(418, 140, 28, 23);
 
         jLabel11.setText("PPK Rujukan :");
         jLabel11.setName("jLabel11"); // NOI18N
         FormSEP.add(jLabel11);
-        jLabel11.setBounds(0, 170, 90, 23);
+        jLabel11.setBounds(0, 140, 90, 23);
 
         KdPpkRujukan.setEditable(false);
         KdPpkRujukan.setBackground(new java.awt.Color(245, 250, 240));
         KdPpkRujukan.setHighlighter(null);
         KdPpkRujukan.setName("KdPpkRujukan"); // NOI18N
         FormSEP.add(KdPpkRujukan);
-        KdPpkRujukan.setBounds(93, 170, 75, 23);
+        KdPpkRujukan.setBounds(93, 140, 79, 23);
 
         NmPpkRujukan.setEditable(false);
         NmPpkRujukan.setBackground(new java.awt.Color(245, 250, 240));
         NmPpkRujukan.setHighlighter(null);
         NmPpkRujukan.setName("NmPpkRujukan"); // NOI18N
         FormSEP.add(NmPpkRujukan);
-        NmPpkRujukan.setBounds(170, 170, 180, 23);
+        NmPpkRujukan.setBounds(175, 140, 240, 23);
 
         jLabel43.setText("Diagnosa Awal :");
         jLabel43.setName("jLabel43"); // NOI18N
         FormSEP.add(jLabel43);
-        jLabel43.setBounds(0, 200, 90, 23);
+        jLabel43.setBounds(0, 170, 90, 23);
 
         KdPenyakit.setEditable(false);
         KdPenyakit.setBackground(new java.awt.Color(245, 250, 240));
         KdPenyakit.setHighlighter(null);
         KdPenyakit.setName("KdPenyakit"); // NOI18N
         FormSEP.add(KdPenyakit);
-        KdPenyakit.setBounds(93, 200, 75, 23);
+        KdPenyakit.setBounds(93, 170, 79, 23);
 
         NmPenyakit.setEditable(false);
         NmPenyakit.setBackground(new java.awt.Color(245, 250, 240));
         NmPenyakit.setHighlighter(null);
         NmPenyakit.setName("NmPenyakit"); // NOI18N
         FormSEP.add(NmPenyakit);
-        NmPenyakit.setBounds(170, 200, 180, 23);
+        NmPenyakit.setBounds(175, 170, 240, 23);
 
         btnDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnDiagnosa.setMnemonic('X');
@@ -1521,7 +1500,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnDiagnosa);
-        btnDiagnosa.setBounds(352, 200, 28, 23);
+        btnDiagnosa.setBounds(418, 170, 28, 23);
 
         btnPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPoli.setMnemonic('X');
@@ -1538,26 +1517,26 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnPoli);
-        btnPoli.setBounds(352, 230, 28, 23);
+        btnPoli.setBounds(418, 200, 28, 23);
 
         NmPoli.setEditable(false);
         NmPoli.setBackground(new java.awt.Color(245, 250, 240));
         NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormSEP.add(NmPoli);
-        NmPoli.setBounds(170, 230, 180, 23);
+        NmPoli.setBounds(175, 200, 240, 23);
 
         KdPoli.setEditable(false);
         KdPoli.setBackground(new java.awt.Color(245, 250, 240));
         KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormSEP.add(KdPoli);
-        KdPoli.setBounds(93, 230, 75, 23);
+        KdPoli.setBounds(93, 200, 79, 23);
 
         LabelPoli.setText("Poli Tujuan :");
         LabelPoli.setName("LabelPoli"); // NOI18N
         FormSEP.add(LabelPoli);
-        LabelPoli.setBounds(0, 230, 90, 23);
+        LabelPoli.setBounds(0, 200, 90, 23);
 
         jLabel44.setText("Jns.Pelayanan :");
         jLabel44.setName("jLabel44"); // NOI18N
@@ -1567,7 +1546,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         jLabel45.setText("Catatan :");
         jLabel45.setName("jLabel45"); // NOI18N
         FormSEP.add(jLabel45);
-        jLabel45.setBounds(0, 440, 90, 23);
+        jLabel45.setBounds(455, 380, 110, 23);
 
         Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
@@ -1577,28 +1556,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Catatan);
-        Catatan.setBounds(93, 440, 257, 23);
-
-        JenisPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Ranap", "2. Ralan" }));
-        JenisPelayanan.setSelectedIndex(1);
-        JenisPelayanan.setName("JenisPelayanan"); // NOI18N
-        JenisPelayanan.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                JenisPelayananItemStateChanged(evt);
-            }
-        });
-        JenisPelayanan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JenisPelayananKeyPressed(evt);
-            }
-        });
-        FormSEP.add(JenisPelayanan);
-        JenisPelayanan.setBounds(93, 320, 100, 23);
+        Catatan.setBounds(568, 380, 305, 23);
 
         LabelKelas.setText("Kelas :");
         LabelKelas.setName("LabelKelas"); // NOI18N
         FormSEP.add(LabelKelas);
-        LabelKelas.setBounds(207, 320, 40, 23);
+        LabelKelas.setBounds(161, 320, 40, 23);
 
         Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Kelas 1", "2. Kelas 2", "3. Kelas 3" }));
         Kelas.setSelectedIndex(2);
@@ -1609,12 +1572,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Kelas);
-        Kelas.setBounds(250, 320, 100, 23);
+        Kelas.setBounds(204, 320, 90, 23);
 
         jLabel46.setText("Laka Lantas :");
         jLabel46.setName("jLabel46"); // NOI18N
         FormSEP.add(jLabel46);
-        jLabel46.setBounds(380, 140, 87, 23);
+        jLabel46.setBounds(455, 80, 110, 23);
 
         LakaLantas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Bukan KLL", "1. KLL Bukan KK", "2. KLL dan KK", "3. KK" }));
         LakaLantas.setName("LakaLantas"); // NOI18N
@@ -1629,62 +1592,38 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(LakaLantas);
-        LakaLantas.setBounds(470, 140, 127, 23);
+        LakaLantas.setBounds(568, 80, 127, 23);
 
-        jLabel47.setText("Tgl.Lahir :");
-        jLabel47.setName("jLabel47"); // NOI18N
-        FormSEP.add(jLabel47);
-        jLabel47.setBounds(0, 50, 90, 23);
-
-        TglLahir.setEditable(false);
-        TglLahir.setBackground(new java.awt.Color(245, 250, 240));
-        TglLahir.setHighlighter(null);
-        TglLahir.setName("TglLahir"); // NOI18N
-        FormSEP.add(TglLahir);
-        TglLahir.setBounds(93, 50, 80, 23);
-
-        jLabel48.setText("J.K.:");
-        jLabel48.setName("jLabel48"); // NOI18N
-        FormSEP.add(jLabel48);
-        jLabel48.setBounds(414, 50, 40, 23);
-
-        JK.setEditable(false);
-        JK.setBackground(new java.awt.Color(245, 250, 240));
-        JK.setHighlighter(null);
-        JK.setName("JK"); // NOI18N
-        FormSEP.add(JK);
-        JK.setBounds(457, 50, 40, 23);
-
-        jLabel49.setText("Peserta :");
+        jLabel49.setText("Jenis Peserta :");
         jLabel49.setName("jLabel49"); // NOI18N
         jLabel49.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel49);
-        jLabel49.setBounds(178, 50, 60, 23);
+        jLabel49.setBounds(455, 50, 110, 23);
 
         JenisPeserta.setEditable(false);
         JenisPeserta.setBackground(new java.awt.Color(245, 250, 240));
         JenisPeserta.setHighlighter(null);
         JenisPeserta.setName("JenisPeserta"); // NOI18N
         FormSEP.add(JenisPeserta);
-        JenisPeserta.setBounds(241, 50, 173, 23);
+        JenisPeserta.setBounds(568, 50, 154, 23);
 
         jLabel50.setText("Status :");
         jLabel50.setName("jLabel50"); // NOI18N
         jLabel50.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel50);
-        jLabel50.setBounds(251, 80, 50, 23);
+        jLabel50.setBounds(725, 50, 45, 23);
 
         Status.setEditable(false);
         Status.setBackground(new java.awt.Color(245, 250, 240));
         Status.setHighlighter(null);
         Status.setName("Status"); // NOI18N
         FormSEP.add(Status);
-        Status.setBounds(304, 80, 130, 23);
+        Status.setBounds(773, 50, 100, 23);
 
-        jLabel51.setText("Asal Rujukan :");
+        jLabel51.setText("Asal :");
         jLabel51.setName("jLabel51"); // NOI18N
         FormSEP.add(jLabel51);
-        jLabel51.setBounds(497, 50, 90, 23);
+        jLabel51.setBounds(233, 80, 34, 23);
 
         AsalRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Faskes 1", "2. Faskes 2(RS)" }));
         AsalRujukan.setName("AsalRujukan"); // NOI18N
@@ -1694,12 +1633,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(AsalRujukan);
-        AsalRujukan.setBounds(590, 50, 137, 23);
+        AsalRujukan.setBounds(270, 80, 114, 23);
 
         jLabel52.setText("Eksekutif :");
         jLabel52.setName("jLabel52"); // NOI18N
         FormSEP.add(jLabel52);
-        jLabel52.setBounds(0, 410, 90, 23);
+        jLabel52.setBounds(0, 380, 90, 23);
 
         Eksekutif.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Eksekutif.setName("Eksekutif"); // NOI18N
@@ -1709,12 +1648,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Eksekutif);
-        Eksekutif.setBounds(93, 410, 100, 23);
+        Eksekutif.setBounds(93, 380, 83, 23);
 
         LabelKelas1.setText("COB :");
         LabelKelas1.setName("LabelKelas1"); // NOI18N
         FormSEP.add(LabelKelas1);
-        LabelKelas1.setBounds(207, 410, 40, 23);
+        LabelKelas1.setBounds(179, 380, 42, 23);
 
         COB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak ", "1.Ya" }));
         COB.setName("COB"); // NOI18N
@@ -1724,23 +1663,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(COB);
-        COB.setBounds(250, 410, 100, 23);
-
-        jLabel53.setText("No.Telp :");
-        jLabel53.setName("jLabel53"); // NOI18N
-        jLabel53.setPreferredSize(new java.awt.Dimension(55, 23));
-        FormSEP.add(jLabel53);
-        jLabel53.setBounds(571, 110, 58, 23);
-
-        NoTelp.setHighlighter(null);
-        NoTelp.setName("NoTelp"); // NOI18N
-        NoTelp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NoTelpKeyPressed(evt);
-            }
-        });
-        FormSEP.add(NoTelp);
-        NoTelp.setBounds(632, 110, 95, 23);
+        COB.setBounds(224, 380, 83, 23);
 
         Katarak.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Katarak.setName("Katarak"); // NOI18N
@@ -1750,21 +1673,21 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Katarak);
-        Katarak.setBounds(470, 110, 95, 23);
+        Katarak.setBounds(363, 380, 83, 23);
 
         jLabel54.setText("Katarak :");
         jLabel54.setName("jLabel54"); // NOI18N
         FormSEP.add(jLabel54);
-        jLabel54.setBounds(380, 110, 87, 23);
+        jLabel54.setBounds(310, 380, 50, 23);
 
-        jLabel55.setText("Tgl :");
+        jLabel55.setText("Tgl. KLL :");
         jLabel55.setName("jLabel55"); // NOI18N
         jLabel55.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel55);
-        jLabel55.setBounds(594, 140, 40, 23);
+        jLabel55.setBounds(698, 80, 72, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-07-2025" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
@@ -1776,13 +1699,13 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(TanggalKKL);
-        TanggalKKL.setBounds(637, 140, 90, 23);
+        TanggalKKL.setBounds(773, 80, 100, 23);
 
-        jLabel56.setText("No.SKDP/SPRI :");
+        jLabel56.setText("No. SKDP :");
         jLabel56.setName("jLabel56"); // NOI18N
         jLabel56.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel56);
-        jLabel56.setBounds(0, 140, 90, 23);
+        jLabel56.setBounds(0, 110, 90, 23);
 
         NoSKDP.setHighlighter(null);
         NoSKDP.setName("NoSKDP"); // NOI18N
@@ -1792,38 +1715,26 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(NoSKDP);
-        NoSKDP.setBounds(93, 140, 227, 23);
-
-        btnSPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnSPRI.setMnemonic('X');
-        btnSPRI.setToolTipText("Alt+X");
-        btnSPRI.setName("btnSPRI"); // NOI18N
-        btnSPRI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSPRIActionPerformed(evt);
-            }
-        });
-        FormSEP.add(btnSPRI);
-        btnSPRI.setBounds(352, 140, 28, 23);
+        NoSKDP.setBounds(93, 110, 323, 23);
 
         LabelPoli2.setText("Dokter DPJP :");
         LabelPoli2.setName("LabelPoli2"); // NOI18N
         FormSEP.add(LabelPoli2);
-        LabelPoli2.setBounds(0, 260, 90, 23);
+        LabelPoli2.setBounds(0, 230, 90, 23);
 
         KdDPJP.setEditable(false);
         KdDPJP.setBackground(new java.awt.Color(245, 250, 240));
         KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         FormSEP.add(KdDPJP);
-        KdDPJP.setBounds(93, 260, 75, 23);
+        KdDPJP.setBounds(93, 230, 79, 23);
 
         NmDPJP.setEditable(false);
         NmDPJP.setBackground(new java.awt.Color(245, 250, 240));
         NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         FormSEP.add(NmDPJP);
-        NmDPJP.setBounds(170, 260, 180, 23);
+        NmDPJP.setBounds(175, 230, 240, 23);
 
         btnDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnDPJP.setMnemonic('X');
@@ -1840,13 +1751,13 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnDPJP);
-        btnDPJP.setBounds(352, 260, 28, 23);
+        btnDPJP.setBounds(418, 230, 28, 23);
 
         jLabel57.setText("Keterangan :");
         jLabel57.setName("jLabel57"); // NOI18N
         jLabel57.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel57);
-        jLabel57.setBounds(380, 170, 87, 23);
+        jLabel57.setBounds(460, 110, 105, 23);
 
         Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
@@ -1856,12 +1767,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Keterangan);
-        Keterangan.setBounds(470, 170, 115, 23);
+        Keterangan.setBounds(568, 110, 164, 23);
 
         jLabel58.setText("Suplesi :");
         jLabel58.setName("jLabel58"); // NOI18N
         FormSEP.add(jLabel58);
-        jLabel58.setBounds(380, 200, 87, 23);
+        jLabel58.setBounds(460, 140, 105, 23);
 
         Suplesi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Suplesi.setName("Suplesi"); // NOI18N
@@ -1871,7 +1782,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Suplesi);
-        Suplesi.setBounds(470, 200, 90, 23);
+        Suplesi.setBounds(568, 140, 80, 23);
 
         NoSEPSuplesi.setHighlighter(null);
         NoSEPSuplesi.setName("NoSEPSuplesi"); // NOI18N
@@ -1881,32 +1792,32 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(NoSEPSuplesi);
-        NoSEPSuplesi.setBounds(632, 200, 65, 23);
+        NoSEPSuplesi.setBounds(722, 140, 120, 23);
 
         jLabel59.setText("SEP Suplesi :");
         jLabel59.setName("jLabel59"); // NOI18N
         jLabel59.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel59);
-        jLabel59.setBounds(561, 200, 68, 23);
+        jLabel59.setBounds(651, 140, 68, 23);
 
         LabelPoli3.setText("Propinsi KLL :");
         LabelPoli3.setName("LabelPoli3"); // NOI18N
         FormSEP.add(LabelPoli3);
-        LabelPoli3.setBounds(380, 230, 87, 23);
+        LabelPoli3.setBounds(460, 170, 105, 23);
 
         KdPropinsi.setEditable(false);
         KdPropinsi.setBackground(new java.awt.Color(245, 250, 240));
         KdPropinsi.setHighlighter(null);
         KdPropinsi.setName("KdPropinsi"); // NOI18N
         FormSEP.add(KdPropinsi);
-        KdPropinsi.setBounds(470, 230, 55, 23);
+        KdPropinsi.setBounds(568, 170, 65, 23);
 
         NmPropinsi.setEditable(false);
         NmPropinsi.setBackground(new java.awt.Color(245, 250, 240));
         NmPropinsi.setHighlighter(null);
         NmPropinsi.setName("NmPropinsi"); // NOI18N
         FormSEP.add(NmPropinsi);
-        NmPropinsi.setBounds(527, 230, 170, 23);
+        NmPropinsi.setBounds(636, 170, 206, 23);
 
         btnPropinsi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPropinsi.setMnemonic('X');
@@ -1923,26 +1834,26 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnPropinsi);
-        btnPropinsi.setBounds(699, 230, 28, 23);
+        btnPropinsi.setBounds(845, 170, 28, 23);
 
         LabelPoli4.setText("Kabupaten KLL :");
         LabelPoli4.setName("LabelPoli4"); // NOI18N
         FormSEP.add(LabelPoli4);
-        LabelPoli4.setBounds(380, 260, 87, 23);
+        LabelPoli4.setBounds(460, 200, 105, 23);
 
         KdKabupaten.setEditable(false);
         KdKabupaten.setBackground(new java.awt.Color(245, 250, 240));
         KdKabupaten.setHighlighter(null);
         KdKabupaten.setName("KdKabupaten"); // NOI18N
         FormSEP.add(KdKabupaten);
-        KdKabupaten.setBounds(470, 260, 55, 23);
+        KdKabupaten.setBounds(568, 200, 65, 23);
 
         NmKabupaten.setEditable(false);
         NmKabupaten.setBackground(new java.awt.Color(245, 250, 240));
         NmKabupaten.setHighlighter(null);
         NmKabupaten.setName("NmKabupaten"); // NOI18N
         FormSEP.add(NmKabupaten);
-        NmKabupaten.setBounds(527, 260, 170, 23);
+        NmKabupaten.setBounds(636, 200, 206, 23);
 
         btnKabupaten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnKabupaten.setMnemonic('X');
@@ -1959,26 +1870,26 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnKabupaten);
-        btnKabupaten.setBounds(699, 260, 28, 23);
+        btnKabupaten.setBounds(845, 200, 28, 23);
 
         LabelPoli5.setText("Kecamatan KLL :");
         LabelPoli5.setName("LabelPoli5"); // NOI18N
         FormSEP.add(LabelPoli5);
-        LabelPoli5.setBounds(380, 290, 87, 23);
+        LabelPoli5.setBounds(460, 230, 105, 23);
 
         KdKecamatan.setEditable(false);
         KdKecamatan.setBackground(new java.awt.Color(245, 250, 240));
         KdKecamatan.setHighlighter(null);
         KdKecamatan.setName("KdKecamatan"); // NOI18N
         FormSEP.add(KdKecamatan);
-        KdKecamatan.setBounds(470, 290, 55, 23);
+        KdKecamatan.setBounds(568, 230, 65, 23);
 
         NmKecamatan.setEditable(false);
         NmKecamatan.setBackground(new java.awt.Color(245, 250, 240));
         NmKecamatan.setHighlighter(null);
         NmKecamatan.setName("NmKecamatan"); // NOI18N
         FormSEP.add(NmKecamatan);
-        NmKecamatan.setBounds(527, 290, 170, 23);
+        NmKecamatan.setBounds(636, 230, 206, 23);
 
         btnKecamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnKecamatan.setMnemonic('X');
@@ -1995,7 +1906,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnKecamatan);
-        btnKecamatan.setBounds(699, 290, 28, 23);
+        btnKecamatan.setBounds(845, 230, 28, 23);
 
         btnRiwayat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnRiwayat.setMnemonic('X');
@@ -2007,7 +1918,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnRiwayat);
-        btnRiwayat.setBounds(669, 80, 28, 23);
+        btnRiwayat.setBounds(387, 80, 28, 23);
 
         btnSKDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSKDP.setMnemonic('X');
@@ -2019,7 +1930,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnSKDP);
-        btnSKDP.setBounds(322, 140, 28, 23);
+        btnSKDP.setBounds(418, 110, 28, 23);
 
         NaikKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1. VVIP", "2. VIP", "3. Kelas I", "4. Kelas II", "5. Kelas III", "6. ICCU", "7. ICU", "8. Diatas Kelas 1" }));
         NaikKelas.setEnabled(false);
@@ -2035,7 +1946,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(NaikKelas);
-        NaikKelas.setBounds(93, 350, 100, 23);
+        NaikKelas.setBounds(330, 320, 116, 23);
 
         Pembiayaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1. Pribadi", "2. Pemberi Kerja", "3. Asuransi Lain" }));
         Pembiayaan.setEnabled(false);
@@ -2046,24 +1957,24 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Pembiayaan);
-        Pembiayaan.setBounds(197, 350, 154, 23);
+        Pembiayaan.setBounds(93, 350, 117, 23);
 
         jLabel60.setText("P.J. Naik Kelas :");
         jLabel60.setName("jLabel60"); // NOI18N
         FormSEP.add(jLabel60);
-        jLabel60.setBounds(0, 380, 90, 23);
+        jLabel60.setBounds(213, 350, 85, 23);
 
         PenanggungJawab.setEditable(false);
         PenanggungJawab.setBackground(new java.awt.Color(245, 250, 240));
         PenanggungJawab.setHighlighter(null);
         PenanggungJawab.setName("PenanggungJawab"); // NOI18N
         FormSEP.add(PenanggungJawab);
-        PenanggungJawab.setBounds(93, 380, 258, 23);
+        PenanggungJawab.setBounds(301, 350, 145, 23);
 
         jLabel61.setText("Tujuan Kunjungan :");
         jLabel61.setName("jLabel61"); // NOI18N
         FormSEP.add(jLabel61);
-        jLabel61.setBounds(357, 320, 110, 23);
+        jLabel61.setBounds(460, 260, 105, 23);
 
         TujuanKunjungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Normal", "1. Prosedur", "2. Konsul Dokter" }));
         TujuanKunjungan.setName("TujuanKunjungan"); // NOI18N
@@ -2078,7 +1989,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(TujuanKunjungan);
-        TujuanKunjungan.setBounds(470, 320, 257, 23);
+        TujuanKunjungan.setBounds(568, 260, 305, 23);
 
         FlagProsedur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0. Prosedur Tidak Berkelanjutan", "1. Prosedur dan Terapi Berkelanjutan" }));
         FlagProsedur.setEnabled(false);
@@ -2089,9 +2000,9 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(FlagProsedur);
-        FlagProsedur.setBounds(470, 350, 257, 23);
+        FlagProsedur.setBounds(568, 290, 305, 23);
 
-        jLabel62.setText("Naik Kelas :");
+        jLabel62.setText("Pembiayaan :");
         jLabel62.setName("jLabel62"); // NOI18N
         FormSEP.add(jLabel62);
         jLabel62.setBounds(0, 350, 90, 23);
@@ -2099,12 +2010,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         jLabel63.setText("Flag Prosedur :");
         jLabel63.setName("jLabel63"); // NOI18N
         FormSEP.add(jLabel63);
-        jLabel63.setBounds(357, 350, 110, 23);
+        jLabel63.setBounds(460, 290, 105, 23);
 
         jLabel64.setText("Penunjang :");
         jLabel64.setName("jLabel64"); // NOI18N
         FormSEP.add(jLabel64);
-        jLabel64.setBounds(357, 380, 110, 23);
+        jLabel64.setBounds(460, 320, 105, 23);
 
         Penunjang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "1. Radioterapi", "2. Kemoterapi", "3. Rehabilitasi Medik", "4. Rehabilitasi Psikososial", "5. Transfusi Darah", "6. Pelayanan Gigi", "7. Laboratorium", "8. USG", "9. Farmasi", "10. Lain-Lain", "11. MRI", "12. HEMODIALISA" }));
         Penunjang.setEnabled(false);
@@ -2115,12 +2026,12 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(Penunjang);
-        Penunjang.setBounds(470, 380, 257, 23);
+        Penunjang.setBounds(568, 320, 305, 23);
 
         jLabel65.setText("Asesmen Pelayanan :");
         jLabel65.setName("jLabel65"); // NOI18N
         FormSEP.add(jLabel65);
-        jLabel65.setBounds(357, 410, 110, 23);
+        jLabel65.setBounds(460, 350, 105, 23);
 
         AsesmenPoli.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "1. Poli spesialis tidak tersedia pada hari sebelumnya", "2. Jam Poli telah berakhir pada hari sebelumnya", "3. Spesialis yang dimaksud tidak praktek pada hari sebelumnya", "4. Atas Instruksi RS", "5. Tujuan Kontrol" }));
         AsesmenPoli.setName("AsesmenPoli"); // NOI18N
@@ -2130,26 +2041,26 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(AsesmenPoli);
-        AsesmenPoli.setBounds(470, 410, 257, 23);
+        AsesmenPoli.setBounds(568, 350, 305, 23);
 
         LabelPoli6.setText("DPJP Layanan :");
         LabelPoli6.setName("LabelPoli6"); // NOI18N
         FormSEP.add(LabelPoli6);
-        LabelPoli6.setBounds(357, 440, 110, 23);
+        LabelPoli6.setBounds(0, 260, 90, 23);
 
         KdDPJPLayanan.setEditable(false);
         KdDPJPLayanan.setBackground(new java.awt.Color(245, 250, 240));
         KdDPJPLayanan.setHighlighter(null);
         KdDPJPLayanan.setName("KdDPJPLayanan"); // NOI18N
         FormSEP.add(KdDPJPLayanan);
-        KdDPJPLayanan.setBounds(470, 440, 55, 23);
+        KdDPJPLayanan.setBounds(93, 260, 79, 23);
 
         NmDPJPLayanan.setEditable(false);
         NmDPJPLayanan.setBackground(new java.awt.Color(245, 250, 240));
         NmDPJPLayanan.setHighlighter(null);
         NmDPJPLayanan.setName("NmDPJPLayanan"); // NOI18N
         FormSEP.add(NmDPJPLayanan);
-        NmDPJPLayanan.setBounds(527, 440, 170, 23);
+        NmDPJPLayanan.setBounds(175, 260, 240, 23);
 
         btnDPJPLayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnDPJPLayanan.setMnemonic('X');
@@ -2166,7 +2077,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnDPJPLayanan);
-        btnDPJPLayanan.setBounds(699, 440, 28, 23);
+        btnDPJPLayanan.setBounds(418, 260, 28, 23);
 
         btnRiwayatRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnRiwayatRujukan.setMnemonic('X');
@@ -2178,7 +2089,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnRiwayatRujukan);
-        btnRiwayatRujukan.setBounds(699, 80, 28, 23);
+        btnRiwayatRujukan.setBounds(418, 80, 28, 23);
 
         btnSuplesi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSuplesi.setMnemonic('X');
@@ -2195,13 +2106,13 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(btnSuplesi);
-        btnSuplesi.setBounds(699, 200, 28, 23);
+        btnSuplesi.setBounds(845, 140, 28, 23);
 
         jLabel66.setText("No.LP :");
         jLabel66.setName("jLabel66"); // NOI18N
         jLabel66.setPreferredSize(new java.awt.Dimension(55, 23));
         FormSEP.add(jLabel66);
-        jLabel66.setBounds(589, 170, 40, 23);
+        jLabel66.setBounds(735, 110, 40, 23);
 
         NoLP.setHighlighter(null);
         NoLP.setName("NoLP"); // NOI18N
@@ -2211,18 +2122,117 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             }
         });
         FormSEP.add(NoLP);
-        NoLP.setBounds(632, 170, 95, 23);
+        NoLP.setBounds(778, 110, 95, 23);
+
+        CmbHuruf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", " " }));
+        CmbHuruf.setName("CmbHuruf"); // NOI18N
+        CmbHuruf.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbHurufItemStateChanged(evt);
+            }
+        });
+        FormSEP.add(CmbHuruf);
+        CmbHuruf.setBounds(468, 20, 60, 23);
+
+        labelAntrian.setText("No. Antrian :");
+        labelAntrian.setName("labelAntrian"); // NOI18N
+        FormSEP.add(labelAntrian);
+        labelAntrian.setBounds(384, 20, 81, 23);
+
+        TNoAntrian.setText("1");
+        TNoAntrian.setName("TNoAntrian"); // NOI18N
+        FormSEP.add(TNoAntrian);
+        TNoAntrian.setBounds(531, 20, 60, 24);
+
+        labelLoket.setText("Loket :");
+        labelLoket.setName("labelLoket"); // NOI18N
+        FormSEP.add(labelLoket);
+        labelLoket.setBounds(594, 20, 50, 23);
+
+        CmbLoket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        CmbLoket.setName("CmbLoket"); // NOI18N
+        FormSEP.add(CmbLoket);
+        CmbLoket.setBounds(647, 20, 60, 23);
+
+        BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
+        BtnAntri.setMnemonic('7');
+        BtnAntri.setText("Antri");
+        BtnAntri.setToolTipText("Alt+7");
+        BtnAntri.setIconTextGap(3);
+        BtnAntri.setName("BtnAntri"); // NOI18N
+        BtnAntri.setPreferredSize(new java.awt.Dimension(80, 23));
+        BtnAntri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAntriActionPerformed(evt);
+            }
+        });
+        FormSEP.add(BtnAntri);
+        BtnAntri.setBounds(710, 20, 80, 23);
+
+        BtnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnStop.setMnemonic('8');
+        BtnStop.setText("Stop");
+        BtnStop.setToolTipText("Alt+8");
+        BtnStop.setIconTextGap(3);
+        BtnStop.setName("BtnStop"); // NOI18N
+        BtnStop.setPreferredSize(new java.awt.Dimension(80, 23));
+        BtnStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnStopActionPerformed(evt);
+            }
+        });
+        FormSEP.add(BtnStop);
+        BtnStop.setBounds(793, 20, 80, 23);
+
+        JenisPelayanan.setEditable(false);
+        JenisPelayanan.setBackground(new java.awt.Color(245, 250, 240));
+        JenisPelayanan.setText("2. Ralan");
+        JenisPelayanan.setHighlighter(null);
+        JenisPelayanan.setName("JenisPelayanan"); // NOI18N
+        FormSEP.add(JenisPelayanan);
+        JenisPelayanan.setBounds(93, 320, 65, 23);
+
+        jLabel6.setText("No. Reg. :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        FormSEP.add(jLabel6);
+        jLabel6.setBounds(248, 20, 70, 23);
+
+        TNoReg.setText("999");
+        TNoReg.setHighlighter(null);
+        TNoReg.setName("TNoReg"); // NOI18N
+        TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoRegKeyPressed(evt);
+            }
+        });
+        FormSEP.add(TNoReg);
+        TNoReg.setBounds(321, 20, 60, 23);
+
+        jLabel67.setText("Naik :");
+        jLabel67.setName("jLabel67"); // NOI18N
+        FormSEP.add(jLabel67);
+        jLabel67.setBounds(297, 320, 30, 23);
 
         PanelInput.add(FormSEP);
 
+        scrollPane2.setViewportView(PanelInput);
+
+        internalFrame1.add(scrollPane2, java.awt.BorderLayout.CENTER);
+
+        panelGlass6.setMinimumSize(new java.awt.Dimension(713, 60));
         panelGlass6.setName("panelGlass6"); // NOI18N
-        panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
+        panelGlass6.setPreferredSize(new java.awt.Dimension(713, 50));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel16.setText("No. RM / NIK / Peserta / Rujukan / Surat Kontrol / Booking MobileJKN :");
-        jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(337, 23));
-        panelGlass6.add(jLabel16);
+        JenisKeyword.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No. RM / NIK / Peserta BPJS", "No. Rujukan FKTP", "No. Rujukan RS", "No. Surat Kontrol", "No. Booking MobileJKN" }));
+        JenisKeyword.setName("JenisKeyword"); // NOI18N
+        JenisKeyword.setPreferredSize(new java.awt.Dimension(180, 24));
+        JenisKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JenisKeywordKeyPressed(evt);
+            }
+        });
+        panelGlass6.add(JenisKeyword);
 
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.setPreferredSize(new java.awt.Dimension(250, 23));
@@ -2303,9 +2313,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         });
         panelGlass6.add(BtnKeluar);
 
-        PanelInput.add(panelGlass6);
-
-        internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_END);
+        internalFrame1.add(panelGlass6, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
@@ -3366,10 +3374,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         // Valid.pindah(evt, NmIbu, Saudara);
     }//GEN-LAST:event_CmbKeluargaKeyPressed
 
-    private void TNoRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNoRMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNoRMActionPerformed
-
     private void TanggalSEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalSEPKeyPressed
         // Valid.pindah(evt, TanggalRujuk, AsalRujukan);
     }//GEN-LAST:event_TanggalSEPKeyPressed
@@ -3545,41 +3549,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         // Valid.pindah(evt, COB, Katarak);
     }//GEN-LAST:event_CatatanKeyPressed
 
-    private void JenisPelayananItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JenisPelayananItemStateChanged
-        /*
-        if (JenisPelayanan.getSelectedIndex() == 0) {
-            KdPoli.setText("");
-            NmPoli.setText("");
-            LabelPoli.setVisible(false);
-            KdPoli.setVisible(false);
-            NmPoli.setVisible(false);
-            btnPoli.setVisible(false);
-            NaikKelas.setEnabled(true);
-            Pembiayaan.setEnabled(true);
-            PenanggungJawab.setEditable(true);
-            KdDPJPLayanan.setText("");
-            NmDPJPLayanan.setText("");
-            btnDPJPLayanan.setEnabled(false);
-        } else if (JenisPelayanan.getSelectedIndex() == 1) {
-            LabelPoli.setVisible(true);
-            KdPoli.setVisible(true);
-            NmPoli.setVisible(true);
-            btnPoli.setVisible(true);
-            NaikKelas.setEnabled(false);
-            NaikKelas.setSelectedIndex(0);
-            Pembiayaan.setEnabled(false);
-            Pembiayaan.setSelectedIndex(0);
-            PenanggungJawab.setEditable(false);
-            PenanggungJawab.setText("");
-            btnDPJPLayanan.setEnabled(true);
-        }
-        */
-    }//GEN-LAST:event_JenisPelayananItemStateChanged
-
-    private void JenisPelayananKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JenisPelayananKeyPressed
-        // Valid.pindah(evt, btnDPJP, Kelas);
-    }//GEN-LAST:event_JenisPelayananKeyPressed
-
     private void KelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasKeyPressed
         // Valid.pindah(evt, JenisPelayanan, Eksekutif);
     }//GEN-LAST:event_KelasKeyPressed
@@ -3615,10 +3584,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         // Valid.pindah(evt, Eksekutif, Catatan);
     }//GEN-LAST:event_COBKeyPressed
 
-    private void NoTelpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoTelpKeyPressed
-        // Valid.pindah(evt, Katarak, LakaLantas);
-    }//GEN-LAST:event_NoTelpKeyPressed
-
     private void KatarakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KatarakKeyPressed
         // Valid.pindah(evt, Catatan, NoTelp);
     }//GEN-LAST:event_KatarakKeyPressed
@@ -3630,16 +3595,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private void NoSKDPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSKDPKeyPressed
         // Valid.pindah(evt, AsalRujukan, btnPPKRujukan);
     }//GEN-LAST:event_NoSKDPKeyPressed
-
-    private void btnSPRIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPRIActionPerformed
-        /*
-        skdp2.setNoRm(NoKartu.getText());
-        skdp2.isCek();
-        skdp2.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        skdp2.setLocationRelativeTo(internalFrame1);
-        skdp2.setVisible(true);
-        */
-    }//GEN-LAST:event_btnSPRIActionPerformed
 
     private void btnDPJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDPJPActionPerformed
         /*
@@ -4200,11 +4155,48 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         // Valid.pindah(evt, Keterangan, Suplesi);
     }//GEN-LAST:event_NoLPKeyPressed
 
+    private void CmbHurufItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbHurufItemStateChanged
+        TNoAntrian.setText(Sequel.cariIsiSmc(
+            "select ifnull(min(convert(substring(antriloketcetak_smc.nomor, 2), signed)), 0) + 1 from antriloketcetak_smc where " +
+            "antriloketcetak_smc.tanggal = current_date() and antriloketcetak_smc.nomor like concat(?, '%') and " +
+            "(antriloketcetak_smc.jam_panggil = '00:00:00' or antriloketcetak_smc.jam_panggil is null)",
+            CmbHuruf.getSelectedItem().toString()
+        ));
+    }//GEN-LAST:event_CmbHurufItemStateChanged
+
+    private void BtnAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntriActionPerformed
+        Sequel.menghapusSmc("antriloketsmc");
+        Sequel.executeRawSmc(
+            "insert into antriloketsmc values (?, concat(?, lpad(?, 3, '0')))",
+            CmbLoket.getSelectedItem().toString(),
+            CmbHuruf.isVisible() ? CmbHuruf.getSelectedItem().toString() : "",
+            TNoAntrian.getText().trim()
+        );
+        Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
+            CmbHuruf.isVisible() ? CmbHuruf.getSelectedItem().toString() : "",
+            TNoAntrian.getText().trim()
+        );
+        TNoAntrian.setText(String.valueOf(Integer.parseInt(TNoAntrian.getText()) + 1));
+    }//GEN-LAST:event_BtnAntriActionPerformed
+
+    private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
+        Sequel.menghapusSmc("antriloketsmc");
+    }//GEN-LAST:event_BtnStopActionPerformed
+
+    private void TNoRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRegKeyPressed
+        
+    }//GEN-LAST:event_TNoRegKeyPressed
+
+    private void JenisKeywordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JenisKeywordKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JenisKeywordKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Alamat;
     private widget.TextBox AlamatPj;
     private widget.ComboBox AsalRujukan;
     private widget.ComboBox AsesmenPoli;
+    private widget.Button BtnAntri;
     private widget.Button BtnBahasa;
     private widget.Button BtnCacat;
     private widget.Button BtnCari;
@@ -4228,6 +4220,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Button BtnSatuanPolri;
     private widget.Button BtnSatuanTNI;
     private widget.Button BtnSimpan;
+    private widget.Button BtnStop;
     private widget.Button BtnSuku;
     private widget.ComboBox CMbGd;
     private widget.ComboBox CMbPnd;
@@ -4236,8 +4229,10 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.CekBox ChkAlamatPJ;
     private widget.CekBox ChkDaftar;
     private widget.CekBox ChkRM;
+    private widget.ComboBox CmbHuruf;
     private widget.ComboBox CmbJk;
     private widget.ComboBox CmbKeluarga;
+    private widget.ComboBox CmbLoket;
     private widget.ComboBox CmbStts;
     private widget.Tanggal DTPDaftar;
     private widget.Tanggal DTPLahir;
@@ -4246,8 +4241,8 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.ComboBox FlagProsedur;
     private widget.PanelBiasa FormPasien;
     private widget.PanelBiasa FormSEP;
-    private widget.TextBox JK;
-    private widget.ComboBox JenisPelayanan;
+    private widget.ComboBox JenisKeyword;
+    private widget.TextBox JenisPelayanan;
     private widget.TextBox JenisPeserta;
     private widget.TextBox Kabupaten;
     private widget.TextBox KabupatenPj;
@@ -4298,12 +4293,10 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.TextBox NmPpkRujukan;
     private widget.TextBox NmPropinsi;
     private widget.TextBox NoKartu;
-    private widget.TextBox NoKartu1;
     private widget.TextBox NoLP;
     private widget.TextBox NoRujukan;
     private widget.TextBox NoSEPSuplesi;
     private widget.TextBox NoSKDP;
-    private widget.TextBox NoTelp;
     private javax.swing.JPanel PanelInput;
     private widget.TextBox Pekerjaan;
     private widget.TextBox PekerjaanPj;
@@ -4318,10 +4311,10 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.TextBox TKtp;
     private widget.TextBox TNm;
     private widget.TextBox TNo;
+    private widget.TextBox TNoAntrian;
     private widget.TextBox TNoPeserta;
-    private widget.TextBox TNoRM;
+    private widget.TextBox TNoReg;
     private widget.TextBox TNoRw;
-    private widget.TextBox TPasien;
     private widget.TextBox TTlp;
     private widget.TextBox TTmp;
     private widget.TextBox TUmurBl;
@@ -4330,7 +4323,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Tanggal TanggalKKL;
     private widget.Tanggal TanggalRujuk;
     private widget.Tanggal TanggalSEP;
-    private widget.TextBox TglLahir;
     private widget.ComboBox TujuanKunjungan;
     private widget.Button btnDPJP;
     private widget.Button btnDPJPLayanan;
@@ -4344,7 +4336,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Button btnRiwayat;
     private widget.Button btnRiwayatRujukan;
     private widget.Button btnSKDP;
-    private widget.Button btnSPRI;
     private widget.Button btnSuplesi;
     private widget.CekBox chkPolri;
     private widget.CekBox chkTNI;
@@ -4356,7 +4347,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel13;
     private widget.Label jLabel14;
     private widget.Label jLabel15;
-    private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
@@ -4389,14 +4379,11 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel44;
     private widget.Label jLabel45;
     private widget.Label jLabel46;
-    private widget.Label jLabel47;
-    private widget.Label jLabel48;
     private widget.Label jLabel49;
     private widget.Label jLabel5;
     private widget.Label jLabel50;
     private widget.Label jLabel51;
     private widget.Label jLabel52;
-    private widget.Label jLabel53;
     private widget.Label jLabel54;
     private widget.Label jLabel55;
     private widget.Label jLabel56;
@@ -4411,8 +4398,11 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel64;
     private widget.Label jLabel65;
     private widget.Label jLabel66;
+    private widget.Label jLabel67;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
+    private widget.Label labelAntrian;
+    private widget.Label labelLoket;
     private widget.TextBox nmbahasa;
     private widget.TextBox nmcacat;
     private widget.TextBox nmgolonganpolri;
@@ -4427,5 +4417,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.TextBox nmsatuantni;
     private widget.TextBox nmsukubangsa;
     private widget.panelisi panelGlass6;
+    private widget.ScrollPane scrollPane1;
+    private widget.ScrollPane scrollPane2;
     // End of variables declaration//GEN-END:variables
 }
