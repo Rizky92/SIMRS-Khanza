@@ -3647,9 +3647,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "resep_obat.jam, resep_obat.tgl_penyerahan, resep_obat.jam_penyerahan from resep_obat join reg_periksa on " +
                                 "resep_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                                 "join dokter on resep_obat.kd_dokter = dokter.kd_dokter join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
-                                "join penjab on reg_periksa.kd_pj = penjab.kd_pj where resep_obat.tgl_peresepan != '0000-00-00' and resep_obat.status = 'ralan' " +
-                                "and resep_obat.tgl_peresepan between ? and ? and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and '' = ? " + statuslayani +
-                                (TCari.getText().isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+                                "join penjab on reg_periksa.kd_pj = penjab.kd_pj where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' " +
+                                "and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and '' = ? " + statuslayani + (TCari.getText().isBlank() ? "" :
+                                "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
                                 "pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") +
                                 "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                         } else {
@@ -3660,11 +3660,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "resep_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                                 "join dokter on resep_obat.kd_dokter = dokter.kd_dokter join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
                                 "join penjab on reg_periksa.kd_pj = penjab.kd_pj join set_depo_ralan on reg_periksa.kd_poli = set_depo_ralan.kd_poli " +
-                                "where resep_obat.tgl_peresepan != '0000-00-00' and resep_obat.status = 'ralan' and resep_obat.tgl_peresepan between " +
-                                "? and ? and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and set_depo_ralan.kd_bangsal = ? " + 
-                                statuslayani + (TCari.getText().isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or " +
-                                "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or " +
-                                "poliklinik.nm_poli like ?) ") + "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
+                                "where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' and resep_obat.kd_dokter like ? and " +
+                                "reg_periksa.kd_poli like ? and set_depo_ralan.kd_bangsal = ? " + statuslayani + (TCari.getText().isBlank() ? "" : 
+                                "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+                                "pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") + 
+                                "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                         }
                         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
                             ps.setString(1, Valid.getTglSmc(DTPCari1));
