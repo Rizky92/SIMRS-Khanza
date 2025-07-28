@@ -26,7 +26,22 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPane1 = new widget.ScrollPane();
+        WindowPengaturan = new javax.swing.JDialog();
+        internalFrame12 = new widget.InternalFrame();
+        BtnTutupPengaturan = new widget.Button();
+        BtnBukaFolderExport = new widget.Button();
+        CmbPilihanAplikasiPDF = new widget.ComboBox();
+        jLabel16 = new widget.Label();
+        TPathAplikasiPDF = new widget.TextBox();
+        jLabel47 = new widget.Label();
+        CmbPilihanTanggalExport = new widget.ComboBox();
+        BtnSimpanPengaturan = new widget.Button();
+        BtnPilihAplikasiPDF = new widget.Button();
+        BtnResetPengaturan = new widget.Button();
+        jLabel48 = new widget.Label();
+        TMaxMemory = new widget.TextBox();
+        jLabel53 = new widget.Label();
+        jLabel68 = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         scrollPane2 = new widget.ScrollPane();
         PanelInput = new javax.swing.JPanel();
@@ -251,10 +266,149 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
         BtnSimpan = new widget.Button();
-        BtnPrint = new widget.Button();
+        BtnPengaturan = new widget.Button();
         BtnKeluar = new widget.Button();
 
-        scrollPane1.setName("scrollPane1"); // NOI18N
+        WindowPengaturan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowPengaturan.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        WindowPengaturan.setName("WindowPengaturan"); // NOI18N
+        WindowPengaturan.setUndecorated(true);
+        WindowPengaturan.setResizable(false);
+
+        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Registrasi SEP ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame12.setMinimumSize(new java.awt.Dimension(611, 178));
+        internalFrame12.setName("internalFrame12"); // NOI18N
+        internalFrame12.setPreferredSize(new java.awt.Dimension(611, 178));
+        internalFrame12.setLayout(null);
+
+        BtnTutupPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnTutupPengaturan.setMnemonic('U');
+        BtnTutupPengaturan.setText("Tutup");
+        BtnTutupPengaturan.setToolTipText("Alt+U");
+        BtnTutupPengaturan.setName("BtnTutupPengaturan"); // NOI18N
+        BtnTutupPengaturan.setPreferredSize(new java.awt.Dimension(86, 30));
+        BtnTutupPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTutupPengaturanActionPerformed(evt);
+            }
+        });
+        internalFrame12.add(BtnTutupPengaturan);
+        BtnTutupPengaturan.setBounds(514, 132, 86, 30);
+
+        BtnBukaFolderExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnBukaFolderExport.setMnemonic('S');
+        BtnBukaFolderExport.setText("Buka Folder Export");
+        BtnBukaFolderExport.setToolTipText("Alt+S");
+        BtnBukaFolderExport.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnBukaFolderExport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnBukaFolderExport.setName("BtnBukaFolderExport"); // NOI18N
+        BtnBukaFolderExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBukaFolderExportActionPerformed(evt);
+            }
+        });
+        internalFrame12.add(BtnBukaFolderExport);
+        BtnBukaFolderExport.setBounds(324, 62, 136, 23);
+
+        CmbPilihanAplikasiPDF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(Aplikasi Default)", "Google Chrome", "Mozilla Firefox", "Microsoft Edge", "Pilih Aplikasi...", "Jangan Buka PDF" }));
+        CmbPilihanAplikasiPDF.setName("CmbPilihanAplikasiPDF"); // NOI18N
+        CmbPilihanAplikasiPDF.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbPilihanAplikasiPDFItemStateChanged(evt);
+            }
+        });
+        internalFrame12.add(CmbPilihanAplikasiPDF);
+        CmbPilihanAplikasiPDF.setBounds(140, 32, 130, 23);
+
+        jLabel16.setText("Buka PDF dengan :");
+        jLabel16.setName("jLabel16"); // NOI18N
+        internalFrame12.add(jLabel16);
+        jLabel16.setBounds(0, 32, 136, 23);
+
+        TPathAplikasiPDF.setEditable(false);
+        TPathAplikasiPDF.setHighlighter(null);
+        TPathAplikasiPDF.setName("TPathAplikasiPDF"); // NOI18N
+        internalFrame12.add(TPathAplikasiPDF);
+        TPathAplikasiPDF.setBounds(274, 32, 294, 23);
+
+        jLabel47.setText("Gunakan Tanggal Export :");
+        jLabel47.setName("jLabel47"); // NOI18N
+        internalFrame12.add(jLabel47);
+        jLabel47.setBounds(0, 62, 136, 23);
+
+        CmbPilihanTanggalExport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tanggal Kompilasi (Default)", "Tanggal SEP" }));
+        CmbPilihanTanggalExport.setName("CmbPilihanTanggalExport"); // NOI18N
+        CmbPilihanTanggalExport.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CmbPilihanTanggalExportItemStateChanged(evt);
+            }
+        });
+        internalFrame12.add(CmbPilihanTanggalExport);
+        CmbPilihanTanggalExport.setBounds(140, 62, 180, 23);
+
+        BtnSimpanPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanPengaturan.setMnemonic('S');
+        BtnSimpanPengaturan.setText("Simpan");
+        BtnSimpanPengaturan.setToolTipText("Alt+S");
+        BtnSimpanPengaturan.setName("BtnSimpanPengaturan"); // NOI18N
+        BtnSimpanPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanPengaturanActionPerformed(evt);
+            }
+        });
+        internalFrame12.add(BtnSimpanPengaturan);
+        BtnSimpanPengaturan.setBounds(10, 132, 86, 30);
+
+        BtnPilihAplikasiPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPilihAplikasiPDF.setMnemonic('S');
+        BtnPilihAplikasiPDF.setToolTipText("Alt+S");
+        BtnPilihAplikasiPDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPilihAplikasiPDF.setName("BtnPilihAplikasiPDF"); // NOI18N
+        BtnPilihAplikasiPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPilihAplikasiPDFActionPerformed(evt);
+            }
+        });
+        internalFrame12.add(BtnPilihAplikasiPDF);
+        BtnPilihAplikasiPDF.setBounds(572, 32, 28, 23);
+
+        BtnResetPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnResetPengaturan.setMnemonic('S');
+        BtnResetPengaturan.setText("Reset");
+        BtnResetPengaturan.setToolTipText("Alt+S");
+        BtnResetPengaturan.setName("BtnResetPengaturan"); // NOI18N
+        BtnResetPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnResetPengaturanActionPerformed(evt);
+            }
+        });
+        internalFrame12.add(BtnResetPengaturan);
+        BtnResetPengaturan.setBounds(150, 132, 86, 30);
+
+        jLabel48.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel48.setText("_____________________________________________________________________________________________________");
+        jLabel48.setName("jLabel48"); // NOI18N
+        internalFrame12.add(jLabel48);
+        jLabel48.setBounds(0, 116, 610, 12);
+
+        TMaxMemory.setHighlighter(null);
+        TMaxMemory.setName("TMaxMemory"); // NOI18N
+        internalFrame12.add(TMaxMemory);
+        TMaxMemory.setBounds(140, 92, 80, 23);
+
+        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        jLabel53.setText("MB");
+        jLabel53.setName("jLabel53"); // NOI18N
+        internalFrame12.add(jLabel53);
+        jLabel53.setBounds(228, 92, 14, 23);
+
+        jLabel68.setText("Max Memory Kompilasi :");
+        jLabel68.setName("jLabel68"); // NOI18N
+        internalFrame12.add(jLabel68);
+        jLabel68.setBounds(0, 92, 136, 23);
+
+        WindowPengaturan.getContentPane().add(internalFrame12, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(null);
@@ -2282,18 +2436,21 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         });
         panelGlass6.add(BtnSimpan);
 
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+        BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
+        BtnPengaturan.setMnemonic('T');
+        BtnPengaturan.setText("Pengaturan");
+        BtnPengaturan.setToolTipText("Alt+T");
+        BtnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnPengaturan.setMaximumSize(new java.awt.Dimension(100, 30));
+        BtnPengaturan.setMinimumSize(new java.awt.Dimension(100, 30));
+        BtnPengaturan.setName("BtnPengaturan"); // NOI18N
+        BtnPengaturan.setPreferredSize(new java.awt.Dimension(120, 28));
+        BtnPengaturan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
+                BtnPengaturanActionPerformed(evt);
             }
         });
-        panelGlass6.add(BtnPrint);
+        panelGlass6.add(BtnPengaturan);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -2329,10 +2486,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_BtnKeluarKeyPressed
-
-    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-
-    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void NoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKartuKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -4191,6 +4344,115 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_JenisKeywordKeyPressed
 
+    private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
+        cekPengaturanKompilasi();
+        WindowPengaturan.setSize(610, 172);
+        WindowPengaturan.setLocationRelativeTo(internalFrame1);
+        WindowPengaturan.setVisible(true);
+    }//GEN-LAST:event_BtnPengaturanActionPerformed
+
+    private void BtnTutupPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTutupPengaturanActionPerformed
+        WindowPengaturan.dispose();
+    }//GEN-LAST:event_BtnTutupPengaturanActionPerformed
+
+    private void BtnBukaFolderExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBukaFolderExportActionPerformed
+        try {
+            Desktop.getDesktop().open(new File("./berkaspdf"));
+        } catch (IOException e) {
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_BtnBukaFolderExportActionPerformed
+
+    private void CmbPilihanAplikasiPDFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbPilihanAplikasiPDFItemStateChanged
+        if (CmbPilihanAplikasiPDF.getSelectedIndex() == 4) {
+            TPathAplikasiPDF.setEditable(true);
+            BtnPilihAplikasiPDF.setEnabled(true);
+        } else {
+            TPathAplikasiPDF.setText("");
+            TPathAplikasiPDF.setEditable(false);
+            BtnPilihAplikasiPDF.setEnabled(false);
+        }
+    }//GEN-LAST:event_CmbPilihanAplikasiPDFItemStateChanged
+
+    private void CmbPilihanTanggalExportItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbPilihanTanggalExportItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CmbPilihanTanggalExportItemStateChanged
+
+    private void BtnSimpanPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPengaturanActionPerformed
+        try {
+            String aplikasipdf = "", tanggalexport = "registrasi", maxmemory = TMaxMemory.getText().trim();
+            switch (CmbPilihanAplikasiPDF.getSelectedIndex()) {
+                case 1:
+                aplikasipdf = "chrome";
+                break;
+                case 2:
+                aplikasipdf = "firefox";
+                break;
+                case 3:
+                aplikasipdf = "msedge";
+                break;
+                case 4:
+                aplikasipdf = TPathAplikasiPDF.getText().trim();
+                break;
+                case 5:
+                aplikasipdf = "disable";
+                break;
+                default:
+                aplikasipdf = "";
+                break;
+            }
+
+            if (CmbPilihanTanggalExport.getSelectedIndex() == 1) {
+                tanggalexport = "sep";
+            } else {
+                tanggalexport = "kompilasi";
+            }
+
+            File iyem = new File("./cache/pengaturankompilasi.iyem");
+            iyem.createNewFile();
+            try (FileWriter fw = new FileWriter(iyem)) {
+                if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                    // Special behaviour for windows because of backslash directory separator
+                    fw.write("{\"pengaturan\":{\"aplikasipdf\":\"" + aplikasipdf.replace(File.separator, File.separator + File.separator) + "\",\"tanggalexport\":\"" + tanggalexport + "\",\"maxmemory\":" + maxmemory + "}}");
+                } else {
+                    fw.write("{\"pengaturan\":{\"aplikasipdf\":\"" + aplikasipdf + "\",\"tanggalexport\":\"" + tanggalexport + "\",\"maxmemory\":" + maxmemory + "}}");
+                }
+                fw.flush();
+                KOMPILASIBERKASAPLIKASIPDF = aplikasipdf;
+                KOMPILASIBERKASGUNAKANTANGGALEXPORT = tanggalexport;
+                KOMPILASIBERKASMAXMEMORY = Integer.parseInt(maxmemory);
+                JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil disimpan..!!");
+                WindowPengaturan.dispose();
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_BtnSimpanPengaturanActionPerformed
+
+    private void BtnPilihAplikasiPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihAplikasiPDFActionPerformed
+        if (!TPathAplikasiPDF.getText().isBlank()) {
+            fc.setCurrentDirectory(new File(TPathAplikasiPDF.getText().substring(0, TPathAplikasiPDF.getText().lastIndexOf(File.separator))));
+        }
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            TPathAplikasiPDF.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_BtnPilihAplikasiPDFActionPerformed
+
+    private void BtnResetPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetPengaturanActionPerformed
+        try {
+            File iyem = new File("./cache/pengaturankompilasi.iyem");
+            if (JOptionPane.showConfirmDialog(null, "Eeeiiittsss... Yakin mau reset pengaturan kompilasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION && !iyem.isDirectory()) {
+                iyem.delete();
+                cekPengaturanKompilasi();
+                JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil direset..!!");
+                WindowPengaturan.dispose();
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mereset pengaturan kompilasi,\nSilahkan coba lagi.");
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_BtnResetPengaturanActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Alamat;
     private widget.TextBox AlamatPj;
@@ -4198,6 +4460,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.ComboBox AsesmenPoli;
     private widget.Button BtnAntri;
     private widget.Button BtnBahasa;
+    private widget.Button BtnBukaFolderExport;
     private widget.Button BtnCacat;
     private widget.Button BtnCari;
     private widget.Button BtnGolonganPolri;
@@ -4213,15 +4476,19 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Button BtnKelurahanPj;
     private widget.Button BtnPangkatPolri;
     private widget.Button BtnPangkatTNI;
+    private widget.Button BtnPengaturan;
     private widget.Button BtnPenjab;
     private widget.Button BtnPerusahaan;
-    private widget.Button BtnPrint;
+    private widget.Button BtnPilihAplikasiPDF;
     private widget.Button BtnPropinsi;
+    private widget.Button BtnResetPengaturan;
     private widget.Button BtnSatuanPolri;
     private widget.Button BtnSatuanTNI;
     private widget.Button BtnSimpan;
+    private widget.Button BtnSimpanPengaturan;
     private widget.Button BtnStop;
     private widget.Button BtnSuku;
+    private widget.Button BtnTutupPengaturan;
     private widget.ComboBox CMbGd;
     private widget.ComboBox CMbPnd;
     private widget.ComboBox COB;
@@ -4233,6 +4500,8 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.ComboBox CmbJk;
     private widget.ComboBox CmbKeluarga;
     private widget.ComboBox CmbLoket;
+    private widget.ComboBox CmbPilihanAplikasiPDF;
+    private widget.ComboBox CmbPilihanTanggalExport;
     private widget.ComboBox CmbStts;
     private widget.Tanggal DTPDaftar;
     private widget.Tanggal DTPLahir;
@@ -4309,12 +4578,14 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.TextBox Status;
     private widget.ComboBox Suplesi;
     private widget.TextBox TKtp;
+    private widget.TextBox TMaxMemory;
     private widget.TextBox TNm;
     private widget.TextBox TNo;
     private widget.TextBox TNoAntrian;
     private widget.TextBox TNoPeserta;
     private widget.TextBox TNoReg;
     private widget.TextBox TNoRw;
+    private widget.TextBox TPathAplikasiPDF;
     private widget.TextBox TTlp;
     private widget.TextBox TTmp;
     private widget.TextBox TUmurBl;
@@ -4324,6 +4595,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Tanggal TanggalRujuk;
     private widget.Tanggal TanggalSEP;
     private widget.ComboBox TujuanKunjungan;
+    private javax.swing.JDialog WindowPengaturan;
     private widget.Button btnDPJP;
     private widget.Button btnDPJPLayanan;
     private widget.Button btnDiagnosa;
@@ -4341,12 +4613,14 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.CekBox chkTNI;
     private widget.ComboBox cmbAgama;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame12;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
     private widget.Label jLabel15;
+    private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
@@ -4379,11 +4653,14 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel44;
     private widget.Label jLabel45;
     private widget.Label jLabel46;
+    private widget.Label jLabel47;
+    private widget.Label jLabel48;
     private widget.Label jLabel49;
     private widget.Label jLabel5;
     private widget.Label jLabel50;
     private widget.Label jLabel51;
     private widget.Label jLabel52;
+    private widget.Label jLabel53;
     private widget.Label jLabel54;
     private widget.Label jLabel55;
     private widget.Label jLabel56;
@@ -4399,6 +4676,7 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel65;
     private widget.Label jLabel66;
     private widget.Label jLabel67;
+    private widget.Label jLabel68;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private widget.Label labelAntrian;
@@ -4417,7 +4695,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.TextBox nmsatuantni;
     private widget.TextBox nmsukubangsa;
     private widget.panelisi panelGlass6;
-    private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     // End of variables declaration//GEN-END:variables
 }
