@@ -434,7 +434,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2024 12:39:32" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025 11:35:04" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -475,7 +475,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -836,7 +836,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -850,7 +850,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
