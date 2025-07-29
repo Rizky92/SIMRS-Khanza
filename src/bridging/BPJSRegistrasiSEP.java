@@ -15,6 +15,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Connection;
@@ -379,7 +380,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         WindowPengaturan.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         WindowPengaturan.setName("WindowPengaturan"); // NOI18N
         WindowPengaturan.setUndecorated(true);
-        WindowPengaturan.setPreferredSize(new java.awt.Dimension(454, 320));
         WindowPengaturan.setResizable(false);
 
         internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Registrasi SEP ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
@@ -734,9 +734,9 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(jLabel12);
         jLabel12.setBounds(402, 140, 90, 23);
 
-        alamat.setText("ALAMAT");
         alamat.setHighlighter(null);
         alamat.setName("alamat"); // NOI18N
+        alamat.setPlaceholderText("ALAMAT");
         FormPasien.add(alamat);
         alamat.setBounds(496, 170, 377, 23);
 
@@ -817,21 +817,21 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(pilihPJ);
         pilihPJ.setBounds(845, 50, 28, 23);
 
-        kelurahan.setText("KELURAHAN");
         kelurahan.setHighlighter(null);
         kelurahan.setName("kelurahan"); // NOI18N
+        kelurahan.setPlaceholderText("KELURAHAN");
         FormPasien.add(kelurahan);
         kelurahan.setBounds(496, 200, 152, 23);
 
-        kecamatan.setText("KECAMATAN");
         kecamatan.setHighlighter(null);
         kecamatan.setName("kecamatan"); // NOI18N
+        kecamatan.setPlaceholderText("KECAMATAN");
         FormPasien.add(kecamatan);
         kecamatan.setBounds(690, 200, 152, 23);
 
-        kabupaten.setText("KABUPATEN");
         kabupaten.setHighlighter(null);
         kabupaten.setName("kabupaten"); // NOI18N
+        kabupaten.setPlaceholderText("KABUPATEN");
         FormPasien.add(kabupaten);
         kabupaten.setBounds(496, 230, 152, 23);
 
@@ -897,15 +897,15 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(jLabel29);
         jLabel29.setBounds(402, 260, 90, 23);
 
-        alamatPJ.setText("ALAMAT");
         alamatPJ.setHighlighter(null);
         alamatPJ.setName("alamatPJ"); // NOI18N
+        alamatPJ.setPlaceholderText("ALAMAT");
         FormPasien.add(alamatPJ);
         alamatPJ.setBounds(496, 260, 346, 23);
 
-        kecamatanPJ.setText("KECAMATAN");
         kecamatanPJ.setHighlighter(null);
         kecamatanPJ.setName("kecamatanPJ"); // NOI18N
+        kecamatanPJ.setPlaceholderText("KECAMATAN");
         FormPasien.add(kecamatanPJ);
         kecamatanPJ.setBounds(690, 290, 152, 23);
 
@@ -916,9 +916,9 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(pilihKecamatanPJ);
         pilihKecamatanPJ.setBounds(845, 290, 28, 23);
 
-        kabupatenPJ.setText("KABUPATEN");
         kabupatenPJ.setHighlighter(null);
         kabupatenPJ.setName("kabupatenPJ"); // NOI18N
+        kabupatenPJ.setPlaceholderText("KABUPATEN");
         FormPasien.add(kabupatenPJ);
         kabupatenPJ.setBounds(496, 320, 152, 23);
 
@@ -936,9 +936,9 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(pilihKelurahanPJ);
         pilihKelurahanPJ.setBounds(651, 290, 28, 23);
 
-        kelurahanPJ.setText("KELURAHAN");
         kelurahanPJ.setHighlighter(null);
         kelurahanPJ.setName("kelurahanPJ"); // NOI18N
+        kelurahanPJ.setPlaceholderText("KELURAHAN");
         FormPasien.add(kelurahanPJ);
         kelurahanPJ.setBounds(496, 290, 152, 23);
 
@@ -1204,15 +1204,15 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         FormPasien.add(pilihPropinsi);
         pilihPropinsi.setBounds(845, 230, 28, 23);
 
-        propinsi.setText("PROPINSI");
         propinsi.setHighlighter(null);
         propinsi.setName("propinsi"); // NOI18N
+        propinsi.setPlaceholderText("PROPINSI");
         FormPasien.add(propinsi);
         propinsi.setBounds(690, 230, 152, 23);
 
-        propinsiPJ.setText("PROPINSI");
         propinsiPJ.setHighlighter(null);
         propinsiPJ.setName("propinsiPJ"); // NOI18N
+        propinsiPJ.setPlaceholderText("PROPINSI");
         FormPasien.add(propinsiPJ);
         propinsiPJ.setBounds(690, 320, 152, 23);
 
@@ -2197,7 +2197,6 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     private widget.Label jLabel74;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private widget.TextBox jabatanPOLRI;
     private widget.TextBox jabatanTNI;
     private widget.TextBox jenisPelayanan;
@@ -2366,17 +2365,17 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
         ubahTglDaftar.setSelected(false);
         pekerjaan.setText("");
         noKTP.setText("");
-        alamat.setText("ALAMAT");
-        kelurahan.setText("KELURAHAN");
-        kecamatan.setText("KECAMATAN");
-        kabupaten.setText("KABUPATEN");
-        propinsi.setText("PROPINSI");
-        alamatPJ.setText("ALAMAT");
+        alamat.setText("");
+        kelurahan.setText("");
+        kecamatan.setText("");
+        kabupaten.setText("");
+        propinsi.setText("");
+        alamatPJ.setText("");
         alamatPJSama.setSelected(false);
-        kelurahanPJ.setText("KELURAHAN");
-        kecamatanPJ.setText("KECAMATAN");
-        kabupatenPJ.setText("KABUPATEN");
-        propinsiPJ.setText("PROPINSI");
+        kelurahanPJ.setText("");
+        kecamatanPJ.setText("");
+        kabupatenPJ.setText("");
+        propinsiPJ.setText("");
         perusahaan.setText("");
         nip.setText("");
         anggotaTNI.setSelected(false);
@@ -2513,7 +2512,96 @@ public final class BPJSRegistrasiSEP extends javax.swing.JDialog {
     }
     
     private void bukaAplikasiFrista() {
-        
+        if (noPeserta.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No. kartu peserta tidak ada..!!");
+            return;
+        }
+        SwingUtilities.invokeLater(() -> { 
+            try {
+                fristaAktif = false;
+                User32 u32 = User32.INSTANCE;
+                Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+
+                u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
+                    char[] windowText = new char[512];
+                    u32.GetWindowText(hwnd, windowText, 512);
+                    String wText = Native.toString(windowText);
+                    
+                    if (wText.isEmpty()) {
+                        return true;
+                    }
+
+                    if (wText.toLowerCase().contains("face recognition bpjs kesehatan")) {
+                        BPJSRegistrasiSEP.this.fristaAktif = true;
+                        u32.SetForegroundWindow(hwnd);
+                    }
+
+                    return true;
+                }, Pointer.NULL);
+
+                Robot r = new Robot();
+                Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection ss;
+
+                if (fristaAktif) {
+                    Thread.sleep(2000);
+                    r.mouseMove(d.width / 2, d.height / 2);
+                    r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                    r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+                    r.keyPress(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_A);
+                    r.keyRelease(KeyEvent.VK_A);
+                    r.keyRelease(KeyEvent.VK_CONTROL);
+                    Thread.sleep(200);
+
+                    ss = new StringSelection(noPeserta.getText());
+                    c.setContents(ss, ss);
+                    r.keyPress(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_CONTROL);
+                } else {
+                    Runtime.getRuntime().exec("\"" + pathFrista + "\"");
+                    Thread.sleep(7000);
+
+                    ss = new StringSelection(userFP);
+                    c.setContents(ss, ss);
+                    r.keyPress(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_TAB);
+                    r.keyRelease(KeyEvent.VK_TAB);
+                    Thread.sleep(1500);
+
+                    ss = new StringSelection(passFP);
+                    c.setContents(ss, ss);
+                    r.keyPress(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_TAB);
+                    r.keyRelease(KeyEvent.VK_TAB);
+                    r.keyPress(KeyEvent.VK_SPACE);
+                    r.keyRelease(KeyEvent.VK_SPACE);
+                    Thread.sleep(5000);
+
+                    r.mouseMove(d.width / 2, d.height / 2);
+                    r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                    r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+
+                    ss = new StringSelection(noPeserta.getText());
+                    c.setContents(ss, ss);
+                    r.keyPress(KeyEvent.VK_CONTROL);
+                    r.keyPress(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_V);
+                    r.keyRelease(KeyEvent.VK_CONTROL);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        });
     }
     
     private void bukaAplikasiFingerprint() {

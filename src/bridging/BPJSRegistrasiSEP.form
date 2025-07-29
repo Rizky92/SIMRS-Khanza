@@ -13,9 +13,6 @@
         </Property>
         <Property name="name" type="java.lang.String" value="WindowPengaturan" noResource="true"/>
         <Property name="undecorated" type="boolean" value="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[454, 320]"/>
-        </Property>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -836,11 +833,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="alamat">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="ALAMAT"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="alamat" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="ALAMAT"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1042,11 +1039,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kelurahan">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KELURAHAN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kelurahan" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KELURAHAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1056,11 +1053,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kecamatan">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KECAMATAN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kecamatan" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KECAMATAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1070,11 +1067,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kabupaten">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KABUPATEN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kabupaten" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KABUPATEN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1222,11 +1219,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="alamatPJ">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="ALAMAT"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="alamatPJ" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="ALAMAT"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1236,11 +1233,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kecamatanPJ">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KECAMATAN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kecamatanPJ" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KECAMATAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1265,11 +1262,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kabupatenPJ">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KABUPATEN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kabupatenPJ" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KABUPATEN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1309,11 +1306,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="kelurahanPJ">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="KELURAHAN"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="kelurahanPJ" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="KELURAHAN"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1885,11 +1882,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="propinsi">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="PROPINSI"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="propinsi" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="PROPINSI"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1899,11 +1896,11 @@
                     </Component>
                     <Component class="widget.TextBox" name="propinsiPJ">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="PROPINSI"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
                         <Property name="name" type="java.lang.String" value="propinsiPJ" noResource="true"/>
+                        <Property name="placeholderText" type="java.lang.String" value="PROPINSI"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
