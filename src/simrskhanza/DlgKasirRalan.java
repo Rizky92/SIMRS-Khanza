@@ -7047,57 +7047,70 @@ private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }else {
                 try {
                     sudah=Sequel.cariInteger("select count(billing.no_rawat) from billing where billing.no_rawat=?",TNoRw.getText());
-                    pscaripiutang=koneksi.prepareStatement("select tgl_piutang from piutang_pasien where no_rkm_medis=? and status='Belum Lunas' order by tgl_piutang asc limit 1");
-                    try{
-                        pscaripiutang.setString(1,tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString());
-                        rskasir=pscaripiutang.executeQuery();
-                        if(rskasir.next()){
-                            i=JOptionPane.showConfirmDialog(null, "Masih ada tunggakan pembayaran, apa mau bayar sekarang ?","Konfirmasi",JOptionPane.YES_NO_OPTION);
-                            if(i==JOptionPane.YES_OPTION){
-                                 DlgLhtPiutang piutang=new DlgLhtPiutang(null,false);
-                                 piutang.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString(),rskasir.getDate(1));
-                                 piutang.tampil();
-                                 piutang.isCek();
-                                 piutang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                                 piutang.setLocationRelativeTo(internalFrame1);
-                                 piutang.setVisible(true);
+                    if (akses.getpiutang_pasien()) {
+                        pscaripiutang=koneksi.prepareStatement("select tgl_piutang from piutang_pasien where no_rkm_medis=? and status='Belum Lunas' order by tgl_piutang asc limit 1");
+                        try{
+                            pscaripiutang.setString(1,tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString());
+                            rskasir=pscaripiutang.executeQuery();
+                            if(rskasir.next()){
+                                i=JOptionPane.showConfirmDialog(null, "Masih ada tunggakan pembayaran, apa mau bayar sekarang ?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                                if(i==JOptionPane.YES_OPTION){
+                                     DlgLhtPiutang piutang=new DlgLhtPiutang(null,false);
+                                     piutang.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString(),rskasir.getDate(1));
+                                     piutang.tampil();
+                                     piutang.isCek();
+                                     piutang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                     piutang.setLocationRelativeTo(internalFrame1);
+                                     piutang.setVisible(true);
+                                }else{
+                                    if(akses.getbilling_ralan()==true){
+                                        otomatisRalan();
+                                    }
+
+                                    akses.setform("DlgKasirRalan");
+                                    billing.TNoRw.setText(TNoRw.getText());
+                                    billing.isCek();
+                                    billing.isRawat();
+                                    if(sudah>0){
+                                        billing.setPiutang();
+                                    }
+                                    billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    billing.setLocationRelativeTo(internalFrame1);
+                                    billing.setVisible(true);
+                                }
                             }else{
                                 if(akses.getbilling_ralan()==true){
                                     otomatisRalan();
                                 }
-
                                 akses.setform("DlgKasirRalan");
                                 billing.TNoRw.setText(TNoRw.getText());
                                 billing.isCek();
                                 billing.isRawat();
-                                if(sudah>0){
-                                    billing.setPiutang();
-                                }
                                 billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 billing.setLocationRelativeTo(internalFrame1);
                                 billing.setVisible(true);
                             }
-                        }else{
-                            if(akses.getbilling_ralan()==true){
-                                otomatisRalan();
+                        }catch(Exception ex){
+                            System.out.println("Notifikasi : "+ex);
+                        } finally{
+                            if(rskasir!=null){
+                                rskasir.close();
                             }
-                            akses.setform("DlgKasirRalan");
-                            billing.TNoRw.setText(TNoRw.getText());
-                            billing.isCek();
-                            billing.isRawat();
-                            billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                            billing.setLocationRelativeTo(internalFrame1);
-                            billing.setVisible(true);
+                            if(pscaripiutang!=null){
+                                pscaripiutang.close();
+                            }
                         }
-                    }catch(Exception ex){
-                        System.out.println("Notifikasi : "+ex);
-                    } finally{
-                        if(rskasir!=null){
-                            rskasir.close();
+                    } else {
+                        if(akses.getbilling_ralan()==true){
+                            otomatisRalan();
                         }
-                        if(pscaripiutang!=null){
-                            pscaripiutang.close();
-                        }
+                        akses.setform("DlgKasirRalan");
+                        billing.TNoRw.setText(TNoRw.getText());
+                        billing.isCek();
+                        billing.isRawat();
+                        billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        billing.setLocationRelativeTo(internalFrame1);
+                        billing.setVisible(true);
                     }
                 } catch (Exception e) {
                     System.out.println(e);
@@ -15355,7 +15368,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
 
-    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15401,7 +15414,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
-    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
