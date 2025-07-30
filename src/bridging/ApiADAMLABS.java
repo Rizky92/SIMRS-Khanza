@@ -52,7 +52,6 @@ public class ApiADAMLABS
     private HttpEntity entity;
     private ObjectNode root;
     private JsonNode response;
-    private String jsonBuilder;
     private SSLContext sslContext;
     private SSLSocketFactory sslFactory;
     private Scheme scheme;
@@ -148,7 +147,7 @@ public class ApiADAMLABS
             Sequel.menyimpanSmc(
                 "adamlabs_request_response",
                 "noorder, url, method, request, code, response, pengirim",
-                kodeRegistrasi, url, "POST", jsonBuilder, String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
+                kodeRegistrasi, url, "POST", root.toString(), String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
             );
             if (response.path("status").asText().equals("200")) {
                 Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("payload").path("registrasi").path("no_lab").asText());
