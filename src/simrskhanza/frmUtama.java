@@ -72,7 +72,6 @@ import bridging.BPJSMapingDokterDPJP;
 import bridging.BPJSMapingPoli;
 import bridging.BPJSMonitoringKlaim;
 import bridging.BPJSProgramPRB;
-import bridging.BPJSRegistrasiSEP;
 import bridging.BPJSRujukanKeluar;
 import bridging.BPJSRujukanKhusus;
 import bridging.BPJSSPRI;
@@ -23760,7 +23759,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
             btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS,
-            btnSuratPernyataanMemilihDPJP,btnBPJSRegistrasiSEP;
+            btnSuratPernyataanMemilihDPJP;
 
     public void isWall(){
         try{
@@ -27217,11 +27216,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
             if(akses.getduta_parkir_rekap_keluar()==true){
                 Panelmenu.add(btnRekapKeluarDutaParking);
-                jmlmenu++;
-            }
-            
-            if (akses.getregistrasi_cepat_bpjs()) {
-                Panelmenu.add(btnBPJSRegistrasiSEP);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){
@@ -35268,11 +35262,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnSetTampilJenisObatResep);
             jmlmenu++;
         }
-        
-        if (akses.getregistrasi_cepat_bpjs()) {
-            Panelmenu.add(btnBPJSRegistrasiSEP);
-            jmlmenu++;
-        }
     }
 
     private void isCariIsi() {
@@ -43233,13 +43222,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
-        
-        if (akses.getregistrasi_cepat_bpjs()) {
-            if (btnBPJSRegistrasiSEP.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSRegistrasiSEP);
-                jmlmenu++;
-            }
-        }
     }
 
     private void initKhanza() {
@@ -48675,14 +48657,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningInstrumenACRS.setName("btnSkriningInstrumenACRS");
         btnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenACRS.addActionListener(this::btnSkriningInstrumenACRSActionPerformed);
-        
-        btnBPJSRegistrasiSEP = new widget.ButtonBig();
-        btnBPJSRegistrasiSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
-        btnBPJSRegistrasiSEP.setText("Registrasi Cepat BPJS");
-        btnBPJSRegistrasiSEP.setIconTextGap(0);
-        btnBPJSRegistrasiSEP.setName("btnBPJSRegistrasiSEP");
-        btnBPJSRegistrasiSEP.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSRegistrasiSEP.addActionListener(this::btnBPJSRegistrasiSEPActionPerformed);
     }
 
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {
@@ -48693,19 +48667,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setAlwaysOnTop(false);
-        aplikasi.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
-    }
-    
-    private void btnBPJSRegistrasiSEPActionPerformed(java.awt.event.ActionEvent evt) {
-        isTutup();
-        DlgHome.dispose();
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BPJSRegistrasiSEP aplikasi = new BPJSRegistrasiSEP(this, true);
-        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-        aplikasi.setLocationRelativeTo(PanelUtama);
-        aplikasi.setAlwaysOnTop(false);
-        aplikasi.isCek();
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }

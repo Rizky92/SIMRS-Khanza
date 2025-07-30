@@ -1431,13 +1431,16 @@ public final class DlgReg extends javax.swing.JDialog {
         labelKeterangan = new widget.Label();
         labelAntrian = new widget.Label();
         TNoAntrian = new widget.TextBox();
-        labelHuruf = new widget.Label();
         CmbHuruf = new widget.ComboBox();
         labelLoket = new widget.Label();
         CmbLoket = new widget.ComboBox();
         BtnAntri = new widget.Button();
         BtnStop = new widget.Button();
         labelAntrianTerakhir = new widget.Label();
+        labelLoket1 = new widget.Label();
+        jLabel25 = new widget.Label();
+        noRujukan = new widget.TextBox();
+        cekEligibilitasRujukan = new widget.Button();
         ChkInput = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
@@ -6632,7 +6635,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6645,7 +6648,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6742,7 +6745,7 @@ public final class DlgReg extends javax.swing.JDialog {
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(490, 167));
+        FormInput.setPreferredSize(new java.awt.Dimension(490, 227));
         FormInput.setLayout(null);
 
         jLabel3.setText("No. Reg. :");
@@ -6786,7 +6789,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-07-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -7097,17 +7100,12 @@ public final class DlgReg extends javax.swing.JDialog {
         labelAntrian.setText("Antrian :");
         labelAntrian.setName("labelAntrian"); // NOI18N
         FormInput.add(labelAntrian);
-        labelAntrian.setBounds(884, 72, 60, 23);
+        labelAntrian.setBounds(137, 162, 50, 23);
 
         TNoAntrian.setText("1");
         TNoAntrian.setName("TNoAntrian"); // NOI18N
         FormInput.add(TNoAntrian);
-        TNoAntrian.setBounds(948, 72, 60, 24);
-
-        labelHuruf.setText("Huruf :");
-        labelHuruf.setName("labelHuruf"); // NOI18N
-        FormInput.add(labelHuruf);
-        labelHuruf.setBounds(884, 42, 60, 23);
+        TNoAntrian.setBounds(253, 162, 60, 23);
 
         CmbHuruf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", " " }));
         CmbHuruf.setName("CmbHuruf"); // NOI18N
@@ -7117,17 +7115,17 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbHuruf);
-        CmbHuruf.setBounds(948, 42, 60, 23);
+        CmbHuruf.setBounds(190, 162, 60, 23);
 
         labelLoket.setText("Loket :");
         labelLoket.setName("labelLoket"); // NOI18N
         FormInput.add(labelLoket);
-        labelLoket.setBounds(884, 102, 60, 23);
+        labelLoket.setBounds(0, 162, 70, 23);
 
         CmbLoket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         CmbLoket.setName("CmbLoket"); // NOI18N
         FormInput.add(CmbLoket);
-        CmbLoket.setBounds(948, 102, 60, 23);
+        CmbLoket.setBounds(74, 162, 60, 23);
 
         BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
         BtnAntri.setMnemonic('7');
@@ -7142,7 +7140,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnAntri);
-        BtnAntri.setBounds(1020, 102, 80, 23);
+        BtnAntri.setBounds(316, 162, 80, 23);
 
         BtnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnStop.setMnemonic('8');
@@ -7157,13 +7155,47 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnStop);
-        BtnStop.setBounds(1110, 102, 80, 23);
+        BtnStop.setBounds(316, 192, 80, 23);
 
         labelAntrianTerakhir.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        labelAntrianTerakhir.setText("<html>Antrian Terakhir : <b>B001</b></html>");
+        labelAntrianTerakhir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelAntrianTerakhir.setName("labelAntrianTerakhir"); // NOI18N
         FormInput.add(labelAntrianTerakhir);
-        labelAntrianTerakhir.setBounds(884, 132, 306, 23);
+        labelAntrianTerakhir.setBounds(74, 192, 60, 23);
+
+        labelLoket1.setText("Terakhir :");
+        labelLoket1.setName("labelLoket1"); // NOI18N
+        FormInput.add(labelLoket1);
+        labelLoket1.setBounds(0, 192, 70, 23);
+
+        jLabel25.setText("No. Rujukan/SKDP :");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(416, 162, 100, 23);
+
+        noRujukan.setName("noRujukan"); // NOI18N
+        noRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                noRujukanKeyPressed(evt);
+            }
+        });
+        FormInput.add(noRujukan);
+        noRujukan.setBounds(520, 162, 330, 23);
+
+        cekEligibilitasRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        cekEligibilitasRujukan.setMnemonic('2');
+        cekEligibilitasRujukan.setText("Cek Rujukan BPJS");
+        cekEligibilitasRujukan.setToolTipText("ALt+2");
+        cekEligibilitasRujukan.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        cekEligibilitasRujukan.setMargin(new java.awt.Insets(2, 3, 2, 7));
+        cekEligibilitasRujukan.setName("cekEligibilitasRujukan"); // NOI18N
+        cekEligibilitasRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cekEligibilitasRujukanActionPerformed(evt);
+            }
+        });
+        FormInput.add(cekEligibilitasRujukan);
+        cekEligibilitasRujukan.setBounds(852, 162, 150, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -14784,6 +14816,14 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         isAntrian();
     }//GEN-LAST:event_formWindowActivated
 
+    private void noRujukanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noRujukanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noRujukanKeyPressed
+
+    private void cekEligibilitasRujukanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cekEligibilitasRujukanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cekEligibilitasRujukanActionPerformed
+
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -16349,7 +16389,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
     
-    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -16722,6 +16762,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button btnPenjab1;
     private widget.Button buttonSimpanAntrian;
     private widget.Button buttonTutupDialogAntrian;
+    private widget.Button cekEligibilitasRujukan;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
@@ -16740,6 +16781,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Label jLabel22;
     private widget.Label jLabel23;
     private widget.Label jLabel24;
+    private widget.Label jLabel25;
     private widget.Label jLabel3;
     private widget.Label jLabel30;
     private widget.Label jLabel31;
@@ -16770,10 +16812,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Label label41;
     private widget.Label labelAntrian;
     private widget.Label labelAntrianTerakhir;
-    private widget.Label labelHuruf;
     private widget.Label labelKeterangan;
     private widget.Label labelLoket;
+    private widget.Label labelLoket1;
     private widget.TextBox nmpnj;
+    private widget.TextBox noRujukan;
     private widget.PanelBiasa panelBiasa3;
     private widget.PanelBiasa panelBiasa4;
     private widget.panelisi panelGlass6;
@@ -17153,7 +17196,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                             if (!antri.isBlank() && !loket.isBlank()) {
                                 if (ANTRIANPREFIXHURUF) {
                                     if (CmbHuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
-                                        labelAntrianTerakhir.setText("<html>Panggilan terakhir : <b>" + antri + "</b></html>");
+                                        labelAntrianTerakhir.setText(antri);
                                         nomor = Integer.parseInt(antri.substring(1)) + 1;
                                     }
                                 } else {
@@ -17344,7 +17387,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,188));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,248));
             FormInput.setVisible(true);
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){
@@ -19147,8 +19190,11 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void isAntrian() {
         if (akses.getadmin() || akses.getantrian_di_registrasi()) {
             if (ANTRIANPREFIXHURUF) {
+                CmbHuruf.setLocation(190, 162);
+                TNoAntrian.setLocation(253, 162);
+                BtnAntri.setLocation(316, 162);
+                BtnStop.setLocation(316, 192);
                 CmbHuruf.setModel(new DefaultComboBoxModel(PREFIXHURUFAKTIF));
-                labelHuruf.setVisible(true);
                 CmbHuruf.setVisible(true);
                 CmbHurufItemStateChanged(null);
             }
@@ -19160,7 +19206,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             BtnAntri.setVisible(true);
             BtnStop.setVisible(true);
         } else {
-            labelHuruf.setVisible(false);
             CmbHuruf.setVisible(false);
             labelAntrian.setVisible(false);
             TNoAntrian.setVisible(false);
