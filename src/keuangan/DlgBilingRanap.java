@@ -4746,6 +4746,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     // End of variables declaration//GEN-END:variables
 
     public void isRawat() {
+        TabRawat.setSelectedIndex(0);
+        TabRawatMouseClicked(null);
          try {      
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
