@@ -1437,10 +1437,6 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnAntri = new widget.Button();
         BtnStop = new widget.Button();
         labelAntrianTerakhir = new widget.Label();
-        labelLoket1 = new widget.Label();
-        jLabel25 = new widget.Label();
-        noRujukan = new widget.TextBox();
-        cekEligibilitasRujukan = new widget.Button();
         ChkInput = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
@@ -6745,7 +6741,7 @@ public final class DlgReg extends javax.swing.JDialog {
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(490, 227));
+        FormInput.setPreferredSize(new java.awt.Dimension(193, 193));
         FormInput.setLayout(null);
 
         jLabel3.setText("No. Reg. :");
@@ -7155,47 +7151,13 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnStop);
-        BtnStop.setBounds(316, 192, 80, 23);
+        BtnStop.setBounds(399, 162, 70, 23);
 
         labelAntrianTerakhir.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        labelAntrianTerakhir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelAntrianTerakhir.setText("<html><body>Antrian terakhir : <b>B001</b></body></html>"); // NOI18N
         labelAntrianTerakhir.setName("labelAntrianTerakhir"); // NOI18N
         FormInput.add(labelAntrianTerakhir);
-        labelAntrianTerakhir.setBounds(74, 192, 60, 23);
-
-        labelLoket1.setText("Terakhir :");
-        labelLoket1.setName("labelLoket1"); // NOI18N
-        FormInput.add(labelLoket1);
-        labelLoket1.setBounds(0, 192, 70, 23);
-
-        jLabel25.setText("No. Rujukan/SKDP :");
-        jLabel25.setName("jLabel25"); // NOI18N
-        FormInput.add(jLabel25);
-        jLabel25.setBounds(416, 162, 100, 23);
-
-        noRujukan.setName("noRujukan"); // NOI18N
-        noRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                noRujukanKeyPressed(evt);
-            }
-        });
-        FormInput.add(noRujukan);
-        noRujukan.setBounds(520, 162, 330, 23);
-
-        cekEligibilitasRujukan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        cekEligibilitasRujukan.setMnemonic('2');
-        cekEligibilitasRujukan.setText("Cek Rujukan BPJS");
-        cekEligibilitasRujukan.setToolTipText("ALt+2");
-        cekEligibilitasRujukan.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        cekEligibilitasRujukan.setMargin(new java.awt.Insets(2, 3, 2, 7));
-        cekEligibilitasRujukan.setName("cekEligibilitasRujukan"); // NOI18N
-        cekEligibilitasRujukan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cekEligibilitasRujukanActionPerformed(evt);
-            }
-        });
-        FormInput.add(cekEligibilitasRujukan);
-        cekEligibilitasRujukan.setBounds(852, 162, 150, 23);
+        labelAntrianTerakhir.setBounds(520, 162, 140, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -14816,14 +14778,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         isAntrian();
     }//GEN-LAST:event_formWindowActivated
 
-    private void noRujukanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noRujukanKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noRujukanKeyPressed
-
-    private void cekEligibilitasRujukanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cekEligibilitasRujukanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cekEligibilitasRujukanActionPerformed
-
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -16762,7 +16716,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button btnPenjab1;
     private widget.Button buttonSimpanAntrian;
     private widget.Button buttonTutupDialogAntrian;
-    private widget.Button cekEligibilitasRujukan;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
@@ -16781,7 +16734,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Label jLabel22;
     private widget.Label jLabel23;
     private widget.Label jLabel24;
-    private widget.Label jLabel25;
     private widget.Label jLabel3;
     private widget.Label jLabel30;
     private widget.Label jLabel31;
@@ -16814,9 +16766,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Label labelAntrianTerakhir;
     private widget.Label labelKeterangan;
     private widget.Label labelLoket;
-    private widget.Label labelLoket1;
     private widget.TextBox nmpnj;
-    private widget.TextBox noRujukan;
     private widget.PanelBiasa panelBiasa3;
     private widget.PanelBiasa panelBiasa4;
     private widget.panelisi panelGlass6;

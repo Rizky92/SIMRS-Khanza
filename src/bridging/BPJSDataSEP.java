@@ -12,8 +12,11 @@
 
 package bridging;
 
+import AESsecurity.EnkripsiAES;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -22,10 +25,14 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.net.URI;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -40,6 +47,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -648,8 +656,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
         ppSEP = new javax.swing.JMenuItem();
@@ -733,6 +740,45 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         NoSEP = new widget.TextBox();
         BtnCari1 = new widget.Button();
         NIK = new widget.TextBox();
+        WindowPengaturan = new javax.swing.JDialog();
+        internalFrame12 = new widget.InternalFrame();
+        panelBiasa1 = new widget.PanelBiasa();
+        CmbModelSEP = new widget.ComboBox();
+        jLabel56 = new widget.Label();
+        PathFingerprint = new widget.TextBox();
+        CariFingerprint = new widget.Button();
+        jLabel58 = new widget.Label();
+        PathFRISTA = new widget.TextBox();
+        CariFRISTA = new widget.Button();
+        cetakSEPRalan = new widget.CekBox();
+        jLabel59 = new widget.Label();
+        jLabel60 = new widget.Label();
+        NamaPrinterSEP = new widget.TextBox();
+        CariPrinterSEP = new widget.Button();
+        jLabel64 = new widget.Label();
+        JumlahCetakSEP = new widget.TextBox();
+        UserFP = new widget.PasswordBox();
+        jLabel67 = new widget.Label();
+        jLabel68 = new widget.Label();
+        PassFP = new widget.PasswordBox();
+        cetakSEPRanap = new widget.CekBox();
+        cetakSEPInternal = new widget.CekBox();
+        jLabel66 = new widget.Label();
+        cetakBCRalan = new widget.CekBox();
+        cetakBCRanap = new widget.CekBox();
+        cetakBCInternal = new widget.CekBox();
+        jLabel69 = new widget.Label();
+        NamaPrinterBarcode = new widget.TextBox();
+        CariPrinterBarcode = new widget.Button();
+        CmbModelBarcode = new widget.ComboBox();
+        jLabel70 = new widget.Label();
+        JumlahCetakBarcode = new widget.TextBox();
+        panelBiasa2 = new widget.PanelBiasa();
+        BtnSimpanPengaturan = new widget.Button();
+        BtnResetPengaturan = new widget.Button();
+        jLabel61 = new widget.Label();
+        BtnTutupPengaturan = new widget.Button();
+        fc = new javax.swing.JFileChooser();
         internalFrame1 = new widget.InternalFrame();
         TabRawat = new javax.swing.JTabbedPane();
         internalFrame2 = new widget.InternalFrame();
@@ -874,6 +920,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnEdit = new widget.Button();
         BtnAll = new widget.Button();
+        BtnPengaturan = new widget.Button();
         BtnKeluar = new widget.Button();
 
         Popup.setName("Popup"); // NOI18N
@@ -887,10 +934,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP.setName("ppSEP"); // NOI18N
         ppSEP.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEPBtnPrintActionPerformed(evt);
             }
         });
@@ -905,10 +950,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP1.setName("ppSEP1"); // NOI18N
         ppSEP1.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP1BtnPrintActionPerformed(evt);
             }
         });
@@ -923,10 +966,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP2.setName("ppSEP2"); // NOI18N
         ppSEP2.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP2BtnPrintActionPerformed(evt);
             }
         });
@@ -941,10 +982,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP3.setName("ppSEP3"); // NOI18N
         ppSEP3.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP3BtnPrintActionPerformed(evt);
             }
         });
@@ -959,10 +998,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP4.setName("ppSEP4"); // NOI18N
         ppSEP4.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP4BtnPrintActionPerformed(evt);
             }
         });
@@ -977,10 +1014,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP5.setName("ppSEP5"); // NOI18N
         ppSEP5.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP5BtnPrintActionPerformed(evt);
             }
         });
@@ -995,10 +1030,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP6.setName("ppSEP6"); // NOI18N
         ppSEP6.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP6BtnPrintActionPerformed(evt);
             }
         });
@@ -1013,10 +1046,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSEP7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSEP7.setName("ppSEP7"); // NOI18N
         ppSEP7.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSEP7.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSEP7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSEP7BtnPrintActionPerformed(evt);
             }
         });
@@ -1031,10 +1062,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppPulang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPulang.setName("ppPulang"); // NOI18N
         ppPulang.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppPulang.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppPulang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPulangBtnPrintActionPerformed(evt);
             }
         });
@@ -1049,10 +1078,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppDetailSEPPeserta.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDetailSEPPeserta.setName("ppDetailSEPPeserta"); // NOI18N
         ppDetailSEPPeserta.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppDetailSEPPeserta.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppDetailSEPPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppDetailSEPPesertaBtnPrintActionPerformed(evt);
             }
         });
@@ -1067,10 +1094,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppRujukan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppRujukan.setName("ppRujukan"); // NOI18N
         ppRujukan.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppRujukan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppRujukanBtnPrintActionPerformed(evt);
             }
         });
@@ -1085,10 +1110,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppDaftarRujukan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDaftarRujukan.setName("ppDaftarRujukan"); // NOI18N
         ppDaftarRujukan.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppDaftarRujukan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppDaftarRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppDaftarRujukanBtnPrintActionPerformed(evt);
             }
         });
@@ -1101,10 +1124,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         MnRujukanKhusus.setText("Rujukan Khusus");
         MnRujukanKhusus.setName("MnRujukanKhusus"); // NOI18N
         MnRujukanKhusus.setPreferredSize(new java.awt.Dimension(300, 25));
-        MnRujukanKhusus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        MnRujukanKhusus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnRujukanKhususActionPerformed(evt);
             }
         });
@@ -1119,10 +1140,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSuratKontrol.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuratKontrol.setName("ppSuratKontrol"); // NOI18N
         ppSuratKontrol.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSuratKontrol.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSuratKontrolBtnPrintActionPerformed(evt);
             }
         });
@@ -1137,10 +1156,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSuratPRI.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuratPRI.setName("ppSuratPRI"); // NOI18N
         ppSuratPRI.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSuratPRI.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSuratPRI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSuratPRIBtnPrintActionPerformed(evt);
             }
         });
@@ -1155,10 +1172,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppProgramPRB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppProgramPRB.setName("ppProgramPRB"); // NOI18N
         ppProgramPRB.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppProgramPRB.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppProgramPRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppProgramPRBActionPerformed(evt);
             }
         });
@@ -1173,10 +1188,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSuplesiJasaRaharja.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSuplesiJasaRaharja.setName("ppSuplesiJasaRaharja"); // NOI18N
         ppSuplesiJasaRaharja.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSuplesiJasaRaharja.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSuplesiJasaRaharja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSuplesiJasaRaharjaBtnPrintActionPerformed(evt);
             }
         });
@@ -1191,10 +1204,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppDataIndukKecelakaan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDataIndukKecelakaan.setName("ppDataIndukKecelakaan"); // NOI18N
         ppDataIndukKecelakaan.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppDataIndukKecelakaan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppDataIndukKecelakaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppDataIndukKecelakaanBtnPrintActionPerformed(evt);
             }
         });
@@ -1209,10 +1220,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppDataSEPInternal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppDataSEPInternal.setName("ppDataSEPInternal"); // NOI18N
         ppDataSEPInternal.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppDataSEPInternal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppDataSEPInternal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppDataSEPInternalBtnPrintActionPerformed(evt);
             }
         });
@@ -1227,10 +1236,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppRiwayatPerawatan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppRiwayatPerawatan.setName("ppRiwayatPerawatan"); // NOI18N
         ppRiwayatPerawatan.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppRiwayatPerawatan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppRiwayatPerawatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppRiwayatPerawatanBtnPrintActionPerformed(evt);
             }
         });
@@ -1245,10 +1252,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSepRujukSama.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSepRujukSama.setName("ppSepRujukSama"); // NOI18N
         ppSepRujukSama.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSepRujukSama.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSepRujukSama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSepRujukSamaBtnPrintActionPerformed(evt);
             }
         });
@@ -1263,10 +1268,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppSepRujukBeda.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppSepRujukBeda.setName("ppSepRujukBeda"); // NOI18N
         ppSepRujukBeda.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppSepRujukBeda.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppSepRujukBeda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppSepRujukBedaBtnPrintActionPerformed(evt);
             }
         });
@@ -1281,10 +1284,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppCekSEPApotekBPJS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppCekSEPApotekBPJS.setName("ppCekSEPApotekBPJS"); // NOI18N
         ppCekSEPApotekBPJS.setPreferredSize(new java.awt.Dimension(300, 25));
-        ppCekSEPApotekBPJS.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppCekSEPApotekBPJS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppCekSEPApotekBPJSBtnPrintActionPerformed(evt);
             }
         });
@@ -1336,10 +1337,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCloseIn4.setText("Tutup");
         BtnCloseIn4.setToolTipText("Alt+U");
         BtnCloseIn4.setName("BtnCloseIn4"); // NOI18N
-        BtnCloseIn4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCloseIn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseIn4ActionPerformed(evt);
             }
         });
@@ -1351,10 +1350,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnSimpan4.setText("Simpan");
         BtnSimpan4.setToolTipText("Alt+S");
         BtnSimpan4.setName("BtnSimpan4"); // NOI18N
-        BtnSimpan4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpan4ActionPerformed(evt);
             }
         });
@@ -1366,7 +1363,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 70, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024 09:22:49" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025 09:43:24" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1381,17 +1378,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         StatusPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Atas Persetujuan Dokter", "3. Atas Permintaan Sendiri", "4. Meninggal", "5. Lain-lain" }));
         StatusPulang.setName("StatusPulang"); // NOI18N
-        StatusPulang.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        StatusPulang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 StatusPulangItemStateChanged(evt);
             }
         });
-        StatusPulang.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        StatusPulang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 StatusPulangKeyPressed(evt);
             }
         });
@@ -1416,7 +1409,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel48);
         jLabel48.setBounds(291, 62, 120, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1457,10 +1450,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCloseIn5.setText("Tutup");
         BtnCloseIn5.setToolTipText("Alt+U");
         BtnCloseIn5.setName("BtnCloseIn5"); // NOI18N
-        BtnCloseIn5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCloseIn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseIn5ActionPerformed(evt);
             }
         });
@@ -1472,10 +1463,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnSimpan5.setText("Simpan");
         BtnSimpan5.setToolTipText("Alt+S");
         BtnSimpan5.setName("BtnSimpan5"); // NOI18N
-        BtnSimpan5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpan5ActionPerformed(evt);
             }
         });
@@ -1488,7 +1477,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel30.setBounds(0, 25, 102, 23);
 
         TanggalRujukKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalRujukKeluar.setDisplayFormat("dd-MM-yyyy");
         TanggalRujukKeluar.setName("TanggalRujukKeluar"); // NOI18N
         TanggalRujukKeluar.setOpaque(false);
@@ -1519,17 +1508,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnPPKRujukan1.setMnemonic('X');
         btnPPKRujukan1.setToolTipText("Alt+X");
         btnPPKRujukan1.setName("btnPPKRujukan1"); // NOI18N
-        btnPPKRujukan1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPPKRujukan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPPKRujukan1ActionPerformed(evt);
             }
         });
-        btnPPKRujukan1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPPKRujukan1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPPKRujukan1KeyPressed(evt);
             }
         });
@@ -1544,17 +1529,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         JenisPelayanan1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Rawat Inap", "2. Rawat Jalan" }));
         JenisPelayanan1.setSelectedIndex(1);
         JenisPelayanan1.setName("JenisPelayanan1"); // NOI18N
-        JenisPelayanan1.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        JenisPelayanan1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 JenisPelayanan1ItemStateChanged(evt);
             }
         });
-        JenisPelayanan1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        JenisPelayanan1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 JenisPelayanan1KeyPressed(evt);
             }
         });
@@ -1584,17 +1565,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnDiagnosa1.setMnemonic('X');
         btnDiagnosa1.setToolTipText("Alt+X");
         btnDiagnosa1.setName("btnDiagnosa1"); // NOI18N
-        btnDiagnosa1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDiagnosa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDiagnosa1ActionPerformed(evt);
             }
         });
-        btnDiagnosa1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnDiagnosa1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDiagnosa1KeyPressed(evt);
             }
         });
@@ -1624,17 +1601,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnPoli1.setMnemonic('X');
         btnPoli1.setToolTipText("Alt+X");
         btnPoli1.setName("btnPoli1"); // NOI18N
-        btnPoli1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPoli1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPoli1ActionPerformed(evt);
             }
         });
-        btnPoli1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPoli1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPoli1KeyPressed(evt);
             }
         });
@@ -1648,24 +1621,18 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TipeRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Penuh", "1. Partial", "2. Rujuk Balik" }));
         TipeRujukan.setName("TipeRujukan"); // NOI18N
-        TipeRujukan.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        TipeRujukan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TipeRujukanItemStateChanged(evt);
             }
         });
-        TipeRujukan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        TipeRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TipeRujukanActionPerformed(evt);
             }
         });
-        TipeRujukan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TipeRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TipeRujukanKeyPressed(evt);
             }
         });
@@ -1679,10 +1646,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Catatan1.setHighlighter(null);
         Catatan1.setName("Catatan1"); // NOI18N
-        Catatan1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Catatan1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 Catatan1KeyPressed(evt);
             }
         });
@@ -1695,7 +1660,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel50.setBounds(638, 55, 80, 23);
 
         TanggalKunjungRujukan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalKunjungRujukan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungRujukan.setName("TanggalKunjungRujukan"); // NOI18N
         TanggalKunjungRujukan.setOpaque(false);
@@ -1716,10 +1681,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppPengajuan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPengajuan.setName("ppPengajuan"); // NOI18N
         ppPengajuan.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppPengajuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPengajuanBtnPrintActionPerformed(evt);
             }
         });
@@ -1734,10 +1697,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppPengajuan1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPengajuan1.setName("ppPengajuan1"); // NOI18N
         ppPengajuan1.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppPengajuan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPengajuan1BtnPrintActionPerformed(evt);
             }
         });
@@ -1752,10 +1713,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppPengajuan2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPengajuan2.setName("ppPengajuan2"); // NOI18N
         ppPengajuan2.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppPengajuan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPengajuan2BtnPrintActionPerformed(evt);
             }
         });
@@ -1770,10 +1729,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppPengajuan3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppPengajuan3.setName("ppPengajuan3"); // NOI18N
         ppPengajuan3.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppPengajuan3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppPengajuan3BtnPrintActionPerformed(evt);
             }
         });
@@ -1788,10 +1745,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppAmbilSep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppAmbilSep.setName("ppAmbilSep"); // NOI18N
         ppAmbilSep.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppAmbilSep.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppAmbilSep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppAmbilSepBtnPrintActionPerformed(evt);
             }
         });
@@ -1806,10 +1761,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ppStatusFinger.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppStatusFinger.setName("ppStatusFinger"); // NOI18N
         ppStatusFinger.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppStatusFinger.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ppStatusFinger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ppStatusFingerBtnPrintActionPerformed(evt);
             }
         });
@@ -1829,10 +1782,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCloseIn6.setText("Tutup");
         BtnCloseIn6.setToolTipText("Alt+U");
         BtnCloseIn6.setName("BtnCloseIn6"); // NOI18N
-        BtnCloseIn6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCloseIn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseIn6ActionPerformed(evt);
             }
         });
@@ -1844,10 +1795,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnSimpan6.setText("Simpan");
         BtnSimpan6.setToolTipText("Alt+S");
         BtnSimpan6.setName("BtnSimpan6"); // NOI18N
-        BtnSimpan6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpan6ActionPerformed(evt);
             }
         });
@@ -1861,10 +1810,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
-        NoSEP.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoSEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoSEPKeyPressed(evt);
             }
         });
@@ -1876,17 +1823,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCari1.setToolTipText("Alt+3");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCari1ActionPerformed(evt);
             }
         });
-        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCari1KeyPressed(evt);
             }
         });
@@ -1897,21 +1840,319 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NIK.setHighlighter(null);
         NIK.setName("NIK"); // NOI18N
-        NIK.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NIK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NIKKeyPressed(evt);
             }
         });
 
+        WindowPengaturan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowPengaturan.setMinimumSize(new java.awt.Dimension(493, 383));
+        WindowPengaturan.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        WindowPengaturan.setName("WindowPengaturan"); // NOI18N
+        WindowPengaturan.setUndecorated(true);
+        WindowPengaturan.setPreferredSize(new java.awt.Dimension(493, 383));
+        WindowPengaturan.setResizable(false);
+
+        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Cetak, Autentikasi dan Aplikasi Biometrik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame12.setMinimumSize(new java.awt.Dimension(493, 383));
+        internalFrame12.setName("internalFrame12"); // NOI18N
+        internalFrame12.setPreferredSize(new java.awt.Dimension(493, 383));
+        internalFrame12.setLayout(new java.awt.BorderLayout());
+
+        panelBiasa1.setMinimumSize(new java.awt.Dimension(456, 311));
+        panelBiasa1.setName("panelBiasa1"); // NOI18N
+        panelBiasa1.setLayout(null);
+
+        CmbModelSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Model 1", "Model 2", "Model 3", "Model 4" }));
+        CmbModelSEP.setEnabled(false);
+        CmbModelSEP.setName("CmbModelSEP"); // NOI18N
+        panelBiasa1.add(CmbModelSEP);
+        CmbModelSEP.setBounds(113, 172, 154, 23);
+
+        jLabel56.setText("Aplikasi Fingerprint :");
+        jLabel56.setName("jLabel56"); // NOI18N
+        panelBiasa1.add(jLabel56);
+        jLabel56.setBounds(0, 12, 110, 23);
+
+        PathFingerprint.setEditable(false);
+        PathFingerprint.setHighlighter(null);
+        PathFingerprint.setName("PathFingerprint"); // NOI18N
+        panelBiasa1.add(PathFingerprint);
+        PathFingerprint.setBounds(113, 12, 294, 23);
+
+        CariFingerprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        CariFingerprint.setMnemonic('S');
+        CariFingerprint.setToolTipText("Alt+S");
+        CariFingerprint.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        CariFingerprint.setName("CariFingerprint"); // NOI18N
+        CariFingerprint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariFingerprintActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(CariFingerprint);
+        CariFingerprint.setBounds(410, 12, 28, 23);
+
+        jLabel58.setText("Aplikasi FRISTA :");
+        jLabel58.setName("jLabel58"); // NOI18N
+        panelBiasa1.add(jLabel58);
+        jLabel58.setBounds(0, 42, 110, 23);
+
+        PathFRISTA.setEditable(false);
+        PathFRISTA.setHighlighter(null);
+        PathFRISTA.setName("PathFRISTA"); // NOI18N
+        panelBiasa1.add(PathFRISTA);
+        PathFRISTA.setBounds(113, 42, 294, 23);
+
+        CariFRISTA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        CariFRISTA.setMnemonic('S');
+        CariFRISTA.setToolTipText("Alt+S");
+        CariFRISTA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        CariFRISTA.setName("CariFRISTA"); // NOI18N
+        CariFRISTA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariFRISTAActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(CariFRISTA);
+        CariFRISTA.setBounds(410, 42, 28, 23);
+
+        cetakSEPRalan.setText("Ralan");
+        cetakSEPRalan.setName("cetakSEPRalan"); // NOI18N
+        cetakSEPRalan.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakSEPRalan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakSEPItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakSEPRalan);
+        cetakSEPRalan.setBounds(113, 112, 60, 23);
+
+        jLabel59.setText("Autocetak SEP :");
+        jLabel59.setName("jLabel59"); // NOI18N
+        panelBiasa1.add(jLabel59);
+        jLabel59.setBounds(0, 112, 110, 23);
+
+        jLabel60.setText("Printer :");
+        jLabel60.setName("jLabel60"); // NOI18N
+        panelBiasa1.add(jLabel60);
+        jLabel60.setBounds(0, 142, 110, 23);
+
+        NamaPrinterSEP.setEditable(false);
+        NamaPrinterSEP.setEnabled(false);
+        NamaPrinterSEP.setHighlighter(null);
+        NamaPrinterSEP.setName("NamaPrinterSEP"); // NOI18N
+        panelBiasa1.add(NamaPrinterSEP);
+        NamaPrinterSEP.setBounds(113, 142, 294, 23);
+
+        CariPrinterSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        CariPrinterSEP.setMnemonic('S');
+        CariPrinterSEP.setToolTipText("Alt+S");
+        CariPrinterSEP.setEnabled(false);
+        CariPrinterSEP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        CariPrinterSEP.setName("CariPrinterSEP"); // NOI18N
+        CariPrinterSEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariPrinterSEPActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(CariPrinterSEP);
+        CariPrinterSEP.setBounds(410, 142, 28, 23);
+
+        jLabel64.setText("Jumlah :");
+        jLabel64.setName("jLabel64"); // NOI18N
+        panelBiasa1.add(jLabel64);
+        jLabel64.setBounds(270, 172, 91, 23);
+
+        JumlahCetakSEP.setEnabled(false);
+        JumlahCetakSEP.setHighlighter(null);
+        JumlahCetakSEP.setName("JumlahCetakSEP"); // NOI18N
+        panelBiasa1.add(JumlahCetakSEP);
+        JumlahCetakSEP.setBounds(364, 172, 78, 23);
+
+        UserFP.setText("passwordBox1");
+        UserFP.setName("UserFP"); // NOI18N
+        panelBiasa1.add(UserFP);
+        UserFP.setBounds(113, 72, 130, 25);
+
+        jLabel67.setText("Username :");
+        jLabel67.setName("jLabel67"); // NOI18N
+        panelBiasa1.add(jLabel67);
+        jLabel67.setBounds(0, 72, 110, 23);
+
+        jLabel68.setText("Password :");
+        jLabel68.setName("jLabel68"); // NOI18N
+        panelBiasa1.add(jLabel68);
+        jLabel68.setBounds(246, 72, 59, 23);
+
+        PassFP.setText("passwordBox1");
+        PassFP.setName("PassFP"); // NOI18N
+        panelBiasa1.add(PassFP);
+        PassFP.setBounds(308, 72, 130, 25);
+
+        cetakSEPRanap.setText("Ranap");
+        cetakSEPRanap.setName("cetakSEPRanap"); // NOI18N
+        cetakSEPRanap.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakSEPRanap.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakSEPItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakSEPRanap);
+        cetakSEPRanap.setBounds(176, 112, 60, 23);
+
+        cetakSEPInternal.setText("Internal");
+        cetakSEPInternal.setName("cetakSEPInternal"); // NOI18N
+        cetakSEPInternal.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakSEPInternal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakSEPItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakSEPInternal);
+        cetakSEPInternal.setBounds(239, 112, 70, 23);
+
+        jLabel66.setText("Autocetak Barcode :");
+        jLabel66.setName("jLabel66"); // NOI18N
+        panelBiasa1.add(jLabel66);
+        jLabel66.setBounds(0, 212, 110, 23);
+
+        cetakBCRalan.setText("Ralan");
+        cetakBCRalan.setName("cetakBCRalan"); // NOI18N
+        cetakBCRalan.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakBCRalan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakBCItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakBCRalan);
+        cetakBCRalan.setBounds(113, 212, 60, 23);
+
+        cetakBCRanap.setText("Ranap");
+        cetakBCRanap.setName("cetakBCRanap"); // NOI18N
+        cetakBCRanap.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakBCRanap.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakBCItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakBCRanap);
+        cetakBCRanap.setBounds(176, 212, 60, 23);
+
+        cetakBCInternal.setText("Internal");
+        cetakBCInternal.setName("cetakBCInternal"); // NOI18N
+        cetakBCInternal.setPreferredSize(new java.awt.Dimension(23, 23));
+        cetakBCInternal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cetakBCItemStateChanged(evt);
+            }
+        });
+        panelBiasa1.add(cetakBCInternal);
+        cetakBCInternal.setBounds(239, 212, 70, 23);
+
+        jLabel69.setText("Printer :");
+        jLabel69.setName("jLabel69"); // NOI18N
+        panelBiasa1.add(jLabel69);
+        jLabel69.setBounds(0, 242, 110, 23);
+
+        NamaPrinterBarcode.setEditable(false);
+        NamaPrinterBarcode.setEnabled(false);
+        NamaPrinterBarcode.setHighlighter(null);
+        NamaPrinterBarcode.setName("NamaPrinterBarcode"); // NOI18N
+        panelBiasa1.add(NamaPrinterBarcode);
+        NamaPrinterBarcode.setBounds(113, 242, 294, 23);
+
+        CariPrinterBarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        CariPrinterBarcode.setMnemonic('S');
+        CariPrinterBarcode.setToolTipText("Alt+S");
+        CariPrinterBarcode.setEnabled(false);
+        CariPrinterBarcode.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        CariPrinterBarcode.setName("CariPrinterBarcode"); // NOI18N
+        CariPrinterBarcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CariPrinterBarcodeActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(CariPrinterBarcode);
+        CariPrinterBarcode.setBounds(410, 242, 28, 23);
+
+        CmbModelBarcode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Model 1", "Model 2" }));
+        CmbModelBarcode.setEnabled(false);
+        CmbModelBarcode.setName("CmbModelBarcode"); // NOI18N
+        panelBiasa1.add(CmbModelBarcode);
+        CmbModelBarcode.setBounds(113, 272, 154, 23);
+
+        jLabel70.setText("Jumlah :");
+        jLabel70.setName("jLabel70"); // NOI18N
+        panelBiasa1.add(jLabel70);
+        jLabel70.setBounds(270, 272, 91, 23);
+
+        JumlahCetakBarcode.setEnabled(false);
+        JumlahCetakBarcode.setHighlighter(null);
+        JumlahCetakBarcode.setName("JumlahCetakBarcode"); // NOI18N
+        panelBiasa1.add(JumlahCetakBarcode);
+        JumlahCetakBarcode.setBounds(364, 272, 78, 23);
+
+        internalFrame12.add(panelBiasa1, java.awt.BorderLayout.CENTER);
+
+        panelBiasa2.setName("panelBiasa2"); // NOI18N
+        panelBiasa2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
+        BtnSimpanPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanPengaturan.setMnemonic('S');
+        BtnSimpanPengaturan.setText("Simpan");
+        BtnSimpanPengaturan.setToolTipText("Alt+S");
+        BtnSimpanPengaturan.setName("BtnSimpanPengaturan"); // NOI18N
+        BtnSimpanPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanPengaturanActionPerformed(evt);
+            }
+        });
+        panelBiasa2.add(BtnSimpanPengaturan);
+
+        BtnResetPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnResetPengaturan.setMnemonic('S');
+        BtnResetPengaturan.setText("Reset");
+        BtnResetPengaturan.setToolTipText("Alt+S");
+        BtnResetPengaturan.setName("BtnResetPengaturan"); // NOI18N
+        BtnResetPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnResetPengaturanActionPerformed(evt);
+            }
+        });
+        panelBiasa2.add(BtnResetPengaturan);
+
+        jLabel61.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        jLabel61.setText("     ");
+        jLabel61.setName("jLabel61"); // NOI18N
+        jLabel61.setPreferredSize(new java.awt.Dimension(40, 14));
+        panelBiasa2.add(jLabel61);
+
+        BtnTutupPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnTutupPengaturan.setMnemonic('U');
+        BtnTutupPengaturan.setText("Tutup");
+        BtnTutupPengaturan.setToolTipText("Alt+U");
+        BtnTutupPengaturan.setName("BtnTutupPengaturan"); // NOI18N
+        BtnTutupPengaturan.setPreferredSize(new java.awt.Dimension(86, 30));
+        BtnTutupPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTutupPengaturanActionPerformed(evt);
+            }
+        });
+        panelBiasa2.add(BtnTutupPengaturan);
+
+        internalFrame12.add(panelBiasa2, java.awt.BorderLayout.PAGE_END);
+
+        WindowPengaturan.getContentPane().add(internalFrame12, java.awt.BorderLayout.CENTER);
+
+        fc.setName("fc"); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -1925,10 +2166,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
-        TabRawat.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
             }
         });
@@ -1965,10 +2204,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        TNoRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TNoRMActionPerformed(evt);
             }
         });
@@ -1995,15 +2232,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel20.setBounds(187, 102, 65, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
         TanggalSEP.setPreferredSize(new java.awt.Dimension(95, 23));
-        TanggalSEP.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TanggalSEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalSEPKeyPressed(evt);
             }
         });
@@ -2017,15 +2252,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel22.setBounds(0, 102, 90, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
         TanggalRujuk.setPreferredSize(new java.awt.Dimension(95, 23));
-        TanggalRujuk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TanggalRujuk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalRujukKeyPressed(evt);
             }
         });
@@ -2040,10 +2273,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoRujukan.setHighlighter(null);
         NoRujukan.setName("NoRujukan"); // NOI18N
-        NoRujukan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoRujukanKeyPressed(evt);
             }
         });
@@ -2073,17 +2304,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnPPKRujukan.setMnemonic('X');
         btnPPKRujukan.setToolTipText("Alt+X");
         btnPPKRujukan.setName("btnPPKRujukan"); // NOI18N
-        btnPPKRujukan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPPKRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPPKRujukanActionPerformed(evt);
             }
         });
-        btnPPKRujukan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPPKRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPPKRujukanKeyPressed(evt);
             }
         });
@@ -2132,17 +2359,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnDiagnosa.setMnemonic('X');
         btnDiagnosa.setToolTipText("Alt+X");
         btnDiagnosa.setName("btnDiagnosa"); // NOI18N
-        btnDiagnosa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDiagnosaActionPerformed(evt);
             }
         });
-        btnDiagnosa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDiagnosaKeyPressed(evt);
             }
         });
@@ -2153,17 +2376,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnPoli.setMnemonic('X');
         btnPoli.setToolTipText("Alt+X");
         btnPoli.setName("btnPoli"); // NOI18N
-        btnPoli.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPoliActionPerformed(evt);
             }
         });
-        btnPoli.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPoli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPoliKeyPressed(evt);
             }
         });
@@ -2201,10 +2420,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
-        Catatan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 CatatanKeyPressed(evt);
             }
         });
@@ -2214,17 +2431,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         JenisPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Ranap", "2. Ralan" }));
         JenisPelayanan.setSelectedIndex(1);
         JenisPelayanan.setName("JenisPelayanan"); // NOI18N
-        JenisPelayanan.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        JenisPelayanan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 JenisPelayananItemStateChanged(evt);
             }
         });
-        JenisPelayanan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        JenisPelayanan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 JenisPelayananKeyPressed(evt);
             }
         });
@@ -2239,10 +2452,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Kelas 1", "2. Kelas 2", "3. Kelas 3" }));
         Kelas.setSelectedIndex(2);
         Kelas.setName("Kelas"); // NOI18N
-        Kelas.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Kelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 KelasKeyPressed(evt);
             }
         });
@@ -2256,17 +2467,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         LakaLantas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Bukan KLL", "1. KLL Bukan KK", "2. KLL dan KK", "3. KK" }));
         LakaLantas.setName("LakaLantas"); // NOI18N
-        LakaLantas.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        LakaLantas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 LakaLantasItemStateChanged(evt);
             }
         });
-        LakaLantas.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        LakaLantas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 LakaLantasKeyPressed(evt);
             }
         });
@@ -2330,10 +2537,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         AsalRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Faskes 1", "2. Faskes 2(RS)" }));
         AsalRujukan.setName("AsalRujukan"); // NOI18N
-        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 AsalRujukanKeyPressed(evt);
             }
         });
@@ -2347,10 +2552,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Eksekutif.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Eksekutif.setName("Eksekutif"); // NOI18N
-        Eksekutif.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Eksekutif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 EksekutifKeyPressed(evt);
             }
         });
@@ -2364,10 +2567,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         COB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak ", "1.Ya" }));
         COB.setName("COB"); // NOI18N
-        COB.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        COB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 COBKeyPressed(evt);
             }
         });
@@ -2382,10 +2583,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoTelp.setHighlighter(null);
         NoTelp.setName("NoTelp"); // NOI18N
-        NoTelp.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoTelp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoTelpKeyPressed(evt);
             }
         });
@@ -2394,10 +2593,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Katarak.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Katarak.setName("Katarak"); // NOI18N
-        Katarak.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Katarak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 KatarakKeyPressed(evt);
             }
         });
@@ -2416,16 +2613,14 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel38.setBounds(594, 132, 40, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
         TanggalKKL.setOpaque(false);
         TanggalKKL.setPreferredSize(new java.awt.Dimension(90, 23));
-        TanggalKKL.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TanggalKKL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKKLKeyPressed(evt);
             }
         });
@@ -2440,10 +2635,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoSKDP.setHighlighter(null);
         NoSKDP.setName("NoSKDP"); // NOI18N
-        NoSKDP.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoSKDP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoSKDPKeyPressed(evt);
             }
         });
@@ -2454,10 +2647,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnSPRI.setMnemonic('X');
         btnSPRI.setToolTipText("Alt+X");
         btnSPRI.setName("btnSPRI"); // NOI18N
-        btnSPRI.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSPRI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSPRIActionPerformed(evt);
             }
         });
@@ -2487,17 +2678,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnDPJP.setMnemonic('X');
         btnDPJP.setToolTipText("Alt+X");
         btnDPJP.setName("btnDPJP"); // NOI18N
-        btnDPJP.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDPJP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDPJPActionPerformed(evt);
             }
         });
-        btnDPJP.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnDPJP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDPJPKeyPressed(evt);
             }
         });
@@ -2512,10 +2699,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
-        Keterangan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 KeteranganKeyPressed(evt);
             }
         });
@@ -2529,10 +2714,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Suplesi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1.Ya" }));
         Suplesi.setName("Suplesi"); // NOI18N
-        Suplesi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Suplesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 SuplesiKeyPressed(evt);
             }
         });
@@ -2541,10 +2724,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoSEPSuplesi.setHighlighter(null);
         NoSEPSuplesi.setName("NoSEPSuplesi"); // NOI18N
-        NoSEPSuplesi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NoSEPSuplesi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoSEPSuplesiKeyPressed(evt);
             }
         });
@@ -2580,17 +2761,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnPropinsi.setMnemonic('X');
         btnPropinsi.setToolTipText("Alt+X");
         btnPropinsi.setName("btnPropinsi"); // NOI18N
-        btnPropinsi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPropinsi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPropinsiActionPerformed(evt);
             }
         });
-        btnPropinsi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPropinsi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPropinsiKeyPressed(evt);
             }
         });
@@ -2620,17 +2797,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnKabupaten.setMnemonic('X');
         btnKabupaten.setToolTipText("Alt+X");
         btnKabupaten.setName("btnKabupaten"); // NOI18N
-        btnKabupaten.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnKabupaten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKabupatenActionPerformed(evt);
             }
         });
-        btnKabupaten.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnKabupaten.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnKabupatenKeyPressed(evt);
             }
         });
@@ -2660,17 +2833,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnKecamatan.setMnemonic('X');
         btnKecamatan.setToolTipText("Alt+X");
         btnKecamatan.setName("btnKecamatan"); // NOI18N
-        btnKecamatan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnKecamatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKecamatanActionPerformed(evt);
             }
         });
-        btnKecamatan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnKecamatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnKecamatanKeyPressed(evt);
             }
         });
@@ -2681,10 +2850,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnRiwayat.setMnemonic('X');
         btnRiwayat.setToolTipText("Alt+X");
         btnRiwayat.setName("btnRiwayat"); // NOI18N
-        btnRiwayat.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnRiwayat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRiwayatActionPerformed(evt);
             }
         });
@@ -2695,10 +2862,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnSKDP.setMnemonic('X');
         btnSKDP.setToolTipText("Alt+X");
         btnSKDP.setName("btnSKDP"); // NOI18N
-        btnSKDP.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSKDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSKDPActionPerformed(evt);
             }
         });
@@ -2708,17 +2873,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         NaikKelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1. VVIP", "2. VIP", "3. Kelas I", "4. Kelas II", "5. Kelas III", "6. ICCU", "7. ICU", "8. Diatas Kelas 1" }));
         NaikKelas.setEnabled(false);
         NaikKelas.setName("NaikKelas"); // NOI18N
-        NaikKelas.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        NaikKelas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 NaikKelasItemStateChanged(evt);
             }
         });
-        NaikKelas.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        NaikKelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 NaikKelasKeyPressed(evt);
             }
         });
@@ -2728,10 +2889,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Pembiayaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "1. Pribadi", "2. Pemberi Kerja", "3. Asuransi Lain" }));
         Pembiayaan.setEnabled(false);
         Pembiayaan.setName("Pembiayaan"); // NOI18N
-        Pembiayaan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Pembiayaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 PembiayaanKeyPressed(evt);
             }
         });
@@ -2757,17 +2916,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TujuanKunjungan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Normal", "1. Prosedur", "2. Konsul Dokter" }));
         TujuanKunjungan.setName("TujuanKunjungan"); // NOI18N
-        TujuanKunjungan.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        TujuanKunjungan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TujuanKunjunganItemStateChanged(evt);
             }
         });
-        TujuanKunjungan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TujuanKunjungan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TujuanKunjunganKeyPressed(evt);
             }
         });
@@ -2777,10 +2932,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         FlagProsedur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0. Prosedur Tidak Berkelanjutan", "1. Prosedur dan Terapi Berkelanjutan" }));
         FlagProsedur.setEnabled(false);
         FlagProsedur.setName("FlagProsedur"); // NOI18N
-        FlagProsedur.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        FlagProsedur.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 FlagProsedurKeyPressed(evt);
             }
         });
@@ -2805,10 +2958,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         Penunjang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "1. Radioterapi", "2. Kemoterapi", "3. Rehabilitasi Medik", "4. Rehabilitasi Psikososial", "5. Transfusi Darah", "6. Pelayanan Gigi", "7. Laboratorium", "8. USG", "9. Farmasi", "10. Lain-Lain", "11. MRI", "12. HEMODIALISA" }));
         Penunjang.setEnabled(false);
         Penunjang.setName("Penunjang"); // NOI18N
-        Penunjang.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Penunjang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 PenunjangKeyPressed(evt);
             }
         });
@@ -2822,10 +2973,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         AsesmenPoli.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "1. Poli spesialis tidak tersedia pada hari sebelumnya", "2. Jam Poli telah berakhir pada hari sebelumnya", "3. Spesialis yang dimaksud tidak praktek pada hari sebelumnya", "4. Atas Instruksi RS", "5. Tujuan Kontrol" }));
         AsesmenPoli.setName("AsesmenPoli"); // NOI18N
-        AsesmenPoli.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        AsesmenPoli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 AsesmenPoliKeyPressed(evt);
             }
         });
@@ -2855,17 +3004,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnDPJPLayanan.setMnemonic('X');
         btnDPJPLayanan.setToolTipText("Alt+X");
         btnDPJPLayanan.setName("btnDPJPLayanan"); // NOI18N
-        btnDPJPLayanan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDPJPLayanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDPJPLayananActionPerformed(evt);
             }
         });
-        btnDPJPLayanan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnDPJPLayanan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDPJPLayananKeyPressed(evt);
             }
         });
@@ -2876,10 +3021,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnRiwayatRujukan.setMnemonic('X');
         btnRiwayatRujukan.setToolTipText("Alt+X");
         btnRiwayatRujukan.setName("btnRiwayatRujukan"); // NOI18N
-        btnRiwayatRujukan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnRiwayatRujukan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRiwayatRujukanActionPerformed(evt);
             }
         });
@@ -2938,17 +3081,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         tbDataSEP.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDataSEP.setComponentPopupMenu(Popup);
         tbDataSEP.setName("tbDataSEP"); // NOI18N
-        tbDataSEP.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbDataSEP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDataSEPMouseClicked(evt);
             }
         });
-        tbDataSEP.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbDataSEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbDataSEPKeyPressed(evt);
             }
         });
@@ -2967,7 +3106,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2981,7 +3120,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2995,10 +3134,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(205, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
             }
         });
@@ -3009,17 +3146,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+3");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -3053,17 +3186,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         tbDataSEPInternal.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDataSEPInternal.setComponentPopupMenu(Popup);
         tbDataSEPInternal.setName("tbDataSEPInternal"); // NOI18N
-        tbDataSEPInternal.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tbDataSEPInternal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDataSEPInternalMouseClicked(evt);
             }
         });
-        tbDataSEPInternal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tbDataSEPInternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbDataSEPInternalKeyPressed(evt);
             }
         });
@@ -3082,7 +3211,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel51);
 
         DTPCariInternal.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCariInternal.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal.setName("DTPCariInternal"); // NOI18N
         DTPCariInternal.setOpaque(false);
@@ -3096,7 +3225,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel52);
 
         DTPCariInternal2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-05-2024" }));
+        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPCariInternal2.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal2.setName("DTPCariInternal2"); // NOI18N
         DTPCariInternal2.setOpaque(false);
@@ -3110,10 +3239,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TCariInternal.setName("TCariInternal"); // NOI18N
         TCariInternal.setPreferredSize(new java.awt.Dimension(205, 23));
-        TCariInternal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TCariInternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariInternalKeyPressed(evt);
             }
         });
@@ -3124,17 +3251,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnCariInternal.setToolTipText("Alt+3");
         BtnCariInternal.setName("BtnCariInternal"); // NOI18N
         BtnCariInternal.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCariInternal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCariInternal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariInternalActionPerformed(evt);
             }
         });
-        BtnCariInternal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCariInternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariInternalKeyPressed(evt);
             }
         });
@@ -3167,17 +3290,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -3189,17 +3308,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -3211,17 +3326,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -3233,17 +3344,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -3255,17 +3362,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEditActionPerformed(evt);
             }
         });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnEditKeyPressed(evt);
             }
         });
@@ -3277,21 +3380,33 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnAllKeyPressed(evt);
             }
         });
         panelGlass8.add(BtnAll);
+
+        BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
+        BtnPengaturan.setMnemonic('T');
+        BtnPengaturan.setText("Pengaturan");
+        BtnPengaturan.setToolTipText("Alt+T");
+        BtnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnPengaturan.setMaximumSize(new java.awt.Dimension(100, 30));
+        BtnPengaturan.setMinimumSize(new java.awt.Dimension(100, 30));
+        BtnPengaturan.setName("BtnPengaturan"); // NOI18N
+        BtnPengaturan.setPreferredSize(new java.awt.Dimension(120, 28));
+        BtnPengaturan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPengaturanActionPerformed(evt);
+            }
+        });
+        panelGlass8.add(BtnPengaturan);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -3299,17 +3414,13 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -3910,6 +4021,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 }                    
             } 
         }
+        cekPengaturanTersimpan();
     }//GEN-LAST:event_formWindowOpened
 
     private void ppSEPBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSEPBtnPrintActionPerformed
@@ -6197,6 +6309,151 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_ppTampilSEPRawatInapBtnPrintActionPerformed
 
+    private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
+        WindowPengaturan.setSize(493, 383);
+        WindowPengaturan.setLocationRelativeTo(internalFrame1);
+        WindowPengaturan.setVisible(true);
+    }//GEN-LAST:event_BtnPengaturanActionPerformed
+
+    private void BtnTutupPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTutupPengaturanActionPerformed
+        WindowPengaturan.dispose();
+    }//GEN-LAST:event_BtnTutupPengaturanActionPerformed
+
+    private void BtnSimpanPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPengaturanActionPerformed
+        try {
+            ObjectNode root = mapper.createObjectNode();
+            
+            ObjectNode biometrik = mapper.createObjectNode();
+            biometrik.put("fingerprint", PathFingerprint.getText());
+            biometrik.put("frista", PathFRISTA.getText());
+            biometrik.put("username", EnkripsiAES.encrypt(new String(UserFP.getPassword())));
+            biometrik.put("password", EnkripsiAES.encrypt(new String(PassFP.getPassword())));
+            root.set("biometrik", biometrik);
+            
+            ObjectNode printerSEP = mapper.createObjectNode();
+            ArrayNode jenisSEP = mapper.createArrayNode();
+            if (cetakSEPRalan.isSelected()) {
+                jenisSEP.add("ralan");
+            }
+            if (cetakSEPRanap.isSelected()) {
+                jenisSEP.add("ranap");
+            }
+            if (cetakSEPInternal.isSelected()) {
+                jenisSEP.add("internal");
+            }
+            printerSEP.set("jenis", jenisSEP);
+            printerSEP.put("printer", NamaPrinterSEP.getText());
+            printerSEP.put("model", CmbModelSEP.getSelectedItem().toString());
+            printerSEP.put("jumlah", Integer.parseInt(JumlahCetakSEP.getText().trim()));
+            root.set("sep", printerSEP);
+            
+            ObjectNode printerBarcode = mapper.createObjectNode();
+            ArrayNode jenisBarcode = mapper.createArrayNode();
+            if (cetakBCRalan.isSelected()) {
+                jenisBarcode.add("ralan");
+            }
+            if (cetakBCRanap.isSelected()) {
+                jenisBarcode.add("ranap");
+            }
+            if (cetakBCInternal.isSelected()) {
+                jenisBarcode.add("internal");
+            }
+            printerBarcode.set("jenis", jenisBarcode);
+            printerBarcode.put("printer", NamaPrinterBarcode.getText());
+            printerBarcode.put("model", CmbModelBarcode.getSelectedItem().toString());
+            printerBarcode.put("jumlah", Integer.parseInt(JumlahCetakBarcode.getText().trim()));
+            root.set("barcode", printerBarcode);
+            
+            File iyem = new File("./cache/pengaturansep.iyem");
+            iyem.createNewFile();
+            try (FileWriter fw = new FileWriter(iyem)) {
+                fw.write(mapper.writeValueAsString(root));
+                fw.flush();
+                JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Pengaturan gagal disimpan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_BtnSimpanPengaturanActionPerformed
+
+    private void CariFingerprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariFingerprintActionPerformed
+        if (!PathFingerprint.getText().isBlank()) {
+            fc.setCurrentDirectory(new File(PathFingerprint.getText().substring(0, PathFingerprint.getText().lastIndexOf(File.separator))));
+        }
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            PathFingerprint.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_CariFingerprintActionPerformed
+
+    private void BtnResetPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetPengaturanActionPerformed
+        try {
+            File iyem = new File("./cache/pengaturansep.iyem");
+            if (JOptionPane.showConfirmDialog(null, "Eeeiiittsss... Yakin mau reset pengaturan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION && !iyem.isDirectory()) {
+                iyem.delete();
+                cekPengaturanTersimpan();
+                JOptionPane.showMessageDialog(null, "Pengaturan berhasil direset..!!");
+                WindowPengaturan.dispose();
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mereset pengaturan,\nSilahkan coba lagi.");
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_BtnResetPengaturanActionPerformed
+
+    private void CariFRISTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariFRISTAActionPerformed
+        if (!PathFRISTA.getText().isBlank()) {
+            fc.setCurrentDirectory(new File(PathFRISTA.getText().substring(0, PathFRISTA.getText().lastIndexOf(File.separator))));
+        }
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            PathFRISTA.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_CariFRISTAActionPerformed
+
+    private void CariPrinterSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPrinterSEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CariPrinterSEPActionPerformed
+
+    private void CariPrinterBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPrinterBarcodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CariPrinterBarcodeActionPerformed
+
+    private void cetakSEPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cetakSEPItemStateChanged
+        if (cetakSEPRalan.isSelected() || cetakSEPRanap.isSelected() || cetakSEPInternal.isSelected()) {
+            NamaPrinterSEP.setEnabled(true);
+            CariPrinterSEP.setEnabled(true);
+            CmbModelSEP.setEnabled(true);
+            JumlahCetakSEP.setEnabled(true);
+        } else {
+            NamaPrinterSEP.setText("");
+            NamaPrinterSEP.setEnabled(false);
+            CariPrinterSEP.setEnabled(false);
+            CmbModelSEP.setSelectedIndex(0);
+            CmbModelSEP.setEnabled(false);
+            JumlahCetakSEP.setText("");
+            JumlahCetakSEP.setEnabled(false);
+        }
+    }//GEN-LAST:event_cetakSEPItemStateChanged
+
+    private void cetakBCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cetakBCItemStateChanged
+        if (cetakBCRalan.isSelected() || cetakBCRanap.isSelected() || cetakBCInternal.isSelected()) {
+            NamaPrinterBarcode.setEnabled(true);
+            CariPrinterBarcode.setEnabled(true);
+            CmbModelBarcode.setEnabled(true);
+            JumlahCetakBarcode.setEnabled(true);
+        } else {
+            NamaPrinterSEP.setText("");
+            NamaPrinterBarcode.setEnabled(false);
+            CariPrinterBarcode.setEnabled(false);
+            CmbModelBarcode.setSelectedIndex(0);
+            CmbModelBarcode.setEnabled(false);
+            JumlahCetakBarcode.setText("");
+            JumlahCetakBarcode.setEnabled(false);
+        }
+    }//GEN-LAST:event_cetakBCItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -6227,14 +6484,24 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
+    private widget.Button BtnPengaturan;
     private widget.Button BtnPrint;
+    private widget.Button BtnResetPengaturan;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpan4;
     private widget.Button BtnSimpan5;
     private widget.Button BtnSimpan6;
+    private widget.Button BtnSimpanPengaturan;
+    private widget.Button BtnTutupPengaturan;
     private widget.ComboBox COB;
+    private widget.Button CariFRISTA;
+    private widget.Button CariFingerprint;
+    private widget.Button CariPrinterBarcode;
+    private widget.Button CariPrinterSEP;
     private widget.TextBox Catatan;
     private widget.TextBox Catatan1;
+    private widget.ComboBox CmbModelBarcode;
+    private widget.ComboBox CmbModelSEP;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.Tanggal DTPCariInternal;
@@ -6246,6 +6513,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.ComboBox JenisPelayanan;
     private widget.ComboBox JenisPelayanan1;
     private widget.TextBox JenisPeserta;
+    private widget.TextBox JumlahCetakBarcode;
+    private widget.TextBox JumlahCetakSEP;
     private widget.ComboBox Katarak;
     private widget.TextBox KdDPJP;
     private widget.TextBox KdDPJPLayanan;
@@ -6276,6 +6545,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnRujukanKhusus;
     private widget.TextBox NIK;
     private widget.ComboBox NaikKelas;
+    private widget.TextBox NamaPrinterBarcode;
+    private widget.TextBox NamaPrinterSEP;
     private widget.TextBox NmDPJP;
     private widget.TextBox NmDPJPLayanan;
     private widget.TextBox NmKabupaten;
@@ -6298,6 +6569,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.TextBox NoSKDP;
     private widget.TextBox NoSuratKematian;
     private widget.TextBox NoTelp;
+    private widget.PasswordBox PassFP;
+    private widget.TextBox PathFRISTA;
+    private widget.TextBox PathFingerprint;
     private widget.ComboBox Pembiayaan;
     private widget.TextBox PenanggungJawab;
     private widget.ComboBox Penunjang;
@@ -6325,7 +6599,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.TextBox TglLahir;
     private widget.ComboBox TipeRujukan;
     private widget.ComboBox TujuanKunjungan;
+    private widget.PasswordBox UserFP;
     private javax.swing.JDialog WindowCariSEP;
+    private javax.swing.JDialog WindowPengaturan;
     private javax.swing.JDialog WindowRujukan;
     private javax.swing.JDialog WindowUpdatePulang;
     private widget.Button btnDPJP;
@@ -6344,7 +6620,15 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Button btnSKDP;
     private widget.Button btnSPRI;
     private widget.Button btnSuplesi;
+    private widget.CekBox cetakBCInternal;
+    private widget.CekBox cetakBCRalan;
+    private widget.CekBox cetakBCRanap;
+    private widget.CekBox cetakSEPInternal;
+    private widget.CekBox cetakSEPRalan;
+    private widget.CekBox cetakSEPRanap;
+    private javax.swing.JFileChooser fc;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame12;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
@@ -6399,10 +6683,23 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Label jLabel53;
     private widget.Label jLabel54;
     private widget.Label jLabel55;
+    private widget.Label jLabel56;
+    private widget.Label jLabel58;
+    private widget.Label jLabel59;
     private widget.Label jLabel6;
+    private widget.Label jLabel60;
+    private widget.Label jLabel61;
+    private widget.Label jLabel64;
+    private widget.Label jLabel66;
+    private widget.Label jLabel67;
+    private widget.Label jLabel68;
+    private widget.Label jLabel69;
     private widget.Label jLabel7;
+    private widget.Label jLabel70;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
+    private widget.PanelBiasa panelBiasa1;
+    private widget.PanelBiasa panelBiasa2;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
@@ -7477,5 +7774,76 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }
         }
         return statusantrean;
+    }
+
+    private void cekPengaturanTersimpan() {
+        if (new File("./cache/pengaturansep.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturansep.iyem")) {
+                JsonNode root = new ObjectMapper().readTree(fr);
+                
+                PathFingerprint.setText(root.path("biometrik").path("fingerprint").asText());
+                PathFRISTA.setText(root.path("biometrik").path("frista").asText());
+                UserFP.setText("************");
+                PassFP.setText("************");
+                
+                if (root.path("sep").path("jenis").isArray()) {
+                    for (JsonNode jn : root.path("sep").path("jenis")) {
+                        if (jn.asText().equals("ralan")) {
+                            cetakSEPRalan.setSelected(true);
+                        }
+                        if (jn.asText().equals("ranap")) {
+                            cetakSEPRanap.setSelected(true);
+                        }
+                        if (jn.asText().equals("internal")) {
+                            cetakSEPInternal.setSelected(true);
+                        }
+                    }
+                    cetakSEPItemStateChanged(null);
+                }
+                NamaPrinterSEP.setText(root.path("sep").path("printer").asText());
+                JumlahCetakSEP.setText(root.path("sep").path("jumlah").asText());
+                CmbModelSEP.setSelectedItem(root.path("sep").path("model").asText());
+                
+                if (root.path("barcode").path("jenis").isArray()) {
+                    for (JsonNode jn : root.path("barcode").path("jenis")) {
+                        if (jn.asText().equals("ralan")) {
+                            cetakBCRalan.setSelected(true);
+                        }
+                        if (jn.asText().equals("ranap")) {
+                            cetakBCRanap.setSelected(true);
+                        }
+                        if (jn.asText().equals("internal")) {
+                            cetakBCInternal.setSelected(true);
+                        }
+                    }
+                    cetakBCItemStateChanged(null);
+                }
+                NamaPrinterBarcode.setText(root.path("barcode").path("printer").asText());
+                JumlahCetakBarcode.setText(root.path("barcode").path("jumlah").asText());
+                CmbModelBarcode.setSelectedItem(root.path("barcode").path("model").asText());
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                PathFingerprint.setText("");
+                PathFRISTA.setText("");
+                UserFP.setText("");
+                PassFP.setText("");
+                cetakSEPRalan.setSelected(false);
+                cetakSEPRanap.setSelected(false);
+                cetakSEPInternal.setSelected(false);
+                cetakSEPItemStateChanged(null);
+                cetakBCRalan.setSelected(false);
+                cetakBCRanap.setSelected(false);
+                cetakBCInternal.setSelected(false);
+                cetakBCItemStateChanged(null);
+            }
+        }
+    }
+    
+    private void bukaAplikasiFingerprint() {
+        
+    }
+    
+    private void bukaAplikasiFrista() {
+        
     }
 }
