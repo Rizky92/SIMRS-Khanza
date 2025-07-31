@@ -2063,7 +2063,8 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
                 (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
                 (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
-                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
+                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or " +
+                "jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
                 "order by jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
             )) {
                 int p = 0;
