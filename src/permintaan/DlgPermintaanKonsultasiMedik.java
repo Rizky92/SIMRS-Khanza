@@ -367,7 +367,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         label1.setBounds(210, 20, 55, 23);
 
         TanggalJawab.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-08-2024 14:41:52" }));
+        TanggalJawab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-07-2024 10:43:47" }));
         TanggalJawab.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalJawab.setName("TanggalJawab"); // NOI18N
         TanggalJawab.setOpaque(false);
@@ -667,7 +667,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(170, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-08-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -685,7 +685,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-08-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -779,7 +779,7 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
         jLabel9.setBounds(415, 40, 90, 23);
 
         TanggalPermintaan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-08-2024 14:41:51" }));
+        TanggalPermintaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-07-2024 10:43:47" }));
         TanggalPermintaan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPermintaan.setName("TanggalPermintaan"); // NOI18N
         TanggalPermintaan.setOpaque(false);
@@ -1537,19 +1537,24 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else if(KdDokter.getText().equals(KdDokterDikonsuli.getText())){
            JOptionPane.showMessageDialog(null,"Maaf, Dokter yang dikonsuli jangan diri sendiri...!");
         }else{
-            if(Sequel.menyimpantf("jawaban_konsultasi_medik","?,?,?,?",4,new String[]{
-                    NoPermintaan.getText(),Valid.SetTgl(TanggalJawab.getSelectedItem()+"")+" "+TanggalJawab.getSelectedItem().toString().substring(11,19),JawabanDiagnosaKerja.getText(),JawabanKonsultasi.getText()
-                },"no_permintaan=?","tanggal=?,diagnosa_kerja=?,uraian_jawaban=?",4,new String[]{
-                    Valid.SetTgl(TanggalJawab.getSelectedItem()+"")+" "+TanggalJawab.getSelectedItem().toString().substring(11,19),JawabanDiagnosaKerja.getText(),JawabanKonsultasi.getText(),NoPermintaan.getText()
-                })==true){
+            Valid.cleanupTextSmc(JawabanDiagnosaKerja);
+            Valid.cleanupTextSmc(JawabanKonsultasi);
+            if (Sequel.menyimpantfSmc("jawaban_konsultasi_medik", null,
+                NoPermintaanJawaban.getText(), Valid.getTglJamSmc(TanggalJawab), JawabanDiagnosaKerja.getText(), JawabanKonsultasi.getText()
+            )) {
+                R2.setSelected(true);
+                tampil();
+                emptTeks();
+            } else {
+                if (Sequel.mengupdatetfSmc("jawaban_konsultasi_medik", "tanggal = ?, diagnosa_kerja = ?, uraian_jawaban = ?", "no_permintaan = ?",
+                    Valid.getTglJamSmc(TanggalJawab), JawabanDiagnosaKerja.getText(), JawabanKonsultasi.getText(), NoPermintaanJawaban.getText()
+                )) {
                     R2.setSelected(true);
                     tampil();
                     emptTeks();
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan atau mengedit jawaban konsultasi medik...!!!");
-                R1.setSelected(true);
-                tampil();
-                emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan jawaban..!!");
+                }
             }
         }
     }//GEN-LAST:event_BtnSimpanJawabanActionPerformed
@@ -1843,7 +1848,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
             NoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()); 
             NoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
             NmPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -1858,6 +1862,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             JawabanKonsultasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
             Valid.SetTgl2(TanggalPermintaan,tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Valid.SetTgl2(TanggalJawab,tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            NoPermintaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
         }
     }
     
