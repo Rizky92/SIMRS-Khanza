@@ -429,11 +429,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -471,6 +471,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(55, 23));
         panelisi3.add(jLabel4);
 
+        KdKtg.setEditable(false);
         KdKtg.setHighlighter(null);
         KdKtg.setName("KdKtg"); // NOI18N
         KdKtg.setPreferredSize(new java.awt.Dimension(50, 23));
@@ -617,7 +618,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.setLayout(null);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-07-2020" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -2534,6 +2535,48 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
     
     public void tampil2() { 
+        try {
+            Valid.tabelKosong(tabMode);
+            boolean isRuangRanap = ruang_ranap.equals("Yes"),
+                    isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
+                    isKelasRanap = kelas_ranap.equals("Yes");
+            
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select jns_perawatan_inap.*, jns_perawatan_inap.nm_perawatan from jns_perawatan_inap join " +
+                "kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
+                "where jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori = ? " +
+                (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
+                (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
+                (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
+                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
+                "order by jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
+            )) {
+                int p = 0;
+                ps.setString(++p, KdKtg.getText());
+                if (isCaraBayarRanap) ps.setString(++p, kd_pj.trim());
+                if (isRuangRanap) ps.setString(++p, kd_bangsal.trim());
+                if (isKelasRanap) ps.setString(++p, kelas.trim());
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        do {
+                            
+                        } while (rs.next());
+                    } else {
+                        
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        
         try{ 
             Valid.tabelKosong(tabMode);
             try {
