@@ -1853,14 +1853,16 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from catatan_observasi_hemodialisa where tgl_perawatan=? and jam_rawat=? and no_rawat=?",3,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
-        })==true){
+        if (Sequel.menghapustfSmc("catatan_observasi_hemodialisa", "no_rawat = ? and tgl_perawatan = ? and jam_rawat = ?",
+            tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
+            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(0, 10),
+            tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString().substring(11)
+        )) {
             tabMode.removeRow(tbObat.getSelectedRow());
-            LCount.setText(""+tabMode.getRowCount());
+            LCount.setText(String.valueOf(tabMode.getRowCount()));
             emptTeks();
-        }else{
-            JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Gagal menghapus..!!");
         }
     }
 
