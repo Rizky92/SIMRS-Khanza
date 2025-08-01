@@ -7163,7 +7163,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                         } catch (Exception e) {
                             statusantrean=false;
-                            System.out.println("Notif No.Rujuk : "+e);
+                            System.out.println("Notif : "+e);
                         }
                     }
                 } catch (Exception e) {
