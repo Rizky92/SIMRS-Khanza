@@ -47,6 +47,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -75,7 +77,7 @@ import rekammedis.RMRiwayatPerawatan;
  * @author perpustakaan
  */
 public final class BPJSDataSEP extends javax.swing.JDialog {
-    private DefaultTableModel tabMode,tabModeInternal;
+    private DefaultTableModel tabMode,tabModeInternal, tabModePrinter;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -91,7 +93,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private BPJSCekReferensiKabupaten kabupaten=new BPJSCekReferensiKabupaten(null,false);
     private BPJSCekReferensiKecamatan kecamatan=new BPJSCekReferensiKecamatan(null,false);
     private String prb="",no_peserta="",link="",ADDANTRIANAPIMOBILEJKN="no",requestJson,URL="",query="",utc="",user="",kddokter="",tglkkl="0000-00-00",penunjang="",kodedokterreg="",kodepolireg="",
-            jammulai="",jamselesai="",datajam="",jeniskunjungan="",hari="",nomorreg="",respon="200",statuslanjut="";
+            jammulai="",jamselesai="",datajam="",jeniskunjungan="",hari="",nomorreg="",respon="200",statuslanjut="",printerUntuk = "";
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -381,6 +383,16 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }
         }
         tbDataSEPInternal.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        tabModePrinter = new DefaultTableModel(null, new String[] {"Printer"}) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tbPrinter.setModel(tabModePrinter);
+        tbPrinter.getColumnModel().getColumn(0).setPreferredWidth(500);
+        tbPrinter.setDefaultRenderer(Object.class, new WarnaTable());
         
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCariInternal.setDocument(new batasInput((byte)100).getKata(TCariInternal));
@@ -1974,7 +1986,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelBiasa1.add(JumlahCetakSEP);
         JumlahCetakSEP.setBounds(364, 172, 78, 23);
 
-        UserFP.setText("passwordBox1");
+        UserFP.setForeground(new java.awt.Color(50, 50, 50));
         UserFP.setName("UserFP"); // NOI18N
         panelBiasa1.add(UserFP);
         UserFP.setBounds(113, 72, 130, 25);
@@ -1989,7 +2001,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelBiasa1.add(jLabel68);
         jLabel68.setBounds(246, 72, 59, 23);
 
-        PassFP.setText("passwordBox1");
+        PassFP.setForeground(new java.awt.Color(50, 50, 50));
         PassFP.setName("PassFP"); // NOI18N
         panelBiasa1.add(PassFP);
         PassFP.setBounds(308, 72, 130, 25);
@@ -2080,7 +2092,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelBiasa1.add(CariPrinterBarcode);
         CariPrinterBarcode.setBounds(410, 242, 28, 23);
 
-        CmbModelBarcode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Model 1", "Model 2" }));
+        CmbModelBarcode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Model 1", "Model 2" }));
         CmbModelBarcode.setEnabled(false);
         CmbModelBarcode.setName("CmbModelBarcode"); // NOI18N
         panelBiasa1.add(CmbModelBarcode);
@@ -2151,10 +2163,15 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         fc.setName("fc"); // NOI18N
 
+        WindowPrinter.setModal(true);
         WindowPrinter.setName("WindowPrinter"); // NOI18N
+        WindowPrinter.setUndecorated(true);
         WindowPrinter.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 WindowPrinterWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                WindowPrinterWindowOpened(evt);
             }
         });
 
@@ -6359,8 +6376,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             ObjectNode biometrik = mapper.createObjectNode();
             biometrik.put("fingerprint", PathFingerprint.getText());
             biometrik.put("frista", PathFRISTA.getText());
-            biometrik.put("username", EnkripsiAES.encrypt(new String(UserFP.getPassword())));
-            biometrik.put("password", EnkripsiAES.encrypt(new String(PassFP.getPassword())));
+            if (!new String(UserFP.getPassword()).equals("************")) {
+                biometrik.put("username", EnkripsiAES.encrypt(new String(UserFP.getPassword())));
+            }
+            if (!new String(PassFP.getPassword()).equals("************")) {
+                biometrik.put("password", EnkripsiAES.encrypt(new String(PassFP.getPassword())));
+            }
             root.set("biometrik", biometrik);
             
             ObjectNode printerSEP = mapper.createObjectNode();
@@ -6446,11 +6467,17 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_CariFRISTAActionPerformed
 
     private void CariPrinterSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPrinterSEPActionPerformed
-        // TODO add your handling code here:
+        printerUntuk = "sep";
+        WindowPrinter.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        WindowPrinter.setLocationRelativeTo(internalFrame1);
+        WindowPrinter.setVisible(true);
     }//GEN-LAST:event_CariPrinterSEPActionPerformed
 
     private void CariPrinterBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CariPrinterBarcodeActionPerformed
-        // TODO add your handling code here:
+        printerUntuk = "barcode";
+        WindowPrinter.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        WindowPrinter.setLocationRelativeTo(internalFrame1);
+        WindowPrinter.setVisible(true);
     }//GEN-LAST:event_CariPrinterBarcodeActionPerformed
 
     private void cetakSEPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cetakSEPItemStateChanged
@@ -6488,15 +6515,36 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_cetakBCItemStateChanged
 
     private void tbPrinterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPrinterKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (tbPrinter.getSelectedRow() >= 0) {
+                WindowPrinter.dispose();
+            }
+        }
     }//GEN-LAST:event_tbPrinterKeyPressed
 
     private void tbPrinterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPrinterMousePressed
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            if (tbPrinter.getSelectedRow() >= 0) {
+                WindowPrinter.dispose();
+            }
+        }
     }//GEN-LAST:event_tbPrinterMousePressed
 
+    private void WindowPrinterWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowPrinterWindowOpened
+        Valid.tabelKosong(tabModePrinter);
+        for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
+            tabModePrinter.addRow(new String[] {ps.getName()});
+        }
+    }//GEN-LAST:event_WindowPrinterWindowOpened
+
     private void WindowPrinterWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowPrinterWindowClosed
-        // TODO add your handling code here:
+        if (tbPrinter.getSelectedRow() >= 0) {
+            switch (printerUntuk) {
+                case "sep": NamaPrinterSEP.setText(tbPrinter.getValueAt(tbPrinter.getSelectedRow(), 0).toString()); break;
+                case "barcode": NamaPrinterBarcode.setText(tbPrinter.getValueAt(tbPrinter.getSelectedRow(), 0).toString()); break;
+            }
+            printerUntuk = "";
+        }
     }//GEN-LAST:event_WindowPrinterWindowClosed
 
     /**
