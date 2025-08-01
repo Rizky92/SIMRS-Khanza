@@ -741,7 +741,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        TCari.setText("");
+        emptTeks();
         tampil();
 }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -2007,6 +2007,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public void tampil() { 
         try {
             ArrayNode tindakan = mapper.createArrayNode();
+            String where = "";
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if ((Boolean) tbKamar.getValueAt(i, 0)
                     || (Boolean) tbKamar.getValueAt(i, 1)
@@ -2030,7 +2031,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     row.put("menejemen", (Double) tbKamar.getValueAt(i, 13));
                     row.put("kelas", tbKamar.getValueAt(i, 14).toString());
                     tindakan.add(row);
+                    where = where.concat("'" + tbKamar.getValueAt(i, 4).toString() + "', ");
                 }
+            }
+            if (!where.isBlank()) {
+                where = where.substring(0, where.length() - 2);
             }
             Valid.tabelKosong(tabMode);
             for (JsonNode row : tindakan) {
@@ -2042,30 +2047,22 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     row.path("menejemen").asDouble(), row.path("kelas").asText()
                 });
             }
-            tampil2();
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
-    
-    public void tampil2() { 
-        try {
-            // Valid.tabelKosong(tabMode);
             cekTindakanTerinput();
             boolean isRuangRanap = ruang_ranap.equals("Yes"),
                     isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
                     isKelasRanap = kelas_ranap.equals("Yes");
-            
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap join " +
-                "kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
-                "where jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori like ? " +
+                "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap " +
+                "join kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
+                "where " + (where.isBlank() ? "" : "jns_perawatan_inap.kd_jenis_prw not in (" + where + ") and ") +
+                "(jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori like ? " +
                 (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
                 (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
                 (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
                 (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or " +
                 "jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
-                "order by jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
+                ") order by " + (where.isBlank() ? "" : "(field(jns_perawatan_inap.kd_jenis_prw, " + where +
+                ") = 1), ") + "jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
             )) {
                 int p = 0;
                 ps.setString(++p, KdKtg.getText() + "%");
@@ -2126,90 +2123,173 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         LCount.setText("" + tbKamar.getRowCount());
     }
+    
+    public void tampil2() { 
+        try {
+            Valid.tabelKosong(tabMode);
+            cekTindakanTerinput();
+            boolean isRuangRanap = ruang_ranap.equals("Yes"),
+                    isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
+                    isKelasRanap = kelas_ranap.equals("Yes");
+            
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap join " +
+                "kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
+                "where jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori like ? " +
+                (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
+                (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
+                (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
+                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or " +
+                "jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
+                "order by jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
+            )) {
+                int p = 0;
+                ps.setString(++p, KdKtg.getText() + "%");
+                if (isCaraBayarRanap) ps.setString(++p, kd_pj.trim());
+                if (isRuangRanap) ps.setString(++p, kd_bangsal.trim());
+                if (isKelasRanap) ps.setString(++p, kelas.trim());
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        do {
+                            JsonNode cc = tindakanTerinput.path(pilihtable).path(rs.getString("kd_jenis_prw"));
+                            switch (pilihtable) {
+                                case "rawat_inap_dr":
+                                    if (rs.getDouble("total_byrdr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_pr":
+                                    if (rs.getDouble("total_byrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_drpr":
+                                    if (rs.getDouble("total_byrdrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                            }
+                        } while (rs.next());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        LCount.setText("" + tbKamar.getRowCount());
+    }
 
     private void cekTindakanTerinput() {
         tindakanTerinput = mapper.createObjectNode();
         try {
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select rawat_inap_dr.kd_jenis_prw, " +
-                "(rawat_inap_dr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
-                "(rawat_inap_dr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
-                "(rawat_inap_dr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
-                "(rawat_inap_dr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
-                "from rawat_inap_dr where rawat_inap_dr.no_rawat = ? and rawat_inap_dr.tgl_perawatan = ? " +
-                "group by rawat_inap_dr.kd_jenis_prw"
-            )) {
-                ps.setString(1, TNoRw.getText());
-                ps.setString(2, Valid.getTglSmc(DTPTgl));
-                System.out.println(ps.toString());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        ObjectNode dr = mapper.createObjectNode();
-                        do {
-                            ObjectNode cc = mapper.createObjectNode();
-                            cc.put("pg", rs.getBoolean("pg"));
-                            cc.put("sg", rs.getBoolean("sg"));
-                            cc.put("sr", rs.getBoolean("sr"));
-                            cc.put("mlm", rs.getBoolean("mlm"));
-                            dr.set(rs.getString("kd_jenis_prw"), cc);
-                        } while (rs.next());
-                        tindakanTerinput.set("rawat_inap_dr", dr);
+            switch (pilihtable) {
+                case "rawat_inap_dr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_dr.kd_jenis_prw, " +
+                        "(rawat_inap_dr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_dr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_dr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_dr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_dr where rawat_inap_dr.no_rawat = ? and rawat_inap_dr.tgl_perawatan = ? " +
+                        "group by rawat_inap_dr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode dr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    dr.set(rs.getString("kd_jenis_prw"), cc);
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_dr", dr);
+                            }
+                        }
                     }
-                }
-            }
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select rawat_inap_pr.kd_jenis_prw, " +
-                "(rawat_inap_pr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
-                "(rawat_inap_pr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
-                "(rawat_inap_pr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
-                "(rawat_inap_pr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
-                "from rawat_inap_pr where rawat_inap_pr.no_rawat = ? and rawat_inap_pr.tgl_perawatan = ? " +
-                "group by rawat_inap_pr.kd_jenis_prw"
-            )) {
-                ps.setString(1, TNoRw.getText());
-                ps.setString(2, Valid.getTglSmc(DTPTgl));
-                System.out.println(ps.toString());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        ObjectNode pr = mapper.createObjectNode();
-                        do {
-                            ObjectNode cc = mapper.createObjectNode();
-                            cc.put("pg", rs.getBoolean("pg"));
-                            cc.put("sg", rs.getBoolean("sg"));
-                            cc.put("sr", rs.getBoolean("sr"));
-                            cc.put("mlm", rs.getBoolean("mlm"));
-                            pr.set(rs.getString("kd_jenis_prw"), cc);
-                        } while (rs.next());
-                        tindakanTerinput.set("rawat_inap_pr", pr);
+                    break;
+                case "rawat_inap_pr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_pr.kd_jenis_prw, " +
+                        "(rawat_inap_pr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_pr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_pr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_pr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_pr where rawat_inap_pr.no_rawat = ? and rawat_inap_pr.tgl_perawatan = ? " +
+                        "group by rawat_inap_pr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode pr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    pr.set(rs.getString("kd_jenis_prw"), cc);
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_pr", pr);
+                            }
+                        }
                     }
-                }
-            }
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select rawat_inap_drpr.kd_jenis_prw, " +
-                "(rawat_inap_drpr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
-                "(rawat_inap_drpr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
-                "(rawat_inap_drpr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
-                "(rawat_inap_drpr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
-                "from rawat_inap_drpr where rawat_inap_drpr.no_rawat = ? and rawat_inap_drpr.tgl_perawatan = ? " +
-                "group by rawat_inap_drpr.kd_jenis_prw"
-            )) {
-                ps.setString(1, TNoRw.getText());
-                ps.setString(2, Valid.getTglSmc(DTPTgl));
-                System.out.println(ps.toString());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        ObjectNode drpr = mapper.createObjectNode();
-                        do {
-                            ObjectNode cc = mapper.createObjectNode();
-                            cc.put("pg", rs.getBoolean("pg"));
-                            cc.put("sg", rs.getBoolean("sg"));
-                            cc.put("sr", rs.getBoolean("sr"));
-                            cc.put("mlm", rs.getBoolean("mlm"));
-                            drpr.set(rs.getString("kd_jenis_prw"), cc);
-                        } while (rs.next());
-                        tindakanTerinput.set("rawat_inap_drpr", drpr);
+                    break;
+                case "rawat_inap_drpr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_drpr.kd_jenis_prw, " +
+                        "(rawat_inap_drpr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_drpr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_drpr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_drpr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_drpr where rawat_inap_drpr.no_rawat = ? and rawat_inap_drpr.tgl_perawatan = ? " +
+                        "group by rawat_inap_drpr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode drpr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    drpr.set(rs.getString("kd_jenis_prw"), cc);
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_drpr", drpr);
+                            }
+                        }
                     }
-                }
+                    break;
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -2328,16 +2408,17 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 sukses = true;
                 ttljmdokter = 0; ttljmperawat = 0; ttlkso = 0; ttlpendapatan = 0; ttljasasarana = 0; ttlbhp = 0; ttlmenejemen = 0;
                 hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
+                
                 for (i = 0; i < tbKamar.getRowCount(); i++) {
                     pg = false; sg = false; sr = false; mlm = false;
+                    if (tindakanTerinput.path(pilihtable).has(tbKamar.getValueAt(i, 4).toString())) {
+                        pg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("pg").asBoolean();
+                        sg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sg").asBoolean();
+                        sr = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sr").asBoolean();
+                        mlm = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("mlm").asBoolean();
+                    }
                     switch (pilihtable) {
                         case "rawat_inap_dr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -2368,12 +2449,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -2404,12 +2479,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -2440,12 +2509,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
@@ -2477,12 +2540,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             break;
                         case "rawat_inap_pr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -2513,12 +2570,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -2549,12 +2600,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -2585,12 +2630,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
@@ -2622,12 +2661,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             break;
                         case "rawat_inap_drpr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -2660,12 +2693,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -2698,12 +2725,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -2736,12 +2757,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
