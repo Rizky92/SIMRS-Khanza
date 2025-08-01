@@ -407,7 +407,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         if(alarm.equals("yes")){
             jam();
         }
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -3433,9 +3433,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "resep_obat.jam, resep_obat.tgl_penyerahan, resep_obat.jam_penyerahan from resep_obat join reg_periksa on " +
                                 "resep_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                                 "join dokter on resep_obat.kd_dokter = dokter.kd_dokter join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
-                                "join penjab on reg_periksa.kd_pj = penjab.kd_pj where resep_obat.tgl_peresepan != '0000-00-00' and resep_obat.status = 'ralan' " +
-                                "and resep_obat.tgl_peresepan between ? and ? and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and '' = ? " + statuslayani +
-                                (TCari.getText().isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+                                "join penjab on reg_periksa.kd_pj = penjab.kd_pj where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' " +
+                                "and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and '' = ? " + statuslayani + (TCari.getText().isBlank() ? "" :
+                                "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
                                 "pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") +
                                 "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                         } else {
@@ -3446,11 +3446,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "resep_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                                 "join dokter on resep_obat.kd_dokter = dokter.kd_dokter join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli " +
                                 "join penjab on reg_periksa.kd_pj = penjab.kd_pj join set_depo_ralan on reg_periksa.kd_poli = set_depo_ralan.kd_poli " +
-                                "where resep_obat.tgl_peresepan != '0000-00-00' and resep_obat.status = 'ralan' and resep_obat.tgl_peresepan between " +
-                                "? and ? and resep_obat.kd_dokter like ? and reg_periksa.kd_poli like ? and set_depo_ralan.kd_bangsal = ? " + 
-                                statuslayani + (TCari.getText().isBlank() ? "" : "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or " +
-                                "reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or " +
-                                "poliklinik.nm_poli like ?) ") + "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
+                                "where resep_obat.tgl_peresepan between ? and ? and resep_obat.status = 'ralan' and resep_obat.kd_dokter like ? and " +
+                                "reg_periksa.kd_poli like ? and set_depo_ralan.kd_bangsal = ? " + statuslayani + (TCari.getText().isBlank() ? "" :
+                                "and (resep_obat.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or " +
+                                "pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or poliklinik.nm_poli like ?) ") +
+                                "order by resep_obat.tgl_peresepan desc, resep_obat.jam_peresepan desc";
                         }
                         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
                             ps.setString(1, Valid.getTglSmc(DTPCari1));
@@ -3495,7 +3495,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     chunks.forEach(tabMode::addRow);
                     LCount.setText("" + i);
                 }
-                
+
                 @Override
                 protected void done() {
                     ceksukses = false;
@@ -4143,7 +4143,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 if (rs2.next()) {
                                                     do {
                                                         Object[] row2 = new Object[] {
-                                                            "", "", rs2.getString("jml_dr") + " " + rs2.getString("metode"), 
+                                                            "", "", rs2.getString("jml_dr") + " " + rs2.getString("metode"),
                                                             "No.Racik : " + rs2.getString("no_racik"), rs2.getString("nama_racik"), rs2.getString("aturan_pakai")
                                                         };
                                                         SwingUtilities.invokeLater(() -> tabMode4.addRow(row2));
@@ -4224,7 +4224,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                                 if (rs2.next()) {
                                                     do {
                                                         Object[] row2 = new Object[] {
-                                                            "", "", rs2.getString("jml_dr") + " " + rs2.getString("metode"), 
+                                                            "", "", rs2.getString("jml_dr") + " " + rs2.getString("metode"),
                                                             "No.Racik : " + rs2.getString("no_racik"), rs2.getString("nama_racik"),
                                                             rs2.getString("aturan_pakai")
                                                         };
@@ -4450,7 +4450,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                   "dokter on permintaan_stok_obat_pasien.kd_dokter = dokter.kd_dokter join kamar_inap on reg_periksa.no_rawat = kamar_inap.no_rawat join " +
                                   "kamar on kamar_inap.kd_kamar = kamar.kd_kamar join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal join penjab on " +
                                   "reg_periksa.kd_pj = penjab.kd_pj where kamar_inap.stts_pulang = '-' and permintaan_stok_obat_pasien.tgl_permintaan between " +
-                                  "? and ? and permintaan_stok_obat_pasien.kd_dokter like ? and kamar.kd_bangsal like ? and '' = ? " + statuslayani + (TCari.getText().isBlank() ? "" : 
+                                  "? and ? and permintaan_stok_obat_pasien.kd_dokter like ? and kamar.kd_bangsal like ? and '' = ? " + statuslayani + (TCari.getText().isBlank() ? "" :
                                   "and (permintaan_stok_obat_pasien.no_permintaan like ? or permintaan_stok_obat_pasien.no_rawat like ? or reg_periksa.no_rkm_medis like ? " +
                                   "or pasien.nm_pasien like ? or penjab.png_jawab like ? or dokter.nm_dokter like ? or bangsal.nm_bangsal like ?) ") + "group by " +
                                   "permintaan_stok_obat_pasien.no_permintaan order by permintaan_stok_obat_pasien.tgl_permintaan desc, permintaan_stok_obat_pasien.jam desc";
