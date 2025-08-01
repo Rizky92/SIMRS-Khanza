@@ -7150,8 +7150,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             System.out.println(nameNode.path("code").asText()+" "+nameNode.path("message").asText());
                             Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
                             if (!nameNode.path("code").asText().equals("200")) {
+                                statusantrean = false;
                                 JOptionPane.showMessageDialog(null, nameNode.path("message").asText(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
-                                statusantrean = false;
                             }
                         } catch (HttpClientErrorException e) {
                             statusantrean = false;
@@ -7166,125 +7166,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             System.out.println("Notif No.Rujuk : "+e);
                         }
                     }
-                    /*
-                    if(!NoRujukan.getText().equals("")){
-                        requestJson = "{"
-                            + "\"kodebooking\": \"" + TNoRw.getText() + "\","
-                            + "\"jenispasien\": \"JKN\","
-                            + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
-                            + "\"nik\": \"" + NIK.getText() + "\","
-                            + "\"nohp\": \"" + NoTelp.getText() + "\","
-                            + "\"kodepoli\": \"" + KdPoli.getText() + "\","
-                            + "\"namapoli\": \"" + NmPoli.getText() + "\","
-                            + "\"pasienbaru\": " + pasienbaru + ","
-                            + "\"norm\": \"" + TNoRM.getText() + "\","
-                            + "\"tanggalperiksa\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
-                            + "\"kodedokter\": " + KdDPJP.getText() + ","
-                            + "\"namadokter\": \"" + NmDPJP.getText() + "\","
-                            + "\"jampraktek\": \"" + jammulai.substring(0, 5) + "-" + jamselesai.substring(0, 5) + "\","
-                            + "\"jeniskunjungan\": " + jeniskunjungan + ","
-                            + "\"nomorreferensi\": \"" + NoRujukan.getText() + "\","
-                            + "\"nomorantrean\": \"" + nomorreg + "\","
-                            + "\"angkaantrean\": " + Integer.parseInt(nomorreg) + ","
-                            + "\"estimasidilayani\": " + parsedDate.getTime() + ","
-                            + "\"sisakuotajkn\": " + (kuota - Integer.parseInt(nomorreg)) + ","
-                            + "\"kuotajkn\": " + kuota + ","
-                            + "\"sisakuotanonjkn\": " + (kuota - Integer.parseInt(nomorreg)) + ","
-                            + "\"kuotanonjkn\": " + kuota + ","
-                            + "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\""
-                            + "}";
-                        System.out.println("JSON : " + requestJson + "\n");
-                        URL = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
-                        System.out.println("URL : " + URL);
-                        try {
-                            headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
-                            utc=String.valueOf(apiMobileJKN.GetUTCdatetimeAsString());
-                            headers.add("x-timestamp",utc);
-                            headers.add("x-signature",apiMobileJKN.getHmac(utc));
-                            headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
-                            requestEntity = new HttpEntity(requestJson,headers);
-                            root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                            nameNode = root.path("metadata");  
-                            respon=nameNode.path("code").asText();
-                            System.out.println("respon WS BPJS Kirim Pakai NoRujukan : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
-                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
-                        } catch (HttpClientErrorException e) {
-                            statusantrean = false;
-                            System.out.println("Notif : " + e.getMessage());
-                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
-                        } catch (HttpServerErrorException e) {
-                            statusantrean = false;
-                            System.out.println("Notif : " + e.getMessage());
-                            Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
-                        } catch (Exception e) {
-                            statusantrean=false;
-                            System.out.println("Notif No.Rujuk : "+e);
-                        }
-                    }
-
-                    if(respon.equals("201")){
-                        if(!NoSKDP.getText().equals("")){
-                            requestJson = "{"
-                                + "\"kodebooking\": \"" + TNoRw.getText() + "\","
-                                + "\"jenispasien\": \"JKN\","
-                                + "\"nomorkartu\": \"" + NoKartu.getText() + "\","
-                                + "\"nik\": \"" + NIK.getText() + "\","
-                                + "\"nohp\": \"" + NoTelp.getText() + "\","
-                                + "\"kodepoli\": \"" + KdPoli.getText() + "\","
-                                + "\"namapoli\": \"" + NmPoli.getText() + "\","
-                                + "\"pasienbaru\": " + pasienbaru + ","
-                                + "\"norm\": \"" + TNoRM.getText() + "\","
-                                + "\"tanggalperiksa\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
-                                + "\"kodedokter\": " + KdDPJP.getText() + ","
-                                + "\"namadokter\": \"" + NmDPJP.getText() + "\","
-                                + "\"jampraktek\": \"" + jammulai.substring(0, 5) + "-" + jamselesai.substring(0, 5) + "\","
-                                + "\"jeniskunjungan\": " + jeniskunjungan + ","
-                                + "\"nomorreferensi\": \"" + NoSKDP.getText() + "\","
-                                + "\"nomorantrean\": \"" + nomorreg + "\","
-                                + "\"angkaantrean\": " + Integer.parseInt(nomorreg) + ","
-                                + "\"estimasidilayani\": " + parsedDate.getTime() + ","
-                                + "\"sisakuotajkn\": " + (kuota - Integer.parseInt(nomorreg)) + ","
-                                + "\"kuotajkn\": " + kuota + ","
-                                + "\"sisakuotanonjkn\": " + (kuota - Integer.parseInt(nomorreg)) + ","
-                                + "\"kuotanonjkn\": " + kuota + ","
-                                + "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\""
-                                + "}";
-                            System.out.println("JSON : " + requestJson + "\n");
-                            URL = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
-                            System.out.println("URL : " + URL);
-                            try {
-                                headers = new HttpHeaders();
-                                headers.setContentType(MediaType.APPLICATION_JSON);
-                                headers.add("x-cons-id",koneksiDB.CONSIDAPIMOBILEJKN());
-                                utc=String.valueOf(apiMobileJKN.GetUTCdatetimeAsString());
-                                headers.add("x-timestamp",utc);
-                                headers.add("x-signature",apiMobileJKN.getHmac(utc));
-                                headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
-                                requestEntity = new HttpEntity(requestJson,headers);
-                                root = mapper.readTree(apiMobileJKN.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
-                                nameNode = root.path("metadata");  
-                                Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
-                                System.out.println("respon WS BPJS Kirim Pakai SKDP : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
-                                if(nameNode.path("code").asText().equals("201")){
-                                    statusantrean=false;
-                                }
-                            } catch (HttpClientErrorException e) {
-                                statusantrean = false;
-                                System.out.println("Notif : " + e.getMessage());
-                                Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
-                            } catch (HttpServerErrorException e) {
-                                statusantrean = false;
-                                System.out.println("Notif : " + e.getMessage());
-                                Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", datajam);
-                            } catch (Exception e) {
-                                statusantrean=false;
-                                System.out.println("Notif SKDP : "+e);
-                            }
-                        }
-                    }
-                    */
                 } catch (Exception e) {
                     statusantrean=false;
                     System.out.println("Notif : "+e);
