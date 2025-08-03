@@ -17,6 +17,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -26,6 +30,12 @@ import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -33,6 +43,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -44,14 +55,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -59,6 +79,7 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.bouncycastle.jcajce.provider.symmetric.AES;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -100,11 +121,15 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode nameNode;
     private JsonNode response;
-    private boolean statusantrean=true;
+    private boolean statusantrean=true, fingerprintAktif = false, fristaAktif = false;
     private Calendar cal = Calendar.getInstance();
     private int day = cal.get(Calendar.DAY_OF_WEEK);
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date parsedDate;
+    private String pathFingerprint = "";
+    private String userFP = "";
+    private String passFP = "";
+    private String pathFrista;
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -738,10 +763,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel50 = new widget.Label();
         TanggalKunjungRujukan = new widget.Tanggal();
         Popup1 = new javax.swing.JPopupMenu();
+        ppPengajuan4 = new javax.swing.JMenuItem();
+        ppPengajuan5 = new javax.swing.JMenuItem();
+        ppPengajuan3 = new javax.swing.JMenuItem();
+        ppPengajuan2 = new javax.swing.JMenuItem();
         ppPengajuan = new javax.swing.JMenuItem();
         ppPengajuan1 = new javax.swing.JMenuItem();
-        ppPengajuan2 = new javax.swing.JMenuItem();
-        ppPengajuan3 = new javax.swing.JMenuItem();
         ppAmbilSep = new javax.swing.JMenuItem();
         ppStatusFinger = new javax.swing.JMenuItem();
         WindowCariSEP = new javax.swing.JDialog();
@@ -1379,7 +1406,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 70, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025 14:53:21" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025 00:03:54" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1425,7 +1452,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel48);
         jLabel48.setBounds(291, 62, 120, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1493,7 +1520,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel30.setBounds(0, 25, 102, 23);
 
         TanggalRujukKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalRujukKeluar.setDisplayFormat("dd-MM-yyyy");
         TanggalRujukKeluar.setName("TanggalRujukKeluar"); // NOI18N
         TanggalRujukKeluar.setOpaque(false);
@@ -1676,7 +1703,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel50.setBounds(638, 55, 80, 23);
 
         TanggalKunjungRujukan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalKunjungRujukan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungRujukan.setName("TanggalKunjungRujukan"); // NOI18N
         TanggalKunjungRujukan.setOpaque(false);
@@ -1687,6 +1714,70 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         WindowRujukan.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
         Popup1.setName("Popup1"); // NOI18N
+
+        ppPengajuan4.setBackground(new java.awt.Color(255, 255, 254));
+        ppPengajuan4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPengajuan4.setForeground(new java.awt.Color(50, 50, 50));
+        ppPengajuan4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuan4.setText("Validasi dengan Fingerprint");
+        ppPengajuan4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPengajuan4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPengajuan4.setName("ppPengajuan4"); // NOI18N
+        ppPengajuan4.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppPengajuan4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuan4BtnPrintActionPerformed(evt);
+            }
+        });
+        Popup1.add(ppPengajuan4);
+
+        ppPengajuan5.setBackground(new java.awt.Color(255, 255, 254));
+        ppPengajuan5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPengajuan5.setForeground(new java.awt.Color(50, 50, 50));
+        ppPengajuan5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuan5.setText("Validasi dengan FRISTA");
+        ppPengajuan5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPengajuan5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPengajuan5.setName("ppPengajuan5"); // NOI18N
+        ppPengajuan5.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppPengajuan5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuan5BtnPrintActionPerformed(evt);
+            }
+        });
+        Popup1.add(ppPengajuan5);
+
+        ppPengajuan3.setBackground(new java.awt.Color(255, 255, 254));
+        ppPengajuan3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPengajuan3.setForeground(new java.awt.Color(50, 50, 50));
+        ppPengajuan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuan3.setText("Pengajuan SEP Finger");
+        ppPengajuan3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPengajuan3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPengajuan3.setName("ppPengajuan3"); // NOI18N
+        ppPengajuan3.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppPengajuan3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuan3BtnPrintActionPerformed(evt);
+            }
+        });
+        Popup1.add(ppPengajuan3);
+
+        ppPengajuan2.setBackground(new java.awt.Color(255, 255, 254));
+        ppPengajuan2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPengajuan2.setForeground(new java.awt.Color(50, 50, 50));
+        ppPengajuan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPengajuan2.setText("Aproval SEP Finger");
+        ppPengajuan2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPengajuan2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPengajuan2.setName("ppPengajuan2"); // NOI18N
+        ppPengajuan2.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppPengajuan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPengajuan2BtnPrintActionPerformed(evt);
+            }
+        });
+        Popup1.add(ppPengajuan2);
 
         ppPengajuan.setBackground(new java.awt.Color(255, 255, 254));
         ppPengajuan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1719,38 +1810,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }
         });
         Popup1.add(ppPengajuan1);
-
-        ppPengajuan2.setBackground(new java.awt.Color(255, 255, 254));
-        ppPengajuan2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppPengajuan2.setForeground(new java.awt.Color(50, 50, 50));
-        ppPengajuan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppPengajuan2.setText("Aproval SEP Finger");
-        ppPengajuan2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppPengajuan2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppPengajuan2.setName("ppPengajuan2"); // NOI18N
-        ppPengajuan2.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppPengajuan2BtnPrintActionPerformed(evt);
-            }
-        });
-        Popup1.add(ppPengajuan2);
-
-        ppPengajuan3.setBackground(new java.awt.Color(255, 255, 254));
-        ppPengajuan3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppPengajuan3.setForeground(new java.awt.Color(50, 50, 50));
-        ppPengajuan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppPengajuan3.setText("Pengajuan SEP Finger");
-        ppPengajuan3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppPengajuan3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppPengajuan3.setName("ppPengajuan3"); // NOI18N
-        ppPengajuan3.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppPengajuan3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppPengajuan3BtnPrintActionPerformed(evt);
-            }
-        });
-        Popup1.add(ppPengajuan3);
 
         ppAmbilSep.setBackground(new java.awt.Color(255, 255, 254));
         ppAmbilSep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2269,6 +2328,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         NoKartu.setEditable(false);
         NoKartu.setBackground(new java.awt.Color(245, 250, 240));
+        NoKartu.setText("0002299948514");
         NoKartu.setComponentPopupMenu(Popup1);
         NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
@@ -2282,7 +2342,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel20.setBounds(187, 102, 65, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -2302,7 +2362,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel22.setBounds(0, 102, 90, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -2663,7 +2723,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel38.setBounds(594, 132, 40, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
@@ -3156,7 +3216,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3170,7 +3230,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3261,7 +3321,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel51);
 
         DTPCariInternal.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPCariInternal.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal.setName("DTPCariInternal"); // NOI18N
         DTPCariInternal.setOpaque(false);
@@ -3275,7 +3335,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel52);
 
         DTPCariInternal2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
+        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPCariInternal2.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal2.setName("DTPCariInternal2"); // NOI18N
         DTPCariInternal2.setOpaque(false);
@@ -6398,7 +6458,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             printerSEP.set("jenis", jenisSEP);
             printerSEP.put("printer", NamaPrinterSEP.getText());
             printerSEP.put("model", CmbModelSEP.getSelectedItem().toString());
-            printerSEP.put("jumlah", Integer.parseInt(JumlahCetakSEP.getText().trim()));
+            if (JumlahCetakSEP.getText().isBlank()) {
+                printerSEP.put("jumlah", 0);
+            } else {
+                printerSEP.put("jumlah", Integer.parseInt(JumlahCetakSEP.getText().trim()));
+            }
             root.set("sep", printerSEP);
             
             ObjectNode printerBarcode = mapper.createObjectNode();
@@ -6415,7 +6479,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             printerBarcode.set("jenis", jenisBarcode);
             printerBarcode.put("printer", NamaPrinterBarcode.getText());
             printerBarcode.put("model", CmbModelBarcode.getSelectedItem().toString());
-            printerBarcode.put("jumlah", Integer.parseInt(JumlahCetakBarcode.getText().trim()));
+            if (JumlahCetakBarcode.getText().isBlank()) {
+                printerBarcode.put("jumlah", 0);
+            } else {
+                printerBarcode.put("jumlah", Integer.parseInt(JumlahCetakBarcode.getText().trim()));
+            }
             root.set("barcode", printerBarcode);
             
             File iyem = new File("./cache/pengaturansep.iyem");
@@ -6546,6 +6614,259 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             printerUntuk = "";
         }
     }//GEN-LAST:event_WindowPrinterWindowClosed
+
+    private void ppPengajuan4BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuan4BtnPrintActionPerformed
+        if (NoKartu.getText().isBlank()) {
+            Valid.textKosong(NoKartu, "No. Peserta");
+            return;
+        }
+        
+        File file = new File("./cache/pengaturansep.iyem");
+            
+        if (!file.exists() || !file.isFile()) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat membuka aplikasi fingerprint,\nCek ulang pengaturan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            JOptionPane.showMessageDialog(null, "Sistem operasi tidak mendukung auto fingerprint..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        final AtomicBoolean aB = new AtomicBoolean(true);
+
+        JOptionPane wait = new JOptionPane();
+        JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(e -> aB.set(false));
+        wait.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        wait.setOptionType(JOptionPane.DEFAULT_OPTION);
+        wait.setOptions(new Object[] {cancel});
+        wait.setMessage("Menunggu aplikasi fingerprint terbuka...");
+        final JDialog modal = wait.createDialog("Loading...");
+
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    fingerprintAktif = false;
+
+                    User32 u32 = User32.INSTANCE;
+
+                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
+                        char[] windowText = new char[512];
+                        u32.GetWindowText(hwnd, windowText, 512);
+                        String wText = Native.toString(windowText);
+
+                        if (wText.isEmpty()) {
+                            return true;
+                        }
+
+                        if (wText.contains("Registrasi Sidik Jari")) {
+                            fingerprintAktif = true;
+                            u32.SetForegroundWindow(hwnd);
+                        }
+
+                        return true;
+                    }, Pointer.NULL);
+
+                    Robot r = new Robot();
+                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    StringSelection ss;
+
+                    if (fingerprintAktif) {
+                        Thread.sleep(1000);
+                        r.keyPress(KeyEvent.VK_CONTROL);
+                        r.keyPress(KeyEvent.VK_A);
+                        r.keyRelease(KeyEvent.VK_A);
+                        r.keyRelease(KeyEvent.VK_CONTROL);
+                        Thread.sleep(500);
+
+                        ss = new StringSelection(NoKartu.getText().trim());
+                        c.setContents(ss, ss);
+                        r.keyPress(KeyEvent.VK_CONTROL);
+                        r.keyPress(KeyEvent.VK_V);
+                        r.keyRelease(KeyEvent.VK_V);
+                        r.keyRelease(KeyEvent.VK_CONTROL);
+                    } else {
+                        try (FileReader fr = new FileReader(file)) {
+                            JsonNode read = mapper.readTree(fr).path("biometrik");
+                            pathFingerprint = read.path("fingerprint").asText();
+                            userFP = read.path("username").asText();
+                            passFP = read.path("password").asText();
+                            if (pathFingerprint.isBlank()) {
+                                pathFingerprint = "";
+                                userFP = "";
+                                passFP = "";
+                                JOptionPane.showMessageDialog(null, "Lokasi aplikasi fingerprint belum diisi..!!");
+                                return null;
+                            }
+
+                            Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
+
+                            long start = System.nanoTime();
+                            while (true) {
+                                long elapsed = System.nanoTime() - start;
+                                if (!aB.get()) {
+                                    modal.dispose();
+                                    break;
+                                }
+                                if (u32.IsWindowVisible(u32.FindWindow(null, "Untitled - Notepad"))) {
+                                    fingerprintAktif = true;
+                                    modal.dispose();
+                                    break;
+                                }
+                                if (TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS) > 30) {
+                                    modal.dispose();
+                                    break;
+                                }
+                            }
+
+                            Thread.sleep(1000);
+                            ss = new StringSelection(EnkripsiAES.decrypt(userFP));
+                            c.setContents(ss, ss);
+
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_TAB);
+                            r.keyRelease(KeyEvent.VK_TAB);
+                            Thread.sleep(1000);
+
+                            ss = new StringSelection(EnkripsiAES.decrypt(passFP));
+                            c.setContents(ss, ss);
+
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_ENTER);
+                            r.keyRelease(KeyEvent.VK_ENTER);
+                            Thread.sleep(1000);
+
+                            ss = new StringSelection(NoKartu.getText());
+                            c.setContents(ss, ss);
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+
+                            pathFingerprint = "";
+                            userFP = "";
+                            passFP = "";
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+
+                return null;
+            }
+        }.execute();
+
+        SwingUtilities.invokeLater(() -> modal.setVisible(true));
+    }//GEN-LAST:event_ppPengajuan4BtnPrintActionPerformed
+
+    private void ppPengajuan5BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuan5BtnPrintActionPerformed
+        if (!NoKartu.getText().isBlank()) {
+            try {
+                try (FileReader fr = new FileReader(new File("./cache/pengaturansep.iyem"))) {
+                    pathFrista = mapper.readTree(fr).path("fingerprint").asText();
+                    userFP = mapper.readTree(fr).path("username").asText();
+                    passFP = mapper.readTree(fr).path("password").asText();
+                    if (pathFingerprint.isBlank()) {
+                        JOptionPane.showMessageDialog(null, "Lokasi aplikasi fingerprint belum diisi..!!");
+                        return;
+                    }
+                }
+                if (!pathFingerprint.isBlank()) {
+                    SwingUtilities.invokeLater(() -> {
+                        if (System.getProperty("os.name").contains("win")) {
+                            try {
+                                fingerprintAktif = false;
+                                
+                                User32 u32 = User32.INSTANCE;
+                                
+                                u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
+                                    char[] windowText = new char[512];
+                                    u32.GetWindowText(hwnd, windowText, 512);
+                                    String wText = Native.toString(windowText);
+                                    
+                                    if (wText.isEmpty()) {
+                                        return true;
+                                    }
+                                    
+                                    if (wText.contains("Registrasi Sidik Jari")) {
+                                        fingerprintAktif = true;
+                                        u32.SetForegroundWindow(hwnd);
+                                    }
+                                    
+                                    return true;
+                                }, Pointer.NULL);
+                                
+                                Robot r = new Robot();
+                                Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+                                StringSelection ss;
+                                
+                                if (fingerprintAktif) {
+                                    Thread.sleep(1000);
+                                    r.keyPress(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_A);
+                                    r.keyRelease(KeyEvent.VK_A);
+                                    r.keyRelease(KeyEvent.VK_CONTROL);
+                                    Thread.sleep(500);
+                                    
+                                    ss = new StringSelection(NoKartu.getText().trim());
+                                    c.setContents(ss, ss);
+                                    r.keyPress(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_CONTROL);
+                                } else {
+                                    Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
+                                    Thread.sleep(2000);
+                                    ss = new StringSelection(EnkripsiAES.decrypt(userFP));
+                                    c.setContents(ss, ss);
+                                    
+                                    r.keyPress(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_TAB);
+                                    r.keyRelease(KeyEvent.VK_TAB);
+                                    Thread.sleep(1000);
+                                    
+                                    ss = new StringSelection(EnkripsiAES.decrypt(passFP));
+                                    c.setContents(ss, ss);
+                                    
+                                    r.keyPress(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_ENTER);
+                                    r.keyRelease(KeyEvent.VK_ENTER);
+                                    Thread.sleep(1000);
+                                    
+                                    ss = new StringSelection(NoKartu.getText());
+                                    c.setContents(ss, ss);
+                                    r.keyPress(KeyEvent.VK_CONTROL);
+                                    r.keyPress(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_V);
+                                    r.keyRelease(KeyEvent.VK_CONTROL);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : " + e);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Sistem operasi tidak mendukung auto fingerprint..!!");
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+    }//GEN-LAST:event_ppPengajuan5BtnPrintActionPerformed
 
     /**
     * @param args the command line arguments
@@ -6809,6 +7130,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppPengajuan1;
     private javax.swing.JMenuItem ppPengajuan2;
     private javax.swing.JMenuItem ppPengajuan3;
+    private javax.swing.JMenuItem ppPengajuan4;
+    private javax.swing.JMenuItem ppPengajuan5;
     private javax.swing.JMenuItem ppProgramPRB;
     private javax.swing.JMenuItem ppPulang;
     private javax.swing.JMenuItem ppRiwayatPerawatan;
@@ -7933,6 +8256,19 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 cetakBCInternal.setSelected(false);
                 cetakBCItemStateChanged(null);
             }
+        } else {
+            PathFingerprint.setText("");
+            PathFRISTA.setText("");
+            UserFP.setText("");
+            PassFP.setText("");
+            cetakSEPRalan.setSelected(false);
+            cetakSEPRanap.setSelected(false);
+            cetakSEPInternal.setSelected(false);
+            cetakSEPItemStateChanged(null);
+            cetakBCRalan.setSelected(false);
+            cetakBCRanap.setSelected(false);
+            cetakBCInternal.setSelected(false);
+            cetakBCItemStateChanged(null);
         }
     }
     
