@@ -72,6 +72,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -6435,13 +6436,17 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             
             ObjectNode biometrik = mapper.createObjectNode();
             biometrik.put("fingerprint", PathFingerprint.getText());
+            pathFingerprint = PathFingerprint.getText();
             biometrik.put("frista", PathFRISTA.getText());
+            pathFrista = PathFRISTA.getText();
             if (!new String(UserFP.getPassword()).equals("************")) {
-                biometrik.put("username", EnkripsiAES.encrypt(new String(UserFP.getPassword())));
+                userFP = EnkripsiAES.encrypt(new String(UserFP.getPassword()));
             }
+            biometrik.put("username", userFP);
             if (!new String(PassFP.getPassword()).equals("************")) {
-                biometrik.put("password", EnkripsiAES.encrypt(new String(PassFP.getPassword())));
+                passFP = EnkripsiAES.encrypt(new String(PassFP.getPassword()));
             }
+            biometrik.put("password", passFP);
             root.set("biometrik", biometrik);
             
             ObjectNode printerSEP = mapper.createObjectNode();
@@ -6633,16 +6638,17 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             return;
         }
 
-        final AtomicBoolean aB = new AtomicBoolean(true);
+        final AtomicBoolean ab = new AtomicBoolean(true);
 
         JOptionPane wait = new JOptionPane();
         JButton cancel = new JButton("Cancel");
-        cancel.addActionListener(e -> aB.set(false));
+        cancel.addActionListener(e -> ab.set(false));
         wait.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         wait.setOptionType(JOptionPane.DEFAULT_OPTION);
         wait.setOptions(new Object[] {cancel});
         wait.setMessage("Menunggu aplikasi fingerprint terbuka...");
         final JDialog modal = wait.createDialog("Loading...");
+        modal.setModal(true);
 
         new SwingWorker<Void, Void>() {
             @Override
@@ -6651,6 +6657,9 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     fingerprintAktif = false;
 
                     User32 u32 = User32.INSTANCE;
+                    
+                    long start = System.nanoTime();
+                    long elapsed = 0;
 
                     u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
                         char[] windowText = new char[512];
@@ -6661,20 +6670,31 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             return true;
                         }
 
-                        if (wText.contains("Registrasi Sidik Jari")) {
+                        if (wText.toLowerCase().contains("registrasi sidik jari")) {
                             fingerprintAktif = true;
+                            /*
+                            u32.SetForegroundWindow(hwnd);
+                            */
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(BPJSDataSEP.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            ab.set(false);
+                            publish((Void) null);
                             u32.SetForegroundWindow(hwnd);
                         }
-
+                        
                         return true;
                     }, Pointer.NULL);
-
+                    
                     Robot r = new Robot();
                     Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
                     StringSelection ss;
 
                     if (fingerprintAktif) {
                         Thread.sleep(1000);
+                        
                         r.keyPress(KeyEvent.VK_CONTROL);
                         r.keyPress(KeyEvent.VK_A);
                         r.keyRelease(KeyEvent.VK_A);
@@ -6688,40 +6708,40 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         r.keyRelease(KeyEvent.VK_V);
                         r.keyRelease(KeyEvent.VK_CONTROL);
                     } else {
-                        try (FileReader fr = new FileReader(file)) {
-                            JsonNode read = mapper.readTree(fr).path("biometrik");
-                            pathFingerprint = read.path("fingerprint").asText();
-                            userFP = read.path("username").asText();
-                            passFP = read.path("password").asText();
-                            if (pathFingerprint.isBlank()) {
-                                pathFingerprint = "";
-                                userFP = "";
-                                passFP = "";
-                                JOptionPane.showMessageDialog(null, "Lokasi aplikasi fingerprint belum diisi..!!");
-                                return null;
+                        if (pathFingerprint.isBlank()) {
+                            pathFingerprint = "";
+                            userFP = "";
+                            passFP = "";
+                            ab.set(false);
+                            publish((Void) null);
+                            return null;
+                        }
+
+                        Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
+
+                        start = System.nanoTime();
+                        while (true) {
+                            elapsed = System.nanoTime() - start;
+                            WinDef.HWND window = u32.FindWindow(null, "Aplikasi Registrasi Sidik Jari");
+
+                            if (u32.IsWindowVisible(window)) {
+                                fingerprintAktif = true;
+                                ab.set(false);
+                                u32.SetForegroundWindow(window);
+                                break;
                             }
 
-                            Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
-
-                            long start = System.nanoTime();
-                            while (true) {
-                                long elapsed = System.nanoTime() - start;
-                                if (!aB.get()) {
-                                    modal.dispose();
-                                    break;
-                                }
-                                if (u32.IsWindowVisible(u32.FindWindow(null, "Untitled - Notepad"))) {
-                                    fingerprintAktif = true;
-                                    modal.dispose();
-                                    break;
-                                }
-                                if (TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS) > 30) {
-                                    modal.dispose();
-                                    break;
-                                }
+                            if (TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS) > 30) {
+                                ab.set(false);
+                                break;
                             }
 
-                            Thread.sleep(1000);
+                            publish((Void) null);
+                        }
+
+                        Thread.sleep(1000);
+
+                        if (fingerprintAktif) {
                             ss = new StringSelection(EnkripsiAES.decrypt(userFP));
                             c.setContents(ss, ss);
 
@@ -6761,6 +6781,16 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 }
 
                 return null;
+            }
+
+            @Override
+            protected void process(List<Void> chunks) {
+                if (!ab.get()) {
+                    modal.dispose();
+                    if (!fingerprintAktif) {
+                        JOptionPane.showMessageDialog(null, "Pengaturan aplikasi fingerprint belum diset..!!");
+                    }
+                }
             }
         }.execute();
 
@@ -8202,7 +8232,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 JsonNode root = new ObjectMapper().readTree(fr);
                 
                 PathFingerprint.setText(root.path("biometrik").path("fingerprint").asText());
+                pathFingerprint = root.path("biometrik").path("fingerprint").asText();
                 PathFRISTA.setText(root.path("biometrik").path("frista").asText());
+                pathFrista = root.path("biometrik").path("frista").asText();
+                userFP = root.path("biometrik").path("username").asText();
+                passFP = root.path("biometrik").path("password").asText();
                 UserFP.setText("************");
                 PassFP.setText("************");
                 
