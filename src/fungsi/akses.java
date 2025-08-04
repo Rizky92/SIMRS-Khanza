@@ -250,7 +250,8 @@ public final class akses {
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
-            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false, antrian_di_registrasi = false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false;
+            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false, antrian_di_registrasi = false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false,
+            skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1427,6 +1428,8 @@ public final class akses {
                         akses.antrian_di_registrasi = rs2.getBoolean("antrian_di_registrasi");
                         akses.skrining_instrumen_acrs=rs2.getBoolean("skrining_instrumen_acrs");
                         akses.surat_pernyataan_memilih_dpjp=rs2.getBoolean("surat_pernyataan_memilih_dpjp");
+                        akses.skrining_instrumen_mental_emosional=rs2.getBoolean("skrining_instrumen_mental_emosional");
+                        akses.pelanggan_lab_kesehatan_lingkungan=rs2.getBoolean("pelanggan_lab_kesehatan_lingkungan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2611,6 +2614,8 @@ public final class akses {
         akses.antrian_di_registrasi = isadmin;
         akses.skrining_instrumen_acrs=isadmin;
         akses.surat_pernyataan_memilih_dpjp=isadmin;
+        akses.skrining_instrumen_mental_emosional=isadmin;
+        akses.pelanggan_lab_kesehatan_lingkungan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3803,6 +3808,8 @@ public final class akses {
     public static boolean getantrian_di_registrasi() {return akses.antrian_di_registrasi;}
     public static boolean getskrining_instrumen_acrs(){return akses.skrining_instrumen_acrs;}
     public static boolean getsurat_pernyataan_memilih_dpjp(){return akses.surat_pernyataan_memilih_dpjp;}
+    public static boolean getskrining_instrumen_mental_emosional(){return akses.skrining_instrumen_mental_emosional;}
+    public static boolean getpelanggan_lab_kesehatan_lingkungan(){return akses.pelanggan_lab_kesehatan_lingkungan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
