@@ -313,6 +313,17 @@ public final class validasi {
         return base;
     }
     
+    public void tabelKosongSmc(DefaultTableModel model, boolean fireEvent) {
+        model.getDataVector().removeAllElements();
+        if (fireEvent) {
+            model.fireTableDataChanged();
+        }
+    }
+    
+    public void tabelKosongSmc(DefaultTableModel model) {
+        tabelKosongSmc(model, false);
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
