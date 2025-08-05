@@ -667,6 +667,11 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
 
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
+        Tanggal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalItemStateChanged(evt);
+            }
+        });
         Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKeyPressed(evt);
@@ -1002,6 +1007,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         Valid.pindah(evt,BtnSimpan,BtnKeluar);
     }//GEN-LAST:event_BtnCari1KeyPressed
 
+    private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -1189,8 +1198,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
     
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(dapur_titip_faktur.no_tagihan,3),signed)),0) from dapur_titip_faktur where dapur_titip_faktur.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "TD"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoTagihan); 
+        Valid.autonomorSmc(NoTagihan, "TD", "", "dapur_titip_faktur", "no_tagihan", 3, "0", Tanggal);
     }
     
     public void isCek(){
