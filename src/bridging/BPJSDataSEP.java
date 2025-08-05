@@ -6709,9 +6709,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         r.keyRelease(KeyEvent.VK_CONTROL);
                     } else {
                         if (pathFingerprint.isBlank()) {
-                            pathFingerprint = "";
-                            userFP = "";
-                            passFP = "";
                             ab.set(false);
                             publish((Void) null);
                             return null;
@@ -6770,10 +6767,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             r.keyPress(KeyEvent.VK_V);
                             r.keyRelease(KeyEvent.VK_V);
                             r.keyRelease(KeyEvent.VK_CONTROL);
-
-                            pathFingerprint = "";
-                            userFP = "";
-                            passFP = "";
                         }
                     }
                 } catch (Exception e) {
@@ -6798,6 +6791,174 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     }//GEN-LAST:event_ppPengajuan4BtnPrintActionPerformed
 
     private void ppPengajuan5BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPengajuan5BtnPrintActionPerformed
+        if (NoKartu.getText().isBlank()) {
+            Valid.textKosong(NoKartu, "No. Peserta");
+            return;
+        }
+        
+        File file = new File("./cache/pengaturansep.iyem");
+            
+        if (!file.exists() || !file.isFile()) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat membuka aplikasi fingerprint,\nCek ulang pengaturan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            JOptionPane.showMessageDialog(null, "Sistem operasi tidak mendukung auto fingerprint..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        final AtomicBoolean ab = new AtomicBoolean(true);
+
+        JOptionPane wait = new JOptionPane();
+        JButton cancel = new JButton("Cancel");
+        cancel.addActionListener(e -> ab.set(false));
+        wait.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        wait.setOptionType(JOptionPane.DEFAULT_OPTION);
+        wait.setOptions(new Object[] {cancel});
+        wait.setMessage("Menunggu aplikasi fingerprint terbuka...");
+        final JDialog modal = wait.createDialog("Loading...");
+        modal.setModal(true);
+
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    fingerprintAktif = false;
+
+                    User32 u32 = User32.INSTANCE;
+                    
+                    long start = System.nanoTime();
+                    long elapsed = 0;
+
+                    u32.EnumWindows((WinDef.HWND hwnd, Pointer pntr) -> {
+                        char[] windowText = new char[512];
+                        u32.GetWindowText(hwnd, windowText, 512);
+                        String wText = Native.toString(windowText);
+
+                        if (wText.isEmpty()) {
+                            return true;
+                        }
+
+                        if (wText.toLowerCase().contains("registrasi sidik jari")) {
+                            fingerprintAktif = true;
+                            /*
+                            u32.SetForegroundWindow(hwnd);
+                            */
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(BPJSDataSEP.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            ab.set(false);
+                            publish((Void) null);
+                            u32.SetForegroundWindow(hwnd);
+                        }
+                        
+                        return true;
+                    }, Pointer.NULL);
+                    
+                    Robot r = new Robot();
+                    Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    StringSelection ss;
+
+                    if (fingerprintAktif) {
+                        Thread.sleep(1000);
+                        
+                        r.keyPress(KeyEvent.VK_CONTROL);
+                        r.keyPress(KeyEvent.VK_A);
+                        r.keyRelease(KeyEvent.VK_A);
+                        r.keyRelease(KeyEvent.VK_CONTROL);
+                        Thread.sleep(500);
+
+                        ss = new StringSelection(NoKartu.getText().trim());
+                        c.setContents(ss, ss);
+                        r.keyPress(KeyEvent.VK_CONTROL);
+                        r.keyPress(KeyEvent.VK_V);
+                        r.keyRelease(KeyEvent.VK_V);
+                        r.keyRelease(KeyEvent.VK_CONTROL);
+                    } else {
+                        if (pathFingerprint.isBlank()) {
+                            ab.set(false);
+                            publish((Void) null);
+                            return null;
+                        }
+
+                        Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
+
+                        start = System.nanoTime();
+                        while (true) {
+                            elapsed = System.nanoTime() - start;
+                            WinDef.HWND window = u32.FindWindow(null, "Aplikasi Registrasi Sidik Jari");
+
+                            if (u32.IsWindowVisible(window)) {
+                                fingerprintAktif = true;
+                                ab.set(false);
+                                u32.SetForegroundWindow(window);
+                                break;
+                            }
+
+                            if (TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS) > 30) {
+                                ab.set(false);
+                                break;
+                            }
+
+                            publish((Void) null);
+                        }
+
+                        Thread.sleep(1000);
+
+                        if (fingerprintAktif) {
+                            ss = new StringSelection(EnkripsiAES.decrypt(userFP));
+                            c.setContents(ss, ss);
+
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_TAB);
+                            r.keyRelease(KeyEvent.VK_TAB);
+                            Thread.sleep(1000);
+
+                            ss = new StringSelection(EnkripsiAES.decrypt(passFP));
+                            c.setContents(ss, ss);
+
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_ENTER);
+                            r.keyRelease(KeyEvent.VK_ENTER);
+                            Thread.sleep(1000);
+
+                            ss = new StringSelection(NoKartu.getText());
+                            c.setContents(ss, ss);
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Void> chunks) {
+                if (!ab.get()) {
+                    modal.dispose();
+                    if (!fingerprintAktif) {
+                        JOptionPane.showMessageDialog(null, "Pengaturan aplikasi fingerprint belum diset..!!");
+                    }
+                }
+            }
+        }.execute();
+
+        SwingUtilities.invokeLater(() -> modal.setVisible(true));
+        /*
         if (!NoKartu.getText().isBlank()) {
             try {
                 try (FileReader fr = new FileReader(new File("./cache/pengaturansep.iyem"))) {
@@ -6896,6 +7057,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 System.out.println("Notif : " + e);
             }
         }
+        */
     }//GEN-LAST:event_ppPengajuan5BtnPrintActionPerformed
 
     /**
@@ -8304,13 +8466,5 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             cetakBCInternal.setSelected(false);
             cetakBCItemStateChanged(null);
         }
-    }
-    
-    private void bukaAplikasiFingerprint() {
-        
-    }
-    
-    private void bukaAplikasiFrista() {
-        
     }
 }
