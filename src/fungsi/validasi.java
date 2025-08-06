@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -322,6 +323,29 @@ public final class validasi {
     
     public void tabelKosongSmc(DefaultTableModel model) {
         tabelKosongSmc(model, false);
+    }
+    
+    public double setAngkaSmc(String value) {
+        if (value.isBlank()) {
+            return 0;
+        }
+        
+        try {
+            return Double.parseDouble(value);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
+    public boolean umurcacheSmc(String path, int hari) {
+        try {
+            File file = new File(path);
+            if (!file.isFile()) return true;
+            return TimeUnit.DAYS.convert(System.currentTimeMillis() - file.lastModified(), TimeUnit.MILLISECONDS) > hari;
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return true;
     }
     
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
@@ -1717,18 +1741,6 @@ public final class validasi {
         }
             
         return x;
-    }
-    
-    public double setAngkaSmc(String value) {
-        if (value.isBlank()) {
-            return 0;
-        }
-        
-        try {
-            return Double.parseDouble(value);
-        } catch (Exception e) {
-            return 0;
-        }
     }
     
     public int SetInteger(String txt){
