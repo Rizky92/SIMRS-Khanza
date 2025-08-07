@@ -7142,19 +7142,23 @@ private void MnSudahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_MnSudahActionPerformed
 
 private void MnBelumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBelumActionPerformed
-       if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-           if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-           }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Belum",tbKasirRalan.getSelectedRow(),10);
+    if (TNoRw.getText().trim().equals("")) {
+        Valid.textKosong(TNoRw, "No.Rawat");
+    } else {
+        if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+            JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+        } else {
+            if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                if (Sequel.cariExistsSmc("select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ?")) {
+                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV', biaya = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?");
+                    tabModekasir.setValueAt("TTV", tbKasirRalan.getSelectedRow(), 10);
+                } else {
+                    Sequel.mengupdateSmc("reg_periksa", "stts = 'Belum', biaya = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?");
+                    tabModekasir.setValueAt("Belum", tbKasirRalan.getSelectedRow(), 10);
                 }
-           }
-
+            }
         }
+    }
 }//GEN-LAST:event_MnBelumActionPerformed
 
 private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDataRalanActionPerformed
