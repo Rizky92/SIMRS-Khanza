@@ -178,6 +178,9 @@ import bridging.SisruteCekReferensiDiagnosa;
 import bridging.SisruteCekReferensiFaskes;
 import bridging.SisruteRujukanKeluar;
 import bridging.SisruteRujukanMasukan;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dapur.DapurBarang;
 import dapur.DapurHibah;
 import dapur.DapurInputStok;
@@ -14677,169 +14680,251 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         sekuel.nyalakanBatasEdit();
 
         File file;
-        FileWriter fileWriter;
-        String iyem = null;
-
-        // akunbayar.iyem
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode root, iyem;
+        ArrayNode array;
+        
         try {
             file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from akun_bayar order by nama_bayar").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NamaAkun\":\"" + rs.getString(1).replaceAll("\"", "") + "\",\"KodeRek\":\"" + rs.getString(2) + "\",\"PPN\":\"" + rs.getDouble(3) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by nama_bayar")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NamaAkun", rs.getString(1));
+                        iyem.put("KodeRek", rs.getString(2));
+                        iyem.put("PPN", rs.getString(3));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("akunbayar", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"akunbayar\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        // akunpiutang.iyem
+        
         try {
-            file = new File("./cache/akunbayar.iyem");
+            file = new File("./cache/akunpiutang.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from akun_piutang order by nama_bayar").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NamaAkun\":\"" + rs.getString(1).replaceAll("\"", "") + "\",\"KodeRek\":\"" + rs.getString(2) + "\",\"KdPJ\":\"" + rs.getString(3) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_piutang order by nama_bayar")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NamaAkun", rs.getString(1));
+                        iyem.put("KodeRek", rs.getString(2));
+                        iyem.put("KdPJ", rs.getString(3));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("akunpiutang", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"akunpiutang\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        // bangsal.iyem
+        
         try {
             file = new File("./cache/bangsal.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from bangsal where status = '1' order by nm_bangsal").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeKamar\":\"" + rs.getString(1) + "\",\"NamaKamar\":\"" + rs.getString(2).replaceAll("\"", "") + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from bangsal where status = '1' order by nm_bangsal")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeKamar", rs.getString(1));
+                        iyem.put("NamaKamar", rs.getString(2));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("bangsal", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"bangsal\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        // dokter.iyem
-        try {
-            file = new File("./cache/dokter.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement(
-                "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir,dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "
-                + "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "
-                + "where dokter.status='1' order by dokter.nm_dokter").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeDokter\":\"" + rs.getString(1) + "\",\"NamaDokter\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"TmpLahir\":\"" + rs.getString(4).replaceAll("\"", "") + "\",\"TglLahir\":\"" + rs.getString(5) + "\",\"GD\":\"" + rs.getString(6) + "\",\"Agama\":\"" + rs.getString(7) + "\",\"AlamatTinggal\":\"" + rs.getString(8).replaceAll("\"", "") + "\",\"NoTelp\":\"" + rs.getString(9) + "\",\"SttsNikah\":\"" + rs.getString(10) + "\",\"Spesialis\":\"" + rs.getString(11) + "\",\"Alumni\":\"" + rs.getString(12).replaceAll("\"", "") + "\",\"NoIjinPraktek\":\"" + rs.getString(13) + "\"},";
-                }
-            }
-            fileWriter.write("{\"dokter\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-
-        // pegawai.iyem
+        
         try {
             file = new File("./cache/pegawai.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select pegawai.nik,pegawai.nama,pegawai.jk,pegawai.jbtn,pegawai.jnj_jabatan,pegawai.departemen,pegawai.bidang,pegawai.stts_wp,pegawai.stts_kerja,"
-                + "pegawai.npwp,pegawai.pendidikan,pegawai.tmp_lahir,pegawai.tgl_lahir,pegawai.alamat,pegawai.kota,pegawai.mulai_kerja,pegawai.ms_kerja,pegawai.indexins,pegawai.bpd,pegawai.rekening,"
-                + "pegawai.stts_aktif,pegawai.wajibmasuk,pegawai.mulai_kontrak,pegawai.no_ktp from pegawai where pegawai.stts_aktif<>'KELUAR' order by pegawai.id ASC").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NIP\":\"" + rs.getString(1) + "\",\"Nama\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"Jabatan\":\"" + rs.getString(4) + "\",\"KodeJenjang\":\"" + rs.getString(5) + "\","
-                        + "\"Departemen\":\"" + rs.getString(6) + "\",\"Bidang\":\"" + rs.getString(7) + "\",\"Status\":\"" + rs.getString(8) + "\",\"StatusKaryawan\":\"" + rs.getString(9) + "\",\"NPWP\":\"" + rs.getString(10) + "\","
-                        + "\"Pendidikan\":\"" + rs.getString(11) + "\",\"TmpLahir\":\"" + rs.getString(12) + "\",\"TglLahir\":\"" + rs.getString(13) + "\",\"Alamat\":\"" + rs.getString(14).replaceAll("\"", "") + "\",\"Kota\":\"" + rs.getString(15).replaceAll("\"", "") + "\","
-                        + "\"MulaiKerja\":\"" + rs.getString(16) + "\",\"KodeMsKerja\":\"" + rs.getString(17) + "\",\"KodeIndex\":\"" + rs.getString(18) + "\",\"BPD\":\"" + rs.getString(19) + "\",\"Rekening\":\"" + rs.getString(20) + "\","
-                        + "\"SttsAktif\":\"" + rs.getString(21) + "\",\"WajibMasuk\":\"" + rs.getString(22) + "\",\"MulaiKontrak\":\"" + rs.getString(23) + "\",\"NoKTP\":\"" + rs.getString(24) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, pegawai.departemen, " +
+                "pegawai.bidang, pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, " +
+                "pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, " +
+                "pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, pegawai.no_ktp " +
+                "from pegawai where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NIP", rs.getString(1));
+                        iyem.put("Nama", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("Jabatan", rs.getString(4));
+                        iyem.put("KodeJenjang", rs.getString(5));
+                        iyem.put("Departemen", rs.getString(6));
+                        iyem.put("Bidang", rs.getString(7));
+                        iyem.put("Status", rs.getString(8));
+                        iyem.put("StatusKaryawan", rs.getString(9));
+                        iyem.put("NPWP", rs.getString(10));
+                        iyem.put("Pendidikan", rs.getString(11));
+                        iyem.put("TmpLahir", rs.getString(12));
+                        iyem.put("TglLahir", rs.getString(13));
+                        iyem.put("Alamat", rs.getString(14));
+                        iyem.put("Kota", rs.getString(15));
+                        iyem.put("MulaiKerja", rs.getString(16));
+                        iyem.put("KodeMsKerja", rs.getString(17));
+                        iyem.put("KodeIndex", rs.getString(18));
+                        iyem.put("BPD", rs.getString(19));
+                        iyem.put("Rekening", rs.getString(20));
+                        iyem.put("SttsAktif", rs.getString(21));
+                        iyem.put("WajibMasuk", rs.getString(22));
+                        iyem.put("MulaiKontrak", rs.getString(23));
+                        iyem.put("NoKTP", rs.getString(24));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("pegawai", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"pegawai\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        // penjab.iyem
+        
+        try {
+            file = new File("./cache/dokter.iyem");
+            file.createNewFile();
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select dokter.kd_dokter, dokter.nm_dokter, dokter.jk, dokter.tmp_lahir, dokter.tgl_lahir, " +
+                "dokter.gol_drh, dokter.agama, dokter.almt_tgl, dokter.no_telp, dokter.stts_nikah, " +
+                "spesialis.nm_sps, dokter.alumni, dokter.no_ijn_praktek from dokter join spesialis on " +
+                "dokter.kd_sps = spesialis.kd_sps where dokter.status = '1' order by dokter.nm_dokter"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeDokter", rs.getString(1));
+                        iyem.put("NamaDokter", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("TmpLahir", rs.getString(4));
+                        iyem.put("TglLahir", rs.getString(5));
+                        iyem.put("GD", rs.getString(6));
+                        iyem.put("Agama", rs.getString(7));
+                        iyem.put("AlamatTinggal", rs.getString(8));
+                        iyem.put("NoTelp", rs.getString(9));
+                        iyem.put("SttsNikah", rs.getString(10));
+                        iyem.put("Spesialis", rs.getString(11));
+                        iyem.put("Alumni", rs.getString(12));
+                        iyem.put("NoIjinPraktek", rs.getString(13));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("dokter", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
         try {
             file = new File("./cache/penjab.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from penjab where penjab.status='1' order by penjab.png_jawab").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeAsuransi\":\"" + rs.getString("kd_pj") + "\",\"NamaAsuransi\":\"" + rs.getString("png_jawab") + "\",\"PerusahaanAsuransi\":\"" + rs.getString("nama_perusahaan") + "\",\"AlamatAsuransi\":\"" + rs.getString("alamat_asuransi") + "\",\"NoTelp\":\"" + rs.getString("no_telp") + "\",\"Attn\":\"" + rs.getString("attn") + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from penjab where penjab.status = '1' order by penjab.png_jawab, penjab.kd_pj")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    int i = 0;
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeAsuransi", rs.getString("kd_pj"));
+                        iyem.put("NamaAsuransi", rs.getString("png_jawab"));
+                        iyem.put("PerusahaanAsuransi", rs.getString("nama_perusahaan"));
+                        iyem.put("AlamatAsuransi", rs.getString("alamat_asuransi"));
+                        iyem.put("NoTelp", rs.getString("no_telp"));
+                        iyem.put("Attn", rs.getString("attn"));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("penjab", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"penjab\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // petugas.iyem
         try {
             file = new File("./cache/petugas.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select petugas.nip,petugas.nama,petugas.jk,petugas.tmp_lahir,petugas.tgl_lahir, "
-                + "petugas.gol_darah,petugas.agama,petugas.stts_nikah,petugas.alamat,jabatan.nm_jbtn,petugas.no_telp "
-                + "from petugas inner join jabatan on jabatan.kd_jbtn=petugas.kd_jbtn "
-                + "where petugas.status='1' order by petugas.nip").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NIP\":\"" + rs.getString(1) + "\",\"NamaPetugas\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"TmpLahir\":\"" + rs.getString(4).replaceAll("\"", "") + "\",\"TglLahir\":\"" + rs.getString(5) + "\",\"GD\":\"" + rs.getString(6) + "\",\"Agama\":\"" + rs.getString(7) + "\",\"SttsNikah\":\"" + rs.getString(8) + "\",\"Alamat\":\"" + rs.getString(9).replaceAll("\"", "") + "\",\"Jabatan\":\"" + rs.getString(10) + "\",\"NoTelp\":\"" + rs.getString(11) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select petugas.nip, petugas.nama, petugas.jk, petugas.tmp_lahir, petugas.tgl_lahir, " +
+                "petugas.gol_darah, petugas.agama, petugas.stts_nikah, petugas.alamat, jabatan.nm_jbtn, " +
+                "petugas.no_telp from petugas join jabatan on jabatan.kd_jbtn = petugas.kd_jbtn where " +
+                "petugas.status = '1' order by petugas.nip"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NIP", rs.getString(1));
+                        iyem.put("NamaPetugas", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("TmpLahir", rs.getString(4));
+                        iyem.put("TglLahir", rs.getString(5));
+                        iyem.put("GD", rs.getString(6));
+                        iyem.put("Agama", rs.getString(7));
+                        iyem.put("SttsNikah", rs.getString(8));
+                        iyem.put("Alamat", rs.getString(9));
+                        iyem.put("Jabatan", rs.getString(10));
+                        iyem.put("NoTelp", rs.getString(11));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("petugas", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"petugas\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        // poli.iyem
+        
         try {
             file = new File("./cache/poli.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from poliklinik where poliklinik.status='1'").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeUnit\":\"" + rs.getString(1) + "\",\"NamaUnit\":\"" + rs.getString(2) + "\",\"RegistrasiBaru\":\"" + rs.getString(3) + "\",\"RegistrasiLama\":\"" + rs.getString(4) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select * from poliklinik where poliklinik.status = '1' order by poliklinik.nm_poli"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeUnit", rs.getString(1));
+                        iyem.put("NamaUnit", rs.getString(2));
+                        iyem.put("RegistrasiBaru", Valid.SetAngka(rs.getDouble(3)));
+                        iyem.put("RegistrasiLama", Valid.SetAngka(rs.getDouble(4)));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("poli", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"poli\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
