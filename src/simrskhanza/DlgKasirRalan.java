@@ -7125,16 +7125,28 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoRwKeyPressed
 
     private void MnSudahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSudahActionPerformed
-       if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    if(Valid.editTabletf(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Sudah'")==true){
-                        tabModekasir.setValueAt("Sudah",tbKasirRalan.getSelectedRow(),10);
-                        Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Kembali',now(),'0000-00-00 00:00:00',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Kembali',kembali=now()","no_rawat='"+TNoRw.getText()+"'");
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    Sequel.executeRawSmc(
+                        "insert into mutasi_berkas values (?, 'Sudah Kembali', now(), '0000-00-00 00:00:00.000', now(), " +
+                        "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update " +
+                        "status = values(status), kembali = values(kembali)", TNoRw.getText()
+                    );
+                    if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                        String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                            tabModekasir.setValueAt("Sudah", tbKasirRalan.getSelectedRow(), 10);
+                            tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                        }
+                    } else {
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah'", "no_rawat = ?", TNoRw.getText())) {
+                            tabModekasir.setValueAt("Sudah", tbKasirRalan.getSelectedRow(), 10);
+                        }
                     }
                 }
             }
@@ -7142,18 +7154,38 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnSudahActionPerformed
 
     private void MnBelumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBelumActionPerformed
-       if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-           if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-           }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Belum",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    if (tabModekasir.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                        String biayareg = Sequel.cariIsiSmc(
+                            "select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, " +
+                            "poliklinik.registrasilama) from reg_periksa join poliklinik on " +
+                            "reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText()
+                        );
+                        tabModekasir.setValueAt(biayareg, tbKasirRalan.getSelectedRow(), 8);
+                        if (Sequel.cariExistsSmc("select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ?", TNoRw.getText())) {
+                            Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText());
+                            tabModekasir.setValueAt("TTV", tbKasirRalan.getSelectedRow(), 10);
+                        } else {
+                            Sequel.mengupdateSmc("reg_periksa", "stts = 'Belum', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText());
+                            tabModekasir.setValueAt("Belum", tbKasirRalan.getSelectedRow(), 10);
+                        }
+                    } else {
+                        if (Sequel.cariExistsSmc("select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = ?", TNoRw.getText())) {
+                            Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ?", TNoRw.getText());
+                            tabModekasir.setValueAt("TTV", tbKasirRalan.getSelectedRow(), 10);
+                        } else {
+                            Sequel.mengupdateSmc("reg_periksa", "stts = 'Belum'", "no_rawat = ?", TNoRw.getText());
+                            tabModekasir.setValueAt("Belum", tbKasirRalan.getSelectedRow(), 10);
+                        }
+                    }
                 }
-           }
-
+            }
         }
     }//GEN-LAST:event_MnBelumActionPerformed
 
@@ -7591,15 +7623,17 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnDiagnosaActionPerformed
 
     private void MnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBatalActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Batal',biaya_reg='0'");
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Batal",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Batal', biaya_reg = 0", "no_rawat = ?", TNoRw.getText())) {
+                        tabModekasir.setValueAt("Batal", tbKasirRalan.getSelectedRow(), 10);
+                        tabModekasir.setValueAt("0", tbKasirRalan.getSelectedRow(), 8);
+                    }
                 }
             }
         }
@@ -8177,17 +8211,30 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
 
     private void ppBerkasRanapBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasRanapBtnPrintActionPerformed
-        if(tabModekasir.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
-        }else if(TNoRw.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbKasirRalan.requestFocus();
-        }else{
-            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Masuk Ranap',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',now()","status='Masuk Ranap',ranap=now()","no_rawat='"+TNoRw.getText()+"'");
-            Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
-            if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),10);
+        } else {
+            if (tbKasirRalan.getSelectedRow() > -1) {
+                Sequel.executeRawSmc(
+                    "insert into mutasi_berkas values (?, 'Masuk Ranap', now(), '0000-00-00 00:00:00.000', " +
+                    "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', now()) on duplicate key update " +
+                    "status = values(status), ranap = values(ranap)", TNoRw.getText()
+                );
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                    String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirawat', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                        tabModekasir.setValueAt("Dirawat", tbKasirRalan.getSelectedRow(), 10);
+                        tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                    }
+                } else {
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirawat'", "no_rawat = ?", TNoRw.getText())) {
+                        tabModekasir.setValueAt("Dirawat", tbKasirRalan.getSelectedRow(), 10);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_ppBerkasRanapBtnPrintActionPerformed
@@ -8235,59 +8282,81 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCatatanPasienBtnPrintActionPerformed
 
     private void MnDirujukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDirujukActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
-                MnRujukActionPerformed(evt);
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Dirujuk",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (tbKasirRalan.getSelectedRow() > -1) {
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                    String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirujuk', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                        tabModekasir.setValueAt("Dirujuk", tbKasirRalan.getSelectedRow(), 10);
+                        tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                    }
+                } else {
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirujuk'", "no_rawat = ?", TNoRw.getText())) {
+                        tabModekasir.setValueAt("Dirujuk", tbKasirRalan.getSelectedRow(), 10);
+                    }
                 }
+                MnRujukActionPerformed(null);
             }
         }
     }//GEN-LAST:event_MnDirujukActionPerformed
 
     private void MnDIrawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDIrawatActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
-                if(MnKamarInap.isEnabled()==true){
-                    MnKamarInapActionPerformed(null);
-                }
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                        String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirawat', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                            tabModekasir.setValueAt("Dirawat", tbKasirRalan.getSelectedRow(), 10);
+                            tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                        }
+                    } else {
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Dirawat'", "no_rawat = ?", TNoRw.getText())) {
+                            tabModekasir.setValueAt("Dirawat", tbKasirRalan.getSelectedRow(), 10);
+                        }
+                    }
+                    if (MnKamarInap.isEnabled()) {
+                        MnKamarInapActionPerformed(null);
+                    }
                 }
             }
         }
     }//GEN-LAST:event_MnDIrawatActionPerformed
 
     private void MnMeninggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnMeninggalActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Meninggal'");
-                DlgPasienMati dlgPasienMati=new DlgPasienMati(null,false);
-                dlgPasienMati.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                dlgPasienMati.setLocationRelativeTo(internalFrame1);
-                dlgPasienMati.emptTeks();
-                dlgPasienMati.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString());
-                dlgPasienMati.isCek();
-                dlgPasienMati.setVisible(true);
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Meninggal",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                        String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Meninggal', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                            tabModekasir.setValueAt("Meninggal", tbKasirRalan.getSelectedRow(), 10);
+                            tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                        }
+                    } else {
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Meninggal'", "no_rawat = ?", TNoRw.getText())) {
+                            tabModekasir.setValueAt("Meninggal", tbKasirRalan.getSelectedRow(), 10);
+                        }
+                    }
+                    DlgPasienMati pasienmati = new DlgPasienMati(null, false);
+                    pasienmati.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    pasienmati.setLocationRelativeTo(internalFrame1);
+                    pasienmati.emptTeks();
+                    pasienmati.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 2).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 3).toString());
+                    pasienmati.isCek();
+                    pasienmati.setVisible(true);
                 }
             }
-
         }
     }//GEN-LAST:event_MnMeninggalActionPerformed
 
@@ -9655,18 +9724,26 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanRadiologiActionPerformed
 
     private void MnPulangPaksaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPulangPaksaBtnPrintActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else{
-            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Pulang Paksa'");
-                if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Pulang Paksa",tbKasirRalan.getSelectedRow(),10);
+        if (TNoRw.getText().trim().equals("")) {
+            Valid.textKosong(TNoRw, "No.Rawat");
+        } else {
+            if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ?", TNoRw.getText())) {
+                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            } else {
+                if (tbKasirRalan.getSelectedRow() > -1) {
+                    if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                        String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Pulang Paksa', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                            tabModekasir.setValueAt("Pulang Paksa", tbKasirRalan.getSelectedRow(), 10);
+                            tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                        }
+                    } else {
+                        if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Pulang Paksa'", "no_rawat = ?", TNoRw.getText())) {
+                            tabModekasir.setValueAt("Pulang Paksa", tbKasirRalan.getSelectedRow(), 10);
+                        }
+                    }
                 }
             }
-
         }
     }//GEN-LAST:event_MnPulangPaksaBtnPrintActionPerformed
 
@@ -9752,17 +9829,30 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_MnPermintaanRadiologi1ActionPerformed
 
     private void ppBerkasDIterimaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDIterimaBtnPrintActionPerformed
-        if(tabModekasir.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
-        }else if(TNoRw.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbKasirRalan.requestFocus();
-        }else{
-            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
-            Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
-            if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+        } else {
+            if (tbKasirRalan.getSelectedRow() > -1) {
+                Sequel.executeRawSmc(
+                    "insert into mutasi_berkas values (?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', " +
+                    "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update " +
+                    "status = values(status), diterima = values(diterima)", TNoRw.getText()
+                );
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString().equals("Batal")) {
+                    String biayareg = Sequel.cariIsiSmc("select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from reg_periksa join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli where reg_periksa.no_rawat = ?", TNoRw.getText());
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Berkas Diterima', biaya_reg = ?", "no_rawat = ?", biayareg, TNoRw.getText())) {
+                        tabModekasir.setValueAt("Berkas Diterima", tbKasirRalan.getSelectedRow(), 10);
+                        tabModekasir.setValueAt(Valid.SetAngka(Double.parseDouble(biayareg)), tbKasirRalan.getSelectedRow(), 8);
+                    }
+                } else {
+                    if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Berkas Diterima'", "no_rawat = ?", TNoRw.getText())) {
+                        tabModekasir.setValueAt("Berkas Diterima", tbKasirRalan.getSelectedRow(), 10);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_ppBerkasDIterimaBtnPrintActionPerformed

@@ -283,9 +283,6 @@ public final class validasi {
             
             CharBuffer cb = latin1Decoder.decode(input);
             txt.setText(cb.toString().trim());
-            
-            latin1Encoder.flush(input);
-            latin1Decoder.flush(cb);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
