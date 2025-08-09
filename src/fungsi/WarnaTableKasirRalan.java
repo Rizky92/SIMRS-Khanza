@@ -1,3 +1,8 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package fungsi;
 
 import java.awt.Color;
@@ -6,6 +11,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Owner
+ */
 public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -15,36 +24,36 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
         Color background = new Color(255, 255, 255);
         Color alternatbg = darken(background, 0.05f);
         
+        DefaultTableModel tabMode = (DefaultTableModel) table.getModel();
+        
         row = table.convertRowIndexToModel(row);
         
-        if (column == 10 && table.getModel().getValueAt(row, 10).toString().equals("TTV")) {
-            foreground = new Color(230, 230, 255);
-            background = new Color(0, 30, 230);
-            alternatbg = lighten(background, 0.1f);
-        }
-        
-        if (table.getModel().getValueAt(row, 10).toString().equals("Sudah")) {
+        if (tabMode.getValueAt(row, 10).toString().equals("TTV")) {
+            foreground = new Color(45, 40, 55);
+            background = new Color(30, 230, 255);
+            alternatbg = darken(background, 0.05f);
+        } else if (tabMode.getValueAt(row, 10).toString().equals("Sudah")) {
             foreground = new Color(255, 230, 230);
-            background = new Color(200, 0, 0);
-            alternatbg = lighten(background, 0.1f);
-        } else if (table.getModel().getValueAt(row, 10).toString().equals("Batal")) {
+            alternatbg = new Color(200, 0, 0);
+            background = lighten(alternatbg, 0.15f);
+        } else if (tabMode.getValueAt(row, 10).toString().equals("Batal")) {
             foreground = new Color(120, 110, 50);
             background = new Color(255, 243, 109);
-            alternatbg = darken(background, 0.1f);
-        } else if (table.getModel().getValueAt(row, 10).toString().equals("Dirujuk") || table.getModel().getValueAt(row, 10).toString().equals("Meninggal") || table.getModel().getValueAt(row, 10).toString().equals("Pulang Paksa")) {
+            alternatbg = darken(background, 0.05f);
+        } else if (tabMode.getValueAt(row, 10).toString().equals("Dirujuk") || tabMode.getValueAt(row, 10).toString().equals("Meninggal") || tabMode.getValueAt(row, 10).toString().equals("Pulang Paksa")) {
             foreground = new Color(245, 245, 255);
             background = new Color(152, 152, 156);
-            alternatbg = darken(background, 0.1f);
-        } else if (table.getModel().getValueAt(row, 10).toString().equals("Dirawat")) {
+            alternatbg = darken(background, 0.05f);
+        } else if (tabMode.getValueAt(row, 10).toString().equals("Dirawat")) {
             foreground = new Color(245, 255, 245);
             background = new Color(119, 221, 119);
-            alternatbg = darken(background, 0.1f);
+            alternatbg = darken(background, 0.05f);
         }
         
-        if (table.getModel().getValueAt(row, 15).toString().equals("Sudah Bayar")) {
+        if (tabMode.getValueAt(row, 15).toString().equals("Sudah Bayar")) {
             foreground = new Color(255, 255, 255);
-            background = new Color(50, 50, 50);
-            alternatbg = lighten(background, 0.1f);
+            alternatbg = new Color(50, 50, 50);
+            background = lighten(alternatbg, 0.15f);
         }
         
         if (row % 2 == 1) {
@@ -54,7 +63,7 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
         }
         setForeground(foreground);
         
-        ((DefaultTableModel) table.getModel()).fireTableRowsUpdated(row, row);
+        tabMode.fireTableRowsUpdated(row, row);
         
         return this;
     }
