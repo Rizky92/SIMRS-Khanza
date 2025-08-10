@@ -47,13 +47,14 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private String bangsal="",aktifkanparsial="no",kamar="",alarm="",DEPOAKTIFOBAT="",rincianobat="",
+    private String bangsal="",kamar="",alarm="",DEPOAKTIFOBAT="",rincianobat="",
             formalarm="",nol_detik,detik,NoResep="",TglPeresepan="",JamPeresepan="",finger="",
             NoRawat="",NoRM="",Pasien="",DokterPeresep="",Status="",KodeDokter="",Ruang="",KodeRuang="",
             kdDokter = "", kdPoli = "", kdDokter2 = "", kdBangsal = "";
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
     private BackgroundMusic music;
     private boolean aktif=false,semua,ceksukses=false;
+    private final boolean AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
 
     /** Creates new form
      * @param parent
@@ -392,12 +393,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }
 
         try {
-            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
             alarm=koneksiDB.ALARMAPOTEK();
             formalarm=koneksiDB.FORMALARMAPOTEK();
             DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
         } catch (Exception ex) {
-            aktifkanparsial="no";
             alarm="no";
             formalarm="ralan + ranap";
             DEPOAKTIFOBAT = "";
@@ -1731,7 +1730,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
                         }else {
                             jmlparsial=0;
-                            if(aktifkanparsial.equals("yes")){
+                            if(AKTIFKANBILLINGPARSIAL){
                                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",NoRawat));
                             }
                             if(jmlparsial>0){

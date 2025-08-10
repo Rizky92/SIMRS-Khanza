@@ -54,8 +54,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private boolean[] pilih,pilih2; 
     private String[] kode,nama,pemeriksaan2,satuan2,nilai_rujukan2,idtemplate2;
     private int jml=0,i=0,index=0,jml2=0,jml3=0,i2=0,index2=0,jmlparsial=0;
-    private String aktifkanparsial="no",norawatibu="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",status="",la="",ld="",pa="",pd="",finger="";
+    private String norawatibu="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",status="",la="",ld="",pa="",pd="",finger="";
     private boolean sukses=true;
+    private final boolean AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
     
 
     /** Creates new form DlgPerawatan
@@ -346,12 +347,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             } 
         } catch (Exception e) {
             System.out.println(e);
-        } 
-        
-        try {
-            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
-        } catch (Exception ex) {            
-            aktifkanparsial="no";
         }
     }
 
@@ -1348,7 +1343,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(DiagnosisKlinis,"Data Permintaan");
         }else{
             jmlparsial=0;
-            if(aktifkanparsial.equals("yes")){
+            if(AKTIFKANBILLINGPARSIAL){
                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
             }
             if(jmlparsial>0){    

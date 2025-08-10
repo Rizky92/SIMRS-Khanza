@@ -1075,14 +1075,13 @@ public class koneksiDB {
         return var;
     }
     
-    public static String AKTIFKANBILLINGPARSIAL(){
-        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fis);
-            var=prop.getProperty("AKTIFKANBILLINGPARSIAL");
-        }catch(Exception e){
-            var=""; 
+    public static boolean AKTIFKANBILLINGPARSIAL() {
+        try (FileInputStream fs = new FileInputStream("settion/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("AKTIFKANBILLINGPARSIAL", "no").trim().equalsIgnoreCase("yes");
+        } catch (Exception e) {
+            return false;
         }
-        return var;
     }
     
     public static String URLDUKCAPILJAKARTA(){
