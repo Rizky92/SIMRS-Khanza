@@ -352,28 +352,26 @@ public final class RMCariPemeriksaan extends javax.swing.JDialog {
                 ps.setString(++p, "%" + TCari.getText().trim() + "%");
                 ps.setString(++p, "%" + TCari.getText().trim() + "%");
                 try (ResultSet rs = ps.executeQuery()) {
-                    String pemeriksaan = "";
                     while (rs.next()) {
-                        pemeriksaan = "";
+                        String pemeriksaan = rs.getString("pemeriksaan");
                         if (!rs.getString("suhu_tubuh").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Suhu = ").concat(rs.getString("suhu_tubuh").trim()).concat("°C, ");
+                            pemeriksaan = pemeriksaan.concat("; Suhu = ").concat(rs.getString("suhu_tubuh").trim()).concat("°C");
                         if (!rs.getString("tensi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Tensi = ").concat(rs.getString("tensi").trim()).concat(" mmHg, ");
+                            pemeriksaan = pemeriksaan.concat("; Tensi = ").concat(rs.getString("tensi").trim()).concat(" mmHg");
                         if (!rs.getString("berat").isBlank())
-                            pemeriksaan = pemeriksaan.concat("BB = ").concat(rs.getString("berat").trim()).concat(" kg, ");
+                            pemeriksaan = pemeriksaan.concat("; BB = ").concat(rs.getString("berat").trim()).concat(" kg");
                         if (!rs.getString("tinggi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("TB = ").concat(rs.getString("tinggi").trim()).concat(" cm, ");
+                            pemeriksaan = pemeriksaan.concat("; TB = ").concat(rs.getString("tinggi").trim()).concat(" cm");
                         if (!rs.getString("respirasi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("RR = ").concat(rs.getString("respirasi").trim()).concat("x/menit, ");
+                            pemeriksaan = pemeriksaan.concat("; RR = ").concat(rs.getString("respirasi").trim()).concat("x/menit");
                         if (!rs.getString("nadi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Nadi = ").concat(rs.getString("nadi").trim()).concat("x/menit, ");
+                            pemeriksaan = pemeriksaan.concat("; Nadi = ").concat(rs.getString("nadi").trim()).concat("x/menit");
                         if (!rs.getString("spo2").isBlank())
-                            pemeriksaan = pemeriksaan.concat("SpO2 = ").concat(rs.getString("spo2").trim()).concat("%, ");
+                            pemeriksaan = pemeriksaan.concat("; SpO2 = ").concat(rs.getString("spo2").trim()).concat("%");
                         if (!rs.getString("gcs").isBlank())
-                            pemeriksaan = pemeriksaan.concat("GCS = ").concat(rs.getString("gcs").trim()).concat(", ");
+                            pemeriksaan = pemeriksaan.concat("; GCS = ").concat(rs.getString("gcs").trim());
                         if (!rs.getString("kesadaran").isBlank() && !rs.getString("kesadaran").trim().equals("-"))
-                            pemeriksaan = pemeriksaan.concat("Kesadaran = ").concat(rs.getString("kesadaran").trim()).concat(", ");
-                        pemeriksaan = pemeriksaan.concat(rs.getString("pemeriksaan"));
+                            pemeriksaan = pemeriksaan.concat("; Kesadaran = ").concat(rs.getString("kesadaran").trim());
                         tabMode.addRow(new String[] {rs.getString(1), rs.getString(2), pemeriksaan});
                     }
                 }
@@ -399,28 +397,26 @@ public final class RMCariPemeriksaan extends javax.swing.JDialog {
                 ps.setString(++p, "%" + TCari.getText().trim() + "%");
                 ps.setString(++p, "%" + TCari.getText().trim() + "%");
                 try (ResultSet rs = ps.executeQuery()) {
-                    String pemeriksaan = "";
                     while (rs.next()) {
-                        pemeriksaan = "";
+                        String pemeriksaan = rs.getString("pemeriksaan");
                         if (!rs.getString("suhu_tubuh").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Suhu = ").concat(rs.getString("suhu_tubuh").trim()).concat("°C, ");
+                            pemeriksaan = pemeriksaan.concat("; Suhu = ").concat(rs.getString("suhu_tubuh").trim()).concat("°C");
                         if (!rs.getString("tensi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Tensi = ").concat(rs.getString("tensi").trim()).concat(" mmHg, ");
+                            pemeriksaan = pemeriksaan.concat("; Tensi = ").concat(rs.getString("tensi").trim()).concat(" mmHg");
                         if (!rs.getString("berat").isBlank())
-                            pemeriksaan = pemeriksaan.concat("BB = ").concat(rs.getString("berat").trim()).concat(" kg, ");
+                            pemeriksaan = pemeriksaan.concat("; BB = ").concat(rs.getString("berat").trim()).concat(" kg");
                         if (!rs.getString("tinggi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("TB = ").concat(rs.getString("tinggi").trim()).concat(" cm, ");
+                            pemeriksaan = pemeriksaan.concat("; TB = ").concat(rs.getString("tinggi").trim()).concat(" cm");
                         if (!rs.getString("respirasi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("RR = ").concat(rs.getString("respirasi").trim()).concat("x/menit, ");
+                            pemeriksaan = pemeriksaan.concat("; RR = ").concat(rs.getString("respirasi").trim()).concat("x/menit");
                         if (!rs.getString("nadi").isBlank())
-                            pemeriksaan = pemeriksaan.concat("Nadi = ").concat(rs.getString("nadi").trim()).concat("x/menit, ");
+                            pemeriksaan = pemeriksaan.concat("; Nadi = ").concat(rs.getString("nadi").trim()).concat("x/menit");
                         if (!rs.getString("spo2").isBlank())
-                            pemeriksaan = pemeriksaan.concat("SpO2 = ").concat(rs.getString("spo2").trim()).concat("%, ");
+                            pemeriksaan = pemeriksaan.concat("; SpO2 = ").concat(rs.getString("spo2").trim()).concat("%");
                         if (!rs.getString("gcs").isBlank())
-                            pemeriksaan = pemeriksaan.concat("GCS = ").concat(rs.getString("gcs").trim()).concat(", ");
+                            pemeriksaan = pemeriksaan.concat("; GCS = ").concat(rs.getString("gcs").trim());
                         if (!rs.getString("kesadaran").isBlank() && !rs.getString("kesadaran").trim().equals("-"))
-                            pemeriksaan = pemeriksaan.concat("Kesadaran = ").concat(rs.getString("kesadaran").trim()).concat(", ");
-                        pemeriksaan = pemeriksaan.concat(rs.getString("pemeriksaan"));
+                            pemeriksaan = pemeriksaan.concat("; Kesadaran = ").concat(rs.getString("kesadaran").trim());
                         tabMode.addRow(new String[] {rs.getString(1), rs.getString(2), pemeriksaan});
                     }
                 }
