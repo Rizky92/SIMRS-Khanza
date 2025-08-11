@@ -1075,12 +1075,12 @@ public class koneksiDB {
         return var;
     }
     
-    public static boolean AKTIFKANBILLINGPARSIAL() {
-        try (FileInputStream fs = new FileInputStream("settion/database.xml")) {
+    public static String AKTIFKANBILLINGPARSIAL(){
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("AKTIFKANBILLINGPARSIAL", "no").trim().equalsIgnoreCase("yes");
+            return prop.getProperty("AKTIFKANBILLINGPARSIAL", "no");
         } catch (Exception e) {
-            return false;
+            return "";
         }
     }
     

@@ -64,10 +64,9 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     private String[] kode,nama,kodebarang,namabarang,satuan,pproyeksi,pkV,pmAS,pFFD,pBSF,pinak,pjml_penyinaran,pdosis;
     private double[] jumlah,total,bagian_rs,bhp,tarif_perujuk,tarif_tindakan_dokter,tarif_tindakan_petugas,kso,menejemen;
     private int jml=0,i=0,index=0,jmlparsial=0;
-    private String noorder="",kelas_radiologi="Yes",kelas="",cara_bayar_radiologi="Yes",pilihan="",pemeriksaan="",kamar,namakamar,status="",url="";
+    private String aktifkanparsial="no",noorder="",kelas_radiologi="Yes",kelas="",cara_bayar_radiologi="Yes",pilihan="",pemeriksaan="",kamar,namakamar,status="",url="";
     private double ttl=0,item=0;
-    private boolean sukses=false;
-    private final boolean VALIDASIULANGHASILPERMINTAANRAD = koneksiDB.VALIDASIULANGHASILPERMINTAAN("rad"), AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
+    private boolean sukses=false, VALIDASIULANGHASILPERMINTAANRAD = koneksiDB.VALIDASIULANGHASILPERMINTAAN("rad");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String Suspen_Piutang_Radiologi_Ranap="",Radiologi_Ranap="",Beban_Jasa_Medik_Dokter_Radiologi_Ranap="",Utang_Jasa_Medik_Dokter_Radiologi_Ranap="",
             Beban_Jasa_Medik_Petugas_Radiologi_Ranap="",Utang_Jasa_Medik_Petugas_Radiologi_Ranap="",Beban_KSO_Radiologi_Ranap="",Utang_KSO_Radiologi_Ranap="",
@@ -401,6 +400,12 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             }  
         } catch (Exception e) {
             System.out.println(e);
+        } 
+        
+        try {
+            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
+        } catch (Exception ex) {            
+            aktifkanparsial="no";
         }
         
         try {
@@ -1390,7 +1395,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             Valid.textKosong(TCariPeriksa,"Data Pemeriksaan");
         }else{
             jmlparsial=0;
-            if(AKTIFKANBILLINGPARSIAL){
+            if(aktifkanparsial.equals("yes")){
                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
             }
             if((jmlparsial>0)&&status.equals("Ralan")){    

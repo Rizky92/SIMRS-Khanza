@@ -21,8 +21,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private String norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no", kodeunit = "";
-    private final boolean AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
+    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no", kodeunit = "";
     private int jmlparsial=0;
     
     /** Creates new form 
@@ -81,6 +80,12 @@ public class DlgCopyResep extends javax.swing.JDialog {
         label1.setVisible(TAMPILKANCOPYRESEPDOKTERLAIN.equals("yes"));
         TCari.setVisible(TAMPILKANCOPYRESEPDOKTERLAIN.equals("yes"));
         repaint();
+        
+        try {
+            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
+        } catch (Exception ex) {
+            aktifkanparsial="no";
+        }
     }
 
     /** This method is called from within the constructor to
@@ -346,7 +351,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep..!!");
             }else {
                 jmlparsial=0;
-                if(AKTIFKANBILLINGPARSIAL){
+                if(aktifkanparsial.equals("yes")){
                     jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",kode_pj);
                 }
                 if(jmlparsial>0){
@@ -393,7 +398,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(null, "Maaf, tidak bisa mengubah resep dokter lain..!!");
             }else {
                 jmlparsial=0;
-                if(AKTIFKANBILLINGPARSIAL){
+                if(aktifkanparsial.equals("yes")){
                     jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",kode_pj);
                 }
                 if(jmlparsial>0){

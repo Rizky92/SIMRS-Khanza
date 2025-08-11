@@ -255,7 +255,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement psotomatis,psotomatis2,pskasir,pscaripiutang,psrekening;
     private ResultSet rskasir,rsrekening;
-    private String kamar_inap_kasir_ralan=Sequel.cariIsi("select set_jam_minimal.kamar_inap_kasir_ralan from set_jam_minimal"),caripenjab="",filter="no",
+    private String aktifkanparsial="no",kamar_inap_kasir_ralan=Sequel.cariIsi("select set_jam_minimal.kamar_inap_kasir_ralan from set_jam_minimal"),caripenjab="",filter="no",
             namadokter="",namapoli="",order="reg_periksa.no_rawat desc",validasicatatan="No",
             Suspen_Piutang_Tindakan_Ralan="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
@@ -269,7 +269,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private DlgRawatJalan dlgrwjl2=new DlgRawatJalan(null,false);
     private boolean semua;
     private boolean sukses=false,ceksukses=false;
-    private final boolean AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
     private Jurnal jur=new Jurnal();
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0,ttlpendapatan=0;
 
@@ -588,6 +587,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 namapoli=koneksiDB.POLIAKTIFKASIRRALAN();
             } catch (Exception e) {
                 namapoli="";
+            }
+
+            try {
+                aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
+            } catch (Exception e) {
+                aktifkanparsial="no";
             }
 
             try {
@@ -7014,7 +7019,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             }else {
                 jmlparsial=0;
-                if(AKTIFKANBILLINGPARSIAL){
+                if(aktifkanparsial.equals("yes")){
                     jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
                 }
                 if(jmlparsial>0){
@@ -8372,7 +8377,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
                 }else {
                     jmlparsial=0;
-                    if(AKTIFKANBILLINGPARSIAL){
+                    if(aktifkanparsial.equals("yes")){
                         jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
                     }
                     if(jmlparsial>0){
@@ -11249,7 +11254,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
                 }else {
                     jmlparsial=0;
-                    if(AKTIFKANBILLINGPARSIAL){
+                    if(aktifkanparsial.equals("yes")){
                         jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
                     }
                     if(jmlparsial>0){
@@ -17020,7 +17025,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private void billingparsial() {
         if(tbKasirRalan.getSelectedRow()!= -1){
             jmlparsial=0;
-            if(AKTIFKANBILLINGPARSIAL){
+            if(aktifkanparsial.equals("yes")){
                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
             }
             if(jmlparsial>0){

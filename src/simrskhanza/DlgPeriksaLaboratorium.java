@@ -72,11 +72,10 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private double[] total,bagian_rs,bhp,tarif_perujuk,tarif_tindakan_dokter,tarif_tindakan_petugas,kso,menejemen,
             biaya_item2,bagian_rs2,bhp2,bagian_perujuk2,bagian_dokter2,bagian_laborat2,kso2,menejemen2;
     private int jml=0,i=0,index=0,jml2=0,i2=0,index2=0,jmlparsial=0;
-    private String noorder="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",pilihan="",status="",diagnosa="",
+    private String aktifkanparsial="no",noorder="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",pilihan="",status="",diagnosa="",
             hasil="",satuan="",nn="",keterangan="";
     private double ttl=0,item=0;
-    private boolean sukses=false;
-    private final boolean VALIDASIULANGHASILPERMINTAANLABPK = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpk"), AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
+    private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABPK = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpk");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_KSO_Laborat_Ranap="",Utang_KSO_Laborat_Ranap="",
@@ -411,6 +410,12 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             } 
         } catch (Exception e) {
             System.out.println(e);
+        } 
+        
+        try {
+            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
+        } catch (Exception ex) {            
+            aktifkanparsial="no";
         }
     }
 
@@ -1062,7 +1067,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else{
             jmlparsial=0;
-            if(AKTIFKANBILLINGPARSIAL){
+            if(aktifkanparsial.equals("yes")){
                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
             }
             if((jmlparsial>0)&&status.equals("Ralan")){    

@@ -59,8 +59,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private String[] kode,nama;
     private int jml=0,i=0,index=0,jmlparsial=0;
     private String kelas_radiologi="Yes",kelas="",cara_bayar_radiologi="Yes",kamar,namakamar,status="",
-            norawatibu="",finger="";
-    private final boolean AKTIFKANBILLINGPARSIAL = koneksiDB.AKTIFKANBILLINGPARSIAL();
+            norawatibu="",aktifkanparsial="no",finger="";
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
@@ -164,6 +163,12 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             }  
         } catch (Exception e) {
             System.out.println(e);
+        } 
+        
+        try {
+            aktifkanparsial=koneksiDB.AKTIFKANBILLINGPARSIAL();
+        } catch (Exception ex) {            
+            aktifkanparsial="no";
         }
     }
 
@@ -768,7 +773,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else{
             jmlparsial=0;
-            if(AKTIFKANBILLINGPARSIAL){
+            if(aktifkanparsial.equals("yes")){
                 jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
             }
             if(jmlparsial>0){    
