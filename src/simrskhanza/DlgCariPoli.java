@@ -337,13 +337,10 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if(Valid.daysOld("./cache/poli.iyem")<30){
-                tampil2();
-            }else{
-                tampil();
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/poli.iyem", 30)) {
+            tampil();
+        } else {
+            tampil2();
         }
     }//GEN-LAST:event_formWindowOpened
 
