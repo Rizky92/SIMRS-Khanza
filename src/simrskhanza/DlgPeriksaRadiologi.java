@@ -2308,7 +2308,11 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                             tbPemeriksaan.getValueAt(i,10).toString(),tbPemeriksaan.getValueAt(i,3).toString(),
                             KodePj.getText(),status,proyeksi, kV, mAS, FFD, BSF, inak, jml_penyinaran, dosis
                         })==true){
-                            if(!noorder.equals("")){
+                            // HOTFIX untuk jurnal tidak sesuai dengan orderan.
+                            // Karena tarif bisa diubah pada saat mengisi hasil, maka pengecekan no. order dapat menyebabkan
+                            // beberapa tindakan tidak masuk ke jurnal.
+                            // Solusi sementara, untuk mematikan pengecekan dulu, selama billing parsial belum digunakan.
+                            /* if(!noorder.equals("")){
                                 if(Sequel.cariIsi("select permintaan_pemeriksaan_radiologi.stts_bayar from permintaan_pemeriksaan_radiologi where permintaan_pemeriksaan_radiologi.noorder='"+noorder+"' and permintaan_pemeriksaan_radiologi.kd_jenis_prw='"+tbPemeriksaan.getValueAt(i,1).toString()+"'").equals("Belum")){
                                     ttlbhp=ttlbhp+Double.parseDouble(tbPemeriksaan.getValueAt(i,5).toString());
                                     ttljmdokter=ttljmdokter+Double.parseDouble(tbPemeriksaan.getValueAt(i,7).toString());
@@ -2319,7 +2323,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                     ttljmperujuk=ttljmperujuk+Double.parseDouble(tbPemeriksaan.getValueAt(i,6).toString());
                                     ttlmenejemen=ttlmenejemen+Double.parseDouble(tbPemeriksaan.getValueAt(i,10).toString());
                                 }
-                            }else{
+                            }else{ */
                                 ttlbhp=ttlbhp+Double.parseDouble(tbPemeriksaan.getValueAt(i,5).toString());
                                 ttljmdokter=ttljmdokter+Double.parseDouble(tbPemeriksaan.getValueAt(i,7).toString());
                                 ttljmpetugas=ttljmpetugas+Double.parseDouble(tbPemeriksaan.getValueAt(i,8).toString());
@@ -2328,7 +2332,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                 ttljasasarana=ttljasasarana+Double.parseDouble(tbPemeriksaan.getValueAt(i,4).toString());
                                 ttljmperujuk=ttljmperujuk+Double.parseDouble(tbPemeriksaan.getValueAt(i,6).toString());
                                 ttlmenejemen=ttlmenejemen+Double.parseDouble(tbPemeriksaan.getValueAt(i,10).toString());
-                            }
+                            // }
                         }else{
                             sukses=false;
                         }

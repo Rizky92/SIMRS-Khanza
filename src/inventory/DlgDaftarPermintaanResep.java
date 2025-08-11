@@ -2302,6 +2302,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         aktif=true;
+        pilihTab();
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
@@ -3512,6 +3513,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -3672,6 +3674,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode2.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -4053,6 +4056,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode3.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -4330,6 +4334,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode4.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -4491,6 +4496,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode5.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -4737,6 +4743,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode6.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -4899,6 +4906,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode7.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
@@ -5101,6 +5109,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 protected void done() {
                     LCount.setText("" + i);
                     setCursor(Cursor.getDefaultCursor());
+                    tabMode8.fireTableDataChanged();
                     ceksukses = false;
                 }
             }.execute();
