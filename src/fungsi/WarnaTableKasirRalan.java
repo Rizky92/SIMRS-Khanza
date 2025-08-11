@@ -19,15 +19,15 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
+
         Color foreground = new Color(50, 50, 50);
         Color background = new Color(255, 255, 255);
         Color alternatbg = darken(background, 0.05f);
-        
+
         DefaultTableModel tabMode = (DefaultTableModel) table.getModel();
-        
+
         row = table.convertRowIndexToModel(row);
-        
+
         switch (tabMode.getValueAt(row, 10).toString()) {
             case "TTV":
                 foreground = new Color(45, 40, 55);
@@ -62,62 +62,60 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
                 alternatbg = darken(background, 0.05f);
                 break;
         }
-        
+
         if (tabMode.getValueAt(row, 15).toString().equals("Sudah Bayar")) {
             foreground = new Color(255, 255, 255);
             alternatbg = new Color(50, 50, 50);
             background = lighten(alternatbg, 0.1f);
         }
-        
+
         if (row % 2 == 1) {
             setBackground(alternatbg);
         } else {
             setBackground(background);
         }
         setForeground(foreground);
-        
-        tabMode.fireTableRowsUpdated(row, row);
-        
+
         return this;
     }
 
     private Color lighten(Color color, double strength) {
         int min = 0, max = 255;
-        
+
         double r = color.getRed();
         double g = color.getGreen();
         double b = color.getBlue();
-        
+
         return new Color(
             (int) clamp(r + (strength * max), min, max),
             (int) clamp(g + (strength * max), min, max),
             (int) clamp(b + (strength * max), min, max)
         );
     }
-    
+
     private Color darken(Color color, double strength) {
         int min = 0, max = 255;
-        
+
         double r = color.getRed();
         double g = color.getGreen();
         double b = color.getBlue();
-        
+
         return new Color(
             (int) clamp(r - (strength * max), min, max),
             (int) clamp(g - (strength * max), min, max),
             (int) clamp(b - (strength * max), min, max)
         );
     }
-    
+
     private double clamp(double value, int min, int max) {
         if (value < min) {
             return min;
         }
-        
+
         if (value > max) {
             return max;
         }
-        
+
         return value;
     }
 }

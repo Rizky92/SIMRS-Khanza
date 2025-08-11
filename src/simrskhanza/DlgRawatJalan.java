@@ -13809,7 +13809,11 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                         TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                         LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
+                                        if (Sequel.cariExistsSmc("select * from reg_periksa where reg_periksa.no_rawat = ? and reg_periksa.stts = 'Batal'", TNoRw.getText())) {
+                                            Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV', biaya_reg = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?", TNoRw.getText());
+                                        } else {
+                                            Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ?", TNoRw.getText());
+                                        }
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Hanya bisa disimpan oleh dokter/petugas yang bersangkutan..!!");
