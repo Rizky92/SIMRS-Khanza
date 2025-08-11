@@ -28,32 +28,45 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
         
         row = table.convertRowIndexToModel(row);
         
-        if (tabMode.getValueAt(row, 10).toString().equals("TTV")) {
-            foreground = new Color(45, 40, 55);
-            background = new Color(30, 230, 255);
-            alternatbg = darken(background, 0.05f);
-        } else if (tabMode.getValueAt(row, 10).toString().equals("Sudah")) {
-            foreground = new Color(255, 230, 230);
-            alternatbg = new Color(200, 0, 0);
-            background = lighten(alternatbg, 0.15f);
-        } else if (tabMode.getValueAt(row, 10).toString().equals("Batal")) {
-            foreground = new Color(120, 110, 50);
-            background = new Color(255, 243, 109);
-            alternatbg = darken(background, 0.05f);
-        } else if (tabMode.getValueAt(row, 10).toString().equals("Dirujuk") || tabMode.getValueAt(row, 10).toString().equals("Meninggal") || tabMode.getValueAt(row, 10).toString().equals("Pulang Paksa")) {
-            foreground = new Color(245, 245, 255);
-            background = new Color(152, 152, 156);
-            alternatbg = darken(background, 0.05f);
-        } else if (tabMode.getValueAt(row, 10).toString().equals("Dirawat")) {
-            foreground = new Color(245, 255, 245);
-            background = new Color(119, 221, 119);
-            alternatbg = darken(background, 0.05f);
+        switch (tabMode.getValueAt(row, 10).toString()) {
+            case "TTV":
+                foreground = new Color(45, 40, 55);
+                background = new Color(30, 230, 255);
+                alternatbg = darken(background, 0.05f);
+                break;
+            case "Sudah":
+                foreground = new Color(255, 230, 230);
+                alternatbg = new Color(200, 0, 0);
+                background = lighten(alternatbg, 0.1f);
+                break;
+            case "Batal":
+                foreground = new Color(120, 110, 50);
+                background = new Color(255, 243, 109);
+                alternatbg = darken(background, 0.05f);
+                break;
+            case "Dirujuk":
+            case "Meninggal":
+            case "Pulang Paksa":
+                foreground = new Color(245, 245, 255);
+                background = new Color(152, 152, 156);
+                alternatbg = darken(background, 0.05f);
+                break;
+            case "Dirawat":
+                foreground = new Color(245, 255, 245);
+                background = new Color(119, 221, 119);
+                alternatbg = darken(background, 0.05f);
+                break;
+            default:
+                foreground = new Color(50, 50, 50);
+                background = new Color(255, 255, 255);
+                alternatbg = darken(background, 0.05f);
+                break;
         }
         
         if (tabMode.getValueAt(row, 15).toString().equals("Sudah Bayar")) {
             foreground = new Color(255, 255, 255);
             alternatbg = new Color(50, 50, 50);
-            background = lighten(alternatbg, 0.15f);
+            background = lighten(alternatbg, 0.1f);
         }
         
         if (row % 2 == 1) {
