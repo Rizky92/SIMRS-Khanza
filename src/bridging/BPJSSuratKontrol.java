@@ -1245,6 +1245,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("logo",Sequel.cariGambar("select gambar.bpjs from gambar")); 
             param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             param.put("nosurat", tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString());
+            param.put("jnspelayanan", tbObat.getValueAt(tbObat.getSelectedRow(), 15).toString().substring(0, 1).equals("1"));
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()+"\nID "+tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()));
             Valid.reportSmc("rptBridgingSuratKontrol2.jasper", "report", "::[ Data Surat Kontrol VClaim ]::", param);
             this.setCursor(Cursor.getDefaultCursor());
