@@ -30,6 +30,7 @@
 	<parameter name="prb" class="java.lang.String"/>
 	<parameter name="finger" class="java.lang.String"/>
 	<parameter name="nosurat" class="java.lang.String"/>
+	<parameter name="jnspelayanan" class="java.lang.Boolean"/>
 	<queryString>
 		<![CDATA[select bridging_sep.no_rawat, bridging_sep.no_sep, bridging_sep.no_kartu, bridging_sep.nomr,
 bridging_sep.nama_pasien, bridging_sep.tanggal_lahir, bridging_sep.jkel, bridging_sep.diagawal,
@@ -93,10 +94,6 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_sep"/>
 		<property name="com.jaspersoft.studio.field.name" value="nmdiagnosaawal"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="jnspelayanan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="jnspelayanan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_sep"/>
 	</field>
 	<field name="tgl_surat" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="tgl_surat"/>
@@ -442,7 +439,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 			<staticText>
 				<reportElement x="0" y="280" width="318" height="30" uuid="a1e13333-81c9-4d60-9ef4-f1a66a748bda">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[$F{jnspelayanan}.equals("1")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$P{jnspelayanan}]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7" isBold="false" isItalic="true"/>
