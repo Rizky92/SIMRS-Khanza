@@ -22,15 +22,21 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -59,7 +65,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         this.setLocation(10,10);
         setSize(457,249);
 
-        Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "KontaK", "Email", "Custom Wallpaper", "Pemberlakuan 2x24 Jam", "Kode PPK BPJS", "Kode PPK Apotek BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "wp", "logo"};
+        Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "Kontak", "Email", "Custom Wallpaper", "Pemberlakuan 2x24 Jam", "Kode PPK BPJS", "Kode PPK Apotek BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "wp", "logo"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -70,12 +76,13 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < row.length; i++) {
             TableColumn column = tbAdmin.getColumnModel().getColumn(i);
-            if(i==0){
-                column.setPreferredWidth(150);
-            }else{
-                column.setPreferredWidth(150);
+            if (i == 12 || i == 13) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            } else {
+                column.setPreferredWidth(120);
             }
         }
 
@@ -589,8 +596,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             String f = jfc.getSelectedFile().toString();
             EGb.setText(f);
             //lGambar.setIcon(new ImageIcon(f));
-            ((Painter) PhotoGambar).setImage(f);
-
+            try {
+                ((Painter) PhotoGambar).setImage(f);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_BtnCariGbActionPerformed
 
@@ -725,8 +735,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         if (jfc2.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             String f = jfc2.getSelectedFile().toString();
             ELogo.setText(f);
-            //lGambar.setIcon(new ImageIcon(f));
-            ((Painter) PhotoLogo).setImage(f);
+            try {
+                ((Painter) PhotoLogo).setImage(f);
+            } catch (IOException ex) {
+                Logger.getLogger(DlgSetAplikasi.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }//GEN-LAST:event_BtnCariLogoActionPerformed
@@ -835,58 +848,61 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes from setting";
-        prosesCari(sql);
-    }
-
-    private void prosesCari(String sql) {
         Valid.tabelKosong(tabMode);
-        try{
-            ResultSet rs=koneksi.prepareStatement(sql).executeQuery();
-            while(rs.next()){
-                Object[] data={rs.getString(1),rs.getString(2),rs.getString(3),
-                               rs.getString(4),rs.getString(5),rs.getBlob(6),
-                               rs.getString(7),rs.getString(8),rs.getBlob(9),
-                               rs.getString(10),rs.getString(11),rs.getString(12)
-                };
-                tabMode.addRow(data);
+        // Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "Kontak", "Email", "Custom Wallpaper", "Pemberlakuan 2x24 Jam", "Kode PPK BPJS", "Kode PPK Apotek BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "wp", "logo"};
+        try (ResultSet rs = koneksi.createStatement().executeQuery(
+            "select nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, " +
+            "pemberlakuan_2x24_jam, kode_ppk, kode_ppkapotek, kode_ppkinhealth, kode_ppkkemenkes, " +
+            "to_base64(wallpaper) as wallpaper, to_base64(logo) as logo from setting"
+        )) {
+            if (rs.next()) {
+                tabMode.addRow(new Object[] {
+                    rs.getString("nama_instansi"),
+                    rs.getString("alamat_instansi"),
+                    rs.getString("kabupaten"),
+                    rs.getString("propinsi"),
+                    rs.getString("kontak"),
+                    rs.getString("email"),
+                    rs.getString("aktifkan"),
+                    rs.getString("pemberlakuan_2x24_jam"),
+                    rs.getString("kode_ppk"),
+                    rs.getString("kode_ppkapotek"),
+                    rs.getString("kode_ppkinhealth"),
+                    rs.getString("kode_ppkkemenkes"),
+                    rs.getString("wallpaper"),
+                    rs.getString("logo")
+                });
             }
-        }catch(SQLException e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 
     private void getData() {
-        int row=tbAdmin.getSelectedRow();
-        if(row!= -1){
-            Nm.setText(tabMode.getValueAt(row,0).toString());
-            Almt.setText(tabMode.getValueAt(row,1).toString());
-            Kota.setText(tabMode.getValueAt(row,2).toString());
-            Propinsi.setText(tabMode.getValueAt(row,3).toString());
-            YesNo.setSelected(tabMode.getValueAt(row,4).toString().equals("yes"));
-            Kontak.setText(tabMode.getValueAt(row,6).toString());
-            Email.setText(tabMode.getValueAt(row,7).toString());
-            kdPPK.setText(tabMode.getValueAt(row,9).toString());
-            kdPPK1.setText(tabMode.getValueAt(row,10).toString());
-            kdPPK2.setText(tabMode.getValueAt(row,11).toString());
+        int row = tbAdmin.getSelectedRow();
+        if (row != -1) {
+            // Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "Kontak", "Email", 
+            // "Custom Wallpaper", "Pemberlakuan 2x24 Jam", "Kode PPK BPJS", "Kode PPK Apotek BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "wp", "logo"};
+            Nm.setText(tabMode.getValueAt(row, 0).toString());
+            Almt.setText(tabMode.getValueAt(row, 1).toString());
+            Kota.setText(tabMode.getValueAt(row, 2).toString());
+            Propinsi.setText(tabMode.getValueAt(row, 3).toString());
+            Kontak.setText(tabMode.getValueAt(row, 4).toString());
+            Email.setText(tabMode.getValueAt(row, 5).toString());
+            YesNo.setSelected(tabMode.getValueAt(row, 6).toString().equals("Yes"));
+            Pemberlakuan2x24jam.setSelected(tabMode.getValueAt(row, 7).toString().equals("Yes"));
+            kdPPK.setText(tabMode.getValueAt(row, 8).toString());
+            kdPPKApol.setText(tabMode.getValueAt(row, 9).toString());
+            kdPPK1.setText(tabMode.getValueAt(row, 10).toString());
+            kdPPK2.setText(tabMode.getValueAt(row, 11).toString());
             try {
-                ResultSet hasil = koneksi.prepareStatement("select wallpaper,logo from setting").executeQuery();
-                for (int I = 0; hasil.next(); I++) {
-                    ((Painter) PhotoGambar).setImage(gambar(tabMode.getValueAt(row,0).toString()));
-                    Blob blob = hasil.getBlob(1);
-                    ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
-                        blob.getBytes(1, (int) (blob.length()))));
-                    blob.free();
-                    
-                    ((Painter) PhotoLogo).setImage(gambar(tabMode.getValueAt(row,0).toString()));
-                    Blob blob2 = hasil.getBlob(2);
-                    ((Painter) PhotoLogo).setImageIcon(new javax.swing.ImageIcon(
-                        blob2.getBytes(1, (int) (blob2.length()))));
-                    blob2.free();
-                }
-                hasil.close();
-            } catch (Exception ex) {
-                cetak(ex.toString());
+                byte[] wallpaper = org.apache.commons.codec.binary.Base64.decodeBase64(tabMode.getValueAt(row, 12).toString()),
+                    logo = org.apache.commons.codec.binary.Base64.decodeBase64(tabMode.getValueAt(row, 13).toString());
+
+                ((Painter) PhotoGambar).setBufferedImage(wallpaper);
+                ((Painter) PhotoLogo).setBufferedImage(logo);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
         }
     }
@@ -896,14 +912,16 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Almt.setText("");
         Kota.setText("");
         Propinsi.setText("");
-        kdPPK.setText("");        
-        kdPPK1.setText("");       
-        kdPPK2.setText("");
-        ((Painter) PhotoGambar).setImage("");
-        EGb.setText("");
-        ((Painter) PhotoLogo).setImage("");
-        ELogo.setText("");
+        Kontak.setText("");
+        Email.setText("");
         YesNo.setSelected(false);
+        Pemberlakuan2x24jam.setSelected(false);
+        kdPPK.setText("");
+        kdPPKApol.setText("");
+        kdPPK1.setText("");
+        kdPPK2.setText("");
+        EGb.setText("");
+        ELogo.setText("");
         Nm.requestFocus();
     }
     
@@ -915,22 +933,21 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private String folder;
 
     public class Painter extends Canvas {
-
-        Image image;
-
-        public void setImage(String file) {
-            URL url = null;
-            try {
-                url = new File(file).toURI().toURL();
-            } catch (MalformedURLException ex) {
-                cetak(ex.toString());
-            }
-            image = getToolkit().getImage(url);
+        
+        BufferedImage image;
+        
+        public void setImage(String file) throws IOException {
+            image = ImageIO.read(new File(file));
             repaint();
         }
-        public void setImageIcon(ImageIcon file) {
-            image = file.getImage();
-            repaint();
+        
+        public void setBufferedImage(byte[] bytes) throws IOException {
+            try (ByteArrayInputStream bits = new ByteArrayInputStream(bytes)) {
+                image = ImageIO.read(bits);
+                repaint();
+            } catch (IOException e) {
+                throw e;
+            }
         }
 
         @Override
@@ -941,7 +958,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 double x = this.getWidth() / 2 - w / 2;
                 g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
             } catch (Exception e) {
-            }            
+                System.out.println("Notifa : " + e);
+                super.paint(g);
+            }
         }
     }
     
