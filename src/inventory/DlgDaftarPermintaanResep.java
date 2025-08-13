@@ -1395,6 +1395,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if (TabPilihRawat.getSelectedIndex() == 0 && TabRawatJalan.getSelectedIndex() == 0) {
+                tampil(true);
+            } else {
+                tampil(false);
+            }
             pilihTab();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari.requestFocus();
@@ -1406,6 +1411,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0 && TabRawatJalan.getSelectedIndex() == 0) {
+            tampil(true);
+        } else {
+            tampil(false);
+        }
         pilihTab();
 }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -3412,7 +3422,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbResepRanap;
     // End of variables declaration//GEN-END:variables
 
-    private synchronized void tampil() {
+    private synchronized void tampil(boolean dariBtnCari) {
         if (ceksukses == false) {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             ceksukses = true;
@@ -3515,6 +3525,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     setCursor(Cursor.getDefaultCursor());
                     tabMode.fireTableDataChanged();
                     ceksukses = false;
+
+                    if (dariBtnCari && tabMode.getRowCount() > 0) {
+                        tbResepRalan.setRowSelectionInterval(0, 0);
+                        getData();
+                        String tglValidasi = tabMode.getValueAt(0, 12).toString();
+                        String jamValidasi = tabMode.getValueAt(0, 13).toString();
+                        String tglPenyerahan = tabMode.getValueAt(0, 14).toString();
+                        String jamPenyerahan = tabMode.getValueAt(0, 15).toString();
+                        
+                        if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
+                            BtnTambahActionPerformed(null);
+                        } else if (!tglValidasi.isBlank() && !jamValidasi.isBlank() && tglPenyerahan.isBlank() && jamPenyerahan.isBlank()) {
+                            BtnPenyerahanActionPerformed(null);
+                        }
+                    }
                 }
             }.execute();
         }
@@ -3874,7 +3899,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void pilihRalan(){
         if(TabRawatJalan.getSelectedIndex()==0){
-            tampil();
+            tampil(false);
         }else if(TabRawatJalan.getSelectedIndex()==1){
             tampil2();
         }
@@ -5130,7 +5155,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(detik.equals("05")){
                     resepbaru=0;
                     if(formalarm.contains("ralan")){
-                        tampil();
+                        tampil(false);
                         for(i=0;i<tbResepRalan.getRowCount();i++){
                             if(tbResepRalan.getValueAt(i,7).toString().equals("Belum Terlayani")){
                                 resepbaru++;
