@@ -13792,7 +13792,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                     TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                     LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belun'", TNoRw.getText());
+                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
                             }
                         }else{
                             if(akses.getkode().equals(KdPeg.getText())){
@@ -13813,7 +13813,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                         TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                         LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belun'", TNoRw.getText());
+                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Hanya bisa disimpan oleh dokter/petugas yang bersangkutan..!!");
