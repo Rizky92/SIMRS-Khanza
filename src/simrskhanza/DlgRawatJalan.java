@@ -6178,10 +6178,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         try {
             i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
-                if(Sequel.mengedittf("reg_periksa","no_rawat=?","stts=?",2,new String[]{"Sudah",TNoRw.getText()})==true){
+                if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah', biaya_reg = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?", TNoRw.getText())) {
                     if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
-                        if (! Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
-                            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Kembali',now(),'0000-00-00 00:00:00',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Kembali',kembali=now()","no_rawat='"+TNoRw.getText()+"'");
+                        if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
+                            Sequel.executeRawSmc(
+                                "insert into mutasi_berkas values (?, 'Sudah Kembali', now(), '0000-00-00 00:00:00.000', now(), " +
+                                "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update " +
+                                "status = values(status), kembali = values(kembali)", TNoRw.getText()
+                            );
                         }
                     }
                 }
@@ -13788,7 +13792,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                     TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                     LCount.setText(""+tabModePemeriksaan.getRowCount());
-                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belun'", TNoRw.getText());
+                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
                             }
                         }else{
                             if(akses.getkode().equals(KdPeg.getText())){
