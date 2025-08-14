@@ -10,8 +10,9 @@
   dak pernah rela karya kami dibajak tanpa ijin.
  */
 
-package bridging;
+package bridging.custom;
 
+import bridging.ApiApotekBPJS;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;

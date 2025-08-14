@@ -9,7 +9,8 @@
  * Created on May 22, 2010, 11:58:21 PM
  */
 
-package bridging;
+package bridging.custom;
+
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
