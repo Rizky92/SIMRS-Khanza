@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -127,9 +127,9 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NomorSEP.setDocument(new batasInput((byte)100).getKata(NomorSEP));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             NomorSEP.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -151,17 +151,17 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             link=koneksiDB.URLAPIAPOTEKBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-              
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -315,7 +315,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int i=0;i<tabMode.getRowCount();i++){  
+            for(int i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -332,21 +332,21 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
                                 tabMode.getValueAt(i,12).toString()+"','"+
                                 tabMode.getValueAt(i,14).toString()+"','"+
                                 tabMode.getValueAt(i,15).toString()+"','"+
-                                tabMode.getValueAt(i,16).toString()+"','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS"); 
+                                tabMode.getValueAt(i,16).toString()+"','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptApotekBPJSDaftarPelayananKlaim.jasper","report","[ Daftar Pelayanan Apotek BPJS ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void NomorSEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorSEPKeyPressed
@@ -364,7 +364,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if(NomorSEP.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Silahkan masukkan nomor SEP terlebih dahulu..!!!");  
+            JOptionPane.showMessageDialog(null,"Silahkan masukkan nomor SEP terlebih dahulu..!!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil(NomorSEP.getText());
@@ -433,14 +433,15 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     public void tampil(String keyword) {
         try {
             headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-	    headers.add("x-cons-id",koneksiDB.CONSIDAPIAPOTEKBPJS());
-	    utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("x-timestamp",utc);
-	    headers.add("x-signature",api.getHmac(utc));
-	    headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            headers.add("x-cons-id", koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc = String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp", utc);
+            headers.add("x-signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             requestEntity = new HttpEntity(headers);
-            URL = link+"/obat/daftar/"+keyword;	
+
+            URL = link+"/pelayanan/obat/daftar/"+keyword;
             System.out.println(URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -458,20 +459,20 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }    
+    }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -481,61 +482,6 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         @Override
         public String getMethod() {
             return "DELETE";
-        }
-    }
-
-    @Test
-    public void bodyWithDeleteRequest() throws Exception {
-        RestTemplate restTemplate = new RestTemplate();
-        SSLContext sslContext = SSLContext.getInstance("SSL");
-        javax.net.ssl.TrustManager[] trustManagers= {
-            new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {return null;}
-                public void checkServerTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
-                public void checkClientTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
-            }
-        };
-        sslContext.init(null,trustManagers , new SecureRandom());
-        SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        Scheme scheme=new Scheme("https",443,sslFactory);
-    
-        HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
-            @Override
-            protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
-                if (HttpMethod.DELETE == httpMethod) {
-                    return new HttpEntityEnclosingDeleteRequest(uri);
-                }
-                return super.createHttpUriRequest(httpMethod, uri);
-            }
-        };
-        factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        restTemplate.setRequestFactory(factory);
-        
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-Timestamp",utc);
-	    headers.add("X-Signature",api.getHmac(utc));
-            headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-            URL = link+"/pelayanan/obat/hapus/";
-            requestJson ="{\"nosepapotek\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+"\",\"noresep\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString()+"\",\"kodeobat\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"\",\"tipeobat\":\""+tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()+"\"}  ";            
-            requestEntity = new HttpEntity(requestJson,headers);
-            root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            System.out.println("code : "+nameNode.path("code").asText());
-            System.out.println("message : "+nameNode.path("message").asText());
-            if(nameNode.path("code").asText().equals("200")){
-                tabMode.removeRow(tbKamar.getSelectedRow());
-            }else{
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-            }
-        } catch (Exception e) {   
-            System.out.println("Notif : "+e);
-            if(e.toString().contains("UnknownHostException")){
-                JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
-            }
         }
     }
 }
