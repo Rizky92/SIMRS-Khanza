@@ -28,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
@@ -228,7 +227,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1280, 720));
         DlgDisplaySMC.setModal(true);
         DlgDisplaySMC.setUndecorated(true);
-        DlgDisplaySMC.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
         internalFrame6.setBorder(null);
@@ -364,8 +362,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         AntrianF.setText("F");
         AntrianF.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AntrianF.setFont(new java.awt.Font("Tahoma", 1, 42)); // NOI18N
-        AntrianF.setMaximumSize(null);
-        AntrianF.setMinimumSize(null);
         AntrianF.setPreferredSize(new java.awt.Dimension(1, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
