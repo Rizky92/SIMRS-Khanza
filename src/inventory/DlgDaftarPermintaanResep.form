@@ -106,7 +106,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel"
                   editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="01-08-2025 05:50:40" />
+                    <StringItem index="0" value="07-08-2025 15:58:32" />
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss" />
@@ -142,6 +142,8 @@
   <Events>
     <EventHandler event="windowActivated" listener="java.awt.event.WindowListener"
       parameters="java.awt.event.WindowEvent" handler="formWindowActivated" />
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener"
+      parameters="java.awt.event.WindowEvent" handler="formWindowClosed" />
     <EventHandler event="windowDeactivated" listener="java.awt.event.WindowListener"
       parameters="java.awt.event.WindowEvent" handler="formWindowDeactivated" />
   </Events>
@@ -258,7 +260,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel"
                       editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="01-08-2025" />
+                        <StringItem index="0" value="07-08-2025" />
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy" />
@@ -290,7 +292,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel"
                       editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="01-08-2025" />
+                        <StringItem index="0" value="07-08-2025" />
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy" />

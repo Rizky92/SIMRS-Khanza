@@ -178,6 +178,9 @@ import bridging.SisruteCekReferensiDiagnosa;
 import bridging.SisruteCekReferensiFaskes;
 import bridging.SisruteRujukanKeluar;
 import bridging.SisruteRujukanMasukan;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dapur.DapurBarang;
 import dapur.DapurHibah;
 import dapur.DapurInputStok;
@@ -871,8 +874,10 @@ import rekammedis.RMCatatanPersalinan;
 import rekammedis.RMChecklistKesiapanAnestesi;
 import rekammedis.RMChecklistKriteriaKeluarHCU;
 import rekammedis.RMChecklistKriteriaKeluarICU;
+import rekammedis.RMChecklistKriteriaKeluarNICU;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
+import rekammedis.RMChecklistKriteriaMasukNICU;
 import rekammedis.RMChecklistPemberianFibrinolitik;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
@@ -2074,7 +2079,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04/08/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11/08/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -14678,169 +14683,251 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         sekuel.nyalakanBatasEdit();
 
         File file;
-        FileWriter fileWriter;
-        String iyem = null;
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode root, iyem;
+        ArrayNode array;
 
-        // akunbayar.iyem
         try {
             file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from akun_bayar order by nama_bayar").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NamaAkun\":\"" + rs.getString(1).replaceAll("\"", "") + "\",\"KodeRek\":\"" + rs.getString(2) + "\",\"PPN\":\"" + rs.getDouble(3) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by nama_bayar")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NamaAkun", rs.getString(1));
+                        iyem.put("KodeRek", rs.getString(2));
+                        iyem.put("PPN", rs.getString(3));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("akunbayar", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"akunbayar\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // akunpiutang.iyem
         try {
-            file = new File("./cache/akunbayar.iyem");
+            file = new File("./cache/akunpiutang.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from akun_piutang order by nama_bayar").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NamaAkun\":\"" + rs.getString(1).replaceAll("\"", "") + "\",\"KodeRek\":\"" + rs.getString(2) + "\",\"KdPJ\":\"" + rs.getString(3) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_piutang order by nama_bayar")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NamaAkun", rs.getString(1));
+                        iyem.put("KodeRek", rs.getString(2));
+                        iyem.put("KdPJ", rs.getString(3));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("akunpiutang", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"akunpiutang\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // bangsal.iyem
         try {
             file = new File("./cache/bangsal.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from bangsal where status = '1' order by nm_bangsal").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeKamar\":\"" + rs.getString(1) + "\",\"NamaKamar\":\"" + rs.getString(2).replaceAll("\"", "") + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from bangsal where status = '1' order by nm_bangsal")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeKamar", rs.getString(1));
+                        iyem.put("NamaKamar", rs.getString(2));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("bangsal", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"bangsal\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // dokter.iyem
-        try {
-            file = new File("./cache/dokter.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement(
-                "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir,dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "
-                + "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "
-                + "where dokter.status='1' order by dokter.nm_dokter").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeDokter\":\"" + rs.getString(1) + "\",\"NamaDokter\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"TmpLahir\":\"" + rs.getString(4).replaceAll("\"", "") + "\",\"TglLahir\":\"" + rs.getString(5) + "\",\"GD\":\"" + rs.getString(6) + "\",\"Agama\":\"" + rs.getString(7) + "\",\"AlamatTinggal\":\"" + rs.getString(8).replaceAll("\"", "") + "\",\"NoTelp\":\"" + rs.getString(9) + "\",\"SttsNikah\":\"" + rs.getString(10) + "\",\"Spesialis\":\"" + rs.getString(11) + "\",\"Alumni\":\"" + rs.getString(12).replaceAll("\"", "") + "\",\"NoIjinPraktek\":\"" + rs.getString(13) + "\"},";
-                }
-            }
-            fileWriter.write("{\"dokter\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-
-        // pegawai.iyem
         try {
             file = new File("./cache/pegawai.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select pegawai.nik,pegawai.nama,pegawai.jk,pegawai.jbtn,pegawai.jnj_jabatan,pegawai.departemen,pegawai.bidang,pegawai.stts_wp,pegawai.stts_kerja,"
-                + "pegawai.npwp,pegawai.pendidikan,pegawai.tmp_lahir,pegawai.tgl_lahir,pegawai.alamat,pegawai.kota,pegawai.mulai_kerja,pegawai.ms_kerja,pegawai.indexins,pegawai.bpd,pegawai.rekening,"
-                + "pegawai.stts_aktif,pegawai.wajibmasuk,pegawai.mulai_kontrak,pegawai.no_ktp from pegawai where pegawai.stts_aktif<>'KELUAR' order by pegawai.id ASC").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NIP\":\"" + rs.getString(1) + "\",\"Nama\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"Jabatan\":\"" + rs.getString(4) + "\",\"KodeJenjang\":\"" + rs.getString(5) + "\","
-                        + "\"Departemen\":\"" + rs.getString(6) + "\",\"Bidang\":\"" + rs.getString(7) + "\",\"Status\":\"" + rs.getString(8) + "\",\"StatusKaryawan\":\"" + rs.getString(9) + "\",\"NPWP\":\"" + rs.getString(10) + "\","
-                        + "\"Pendidikan\":\"" + rs.getString(11) + "\",\"TmpLahir\":\"" + rs.getString(12) + "\",\"TglLahir\":\"" + rs.getString(13) + "\",\"Alamat\":\"" + rs.getString(14).replaceAll("\"", "") + "\",\"Kota\":\"" + rs.getString(15).replaceAll("\"", "") + "\","
-                        + "\"MulaiKerja\":\"" + rs.getString(16) + "\",\"KodeMsKerja\":\"" + rs.getString(17) + "\",\"KodeIndex\":\"" + rs.getString(18) + "\",\"BPD\":\"" + rs.getString(19) + "\",\"Rekening\":\"" + rs.getString(20) + "\","
-                        + "\"SttsAktif\":\"" + rs.getString(21) + "\",\"WajibMasuk\":\"" + rs.getString(22) + "\",\"MulaiKontrak\":\"" + rs.getString(23) + "\",\"NoKTP\":\"" + rs.getString(24) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan, pegawai.departemen, " +
+                "pegawai.bidang, pegawai.stts_wp, pegawai.stts_kerja, pegawai.npwp, pegawai.pendidikan, pegawai.tmp_lahir, " +
+                "pegawai.tgl_lahir, pegawai.alamat, pegawai.kota, pegawai.mulai_kerja, pegawai.ms_kerja, pegawai.indexins, " +
+                "pegawai.bpd, pegawai.rekening, pegawai.stts_aktif, pegawai.wajibmasuk, pegawai.mulai_kontrak, pegawai.no_ktp " +
+                "from pegawai where pegawai.stts_aktif <> 'KELUAR' order by pegawai.nik"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NIP", rs.getString(1));
+                        iyem.put("Nama", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("Jabatan", rs.getString(4));
+                        iyem.put("KodeJenjang", rs.getString(5));
+                        iyem.put("Departemen", rs.getString(6));
+                        iyem.put("Bidang", rs.getString(7));
+                        iyem.put("Status", rs.getString(8));
+                        iyem.put("StatusKaryawan", rs.getString(9));
+                        iyem.put("NPWP", rs.getString(10));
+                        iyem.put("Pendidikan", rs.getString(11));
+                        iyem.put("TmpLahir", rs.getString(12));
+                        iyem.put("TglLahir", rs.getString(13));
+                        iyem.put("Alamat", rs.getString(14));
+                        iyem.put("Kota", rs.getString(15));
+                        iyem.put("MulaiKerja", rs.getString(16));
+                        iyem.put("KodeMsKerja", rs.getString(17));
+                        iyem.put("KodeIndex", rs.getString(18));
+                        iyem.put("BPD", rs.getString(19));
+                        iyem.put("Rekening", rs.getString(20));
+                        iyem.put("SttsAktif", rs.getString(21));
+                        iyem.put("WajibMasuk", rs.getString(22));
+                        iyem.put("MulaiKontrak", rs.getString(23));
+                        iyem.put("NoKTP", rs.getString(24));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("pegawai", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"pegawai\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // penjab.iyem
+        try {
+            file = new File("./cache/dokter.iyem");
+            file.createNewFile();
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select dokter.kd_dokter, dokter.nm_dokter, dokter.jk, dokter.tmp_lahir, dokter.tgl_lahir, " +
+                "dokter.gol_drh, dokter.agama, dokter.almt_tgl, dokter.no_telp, dokter.stts_nikah, " +
+                "spesialis.nm_sps, dokter.alumni, dokter.no_ijn_praktek from dokter join spesialis on " +
+                "dokter.kd_sps = spesialis.kd_sps where dokter.status = '1' order by dokter.nm_dokter"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeDokter", rs.getString(1));
+                        iyem.put("NamaDokter", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("TmpLahir", rs.getString(4));
+                        iyem.put("TglLahir", rs.getString(5));
+                        iyem.put("GD", rs.getString(6));
+                        iyem.put("Agama", rs.getString(7));
+                        iyem.put("AlamatTinggal", rs.getString(8));
+                        iyem.put("NoTelp", rs.getString(9));
+                        iyem.put("SttsNikah", rs.getString(10));
+                        iyem.put("Spesialis", rs.getString(11));
+                        iyem.put("Alumni", rs.getString(12));
+                        iyem.put("NoIjinPraktek", rs.getString(13));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("dokter", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
         try {
             file = new File("./cache/penjab.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from penjab where penjab.status='1' order by penjab.png_jawab").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeAsuransi\":\"" + rs.getString("kd_pj") + "\",\"NamaAsuransi\":\"" + rs.getString("png_jawab") + "\",\"PerusahaanAsuransi\":\"" + rs.getString("nama_perusahaan") + "\",\"AlamatAsuransi\":\"" + rs.getString("alamat_asuransi") + "\",\"NoTelp\":\"" + rs.getString("no_telp") + "\",\"Attn\":\"" + rs.getString("attn") + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from penjab where penjab.status = '1' order by penjab.png_jawab, penjab.kd_pj")) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    int i = 0;
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeAsuransi", rs.getString("kd_pj"));
+                        iyem.put("NamaAsuransi", rs.getString("png_jawab"));
+                        iyem.put("PerusahaanAsuransi", rs.getString("nama_perusahaan"));
+                        iyem.put("AlamatAsuransi", rs.getString("alamat_asuransi"));
+                        iyem.put("NoTelp", rs.getString("no_telp"));
+                        iyem.put("Attn", rs.getString("attn"));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("penjab", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"penjab\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // petugas.iyem
         try {
             file = new File("./cache/petugas.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select petugas.nip,petugas.nama,petugas.jk,petugas.tmp_lahir,petugas.tgl_lahir, "
-                + "petugas.gol_darah,petugas.agama,petugas.stts_nikah,petugas.alamat,jabatan.nm_jbtn,petugas.no_telp "
-                + "from petugas inner join jabatan on jabatan.kd_jbtn=petugas.kd_jbtn "
-                + "where petugas.status='1' order by petugas.nip").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"NIP\":\"" + rs.getString(1) + "\",\"NamaPetugas\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"JK\":\"" + rs.getString(3) + "\",\"TmpLahir\":\"" + rs.getString(4).replaceAll("\"", "") + "\",\"TglLahir\":\"" + rs.getString(5) + "\",\"GD\":\"" + rs.getString(6) + "\",\"Agama\":\"" + rs.getString(7) + "\",\"SttsNikah\":\"" + rs.getString(8) + "\",\"Alamat\":\"" + rs.getString(9).replaceAll("\"", "") + "\",\"Jabatan\":\"" + rs.getString(10) + "\",\"NoTelp\":\"" + rs.getString(11) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select petugas.nip, petugas.nama, petugas.jk, petugas.tmp_lahir, petugas.tgl_lahir, " +
+                "petugas.gol_darah, petugas.agama, petugas.stts_nikah, petugas.alamat, jabatan.nm_jbtn, " +
+                "petugas.no_telp from petugas join jabatan on jabatan.kd_jbtn = petugas.kd_jbtn where " +
+                "petugas.status = '1' order by petugas.nip"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("NIP", rs.getString(1));
+                        iyem.put("NamaPetugas", rs.getString(2));
+                        iyem.put("JK", rs.getString(3));
+                        iyem.put("TmpLahir", rs.getString(4));
+                        iyem.put("TglLahir", rs.getString(5));
+                        iyem.put("GD", rs.getString(6));
+                        iyem.put("Agama", rs.getString(7));
+                        iyem.put("SttsNikah", rs.getString(8));
+                        iyem.put("Alamat", rs.getString(9));
+                        iyem.put("Jabatan", rs.getString(10));
+                        iyem.put("NoTelp", rs.getString(11));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("petugas", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"petugas\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
 
-        // poli.iyem
         try {
             file = new File("./cache/poli.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            iyem = "";
-            try (ResultSet rs = koneksi.prepareStatement("select * from poliklinik where poliklinik.status='1'").executeQuery()) {
-                while (rs.next()) {
-                    iyem = iyem + "{\"KodeUnit\":\"" + rs.getString(1) + "\",\"NamaUnit\":\"" + rs.getString(2) + "\",\"RegistrasiBaru\":\"" + rs.getString(3) + "\",\"RegistrasiLama\":\"" + rs.getString(4) + "\"},";
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select * from poliklinik where poliklinik.status = '1' order by poliklinik.nm_poli"
+            )) {
+                if (rs.next()) {
+                    root = mapper.createObjectNode();
+                    array = mapper.createArrayNode();
+                    do {
+                        iyem = mapper.createObjectNode();
+                        iyem.put("KodeUnit", rs.getString(1));
+                        iyem.put("NamaUnit", rs.getString(2));
+                        iyem.put("RegistrasiBaru", Valid.SetAngka(rs.getDouble(3)));
+                        iyem.put("RegistrasiLama", Valid.SetAngka(rs.getDouble(4)));
+                        array.add(iyem);
+                    } while (rs.next());
+                    root.set("poli", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            fileWriter.write("{\"poli\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            fileWriter.flush();
-            fileWriter.close();
-            iyem = null;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
@@ -23035,8 +23122,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnSuratPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {  
+
+    private void btnSuratPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23047,7 +23134,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnSkriningInstrumenMentalEmosionalActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -23058,6 +23145,30 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMChecklistKriteriaMasukNICU aplikasi=new RMChecklistKriteriaMasukNICU(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnChecklistKriteriaKeluarNICUActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMChecklistKriteriaKeluarNICU aplikasi=new RMChecklistKriteriaKeluarNICU(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
         this.setCursor(Cursor.getDefaultCursor());
     }
 
@@ -23773,7 +23884,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnRiwayatSuratPeringatan,btnMasterKesimpulanAnjuranMCU,btnKategoriPiutangJasaPerusahaan,btnPiutangJasaPerusahaan,btnBayarPiutangJasaPerusahaan,btnPiutangJasaPerusahaanBelumLunas,
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
             btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS,
-            btnSuratPernyataanMemilihDPJP,btnSkriningInstrumenMentalEmosional;
+            btnSuratPernyataanMemilihDPJP,btnSkriningInstrumenMentalEmosional,btnChecklistKriteriaMasukNICU,btnChecklistKriteriaKeluarNICU;
 
     public void isWall(){
         try{
@@ -28080,6 +28191,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
 
+            if(akses.getkriteria_masuk_nicu()==true){
+                Panelmenu.add(btnChecklistKriteriaMasukNICU);
+                jmlmenu++;
+            }
+
+            if(akses.getkriteria_keluar_nicu()==true){
+                Panelmenu.add(btnChecklistKriteriaKeluarNICU);
+                jmlmenu++;
+            }
+
             if(akses.getchecklist_kriteria_masuk_icu()==true){
                 Panelmenu.add(btnChecklistKriteriaMasukICU);
                 jmlmenu++;
@@ -28333,7 +28454,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnSkriningInstrumenACRS);
                 jmlmenu++;
             }
-            
+
             if(akses.getskrining_instrumen_mental_emosional()==true){
                 Panelmenu.add(btnSkriningInstrumenMentalEmosional);
                 jmlmenu++;
@@ -29166,7 +29287,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnTemplatePersetujuanPenolakanTindakan);
                 jmlmenu++;
             }
-            
+
             if(akses.getsurat_pernyataan_memilih_dpjp()==true){
                 Panelmenu.add(btnSuratPernyataanMemilihDPJP);
                 jmlmenu++;
@@ -33759,6 +33880,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
 
+        if(akses.getkriteria_masuk_nicu()==true){
+            Panelmenu.add(btnChecklistKriteriaMasukNICU);
+            jmlmenu++;
+        }
+
+        if(akses.getkriteria_keluar_nicu()==true){
+            Panelmenu.add(btnChecklistKriteriaKeluarNICU);
+            jmlmenu++;
+        }
+
         if(akses.getchecklist_kriteria_masuk_icu()==true){
             Panelmenu.add(btnChecklistKriteriaMasukICU);
             jmlmenu++;
@@ -34012,7 +34143,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnSkriningInstrumenACRS);
             jmlmenu++;
         }
-        
+
         if(akses.getskrining_instrumen_mental_emosional()==true){
             Panelmenu.add(btnSkriningInstrumenMentalEmosional);
             jmlmenu++;
@@ -34837,7 +34968,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPersetujuanPemeriksaanHIV);
             jmlmenu++;
         }
-        
+
         if(akses.getsurat_pernyataan_memilih_dpjp()==true){
             Panelmenu.add(btnSuratPernyataanMemilihDPJP);
             jmlmenu++;
@@ -41106,6 +41237,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
         }
 
+        if(akses.getkriteria_masuk_nicu()==true){
+            if(btnChecklistKriteriaMasukNICU.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnChecklistKriteriaMasukNICU);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getkriteria_keluar_nicu()==true){
+            if(btnChecklistKriteriaKeluarNICU.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnChecklistKriteriaKeluarNICU);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getchecklist_kriteria_masuk_icu()==true){
             if(btnChecklistKriteriaMasukICU.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnChecklistKriteriaMasukICU);
@@ -41294,12 +41439,12 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getskrining_instrumen_mental_emosional()==true){
             if(btnSkriningInstrumenMentalEmosional.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningInstrumenMentalEmosional);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getskrining_kanker_kolorektal()==true){
@@ -42620,10 +42765,10 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getsurat_pernyataan_memilih_dpjp()==true){
             if(btnSuratPernyataanMemilihDPJP.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
-                Panelmenu.add(btnSuratPernyataanMemilihDPJP);                 
+                Panelmenu.add(btnSuratPernyataanMemilihDPJP);
                 jmlmenu++;
             }
         }
@@ -46384,9 +46529,9 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPersetujuanPenolakanTindakan.setName("btnPersetujuanPenolakanTindakan");
         btnPersetujuanPenolakanTindakan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPersetujuanPenolakanTindakan.addActionListener(this::btnPersetujuanPenolakanTindakanActionPerformed);
-        
+
         btnSuratPernyataanMemilihDPJP = new widget.ButtonBig();
-        btnSuratPernyataanMemilihDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898997_avatar_doctor_man_mask_user_icon.png"))); 
+        btnSuratPernyataanMemilihDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5898997_avatar_doctor_man_mask_user_icon.png")));
         btnSuratPernyataanMemilihDPJP.setText("Surat Pernyataan Memilih DPJP");
         btnSuratPernyataanMemilihDPJP.setIconTextGap(0);
         btnSuratPernyataanMemilihDPJP.setName("btnSuratPernyataanMemilihDPJP");
@@ -47224,6 +47369,22 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnChecklistKriteriaKeluarHCU.setName("btnChecklistKriteriaKeluarHCU");
         btnChecklistKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaKeluarHCU.addActionListener(this::btnChecklistKriteriaKeluarHCUActionPerformed);
+
+        btnChecklistKriteriaMasukNICU = new widget.ButtonBig();
+        btnChecklistKriteriaMasukNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088517_beat_care_heart_pulse_time_icon.png")));
+        btnChecklistKriteriaMasukNICU.setText("Check List Kriteria Masuk NICU");
+        btnChecklistKriteriaMasukNICU.setIconTextGap(0);
+        btnChecklistKriteriaMasukNICU.setName("btnChecklistKriteriaMasukNICU");
+        btnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnChecklistKriteriaMasukNICU.addActionListener(this::btnChecklistKriteriaMasukNICUActionPerformed);
+
+        btnChecklistKriteriaKeluarNICU = new widget.ButtonBig();
+        btnChecklistKriteriaKeluarNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088517_beat_care_heart_pulse_time_icon.png")));
+        btnChecklistKriteriaKeluarNICU.setText("Check List Kriteria Keluar NICU");
+        btnChecklistKriteriaKeluarNICU.setIconTextGap(0);
+        btnChecklistKriteriaKeluarNICU.setName("btnChecklistKriteriaKeluarNICU");
+        btnChecklistKriteriaKeluarNICU.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnChecklistKriteriaKeluarNICU.addActionListener(this::btnChecklistKriteriaKeluarNICUActionPerformed);
 
         btnPenilaianRisikoDekubitus = new widget.ButtonBig();
         btnPenilaianRisikoDekubitus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6090058_bed_rent_room_icon.png")));
@@ -48690,7 +48851,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningInstrumenACRS.addActionListener(this::btnSkriningInstrumenACRSActionPerformed);
 
         btnSkriningInstrumenMentalEmosional = new widget.ButtonBig();
-        btnSkriningInstrumenMentalEmosional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859961_depression_disorder_health_mental_psychology_icon.png"))); 
+        btnSkriningInstrumenMentalEmosional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5859961_depression_disorder_health_mental_psychology_icon.png")));
         btnSkriningInstrumenMentalEmosional.setText("Skrining Instrumen Mental Emosional Anak");
         btnSkriningInstrumenMentalEmosional.setIconTextGap(0);
         btnSkriningInstrumenMentalEmosional.setName("btnSkriningInstrumenMentalEmosional");

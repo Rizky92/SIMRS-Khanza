@@ -346,6 +346,12 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         jLabel119 = new widget.Label();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel163 = new widget.Label();
+        jLabel120 = new widget.Label();
+        jLabel121 = new widget.Label();
+        jLabel122 = new widget.Label();
+        jLabel123 = new widget.Label();
+        jLabel124 = new widget.Label();
+        jLabel125 = new widget.Label();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -543,7 +549,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -557,7 +563,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -678,7 +684,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -804,37 +810,37 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         jLabel100.setText("1.");
         jLabel100.setName("jLabel100"); // NOI18N
         FormInput.add(jLabel100);
-        jLabel100.setBounds(44, 90, 25, 23);
+        jLabel100.setBounds(44, 90, 25, 36);
 
         jLabel101.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel101.setText("2.");
         jLabel101.setName("jLabel101"); // NOI18N
         FormInput.add(jLabel101);
-        jLabel101.setBounds(44, 120, 25, 23);
+        jLabel101.setBounds(44, 120, 25, 36);
 
         jLabel102.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel102.setText("3.");
         jLabel102.setName("jLabel102"); // NOI18N
         FormInput.add(jLabel102);
-        jLabel102.setBounds(44, 150, 25, 23);
+        jLabel102.setBounds(44, 150, 25, 36);
 
         jLabel103.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel103.setText("4.");
         jLabel103.setName("jLabel103"); // NOI18N
         FormInput.add(jLabel103);
-        jLabel103.setBounds(44, 180, 25, 23);
+        jLabel103.setBounds(44, 180, 25, 36);
 
         jLabel104.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel104.setText("5.");
         jLabel104.setName("jLabel104"); // NOI18N
         FormInput.add(jLabel104);
-        jLabel104.setBounds(44, 210, 25, 23);
+        jLabel104.setBounds(44, 210, 25, 36);
 
         jLabel105.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel105.setText("6.");
         jLabel105.setName("jLabel105"); // NOI18N
         FormInput.add(jLabel105);
-        jLabel105.setBounds(44, 240, 25, 23);
+        jLabel105.setBounds(44, 240, 25, 36);
 
         jLabel106.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel106.setText("7.");
@@ -860,7 +866,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         FormInput.add(jLabel109);
         jLabel109.setBounds(44, 360, 25, 23);
 
-        ACRS1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS1.setName("ACRS1"); // NOI18N
         ACRS1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -873,9 +879,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS1);
-        ACRS1.setBounds(570, 90, 130, 23);
+        ACRS1.setBounds(620, 90, 80, 23);
 
-        ACRS2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS2.setName("ACRS2"); // NOI18N
         ACRS2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -888,9 +894,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS2);
-        ACRS2.setBounds(570, 120, 130, 23);
+        ACRS2.setBounds(620, 120, 80, 23);
 
-        ACRS3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS3.setName("ACRS3"); // NOI18N
         ACRS3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -903,9 +909,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS3);
-        ACRS3.setBounds(570, 150, 130, 23);
+        ACRS3.setBounds(620, 150, 80, 23);
 
-        ACRS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS4.setName("ACRS4"); // NOI18N
         ACRS4.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -918,9 +924,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS4);
-        ACRS4.setBounds(570, 180, 130, 23);
+        ACRS4.setBounds(620, 180, 80, 23);
 
-        ACRS5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS5.setName("ACRS5"); // NOI18N
         ACRS5.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -933,9 +939,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS5);
-        ACRS5.setBounds(570, 210, 130, 23);
+        ACRS5.setBounds(620, 210, 80, 23);
 
-        ACRS6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS6.setName("ACRS6"); // NOI18N
         ACRS6.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -948,9 +954,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS6);
-        ACRS6.setBounds(570, 240, 130, 23);
+        ACRS6.setBounds(620, 240, 80, 23);
 
-        ACRS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS7.setName("ACRS7"); // NOI18N
         ACRS7.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -963,9 +969,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS7);
-        ACRS7.setBounds(570, 270, 130, 23);
+        ACRS7.setBounds(620, 270, 80, 23);
 
-        ACRS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS8.setName("ACRS8"); // NOI18N
         ACRS8.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -978,9 +984,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS8);
-        ACRS8.setBounds(570, 300, 130, 23);
+        ACRS8.setBounds(620, 300, 80, 23);
 
-        ACRS9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS9.setName("ACRS9"); // NOI18N
         ACRS9.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -993,9 +999,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS9);
-        ACRS9.setBounds(570, 330, 130, 23);
+        ACRS9.setBounds(620, 330, 80, 23);
 
-        ACRS10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Pernah", "Kadang-kadang", "Sering", "Selalu" }));
+        ACRS10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         ACRS10.setName("ACRS10"); // NOI18N
         ACRS10.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1008,7 +1014,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         });
         FormInput.add(ACRS10);
-        ACRS10.setBounds(570, 360, 130, 23);
+        ACRS10.setBounds(620, 360, 80, 23);
 
         jLabel130.setText("Nilai :");
         jLabel130.setName("jLabel130"); // NOI18N
@@ -1149,40 +1155,40 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         jSeparator1.setBounds(0, 70, 807, 1);
 
         jLabel110.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel110.setText("Tidak kenal lelah, atau aktivitas yang berlebihan ?");
+        jLabel110.setText("Apakah anak seringkali terlihat marah tanpa sebab yang jelas ? (Seperti banyak menangis, mudah");
         jLabel110.setName("jLabel110"); // NOI18N
         FormInput.add(jLabel110);
-        jLabel110.setBounds(62, 90, 450, 23);
+        jLabel110.setBounds(62, 90, 550, 23);
 
         jLabel111.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel111.setText("Mudah jadi gembira, impulsive ?");
+        jLabel111.setText("Apakah anak tampak menghindar dari teman-teman/anggota keluarganya ? (Seperti ingin merasa sendirian,");
         jLabel111.setName("jLabel111"); // NOI18N
         FormInput.add(jLabel111);
-        jLabel111.setBounds(62, 120, 450, 23);
+        jLabel111.setBounds(62, 120, 550, 23);
 
         jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel112.setText("Mengganggu anak-anak lain ?");
+        jLabel112.setText("Apakah anak terlihat berprilaku merusak & menentang terhadap lingkungan sekitarnya ? (Seperti melanggar");
         jLabel112.setName("jLabel112"); // NOI18N
         FormInput.add(jLabel112);
-        jLabel112.setBounds(62, 150, 450, 23);
+        jLabel112.setBounds(62, 150, 550, 23);
 
         jLabel113.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel113.setText("Gagal menyelesaikan kegiatan yang telah dimulai, rentang perhatian pendek ?");
+        jLabel113.setText("Apakah anak memperlihatkan adanya perasaan ketakutan/kecemasan berlebihan yang tidak dapat dijelaskan");
         jLabel113.setName("jLabel113"); // NOI18N
         FormInput.add(jLabel113);
-        jLabel113.setBounds(62, 180, 450, 23);
+        jLabel113.setBounds(62, 180, 550, 23);
 
         jLabel114.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel114.setText("Menggerak-gerakkan anggota badan atau kepala secara terus-menerus ?");
+        jLabel114.setText("Apakah anak mengalami keterbatasan karena adanya konsentrasi yang buruk/mudah beralih perhatiannya,");
         jLabel114.setName("jLabel114"); // NOI18N
         FormInput.add(jLabel114);
-        jLabel114.setBounds(62, 210, 490, 23);
+        jLabel114.setBounds(62, 210, 550, 23);
 
         jLabel115.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel115.setText("Kurang perhatian, mudah teralihkan ?");
+        jLabel115.setText("Apakah anak menunjukkan perilaku kebingungan sehingga mengalami kesulitan dalam berkomunikasi dan");
         jLabel115.setName("jLabel115"); // NOI18N
         FormInput.add(jLabel115);
-        jLabel115.setBounds(62, 240, 450, 23);
+        jLabel115.setBounds(62, 240, 540, 23);
 
         jLabel116.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel116.setText("Permintaannya harus segera dipenuhi, mudah menjadi frustasi ?");
@@ -1220,6 +1226,42 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         jLabel163.setName("jLabel163"); // NOI18N
         FormInput.add(jLabel163);
         jLabel163.setBounds(10, 420, 200, 23);
+
+        jLabel120.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel120.setText("tersinggung atau bereaksi berlebihan terhadap hal-hal yang sudah biasa dihadapainya)");
+        jLabel120.setName("jLabel120"); // NOI18N
+        FormInput.add(jLabel120);
+        jLabel120.setBounds(62, 103, 540, 23);
+
+        jLabel121.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel121.setText("menyendiri/merasa sedih sepanjang waktu, kehilangan minat terhadap hal yang biasa sangat dinikmati)");
+        jLabel121.setName("jLabel121"); // NOI18N
+        FormInput.add(jLabel121);
+        jLabel121.setBounds(62, 133, 540, 23);
+
+        jLabel122.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel122.setText("peraturan yang ada : mencuri, melakukan perbuatan yang berbahaya, menyiksa binatang/anak-anak lainnya)");
+        jLabel122.setName("jLabel122"); // NOI18N
+        FormInput.add(jLabel122);
+        jLabel122.setBounds(62, 163, 550, 23);
+
+        jLabel123.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel123.setText("asalnya & tidak sebanding dengan anak lain seusianya ?");
+        jLabel123.setName("jLabel123"); // NOI18N
+        FormInput.add(jLabel123);
+        jLabel123.setBounds(62, 193, 550, 23);
+
+        jLabel124.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel124.setText("sehingga mengalami penurunan dalam aktivitas sehari-hari atau prestasi belajarnya ?");
+        jLabel124.setName("jLabel124"); // NOI18N
+        FormInput.add(jLabel124);
+        jLabel124.setBounds(62, 223, 550, 23);
+
+        jLabel125.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel125.setText("membuat keputusan ?");
+        jLabel125.setName("jLabel125"); // NOI18N
+        FormInput.add(jLabel125);
+        jLabel125.setBounds(62, 253, 540, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1805,6 +1847,12 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private widget.Label jLabel117;
     private widget.Label jLabel118;
     private widget.Label jLabel119;
+    private widget.Label jLabel120;
+    private widget.Label jLabel121;
+    private widget.Label jLabel122;
+    private widget.Label jLabel123;
+    private widget.Label jLabel124;
+    private widget.Label jLabel125;
     private widget.Label jLabel130;
     private widget.Label jLabel141;
     private widget.Label jLabel142;
