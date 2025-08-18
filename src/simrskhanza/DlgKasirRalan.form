@@ -100,7 +100,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan IGD"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan IGD"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanIGD" noResource="true"/>
@@ -126,7 +126,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis IGD"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis IGD"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisIGD" noResource="true"/>
@@ -152,7 +152,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis IGD Psikiatri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis IGD Psikiatri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisIGDPsikiatri" noResource="true"/>
@@ -178,7 +178,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Pasien Keracunan"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Pasien Keracunan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPasienKeracunan" noResource="true"/>
@@ -408,7 +408,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Umum"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Umum"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanRalan" noResource="true"/>
@@ -434,7 +434,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Gigi &amp; Mulut"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Gigi &amp; Mulut"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanGigi" noResource="true"/>
@@ -460,7 +460,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Kebidanan &amp; Kandungan"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Kebidanan &amp; Kandungan"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanKebidanan" noResource="true"/>
@@ -486,7 +486,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Bayi/Anak"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Bayi/Anak"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanBayiAnak" noResource="true"/>
@@ -512,7 +512,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Psikiatri"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Psikiatri"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanPsikiatri" noResource="true"/>
@@ -538,7 +538,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Geriatri"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Keperawatan Geriatri"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanRalanGeriatri" noResource="true"/>
@@ -589,7 +589,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Umum"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Umum"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalan" noResource="true"/>
@@ -615,7 +615,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Kebidanan &amp; Kandungan"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Kebidanan &amp; Kandungan"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanKebidanan" noResource="true"/>
@@ -641,7 +641,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bayi/Anak"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Bayi/Anak"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBayi" noResource="true"/>
@@ -667,7 +667,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis THT"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis THT"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanTHT" noResource="true"/>
@@ -693,7 +693,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Psikiatri"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Psikiatri"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPsikiatri" noResource="true"/>
@@ -719,7 +719,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Penyakit Dalam"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Penyakit Dalam"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPenyakitDalam" noResource="true"/>
@@ -745,7 +745,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Mata"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Mata"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanMata" noResource="true"/>
@@ -771,7 +771,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Neurologi"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Neurologi"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanNeurologi" noResource="true"/>
@@ -797,7 +797,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Orthopedi"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Orthopedi"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanOrthopedi" noResource="true"/>
@@ -823,7 +823,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Bedah"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedah" noResource="true"/>
@@ -849,7 +849,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah Mulut"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Bedah Mulut"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedahMulut" noResource="true"/>
@@ -875,7 +875,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Geriatri"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Geriatri"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanGeriatri" noResource="true"/>
@@ -901,7 +901,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Kulit &amp; Kelamin"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Kulit &amp; Kelamin"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanKulitKelamin" noResource="true"/>
@@ -927,7 +927,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Paru"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Paru"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanParu" noResource="true"/>
@@ -953,7 +953,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Hemodialisa"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Hemodialisa"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanHemodialisa" noResource="true"/>
@@ -979,7 +979,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/category.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Fisik &amp; Rehabilitasi"/>
+                        <Property name="text" type="java.lang.String" value="Pengkajian Awal Medis Fisik &amp; Rehabilitasi"/>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                         <Property name="horizontalTextPosition" type="int" value="4"/>
                         <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanFisikRehabilitasi" noResource="true"/>
@@ -1033,7 +1033,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Awal Fisioterapi"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Awal Fisioterapi"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianFisioterapi" noResource="true"/>
@@ -1059,7 +1059,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Psikolog"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Psikolog"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPsikolog" noResource="true"/>
@@ -1085,7 +1085,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Terapi Wicara"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Terapi Wicara"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianTerapiWicara" noResource="true"/>
@@ -1240,7 +1240,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Pre Operasi"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Pre Operasi"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPreOp" noResource="true"/>
@@ -1266,7 +1266,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Pre Anestesi"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Pre Anestesi"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPreAnestesi" noResource="true"/>
@@ -1498,7 +1498,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Dewasa"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Dewasa"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhDewasa" noResource="true"/>
@@ -1524,7 +1524,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Anak"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Anak"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhAnak" noResource="true"/>
@@ -1550,7 +1550,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Lansia"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Lansia"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhLansia" noResource="true"/>
@@ -1576,7 +1576,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Neonatus"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Neonatus"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhNeonatus" noResource="true"/>
@@ -1602,7 +1602,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Geriatri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Geriatri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhGeriatri" noResource="true"/>
@@ -1628,7 +1628,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Psikiatri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Risiko Jatuh Psikiatri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhPsikiatri" noResource="true"/>
@@ -1654,7 +1654,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Skrining Fungsional"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Lanjutan Skrining Fungsional"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianLanjutanSkriningFungsional" noResource="true"/>
@@ -1679,7 +1679,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/category.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Penilaian Lain-lain"/>
+                <Property name="text" type="java.lang.String" value="Pengkajian Lain-lain"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="0"/>
                 </Property>
@@ -1705,7 +1705,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Tambahan Pasien Geriatri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Tambahan Pasien Geriatri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianTambahanGeriatri" noResource="true"/>
@@ -1731,7 +1731,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Tambahan Bunuh Diri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Tambahan Bunuh Diri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianTambahanBunuhDiri" noResource="true"/>
@@ -1757,7 +1757,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Tambahan Perilaku Kekerasan"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Tambahan Perilaku Kekerasan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianTambahanPerilakuKekerasan" noResource="true"/>
@@ -1783,7 +1783,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Tambahan Melarikan Diri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Tambahan Melarikan Diri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianTambahanMelarikanDiri" noResource="true"/>
@@ -1809,7 +1809,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Pasien Terminal"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Pasien Terminal"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPasienTerminal" noResource="true"/>
@@ -1835,7 +1835,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Korban Kekerasan"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Korban Kekerasan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianKorbanKekerasan" noResource="true"/>
@@ -1861,7 +1861,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Pasien Penyakit Menular"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Pasien Penyakit Menular"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPasienPenyakitMenular" noResource="true"/>
@@ -1887,7 +1887,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Medical Check Up"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Medical Check Up"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianMCU" noResource="true"/>
@@ -2093,7 +2093,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Ulang Nyeri"/>
+                    <Property name="text" type="java.lang.String" value="Pengkajian Ulang Nyeri"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianUlangNyeri" noResource="true"/>
@@ -8988,7 +8988,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="13-08-2025"/>
+                        <StringItem index="0" value="18-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -9075,7 +9075,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="13-08-2025"/>
+                        <StringItem index="0" value="18-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -9610,7 +9610,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="13-08-2025"/>
+                        <StringItem index="0" value="18-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -9635,7 +9635,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="13-08-2025"/>
+                        <StringItem index="0" value="18-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
