@@ -4454,23 +4454,21 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }else if (NoKartu.getText().trim().equals("")) {
                 Valid.textKosong(NoKartu, "Nomor Kartu");
             }else{ 
-                tglkkl="0000-00-00";
-                if(LakaLantas.getSelectedIndex()>0){
-                    tglkkl=Valid.SetTgl(TanggalKKL.getSelectedItem()+"");
+                tglkkl = "0000-00-00";
+                if (LakaLantas.getSelectedIndex() > 0) {
+                    tglkkl = Valid.getTglSmc(TanggalKKL);
                 }
-                
-                if(Sequel.menyimpantf("bridging_sep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","SEP",52,new String[]{
-                     NoSEP.getText().trim(),TNoRw.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+""),Valid.SetTgl(TanggalRujuk.getSelectedItem()+""),NoRujukan.getText(),KdPpkRujukan.getText(), 
-                     NmPpkRujukan.getText(),KdPPK.getText(), NmPPK.getText(),JenisPelayanan.getSelectedItem().toString().substring(0,1), Catatan.getText(),KdPenyakit.getText(),NmPenyakit.getText(),
-                     KdPoli.getText(),NmPoli.getText(), Kelas.getSelectedItem().toString().substring(0,1),(NaikKelas.getSelectedIndex()>0?NaikKelas.getSelectedItem().toString().substring(0,1):""),
-                     (Pembiayaan.getSelectedIndex()>0?Pembiayaan.getSelectedItem().toString().substring(0,1):""),(PenanggungJawab.getText().equals("")?"":PenanggungJawab.getText()),
-                     LakaLantas.getSelectedItem().toString().substring(0,1),user,TNoRM.getText(),TPasien.getText(),TglLahir.getText(),JenisPeserta.getText(),JK.getText(),NoKartu.getText(),
-                     "0000-00-00 00:00:00",AsalRujukan.getSelectedItem().toString(),Eksekutif.getSelectedItem().toString(),COB.getSelectedItem().toString(),NoTelp.getText(),Katarak.getSelectedItem().toString(),
-                     tglkkl,Keterangan.getText(),Suplesi.getSelectedItem().toString(),NoSEPSuplesi.getText(),KdPropinsi.getText(),NmPropinsi.getText(),KdKabupaten.getText(),NmKabupaten.getText(),
-                     KdKecamatan.getText(),NmKecamatan.getText(),NoSKDP.getText(),KdDPJP.getText(),NmDPJP.getText(),TujuanKunjungan.getSelectedItem().toString().substring(0,1),
-                     (FlagProsedur.getSelectedIndex()>0?FlagProsedur.getSelectedItem().toString().substring(0,1):""),(Penunjang.getSelectedIndex()>0?Penunjang.getSelectedIndex()+"":""),
-                     (AsesmenPoli.getSelectedIndex()>0?AsesmenPoli.getSelectedItem().toString().substring(0,1):""),KdDPJPLayanan.getText(),NmDPJPLayanan.getText()
-                 })==true){
+                if (Sequel.menyimpantfSmc("bridging_sep", null,  NoSEP.getText().trim(), TNoRw.getText(), Valid.getTglSmc(TanggalSEP), Valid.getTglSmc(TanggalRujuk), NoRujukan.getText(), KdPpkRujukan.getText(),
+                    NmPpkRujukan.getText(), KdPPK.getText(), NmPPK.getText(), JenisPelayanan.getSelectedItem().toString().substring(0, 1), Catatan.getText(), KdPenyakit.getText(), NmPenyakit.getText(),
+                    KdPoli.getText(), NmPoli.getText(), Kelas.getSelectedItem().toString().substring(0, 1), (NaikKelas.getSelectedIndex() > 0 ? NaikKelas.getSelectedItem().toString().substring(0, 1) : ""),
+                    (Pembiayaan.getSelectedIndex() > 0 ? Pembiayaan.getSelectedItem().toString().substring(0, 1) : ""), (PenanggungJawab.getText().equals("") ? "" : PenanggungJawab.getText()),
+                    LakaLantas.getSelectedItem().toString().substring(0, 1), user, TNoRM.getText(), TPasien.getText(), TglLahir.getText(), JenisPeserta.getText(), JK.getText(), NoKartu.getText(),
+                    "0000-00-00 00:00:00", AsalRujukan.getSelectedItem().toString(), Eksekutif.getSelectedItem().toString(), COB.getSelectedItem().toString(), NoTelp.getText(), Katarak.getSelectedItem().toString(),
+                    tglkkl, Keterangan.getText(), Suplesi.getSelectedItem().toString(), NoSEPSuplesi.getText(), KdPropinsi.getText(), NmPropinsi.getText(), KdKabupaten.getText(), NmKabupaten.getText(),
+                    KdKecamatan.getText(), NmKecamatan.getText(), NoSKDP.getText(), KdDPJP.getText(), NmDPJP.getText(), TujuanKunjungan.getSelectedItem().toString().substring(0, 1),
+                    (FlagProsedur.getSelectedIndex() > 0 ? FlagProsedur.getSelectedItem().toString().substring(0, 1) : ""), (Penunjang.getSelectedIndex() > 0 ? Penunjang.getSelectedIndex() + "" : ""),
+                    (AsesmenPoli.getSelectedIndex() > 0 ? AsesmenPoli.getSelectedItem().toString().substring(0, 1) : ""), KdDPJPLayanan.getText(), NmDPJPLayanan.getText(), "0"
+                )) {
                     tampil();
                     WindowCariSEP.dispose();
                 }
@@ -6984,7 +6982,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     )) {
                         Sequel.menyimpanSmc("rujuk_masuk", null, TNoRw.getText(), NmPpkRujukan.getText(), "-", NoRujukan.getText(), "0", NmPpkRujukan.getText(), KdPenyakit.getText(), "-", "-", NoBalasan.getText());
                         if (JenisPelayanan.getSelectedIndex() == 1) {
-                            Sequel.mengupdateSmc("bridging_sep", "tglpulang = ?", "no_sep = ?", Valid.getTglSmc(TanggalSEP), response.asText());
+                            Sequel.mengupdateSmc("bridging_sep_internal", "tglpulang = ?", "no_sep = ?", Valid.getTglSmc(TanggalSEP), response.asText());
                         }
                         if (!prb.equals("")) {
                             if (Sequel.menyimpantfSmc("bpjs_prb", null, response.asText(), prb)) {
@@ -7106,7 +7104,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             + "\"namapoli\": \"" + NmPoli.getText() + "\","
                             + "\"pasienbaru\": " + pasienbaru + ","
                             + "\"norm\": \"" + TNoRM.getText() + "\","
-                            + "\"tanggalperiksa\": \"" + Valid.SetTgl(TanggalSEP.getSelectedItem() + "") + "\","
+                            + "\"tanggalperiksa\": \"" + Valid.getTglSmc(TanggalSEP) + "\","
                             + "\"kodedokter\": " + KdDPJP.getText() + ","
                             + "\"namadokter\": \"" + NmDPJP.getText() + "\","
                             + "\"jampraktek\": \"" + jammulai.substring(0, 5) + "-" + jamselesai.substring(0, 5) + "\","
