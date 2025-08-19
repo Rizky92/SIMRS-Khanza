@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `antriloketfarmasi_smc`  (
   PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
   INDEX `antriloketfarmasi_smc_jam_IDX`(`jam`) USING BTREE,
   INDEX `antriloketfarmasi_smc_tanggal_IDX`(`tanggal`) USING BTREE,
-  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
