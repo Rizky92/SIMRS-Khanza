@@ -909,7 +909,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                     if (task3.equals("")) {
                                                         date = Sequel.cariTglSmc("select if(m.dikirim = '0000-00-00 00:00:00.000', '', m.dikirim) from mutasi_berkas m where m.no_rawat = ?", rs.getString("no_rawat"));
                                                         if (date == null && !rs.getString("kd_pj").equals(kodebpjs)) {
-                                                            date = Sequel.cariTglSmc("select concat(r.tgl_registrasi, ' ', if(r.jam_reg > ?, r.jam_reg, ?)) from reg_periksa r where r.no_rawat = ?", rs2.getString("jam_mulai"), rs2.getString("jam_mulai"), rs.getString("no_rawat"));
+                                                            date = Sequel.cariTglSmc("select concat(r.tgl_registrasi, ' ', r.jam_reg) from reg_periksa r where r.no_rawat = ?", rs2.getString("jam_mulai"), rs2.getString("jam_mulai"), rs.getString("no_rawat"));
                                                         }
                                                         if (date != null) {
                                                             waktu = dtf.format(date);
