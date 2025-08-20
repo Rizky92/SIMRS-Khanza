@@ -3560,14 +3560,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            Date now = Calendar.getInstance().getTime();
             if (ChkJln.isSelected()) {
-                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
-                
-                DTPTgl.setDate(now);
-                cmbJam.setSelectedItem(jam.substring(0, 2));
-                cmbMnt.setSelectedItem(jam.substring(3, 5));
-                cmbDtk.setSelectedItem(jam.substring(6, 8));
+                Valid.setTglJamRealSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk);
             }
         };
         // Timer
