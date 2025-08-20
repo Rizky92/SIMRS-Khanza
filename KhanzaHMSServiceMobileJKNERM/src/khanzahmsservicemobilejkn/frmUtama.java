@@ -151,23 +151,18 @@ public class frmUtama extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private void jam() {
         ActionListener taskPerformer = new ActionListener() {
-            private int jam;
-            private int menit;
-            private int detik;
-
             @Override
             public void actionPerformed(ActionEvent evt) {
-                cal = Calendar.getInstance();
-                jam = cal.get(Calendar.HOUR_OF_DAY);
-                menit = cal.get(Calendar.MINUTE);
-                detik = cal.get(Calendar.SECOND);
-
-                if (jam == 1 && menit < 5) {
-                    TeksArea.setText("");
-                    Tanggal1.setDate(cal.getTime());
-                }
+                Calendar c = Calendar.getInstance();
+                int jam = c.get(Calendar.HOUR_OF_DAY);
+                int menit = c.get(Calendar.MINUTE);
+                int detik = c.get(Calendar.SECOND);
 
                 if (detik == 1 && (menit % 5 == 0)) {
+                    if (jam == 0) {
+                        TeksArea.setText("");
+                        Tanggal1.setDate(c.getTime());
+                    }
                     koneksi = koneksiDB.condb();
 
                     // Addantrean MobileJKN
@@ -229,9 +224,11 @@ public class frmUtama extends javax.swing.JFrame {
                                     TeksArea.append("respon WS BPJS : " + metadata.path("code").asText() + " " + metadata.path("message").asText() + "\n");
                                 } catch (HttpClientErrorException e) {
                                     System.out.println("Notif : " + e.getMessage());
+                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), rs.getString("dt_ed"));
                                 } catch (HttpServerErrorException e) {
                                     System.out.println("Notif : " + e.getMessage());
+                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", rs.getString("dt_ed"));
                                 } catch (Exception e) {
                                     System.out.println("Notif : " + e);
@@ -276,9 +273,11 @@ public class frmUtama extends javax.swing.JFrame {
                                     TeksArea.append("respon WS BPJS : " + metadata.path("code").asText() + " " + metadata.path("message").asText() + "\n");
                                 } catch (HttpClientErrorException e) {
                                     System.out.println("Notif : " + e.getMessage());
+                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                     Sequel.logTaskid(rs.getString("no_rawat_batal"), rs.getString("nobooking"), "MobileJKN", "batalantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), rs.getString("tanggalbatal"));
                                 } catch (HttpServerErrorException e) {
                                     System.out.println("Notif : " + e.getMessage());
+                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                     Sequel.logTaskid(rs.getString("no_rawat_batal"), rs.getString("nobooking"), "MobileJKN", "batalantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", rs.getString("tanggalbatal"));
                                 } catch (Exception e) {
                                     System.out.println("Notif : " + e);
@@ -299,7 +298,8 @@ public class frmUtama extends javax.swing.JFrame {
                         "if(exists(select * from referensi_mobilejkn_bpjs_taskid t where t.no_rawat = b.no_rawat and t.taskid = '7'), 'Sudah', '') as ada_task7, " +
                         "if(exists(select * from referensi_mobilejkn_bpjs_taskid t where t.no_rawat = b.no_rawat and t.taskid = '99'), 'Sudah', '') as ada_task99 " +
                         "from referensi_mobilejkn_bpjs b join reg_periksa r on b.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
-                        "poliklinik p on r.kd_poli = p.kd_poli join dokter d on r.kd_dokter = d.kd_dokter where b.status = 'Checkin' and b.tanggalperiksa between ? and ?"
+                        "poliklinik p on r.kd_poli = p.kd_poli join dokter d on r.kd_dokter = d.kd_dokter where b.status = 'Checkin' and b.statuskirim = 'Sudah' and " +
+                        "b.tanggalperiksa between ? and ?"
                     )) {
                         ps.setString(1, tgl.format(Tanggal1.getDate()));
                         ps.setString(2, tgl.format(Tanggal1.getDate()));
@@ -349,10 +349,12 @@ public class frmUtama extends javax.swing.JFrame {
                                             } catch (HttpClientErrorException e) {
                                                 task99 = "";
                                                 System.out.println("Notif : " + e.getMessage());
+                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                             } catch (HttpServerErrorException e) {
                                                 task99 = "";
                                                 System.out.println("Notif : " + e.getMessage());
+                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "99", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                             } catch (Exception e) {
                                                 task99 = "";
@@ -399,10 +401,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 } catch (HttpClientErrorException e) {
                                                     task3 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "3", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                 } catch (HttpServerErrorException e) {
                                                     task3 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "3", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                 } catch (Exception e) {
                                                     task3 = "";
@@ -451,10 +455,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 } catch (HttpClientErrorException e) {
                                                     task4 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "4", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                 } catch (HttpServerErrorException e) {
                                                     task4 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "4", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                 } catch (Exception e) {
                                                     task4 = "";
@@ -500,10 +506,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 } catch (HttpClientErrorException e) {
                                                     task5 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "5", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                 } catch (HttpServerErrorException e) {
                                                     task5 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "5", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                 } catch (Exception e) {
                                                     task5 = "";
@@ -544,9 +552,11 @@ public class frmUtama extends javax.swing.JFrame {
                                                 TeksArea.append("respon WS BPJS : " + metadata.path("code").asText() + " " + metadata.path("message").asText() + "\n");
                                             } catch (HttpClientErrorException e) {
                                                 System.out.println("Notif : " + e.getMessage());
+                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantreanfarmasi", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), null);
                                             } catch (HttpServerErrorException e) {
                                                 System.out.println("Notif : " + e.getMessage());
+                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "addantreanfarmasi", requestJson, e.getStatusCode().toString(), e.getMessage(), "", null);
                                             } catch (Exception e) {
                                                 System.out.println("Notif : " + e);
@@ -588,10 +598,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 } catch (HttpClientErrorException e) {
                                                     task6 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "6", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                 } catch (HttpServerErrorException e) {
                                                     task6 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "6", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                 } catch (Exception e) {
                                                     task6 = "";
@@ -637,10 +649,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 } catch (HttpClientErrorException e) {
                                                     task7 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "7", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                 } catch (HttpServerErrorException e) {
                                                     task7 = "";
                                                     System.out.println("Notif : " + e.getMessage());
+                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("nobooking"), "MobileJKN", "7", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                 } catch (Exception e) {
                                                     task7 = "";
@@ -745,10 +759,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                     } catch (HttpClientErrorException e) {
                                                         antrean = "";
                                                         System.out.println("Notif : " + e.getMessage());
+                                                        TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                         Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                     } catch (HttpServerErrorException e) {
                                                         antrean = "";
                                                         System.out.println("Notif : " + e.getMessage());
+                                                        TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                         Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "addantrean", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                     } catch (Exception e) {
                                                         antrean = "";
@@ -794,10 +810,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                             } catch (HttpClientErrorException e) {
                                                                 task99 = "";
                                                                 System.out.println("Notif : " + e.getMessage());
+                                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "99", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                             } catch (HttpServerErrorException e) {
                                                                 task99 = "";
                                                                 System.out.println("Notif : " + e.getMessage());
+                                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "99", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                             } catch (Exception e) {
                                                                 task99 = "";
@@ -844,10 +862,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task1 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "1", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task1 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "1", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task1 = "";
@@ -893,10 +913,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task2 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "2", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task2 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "2", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task2 = "";
@@ -907,8 +929,9 @@ public class frmUtama extends javax.swing.JFrame {
                                                     }
 
                                                     if (task3.equals("")) {
-                                                        date = Sequel.cariTglSmc("select if(m.dikirim = '0000-00-00 00:00:00.000', '', m.dikirim) from mutasi_berkas m where m.no_rawat = ?", rs.getString("no_rawat"));
-                                                        if (date == null && !rs.getString("kd_pj").equals(kodebpjs)) {
+                                                        if (rs.getString("kd_pj").equals(kodebpjs)) {
+                                                            date = Sequel.cariTglSmc("select if(m.dikirim = '0000-00-00 00:00:00.000', '', m.dikirim) from mutasi_berkas m where m.no_rawat = ?", rs.getString("no_rawat"));
+                                                        } else {
                                                             date = Sequel.cariTglSmc("select concat(r.tgl_registrasi, ' ', r.jam_reg) from reg_periksa r where r.no_rawat = ?", rs2.getString("jam_mulai"), rs2.getString("jam_mulai"), rs.getString("no_rawat"));
                                                         }
                                                         if (date != null) {
@@ -945,10 +968,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task3 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "3", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task3 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "3", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task3 = "";
@@ -997,10 +1022,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task4 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "4", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task4 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "4", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task4 = "";
@@ -1046,10 +1073,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task5 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "5", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task5 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "5", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task5 = "";
@@ -1088,9 +1117,11 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 TeksArea.append("respon WS BPJS : " + metadata.path("code").asText() + " " + metadata.path("message").asText() + "\n");
                                                             } catch (HttpClientErrorException e) {
                                                                 System.out.println("Notif : " + e.getMessage());
+                                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "addantreanfarmasi", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), null);
                                                             } catch (HttpServerErrorException e) {
                                                                 System.out.println("Notif : " + e.getMessage());
+                                                                TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                 Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "addantreanfarmasi", requestJson, e.getStatusCode().toString(), e.getMessage(), "", null);
                                                             } catch (Exception e) {
                                                                 System.out.println("Notif : " + e);
@@ -1132,10 +1163,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task6 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "6", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task6 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "6", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task6 = "";
@@ -1181,10 +1214,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                                 } catch (HttpClientErrorException e) {
                                                                     task7 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "7", requestJson, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), waktu);
                                                                 } catch (HttpServerErrorException e) {
                                                                     task7 = "";
                                                                     System.out.println("Notif : " + e.getMessage());
+                                                                    TeksArea.append("respon WS BPJS : " + e.getStatusCode().toString() + " " + e.getMessage() + "\n");
                                                                     Sequel.logTaskid(rs.getString("no_rawat"), rs.getString("no_rawat"), "Onsite", "7", requestJson, e.getStatusCode().toString(), e.getMessage(), "", waktu);
                                                                 } catch (Exception e) {
                                                                     task7 = "";
