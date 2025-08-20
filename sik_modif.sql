@@ -23,6 +23,18 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `antriloketfarmasi_smc`  (
+  `nomor` varchar(6) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NULL DEFAULT NULL,
+  `jam_panggil` time NULL DEFAULT NULL,
+  `no_resep` varchar(14) NULL DEFAULT NULL,
+  PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_jam_IDX`(`jam`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_tanggal_IDX`(`tanggal`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
