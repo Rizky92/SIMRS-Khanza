@@ -87,6 +87,9 @@ import bridging.ICareRiwayatPerawatanFKTP;
 import bridging.INACBGPerawatanCorona;
 import bridging.PilihanBridgingAsuransi;
 import inventory.DlgCopyResep;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import laporan.DlgDiagnosaPenyakit;
@@ -285,8 +288,9 @@ public final class DlgReg extends javax.swing.JDialog {
     private boolean ceksukses=false;
     private String nosisrute="",aktifkanparsial="no",BASENOREG="",TANGGALMUNDUR="yes",
             URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",terbitsep="",
-            validasiregistrasi="No",validasicatatan="No",norawatdipilih="",normdipilih="";
-    private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI();
+            validasiregistrasi="No",validasicatatan="No",norawatdipilih="",normdipilih="",antri = "", loket = "";
+    private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI(), ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
+    private final List<String> PREFIXHURUFAKTIF = Arrays.asList(koneksiDB.PREFIXHURUFAKTIF());
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private char ESC = 27;
     // ganti kertas
@@ -17066,7 +17070,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             private int nilai_jam;
             private int nilai_menit;
             private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent event) {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
@@ -17108,6 +17112,35 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 CmbJam.setSelectedItem(jam);
                 CmbMenit.setSelectedItem(menit);
                 CmbDetik.setSelectedItem(detik);
+                
+                if (nilai_detik % 5 == 0) {
+                    antri = ""; loket = "";
+                    try (ResultSet rs = koneksi.createStatement().executeQuery("select antrian, loket from antriloketsmc")) {
+                        if (rs.next()) {
+                            antri = rs.getString(1);
+                            loket = rs.getString(2);
+                            if (!antri.isBlank() && !loket.isBlank()) {
+                                if (ANTRIANPREFIXHURUF) {
+                                    if (cmbhuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
+                                        i = Integer.parseInt(antri.substring(1)) + 1;
+                                    }
+                                } else {
+                                    i = Integer.parseInt(antri) + 1;
+                                }
+                                TNoAntrian.setText("" + i);
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.getMessage().contains("connection closed.")) {
+                            koneksi = koneksiDB.condb();
+                        }
+                    }
+                    
+                    TNoAntrian.setText(Sequel.cariIsiSmc("select substring(max(antriloketcetak_smc.nomor), 2) from " +
+                        "antriloketcetak_smc where tanggal = current_date() and left(nomor, 1) = ? and " +
+                        "jam_panggil is not null", cmbhuruf.getSelectedItem().toString()));
+                }
             }
         };
         // Timer
@@ -19082,6 +19115,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void isAntrian() {
         if (akses.getantrian_di_registrasi()) {
+            cmbhuruf.removeAllItems();
+            PREFIXHURUFAKTIF.forEach(cmbhuruf::addItem);
             label2.setVisible(true);
             cmbloket.setVisible(true);
             label3.setVisible(true);
