@@ -998,6 +998,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
+        isAntrian();
     }
 
 
@@ -19076,6 +19077,29 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     }
                 }
             }
+        }
+    }
+    
+    private void isAntrian() {
+        if (akses.getantrian_di_registrasi()) {
+            label2.setVisible(true);
+            cmbloket.setVisible(true);
+            label3.setVisible(true);
+            cmbhuruf.setVisible(true);
+            jLabel5.setVisible(true);
+            TNoAntrian.setVisible(true);
+            BtnAntri.setVisible(true);
+            BtnStop.setVisible(true);
+        } else {
+            label2.setVisible(false);
+            cmbloket.setVisible(false);
+            label3.setVisible(false);
+            cmbhuruf.setVisible(false);
+            jLabel5.setVisible(false);
+            TNoAntrian.setVisible(false);
+            TNoAntrian.setText("");
+            BtnAntri.setVisible(false);
+            BtnStop.setVisible(false);
         }
     }
 }
