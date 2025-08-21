@@ -17809,12 +17809,16 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             if(ChkTracker.isSelected()==true){
                 ctk();
             }
-            if (! TNoAntrian.getText().isBlank()) {
-                if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = current_date() and no_rawat != ?", TNoAntrian.getText().trim(), TNoRw.getText())) {
+            if (!TNoAntrian.getText().isBlank()) {
+                if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0')) and tanggal = current_date() and no_rawat != ?",
+                    cmbhuruf.getSelectedItem().toString(), TNoAntrian.getText().trim(), TNoRw.getText()
+                )) {
                     JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
-                } else if (! Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText().trim())
-                        && Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText().trim())) {
-                    Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = ?", TNoRw.getText(), TNoRM.getText(), TNoAntrian.getText().trim());
+                } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText().trim()) &&
+                    Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText().trim()
+                )) {
+                    Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0'))",
+                        TNoRw.getText(), TNoRM.getText(), cmbhuruf.getSelectedItem().toString(), TNoAntrian.getText().trim());
                 }
             }
             if(TabRawat.getSelectedIndex()==0){
