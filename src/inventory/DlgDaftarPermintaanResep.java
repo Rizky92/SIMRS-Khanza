@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -61,7 +62,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private BackgroundMusic music;
     private boolean aktif=false,semua,ceksukses=false;
     private String modelLembarPemberianObat = "", modelAturanPakai = "";
-    private boolean autoValidasiRalan = false, autoValidasiRanap = false;
+    private boolean isopening = false, autoaksi = false, autoValidasiRalan = false, autoValidasiRanap = false;
 
     /** Creates new form
      * @param parent
@@ -1576,6 +1577,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            autoaksi = true;
             pilihTab();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari.requestFocus();
@@ -3815,21 +3817,28 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     setCursor(Cursor.getDefaultCursor());
                     tabMode.fireTableDataChanged();
                     ceksukses = false;
-                    
-                    /*if (tabMode.getRowCount() > 0) {
-                        tbResepRalan.setRowSelectionInterval(0, 0);
-                        getData();
-                        String tglValidasi = tabMode.getValueAt(0, 12).toString();
-                        String jamValidasi = tabMode.getValueAt(0, 13).toString();
-                        String tglPenyerahan = tabMode.getValueAt(0, 14).toString();
-                        String jamPenyerahan = tabMode.getValueAt(0, 15).toString();
-                        
-                        if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
-                            BtnTambahActionPerformed(null);
-                        } else if (!tglValidasi.isBlank() && !jamValidasi.isBlank() && tglPenyerahan.isBlank() && jamPenyerahan.isBlank()) {
-                            BtnPenyerahanActionPerformed(null);
-                        }
-                    }*/
+                    if (!isopening && autoValidasiRalan && autoaksi && tabMode.getRowCount() > 0) {
+                        SwingUtilities.invokeLater(() -> {
+                            isopening = true;
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {}
+
+                            tbResepRalan.setRowSelectionInterval(0, 0);
+                            getData();
+                            String tglValidasi = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 12).toString(),
+                                   jamValidasi = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 13).toString(),
+                                   tglPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 14).toString(),
+                                   jamPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 15).toString();
+
+                            if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
+                                BtnTambahActionPerformed(null);
+                            } else if (!tglValidasi.isBlank() && !jamValidasi.isBlank() && tglPenyerahan.isBlank() && jamPenyerahan.isBlank()) {
+                                BtnPenyerahanActionPerformed(null);
+                            }
+                        });
+                    }
+                    autoaksi = false;
                 }
             }.execute();
         }
@@ -4097,6 +4106,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         dlgobt.setLocationRelativeTo(internalFrame1);
         TeksKosong();
         dlgobt.setVisible(true);
+        dlgobt.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                isopening = false;
+            }
+        });
     }
 
     private void TeksKosong(){
@@ -4133,6 +4148,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         dlgobt2.setLocationRelativeTo(internalFrame1);
         TeksKosong();
         dlgobt2.setVisible(true);
+        dlgobt2.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                isopening = false;
+            }
+        });
     }
 
     private void panggilform3() {
@@ -4178,7 +4199,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         TeksKosong();
         dlgresepulang.setVisible(true);
     }
-
+    
     private void pilihTab(){
         if(TabPilihRawat.getSelectedIndex()==0){
             pilihRalan();
@@ -4373,6 +4394,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     setCursor(Cursor.getDefaultCursor());
                     tabMode3.fireTableDataChanged();
                     ceksukses = false;
+                    if (!isopening && autoValidasiRanap && autoaksi && tabMode3.getRowCount() > 0) {
+                        isopening = true;
+                        SwingUtilities.invokeLater(() -> {
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {}
+
+                            tbResepRanap.setRowSelectionInterval(0, 0);
+                            getData2();
+                            String tglValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 12).toString(),
+                                   jamValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 13).toString();
+
+                            if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
+                                BtnTambahActionPerformed(null);
+                            }
+                        });
+                    }
+                    autoaksi = false;
                 }
             }.execute();
         }
