@@ -521,7 +521,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TNoReg.setDocument(new batasInput((byte)8).getKata(TNoReg));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TNoRM.setDocument(new batasInput((byte)15).getKata(TNoRM));
-        TNoAntrian.setDocument(new batasInput(6).getKata(TNoAntrian));
+        //TNoAntrian.setDocument(new batasInput(6).getKata(TNoAntrian));
         textNoAntrian.setDocument(new batasInput(6).getKata(textNoAntrian));
         AsalRujukan.setDocument(new batasInput((byte)60).getKata(AsalRujukan));
         KdDokter.setDocument(new batasInput((byte)20).getKata(KdDokter));
@@ -1432,7 +1432,6 @@ public final class DlgReg extends javax.swing.JDialog {
         NoKa = new widget.TextBox();
         btnCekBridging = new widget.Button();
         jLabel5 = new widget.Label();
-        TNoAntrian = new widget.TextBox();
         labelKeterangan = new widget.Label();
         label2 = new widget.Label();
         cmbloket = new widget.ComboBox();
@@ -1440,6 +1439,9 @@ public final class DlgReg extends javax.swing.JDialog {
         cmbhuruf = new widget.ComboBox();
         BtnAntri = new widget.Button();
         BtnStop = new widget.Button();
+        label4 = new widget.Label();
+        AntrianTerakhir = new widget.Label();
+        TNoAntrian = new javax.swing.JSpinner();
         ChkInput = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
@@ -6466,6 +6468,9 @@ public final class DlgReg extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -6631,7 +6636,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6644,7 +6649,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6785,7 +6790,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-08-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -7092,16 +7097,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(884, 72, 50, 23);
 
-        TNoAntrian.setHighlighter(null);
-        TNoAntrian.setName("TNoAntrian"); // NOI18N
-        TNoAntrian.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoAntrianKeyPressed(evt);
-            }
-        });
-        FormInput.add(TNoAntrian);
-        TNoAntrian.setBounds(938, 72, 60, 23);
-
         labelKeterangan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelKeterangan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelKeterangan.setName("labelKeterangan"); // NOI18N
@@ -7121,12 +7116,17 @@ public final class DlgReg extends javax.swing.JDialog {
         label3.setText("Huruf :");
         label3.setName("label3"); // NOI18N
         FormInput.add(label3);
-        label3.setBounds(1002, 42, 44, 23);
+        label3.setBounds(1002, 42, 50, 23);
 
         cmbhuruf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", " " }));
         cmbhuruf.setName("cmbhuruf"); // NOI18N
+        cmbhuruf.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbhurufItemStateChanged(evt);
+            }
+        });
         FormInput.add(cmbhuruf);
-        cmbhuruf.setBounds(1050, 42, 60, 23);
+        cmbhuruf.setBounds(1056, 42, 60, 23);
 
         BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
         BtnAntri.setMnemonic('7');
@@ -7157,6 +7157,22 @@ public final class DlgReg extends javax.swing.JDialog {
         });
         FormInput.add(BtnStop);
         BtnStop.setBounds(980, 132, 80, 23);
+
+        label4.setText("Terakhir :"); // NOI18N
+        label4.setName("label4"); // NOI18N
+        FormInput.add(label4);
+        label4.setBounds(1002, 72, 50, 23);
+
+        AntrianTerakhir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        AntrianTerakhir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        AntrianTerakhir.setName("AntrianTerakhir"); // NOI18N
+        FormInput.add(AntrianTerakhir);
+        AntrianTerakhir.setBounds(1056, 72, 50, 23);
+
+        TNoAntrian.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        TNoAntrian.setName("TNoAntrian"); // NOI18N
+        FormInput.add(TNoAntrian);
+        TNoAntrian.setBounds(938, 72, 60, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -7333,7 +7349,7 @@ public final class DlgReg extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"dokter");
-        }else if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
+        }else if(TNoRM.getText().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRM,"pasien");
         }else if(TPoli.getText().trim().equals("")){
             Valid.textKosong(kdpoli,"poliklinik");
@@ -7528,7 +7544,7 @@ public final class DlgReg extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"dokter");
-        }else if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
+        }else if(TNoRM.getText().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRM,"pasien");
         }else if(TPoli.getText().trim().equals("")){
             Valid.textKosong(kdpoli,"poliklinik");
@@ -13672,7 +13688,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
         if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
             JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
-        } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+        } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText(), Valid.getTglSmc(DTPReg))) {
             Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
             Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
         }
@@ -13684,17 +13700,13 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         emptTeks();
     }//GEN-LAST:event_buttonSimpanAntrianActionPerformed
 
-    private void TNoAntrianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoAntrianKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNoAntrianKeyPressed
-
     private void textNoAntrianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNoAntrianKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             akses.setform("DlgReg");
 
             if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
                 JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
-            } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+            } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText(), Valid.getTglSmc(DTPReg))) {
                 Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
                 Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
             }
@@ -13713,7 +13725,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
             if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = ? and no_rawat != ?", textNoAntrian.getText().trim(), Valid.getTglSmc(DTPReg), textNoRawatAntrian.getText())) {
                 JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!");
-            } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText().trim(), Valid.getTglSmc(DTPReg))) {
+            } else if (Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = ?", TNoRM.getText(), Valid.getTglSmc(DTPReg))) {
                 Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = null, no_rkm_medis = null", "no_rawat = ?", textNoRawatAntrian.getText());
                 Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = ? and nomor = ?", textNoRawatAntrian.getText(), TNoRM.getText(), Valid.getTglSmc(DTPReg), textNoAntrian.getText().trim());
             }
@@ -14752,14 +14764,27 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void BtnAntriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntriActionPerformed
         Sequel.menghapusSmc("antriloketsmc");
         Sequel.executeRawSmc("insert into antriloketsmc values (?, concat(?, lpad(?, 3, '0')))", cmbloket.getSelectedItem().toString(),
-            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", TNoAntrian.getText());
+            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", String.valueOf(TNoAntrian.getValue()));
         Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
-            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", TNoAntrian.getText());
+            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", String.valueOf(TNoAntrian.getValue()));
     }//GEN-LAST:event_BtnAntriActionPerformed
 
     private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
         Sequel.menghapusSmc("antriloketsmc");
     }//GEN-LAST:event_BtnStopActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        isAntrian();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void cmbhurufItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbhurufItemStateChanged
+        if (akses.getantrian_di_registrasi()) {
+            AntrianTerakhir.setText(Sequel.cariIsiSmc(
+                "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
+                "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
+            ));
+        }
+    }//GEN-LAST:event_cmbhurufItemStateChanged
 
     private void MnSkorAldrettePascaAnestesiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
@@ -16366,6 +16391,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.Label AntrianTerakhir;
     private widget.TextBox AsalRujukan;
     private widget.Button BtnAll;
     private widget.Button BtnAntri;
@@ -16679,7 +16705,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox TCari;
     private widget.TextBox TDokter;
     private widget.TextBox THbngn;
-    private widget.TextBox TNoAntrian;
+    private javax.swing.JSpinner TNoAntrian;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoReg;
     private widget.TextBox TNoRw;
@@ -16746,6 +16772,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox kdpoli;
     private widget.Label label2;
     private widget.Label label3;
+    private widget.Label label4;
     private widget.Label label40;
     private widget.Label label41;
     private widget.Label labelKeterangan;
@@ -17029,9 +17056,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoRM.requestFocus();
         kdpnj.setText("");
         nmpnj.setText("");
-        TNoAntrian.setText("");
+        // TNoAntrian.setText("");
         tbPetugas.clearSelection();
-        TNoAntrian.setEditable(true);
+        // TNoAntrian.setEditable(true);
         labelKeterangan.setText("");
         labelKeterangan.setForeground(new Color(50, 50, 50));
     }
@@ -17059,8 +17086,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());
-            TNoAntrian.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 24).toString());
-            TNoAntrian.setEditable(false);
+            // TNoAntrian.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 24).toString());
+            // TNoAntrian.setEditable(false);
         }
     }
 
@@ -17113,33 +17140,13 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 CmbMenit.setSelectedItem(menit);
                 CmbDetik.setSelectedItem(detik);
                 
-                if (nilai_detik % 5 == 0) {
-                    antri = ""; loket = "";
-                    try (ResultSet rs = koneksi.createStatement().executeQuery("select antrian, loket from antriloketsmc")) {
-                        if (rs.next()) {
-                            antri = rs.getString(1);
-                            loket = rs.getString(2);
-                            if (!antri.isBlank() && !loket.isBlank()) {
-                                if (ANTRIANPREFIXHURUF) {
-                                    if (cmbhuruf.getSelectedItem().toString().equals(antri.substring(0, 1))) {
-                                        i = Integer.parseInt(antri.substring(1)) + 1;
-                                    }
-                                } else {
-                                    i = Integer.parseInt(antri) + 1;
-                                }
-                                TNoAntrian.setText("" + i);
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notif : " + e);
-                        if (e.getMessage().contains("connection closed.")) {
-                            koneksi = koneksiDB.condb();
-                        }
+                if (akses.getantrian_di_registrasi()) {
+                    if (nilai_detik % 5 == 0) {
+                        AntrianTerakhir.setText(Sequel.cariIsiSmc(
+                            "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
+                            "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
+                        ));
                     }
-                    
-                    TNoAntrian.setText(Sequel.cariIsiSmc("select substring(max(antriloketcetak_smc.nomor), 2) from " +
-                        "antriloketcetak_smc where tanggal = current_date() and left(nomor, 1) = ? and " +
-                        "jam_panggil is not null", cmbhuruf.getSelectedItem().toString()));
                 }
             }
         };
@@ -17809,23 +17816,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             if(ChkTracker.isSelected()==true){
                 ctk();
             }
-            if (!TNoAntrian.getText().isBlank()) {
+            if (((Integer) TNoAntrian.getValue()) > 0) {
                 if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0')) and tanggal = current_date() and no_rawat != ?",
-                    cmbhuruf.getSelectedItem().toString(), TNoAntrian.getText().trim(), TNoRw.getText()
+                    cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()), TNoRw.getText()
                 )) {
                     JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
-                } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText().trim()) &&
-                    Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText().trim()
+                } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText()) &&
+                    Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText()
                 )) {
                     Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0'))",
-                        TNoRw.getText(), TNoRM.getText(), cmbhuruf.getSelectedItem().toString(), TNoAntrian.getText().trim());
+                        TNoRw.getText(), TNoRM.getText(), cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()));
                 }
             }
             if(TabRawat.getSelectedIndex()==0){
                 tabMode.addRow(new Object[] {
                     false,TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                     KdDokter.getText(),TDokter.getText(),TNoRM.getText(),TPasien.getText(),JK.getText(),umur+" "+sttsumur,TPoli.getText(),nmpnj.getText(),TPngJwb.getText(),TAlmt.getText(),
-                    THbngn.getText(),Valid.SetAngka(Double.parseDouble(TBiaya.getText())),TStatus.getText(),NoTelp.getText(),"Belum",status,kdpoli.getText(),kdpnj.getText(),"Belum Bayar",TNoAntrian.getText()
+                    THbngn.getText(),Valid.SetAngka(Double.parseDouble(TBiaya.getText())),TStatus.getText(),NoTelp.getText(),"Belum",status,kdpoli.getText(),kdpnj.getText(),"Belum Bayar",
+                    cmbhuruf.getSelectedItem().toString() + Valid.padleftSmc(String.valueOf(TNoAntrian.getValue()), 3, '0')
                 });
                 LCount.setText(""+tabMode.getRowCount());
             }
@@ -19119,24 +19127,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void isAntrian() {
         if (akses.getantrian_di_registrasi()) {
-            cmbhuruf.removeAllItems();
+            //cmbhuruf.removeAllItems();
             PREFIXHURUFAKTIF.forEach(cmbhuruf::addItem);
             label2.setVisible(true);
             cmbloket.setVisible(true);
             label3.setVisible(true);
             cmbhuruf.setVisible(true);
             jLabel5.setVisible(true);
+            label4.setVisible(true);
+            AntrianTerakhir.setVisible(true);
             TNoAntrian.setVisible(true);
             BtnAntri.setVisible(true);
             BtnStop.setVisible(true);
         } else {
+            cmbhuruf.removeAllItems();
             label2.setVisible(false);
             cmbloket.setVisible(false);
             label3.setVisible(false);
             cmbhuruf.setVisible(false);
             jLabel5.setVisible(false);
+            label4.setVisible(false);
+            AntrianTerakhir.setVisible(false);
+            AntrianTerakhir.setText("");
             TNoAntrian.setVisible(false);
-            TNoAntrian.setText("");
+            TNoAntrian.setValue(0);
             BtnAntri.setVisible(false);
             BtnStop.setVisible(false);
         }

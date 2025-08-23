@@ -345,6 +345,30 @@ public final class validasi {
         return true;
     }
     
+    public String padleftSmc(String value, int panjang, char pad) {
+        value = value.trim();
+        StringBuilder sb = new StringBuilder();
+        sb.append(trimStartSmc(value, pad));
+        
+        while ((panjang - value.length()) > 0) {
+            sb.insert(0, pad);
+            --panjang;
+        }
+        
+        return sb.toString();
+    }
+    
+    public String trimStartSmc(String value, char trim) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(value.trim());
+        
+        while (sb.charAt(0) == trim) {
+            sb.deleteCharAt(0);
+        }
+        
+        return sb.toString();
+    }
+    
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
