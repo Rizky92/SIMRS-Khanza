@@ -355,19 +355,22 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         tbPotongan.setDefaultRenderer(Object.class, new WarnaTable());
 
         //ubah lama inap
-        Object[] rowUbahLama={"Kode Kamar","Nama Kamar","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar","Lama Inap"};
+        Object[] rowUbahLama={"Kode Kamar","Nama Kamar","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar","Lama Inap", "Status Kamar", "tgl_masuk", "jam_masuk"};
         tabModeKamIn=new DefaultTableModel(null,rowUbahLama){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                 boolean a = false;
-                 if ((colIndex==2)||(colIndex==3)||(colIndex==4)||(colIndex==5||(colIndex==6))) {
-                      a=true;
-                 }
-                 return a;
+                 return colIndex == 2
+                     || colIndex == 3
+                     || colIndex == 4
+                     || colIndex == 5
+                     || colIndex == 6 
+                     || colIndex == 7;
              }
               
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.Double.class, java.lang.String.class, java.lang.String.class,
+                 java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -6549,33 +6552,57 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     public void tampilUbahLama(String NoRawat) {
         norawatubahlama.setText(NoRawat);
         Valid.tabelKosong(tabModeKamIn);
-        try{   
-            pskamarin=koneksi.prepareStatement(sqlpskamarin);
+        try (PreparedStatement ps = koneksi.prepareStatement(sqlpskamarin)) {
+            ps.setString(1, norawatubahlama.getText());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    /*sqlpskamarin="select kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,"+
+                    "kamar_inap.lama,kamar_inap.ttl_biaya as total,kamar_inap.tgl_masuk, "+
+                    "kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00',current_date(),kamar_inap.tgl_keluar) as tgl_keluar,"+
+                    "if(kamar_inap.jam_keluar='00:00:00',current_time(),kamar_inap.jam_keluar) as jam_keluar "+
+                    "from kamar_inap inner join bangsal inner join kamar "+
+                    "on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                    "and kamar.kd_bangsal=bangsal.kd_bangsal where "+
+                    "kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk,kamar_inap.kd_kamar",*/
+                    // Object[] rowUbahLama={"Kode Kamar","Nama Kamar","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar","Lama Inap", "Status Kamar", "tgl_masuk", "jam_masuk"};
+                    tabModeKamIn.addRow(new Object[] {
+                        rs.getString("kd_kamar"), rs.getString("nm_bangsal"), rs.getString("tgl_masuk"), rs.getString("jam_masuk"),
+                        rs.getString("tgl_keluar"), rs.getString("jam_keluar"), rs.getString("lama"), rs.getString("stts_pulang"),
+                        rs.getString("tgl_masuk"), rs.getString("jam_masuk")
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        
+        try {
+            pskamarin = koneksi.prepareStatement(sqlpskamarin);
             try {
-                pskamarin.setString(1,norawatubahlama.getText());
-                rskamarin=pskamarin.executeQuery();
-                while(rskamarin.next()){
-                    tabModeKamIn.addRow(new Object[]{
-                        rskamarin.getString("kd_kamar"),rskamarin.getString("nm_bangsal"),
-                        rskamarin.getString("tgl_masuk"),rskamarin.getString("jam_masuk"),
-                        rskamarin.getString("tgl_keluar"),rskamarin.getString("jam_keluar"),
+                pskamarin.setString(1, norawatubahlama.getText());
+                rskamarin = pskamarin.executeQuery();
+                while (rskamarin.next()) {
+                    tabModeKamIn.addRow(new Object[] {
+                        rskamarin.getString("kd_kamar"), rskamarin.getString("nm_bangsal"),
+                        rskamarin.getString("tgl_masuk"), rskamarin.getString("jam_masuk"),
+                        rskamarin.getString("tgl_keluar"), rskamarin.getString("jam_keluar"),
                         rskamarin.getString("lama")
                     });
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rskamarin!=null){
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rskamarin != null) {
                     rskamarin.close();
                 }
-                if(pskamarin!=null){
+                if (pskamarin != null) {
                     pskamarin.close();
                 }
-            }        
+            }
             //rs.close();
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }            
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
     }
     
     private void tampilAkunBankJateng() { 
