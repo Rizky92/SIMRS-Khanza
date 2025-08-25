@@ -1352,7 +1352,7 @@ public final class DlgReg extends javax.swing.JDialog {
         kdpnj = new widget.TextBox();
         JK = new widget.TextBox();
         NoTelp = new widget.TextBox();
-        WindowInputNoAntrian = new javax.swing.JDialog();
+        WindowUpdateAntrian = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         buttonTutupDialogAntrian = new widget.Button();
         buttonSimpanAntrian = new widget.Button();
@@ -6392,14 +6392,14 @@ public final class DlgReg extends javax.swing.JDialog {
         NoTelp.setName("NoTelp"); // NOI18N
         NoTelp.setPreferredSize(new java.awt.Dimension(207, 23));
 
-        WindowInputNoAntrian.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        WindowInputNoAntrian.setAlwaysOnTop(true);
-        WindowInputNoAntrian.setModal(true);
-        WindowInputNoAntrian.setName("WindowInputNoAntrian"); // NOI18N
-        WindowInputNoAntrian.setUndecorated(true);
-        WindowInputNoAntrian.setResizable(false);
+        WindowUpdateAntrian.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowUpdateAntrian.setAlwaysOnTop(true);
+        WindowUpdateAntrian.setModal(true);
+        WindowUpdateAntrian.setName("WindowUpdateAntrian"); // NOI18N
+        WindowUpdateAntrian.setUndecorated(true);
+        WindowUpdateAntrian.setResizable(false);
 
-        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Update No. Antrian ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50)));
+        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 50, 50)), "::[ Update No. Antrian ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame8.setName("internalFrame8"); // NOI18N
         internalFrame8.setLayout(null);
 
@@ -6462,7 +6462,7 @@ public final class DlgReg extends javax.swing.JDialog {
         internalFrame8.add(label40);
         label40.setBounds(0, 22, 105, 23);
 
-        WindowInputNoAntrian.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
+        WindowUpdateAntrian.getContentPane().add(internalFrame8, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -7504,7 +7504,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DlgSakit2.dispose();
         DlgDemografi.dispose();
         DlgCatatan.dispose();
-        WindowInputNoAntrian.dispose();
+        WindowUpdateAntrian.dispose();
         akses.setAktif(false);
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
@@ -13680,7 +13680,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_MnCatatanPersalinanActionPerformed
 
     private void buttonTutupDialogAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTutupDialogAntrianActionPerformed
-        WindowInputNoAntrian.dispose();
+        WindowUpdateAntrian.dispose();
     }//GEN-LAST:event_buttonTutupDialogAntrianActionPerformed
 
     private void buttonSimpanAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimpanAntrianActionPerformed
@@ -13696,7 +13696,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         textNoRawatAntrian.setText("");
         textNoAntrian.setText("");
 
-        WindowInputNoAntrian.dispose();
+        WindowUpdateAntrian.dispose();
         emptTeks();
     }//GEN-LAST:event_buttonSimpanAntrianActionPerformed
 
@@ -13714,7 +13714,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             textNoRawatAntrian.setText("");
             textNoAntrian.setText("");
 
-            WindowInputNoAntrian.dispose();
+            WindowUpdateAntrian.dispose();
             emptTeks();
         }
     }//GEN-LAST:event_textNoAntrianKeyPressed
@@ -13733,7 +13733,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             textNoRawatAntrian.setText("");
             textNoAntrian.setText("");
 
-            WindowInputNoAntrian.dispose();
+            WindowUpdateAntrian.dispose();
             emptTeks();
         }
     }//GEN-LAST:event_buttonSimpanAntrianKeyPressed
@@ -15192,9 +15192,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void MnInputNoAntrianRegistrasiActionPerformed(java.awt.event.ActionEvent evt) {
         textNoRawatAntrian.setText(TNoRw.getText());
         textNoAntrian.setText(Sequel.cariIsiSmc("select max(nomor) from antriloketcetak_smc where tanggal = ? and jam_panggil is null", Valid.SetTgl(DTPReg.getSelectedItem().toString())));
-        WindowInputNoAntrian.setSize(617, 105);
-        WindowInputNoAntrian.setLocationRelativeTo(internalFrame1);
-        WindowInputNoAntrian.setVisible(true);
+        WindowUpdateAntrian.setSize(617, 105);
+        WindowUpdateAntrian.setLocationRelativeTo(internalFrame1);
+        WindowUpdateAntrian.setVisible(true);
     }
 
     private void MnHasilEndoskopiHidungActionPerformed(java.awt.event.ActionEvent evt) {
@@ -16722,7 +16722,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox TPoli;
     private widget.TextBox TStatus;
     private javax.swing.JTabbedPane TabRawat;
-    private javax.swing.JDialog WindowInputNoAntrian;
+    private javax.swing.JDialog WindowUpdateAntrian;
     private widget.Button btnCekBridging;
     private widget.Button btnKab;
     private widget.Button btnKec;

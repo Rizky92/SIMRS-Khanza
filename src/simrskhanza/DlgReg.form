@@ -8322,12 +8322,12 @@
         </Property>
       </Properties>
     </Component>
-    <Container class="javax.swing.JDialog" name="WindowInputNoAntrian">
+    <Container class="javax.swing.JDialog" name="WindowUpdateAntrian">
       <Properties>
         <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
         <Property name="modal" type="boolean" value="true"/>
-        <Property name="name" type="java.lang.String" value="WindowInputNoAntrian" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="WindowUpdateAntrian" noResource="true"/>
         <Property name="undecorated" type="boolean" value="true"/>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
@@ -8336,8 +8336,18 @@
       <SubComponents>
         <Container class="widget.InternalFrame" name="internalFrame8">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), &quot;::[ Update No. Antrian ]::&quot;, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font(&quot;Tahoma&quot;, 0, 11), new java.awt.Color(50, 50, 50))" type="code"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="::[ Update No. Antrian ]::">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                  <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
+                  <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
+                </TitledBorder>
+              </Border>
             </Property>
             <Property name="name" type="java.lang.String" value="internalFrame8" noResource="true"/>
           </Properties>
@@ -8711,7 +8721,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="25-08-2025"/>
+                        <StringItem index="0" value="26-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8736,7 +8746,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="25-08-2025"/>
+                        <StringItem index="0" value="26-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8996,7 +9006,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="25-08-2025"/>
+                        <StringItem index="0" value="26-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
