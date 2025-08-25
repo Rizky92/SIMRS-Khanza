@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
+import javax.swing.DefaultCellEditor;
 import javax.swing.Timer;
 import simrskhanza.DlgCariCaraBayar;
 import simrskhanza.DlgCariPeriksaLabMB;
@@ -61,6 +62,7 @@ import simrskhanza.DlgInputResepPulang;
 import simrskhanza.DlgPeriksaLaboratoriumMB;
 import simrskhanza.DlgPeriksaLaboratoriumPA;
 import simrskhanza.DlgTagihanOperasi;
+import widget.ComboBox;
 
 /**
  *
@@ -117,11 +119,11 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             sqlpskamarin="select kamar_inap.kd_kamar,bangsal.nm_bangsal,kamar_inap.trf_kamar,"+
                     "kamar_inap.lama,kamar_inap.ttl_biaya as total,kamar_inap.tgl_masuk, "+
                     "kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00',current_date(),kamar_inap.tgl_keluar) as tgl_keluar,"+
-                    "if(kamar_inap.jam_keluar='00:00:00',current_time(),kamar_inap.jam_keluar) as jam_keluar "+
+                    "if(kamar_inap.jam_keluar='00:00:00',current_time(),kamar_inap.jam_keluar) as jam_keluar,kamar_inap.stts_pulang "+
                     "from kamar_inap inner join bangsal inner join kamar "+
                     "on kamar_inap.kd_kamar=kamar.kd_kamar "+
                     "and kamar.kd_bangsal=bangsal.kd_bangsal where "+
-                    "kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk,kamar_inap.kd_kamar",
+                    "kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk,kamar_inap.jam_masuk,kamar_inap.kd_kamar",
             sqlpsbiayasekali="select biaya_sekali.nama_biaya,biaya_sekali.besar_biaya,(biaya_sekali.besar_biaya*1) as total from biaya_sekali "+
                     " where biaya_sekali.kd_kamar=? order by biaya_sekali.nama_biaya",
             sqlpsbiayaharian="select biaya_harian.nama_biaya,biaya_harian.besar_biaya,biaya_harian.jml,(biaya_harian.jml*biaya_harian.besar_biaya*?) as total from biaya_harian "+
@@ -362,8 +364,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                      || colIndex == 3
                      || colIndex == 4
                      || colIndex == 5
-                     || colIndex == 6 
-                     || colIndex == 7;
+                     || colIndex == 6;
              }
               
              Class[] types = new Class[] {
@@ -381,13 +382,17 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
         tbUbahLama.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbUbahLama.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < rowUbahLama.length; i++) {
             TableColumn column = tbUbahLama.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
             }else if(i==1){
                 column.setPreferredWidth(250);
+            } else if (i == 7) {
+                column.setPreferredWidth(130);
+            } else if (i == 8 || i == 9) {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else{
                 column.setPreferredWidth(80);
             }
@@ -3575,20 +3580,62 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(norawatubahlama.getText().trim().equals("")||(tbUbahLama.getRowCount()<=0)){
             Valid.textKosong(norawatubahlama,"Data");
         }else{
-            z=tbUbahLama.getRowCount();
-            for(r=0;r<z;r++){
-                if(Valid.SetAngka(tbUbahLama.getValueAt(r,6).toString())>-1){                    
-                    Sequel.mengedit("kamar_inap","no_rawat='"+norawatubahlama.getText()+"' and kd_kamar='"+tbUbahLama.getValueAt(r,0)+"'",
-                           "tgl_keluar='"+tbUbahLama.getValueAt(r,4).toString()+"',jam_keluar='"+tbUbahLama.getValueAt(r,5).toString()+"',"+
-                           "tgl_masuk='"+tbUbahLama.getValueAt(r,2).toString()+"',jam_masuk='"+tbUbahLama.getValueAt(r,3).toString()+"',"+
-                           "lama='"+tbUbahLama.getValueAt(r,6).toString()+"',"+
-                           "ttl_biaya="+tbUbahLama.getValueAt(r,6).toString()+"*trf_kamar");                       
+            sukses = true;
+            z = tbUbahLama.getRowCount();
+            String tglkeluar, jamkeluar;
+            Sequel.AutoComitFalse();
+            for (r = 0; r < z; r++) {
+                if (((Double) tbUbahLama.getValueAt(r, 6)) > -1) {
+                    tglkeluar = tbUbahLama.getValueAt(r, 4).toString();
+                    jamkeluar = tbUbahLama.getValueAt(r, 5).toString();
+                    if (tglkeluar.isBlank()) {
+                        tglkeluar = "0000-00-00";
+                    }
+                    if (jamkeluar.isBlank()) {
+                        jamkeluar = "00:00:00";
+                    }
+                    if (tbUbahLama.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
+                        if ((r + 1) < z) {
+                            if (tbUbahLama.getValueAt(r + 1, 2).toString().equals(tbUbahLama.getValueAt(r, 4).toString())
+                                && tbUbahLama.getValueAt(r + 1, 3).toString().equals(tbUbahLama.getValueAt(r, 5).toString())
+                            ) {
+                                if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, lama = ?, ttl_biaya = ? * trf_kamar",
+                                    "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?", tbUbahLama.getValueAt(r, 2).toString(),
+                                    tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar, tbUbahLama.getValueAt(r, 6).toString(),
+                                    tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(), tbUbahLama.getValueAt(r, 0).toString(),
+                                    tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
+                                ) {
+                                    sukses = false;
+                                }
+                            } else {
+                                sukses = false;
+                                JOptionPane.showMessageDialog(null, "Waktu keluar kamar asal pindah kamar dengan waktu masuk kamar tujuan harus sama..!!");
+                            }
+                        }
+                    } else {
+                        if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, lama = ?, ttl_biaya = ? * trf_kamar",
+                            "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?", tbUbahLama.getValueAt(r, 2).toString(),
+                            tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar, tbUbahLama.getValueAt(r, 6).toString(),
+                            tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(), tbUbahLama.getValueAt(r, 0).toString(),
+                            tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
+                        ) {
+                            sukses = false;
+                        }
+                    }
                 }
             }
-            
-                       
-            isRawat();
-            WindowInput5.dispose();
+            if (sukses) {
+                Sequel.Commit();
+            } else {
+                Sequel.RollBack();
+            }
+            Sequel.AutoComitTrue();
+            if (sukses) {
+                isRawat();
+                WindowInput5.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah lama inap\nSilahkan periksa kembali data yang mau diubah..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_BtnSimpanUbahLamaActionPerformed
 
@@ -6567,7 +6614,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     // Object[] rowUbahLama={"Kode Kamar","Nama Kamar","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar","Lama Inap", "Status Kamar", "tgl_masuk", "jam_masuk"};
                     tabModeKamIn.addRow(new Object[] {
                         rs.getString("kd_kamar"), rs.getString("nm_bangsal"), rs.getString("tgl_masuk"), rs.getString("jam_masuk"),
-                        rs.getString("tgl_keluar"), rs.getString("jam_keluar"), rs.getString("lama"), rs.getString("stts_pulang"),
+                        rs.getString("tgl_keluar"), rs.getString("jam_keluar"), rs.getDouble("lama"), rs.getString("stts_pulang"),
                         rs.getString("tgl_masuk"), rs.getString("jam_masuk")
                     });
                 }
@@ -6576,7 +6623,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notif : " + e);
         }
         
-        try {
+        /*try {
             pskamarin = koneksi.prepareStatement(sqlpskamarin);
             try {
                 pskamarin.setString(1, norawatubahlama.getText());
@@ -6602,7 +6649,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             //rs.close();
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        }
+        }*/
     }
     
     private void tampilAkunBankJateng() { 
