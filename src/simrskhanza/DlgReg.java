@@ -6636,7 +6636,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6649,7 +6649,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6790,7 +6790,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-08-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -14765,8 +14765,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         Sequel.menghapusSmc("antriloketsmc");
         Sequel.executeRawSmc("insert into antriloketsmc values (?, concat(?, lpad(?, 3, '0')))", cmbloket.getSelectedItem().toString(),
             cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", String.valueOf(TNoAntrian.getValue()));
-        Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
-            cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", String.valueOf(TNoAntrian.getValue()));
+        if (ANTRIANPREFIXHURUF) {
+            Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = concat(?, lpad(?, 3, '0')) and tanggal = current_date()",
+                cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "", String.valueOf(TNoAntrian.getValue()));
+        } else {
+            Sequel.mengupdatetfSmc("antriloketcetak_smc", "jam_panggil = current_time()", "nomor = ? and tanggal = current_date()", String.valueOf(TNoAntrian.getValue()));
+        }
     }//GEN-LAST:event_BtnAntriActionPerformed
 
     private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
@@ -14779,10 +14783,14 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
     private void cmbhurufItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbhurufItemStateChanged
         if (akses.getantrian_di_registrasi()) {
-            AntrianTerakhir.setText(Sequel.cariIsiSmc(
-                "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
-                "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
-            ));
+            if (ANTRIANPREFIXHURUF) {
+                AntrianTerakhir.setText(Sequel.cariIsiSmc(
+                    "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
+                    "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
+                ));
+            } else {
+                AntrianTerakhir.setText(Sequel.cariIsiSmc("select max(nomor) from antriloketcetak_smc where tanggal = current_date() and jam_panggil is not null"));
+            }
         }
     }//GEN-LAST:event_cmbhurufItemStateChanged
 
@@ -17142,10 +17150,16 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 
                 if (akses.getantrian_di_registrasi()) {
                     if (nilai_detik % 5 == 0) {
-                        AntrianTerakhir.setText(Sequel.cariIsiSmc(
-                            "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
-                            "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
-                        ));
+                        if (ANTRIANPREFIXHURUF) {
+                            if (cmbhuruf.getSelectedItem() != null) {
+                                AntrianTerakhir.setText(Sequel.cariIsiSmc(
+                                    "select max(nomor) from antriloketcetak_smc where tanggal = current_date() and " +
+                                    "nomor like ? and jam_panggil is not null", cmbhuruf.getSelectedItem().toString() + "%"
+                                ));
+                            }
+                        } else {
+                            AntrianTerakhir.setText(Sequel.cariIsiSmc("select max(nomor) from antriloketcetak_smc where tanggal = current_date() and jam_panggil is not null"));
+                        }
                     }
                 }
             }
@@ -17817,15 +17831,27 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 ctk();
             }
             if (((Integer) TNoAntrian.getValue()) > 0) {
-                if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0')) and tanggal = current_date() and no_rawat != ?",
-                    cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()), TNoRw.getText()
-                )) {
-                    JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
-                } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText()) &&
-                    Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText()
-                )) {
-                    Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0'))",
-                        TNoRw.getText(), TNoRM.getText(), cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()));
+                if (ANTRIANPREFIXHURUF) {
+                    if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0')) and tanggal = current_date() and no_rawat != ?",
+                        cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()), TNoRw.getText()
+                    )) {
+                        JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
+                    } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText()) &&
+                        Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText()
+                    )) {
+                        Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = concat(?, lpad(?, greatest(length(substring(nomor, 2)), 3), '0'))",
+                            TNoRw.getText(), TNoRM.getText(), cmbhuruf.getSelectedItem().toString(), String.valueOf(TNoAntrian.getValue()));
+                    }
+                } else {
+                    
+                    if (Sequel.cariExistsSmc("select * from antriloketcetak_smc where nomor = ? and tanggal = current_date() and no_rawat != ?", String.valueOf(TNoAntrian.getValue()), TNoRw.getText())) {
+                        JOptionPane.showMessageDialog(null, "Maaf, no. antrian ini sudah pernah digunakan!\nSilahkan lakukan update no. antrian!");
+                    } else if (!Sequel.cariExistsSmc("select * from antriloketcetak_smc where no_rkm_medis = ?", TNoRM.getText()) &&
+                        Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ? and tgl_daftar = current_date()", TNoRM.getText())
+                    ) {
+                        Sequel.mengupdateSmc("antriloketcetak_smc", "no_rawat = ?, no_rkm_medis = ?", "tanggal = current_date() and nomor = ?",
+                            TNoRw.getText(), TNoRM.getText(), String.valueOf(TNoAntrian.getValue()));
+                    }
                 }
             }
             if(TabRawat.getSelectedIndex()==0){
@@ -17833,7 +17859,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     false,TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                     KdDokter.getText(),TDokter.getText(),TNoRM.getText(),TPasien.getText(),JK.getText(),umur+" "+sttsumur,TPoli.getText(),nmpnj.getText(),TPngJwb.getText(),TAlmt.getText(),
                     THbngn.getText(),Valid.SetAngka(Double.parseDouble(TBiaya.getText())),TStatus.getText(),NoTelp.getText(),"Belum",status,kdpoli.getText(),kdpnj.getText(),"Belum Bayar",
-                    cmbhuruf.getSelectedItem().toString() + Valid.padleftSmc(String.valueOf(TNoAntrian.getValue()), 3, '0')
+                    (ANTRIANPREFIXHURUF ? (cmbhuruf.getSelectedItem().toString() + Valid.padleftSmc(String.valueOf(TNoAntrian.getValue()), 3, '0')) : TNoAntrian.getValue())
                 });
                 LCount.setText(""+tabMode.getRowCount());
             }
@@ -19127,12 +19153,15 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     
     private void isAntrian() {
         if (akses.getantrian_di_registrasi()) {
-            //cmbhuruf.removeAllItems();
-            PREFIXHURUFAKTIF.forEach(cmbhuruf::addItem);
+            if (ANTRIANPREFIXHURUF) {
+                cmbhuruf.removeAllItems();
+                PREFIXHURUFAKTIF.forEach(cmbhuruf::addItem);
+                cmbhuruf.setSelectedIndex(0);
+                label3.setVisible(true);
+                cmbhuruf.setVisible(true);
+            }
             label2.setVisible(true);
             cmbloket.setVisible(true);
-            label3.setVisible(true);
-            cmbhuruf.setVisible(true);
             jLabel5.setVisible(true);
             label4.setVisible(true);
             AntrianTerakhir.setVisible(true);

@@ -316,7 +316,7 @@ public class koneksiDB {
     
     public static String[] PREFIXHURUFAKTIF() {
         if (!ANTRIANPREFIXHURUF()) {
-            return null;
+            return new String[0];
         }
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
