@@ -251,7 +251,8 @@ public final class akses {
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
             surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false,
-            skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false,kriteria_masuk_nicu=false,kriteria_keluar_nicu=false,penilaian_medis_ranap_psikiatrik=false;
+            skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false,kriteria_masuk_nicu=false,kriteria_keluar_nicu=false,penilaian_medis_ranap_psikiatrik=false,
+            kriteria_masuk_picu=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1432,6 +1433,7 @@ public final class akses {
                         akses.kriteria_masuk_nicu=rs2.getBoolean("kriteria_masuk_nicu");
                         akses.kriteria_keluar_nicu=rs2.getBoolean("kriteria_keluar_nicu");
                         akses.penilaian_medis_ranap_psikiatrik=rs2.getBoolean("penilaian_medis_ranap_psikiatrik");
+                        akses.kriteria_masuk_picu=rs2.getBoolean("kriteria_masuk_picu");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2620,6 +2622,7 @@ public final class akses {
         akses.kriteria_masuk_nicu=isadmin;
         akses.kriteria_keluar_nicu=isadmin;
         akses.penilaian_medis_ranap_psikiatrik=isadmin;
+        akses.kriteria_masuk_picu=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3816,6 +3819,7 @@ public final class akses {
     public static boolean getkriteria_masuk_nicu(){return akses.kriteria_masuk_nicu;}
     public static boolean getkriteria_keluar_nicu(){return akses.kriteria_keluar_nicu;}
     public static boolean getpenilaian_medis_ranap_psikiatrik(){return akses.penilaian_medis_ranap_psikiatrik;}
+    public static boolean getkriteria_masuk_picu(){return akses.kriteria_masuk_picu;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
