@@ -3596,28 +3596,26 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                     if (tbUbahLama.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
                         if ((r + 1) < z) {
-                            if (tbUbahLama.getValueAt(r + 1, 2).toString().equals(tbUbahLama.getValueAt(r, 4).toString())
-                                && tbUbahLama.getValueAt(r + 1, 3).toString().equals(tbUbahLama.getValueAt(r, 5).toString())
-                            ) {
-                                if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, lama = ?, ttl_biaya = ? * trf_kamar",
-                                    "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?", tbUbahLama.getValueAt(r, 2).toString(),
-                                    tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar, tbUbahLama.getValueAt(r, 6).toString(),
-                                    tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(), tbUbahLama.getValueAt(r, 0).toString(),
-                                    tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
+                            if (tglkeluar.equals(tbUbahLama.getValueAt(r + 1, 2).toString()) && jamkeluar.equals(tbUbahLama.getValueAt(r + 1, 3).toString())) {
+                                if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
+                                    "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
+                                    tbUbahLama.getValueAt(r, 2).toString(), tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
+                                    tbUbahLama.getValueAt(r, 6).toString(), tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(),
+                                    tbUbahLama.getValueAt(r, 0).toString(), tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
                                 ) {
                                     sukses = false;
                                 }
                             } else {
                                 sukses = false;
-                                JOptionPane.showMessageDialog(null, "Waktu keluar kamar asal pindah kamar dengan waktu masuk kamar tujuan harus sama..!!");
+                                JOptionPane.showMessageDialog(null, "Waktu keluar awal pindah kamar dengan waktu masuk kamar tujuan harus sama..!!");
                             }
                         }
                     } else {
-                        if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, lama = ?, ttl_biaya = ? * trf_kamar",
-                            "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?", tbUbahLama.getValueAt(r, 2).toString(),
-                            tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar, tbUbahLama.getValueAt(r, 6).toString(),
-                            tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(), tbUbahLama.getValueAt(r, 0).toString(),
-                            tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
+                        if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
+                            "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
+                            tbUbahLama.getValueAt(r, 2).toString(), tbUbahLama.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
+                            tbUbahLama.getValueAt(r, 6).toString(), tbUbahLama.getValueAt(r, 6).toString(), norawatubahlama.getText(),
+                            tbUbahLama.getValueAt(r, 0).toString(), tbUbahLama.getValueAt(r, 8).toString(), tbUbahLama.getValueAt(r, 9).toString())
                         ) {
                             sukses = false;
                         }
