@@ -74,6 +74,8 @@ ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tang
 
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
 
+ALTER TABLE `bridging_sep` ADD COLUMN IF NOT EXISTS `esep` enum('0','1') NULL DEFAULT NULL AFTER `nmdpjplayanan`;
+
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;
