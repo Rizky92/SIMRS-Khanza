@@ -678,9 +678,9 @@ public final class sekuel {
     }
     
     public void deleteTemporaryResep(String label) {
-        String sql = "delete from temporary_resep where temporary_resep.temp35 = ? and temporary_resep.temp36 = ? and temporary_lab.temp37 = ?";
+        String sql = "delete from temporary_resep where temp35 = ? and temp36 = ? and temp37 = ?";
         if (label == null) {
-            sql = "delete from temporary_resep where temporary_resep.temp36 = ? and temporary_lab.temp37 = ?";
+            sql = "delete from temporary_resep where temp36 = ? and temp37 = ?";
         }
         
         try (PreparedStatement ps = connect.prepareStatement(sql)) {

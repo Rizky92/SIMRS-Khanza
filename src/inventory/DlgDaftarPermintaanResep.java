@@ -529,6 +529,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         WindowJamPenyerahan.setName("WindowJamPenyerahan"); // NOI18N
         WindowJamPenyerahan.setUndecorated(true);
         WindowJamPenyerahan.setResizable(false);
+        WindowJamPenyerahan.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                WindowJamPenyerahanWindowClosed(evt);
+            }
+        });
 
         internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Penyerahan Resep ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
@@ -565,7 +570,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025 14:27:35" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025 10:26:24" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -751,7 +756,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -765,7 +770,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3613,6 +3618,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         ChkAutoValidasiRalanItemStateChanged(null);
     }//GEN-LAST:event_BtnResetPengaturanActionPerformed
 
+    private void WindowJamPenyerahanWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowJamPenyerahanWindowClosed
+        isopening = false;
+    }//GEN-LAST:event_WindowJamPenyerahanWindowClosed
+
     /**
     * @param args the command line arguments
     */
@@ -3832,10 +3841,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!isopening && autoValidasiRalan && autoaksi && tabMode.getRowCount() > 0) {
                         SwingUtilities.invokeLater(() -> {
                             isopening = true;
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException ex) {}
-
                             tbResepRalan.setRowSelectionInterval(0, 0);
                             getData();
                             String tglValidasi = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 12).toString(),
@@ -3844,6 +3849,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                    jamPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 15).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException ex) {}
                                 BtnTambahActionPerformed(null);
                             } else if (!tglValidasi.isBlank() && !jamValidasi.isBlank() && tglPenyerahan.isBlank() && jamPenyerahan.isBlank()) {
                                 BtnPenyerahanActionPerformed(null);
