@@ -109,7 +109,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private FileWriter fileWriter;
     private FileReader myObj;
     private Map<String, Object> map;
-    private boolean autoValidasiRalan = false, previewLembarObat = false, previewAturanPakai = false;
+    private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelPemberianObat = "", modelAturanPakai = "";
     
     /** Creates new form DlgPenyakit
@@ -1743,7 +1743,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                         }
                         
-                        if (autoValidasiRalan) {
+                        if (autovalidasi) {
                             cetakAturanPakai();
                             cetakLembarObat();
                         } else if(ChkNoResep.isSelected()==true){
@@ -4382,10 +4382,10 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         boolean oldValue = ChkNoResep.isSelected();
         try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
             JsonNode iyem = mapper.readTree(fr);
-            autoValidasiRalan = iyem.path("autovalidasiralan").asBoolean(false);
+            autovalidasi = iyem.path("autovalidasiralan").asBoolean(false);
             previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
             previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
-            if (autoValidasiRalan) {
+            if (autovalidasi) {
                 ChkNoResep.setSelected(false);
                 if (previewLembarObat) {
                     modelPemberianObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
@@ -4396,7 +4396,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            autoValidasiRalan = false;
+            autovalidasi = false;
             previewLembarObat = false;
             previewAturanPakai = false;
             modelPemberianObat = "";
