@@ -669,7 +669,55 @@ public final class sekuel {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak..!!");
+            // JOptionPane.showMessageDialog(null, "Gagal memproses hasil cetak..!!");
+        }
+    }
+    
+    public void deleteTemporaryResep() {
+        deleteTemporaryResep(null);
+    }
+    
+    public void deleteTemporaryResep(String label) {
+        String sql = "delete from temporary_resep where temporary_resep.temp35 = ? and temporary_resep.temp36 = ? and temporary_lab.temp37 = ?";
+        if (label == null) {
+            sql = "delete from temporary_resep where temporary_resep.temp36 = ? and temporary_lab.temp37 = ?";
+        }
+        
+        try (PreparedStatement ps = connect.prepareStatement(sql)) {
+            int p = 0;
+            if (label != null) {
+                ps.setString(++p, label);
+            }
+            ps.setString(++p, akses.getkode());
+            ps.setString(++p, akses.getalamatip());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+    
+    public void temporaryResep(int no, String label, String... values) {
+        StringBuilder sb = new StringBuilder("insert into temporary_resep values(?, ");
+        for (int i = 0; i < 34; i++) {
+            if (i < values.length) {
+                sb.append("?, ");
+            } else {
+                sb.append("'', ");
+            }
+        }
+        sb.append("'").append(label).append("', ")
+            .append("'").append(akses.getkode()).append("', ")
+            .append("'").append(akses.getalamatip()).append("')");
+        
+        try (PreparedStatement ps = connect.prepareStatement(sb.toString())) {
+            int p = 0;
+            ps.setInt(++p, no);
+            for (String value : values) {
+                ps.setString(++p, value);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 

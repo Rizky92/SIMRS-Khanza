@@ -3545,11 +3545,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (ChkAutoValidasiRalan.isSelected() || ChkAutoValidasiRanap.isSelected()) {
             ChkPreviewLembarObat.setEnabled(true);
             ChkPreviewAturanPakai.setEnabled(true);
+            ChkPreviewLembarObatItemStateChanged(null);
+            ChkPreviewAturanPakaiItemStateChanged(null);
         } else {
             ChkPreviewLembarObat.setEnabled(false);
             ChkPreviewAturanPakai.setEnabled(false);
             ChkPreviewLembarObat.setSelected(false);
             ChkPreviewAturanPakai.setSelected(false);
+            ChkPreviewLembarObatItemStateChanged(null);
+            ChkPreviewAturanPakaiItemStateChanged(null);
         }
     }//GEN-LAST:event_ChkAutoValidasiRanapItemStateChanged
 
@@ -3563,15 +3567,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 iyem.put("autovalidasiralan", ChkAutoValidasiRalan.isSelected());
                 iyem.put("autovalidasiranap", ChkAutoValidasiRanap.isSelected());
                 if (ChkAutoValidasiRalan.isSelected() || ChkAutoValidasiRanap.isSelected()) {
-                    ObjectNode setelahValidasi = mapper.createObjectNode(),
-                               lembarObat = mapper.createObjectNode(),
-                               aturanPakai = mapper.createObjectNode();
+                    ObjectNode setelahValidasi = mapper.createObjectNode();
                     if (ChkPreviewLembarObat.isSelected()) {
+                        if (CmbModelLembarObat.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(null, "Model pemberian obat tidak boleh kosong apabila ingin diaktifkan..!!", "Pemberian Obat", JOptionPane.WARNING_MESSAGE);
+                            throw new Exception();
+                        }
+                        ObjectNode lembarObat = mapper.createObjectNode();
                         lembarObat.put("preview", ChkPreviewLembarObat.isSelected());
                         lembarObat.put("model",  CmbModelLembarObat.getSelectedItem().toString());
                         setelahValidasi.set("lembarobat", lembarObat);
                     }
                     if (ChkPreviewAturanPakai.isSelected()) {
+                        if (CmbModelAturanPakai.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(null, "Model aturan pakai tidak boleh kosong apabila ingin diaktifkan..!!", "Aturan Pakai", JOptionPane.WARNING_MESSAGE);
+                            throw new Exception();
+                        }
+                        ObjectNode aturanPakai = mapper.createObjectNode();
                         aturanPakai.put("preview", ChkPreviewAturanPakai.isSelected());
                         aturanPakai.put("model", CmbModelAturanPakai.getSelectedItem().toString());
                         setelahValidasi.set("aturanpakai", aturanPakai);
@@ -3580,9 +3592,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
                 fw.write(iyem.toString());
                 fw.flush();
+                JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!", "Berhasil Simpan", JOptionPane.INFORMATION_MESSAGE);
                 autoValidasiRalan = ChkAutoValidasiRalan.isSelected();
                 autoValidasiRanap = ChkAutoValidasiRanap.isSelected();
-                JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!", "Berhasil Simpan", JOptionPane.INFORMATION_MESSAGE);
                 WindowPengaturan.dispose();
             }
         } catch (Exception e) {
@@ -5582,10 +5594,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ObjectMapper mapper = new ObjectMapper();
             JsonNode iyem = mapper.readTree(fr);
             autoValidasiRalan = iyem.path("autovalidasiralan").asBoolean(false);
-            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
             autoValidasiRanap = iyem.path("autovalidasiranap").asBoolean(false);
-            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
-            ChkAutoValidasiRalanItemStateChanged(null);
             ChkPreviewLembarObat.setSelected(iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false));
             if (ChkPreviewLembarObat.isSelected()) {
                 CmbModelLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("model").asText(""));
@@ -5598,9 +5607,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notif : " + e);
             autoValidasiRalan = false;
             autoValidasiRanap = false;
-            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
-            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
-            ChkAutoValidasiRalanItemStateChanged(null);
         }
+        ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
+        ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
+        ChkAutoValidasiRalanItemStateChanged(null);
     }
 }
