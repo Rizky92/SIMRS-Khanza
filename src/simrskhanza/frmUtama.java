@@ -875,6 +875,7 @@ import rekammedis.RMChecklistKesiapanAnestesi;
 import rekammedis.RMChecklistKriteriaKeluarHCU;
 import rekammedis.RMChecklistKriteriaKeluarICU;
 import rekammedis.RMChecklistKriteriaKeluarNICU;
+import rekammedis.RMChecklistKriteriaKeluarPICU;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
 import rekammedis.RMChecklistKriteriaMasukNICU;
@@ -23186,8 +23187,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingPelangganActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingPelangganActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingPelanggan suplier=new LabKeslingPelanggan(this,false);
@@ -23199,12 +23200,24 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMChecklistKriteriaMasukPICU aplikasi=new RMChecklistKriteriaMasukPICU(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnChecklistKriteriaKeluarPICUActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMChecklistKriteriaKeluarPICU aplikasi=new RMChecklistKriteriaKeluarPICU(this,false);
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -23925,7 +23938,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
             btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS,
             btnSuratPernyataanMemilihDPJP,btnSkriningInstrumenMentalEmosional,btnChecklistKriteriaMasukNICU,btnChecklistKriteriaKeluarNICU,btnPenilaianAwalMedisRanapPsikiatri,
-            btnLabKeslingPelanggan,btnChecklistKriteriaMasukPICU;
+            btnLabKeslingPelanggan,btnChecklistKriteriaMasukPICU,btnChecklistKriteriaKeluarPICU;
 
     public void isWall(){
         try{
@@ -24215,7 +24228,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnBarcodeRanap);
                 jmlmenu++;
             }
-            
+
             if(akses.getpelanggan_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingPelanggan);
                 jmlmenu++;
@@ -28251,9 +28264,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnChecklistKriteriaKeluarNICU);
                 jmlmenu++;
             }
-            
+
             if(akses.getkriteria_masuk_picu()==true){
                 Panelmenu.add(btnChecklistKriteriaMasukPICU);
+                jmlmenu++;
+            }
+
+            if(akses.getkriteria_keluar_picu()==true){
+                Panelmenu.add(btnChecklistKriteriaKeluarPICU);
                 jmlmenu++;
             }
 
@@ -29970,7 +29988,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnBarcodeRanap);
             jmlmenu++;
         }
-        
+
         if(akses.getpelanggan_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingPelanggan);
             jmlmenu++;
@@ -33955,9 +33973,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnChecklistKriteriaKeluarNICU);
             jmlmenu++;
         }
-        
+
         if(akses.getkriteria_masuk_picu()==true){
             Panelmenu.add(btnChecklistKriteriaMasukPICU);
+            jmlmenu++;
+        }
+
+        if(akses.getkriteria_keluar_picu()==true){
+            Panelmenu.add(btnChecklistKriteriaKeluarPICU);
             jmlmenu++;
         }
 
@@ -35745,14 +35768,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             if(btnBarcodeRanap.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBarcodeRanap);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getpelanggan_lab_kesehatan_lingkungan()==true){
             if(btnLabKeslingPelanggan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingPelanggan);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getpetugas()==true){
@@ -40815,14 +40838,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             if(btnPenilaianAwalMedisRanapPsikiatri.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianAwalMedisRanapPsikiatri);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getpenilaian_awal_medis_ralan_penyakit_dalam()==true){
             if(btnPenilaianAwalMedisRalanPenyakitDalam.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenilaianAwalMedisRalanPenyakitDalam);
                 jmlmenu++;
-            }               
+            }
         }
 
         if(akses.getpenilaian_awal_medis_ralan_mata()==true){
@@ -41335,10 +41358,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getkriteria_masuk_picu()==true){
             if(btnChecklistKriteriaMasukPICU.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnChecklistKriteriaMasukPICU);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getkriteria_keluar_picu()==true){
+            if(btnChecklistKriteriaKeluarPICU.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnChecklistKriteriaKeluarPICU);
                 jmlmenu++;
             }
         }
@@ -47477,14 +47507,22 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnChecklistKriteriaMasukNICU.setName("btnChecklistKriteriaMasukNICU");
         btnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukNICU.addActionListener(this::btnChecklistKriteriaMasukNICUActionPerformed);
-        
+
         btnChecklistKriteriaMasukPICU = new widget.ButtonBig();
-        btnChecklistKriteriaMasukPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1934246_boy_child_kid_people_playing_icon.png"))); 
+        btnChecklistKriteriaMasukPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1934246_boy_child_kid_people_playing_icon.png")));
         btnChecklistKriteriaMasukPICU.setText("Check List Kriteria Masuk PICU");
         btnChecklistKriteriaMasukPICU.setIconTextGap(0);
-        btnChecklistKriteriaMasukPICU.setName("btnChecklistKriteriaMasukPICU"); 
+        btnChecklistKriteriaMasukPICU.setName("btnChecklistKriteriaMasukPICU");
         btnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(200, 90));
         btnChecklistKriteriaMasukPICU.addActionListener(this::btnChecklistKriteriaMasukPICUActionPerformed);
+
+        btnChecklistKriteriaKeluarPICU = new widget.ButtonBig();
+        btnChecklistKriteriaKeluarPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1934246_boy_child_kid_people_playing_icon.png")));
+        btnChecklistKriteriaKeluarPICU.setText("Check List Kriteria Keluar PICU");
+        btnChecklistKriteriaKeluarPICU.setIconTextGap(0);
+        btnChecklistKriteriaKeluarPICU.setName("btnChecklistKriteriaKeluarPICU");
+        btnChecklistKriteriaKeluarPICU.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnChecklistKriteriaKeluarPICU.addActionListener(this::btnChecklistKriteriaKeluarPICUActionPerformed);
 
         btnChecklistKriteriaKeluarNICU = new widget.ButtonBig();
         btnChecklistKriteriaKeluarNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6088517_beat_care_heart_pulse_time_icon.png")));
@@ -48965,9 +49003,9 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSkriningInstrumenMentalEmosional.setName("btnSkriningInstrumenMentalEmosional");
         btnSkriningInstrumenMentalEmosional.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSkriningInstrumenMentalEmosional.addActionListener(this::btnSkriningInstrumenMentalEmosionalActionPerformed);
-        
+
         btnLabKeslingPelanggan = new widget.ButtonBig();
-        btnLabKeslingPelanggan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554587_school_education_learning_book_science_icon.png"))); 
+        btnLabKeslingPelanggan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/9554587_school_education_learning_book_science_icon.png")));
         btnLabKeslingPelanggan.setText("Pelanggan Lab Kesling");
         btnLabKeslingPelanggan.setIconTextGap(0);
         btnLabKeslingPelanggan.setName("btnLabKeslingPelanggan");
