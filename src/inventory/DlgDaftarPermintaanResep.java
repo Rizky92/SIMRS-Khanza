@@ -4417,16 +4417,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!isopening && autoValidasiRanap && autoaksi && tabMode3.getRowCount() > 0) {
                         isopening = true;
                         SwingUtilities.invokeLater(() -> {
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException ex) {}
-
                             tbResepRanap.setRowSelectionInterval(0, 0);
                             getData2();
                             String tglValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 12).toString(),
                                    jamValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 13).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException ex) {}
                                 BtnTambahActionPerformed(null);
                             }
                         });
