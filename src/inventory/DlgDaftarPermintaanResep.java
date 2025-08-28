@@ -5119,15 +5119,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
             if(aktif==true){
-                nol_detik = "";
-                Date now = Calendar.getInstance().getTime();
-                nilai_detik = now.getSeconds();
-                if (nilai_detik <= 9) {
-                    nol_detik = "0";
-                }
-
-                detik = nol_detik + Integer.toString(nilai_detik);
-                if(detik.equals("05")){
+                Calendar c = Calendar.getInstance();
+                if(c.get(Calendar.SECOND) == 5){
                     resepbaru=0;
                     if(formalarm.contains("ralan")){
                         tampil();
