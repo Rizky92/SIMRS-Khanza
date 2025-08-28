@@ -29,8 +29,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
@@ -60,7 +65,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             kdDokter = "", kdPoli = "", kdDokter2 = "", kdBangsal = "";
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
     private BackgroundMusic music;
-    private boolean aktif=false,semua,ceksukses=false;
+    private boolean semua,ceksukses=false;
     private String modelLembarPemberianObat = "", modelAturanPakai = "";
     private boolean isopening = false, autoaksi = false, autoValidasiRalan = false, autoValidasiRanap = false;
 
@@ -412,12 +417,21 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             DEPOAKTIFOBAT = "";
         }
 
-        if(alarm.equals("yes")){
-            jam();
-        }
+        jam();
 
         ChkAccor.setSelected(false);
         isMenu();
+
+        InputMap input = WindowJamPenyerahan.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap action = WindowJamPenyerahan.getRootPane().getActionMap();
+
+        input.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "CONFIRM");
+        action.put("CONFIRM", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BtnSimpan4ActionPerformed(e);
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -436,6 +450,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnSimpan4 = new widget.Button();
         jLabel26 = new widget.Label();
         TglSelesai = new widget.Tanggal();
+        ChkSelesai = new widget.CekBox();
         WindowPengaturan = new javax.swing.JDialog();
         internalFrame12 = new widget.InternalFrame();
         panelBiasa1 = new widget.PanelBiasa();
@@ -570,13 +585,18 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025 10:26:24" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025 14:26:32" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
         TglSelesai.setPreferredSize(new java.awt.Dimension(95, 23));
         internalFrame5.add(TglSelesai);
         TglSelesai.setBounds(110, 32, 150, 23);
+
+        ChkSelesai.setSelected(true);
+        ChkSelesai.setName("ChkSelesai"); // NOI18N
+        internalFrame5.add(ChkSelesai);
+        ChkSelesai.setBounds(264, 32, 23, 23);
 
         WindowJamPenyerahan.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -728,9 +748,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
-            public void windowDeactivated(java.awt.event.WindowEvent evt) {
-                formWindowDeactivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -756,7 +773,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -770,7 +787,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -782,7 +799,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         jLabel12.setPreferredSize(new java.awt.Dimension(60, 23));
         panelisi2.add(jLabel12);
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum Terlayani", "Sudah Terlayani" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum Terlayani", "Menunggu Penyerahan", "Sudah Terlayani" }));
         cmbStatus.setSelectedIndex(1);
         cmbStatus.setName("cmbStatus"); // NOI18N
         cmbStatus.setPreferredSize(new java.awt.Dimension(130, 23));
@@ -2489,13 +2506,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        aktif=true;
         pilihTab();
     }//GEN-LAST:event_formWindowActivated
-
-    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
-        aktif=false;
-    }//GEN-LAST:event_formWindowDeactivated
 
     private void tbPermintaanStokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanStokMouseClicked
         if(tabMode5.getRowCount()!=0){
@@ -3674,6 +3686,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.CekBox ChkAutoValidasiRanap;
     private widget.CekBox ChkPreviewAturanPakai;
     private widget.CekBox ChkPreviewLembarObat;
+    private widget.CekBox ChkSelesai;
     private widget.ComboBox CmbModelAturanPakai;
     private widget.ComboBox CmbModelLembarObat;
     private widget.TextBox CrDokter;
@@ -3752,7 +3765,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and resep_obat.tgl_perawatan = '0000-00-00' ";
                                 break;
                             case 2:
-                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' ";
+                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' and resep_obat.tgl_penyerahan = '0000-00-00' ";
+                                break;
+                            case 3:
+                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' and resep_obat.tgl_penyerahan != '0000-00-00' ";
                                 break;
                             default:
                                 statuslayani = "";
@@ -3849,9 +3865,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                    jamPenyerahan = tabMode.getValueAt(tbResepRalan.getSelectedRow(), 15).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException ex) {}
+                                if (i > 1) {
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {}
+                                }
                                 BtnTambahActionPerformed(null);
                             } else if (!tglValidasi.isBlank() && !jamValidasi.isBlank() && tglPenyerahan.isBlank() && jamPenyerahan.isBlank()) {
                                 BtnPenyerahanActionPerformed(null);
@@ -3881,7 +3899,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and resep_obat.tgl_perawatan = '0000-00-00' ";
                                 break;
                             case 2:
-                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' ";
+                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' and resep_obat.tgl_penyerahan = '0000-00-00' ";
+                                break;
+                            case 3:
+                                statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' and resep_obat.tgl_penyerahan != '0000-00-00' ";
                                 break;
                             default:
                                 statuslayani = "";
@@ -4219,7 +4240,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         TeksKosong();
         dlgresepulang.setVisible(true);
     }
-    
+
     private void pilihTab(){
         if(TabPilihRawat.getSelectedIndex()==0){
             pilihRalan();
@@ -4269,6 +4290,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and resep_obat.tgl_perawatan = '0000-00-00' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' ";
                                 break;
                             default:
@@ -4423,9 +4445,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                    jamValidasi = tabMode3.getValueAt(tbResepRanap.getSelectedRow(), 13).toString();
 
                             if (tglValidasi.isBlank() && jamValidasi.isBlank()) {
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException ex) {}
+                                if (i > 1) {
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {}
+                                }
                                 BtnTambahActionPerformed(null);
                             }
                         });
@@ -4453,6 +4477,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and resep_obat.tgl_perawatan = '0000-00-00' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and resep_obat.tgl_perawatan != '0000-00-00' ";
                                 break;
                             default:
@@ -4731,6 +4756,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and permintaan_stok_obat_pasien.status = 'Belum' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and permintaan_stok_obat_pasien.status = 'Sudah' ";
                                 break;
                             default:
@@ -4893,6 +4919,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and permintaan_stok_obat_pasien.status = 'Belum' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and permintaan_stok_obat_pasien.status = 'Sudah' ";
                                 break;
                             default:
@@ -5140,6 +5167,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and permintaan_resep_pulang.status = 'Belum' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and permintaan_resep_pulang.status = 'Sudah' ";
                                 break;
                             default:
@@ -5303,6 +5331,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 statuslayani = "and permintaan_resep_pulang.status = 'Belum' ";
                                 break;
                             case 2:
+                            case 3:
                                 statuslayani = "and permintaan_resep_pulang.status = 'Sudah' ";
                                 break;
                             default:
@@ -5491,55 +5520,62 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            if(aktif==true){
-                nol_detik = "";
-                Date now = Calendar.getInstance().getTime();
-                nilai_detik = now.getSeconds();
-                if (nilai_detik <= 9) {
-                    nol_detik = "0";
+            if (WindowJamPenyerahan.isActive()) {
+                if (ChkSelesai.isSelected()) {
+                    Valid.setTglJamSmc(TglSelesai);
                 }
-
-                detik = nol_detik + Integer.toString(nilai_detik);
-                if(detik.equals("05")){
-                    resepbaru=0;
-                    if(formalarm.contains("ralan")){
-                        tampil();
-                        for(i=0;i<tbResepRalan.getRowCount();i++){
-                            if(tbResepRalan.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                resepbaru++;
-                            }
-                        }
+            }
+            if (isActive()) {
+                if (alarm.equalsIgnoreCase("yes")) {
+                    nol_detik = "";
+                    Date now = Calendar.getInstance().getTime();
+                    nilai_detik = now.getSeconds();
+                    if (nilai_detik <= 9) {
+                        nol_detik = "0";
                     }
 
-                    if(formalarm.contains("ranap")){
-                        tampil3();
-                        for(i=0;i<tbResepRanap.getRowCount();i++){
-                            if(tbResepRanap.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                resepbaru++;
+                    detik = nol_detik + Integer.toString(nilai_detik);
+                    if(detik.equals("05")){
+                        resepbaru=0;
+                        if(formalarm.contains("ralan")){
+                            tampil();
+                            for(i=0;i<tbResepRalan.getRowCount();i++){
+                                if(tbResepRalan.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                    resepbaru++;
+                                }
                             }
                         }
 
-                        tampil5();
-                        for(i=0;i<tbPermintaanStok.getRowCount();i++){
-                            if(tbPermintaanStok.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                resepbaru++;
+                        if(formalarm.contains("ranap")){
+                            tampil3();
+                            for(i=0;i<tbResepRanap.getRowCount();i++){
+                                if(tbResepRanap.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                    resepbaru++;
+                                }
+                            }
+
+                            tampil5();
+                            for(i=0;i<tbPermintaanStok.getRowCount();i++){
+                                if(tbPermintaanStok.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                    resepbaru++;
+                                }
+                            }
+
+                            tampil7();
+                            for(i=0;i<tbPermintaanResepPulang.getRowCount();i++){
+                                if(tbPermintaanResepPulang.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                    resepbaru++;
+                                }
                             }
                         }
 
-                        tampil7();
-                        for(i=0;i<tbPermintaanResepPulang.getRowCount();i++){
-                            if(tbPermintaanResepPulang.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                resepbaru++;
+                        if(resepbaru>0){
+                            try {
+                                music = new BackgroundMusic("./suara/alarm.mp3");
+                                music.start();
+                            } catch (Exception ex) {
+                                System.out.println(ex);
                             }
-                        }
-                    }
-
-                    if(resepbaru>0){
-                        try {
-                            music = new BackgroundMusic("./suara/alarm.mp3");
-                            music.start();
-                        } catch (Exception ex) {
-                            System.out.println(ex);
                         }
                     }
                 }
@@ -5595,7 +5631,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             kirimWA.setVisible(true);
         }
     }
-    
+
     private void cekPengaturan() {
         try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
             ObjectMapper mapper = new ObjectMapper();

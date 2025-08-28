@@ -112,7 +112,7 @@ public final class validasi {
     }
     
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, Tanggal tanggal, int next) {
-        autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, getTglSmc(tanggal), next);
+        autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal), next);
     }
     
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
@@ -120,15 +120,27 @@ public final class validasi {
     }
     
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, Tanggal tanggal) {
-        autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, getTglSmc(tanggal));
+        autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
     }
     
     public void autonomor1Smc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tanggal) {
-        autonomorSmc(component, prefix, "", table, kolom, panjang, pad, getTglSmc(tanggal));
+        autonomorSmc(component, prefix, "", table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
+    }
+    
+    public String getTglSmc(Date tgl, String format) {
+        return new SimpleDateFormat(format).format(tgl);
     }
     
     public String getTglSmc(Tanggal tgl) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
+        return getTglSmc(tgl.getDate(), "yyyy-MM-dd");
+    }
+    
+    public String getTglSmc(Date tgl) {
+        return getTglSmc(tgl, "dd-MM-yyy");
+    }
+    
+    public String setTglSmc(String tgl) {
+        return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);
     }
     
     public String getJamSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
@@ -147,16 +159,12 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tgljam.getDate());
     }
     
-    public String setTglSmc(Date tgl) {
-        return new SimpleDateFormat("dd-MM-yyyy").format(tgl);
-    }
-    
-    public String setTglSmc(String tgl) {
-        return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);
-    }
-    
-    public String setTglJamSmc(Date tgljam) {
+    public String getTglJamSmc(Date tgljam) {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
+    }
+    
+    public void setTglJamSmc(Tanggal tgl) {
+        tgl.setDate(Calendar.getInstance().getTime());
     }
     
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {

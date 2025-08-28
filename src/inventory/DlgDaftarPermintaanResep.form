@@ -95,7 +95,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="27-08-2025 10:26:24"/>
+                    <StringItem index="0" value="28-08-2025 14:26:32"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -108,6 +108,17 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="110" y="32" width="150" height="23"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="widget.CekBox" name="ChkSelesai">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="name" type="java.lang.String" value="ChkSelesai" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="264" y="32" width="23" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -376,7 +387,6 @@
   <Events>
     <EventHandler event="windowActivated" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowActivated"/>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
-    <EventHandler event="windowDeactivated" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowDeactivated"/>
     <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
@@ -479,7 +489,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="27-08-2025"/>
+                        <StringItem index="0" value="28-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -507,7 +517,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="27-08-2025"/>
+                        <StringItem index="0" value="28-08-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -530,10 +540,11 @@
                 <Component class="widget.ComboBox" name="cmbStatus">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
+                      <StringArray count="4">
                         <StringItem index="0" value="Semua"/>
                         <StringItem index="1" value="Belum Terlayani"/>
-                        <StringItem index="2" value="Sudah Terlayani"/>
+                        <StringItem index="2" value="Menunggu Penyerahan"/>
+                        <StringItem index="3" value="Sudah Terlayani"/>
                       </StringArray>
                     </Property>
                     <Property name="selectedIndex" type="int" value="1"/>
