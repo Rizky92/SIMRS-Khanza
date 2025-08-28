@@ -13,6 +13,8 @@ package simrskhanza;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -335,13 +337,10 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if(Valid.daysOld("./cache/poli.iyem")<30){
-                tampil2();
-            }else{
-                tampil();
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/poli.iyem", 30)) {
+            tampil();
+        } else {
+            tampil2();
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -377,41 +376,34 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosongSmc(tabMode);
         try {
-            file=new File("./cache/poli.iyem");
+            File file = new File("./cache/poli.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select * from poliklinik where poliklinik.status='1'");
-            try{           
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),Valid.SetAngka(rs.getDouble(3)),Valid.SetAngka(rs.getDouble(4))});
-                    iyembuilder.append("{\"KodeUnit\":\"").append(rs.getString(1)).append("\",\"NamaUnit\":\"").append(rs.getString(2)).append("\",\"RegistrasiBaru\":\"").append(rs.getString(3)).append("\",\"RegistrasiLama\":\"").append(rs.getString(4)).append("\"},");
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from poliklinik where poliklinik.status = '1' order by poliklinik.nm_poli")) {
+                if (rs.next()) {
+                    ObjectNode root = mapper.createObjectNode();
+                    ArrayNode array = mapper.createArrayNode();
+                    do {
+                        ObjectNode poli = mapper.createObjectNode();
+                        poli.put("KodeUnit", rs.getString(1));
+                        poli.put("NamaUnit", rs.getString(2));
+                        poli.put("RegistrasiBaru", Valid.SetAngka(rs.getDouble(3)));
+                        poli.put("RegistrasiLama", Valid.SetAngka(rs.getDouble(4)));
+                        array.add(poli);
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1), rs.getString(2),
+                            Valid.SetAngka(rs.getDouble(3)), Valid.SetAngka(rs.getDouble(4))
+                        });
+                    } while (rs.next());
+                    root.set("poli", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
-            }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
-            }finally{
-                if(rs != null){
-                    rs.close();
-                }
-                
-                if(ps != null){
-                    ps.close();
-                }
+                tabMode.fireTableDataChanged();
             }
-
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"poli\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-            
-            fileWriter.close();
-            iyembuilder=null;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notif : " + e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -429,35 +421,34 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     }
     
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/poli.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("poli");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
+        Valid.tabelKosongSmc(tabMode);
+        try (FileReader fr = new FileReader("./cache/poli.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("poli");
+            if (response.isArray()) {
+                if (TCari.getText().isBlank()) {
+                    for (JsonNode list : response) {
+                        tabMode.addRow(new Object[] {
+                            list.path("KodeUnit").asText(), list.path("NamaUnit").asText(),
+                            list.path("RegistrasiBaru").asText(), list.path("RegistrasiLama").asText()
                         });
                     }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                            tabMode.addRow(new Object[]{
-                                list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
+                } else {
+                    for (JsonNode list : response) {
+                        if (list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            || list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                        ) {
+                            tabMode.addRow(new Object[] {
+                                list.path("KodeUnit").asText(), list.path("NamaUnit").asText(),
+                                list.path("RegistrasiBaru").asText(), list.path("RegistrasiLama").asText()
                             });
                         }
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
+            tabMode.fireTableDataChanged();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            tampil();
         }
         LCount.setText(""+tabMode.getRowCount());
     } 

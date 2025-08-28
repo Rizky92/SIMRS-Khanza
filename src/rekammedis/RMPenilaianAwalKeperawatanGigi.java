@@ -358,7 +358,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         BB.setDocument(new batasInput((byte)5).getKata(BB));
         TB.setDocument(new batasInput((byte)5).getKata(TB));
         BMI.setDocument(new batasInput((byte)5).getKata(BMI));
-        KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)150).getKata(KeluhanUtama));
         Alergi.setDocument(new batasInput((int)25).getKata(Alergi));
         KetBantu.setDocument(new batasInput((int)50).getKata(KetBantu));
         KetProthesa.setDocument(new batasInput((int)50).getKata(KetProthesa));
@@ -372,7 +372,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         Frekuensi.setDocument(new batasInput((int)25).getKata(Frekuensi));
         KetNyeri.setDocument(new batasInput((int)40).getKata(KetNyeri));
         KetDokter.setDocument(new batasInput((int)15).getKata(KetDokter));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         KetRiwayatPenyakit.setDocument(new batasInput((int)30).getKata(KetRiwayatPenyakit));
         KetRiwayatPerawatan.setDocument(new batasInput((int)50).getKata(KetRiwayatPerawatan));
         KetKebiasaanLain.setDocument(new batasInput((int)30).getKata(KetKebiasaanLain));
@@ -1495,7 +1495,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         FormInput.add(jLabel87);
         jLabel87.setBounds(370, 730, 45, 23);
 
-        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Istirahat", "Medengar Musik", "Minum Obat", "Tidak ada nyeri" }));
+        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Istirahat", "Medengar Musik", "Minum Obat", "Tidak ada nyeri" }));
         NyeriHilang.setName("NyeriHilang"); // NOI18N
         NyeriHilang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

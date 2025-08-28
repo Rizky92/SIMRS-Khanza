@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -18,7 +18,7 @@ package simrskhanza;
  */
 public class DlgAbout extends javax.swing.JDialog {
 
-    
+
     public DlgAbout(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -92,16 +92,16 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7.setBounds(0, 8, 104, 17);
 
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-06-26");
+        jLabel17.setText("2025-08-01");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
-        jLabel17.setBounds(107, 8, 120, 17);
+        jLabel17.setBounds(107, 8, 90, 17);
 
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 3");
+        jLabel18.setText("Patch 1");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
-        jLabel18.setBounds(107, 28, 170, 14);
+        jLabel18.setBounds(107, 28, 90, 17);
 
         internalFrame1.add(panelGlass1);
         panelGlass1.setBounds(7, 38, 454, 90);

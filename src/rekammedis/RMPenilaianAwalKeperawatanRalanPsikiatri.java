@@ -480,9 +480,9 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         tbRencanaDetail.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
         BMI.setDocument(new batasInput((byte)8).getKata(BMI));
-        RKDKeluhan.setDocument(new batasInput((int)500).getKata(RKDKeluhan));
+        // RKDKeluhan.setDocument(new batasInput((int)500).getKata(RKDKeluhan));
         KetPutusObat.setDocument(new batasInput((int)50).getKata(KetPutusObat));
         KetMasalahEkonomi.setDocument(new batasInput((int)50).getKata(KetMasalahEkonomi));
         KetMasalahFisik.setDocument(new batasInput((int)50).getKata(KetMasalahFisik));
@@ -530,7 +530,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         KetKKPembelajaranLainnya.setDocument(new batasInput((int)50).getKata(KetKKPembelajaranLainnya));
         KetKKPenerjamahLainnya.setDocument(new batasInput((int)50).getKata(KetKKPenerjamahLainnya));
         KetKKKebutuhanEdukasi.setDocument(new batasInput((int)50).getKata(KetKKKebutuhanEdukasi));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
@@ -2994,7 +2994,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel80);
         jLabel80.setBounds(510, 710, 60, 23);
 
-        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Proses Penyakit", "Benturan", "Lain-lain" }));
+        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Proses Penyakit", "Benturan", "Lain-lain" }));
         Provokes.setName("Provokes"); // NOI18N
         Provokes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3019,7 +3019,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel81);
         jLabel81.setBounds(370, 740, 55, 23);
 
-        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
+        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
         Quality.setName("Quality"); // NOI18N
         Quality.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3121,7 +3121,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel89);
         jLabel89.setBounds(0, 860, 130, 23);
 
-        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Istirahat", "Medengar Musik", "Minum Obat" }));
+        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Istirahat", "Medengar Musik", "Minum Obat" }));
         NyeriHilang.setName("NyeriHilang"); // NOI18N
         NyeriHilang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -1063,7 +1063,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
 
                 if(sukses==true){
-                   Sequel.queryu2("delete from ipsrspemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                    sukses=Sequel.queryu2tf("delete from ipsrspemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                }
+                
+                if(sukses==true){
                    Sequel.Commit();
                    tampil();
                 }else{

@@ -5157,10 +5157,11 @@
                         <Component class="widget.ComboBox" name="Provokes">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="3">
+                              <StringArray count="4">
                                 <StringItem index="0" value="Proses Penyakit"/>
-                                <StringItem index="1" value="Benturan"/>
-                                <StringItem index="2" value="Lain-lain"/>
+                                <StringItem index="1" value="Proses Penyakit"/>
+                                <StringItem index="2" value="Benturan"/>
+                                <StringItem index="3" value="Lain-lain"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Provokes" noResource="true"/>
@@ -5202,13 +5203,14 @@
                         <Component class="widget.ComboBox" name="Quality">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="6">
-                                <StringItem index="0" value="Seperti Tertusuk"/>
-                                <StringItem index="1" value="Berdenyut"/>
-                                <StringItem index="2" value="Teriris"/>
-                                <StringItem index="3" value="Tertindih"/>
-                                <StringItem index="4" value="Tertiban"/>
-                                <StringItem index="5" value="Lain-lain"/>
+                              <StringArray count="7">
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="Seperti Tertusuk"/>
+                                <StringItem index="2" value="Berdenyut"/>
+                                <StringItem index="3" value="Teriris"/>
+                                <StringItem index="4" value="Tertindih"/>
+                                <StringItem index="5" value="Tertiban"/>
+                                <StringItem index="6" value="Lain-lain"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Quality" noResource="true"/>
@@ -5404,10 +5406,11 @@
                         <Component class="widget.ComboBox" name="NyeriHilang">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="3">
-                                <StringItem index="0" value="Istirahat"/>
-                                <StringItem index="1" value="Medengar Musik"/>
-                                <StringItem index="2" value="Minum Obat"/>
+                              <StringArray count="4">
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="Istirahat"/>
+                                <StringItem index="2" value="Medengar Musik"/>
+                                <StringItem index="3" value="Minum Obat"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="NyeriHilang" noResource="true"/>

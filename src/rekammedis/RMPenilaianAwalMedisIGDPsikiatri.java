@@ -250,14 +250,14 @@ public final class RMPenilaianAwalMedisIGDPsikiatri extends javax.swing.JDialog 
         
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        GejalaMenyertai.setDocument(new batasInput((int)1000).getKata(GejalaMenyertai));
-        FaktorPencetus.setDocument(new batasInput((int)1000).getKata(FaktorPencetus));
-        KeteranganRiwayatPenyakitDahulu.setDocument(new batasInput((int)1000).getKata(KeteranganRiwayatPenyakitDahulu));
-        RiwayatKehamilan.setDocument(new batasInput((int)1000).getKata(RiwayatKehamilan));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // GejalaMenyertai.setDocument(new batasInput((int)1000).getKata(GejalaMenyertai));
+        // FaktorPencetus.setDocument(new batasInput((int)1000).getKata(FaktorPencetus));
+        // KeteranganRiwayatPenyakitDahulu.setDocument(new batasInput((int)1000).getKata(KeteranganRiwayatPenyakitDahulu));
+        // RiwayatKehamilan.setDocument(new batasInput((int)1000).getKata(RiwayatKehamilan));
         KeteranganRiwayatSosial.setDocument(new batasInput((int)50).getKata(KeteranganRiwayatSosial));
         KeteranganRiwayatPekerjaan.setDocument(new batasInput((int)50).getKata(KeteranganRiwayatPekerjaan));
-        RiwayatObatDiminum.setDocument(new batasInput((int)1000).getKata(RiwayatObatDiminum));
+        // RiwayatObatDiminum.setDocument(new batasInput((int)1000).getKata(RiwayatObatDiminum));
         FaktorPremorbid.setDocument(new batasInput((int)50).getKata(FaktorPremorbid));
         KeteranganFaktorKeturunan.setDocument(new batasInput((int)50).getKata(KeteranganFaktorKeturunan));
         KeteranganFaktorOrganik.setDocument(new batasInput((int)50).getKata(KeteranganFaktorOrganik));
@@ -275,7 +275,7 @@ public final class RMPenilaianAwalMedisIGDPsikiatri extends javax.swing.JDialog 
         KeteranganStatusDada.setDocument(new batasInput((int)50).getKata(KeteranganStatusDada));
         KeteranganStatusPerut.setDocument(new batasInput((int)50).getKata(KeteranganStatusPerut));
         KeteranganStatusAnggotaGerak.setDocument(new batasInput((int)50).getKata(KeteranganStatusAnggotaGerak));
-        StatusLokalisata.setDocument(new batasInput((int)1000).getKata(StatusLokalisata));
+        // StatusLokalisata.setDocument(new batasInput((int)1000).getKata(StatusLokalisata));
         PsikiatriKesanUmum.setDocument(new batasInput((int)50).getKata(PsikiatriKesanUmum));
         PsikiatriSikap.setDocument(new batasInput((int)50).getKata(PsikiatriSikap));
         PsikiatriKesadaran.setDocument(new batasInput((int)50).getKata(PsikiatriKesadaran));
@@ -284,13 +284,13 @@ public final class RMPenilaianAwalMedisIGDPsikiatri extends javax.swing.JDialog 
         PsikiatriPersepsi.setDocument(new batasInput((int)50).getKata(PsikiatriPersepsi));
         PsikiatriPikiran.setDocument(new batasInput((int)50).getKata(PsikiatriPikiran));
         PsikiatriInsight.setDocument(new batasInput((int)50).getKata(PsikiatriInsight));
-        Laborat.setDocument(new batasInput((int)300).getKata(Laborat));
-        Radiologi.setDocument(new batasInput((int)200).getKata(Radiologi));
-        EKG.setDocument(new batasInput((int)200).getKata(EKG));
-        Diagnosis.setDocument(new batasInput((int)1000).getKata(Diagnosis));
-        Permasalahan.setDocument(new batasInput((int)500).getKata(Permasalahan));
-        Instruksi.setDocument(new batasInput((int)600).getKata(Instruksi));
-        Rencana.setDocument(new batasInput((int)1000).getKata(Rencana));
+        // Laborat.setDocument(new batasInput((int)300).getKata(Laborat));
+        // Radiologi.setDocument(new batasInput((int)200).getKata(Radiologi));
+        // EKG.setDocument(new batasInput((int)200).getKata(EKG));
+        // Diagnosis.setDocument(new batasInput((int)1000).getKata(Diagnosis));
+        // Permasalahan.setDocument(new batasInput((int)500).getKata(Permasalahan));
+        // Instruksi.setDocument(new batasInput((int)600).getKata(Instruksi));
+        // Rencana.setDocument(new batasInput((int)1000).getKata(Rencana));
         KeteranganDipulangkan.setDocument(new batasInput((int)100).getKata(KeteranganDipulangkan));
         DirawatDiRuang.setDocument(new batasInput((int)30).getKata(DirawatDiRuang));
         IndikasiRanap.setDocument(new batasInput((int)100).getKata(IndikasiRanap));
@@ -302,7 +302,7 @@ public final class RMPenilaianAwalMedisIGDPsikiatri extends javax.swing.JDialog 
         PulangGCS.setDocument(new batasInput((int)8).getKata(PulangGCS));
         PulangSuhu.setDocument(new batasInput((int)5).getKata(PulangSuhu));
         PulangRR.setDocument(new batasInput((int)5).getKata(PulangRR));
-        Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
+        // Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
