@@ -1749,14 +1749,8 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
 
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            Date now = Calendar.getInstance().getTime();
             if (ChkKejadian.isSelected()) {
-                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
-                
-                Tanggal.setDate(now);
-                Jam.setSelectedItem(jam.substring(0, 2));
-                Menit.setSelectedItem(jam.substring(3, 5));
-                Detik.setSelectedItem(jam.substring(6, 8));
+                Valid.setTglJamRealSmc(Tanggal, Jam, Menit, Detik);
             }
         };
 

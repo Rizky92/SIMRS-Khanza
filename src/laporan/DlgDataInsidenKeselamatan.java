@@ -236,7 +236,6 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
         isForm();
         
         jam();
-        jam2();
     }
 
 
@@ -1861,105 +1860,13 @@ public final class DlgDataInsidenKeselamatan extends javax.swing.JDialog {
     }
 
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkKejadian.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkKejadian.isSelected()==false){
-                    nilai_jam =JamKejadian.getSelectedIndex();
-                    nilai_menit =MenitKejadian.getSelectedIndex();
-                    nilai_detik =DetikKejadian.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                JamKejadian.setSelectedItem(jam);
-                MenitKejadian.setSelectedItem(menit);
-                DetikKejadian.setSelectedItem(detik);
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            if (ChkKejadian.isSelected()) {
+                Valid.setTglJamRealSmc(Kejadian, JamKejadian, MenitKejadian, DetikKejadian);
             }
-        };
-        // Timer
-        new Timer(1000, taskPerformer).start();
-    }
-    
-    private void jam2(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkLapor.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkLapor.isSelected()==false){
-                    nilai_jam =JamLapor.getSelectedIndex();
-                    nilai_menit =MenitLapor.getSelectedIndex();
-                    nilai_detik =DetikLapor.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                JamLapor.setSelectedItem(jam);
-                MenitLapor.setSelectedItem(menit);
-                DetikLapor.setSelectedItem(detik);
+            
+            if (ChkLapor.isSelected()) {
+                Valid.setTglJamRealSmc(Lapor, JamLapor, MenitLapor, DetikLapor);
             }
         };
         // Timer
