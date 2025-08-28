@@ -29,9 +29,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -432,6 +435,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
                 BtnSimpan4ActionPerformed(e);
             }
         });
+        refreshPilihanPrinter(CmbPrinterLembarObat);
     }
 
     /** This method is called from within the constructor to
@@ -461,6 +465,9 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         CmbModelLembarObat = new widget.ComboBox();
         ChkPreviewAturanPakai = new widget.CekBox();
         CmbModelAturanPakai = new widget.ComboBox();
+        label2 = new widget.Label();
+        CmbPrinterLembarObat = new widget.ComboBox();
+        BtnRefreshPrinterLembarObat = new widget.Button();
         panelBiasa2 = new widget.PanelBiasa();
         BtnSimpanPengaturan = new widget.Button();
         BtnResetPengaturan = new widget.Button();
@@ -606,7 +613,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         WindowPengaturan.setUndecorated(true);
         WindowPengaturan.setResizable(false);
 
-        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Kompilasi Berkas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "::[ Pengaturan Resep Otomatis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame12.setName("internalFrame12"); // NOI18N
         internalFrame12.setPreferredSize(new java.awt.Dimension(610, 182));
         internalFrame12.setLayout(new java.awt.GridBagLayout());
@@ -625,10 +632,11 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelBiasa1.add(ChkAutoValidasiRalan);
         ChkAutoValidasiRalan.setBounds(10, 10, 363, 23);
 
-        label1.setText("Setelah melakukan validasi:");
+        label1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label1.setText("Setelah melakukan validasi :");
         label1.setName("label1"); // NOI18N
         panelBiasa1.add(label1);
-        label1.setBounds(33, 70, 131, 23);
+        label1.setBounds(28, 70, 140, 23);
 
         ChkAutoValidasiRanap.setText("Aktifkan auto validasi setelah pencarian resep rawat inap");
         ChkAutoValidasiRanap.setName("ChkAutoValidasiRanap"); // NOI18N
@@ -663,12 +671,33 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(ChkPreviewAturanPakai);
-        ChkPreviewAturanPakai.setBounds(60, 130, 125, 23);
+        ChkPreviewAturanPakai.setBounds(60, 160, 125, 23);
 
         CmbModelAturanPakai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Model 1", "Model 2", "Model 3" }));
         CmbModelAturanPakai.setName("CmbModelAturanPakai"); // NOI18N
         panelBiasa1.add(CmbModelAturanPakai);
-        CmbModelAturanPakai.setBounds(243, 130, 90, 23);
+        CmbModelAturanPakai.setBounds(243, 160, 90, 23);
+
+        label2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label2.setText("Print otomatis dengan :");
+        label2.setName("label2"); // NOI18N
+        panelBiasa1.add(label2);
+        label2.setBounds(78, 130, 112, 23);
+
+        CmbPrinterLembarObat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        CmbPrinterLembarObat.setName("CmbPrinterLembarObat"); // NOI18N
+        panelBiasa1.add(CmbPrinterLembarObat);
+        CmbPrinterLembarObat.setBounds(194, 130, 301, 23);
+
+        BtnRefreshPrinterLembarObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnRefreshPrinterLembarObat.setName("BtnRefreshPrinterLembarObat"); // NOI18N
+        BtnRefreshPrinterLembarObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRefreshPrinterLembarObatActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(BtnRefreshPrinterLembarObat);
+        BtnRefreshPrinterLembarObat.setBounds(499, 130, 28, 23);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -3515,7 +3544,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_formWindowClosed
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
-        WindowPengaturan.setSize(516, 261);
+        WindowPengaturan.setSize(558, 280);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
     }//GEN-LAST:event_BtnPengaturanActionPerformed
@@ -3527,9 +3556,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void ChkPreviewLembarObatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkPreviewLembarObatItemStateChanged
         if (ChkPreviewLembarObat.isSelected()) {
             CmbModelLembarObat.setEnabled(true);
+            CmbPrinterLembarObat.setEnabled(true);
+            BtnRefreshPrinterLembarObat.setEnabled(true);
         } else {
             CmbModelLembarObat.setEnabled(false);
             CmbModelLembarObat.setSelectedIndex(0);
+            CmbPrinterLembarObat.setEnabled(false);
+            CmbPrinterLembarObat.setSelectedIndex(0);
+            BtnRefreshPrinterLembarObat.setEnabled(false);
         }
     }//GEN-LAST:event_ChkPreviewLembarObatItemStateChanged
 
@@ -3593,6 +3627,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ObjectNode lembarObat = mapper.createObjectNode();
                         lembarObat.put("preview", ChkPreviewLembarObat.isSelected());
                         lembarObat.put("model",  CmbModelLembarObat.getSelectedItem().toString());
+                        if (CmbPrinterLembarObat.getSelectedIndex() > 0) {
+                            lembarObat.put("printer", CmbPrinterLembarObat.getSelectedItem().toString());
+                        }
                         setelahValidasi.set("lembarobat", lembarObat);
                     }
                     if (ChkPreviewAturanPakai.isSelected()) {
@@ -3634,6 +3671,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         isopening = false;
     }//GEN-LAST:event_WindowJamPenyerahanWindowClosed
 
+    private void BtnRefreshPrinterLembarObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshPrinterLembarObatActionPerformed
+        refreshPilihanPrinter(CmbPrinterLembarObat);
+    }//GEN-LAST:event_BtnRefreshPrinterLembarObatActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3668,6 +3709,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnPenyerahan;
     private widget.Button BtnPiutangObat;
     private widget.Button BtnPrint;
+    private widget.Button BtnRefreshPrinterLembarObat;
     private widget.Button BtnRekap;
     private widget.Button BtnResepAwal;
     private widget.Button BtnResepLuar;
@@ -3689,6 +3731,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.CekBox ChkSelesai;
     private widget.ComboBox CmbModelAturanPakai;
     private widget.ComboBox CmbModelLembarObat;
+    private widget.ComboBox CmbPrinterLembarObat;
     private widget.TextBox CrDokter;
     private widget.TextBox CrDokter2;
     private widget.TextBox CrPoli;
@@ -3723,6 +3766,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private javax.swing.JPanel jPanel2;
     private widget.Label label1;
     private widget.Label label10;
+    private widget.Label label2;
     private widget.Label label9;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
@@ -5638,9 +5682,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JsonNode iyem = mapper.readTree(fr);
             autoValidasiRalan = iyem.path("autovalidasiralan").asBoolean(false);
             autoValidasiRanap = iyem.path("autovalidasiranap").asBoolean(false);
+            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
+            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
+            ChkAutoValidasiRalanItemStateChanged(null);
             ChkPreviewLembarObat.setSelected(iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false));
             if (ChkPreviewLembarObat.isSelected()) {
                 CmbModelLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("model").asText(""));
+                CmbPrinterLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText());
             }
             ChkPreviewAturanPakai.setSelected(iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false));
             if (ChkPreviewAturanPakai.isSelected()) {
@@ -5650,9 +5698,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notif : " + e);
             autoValidasiRalan = false;
             autoValidasiRanap = false;
+            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
+            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
+            ChkAutoValidasiRalanItemStateChanged(null);
         }
-        ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
-        ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
-        ChkAutoValidasiRalanItemStateChanged(null);
+    }
+    
+    private void refreshPilihanPrinter(JComboBox cmb) {
+        cmb.removeAllItems();
+        cmb.addItem("");
+        for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
+            cmb.addItem(ps.getName());
+        }
     }
 }
