@@ -23,6 +23,18 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `antriloketfarmasi_smc`  (
+  `nomor` varchar(6) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NULL DEFAULT NULL,
+  `jam_panggil` time NULL DEFAULT NULL,
+  `no_resep` varchar(14) NULL DEFAULT NULL,
+  PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_jam_IDX`(`jam`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_tanggal_IDX`(`tanggal`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
@@ -61,6 +73,8 @@ ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_booking`(`tang
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tanggal_periksa`) USING BTREE;
 
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
+
+ALTER TABLE `bridging_sep` ADD COLUMN IF NOT EXISTS `esep` enum('0','1') NULL DEFAULT NULL AFTER `nmdpjplayanan`;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
