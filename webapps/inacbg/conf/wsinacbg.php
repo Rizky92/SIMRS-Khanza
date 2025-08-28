@@ -1214,7 +1214,7 @@
         $admission_id          = $msg['response']['data']['admission_id'];
         $hospital_admission_id = $msg['response']['data']['hospital_admission_id'];
 
-        Hapus2('inacbg_klaim_baru2', "no_sep = '$nomor_sep'");
+        Hapus2('inacbg_klaim_baru2', "no_rawat = '$norawat'");
         InsertData2('inacbg_klaim_baru2', "'$norawat', '$nomor_sep', '$patient_id', '$admission_id', '$hospital_admission_id'");
 
         return [
