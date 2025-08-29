@@ -20,11 +20,11 @@ public class Jurnal {
     private final sekuel Sequel = new sekuel();
     private final Connection koneksi = koneksiDB.condb();
     private String nojur = "", nobukti = "", jenis = "", keterangan = "";
-    private HashMap<String, Double> detaildebet = new HashMap<>(),
-                                    detailkredit = new HashMap<>();
-    
+    private final HashMap<String, Double> detaildebet = new HashMap<>(),
+                                          detailkredit = new HashMap<>();
+
     public Jurnal() {}
-    
+
     public Jurnal(String nobukti, String jenis, String keterangan) {
         this.nobukti = nobukti;
         this.jenis = jenis;
@@ -34,12 +34,10 @@ public class Jurnal {
     public synchronized void bersihkan() {
         detaildebet.clear();
         detailkredit.clear();
-        System.out.println("cleared");
-        System.out.println("detaildebet status : " + detaildebet.toString());
-        System.out.println("detailkredit status : " + detailkredit.toString());
     }
     
     public synchronized boolean tampung(String kdrek, String nmrek, double debet, double kredit) {
+        // gagalkan apabila debet dan kredit 0
         if (debet <= 0 && kredit <= 0) {
             return false;
         }
@@ -59,10 +57,7 @@ public class Jurnal {
                 detailkredit.put(kdrek, kredit);
             }
         }
-        
-        System.out.println("detaildebet status : " + detaildebet.toString());
-        System.out.println("detailkredit status : " + detailkredit.toString());
-        
+
         return true;
     }
     
@@ -82,9 +77,6 @@ public class Jurnal {
     }
     
     public synchronized boolean simpanJurnal() {
-        // kalau debet atau kredit kosong, proses pencatatan jurnal pasti tidak valid
-        System.out.println("detaildebet status : " + detaildebet.toString());
-        System.out.println("detailkredit status : " + detailkredit.toString());
         if (detaildebet.isEmpty() || detailkredit.isEmpty()) {
             return false;
         }
@@ -92,21 +84,25 @@ public class Jurnal {
         int totaldebet = detaildebet.values().stream().reduce(0d, Double::sum).intValue(),
             totalkredit = detailkredit.values().stream().reduce(0d, Double::sum).intValue();
         
-        // cek jumlah debet/kredit kalau kosong maka 
+        // cek jumlah debet/kredit apabila nominal 0 atau lebih kecil,
+        // atau apabila total debet tidak sesuai dengan total kredit
         if (totaldebet <= 0 || totalkredit <= 0 || totaldebet != totalkredit) {
             return false;
         }
         
         int next = 1, retry = 4;
         boolean sukses = true;
+
+        String tgl = Sequel.cariIsiSmc("select current_date()"),
+               jam = Sequel.cariIsiSmc("select current_time()");
+
         // loop proses simpan, pastikan pencatatan jurnal mendapatkan no. jurnal yang sesuai
-        String tgl = Sequel.cariIsiSmc("select current_date()"), jam = Sequel.cariIsiSmc("select current_time()");
         do {
             nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", tgl, next);
             sukses = Sequel.menyimpantfSmc("jurnal", null, nojur, nobukti, tgl, jam, jenis, keterangan);
         } while (!sukses && next++ <= retry);
-        
-        // return cepat ketika gagal
+
+        // return cepat ketika jurnal nggak bisa terbuat
         if (!sukses) return false;
         
         try (PreparedStatement ps = koneksi.prepareStatement("insert into detailjurnal values (?, ?, ?, ?)")) {
@@ -119,6 +115,7 @@ public class Jurnal {
                 ps.addBatch();
                 ++batches;
             }
+            
             for (Map.Entry<String, Double> kredit : detailkredit.entrySet()) {
                 ps.setString(1, nojur);
                 ps.setString(2, kredit.getKey());
@@ -127,8 +124,10 @@ public class Jurnal {
                 ps.addBatch();
                 ++batches;
             }
-            int result = Arrays.stream(ps.executeBatch()).reduce(0, Integer::sum);
-            if (batches != result) {
+            
+            // hitung jumlah statement yang tereksekusi,
+            // gagal apabila jummlah batch tidak sesuai statement
+            if (batches != Arrays.stream(ps.executeBatch()).reduce(0, Integer::sum)) {
                 return false;
             }
         } catch (Exception e) {
