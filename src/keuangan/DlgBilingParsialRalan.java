@@ -5737,6 +5737,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
     private void isSimpan() {
         int jawab=JOptionPane.showConfirmDialog(null, "Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if(jawab==JOptionPane.YES_OPTION){
+            DTPTgl.setDate(new Date());
             if(notaralan.equals("Yes")){
                 BtnNotaActionPerformed(null);
             }
@@ -7395,5 +7396,4 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+ex);
         }
     }
-
 }

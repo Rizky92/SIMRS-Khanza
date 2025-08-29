@@ -72,7 +72,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         setSize(628,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Nota","Tgl.Piutang","NIP","Nama Petugas","Kode","Nama Pemberi Hutang","Keterangan","Tgl.Tempo","Nilai Hutang","Sisa Piutang","Status"}){
+            "No.Nota","Tgl.Hutang","NIP","Nama Petugas","Kode","Nama Pemberi Hutang","Keterangan","Tgl.Tempo","Nilai Hutang","Sisa Hutang","Status"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
@@ -592,6 +592,11 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
 
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
+        Tanggal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalItemStateChanged(evt);
+            }
+        });
         Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKeyPressed(evt);
@@ -996,6 +1001,10 @@ private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//
         }
     }//GEN-LAST:event_ppBayarBebanBtnPrintActionPerformed
 
+    private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalItemStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -1172,7 +1181,6 @@ private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(beban_hutang_lain.no_hutang,4),signed)),0) from beban_hutang_lain where beban_hutang_lain.tgl_hutang like '%"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"%' ",
-                "BHL"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),4,NoHutang);
+        Valid.autonomorSmc(NoHutang, "BHL", "", "beban_hutang_lain", "no_hutang", 4, "0", Tanggal);
     }
 }

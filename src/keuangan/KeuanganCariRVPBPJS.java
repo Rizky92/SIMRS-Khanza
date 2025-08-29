@@ -109,20 +109,20 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
                 java.lang.Double.class
              };
              @Override
@@ -198,7 +198,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
 
         try {
             ps=koneksi.prepareStatement(
@@ -221,8 +221,8 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            
+            }
+
             ps=koneksi.prepareStatement(
                     "select Tindakan_Ralan,set_akun_ralan.Beban_Jasa_Medik_Dokter_Tindakan_Ralan,set_akun_ralan.Utang_Jasa_Medik_Dokter_Tindakan_Ralan,"+
                     "set_akun_ralan.Beban_Jasa_Medik_Paramedis_Tindakan_Ralan,set_akun_ralan.Utang_Jasa_Medik_Paramedis_Tindakan_Ralan,set_akun_ralan.Beban_KSO_Tindakan_Ralan,"+
@@ -305,8 +305,8 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            
+            }
+
             ps=koneksi.prepareStatement(
                     "select set_akun_ranap.Tindakan_Ranap,set_akun_ranap.Beban_Jasa_Medik_Dokter_Tindakan_Ranap,set_akun_ranap.Utang_Jasa_Medik_Dokter_Tindakan_Ranap,"+
                     "set_akun_ranap.Beban_Jasa_Medik_Paramedis_Tindakan_Ranap,set_akun_ranap.Utang_Jasa_Medik_Paramedis_Tindakan_Ranap,set_akun_ranap.Beban_KSO_Tindakan_Ranap,"+
@@ -393,8 +393,8 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            } 
-            
+            }
+
             ps=koneksi.prepareStatement("select set_akun_ranap2.Harian_Ranap from set_akun_ranap2");
             try {
                 rs=ps.executeQuery();
@@ -415,7 +415,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
             System.out.println(e);
         }
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -728,7 +728,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             ttlpiutang=0;ttliur=0;ttlsudahdibayar=0;ttlsisapiutang=0;ttlinacbg=0;total=0;rugi=0;lebih=0;
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 sisapiutang=0;
                 try {
                     sisapiutang=Double.parseDouble(tabMode.getValueAt(i,10).toString());
@@ -756,19 +756,19 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                             Valid.SetAngka(sisapiutang)+"','"+
                             Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
                             Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutang"); 
+                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutang");
             }
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','Total :','','','','"+Valid.SetAngka(ttlpiutang)+"','"+Valid.SetAngka(ttliur)+"','"+Valid.SetAngka(ttlsudahdibayar)+"','"+Valid.SetAngka(ttlsisapiutang)+"','"+Valid.SetAngka(ttlinacbg)+"','"+Valid.SetAngka(total)+"','','"+Valid.SetAngka(rugi)+"','"+Valid.SetAngka(lebih)+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutang"); 
-            
-            Map<String, Object> param = new HashMap<>();                 
+            Sequel.menyimpan("temporary","'"+i+"','Total :','','','','"+Valid.SetAngka(ttlpiutang)+"','"+Valid.SetAngka(ttliur)+"','"+Valid.SetAngka(ttlsudahdibayar)+"','"+Valid.SetAngka(ttlsisapiutang)+"','"+Valid.SetAngka(ttlinacbg)+"','"+Valid.SetAngka(total)+"','','"+Valid.SetAngka(rugi)+"','"+Valid.SetAngka(lebih)+"','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutang");
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRVPPiutang2.jasper","report","::[ Data RVP Piutang BPJS ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -837,7 +837,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbBangsalPropertyChange
-        
+
     }//GEN-LAST:event_tbBangsalPropertyChange
 
     private void Tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl2KeyPressed
@@ -855,10 +855,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             sukses=true;
             row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 if(tabMode.getValueAt(i,0).toString().equals("true")){
                     Sequel.AutoComitFalse();
-                    Sequel.mengupdateSmc("piutang_pasien", "status = 'Belum Lunas', sisapiutang = sisapiutang + ?", "no_rawat = ?", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString());
+                    Sequel.mengupdateSmc("piutang_pasien", "status = 'Belum Lunas'", "no_rawat = ?", tabMode.getValueAt(i, 1).toString());
                     Sequel.mengupdateSmc("detail_piutang_pasien", "sisapiutang = sisapiutang + ?", "no_rawat = ? and nama_bayar = (select akun_piutang.nama_bayar from akun_piutang where akun_piutang.kd_rek = ?)", tabMode.getValueAt(i, 8).toString(), tabMode.getValueAt(i, 1).toString(), tabMode.getValueAt(i, 83).toString());
                     if (Valid.SetAngka(tabMode.getValueAt(i, 11).toString()) >= 100) {
                         jur.bersihkan();
@@ -1522,7 +1522,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                     }
-                    
+
                     if(sukses==true){
                         if(Sequel.queryu2tf("delete from bayar_piutang where tgl_bayar=? and no_rawat=? and kd_rek=? and kd_rek_kontra=?",4,new String[]{
                             tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,82).toString(),tabMode.getValueAt(i,83).toString()
@@ -1665,7 +1665,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(7,"%"+TCari.getText()+"%");
                     ps.setString(8,"%"+TCari.getText()+"%");
                 }
-                    
+
                 sisapiutang=0;
                 total=0;
                 rs=ps.executeQuery();
@@ -1710,22 +1710,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }
-            
-            
+
+
             LCount.setText(Valid.SetAngka(sisapiutang));
             LCount2.setText(Valid.SetAngka(total));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getdata() {
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         if(akses.getjml2()>=1){
             BtnHapus.setEnabled(akses.getrvu_bpjs());
-        } 
+        }
     }
 }

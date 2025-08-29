@@ -187,8 +187,8 @@ public final class RMPenilaianPreInduksi extends javax.swing.JDialog {
         Suhu.setDocument(new batasInput((int)5).getKata(Suhu));
         EKG.setDocument(new batasInput((int)50).getKata(EKG));
         Lainlain.setDocument(new batasInput((int)50).getKata(Lainlain));
-        Perencanaan.setDocument(new batasInput((int)300).getKata(Perencanaan));
-        InfusPerifier.setDocument(new batasInput((int)300).getKata(InfusPerifier));
+        // Perencanaan.setDocument(new batasInput((int)300).getKata(Perencanaan));
+        // InfusPerifier.setDocument(new batasInput((int)300).getKata(InfusPerifier));
         CVC.setDocument(new batasInput((int)70).getKata(CVC));
         KeteranganPremedikasi.setDocument(new batasInput((int)50).getKata(KeteranganPremedikasi));
         KeteranganInfusInduksi.setDocument(new batasInput((int)70).getKata(KeteranganInfusInduksi));
@@ -203,7 +203,7 @@ public final class RMPenilaianPreInduksi extends javax.swing.JDialog {
         BronchoscopiFiberoptik.setDocument(new batasInput((int)60).getKata(BronchoscopiFiberoptik));
         Glidescopi.setDocument(new batasInput((int)60).getKata(Glidescopi));
         TatalaksanaLainlain.setDocument(new batasInput((int)100).getKata(TatalaksanaLainlain));
-        KeteranganIntubasi.setDocument(new batasInput((int)200).getKata(KeteranganIntubasi));
+        // KeteranganIntubasi.setDocument(new batasInput((int)200).getKata(KeteranganIntubasi));
         IntubasiSulitVentilasi.setDocument(new batasInput((int)100).getKata(IntubasiSulitVentilasi));
         IntubasiSulitIntubasi.setDocument(new batasInput((int)100).getKata(IntubasiSulitIntubasi));
         Ventilasi.setDocument(new batasInput((int)100).getKata(Ventilasi));
@@ -211,8 +211,8 @@ public final class RMPenilaianPreInduksi extends javax.swing.JDialog {
         TeknikRegionalLokasi.setDocument(new batasInput((int)40).getKata(TeknikRegionalLokasi));
         TeknikRegionalJenisJarum.setDocument(new batasInput((int)30).getKata(TeknikRegionalJenisJarum));
         TeknikRegionalKateterFiksasi.setDocument(new batasInput((int)40).getKata(TeknikRegionalKateterFiksasi));
-        TeknikRegionalObatobatan.setDocument(new batasInput((int)400).getKata(TeknikRegionalObatobatan));
-        TeknikRegionalKomplikasi.setDocument(new batasInput((int)200).getKata(TeknikRegionalKomplikasi));
+        // TeknikRegionalObatobatan.setDocument(new batasInput((int)400).getKata(TeknikRegionalObatobatan));
+        // TeknikRegionalKomplikasi.setDocument(new batasInput((int)200).getKata(TeknikRegionalKomplikasi));
         TeknikRegionalHasil.setDocument(new batasInput((int)100).getKata(TeknikRegionalHasil));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         

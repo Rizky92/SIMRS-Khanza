@@ -496,10 +496,9 @@ public final class sekuel {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
-            if (ps.executeUpdate() > 0) {
-                track = ps.toString();
-                SimpanTrack(track.substring(track.indexOf("delete")));
-            }
+            track = ps.toString();
+            SimpanTrack(track.substring(track.indexOf("delete")));
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }

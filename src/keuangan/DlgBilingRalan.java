@@ -4264,6 +4264,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // End of variables declaration//GEN-END:variables
 
     public void isRawat() {
+        TabRawat.setSelectedIndex(0);
+        TabRawatMouseClicked(null);
         try {    
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
 	    try{

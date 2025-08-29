@@ -71,6 +71,8 @@ import rekammedis.RMCatatanPersalinan;
 import rekammedis.RMChecklistKesiapanAnestesi;
 import rekammedis.RMChecklistKriteriaMasukHCU;
 import rekammedis.RMChecklistKriteriaMasukICU;
+import rekammedis.RMChecklistKriteriaMasukNICU;
+import rekammedis.RMChecklistKriteriaMasukPICU;
 import rekammedis.RMChecklistPemberianFibrinolitik;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
@@ -176,6 +178,7 @@ import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningFrailtySyndrome;
 import rekammedis.RMSkriningHipertensi;
 import rekammedis.RMSkriningIndraPendengaran;
+import rekammedis.RMSkriningInstrumenACRS;
 import rekammedis.RMSkriningInstrumenSDQ;
 import rekammedis.RMSkriningKankerKolorektal;
 import rekammedis.RMSkriningKekerasanPadaPerempuan;
@@ -2565,7 +2568,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel41.setBounds(0, 40, 190, 23);
 
         jLabel53.setText("Inst/Impl :");
-        jLabel53.setName("jLabel53"); 
+        jLabel53.setName("jLabel53");
         panelGlass12.add(jLabel53);
         jLabel53.setBounds(450, 139, 90, 23);
 
@@ -5443,7 +5446,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TCavumDouglas.setText("");
         Catatan.setText("");
         cmbKesadaran.setSelectedIndex(0);
-        if (TNoRw.getText().equals(norawatasal)) {
+        if (!TNoRw.getText().equals(norawatasal)) {
             TNoRw.setText(norawatasal);
         }
         TNoRw.requestFocus();
@@ -6177,10 +6180,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         try {
             i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
-                if(Sequel.mengedittf("reg_periksa","no_rawat=?","stts=?",2,new String[]{"Sudah",TNoRw.getText()})==true){
+                if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah', biaya_reg = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?", TNoRw.getText())) {
                     if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
-                        if (! Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
-                            Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Kembali',now(),'0000-00-00 00:00:00',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Kembali',kembali=now()","no_rawat='"+TNoRw.getText()+"'");
+                        if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
+                            Sequel.executeRawSmc(
+                                "insert into mutasi_berkas values (?, 'Sudah Kembali', now(), '0000-00-00 00:00:00.000', now(), " +
+                                "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update " +
+                                "status = values(status), kembali = values(kembali)", TNoRw.getText()
+                            );
                         }
                     }
                 }
@@ -10180,7 +10187,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
-    private void BtnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    private void BtnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10282,6 +10289,58 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    private void BtnSkriningInstrumenACRSActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMSkriningInstrumenACRS form=new RMSkriningInstrumenACRS(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    private void BtnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMChecklistKriteriaMasukNICU form=new RMChecklistKriteriaMasukNICU(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.emptTeks();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+    
+    private void BtnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMChecklistKriteriaMasukPICU form=new RMChecklistKriteriaMasukPICU(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.emptTeks();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -10652,7 +10711,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                           BtnChecklistPemberianFibrinolitik,BtnSkriningKankerKolorektal,BtnPenilaianPsikologKlinis,BtnPenilaianDerajatDehidrasi,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnSkriningDiabetesMelitus,
                           BtnLaporanTindakan,BtnPelaksanaanInformasiEdukasi,BtnLayananKedokteranFisikRehabilitasi,BtnSkriningKesehatanGigiMulutBalita,BtnSkriningAnemia,BtnSkriningHipertensi,BtnSkriningKesehatanPenglihatan,
                           BtnCatatanObservasiHemodialisa,BtnSkriningKesehatanGigiMulutDewasa,BtnSkriningRisikoKankerServiks,BtnCatatanCairanHemodialisa,BtnSkriningKesehatanGigiMulutLansia,BtnSkriningIndraPendengaran,
-                          BtnCatatanPengkajianPaskaOperasi,BtnSkriningFrailtySyndrome,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT;
+                          BtnCatatanPengkajianPaskaOperasi,BtnSkriningFrailtySyndrome,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,BtnSkriningInstrumenACRS,
+                          BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaMasukPICU;
 
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -11540,6 +11600,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(akses.getskrining_instrumen_srq()==true){
             tinggi=tinggi+24;
         }
+        BtnSkriningInstrumenACRS.setVisible(akses.getskrining_instrumen_acrs());
+        if(akses.getskrining_instrumen_acrs()==true){
+            tinggi=tinggi+24;
+        }
         BtnSkriningKankerKolorektal.setVisible(akses.getskrining_kanker_kolorektal());
         if(akses.getskrining_kanker_kolorektal()==true){
             tinggi=tinggi+24;
@@ -11566,6 +11630,14 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         BtnLayananKedokteranFisikRehabilitasi.setVisible(akses.getlayanan_kedokteran_fisik_rehabilitasi());
         if(akses.getlayanan_kedokteran_fisik_rehabilitasi()==true){
+            tinggi=tinggi+24;
+        }
+        BtnChecklistKriteriaMasukNICU.setVisible(akses.getkriteria_masuk_nicu());
+        if(akses.getkriteria_masuk_nicu()==true){
+            tinggi=tinggi+24;
+        }
+        BtnChecklistKriteriaMasukPICU.setVisible(akses.getkriteria_masuk_picu()); 
+        if(akses.getkriteria_masuk_picu()==true){
             tinggi=tinggi+24;
         }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
@@ -11833,7 +11905,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Date now = Calendar.getInstance().getTime();
             if (ChkJln.isSelected()) {
                 String jam = new SimpleDateFormat("HH:mm:ss").format(now);
-                
+
                 DTPTgl.setDate(now);
                 cmbJam.setSelectedItem(jam.substring(0, 2));
                 cmbMnt.setSelectedItem(jam.substring(3, 5));
@@ -13381,6 +13453,19 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnSkriningInstrumenSDQ.setRoundRect(false);
         BtnSkriningInstrumenSDQ.addActionListener(this::BtnSkriningInstrumenSDQActionPerformed);
 
+        BtnSkriningInstrumenACRS = new widget.Button();
+        BtnSkriningInstrumenACRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnSkriningInstrumenACRS.setText("Skrining Instrumen ACRS");
+        BtnSkriningInstrumenACRS.setFocusPainted(false);
+        BtnSkriningInstrumenACRS.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnSkriningInstrumenACRS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnSkriningInstrumenACRS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnSkriningInstrumenACRS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnSkriningInstrumenACRS.setName("BtnSkriningInstrumenACRS");
+        BtnSkriningInstrumenACRS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnSkriningInstrumenACRS.setRoundRect(false);
+        BtnSkriningInstrumenACRS.addActionListener(this::BtnSkriningInstrumenACRSActionPerformed);
+
         BtnSkriningInstrumenSRQ = new widget.Button();
         BtnSkriningInstrumenSRQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnSkriningInstrumenSRQ.setText("Skrining Instrumen SRQ");
@@ -13485,6 +13570,32 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnCatatanObservasiBayi.setRoundRect(false);
         BtnCatatanObservasiBayi.addActionListener(this::BtnCatatanObservasiBayiActionPerformed);
 
+        BtnChecklistKriteriaMasukNICU = new widget.Button();
+        BtnChecklistKriteriaMasukNICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnChecklistKriteriaMasukNICU.setText("Check List Masuk NICU");
+        BtnChecklistKriteriaMasukNICU.setFocusPainted(false);
+        BtnChecklistKriteriaMasukNICU.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnChecklistKriteriaMasukNICU.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnChecklistKriteriaMasukNICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnChecklistKriteriaMasukNICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnChecklistKriteriaMasukNICU.setName("BtnChecklistKriteriaMasukNICU");
+        BtnChecklistKriteriaMasukNICU.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnChecklistKriteriaMasukNICU.setRoundRect(false);
+        BtnChecklistKriteriaMasukNICU.addActionListener(this::BtnChecklistKriteriaMasukNICUActionPerformed);
+        
+        BtnChecklistKriteriaMasukPICU = new widget.Button();
+        BtnChecklistKriteriaMasukPICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnChecklistKriteriaMasukPICU.setText("Check List Masuk PICU");
+        BtnChecklistKriteriaMasukPICU.setFocusPainted(false);
+        BtnChecklistKriteriaMasukPICU.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnChecklistKriteriaMasukPICU.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnChecklistKriteriaMasukPICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnChecklistKriteriaMasukPICU.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnChecklistKriteriaMasukPICU.setName("BtnChecklistKriteriaMasukPICU");
+        BtnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnChecklistKriteriaMasukPICU.setRoundRect(false);
+        BtnChecklistKriteriaMasukPICU.addActionListener(this::BtnChecklistKriteriaMasukPICUActionPerformed);
+
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi");
@@ -13555,6 +13666,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnUjiFungsiKFR);
         FormMenu.add(BtnChecklistKriteriaMasukHCU);
         FormMenu.add(BtnChecklistKriteriaMasukICU);
+        FormMenu.add(BtnChecklistKriteriaMasukNICU);
+        FormMenu.add(BtnChecklistKriteriaMasukPICU);
         FormMenu.add(BtnPenilaianPreInduksi);
         FormMenu.add(BtnChecklistPreOperasi);
         FormMenu.add(BtnSignInSebelumAnestesi);
@@ -13609,6 +13722,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnSkriningThalassemia);
         FormMenu.add(BtnSkriningInstrumenSDQ);
         FormMenu.add(BtnSkriningInstrumenSRQ);
+        FormMenu.add(BtnSkriningInstrumenACRS);
         FormMenu.add(BtnSkriningKankerKolorektal);
         FormMenu.add(BtnSkriningDiabetesMelitus);
         FormMenu.add(BtnSkriningAnemia);
@@ -13751,6 +13865,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                     TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                     LCount.setText(""+tabModePemeriksaan.getRowCount());
+                                    Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
                             }
                         }else{
                             if(akses.getkode().equals(KdPeg.getText())){
@@ -13771,6 +13886,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
                                         TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
                                         LCount.setText(""+tabModePemeriksaan.getRowCount());
+                                        Sequel.mengupdateSmc("reg_periksa", "stts = 'TTV'", "no_rawat = ? and stts = 'Belum'", TNoRw.getText());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Hanya bisa disimpan oleh dokter/petugas yang bersangkutan..!!");

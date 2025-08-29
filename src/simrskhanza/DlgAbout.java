@@ -90,21 +90,21 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7.setText("Versi Aplikasi :");
         jLabel7.setName("jLabel7"); // NOI18N
         panelGlass1.add(jLabel7);
-        jLabel7.setBounds(0, 8, 104, 14);
+        jLabel7.setBounds(0, 8, 104, 17);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-06-26");
+        jLabel17.setText("2025-08-01");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
-        jLabel17.setBounds(107, 8, 120, 14);
+        jLabel17.setBounds(107, 8, 90, 17);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 3");
+        jLabel18.setText("Patch 1");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
-        jLabel18.setBounds(107, 28, 170, 14);
+        jLabel18.setBounds(107, 28, 90, 17);
 
         internalFrame1.add(panelGlass1);
         panelGlass1.setBounds(7, 38, 454, 90);

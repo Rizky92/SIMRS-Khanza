@@ -308,7 +308,7 @@ public final class RMPenilaianAwalMedisHemodialisa extends javax.swing.JDialog {
         SGPT.setDocument(new batasInput((byte)30).getKata(SGPT));
         CT.setDocument(new batasInput((byte)30).getKata(CT));
         AsamUrat.setDocument(new batasInput((byte)30).getKata(AsamUrat));
-        Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
+        // Edukasi.setDocument(new batasInput((int)1000).getKata(Edukasi));
         
         
         if(koneksiDB.CARICEPAT().equals("aktif")){

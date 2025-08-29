@@ -188,9 +188,9 @@ public final class RMPenilaianAwalMedisRalanRehabMedik extends javax.swing.JDial
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
-        KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
-        RPS.setDocument(new batasInput((int)2000).getKata(RPS));
-        RPD.setDocument(new batasInput((int)1000).getKata(RPD));
+        // KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
+        // RPS.setDocument(new batasInput((int)2000).getKata(RPS));
+        // RPD.setDocument(new batasInput((int)1000).getKata(RPD));
         Alergi.setDocument(new batasInput((int)50).getKata(Alergi));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
         Nadi.setDocument(new batasInput((byte)5).getKata(Nadi));
@@ -203,17 +203,17 @@ public final class RMPenilaianAwalMedisRalanRehabMedik extends javax.swing.JDial
         KeteranganMusku.setDocument(new batasInput((byte)30).getKata(KeteranganMusku));
         KeteranganEkstremitas.setDocument(new batasInput((byte)30).getKata(KeteranganEkstremitas));
         KeteranganColumna.setDocument(new batasInput((byte)30).getKata(KeteranganColumna));
-        Lainnya.setDocument(new batasInput((int)1000).getKata(Lainnya));
-        DiagnosaMedis.setDocument(new batasInput((int)500).getKata(DiagnosaMedis));
-        DiagnosaFungsi.setDocument(new batasInput((int)500).getKata(DiagnosaFungsi));
-        PenunjangLain.setDocument(new batasInput((int)500).getKata(PenunjangLain));
+        // Lainnya.setDocument(new batasInput((int)1000).getKata(Lainnya));
+        // DiagnosaMedis.setDocument(new batasInput((int)500).getKata(DiagnosaMedis));
+        // DiagnosaFungsi.setDocument(new batasInput((int)500).getKata(DiagnosaFungsi));
+        // PenunjangLain.setDocument(new batasInput((int)500).getKata(PenunjangLain));
         Fisio.setDocument(new batasInput((int)100).getKata(Fisio));
         Okupasi.setDocument(new batasInput((int)100).getKata(Okupasi));
         Wicara.setDocument(new batasInput((int)100).getKata(Wicara));
         Akupuntur.setDocument(new batasInput((int)100).getKata(Akupuntur));
         Tatalainnya.setDocument(new batasInput((int)100).getKata(Tatalainnya));
         Frekuensiterapi.setDocument(new batasInput((int)40).getKata(Frekuensiterapi));
-        Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
+        // Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
 
 

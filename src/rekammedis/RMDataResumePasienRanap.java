@@ -2539,7 +2539,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if(caripemeriksaan.getTable().getSelectedRow()!= -1){
-                        PemeriksaanFisik.append(caripemeriksaan.getTable().getValueAt(caripemeriksaan.getTable().getSelectedRow(),2).toString()+", ");
+                        PemeriksaanFisik.append(caripemeriksaan.getTable().getValueAt(caripemeriksaan.getTable().getSelectedRow(),2).toString());
                         PemeriksaanFisik.requestFocus();
                     }
                 }
