@@ -138,6 +138,8 @@ ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NO
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
+ALTER TABLE `detailjurnal` ADD INDEX IF NOT EXISTS `detailjurnal_no_jurnal_kd_rek_idx`(`no_jurnal`, `kd_rek`) USING BTREE;
+
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
@@ -178,6 +180,8 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DE
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
+
+ALTER TABLE `jurnal` ADD INDEX IF NOT EXISTS `jurnal_tgl_jurnal_no_jurnal_idx`(`tgl_jurnal`, `no_jurnal`) USING BTREE;
 
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
