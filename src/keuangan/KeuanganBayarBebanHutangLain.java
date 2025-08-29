@@ -1288,16 +1288,10 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","status='Sudah Lunas'");
                     }
                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
-                    Sequel.queryu("delete from tampjurnal");
-                    if(Sequel.menyimpantf2("tampjurnal","'"+kontraakun+"','"+namakontraakun+"','"+Cicilan.getText()+"','0'","Rekening")==false){
-                        sukses=false;
-                    }
-                    if(Sequel.menyimpantf2("tampjurnal","'"+koderekening+"','"+AkunBayar.getSelectedItem()+"','0','"+Cicilan.getText()+"'","Rekening")==false){
-                        sukses=false;
-                    }
-                    if(sukses==true){
-                        sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
-                    }
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(kontraakun, namakontraakun, Cicilan.getText(), "0");
+                    if (sukses) sukses = jur.tampung(koderekning, AkunBayar.getSelectedItem.toString(), "0", Cicilan.getText());
+                    if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(), "U", "BAYAR BEBAN HUTANG LAIN NO.HUTANG " + NoHutang.getText() + ", OLEH " + akses.getkode());
                     if(sukses==true){
                         if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
                             NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),Cicilan.getText(),NoHutang.getText(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Beban Hutang Lain","Baru"
