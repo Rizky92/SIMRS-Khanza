@@ -1290,7 +1290,7 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
                     jur.bersihkan();
                     if (sukses) sukses = jur.tampung(kontraakun, namakontraakun, Cicilan.getText(), "0");
-                    if (sukses) sukses = jur.tampung(koderekning, AkunBayar.getSelectedItem.toString(), "0", Cicilan.getText());
+                    if (sukses) sukses = jur.tampung(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
                     if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(), "U", "BAYAR BEBAN HUTANG LAIN NO.HUTANG " + NoHutang.getText() + ", OLEH " + akses.getkode());
                     if(sukses==true){
                         if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
