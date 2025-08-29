@@ -708,10 +708,10 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     NoHutang.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPetugas.getText(),KdPemberiHutang.getText(),koderekening,
                     Keterangan.getText(),Valid.SetTgl(Tempo.getSelectedItem()+""),NilaiHutang.getText(),NilaiHutang.getText()
                 })==true){
-                    Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", NilaiHutang.getText());
-                    Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0");
-                    sukses=jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    jur.bersihkan();
+                    if (sukses) sukses = jur.tampung(kontraakun, namakontraakun, "0", NilaiHutang.getText());
+                    if (sukses) sukses = jur.tampung(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0");
+                    if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(), "U", "BEBAN HUTANG LAIN, OLEH " + akses.getkode());
             }else{
                 sukses=false;
             }
@@ -766,12 +766,10 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                 } catch (Exception e) {
                     sukses=false;
                 }
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
-                Sequel.insertTampJurnal(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0");
-                if(sukses==true){
-                    sukses=jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
-                }
+                jur.bersihkan();
+                if (sukses) sukses = jur.tampung(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
+                if (sukses) sukses = jur.tampung(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0");
+                if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(), "U", "PEMBATALAN BEBAN HUTANG LAIN, OLEH " + akses.getkode());
             }else{
                 sukses=false;
             }
@@ -813,7 +811,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getDefaultCursor().getPredefinedCursor(Cursor.WAIT_CURSOR));
         BtnCariActionPerformed(evt);
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");

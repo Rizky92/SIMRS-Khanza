@@ -83,7 +83,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return colIndex == 0;
             }
-            
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? java.lang.Boolean.class : java.lang.String.class;
@@ -108,7 +108,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return colIndex == 0;
             }
-            
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? java.lang.Boolean.class : java.lang.String.class;
@@ -542,7 +542,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
         return i;
     }
-    
+
     private void tampildiagnosa() {
         tampildiagnosa(false);
     }
@@ -581,17 +581,17 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                     });
                 }
             }
-            
+
             if (jml > 0) {
                 notIn = notIn.substring(0, notIn.length() - 2).concat(")");
             } else {
                 notIn = "";
             }
-            
+
             String[] keywords = Diagnosa.getText().trim().split("\\s+");
-            
+
             String searchQuery = "";
-            
+
             if (! Diagnosa.getText().trim().isBlank()) {
                 for (int i = 0; i < keywords.length; i++) {
                     if (i == 0) {
@@ -602,11 +602,11 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 }
                 searchQuery = searchQuery.concat(")");
             }
-            
+
             String sql = "select penyakit.kd_penyakit, penyakit.nm_penyakit, penyakit.ciri_ciri, penyakit.keterangan, kategori_penyakit.nm_kategori, kategori_penyakit.ciri_umum " +
                 "from kategori_penyakit join penyakit on penyakit.kd_ktg = kategori_penyakit.kd_ktg where exists(select * from eklaim_icd10 where eklaim_icd10.code = penyakit.kd_penyakit and eklaim_icd10.status = '1') " +
                 notIn + searchQuery + " order by penyakit.kd_penyakit limit 1000";
-            
+
             try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
                 if (jml > 0) {
                     for (int i = 0; i < jml; i++) {
@@ -637,7 +637,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampilprosedure() {
         tampilprosedure(false);
     }
@@ -670,17 +670,17 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                     });
                 }
             }
-            
+
             if (jml > 0) {
                 notIn = notIn.substring(0, notIn.length() - 2).concat(")");
             } else {
                 notIn = "";
             }
-            
+
             String[] keywords = Prosedur.getText().trim().split("\\s+");
-            
+
             String searchQuery = "";
-            
+
             if (! Prosedur.getText().trim().isBlank()) {
                 for (int i = 0; i < keywords.length; i++) {
                     if (i == 0) {
@@ -691,9 +691,9 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 }
                 searchQuery = searchQuery.concat(")");
             }
-            
+
             String sql = "select * from icd9 where 1 " + notIn + searchQuery + " order by kode limit 1000";
-            
+
             try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
                 if (jml > 0) {
                     for (int i = 0; i < jml; i++) {
@@ -785,9 +785,9 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         if (TabRawat.getSelectedIndex() > 0) {
             return;
         }
-        
+
         try {
-            koneksi.setAutoCommit(false);
+            Sequel.AutoComitFalse();
             index = 1;
             for (i = 0; i < tbDiagnosa.getRowCount(); i++) {
                 if (tbDiagnosa.getValueAt(i, 0).toString().equals("true")) {
@@ -862,7 +862,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                     index++;
                 }
             }
-            koneksi.setAutoCommit(true);
+            Sequel.AutoComitTrue();
             for (i = 0; i < tbDiagnosa.getRowCount(); i++) {
                 tbDiagnosa.setValueAt(false, i, 0);
             }
@@ -871,7 +871,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
 
         try {
-            koneksi.setAutoCommit(false);
+            Sequel.AutoComitFalse();
             index = 1;
             for (i = 0; i < tbProsedur.getRowCount(); i++) {
                 if (tbProsedur.getValueAt(i, 0).toString().equals("true")) {
@@ -924,7 +924,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                     index++;
                 }
             }
-            koneksi.setAutoCommit(true);
+            Sequel.AutoComitTrue();
             for (i = 0; i < tbProsedur.getRowCount(); i++) {
                 tbProsedur.setValueAt(false, i, 0);
             }
@@ -933,12 +933,12 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
         pilihTab();
     }
-    
+
     public void pilihTab(int tab) {
         TabRawat.setSelectedIndex(tab);
         pilihTab();
     }
-    
+
     public int tabSekarang() {
         return TabRawat.getSelectedIndex();
     }
@@ -1058,24 +1058,24 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     public void revalidate(int width) {
         Scroll1.setSize(new Dimension(width - 10, Scroll1.getSize().height));
         Scroll1.setPreferredSize(new Dimension(width - 10, Scroll1.getSize().height));
         Diagnosa.setSize(new Dimension(width - Diagnosa.getX() - 39, Diagnosa.getSize().height));
         Diagnosa.setPreferredSize(new Dimension(width - Diagnosa.getX() - 39, Diagnosa.getSize().height));
         BtnCariPenyakit.setLocation(width - BtnCariPenyakit.getSize().width - 11, BtnCariPenyakit.getY());
-        
+
         Scroll2.setSize(new Dimension(width - 10, Scroll2.getSize().height));
         Scroll2.setPreferredSize(new Dimension(width - 10, Scroll2.getSize().height));
         Prosedur.setSize(new Dimension(width - Prosedur.getX() - 39, Prosedur.getSize().height));
         Prosedur.setPreferredSize(new Dimension(width - Prosedur.getX() - 39, Prosedur.getSize().height));
         BtnCariProsedur.setLocation(width - BtnCariProsedur.getSize().width - 11, BtnCariProsedur.getY());
-        
+
         FormData.setSize(new Dimension(width - 10, Scroll2.getHeight() + Scroll2.getY()));
         FormData.setPreferredSize(new Dimension(width - 10, Scroll2.getHeight() + Scroll2.getY()));
     }
-    
+
     public JTabbedPane getTabbedPane() {
         return TabRawat;
     }

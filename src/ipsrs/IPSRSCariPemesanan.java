@@ -1054,12 +1054,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }
 
-                Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Sequel.cariIsi("select Penerimaan_NonMedis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("total"));
+                jur.bersihkan();
+                if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Penerimaan_NonMedis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("total"));
                 if (rs.getDouble("ppn") > 0) {
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Non Medis", 0, rs.getDouble("ppn"));
+                    if (sukses) sukses = jur.tampung(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Non Medis", 0, rs.getDouble("ppn"));
                 }
-                Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Penerimaan_NonMedis from set_akun"), "HUTANG BARANG NON MEDIS", rs.getDouble("tagihan"), 0);
+                if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Penerimaan_NonMedis from set_akun"), "HUTANG BARANG NON MEDIS", rs.getDouble("tagihan"), 0);
                 sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
 
                 if(sukses==true){

@@ -819,9 +819,9 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                           }
                       }
 
-                      Sequel.deleteTampJurnal();
-                      Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis fromn set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("totalhibah"));
-                      Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
+                      jur.bersihkan();
+                      if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Hibah_Non_Medis fromn set_akun"), "PERSEDIAAN BARANG NON MEDIS", 0, rs.getDouble("totalhibah"));
+                      if (sukses) sukses = jur.tampung(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
                       sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());  
                       
                       if(sukses==true){
