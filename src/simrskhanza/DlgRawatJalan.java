@@ -227,7 +227,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             Suspen_Piutang_Tindakan_Ralan="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
             Beban_Jasa_Sarana_Tindakan_Ralan="",Utang_Jasa_Sarana_Tindakan_Ralan="",HPP_BHP_Tindakan_Ralan="",Persediaan_BHP_Tindakan_Ralan="",
-            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",norawatasal = "";
+            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",norawatasal = "", waktubuka = "";
     private boolean[] pilih;
     private String[] kode,nama,kategori;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
@@ -6180,16 +6180,21 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         try {
             i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
-                if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah', biaya_reg = (select if(reg_periksa.stts_daftar = 'Baru', poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)", "no_rawat = ?", TNoRw.getText())) {
+                if (Sequel.mengupdatetfSmc("reg_periksa", "stts = 'Sudah', biaya_reg = (select if(reg_periksa.stts_daftar = 'Baru', " +
+                    "poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)",
+                    "no_rawat = ?", TNoRw.getText()
+                )) {
                     if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
                         if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
                             Sequel.executeRawSmc(
-                                "insert into mutasi_berkas values (?, 'Sudah Kembali', now(), '0000-00-00 00:00:00.000', now(), " +
-                                "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update " +
-                                "status = values(status), kembali = values(kembali)", TNoRw.getText()
+                                "insert into mutasi_berkas values(?, 'Sudah Kembali', now(), ?, now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') " +
+                                "on duplicate key update status = values(status), diterima = (if(diterima = '0000-00-00 00:00:00.000', values(diterima), " +
+                                "diterima)), kembali = (if(kembali = '0000-00-00 00:00:00.000', values(kembali), kembali))", TNoRw.getText(),
+                                (waktubuka.isBlank() ? "0000-00-00 00:00:00.000" : waktubuka)
                             );
                         }
                     }
+                    waktubuka = "";
                 }
             }
         } catch (Exception e) {
@@ -10311,7 +10316,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
-    private void BtnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10328,7 +10333,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
     
-    private void BtnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -10952,6 +10957,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     public void setNoRm(String norwt,Date tgl1,Date tgl2) {
         this.norawatasal = norwt;
+        this.waktubuka = Sequel.cariIsiSmc("select now() from reg_periksa where no_rawat = ? and kd_dokter = ? and status_lanjut = 'Ralan'", norwt, akses.getkode());
         TNoRw.setText(norwt);
         TCari.setText("");
         DTPCari1.setDate(tgl1);
