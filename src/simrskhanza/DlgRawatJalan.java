@@ -6185,13 +6185,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     "no_rawat = ?", TNoRw.getText()
                 )) {
                     if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
-                        Sequel.executeRawSmc(
-                            "insert into mutasi_berkas values (?, 'Sudah Kembali', now(), (if(? = '', '0000-00-00 00:00:00.000', ?)), now(), " +
-                            "'0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update status = values(status), " +
-                            "diterima = (if(values(diterima) = '0000-00-00 00:00:00.000' or values(diterima) >= diterima, diterima, " +
-                            "values(diterima))), kembali = (if(kembali = '0000-00-00 00:00:00.000', values(kembali), kembali))",
-                            TNoRw.getText(), waktubuka, waktubuka
-                        );
+                        if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali", TNoRw.getText())) {
+                            Sequel.executeRawSmc(
+                                "insert into mutasi_berkas values(?, 'Sudah Kembali', now(), ?, now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') " +
+                                "on duplicate key update status = values(status), diterima = (if(diterima = '0000-00-00 00:00:00.000', values(diterima), " +
+                                "diterima)), kembali = (if(kembali = '0000-00-00 00:00:00.000', values(kembali), kembali))", TNoRw.getText(),
+                                (waktubuka.isBlank() ? "0000-00-00 00:00:00.000" : waktubuka)
+                            );
+                        }
                     }
                 }
             }
