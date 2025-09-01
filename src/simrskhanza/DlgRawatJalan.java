@@ -6185,7 +6185,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     "no_rawat = ?", TNoRw.getText()
                 )) {
                     if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
-                        if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali", TNoRw.getText())) {
+                        if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
                             Sequel.executeRawSmc(
                                 "insert into mutasi_berkas values(?, 'Sudah Kembali', now(), ?, now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') " +
                                 "on duplicate key update status = values(status), diterima = (if(diterima = '0000-00-00 00:00:00.000', values(diterima), " +
