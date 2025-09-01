@@ -34,6 +34,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -49,12 +54,16 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import uz.ncipro.calendar.JDateTimePicker;
 import widget.Button;
@@ -201,6 +210,104 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
+        }
+    }
+    
+    public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah, String sql, String... values) {
+        try {
+            try (PreparedStatement ps = connect.prepareStatement(sql)) {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                }
+
+                JasperPrint jp = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, new JRResultSetDataSource(ps.executeQuery()));
+
+                PrintService printService = null;
+                for (PrintService currentPrintService : PrintServiceLookup.lookupPrintServices(null, null)) {
+                    if (currentPrintService.getName().equals(printerName)) {
+                        System.out.println("Printer ditemukan: " + currentPrintService.getName());
+                        printService = currentPrintService;
+                        break;
+                    }
+                }
+
+                if (printService != null) {
+                    PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
+                    pra.add(new Copies(jumlah));
+
+                    SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
+
+                    config.setPrintService(printService);
+                    config.setPrintRequestAttributeSet(pra);
+                    config.setPrintServiceAttributeSet(printService.getAttributes());
+                    config.setDisplayPageDialog(false);
+                    config.setDisplayPrintDialog(false);
+
+                    JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+
+                    exporter.setExporterInput(new SimpleExporterInput(jp));
+                    exporter.setConfiguration(config);
+                    exporter.exportReport();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
+                    JasperViewer jv = new JasperViewer(jp, false);
+                    jv.setTitle(judul);
+                    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                    jv.setSize(screen.width - 50, screen.height - 50);
+                    jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                    jv.setLocationRelativeTo(null);
+                    jv.setVisible(true);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah) {
+        try {
+            JasperPrint jp = JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect);
+
+            PrintService printService = null;
+            for (PrintService currentPrintService : PrintServiceLookup.lookupPrintServices(null, null)) {
+                if (currentPrintService.getName().equals(printerName)) {
+                    System.out.println("Printer ditemukan: " + currentPrintService.getName());
+                    printService = currentPrintService;
+                    break;
+                }
+            }
+
+            if (printService != null) {
+                PrintRequestAttributeSet pra = new HashPrintRequestAttributeSet();
+                pra.add(new Copies(jumlah));
+
+                SimplePrintServiceExporterConfiguration config = new SimplePrintServiceExporterConfiguration();
+
+                config.setPrintService(printService);
+                config.setPrintRequestAttributeSet(pra);
+                config.setPrintServiceAttributeSet(printService.getAttributes());
+                config.setDisplayPageDialog(false);
+                config.setDisplayPrintDialog(false);
+
+                JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+
+                exporter.setExporterInput(new SimpleExporterInput(jp));
+                exporter.setConfiguration(config);
+                exporter.exportReport();
+            } else {
+                JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setTitle(judul);
+                Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+                jv.setSize(screen.width - 50, screen.height - 50);
+                jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                jv.setLocationRelativeTo(null);
+                jv.setVisible(true);
+            }
+        } catch (JRException e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
         }
     }
     

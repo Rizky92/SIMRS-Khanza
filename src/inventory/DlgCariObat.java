@@ -110,7 +110,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private FileReader myObj;
     private Map<String, Object> map;
     private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelPemberianObat = "", modelAturanPakai = "";
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
     
     /** Creates new form DlgPenyakit
      * @param parent
@@ -4388,7 +4388,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if (autovalidasi) {
                 ChkNoResep.setSelected(false);
                 if (previewLembarObat) {
-                    modelPemberianObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
+                    modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
+                    printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
                 }
                 if (previewAturanPakai) {
                     modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
@@ -4399,14 +4400,14 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             autovalidasi = false;
             previewLembarObat = false;
             previewAturanPakai = false;
-            modelPemberianObat = "";
+            modelLembarObat = "";
             modelAturanPakai = "";
             ChkNoResep.setSelected(oldValue);
         }
     }
 
-    private void cetakLembarObat() {
-        if (!previewLembarObat) return;
+    private void cetakAturanPakai() {
+        if (!previewAturanPakai) return;
         
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Map<String, Object> param = new HashMap<>();
@@ -4417,7 +4418,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         param.put("kontakrs", akses.getkontakrs());
         param.put("emailrs", akses.getemailrs());
         param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-        switch (modelPemberianObat) {
+        switch (modelAturanPakai) {
             case "Model 1":
                 if (Sequel.cariExistsSmc("select * from resep_obat r join aturan_pakai a on r.no_rawat = a.no_rawat and " +
                     "r.tgl_perawatan = a.tgl_perawatan and r.jam = a.jam where r.no_resep = ? and a.aturan != ''", noresep
@@ -4499,15 +4500,15 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    private void cetakAturanPakai() {
-        if (!previewAturanPakai) return;
+    private void cetakLembarObat() {
+        if (!previewLembarObat) return;
         
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Map<String, Object> param = new HashMap<>();
         String kddokter = Sequel.cariIsiSmc("select resep_obat.kd_dokter from resep_obat where resep_obat.no_resep = ?", noresep),
                nmdokter = Sequel.cariIsiSmc("select dokter.nm_dokter from dokter where dokter.kd_dokter = ?", kddokter),
                finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", kddokter);
-        switch (modelAturanPakai) {
+        switch (modelLembarObat) {
             case "Model 1":
                 param.put("namars", akses.getnamars());
                 param.put("alamatrs", akses.getalamatrs());
@@ -4526,7 +4527,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 param.put("jam", Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk));
                 param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
                 param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + nmdokter + "\nID " + (finger.equals("") ? kddokter : finger) + "\n" + DTPTgl.getSelectedItem().toString());
-                Valid.reportSmc("rptLembarObat.jasper", "report", "::[ Lembar Pemberian Obat ]::", param);
+                Valid.printReportSmc("rptLembarObat.jasper", "report", "::[ Lembar Pemberian Obat ]::", param, printerLembarObat, 1);
                 break;
             case "Model 2":
                 try {
@@ -4600,11 +4601,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 param.put("jam", Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk));
                 param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
                 param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + nmdokter + "\nID " + (finger.equals("") ? kddokter : finger) + "\n" + DTPTgl.getSelectedItem().toString());
-                Valid.reportSmc("rptLembarObat2.jasper", "report", "::[ Lembar Pemberian Obat ]::", param, "select * from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 2' and temp36 = ? and temp37 = ? order by temporary_resep.no", akses.getkode(), akses.getalamatip());
+                Valid.printReportSmc("rptLembarObat2.jasper", "report", "::[ Lembar Pemberian Obat ]::", param, printerLembarObat, 1, "select * from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 2' and temp36 = ? and temp37 = ? order by no", akses.getkode(), akses.getalamatip());
                 break;
             case "Model 3":
                 try {
-                    Sequel.deleteTemporaryResep("LEMBAR PEMBERIAN OBAT 2");
+                    Sequel.deleteTemporaryResep("LEMBAR PEMBERIAN OBAT 3");
                     int p = 0;
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select b.nama_brng, a.aturan, d.jml, k.satuan from resep_obat rx join detail_pemberian_obat d on " +
@@ -4616,7 +4617,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         ps.setString(1, noresep);
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
-                                Sequel.temporaryResep(++p, "LEMBAR PEMBERIAN OBAT 2", rs.getString("nama_brng"), rs.getString("aturan"), rs.getString("jml"), rs.getString("satuan"));
+                                Sequel.temporaryResep(++p, "LEMBAR PEMBERIAN OBAT 3", rs.getString("nama_brng"), rs.getString("aturan"), rs.getString("jml"), rs.getString("satuan"));
                             }
                         }
                     }
@@ -4647,7 +4648,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                         }
                                     }
                                 }
-                                Sequel.temporaryResep(++p, "LEMBAR PEMBERIAN OBAT 2", rs.getString("nama_racik") +
+                                Sequel.temporaryResep(++p, "LEMBAR PEMBERIAN OBAT 3", rs.getString("nama_racik") +
                                     " (" + s.substring(0, s.length() - 2) + ")", rs.getString("aturan_pakai"),
                                     rs.getString("jml_dr"), rs.getString("nm_racik"));
                             }
@@ -4680,7 +4681,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + nmdokter + "\nID " + (finger.equals("") ? kddokter : finger) + "\n" + DTPTgl.getSelectedItem().toString());
                 param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
                 param.put("photo", "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/penyerahanresep/" + Sequel.cariIsi("select bukti_penyerahan_resep_obat.photo from bukti_penyerahan_resep_obat where bukti_penyerahan_resep_obat.no_resep = ?", noresep));
-                Valid.reportSmc("rptLembarObat3.jasper", "report", "::[ Lembar Pemberian Obat ]::", param, "select * from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 3' and temp36 = ? and temp37 = ? order by temporary_resep.no", akses.getkode(), akses.getalamatip());
+                Valid.printReportSmc("rptLembarObat3.jasper", "report", "::[ Lembar Pemberian Obat ]::", param, printerLembarObat, 1, "select * from temporary_resep where temp35 = 'LEMBAR PEMBERIAN OBAT 3' and temp36 = ? and temp37 = ? order by temporary_resep.no", akses.getkode(), akses.getalamatip());
                 break;
         }
         this.setCursor(Cursor.getDefaultCursor());
