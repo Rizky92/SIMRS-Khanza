@@ -6194,11 +6194,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                             );
                         }
                     }
-                    waktubuka = "";
                 }
             }
         } catch (Exception e) {
         }
+        waktubuka = "";
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
