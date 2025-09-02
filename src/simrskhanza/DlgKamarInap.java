@@ -16608,7 +16608,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                             TNoSEPRanapPulang.setText(rs2.getString("no_sep"));
                                             TNoRMPulang.setText(rs2.getString("no_rkm_medis"));
                                             TPasienPulang.setText(rs2.getString("nm_pasien"));
-                                            TanggalPulang.setSelectedItem(Valid.setTglJamSmc((Date) rs2.getTimestamp("tglpulang")));
+                                            TanggalPulang.setSelectedItem(Valid.getTglJamSmc((Date) rs2.getTimestamp("tglpulang")));
                                             WindowUpdatePulang.setVisible(true);
                                         } else {
                                             this.setCursor(Cursor.getDefaultCursor());
@@ -16645,7 +16645,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 TNoSEPRanapPulang.setText(rs.getString("no_sep"));
                                 TNoRMPulang.setText(rs.getString("no_rkm_medis"));
                                 TPasienPulang.setText(rs.getString("nm_pasien"));
-                                TanggalPulang.setSelectedItem(Valid.setTglJamSmc((Date) rs.getTimestamp("tglpulang")));
+                                TanggalPulang.setSelectedItem(Valid.getTglJamSmc((Date) rs.getTimestamp("tglpulang")));
                                 WindowUpdatePulang.setVisible(true);
                             } else {
                                 this.setCursor(Cursor.getDefaultCursor());
