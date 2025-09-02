@@ -1468,7 +1468,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if (autovalidasi) {
                             cetakLembarObat();
                             cetakAturanPakai();
-                        } else if(ChkNoResep.isSelected()==true){
+                        }
+                        if(ChkNoResep.isSelected()==true){
                             DlgResepObat resep=new DlgResepObat(null,false);
                             resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                             resep.setLocationRelativeTo(internalFrame1);
@@ -4124,7 +4125,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
             previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
             if (autovalidasi) {
-                ChkNoResep.setSelected(false);
+                ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
                 if (previewLembarObat) {
                     modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
                     printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
