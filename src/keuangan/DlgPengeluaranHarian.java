@@ -997,63 +997,50 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         }else if(!(Keterangan.getText().trim().equals(""))){
             if(tbResep.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
-                sukses=true;     
-
-                    if(Sequel.queryu2tf("delete from pengeluaran_harian where no_keluar=?",1,new String[]{
-                        tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()
-                    })==true){
-                        try {
-                            psakun=koneksi.prepareStatement(
-                                "select kategori_pengeluaran_harian.kd_rek,kategori_pengeluaran_harian.kd_rek2 from kategori_pengeluaran_harian where kategori_pengeluaran_harian.kode_kategori=?");
-                            try {
-                                psakun.setString(1,KdKategori.getText());
-                                rs=psakun.executeQuery();
-                                if(rs.next()){
-                                    total=0;
-                                    if(rs.getString("kd_rek2").equals(kategori.Host_to_Host_Bank_Mandiri)){
-                                        total=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
-                                        Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbResep.getValueAt(tbResep.getSelectedRow(),0).toString());
-                                    }
-                                    Sequel.deleteTampJurnal();
-                                    if(total>0){
-                                        Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
-                                    }
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", "0", Pengeluaran.getText());
-                                    Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", (Valid.SetAngka(Pengeluaran.getText()) + total), 0);
-                                    sukses=jur.simpanJurnal(Nomor.getText(),"U","PEMBATALAN PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
-                                } 
-                            } catch (Exception e) {
-                                sukses=false;
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rs!=null){
-                                    rs.close();
+                sukses = true;
+                if (Sequel.menghapustfSmc("pengeluaran_harian", "no_keluar = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString())) {
+                    try (PreparedStatement ps = koneksi.prepareStatement("select k.kd_rek, k.kd_rek2 from kategori_pengeluaran_harian k where k.kode_kategori = ?")) {
+                        ps.setString(1, tbResep.getValueAt(tbResep.getSelectedRow(), 6).toString());
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                total = 0;
+                                if (rs.getString("kd_rek2").equals(kategori.Host_to_Host_Bank_Mandiri)) {
+                                    total = Sequel.cariDoubleSmc("select m.biaya_transaksi from metode_pembayaran_bankmandiri m join " +
+                                        "pembayaran_pihak_ke3_bankmandiri m2 on m2.kode_metode = m.kode_metode where m2.nomor_pembayaran = ?",
+                                        tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
+                                    Sequel.menghapusSmc("pembayaran_pihak_ke3_bankmandiri", "nomor_pembayaran = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
                                 }
-                                if(psakun!=null){
-                                    psakun.close();
+                                Sequel.deleteTampJurnal();
+                                if (total > 0) {
+                                    Sequel.insertTampJurnal(kategori.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
                                 }
-                            } 
-                        } catch (Exception e) {
-                            sukses=false;
-                            System.out.println("Notifikasi : "+e);
+                                Sequel.insertTampJurnal(rs.getString("kd_rek"), "Akun", 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
+                                Sequel.insertTampJurnal(rs.getString("kd_rek2"), "Kontra Akun", ((Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4)) + total, 0);
+                                sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PENGELUARAN HARIAN, OLEH " + akses.getkode());
+                            } else {
+                                sukses = false;
+                            }
                         }
-                    }else{
-                        sukses=false;
-                    }               
-
-                if(sukses==true){
-                    Sequel.Commit();
-                }else{
-                    sukses=false;
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                    Sequel.RollBack();
+                    } catch (Exception e) {
+                        sukses = false;
+                        System.out.println("Notif : " + e);
+                    }
+                } else {
+                    sukses = false;
                 }
 
+                if (sukses) {
+                    Sequel.Commit();
+                } else {
+                    Sequel.RollBack();
+                }
                 Sequel.AutoComitTrue();
-                if(sukses==true){
+                if (sukses) {
                     tabMode.removeRow(tbResep.getSelectedRow());
                     emptTeks();
                     hitung();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
             }                
         }
