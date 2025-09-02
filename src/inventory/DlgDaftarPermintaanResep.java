@@ -5703,7 +5703,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ChkAutoValidasiRalanItemStateChanged(null);
         }
     }
-    
+
     private void refreshPilihanPrinter(JComboBox cmb) {
         cmb.removeAllItems();
         cmb.addItem("");
