@@ -189,7 +189,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -219,6 +219,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
+        PanelInput = new widget.PanelBiasa();
         FormInput = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
         kdobat = new widget.TextBox();
@@ -232,6 +233,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         jLabel20 = new widget.Label();
         jLabel21 = new widget.Label();
         Retriksi = new widget.TextBox();
+        ChkInput = new widget.CekBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -453,26 +455,31 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
+        PanelInput.setName("PanelInput"); // NOI18N
+        PanelInput.setPreferredSize(new java.awt.Dimension(100, 128));
+        PanelInput.setLayout(new java.awt.BorderLayout());
+
+        FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(100, 44));
+        FormInput.setPreferredSize(new java.awt.Dimension(100, 104));
         FormInput.setLayout(null);
 
         jLabel4.setText("Obat RS :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(0, 10, 56, 23);
+        jLabel4.setBounds(0, 10, 70, 23);
 
         kdobat.setEditable(false);
         kdobat.setHighlighter(null);
         kdobat.setName("kdobat"); // NOI18N
         FormInput.add(kdobat);
-        kdobat.setBounds(59, 10, 70, 23);
+        kdobat.setBounds(74, 10, 100, 23);
 
         TObat.setEditable(false);
         TObat.setHighlighter(null);
         TObat.setName("TObat"); // NOI18N
         FormInput.add(TObat);
-        TObat.setBounds(131, 10, 190, 23);
+        TObat.setBounds(178, 10, 354, 23);
 
         btnPoliRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPoliRS.setMnemonic('1');
@@ -489,23 +496,23 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnPoliRS);
-        btnPoliRS.setBounds(323, 10, 28, 23);
+        btnPoliRS.setBounds(536, 10, 28, 23);
 
-        jLabel19.setText("Harga :");
+        jLabel19.setText("Harga (Rp) :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(710, 10, 70, 23);
+        jLabel19.setBounds(0, 70, 70, 23);
 
         KdObatBPJS.setEditable(false);
         KdObatBPJS.setHighlighter(null);
         KdObatBPJS.setName("KdObatBPJS"); // NOI18N
         FormInput.add(KdObatBPJS);
-        KdObatBPJS.setBounds(426, 10, 70, 23);
+        KdObatBPJS.setBounds(74, 40, 100, 23);
 
         NmObatBPJS.setEditable(false);
         NmObatBPJS.setName("NmObatBPJS"); // NOI18N
         FormInput.add(NmObatBPJS);
-        NmObatBPJS.setBounds(498, 10, 190, 23);
+        NmObatBPJS.setBounds(178, 40, 354, 23);
 
         btnPoliBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPoliBPJS.setMnemonic('3');
@@ -517,31 +524,54 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnPoliBPJS);
-        btnPoliBPJS.setBounds(690, 10, 28, 23);
+        btnPoliBPJS.setBounds(536, 40, 28, 23);
 
         HargaObat.setEditable(false);
         HargaObat.setHighlighter(null);
         HargaObat.setName("HargaObat"); // NOI18N
         FormInput.add(HargaObat);
-        HargaObat.setBounds(785, 10, 100, 23);
+        HargaObat.setBounds(74, 70, 120, 23);
 
         jLabel20.setText("Obat BPJS :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(353, 10, 70, 23);
+        jLabel20.setBounds(0, 40, 70, 23);
 
-        jLabel21.setText("Retriksi :");
+        jLabel21.setText("Restriksi :");
         jLabel21.setName("jLabel21"); // NOI18N
         FormInput.add(jLabel21);
-        jLabel21.setBounds(910, 10, 50, 23);
+        jLabel21.setBounds(198, 70, 50, 23);
 
         Retriksi.setEditable(false);
         Retriksi.setHighlighter(null);
         Retriksi.setName("Retriksi"); // NOI18N
         FormInput.add(Retriksi);
-        Retriksi.setBounds(970, 10, 340, 23);
+        Retriksi.setBounds(252, 70, 340, 23);
 
-        internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
+        PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
+
+        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setMnemonic('I');
+        ChkInput.setText(".: Input Data");
+        ChkInput.setToolTipText("Alt+I");
+        ChkInput.setBorderPainted(true);
+        ChkInput.setBorderPaintedFlat(true);
+        ChkInput.setFocusable(false);
+        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkInput.setName("ChkInput"); // NOI18N
+        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
+        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkInputActionPerformed(evt);
+            }
+        });
+        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
+
+        internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
@@ -734,6 +764,10 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         emptTeks();
     }//GEN-LAST:event_formWindowOpened
 
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+        isForm();
+    }//GEN-LAST:event_ChkInputActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -759,11 +793,13 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.CekBox ChkInput;
     private widget.PanelBiasa FormInput;
     private widget.TextBox HargaObat;
     private widget.TextBox KdObatBPJS;
     private widget.Label LCount;
     private widget.TextBox NmObatBPJS;
+    private widget.PanelBiasa PanelInput;
     private widget.TextBox Retriksi;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -849,5 +885,19 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
     public JTable getTable(){
         return tbJnsPerawatan;
+    }
+    
+    private void isForm() {
+        if (ChkInput.isSelected()) {
+            ChkInput.setVisible(false);
+            PanelInput.setPreferredSize(new Dimension(WIDTH, 128));
+            FormInput.setVisible(true);
+            ChkInput.setVisible(true);
+        } else {
+            ChkInput.setVisible(false);
+            PanelInput.setPreferredSize(new Dimension(WIDTH, 20));
+            FormInput.setVisible(false);
+            ChkInput.setVisible(true);
+        }
     }
 }
