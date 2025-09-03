@@ -145,7 +145,7 @@ public final class validasi {
     }
 
     public String getTglSmc(Date tgl) {
-        return getTglSmc(tgl, "dd-MM-yyy");
+        return getTglSmc(tgl, "dd-MM-yyyy");
     }
 
     public String setTglSmc(String tgl) {
