@@ -764,57 +764,44 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
         }else if(!(Keterangan.getText().trim().equals(""))){
             if(tbResep.getSelectedRow()>-1){
                 Sequel.AutoComitFalse();
-                sukses=true;       
-                    
-                if(Sequel.queryu2tf("delete from pemasukan_lain where no_masuk=?",1,new String[]{
-                    tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()
-                })==true){
-                    try {
-                        Sequel.deleteTampJurnal();
-                        psakun=koneksi.prepareStatement(
-                            "select kategori_pemasukan_lain.kd_rek,'Akun',kategori_pemasukan_lain.kd_rek2,'Kontra Akun' from kategori_pemasukan_lain where kategori_pemasukan_lain.kode_kategori=?");
-                        try{
-                            psakun.setString(1,KdKategori.getText());
-                            rs=psakun.executeQuery();
-                            if(rs.next()){
-                                Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), Double.parseDouble(pemasukan.getText()), 0);
-                                Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, Double.parseDouble(pemasukan.getText())); 
-                                sukses=jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
-                            } 
-                        } catch (Exception e) {
-                            sukses=false;
-                            System.out.println("Jurnal : "+e);
-                        } finally{
-                            if(rs!=null){
-                                rs.close();
+                sukses = true;
+                if (Sequel.menghapustfSmc("pemasukan_lain", "no_masuk = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString())) {
+                    try (PreparedStatement ps = koneksi.prepareStatement("select p.kd_rek, 'Akun', p.kd_rek2, 'Kontra Akun' from kategori_pemasukan_lain p where p.kode_kategori = ?")) {
+                        ps.setString(1, tbResep.getValueAt(tbResep.getSelectedRow(), 7).toString());
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                Sequel.deleteTampJurnal();
+                                Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0);
+                                Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
+                                sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PEMASUKAN LAIN-LAIN OLEH " + akses.getkode());
+                            } else {
+                                sukses = false;
                             }
-                            if(psakun!=null){
-                                psakun.close();
-                            }
-                        }
-                        if(sukses==true){
-                            Sequel.queryu2("delete from tagihan_sadewa where no_nota='"+tbResep.getValueAt(tbResep.getSelectedRow(),0).toString()+"'"); 
                         }
                     } catch (Exception e) {
-                        sukses=false;
-                        System.out.println("Notifikasi : "+e);
+                        sukses = false;
+                        System.out.println("Notif : " + e);
                     }
-                }else{
-                    sukses=false;
-                }                                           
+                    if (sukses) {
+                        sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString());
+                    }
+                } else {
+                    sukses = false;
+                }
                 
-                if(sukses==true){
+                if (sukses) {
                     Sequel.Commit();
-                }else{
-                    sukses=false;
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                } else {
                     Sequel.RollBack();
                 }
-
+                
                 Sequel.AutoComitTrue();
-                if(sukses==true){
+                
+                if (sukses) {
                     tampil();
                     emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
             }                
         }
