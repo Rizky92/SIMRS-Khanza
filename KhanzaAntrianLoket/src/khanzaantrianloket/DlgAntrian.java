@@ -228,7 +228,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         DlgDisplaySMC.setMinimumSize(new java.awt.Dimension(1280, 720));
         DlgDisplaySMC.setModal(true);
         DlgDisplaySMC.setUndecorated(true);
-        DlgDisplaySMC.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         internalFrame6.setBackground(new java.awt.Color(250, 255, 250));
         internalFrame6.setBorder(null);
@@ -416,7 +415,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
-        BtnDisplay.setMnemonic('D');
         BtnDisplay.setText("Display");
         BtnDisplay.setToolTipText("Alt+D");
         BtnDisplay.setIconTextGap(3);
@@ -425,7 +423,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi1.add(BtnDisplay);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setIconTextGap(3);
@@ -439,7 +436,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         panelisi5.setLayout(null);
 
         BtnAntri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
-        BtnAntri.setMnemonic('7');
         BtnAntri.setText("Antri");
         BtnAntri.setToolTipText("Alt+7");
         BtnAntri.setIconTextGap(3);
@@ -449,7 +445,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         BtnAntri.setBounds(20, 90, 100, 30);
 
         BtnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnReset.setMnemonic('8');
         BtnReset.setText("Reset");
         BtnReset.setToolTipText("Alt+8");
         BtnReset.setIconTextGap(3);
@@ -475,7 +470,6 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         Antrian.setBounds(210, 12, 60, 24);
 
         BtnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnStop.setMnemonic('8');
         BtnStop.setText("Stop");
         BtnStop.setToolTipText("Alt+8");
         BtnStop.setIconTextGap(3);
@@ -735,6 +729,30 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
+    
+    public String padleftSmc(String value, int panjang, char pad) {
+        value = value.trim();
+        StringBuilder sb = new StringBuilder();
+        sb.append(trimStartSmc(value, pad));
+        
+        while ((panjang - value.length()) > 0) {
+            sb.insert(0, pad);
+            --panjang;
+        }
+        
+        return sb.toString();
+    }
+    
+    public String trimStartSmc(String value, char trim) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(value.trim());
+        
+        while (sb.charAt(0) == trim && sb.length() > 1) {
+            sb.deleteCharAt(0);
+        }
+        
+        return sb.toString();
+    }
 
     private void jam() {
         ActionListener taskPerformer = (ActionEvent event) -> {
@@ -770,12 +788,15 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                         koneksi = koneksiDB.condb();
                     }
                 }
-                
-                if (panelBiasa1.isVisible()) {
-                    try (ResultSet rs = koneksi.createStatement().executeQuery(
-                        "select left(nomor, 1), max(nomor) from antriloketcetak_smc where tanggal = current_date() and jam_panggil is not null group by left(nomor, 1)"
-                    )) {
-                        while (rs.next()) {
+
+                try (ResultSet rs = koneksi.createStatement().executeQuery(
+                    "select left(nomor, 1), max(nomor) from antriloketcetak_smc where tanggal = current_date() and jam_panggil is not null group by left(nomor, 1)"
+                )) {
+                    while (rs.next()) {
+                        if (rs.getString(1).equals(cmbhuruf.getSelectedItem().toString())) {
+                            Antrian.setText(trimStartSmc(rs.getString(2), '0'));
+                        }
+                        if (panelBiasa1.isVisible()) {
                             switch (rs.getString(1)) {
                                 case "A": AntrianA.setText(rs.getString(2)); break;
                                 case "B": AntrianB.setText(rs.getString(2)); break;
@@ -785,11 +806,11 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                                 case "F": AntrianF.setText(rs.getString(2)); break;
                             }
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notif : " + e);
-                        if (e.getMessage().contains("connection closed.")) {
-                            koneksi = koneksiDB.condb();
-                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                    if (e.getMessage().contains("connection closed.")) {
+                        koneksi = koneksiDB.condb();
                     }
                 }
             }
