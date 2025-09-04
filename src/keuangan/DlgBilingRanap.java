@@ -3513,6 +3513,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        isRawatSmc();
         try {
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
@@ -4798,7 +4799,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     public void isRawat() {
         TabRawat.setSelectedIndex(0);
         TabRawatMouseClicked(null);
-         try {      
+        isRawatSmc();
+    }
+    
+    private void isRawatSmc() {
+        try {      
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
                 pscekbilling.setString(1,TNoRw.getText());

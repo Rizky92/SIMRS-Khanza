@@ -3424,6 +3424,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        isRawatSmc();
         try {
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
@@ -4106,8 +4107,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }//GEN-LAST:event_MnCetakRegisterActionPerformed
 
- 
-
     /**
     * @param args the command line arguments
     */
@@ -4266,6 +4265,10 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     public void isRawat() {
         TabRawat.setSelectedIndex(0);
         TabRawatMouseClicked(null);
+        isRawatSmc();
+    }
+    
+    private void isRawatSmc() {
         try {    
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
 	    try{
@@ -5086,7 +5089,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }
 
-
     private void isHitung() {   
         ttl=0;
         y=0;
@@ -5135,8 +5137,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
         TtlSemua.setText(Valid.SetAngka3(ttl));
     }    
-    
-    
       
     public void isCek(){
         Valid.tabelKosong(tabModeAkunBayar);
@@ -5241,7 +5241,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             TKembali.setText(Valid.SetAngka3(kekurangan));  
         }  
     }
-    
     
     public void tampilTambahan(String NoRawat) {
         norawat.setText(NoRawat);
