@@ -271,7 +271,7 @@ public class DlgUser extends javax.swing.JDialog {
                 "[M]Hasil Pemeriksaan Slit Lamp","[M]Hasil Pemeriksaan OCT","[K]Beban Hutang Lain","[J]Poli Asal Pasien Ranap","[K]Pemberi Hutang Lain","[J]Dokter Asal Pasien Ranap",
                 "[L]Rekap Keluar Duta Parking","[P]Surat Keterangan Layak Terbang","[K]Bayar Beban Hutang Lain","[P]Surat Persetujuan Pemeriksaan HIV","[M]Skrining Instrumen ACRS",
                 "[P]Surat Pernyataan Memilih DPJP","[M]Skrining Instrumen Mental Emosional Anak","[B]Pelanggan Lab Kesehatan Lingkungan","[M]Check List Kriteria Masuk NICU",
-                "[M]Check List Kriteria Keluar NICU","[M]Pengkajian Awal Medis Ranap Psikiatri","[M]Check List Kriteria Masuk PICU","[M]Check List Kriteria Keluar PICU","[B]Master Sampel & Baku Mutu",
+                "[M]Check List Kriteria Keluar NICU","[M]Pengkajian Awal Medis Ranap Psikiatri","[M]Check List Kriteria Masuk PICU","[M]Check List Kriteria Keluar PICU","[B]Master Sampel Lab Kesling",
                 "[M]Skrining Instrumen AMT"
         };
         
@@ -3509,10 +3509,10 @@ public class DlgUser extends javax.swing.JDialog {
                     column.setPreferredWidth(173);
                     break;
                 case 1152:
-                    column.setPreferredWidth(157);
+                    column.setPreferredWidth(152);
                     break;
                 case 1153:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(141);
                     break;
                 default:
                     column.setPreferredWidth(133);
@@ -6923,7 +6923,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             "user.piutang_peminjaman_uang_belum_lunas,user.hasil_pemeriksaan_slit_lamp,user.hasil_pemeriksaan_oct,user.beban_hutang_lain,user.poli_asal_pasien_ranap,user.pemberi_hutang_lain,"+
                             "user.dokter_asal_pasien_ranap,user.duta_parkir_rekap_keluar,user.surat_keterangan_layak_terbang,user.bayar_beban_hutang_lain,user.surat_persetujuan_pemeriksaan_hiv,"+
                             "user.skrining_instrumen_acrs,user.surat_pernyataan_memilih_dpjp,user.skrining_instrumen_mental_emosional,user.pelanggan_lab_kesehatan_lingkungan,user.kriteria_masuk_nicu,"+
-                            "user.kriteria_keluar_nicu,user.penilaian_medis_ranap_psikiatrik,user.kriteria_masuk_picu,user.kriteria_keluar_picu,user.master_sampel_bakumutu from user order by AES_DECRYPT(user.id_user,'nur')");
+                            "user.kriteria_keluar_nicu,user.penilaian_medis_ranap_psikiatrik,user.kriteria_masuk_picu,user.kriteria_keluar_picu,user.master_sampel_bakumutu,user.skrining_instrumen_amt from user order by AES_DECRYPT(user.id_user,'nur')");
                         try {
                             rs=ps.executeQuery();
                             i=0;
@@ -8089,7 +8089,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                            rs.getBoolean("penilaian_medis_ranap_psikiatrik"),
                                            rs.getBoolean("kriteria_masuk_picu"),
                                            rs.getBoolean("kriteria_keluar_picu"),
-                                           rs.getBoolean("master_sampel_bakumutu")
+                                           rs.getBoolean("master_sampel_bakumutu"),
+                                           rs.getBoolean("skrining_instrumen_amt")
                                         };
                                         i++;
                                         SwingUtilities.invokeLater(() -> tabMode.addRow(row));
@@ -9245,7 +9246,8 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                        rs.getBoolean("penilaian_medis_ranap_psikiatrik"),
                                        rs.getBoolean("kriteria_masuk_picu"),
                                        rs.getBoolean("kriteria_keluar_picu"),
-                                       rs.getBoolean("master_sampel_bakumutu")
+                                       rs.getBoolean("master_sampel_bakumutu"),
+                                       rs.getBoolean("skrining_instrumen_amt")
                                     };
                                     i++;
                                     SwingUtilities.invokeLater(() -> tabMode.addRow(row));
