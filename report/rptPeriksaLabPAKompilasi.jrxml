@@ -184,7 +184,7 @@
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[JK/Umur]]></text>
+				<text><![CDATA[JK/Tgl. Lahir]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement positionType="Float" x="77" y="183" width="35" height="15" uuid="b30b4dd8-56e4-4d8f-a385-0a466c1c11b3"/>
