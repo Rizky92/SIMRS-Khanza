@@ -51,15 +51,15 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
     public RMCariKesimpulanAnjuranMCU(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        Object[] row={"P", "Kesimpulan","Anjuran"};        
+
+        Object[] row={"P", "Kesimpulan","Anjuran"};
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
@@ -68,7 +68,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
                 }
                 return java.lang.String.class;
             }
-            
+
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return colIndex == 0;
@@ -113,7 +113,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
                 }
             });
         }
-    }    
+    }
 
 
     /** This method is called from within the constructor to
@@ -314,7 +314,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
             if(evt.getClickCount()==2){
                 dispose();
             }
-        }         
+        }
 }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -338,8 +338,8 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
         nama.setLocationRelativeTo(internalFrame1);
         nama.setAlwaysOnTop(false);
         nama.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -387,7 +387,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     private widget.panelisi panelisi3;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
@@ -414,7 +414,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode);
         try (FileReader fr = new FileReader("./cache/masteranjuranmcu.iyem")) {
@@ -451,7 +451,7 @@ public final class RMCariKesimpulanAnjuranMCU extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void onCari(){
         TCari.requestFocus();
     }

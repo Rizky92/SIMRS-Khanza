@@ -3424,6 +3424,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        double sekarang = tagihanppn;
+        isRawatSmc();
         try {
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
@@ -3455,26 +3457,30 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }else if(cek>0){
             JOptionPane.showMessageDialog(null,"Maaf, data tagihan pasien dengan No.Rawat tersebut sudah pernah disimpan...!!!");
         }else if(cek==0){
-            if(piutang<=0){
-                if(kekurangan<0){
-                    JOptionPane.showMessageDialog(null,"Maaf, pembayaran pasien masih kurang ...!!!");
-                }else if(kekurangan>0){
-                    if(countbayar>1){
-                        JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
+            if (sekarang != tagihanppn) {
+                JOptionPane.showMessageDialog(null, "Terjadi perubahan total tagihan\nSilahkan cek kembali data tagihan pasien...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if(piutang<=0){
+                    if(kekurangan<0){
+                        JOptionPane.showMessageDialog(null,"Maaf, pembayaran pasien masih kurang ...!!!");
+                    }else if(kekurangan>0){
+                        if(countbayar>1){
+                            JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
+                        }else{
+                            isSimpan();
+                        }                        
+                    }else if(kekurangan==0){
+                        isSimpan();
+                    }                
+                }else if(piutang>=1){
+                    if(kekurangan<0){
+                        JOptionPane.showMessageDialog(null,"Maaf, piutang belum genap. Silahkan isi di jumlah piutang ...!!!");
+                    }else if(kekurangan>0){
+                        JOptionPane.showMessageDialog(null,"Maaf, terjadi kelebihan piutang ...!!!");
                     }else{
                         isSimpan();
-                    }                        
-                }else if(kekurangan==0){
-                    isSimpan();
-                }                
-            }else if(piutang>=1){
-                if(kekurangan<0){
-                    JOptionPane.showMessageDialog(null,"Maaf, piutang belum genap. Silahkan isi di jumlah piutang ...!!!");
-                }else if(kekurangan>0){
-                    JOptionPane.showMessageDialog(null,"Maaf, terjadi kelebihan piutang ...!!!");
-                }else{
-                    isSimpan();
-                }                    
+                    }                    
+                }
             }
         }
         
@@ -4106,8 +4112,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }//GEN-LAST:event_MnCetakRegisterActionPerformed
 
- 
-
     /**
     * @param args the command line arguments
     */
@@ -4266,6 +4270,10 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     public void isRawat() {
         TabRawat.setSelectedIndex(0);
         TabRawatMouseClicked(null);
+        isRawatSmc();
+    }
+    
+    private void isRawatSmc() {
         try {    
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
 	    try{
@@ -5086,7 +5094,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }
 
-
     private void isHitung() {   
         ttl=0;
         y=0;
@@ -5135,8 +5142,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
         TtlSemua.setText(Valid.SetAngka3(ttl));
     }    
-    
-    
       
     public void isCek(){
         Valid.tabelKosong(tabModeAkunBayar);
@@ -5241,7 +5246,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             TKembali.setText(Valid.SetAngka3(kekurangan));  
         }  
     }
-    
     
     public void tampilTambahan(String NoRawat) {
         norawat.setText(NoRawat);
