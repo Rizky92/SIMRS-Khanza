@@ -71,32 +71,41 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         tbICD10.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeICD9CM = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM"
+            "P", "Mtpx", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
-                return colIndex == 0;
+                return colIndex == 0 || colIndex == 1;
             }
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? java.lang.Boolean.class : java.lang.String.class;
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
+                }
+                
+                if (columnIndex == 1) {
+                    return java.lang.Integer.class;
+                }
+                
+                return java.lang.String.class;
             }
         };
         tbICD9CM.setModel(tabModeICD9CM);
         tbICD9CM.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbICD9CM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD9CM.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(400);
-        tbICD9CM.getColumnModel().getColumn(3).setMinWidth(0);
-        tbICD9CM.getColumnModel().getColumn(3).setMaxWidth(0);
+        tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(30);
+        tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(400);
         tbICD9CM.getColumnModel().getColumn(4).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(4).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(5).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(5).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(6).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(6).setMaxWidth(0);
+        tbICD9CM.getColumnModel().getColumn(7).setMinWidth(0);
+        tbICD9CM.getColumnModel().getColumn(7).setMaxWidth(0);
         tbICD9CM.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeDiagnosaPasien = new DefaultTableModel(null, new Object[] {
@@ -558,14 +567,11 @@ public class PanelDiagnosaSMC extends widget.panelisi {
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
-                        if (icd.contains(rs.getString("code1"))) {
-                        } else {
-                            tabModeICD9CM.addRow(new Object[] {
-                                pilihPertama, rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"),
-                                rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im")
-                            });
-                            pilihPertama = false;
-                        }
+                        tabModeICD9CM.addRow(new Object[] {
+                            pilihPertama, rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"),
+                            rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im")
+                        });
+                        pilihPertama = false;
                     }
                 }
             }
