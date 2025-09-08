@@ -1712,7 +1712,7 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kirim_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `kriteria_keluar_picu`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kirim_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `parameter_pengujian_lab_kesehatan_lingkungan`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_edit_kirim_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_kirim_obat_smc`;
 
