@@ -9,8 +9,9 @@
  * Created on May 22, 2010, 11:58:21 PM
  */
 
-package bridging;
+package bridging.custom;
 
+import bridging.ApotekBPJSCekReferensiDPHO;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -45,11 +46,11 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;
+    private ResultSet rs;    
     private int i=0;
     private DlgBarang barang=new DlgBarang(null,false);
     private ApotekBPJSCekReferensiDPHO barangbpjs=new ApotekBPJSCekReferensiDPHO(null,false);
-
+    
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -70,7 +71,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 5; i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -88,10 +89,10 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        kdobat.setDocument(new batasInput((byte)5).getKata(kdobat));
-        KdObatBPJS.setDocument(new batasInput((byte)15).getKata(KdObatBPJS));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
+        kdobat.setDocument(new batasInput((byte)5).getKata(kdobat)); 
+        KdObatBPJS.setDocument(new batasInput((byte)15).getKata(KdObatBPJS)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
+        
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -113,8 +114,8 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                     }
                 }
             });
-        }
-
+        }  
+        
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -122,7 +123,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){
+                if(barang.getTable().getSelectedRow()!= -1){                    
                     kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     TObat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                 }
@@ -136,8 +137,8 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });
-
+        }); 
+        
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -150,7 +151,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-
+        
         barangbpjs.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -158,14 +159,14 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barangbpjs.getTable().getSelectedRow()!= -1){
+                if(barangbpjs.getTable().getSelectedRow()!= -1){                   
                     KdObatBPJS.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),0).toString());
-                    NmObatBPJS.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),1).toString());
+                    NmObatBPJS.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),1).toString());                    
                     HargaObat.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),5).toString());
                     Retriksi.setText(barangbpjs.getTable().getValueAt(barangbpjs.getTable().getSelectedRow(),6).toString());
 
                     KdObatBPJS.requestFocus();
-                }
+                }                  
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -176,7 +177,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
+        
         barangbpjs.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -188,8 +189,8 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });
-        isForm();
+        });  
+    
     }
 
     /** This method is called from within the constructor to
@@ -219,7 +220,6 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
-        PanelInput = new widget.PanelBiasa();
         FormInput = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
         kdobat = new widget.TextBox();
@@ -233,7 +233,6 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         jLabel20 = new widget.Label();
         jLabel21 = new widget.Label();
         Retriksi = new widget.TextBox();
-        ChkInput = new widget.CekBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -455,31 +454,26 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        PanelInput.setName("PanelInput"); // NOI18N
-        PanelInput.setPreferredSize(new java.awt.Dimension(100, 128));
-        PanelInput.setLayout(new java.awt.BorderLayout());
-
-        FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(100, 104));
+        FormInput.setPreferredSize(new java.awt.Dimension(100, 44));
         FormInput.setLayout(null);
 
         jLabel4.setText("Obat RS :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(0, 10, 70, 23);
+        jLabel4.setBounds(0, 10, 56, 23);
 
         kdobat.setEditable(false);
         kdobat.setHighlighter(null);
         kdobat.setName("kdobat"); // NOI18N
         FormInput.add(kdobat);
-        kdobat.setBounds(74, 10, 100, 23);
+        kdobat.setBounds(59, 10, 70, 23);
 
         TObat.setEditable(false);
         TObat.setHighlighter(null);
         TObat.setName("TObat"); // NOI18N
         FormInput.add(TObat);
-        TObat.setBounds(178, 10, 354, 23);
+        TObat.setBounds(131, 10, 190, 23);
 
         btnPoliRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPoliRS.setMnemonic('1');
@@ -496,23 +490,23 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnPoliRS);
-        btnPoliRS.setBounds(536, 10, 28, 23);
+        btnPoliRS.setBounds(323, 10, 28, 23);
 
-        jLabel19.setText("Harga (Rp) :");
+        jLabel19.setText("Harga :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(0, 70, 70, 23);
+        jLabel19.setBounds(710, 10, 70, 23);
 
         KdObatBPJS.setEditable(false);
         KdObatBPJS.setHighlighter(null);
         KdObatBPJS.setName("KdObatBPJS"); // NOI18N
         FormInput.add(KdObatBPJS);
-        KdObatBPJS.setBounds(74, 40, 100, 23);
+        KdObatBPJS.setBounds(426, 10, 70, 23);
 
         NmObatBPJS.setEditable(false);
         NmObatBPJS.setName("NmObatBPJS"); // NOI18N
         FormInput.add(NmObatBPJS);
-        NmObatBPJS.setBounds(178, 40, 354, 23);
+        NmObatBPJS.setBounds(498, 10, 190, 23);
 
         btnPoliBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPoliBPJS.setMnemonic('3');
@@ -524,54 +518,31 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnPoliBPJS);
-        btnPoliBPJS.setBounds(536, 40, 28, 23);
+        btnPoliBPJS.setBounds(690, 10, 28, 23);
 
         HargaObat.setEditable(false);
         HargaObat.setHighlighter(null);
         HargaObat.setName("HargaObat"); // NOI18N
         FormInput.add(HargaObat);
-        HargaObat.setBounds(74, 70, 120, 23);
+        HargaObat.setBounds(785, 10, 100, 23);
 
         jLabel20.setText("Obat BPJS :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(0, 40, 70, 23);
+        jLabel20.setBounds(353, 10, 70, 23);
 
-        jLabel21.setText("Restriksi :");
+        jLabel21.setText("Retriksi :");
         jLabel21.setName("jLabel21"); // NOI18N
         FormInput.add(jLabel21);
-        jLabel21.setBounds(198, 70, 50, 23);
+        jLabel21.setBounds(910, 10, 50, 23);
 
         Retriksi.setEditable(false);
         Retriksi.setHighlighter(null);
         Retriksi.setName("Retriksi"); // NOI18N
         FormInput.add(Retriksi);
-        Retriksi.setBounds(252, 70, 340, 23);
+        Retriksi.setBounds(970, 10, 340, 23);
 
-        PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
-
-        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
-        ChkInput.setText(".: Input Data");
-        ChkInput.setToolTipText("Alt+I");
-        ChkInput.setBorderPainted(true);
-        ChkInput.setBorderPaintedFlat(true);
-        ChkInput.setFocusable(false);
-        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ChkInput.setName("ChkInput"); // NOI18N
-        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
-        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkInputActionPerformed(evt);
-            }
-        });
-        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
-
-        internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
+        internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
@@ -579,14 +550,14 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPoliRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliRSActionPerformed
-        barang.isCek();
+        barang.isCek();        
         barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         barang.setLocationRelativeTo(internalFrame1);
         barang.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-
+        
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -600,7 +571,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }
+            }                
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -647,7 +618,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                     emptTeks();
                     tampil();
                 }
-            }
+            }                
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -674,17 +645,17 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
+        }else if(tabMode.getRowCount()!=0){            
+                Map<String, Object> param = new HashMap<>();    
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingObatApotekBPJS.jasper","report","::[ Mapping Obat Apotek BPJS ]::",param);
+                param.put("emailrs",akses.getemailrs());   
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("parameter","%"+TCari.getText().trim()+"%");   
+                Valid.MyReport("rptMapingObatApotekBPJS.jasper","report","::[ Mapping Obat Apotek BPJS ]::",param);            
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -764,10 +735,6 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         emptTeks();
     }//GEN-LAST:event_formWindowOpened
 
-    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();
-    }//GEN-LAST:event_ChkInputActionPerformed
-
     /**
     * @param args the command line arguments
     */
@@ -793,13 +760,11 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
-    private widget.CekBox ChkInput;
     private widget.PanelBiasa FormInput;
     private widget.TextBox HargaObat;
     private widget.TextBox KdObatBPJS;
     private widget.Label LCount;
     private widget.TextBox NmObatBPJS;
-    private widget.PanelBiasa PanelInput;
     private widget.TextBox Retriksi;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
@@ -869,35 +834,28 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
            kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
            TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
            KdObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());           
            HargaObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
            Retriksi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
 
         }
     }
-
+    
     public void isCek(){
         BtnSimpan.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnHapus.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnEdit.setEnabled(akses.getbpjs_mapping_obat_apotek());
         BtnPrint.setEnabled(akses.getbpjs_mapping_obat_apotek());
     }
-
+    
     public JTable getTable(){
         return tbJnsPerawatan;
-    }
+    }    
+
+   
     
-    private void isForm() {
-        if (ChkInput.isSelected()) {
-            ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH, 128));
-            FormInput.setVisible(true);
-            ChkInput.setVisible(true);
-        } else {
-            ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH, 20));
-            FormInput.setVisible(false);
-            ChkInput.setVisible(true);
-        }
-    }
+    
+    
+
+    
 }
