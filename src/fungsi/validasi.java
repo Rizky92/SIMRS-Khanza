@@ -81,12 +81,12 @@ public final class validasi {
     private final Connection connect=koneksiDB.condb();
     private final sekuel sek=new sekuel();
     private final java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-    private final DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");  
-    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.#################");  
-    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##");  
-    private final DecimalFormat df3 = new DecimalFormat("######"); 
-    private final DecimalFormat df6 = new DecimalFormat("######.###"); 
-    private final DecimalFormat df7 = new DecimalFormat("######.#"); 
+    private final DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
+    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.#################");
+    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##");
+    private final DecimalFormat df3 = new DecimalFormat("######");
+    private final DecimalFormat df6 = new DecimalFormat("######.###");
+    private final DecimalFormat df7 = new DecimalFormat("######.#");
     private PreparedStatement ps;
     private ResultSet rs;
     private File file;
@@ -99,11 +99,11 @@ public final class validasi {
         "nol","satu","dua","tiga","empat","lima","enam",
         "tujuh","delapan","sembilan","sepuluh","sebelas"
     };
-    
+
     public validasi(){
         super();
     };
-    
+
     public String fingerSmc(String kodedokter, String tanggal) {
         String finger = sek.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", kodedokter);
         return String.format("Dikeluarkan di %s, Kabupaten/Kota %s\nDitandatangani secara elektronik oleh %s\nID %s\n%s",
@@ -111,75 +111,75 @@ public final class validasi {
             finger.isBlank() ? kodedokter : finger, tanggal
         );
     }
-    
+
     public void autonomorSmc(JTextComponent component, String prefix, String table, int panjang, String pad) {
         component.setText(sek.autonomorSmc(prefix, table, panjang, pad));
     }
-    
+
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
         component.setText(sek.autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, next));
     }
-    
+
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, Tanggal tanggal, int next) {
         autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal), next);
     }
-    
+
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
         component.setText(sek.autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal));
     }
-    
+
     public void autonomorSmc(JTextComponent component, String prefix, String separator, String table, String kolom, int panjang, String pad, Tanggal tanggal) {
         autonomorSmc(component, prefix, separator, table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
     }
-    
+
     public void autonomor1Smc(JTextComponent component, String prefix, String table, String kolom, int panjang, String pad, Tanggal tanggal) {
         autonomorSmc(component, prefix, "", table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
     }
-    
+
     public String getTglSmc(Date tgl, String format) {
         return new SimpleDateFormat(format).format(tgl);
     }
-    
+
     public String getTglSmc(Tanggal tgl) {
         return getTglSmc(tgl.getDate(), "yyyy-MM-dd");
     }
-    
+
     public String getTglSmc(Date tgl) {
-        return getTglSmc(tgl, "dd-MM-yyy");
+        return getTglSmc(tgl, "dd-MM-yyyy");
     }
-    
+
     public String setTglSmc(String tgl) {
         return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);
     }
-    
+
     public String getJamSmc(ComboBox jam, ComboBox menit, ComboBox detik) {
         return jam.getSelectedItem() + ":" + menit.getSelectedItem() + ":" + detik.getSelectedItem();
     }
-    
+
     public String getJamSmc(Tanggal tgl) {
         return new SimpleDateFormat("HH:mm:ss").format(tgl.getDate());
     }
-    
+
     public String getTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
         return getTglSmc(tgl) + " " + getJamSmc(jam, menit, detik);
     }
-    
+
     public String getTglJamSmc(Tanggal tgljam) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tgljam.getDate());
     }
-    
+
     public String getTglJamSmc(Date tgljam) {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(tgljam);
     }
-    
+
     public void setTglJamSmc(Tanggal tgl) {
         tgl.setDate(Calendar.getInstance().getTime());
     }
-    
+
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ? order by temporary.no", akses.getalamatip());
     }
-    
+
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams, String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
@@ -197,7 +197,7 @@ public final class validasi {
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
         }
     }
-    
+
     public void reportSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         try {
             JasperViewer jv = new JasperViewer(JasperFillManager.fillReport("./" + reportDirName + "/" + reportName, reportParams, connect), false);
@@ -212,7 +212,7 @@ public final class validasi {
             JOptionPane.showMessageDialog(null, "Report can't view because : " + e);
         }
     }
-    
+
     public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah, String sql, String... values) {
         try {
             try (PreparedStatement ps = connect.prepareStatement(sql)) {
@@ -310,11 +310,11 @@ public final class validasi {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public String capitalizeSmc(String judul) {
         return judul.substring(0, 1).toUpperCase() + judul.substring(1);
     }
-    
+
     public String terbilangSmc(double nilai) {
         if (nilai < 12) {
             return nominal2[(int) nilai];
@@ -347,10 +347,10 @@ public final class validasi {
         if (nilai >= 1_000_000 && nilai <= 999_999_999) {
             return terbilangSmc((int) nilai / 1_000_000) + " juta " + terbilangSmc(nilai % 1_000_000);
         }
-        
+
         return "";
     }
-    
+
     public void panggilUrlSmc(String app, String url) {
         if (app == null || app.isBlank()) {
             panggilUrl2(url);
@@ -385,7 +385,7 @@ public final class validasi {
             }
         }
     }
-    
+
     public void cleanupTextSmc(JTextComponent txt) {
         try {
             CharsetEncoder latin1Encoder = Charset.forName("ISO-8859-1").newEncoder();
@@ -393,16 +393,16 @@ public final class validasi {
             latin1Encoder.onMalformedInput(CodingErrorAction.REPLACE);
             latin1Encoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
             latin1Encoder.replaceWith(" ".getBytes());
-            
+
             ByteBuffer input = latin1Encoder.encode(CharBuffer.wrap(txt.getText()));
-            
+
             CharBuffer cb = latin1Decoder.decode(input);
             txt.setText(cb.toString().trim());
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     public boolean exists(String path) {
         try {
             return new File(path).isFile();
@@ -411,44 +411,44 @@ public final class validasi {
             return false;
         }
     }
-    
+
     public String joinSmc(String separator, String... values) {
         if (values.length == 0) {
             return "";
         }
-        
+
         String base = values[0];
-        
+
         for (int i = 1; i < values.length; i++) {
             base = base.concat(separator + values[i]);
         }
-        
+
         return base;
     }
-    
+
     public void tabelKosongSmc(DefaultTableModel model, boolean fireEvent) {
         model.getDataVector().removeAllElements();
         if (fireEvent) {
             model.fireTableDataChanged();
         }
     }
-    
+
     public void tabelKosongSmc(DefaultTableModel model) {
         tabelKosongSmc(model, false);
     }
-    
+
     public double setAngkaSmc(String value) {
         if (value.isBlank()) {
             return 0;
         }
-        
+
         try {
             return Double.parseDouble(value);
         } catch (Exception e) {
             return 0;
         }
     }
-    
+
     public boolean umurcacheSmc(String path, int hari) {
         try {
             File file = new File(path);
@@ -459,32 +459,32 @@ public final class validasi {
         }
         return true;
     }
-    
+
     public String padleftSmc(String value, int panjang, char pad) {
         value = value.trim();
         StringBuilder sb = new StringBuilder();
         sb.append(trimStartSmc(value, pad));
-        
+
         while ((panjang - value.length()) > 0) {
             sb.insert(0, pad);
             --panjang;
         }
-        
+
         return sb.toString();
     }
-    
+
     public String trimStartSmc(String value, char trim) {
         StringBuilder sb = new StringBuilder();
         sb.append(value.trim());
-        
+
         while (sb.charAt(0) == trim) {
             sb.deleteCharAt(0);
         }
-        
+
         return sb.toString();
     }
-    
-    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
+
+    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
         s1="";
@@ -506,14 +506,14 @@ public final class validasi {
                for(i = 1;i<=pnj-j;i++){
                    s1=s1+"0";
                }
-               teks.setText(strAwal+s1+s);      
+               teks.setText(strAwal+s1+s);
             }catch(Exception e){
                System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -522,7 +522,7 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer2(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
@@ -542,7 +542,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -551,16 +551,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer3(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -575,7 +575,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -584,16 +584,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer4(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -608,7 +608,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -617,16 +617,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer5(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -641,7 +641,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -650,16 +650,16 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer6(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement(sql);
-            try{   
+            try{
                 rs=ps.executeQuery();
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -674,7 +674,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -683,12 +683,12 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public String autoNomer(String tabel,String strAwal,Integer pnj){
         try {
             auto="";
             ps=connect.prepareStatement("select * from "+tabel);
-            try{        
+            try{
                 rs=ps.executeQuery();
                 rs.last();
                 s=Integer.toString(rs.getRow()+1);
@@ -697,7 +697,7 @@ public final class validasi {
                 for(i = 1;i<=pnj-j;i++){
                     s1=s1+"0";
                 }
-                auto=strAwal+s1+s;             
+                auto=strAwal+s1+s;
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
@@ -705,7 +705,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -713,10 +713,10 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
-        return auto;        
+
+        return auto;
     }
-    
+
     public String autoNomer3(String sql,String strAwal,Integer pnj){
         try {
             auto="";
@@ -726,7 +726,7 @@ public final class validasi {
                 s="1";
                 while(rs.next()){
                     s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
+                }
 
                 j=s.length();
                 s1="";
@@ -741,7 +741,7 @@ public final class validasi {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -749,7 +749,7 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return auto;
     }
 
@@ -759,11 +759,11 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
     }
-    
+
     public boolean editTabletf(DefaultTableModel tabMode,String table,String field_acuan,JTextField nilai_field,String update) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -773,30 +773,30 @@ public final class validasi {
         }else if(nilai_field.getText().trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            status=sek.mengedittf(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            status=sek.mengedittf(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
         return status;
     }
-    
+
     public void editTable(String table,String field_acuan,JTextField nilai_field,String update) {
         if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);                 
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
         }
     }
-    
+
     public void editTable(DefaultTableModel tabMode,String table,String field_acuan,String nilai_field,String update,int i, String[] a) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         }else if(nilai_field.trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.trim().equals("")){            
-            sek.mengedit(table,field_acuan+"="+nilai_field, update,i,a);                 
+        }else if(! nilai_field.trim().equals("")){
+            sek.mengedit(table,field_acuan+"="+nilai_field, update,i,a);
         }
     }
-    
+
     public boolean editTabletf(DefaultTableModel tabMode,String table,String field_acuan,String nilai_field,String update,int i, String[] a) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -805,8 +805,8 @@ public final class validasi {
         }else if(nilai_field.trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.trim().equals("")){            
-            status=sek.mengedittf(table,field_acuan+"="+nilai_field, update,i,a);                 
+        }else if(! nilai_field.trim().equals("")){
+            status=sek.mengedittf(table,field_acuan+"="+nilai_field, update,i,a);
         }
         return status;
     }
@@ -817,9 +817,9 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(nilai_field.getSelectedItem()!=""){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getSelectedItem()+"'", update);            
-            
+        }else if(nilai_field.getSelectedItem()!=""){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getSelectedItem()+"'", update);
+
         }
     }
 
@@ -829,16 +829,16 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal mengedit. Pilih dulu data yang mau diedit.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);            
-            
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.mengedit(table,field_acuan+"='"+nilai_field.getText()+"'", update);
+
         }
     }
-    
+
     public void fillData(DefaultTableModel model,JTable table, File file) {
         try {
             WritableWorkbook workbook1 = Workbook.createWorkbook(file);
-            WritableSheet sheet1 = workbook1.createSheet("First Sheet", 0); 
+            WritableSheet sheet1 = workbook1.createSheet("First Sheet", 0);
             model = (DefaultTableModel) table.getModel();
 
             for (i = 0; i < model.getColumnCount(); i++) {
@@ -847,7 +847,7 @@ public final class validasi {
             }
             for (i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
-                    Label row = new Label(j, i + 1, 
+                    Label row = new Label(j, i + 1,
                             model.getValueAt(i, j).toString());
                     sheet1.addCell(row);
                 }
@@ -865,11 +865,11 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            sek.meghapus(table,field,nilai_field.getText());   
+        }else if(! nilai_field.getText().trim().equals("")){
+            sek.meghapus(table,field,nilai_field.getText());
         }
     }
-    
+
     public boolean hapusTabletf(DefaultTableModel tabMode,JTextField nilai_field,String table,String field) {
         status=true;
         if(tabMode.getRowCount()==0){
@@ -879,8 +879,8 @@ public final class validasi {
         }else if(nilai_field.getText().trim().equals("")){
             status=false;
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(! nilai_field.getText().trim().equals("")){            
-            status=sek.meghapustf(table,field,nilai_field.getText());   
+        }else if(! nilai_field.getText().trim().equals("")){
+            status=sek.meghapustf(table,field,nilai_field.getText());
         }
         return status;
     }
@@ -891,9 +891,9 @@ public final class validasi {
             nilai_field.requestFocus();
         }else if(nilai_field.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
-        }else if(nilai_field.getSelectedItem()!=""){            
+        }else if(nilai_field.getSelectedItem()!=""){
             String data=nilai_field.getSelectedItem().toString();
-            sek.meghapus(table,field,data);     
+            sek.meghapus(table,field,data);
         }
     }
 
@@ -907,14 +907,14 @@ public final class validasi {
                     String item=rs.getString(1);
                     cmb.addItem(item);
                     a++;
-                }          
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -923,31 +923,31 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public int hariAkhad(int month,int year){ 
-        j=0; 
-        Calendar calendar=Calendar.getInstance(); 
-        calendar.set(year, month-1,1); 
-        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); 
-        
-        for(i=1;i<=days;i++) { 
-            calendar.set(year, month-1, i); 
-            int day=calendar.get(Calendar.DAY_OF_WEEK); 
+
+    public int hariAkhad(int month,int year){
+        j=0;
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(year, month-1,1);
+        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        for(i=1;i<=days;i++) {
+            calendar.set(year, month-1, i);
+            int day=calendar.get(Calendar.DAY_OF_WEEK);
             if(day==1){
                 j++ ;
-            }  
-        } 
-        
-        return j; 
-    } 
-    
-    public int jumlahHari(int month,int year){ 
-        Calendar calendar=Calendar.getInstance(); 
-        calendar.set(year, month-1,1); 
-        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); 
-        return days; 
-    } 
-    
+            }
+        }
+
+        return j;
+    }
+
+    public int jumlahHari(int month,int year){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(year, month-1,1);
+        int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return days;
+    }
+
     public void loadCombo(JComboBox cmb,String query){
         cmb.removeAllItems();
         try {
@@ -958,14 +958,14 @@ public final class validasi {
                     String item=rs.getString(1);
                     cmb.addItem(item);
                     a++;
-                }          
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -975,7 +975,7 @@ public final class validasi {
         }
     }
 
-    public void LoadTahun(JComboBox cmb){        
+    public void LoadTahun(JComboBox cmb){
         cmb.removeAllItems();
         for(i =(year+1);i>=1980;i--){
             cmb.addItem(i);
@@ -1017,10 +1017,10 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    
+
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    
+
                     JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
                     jasperViewer.setTitle(judul);
                     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
@@ -1037,7 +1037,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReportPDF(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -1063,7 +1063,7 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
                     JasperExportManager.exportReportToPdfFile(jasperPrint,"./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
@@ -1077,7 +1077,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReportPDF2(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -1103,7 +1103,7 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
                     JasperExportManager.exportReportToPdfFile(jasperPrint,"./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
@@ -1116,7 +1116,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("empty-statement")
     public void MyReport2(String reportName,String reportDirName,String judul,Map parameters){
         Properties systemProp = System.getProperties();
@@ -1142,10 +1142,10 @@ public final class validasi {
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    
+
                     String namafile="./"+reportDirName+"/"+reportName;
                     JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    
+
                     JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
                     jasperViewer.setTitle(judul);
                     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
@@ -1162,7 +1162,7 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
@@ -1190,7 +1190,7 @@ public final class validasi {
                 String namafile="./"+reportDirName+"/"+reportName;
                 rs=ps.executeQuery();
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
-                
+
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
 
                 JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
@@ -1215,37 +1215,37 @@ public final class validasi {
             System.out.println(e);
         }
     }
-    
+
     public void viewReport(String namaReport, String judul, Map params) {
         String currentDir = System.getProperties().getProperty("user.dir");
 
         File dir = new File(currentDir);
 
         File report = null;
-        
+
         if (dir.isDirectory()) {
             for (String file: dir.list()) {
                 report = new File(currentDir + File.separatorChar + file + File.separatorChar + namaReport);
-                
+
                 if (report.isFile()) {
                     System.out.println("Found report file at: " + report.toString());
                     break;
                 }
             }
         }
-        
+
         if (report == null) {
             JOptionPane.showMessageDialog(null, "File tidak ditemukan!");
             return;
         }
-        
+
         try {
-            JasperReport jr = (JasperReport) JRLoader.loadObject(report);            
+            JasperReport jr = (JasperReport) JRLoader.loadObject(report);
             JasperPrint jp = JasperFillManager.fillReport(jr, params, connect);
             JasperViewer jv = new JasperViewer(jp, false);
-            
+
             Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-            
+
             jv.setTitle(judul);
             jv.setSize(screen.width - 50, screen.height - 50);
             jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
@@ -1254,11 +1254,11 @@ public final class validasi {
         } catch (Exception e) {
             System.out.println("Report can't view because: " + e);
             e.printStackTrace();
-            
+
             JOptionPane.showMessageDialog(null, "Tidak bisa menampilkan hasil cetak!");
         }
     }
-    
+
     public void MyReportqrypdf(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
@@ -1284,7 +1284,7 @@ public final class validasi {
             ps=connect.prepareStatement(qry);
             try {
                 String namafile="./"+reportDirName+"/"+reportName;
-                File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
+                File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
                 rs=ps.executeQuery();
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
@@ -1306,7 +1306,7 @@ public final class validasi {
         }
     }
 
-    
+
     public void MyReport(String reportName,Map parameters,String title){
         try {
                 JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
@@ -1316,7 +1316,7 @@ public final class validasi {
                 //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
         } catch (Exception ex) {
            System.out.println("Notifikasi : "+ex);
-        } 
+        }
     }
 
 
@@ -1327,7 +1327,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JCheckBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1335,7 +1335,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan,JTextField bawah){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1345,7 +1345,7 @@ public final class validasi {
             bawah.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1353,7 +1353,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, Button kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1361,7 +1361,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1369,7 +1369,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1377,7 +1377,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1385,7 +1385,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextArea kiri,JButton kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1393,7 +1393,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JComboBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1401,7 +1401,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JComboBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1409,7 +1409,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1417,7 +1417,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JComboBox kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1425,7 +1425,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JButton kiri,JTextArea kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1441,7 +1441,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, Tanggal kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1457,7 +1457,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(java.awt.event.KeyEvent evt,JTextField kiri,JButton kanan){
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1465,7 +1465,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah2(KeyEvent evt, ComboBox kiri, Button kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_TAB){
             kanan.requestFocus();
@@ -1489,7 +1489,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1497,7 +1497,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextArea kiri,JTextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1521,7 +1521,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JButton kanan,JTextField bawah){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1547,7 +1547,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JCheckBox kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1587,7 +1587,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JCheckBox kiri,JDateTimePicker kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1595,7 +1595,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(KeyEvent evt, Button kiri, TextArea kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -1651,11 +1651,11 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void panggilUrl(String url){
         String os = System.getProperty("os.name").toLowerCase();
-        Runtime rt = Runtime.getRuntime();                                
-        try{ 
+        Runtime rt = Runtime.getRuntime();
+        try{
             if(os.contains("win")) {
                 rt.exec( "rundll32 url.dll,FileProtocolHandler " + "http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+url);
             }else if (os.contains("mac")) {
@@ -1666,16 +1666,16 @@ public final class validasi {
                 StringBuilder cmd = new StringBuilder();
                 for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/").append(url).append( "\" ");
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
-            } 
+            }
         }catch (Exception e){
             System.out.println("Notif Browser : "+e);
-        } 
+        }
     }
-    
+
     public void panggilUrl2(String url){
         String os = System.getProperty("os.name").toLowerCase();
-        Runtime rt = Runtime.getRuntime();                                
-        try{ 
+        Runtime rt = Runtime.getRuntime();
+        try{
             if(os.contains("win")) {
                 rt.exec( "rundll32 url.dll,FileProtocolHandler "+url);
             }else if (os.contains("mac")) {
@@ -1686,15 +1686,15 @@ public final class validasi {
                 StringBuilder cmd = new StringBuilder();
                 for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append(url).append( "\" ");
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
-            } 
+            }
         }catch (Exception e){
             System.out.println("Notif Browser : "+e);
-        } 
+        }
     }
-    
+
     public void printUrl(String url) throws URISyntaxException{
         try{
-           desktop.print(new File(new java.net.URI("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+url)));  
+           desktop.print(new File(new java.net.URI("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+url)));
         }catch (Exception e) {
            System.out.println(e);
         }
@@ -1709,56 +1709,56 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
+
     public String SetTgl(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+"-"+original.substring(3,5)+"-"+original.substring(0,2);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String SetTglJam(String original, String pattern)
     {
         original = original.replaceAll("'", "");
         String out = "";
-        
+
         SimpleDateFormat dfIn = new SimpleDateFormat(pattern);
         SimpleDateFormat dfOut = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
+
         try {
             Date date = dfIn.parse(original);
-            
+
             out = dfOut.format(date);
         } catch (ParseException ex) {
             System.out.println("Notif : " + ex);
         }
-        
+
         return out;
     }
-    
+
     public String SetTglJam(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+"-"+original.substring(3,5)+"-"+original.substring(0,2)+" "+original.substring(11,19);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String SetTgl3(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(8,10)+"-"+original.substring(5,7)+"-"+original.substring(0,4);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public String MaxTeks(String original,int max){
         if(original.length()>=max){
             s=original.substring(0,(max-1));
@@ -1767,8 +1767,8 @@ public final class validasi {
         }
         return original;
     }
-    
-    public void SetTgl(JDateTimePicker dtp,String tgl){            
+
+    public void SetTgl(JDateTimePicker dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
@@ -1776,8 +1776,8 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
-    public void SetTgl2(JDateTimePicker dtp,String tgl){            
+
+    public void SetTgl2(JDateTimePicker dtp,String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(tgl.replaceAll("'",""));
            dtp.setDate(dtpa);
@@ -1785,7 +1785,7 @@ public final class validasi {
            dtp.setDate(new Date());
         }
     }
-    
+
     public Date SetTgl2(String tgl){
         try {
            Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tgl.replaceAll("'",""));
@@ -1794,17 +1794,17 @@ public final class validasi {
            return new Date();
         }
     }
-    
+
     public String SetTgl4(String original){
         original=original.replaceAll("'","");
         s = "";
         try {
             s=original.substring(6,10)+original.substring(3,5)+original.substring(0,2);
         }catch (Exception e) {
-        }   
+        }
         return s;
     }
-    
+
     public void textKosong(JTextField teks,String pesan){
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
@@ -1814,7 +1814,7 @@ public final class validasi {
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
     }
-    
+
     public void textKosong(JButton teks,String pesan){
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
@@ -1831,41 +1831,41 @@ public final class validasi {
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
     }
-    
-    public String SetAngka(double nilai){        
+
+    public String SetAngka(double nilai){
        return df2.format(nilai);
     }
-    
-    public String SetAngka3(double nilai){        
+
+    public String SetAngka3(double nilai){
        return df4.format(nilai);
     }
-    
-    public String SetAngka4(double nilai){        
+
+    public String SetAngka4(double nilai){
        return df5.format(nilai);
     }
-    
-    public String SetAngka2(double nilai){        
+
+    public String SetAngka2(double nilai){
        return df3.format(nilai);
     }
-    
-    public String SetAngka5(double nilai){        
+
+    public String SetAngka5(double nilai){
        return df6.format(nilai);
     }
-    
-    public String SetAngka6(double nilai){        
+
+    public String SetAngka6(double nilai){
        return df7.format(nilai);
     }
-    
-    public double SetAngka7(double nilai){        
+
+    public double SetAngka7(double nilai){
        return Double.parseDouble(df7.format(nilai));
     }
-    
-    public double SetAngka8(double value,int places){      
+
+    public double SetAngka8(double value,int places){
         return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
     }
-    
+
     public double SetAngka(String txt){
-        double x;   
+        double x;
         try {
             if(txt.equals("")){
                 x=0;
@@ -1875,12 +1875,12 @@ public final class validasi {
         } catch (Exception e) {
             x=0;
         }
-            
+
         return x;
     }
-    
+
     public int SetInteger(String txt){
-        int x;   
+        int x;
         try {
             if(txt.equals("")){
                 x=0;
@@ -1890,10 +1890,10 @@ public final class validasi {
         } catch (Exception e) {
             x=0;
         }
-            
+
         return x;
     }
-    
+
     public double roundUp(double number, int multiple) {
         if(PEMBULATANHARGAOBAT.equals("yes")){
             result = multiple;
@@ -1910,7 +1910,7 @@ public final class validasi {
             return Math.round(number);
         }
     }
-    
+
     public String terbilang(double angka)
     {
         if (angka < 12) {
@@ -1947,7 +1947,7 @@ public final class validasi {
 
         return "";
     }
-    
+
     public int daysOld(String path) {
         file=new File(path);
         if (file.lastModified() < 1) return 0;
