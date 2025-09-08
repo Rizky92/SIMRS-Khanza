@@ -1597,7 +1597,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("namapasien", lblNamaPasien.getText());
                         param.put("jkel", rs.getString("jk"));
                         param.put("umur", rs.getString("umur"));
-                        param.put("lahir", rs.getString("tgl_lahir"));
+                        param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
                         param.put("alamat", rs.getString("alamat"));
                         param.put("diagnosa", tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 9).toString());
                         param.put("pekerjaan", rs.getString("pekerjaan"));
@@ -3750,7 +3750,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         param.put("namapasien", lblNamaPasien.getText());
                         param.put("jkel", rs.getString("jk"));
                         param.put("umur", rs.getString("umur"));
-                        param.put("lahir", rs.getString("tgl_lahir"));
+                        param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
                         param.put("alamat", rs.getString("alamat"));
                         param.put("diagnosa", tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 9).toString());
                         param.put("pekerjaan", rs.getString("pekerjaan"));
