@@ -3513,6 +3513,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        double sekarang = tagihanppn;
+        isRawatSmc();
         try {
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
@@ -3540,38 +3542,42 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }else if(i>0){
             JOptionPane.showMessageDialog(null,"Maaf, data tagihan pasien dengan No.Rawat tersebut sudah pernah disimpan...!!!");
         }else if(i==0){ 
-            if(piutang<=0){
-                if(kekurangan<0){
-                    JOptionPane.showMessageDialog(null,"Maaf, pembayaran pasien masih kurang ...!!!");
-                }else if(kekurangan>0){
-                    if(countbayar>1){
-                        JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
-                    }else{
+            if (sekarang != tagihanppn) {
+                JOptionPane.showMessageDialog(null, "Terjadi perubahan total tagihan\nSilahkan cek kembali data tagihan pasien...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if(piutang<=0){
+                    if(kekurangan<0){
+                        JOptionPane.showMessageDialog(null,"Maaf, pembayaran pasien masih kurang ...!!!");
+                    }else if(kekurangan>0){
+                        if(countbayar>1){
+                            JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
+                        }else{
+                            if(ChkPiutang.isSelected()==true){
+                                JOptionPane.showMessageDialog(null,"Maaf, matikan centang di piutang ...!!!");
+                            }else{
+                                isSimpan();
+                            }                            
+                        }                        
+                    }else if(kekurangan==0){
                         if(ChkPiutang.isSelected()==true){
                             JOptionPane.showMessageDialog(null,"Maaf, matikan centang di piutang ...!!!");
                         }else{
                             isSimpan();
-                        }                            
-                    }                        
-                }else if(kekurangan==0){
+                        } 
+                    }                
+                }else if(piutang>=1){
                     if(ChkPiutang.isSelected()==true){
-                        JOptionPane.showMessageDialog(null,"Maaf, matikan centang di piutang ...!!!");
-                    }else{
-                        isSimpan();
-                    } 
-                }                
-            }else if(piutang>=1){
-                if(ChkPiutang.isSelected()==true){
-                    if(kekurangan<0){
-                        JOptionPane.showMessageDialog(null,"Maaf, piutang belum genap. Silahkan isi di jumlah piutang ...!!!");
-                    }else if(kekurangan>0){
-                        JOptionPane.showMessageDialog(null,"Maaf, terjadi kelebihan piutang ...!!!");
-                    }else{
-                        isSimpan();
-                    }    
-                }else if(ChkPiutang.isSelected()==false){
-                    JOptionPane.showMessageDialog(rootPane,"Silahkan centang terlebih dahulu pada pilihan piutang...!!");
-                }                
+                        if(kekurangan<0){
+                            JOptionPane.showMessageDialog(null,"Maaf, piutang belum genap. Silahkan isi di jumlah piutang ...!!!");
+                        }else if(kekurangan>0){
+                            JOptionPane.showMessageDialog(null,"Maaf, terjadi kelebihan piutang ...!!!");
+                        }else{
+                            isSimpan();
+                        }    
+                    }else if(ChkPiutang.isSelected()==false){
+                        JOptionPane.showMessageDialog(rootPane,"Silahkan centang terlebih dahulu pada pilihan piutang...!!");
+                    }                
+                }
             }
         }           
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -4798,7 +4804,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     public void isRawat() {
         TabRawat.setSelectedIndex(0);
         TabRawatMouseClicked(null);
-         try {      
+        isRawatSmc();
+    }
+    
+    private void isRawatSmc() {
+        try {      
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
             try {
                 pscekbilling.setString(1,TNoRw.getText());
