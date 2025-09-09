@@ -19,6 +19,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -35,6 +37,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
     private final validasi Valid = new validasi();
     private final ObjectMapper mapper = new ObjectMapper();
     public String norawat = "", status = "", norm = "", tanggal1 = "", tanggal2 = "", keyword = "";
+    private int dx = 1, px = 1;
 
     /**
      * Creates new form panelDiagnosa
@@ -42,7 +45,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
     public PanelDiagnosaSMC() {
         initComponents();
         tabModeICD10 = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM"
+            "P", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -51,7 +54,15 @@ public class PanelDiagnosaSMC extends widget.panelisi {
 
             @Override
             public Class getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? java.lang.Boolean.class : java.lang.String.class;
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
+                }
+                
+                if (columnIndex == 7) {
+                    return java.lang.Integer.class;
+                }
+                
+                return java.lang.String.class;
             }
         };
         tbICD10.setModel(tabModeICD10);
@@ -68,10 +79,12 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         tbICD10.getColumnModel().getColumn(5).setMaxWidth(0);
         tbICD10.getColumnModel().getColumn(6).setMinWidth(0);
         tbICD10.getColumnModel().getColumn(6).setMaxWidth(0);
+        tbICD10.getColumnModel().getColumn(7).setMinWidth(0);
+        tbICD10.getColumnModel().getColumn(7).setMaxWidth(0);
         tbICD10.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeICD9CM = new DefaultTableModel(null, new Object[] {
-            "P", "Mtpx", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM"
+            "P", "Mtpx", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -84,7 +97,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
                     return java.lang.Boolean.class;
                 }
                 
-                if (columnIndex == 1) {
+                if (columnIndex == 1 || columnIndex == 8) {
                     return java.lang.Integer.class;
                 }
                 
@@ -106,6 +119,8 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         tbICD9CM.getColumnModel().getColumn(6).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(7).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(7).setMaxWidth(0);
+        tbICD9CM.getColumnModel().getColumn(8).setMinWidth(0);
+        tbICD9CM.getColumnModel().getColumn(8).setMaxWidth(0);
         tbICD9CM.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeDiagnosaPasien = new DefaultTableModel(null, new Object[] {
@@ -272,6 +287,12 @@ public class PanelDiagnosaSMC extends widget.panelisi {
 
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setOpaque(true);
+
+        tbICD10.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tbICD10PropertyChange(evt);
+            }
+        });
         Scroll1.setViewportView(tbICD10);
 
         FormData.add(Scroll1);
@@ -407,13 +428,15 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         if (tabModeICD9CM.getRowCount() > 0
             && evt.getPropertyName().equals("tableCellEditor")
             && (!tbICD9CM.isEditing())
+            && tbICD9CM.getSelectedColumn() == 0
         ) {
-            if (tbICD9CM.getSelectedColumn() == 0) {
-                if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0)) {
-                    tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
-                } else {
-                    tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
-                }
+            if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0)
+                && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
+            ) {
+                tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
+            } else {
+                tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
+                tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
             }
         }
     }//GEN-LAST:event_tbICD9CMPropertyChange
@@ -422,6 +445,19 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         pilihTab();
     }//GEN-LAST:event_TabRawatMouseClicked
 
+    private void tbICD10PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbICD10PropertyChange
+        if (tabModeICD10.getRowCount() > 0
+            && evt.getPropertyName().equals("tableCellEditor")
+            && (!tbICD10.isEditing())
+            && tbICD10.getSelectedColumn() == 0
+        ) {
+            if ((Boolean) tabModeICD10.getValueAt(tbICD10.getSelectedRow(), 0)
+                && !cekValiditasICD10(tbICD10.getSelectedRow())
+            ) {
+                tabModeICD10.setValueAt(false, tbICD10.getSelectedRow(), 0);
+            }
+        }
+    }//GEN-LAST:event_tbICD10PropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCariPenyakit;
@@ -447,7 +483,32 @@ public class PanelDiagnosaSMC extends widget.panelisi {
     private widget.Table tbICD9CM;
     private widget.Table tbProsedurPasien;
     // End of variables declaration//GEN-END:variables
+
+    private boolean cekValiditasICD10(int selectedRow) {
+        if (tabModeICD10.getValueAt(selectedRow, 3).toString().equals("0")) {
+            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!");
+            return false;
+        }
+        
+        if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1)
+            && tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")
+        ) {
+            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!");
+            return false;
+        }
+        
+        return true;
+    }
     
+    private boolean cekValiditasICD9CM(int selectedRow) {
+        if (tabModeICD9CM.getValueAt(selectedRow, 4).toString().equals("0")) {
+            JOptionPane.showMessageDialog(null, "Kode prosedur tidak bisa digunakan untuk coding..!!");
+            return false;
+        }
+        
+        return true;
+    }
+
     public void tampilDiagnosa() {
         Valid.tabelKosong(tabModeDiagnosaPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
@@ -522,22 +583,23 @@ public class PanelDiagnosaSMC extends widget.panelisi {
 
     private void tampilICD10IDRG(boolean pilihPertama) {
         try {
-            ArrayNode rows = mapper.createArrayNode();
-            ObjectNode row;
             ArrayList<String> icd = new ArrayList<>();
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
             
+            dx = 1;
             if (!Diagnosa.getText().isBlank()) {
-                for (int i = 0, p = 0; i < tabModeICD10.getRowCount(); i++) {
+                for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
                         icd.add((String) tabModeICD10.getValueAt(i, 1));
-                        row = mapper.createObjectNode();
-                        row.put("idx", p++);
+                        Map<String, Object> row = new HashMap<>();
+                        row.put("p", true);
                         row.put("code1", (String) tabModeICD10.getValueAt(i, 1));
                         row.put("deskripsi", (String) tabModeICD10.getValueAt(i, 2));
                         row.put("validcode", (String) tabModeICD10.getValueAt(i, 3));
                         row.put("accpdx", (String) tabModeICD10.getValueAt(i, 4));
                         row.put("asterisk", (String) tabModeICD10.getValueAt(i, 5));
                         row.put("im", (String) tabModeICD10.getValueAt(i, 6));
+                        row.put("urut", dx++);
                         rows.add(row);
                     }
                 }
@@ -548,8 +610,8 @@ public class PanelDiagnosaSMC extends widget.panelisi {
             Valid.tabelKosong(tabModeICD10);
             
             rows.forEach(r -> tabModeICD10.addRow(new Object[] {
-                true, r.path("code1").asText(""), r.path("deskripsi").asText(""), r.path("validcode").asText(""),
-                r.path("accpdx").asText(""), r.path("asterisk").asText(""), r.path("im").asText("")
+                r.get("p"), r.get("code1"), r.get("deskripsi"), r.get("validcode"),
+                r.get("accpdx"), r.get("asterisk"), r.get("im"), r.get("urut")
             }));
             
             try (PreparedStatement ps = koneksi.prepareStatement(
@@ -564,19 +626,22 @@ public class PanelDiagnosaSMC extends widget.panelisi {
                     ps.setString(++p, "%" + Diagnosa.getText().trim() + "%");
                 }
                 try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        if (icd.contains(rs.getString("code1"))) {
-                        } else {
-                            String deskripsi = rs.getString("deskripsi");
-                            if (rs.getString("asterisk").equals("1")) {
-                                deskripsi = "*" + deskripsi;
-                            }
+                    if (rs.next()) {
+                        do {
+                            if (icd.contains(rs.getString("code1"))) continue;
+                        
                             tabModeICD10.addRow(new Object[] {
-                                pilihPertama, rs.getString("code1"), deskripsi, rs.getString("validcode"),
-                                rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im")
+                                pilihPertama, rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"),
+                                rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im"), dx
                             });
-                            pilihPertama = false;
-                        }
+
+                            if (pilihPertama) {
+                                tabModeICD10.setValueAt(cekValiditasICD10(tabModeICD10.getRowCount() - 1), tabModeICD10.getRowCount() - 1, 0);
+                                pilihPertama = false;
+                            }
+                        } while (rs.next());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
                     }
                 }
             }
@@ -587,21 +652,22 @@ public class PanelDiagnosaSMC extends widget.panelisi {
     
     private void tampilICD9IDRG(boolean pilihPertama) {
         try {
-            ArrayNode rows = mapper.createArrayNode();
-            ObjectNode row;
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
             
+            px = 1;
             if (pilihPertama && !Prosedur.getText().isBlank()) {
-                for (int i = 0, p = 0; i < tabModeICD9CM.getRowCount(); i++) {
+                for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
-                        row = mapper.createObjectNode();
-                        row.put("idx", p++);
-                        row.put("mtpx", (Integer) tabModeICD9CM.getValueAt(i, 1));
-                        row.put("code1", (String) tabModeICD9CM.getValueAt(i, 2));
-                        row.put("deskripsi", (String) tabModeICD9CM.getValueAt(i, 3));
-                        row.put("validcode", (String) tabModeICD9CM.getValueAt(i, 4));
-                        row.put("accpdx", (String) tabModeICD9CM.getValueAt(i, 5));
-                        row.put("asterisk", (String) tabModeICD9CM.getValueAt(i, 6));
-                        row.put("im", (String) tabModeICD9CM.getValueAt(i, 7));
+                        Map<String, Object> row = new HashMap<>();
+                        row.put("p", true);
+                        row.put("mtpx", tabModeICD9CM.getValueAt(i, 1));
+                        row.put("code1", tabModeICD9CM.getValueAt(i, 2));
+                        row.put("deskripsi", tabModeICD9CM.getValueAt(i, 3));
+                        row.put("validcode", tabModeICD9CM.getValueAt(i, 4));
+                        row.put("accpdx", tabModeICD9CM.getValueAt(i, 5));
+                        row.put("asterisk", tabModeICD9CM.getValueAt(i, 6));
+                        row.put("im", tabModeICD9CM.getValueAt(i, 7));
+                        row.put("urut", px++);
                         rows.add(row);
                     }
                 }
@@ -612,10 +678,9 @@ public class PanelDiagnosaSMC extends widget.panelisi {
             Valid.tabelKosong(tabModeICD9CM);
             
             rows.forEach(r -> tabModeICD9CM.addRow(new Object[] {
-                true, r.path("mtpx").asInt(1), r.path("code1").asText(""),
-                r.path("deskripsi").asText(""), r.path("validcode").asText(""),
-                r.path("accpdx").asText(""), r.path("asterisk").asText(""),
-                r.path("im").asText("")
+                r.get("p"), r.get("mtpx"), r.get("code1"), r.get("deskripsi"),
+                r.get("validcode"), r.get("accpdx"), r.get("asterisk"),
+                r.get("im"), r.get("urut")
             }));
             
             try (PreparedStatement ps = koneksi.prepareStatement(
@@ -629,12 +694,20 @@ public class PanelDiagnosaSMC extends widget.panelisi {
                     ps.setString(++p, "%" + Prosedur.getText().trim() + "%");
                 }
                 try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        tabModeICD9CM.addRow(new Object[] {
-                            pilihPertama, (pilihPertama ? 1 : 0), rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"),
-                            rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im")
-                        });
-                        pilihPertama = false;
+                    if (rs.next()) {
+                        do {
+                            tabModeICD9CM.addRow(new Object[] {
+                                pilihPertama, (pilihPertama ? 1 : 0), rs.getString("code1"), rs.getString("deskripsi"),
+                                rs.getString("validcode"), rs.getString("accpdx"), rs.getString("asterisk"), rs.getString("im"), px
+                            });
+
+                            if (pilihPertama) {
+                                tabModeICD9CM.setValueAt(cekValiditasICD9CM(tabModeICD9CM.getRowCount() - 1), tabModeICD9CM.getRowCount() - 1, 0);
+                                pilihPertama = false;
+                            }
+                        } while (rs.next());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
                     }
                 }
             }

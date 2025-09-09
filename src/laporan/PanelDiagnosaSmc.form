@@ -212,6 +212,9 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="widget.Table" name="tbICD10">
+                      <Events>
+                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="tbICD10PropertyChange"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
