@@ -6345,13 +6345,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }
 
     private void jam2() {
-        ActionListener taskPerformer = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Date now = Calendar.getInstance().getTime();
-                if (waktu) {
-                    DTPTgl.setDate(now);
-                }
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            if (waktu) {
+                DTPTgl.setDate(Calendar.getInstance().getTime());
             }
         };
         new Timer(1000, taskPerformer).start();
