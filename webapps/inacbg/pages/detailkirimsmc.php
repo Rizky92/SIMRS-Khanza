@@ -94,12 +94,12 @@
                             Tambah3('inacbg_noklaim_corona', "'$norawat', '$nosep'");
                         }
                     }
-                    
+
                     $naikkelas = getOne("select klsnaik from bridging_sep where no_rawat = '$norawat'");
                     if (empty($naikkelas)) {
                         $naikkelas = getOne("select klsnaik from bridging_sep_internal where no_rawat = '$norawat'");
                     }
-                    
+
                     $upgrade_class_ind = '0';
                     if (! empty($naikkelas)) {
                         $upgrade_class_ind = '1';
@@ -171,17 +171,17 @@
                             <td width="25%">Tgl. Registrasi</td>
                             <td>:</td>
                             <td width="75%"><?= $tgl_registrasi.' '.$jam_reg ?></td>
-                        </tr>   
+                        </tr>
                         <tr class="head">
                             <td width="25%">Poliklinik</td>
                             <td>:</td>
                             <td width="75%"><?= $nm_poli ?></td>
-                        </tr> 
+                        </tr>
                         <tr class="head">
                             <td width="25%">Dokter</td>
                             <td>:</td>
                             <td width="75%"><?= $nm_dokter ?></td>
-                        </tr> 
+                        </tr>
                         <tr class="head">
                             <td width="25%">Status</td>
                             <td>:</td>
@@ -283,7 +283,7 @@
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
                                         <?php endforeach; ?>
                                         <option value=""></option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -295,7 +295,7 @@
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
                                         <?php endforeach; ?>
                                         <option value=""></option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -307,7 +307,7 @@
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
                                         <?php endforeach; ?>
                                         <option value=""></option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head"><td colspan="3"><hr></td></tr>
@@ -327,7 +327,7 @@
                                             <option value="2">Kelas 2</option>
                                             <option value="3">Kelas 3</option>
                                         <?php endif; ?>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <?php if ($status_lanjut == 'Ranap'): ?>
@@ -340,7 +340,7 @@
                                             <?php for ($i = 12; $i <= 60; $i++): ?>
                                                 <option value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor; ?>
-                                        </select> 
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -352,7 +352,7 @@
                                             <?php for ($i = 12; $i <= 60; $i++): ?>
                                                 <option value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor; ?>
-                                        </select> 
+                                        </select>
                                     </td>
                                 </tr>
                                 <?php
@@ -369,7 +369,7 @@
                                         <select name="icu_indikator" class="text3" style="font-family: Tahoma">
                                             <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
                                             <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
-                                        </select> 
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -401,7 +401,7 @@
                                         <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -414,7 +414,7 @@
                                         <option value="kelas_2">Kelas 2</option>
                                         <option value="vip">Kelas VIP</option>
                                         <option value="vvip">Kelas VVIP</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -485,7 +485,7 @@
                                         <option value="3">Atas permintaan sendiri</option>
                                         <option value="4">Meninggal</option>
                                         <option value="5">Lain-lain</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -493,19 +493,14 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $penyakit = '';
-                                        $a = 1;
-                                        $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                        while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
-                                            if ($a == 1) {
-                                                $penyakit = $barispenyakit['kd_penyakit'];
-                                            } else {
-                                                $penyakit .= '#'.$barispenyakit['kd_penyakit'];
-                                            }
-                                            $a++;
+                                        $icd10_idrg = '';
+                                        $query_icd10_idrg = bukaquery("select idrg_diagnosa_pasien_smc.kode_icd10 from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = '$nosep' order by idrg_diagnosa_pasien_smc.urut");
+                                        while ($barispenyakit = mysqli_fetch_array($query_icd10_idrg)) {
+                                            $icd10_idrg .= $barispenyakit['kode_icd10'].'#';
                                         }
+                                        $icd10_idrg = substr($icd10_idrg, 0, -1);
                                     ?>
-                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
+                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icd10_idrg ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -513,19 +508,18 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $prosedur = '';
-                                        $a = 1;
-                                        $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                        while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
-                                            if ($a == 1) {
-                                                $prosedur = $barisprosedur['kode'];
+                                        $icd9_idrg = '';
+                                        $query_icd9_idrg = bukaquery("select idrg_prosedur_pasien_smc.kode_icd9, idrg_prosedur_pasien_smc.multiplicity, idrg_prosedur_pasien_smc.urut from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = '$nosep' order by idrg_prosedur_pasien_smc.urut");
+                                        while ($barisprosedur = mysqli_fetch_array($query_icd9_idrg)) {
+                                            if ($barisprosedur['multiplicity'] > 1) {
+                                                $icd9_idrg .= $barisprosedur['kode_icd9'].'+'.$barisprosedur['multiplicity'].'#';
                                             } else {
-                                                $prosedur .= '#'.$barisprosedur['kode'];
+                                                $icd9_idrg .= $barisprosedur['kode_icd9'].'#';
                                             }
-                                            $a++;
                                         }
+                                        $icd9_idrg = substr($icd9_idrg, 0, -1);
                                     ?>
-                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
+                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $icd9_idrg; ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -547,7 +541,7 @@
                                 </td>
                             </tr>
                             <?php
-                                $querybilling = bukaquery("select 
+                                $querybilling = bukaquery("select
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Operasi') as prosedur_bedah,
                                     (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter', 'Ranap Dokter')) as konsultasi,
@@ -805,16 +799,16 @@
                             </tr>
                             <?php if ($corona == 'PasienCorona'): ?>
                                 <?php $hasilcorona = bukaquery("select
-                                    pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah, 
-                                    kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah, 
-                                    peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,  
-                                    plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,  
-                                    desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,   
-                                    mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,    
-                                    desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,  
-                                    covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd, 
-                                    nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6, 
-                                    covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind 
+                                    pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah,
+                                    kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah,
+                                    peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,
+                                    plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,
+                                    desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,
+                                    mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,
+                                    desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,
+                                    covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd,
+                                    nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6,
+                                    covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind
                                     from perawatan_corona where no_rawat = '$norawat'"
                                 ); ?>
                                 <?php while ($bariscorona = mysqli_fetch_array($hasilcorona)): ?>
@@ -826,7 +820,7 @@
                                                 <option value="<?= $bariscorona['ytpemulasaraan_jenazah'] ?>"><?= $bariscorona['pemulasaraan_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -837,7 +831,7 @@
                                                 <option value="<?= $bariscorona['ytkantong_jenazah'] ?>"><?= $bariscorona['kantong_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -848,7 +842,7 @@
                                                 <option value="<?= $bariscorona['ytpeti_jenazah'] ?>"><?= $bariscorona['peti_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -859,7 +853,7 @@
                                                 <option value="<?= $bariscorona['ytplastik_erat'] ?>"><?= $bariscorona['plastik_erat'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -870,7 +864,7 @@
                                                 <option value="<?= $bariscorona['ytdesinfektan_jenazah'] ?>"><?= $bariscorona['desinfektan_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -881,7 +875,7 @@
                                                 <option value="<?= $bariscorona['ytmobil_jenazah'] ?>"><?= $bariscorona['mobil_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -892,7 +886,7 @@
                                                 <option value="<?= $bariscorona['ytdesinfektan_mobil_jenazah'] ?>"><?= $bariscorona['desinfektan_mobil_jenazah'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -904,7 +898,7 @@
                                                 <option value="1">ODP</option>
                                                 <option value="2">PDP</option>
                                                 <option value="3">Positif</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr class="head">
@@ -964,7 +958,7 @@
                                                 <option value="<?= $bariscorona['ytcovid19_cc_ind'] ?>"><?= $bariscorona['covid19_cc_ind'] ?></option>
                                                 <option value="1">Ya</option>
                                                 <option value="0">Tidak</option>
-                                            </select> 
+                                            </select>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -974,7 +968,7 @@
                 </div>
                 <?php
                     $BtnSimpan = $_POST['BtnSimpan'] ?? null;
-                    
+
                     if (isset($BtnSimpan)) {
                         $validasi = 0;
                         if ($action == 'stage2') {
@@ -1094,8 +1088,8 @@
                                 // $episodes6                  = validTeks(trim($_POST['episodes6']));
                                 // $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
                                 // $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
-                                // $episodes                   = substr($episodes, 0, -1); 
-                                
+                                // $episodes                   = substr($episodes, 0, -1);
+
                                 // if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
                                 //     BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
                                 //     EditUlangKlaim($nosep);
@@ -1172,7 +1166,7 @@
                             echo 'Total billing tidak sesuai dengan billing pasien!';
                         }
                     }
-                ?>         
+                ?>
             </div>
             <div align="center">
                 <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM">

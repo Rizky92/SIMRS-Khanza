@@ -1764,15 +1764,42 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 ps.setString(1, lblNoRawat.getText());
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
-                        String pemeriksaan = rs.getString("nm_perawatan")
-                            + (rs.getString("proyeksi") == null || rs.getString("proyeksi").isBlank() ? "" : " dengan Proyeksi : " + rs.getString("proyeksi"))
-                            + (rs.getString("kV") == null || rs.getString("kV").isBlank() ? "" : ", kV : " + rs.getString("kV"))
-                            + (rs.getString("mAS") == null || rs.getString("mAS").isBlank() ? "" : ", mAS : " + rs.getString("mAS"))
-                            + (rs.getString("FFD") == null || rs.getString("FFD").isBlank() ? "" : ", FFD : " + rs.getString("FFD"))
-                            + (rs.getString("BSF") == null || rs.getString("BSF").isBlank() ? "" : ", BSF : " + rs.getString("BSF"))
-                            + (rs.getString("Inak") == null || rs.getString("Inak").isBlank() ? "" : ", Inak : " + rs.getString("Inak"))
-                            + (rs.getString("jml_penyinaran") == null || rs.getString("jml_penyinaran").isBlank() ? "" : ", Jumlah penyinaran : " + rs.getString("jml_penyinaran"))
-                            + (rs.getString("dosis") == null || rs.getString("dosis").isBlank() ? "" : ", Dosis Radiasi : " + rs.getString("dosis"));
+                        StringBuilder sb = new StringBuilder();
+                        
+                        sb.append(rs.getString("nm_perawatan"));
+                        
+                        if (rs.getString("proyeksi") != null && rs.getString("proyeksi").trim().length() > 0) {
+                            sb.append(" dengan proyeksi : ").append(rs.getString("proyeksi"));
+                        }
+                        
+                        if (rs.getString("kV") != null && rs.getString("kV").trim().length() > 0) {
+                            sb.append(", kV : ").append(rs.getString("kV"));
+                        }
+                        
+                        if (rs.getString("mAS") != null && rs.getString("mAS").trim().length() > 0) {
+                            sb.append(", mAS : ").append(rs.getString("mAS"));
+                        }
+
+                        if (rs.getString("FFD") != null && rs.getString("FFD").trim().length() > 0) {
+                            sb.append(", FFD : ").append(rs.getString("FFD"));
+                        }
+
+                        if (rs.getString("BSF") != null && rs.getString("BSF").trim().length() > 0) {
+                            sb.append(", BSF : ").append(rs.getString("BSF"));
+                        }
+
+                        if (rs.getString("Inak") != null && rs.getString("Inak").trim().length() > 0) {
+                            sb.append(", Inak : ").append(rs.getString("Inak"));
+                        }
+
+                        if (rs.getString("jml_penyinaran") != null && rs.getString("jml_penyinaran").trim().length() > 0) {
+                            sb.append(", Jumlah penyinaran : ").append(rs.getString("jml_penyinaran"));
+                        }
+
+                        if (rs.getString("dosis") != null && rs.getString("dosis").trim().length() > 0) {
+                            sb.append(", Dosis Radiasi : ").append(rs.getString("dosis"));
+                        }
+
                         Map<String, Object> param = new HashMap<>();
                         param.put("noperiksa", lblNoRawat.getText());
                         param.put("norm", lblNoRM.getText());
@@ -1804,7 +1831,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         }
                         param.put("kamar", kamar);
                         param.put("namakamar", namaKamar);
-                        param.put("pemeriksaan", pemeriksaan);
+                        param.put("pemeriksaan", sb.toString());
                         param.put("jam", rs.getString("jam"));
                         param.put("namars", akses.getnamars());
                         param.put("alamatrs", akses.getalamatrs());
@@ -2875,7 +2902,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSPRI, false);
                 flipStatus(btnSurkon, false);
             }
-            panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText());
+            panelDiagnosaSmc.setRM(lblNoSEP.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText());
             //panelDiagnosaSmc.batal();
             panelDiagnosaSmc.tampilICD();
             tampilINACBG();
