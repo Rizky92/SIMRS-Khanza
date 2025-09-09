@@ -283,6 +283,9 @@
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="tbICD9CMPropertyChange"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

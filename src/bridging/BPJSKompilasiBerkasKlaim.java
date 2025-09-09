@@ -2876,8 +2876,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSurkon, false);
             }
             panelDiagnosaSmc.setRM(lblNoRawat.getText(), lblNoRM.getText(), Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), lblStatusRawat.getText());
-            panelDiagnosaSmc.batal();
-            panelDiagnosaSmc.pilihTab(0);
+            //panelDiagnosaSmc.batal();
+            panelDiagnosaSmc.tampilICD();
             tampilINACBG();
             tampilBilling();
         }
