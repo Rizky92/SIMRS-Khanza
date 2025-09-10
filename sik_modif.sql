@@ -23,18 +23,6 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `antriloketfarmasi_smc`  (
-  `nomor` varchar(6) NOT NULL,
-  `tanggal` date NOT NULL,
-  `jam` time NULL DEFAULT NULL,
-  `jam_panggil` time NULL DEFAULT NULL,
-  `no_resep` varchar(14) NULL DEFAULT NULL,
-  PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
-  INDEX `antriloketfarmasi_smc_jam_IDX`(`jam`) USING BTREE,
-  INDEX `antriloketfarmasi_smc_tanggal_IDX`(`tanggal`) USING BTREE,
-  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
@@ -47,6 +35,18 @@ CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   INDEX `antriloketcetak_smc_tanggal_IDX`(`tanggal`) USING BTREE,
   INDEX `antriloketcetak_smc_no_rawat_IDX`(`no_rawat`) USING BTREE,
   INDEX `antriloketcetak_smc_no_rkm_medis_IDX`(`no_rkm_medis`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `antriloketfarmasi_smc`  (
+  `nomor` varchar(6) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` time NULL DEFAULT NULL,
+  `jam_panggil` time NULL DEFAULT NULL,
+  `no_resep` varchar(14) NULL DEFAULT NULL,
+  PRIMARY KEY (`tanggal`, `nomor`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_jam_IDX`(`jam`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_tanggal_IDX`(`tanggal`) USING BTREE,
+  INDEX `antriloketfarmasi_smc_no_resep_IDX`(`no_resep`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
@@ -137,6 +137,8 @@ ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NOT NULL AFTER `id_template`;
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
+
+ALTER TABLE `detailjurnal` ADD INDEX IF NOT EXISTS `detailjurnal_no_jurnal_kd_rek_idx`(`no_jurnal`, `kd_rek`) USING BTREE;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
 
@@ -1078,6 +1080,12 @@ ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','B
 
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;
 
+ALTER TABLE `resep_obat` ADD INDEX IF NOT EXISTS `idx_resep_obat_peresepan_status_dokter_perawatan`(`tgl_peresepan`, `status`, `kd_dokter`, `tgl_perawatan`) USING BTREE;
+
+ALTER TABLE `resep_obat` ADD INDEX IF NOT EXISTS `idx_peresepan_desc`(`tgl_peresepan`, `jam_peresepan`) USING BTREE;
+
+ALTER TABLE `resep_obat` ADD INDEX IF NOT EXISTS `idx_nama_template`(`nama_template`) USING BTREE;
+
 ALTER TABLE `resiko_kerja` MODIFY COLUMN IF EXISTS `nama_resiko` varchar(200) NULL DEFAULT NULL AFTER `kode_resiko`;
 
 ALTER TABLE `resume_pasien` MODIFY COLUMN IF EXISTS `diagnosa_utama` varchar(200) NOT NULL AFTER `hasil_laborat`;
@@ -1244,8 +1252,6 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` v
 ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
-
-ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `no_surat` varchar(20) NOT NULL FIRST;
 
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `hubungan` enum('Suami','Istri','Anak','Ayah','Ibu','Saudara','Keponakan') NOT NULL AFTER `alamat`;
 
