@@ -228,7 +228,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     private WarnaTable2 warna2=new WarnaTable2();
     private String[] Nama_Akun_Piutang,Kode_Rek_Piutang,Kd_PJ,Besar_Piutang,Jatuh_Tempo,
             Nama_Akun_Bayar,Kode_Rek_Bayar,Bayar,PPN_Persen,PPN_Besar;
-    private boolean sukses=false, waktu = false;
+    private boolean sukses=false, waktu = true;
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
