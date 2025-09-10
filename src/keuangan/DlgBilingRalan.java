@@ -3110,16 +3110,18 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         Valid.hapusTable(tabModeRwJlDr,TNoRw,"billing","no_rawat");
                         Valid.hapusTable(tabModeRwJlDr,TNoRw,"tagihan_sadewa","no_nota");
                         Sequel.Commit();
+                    }else{
+                        Sequel.RollBack();
+                    }
+                    Sequel.AutoComitTrue();
+                    if (sukses) {
                         JOptionPane.showMessageDialog(rootPane,"Proses hapus data Nota Salah selesai..!!");
                         Valid.tabelKosong(tabModeAkunBayar);
                         Valid.tabelKosong(tabModeAkunPiutang);
                         isRawat();
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
                     }
-
-                    Sequel.AutoComitTrue();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else if(i<=0){
@@ -5963,6 +5965,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void isSimpan(){
         waktu = false;
+        DTPTgl.setDate(Calendar.getInstance().getTime());
         if(notaralan.equals("Yes")){
             chkLaborat.setSelected(true);
             chkRadiologi.setSelected(true);
@@ -5974,7 +5977,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             chkTarifDokter.setSelected(true);
             chkTarifPrm.setSelected(true);
             isRawat2();
-            BtnNotaActionPerformed(null);
         }
 
         if((chkLaborat.isSelected()==false)||(chkRadiologi.isSelected()==false)){
@@ -6325,19 +6327,22 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"status_bayar='Sudah Bayar'");
                     Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
                     Sequel.Commit();
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-
                 if(sukses==true){
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                     if(notaralan.equals("Yes")){
+                        BtnNotaActionPerformed(null);
                         this.dispose();
                     }
+                } else {
+                    waktu = true;
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
             }catch (Exception ex) {
+                waktu = true;
                 System.out.println("Notifikasi : "+ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Data yang sama dimasukkan sebelumnya...!");
             }
