@@ -3041,7 +3041,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),hargacari,h_belicari,
                                             rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
-                                            rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
+                                            rs2.getDouble("jml"),embalase,tuslah,rs2.getString("nama_industri"),rs2.getString("kategori"),
                                             rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,false,0,""
                                         });
                                         cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
@@ -3100,7 +3100,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),rs2.getDouble("harga"),rs2.getDouble("dasar"),
                                             rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
-                                            rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
+                                            rs2.getDouble("jml"),embalase,tuslah,rs2.getString("nama_industri"),rs2.getString("kategori"),
                                             rs2.getString("golongan"),"","","", false, 0, ""
                                         });
                                         cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
@@ -3177,7 +3177,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),hargacari,h_belicari,
                                             rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
-                                            rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
+                                            rs2.getDouble("jml"),embalase,tuslah,rs2.getString("nama_industri"),rs2.getString("kategori"),
                                             rs2.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari, false, 0, ""
                                         });
                                         cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
@@ -3241,7 +3241,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                             rsobat.getString("no_racik"),rs2.getString("kode_brng"),rs2.getString("nama_brng"),
                                             rs2.getString("kode_sat"),rs2.getDouble(kolomHarga),rs2.getDouble("dasar"),
                                             rs2.getString("jenis"),sisacari,rs2.getDouble("kapasitas"),rs2.getString("kandungan"),
-                                            rs2.getDouble("jml"),0,0,rs2.getString("nama_industri"),rs2.getString("kategori"),
+                                            rs2.getDouble("jml"),embalase,tuslah,rs2.getString("nama_industri"),rs2.getString("kategori"),
                                             rs2.getString("golongan"),"","","", false, 0, ""
                                         });
                                         cekObatKronisRacikan(tbDetailObatRacikan.getRowCount() - 1, rs2.getString("kode_brng"), rs2.getString("nama_brng"));
@@ -3751,7 +3751,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         tabModeDetailObatRacikan.addRow(new Object[] {
                             tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                             list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
-                            list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,0,0,
+                            list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,embalase,tuslah,
                             list.path("IndustriFarmasi").asText(),list.path("Kategori").asText(),list.path("Golongan").asText(),list.path("NoBatch").asText(),
                             list.path("NoFaktur").asText(),list.path("Kadaluarsa").asText(), false, 0, ""
                         });
@@ -3762,7 +3762,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             tabModeDetailObatRacikan.addRow(new Object[] {
                                 tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                 list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
-                                list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,0,0,
+                                list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,embalase,tuslah,
                                 list.path("IndustriFarmasi").asText(),list.path("Kategori").asText(),list.path("Golongan").asText(),list.path("NoBatch").asText(),
                                 list.path("NoFaktur").asText(),list.path("Kadaluarsa").asText(), false, 0, ""
                             });
