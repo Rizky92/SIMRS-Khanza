@@ -74,13 +74,17 @@ ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tang
 
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
 
-ALTER TABLE `bridging_sep` ADD COLUMN IF NOT EXISTS `esep` enum('0','1') NULL DEFAULT NULL AFTER `nmdpjplayanan`;
-
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp`) USING BTREE;
+
+CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
+  `no_sep` varchar(40) NOT NULL,
+  `tgl_simpan` DATETIME NOT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_input` varchar(10) NULL DEFAULT '0' AFTER `nip`;
 
