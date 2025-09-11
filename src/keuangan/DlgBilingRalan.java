@@ -59,7 +59,7 @@ import simrskhanza.DlgTagihanOperasi;
 public class DlgBilingRalan extends javax.swing.JDialog {
     private DefaultTableModel tabModeRwJlDr;
     private final DefaultTableModel tabModeTambahan,tabModePotongan,tabModeAkunBayar,tabModeAkunPiutang,tabModeLab,tabModeRad,tabModeApotek;
-    private boolean sukses=false, waktu=false;
+    private boolean sukses=false, waktu=true;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
@@ -2836,11 +2836,11 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             try {
                                 switch (tbBilling.getValueAt(tbBilling.getSelectedRow(),8).toString()) {
                                     case "Laborat":
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf, untuk tambahan/potongan laborat gunakan pada Tambahan/Potongan Biaya");
+                                        JOptionPane.showMessageDialog(null,"Maaf, untuk tambahan/potongan laborat gunakan pada Tambahan/Potongan Biaya");
                                         isRawat();
                                         break;
                                     case "Obat":
-                                        JOptionPane.showMessageDialog(rootPane,"Maaf, untuk tambahan potongan obat hanya bisa diisi embalase.\nGunakan Tambahan Biaya jika ingin tambahan lain");
+                                        JOptionPane.showMessageDialog(null,"Maaf, untuk tambahan potongan obat hanya bisa diisi embalase.\nGunakan Tambahan Biaya jika ingin tambahan lain");
                                         isRawat();
                                         break;
                                     default:
@@ -3110,20 +3110,22 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         Valid.hapusTable(tabModeRwJlDr,TNoRw,"billing","no_rawat");
                         Valid.hapusTable(tabModeRwJlDr,TNoRw,"tagihan_sadewa","no_nota");
                         Sequel.Commit();
-                        JOptionPane.showMessageDialog(rootPane,"Proses hapus data Nota Salah selesai..!!");
+                    }else{
+                        Sequel.RollBack();
+                    }
+                    Sequel.AutoComitTrue();
+                    if (sukses) {
+                        JOptionPane.showMessageDialog(null,"Proses hapus data Nota Salah selesai..!!");
                         Valid.tabelKosong(tabModeAkunBayar);
                         Valid.tabelKosong(tabModeAkunPiutang);
                         isRawat();
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
                     }
-
-                    Sequel.AutoComitTrue();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }else if(i<=0){
-                JOptionPane.showMessageDialog(rootPane,"Data belum pernah disimpan/diverifikasi.\nTidak perlu ada penghapusan data salah..!!");
+                JOptionPane.showMessageDialog(null,"Data belum pernah disimpan/diverifikasi.\nTidak perlu ada penghapusan data salah..!!");
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
@@ -3146,7 +3148,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void MnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDokterActionPerformed
         if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-            JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
+            JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi..!!");
         }else{
             WindowGantiDokterPoli.setSize(630,80);
             WindowGantiDokterPoli.setLocationRelativeTo(internalFrame1);
@@ -3262,7 +3264,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void MnTambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnTambahanActionPerformed
         if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-            JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
+            JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi..!!");
         }else{
             norawat.setText(TNoRw.getText());
             tampilTambahan(norawat.getText());
@@ -3399,7 +3401,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void MnPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPotonganActionPerformed
         if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-            JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+            JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
         }else{
             norawatpotongan.setText(TNoRw.getText());
             tampilPotongan(norawatpotongan.getText());
@@ -3415,7 +3417,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgPeriksaLaboratorium periksalab=new DlgPeriksaLaboratorium(null,false);
                 periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
@@ -3525,7 +3527,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             TNoRw.requestFocus();
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgCariObat dlgobt=new DlgCariObat(null,false);
                 dlgobt.emptTeksobat();
@@ -3546,7 +3548,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             TNoRw.requestFocus();
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
             }else{
                 akses.setform("DlgBilingRalan");
                 kdptg=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
@@ -3584,7 +3586,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi..!!");
             }else{
                 DlgPeriksaRadiologi periksalab=new DlgPeriksaRadiologi(null,false);
                 periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
@@ -3904,7 +3906,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgPeriksaLaboratoriumPA periksalab=new DlgPeriksaLaboratoriumPA(null,false);
                 periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
@@ -4022,7 +4024,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
         }else{
             if(Sequel.cariRegistrasi(TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
+                JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi ..!!");
             }else{
                 DlgPeriksaLaboratoriumMB periksalab=new DlgPeriksaLaboratoriumMB(null,false);
                 periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
@@ -5963,6 +5965,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void isSimpan(){
         waktu = false;
+        DTPTgl.setDate(Calendar.getInstance().getTime());
         if(notaralan.equals("Yes")){
             chkLaborat.setSelected(true);
             chkRadiologi.setSelected(true);
@@ -5974,7 +5977,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             chkTarifDokter.setSelected(true);
             chkTarifPrm.setSelected(true);
             isRawat2();
-            BtnNotaActionPerformed(null);
         }
 
         if((chkLaborat.isSelected()==false)||(chkRadiologi.isSelected()==false)){
@@ -6325,19 +6327,22 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"status_bayar='Sudah Bayar'");
                     Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
                     Sequel.Commit();
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-
                 if(sukses==true){
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                     if(notaralan.equals("Yes")){
+                        BtnNotaActionPerformed(null);
                         this.dispose();
                     }
+                } else {
+                    waktu = true;
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
             }catch (Exception ex) {
+                waktu = true;
                 System.out.println("Notifikasi : "+ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Data yang sama dimasukkan sebelumnya...!");
             }
