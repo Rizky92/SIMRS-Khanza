@@ -1188,7 +1188,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         Suhu.setText("");
         Keperluan.setText("");
         TanggalSurat.setDate(new Date());
-        CmbButaWarna.setSelectedItem("Tidak");2
+        CmbButaWarna.setSelectedItem("Tidak");
         CmbKesimpulan.setSelectedItem("Sehat");
         Valid.autonomorSmc(NoSurat, "SKD", "", "surat_keterangan_sehat", "no_surat", 3, "0", TanggalSurat);
         NoSurat.requestFocus();

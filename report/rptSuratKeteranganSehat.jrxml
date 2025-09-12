@@ -409,6 +409,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box bottomPadding="2"/>
 				<textElement>
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
@@ -742,7 +743,7 @@
 		<band height="15" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="495" height="15" uuid="8df23153-f161-4c1b-b973-a1852c2e489c">
+				<reportElement positionType="Float" x="0" y="0" width="495" height="15" uuid="8df23153-f161-4c1b-b973-a1852c2e489c">
 					<property name="com.jaspersoft.layout.grid.x" value="0"/>
 					<property name="com.jaspersoft.layout.grid.y" value="10"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
@@ -794,8 +795,8 @@
 					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
 				</jr:QRCode>
 			</componentElement>
-			<textField>
-				<reportElement x="310" y="120" width="185" height="15" uuid="816320f6-7c29-4933-b34e-e68305a2256d">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="310" y="120" width="185" height="15" uuid="816320f6-7c29-4933-b34e-e68305a2256d">
 					<property name="com.jaspersoft.layout.grid.x" value="7"/>
 					<property name="com.jaspersoft.layout.grid.y" value="14"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
