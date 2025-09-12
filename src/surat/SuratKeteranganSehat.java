@@ -217,6 +217,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         MnCetakSuratSehat1.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSehat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnCetakSuratSehat1.setText("Cetak Surat Sehat 2");
+        MnCetakSuratSehat1.setEnabled(false);
         MnCetakSuratSehat1.setName("MnCetakSuratSehat1"); // NOI18N
         MnCetakSuratSehat1.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCetakSuratSehat1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +268,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -285,7 +285,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -303,7 +302,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -321,7 +319,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -339,7 +336,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -357,7 +353,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -375,7 +370,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnAll);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -440,7 +434,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('3');
         BtnCari.setToolTipText("Alt+3");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -631,7 +624,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         FormInput.add(jLabel28);
         jLabel28.setBounds(527, 70, 75, 23);
 
-        CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya", "-" }));
+        CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Tidak", "Ya" }));
         CmbButaWarna.setName("CmbButaWarna"); // NOI18N
         CmbButaWarna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -678,7 +671,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
         ChkInput.setText(".: Input Data");
         ChkInput.setToolTipText("Alt+I");
         ChkInput.setBorderPainted(true);
