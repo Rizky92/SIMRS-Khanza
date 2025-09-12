@@ -217,6 +217,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         MnCetakSuratSehat1.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSehat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnCetakSuratSehat1.setText("Cetak Surat Sehat 2");
+        MnCetakSuratSehat1.setEnabled(false);
         MnCetakSuratSehat1.setName("MnCetakSuratSehat1"); // NOI18N
         MnCetakSuratSehat1.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCetakSuratSehat1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +268,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -285,7 +285,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -303,7 +302,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -321,7 +319,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -339,7 +336,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -357,7 +353,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -375,7 +370,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass8.add(BtnAll);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -404,7 +398,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2021" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -418,7 +412,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2021" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -440,7 +434,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('3');
         BtnCari.setToolTipText("Alt+3");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -631,7 +624,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         FormInput.add(jLabel28);
         jLabel28.setBounds(527, 70, 75, 23);
 
-        CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
+        CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Tidak", "Ya" }));
         CmbButaWarna.setName("CmbButaWarna"); // NOI18N
         CmbButaWarna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -652,14 +645,14 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         CmbKesimpulan.setBounds(606, 70, 114, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-04-2021" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
         TanggalSurat.setPreferredSize(new java.awt.Dimension(141, 18));
-        TanggalSurat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TanggalSuratActionPerformed(evt);
+        TanggalSurat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalSuratItemStateChanged(evt);
             }
         });
         TanggalSurat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -678,7 +671,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
         ChkInput.setText(".: Input Data");
         ChkInput.setToolTipText("Alt+I");
         ChkInput.setBorderPainted(true);
@@ -984,10 +976,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
        }
     }//GEN-LAST:event_MnCetakSuratSehatActionPerformed
 
-    private void TanggalSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TanggalSuratActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TanggalSuratActionPerformed
-
     private void TanggalSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalSuratKeyPressed
         Valid.pindah(evt,TCari,Keperluan);
     }//GEN-LAST:event_TanggalSuratKeyPressed
@@ -1052,6 +1040,10 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     private void CmbKesimpulanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbKesimpulanKeyPressed
         Valid.pindah(evt,Keperluan,BtnSimpan);
     }//GEN-LAST:event_CmbKesimpulanKeyPressed
+
+    private void TanggalSuratItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalSuratItemStateChanged
+        Valid.autonomorSmc(NoSurat, "SKD", "", "surat_keterangan_sehat", "no_surat", 3, "0", TanggalSurat);
+    }//GEN-LAST:event_TanggalSuratItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -1182,7 +1174,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         TNoRw.setText("");
         TNoRM.setText("");
         TPasien.setText("");
-        NoSurat.setText("");
         Bb.setText("");
         Tb.setText("");
         Tensi.setText("");
@@ -1191,8 +1182,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         TanggalSurat.setDate(new Date());
         CmbButaWarna.setSelectedItem("Tidak");
         CmbKesimpulan.setSelectedItem("Sehat");
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_keterangan_sehat.no_surat,3),signed)),0) from surat_keterangan_sehat where surat_keterangan_sehat.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-                "SKD"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),3,NoSurat);
+        Valid.autonomorSmc(NoSurat, "SKD", "", "surat_keterangan_sehat", "no_surat", 3, "0", TanggalSurat);
         NoSurat.requestFocus();
     }
 
