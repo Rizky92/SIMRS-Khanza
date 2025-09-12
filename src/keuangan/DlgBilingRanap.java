@@ -2080,7 +2080,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2023 07:41:51" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025 08:35:49" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -4608,7 +4608,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         if(ChkPiutang.isSelected()==false){
             ppBersihkanPiutangActionPerformed(null);
         }
-        isRawat();
+        isRawatSmc();
     }//GEN-LAST:event_ChkPiutangItemStateChanged
 
     private void MnPeriksaLabMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabMBActionPerformed
@@ -5012,7 +5012,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
                     umurdaftar=rsreg.getString("umurdaftar")+rsreg.getString("sttsumur");
                     tgl_registrasi=rsreg.getString("tgl_registrasi");
-                    DTPTgl.setDate(new Date());
                     tabModeRwJlDr.addRow(new Object[]{true,"Tgl.Perawatan",": "+rsreg.getString("registrasi")+" s.d. "+rsreg.getString("keluar")+" ( "+rsreg.getString("lama")+" Hari )","",null,null,null,null,"-"});
 
                     norawatbayi="";
@@ -7173,7 +7172,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
 
     private void isSimpan() {
         waktu = false;
-        DTPTgl.setDate(Calendar.getInstance().getTime());
+        DTPTgl.setDate(Sequel.cariTglSmc("select now()"));
         try {
             try {
                 Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());

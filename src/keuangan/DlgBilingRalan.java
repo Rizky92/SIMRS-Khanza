@@ -5965,7 +5965,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
     private void isSimpan(){
         waktu = false;
-        DTPTgl.setDate(Calendar.getInstance().getTime());
+        DTPTgl.setDate(Sequel.cariTglSmc("select now()"));
         if(notaralan.equals("Yes")){
             chkLaborat.setSelected(true);
             chkRadiologi.setSelected(true);
