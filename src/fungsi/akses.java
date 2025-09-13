@@ -250,7 +250,7 @@ public final class akses {
             riwayat_surat_peringatan=false,master_kesimpulan_anjuran_mcu=false,kategori_piutang_jasa_perusahaan=false,piutang_jasa_perusahaan=false,bayar_piutang_jasa_perusahaan=false,
             piutang_jasa_perusahaan_belum_lunas=false,checklist_kesiapan_anestesi=false,piutang_peminjaman_uang_belum_lunas=false,hasil_pemeriksaan_slit_lamp=false,
             hasil_pemeriksaan_oct=false,beban_hutang_lain=false,poli_asal_pasien_ranap=false,pemberi_hutang_lain=false,dokter_asal_pasien_ranap=false,duta_parkir_rekap_keluar=false,
-            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false,
+            surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false,antrian_di_registrasi=false,
             skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false,kriteria_masuk_nicu=false,kriteria_keluar_nicu=false,penilaian_medis_ranap_psikiatrik=false,
             kriteria_masuk_picu=false,kriteria_keluar_picu=false,master_sampel_bakumutu=false,skrining_instrumen_amt=false,parameter_pengujian_lab_kesehatan_lingkungan=false;
 
@@ -1428,6 +1428,7 @@ public final class akses {
                         akses.surat_persetujuan_pemeriksaan_hiv=rs2.getBoolean("surat_persetujuan_pemeriksaan_hiv");
                         akses.skrining_instrumen_acrs=rs2.getBoolean("skrining_instrumen_acrs");
                         akses.surat_pernyataan_memilih_dpjp=rs2.getBoolean("surat_pernyataan_memilih_dpjp");
+                        akses.antrian_di_registrasi=rs2.getBoolean("antrian_di_registrasi");
                         akses.skrining_instrumen_mental_emosional=rs2.getBoolean("skrining_instrumen_mental_emosional");
                         akses.pelanggan_lab_kesehatan_lingkungan=rs2.getBoolean("pelanggan_lab_kesehatan_lingkungan");
                         akses.kriteria_masuk_nicu=rs2.getBoolean("kriteria_masuk_nicu");
@@ -2621,6 +2622,7 @@ public final class akses {
         akses.surat_persetujuan_pemeriksaan_hiv=isadmin;
         akses.skrining_instrumen_acrs=isadmin;
         akses.surat_pernyataan_memilih_dpjp=isadmin;
+        akses.antrian_di_registrasi=isadmin;
         akses.skrining_instrumen_mental_emosional=isadmin;
         akses.pelanggan_lab_kesehatan_lingkungan=isadmin;
         akses.kriteria_masuk_nicu=isadmin;
@@ -3822,6 +3824,7 @@ public final class akses {
     public static boolean getsurat_persetujuan_pemeriksaan_hiv(){return akses.surat_persetujuan_pemeriksaan_hiv;}
     public static boolean getskrining_instrumen_acrs(){return akses.skrining_instrumen_acrs;}
     public static boolean getsurat_pernyataan_memilih_dpjp(){return akses.surat_pernyataan_memilih_dpjp;}
+    public static boolean getantrian_di_registrasi(){return akses.antrian_di_registrasi;}
     public static boolean getskrining_instrumen_mental_emosional(){return akses.skrining_instrumen_mental_emosional;}
     public static boolean getpelanggan_lab_kesehatan_lingkungan(){return akses.pelanggan_lab_kesehatan_lingkungan;}
     public static boolean getkriteria_masuk_nicu(){return akses.kriteria_masuk_nicu;}

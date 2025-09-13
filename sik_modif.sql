@@ -1387,6 +1387,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pindah_kamar_pilihan_2` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_hutang_vendor_dapur`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `antrian_di_registrasi` enum('true','false') NULL DEFAULT NULL AFTER `surat_pernyataan_memilih_dpjp`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
