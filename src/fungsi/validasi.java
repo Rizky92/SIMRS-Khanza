@@ -176,6 +176,23 @@ public final class validasi {
         tgl.setDate(Calendar.getInstance().getTime());
     }
 
+    public void setTglJamSmc(Date waktu, JDateTimePicker tgl, JComboBox jam, JComboBox menit, JComboBox detik) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(waktu);
+        tgl.setDate(waktu);
+        jam.setSelectedIndex(c.get(Calendar.HOUR_OF_DAY));
+        menit.setSelectedIndex(c.get(Calendar.MINUTE));
+        detik.setSelectedIndex(c.get(Calendar.SECOND));
+    }
+
+    public void setTglJamRealSmc(JDateTimePicker tgl, JComboBox jam, JComboBox menit, JComboBox detik) {
+        Calendar c = Calendar.getInstance();
+        tgl.setDate(c.getTime());
+        jam.setSelectedIndex(c.get(Calendar.HOUR_OF_DAY));
+        menit.setSelectedIndex(c.get(Calendar.MINUTE));
+        detik.setSelectedIndex(c.get(Calendar.SECOND));
+    }
+
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
         reportSmc(reportName, reportDirName, judul, reportParams, "select * from temporary where temp37 = ? order by temporary.no", akses.getalamatip());
     }

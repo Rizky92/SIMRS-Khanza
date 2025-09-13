@@ -53,7 +53,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String finger="";
     private StringBuilder htmlContent;
@@ -72,7 +72,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             "ACRS1","N.ACRS1","ACRS2","N.ACRS2","ACRS3","N.ACRS3","ACRS4","N.ACRS4","ACRS5","N.ACRS5",
             "ACRS6","N.ACRS6","ACRS7","N.ACRS7","ACRS8","N.ACRS8","ACRS9","N.ACRS9","ACRS10","N.ACRS10",
             "N.Total","Kesimpulan"
-            
+
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -152,7 +152,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         Kesimpulan.setDocument(new batasInput((int)100).getKata(Kesimpulan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -175,7 +175,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -183,10 +183,10 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -197,11 +197,11 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -219,13 +219,13 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -1277,7 +1277,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1301,7 +1301,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                 if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem())==true){
                     simpan();
                 }
-            } 
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1316,7 +1316,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1340,7 +1340,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1356,7 +1356,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else{ 
+        }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
@@ -1376,7 +1376,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1407,7 +1407,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
@@ -1484,7 +1484,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1499,8 +1499,8 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                 );
                 bg.close();
 
-                File f = new File("DataSkriningInstrumenACRS.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataSkriningInstrumenACRS.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1509,12 +1509,12 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN ACRS<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN ACRS<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1640,10 +1640,10 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningInstrumenACRS.jasper","report","::[ Formulir Skrining Instrumen ACRS ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_acrs.nip,petugas.nama,skrining_instrumen_acrs.tanggal,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "skrining_instrumen_acrs.pernyataanacrs1,skrining_instrumen_acrs.nilai_acrs1,skrining_instrumen_acrs.pernyataanacrs2,skrining_instrumen_acrs.nilai_acrs2,skrining_instrumen_acrs.pernyataanacrs3,"+
@@ -1885,7 +1885,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1912,7 +1912,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                     "pasien.nm_pasien like ? or skrining_instrumen_acrs.nip like ? or petugas.nama like ?) "+
                     "order by skrining_instrumen_acrs.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1926,7 +1926,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1952,7 +1952,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         ACRS1.setSelectedIndex(0);
         NilaiACRS1.setText("0");
@@ -1978,7 +1978,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         Kesimpulan.setText("Kondisi Normal");
         Tanggal.setDate(new Date());
         ACRS1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -2012,10 +2012,10 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             NilaiACRS10.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
             TotalNilai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             Kesimpulan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -2048,35 +2048,35 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_instrumen_acrs());
         BtnHapus.setEnabled(akses.getskrining_instrumen_acrs());
         BtnEdit.setEnabled(akses.getskrining_instrumen_acrs());
-        BtnPrint.setEnabled(akses.getskrining_instrumen_acrs()); 
+        BtnPrint.setEnabled(akses.getskrining_instrumen_acrs());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -2086,7 +2086,7 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }    
+        }
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -2101,52 +2101,9 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     }
 
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkKejadian.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkKejadian.isSelected()==false){
-                    nilai_jam =Jam.getSelectedIndex();
-                    nilai_menit =Menit.getSelectedIndex();
-                    nilai_detik =Detik.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                Jam.setSelectedItem(jam);
-                Menit.setSelectedItem(menit);
-                Detik.setSelectedItem(detik);
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            if (ChkKejadian.isSelected()) {
+                Valid.setTglJamRealSmc(Tanggal, Jam, Menit, Detik);
             }
         };
         // Timer
@@ -2157,8 +2114,8 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
         if(Sequel.mengedittf("skrining_instrumen_acrs","no_rawat=?","no_rawat=?,tanggal=?,nip=?,pernyataanacrs1=?,nilai_acrs1=?,pernyataanacrs2=?,nilai_acrs2=?,pernyataanacrs3=?,nilai_acrs3=?,pernyataanacrs4=?,nilai_acrs4=?,pernyataanacrs5=?,nilai_acrs5=?,"+
                 "pernyataanacrs6=?,nilai_acrs6=?,pernyataanacrs7=?,nilai_acrs7=?,pernyataanacrs8=?,nilai_acrs8=?,pernyataanacrs9=?,nilai_acrs9=?,pernyataanacrs10=?,nilai_acrs10=?,nilai_total_acrs=?,kesimpulan=?",26,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
-                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
                 ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
                tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
@@ -2210,21 +2167,21 @@ public final class RMSkriningInstrumenMentalEmosional extends javax.swing.JDialo
     private void simpan() {
         if(Sequel.menyimpantf("skrining_instrumen_acrs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",25,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
-            ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-            ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+            ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+            ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
             ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText()
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
                 ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText()
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
     private void isTotal() {
         try {
             TotalNilai.setText(""+(

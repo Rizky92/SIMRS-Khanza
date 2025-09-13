@@ -928,46 +928,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
     
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                if(aktif==true){
-                    String nol_jam = "";
-                    String nol_menit = "";
-                    String nol_detik = "";
-
-                    Date now = Calendar.getInstance().getTime();
-
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-
-
-                    // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                    if (nilai_jam <= 9) {
-                        // Tambahkan "0" didepannya
-                        nol_jam = "0";
-                    }
-                    // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                    if (nilai_menit <= 9) {
-                        // Tambahkan "0" didepannya
-                        nol_menit = "0";
-                    }
-                    // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                    if (nilai_detik <= 9) {
-                        // Tambahkan "0" didepannya
-                        nol_detik = "0";
-                    }
-                    // Membuat String JAM, MENIT, DETIK
-                    String jam = nol_jam + Integer.toString(nilai_jam);
-                    String menit = nol_menit + Integer.toString(nilai_menit);
-                    String detik = nol_detik + Integer.toString(nilai_detik);
-                    if(ChkJln.isSelected()==true){
-                        if(detik.equals("20")){
-                            TabRawatMouseClicked(null);
-                        }
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            if(aktif==true){
+                Calendar c = Calendar.getInstance();
+                if(ChkJln.isSelected()==true){
+                    if(c.get(Calendar.SECOND) == 20){
+                        TabRawatMouseClicked(null);
                     }
                 }                    
             }

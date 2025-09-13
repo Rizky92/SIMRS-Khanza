@@ -53,7 +53,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String finger="";
     private String TANGGALMUNDUR="yes";
@@ -153,7 +153,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Keterangan.setDocument(new batasInput((byte)40).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -176,7 +176,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -184,10 +184,10 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -198,11 +198,11 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -220,13 +220,13 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -1307,7 +1307,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1345,7 +1345,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1370,7 +1370,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1436,7 +1436,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1451,10 +1451,10 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f;            
+                File f;
                 BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
@@ -1536,9 +1536,9 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSkriningFrailtySyndrome.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSkriningFrailtySyndrome.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1547,12 +1547,12 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SEKRINING FRAILTY SYNDROME<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SEKRINING FRAILTY SYNDROME<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
@@ -1634,9 +1634,9 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                                   "</table>"+
                                 "</html>"
                             );
-                            
-                            f = new File("DataSkriningFrailtySyndrome.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+
+                            f = new File("DataSkriningFrailtySyndrome.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                         "<table width='2000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1645,32 +1645,32 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA SEKRINING FRAILTY SYNDROME<br><br></font>"+        
+                                                    "<font size='2' face='Tahoma'>DATA SEKRINING FRAILTY SYNDROME<br><br></font>"+
                                                 "</td>"+
                                            "</tr>"+
                                         "</table>")
                             );
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"Umur\";\"Kode Petugas\";\"Nama Petugas\";\"Tanggal\";\"Resistensi\";\"N.R.\";\"Aktivitas\";\"N.A.\";\"Tidak Pernah\";\"Kanker\";\"Gagal Jantung\";\"Ginjal\";\"Nyeri Dada\";\"Serangan Jantung\";\"Stroke\";\"Asma\";\"Nyeri Sendi\";\"Paru Kronis\";\"Hipertensi\";\"Diabetes\";\"N.P.\";\"Usaha Berjalan\";\"N.U.\";\"Berat Badan\";\"N.B.\";\"N.Total\";\"Hasil Skrining\";\"Keterangan\"\n"
-                            ); 
+                            );
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").
                                                          append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\";\"").append(tbObat.getValueAt(i,17).toString()).append("\";\"").append(tbObat.getValueAt(i,18).toString()).append("\";\"").append(tbObat.getValueAt(i,19).toString()).append("\";\"").
                                                          append(tbObat.getValueAt(i,20).toString()).append("\";\"").append(tbObat.getValueAt(i,21).toString()).append("\";\"").append(tbObat.getValueAt(i,22).toString()).append("\";\"").append(tbObat.getValueAt(i,23).toString()).append("\";\"").append(tbObat.getValueAt(i,24).toString()).append("\";\"").append(tbObat.getValueAt(i,25).toString()).append("\";\"").append(tbObat.getValueAt(i,26).toString()).append("\";\"").append(tbObat.getValueAt(i,27).toString()).append("\";\"").append(tbObat.getValueAt(i,28).toString()).append("\";\"").append(tbObat.getValueAt(i,29).toString()).append("\";\"").
                                                          append(tbObat.getValueAt(i,30).toString()).append("\";\"").append(tbObat.getValueAt(i,31).toString()).append("\"\n");
                             }
-                            f = new File("DataSkriningFrailtySyndrome.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("DataSkriningFrailtySyndrome.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
-                }   
+                        break;
+                }
                 htmlContent=null;
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1779,10 +1779,10 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningFrailtySyndrome.jasper","report","::[ Formulir Skrining Frailty Syndrome ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,reg_periksa.umurdaftar,reg_periksa.sttsumur,skrining_frailty_syndrome.nip,"+
                     "petugas.nama,skrining_frailty_syndrome.tanggal,skrining_frailty_syndrome.resistensi,skrining_frailty_syndrome.nilai_resistensi,skrining_frailty_syndrome.aktivitas,"+
@@ -2050,7 +2050,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -2081,7 +2081,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                     "pasien.nm_pasien like ? or skrining_frailty_syndrome.nip like ? or petugas.nama like ?) "+
                     "order by skrining_frailty_syndrome.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2095,7 +2095,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2122,7 +2122,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         Resistensi.setSelectedIndex(0);
@@ -2150,7 +2150,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
         HasilSkrining.setText("Segar & Tidak Rapuh");
         Keterangan.setText("");
         Resistensi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -2169,62 +2169,62 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             if(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString().equals("Ya")){
                 ChkTidakPernah.setSelected(true);
             }else{
-                ChkTidakPernah.setSelected(false); 
+                ChkTidakPernah.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("Ya")){
                 ChkKanker.setSelected(true);
             }else{
-                ChkKanker.setSelected(false); 
+                ChkKanker.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("Ya")){
                 ChkGagalJantung.setSelected(true);
             }else{
-                ChkGagalJantung.setSelected(false); 
+                ChkGagalJantung.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString().equals("Ya")){
                 ChkPenyakitGinjal.setSelected(true);
             }else{
-                ChkPenyakitGinjal.setSelected(false); 
+                ChkPenyakitGinjal.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString().equals("Ya")){
                 ChkNyeriDada.setSelected(true);
             }else{
-                ChkNyeriDada.setSelected(false); 
+                ChkNyeriDada.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString().equals("Ya")){
                 ChkSeranganJantung.setSelected(true);
             }else{
-                ChkSeranganJantung.setSelected(false); 
+                ChkSeranganJantung.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString().equals("Ya")){
                 ChkStroke.setSelected(true);
             }else{
-                ChkStroke.setSelected(false); 
+                ChkStroke.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString().equals("Ya")){
                 ChkAsma.setSelected(true);
             }else{
-                ChkAsma.setSelected(false); 
+                ChkAsma.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString().equals("Ya")){
                 ChkNyeriSendi.setSelected(true);
             }else{
-                ChkNyeriSendi.setSelected(false); 
+                ChkNyeriSendi.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString().equals("Ya")){
                 ChkPenyakitParuKronis.setSelected(true);
             }else{
-                ChkPenyakitParuKronis.setSelected(false); 
+                ChkPenyakitParuKronis.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString().equals("Ya")){
                 ChkHipertensi.setSelected(true);
             }else{
-                ChkHipertensi.setSelected(false); 
+                ChkHipertensi.setSelected(false);
             }
             if(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString().equals("Ya")){
                 ChkDiabetes.setSelected(true);
             }else{
-                ChkDiabetes.setSelected(false); 
+                ChkDiabetes.setSelected(false);
             }
             NilaiPenyakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
             UsahaBerjalan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
@@ -2234,10 +2234,10 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             TotalHasil.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
             HasilSkrining.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -2275,42 +2275,42 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             if(internalFrame1.getHeight()>657){
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,485));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_frailty_syndrome());
         BtnHapus.setEnabled(akses.getskrining_frailty_syndrome());
         BtnEdit.setEnabled(akses.getskrining_frailty_syndrome());
-        BtnPrint.setEnabled(akses.getskrining_frailty_syndrome()); 
+        BtnPrint.setEnabled(akses.getskrining_frailty_syndrome());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -2320,8 +2320,8 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }  
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -2335,52 +2335,9 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
     }
 
     private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkKejadian.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkKejadian.isSelected()==false){
-                    nilai_jam =Jam.getSelectedIndex();
-                    nilai_menit =Menit.getSelectedIndex();
-                    nilai_detik =Detik.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                Jam.setSelectedItem(jam);
-                Menit.setSelectedItem(menit);
-                Detik.setSelectedItem(detik);
+        ActionListener taskPerformer = (ActionEvent e) -> {
+            if (ChkKejadian.isSelected()) {
+                Valid.setTglJamRealSmc(Tanggal, Jam, Menit, Detik);
             }
         };
         // Timer
@@ -2392,7 +2349,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
                 "penyakit_gagal_jantung=?,penyakit_ginjal=?,penyakit_nyeri_dada=?,penyakit_serangan_jantung=?,penyakit_stroke=?,penyakit_asma=?,penyakit_nyeri_sendi=?,penyakit_paru_kronis=?,penyakit_hipertensi=?,"+
                 "penyakit_diabetes=?,nilai_penyakit=?,usaha_berjalan=?,nilai_usaha_berjalan=?,berat_badan=?,nilai_berat_badan=?,nilai_total=?,hasil_skrining=?,keterangan=?,nip=?",28,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Resistensi.getSelectedItem().toString(),NilaiResistensi.getText(),Aktivitas.getSelectedItem().toString(),NilaiAktivitas.getText(),
-                (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"), 
+                (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"),
                 (ChkStroke.isSelected()==true?"Ya":"Tidak"),(ChkAsma.isSelected()==true?"Ya":"Tidak"),(ChkNyeriSendi.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitParuKronis.isSelected()==true?"Ya":"Tidak"),(ChkHipertensi.isSelected()==true?"Ya":"Tidak"),(ChkDiabetes.isSelected()==true?"Ya":"Tidak"),
                 NilaiPenyakit.getText(),UsahaBerjalan.getSelectedItem().toString(),NilaiUsahaBerjalan.getText(),BeratBadan.getSelectedItem().toString(),NilaiBeratBadan.getText(),TotalHasil.getText(),HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
@@ -2458,7 +2415,7 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
             HasilSkrining.setText("Segar & Tidak Rapuh");
         }
     }
-    
+
     private void isPenyakit() {
         ChkTidakPernah.setSelected(false);
         i=0;
@@ -2506,20 +2463,20 @@ public final class RMSkriningFrailtySyndrome extends javax.swing.JDialog {
     private void simpan() {
         if(Sequel.menyimpantf("skrining_frailty_syndrome","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",27,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Resistensi.getSelectedItem().toString(),NilaiResistensi.getText(),Aktivitas.getSelectedItem().toString(),NilaiAktivitas.getText(),
-            (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"), 
+            (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"),
             (ChkStroke.isSelected()==true?"Ya":"Tidak"),(ChkAsma.isSelected()==true?"Ya":"Tidak"),(ChkNyeriSendi.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitParuKronis.isSelected()==true?"Ya":"Tidak"),(ChkHipertensi.isSelected()==true?"Ya":"Tidak"),(ChkDiabetes.isSelected()==true?"Ya":"Tidak"),
             NilaiPenyakit.getText(),UsahaBerjalan.getSelectedItem().toString(),NilaiUsahaBerjalan.getText(),BeratBadan.getSelectedItem().toString(),NilaiBeratBadan.getText(),TotalHasil.getText(),HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText()
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Umur.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 Resistensi.getSelectedItem().toString(),NilaiResistensi.getText(),Aktivitas.getSelectedItem().toString(),NilaiAktivitas.getText(),
-                (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"), 
+                (ChkTidakPernah.isSelected()==true?"Ya":"Tidak"),(ChkKanker.isSelected()==true?"Ya":"Tidak"),(ChkGagalJantung.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitGinjal.isSelected()==true?"Ya":"Tidak"),(ChkNyeriDada.isSelected()==true?"Ya":"Tidak"),(ChkSeranganJantung.isSelected()==true?"Ya":"Tidak"),
                 (ChkStroke.isSelected()==true?"Ya":"Tidak"),(ChkAsma.isSelected()==true?"Ya":"Tidak"),(ChkNyeriSendi.isSelected()==true?"Ya":"Tidak"),(ChkPenyakitParuKronis.isSelected()==true?"Ya":"Tidak"),(ChkHipertensi.isSelected()==true?"Ya":"Tidak"),(ChkDiabetes.isSelected()==true?"Ya":"Tidak"),
                 NilaiPenyakit.getText(),UsahaBerjalan.getSelectedItem().toString(),NilaiUsahaBerjalan.getText(),BeratBadan.getSelectedItem().toString(),NilaiBeratBadan.getText(),TotalHasil.getText(),HasilSkrining.getText(),Keterangan.getText()
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
 }
