@@ -493,14 +493,14 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $icd10_idrg = '';
-                                        $query_icd10_idrg = bukaquery("select idrg_diagnosa_pasien_smc.kode_icd10 from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = '$nosep' order by idrg_diagnosa_pasien_smc.urut");
-                                        while ($barispenyakit = mysqli_fetch_array($query_icd10_idrg)) {
-                                            $icd10_idrg .= $barispenyakit['kode_icd10'].'#';
+                                        $diagnosa_idrg = '';
+                                        $query_diagnosa_idrg = bukaquery("select idrg_diagnosa_pasien_smc.kode_icd10 from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = '$nosep' order by idrg_diagnosa_pasien_smc.urut");
+                                        while ($barisdiagnosa = mysqli_fetch_array($query_diagnosa_idrg)) {
+                                            $diagnosa_idrg .= $barisdiagnosa['kode_icd10'].'#';
                                         }
-                                        $icd10_idrg = substr($icd10_idrg, 0, -1);
+                                        $diagnosa_idrg = substr($diagnosa_idrg, 0, -1);
                                     ?>
-                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icd10_idrg ?>" maxlength="100">
+                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diagnosa_idrg ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -508,18 +508,18 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $icd9_idrg = '';
-                                        $query_icd9_idrg = bukaquery("select idrg_prosedur_pasien_smc.kode_icd9, idrg_prosedur_pasien_smc.multiplicity, idrg_prosedur_pasien_smc.urut from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = '$nosep' order by idrg_prosedur_pasien_smc.urut");
-                                        while ($barisprosedur = mysqli_fetch_array($query_icd9_idrg)) {
+                                        $prosedur_idrg = '';
+                                        $query_prosedur_idrg = bukaquery("select idrg_prosedur_pasien_smc.kode_icd9, idrg_prosedur_pasien_smc.multiplicity, idrg_prosedur_pasien_smc.urut from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = '$nosep' order by idrg_prosedur_pasien_smc.urut");
+                                        while ($barisprosedur = mysqli_fetch_array($query_prosedur_idrg)) {
                                             if ($barisprosedur['multiplicity'] > 1) {
-                                                $icd9_idrg .= $barisprosedur['kode_icd9'].'+'.$barisprosedur['multiplicity'].'#';
+                                                $prosedur_idrg .= $barisprosedur['kode_icd9'].'+'.$barisprosedur['multiplicity'].'#';
                                             } else {
-                                                $icd9_idrg .= $barisprosedur['kode_icd9'].'#';
+                                                $prosedur_idrg .= $barisprosedur['kode_icd9'].'#';
                                             }
                                         }
-                                        $icd9_idrg = substr($icd9_idrg, 0, -1);
+                                        $prosedur_idrg = substr($prosedur_idrg, 0, -1);
                                     ?>
-                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $icd9_idrg; ?>" maxlength="100">
+                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur_idrg; ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">

@@ -11,6 +11,8 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -19,10 +21,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -119,6 +125,24 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         tbICD9CM.getColumnModel().getColumn(8).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(8).setMaxWidth(0);
         tbICD9CM.setDefaultRenderer(Object.class, new WarnaTable());
+        tbICD9CM.setDefaultRenderer(Integer.class, new WarnaTable() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setHorizontalAlignment(JLabel.RIGHT);
+                if (column == 1) {
+                    c.setBackground(new Color(215, 215, 255));
+                    c.setForeground(new Color(50, 50, 50));
+                    if (((Integer) value) > 0) {
+                        c.setBackground(new Color(255, 255, 255));
+                        c.setForeground(new Color(55, 55, 175));
+                    } else {
+                        c.setText("");
+                    }
+                }
+                return c;
+            }
+        });
         
         // 
         
@@ -366,15 +390,25 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         if (tabModeICD9CM.getRowCount() > 0
             && evt.getPropertyName().equals("tableCellEditor")
             && (!tbICD9CM.isEditing())
-            && tbICD9CM.getSelectedColumn() == 0
         ) {
-            if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0)
-                && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
-            ) {
-                tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
-            } else {
-                tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
-                tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
+            if (tbICD9CM.getSelectedColumn() == 0) {
+                if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0)
+                    && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
+                ) {
+                    tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
+                } else {
+                    tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
+                    tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
+                }
+            } else if (tbICD9CM.getSelectedColumn() == 1) {
+                if ((((Integer) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 1)) > 0)
+                    && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
+                ) {
+                    tabModeICD9CM.setValueAt(true, tbICD9CM.getSelectedRow(), 0);
+                } else {
+                    tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
+                    tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
+                }
             }
         }
     }//GEN-LAST:event_tbICD9CMPropertyChange
@@ -493,6 +527,13 @@ public class PanelDiagnosaSmc extends widget.panelisi {
 
     public void tampilProsedur() {
         Valid.tabelKosong(tabModeProsedurPasien);
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            ""
+        )) {
+            
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
         
         /*
         try (PreparedStatement ps = koneksi.prepareStatement(
@@ -589,7 +630,9 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                             }
                         } while (rs.next());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
+                        if (!Diagnosa.getText().isBlank()) {
+                            JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
+                        }
                     }
                 }
             }
@@ -633,7 +676,8 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select * from eklaim_icd9 " + (Prosedur.getText().isBlank() ? "" :
-                "where (code1 like ? or code2 like ? or deskripsi like ?) ") + "order by code1 limit 100"
+                "where (code1 like ? or code2 like ? or deskripsi like ?) ") +
+                "order by code1 limit 100"
             )) {
                 int p = 0;
                 if (!Prosedur.getText().isBlank()) {
@@ -655,7 +699,9 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                             }
                         } while (rs.next());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
+                        if (!Prosedur.getText().isBlank()) {
+                            JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
+                        }
                     }
                 }
             }
