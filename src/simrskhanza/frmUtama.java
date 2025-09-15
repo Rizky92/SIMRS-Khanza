@@ -1144,6 +1144,7 @@ import tranfusidarah.UTDStokDarah;
 import viabarcode.DlgBarcodeRalan;
 import viabarcode.DlgBarcodeRanap;
 import viabarcode.LabKeslingMasterSampelBakuMutu;
+import viabarcode.LabKeslingNilaiNormalBakuMutu;
 import viabarcode.LabKeslingParameterPengujian;
 import viabarcode.LabKeslingPelanggan;
 import ziscsr.ZISAtapRumahPenerimaDankes;
@@ -23267,6 +23268,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnLabKeslingNilaiNormalBakuMutuActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        LabKeslingNilaiNormalBakuMutu form=new LabKeslingNilaiNormalBakuMutu(this,false);
+        form.isCek();
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -23980,7 +23994,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPiutangPeminjamanUangBelumLunas,btnChecklistKesiapanAnestesi,btnHasilPemeriksaanSlitLamp,btnHasilPemeriksaanOCT,btnPoliAsalPasienRanap,btnPemberiHutangLain,
             btnDokterAsalPasienRanap,btnBebanHutangLain,btnRekapKeluarDutaParking,btnSuratKeteranganLayakTerbang,btnBayarBebanHutangLain,btnPersetujuanPemeriksaanHIV,btnSkriningInstrumenACRS,
             btnSuratPernyataanMemilihDPJP,btnSkriningInstrumenMentalEmosional,btnChecklistKriteriaMasukNICU,btnChecklistKriteriaKeluarNICU,btnPenilaianAwalMedisRanapPsikiatri,
-            btnLabKeslingPelanggan,btnChecklistKriteriaMasukPICU,btnChecklistKriteriaKeluarPICU,btnLabKeslingSampelBakuMutu,btnSkriningInstrumenAMT,btnLabKeslingParameterPengujian;
+            btnLabKeslingPelanggan,btnChecklistKriteriaMasukPICU,btnChecklistKriteriaKeluarPICU,btnLabKeslingSampelBakuMutu,btnSkriningInstrumenAMT,btnLabKeslingParameterPengujian,
+            btnLabKeslingNilaiNormalBakuMutu;
 
     public void isWall(){
         try{
@@ -24283,6 +24298,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
             if(akses.getparameter_pengujian_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingParameterPengujian);
+                jmlmenu++;
+            }
+
+            if(akses.getnilai_normal_baku_mutu_lab_kesehatan_lingkungan()==true){
+                Panelmenu.add(btnLabKeslingNilaiNormalBakuMutu);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==2){
@@ -30058,6 +30078,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getparameter_pengujian_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingParameterPengujian);
+            jmlmenu++;
+        }
+
+        if(akses.getnilai_normal_baku_mutu_lab_kesehatan_lingkungan()==true){
+            Panelmenu.add(btnLabKeslingNilaiNormalBakuMutu);
             jmlmenu++;
         }
 
@@ -35860,6 +35885,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getparameter_pengujian_lab_kesehatan_lingkungan()==true){
             if(btnLabKeslingParameterPengujian.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingParameterPengujian);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getnilai_normal_baku_mutu_lab_kesehatan_lingkungan()==true){
+            if(btnLabKeslingNilaiNormalBakuMutu.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnLabKeslingNilaiNormalBakuMutu);
                 jmlmenu++;
             }
         }
@@ -49128,6 +49160,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnLabKeslingParameterPengujian.setName("btnLabKeslingParameterPengujian");
         btnLabKeslingParameterPengujian.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingParameterPengujian.addActionListener(this::btnLabKeslingParameterPengujianActionPerformed);
+
+        btnLabKeslingNilaiNormalBakuMutu = new widget.ButtonBig();
+        btnLabKeslingNilaiNormalBakuMutu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/8960644_test_test tube_blood_laboratory_lab_icon.png")));
+        btnLabKeslingNilaiNormalBakuMutu.setText("Nilai Normal Baku Mutu Lab Kesling");
+        btnLabKeslingNilaiNormalBakuMutu.setIconTextGap(0);
+        btnLabKeslingNilaiNormalBakuMutu.setName("btnLabKeslingNilaiNormalBakuMutu");
+        btnLabKeslingNilaiNormalBakuMutu.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnLabKeslingNilaiNormalBakuMutu.addActionListener(this::btnLabKeslingNilaiNormalBakuMutuActionPerformed);
     }
 
     private void btnSetTampilJenisObatResepActionPerformed(java.awt.event.ActionEvent evt) {

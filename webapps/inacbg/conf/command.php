@@ -7,7 +7,7 @@
             $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
             $judul = str_replace(array('.','-','/',',')," ",$judul);
             $judul = trim($judul);
-            echo "$judul";	
+            echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -41,7 +41,7 @@
         } else {
             return true;
         }
-    }	
+    }
 
 
     function formProtek() {
@@ -55,21 +55,20 @@
                             break;
                         }
                     }
-            }		
-
+            }
     }
 
     function actionPages() {
         $aksi=isset($_REQUEST['act'])?$_REQUEST['act']:NULL;
         formProtek();
         switch ($aksi) {
-            case 'HomeAdmin'            : include_once('pages/kontak.php'); break;
-            case 'KlaimBaruOtomatis'    : include_once('pages/klaimbaruotomatis.php'); break;
-            case 'KlaimBaruManual'      : include_once('pages/klaimbarumanual.php'); break;
-            case 'KlaimBaruManual2'     : include_once('pages/klaimbarumanual2.php'); break;
-            case 'DetailKirim'          : include_once('pages/detailkirim.php'); break;
-            case 'DetailKirimSmc'          : include_once('pages/detailkirimsmc.php'); break;
-            default                     : include_once('pages/kontak.php');
+            case 'HomeAdmin'        : include_once('pages/kontak.php'); break;
+            case 'KlaimBaruOtomatis': include_once('pages/klaimbaruotomatis.php'); break;
+            case 'KlaimBaruManual'  : include_once('pages/klaimbarumanual.php'); break;
+            case 'KlaimBaruManual2' : include_once('pages/klaimbarumanual2.php'); break;
+            case 'DetailKirim'      : include_once('pages/detailkirim.php'); break;
+            case 'DetailKirimSmc'   : include_once('pages/detailkirimsmc.php'); break;
+                 default            : include_once('pages/kontak.php');
         }
     }
 ?>
