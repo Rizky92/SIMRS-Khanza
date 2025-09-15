@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author khanzamedia
  */
-public class PanelDiagnosaSMC extends widget.panelisi {
+public class PanelDiagnosaSmc extends widget.panelisi {
     private final DefaultTableModel tabModeDiagnosaPasien, tabModeICD10, tabModeICD9CM, tabModeProsedurPasien;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
@@ -39,7 +39,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
     /**
      * Creates new form panelDiagnosa
      */
-    public PanelDiagnosaSMC() {
+    public PanelDiagnosaSmc() {
         initComponents();
         tabModeICD10 = new DefaultTableModel(null, new Object[] {
             "P", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM", "urut"
@@ -454,7 +454,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
             System.out.println("Notif : " + e);
         }
         
-        
+        /*
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select r.tgl_registrasi, d.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
             "d.kd_penyakit, p.nm_penyakit, d.status, d.status_penyakit from " +
@@ -488,10 +488,13 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        */
     }
 
     public void tampilProsedur() {
         Valid.tabelKosong(tabModeProsedurPasien);
+        
+        /*
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select r.tgl_registrasi, p.no_rawat, r.no_rkm_medis, px.nm_pasien, p.kode, " +
             "i.deskripsi_panjang, p.status from prosedur_pasien p join reg_periksa r on " +
@@ -523,6 +526,7 @@ public class PanelDiagnosaSMC extends widget.panelisi {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+        */
     }
 
     private void tampilICD10IDRG(boolean pilihPertama) {
