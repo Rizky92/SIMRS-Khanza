@@ -317,8 +317,8 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         poli.setLocationRelativeTo(internalFrame1);
         poli.setAlwaysOnTop(false);
         poli.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -388,12 +388,12 @@ public final class DlgCariPoli extends javax.swing.JDialog {
                         ObjectNode poli = mapper.createObjectNode();
                         poli.put("KodeUnit", rs.getString(1));
                         poli.put("NamaUnit", rs.getString(2));
-                        poli.put("RegistrasiBaru", Valid.SetAngka(rs.getDouble(3)));
-                        poli.put("RegistrasiLama", Valid.SetAngka(rs.getDouble(4)));
+                        poli.put("RegistrasiBaru", rs.getString(3));
+                        poli.put("RegistrasiLama", rs.getString(4));
                         array.add(poli);
                         tabMode.addRow(new Object[] {
                             rs.getString(1), rs.getString(2),
-                            Valid.SetAngka(rs.getDouble(3)), Valid.SetAngka(rs.getDouble(4))
+                            rs.getString(3), rs.getString(4)
                         });
                     } while (rs.next());
                     root.set("poli", array);
@@ -408,18 +408,18 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getadmin());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosongSmc(tabMode);
         try (FileReader fr = new FileReader("./cache/poli.iyem")) {
@@ -451,5 +451,5 @@ public final class DlgCariPoli extends javax.swing.JDialog {
             tampil();
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
+    }
 }
