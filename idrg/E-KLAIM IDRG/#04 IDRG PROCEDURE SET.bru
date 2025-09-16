@@ -1,0 +1,31 @@
+meta {
+  name: #04 IDRG PROCEDURE SET
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "idrg_procedure_set",
+          "nomor_sep": "0302R1100825V999999"
+      },
+      "data": {
+          "procedure": "23.71+2"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

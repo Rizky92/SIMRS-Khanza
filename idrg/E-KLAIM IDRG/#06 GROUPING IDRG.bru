@@ -1,0 +1,32 @@
+meta {
+  name: #06 GROUPING IDRG
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "grouper",
+          "stage": "1",
+          "grouper": "idrg"
+      },
+      "data": {
+          "nomor_sep": "0302R1100825V999999"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

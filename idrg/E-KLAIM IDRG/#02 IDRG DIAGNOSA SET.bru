@@ -1,0 +1,31 @@
+meta {
+  name: #02 IDRG DIAGNOSA SET
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "idrg_diagnosa_set",
+          "nomor_sep": "0302R1100825V999999"
+      },
+      "data": {
+          "diagnosa": "Z09.8#K04.1"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

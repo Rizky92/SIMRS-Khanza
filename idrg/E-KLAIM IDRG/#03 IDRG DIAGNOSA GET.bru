@@ -1,0 +1,30 @@
+meta {
+  name: #03 IDRG DIAGNOSA GET
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "idrg_diagnosa_get"
+      },
+      "data": {
+          "nomor_sep": "UJICOBA3"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

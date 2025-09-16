@@ -1,0 +1,32 @@
+meta {
+  name: #14 GROUPING INACBG STAGE 1
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "grouper",
+          "stage": "1",
+          "grouper": "inacbg"
+      },
+      "data": {
+          "nomor_sep": "0302R1100825V999999"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

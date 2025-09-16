@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `dokter_ttdbasah`  (
   CONSTRAINT `dokter_ttdbasah_ibfk_1` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `eklaim_icd9`  (
+CREATE TABLE IF NOT EXISTS `idrg_referensi_icd9cm_im`  (
   `code1` varchar(7) NOT NULL,
   `code2` varchar(7) NOT NULL DEFAULT '',
   `deskripsi` varchar(300) NOT NULL DEFAULT '',
@@ -164,11 +164,11 @@ CREATE TABLE IF NOT EXISTS `eklaim_icd9`  (
   `asterisk` enum('0','1') NOT NULL DEFAULT '0',
   `im` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`code1`) USING BTREE,
-  INDEX `eklaim_icd9_ibfk_1` (`code1`,`deskripsi`) USING BTREE,
-  INDEX `eklaim_icd9_ibfk_2` (`validcode`,`accpdx`,`asterisk`,`im`) USING BTREE
+  INDEX `idrg_referensi_icd9cm_im_ibfk_1` (`code1`,`deskripsi`) USING BTREE,
+  INDEX `idrg_referensi_icd9cm_im_ibfk_2` (`validcode`,`accpdx`,`asterisk`,`im`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
-CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
+CREATE TABLE IF NOT EXISTS `idrg_referensi_icd10_im`  (
   `code1` varchar(7) NOT NULL,
   `code2` varchar(7) NOT NULL DEFAULT '',
   `deskripsi` varchar(300) NOT NULL DEFAULT '',
@@ -177,8 +177,8 @@ CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
   `asterisk` enum('0','1') NOT NULL DEFAULT '0',
   `im` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`code1`) USING BTREE,
-  INDEX `eklaim_icd10_ibfk_1` (`validcode`,`accpdx`,`asterisk`,`im`) USING BTREE,
-  INDEX `eklaim_icd10_ibfk_2` (`code1`,`deskripsi`) USING BTREE
+  INDEX `idrg_referensi_icd10_im_ibfk_1` (`validcode`,`accpdx`,`asterisk`,`im`) USING BTREE,
+  INDEX `idrg_referensi_icd10_im_ibfk_2` (`code1`,`deskripsi`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
@@ -186,13 +186,13 @@ ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(2
 CREATE TABLE IF NOT EXISTS `idrg_diagnosa_pasien_smc`  (
     `no_sep` varchar(40) NOT NULL,
     `kode_icd10` varchar(7) NOT NULL,
-    `is_primary` TINYINT NOT NULL DEFAULT 0,
+    `urut` INT UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`no_sep`, `kode_icd10`),
     CONSTRAINT `idrg_dx_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT `idrg_dx_smc_icd10_im` FOREIGN KEY (`kode_icd10`) REFERENCES `eklaim_icd10` (`code1`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `idrg_dx_smc_icd10_im` FOREIGN KEY (`kode_icd10`) REFERENCES `idrg_referensi_icd10_im` (`code1`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE IF NOT EXISTS TABLE `idrg_grouping_smc`  (
+CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `mdc_number` varchar(4) NOT NULL,
   `mdc_description` varchar(150) NULL DEFAULT NULL,
@@ -207,11 +207,10 @@ CREATE TABLE IF NOT EXISTS `idrg_prosedur_pasien_smc`  (
     `no_sep` varchar(40) NOT NULL,
     `kode_icd9` varchar(7) NOT NULL,
     `multiplicity` INT UNSIGNED NOT NULL DEFAULT 1,
-    `idx` INT UNSIGNED NOT NULL DEFAULT 1,
-    `is_primary` TINYINT NOT NULL DEFAULT 0,
+    `urut` TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (`no_sep`, `kode_icd9`, `idx`),
     CONSTRAINT `idrg_pc_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT `idrg_pc_smc_icd9cm_im` FOREIGN KEY (`kode_icd9`) REFERENCES `eklaim_icd9` (`code1`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `idrg_pc_smc_icd9cm_im` FOREIGN KEY (`kode_icd9`) REFERENCES `idrg_referensi_icd9cm_im` (`code1`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "E-KLAIM IDRG",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

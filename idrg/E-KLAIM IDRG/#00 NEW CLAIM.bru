@@ -1,0 +1,35 @@
+meta {
+  name: #00 NEW CLAIM
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "new_claim"
+      },
+      "data": {
+          "nomor_kartu": "0000123456789",
+          "nomor_sep": "0302R1100825V999999",
+          "nomor_rm": "999999",
+          "nama_pasien": "RISKI MAULANA",
+          "tgl_lahir": "2010-09-25 00:00:00",
+          "gender": "1"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

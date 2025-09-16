@@ -1,0 +1,48 @@
+{
+    "metadata": {
+        "code": 200,
+        "message": "Ok",
+        "method": "idrg_to_inacbg_import"
+    },
+    "data": {
+        "diagnosa": {
+            "string": "Z09.8#I11.9#I25.1",
+            "expanded": [
+                {
+                    "code": "Z09.8",
+                    "display": "Follow-up exam after other treatment for other conditions",
+                    "no": "1",
+                    "validcode": "1",
+                    "metadata": {
+                        "code": "200",
+                        "message": "Ok"
+                    }
+                },
+                {
+                    "code": "I11.9",
+                    "display": "Hypertensive heart disease without (congestive) heart failure",
+                    "no": "2",
+                    "validcode": "1",
+                    "metadata": {
+                        "code": "200",
+                        "message": "Ok"
+                    }
+                },
+                {
+                    "code": "I25.1",
+                    "display": "Atherosclerotic heart disease",
+                    "no": "3",
+                    "validcode": "1",
+                    "metadata": {
+                        "code": "200",
+                        "message": "Ok"
+                    }
+                }
+            ]
+        },
+        "procedure": {
+            "string": "",
+            "expanded": []
+        }
+    }
+}
