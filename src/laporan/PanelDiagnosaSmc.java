@@ -5,7 +5,6 @@
  */
 package laporan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -21,14 +20,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -73,7 +69,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         tbICD10.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD10.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD10.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(530);
+        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(490);
         tbICD10.getColumnModel().getColumn(3).setMinWidth(0);
         tbICD10.getColumnModel().getColumn(3).setMaxWidth(0);
         tbICD10.getColumnModel().getColumn(4).setMinWidth(0);
@@ -111,9 +107,9 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         tbICD9CM.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbICD9CM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD9CM.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(30);
+        tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(40);
         tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(500);
+        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(470);
         tbICD9CM.getColumnModel().getColumn(4).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(4).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(5).setMinWidth(0);
@@ -143,9 +139,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 return c;
             }
         });
-        
-        // 
-        
+
         tabModeDiagnosaPasien = new DefaultTableModel(null, new Object[] {
             "P", "Kode", "Deskripsi", "Status", "No. SEP", "No. RM", "Nama Pasien"
         }) {
@@ -164,15 +158,15 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         tbDiagnosaPasien.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbDiagnosaPasien.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbDiagnosaPasien.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbDiagnosaPasien.getColumnModel().getColumn(2).setPreferredWidth(500);
-        tbDiagnosaPasien.getColumnModel().getColumn(3).setPreferredWidth(70);
+        tbDiagnosaPasien.getColumnModel().getColumn(2).setPreferredWidth(350);
+        tbDiagnosaPasien.getColumnModel().getColumn(3).setPreferredWidth(60);
         tbDiagnosaPasien.getColumnModel().getColumn(4).setPreferredWidth(120);
         tbDiagnosaPasien.getColumnModel().getColumn(5).setPreferredWidth(80);
         tbDiagnosaPasien.getColumnModel().getColumn(6).setPreferredWidth(400);
         tbDiagnosaPasien.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeProsedurPasien = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Deskripsi", "Status", "No. SEP", "No. RM", "Nama Pasien"
+            "P", "Kode", "Mtpx", "Deskripsi", "Status", "No. SEP", "No. RM", "Nama Pasien"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -181,19 +175,28 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             
             @Override
             public Class getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? java.lang.Boolean.class : java.lang.String.class;
+                if (columnIndex == 0) {
+                    return java.lang.Boolean.class;
+                }
+                
+                if (columnIndex == 2) {
+                    return java.lang.Integer.class;
+                }
+                
+                return java.lang.String.class;
             }
         };
         tbProsedurPasien.setModel(tabModeProsedurPasien);
         tbProsedurPasien.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbProsedurPasien.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tbDiagnosaPasien.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tbDiagnosaPasien.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbDiagnosaPasien.getColumnModel().getColumn(2).setPreferredWidth(500);
-        tbDiagnosaPasien.getColumnModel().getColumn(3).setPreferredWidth(70);
-        tbDiagnosaPasien.getColumnModel().getColumn(4).setPreferredWidth(120);
-        tbDiagnosaPasien.getColumnModel().getColumn(5).setPreferredWidth(80);
-        tbDiagnosaPasien.getColumnModel().getColumn(6).setPreferredWidth(400);
+        tbProsedurPasien.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tbProsedurPasien.getColumnModel().getColumn(1).setPreferredWidth(50);
+        tbProsedurPasien.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tbProsedurPasien.getColumnModel().getColumn(3).setPreferredWidth(350);
+        tbProsedurPasien.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tbProsedurPasien.getColumnModel().getColumn(5).setPreferredWidth(120);
+        tbProsedurPasien.getColumnModel().getColumn(6).setPreferredWidth(80);
+        tbProsedurPasien.getColumnModel().getColumn(7).setPreferredWidth(400);
         tbProsedurPasien.setDefaultRenderer(Object.class, new WarnaTable());
 
         Diagnosa.setDocument(new batasInput((byte) 100).getKata(Diagnosa));
@@ -481,93 +484,49 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     public void tampilDiagnosa() {
         Valid.tabelKosong(tabModeDiagnosaPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            ""
+            "select dx.kode_icd10, i.deskripsi, if(dx.urut = 1, 'Utama', '') as " +
+            "stts, dx.no_sep, r.no_rkm_medis, px.nm_pasien from idrg_diagnosa_pasien_smc " +
+            "dx join eklaim_icd10 i on dx.kode_icd10 = i.code1 join bridging_sep s on " +
+            "dx.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join " +
+            "pasien px on r.no_rkm_medis = px.no_rkm_medis where dx.no_sep = ? order " +
+            "by dx.urut"
         )) {
-            
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        
-        /*
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select r.tgl_registrasi, d.no_rawat, r.no_rkm_medis, px.nm_pasien, " +
-            "d.kd_penyakit, p.nm_penyakit, d.status, d.status_penyakit from " +
-            "diagnosa_pasien d join reg_periksa r on d.no_rawat = r.no_rawat join " +
-            "pasien px on r.no_rkm_medis = px.no_rkm_medis join penyakit p on " +
-            "d.kd_penyakit = p.kd_penyakit where d.no_rawat = ? " + (keyword.isBlank() ? "" :
-            "and (d.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or " +
-            "d.kd_penyakit like ? or p.nm_penyakit like ? or d.status_penyakit like ? or " +
-            "d.status like ?) ") + "order by d.prioritas"
-        )) {
-            int p = 0;
-            ps.setString(++p, norawat);
-            if (!keyword.isBlank()) {
-                keyword = keyword.trim();
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-            }
+            ps.setString(1, nosep);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabModeDiagnosaPasien.addRow(new Object[] {
-                        false, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)
+                        false, rs.getString("kode_icd10"), rs.getString("deskripsi"), rs.getString("stts"),
+                        rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien")
                     });
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        */
     }
 
     public void tampilProsedur() {
         Valid.tabelKosong(tabModeProsedurPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            ""
-        )) {
-            
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        
-        /*
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select r.tgl_registrasi, p.no_rawat, r.no_rkm_medis, px.nm_pasien, p.kode, " +
-            "i.deskripsi_panjang, p.status from prosedur_pasien p join reg_periksa r on " +
-            "p.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join " +
-            "icd9 i on p.kode = i.kode where p.no_rawat = ? " + (keyword.isBlank() ? "" :
-            "and (p.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or " +
-            "p.kode like ? or i.deskripsi_panjang like ? or p.status like ?) ") +
-            "order by p.prioritas"
+            "select p.kode_icd9, i.deskripsi, p.multiplicity, if(p.urut = 1, 'Utama', '') as stts, " +
+            "p.no_sep, r.no_rkm_medis, px.nm_pasien from idrg_prosedur_pasien_smc p join eklaim_icd9 i on " +
+            "p.kode_icd9 = i.code1 join bridging_sep s on p.no_sep = s.no_sep join reg_periksa r on " +
+            "s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis where " +
+            "p.no_sep = ? order by p.urut"
         )) {
             int p = 0;
-            ps.setString(++p, norawat);
-            if (!keyword.isBlank()) {
-                keyword = keyword.trim();
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-                ps.setString(++p, "%" + keyword + "%");
-            }
+            ps.setString(++p, nosep);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabModeProsedurPasien.addRow(new Object[] {
-                        false, rs.getString(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)
+                        false, rs.getString("kode_icd9"), rs.getInt("multiplicity"), rs.getString("deskripsi"),
+                        rs.getString("stts"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien")
                     });
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        */
     }
 
     private void tampilICD10IDRG(boolean pilihPertama) {

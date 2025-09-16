@@ -500,7 +500,7 @@
                                         }
                                         $diagnosa_idrg = substr($diagnosa_idrg, 0, -1);
                                     ?>
-                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diagnosa_idrg ?>" maxlength="100">
+                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diagnosa_idrg ?>" maxlength="150">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -519,7 +519,7 @@
                                         }
                                         $prosedur_idrg = substr($prosedur_idrg, 0, -1);
                                     ?>
-                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur_idrg; ?>" maxlength="100">
+                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur_idrg; ?>" maxlength="150">
                                 </td>
                             </tr>
                             <tr class="head">

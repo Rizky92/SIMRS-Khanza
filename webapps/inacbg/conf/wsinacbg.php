@@ -1335,10 +1335,10 @@
                 'sistole'              => $sistole,
                 'diastole'             => $diastole,
                 'discharge_status'     => $discharge_status,
-                'diagnosa'             => $diagnosa,
-                'procedure'            => $procedure,
-                'diagnosa_inagrouper'  => $diagnosa,
-                'procedure_inagrouper' => $procedure,
+                // 'diagnosa'             => $diagnosa,
+                // 'procedure'            => $procedure,
+                // 'diagnosa_inagrouper'  => $diagnosa,
+                // 'procedure_inagrouper' => $procedure,
                 'dializer_single_use'  => $dializer_single_use,
                 'tarif_rs'             => [
                     'prosedur_non_bedah' => $prosedur_non_bedah,
@@ -1393,6 +1393,108 @@
         InsertData2("inacbg_data_terkirim2", "'".$nomor_sep."','".$coder_nik."'");
 
         return GroupingStage1Smc($nomor_sep, $coder_nik);
+    }
+
+    function GroupingIdrgStage1Smc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'grouper',
+                'stage' => '1',
+                'grouper' => 'idrg',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ]
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "grouper idrg stage 1": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2('idrg_grouping_smc', "no_sep = '$nomor_sep'");
+        InsertData2('idrg_grouping_smc',
+            "'$nomor_sep', '$msg[response_idrg][mdc_number]', '$msg[response_idrg][mdc_description]', '$msg[response_idrg][drg_code]', '$msg[response_idrg][drg_description]', 0"
+        );
+    }
+
+    function FinalIdrgSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_grouping_final',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "idrg_grouping_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        ubahSmc('idrg_grouping_smc', 'final = 1', "no_sep = '$nomor_sep'");
+    }
+
+    function ImportIdrgToInacbgSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_to_inacbg_import',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "idrg_to_inacbg_import": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
     }
 
     function GroupingStage1Smc($nomor_sep, $coder_nik)
