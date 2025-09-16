@@ -192,6 +192,17 @@ CREATE TABLE IF NOT EXISTS `idrg_diagnosa_pasien_smc`  (
     CONSTRAINT `idrg_dx_smc_icd10_im` FOREIGN KEY (`kode_icd10`) REFERENCES `eklaim_icd10` (`code1`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE IF NOT EXISTS TABLE `idrg_grouping_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `mdc_number` varchar(4) NOT NULL,
+  `mdc_description` varchar(150) NULL DEFAULT NULL,
+  `drg_code` varchar(10) NOT NULL,
+  `drg_description` varchar(250) NULL DEFAULT NULL,
+  `final` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `idrg_grouping_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `idrg_prosedur_pasien_smc`  (
     `no_sep` varchar(40) NOT NULL,
     `kode_icd9` varchar(7) NOT NULL,
