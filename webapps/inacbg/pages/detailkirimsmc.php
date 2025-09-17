@@ -31,7 +31,9 @@
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
         <?php endif; ?>
-    <?php else: ?>
+    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'idrg'): ?>
+
+    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'inacbg'): ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
                 <?php
@@ -1118,7 +1120,7 @@
                                         $special_drug,
                                     ]));
 
-                                    ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2Smc($nosep, $codernik, $special_cmg);
+                                    ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2InacbgSmc($nosep, $codernik, $special_cmg);
 
                                     if (! $success) {
                                         echo $error;

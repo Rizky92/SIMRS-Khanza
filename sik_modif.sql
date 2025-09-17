@@ -160,8 +160,6 @@ CREATE TABLE IF NOT EXISTS `idrg_referensi_icd9cm_im`  (
   `code2` varchar(7) NOT NULL DEFAULT '',
   `deskripsi` varchar(300) NOT NULL DEFAULT '',
   `validcode` enum('0','1') NOT NULL DEFAULT '0',
-  `accpdx` enum('Y','N') NOT NULL DEFAULT 'Y',
-  `asterisk` enum('0','1') NOT NULL DEFAULT '0',
   `im` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`code1`) USING BTREE,
   INDEX `idrg_referensi_icd9cm_im_ibfk_1` (`code1`,`deskripsi`) USING BTREE,

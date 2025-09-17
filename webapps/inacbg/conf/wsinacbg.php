@@ -1171,6 +1171,7 @@
             return GetDataKlaimSmc($nomor_sep, $norawat);
         }
 
+        Hapus2('inacbg_klaim_baru2', "no_rawat = '$norawat'");
         InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
 
         return [
@@ -1392,10 +1393,97 @@
         Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
         InsertData2("inacbg_data_terkirim2", "'".$nomor_sep."','".$coder_nik."'");
 
-        return GroupingStage1Smc($nomor_sep, $coder_nik);
+        $set_diagnosa = SetDiagnosaIdrgSmc($nomor_sep, $diagnosa);
+        $set_prosedur = SetProsedurIdrgSmc($nomor_sep, $prosedur);
+
+        if (!$set_diagnosa['success']) {
+            return $set_diagnosa;
+        }
+
+        if (!$set_prosedur['success']) {
+            return $set_prosedur;
+        }
+
+        return GroupingStage1IdrgSmc($nomor_sep, $coder_nik);
     }
 
-    function GroupingIdrgStage1Smc($nomor_sep, $coder_nik)
+    function SetDiagnosaIdrgSmc($nomor_sep, $diagnosa)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_diagnosa_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'diagnosa' => $diagnosa,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "idrg_diagnosa_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Diagnosa berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function SetProsedurIdrgSmc($nomor_sep, $prosedur)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_procedure_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'procedure' => $prosedur,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "idrg_procedure_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error;
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Prosedur berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function GroupingStage1IdrgSmc($nomor_sep, $coder_nik)
     {
         $request = [
             'metadata' => [
@@ -1412,7 +1500,7 @@
 
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
-                '[%s] method "grouper idrg stage 1": %s - %s',
+                '[%s] method "grouper idrg": %s - %s',
                 $msg['metadata']['code'],
                 $msg['metadata']['error_no'],
                 $msg['metadata']['message']
@@ -1431,6 +1519,8 @@
         InsertData2('idrg_grouping_smc',
             "'$nomor_sep', '$msg[response_idrg][mdc_number]', '$msg[response_idrg][mdc_description]', '$msg[response_idrg][drg_code]', '$msg[response_idrg][drg_description]', 0"
         );
+
+        return FinalIdrgSmc($nomor_sep);
     }
 
     function FinalIdrgSmc($nomor_sep)
@@ -1464,9 +1554,15 @@
         }
 
         ubahSmc('idrg_grouping_smc', 'final = 1', "no_sep = '$nomor_sep'");
+
+        return [
+            'success' => true,
+            'data' => 'Grouping IDRG sudah final dan berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
-    function ImportIdrgToInacbgSmc($nomor_sep)
+    function ImportIdrgToInacbgSmc($nomor_sep, $no_rawat, $status_rawat)
     {
         $request = [
             'metadata' => [
@@ -1495,14 +1591,27 @@
                 'error' => $error,
             ];
         }
+
+        $no_rkm_medis =
+
+        $data_diagnosa = $msg['data']['diagnosa']['expanded'];
+        $data_prosedur = $msg['data']['prosedur']['expanded'];
+
+        Hapus2('diagnosa_pasien', "no_rawat = '$no_rawat'");
+        foreach ($data_diagnosa as $dx) {
+            InsertData2('diagnosa_pasien', "'$no_rawat', '$dx[code]', '$status_rawat', '$dx[no]', (if(exists(select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where reg_p");
+        }
+
+        Hapus2('prosedur_pasien', "no_rawat = '$no_rawat'");
     }
 
-    function GroupingStage1Smc($nomor_sep, $coder_nik)
+    function GroupingStage1InacbgSmc($nomor_sep, $coder_nik)
     {
         $request = [
             'metadata' => [
                 'method' => 'grouper',
                 'stage' => '1',
+                'grouper' => 'inacbg',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
@@ -1551,12 +1660,13 @@
         }
     }
 
-    function GroupingStage2Smc($nomor_sep, $coder_nik, $special_cmg)
+    function GroupingStage2InacbgSmc($nomor_sep, $coder_nik, $special_cmg)
     {
         $request = [
             'metadata' => [
                 'method' => 'grouper',
                 'stage' => 2,
+                'grouper' => 'inacbg',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
