@@ -1390,21 +1390,14 @@
             ];
         }
 
-        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-        InsertData2("inacbg_data_terkirim2", "'".$nomor_sep."','".$coder_nik."'");
+        Hapus2('inacbg_data_terkirim2', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
 
-        $set_diagnosa = SetDiagnosaIdrgSmc($nomor_sep, $diagnosa);
-        $set_prosedur = SetProsedurIdrgSmc($nomor_sep, $prosedur);
-
-        if (!$set_diagnosa['success']) {
-            return $set_diagnosa;
-        }
-
-        if (!$set_prosedur['success']) {
-            return $set_prosedur;
-        }
-
-        return GroupingStage1IdrgSmc($nomor_sep, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Data klaim berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
     function SetDiagnosaIdrgSmc($nomor_sep, $diagnosa)
@@ -1516,18 +1509,22 @@
         }
 
         Hapus2('idrg_grouping_smc', "no_sep = '$nomor_sep'");
-        InsertData2('idrg_grouping_smc',
-            "'$nomor_sep', '$msg[response_idrg][mdc_number]', '$msg[response_idrg][mdc_description]', '$msg[response_idrg][drg_code]', '$msg[response_idrg][drg_description]', 0"
-        );
+        InsertData2('idrg_grouping_smc', sprintf("'%s', '%s', '%s', '%s', '%s'",
+            $nomor_sep,
+            $msg['response_idrg']['mdc_number'],
+            $msg['response_idrg']['mdc_description'],
+            $msg['response_idrg']['drg_code'],
+            $msg['response_idrg']['drg_description']
+        ));
 
-        return FinalIdrgSmc($nomor_sep);
+        return FinalIdrgSmc($nomor_sep, $coder_nik);
     }
 
-    function FinalIdrgSmc($nomor_sep)
+    function FinalIdrgSmc($nomor_sep, $coder_nik)
     {
         $request = [
             'metadata' => [
-                'method' => 'idrg_grouping_final',
+                'method' => 'idrg_grouper_final',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
@@ -1538,7 +1535,7 @@
 
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
-                '[%s] method "idrg_grouping_final": %s - %s',
+                '[%s] method "idrg_grouper_final": %s - %s',
                 $msg['metadata']['code'],
                 $msg['metadata']['error_no'],
                 $msg['metadata']['message']
@@ -1553,7 +1550,7 @@
             ];
         }
 
-        ubahSmc('idrg_grouping_smc', 'final = 1', "no_sep = '$nomor_sep'");
+        InsertData2('idrg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
         return [
             'success' => true,
@@ -1562,7 +1559,7 @@
         ];
     }
 
-    function ImportIdrgToInacbgSmc($nomor_sep, $no_rawat, $status_rawat)
+    function ImportIdrgToInacbgSmc($nomor_sep, $no_rawat, $status_rawat, $coder_nik)
     {
         $request = [
             'metadata' => [
@@ -1592,17 +1589,26 @@
             ];
         }
 
-        $no_rkm_medis =
+        $no_rkm_medis = getOne("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat = '$no_rawat'");
 
         $data_diagnosa = $msg['data']['diagnosa']['expanded'];
         $data_prosedur = $msg['data']['prosedur']['expanded'];
 
         Hapus2('diagnosa_pasien', "no_rawat = '$no_rawat'");
         foreach ($data_diagnosa as $dx) {
-            InsertData2('diagnosa_pasien', "'$no_rawat', '$dx[code]', '$status_rawat', '$dx[no]', (if(exists(select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where reg_p");
+            InsertData2('diagnosa_pasien',
+                "'$no_rawat', '$dx[code]', '$status_rawat', '$dx[no]', (if(exists(
+                select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where
+                diagnosa_pasien.kd_penyakit = '$dx[code]' and reg_periksa.no_rkm_medis = '$no_rkm_medis'), 'Lama', 'Baru'))"
+            );
         }
 
         Hapus2('prosedur_pasien', "no_rawat = '$no_rawat'");
+        foreach ($data_prosedur as $p) {
+            InsertData2('prosedur_pasien', "'no_rawat', '$dx[code]', '$status_rawat', '$dx[no]'");
+        }
+
+        return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
     }
 
     function GroupingStage1InacbgSmc($nomor_sep, $coder_nik)
