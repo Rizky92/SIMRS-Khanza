@@ -31,9 +31,7 @@
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
         <?php endif; ?>
-    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'idrg'): ?>
-
-    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'inacbg'): ?>
+    <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
                 <?php
@@ -495,14 +493,19 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $diagnosa_idrg = '';
-                                        $query_diagnosa_idrg = bukaquery("select idrg_diagnosa_pasien_smc.kode_icd10 from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = '$nosep' order by idrg_diagnosa_pasien_smc.urut");
-                                        while ($barisdiagnosa = mysqli_fetch_array($query_diagnosa_idrg)) {
-                                            $diagnosa_idrg .= $barisdiagnosa['kode_icd10'].'#';
+                                        $penyakit = '';
+                                        $a = 1;
+                                        $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                        while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
+                                            if ($a == 1) {
+                                                $penyakit = $barispenyakit['kd_penyakit'];
+                                            } else {
+                                                $penyakit .= '#'.$barispenyakit['kd_penyakit'];
+                                            }
+                                            $a++;
                                         }
-                                        $diagnosa_idrg = substr($diagnosa_idrg, 0, -1);
                                     ?>
-                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $diagnosa_idrg ?>" maxlength="150">
+                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -510,18 +513,19 @@
                                 <td>:</td>
                                 <td width="57%">
                                     <?php
-                                        $prosedur_idrg = '';
-                                        $query_prosedur_idrg = bukaquery("select idrg_prosedur_pasien_smc.kode_icd9, idrg_prosedur_pasien_smc.multiplicity, idrg_prosedur_pasien_smc.urut from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = '$nosep' order by idrg_prosedur_pasien_smc.urut");
-                                        while ($barisprosedur = mysqli_fetch_array($query_prosedur_idrg)) {
-                                            if ($barisprosedur['multiplicity'] > 1) {
-                                                $prosedur_idrg .= $barisprosedur['kode_icd9'].'+'.$barisprosedur['multiplicity'].'#';
+                                        $prosedur = '';
+                                        $a = 1;
+                                        $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
+                                        while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
+                                            if ($a == 1) {
+                                                $prosedur = $barisprosedur['kode'];
                                             } else {
-                                                $prosedur_idrg .= $barisprosedur['kode_icd9'].'#';
+                                                $prosedur .= '#'.$barisprosedur['kode'];
                                             }
+                                            $a++;
                                         }
-                                        $prosedur_idrg = substr($prosedur_idrg, 0, -1);
                                     ?>
-                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur_idrg; ?>" maxlength="150">
+                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
                                 </td>
                             </tr>
                             <tr class="head">
