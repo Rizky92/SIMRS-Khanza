@@ -5,7 +5,7 @@
     require_once('../conf/conf.php');
 
     function getKey() {
-       $keyRS = "";
+       $keyRS = "b5695f833187f277e420adb25298c31027f24ef2300ca1915f9be549b649ab28";
 
        if (empty($keyRS)) {
             throw new \Exception("Key belum ada!");
@@ -1115,9 +1115,10 @@
         $hasilresponse = substr($response,$first,strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
         //echo $hasildecrypt;
-        $msg = json_decode($hasildecrypt,true);
-        print_r(['request' => $request, 'response' => $msg]);
-        return $msg;
+        $decoded = json_decode($hasildecrypt, true);
+        print_r(['request' => $request, 'response' => $hasildecrypt]);
+        echo "<br /><br />";
+        return $decoded;
     }
 
     function Get($request) {
@@ -1166,7 +1167,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return GetDataKlaimSmc($nomor_sep, $norawat);
         }
@@ -1202,7 +1203,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1225,7 +1226,7 @@
         ];
     }
 
-    function EditUlangKlaimSmc($nomor_sep)
+    function ReeditKlaimSmc($nomor_sep)
     {
         $request = [
             'metadata' => [
@@ -1246,7 +1247,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1284,7 +1285,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1381,7 +1382,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1422,7 +1423,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1460,7 +1461,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1499,7 +1500,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1541,7 +1542,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1550,6 +1551,7 @@
             ];
         }
 
+        Hapus2('idrg_klaim_final_smc', "no_sep = '$nomor_sep'");
         InsertData2('idrg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
         return [
@@ -1580,7 +1582,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1592,20 +1594,24 @@
         $no_rkm_medis = getOne("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat = '$no_rawat'");
 
         $data_diagnosa = $msg['data']['diagnosa']['expanded'];
-        $data_prosedur = $msg['data']['prosedur']['expanded'];
+        $data_prosedur = $msg['data']['procedure']['expanded'];
 
         Hapus2('diagnosa_pasien', "no_rawat = '$no_rawat'");
         foreach ($data_diagnosa as $dx) {
-            InsertData2('diagnosa_pasien',
-                "'$no_rawat', '$dx[code]', '$status_rawat', '$dx[no]', (if(exists(
-                select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where
-                diagnosa_pasien.kd_penyakit = '$dx[code]' and reg_periksa.no_rkm_medis = '$no_rkm_medis'), 'Lama', 'Baru'))"
-            );
+            $statusdx = 'Baru';
+            if (getOne(
+                "select exists(select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where
+                diagnosa_pasien.kd_penyakit = '$dx[code]' and reg_periksa.no_rkm_medis = '$no_rkm_medis')"
+            ) == '1') {
+                $statusdx = 'Lama';
+            }
+
+            InsertData2('diagnosa_pasien', "'$no_rawat', '$dx[code]', '$status_rawat', '$dx[no]', '$statusdx'");
         }
 
         Hapus2('prosedur_pasien', "no_rawat = '$no_rawat'");
         foreach ($data_prosedur as $p) {
-            InsertData2('prosedur_pasien', "'no_rawat', '$dx[code]', '$status_rawat', '$dx[no]'");
+            InsertData2('prosedur_pasien', "'$no_rawat', '$p[code]', '$status_rawat', '$p[no]'");
         }
 
         return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
@@ -1634,7 +1640,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1643,12 +1649,13 @@
             ];
         }
 
-        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
-        $cbg             = validangka($msg['response']['cbg']['tariff']);
-        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
-        $chronic         = validangka($msg['response']['chronic']['tariff']);
-        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
-        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_grouping_stage12', sprintf("'%s', '%s', '%s', %s",
+            $nomor_sep,
+            $msg['response_inacbg']['cbg']['code'],
+            $msg['response_inacbg']['cbg']['description'],
+            $msg['response_inacbg']['tariff']
+        ));
 
         if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
             Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
@@ -1690,7 +1697,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1700,14 +1707,57 @@
         }
 
         Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
-        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
-        $cbg             = validangka($msg['response']['cbg']['tariff']);
-        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
-        $chronic         = validangka($msg['response']['chronic']['tariff']);
-        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
-        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_grouping_stage12', sprintf("'%s', '%s', '%s', %s",
+            $nomor_sep,
+            $msg['response_inacbg']['cbg']['code'],
+            $msg['response_inacbg']['cbg']['description'],
+            $msg['response_inacbg']['tariff']
+        ));
+
+        return FinalInacbgSmc($nomor_sep, $coder_nik);
+    }
+
+    function FinalInacbgSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'inacbg_grouper_final',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "inacbg_grouper_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo $error.'<br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
         return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
+
+        /*return [
+            'success' => true,
+            'data' => 'Grouping INACBG sudah final dan berhasil disimpan!',
+            'error' => null,
+        ];*/
     }
 
     function FinalisasiKlaimSmc($nomor_sep, $coder_nik)
@@ -1732,7 +1782,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,
@@ -1765,7 +1815,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo $error.'<br /><br />';
 
             return [
                 'success' => false,

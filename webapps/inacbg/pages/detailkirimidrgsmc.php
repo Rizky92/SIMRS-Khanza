@@ -950,7 +950,7 @@
                         if ((int) round($validasi) === 0) {
                             if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
                                 BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                EditUlangKlaimSmc($nosep);
+                                ReeditKlaimSmc($nosep);
                                 ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
                                     $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                     $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
