@@ -1819,7 +1819,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="laporan.PanelIDRGSMC" name="panelDiagnosaSmc">
+                        <Component class="laporan.PanelDiagnosaSmc" name="panelDiagnosaSmc">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="panelDiagnosaSmc" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

@@ -329,7 +329,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnHapusDiagnosa = new widget.Button();
         jLabel32 = new widget.Label();
         btnRiwayatPasien = new widget.Button();
-        panelDiagnosaSmc = new laporan.PanelIDRGSMC();
+        panelDiagnosaSmc = new laporan.PanelDiagnosaSmc();
         jLabel33 = new widget.Label();
         btnPDFKlaimINACBG = new widget.Button();
         jLabel34 = new widget.Label();
@@ -2724,7 +2724,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Label lblTglSEP;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
-    private laporan.PanelIDRGSMC panelDiagnosaSmc;
+    private laporan.PanelDiagnosaSmc panelDiagnosaSmc;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
