@@ -1,0 +1,875 @@
+{
+  "name": "E-KLAIM IDRG",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "#03 IDRG DIAGNOSA GET",
+      "filename": "#03 IDRG DIAGNOSA GET.bru",
+      "seq": 4,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_diagnosa_get\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA3\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#02 IDRG DIAGNOSA SET",
+      "filename": "#02 IDRG DIAGNOSA SET.bru",
+      "seq": 3,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_diagnosa_set\",\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    },\r\n    \"data\": {\r\n        \"diagnosa\": \"Z09.8#K04.1\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#15 GROUPING INACBG STAGE 2",
+      "filename": "#15 GROUPING INACBG STAGE 2.bru",
+      "seq": 16,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"grouper\",\r\n        \"stage\": \"2\",\r\n        \"grouper\": \"inacbg\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA5\",\r\n        \"special_cmg\": \"RR04Knee#YY01\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#04 IDRG PROCEDURE SET",
+      "filename": "#04 IDRG PROCEDURE SET.bru",
+      "seq": 5,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_procedure_set\",\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    },\r\n    \"data\": {\r\n        \"procedure\": \"23.71+2\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#17 RE-EDIT INACBG",
+      "filename": "#17 RE-EDIT INACBG.bru",
+      "seq": 18,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_grouper_reedit\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V007472\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#19 CLAIM RE-EDIT",
+      "filename": "#19 CLAIM RE-EDIT.bru",
+      "seq": 20,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"reedit_claim\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V007472\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#16 FINAL INACBG",
+      "filename": "#16 FINAL INACBG.bru",
+      "seq": 17,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_grouper_final\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#18 CLAIM FINAL",
+      "filename": "#18 CLAIM FINAL.bru",
+      "seq": 19,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"claim_final\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\",\r\n        \"coder_nik\": \"6472120000000001\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#05 IDRG PROCEDURE GET",
+      "filename": "#05 IDRG PROCEDURE GET.bru",
+      "seq": 6,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_procedure_get\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA3\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#20 CLAIM SEND",
+      "filename": "#20 CLAIM SEND.bru",
+      "seq": 21,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"send_claim_individual\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA5\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#21 GET CLAIM DATA",
+      "filename": "#21 GET CLAIM DATA.bru",
+      "seq": 22,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"get_claim_data\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA5\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#07 FINAL IDRG",
+      "filename": "#07 FINAL IDRG.bru",
+      "seq": 8,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_grouper_final\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#06 GROUPING IDRG",
+      "filename": "#06 GROUPING IDRG.bru",
+      "seq": 7,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"grouper\",\r\n        \"stage\": \"1\",\r\n        \"grouper\": \"idrg\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#01 SET CLAIM DATA",
+      "filename": "#01 SET CLAIM DATA.bru",
+      "seq": 2,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"set_claim_data\",\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\",\r\n        \"nomor_kartu\": \"0000123456789\",\r\n        \"tgl_masuk\": \"2025-08-06 14:36:32\",\r\n        \"tgl_pulang\": \"2025-08-06 23:59:99\",\r\n        \"cara_masuk\": \"gp\",\r\n        \"jenis_rawat\": \"2\",\r\n        \"kelas_rawat\": \"3\",\r\n        \"adl_sub_acute\": \"0\",\r\n        \"adl_chronic\": \"0\",\r\n        \"icu_indikator\": \"0\",\r\n        \"icu_los\": \"0\",\r\n        \"upgrade_class_ind\": \"0\",\r\n        \"add_payment_pct\": \"0\",\r\n        \"birth_weight\": \"0\",\r\n        \"sistole\": 120,\r\n        \"diastole\": 90,\r\n        \"discharge_status\": \"1\",\r\n        \"tarif_rs\": {\r\n            \"prosedur_non_bedah\": \"0\",\r\n            \"prosedur_bedah\": \"0\",\r\n            \"konsultasi\": \"306100\",\r\n            \"tenaga_ahli\": \"0\",\r\n            \"keperawatan\": \"52500\",\r\n            \"penunjang\": \"0\",\r\n            \"radiologi\": \"0\",\r\n            \"laboratorium\": \"0\",\r\n            \"pelayanan_darah\": \"0\",\r\n            \"rehabilitasi\": \"0\",\r\n            \"kamar\": \"25000\",\r\n            \"rawat_intensif\": \"0\",\r\n            \"obat\": \"0\",\r\n            \"obat_kronis\": \"0\",\r\n            \"obat_kemoterapi\": \"0\",\r\n            \"alkes\": \"0\",\r\n            \"bmhp\": \"0\",\r\n            \"sewa_alat\": \"0\"\r\n        },\r\n        \"tarif_poli_eks\": \"0\",\r\n        \"nama_dokter\": \"drg. AYU RAFANIA ATIKAH, Sp.KG\",\r\n        \"kode_tarif\": \"CS\",\r\n        \"payor_id\": \"3\",\r\n        \"payor_cd\": \"JKN\",\r\n        \"coder_nik\": \"6472120000000001\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#08 RE-EDIT IDRG",
+      "filename": "#08 RE-EDIT IDRG.bru",
+      "seq": 9,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_grouper_reedit\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V007472\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#00 NEW CLAIM",
+      "filename": "#00 NEW CLAIM.bru",
+      "seq": 1,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"new_claim\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_kartu\": \"0000123456789\",\r\n        \"nomor_sep\": \"0302R1100825V999999\",\r\n        \"nomor_rm\": \"999999\",\r\n        \"nama_pasien\": \"RISKI MAULANA\",\r\n        \"tgl_lahir\": \"2010-09-25 00:00:00\",\r\n        \"gender\": \"1\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#13 INACBG PROCEDURE GET",
+      "filename": "#13 INACBG PROCEDURE GET.bru",
+      "seq": 14,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_procedure_get\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA5\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#12 INACBG PROCEDURE SET",
+      "filename": "#12 INACBG PROCEDURE SET.bru",
+      "seq": 13,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_procedure_set\",\r\n        \"nomor_sep\": \"UJICOBA5\"\r\n    },\r\n    \"data\": {\r\n        \"procedure\": \"81.52#86.22#90.09\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#09 IDRG TO INACBG IMPORT",
+      "filename": "#09 IDRG TO INACBG IMPORT.bru",
+      "seq": 10,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"idrg_to_inacbg_import\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#10 INACBG DIAGNOSA GET",
+      "filename": "#10 INACBG DIAGNOSA GET.bru",
+      "seq": 11,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_diagnosa_get\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"UJICOBA3\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#11 INACBG DIAGNOSA SET",
+      "filename": "#11 INACBG DIAGNOSA SET.bru",
+      "seq": 12,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"inacbg_diagnosa_set\",\r\n        \"nomor_sep\": \"UJICOBA5\"\r\n    },\r\n    \"data\": {\r\n        \"diagnosa\": \"S71.0#A00.1\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "#14 GROUPING INACBG STAGE 1",
+      "filename": "#14 GROUPING INACBG STAGE 1.bru",
+      "seq": 15,
+      "settings": {
+        "encodeUrl": true
+      },
+      "tags": [],
+      "request": {
+        "url": "{{base_url}}/E-Klaim/ws.php?mode=debug",
+        "method": "POST",
+        "headers": [],
+        "params": [
+          {
+            "name": "mode",
+            "value": "debug",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\r\n    \"metadata\": {\r\n        \"method\": \"grouper\",\r\n        \"stage\": \"1\",\r\n        \"grouper\": \"inacbg\"\r\n    },\r\n    \"data\": {\r\n        \"nomor_sep\": \"0302R1100825V999999\"\r\n    }\r\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "none"
+      },
+      "vars": {
+        "req": [
+          {
+            "name": "base_url",
+            "value": "http://10.211.55.3",
+            "enabled": true,
+            "local": false,
+            "uid": "tIgsvjpT9PK8apr6Gschc"
+          }
+        ]
+      }
+    },
+    "meta": {
+      "name": "E-KLAIM IDRG"
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "E-KLAIM IDRG",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.010179519653320312,
+    "filesCount": 23
+  }
+}

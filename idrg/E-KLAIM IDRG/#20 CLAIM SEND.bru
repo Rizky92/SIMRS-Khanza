@@ -1,0 +1,30 @@
+meta {
+  name: #20 CLAIM SEND
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "send_claim_individual"
+      },
+      "data": {
+          "nomor_sep": "UJICOBA5"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

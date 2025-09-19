@@ -1,0 +1,11 @@
+{
+    "metadata": {
+        "code": 200,
+        "message": "Ok"
+    },
+    "response": {
+        "patient_id": "3",
+        "admission_id": 2,
+        "hospital_admission_id": 4
+    }
+}

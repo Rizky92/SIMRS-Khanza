@@ -612,6 +612,7 @@
     }
 
     function InsertData2($tabelname,$attrib) {
+        echo $attrib.'<br /><br />';
         $command = bukaquery("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }
@@ -999,5 +1000,20 @@
           return Terbilang($x / 1000) . " ribu" . Terbilang($x % 1000);
         elseif ($x < 1000000000)
           return Terbilang($x / 1000000) . " juta" . Terbilang($x % 1000000);
+    }
+
+    function formatDuitSmc($duit)
+    {
+        return (round((float) $duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
+    }
+
+    function ubahSmc($table, $attributes, $condition)
+    {
+        if (empty($table) || empty($attributes) || empty($conditions)) {
+            echo '<span style="color: rgb(255, 0, 0); font-weight: bold">Terjadi kesalahan..!!</span>';
+            return;
+        }
+
+        return bukaquery("UPDATE $table SET $attributes WHERE $condition");
     }
 ?>

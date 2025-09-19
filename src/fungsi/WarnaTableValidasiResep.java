@@ -46,13 +46,11 @@ public class WarnaTableValidasiResep extends DefaultTableCellRenderer {
         return component;
     }
     
-    public void setWarnaKolom(int posisi)
-    {
+    public void setWarnaKolom(int posisi) {
         posisiWarna = posisi;
     }
     
-    public void setWarnaKolomKondisi(int posisi)
-    {
+    public void setWarnaKolomKondisi(int posisi) {
         posisiKondisi = posisi;
     }
 }

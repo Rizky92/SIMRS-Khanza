@@ -1,0 +1,31 @@
+meta {
+  name: #12 INACBG PROCEDURE SET
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "inacbg_procedure_set",
+          "nomor_sep": "UJICOBA5"
+      },
+      "data": {
+          "procedure": "81.52#86.22#90.09"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

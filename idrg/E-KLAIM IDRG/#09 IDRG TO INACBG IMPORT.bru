@@ -1,0 +1,30 @@
+meta {
+  name: #09 IDRG TO INACBG IMPORT
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{base_url}}/E-Klaim/ws.php?mode=debug
+  body: json
+  auth: inherit
+}
+
+params:query {
+  mode: debug
+}
+
+body:json {
+  {
+      "metadata": {
+          "method": "idrg_to_inacbg_import"
+      },
+      "data": {
+          "nomor_sep": "0302R1100825V999999"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

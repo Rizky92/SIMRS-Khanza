@@ -1101,28 +1101,32 @@
 
     function Request($request){
         $json = mc_encrypt($request, getKey());
-        $header = array("Content-Type: application/x-www-form-urlencoded");
+        $header = ['Content-Type: application/x-www-form-urlencoded'];
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         $response = curl_exec($ch);
-        $first = strpos($response, "\n")+1;
-        $last = strrpos($response, "\n")-1;
-        $hasilresponse = substr($response,$first,strlen($response) - $first - $last);
+
+        $first = strpos($response, "\n") + 1;
+        $last = strrpos($response, "\n") - 1;
+        $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
-        //echo $hasildecrypt;
-        $msg = json_decode($hasildecrypt,true);
-        print_r(['request' => $request, 'response' => $msg]);
-        return $msg;
+
+        print_r(['request' => $request, 'response' => $hasildecrypt]);
+        echo "<br /><br />";
+
+        return json_decode($hasildecrypt, true);
     }
 
     function Get($request) {
         $json = mc_encrypt($request, getKey());
         $header = ['Content-Type: application/json', 'Accept: application/json'];
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -1131,13 +1135,16 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         $response = curl_exec($ch);
+
         $first = strpos($response, "\n") + 1;
         $last = strrpos($response, "\n") - 1;
         $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
-        $msg = json_decode($hasildecrypt, true);
-        print_r(['request' => $request, 'response' => $msg]);
-        return $msg;
+
+        print_r(['request' => $request, 'response' => $hasildecrypt]);
+        echo "<br /><br />";
+
+        return json_decode($hasildecrypt, true);
     }
 
     function BuatKlaimBaruSmc($nomor_kartu, $nomor_sep, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $norawat)
@@ -1166,12 +1173,18 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return GetDataKlaimSmc($nomor_sep, $norawat);
         }
 
-        InsertData2("inacbg_klaim_baru2", "'".$norawat."','".$nomor_sep."','".$msg['response']['patient_id']."','".$msg['response']['admission_id']."','".$msg['response']['hospital_admission_id']."'");
+        InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
+            $norawat,
+            $nomor_sep,
+            $msg['response']['patient_id'],
+            $msg['response']['admission_id'],
+            $msg['response']['hospital_admission_id']
+        ));
 
         return [
             'success' => true,
@@ -1201,7 +1214,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1210,21 +1223,29 @@
             ];
         }
 
-        $patient_id            = $msg['response']['data']['patient_id'];
-        $admission_id          = $msg['response']['data']['admission_id'];
-        $hospital_admission_id = $msg['response']['data']['hospital_admission_id'];
-
         Hapus2('inacbg_klaim_baru2', "no_rawat = '$norawat'");
-        InsertData2('inacbg_klaim_baru2', "'$norawat', '$nomor_sep', '$patient_id', '$admission_id', '$hospital_admission_id'");
+        InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
+            $norawat,
+            $nomor_sep,
+            $msg['response']['data']['patient_id'],
+            $msg['response']['data']['admission_id'],
+            $msg['response']['data']['hospital_admission_id']
+        ));
 
-        return [
+        if ($msg['response']['data']['klaim_status_cd'] == 'final') {
+            return ReeditKlaimSmc($nomor_sep);
+        }
+
+        return ReeditIdrgSmc($nomor_sep);
+
+        /*return [
             'success' => true,
             'data' => 'Klaim berhasil disimpan',
             'error' => null,
-        ];
+        ];*/
     }
 
-    function EditUlangKlaimSmc($nomor_sep)
+    function ReeditKlaimSmc($nomor_sep)
     {
         $request = [
             'metadata' => [
@@ -1245,7 +1266,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1253,6 +1274,53 @@
                 'error' => $error,
             ];
         }
+
+        return ReeditIdrgSmc($nomor_sep);
+
+        /*return [
+            'success' => true,
+            'data' => 'Klaim berhasil diedit',
+            'error' => null,
+        ];*/
+    }
+
+    function ReeditIdrgSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_grouper_reedit',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "idrg_grouper_reedit": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2('idrg_grouping_smc', "no_sep = '$nomor_sep'");
+        Hapus2('idrg_klaim_final_smc', "no_sep = '$nomor_sep'");
+
+        // Edit klaim IDRG akan membuat grouper INACBG invalid,
+        // Jadi batalkan klaim INACBG
+        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
+        Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
@@ -1261,15 +1329,14 @@
         ];
     }
 
-    function MenghapusKlaimSmc($nomor_sep, $coder_nik)
+    function ReeditInacbgSmc($nomor_sep)
     {
         $request = [
             'metadata' => [
-                'method' => 'delete_claim',
+                'method' => 'inacbg_grouper_reedit',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
-                'coder_nik' => $coder_nik,
             ],
         ];
 
@@ -1277,13 +1344,13 @@
 
         if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
-                '[%s] method "delete_claim": %s - %s',
+                '[%s] method "inacbg_grouper_reedit": %s - %s',
                 $msg['metadata']['code'],
                 $msg['metadata']['error_no'],
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1292,13 +1359,12 @@
             ];
         }
 
-        Hapus2("inacbg_grouping_stage_12", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
+        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
+        Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
-            'data' => 'Klaim berhasil Dihapus!',
+            'data' => 'Klaim berhasil diedit',
             'error' => null,
         ];
     }
@@ -1335,10 +1401,10 @@
                 'sistole'              => $sistole,
                 'diastole'             => $diastole,
                 'discharge_status'     => $discharge_status,
-                'diagnosa'             => $diagnosa,
-                'procedure'            => $procedure,
-                'diagnosa_inagrouper'  => $diagnosa,
-                'procedure_inagrouper' => $procedure,
+                // 'diagnosa'             => $diagnosa,
+                // 'procedure'            => $procedure,
+                // 'diagnosa_inagrouper'  => $diagnosa,
+                // 'procedure_inagrouper' => $procedure,
                 'dializer_single_use'  => $dializer_single_use,
                 'tarif_rs'             => [
                     'prosedur_non_bedah' => $prosedur_non_bedah,
@@ -1380,7 +1446,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1389,18 +1455,341 @@
             ];
         }
 
-        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-        InsertData2("inacbg_data_terkirim2", "'".$nomor_sep."','".$coder_nik."'");
+        Hapus2('inacbg_data_terkirim2', "no_sep = '$nomor_sep'");
+        InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
 
-        return GroupingStage1Smc($nomor_sep, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Data klaim berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
-    function GroupingStage1Smc($nomor_sep, $coder_nik)
+    function SetDiagnosaIdrgSmc($nomor_sep, $diagnosa)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_diagnosa_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'diagnosa' => $diagnosa,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "idrg_diagnosa_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Diagnosa IDRG berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function SetProsedurIdrgSmc($nomor_sep, $prosedur)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_procedure_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'procedure' => $prosedur,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "idrg_procedure_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Prosedur IDRG berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function GroupingStage1IdrgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik)
     {
         $request = [
             'metadata' => [
                 'method' => 'grouper',
                 'stage' => '1',
+                'grouper' => 'idrg',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ]
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "grouper idrg": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        InsertData2('idrg_grouping_smc', sprintf("'%s', '%s', '%s', '%s', '%s'",
+            $nomor_sep,
+            $msg['response_idrg']['mdc_number'],
+            $msg['response_idrg']['mdc_description'],
+            $msg['response_idrg']['drg_code'],
+            $msg['response_idrg']['drg_description']
+        ));
+
+        return FinalIdrgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik);
+    }
+
+    function FinalIdrgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_grouper_final',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "idrg_grouper_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        InsertData2('idrg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
+
+        return ImportIdrgToInacbgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik);
+    }
+
+    function ImportIdrgToInacbgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'idrg_to_inacbg_import',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "idrg_to_inacbg_import": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        $no_rkm_medis = getOne("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat = '$norawat'");
+
+        $data_diagnosa = $msg['data']['diagnosa']['expanded'];
+        $data_prosedur = $msg['data']['procedure']['expanded'];
+
+        usort($data_diagnosa, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
+        usort($data_prosedur, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
+
+        Hapus2('diagnosa_pasien', "no_rawat = '$norawat'");
+        $urut = 1;
+        $diagnosa = '';
+        foreach ($data_diagnosa as $dx) {
+            if (getOne("select exists(select * from eklaim_icd10_smc where code1 = '$dx[code]' and im = '1')") == '1') continue;
+
+            $statusdx = 'Baru';
+            if (getOne(
+                "select exists(select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where
+                diagnosa_pasien.kd_penyakit = '$dx[code]' and reg_periksa.no_rkm_medis = '$no_rkm_medis')"
+            ) == '1') {
+                $statusdx = 'Lama';
+            }
+
+            InsertData2('diagnosa_pasien', sprintf("'%s', '%s', '%s', %s, '%s'",
+                $norawat, $dx['code'], $status_rawat, $urut++, $statusdx
+            ));
+
+            $diagnosa .= $dx['code'].'#';
+        }
+
+        ['success' => $sukses_dx, 'data' => $data_dx, 'error' => $_err] = SetDiagnosaInacbgSmc($nomor_sep, mb_substr($diagnosa, 0, -1));
+
+        Hapus2('prosedur_pasien', "no_rawat = '$norawat'");
+        $urut = 1;
+        $prosedur = '';
+        foreach ($data_prosedur as $p) {
+            if (getOne("select exists(select * from eklaim_icd9cm_smc where code1 = '$p[code]' and im = '1')") == '1') continue;
+
+            InsertData2('prosedur_pasien', sprintf("'%s', '%s', '%s', %s",
+                $norawat, $p['code'], $status_rawat, $urut++
+            ));
+
+            $prosedur .= $p['code'].'#';
+        }
+
+        ['success' => $sukses_p, 'data' => $data_p, 'error' => $_err] = SetProsedurInacbgSmc($nomor_sep, mb_substr($prosedur, 0, -1));
+
+        if (($sukses_dx === false) || ($sukses_p === false)) {
+            return [
+                'success' => false,
+                'data' => 'Diagnosa atau prosedur tidak valid..!!',
+                'error' => $err
+            ];
+        }
+
+        return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
+
+    }
+
+    function SetDiagnosaInacbgSmc($nomor_sep, $diagnosa)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'inacbg_diagnosa_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'diagnosa' => $diagnosa,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "inacbg_diagnosa_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Diagnosa INACBG berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function SetProsedurInacbgSmc($nomor_sep, $prosedur)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'inacbg_procedure_set',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => [
+                'procedure' => $prosedur,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != "200") {
+            $error = sprintf(
+                '[%s] method "inacbg_procedure_set": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Prosedur INACBG berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function GroupingStage1InacbgSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'grouper',
+                'stage' => '1',
+                'grouper' => 'inacbg',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
@@ -1417,7 +1806,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1426,12 +1815,26 @@
             ];
         }
 
-        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
-        $cbg             = validangka($msg['response']['cbg']['tariff']);
-        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
-        $chronic         = validangka($msg['response']['chronic']['tariff']);
-        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
-        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+        $tariff = 0;
+        if (isset($msg['response_inacbg']['tariff'])) {
+            $tariff = $msg['response_inacbg']['tariff'];
+        }
+
+        InsertData2('inacbg_grouping_stage12', sprintf("'%s', '%s', '%s', %s, '%s'",
+            $nomor_sep,
+            $msg['response_inacbg']['cbg']['code'],
+            $msg['response_inacbg']['cbg']['description'],
+            $tariff,
+            'Tidak Ada'
+        ));
+
+        if (mb_substr($msg['response_inacbg']['cbg']['code'], 0, 1) === 'X') {
+            return [
+                'success' => false,
+                'data' => $msg['response_inacbg']['cbg']['description'],
+                'error' => $msg['response_inacbg']['cbg']['code']
+            ];
+        }
 
         if (isset($msg['special_cmg_option']) && count($msg['special_cmg_option']) > 0) {
             Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
@@ -1439,22 +1842,25 @@
                 InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
             }
 
+            ubahSmc('inacbg_grouping_stage12', "top_up = 'Belum'", "no_sep = '$nomor_sep'");
+
             return [
                 'success' => true,
                 'data' => 'stage2',
                 'error' => null,
             ];
-        } else {
-            return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
         }
+
+        return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
     }
 
-    function GroupingStage2Smc($nomor_sep, $coder_nik, $special_cmg)
+    function GroupingStage2InacbgSmc($nomor_sep, $coder_nik, $special_cmg)
     {
         $request = [
             'metadata' => [
                 'method' => 'grouper',
                 'stage' => 2,
+                'grouper' => 'inacbg',
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
@@ -1472,7 +1878,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1482,14 +1888,55 @@
         }
 
         Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
-        Hapus2("inacbg_grouping_stage12", "no_sep='".$nomor_sep."'");
-        $cbg             = validangka($msg['response']['cbg']['tariff']);
-        $sub_acute       = validangka($msg['response']['sub_acute']['tariff']);
-        $chronic         = validangka($msg['response']['chronic']['tariff']);
-        $add_payment_amt = validangka($msg['response']['add_payment_amt']);
-        InsertData2("inacbg_grouping_stage12", "'".$nomor_sep."','".$msg['response']['cbg']['code']."','".$msg['response']['cbg']['description']."','".($cbg + $sub_acute + $chronic + $add_payment_amt)."'");
+
+        ubahSmc('inacbg_grouping_stage12', sprintf("code_cbg = '%s', deskripsi = '%s', tarif = %s, top_up = 'Sudah'",
+            $msg['response_inacbg']['cbg']['code'],
+            $msg['response_inacbg']['cbg']['description'],
+            $msg['response_inacbg']['tariff']
+        ), "no_sep = '$nomor_sep'");
+
+        return FinalInacbgSmc($nomor_sep, $coder_nik);
+    }
+
+    function FinalInacbgSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'inacbg_grouper_final',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "inacbg_grouper_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        InsertData2('inacbg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
         return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
+
+        /*return [
+            'success' => true,
+            'data' => 'Grouping INACBG sudah final dan berhasil disimpan!',
+            'error' => null,
+        ];*/
     }
 
     function FinalisasiKlaimSmc($nomor_sep, $coder_nik)
@@ -1514,7 +1961,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1547,7 +1994,7 @@
                 $msg['metadata']['message']
             );
 
-            echo $error;
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [
                 'success' => false,
@@ -1576,4 +2023,45 @@
             'error' => null,
         ];
     }
-?>
+
+    /*function MenghapusKlaimSmc($nomor_sep, $coder_nik)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'delete_claim',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'coder_nik' => $coder_nik,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "delete_claim": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2("inacbg_grouping_stage_12", "no_sep='".$nomor_sep."'");
+        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
+        Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil Dihapus!',
+            'error' => null,
+        ];
+    }*/

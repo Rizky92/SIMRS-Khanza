@@ -1,0 +1,14 @@
+{
+    "metadata": {
+        "code": 200,
+        "message": "Ok"
+    },
+    "response_idrg": {
+        "mdc_number": "15",
+        "mdc_description": "Diseases and Disorders of the Circulatory System",
+        "drg_code": "1560220",
+        "drg_description": "Chronic Circulatory System Disorder - Follow Up",
+        "script_version": "1.0.26",
+        "logic_version": "0.2.1718.202508082251"
+    }
+}
