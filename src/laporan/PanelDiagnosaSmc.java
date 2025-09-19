@@ -31,12 +31,15 @@ import javax.swing.table.DefaultTableModel;
  * @author khanzamedia
  */
 public class PanelDiagnosaSmc extends widget.panelisi {
+    public static final int MODE_IDRG = 1;
+    public static final int MODE_INACBG = 2;
+    
     private final DefaultTableModel tabModeDiagnosaPasien, tabModeICD10, tabModeICD9CM, tabModeProsedurPasien;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    public String nosep = "", status = "", norm = "", tanggal1 = "", tanggal2 = "", keyword = "";
-    private int dx = 1, px = 1;
+    private String nosep = "";
+    private int dx = 1, px = 1, mode = -1;
 
     /**
      * Creates new form panelDiagnosa
@@ -454,14 +457,19 @@ public class PanelDiagnosaSmc extends widget.panelisi {
 
     private boolean cekValiditasICD10(int selectedRow) {
         if (tabModeICD10.getValueAt(selectedRow, 3).toString().equals("0")) {
-            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!");
+            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         
         if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1)
             && tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")
         ) {
-            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!");
+            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (this.mode == MODE_INACBG && tabModeICD10.getValueAt(selectedRow, 6).toString().equals("1")) {
+            JOptionPane.showMessageDialog(null, "Kode diagnosa IM tidak boleh digunakan untuk set diagnosa INACBG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         
@@ -470,19 +478,38 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     
     private boolean cekValiditasICD9CM(int selectedRow) {
         if (tabModeICD9CM.getValueAt(selectedRow, 4).toString().equals("0")) {
-            JOptionPane.showMessageDialog(null, "Kode prosedur tidak bisa digunakan untuk coding..!!");
+            JOptionPane.showMessageDialog(null, "Kode prosedur tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        
+        if (this.mode == MODE_INACBG && tabModeICD9CM.getValueAt(selectedRow, 5).toString().equals("1")) {
+            JOptionPane.showMessageDialog(null, "Kode prosedur IM tidak boleh digunakan untuk set prosedur INACBG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         
         return true;
     }
+    
+    public void setSEP(String nosep) {
+        this.nosep = nosep;
+        if (Sequel.cariExistsSmc("select * from idrg_klaim_final_smc where no_sep = ?", nosep)) {
+            this.mode = MODE_INACBG;
+            tbICD9CM.getColumnModel().getColumn(1).setMinWidth(0);
+            tbICD9CM.getColumnModel().getColumn(1).setMaxWidth(0);
+        } else {
+            this.mode = MODE_IDRG;
+            tbICD9CM.getColumnModel().getColumn(1).setMinWidth(0);
+            tbICD9CM.getColumnModel().getColumn(1).setMaxWidth(Integer.MAX_VALUE);
+            tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(40);
+        }
+    }
 
     public void tampilDiagnosa() {
         Valid.tabelKosong(tabModeDiagnosaPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select dx.kode_icd10, i.deskripsi, if(dx.urut = 1, 'Utama', '') as " +
-            "stts, dx.no_sep, r.no_rkm_medis, px.nm_pasien from idrg_diagnosa_pasien_smc " +
-            "dx join idrg_referensi_icd10_im i on dx.kode_icd10 = i.code1 join bridging_sep s on " +
+            "select dx.kode_icd10, i.deskripsi, if(dx.urut = 1, 'Utama', '') as stts, " +
+            "dx.no_sep, r.no_rkm_medis, px.nm_pasien, from idrg_diagnosa_pasien_smc " +
+            "dx join eklaim_icd10_smc i on dx.kode_icd10 = i.code1 join bridging_sep s on " +
             "dx.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join " +
             "pasien px on r.no_rkm_medis = px.no_rkm_medis where dx.no_sep = ? order " +
             "by dx.urut"
@@ -504,8 +531,8 @@ public class PanelDiagnosaSmc extends widget.panelisi {
     public void tampilProsedur() {
         Valid.tabelKosong(tabModeProsedurPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select p.kode_icd9, i.deskripsi, p.multiplicity, if(p.urut = 1, 'Utama', '') as stts, " +
-            "p.no_sep, r.no_rkm_medis, px.nm_pasien from idrg_prosedur_pasien_smc p join idrg_referensi_icd9cm_im i on " +
+            "select p.kode_icd9, i.deskripsi, p.multiplicity, if(p.urut = 1, 'Utama', '') as stts, p.no_sep, " +
+            "r.no_rkm_medis, px.nm_pasien, from idrg_prosedur_pasien_smc p join eklaim_icd9cm_smc i on " +
             "p.kode_icd9 = i.code1 join bridging_sep s on p.no_sep = s.no_sep join reg_periksa r on " +
             "s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis where " +
             "p.no_sep = ? order by p.urut"
@@ -559,7 +586,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             }));
             
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select * from idrg_referensi_icd10_im " + (Diagnosa.getText().isBlank() ? "" :
+                "select * from eklaim_icd10_smc " + (Diagnosa.getText().isBlank() ? "" :
                 "where (code1 like ? or code2 like ? or deskripsi like ?) ") +
                 "order by code1 limit 100"
             )) {
@@ -627,7 +654,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
             }));
             
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select * from idrg_referensi_icd9cm_im " + (Prosedur.getText().isBlank() ? "" :
+                "select * from eklaim_icd9cm_smc " + (Prosedur.getText().isBlank() ? "" :
                 "where (code1 like ? or code2 like ? or deskripsi like ?) ") +
                 "order by code1 limit 100"
             )) {
@@ -668,14 +695,6 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         Prosedur.setText("");
         tampilICD10IDRG(false);
         tampilICD9IDRG(false);
-    }
-    
-    public void setRM(String nosep, String norm, String tanggal1, String tanggal2, String status) {
-        this.nosep = nosep;
-        this.norm = norm;
-        this.tanggal1 = tanggal1;
-        this.tanggal2 = tanggal2;
-        this.status = status;
     }
 
     public void simpan() {

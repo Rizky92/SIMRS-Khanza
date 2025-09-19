@@ -187,7 +187,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="08-09-2025 09:25:13"/>
+                    <StringItem index="0" value="19-09-2025 09:45:48"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -281,7 +281,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="08-09-2025"/>
+                    <StringItem index="0" value="19-09-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -998,7 +998,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="08-09-2025"/>
+                        <StringItem index="0" value="19-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1026,7 +1026,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="08-09-2025"/>
+                        <StringItem index="0" value="19-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1067,7 +1067,7 @@
                 </Component>
                 <Component class="widget.Label" name="jLabel11">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Status Kirim :"/>
+                    <Property name="text" type="java.lang.String" value="Status Klaim :"/>
                     <Property name="name" type="java.lang.String" value="jLabel11" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[100, 23]"/>
@@ -1077,10 +1077,12 @@
                 <Component class="widget.ComboBox" name="CmbStatusKirim">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
+                      <StringArray count="5">
                         <StringItem index="0" value="Semua"/>
                         <StringItem index="1" value="Terkirim"/>
-                        <StringItem index="2" value="Belum Terkirim"/>
+                        <StringItem index="2" value="Final INACBG"/>
+                        <StringItem index="3" value="Final IDRG"/>
+                        <StringItem index="4" value="Belum Terkirim"/>
                       </StringArray>
                     </Property>
                     <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
