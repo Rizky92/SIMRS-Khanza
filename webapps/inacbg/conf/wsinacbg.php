@@ -1101,29 +1101,32 @@
 
     function Request($request){
         $json = mc_encrypt($request, getKey());
-        $header = array("Content-Type: application/x-www-form-urlencoded");
+        $header = ['Content-Type: application/x-www-form-urlencoded'];
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         $response = curl_exec($ch);
-        $first = strpos($response, "\n")+1;
-        $last = strrpos($response, "\n")-1;
-        $hasilresponse = substr($response,$first,strlen($response) - $first - $last);
+
+        $first = strpos($response, "\n") + 1;
+        $last = strrpos($response, "\n") - 1;
+        $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
-        //echo $hasildecrypt;
-        $decoded = json_decode($hasildecrypt, true);
+
         print_r(['request' => $request, 'response' => $hasildecrypt]);
         echo "<br /><br />";
-        return $decoded;
+
+        return json_decode($hasildecrypt, true);
     }
 
     function Get($request) {
         $json = mc_encrypt($request, getKey());
         $header = ['Content-Type: application/json', 'Accept: application/json'];
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, getUrlWS());
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -1132,13 +1135,16 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         $response = curl_exec($ch);
+
         $first = strpos($response, "\n") + 1;
         $last = strrpos($response, "\n") - 1;
         $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
-        $msg = json_decode($hasildecrypt, true);
-        print_r(['request' => $request, 'response' => $msg]);
-        return $msg;
+
+        print_r(['request' => $request, 'response' => $hasildecrypt]);
+        echo "<br /><br />";
+
+        return json_decode($hasildecrypt, true);
     }
 
     function BuatKlaimBaruSmc($nomor_kartu, $nomor_sep, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $norawat)
