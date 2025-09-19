@@ -612,6 +612,7 @@
     }
 
     function InsertData2($tabelname,$attrib) {
+        echo $attrib.'<br /><br />';
         $command = bukaquery("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }

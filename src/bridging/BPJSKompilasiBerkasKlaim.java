@@ -874,7 +874,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel11.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass10.add(jLabel11);
 
-        CmbStatusKirim.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Terkirim", "Final INACBG", "Final IDRG", "Belum Terkirim" }));
+        CmbStatusKirim.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Terkirim", "Belum Terkirim" }));
         CmbStatusKirim.setLightWeightPopupEnabled(false);
         CmbStatusKirim.setMinimumSize(new java.awt.Dimension(75, 21));
         CmbStatusKirim.setName("CmbStatusKirim"); // NOI18N
@@ -2968,15 +2968,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             engine = view.getEngine();
             engine.setJavaScriptEnabled(true);
             engine.setCreatePopupHandler((PopupFeatures p) -> view.getEngine());
-            engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                if (engine.getLoadWorker().getState() == FAILED) {
-                    SwingUtilities.invokeLater(() -> {
-                        JOptionPane.showMessageDialog(PanelContentINACBG,
-                            engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
-                            "Loading Catatan...", JOptionPane.ERROR_MESSAGE);
-                    });
-                }
-            });
+            engine.getLoadWorker().exceptionProperty()
+                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                    if (engine.getLoadWorker().getState() == FAILED) {
+                        SwingUtilities.invokeLater(() -> {
+                            JOptionPane.showMessageDialog(null,
+                                engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        });
+                    }
+                });
 
             jfxPanelicare.setScene(new Scene(view));
             try {
@@ -3008,9 +3009,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(panelInvoices,
+                            JOptionPane.showMessageDialog(null,
                                 engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
-                                "Loading Catatan...", JOptionPane.ERROR_MESSAGE);
+                                "Error", JOptionPane.ERROR_MESSAGE);
                         });
                     }
                 });

@@ -31,6 +31,8 @@
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
         <?php endif; ?>
+    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'inacbg'): ?>
+
     <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
@@ -1134,7 +1136,7 @@
                                 } else {
                                     if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
                                         BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                        ReeditKlaimSmc($nosep);
+                                        // ReeditKlaimSmc($nosep);
                                         ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
                                             $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
@@ -1156,11 +1158,7 @@
                                                 return $set_prosedur;
                                             }
 
-                                            ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage1IdrgSmc($nosep, $codernik);
-                                        }
-
-                                        if ($success) {
-                                            ['success' => $success, 'data' => $response, 'error' => $error] = ImportIdrgToInacbgSmc($nosep, $norawat, $status_lanjut, $codernik);
+                                            ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage1IdrgSmc($nosep, $norawat, $status_lanjut, $codernik);
                                         }
 
                                         if (! $success) {
@@ -1173,9 +1171,9 @@
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
                                                 HTML;
                                         } else {
-                                            // echo <<<HTML
-                                            //     <meta http-equiv="refresh" content="5;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                            //     HTML;
+                                            echo <<<HTML
+                                                <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
+                                                HTML;
                                         }
                                     } else {
                                         echo 'Semua field harus isi..!!!';
