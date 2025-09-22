@@ -1156,6 +1156,7 @@
                                             $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use
                                         );
                                     }
+
                                     if ($success === true) {
                                         $set_diagnosa = SetDiagnosaIdrgSmc($nosep, $diagnosa);
                                         $set_prosedur = SetProsedurIdrgSmc($nosep, $prosedur);

@@ -2983,17 +2983,21 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             engine.getLoadWorker().stateProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
-                        if (engine.getLocation()
+                        String cekURL = engine.getLocation()
                             .replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "")
-                            .toLowerCase()
-                            .contains("sukses=true&action=selesai")
-                        ) {
+                            .toLowerCase();
+                        if (cekURL.contains("sukses=true&action=selesai")) {
                             SwingUtilities.invokeLater(() -> {
                                 getData();
                                 tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 11);
                                 tabMode.setValueAt("1", tbKompilasi.getSelectedRow(), 12);
                                 tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
                             });
+                        } else if (cekURL.contains("sukses=false")) {
+                            getData();
+                            tabMode.setValueAt("Belum Terkirim", tbKompilasi.getSelectedRow(), 11);
+                            tabMode.setValueAt("0", tbKompilasi.getSelectedRow(), 12);
+                            tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
                         }
                     }
                 });

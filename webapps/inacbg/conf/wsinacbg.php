@@ -1358,6 +1358,7 @@
         // Jadi batalkan klaim INACBG
         Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
         Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
+        Hapus2('inacbg_cetak_klaim', "no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
