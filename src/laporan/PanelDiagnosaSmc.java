@@ -653,7 +653,11 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                             });
 
                             if (pilihPertama) {
-                                tabModeICD9CM.setValueAt(cekValiditasICD9CM(tabModeICD9CM.getRowCount() - 1), tabModeICD9CM.getRowCount() - 1, 0);
+                                pilihPertama = cekValiditasICD9CM(tabModeICD9CM.getRowCount() - 1);
+                                
+                                tabModeICD9CM.setValueAt(pilihPertama, tabModeICD9CM.getRowCount() - 1, 0);
+                                tabModeICD9CM.setValueAt(pilihPertama ? 1 : 0, tabModeICD9CM.getRowCount() - 1, 1);
+                                
                                 pilihPertama = false;
                             }
                         } while (rs.next());

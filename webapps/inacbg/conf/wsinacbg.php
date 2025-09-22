@@ -4,7 +4,8 @@
     }
     require_once('../conf/conf.php');
 
-    function getKey() {
+    function getKey()
+    {
        $keyRS = "";
 
        if (empty($keyRS)) {
@@ -14,12 +15,14 @@
        return $keyRS;
     }
 
-    function getUrlWS() {
+    function getUrlWS()
+    {
         $UrlWS = "http://localhost/E-Klaim/ws.php";
         return $UrlWS;
     }
 
-    function getKelasRS() {
+    function getKelasRS()
+    {
         $kelasRS = "";
 
         if (empty($kelasRS)) {
@@ -1099,7 +1102,8 @@
         echo $msg['metadata']['message']."";
     }
 
-    function Request($request){
+    function Request($request)
+    {
         $json = mc_encrypt($request, getKey());
         $header = ['Content-Type: application/x-www-form-urlencoded'];
 
@@ -1117,13 +1121,14 @@
         $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
 
-        print_r(['request' => $request, 'response' => $hasildecrypt]);
-        echo "<br /><br />";
+        // print_r(['request' => $request, 'response' => $hasildecrypt]);
+        // echo "<br /><br />";
 
         return json_decode($hasildecrypt, true);
     }
 
-    function Get($request) {
+    function Get($request)
+    {
         $json = mc_encrypt($request, getKey());
         $header = ['Content-Type: application/json', 'Accept: application/json'];
 
@@ -1141,8 +1146,8 @@
         $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
 
-        print_r(['request' => $request, 'response' => $hasildecrypt]);
-        echo "<br /><br />";
+        // print_r(['request' => $request, 'response' => $hasildecrypt]);
+        // echo "<br /><br />";
 
         return json_decode($hasildecrypt, true);
     }
@@ -1175,7 +1180,7 @@
 
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
-            return GetDataKlaimSmc($nomor_sep, $norawat);
+            return GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
         }
 
         InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
@@ -1193,7 +1198,7 @@
         ];
     }
 
-    function GetDataKlaimSmc($nomor_sep, $norawat)
+    function GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender)
     {
         $request = [
             'metadata' => [
@@ -1232,17 +1237,61 @@
             $msg['response']['data']['hospital_admission_id']
         ));
 
+        UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
+
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
             return ReeditKlaimSmc($nomor_sep);
         }
 
-        return ReeditIdrgSmc($nomor_sep);
+        ReeditIdrgSmc($nomor_sep);
 
-        /*return [
+        return [
             'success' => true,
             'data' => 'Klaim berhasil disimpan',
             'error' => null,
-        ];*/
+        ];
+    }
+
+    function UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'update_patient',
+                'nomor_rm' => $nomor_rm,
+            ],
+            'data' => [
+                'nomor_kartu' => $nomor_kartu,
+                'nomor_rm' => $nomor_rm,
+                'nama_pasien' => $nama_pasien,
+                'tgl_lahir' => $tgl_lahir,
+                'gender' => $gender,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "update_patient": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Data pasien berhasil diupdate',
+            'error' => null,
+        ];
     }
 
     function ReeditKlaimSmc($nomor_sep)
@@ -1276,12 +1325,6 @@
         }
 
         return ReeditIdrgSmc($nomor_sep);
-
-        /*return [
-            'success' => true,
-            'data' => 'Klaim berhasil diedit',
-            'error' => null,
-        ];*/
     }
 
     function ReeditIdrgSmc($nomor_sep)
@@ -1306,12 +1349,6 @@
             );
 
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
-
-            return [
-                'success' => false,
-                'data' => null,
-                'error' => $error,
-            ];
         }
 
         Hapus2('idrg_grouping_smc', "no_sep = '$nomor_sep'");
@@ -1851,7 +1888,7 @@
             ];
         }
 
-        return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
+        return FinalInacbgSmc($nomor_sep, $coder_nik);
     }
 
     function GroupingStage2InacbgSmc($nomor_sep, $coder_nik, $special_cmg)

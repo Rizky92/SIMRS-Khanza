@@ -44,6 +44,7 @@ import java.util.Locale;
 import java.util.Map;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -2979,6 +2980,23 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     }
                 });
 
+            engine.getLoadWorker().stateProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        if (engine.getLocation()
+                            .replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "")
+                            .toLowerCase()
+                            .contains("sukses=true&action=selesai")
+                        ) {
+                            SwingUtilities.invokeLater(() -> {
+                                getData();
+                                tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 11);
+                                tabMode.setValueAt("1", tbKompilasi.getSelectedRow(), 12);
+                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                            });
+                        }
+                    }
+                });
             jfxPanelicare.setScene(new Scene(view));
             try {
                 engine.load(url);

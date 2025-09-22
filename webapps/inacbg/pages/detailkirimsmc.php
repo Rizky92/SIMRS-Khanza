@@ -31,8 +31,6 @@
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
             <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
         <?php endif; ?>
-    <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'inacbg'): ?>
-
     <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
@@ -62,7 +60,14 @@
                     $jam_reg        = $baris['jam_reg'];
                     $nm_poli        = $baris['nm_poli'];
                     $nm_dokter      = getOne("select d.nm_dokter from bridging_sep s join maping_dokter_dpjpvclaim m on s.kddpjp = m.kd_dokter_bpjs join dokter d on m.kd_dokter = d.kd_dokter where s.no_sep = '$nosep'");
-                    ['code_cbg' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery("select code_cbg, deskripsi from inacbg_grouping_stage12 where no_sep = '$nosep' limit 1"));
+                    ['kode' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery(
+                        "(select inacbg_grouping_stage12.code_cbg as kode, inacbg_grouping_stage12.deskripsi
+                        from inacbg_grouping_stage12 where inacbg_grouping_stage12.no_sep = '$nosep' and
+                        (left(inacbg_grouping_stage12.code_cbg, 1)) = 'X' limit 1) union all (select
+                        idrg_grouping_smc.drg_code as kode, concat(idrg_grouping_smc.mdc_description,
+                        ' - ', idrg_grouping_smc.drg_description) as deskripsi from idrg_grouping_smc
+                        where idrg_grouping_smc.no_sep = '$nosep' and idrg_grouping_smc.mdc_number = '36' limit 1)"
+                    ));
 
                     $status_lanjut = $baris['status_lanjut'];
                     $png_jawab = $baris['png_jawab'];
@@ -127,8 +132,8 @@
                 <input type="hidden" name="jnsrawat" value="<?= $jnsrawat ?>">
                 <input type="hidden" name="jk" value="<?= $jk ?>">
                 <input type="hidden" name="codernik" value="<?= $codernik ?>">
-                <?php if (substr($isError ?? '', 0, 1) === 'X'): ?>
-                    <div class="center" style="margin-left: 0.7rem">
+                <?php if (!empty($isError)): ?>
+                    <div class="center" style="margin-right: 1rem; margin-left: 0.7rem">
                         <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000">GROUPING ERROR: <?= $pesanError ?></span>
                     </div>
                 <?php endif; ?>
@@ -969,174 +974,178 @@
                         <?php endif; ?>
                     </table>
                 </div>
-                <?php
-                    $BtnSimpan = $_POST['BtnSimpan'] ?? null;
+            </div>
+            <div align="center">
+                <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM">
+            </div>
+            <?php
+                $BtnSimpan = $_POST['BtnSimpan'] ?? null;
 
-                    if (isset($BtnSimpan)) {
-                        $validasi = 0;
-                        if ($action == 'stage2') {
-                            // TOP UP CMG
-                            $special_procedure     = isset($_POST['special_procedure']) ? validTeks(trim($_POST['special_procedure'])) : '';
-                            $special_prosthesis    = isset($_POST['special_prosthesis']) ? validTeks(trim($_POST['special_prosthesis'])) : '';
-                            $special_investigation = isset($_POST['special_investigation']) ? validTeks(trim($_POST['special_investigation'])) : '';
-                            $special_drug          = isset($_POST['special_drug']) ? validTeks(trim($_POST['special_drug'])) : '';
+                if (isset($BtnSimpan)) {
+                    $validasi = 0;
+                    if ($action == 'stage2') {
+                        // TOP UP CMG
+                        $special_procedure     = isset($_POST['special_procedure']) ? validTeks(trim($_POST['special_procedure'])) : '';
+                        $special_prosthesis    = isset($_POST['special_prosthesis']) ? validTeks(trim($_POST['special_prosthesis'])) : '';
+                        $special_investigation = isset($_POST['special_investigation']) ? validTeks(trim($_POST['special_investigation'])) : '';
+                        $special_drug          = isset($_POST['special_drug']) ? validTeks(trim($_POST['special_drug'])) : '';
+                    } else {
+                        $tgl_registrasi      = validTeks(trim($_POST['tgl_registrasi']));
+                        $codernik            = validTeks(trim($_POST['codernik']));
+                        $nm_pasien           = validTeks(trim($_POST['nm_pasien']));
+                        $keluar              = validTeks(trim($_POST['keluar']));
+                        $kelas_rawat         = validTeks(trim($_POST['kelas_rawat']));
+                        $adl_sub_acute       = validTeks(trim($_POST['adl_sub_acute']));
+                        $adl_chronic         = validTeks(trim($_POST['adl_chronic']));
+                        $icu_indikator       = validTeks(trim($_POST['icu_indikator']));
+                        $icu_los             = validTeks(trim($_POST['icu_los']));
+                        $ventilator_hour     = validTeks(trim($_POST['ventilator_hour']));
+                        $upgrade_class_ind   = validTeks(trim($_POST['upgrade_class_ind']));
+                        $upgrade_class_class = validTeks(trim($_POST['upgrade_class_class']));
+                        $upgrade_class_los   = validTeks(trim($_POST['upgrade_class_los']));
+                        $add_payment_pct     = validTeks(trim($_POST['add_payment_pct']));
+                        $birth_weight        = validTeks(trim($_POST['birth_weight']));
+                        $discharge_status    = validTeks(trim($_POST['discharge_status']));
+                        $diagnosa            = validTeks2(trim($_POST['diagnosa']));
+                        $procedure           = validTeks2(trim($_POST['procedure']));
+                        $nama_dokter         = validTeks(trim($_POST['nama_dokter']));
+                        $jk                  = validTeks(trim($_POST['jk']));
+                        $tgl_lahir           = validTeks(trim($_POST['tgl_lahir']));
+                        $jnsrawat            = validTeks(trim($_POST['jnsrawat']));
+                        $sistole             = validTeks(trim($_POST['sistole']));
+                        $diastole            = validTeks(trim($_POST['diastole']));
+                        $gender              = ($jk == 'L') ? '1' : '2';
+
+                        $prosedur_non_bedah        = validTeks(trim($_POST['prosedur_non_bedah']));
+                        $diskon_prosedur_non_bedah = validTeks(trim($_POST['diskon_prosedur_non_bedah']));
+                        $prosedur_bedah            = validTeks(trim($_POST['prosedur_bedah']));
+                        $diskon_prosedur_bedah     = validTeks(trim($_POST['diskon_prosedur_bedah']));
+                        $konsultasi                = validTeks(trim($_POST['konsultasi']));
+                        $diskon_konsultasi         = validTeks(trim($_POST['diskon_konsultasi']));
+                        $tenaga_ahli               = validTeks(trim($_POST['tenaga_ahli']));
+                        $diskon_tenaga_ahli        = validTeks(trim($_POST['diskon_tenaga_ahli']));
+                        $keperawatan               = validTeks(trim($_POST['keperawatan']));
+                        $diskon_keperawatan        = validTeks(trim($_POST['diskon_keperawatan']));
+                        $penunjang                 = validTeks(trim($_POST['penunjang']));
+                        $diskon_penunjang          = validTeks(trim($_POST['diskon_penunjang']));
+                        $radiologi                 = validTeks(trim($_POST['radiologi']));
+                        $diskon_radiologi          = validTeks(trim($_POST['diskon_radiologi']));
+                        $laboratorium              = validTeks(trim($_POST['laboratorium']));
+                        $diskon_laboratorium       = validTeks(trim($_POST['diskon_laboratorium']));
+                        $pelayanan_darah           = validTeks(trim($_POST['pelayanan_darah']));
+                        $diskon_pelayanan_darah    = validTeks(trim($_POST['diskon_pelayanan_darah']));
+                        $rehabilitasi              = validTeks(trim($_POST['rehabilitasi']));
+                        $diskon_rehabilitasi       = validTeks(trim($_POST['diskon_rehabilitasi']));
+                        $kamar                     = validTeks(trim($_POST['kamar']));
+                        $diskon_kamar              = validTeks(trim($_POST['diskon_kamar']));
+                        $rawat_intensif            = validTeks(trim($_POST['rawat_intensif']));
+                        $diskon_rawat_intensif     = validTeks(trim($_POST['diskon_rawat_intensif']));
+                        $obat                      = validTeks(trim($_POST['obat']));
+                        $diskon_obat               = validTeks(trim($_POST['diskon_obat']));
+                        $obat_kronis               = validTeks(trim($_POST['obat_kronis']));
+                        $diskon_obat_kronis        = validTeks(trim($_POST['diskon_obat_kronis']));
+                        $obat_kemoterapi           = validTeks(trim($_POST['obat_kemoterapi']));
+                        $diskon_obat_kemoterapi    = validTeks(trim($_POST['diskon_obat_kemoterapi']));
+                        $alkes                     = validTeks(trim($_POST['alkes']));
+                        $diskon_alkes              = validTeks(trim($_POST['diskon_alkes']));
+                        $bmhp                      = validTeks(trim($_POST['bmhp']));
+                        $diskon_bmhp               = validTeks(trim($_POST['diskon_bmhp']));
+                        $sewa_alat                 = validTeks(trim($_POST['sewa_alat']));
+                        $diskon_sewa_alat          = validTeks(trim($_POST['diskon_sewa_alat']));
+                        $tarif_poli_eks            = validTeks(trim($_POST['tarif_poli_eks']));
+                        $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
+                        $dializer_single_use       = validTeks(trim($_POST['dializer_single_use']));
+
+                        $totalbillingsementara
+                            = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)
+                            + ($prosedur_bedah - $diskon_prosedur_bedah)
+                            + ($konsultasi - $diskon_konsultasi)
+                            + ($tenaga_ahli - $diskon_tenaga_ahli)
+                            + ($keperawatan - $diskon_keperawatan)
+                            + ($penunjang - $diskon_penunjang)
+                            + ($radiologi - $diskon_radiologi)
+                            + ($laboratorium - $diskon_laboratorium)
+                            + ($pelayanan_darah - $diskon_pelayanan_darah)
+                            + ($rehabilitasi - $diskon_rehabilitasi)
+                            + ($kamar - $diskon_kamar)
+                            + ($rawat_intensif - $diskon_rawat_intensif)
+                            + ($obat - $diskon_obat)
+                            + ($obat_kronis - $diskon_obat_kronis)
+                            + ($obat_kemoterapi - $diskon_obat_kemoterapi)
+                            + ($alkes - $diskon_alkes)
+                            + ($bmhp - $diskon_bmhp)
+                            + ($sewa_alat - $diskon_sewa_alat)
+                            + ($tarif_poli_eks - $diskon_tarif_poli_eks);
+
+                        $validasi = $totalbilling - $totalbillingsementara;
+                    }
+
+                    if ((int) round($validasi) === 0) {
+                        if ($corona == 'PasienCorona') {
+                            echo "Bridging klaim INACBG untuk Pasien Covid-19 belum support!";
+                            // $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
+                            // $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
+                            // $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
+                            // $plastik_erat               = validTeks(trim($_POST['plastik_erat']));
+                            // $desinfektan_jenazah        = validTeks(trim($_POST['desinfektan_jenazah']));
+                            // $mobil_jenazah              = validTeks(trim($_POST['mobil_jenazah']));
+                            // $desinfektan_mobil_jenazah  = validTeks(trim($_POST['desinfektan_mobil_jenazah']));
+                            // $covid19_status_cd          = validTeks(trim($_POST['covid19_status_cd']));
+                            // $nomor_kartu_t              = validTeks(trim($_POST['nomor_kartu_t']));
+                            // $episodes1                  = validTeks(trim($_POST['episodes1']));
+                            // $episodes2                  = validTeks(trim($_POST['episodes2']));
+                            // $episodes3                  = validTeks(trim($_POST['episodes3']));
+                            // $episodes4                  = validTeks(trim($_POST['episodes4']));
+                            // $episodes5                  = validTeks(trim($_POST['episodes5']));
+                            // $episodes6                  = validTeks(trim($_POST['episodes6']));
+                            // $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
+                            // $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
+                            // $episodes                   = substr($episodes, 0, -1);
+
+                            // if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
+                            //     BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                            //     EditUlangKlaim($nosep);
+                            //     UpdateDataKlaim3($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
+                            //         $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
+                            //         $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
+                            //         $tarif_poli_eks, $nama_dokter, getKelasRS(), "71", "COVID-19", "#", $codernik,
+                            //         $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
+                            //         $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
+                            //         $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
+                            //         $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
+                            //         $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
+                            //     CetakKlaim($nosep);
+                            //     echo <<<HTML
+                            //         <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
+                            //     HTML;
+                            // } else {
+                            //     echo 'Semua field harus isi..!!!';
+                            // }
                         } else {
-                            $tgl_registrasi      = validTeks(trim($_POST['tgl_registrasi']));
-                            $codernik            = validTeks(trim($_POST['codernik']));
-                            $nm_pasien           = validTeks(trim($_POST['nm_pasien']));
-                            $keluar              = validTeks(trim($_POST['keluar']));
-                            $kelas_rawat         = validTeks(trim($_POST['kelas_rawat']));
-                            $adl_sub_acute       = validTeks(trim($_POST['adl_sub_acute']));
-                            $adl_chronic         = validTeks(trim($_POST['adl_chronic']));
-                            $icu_indikator       = validTeks(trim($_POST['icu_indikator']));
-                            $icu_los             = validTeks(trim($_POST['icu_los']));
-                            $ventilator_hour     = validTeks(trim($_POST['ventilator_hour']));
-                            $upgrade_class_ind   = validTeks(trim($_POST['upgrade_class_ind']));
-                            $upgrade_class_class = validTeks(trim($_POST['upgrade_class_class']));
-                            $upgrade_class_los   = validTeks(trim($_POST['upgrade_class_los']));
-                            $add_payment_pct     = validTeks(trim($_POST['add_payment_pct']));
-                            $birth_weight        = validTeks(trim($_POST['birth_weight']));
-                            $discharge_status    = validTeks(trim($_POST['discharge_status']));
-                            $diagnosa            = validTeks2(trim($_POST['diagnosa']));
-                            $procedure           = validTeks2(trim($_POST['procedure']));
-                            $nama_dokter         = validTeks(trim($_POST['nama_dokter']));
-                            $jk                  = validTeks(trim($_POST['jk']));
-                            $tgl_lahir           = validTeks(trim($_POST['tgl_lahir']));
-                            $jnsrawat            = validTeks(trim($_POST['jnsrawat']));
-                            $sistole             = validTeks(trim($_POST['sistole']));
-                            $diastole            = validTeks(trim($_POST['diastole']));
-                            $gender              = ($jk == 'L') ? '1' : '2';
+                            if ($action == 'stage2') {
+                                $special_cmg = implode('#', array_filter([
+                                    $special_procedure,
+                                    $special_prosthesis,
+                                    $special_investigation,
+                                    $special_drug,
+                                ]));
 
-                            $prosedur_non_bedah        = validTeks(trim($_POST['prosedur_non_bedah']));
-                            $diskon_prosedur_non_bedah = validTeks(trim($_POST['diskon_prosedur_non_bedah']));
-                            $prosedur_bedah            = validTeks(trim($_POST['prosedur_bedah']));
-                            $diskon_prosedur_bedah     = validTeks(trim($_POST['diskon_prosedur_bedah']));
-                            $konsultasi                = validTeks(trim($_POST['konsultasi']));
-                            $diskon_konsultasi         = validTeks(trim($_POST['diskon_konsultasi']));
-                            $tenaga_ahli               = validTeks(trim($_POST['tenaga_ahli']));
-                            $diskon_tenaga_ahli        = validTeks(trim($_POST['diskon_tenaga_ahli']));
-                            $keperawatan               = validTeks(trim($_POST['keperawatan']));
-                            $diskon_keperawatan        = validTeks(trim($_POST['diskon_keperawatan']));
-                            $penunjang                 = validTeks(trim($_POST['penunjang']));
-                            $diskon_penunjang          = validTeks(trim($_POST['diskon_penunjang']));
-                            $radiologi                 = validTeks(trim($_POST['radiologi']));
-                            $diskon_radiologi          = validTeks(trim($_POST['diskon_radiologi']));
-                            $laboratorium              = validTeks(trim($_POST['laboratorium']));
-                            $diskon_laboratorium       = validTeks(trim($_POST['diskon_laboratorium']));
-                            $pelayanan_darah           = validTeks(trim($_POST['pelayanan_darah']));
-                            $diskon_pelayanan_darah    = validTeks(trim($_POST['diskon_pelayanan_darah']));
-                            $rehabilitasi              = validTeks(trim($_POST['rehabilitasi']));
-                            $diskon_rehabilitasi       = validTeks(trim($_POST['diskon_rehabilitasi']));
-                            $kamar                     = validTeks(trim($_POST['kamar']));
-                            $diskon_kamar              = validTeks(trim($_POST['diskon_kamar']));
-                            $rawat_intensif            = validTeks(trim($_POST['rawat_intensif']));
-                            $diskon_rawat_intensif     = validTeks(trim($_POST['diskon_rawat_intensif']));
-                            $obat                      = validTeks(trim($_POST['obat']));
-                            $diskon_obat               = validTeks(trim($_POST['diskon_obat']));
-                            $obat_kronis               = validTeks(trim($_POST['obat_kronis']));
-                            $diskon_obat_kronis        = validTeks(trim($_POST['diskon_obat_kronis']));
-                            $obat_kemoterapi           = validTeks(trim($_POST['obat_kemoterapi']));
-                            $diskon_obat_kemoterapi    = validTeks(trim($_POST['diskon_obat_kemoterapi']));
-                            $alkes                     = validTeks(trim($_POST['alkes']));
-                            $diskon_alkes              = validTeks(trim($_POST['diskon_alkes']));
-                            $bmhp                      = validTeks(trim($_POST['bmhp']));
-                            $diskon_bmhp               = validTeks(trim($_POST['diskon_bmhp']));
-                            $sewa_alat                 = validTeks(trim($_POST['sewa_alat']));
-                            $diskon_sewa_alat          = validTeks(trim($_POST['diskon_sewa_alat']));
-                            $tarif_poli_eks            = validTeks(trim($_POST['tarif_poli_eks']));
-                            $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
-                            $dializer_single_use       = validTeks(trim($_POST['dializer_single_use']));
+                                ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2InacbgSmc($nosep, $codernik, $special_cmg);
 
-                            $totalbillingsementara
-                                = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)
-                                + ($prosedur_bedah - $diskon_prosedur_bedah)
-                                + ($konsultasi - $diskon_konsultasi)
-                                + ($tenaga_ahli - $diskon_tenaga_ahli)
-                                + ($keperawatan - $diskon_keperawatan)
-                                + ($penunjang - $diskon_penunjang)
-                                + ($radiologi - $diskon_radiologi)
-                                + ($laboratorium - $diskon_laboratorium)
-                                + ($pelayanan_darah - $diskon_pelayanan_darah)
-                                + ($rehabilitasi - $diskon_rehabilitasi)
-                                + ($kamar - $diskon_kamar)
-                                + ($rawat_intensif - $diskon_rawat_intensif)
-                                + ($obat - $diskon_obat)
-                                + ($obat_kronis - $diskon_obat_kronis)
-                                + ($obat_kemoterapi - $diskon_obat_kemoterapi)
-                                + ($alkes - $diskon_alkes)
-                                + ($bmhp - $diskon_bmhp)
-                                + ($sewa_alat - $diskon_sewa_alat)
-                                + ($tarif_poli_eks - $diskon_tarif_poli_eks);
-
-                            $validasi = $totalbilling - $totalbillingsementara;
-                        }
-
-                        if ((int) round($validasi) === 0) {
-                            if ($corona == 'PasienCorona') {
-                                echo "Bridging klaim INACBG untuk Pasien Covid-19 belum support!";
-                                // $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
-                                // $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
-                                // $peti_jenazah               = validTeks(trim($_POST['peti_jenazah']));
-                                // $plastik_erat               = validTeks(trim($_POST['plastik_erat']));
-                                // $desinfektan_jenazah        = validTeks(trim($_POST['desinfektan_jenazah']));
-                                // $mobil_jenazah              = validTeks(trim($_POST['mobil_jenazah']));
-                                // $desinfektan_mobil_jenazah  = validTeks(trim($_POST['desinfektan_mobil_jenazah']));
-                                // $covid19_status_cd          = validTeks(trim($_POST['covid19_status_cd']));
-                                // $nomor_kartu_t              = validTeks(trim($_POST['nomor_kartu_t']));
-                                // $episodes1                  = validTeks(trim($_POST['episodes1']));
-                                // $episodes2                  = validTeks(trim($_POST['episodes2']));
-                                // $episodes3                  = validTeks(trim($_POST['episodes3']));
-                                // $episodes4                  = validTeks(trim($_POST['episodes4']));
-                                // $episodes5                  = validTeks(trim($_POST['episodes5']));
-                                // $episodes6                  = validTeks(trim($_POST['episodes6']));
-                                // $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
-                                // $episodes                   = ($episodes1 == 0 ? "" : "1;$episodes1#") . ($episodes2 == 0 ? "" : "2;$episodes2#") . ($episodes3 == 0 ? "" : "3;$episodes3#") . ($episodes4 == 0 ? "" : "4;$episodes4#") . ($episodes5 == 0 ? "" : "5;$episodes5#") . ($episodes6 == 0 ? "" : "6;$episodes6#");
-                                // $episodes                   = substr($episodes, 0, -1);
-
-                                // if ((! empty($norawat)) && (! empty($nosep)) && (! empty($nokartu)) && (! empty($nomor_kartu_t))) {
-                                //     BuatKlaimBaru2($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                //     EditUlangKlaim($nosep);
-                                //     UpdateDataKlaim3($nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
-                                //         $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
-                                //         $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure,
-                                //         $tarif_poli_eks, $nama_dokter, getKelasRS(), "71", "COVID-19", "#", $codernik,
-                                //         $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang,
-                                //         $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
-                                //         $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $pemulasaraan_jenazah, $kantong_jenazah,
-                                //         $peti_jenazah, $plastik_erat, $desinfektan_jenazah, $mobil_jenazah, $desinfektan_mobil_jenazah,
-                                //         $covid19_status_cd, $nomor_kartu_t, $episodes, $covid19_cc_ind, $sistole, $diastole);
-                                //     CetakKlaim($nosep);
-                                //     echo <<<HTML
-                                //         <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}">
-                                //     HTML;
-                                // } else {
-                                //     echo 'Semua field harus isi..!!!';
-                                // }
-                            } else {
-                                if ($action == 'stage2') {
-                                    $special_cmg = implode('#', array_filter([
-                                        $special_procedure,
-                                        $special_prosthesis,
-                                        $special_investigation,
-                                        $special_drug,
-                                    ]));
-
-                                    ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2InacbgSmc($nosep, $codernik, $special_cmg);
-
-                                    if (! $success) {
-                                        echo $error;
-                                        echo <<<HTML
-                                            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=stage2">
-                                            HTML;
-                                    } else {
-                                        echo <<<HTML
-                                            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
-                                            HTML;
-                                    }
+                                if (! $success) {
+                                    echo $error;
+                                    echo <<<HTML
+                                        <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=stage2">
+                                        HTML;
                                 } else {
-                                    if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
-                                        BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
-                                        // ReeditKlaimSmc($nosep);
+                                    echo <<<HTML
+                                        <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
+                                        HTML;
+                                }
+                            } else {
+                                if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
+                                    ['success' => $success, 'data' => $response, 'error' => $error] = BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
+                                    if ($success === true) {
                                         ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
                                             $nosep, $nokartu, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,
@@ -1146,27 +1155,29 @@
                                             $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                             $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole, $dializer_single_use
                                         );
-                                        if ($success) {
-                                            $set_diagnosa = SetDiagnosaIdrgSmc($nosep, $diagnosa);
-                                            $set_prosedur = SetProsedurIdrgSmc($nosep, $prosedur);
+                                    }
+                                    if ($success === true) {
+                                        $set_diagnosa = SetDiagnosaIdrgSmc($nosep, $diagnosa);
+                                        $set_prosedur = SetProsedurIdrgSmc($nosep, $prosedur);
 
-                                            if (!$set_diagnosa['success']) {
-                                                return $set_diagnosa;
-                                            }
-
-                                            if (!$set_prosedur['success']) {
-                                                return $set_prosedur;
-                                            }
-
-                                            ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage1IdrgSmc($nosep, $norawat, $status_lanjut, $codernik);
+                                        if ($set_diagnosa['success'] === false) {
+                                            return $set_diagnosa;
                                         }
 
-                                        if (! $success) {
-                                            echo $error;
-                                            echo <<<HTML
-                                                <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
-                                                HTML;
-                                        } else if ($success && $response == 'stage2') {
+                                        if ($set_prosedur['success'] === false) {
+                                            return $set_prosedur;
+                                        }
+
+                                        ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage1IdrgSmc($nosep, $norawat, $status_lanjut, $codernik);
+                                    }
+
+                                    if ($success === false) {
+                                        echo $error;
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="5;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false">
+                                            HTML;
+                                    } else {
+                                        if ($response === 'stage2') {
                                             echo <<<HTML
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=stage2">
                                                 HTML;
@@ -1175,20 +1186,17 @@
                                                 <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
                                                 HTML;
                                         }
-                                    } else {
-                                        echo 'Semua field harus isi..!!!';
                                     }
+                                } else {
+                                    echo 'Semua field harus isi..!!!';
                                 }
                             }
-                        } else {
-                            echo 'Total billing tidak sesuai dengan billing pasien!';
                         }
+                    } else {
+                        echo 'Total billing tidak sesuai dengan billing pasien!';
                     }
-                ?>
-            </div>
-            <div align="center">
-                <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM">
-            </div>
+                }
+            ?>
         </form>
         <script>
             let totalbilling              = document.querySelector('#totalbilling')
