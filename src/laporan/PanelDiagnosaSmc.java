@@ -31,8 +31,8 @@ import javax.swing.table.DefaultTableModel;
  * @author khanzamedia
  */
 public class PanelDiagnosaSmc extends widget.panelisi {
-    public static final int MODE_IDRG = 1;
-    public static final int MODE_INACBG = 2;
+    public static final int MODE_IDRG = 0;
+    public static final int MODE_INACBG = 1;
     
     private final DefaultTableModel tabModeDiagnosaPasien, tabModeICD10, tabModeICD9CM, tabModeProsedurPasien;
     private final Connection koneksi = koneksiDB.condb();
