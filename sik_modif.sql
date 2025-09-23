@@ -232,6 +232,8 @@ CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
   CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `inacbg_grouping_stage12` ADD COLUMN IF NOT EXISTS `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada' AFTER `tarif`;
+
 CREATE TABLE IF NOT EXISTS `inacbg_klaim_final_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `nik` varchar(30) NOT NULL,
