@@ -223,9 +223,12 @@
     <entry key="URLAPISERTISIGN">https://api-stag.sertisign.id/v2/poa/signing-qr</entry>
     <entry key="APIKEYSERTISIGN">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLDOKUMENSERTISIGN">https://sertisign.com/webhook</entry>
-    <entry key="HOSTDUTAPARKING">5k7+C7EnUw9nUv2Nix+DBA==</entry>
-    <entry key="DATABASEDUTAPARKING">PvMIHTTN+Nnyzfbt2jiUvg==</entry>
-    <entry key="PORTDUTAPARKING">nioxtijcpDaKSUiUiP5FAg==</entry>
-    <entry key="USERDUTAPARKING">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="HOSTDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="DATABASEDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PORTDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASDUTAPARKING">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLAPISPDGT">https://spgdt.kebumenkab.go.id/index.php/api</entry>
+    <entry key="USERSPDGT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSSPDGT">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 </properties>
