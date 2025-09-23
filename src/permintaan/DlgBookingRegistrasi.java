@@ -63,34 +63,35 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
-                "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
-                "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
-                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "no_rawat"
-            }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){
+            "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
+            "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
+            "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
+            "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "No.Rawat"
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
                     a=true;
                 }
                 return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class, java.lang.String.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            }
+            Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbObat.setModel(tabMode);
 
@@ -165,14 +166,19 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==27){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                if (BOOKINGLANGSUNGREGISTRASI) {
+                    column.setPreferredWidth(130);
+                    column.setMinWidth(0);
+                    column.setMaxWidth(Integer.MAX_VALUE);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             }else{
                 column.setWidth(180);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         TNoRM.setDocument(new batasInput((byte)17).getKata(TNoRM));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -1482,13 +1488,13 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
             if(tbObat.getValueAt(i,0).toString().equals("true")){
                 if (BOOKINGLANGSUNGREGISTRASI) {
                     if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
-                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                            tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
+                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and no_rawat = ?",
+                            tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 27).toString()
                         )) {
                             Sequel.menghapusIgnoreSmc("reg_periksa",
-                                "no_rawat = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
+                                "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
                                 "not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
-                                tbObat.getValueAt(i, 27).toString()
+                                tbObat.getValueAt(i, 27).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
                             );
                             tabMode.removeRow(i);
                         }
@@ -1782,6 +1788,9 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 ));
                 break;
         }
+        if (BOOKINGLANGSUNGREGISTRASI) {
+            no_rawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
+        }
     }
 
     private void getData() {
@@ -1933,25 +1942,29 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            isNomer();
-            if (Sequel.menyimpantfSmc("booking_registrasi", null, Valid.getTglSmc(TanggalBooking), jam(),
-                TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
-                kdpnj.getText(), "0", null, "Belum", ""
-            )) {
-                no_rawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
-                if (Sequel.menyimpantfSmc("reg_periksa", null, NoReg.getText(), no_rawat, Valid.getTglSmc(TanggalPeriksa), jamRegist,
+            
+            boolean sukses = false;
+            int i = 0, max = 5;
+            do {
+                isNomer();
+
+                sukses = Sequel.menyimpantfSmc("reg_periksa", null, NoReg.getText(), no_rawat, Valid.getTglSmc(TanggalPeriksa), jamRegist,
                     KdDokter.getText(), TNoRM.getText(), KdPoli.getText(), namaPJ, alamatPJ, hubunganPJ, biayaReg, "Belum", statusDaftar,
-                    "Ralan", kdpnj.getText(), umurDaftar, statusUmur, "Belum bayar", statusPoli
-                )) {
+                    "Ralan", kdpnj.getText(), umurDaftar, statusUmur, "Belum bayar", statusPoli);
+
+                if (sukses) {
+                    Sequel.menyimpanSmc("booking_registrasi", null, Valid.getTglSmc(TanggalBooking), jam(),
+                        TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
+                        kdpnj.getText(), "0", null, "Belum", no_rawat
+                    );
                     Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasienRM, TNoRM.getText());
-                    Sequel.mengupdateSmc("booking_registrasi", "no_rawat = ?", "tanggal_periksa = ? and no_rkm_medis = ?", no_rawat, Valid.getTglSmc(TanggalPeriksa), TNoRM.getText());
                     emptTeks();
                     tampil();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan registrasi..!!");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Hanya boleh ada 1 booking per tanggal periksa..!!");
+            } while (!sukses && i++ < max);
+            
+            if (!sukses) {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan booking registrasi..!!\nKemungkinan no. rawat sudah digunakan pada booking yang lain", "Gagal", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
