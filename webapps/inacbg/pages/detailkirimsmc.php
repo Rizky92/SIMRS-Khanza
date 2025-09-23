@@ -976,7 +976,7 @@
                 </div>
             </div>
             <div align="center">
-                <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM">
+                <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN & KIRIM KE EKLAIM" <?= $penyakit === '' ? 'disabled' : '' ?> >
             </div>
             <?php
                 $BtnSimpan = $_POST['BtnSimpan'] ?? null;
