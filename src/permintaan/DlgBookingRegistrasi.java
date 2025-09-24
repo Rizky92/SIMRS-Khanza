@@ -1484,31 +1484,41 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for (i = tbObat.getRowCount() - 1; i > -1; --i) { // loop mundur
-            if(tbObat.getValueAt(i,0).toString().equals("true")){
-                if (BOOKINGLANGSUNGREGISTRASI) {
-                    if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
-                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and no_rawat = ?",
-                            tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 27).toString()
-                        )) {
-                            Sequel.menghapusIgnoreSmc("reg_periksa",
-                                "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
-                                "not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
-                                tbObat.getValueAt(i, 27).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
-                            );
-                            tabMode.removeRow(i);
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Data table masih kosong..!!");
+        } else {
+            for (i = tbObat.getRowCount() - 1; i >= 0; --i) {
+                if(tbObat.getValueAt(i,0).toString().equals("true")){
+                    if (BOOKINGLANGSUNGREGISTRASI) {
+                        if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
+                            if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and no_rawat = ?",
+                                tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 27).toString()
+                            )) {
+                                Sequel.menghapusIgnoreSmc("reg_periksa",
+                                    "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
+                                    "status_bayar = 'Belum Bayar' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
+                                    tbObat.getValueAt(i, 27).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
+                                );
+                                tabMode.removeRow(i);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Maaf, booking sudah diberikan pelayanan..!!");
+                            tbObat.setValueAt(false, i, 0);
+                            break;
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Maaf, booking sudah diberikan pelayanan..!!");
-                        tbObat.setValueAt(false, i, 0);
-                        break;
-                    }
-                } else {
-                    if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
-                        tabMode.removeRow(i);
+                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
+                            tabMode.removeRow(i);
+                        }
                     }
                 }
             }
+            emptTeks();
+            KdDokter.setText("");
+            NmDokter.setText("");
+            KdPoli.setText("");
+            NmPoli.setText("");
+            NoReg.setText("");
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1749,6 +1759,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         TanggalBooking.setDate(new Date());
         BtnPasien.requestFocus();
         isNomer();
+        tbObat.clearSelection();
     }
 
     private void isNomer(){
