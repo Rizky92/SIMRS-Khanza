@@ -7170,8 +7170,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             respon=nameNode.path("code").asText();
                             System.out.println(nameNode.path("code").asText()+" "+nameNode.path("message").asText());
                             Sequel.logTaskid(TNoRw.getText(), TNoRw.getText(), "Onsite", "addantrean", requestJson, nameNode.path("code").asText(), nameNode.path("message").asText(), root.toString(), datajam);
-                            if (nameNode.path("code").asText().equals("200") || nameNode.path("code").asText().equals("208")) {
-                            } else {
+                            if (!(nameNode.path("code").asText().equals("200") || nameNode.path("code").asText().equals("208"))) {
                                 statusantrean = false;
                                 JOptionPane.showMessageDialog(null, nameNode.path("message").asText(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
                             }
