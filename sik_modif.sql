@@ -218,7 +218,7 @@ ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(
 
 ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `harga` varchar(10) NULL DEFAULT NULL AFTER `nama_brng_apotek_bpjs`;
 
-ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `retriksi` varchar(255) NULL DEFAULT NULL AFTER `harga`;
+ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `restriksi` varchar(255) NULL DEFAULT NULL AFTER `harga`;
 
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
@@ -1288,7 +1288,7 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` v
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` varchar(20) NULL DEFAULT NULL AFTER `kd_dokter`;
 
-ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY IF NOT EXISTS (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
 

@@ -521,7 +521,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan);
 
         BtnSimpan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan1.setMnemonic('S');
         BtnSimpan1.setText("Simpan Resep Kosong");
         BtnSimpan1.setToolTipText("Alt+S");
         BtnSimpan1.setName("BtnSimpan1"); // NOI18N
@@ -534,7 +533,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan1);
 
         BtnSimpan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan2.setMnemonic('S');
         BtnSimpan2.setText("INSERT OBAT NON RACIKAN");
         BtnSimpan2.setToolTipText("Alt+S");
         BtnSimpan2.setName("BtnSimpan2"); // NOI18N
@@ -548,7 +546,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan2);
 
         BtnSimpan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan3.setMnemonic('S');
         BtnSimpan3.setText("INSERT OBAT RACIKAN");
         BtnSimpan3.setToolTipText("Alt+S");
         BtnSimpan3.setName("BtnSimpan3"); // NOI18N
@@ -562,7 +559,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan3);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -597,7 +593,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.add(CariDataObat);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('5');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -697,12 +692,14 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel11.setBounds(205, 10, 45, 23);
 
         TPasien.setEditable(false);
+        TPasien.setText("PASIEN X");
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(TPasien);
         TPasien.setBounds(427, 10, 237, 23);
 
         TNoRM.setEditable(false);
+        TNoRM.setText("000001");
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.setPreferredSize(new java.awt.Dimension(207, 23));
         TNoRM.addActionListener(new java.awt.event.ActionListener() {
@@ -714,7 +711,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         TNoRM.setBounds(254, 10, 90, 23);
 
         LblNoRawat.setEditable(false);
-        LblNoRawat.setText("2025/12/31/999999");
+        LblNoRawat.setText("2025/09/24/000417");
         LblNoRawat.setName("LblNoRawat"); // NOI18N
         LblNoRawat.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(LblNoRawat);
@@ -746,12 +743,14 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel20.setBounds(0, 130, 74, 23);
 
         NmPoli.setEditable(false);
+        NmPoli.setText("Penyakit Dalam");
         NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormInput.add(NmPoli);
         NmPoli.setBounds(481, 70, 183, 23);
 
         KdPoli.setEditable(false);
+        KdPoli.setText("INT");
         KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormInput.add(KdPoli);
@@ -768,12 +767,14 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel15.setBounds(0, 70, 74, 23);
 
         KdDPJP.setEditable(false);
+        KdDPJP.setText("2790");
         KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         FormInput.add(KdDPJP);
         KdDPJP.setBounds(78, 70, 75, 23);
 
         NmDPJP.setEditable(false);
+        NmDPJP.setText("dr. Carta A Gunawan, Sp. PD");
         NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         FormInput.add(NmDPJP);
@@ -822,6 +823,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         NoKartu.setBounds(236, 40, 130, 23);
 
         NoSEP.setEditable(false);
+        NoSEP.setText("0302R1100925V000001");
         NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
         FormInput.add(NoSEP);
@@ -1016,14 +1018,14 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
                         System.out.println(URL);
                         requestJson = "{" //                                    + "\"TGLSJP\": \"" + Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+Jam.getText()+ "\","+
                             +
-                             "\"TGLSJP\": \"" + Valid.SetTgl(DTPTgl.getSelectedItem() + "") + " " + cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem() + "\"," +
+                             "\"TGLSJP\": \"" + Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk) + "\"," +
                             "\"REFASALSJP\": \"" + NoSEP.getText() + "\"," +
                             "\"POLIRSP\": \"" + KdPoli.getText() + "\"," +
                             "\"KDJNSOBAT\": \"" + JnsObat.getSelectedItem().toString().substring(0, 1) + "\"," +
                             "\"NORESEP\": \"" + TResep.getText() + "\", " +
                             "\"IDUSERSJP\": \"RS_" + akses.getkode() + "\"," +
-                            "\"TGLRSP\": \"" + Valid.SetTgl(TanggalPelayanan.getSelectedItem() + "") + " 00:00:00\", " +
-                            "\"TGLPELRSP\": \"" + Valid.SetTgl(TanggalPelayanan.getSelectedItem() + "") + " 00:00:00\"," +
+                            "\"TGLRSP\": \"" + Valid.getTglSmc(TanggalPelayanan) + " 00:00:00\", " +
+                            "\"TGLPELRSP\": \"" + Valid.getTglSmc(TanggalPelayanan) + " 00:00:00\"," +
                             "\"KdDokter\": \"0\"," +
                             "\"iterasi\":\"" + Iterasi.getSelectedItem().toString().substring(0, 1) + "\"" +
                             "}  ";
@@ -2075,14 +2077,14 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
                     System.out.println(URL);
                     requestJson = "{" //                                    + "\"TGLSJP\": \"" + Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+Jam.getText()+ "\","+
                         +
-                         "\"TGLSJP\": \"" + Valid.SetTgl(DTPTgl.getSelectedItem() + "") + " " + cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem() + "\"," +
+                         "\"TGLSJP\": \"" + Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk) + "\"," +
                         "\"REFASALSJP\": \"" + NoSEP.getText() + "\"," +
                         "\"POLIRSP\": \"" + KdPoli.getText() + "\"," +
                         "\"KDJNSOBAT\": \"" + JnsObat.getSelectedItem().toString().substring(0, 1) + "\"," +
                         "\"NORESEP\": \"" + TResep.getText() + "\", " +
                         "\"IDUSERSJP\": \"RS_" + akses.getkode() + "\"," +
-                        "\"TGLRSP\": \"" + Valid.SetTgl(TanggalPelayanan.getSelectedItem() + "") + " 00:00:00\", " +
-                        "\"TGLPELRSP\": \"" + Valid.SetTgl(TanggalPelayanan.getSelectedItem() + "") + " 00:00:00\"," +
+                        "\"TGLRSP\": \"" + Valid.getTglSmc(TanggalPelayanan) + " 00:00:00\", " +
+                        "\"TGLPELRSP\": \"" + Valid.getTglSmc(TanggalPelayanan) + " 00:00:00\"," +
                         "\"KdDokter\": \"0\"," +
                         "\"iterasi\":\"" + Iterasi.getSelectedItem().toString().substring(0, 1) + "\"" +
                         "}  ";
