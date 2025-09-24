@@ -253,7 +253,7 @@ public final class akses {
             surat_keterangan_layak_terbang=false,bayar_beban_hutang_lain=false,surat_persetujuan_pemeriksaan_hiv=false,skrining_instrumen_acrs=false,surat_pernyataan_memilih_dpjp=false,
             skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false,kriteria_masuk_nicu=false,kriteria_keluar_nicu=false,penilaian_medis_ranap_psikiatrik=false,
             kriteria_masuk_picu=false,kriteria_keluar_picu=false,master_sampel_bakumutu=false,skrining_instrumen_amt=false,parameter_pengujian_lab_kesehatan_lingkungan=false,
-            nilai_normal_baku_mutu_lab_kesehatan_lingkungan=false;
+            nilai_normal_baku_mutu_lab_kesehatan_lingkungan=false,skrining_pneumonia_severity_index=false,permintaan_pengujian_sampel_lab_kesehatan_lingkungan=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1440,6 +1440,8 @@ public final class akses {
                         akses.skrining_instrumen_amt=rs2.getBoolean("skrining_instrumen_amt");
                         akses.parameter_pengujian_lab_kesehatan_lingkungan=rs2.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan");
                         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=rs2.getBoolean("nilai_normal_baku_mutu_lab_kesehatan_lingkungan");
+                        akses.skrining_pneumonia_severity_index=rs2.getBoolean("skrining_pneumonia_severity_index");
+                        akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2634,6 +2636,8 @@ public final class akses {
         akses.skrining_instrumen_amt=isadmin;
         akses.parameter_pengujian_lab_kesehatan_lingkungan=isadmin;
         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=isadmin;
+        akses.skrining_pneumonia_severity_index=isadmin;
+        akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3836,6 +3840,8 @@ public final class akses {
     public static boolean getskrining_instrumen_amt(){return akses.skrining_instrumen_amt;}
     public static boolean getparameter_pengujian_lab_kesehatan_lingkungan(){return akses.parameter_pengujian_lab_kesehatan_lingkungan;}
     public static boolean getnilai_normal_baku_mutu_lab_kesehatan_lingkungan(){return akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan;}
+    public static boolean getskrining_pneumonia_severity_index(){return akses.skrining_pneumonia_severity_index;}
+    public static boolean getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     private static void setEdit() {
         if (! akses.edit) {
