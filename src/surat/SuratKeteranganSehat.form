@@ -50,6 +50,7 @@
               <Image iconType="3" name="/picture/category.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cetak Surat Sehat 2"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="MnCetakSuratSehat1" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 26]"/>
@@ -351,7 +352,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-05-2023"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -379,7 +380,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-05-2023"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -762,9 +763,10 @@
                 <Component class="widget.ComboBox" name="CmbButaWarna">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="2">
-                        <StringItem index="0" value="Tidak"/>
-                        <StringItem index="1" value="Ya"/>
+                      <StringArray count="3">
+                        <StringItem index="0" value="-"/>
+                        <StringItem index="1" value="Tidak"/>
+                        <StringItem index="2" value="Ya"/>
                       </StringArray>
                     </Property>
                     <Property name="name" type="java.lang.String" value="CmbButaWarna" noResource="true"/>
@@ -804,7 +806,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-05-2023"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -815,7 +817,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TanggalSuratActionPerformed"/>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="TanggalSuratItemStateChanged"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TanggalSuratKeyPressed"/>
                   </Events>
                   <Constraints>

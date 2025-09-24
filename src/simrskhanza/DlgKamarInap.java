@@ -20095,6 +20095,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }else{
                 MnHapusDataSalah.setEnabled(false);
             }
+            namadokter="";
             if(KUNCIDOKTERRANAP.equals("yes")){
                 dokterranap=billing.rawatinap.perawatan.dokter.tampil3(akses.getkode());
                 if(!dokterranap.equals("")){

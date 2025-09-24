@@ -105,13 +105,17 @@ CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_obat`  (
   CONSTRAINT `bridging_apotek_bpjs_obat_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep`(`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `bridging_sep` ADD COLUMN IF NOT EXISTS `esep` enum('0','1') NULL DEFAULT NULL AFTER `nmdpjplayanan`;
-
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspelayanan`) USING BTREE;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp`) USING BTREE;
+
+CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
+  `no_sep` varchar(40) NOT NULL,
+  `tgl_simpan` DATETIME NOT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `catatan_cairan_hemodialisa` ADD COLUMN IF NOT EXISTS `ttl_input` varchar(10) NULL DEFAULT '0' AFTER `nip`;
 
@@ -1287,6 +1291,8 @@ ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` v
 ALTER TABLE `surat_keterangan_rawat_inap` ADD CONSTRAINT `surat_keterangan_rawat_inap_dokter_FK` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD INDEX IF NOT EXISTS `surat_keterangan_rawat_inap_dokter_FK`(`kd_dokter`) USING BTREE;
+
+ALTER TABLE `surat_keterangan_sehat` MODIFY COLUMN IF EXISTS `butawarna` enum('Ya','Tidak','-') NOT NULL AFTER `suhu`;
 
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `hubungan` enum('Suami','Istri','Anak','Ayah','Ibu','Saudara','Keponakan') NOT NULL AFTER `alamat`;
 

@@ -341,8 +341,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 if(caribangsal.getTable().getSelectedRow()!= -1){                   
                     kdgudang.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(),0).toString());
                     nmgudang.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(),1).toString());
+                    BtnAllActionPerformed(null);
                 } 
-                kdgudang.requestFocus();
+                TCari.requestFocus();
             }
             @Override
             public void windowIconified(WindowEvent e) {}

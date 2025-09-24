@@ -94,13 +94,14 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-09-09");
+        jLabel17.setText("2025-09-11");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
         jLabel17.setBounds(107, 8, 90, 17);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
+        jLabel18.setText("Patch 1");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
         jLabel18.setBounds(107, 28, 90, 17);
