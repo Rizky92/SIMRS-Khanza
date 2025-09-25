@@ -545,7 +545,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnInformasiObat = new widget.Button();
         BtnSEPBPJS = new widget.Button();
         BtnObat23HariBPJS = new widget.Button();
-        BtnBridgingResepApotekBPJS = new widget.Button();
         BtnKirimResepApotekBPJS = new widget.Button();
         BtnKirimWAPengerjaan = new widget.Button();
         BtnKirimWASelesai = new widget.Button();
@@ -1585,25 +1584,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnObat23HariBPJS);
-
-        BtnBridgingResepApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnBridgingResepApotekBPJS.setText("Daftar Resep Apotek BPJS");
-        BtnBridgingResepApotekBPJS.setFocusPainted(false);
-        BtnBridgingResepApotekBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnBridgingResepApotekBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnBridgingResepApotekBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnBridgingResepApotekBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnBridgingResepApotekBPJS.setMaximumSize(null);
-        BtnBridgingResepApotekBPJS.setMinimumSize(new java.awt.Dimension(158, 23));
-        BtnBridgingResepApotekBPJS.setName("BtnBridgingResepApotekBPJS"); // NOI18N
-        BtnBridgingResepApotekBPJS.setPreferredSize(new java.awt.Dimension(158, 23));
-        BtnBridgingResepApotekBPJS.setRoundRect(false);
-        BtnBridgingResepApotekBPJS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBridgingResepApotekBPJSActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnBridgingResepApotekBPJS);
 
         BtnKirimResepApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKirimResepApotekBPJS.setText("Kirim Resep Apotek BPJS");
@@ -3740,12 +3720,31 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         refreshPilihanPrinter(CmbPrinterLembarObat);
     }//GEN-LAST:event_BtnRefreshPrinterLembarObatActionPerformed
 
-    private void BtnBridgingResepApotekBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBridgingResepApotekBPJSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnBridgingResepApotekBPJSActionPerformed
-
     private void BtnKirimResepApotekBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimResepApotekBPJSActionPerformed
-        // TODO add your handling code here:
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (akses.getbpjs_kirim_obat_smc()) {
+                    if (tabMode.getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                        TCari.requestFocus();
+                    } else if (NoRawat.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep dokter yang mau dikirim ke Apotek Online BPJS..!!");
+                    } else {
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        ApotekBPJSKirimObat apol = new ApotekBPJSKirimObat(null, false);
+                        apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        apol.setLocationRelativeTo(internalFrame1);
+                        apol.setNoRm(NoRawat, NoRM, Pasien, Valid.SetTgl3(TglPeresepan) + " " + JamPeresepan, NoResep);
+                        apol.tampilobat2(NoResep);
+                        apol.setVisible(true);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                }
+            } else if (TabRawatJalan.getSelectedIndex() == 1) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan buka Daftar Resep...!!!!");
+                TCari.requestFocus();
+            }
+        }
     }//GEN-LAST:event_BtnKirimResepApotekBPJSActionPerformed
 
     /**
@@ -3766,7 +3765,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
-    private widget.Button BtnBridgingResepApotekBPJS;
     private widget.Button BtnCari;
     private widget.Button BtnCloseIn4;
     private widget.Button BtnEdit;
