@@ -105,7 +105,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 boolean a = false;
-                if ((colIndex == 0) || (colIndex == 4) || (colIndex == 5) || (colIndex == 6)) {
+                if ((colIndex == 1) || (colIndex == 4) || (colIndex == 5) || (colIndex == 6)) {
                     a = true;
                 }
                 return a;
@@ -1742,6 +1742,91 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
 //        }
     }
 
+    public void tampilobatSmc(String noresep) {
+        this.noresep = noresep;
+
+        try {
+            Valid.tabelKosong(tabModeobat);
+            Valid.tabelKosong(tabModeObatRacikan);
+            Valid.tabelKosong(tabModeDetailObatRacikan);
+
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select resep_obat.no_resep, resep_obat.tgl_perawatan, resep_obat.jam, resep_obat.no_rawat, pasien.no_rkm_medis, " +
+                "pasien.nm_pasien, resep_obat.kd_dokter, dokter.nm_dokter from resep_obat join reg_periksa on " +
+                "resep_obat.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                "join dokter on resep_obat.kd_dokter = dokter.kd_dokter where resep_obat.no_resep = ?"
+            )) {
+                ps.setString(1, noresep);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                            "select m.kode_brng_apotek_bpjs, m.nama_brng_apotek_bpjs, dpo.jml, o.kode_brng, o.nama_brng, " +
+                            "from detail_pemberian_obat dpo join maping_obat_apotek_bpjs m on dpo.kode_brng = m.kode_brng " +
+                            "join databarang o on dpo.kode_brng = o.kode_brng where dpo.no_rawat = ? and dpo.tgl_perawatan = ? " +
+                            "and dpo.jam = ? and not exists(select * from detail_obat_racikan dor where " +
+                            "dor.no_rawat = dpo.no_rawat and dor.tgl_perawatan = dpo.tgl_perawatan and " +
+                            "dor.jam = dpo.jam and dor.kode_brng = dpo.kode_brng) order by o.kode_brng"
+                        )) {
+                            ps2.setString(1, rs.getString("no_rawat"));
+                            ps2.setString(2, rs.getString("tgl_perawatan"));
+                            ps2.setString(3, rs.getString("jam"));
+                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                while (rs2.next()) {
+                                    switch (rsobat.getString("jml")) {
+                                        case "15":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 1, 0.5, 30
+                                            });
+                                            break;
+                                        case "45":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 1, 1.5, 30
+                                            });
+                                            break;
+                                        case "60":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 2, 1, 30
+                                            });
+                                            break;
+                                        case "90":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 3, 1, 30
+                                            });
+                                            break;
+                                        case "120":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 4, 1, 30
+                                            });
+                                            break;
+                                        case "3":
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 1, 1, 3
+                                            });
+                                            break;
+                                        default:
+                                            tabModeobat.addRow(new Object[] {
+                                                false, rs2.getString("jml"), rs2.getString("kode_brng_apotek_bpjs"),
+                                                rsobat.getString("nama_brng_apotek_bpjs"), 1, 1, 30
+                                            });
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
     public void tampilobat2(String no_resep) {
         this.noresep = no_resep;
         try {
@@ -2189,7 +2274,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
                                             tbObat.getValueAt(i, 4).toString(),
                                             tbObat.getValueAt(i, 5).toString(),
                                             "0",
-                                            no_apotek = Sequel.cariIsiSmc("select no_apotek from bridging_apotek_bpjs where no_resep='" + TResep.getText() + "'")
+                                            Sequel.cariIsiSmc("select no_apotek from bridging_apotek_bpjs where no_resep='" + TResep.getText() + "'")
                                         }) == true) {
                                             System.out.println("Obat " + tbObat.getValueAt(i, 3).toString() + " Berhasil disimpan");
                                             JOptionPane.showMessageDialog(null, "Obat " + tbObat.getValueAt(i, 3).toString() + " Berhasil disimpan");
