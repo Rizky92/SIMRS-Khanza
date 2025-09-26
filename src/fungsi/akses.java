@@ -254,6 +254,7 @@ public final class akses {
             skrining_instrumen_mental_emosional=false,pelanggan_lab_kesehatan_lingkungan=false,kriteria_masuk_nicu=false,kriteria_keluar_nicu=false,penilaian_medis_ranap_psikiatrik=false,
             kriteria_masuk_picu=false,kriteria_keluar_picu=false,master_sampel_bakumutu=false,skrining_instrumen_amt=false,parameter_pengujian_lab_kesehatan_lingkungan=false,
             nilai_normal_baku_mutu_lab_kesehatan_lingkungan=false,skrining_pneumonia_severity_index=false,permintaan_pengujian_sampel_lab_kesehatan_lingkungan=false;
+    private static boolean bpjs_kirim_obat_smc=false,bpjs_edit_kirim_obat_smc=false,bpjs_riwayat_obat_smc=false,bpjs_riwayat_pelayanan_obat_smc=false,bpjs_riwayat_pelayanan_resep_smc=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1439,6 +1440,11 @@ public final class akses {
                         akses.master_sampel_bakumutu=rs2.getBoolean("master_sampel_bakumutu");
                         akses.skrining_instrumen_amt=rs2.getBoolean("skrining_instrumen_amt");
                         akses.parameter_pengujian_lab_kesehatan_lingkungan=rs2.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan");
+                        akses.bpjs_kirim_obat_smc=rs2.getBoolean("bpjs_kirim_obat_smc");
+                        akses.bpjs_edit_kirim_obat_smc=rs2.getBoolean("bpjs_edit_kirim_obat_smc");
+                        akses.bpjs_riwayat_obat_smc=rs2.getBoolean("bpjs_riwayat_obat_smc");
+                        akses.bpjs_riwayat_pelayanan_obat_smc=rs2.getBoolean("bpjs_riwayat_pelayanan_obat_smc");
+                        akses.bpjs_riwayat_pelayanan_resep_smc=rs2.getBoolean("bpjs_riwayat_pelayanan_resep_smc");
                         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=rs2.getBoolean("nilai_normal_baku_mutu_lab_kesehatan_lingkungan");
                         akses.skrining_pneumonia_severity_index=rs2.getBoolean("skrining_pneumonia_severity_index");
                         akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan");
@@ -2635,6 +2641,11 @@ public final class akses {
         akses.master_sampel_bakumutu=isadmin;
         akses.skrining_instrumen_amt=isadmin;
         akses.parameter_pengujian_lab_kesehatan_lingkungan=isadmin;
+        akses.bpjs_kirim_obat_smc=isadmin;
+        akses.bpjs_edit_kirim_obat_smc=isadmin;
+        akses.bpjs_riwayat_obat_smc=isadmin;
+        akses.bpjs_riwayat_pelayanan_obat_smc=isadmin;
+        akses.bpjs_riwayat_pelayanan_resep_smc=isadmin;
         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=isadmin;
         akses.skrining_pneumonia_severity_index=isadmin;
         akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
@@ -3839,6 +3850,11 @@ public final class akses {
     public static boolean getmaster_sampel_bakumutu(){return akses.master_sampel_bakumutu;}
     public static boolean getskrining_instrumen_amt(){return akses.skrining_instrumen_amt;}
     public static boolean getparameter_pengujian_lab_kesehatan_lingkungan(){return akses.parameter_pengujian_lab_kesehatan_lingkungan;}
+    public static boolean getbpjs_kirim_obat_smc() {return akses.bpjs_kirim_obat_smc;}
+    public static boolean getbpjs_edit_kirim_obat_smc() {return akses.bpjs_edit_kirim_obat_smc;}
+    public static boolean getbpjs_riwayat_obat_smc() {return akses.bpjs_riwayat_obat_smc;}
+    public static boolean getbpjs_riwayat_pelayanan_obat_smc() {return akses.bpjs_riwayat_pelayanan_obat_smc;}
+    public static boolean getbpjs_riwayat_pelayanan_resep_smc() {return akses.bpjs_riwayat_pelayanan_resep_smc;}
     public static boolean getnilai_normal_baku_mutu_lab_kesehatan_lingkungan(){return akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan;}
     public static boolean getskrining_pneumonia_severity_index(){return akses.skrining_pneumonia_severity_index;}
     public static boolean getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan;}
