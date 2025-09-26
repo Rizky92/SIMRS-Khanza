@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs`  (
   `tgl_resep` datetime(0) NOT NULL,
   `tgl_pelayanan` date NULL DEFAULT NULL,
   `jenis_obat` enum('1','2','3') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `iterasi` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `iterasi` enum('0','1','2') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `kd_poli` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `nm_poli` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `kodedpjp` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,

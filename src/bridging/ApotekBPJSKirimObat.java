@@ -490,11 +490,11 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -508,7 +508,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -618,7 +617,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel8.setBounds(212, 130, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -718,7 +717,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         LblNoRawat.setBounds(78, 10, 123, 23);
 
         TanggalPelayanan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025 13:57:25" }));
+        TanggalPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2025 14:12:33" }));
         TanggalPelayanan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPelayanan.setName("TanggalPelayanan"); // NOI18N
         TanggalPelayanan.setOpaque(false);
@@ -857,7 +856,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         FormInput.add(jLabel21);
         jLabel21.setBounds(348, 10, 75, 23);
 
-        Iterasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tanpa Iterasi", "1. Dengan Iterasi" }));
+        Iterasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tanpa Iterasi", "1. Iterasi 1", "2. Iterasi 2" }));
         Iterasi.setName("Iterasi"); // NOI18N
         FormInput.add(Iterasi);
         Iterasi.setBounds(225, 100, 140, 23);
