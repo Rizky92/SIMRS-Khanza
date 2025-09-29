@@ -1178,9 +1178,7 @@
                 $msg['metadata']['message']
             );
 
-            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
-
-            return GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
+            return GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $error);
         }
 
         InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
@@ -1198,7 +1196,7 @@
         ];
     }
 
-    function GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender)
+    function GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $error_klaim_baru)
     {
         $request = [
             'metadata' => [
@@ -1219,6 +1217,7 @@
                 $msg['metadata']['message']
             );
 
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error_klaim_baru.'</span><br /><br />';
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
             return [

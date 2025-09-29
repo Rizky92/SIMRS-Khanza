@@ -30,24 +30,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author khanzamedia
  */
-public class PanelDiagnosaSmc extends widget.panelisi {
-    public static final int MODE_IDRG = 0;
-    public static final int MODE_INACBG = 1;
-    
+public class PanelInacbgSmc extends widget.panelisi {
     private final DefaultTableModel tabModeDiagnosaPasien, tabModeICD10, tabModeICD9CM, tabModeProsedurPasien;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private String nosep = "";
-    private int dx = 1, px = 1, mode = -1;
+    private int dx = 1, px = 1;
 
     /**
      * Creates new form panelDiagnosa
      */
-    public PanelDiagnosaSmc() {
+    public PanelInacbgSmc() {
         initComponents();
         tabModeICD10 = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Deskripsi", "VALIDCODE", "ACCPDX", "ASTERISK", "IM", "urut"
+            "P", "Kode", "Deskripsi", "VALIDCODE", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -86,7 +83,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
         tbICD10.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeICD9CM = new DefaultTableModel(null, new Object[] {
-            "P", "Mtpx", "Kode", "Deskripsi", "VALIDCODE", "IM", "urut"
+            "P", "Kode", "Deskripsi", "VALIDCODE", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -128,7 +125,7 @@ public class PanelDiagnosaSmc extends widget.panelisi {
                 if (column == 1) {
                     c.setBackground(new Color(215, 215, 255));
                     c.setForeground(new Color(50, 50, 50));
-                    if (((Integer) value) > 0) {
+                    if (value != null && ((Integer) value) > 0) {
                         c.setBackground(new Color(255, 255, 255));
                         c.setForeground(new Color(55, 55, 175));
                     } else {
