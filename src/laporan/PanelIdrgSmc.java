@@ -649,7 +649,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select dx.kode_icd10, i.deskripsi, if(dx.urut = 1, 'Utama', '') as stts, " +
             "dx.no_sep, r.no_rkm_medis, px.nm_pasien, dx.urut from idrg_diagnosa_pasien_smc " +
-            "dx join eklaim_icd10_smc i on dx.kode_icd10 = i.code1 join bridging_sep s on " +
+            "dx join idrg_referensi_icd10_smc i on dx.kode_icd10 = i.code1 join bridging_sep s on " +
             "dx.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join " +
             "pasien px on r.no_rkm_medis = px.no_rkm_medis where dx.no_sep = ? order " +
             "by dx.urut"
@@ -673,7 +673,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         Valid.tabelKosong(tabModeProsedurPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select p.kode_icd9, i.deskripsi, p.multiplicity, if(p.urut = 1, 'Utama', '') as stts, p.no_sep, " +
-            "r.no_rkm_medis, px.nm_pasien, p.urut from idrg_prosedur_pasien_smc p join eklaim_icd9cm_smc i on " +
+            "r.no_rkm_medis, px.nm_pasien, p.urut from idrg_prosedur_pasien_smc p join idrg_referensi_icd9cm_smc i on " +
             "p.kode_icd9 = i.code1 join bridging_sep s on p.no_sep = s.no_sep join reg_periksa r on " +
             "s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis where " +
             "p.no_sep = ? order by p.urut"
@@ -727,7 +727,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 r.get("accpdx"), r.get("asterisk"), r.get("im"), r.get("urut")
             }));
             
-            StringBuilder sb = new StringBuilder("select * from eklaim_icd10_smc ");
+            StringBuilder sb = new StringBuilder("select * from idrg_referensi_icd10_smc ");
             
             String query = "(code1 like ? or code2 like ? or deskripsi like ?) ";
             
@@ -812,7 +812,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 r.get("validcode"), r.get("im"), r.get("urut")
             }));
             
-            StringBuilder sb = new StringBuilder("select * from eklaim_icd9cm_smc ");
+            StringBuilder sb = new StringBuilder("select * from idrg_referensi_icd9cm_smc ");
             
             String query = "(code1 like ? or code2 like ? or deskripsi like ?) ";
             
@@ -886,8 +886,21 @@ public class PanelIdrgSmc extends widget.panelisi {
             return;
         }
         
+        boolean updateDiagnosa = false, updateProsedur = false;
+        
         if (tabModeICD10.getRowCount() > 0) {
-            Sequel.menghapusSmc("idrg_diagnosa_pasien_smc", "no_sep = ?", nosep);
+            for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
+                if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
+                    updateDiagnosa = true;
+                    break;
+                    
+                }
+            }
+            
+            if (updateDiagnosa) {
+                Sequel.menghapusSmc("idrg_diagnosa_pasien_smc", "no_sep = ?", nosep);
+            }
+            
             for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                 if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("idrg_diagnosa_pasien_smc", null,
@@ -895,10 +908,21 @@ public class PanelIdrgSmc extends widget.panelisi {
                         tabModeICD10.getValueAt(i, 7).toString());
                 }
             }
+            
         }
         
         if (tabModeICD9CM.getRowCount() > 0) {
-            Sequel.menghapusSmc("idrg_prosedur_pasien_smc", "no_sep = ?", nosep);
+            for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
+                if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
+                    updateProsedur = true;
+                    break;
+                }
+            }
+            
+            if (updateProsedur) {
+                Sequel.menghapusSmc("idrg_prosedur_pasien_smc", "no_sep = ?", nosep);
+            }
+            
             for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                 if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("idrg_prosedur_pasien_smc", null,
