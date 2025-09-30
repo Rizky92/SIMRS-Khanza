@@ -302,16 +302,16 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         Suhu = new widget.TextBox();
         jLabel30 = new widget.Label();
         SpO2 = new widget.TextBox();
-        jLabel26 = new widget.Label();
-        Tindakan = new widget.TextBox();
-        jLabel31 = new widget.Label();
-        UFG = new widget.TextBox();
         jLabel27 = new widget.Label();
         BarcodeHF = new widget.TextBox();
         jLabel32 = new widget.Label();
         RR = new widget.TextBox();
+        jLabel31 = new widget.Label();
+        UFG = new widget.TextBox();
         jLabel33 = new widget.Label();
         UFV = new widget.TextBox();
+        jLabel26 = new widget.Label();
+        Tindakan = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -512,7 +512,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -526,7 +526,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -622,7 +622,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-09-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -888,35 +888,20 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         FormInput.add(SpO2);
         SpO2.setBounds(334, 100, 55, 23);
 
-        jLabel26.setText("Tindakan :");
-        jLabel26.setName("jLabel26"); // NOI18N
-        FormInput.add(jLabel26);
-        jLabel26.setBounds(0, 130, 70, 23);
+        jLabel27.setText("Barcode HF :");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(455, 130, 70, 23);
 
-        Tindakan.setFocusTraversalPolicyProvider(true);
-        Tindakan.setName("Tindakan"); // NOI18N
-        Tindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+        BarcodeHF.setFocusTraversalPolicyProvider(true);
+        BarcodeHF.setName("BarcodeHF"); // NOI18N
+        BarcodeHF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TindakanKeyPressed(evt);
+                BarcodeHFKeyPressed(evt);
             }
         });
-        FormInput.add(Tindakan);
-        Tindakan.setBounds(74, 130, 715, 23);
-
-        jLabel31.setText("UFG :");
-        jLabel31.setName("jLabel31"); // NOI18N
-        FormInput.add(jLabel31);
-        jLabel31.setBounds(566, 100, 40, 23);
-
-        UFG.setFocusTraversalPolicyProvider(true);
-        UFG.setName("UFG"); // NOI18N
-        UFG.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                UFGKeyPressed(evt);
-            }
-        });
-        FormInput.add(UFG);
-        UFG.setBounds(610, 100, 60, 23);
+        FormInput.add(BarcodeHF);
+        BarcodeHF.setBounds(529, 130, 260, 23);
 
         jLabel32.setText("RR/menit :");
         jLabel32.setName("jLabel32"); // NOI18N
@@ -933,6 +918,21 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         FormInput.add(RR);
         RR.setBounds(490, 100, 55, 23);
 
+        jLabel31.setText("UFG :");
+        jLabel31.setName("jLabel31"); // NOI18N
+        FormInput.add(jLabel31);
+        jLabel31.setBounds(566, 100, 40, 23);
+
+        UFG.setFocusTraversalPolicyProvider(true);
+        UFG.setName("UFG"); // NOI18N
+        UFG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UFGKeyPressed(evt);
+            }
+        });
+        FormInput.add(UFG);
+        UFG.setBounds(610, 100, 60, 23);
+
         jLabel33.setText("UFV :");
         jLabel33.setName("jLabel33"); // NOI18N
         FormInput.add(jLabel33);
@@ -948,20 +948,20 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         FormInput.add(UFV);
         UFV.setBounds(729, 100, 60, 23);
 
-        jLabel27.setText("Barcode HF :");
-        jLabel27.setName("jLabel27"); // NOI18N
-        FormInput.add(jLabel27);
-        jLabel27.setBounds(146, 130, 70, 23);
+        jLabel26.setText("Tindakan :");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(0, 130, 70, 23);
 
-        BarcodeHF.setFocusTraversalPolicyProvider(true);
-        BarcodeHF.setName("BarcodeHF"); // NOI18N
-        BarcodeHF.addKeyListener(new java.awt.event.KeyAdapter() {
+        Tindakan.setFocusTraversalPolicyProvider(true);
+        Tindakan.setName("Tindakan"); // NOI18N
+        Tindakan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BarcodeHFKeyPressed(evt);
+                TindakanKeyPressed(evt);
             }
         });
-        FormInput.add(BarcodeHF);
-        BarcodeHF.setBounds(220, 130, 260, 23);
+        FormInput.add(Tindakan);
+        Tindakan.setBounds(74, 130, 377, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1537,14 +1537,6 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         Valid.pindah(evt,Suhu,RR);
     }//GEN-LAST:event_SpO2KeyPressed
 
-    private void TindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakanKeyPressed
-        Valid.pindah(evt,UFV,BtnSimpan);
-    }//GEN-LAST:event_TindakanKeyPressed
-
-    private void UFGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UFGKeyPressed
-        Valid.pindah(evt,RR,UFV);
-    }//GEN-LAST:event_UFGKeyPressed
-
     private void RRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RRKeyPressed
         Valid.pindah(evt,SpO2,UFG);
     }//GEN-LAST:event_RRKeyPressed
@@ -1556,6 +1548,14 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     private void BarcodeHFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BarcodeHFKeyPressed
         Valid.pindah(evt,UFG,BtnSimpan);
     }//GEN-LAST:event_BarcodeHFKeyPressed
+
+    private void UFGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UFGKeyPressed
+        Valid.pindah(evt,RR,UFV);
+    }//GEN-LAST:event_UFGKeyPressed
+
+    private void TindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakanKeyPressed
+        Valid.pindah(evt,UFV,BtnSimpan);
+    }//GEN-LAST:event_TindakanKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1664,14 +1664,15 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
             "like ? or pasien.nm_pasien like ? or catatan_observasi_hemodialisa.nip like ? or petugas.nama like ?) ") + "order by " +
             "catatan_observasi_hemodialisa.tgl_perawatan, catatan_observasi_hemodialisa.jam_rawat"
         )) {
-            ps.setString(1, Valid.getTglSmc(DTPCari1));
-            ps.setString(2, Valid.getTglSmc(DTPCari2));
+            int p = 0;
+            ps.setString(++p, Valid.getTglSmc(DTPCari1));
+            ps.setString(++p, Valid.getTglSmc(DTPCari2));
             if (!TCari.getText().isBlank()) {
-                ps.setString(3, "%" + TCari.getText().trim() + "%");
-                ps.setString(4, "%" + TCari.getText().trim() + "%");
-                ps.setString(5, "%" + TCari.getText().trim() + "%");
-                ps.setString(6, "%" + TCari.getText().trim() + "%");
-                ps.setString(7, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
             }
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -1826,14 +1827,13 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
 
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            Date now = Calendar.getInstance().getTime();
             if (ChkKejadian.isSelected()) {
-                String jam = new SimpleDateFormat("HH:mm:ss").format(now);
+                Calendar c = Calendar.getInstance();
                 
-                Tanggal.setDate(now);
-                Jam.setSelectedItem(jam.substring(0, 2));
-                Menit.setSelectedItem(jam.substring(3, 5));
-                Detik.setSelectedItem(jam.substring(6, 8));
+                Tanggal.setDate(c.getTime());
+                Jam.setSelectedIndex(c.get(Calendar.HOUR_OF_DAY));
+                Menit.setSelectedIndex(c.get(Calendar.MINUTE));
+                Detik.setSelectedIndex(c.get(Calendar.SECOND));
             }
         };
 
