@@ -183,7 +183,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             });
         }
 
-        panelDiagnosaSmc.getTabbedPane().addChangeListener((ChangeEvent e) -> {
+        panelIdrg.getTabbedPane().addChangeListener((ChangeEvent e) -> {
+            if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
+                BtnSimpanDiagnosa.setEnabled(true);
+                BtnHapusDiagnosa.setEnabled(false);
+            } else {
+                BtnSimpanDiagnosa.setEnabled(false);
+                BtnHapusDiagnosa.setEnabled(true);
+            }
+        });
+        
+        panelInacbg.getTabbedPane().addChangeListener((ChangeEvent e) -> {
             if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
                 BtnSimpanDiagnosa.setEnabled(true);
                 BtnHapusDiagnosa.setEnabled(false);
@@ -268,6 +278,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel16 = new widget.Label();
         jLabel22 = new widget.Label();
         fc = new javax.swing.JFileChooser();
+        panelInacbgSmc1 = new laporan.PanelInacbgSmc();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -330,17 +341,20 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnHapusDiagnosa = new widget.Button();
         jLabel32 = new widget.Label();
         btnRiwayatPasien = new widget.Button();
-        panelDiagnosaSmc = new laporan.PanelIdrgSmc();
         jLabel33 = new widget.Label();
         btnPDFKlaimINACBG = new widget.Button();
         jLabel34 = new widget.Label();
         btnTriaseIGD = new widget.Button();
         lblTglSEP = new widget.Label();
+        tabPane2 = new widget.TabPane();
+        panelIdrg = new laporan.PanelIdrgSmc();
+        panelInacbg = new laporan.PanelInacbgSmc();
         panelBiasa2 = new widget.PanelBiasa();
-        BtnValidasiQR = new widget.Button();
+        BtnKompilasi = new widget.Button();
         jPanel5 = new javax.swing.JPanel();
         tabPane1 = new widget.TabPane();
         panelInvoices = new widget.panelisi();
+        lblCetak = new widget.Label();
         PanelContentINACBG = new widget.panelisi();
 
         jPopupMenu1.setForeground(new java.awt.Color(50, 50, 50));
@@ -435,7 +449,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-09-2025 09:45:48" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025 14:06:00" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -476,7 +490,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-09-2025" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -683,6 +697,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
         fc.setName("fc"); // NOI18N
 
+        panelInacbgSmc1.setName("panelInacbgSmc1"); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -837,7 +853,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-09-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -851,7 +867,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-09-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1251,11 +1267,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.add(btnRiwayatPasien);
         btnRiwayatPasien.setBounds(120, 250, 100, 14);
 
-        panelDiagnosaSmc.setName("panelDiagnosaSmc"); // NOI18N
-        panelDiagnosaSmc.setPreferredSize(new java.awt.Dimension(800, 432));
-        panelBiasa1.add(panelDiagnosaSmc);
-        panelDiagnosaSmc.setBounds(0, 310, 800, 432);
-
         jLabel33.setText("Hasil Klaim INACBG : ");
         jLabel33.setName("jLabel33"); // NOI18N
         jLabel33.setPreferredSize(new java.awt.Dimension(120, 14));
@@ -1309,6 +1320,20 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.add(lblTglSEP);
         lblTglSEP.setBounds(248, 70, 70, 14);
 
+        tabPane2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        tabPane2.setName("tabPane2"); // NOI18N
+        tabPane2.setPreferredSize(new java.awt.Dimension(800, 432));
+
+        panelIdrg.setName("panelIdrg"); // NOI18N
+        panelIdrg.setPreferredSize(new java.awt.Dimension(800, 432));
+        tabPane2.addTab("IDRG", panelIdrg);
+
+        panelInacbg.setName("panelInacbg"); // NOI18N
+        tabPane2.addTab("INACBG", panelInacbg);
+
+        panelBiasa1.add(tabPane2);
+        tabPane2.setBounds(0, 310, 800, 432);
+
         scrollPane1.setViewportView(panelBiasa1);
 
         jPanel2.add(scrollPane1, java.awt.BorderLayout.CENTER);
@@ -1316,21 +1341,21 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa2.setName("panelBiasa2"); // NOI18N
         panelBiasa2.setLayout(new java.awt.BorderLayout());
 
-        BtnValidasiQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2.png"))); // NOI18N
-        BtnValidasiQR.setMnemonic('T');
-        BtnValidasiQR.setText("Kompilasi");
-        BtnValidasiQR.setToolTipText("Alt+T");
-        BtnValidasiQR.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        BtnValidasiQR.setMaximumSize(new java.awt.Dimension(100, 30));
-        BtnValidasiQR.setMinimumSize(new java.awt.Dimension(100, 30));
-        BtnValidasiQR.setName("BtnValidasiQR"); // NOI18N
-        BtnValidasiQR.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnValidasiQR.addActionListener(new java.awt.event.ActionListener() {
+        BtnKompilasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2.png"))); // NOI18N
+        BtnKompilasi.setMnemonic('T');
+        BtnKompilasi.setText("Kompilasi");
+        BtnKompilasi.setToolTipText("Alt+T");
+        BtnKompilasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnKompilasi.setMaximumSize(new java.awt.Dimension(100, 30));
+        BtnKompilasi.setMinimumSize(new java.awt.Dimension(100, 30));
+        BtnKompilasi.setName("BtnKompilasi"); // NOI18N
+        BtnKompilasi.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKompilasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnValidasiQRActionPerformed(evt);
+                BtnKompilasiActionPerformed(evt);
             }
         });
-        panelBiasa2.add(BtnValidasiQR, java.awt.BorderLayout.CENTER);
+        panelBiasa2.add(BtnKompilasi, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(panelBiasa2, java.awt.BorderLayout.PAGE_END);
 
@@ -1348,6 +1373,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelInvoices.setName("panelInvoices"); // NOI18N
         panelInvoices.setPreferredSize(new java.awt.Dimension(55, 100));
         panelInvoices.setLayout(new java.awt.BorderLayout());
+
+        lblCetak.setText("<html>\n<body>\n<a href=\"#\">Cetak</a>\n</body>\n</html>"); // NOI18N
+        lblCetak.setName("lblCetak"); // NOI18N
+        panelInvoices.add(lblCetak, java.awt.BorderLayout.PAGE_END);
+
         tabPane1.addTab("Billing", panelInvoices);
         panelInvoices.getAccessibleContext().setAccessibleName("");
 
@@ -1429,7 +1459,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKompilasiMouseClicked
 
-    private void BtnValidasiQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidasiQRActionPerformed
+    private void BtnKompilasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKompilasiActionPerformed
         if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
@@ -1438,7 +1468,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             gabung();
             this.setCursor(Cursor.getDefaultCursor());
         }
-    }//GEN-LAST:event_BtnValidasiQRActionPerformed
+    }//GEN-LAST:event_BtnKompilasiActionPerformed
 
     private void btnSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPActionPerformed
         if (lblNoRawat.getText().isBlank()) {
@@ -1941,14 +1971,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void BtnSimpanDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanDiagnosaActionPerformed
         if (!lblNoRawat.getText().isBlank()) {
-            panelDiagnosaSmc.simpan();
+            panelIdrg.simpan();
             tampilINACBG();
         }
     }//GEN-LAST:event_BtnSimpanDiagnosaActionPerformed
 
     private void BtnHapusDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusDiagnosaActionPerformed
         if (!lblNoRawat.getText().isBlank()) {
-            panelDiagnosaSmc.hapus();
+            panelIdrg.hapus();
             tampilINACBG();
         }
     }//GEN-LAST:event_BtnHapusDiagnosaActionPerformed
@@ -1956,9 +1986,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
         Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
-        panelDiagnosaSmc.setPreferredSize(new Dimension(newD.width, panelDiagnosaSmc.getPreferredSize().height));
-        panelDiagnosaSmc.setSize(new Dimension(newD.width, panelDiagnosaSmc.getPreferredSize().height));
-        panelDiagnosaSmc.revalidate(newD.width);
+        panelIdrg.setPreferredSize(new Dimension(newD.width, panelIdrg.getPreferredSize().height));
+        panelIdrg.setSize(new Dimension(newD.width, panelIdrg.getPreferredSize().height));
+        panelIdrg.revalidate(newD.width);
         panelBiasa1.setPreferredSize(newD);
         panelBiasa1.setSize(newD);
         scrollPane1.setPreferredSize(newD);
@@ -2652,6 +2682,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Button BtnCloseIn8;
     private widget.Button BtnHapusDiagnosa;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKompilasi;
     private widget.Button BtnPengaturan;
     private widget.Button BtnPenjamin;
     private widget.Button BtnPilihAplikasiPDF;
@@ -2660,7 +2691,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Button BtnSimpanDiagnosa;
     private widget.Button BtnSimpanPengaturan;
     private widget.Button BtnTutupPengaturan;
-    private widget.Button BtnValidasiQR;
     private widget.ComboBox CmbPilihanAplikasiPDF;
     private widget.ComboBox CmbPilihanTanggalExport;
     private widget.ComboBox CmbStatusKirim;
@@ -2742,6 +2772,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label19;
+    private widget.Label lblCetak;
     private widget.Label lblCoderNIK;
     private widget.Label lblNamaPasien;
     private widget.Label lblNoRM;
@@ -2751,16 +2782,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Label lblTglSEP;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
-    private laporan.PanelIdrgSmc panelDiagnosaSmc;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
+    private laporan.PanelIdrgSmc panelIdrg;
+    private laporan.PanelInacbgSmc panelInacbg;
+    private laporan.PanelInacbgSmc panelInacbgSmc1;
     private widget.panelisi panelInvoices;
     private javax.swing.JMenuItem ppBerkasDigital;
     private javax.swing.JMenuItem ppRiwayatPerawatan;
     private javax.swing.JMenuItem ppUpdateTanggalPulangSEP;
     private widget.ScrollPane scrollPane1;
     private widget.TabPane tabPane1;
+    private widget.TabPane tabPane2;
     private widget.Table tbKompilasi;
     // End of variables declaration//GEN-END:variables
 
@@ -2865,6 +2899,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnPDFKlaimINACBG.setText("Tidak Ada");
         btnPDFKlaimINACBG.setEnabled(false);
         tbKompilasi.clearSelection();
+        
     }
 
     private void flipStatus(JButton button, boolean status) {
@@ -2929,9 +2964,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSPRI, false);
                 flipStatus(btnSurkon, false);
             }
-            panelDiagnosaSmc.setSEP(lblNoSEP.getText());
+            panelIdrg.setSEP(lblNoSEP.getText());
+            panelInacbg.setSEP(lblNoSEP.getText());
             //panelDiagnosaSmc.batal();
-            panelDiagnosaSmc.tampilICD();
+            panelIdrg.tampilICD();
+            panelInacbg.tampilICD();
             tampilINACBG();
             tampilBilling();
         }

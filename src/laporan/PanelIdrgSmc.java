@@ -34,7 +34,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author khanzamedia
  */
 public class PanelIdrgSmc extends widget.panelisi {
-    private final DefaultTableModel tabModeDiagnosaPasien, tabModeICD10, tabModeICD9CM, tabModeProsedurPasien;
+    private final DefaultTableModel tabModeICD10, tabModeICD9CM, tabModeDiagnosaPasien, tabModeProsedurPasien;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
@@ -112,7 +112,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbICD9CM.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(40);
         tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(470);
+        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(450);
         tbICD9CM.getColumnModel().getColumn(4).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(4).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(5).setMinWidth(0);
@@ -490,12 +490,13 @@ public class PanelIdrgSmc extends widget.panelisi {
     }//GEN-LAST:event_tbICD10PropertyChange
 
     private void ppJadikanDiagnosaUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppJadikanDiagnosaUtamaActionPerformed
-        if (tbDiagnosaPasien.getSelectedRow() < 0) {
+        int selected = tbDiagnosaPasien.getSelectedRow();
+        if (selected < 0) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih diagnosa yang mau diangkat jadi diagnosa utama..!!");
+        } else if (Sequel.cariExistsSmc("select * from idrg_referensi_icd10_smc i where i.code1 = ? and i.accpdx = 'N'", (String) tabModeDiagnosaPasien.getValueAt(selected, 1))) {
+            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            int selected = tbDiagnosaPasien.getSelectedRow();
             tabModeDiagnosaPasien.moveRow(selected, selected, 0);
-            tabModeDiagnosaPasien.fireTableDataChanged();
             
             try {
                 boolean sukses = true;
@@ -954,7 +955,6 @@ public class PanelIdrgSmc extends widget.panelisi {
     }
 
     public void hapus() {
-        /*
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 return;
@@ -962,32 +962,107 @@ public class PanelIdrgSmc extends widget.panelisi {
                 if (tabModeDiagnosaPasien.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                 } else {
-                    for (i = 0; i < tbDiagnosaPasien.getRowCount(); i++) {
-                        if (tbDiagnosaPasien.getValueAt(i, 0).toString().equals("true")) {
-                            Sequel.queryu2("delete from diagnosa_pasien where no_rawat=? and kd_penyakit=?", 2, new String[] {
-                                tbDiagnosaPasien.getValueAt(i, 2).toString(), tbDiagnosaPasien.getValueAt(i, 5).toString()
-                            });
+                    try {
+                        boolean sukses = true;
+                        Sequel.AutoComitFalse();
+                        for (int i = tabModeDiagnosaPasien.getRowCount() - 1; i >= 0; i--) {
+                            if ((Boolean) tabModeDiagnosaPasien.getValueAt(i, 0)) {
+                                // "P", "Kode", "Deskripsi", "Status", "No. SEP", "No. RM", "Nama Pasien", "urut"
+                                if (Sequel.menghapustfSmc("idrg_diagnosa_pasien_smc", "no_sep = ? and kode_icd10 = ?",
+                                    (String) tabModeDiagnosaPasien.getValueAt(i, 4),
+                                    (String) tabModeDiagnosaPasien.getValueAt(i, 1)
+                                )) {
+                                    tabModeDiagnosaPasien.removeRow(i);
+                                } else {
+                                    sukses = false;
+                                }
+                            }
                         }
+                        
+                        if (sukses) {
+                            for (int i = 0; i < tabModeDiagnosaPasien.getRowCount(); i++) {
+                                if (!Sequel.mengupdatetfSmc("idrg_diagnosa_pasien_smc", "urut = ?", "no_sep = ? and kode_icd10 = ? and urut = ?",
+                                    String.valueOf(i + 1), tabModeDiagnosaPasien.getValueAt(i, 4).toString(), tabModeDiagnosaPasien.getValueAt(i, 1).toString(),
+                                    tabModeDiagnosaPasien.getValueAt(i, 7).toString()
+                                )) {
+                                    sukses = false;
+                                }
+                            }
+                        }
+
+                        if (sukses) {
+                            Sequel.Commit();
+                        } else {
+                            Sequel.RollBack();
+                        }
+
+                        Sequel.AutoComitTrue();
+                        
+                        if (!sukses) {
+                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data diagnosa IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data diagnosa IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
+                    
+                    tampilDiagnosa();
                 }
                 break;
             case 2:
                 if (tabModeProsedurPasien.getRowCount() == 0) {
                     JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                 } else {
-                    for (i = 0; i < tbProsedurPasien.getRowCount(); i++) {
-                        if (tbProsedurPasien.getValueAt(i, 0).toString().equals("true")) {
-                            Sequel.queryu2("delete from prosedur_pasien where no_rawat=? and kode=?", 2, new String[] {
-                                tbProsedurPasien.getValueAt(i, 2).toString(), tbProsedurPasien.getValueAt(i, 5).toString()
-                            });
+                    try {
+                        boolean sukses = true;
+                        Sequel.AutoComitFalse();
+                        for (int i = tabModeProsedurPasien.getRowCount() - 1; i >= 0; i--) {
+                            // "P", "Kode", "Mtpx", "Deskripsi", "Status", "No. SEP", "No. RM", "Nama Pasien", "urut"
+                            if ((Boolean) tabModeProsedurPasien.getValueAt(i, 0)) {
+                                if (Sequel.menghapustfSmc("idrg_prosedur_pasien_smc", "no_sep = ? and kode_icd9 = ?",
+                                    (String) tabModeProsedurPasien.getValueAt(i, 4),
+                                    (String) tabModeProsedurPasien.getValueAt(i, 1)
+                                )) {
+                                    tabModeProsedurPasien.removeRow(i);
+                                } else {
+                                    sukses = false;
+                                }
+                            }
                         }
+                        
+                        if (sukses) {
+                            for (int i = 0; i < tabModeProsedurPasien.getRowCount(); i++) {
+                                if (!Sequel.mengupdatetfSmc("idrg_prosedur_pasien_smc", "urut = ?", "no_sep = ? and kode_icd9 = ? and urut = ?",
+                                    String.valueOf(i + 1), tabModeProsedurPasien.getValueAt(i, 5).toString(), tabModeProsedurPasien.getValueAt(i, 1).toString(),
+                                    tabModeProsedurPasien.getValueAt(i, 8).toString()
+                                )) {
+                                    sukses = false;
+                                }
+                            }
+                        }
+
+                        if (sukses) {
+                            Sequel.Commit();
+                        } else {
+                            Sequel.RollBack();
+                        }
+
+                        Sequel.AutoComitTrue();
+                        
+                        if (!sukses) {
+                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data prosedur IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data prosedur IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
+                    
+                    tampilProsedur();
                 }
                 break;
             default:
                 break;
         }
-        */
         pilihTab();
     }
 
