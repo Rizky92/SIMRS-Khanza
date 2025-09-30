@@ -1898,8 +1898,8 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
         if (Sequel.menyimpantfSmc("catatan_observasi_hemodialisa", null, 
             TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), QB.getText(),
             QD.getText(), Arteri.getText(), Vena.getText(), TMP.getText(), UFR.getText(), Tensi.getText(),
-            Nadi.getText(), Suhu.getText(), SpO2.getText(), Tindakan.getText(), UFG.getText(), BarcodeHF.getText(), NIP.getText(),
-            RR.getText(), UFV.getText()
+            Nadi.getText(), Suhu.getText(), SpO2.getText(), Tindakan.getText(), UFG.getText(), BarcodeHF.getText(),
+            NIP.getText(), RR.getText(), UFV.getText()
         )) {
             tabMode.addRow(new Object[] {
                 TNoRw.getText(), TNoRM.getText(), TPasien.getText(), Umur.getText(), JK.getText(), TglLahir.getText(),
