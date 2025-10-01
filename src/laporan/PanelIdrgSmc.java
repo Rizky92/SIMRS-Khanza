@@ -72,7 +72,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbICD10.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD10.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD10.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(490);
+        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(480);
         tbICD10.getColumnModel().getColumn(3).setMinWidth(0);
         tbICD10.getColumnModel().getColumn(3).setMaxWidth(0);
         tbICD10.getColumnModel().getColumn(4).setMinWidth(0);
@@ -112,7 +112,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbICD9CM.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(40);
         tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(450);
+        tbICD9CM.getColumnModel().getColumn(3).setPreferredWidth(440);
         tbICD9CM.getColumnModel().getColumn(4).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(4).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(5).setMinWidth(0);

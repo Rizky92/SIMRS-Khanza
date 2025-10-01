@@ -1694,54 +1694,39 @@
         usort($data_diagnosa, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
         usort($data_prosedur, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
 
-        Hapus2('diagnosa_pasien', "no_rawat = '$norawat'");
-        $urut = 1;
+        bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
         $diagnosa = '';
+        $diagnosa_error = '';
         foreach ($data_diagnosa as $dx) {
-            if (getOne("select exists(select * from eklaim_icd10_smc where code1 = '$dx[code]' and im = '1')") == '1') continue;
-
-            $statusdx = 'Baru';
-            if (getOne(
-                "select exists(select * from diagnosa_pasien join reg_periksa on diagnosa_pasien.no_rawat = reg_periksa.no_rawat where
-                diagnosa_pasien.kd_penyakit = '$dx[code]' and reg_periksa.no_rkm_medis = '$no_rkm_medis')"
-            ) == '1') {
-                $statusdx = 'Lama';
+            if ($dx['metadata']['code'] != '200') {
+                $diagnosa_error .= sprintf('<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Import IDRG to INACBG - Diagnosa ["%s"]: %s - %s</span><br />',
+                    $dx['code'], $dx['metadata']['code'], $dx['metadata']['message']);
+            } else {
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
+                $diagnosa .= $dx['code'].'#';
             }
-
-            InsertData2('diagnosa_pasien', sprintf("'%s', '%s', '%s', %s, '%s'",
-                $norawat, $dx['code'], $status_rawat, $urut++, $statusdx
-            ));
-
-            $diagnosa .= $dx['code'].'#';
         }
 
-        ['success' => $sukses_dx, 'data' => $data_dx, 'error' => $_err] = SetDiagnosaInacbgSmc($nomor_sep, mb_substr($diagnosa, 0, -1));
-
-        Hapus2('prosedur_pasien', "no_rawat = '$norawat'");
-        $urut = 1;
+        bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
         $prosedur = '';
+        $prosedur_error = '';
         foreach ($data_prosedur as $p) {
-            if (getOne("select exists(select * from eklaim_icd9cm_smc where code1 = '$p[code]' and im = '1')") == '1') continue;
-
-            InsertData2('prosedur_pasien', sprintf("'%s', '%s', '%s', %s",
-                $norawat, $p['code'], $status_rawat, $urut++
-            ));
-
-            $prosedur .= $p['code'].'#';
+            if ($p['metadata']['code'] != '200') {
+                $prosedur_error .= sprintf('<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Import IDRG to INACBG - Prosedur ["%s"]: %s - %s</span><br />',
+                    $p['code'], $p['metadata']['code'], $p['metadata']['message']);
+            } else {
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
+                $prosedur .= $p['code'].'#';
+            }
         }
 
-        ['success' => $sukses_p, 'data' => $data_p, 'error' => $_err] = SetProsedurInacbgSmc($nomor_sep, mb_substr($prosedur, 0, -1));
+        return [
+            'success' => true,
+            'data' => 'inacbg_stage1',
+            'error' => null,
+        ];
 
-        if (($sukses_dx === false) || ($sukses_p === false)) {
-            return [
-                'success' => false,
-                'data' => 'Diagnosa atau prosedur tidak valid..!!',
-                'error' => $err
-            ];
-        }
-
-        return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
-
+        // return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
     }
 
     function SetDiagnosaInacbgSmc($nomor_sep, $diagnosa)
@@ -1820,8 +1805,26 @@
         ];
     }
 
-    function GroupingStage1InacbgSmc($nomor_sep, $coder_nik)
+    function GroupingStage1InacbgSmc($nomor_sep, $diagnosa, $prosedur, $coder_nik)
     {
+        ['success' => $sukses_dx, 'data' => $data_dx, 'error' => $dx_err] = SetDiagnosaInacbgSmc($nomor_sep, $diagnosa);
+        ['success' => $sukses_p, 'data' => $data_p, 'error' => $p_err] = SetProsedurInacbgSmc($nomor_sep, $prosedur);
+
+        if (($sukses_dx === false) || ($sukses_p === false)) {
+            if ($sukses_dx === false) {
+                echo $diagnosa_error;
+            }
+            if ($sukses_p === false) {
+                echo $prosedur_error;
+            }
+
+            return [
+                'success' => false,
+                'data' => 'Diagnosa atau prosedur tidak valid..!!',
+                'error' => 'Diagnosa atau prosedur tidak valid..!!',
+            ];
+        }
+
         $request = [
             'metadata' => [
                 'method' => 'grouper',

@@ -1445,7 +1445,7 @@ public final class akses {
                         akses.permintaan_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan");
                         akses.penilaian_awal_medis_ralan_jantung=rs2.getBoolean("penilaian_awal_medis_ralan_jantung");
                         akses.penilaian_awal_medis_ralan_urologi=rs2.getBoolean("penilaian_awal_medis_ralan_urologi");
-                        try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ?")) {
+                        try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and tgl_selesai < now()")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
                                 if (rsx.next()) {
@@ -1469,6 +1469,8 @@ public final class akses {
                     --retries;
                 } else {
                     retries = 0;
+                    akses.tglSelesai = -1;
+                    akses.edit = false;
                 }
             }
         }while(retries > 0);

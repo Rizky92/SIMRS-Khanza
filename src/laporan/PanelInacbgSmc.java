@@ -69,7 +69,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         tbICD10.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD10.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD10.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(490);
+        tbICD10.getColumnModel().getColumn(2).setPreferredWidth(480);
         tbICD10.getColumnModel().getColumn(3).setMinWidth(0);
         tbICD10.getColumnModel().getColumn(3).setMaxWidth(0);
         tbICD10.getColumnModel().getColumn(4).setMinWidth(0);
@@ -102,7 +102,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         tbICD9CM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbICD9CM.getColumnModel().getColumn(0).setPreferredWidth(20);
         tbICD9CM.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(490);
+        tbICD9CM.getColumnModel().getColumn(2).setPreferredWidth(480);
         tbICD9CM.getColumnModel().getColumn(3).setMinWidth(0);
         tbICD9CM.getColumnModel().getColumn(3).setMaxWidth(0);
         tbICD9CM.getColumnModel().getColumn(4).setMinWidth(0);
@@ -797,7 +797,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                         do {
                             if (icd.contains(rs.getString("code1"))) continue;
 
-                            tabModeICD10.addRow(new Object[] {
+                            tabModeICD9CM.addRow(new Object[] {
                                 pilihPertama, rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"), px
                             });
 
