@@ -1698,31 +1698,33 @@
         $diagnosa = '';
         $diagnosa_error = '';
         foreach ($data_diagnosa as $dx) {
-            if ($dx['metadata']['code'] != '200') {
-                $diagnosa_error .= sprintf('<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Import IDRG to INACBG - Diagnosa ["%s"]: %s - %s</span><br />',
-                    $dx['code'], $dx['metadata']['code'], $dx['metadata']['message']);
-            } else {
-                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
-                $diagnosa .= $dx['code'].'#';
+            $_error = '';
+            if ($dx['metadata']['message'] != '200') {
+                $_error = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
             }
+            bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s, '%s')",
+                $nomor_sep, $dx['code'], $dx['no'], $_error
+            ));
+            $diagnosa .= $dx['code'].'#';
         }
 
         bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
         $prosedur = '';
         $prosedur_error = '';
         foreach ($data_prosedur as $p) {
-            if ($p['metadata']['code'] != '200') {
-                $prosedur_error .= sprintf('<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Import IDRG to INACBG - Prosedur ["%s"]: %s - %s</span><br />',
-                    $p['code'], $p['metadata']['code'], $p['metadata']['message']);
-            } else {
-                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
-                $prosedur .= $p['code'].'#';
+            $_error = '';
+            if ($p['metadata']['message'] != '200') {
+                $_error = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
             }
+            bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s, '%s')",
+                $nomor_sep, $p['code'], $p['no'], $_error
+            ));
+            $prosedur .= $p['code'].'#';
         }
 
         return [
             'success' => true,
-            'data' => 'inacbg_stage1',
+            'data' => 'Import koding ke INACBG berhasil!',
             'error' => null,
         ];
 

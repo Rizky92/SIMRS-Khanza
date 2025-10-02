@@ -655,7 +655,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<String> icd = new ArrayList<>();
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
             
-            dx = 0;
+            dx = 1;
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -665,7 +665,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                         row.put("code1", (String) tabModeICD10.getValueAt(i, 1));
                         row.put("deskripsi", (String) tabModeICD10.getValueAt(i, 2));
                         row.put("validcode", (String) tabModeICD10.getValueAt(i, 3));
-                        row.put("urut", ++dx);
+                        row.put("urut", dx++);
                         rows.add(row);
                     }
                 }
@@ -739,7 +739,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<String> icd = new ArrayList<>();
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
             
-            px = 0;
+            px = 1;
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
@@ -749,7 +749,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                         row.put("code1", tabModeICD9CM.getValueAt(i, 1));
                         row.put("deskripsi", tabModeICD9CM.getValueAt(i, 2));
                         row.put("validcode", tabModeICD9CM.getValueAt(i, 3));
-                        row.put("urut", ++px);
+                        row.put("urut", px++);
                         rows.add(row);
                     }
                 }
