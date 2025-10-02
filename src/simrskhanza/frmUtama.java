@@ -49193,16 +49193,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnHasilPemeriksaanECHOPediatrik.addActionListener(this::btnHasilPemeriksaanECHOPediatrikActionPerformed);
     }
 
-    private void initKhanza2() {
-        btnHasilPemeriksaanECHOPediatrik = new widget.ButtonBig();
-        btnHasilPemeriksaanECHOPediatrik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2104702_beat_health_healthcare_heart_heartbeat_icon.png")));
-        btnHasilPemeriksaanECHOPediatrik.setText("Hasil Pemeriksaan ECHO Pediatrik");
-        btnHasilPemeriksaanECHOPediatrik.setIconTextGap(0);
-        btnHasilPemeriksaanECHOPediatrik.setName("btnHasilPemeriksaanECHOPediatrik");
-        btnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnHasilPemeriksaanECHOPediatrik.addActionListener(this::btnHasilPemeriksaanECHOPediatrikActionPerformed);
-    }
-
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatObatApotek, btnBPJSRiwayatPelayananObatApotek,
                              btnBPJSRiwayatPelayananResepApotek;
