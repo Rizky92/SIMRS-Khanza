@@ -10,8 +10,6 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -26,7 +24,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
 
@@ -615,22 +612,15 @@ public class PanelInacbgSmc extends widget.panelisi {
         Valid.tabelKosong(tabModeDiagnosaPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select dx.*, r.deskripsi, if (dx.urut = 1, 'Utama', '') as stts from " +
-            "inacbg_diagnosa_pasien_smc dx join inacbg_referensi_icd10_smc r on dx.kode_icd10 = r.code1 " +
-            "where dx.no_sep = ? group by dx.no_sep, dx.kode_icd10 order by dx.urut"
+            "inacbg_diagnosa_pasien_smc dx join inacbg_referensi_icd10_smc r on " +
+            "dx.kode_icd10 = r.code1 where dx.no_sep = ? order by dx.urut"
         )) {
             ps.setString(1, nosep);
             try (ResultSet rs = ps.executeQuery()) {
-                String deskripsi = "", adaError = "0";
                 while (rs.next()) {
-                    deskripsi = rs.getString("deskripsi");
-                    adaError = "0";
-                    if (!rs.getString("keterangan").isBlank() && !rs.wasNull()) {
-                        deskripsi = deskripsi.concat(" (").concat(rs.getString("keterangan")).concat(")");
-                        adaError = "1";
-                    }
                     tabModeDiagnosaPasien.addRow(new Object[] {
-                        false, rs.getString("kode_icd10"), deskripsi,
-                        rs.getString("stts"), adaError, rs.getInt("urut")
+                        false, rs.getString("kode_icd10"), rs.getString("deskripsi"),
+                        rs.getString("stts"), rs.getInt("urut")
                     });
                 }
             }
@@ -643,22 +633,15 @@ public class PanelInacbgSmc extends widget.panelisi {
         Valid.tabelKosong(tabModeProsedurPasien);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select p.*, r.deskripsi, if(p.urut = 1, 'Utama', '') as stts from " +
-            "inacbg_prosedur_pasien_smc p join inacbg_referensi_icd9cm_smc r on p.kode_icd9 = r.code1 " +
-            "where p.no_sep = ? group by p.no_sep, p.kode_icd9 order by p.urut"
+            "inacbg_prosedur_pasien_smc p join inacbg_referensi_icd9cm_smc r on " +
+            "p.kode_icd9 = r.code1 where p.no_sep = ? order by p.urut"
         )) {
             ps.setString(1, nosep);
             try (ResultSet rs = ps.executeQuery()) {
-                String deskripsi = "", adaError = "0";
                 while (rs.next()) {
-                    deskripsi = rs.getString("deskripsi");
-                    adaError = "0";
-                    if (!rs.getString("keterangan").isBlank() && !rs.wasNull()) {
-                        deskripsi = deskripsi.concat(" (").concat(rs.getString("keterangan")).concat(")");
-                        adaError = "1";
-                    }
                     tabModeProsedurPasien.addRow(new Object[] {
-                        false, rs.getString("kode_icd9"), deskripsi,
-                        rs.getString("stts"), adaError, rs.getInt("urut")
+                        false, rs.getString("kode_icd9"), rs.getString("deskripsi"),
+                        rs.getString("stts"), rs.getInt("urut")
                     });
                 }
             }

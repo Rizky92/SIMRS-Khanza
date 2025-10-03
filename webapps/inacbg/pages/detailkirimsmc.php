@@ -1078,19 +1078,15 @@
                                 <td>:</td>
                                 <td width="74%"><?= $nosep ?></td>
                             </tr>
-
                             <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
-
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
-                                        Grouping IDRG berhasil!
+                                        Hasil Grouping IDRG (FINAL)
                                     </span>
                                 </td>
                             </tr>
-
                             <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
-
                             <tr class="head">
                                 <td width="25%">MDC Number</td>
                                 <td>:</td>
@@ -1111,7 +1107,6 @@
                                 <td>:</td>
                                 <td width="74%"><?= $hasilgroupingidrg['drg_description'] ?></td>
                             </tr>
-
                             <?php
                                 $diagnosa_idrg = '';
                                 $querydiagnosa_idrg = bukaquery("select kode_icd10, urut from idrg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
@@ -1162,7 +1157,6 @@
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
                             </tr>
                             <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
-
                             <?php
                                 $diagnosa_inacbg = '';
                                 $querydiagnosa_inacbg = bukaquery("select kode_icd10, urut from inacbg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
@@ -1183,7 +1177,6 @@
                                 <?php endif; ?>
                             <?php endwhile; ?>
                             <?php $diagnosa_inacbg = mb_substr($diagnosa_inacbg, 0, -1); ?>
-
                             <?php
                                 $prosedur_inacbg = '';
                                 $queryprosedur_inacbg = bukaquery("select kode_icd9, urut from inacbg_prosedur_pasien_smc where no_sep = '$nosep' order by urut asc");
@@ -1211,47 +1204,149 @@
                                 <td>:</td>
                                 <td width="74%"><?= $nosep ?></td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr></td></tr>
+                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
-                                <td width="41%">Diagnosa</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <?php
-                                        $penyakit = '';
-                                        $a = 1;
-                                        $hasilpenyakit = bukaquery("select kd_penyakit from diagnosa_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                        while ($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
-                                            if ($a == 1) {
-                                                $penyakit = $barispenyakit['kd_penyakit'];
-                                            } else {
-                                                $penyakit .= '#'.$barispenyakit['kd_penyakit'];
-                                            }
-                                            $a++;
-                                        }
-                                    ?>
-                                    <input name="diagnosa" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $penyakit ?>" maxlength="100">
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
+                                        Hasil Grouping IDRG (FINAL)
+                                    </span>
                                 </td>
                             </tr>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
                             <tr class="head">
-                                <td width="41%">Prosedur</td>
+                                <td width="25%">MDC Number</td>
                                 <td>:</td>
-                                <td width="57%">
-                                    <?php
-                                        $prosedur = '';
-                                        $a = 1;
-                                        $hasilprosedur = bukaquery("select kode from prosedur_pasien where no_rawat = '$norawat' order by prioritas asc");
-                                        while ($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
-                                            if ($a == 1) {
-                                                $prosedur = $barisprosedur['kode'];
-                                            } else {
-                                                $prosedur .= '#'.$barisprosedur['kode'];
-                                            }
-                                            $a++;
-                                        }
-                                    ?>
-                                    <input name="procedure" type="text" class="text inputbox" style="font-family: Tahoma" value="<?= $prosedur; ?>" maxlength="100">
+                                <td width="74%"><?= $hasilgroupingidrg['mdc_number'] ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="25%">MDC Description</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupingidrg['mdc_description'] ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="25%">DRG Code</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupingidrg['drg_code'] ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="25%">DRG Description</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupingidrg['drg_description'] ?></td>
+                            </tr>
+                            <?php
+                                $diagnosa_idrg = '';
+                                $querydiagnosa_idrg = bukaquery("select kode_icd10, urut from idrg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
+                            ?>
+                            <?php while ($barisdiagnosa_idrg = mysqli_fetch_array($querydiagnosa_idrg)): ?>
+                                <?php $diagnosa_idrg .= $barisdiagnosa_idrg['kode_icd10'].'#'; ?>
+                                <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
+                                    <tr class="head">
+                                        <td width="25%">Diagnosa IDRG</td>
+                                        <td>:</td>
+                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="25%"></td>
+                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php $diagnosa_idrg = mb_substr($diagnosa_idrg, 0, -1); ?>
+                            <?php
+                                $prosedur_idrg = '';
+                                $queryprosedur_idrg = bukaquery("select kode_icd9, multiplicity, urut from idrg_prosedur_pasien_smc where no_sep = '$nosep' order by urut asc");
+                            ?>
+                            <?php while ($barisprosedur_idrg = mysqli_fetch_array($queryprosedur_idrg)): ?>
+                                <?php
+                                    if ($barisprosedur_idrg['multiplicity'] > 1) {
+                                        $prosedur_idrg .= $barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity'].'#';
+                                    } else {
+                                        $prosedur_idrg .= $barisprosedur_idrg['kode_icd9'].'#';
+                                    }
+                                ?>
+                                <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
+                                    <tr class="head">
+                                        <td width="25%">Prosedur IDRG</td>
+                                        <td>:</td>
+                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="25%"></td>
+                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php $prosedur_idrg = mb_substr($prosedur_idrg, 0, -1); ?>
+                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
+                                        Hasil Grouping INACBG (Ada top up)
+                                    </span>
                                 </td>
                             </tr>
+                            <?php $hasilgroupinginacbg = mysqli_fetch_assoc(bukaquery("select * from inacbg_grouping_stage12 where no_sep = '$nosep'")); ?>
+                            <tr class="head">
+                                <td width="25%">Kode CBG</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupinginacbg['code_cbg'] ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="25%">Deskripsi</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupinginacbg['deskripsi'] ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="25%">Total tarif</td>
+                                <td>:</td>
+                                <td width="74%"><?= $hasilgroupinginacbg['tarif'] ?></td>
+                            </tr>
+                            <?php
+                                $diagnosa_inacbg = '';
+                                $querydiagnosa_inacbg = bukaquery("select kode_icd10, urut from inacbg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
+                            ?>
+                            <?php while ($barisdiagnosa_inacbg = mysqli_fetch_array($querydiagnosa_inacbg)): ?>
+                                <?php $diagnosa_inacbg .= $barisdiagnosa_inacbg['kode_icd10'].'#'; ?>
+                                <?php if ($barisdiagnosa_inacbg['urut'] == '1'): ?>
+                                    <tr class="head">
+                                        <td width="25%">Diagnosa INACBG</td>
+                                        <td>:</td>
+                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?> (UTAMA)</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="25%"></td>
+                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php $diagnosa_inacbg = mb_substr($diagnosa_inacbg, 0, -1); ?>
+                            <?php
+                                $prosedur_inacbg = '';
+                                $queryprosedur_inacbg = bukaquery("select kode_icd9, urut from inacbg_prosedur_pasien_smc where no_sep = '$nosep' order by urut asc");
+                            ?>
+                            <?php while ($barisprosedur_inacbg = mysqli_fetch_array($queryprosedur_inacbg)): ?>
+                                <?php $prosedur_inacbg .= $barisprosedur_inacbg['kode_icd9'].'#'; ?>
+                                <?php if ($barisprosedur_inacbg['urut'] == '1'): ?>
+                                    <tr class="head">
+                                        <td width="25%">Prosedur INACBG</td>
+                                        <td>:</td>
+                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?> (UTAMA)</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="25%"></td>
+                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php $prosedur_inacbg = mb_substr($prosedur_inacbg, 0, -1); ?>
+                            <tr class="head">
+                                <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit INACBG]</a></td>
+                            </tr>
+                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php
                                 $data_special_procedure = [];
                                 $data_special_prosthesis = [];
@@ -1503,7 +1598,7 @@
                         if (! $success) {
                             echo $error;
                             echo <<<HTML
-                                <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=inacbg_stage2">
+                                <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&grouper=inacbg_stage2">
                                 HTML;
                         } else {
                             echo <<<HTML
