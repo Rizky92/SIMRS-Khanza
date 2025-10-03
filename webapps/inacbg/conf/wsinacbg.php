@@ -1227,7 +1227,7 @@
             ];
         }
 
-        Hapus2('inacbg_klaim_baru2', "no_rawat = '$norawat'");
+        bukaquery2("delete from inacbg_klaim_baru2 where no_rawat = '$norawat'");
         InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
             $norawat,
             $nomor_sep,
@@ -1350,14 +1350,13 @@
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
         }
 
-        Hapus2('idrg_grouping_smc', "no_sep = '$nomor_sep'");
-        Hapus2('idrg_klaim_final_smc', "no_sep = '$nomor_sep'");
-
-        // Edit klaim IDRG akan membuat grouper INACBG invalid,
-        // Jadi batalkan klaim INACBG
-        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
-        Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
-        Hapus2('inacbg_cetak_klaim', "no_sep = '$nomor_sep'");
+        bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
+        bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
@@ -1396,8 +1395,8 @@
             ];
         }
 
-        Hapus2('inacbg_grouping_stage12', "no_sep = '$nomor_sep'");
-        Hapus2('inacbg_klaim_final_smc', "no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
@@ -1408,7 +1407,7 @@
 
     function UpdateDataKlaimSmc(
         $nomor_sep, $nomor_kartu, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
-        $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $diagnosa, $procedure, $tarif_poli_eks,
+        $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
         $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
         $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
         $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
@@ -1419,31 +1418,28 @@
                 'nomor_sep' => $nomor_sep,
             ],
             'data' => [
-                'nomor_sep'            => $nomor_sep,
-                'nomor_kartu'          => $nomor_kartu,
-                'tgl_masuk'            => $tgl_masuk.' 00:00:01',
-                'tgl_pulang'           => $tgl_pulang.' 23:59:59',
-                'jenis_rawat'          => $jenis_rawat,
-                'kelas_rawat'          => $kelas_rawat,
-                'adl_sub_acute'        => $adl_sub_acute,
-                'adl_chronic'          => $adl_chronic,
-                'icu_indikator'        => $icu_indikator,
-                'icu_los'              => $icu_los,
-                'ventilator_hour'      => $ventilator_hour,
-                'upgrade_class_ind'    => $upgrade_class_ind,
-                'upgrade_class_class'  => $upgrade_class_class,
-                'upgrade_class_los'    => $upgrade_class_los,
-                'add_payment_pct'      => $add_payment_pct,
-                'birth_weight'         => $birth_weight,
-                'sistole'              => $sistole,
-                'diastole'             => $diastole,
-                'discharge_status'     => $discharge_status,
-                // 'diagnosa'             => $diagnosa,
-                // 'procedure'            => $procedure,
-                // 'diagnosa_inagrouper'  => $diagnosa,
-                // 'procedure_inagrouper' => $procedure,
-                'dializer_single_use'  => $dializer_single_use,
-                'tarif_rs'             => [
+                'nomor_sep'           => $nomor_sep,
+                'nomor_kartu'         => $nomor_kartu,
+                'tgl_masuk'           => $tgl_masuk.' 00:00:01',
+                'tgl_pulang'          => $tgl_pulang.' 23:59:59',
+                'cara_masuk'          => $cara_masuk,
+                'jenis_rawat'         => $jenis_rawat,
+                'kelas_rawat'         => $kelas_rawat,
+                'adl_sub_acute'       => $adl_sub_acute,
+                'adl_chronic'         => $adl_chronic,
+                'icu_indikator'       => $icu_indikator,
+                'icu_los'             => $icu_los,
+                'ventilator_hour'     => $ventilator_hour,
+                'upgrade_class_ind'   => $upgrade_class_ind,
+                'upgrade_class_class' => $upgrade_class_class,
+                'upgrade_class_los'   => $upgrade_class_los,
+                'add_payment_pct'     => $add_payment_pct,
+                'birth_weight'        => $birth_weight,
+                'sistole'             => $sistole,
+                'diastole'            => $diastole,
+                'discharge_status'    => $discharge_status,
+                'dializer_single_use' => $dializer_single_use,
+                'tarif_rs'            => [
                     'prosedur_non_bedah' => $prosedur_non_bedah,
                     'prosedur_bedah'     => $prosedur_bedah,
                     'konsultasi'         => $konsultasi,
@@ -1492,7 +1488,7 @@
             ];
         }
 
-        Hapus2('inacbg_data_terkirim2', "no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
 
         return [
@@ -1694,32 +1690,26 @@
         usort($data_diagnosa, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
         usort($data_prosedur, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
 
+        $_invalid = '';
+
         bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
-        $diagnosa = '';
-        $diagnosa_error = '';
         foreach ($data_diagnosa as $dx) {
-            $_error = '';
-            if ($dx['metadata']['message'] != '200') {
-                $_error = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
+            if ($dx['metadata']['code'] != '200') {
+                $_invalid .= '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'
+                    .$dx['metadata']['error_no'].' - '.$dx['metadata']['message']
+                    .'</span><br /><br />';
             }
-            bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s, '%s')",
-                $nomor_sep, $dx['code'], $dx['no'], $_error
-            ));
-            $diagnosa .= $dx['code'].'#';
+            bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
         }
 
         bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
-        $prosedur = '';
-        $prosedur_error = '';
         foreach ($data_prosedur as $p) {
-            $_error = '';
-            if ($p['metadata']['message'] != '200') {
-                $_error = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
+            if ($p['metadata']['code'] != '200') {
+                $_invalid .= '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'
+                    .$p['metadata']['error_no'].' - '.$p['metadata']['message']
+                    .'</span><br /><br />';
             }
-            bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s, '%s')",
-                $nomor_sep, $p['code'], $p['no'], $_error
-            ));
-            $prosedur .= $p['code'].'#';
+            bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
         }
 
         return [
@@ -1888,7 +1878,7 @@
 
             return [
                 'success' => true,
-                'data' => 'stage2',
+                'data' => 'inacbg_stage2',
                 'error' => null,
             ];
         }

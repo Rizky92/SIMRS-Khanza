@@ -2839,10 +2839,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 statusklaim = "and inc.no_sep is not null ";
                 break;
             case 2:
-                statusklaim = "and inf.no_sep is not null ";
+                statusklaim = "and ing.no_sep is not null and ing.top_up = 'Belum' ";
                 break;
             case 3:
-                statusklaim = "and inf.no_sep is null ";
+                statusklaim = "and ing.no_sep is not null and ing.top_up = 'Tidak Ada' ";
                 break;
             case 4:
                 statusklaim = "and idf.no_sep is not null ";
@@ -3104,12 +3104,45 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         String cekURL = engine.getLocation()
                             .replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "")
                             .toLowerCase();
-                        if (cekURL.contains("sukses=true&action=selesai")) {
+                        // Semua
+                        // Terkirim
+                        // INACBG Grouping Stage 2
+                        // INACBG Grouping
+                        // IDRG Final
+                        // IDRG Grouping
+                        // Belum Terkirim
+                        
+                        if (cekURL.contains("&action=reedit&grouper=idrg")) {
                             SwingUtilities.invokeLater(() -> {
+                                tabMode.setValueAt("Belum Terkirim", tbKompilasi.getSelectedRow(), 10);
+                                tabMode.setValueAt(6, tbKompilasi.getSelectedRow(), 11);
+                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
                                 getData();
+                            });
+                        } else if (cekURL.contains("&action=reedit&grouper=inacbg_stage1")) {
+                            SwingUtilities.invokeLater(() -> {
+                                tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
+                                tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
+                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                getData();
+                            });
+                        } else if (cekURL.contains("&grouper=inacbg_stage1")) {
+                            // posisi IDRG sudah final, mau grouping INACBG
+                            SwingUtilities.invokeLater(() -> {
+                                tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
+                                tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
+                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                getData();
+                            });
+                        } else if (cekURL.contains("&grouper=inacbg_stage2")) {
+                            // posisi grouping stage 2 (statusklaim 2?)
+                        } else if (cekURL.contains("&action=selesai")) {
+                            // posisi sudah terkirim (statusklaim 1)
+                            SwingUtilities.invokeLater(() -> {
                                 tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 10);
                                 tabMode.setValueAt(1, tbKompilasi.getSelectedRow(), 11);
                                 tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                getData();
                             });
                         }
                     }
