@@ -45,7 +45,11 @@
                     $judul     = 'SIMPAN & KIRIM KE EKLAIM';
 
                     if ($action === 'reedit') {
-                        ReeditIdrgSmc($nosep);
+                        if ($grouper === 'idrg') {
+                            ReeditIdrgSmc($nosep);
+                        } else if ($grouper === 'inacbg_stage1') {
+                            ReeditInacbgSmc($nosep, $codernik);
+                        }
                     }
 
                     ['kode' => $isError, 'deskripsi' => $pesanError] = mysqli_fetch_array(bukaquery(<<<SQL
@@ -70,7 +74,7 @@
                         <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff0000"><?= $pesanError ?></span>
                     </div>
                 <?php endif; ?>
-                <div style="width: 100%; height: 90%; overflow: auto;">
+                <div style="width: 100%; height: 90%; overflow: auto">
                     <table width="100%" align="center">
                         <?php if ($grouper === 'idrg'): ?>
                             <?php
@@ -175,72 +179,72 @@
                                 }
                             ?>
                             <tr class="head">
-                                <td width="25%">No. Rawat</td>
-                                <td>:</td>
-                                <td width="74%"><?= $norawat ?></td>
+                                <td width="28%">No. Rawat</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $norawat ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">No. SEP</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nosep ?></td>
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">No. RM</td>
-                                <td>:</td>
-                                <td width="74%"><?= $no_rkm_medis ?></td>
+                                <td width="28%">No. RM</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $no_rkm_medis ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">No. Kartu Peserta</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nokartu ?></td>
+                                <td width="28%">No. Kartu Peserta</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nokartu ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Nama Pasien</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nm_pasien.', '.$umurdaftar.' '.$sttsumur ?></td>
+                                <td width="28%">Nama Pasien</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nm_pasien.', '.$umurdaftar.' '.$sttsumur ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Jenis Kelamin</td>
-                                <td>:</td>
-                                <td width="74%"><?= $jk ?></td>
+                                <td width="28%">Jenis Kelamin</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $jk ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Alamat</td>
-                                <td>:</td>
-                                <td width="74%"><?= $almt_pj ?></td>
+                                <td width="28%">Alamat</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $almt_pj ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Tgl. Registrasi</td>
-                                <td>:</td>
-                                <td width="74%"><?= $tgl_registrasi.' '.$jam_reg ?></td>
+                                <td width="28%">Tgl. Registrasi</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $tgl_registrasi.' '.$jam_reg ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Poliklinik</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nm_poli ?></td>
+                                <td width="28%">Poliklinik</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nm_poli ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Dokter DPJP</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nm_dokter ?></td>
+                                <td width="28%">Dokter DPJP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nm_dokter ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Status</td>
-                                <td>:</td>
-                                <td width="74%"><?= $status_lanjut.' ('.$png_jawab.')' ?></td>
+                                <td width="28%">Status</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $status_lanjut.' ('.$png_jawab.')' ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Tgl. Keluar</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma; width: 100%" value="<?= $tgl_keluar ?>" size="15" maxlength="10">
+                                <td width="28%">Tgl. Keluar</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="keluar" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $tgl_keluar ?>" size="15" maxlength="10">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Kelas Rawat</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="kelas_rawat" class="text" style="font-family: Tahoma; width: 100%">
+                                <td width="28%">Kelas Rawat</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="kelas_rawat" class="text" style="font-family: Tahoma; width: 95%">
                                         <?php if ($status_lanjut == 'Ralan'): ?>
                                             <option value="3">Kelas Reguler</option>
                                             <option value="1">Kelas Eksekutif</option>
@@ -254,10 +258,10 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Cara Masuk</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 100%">
+                                <td width="28%">Cara Masuk</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 95%">
                                         <option <?= $asalrujukan === '1' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
                                         <option <?= $asalrujukan === '2' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
                                         <option value="mp">Rujukan Spesialis</option>
@@ -274,10 +278,10 @@
                             </tr>
                             <?php if ($status_lanjut == 'Ranap'): ?>
                                 <tr class="head">
-                                    <td width="41%">ADL Sub Acute</td>
-                                    <td>:</td>
-                                    <td width="57%">
-                                        <select name="adl_sub_acute" class="text3" style="font-family: Tahoma; width: 100%">
+                                    <td width="28%">ADL Sub Acute</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="adl_sub_acute" class="text3" style="font-family: Tahoma; width: 95%">
                                             <option value="0"></option>
                                             <?php for ($i = 12; $i <= 60; $i++): ?>
                                                 <option value="<?= $i ?>"><?= $i ?></option>
@@ -286,10 +290,10 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">ADL Chronic</td>
-                                    <td>:</td>
-                                    <td width="57%">
-                                        <select name="adl_chronic" class="text3" style="font-family: Tahoma; width: 100%">
+                                    <td width="28%">ADL Chronic</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="adl_chronic" class="text3" style="font-family: Tahoma; width: 95%">
                                             <option value="0"></option>
                                             <?php for ($i = 12; $i <= 60; $i++): ?>
                                                 <option value="<?= $i ?>"><?= $i ?></option>
@@ -305,27 +309,27 @@
                                     }
                                 ?>
                                 <tr class="head">
-                                    <td width="41%">ICU Indikator</td>
-                                    <td>:</td>
-                                    <td width="57%">
-                                        <select name="icu_indikator" class="text3" style="font-family: Tahoma; width: 100%">
+                                    <td width="28%">ICU Indikator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="icu_indikator" class="text3" style="font-family: Tahoma; width: 95%">
                                             <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
                                             <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">ICU Los</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">ICU Los</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Jam Penggunaan Ventilator di ICU</td>
-                                    <td>:</td>
-                                    <td width="57%">
-                                        <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                    <td width="28%">Jumlah Jam Penggunaan Ventilator di ICU</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                             <?php else: ?>
@@ -336,10 +340,10 @@
                                 <input type="hidden" name="ventilator_hour" value="0">
                             <?php endif; ?>
                             <tr class="head">
-                                <td width="41%">Indikator Upgrade Kelas</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="upgrade_class_ind" class="text3"style="font-family: Tahoma; width: 100%">
+                                <td width="28%">Indikator Upgrade Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_ind" class="text3"style="font-family: Tahoma; width: 95%">
                                         <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -347,10 +351,10 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Naik ke Kelas</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="upgrade_class_class" class="text2" style="font-family: Tahoma; width: 100%">
+                                <td width="28%">Naik ke Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_class" class="text2" style="font-family: Tahoma; width: 95%">
                                         <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
                                         <option value="kelas_1">Kelas 1</option>
                                         <option value="kelas_2">Kelas 2</option>
@@ -360,45 +364,45 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Lama Hari Naik Kelas</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                <td width="28%">Lama Hari Naik Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Tambahan</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                <td width="28%">Biaya Tambahan</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Berat Saat Lahir</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                <td width="28%">Berat Saat Lahir</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Sistole</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="sistole" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="<?= $sistole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                <td width="28%">Sistole</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="sistole" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $sistole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Diastole</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <input name="diastole" class="text inputbox" style="font-family: Tahoma; width: 100%" type="text" value="<?= $diastole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                <td width="28%">Diastole</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="diastole" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $diastole ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Status Pulang</td>
-                                <td>:</td>
-                                <td width="57%">
-                                    <select name="discharge_status" class="text2" style="font-family: Tahoma; width: 100%">
+                                <td width="28%">Status Pulang</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="discharge_status" class="text2" style="font-family: Tahoma; width: 95%">
                                         <?php if (getOne("select count(*) from kamar_inap where stts_pulang = 'Sembuh' and no_rawat = '$norawat'") > 0): ?>
                                             <option value="1">Atas persetujuan dokter</option>
                                         <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Sehat' and no_rawat = '$norawat'") > 0): ?>
@@ -431,11 +435,11 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Dializer Single Use</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Dializer Single Use</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <?php $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')"); ?>
-                                    <select name="dializer_single_use" class="text2" style="font-family: Tahoma; width: 100%">
+                                    <select name="dializer_single_use" class="text2" style="font-family: Tahoma; width: 95%">
                                         <option <?= $dializer_single_use == '1' ? 'selected ' : '' ?>value="1">Ya</Option>
                                         <option <?= $dializer_single_use == '0' ? 'selected ' : '' ?>value="0">Tidak</Option>
                                     </select>
@@ -461,9 +465,9 @@
                                     ));
                                 ?>
                                 <tr class="head">
-                                    <td width="41%">Dilakukan Pemulasaran Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Dilakukan Pemulasaran Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="pemulasaraan_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytpemulasaraan_jenazah'] ?>"><?= $bariscorona['pemulasaraan_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -472,9 +476,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Kantong Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Kantong Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="kantong_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytkantong_jenazah'] ?>"><?= $bariscorona['kantong_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -483,9 +487,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Peti Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Peti Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="peti_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytpeti_jenazah'] ?>"><?= $bariscorona['peti_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -494,9 +498,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Plastik Erat?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Plastik Erat?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="plastik_erat" class="text3">
                                             <option value="<?= $bariscorona['ytplastik_erat'] ?>"><?= $bariscorona['plastik_erat'] ?></option>
                                             <option value="1">Ya</option>
@@ -505,9 +509,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Desinfektan Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Desinfektan Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="desinfektan_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytdesinfektan_jenazah'] ?>"><?= $bariscorona['desinfektan_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -516,9 +520,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Mobil Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Mobil Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="mobil_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytmobil_jenazah'] ?>"><?= $bariscorona['mobil_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -527,9 +531,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Menggunakan Desinfektan Mobil Jenazah?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Menggunakan Desinfektan Mobil Jenazah?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="desinfektan_mobil_jenazah" class="text3">
                                             <option value="<?= $bariscorona['ytdesinfektan_mobil_jenazah'] ?>"><?= $bariscorona['desinfektan_mobil_jenazah'] ?></option>
                                             <option value="1">Ya</option>
@@ -538,9 +542,9 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Status Covid/Corona</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Status Covid/Corona</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="covid19_status_cd" class="text3">
                                             <option value="<?= $bariscorona['ytcovid19_status_cd'] ?>"><?= $bariscorona['covid19_status_cd'] ?></option>
                                             <option value="1">ODP</option>
@@ -550,58 +554,58 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">No. Jaminan/NIK/KITAS/KITAP/PASPOR/JKN</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">No. Jaminan/NIK/KITAS/KITAP/PASPOR/JKN</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="nomor_kartu_t" class="text" type="text" class="inputbox" value="<?= $bariscorona['nomor_kartu_t'] ?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang ICU Dengan Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang ICU Dengan Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes1" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes1'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang ICU Tanpa Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang ICU Tanpa Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes2" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes2'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Dengan Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Dengan Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes3" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes3'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Tanpa Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang Isolasi Tekanan Negatif Tanpa Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes4" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes4'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Dengan Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Dengan Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes5" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes5'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Tanpa Ventilator</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Jumlah Hari Penggunaan Ruang Isolasi Non Tekanan Negatif Tanpa Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <input name="episodes6" class="text" type="text" class="inputbox" value="<?= $bariscorona['episodes6'] ?>" size="7" maxlength="3" pattern="[0-9]{1,3}" title=" 0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="41%">Ada Comorbid/Complexity/Penyerta?</td>
-                                    <td>:</td>
-                                    <td width="57%">
+                                    <td width="28%">Ada Comorbid/Complexity/Penyerta?</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
                                         <select name="covid19_cc_ind" class="text3">
                                             <option value="<?= $bariscorona['ytcovid19_cc_ind'] ?>"><?= $bariscorona['covid19_cc_ind'] ?></option>
                                             <option value="1">Ya</option>
@@ -650,9 +654,9 @@
                                                        + $obat_kemoterapi + $obat + $bmhp + $sewa_alat + $rehabilitasi;
                             ?>
                             <tr class="head">
-                                <td width="41%">Biaya Prosedur Non Bedah</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Prosedur Non Bedah</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_prosedur_non_bedah" name="prosedur_non_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_non_bedah ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -660,9 +664,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Prosedur Bedah</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Prosedur Bedah</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_prosedur_bedah" name="prosedur_bedah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $prosedur_bedah ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -670,9 +674,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Konsultasi</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Konsultasi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_konsultasi" name="konsultasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $konsultasi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -680,9 +684,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Tenaga Ahli</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Tenaga Ahli</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_tenaga_ahli" name="tenaga_ahli" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $tenaga_ahli ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -690,9 +694,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Keperawatan</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Keperawatan</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_keperawatan" name="keperawatan" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $keperawatan ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -700,9 +704,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Penunjang</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Penunjang</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_penunjang" name="penunjang" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -710,9 +714,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Radiologi</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Radiologi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_radiologi" name="radiologi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $radiologi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -720,9 +724,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Laboratorium</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Laboratorium</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_laboratorium" name="laboratorium" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $laboratorium ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -730,9 +734,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Pelayanan Darah</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Pelayanan Darah</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_pelayanan_darah" name="pelayanan_darah" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -740,9 +744,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Rehabilitasi</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Rehabilitasi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_rehabilitasi" name="rehabilitasi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -750,9 +754,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Kamar</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Kamar</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_kamar" name="kamar" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $kamar ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -760,9 +764,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Rawat Intensif</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Rawat Intensif</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_rawat_intensif" name="rawat_intensif" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -770,9 +774,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Obat</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Obat</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_obat" name="obat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -780,9 +784,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Obat Kronis</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Obat Kronis</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_obat_kronis" name="obat_kronis" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kronis ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -790,9 +794,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Obat Kemoterapi</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Obat Kemoterapi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_obat_kemoterapi" name="obat_kemoterapi" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $obat_kemoterapi ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -800,9 +804,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Alkes</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Alkes</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_alkes" name="alkes" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -810,9 +814,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya BMHP</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya BMHP</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_bmhp" name="bmhp" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $bmhp ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -820,9 +824,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Biaya Sewa Alat</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Biaya Sewa Alat</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_sewa_alat" name="sewa_alat" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="<?= $sewa_alat ?>" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -830,9 +834,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Tarif Poli Eksekutif</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Tarif Poli Eksekutif</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span>
                                     <input id="billing_tarif_poli_eks" name="tarif_poli_eks" class="text inputbox" type="text" style="font-family: Tahoma; text-align: right" value="0" size="15" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     <span> Diskon </span>
@@ -840,16 +844,16 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Total Rincian Biaya</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Total Rincian Biaya</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span><span id="totalbillingsementara"><?= $totalbillingsementara ?></span>
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">TOTAL BILLING</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">TOTAL BILLING</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <span>Rp. </span><span id="totalbilling"><?= $totalbilling ?></span>
                                 </td>
                             </tr>
@@ -1023,7 +1027,7 @@
                                 })
                             </script>
 
-                            <tr class="head"><td colspan="3"><hr></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
 
                             <?php
                                 $diagnosa_idrg = '';
@@ -1033,14 +1037,14 @@
                                 <?php $diagnosa_idrg .= $barisdiagnosa_idrg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Diagnosa</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="28%">Diagnosa</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1059,14 +1063,14 @@
                                 ?>
                                 <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Prosedur</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
+                                        <td width="28%">Prosedur</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1074,11 +1078,11 @@
                             <?php $judul = 'SIMPAN DATA KLAIM & GROUPING IDRG'; ?>
                         <?php elseif ($grouper === 'inacbg_stage1'): ?>
                             <tr class="head">
-                                <td width="25%">No. SEP</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nosep ?></td>
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1088,24 +1092,24 @@
                             </tr>
                             <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
                             <tr class="head">
-                                <td width="25%">MDC Number</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['mdc_number'] ?></td>
+                                <td width="28%">MDC Number</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['mdc_number'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">MDC Description</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['mdc_description'] ?></td>
+                                <td width="28%">MDC Description</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['mdc_description'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">DRG Code</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['drg_code'] ?></td>
+                                <td width="28%">DRG Code</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['drg_code'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">DRG Description</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['drg_description'] ?></td>
+                                <td width="28%">DRG Description</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['drg_description'] ?></td>
                             </tr>
                             <?php
                                 $diagnosa_idrg = '';
@@ -1115,14 +1119,14 @@
                                 <?php $diagnosa_idrg .= $barisdiagnosa_idrg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Diagnosa IDRG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="28%">Diagnosa IDRG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1141,14 +1145,14 @@
                                 ?>
                                 <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Prosedur IDRG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
+                                        <td width="28%">Prosedur IDRG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1156,7 +1160,7 @@
                             <tr class="head">
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php
                                 $diagnosa_inacbg = '';
                                 $querydiagnosa_inacbg = bukaquery("select kode_icd10, urut from inacbg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
@@ -1165,14 +1169,14 @@
                                 <?php $diagnosa_inacbg .= $barisdiagnosa_inacbg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_inacbg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Diagnosa INACBG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="28%">Diagnosa INACBG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1185,14 +1189,14 @@
                                 <?php $prosedur_inacbg .= $barisprosedur_inacbg['kode_icd9'].'#'; ?>
                                 <?php if ($barisprosedur_inacbg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Prosedur INACBG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?> (UTAMA)</td>
+                                        <td width="28%">Prosedur INACBG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_inacbg['kode_icd9'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_inacbg['kode_icd9'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1200,11 +1204,11 @@
                             <?php $judul = 'GROUPING INACBG & FINALISASI KLAIM'; ?>
                         <?php elseif ($grouper === 'inacbg_stage2'): ?>
                             <tr class="head">
-                                <td width="25%">No. SEP</td>
-                                <td>:</td>
-                                <td width="74%"><?= $nosep ?></td>
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1214,24 +1218,24 @@
                             </tr>
                             <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
                             <tr class="head">
-                                <td width="25%">MDC Number</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['mdc_number'] ?></td>
+                                <td width="28%">MDC Number</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['mdc_number'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">MDC Description</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['mdc_description'] ?></td>
+                                <td width="28%">MDC Description</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['mdc_description'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">DRG Code</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['drg_code'] ?></td>
+                                <td width="28%">DRG Code</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['drg_code'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">DRG Description</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupingidrg['drg_description'] ?></td>
+                                <td width="28%">DRG Description</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupingidrg['drg_description'] ?></td>
                             </tr>
                             <?php
                                 $diagnosa_idrg = '';
@@ -1241,14 +1245,14 @@
                                 <?php $diagnosa_idrg .= $barisdiagnosa_idrg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Diagnosa IDRG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="28%">Diagnosa IDRG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1267,19 +1271,19 @@
                                 ?>
                                 <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Prosedur IDRG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
+                                        <td width="28%">Prosedur IDRG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
                             <?php $prosedur_idrg = mb_substr($prosedur_idrg, 0, -1); ?>
-                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1289,19 +1293,19 @@
                             </tr>
                             <?php $hasilgroupinginacbg = mysqli_fetch_assoc(bukaquery("select * from inacbg_grouping_stage12 where no_sep = '$nosep'")); ?>
                             <tr class="head">
-                                <td width="25%">Kode CBG</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupinginacbg['code_cbg'] ?></td>
+                                <td width="28%">Kode CBG</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupinginacbg['code_cbg'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Deskripsi</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupinginacbg['deskripsi'] ?></td>
+                                <td width="28%">Deskripsi</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupinginacbg['deskripsi'] ?></td>
                             </tr>
                             <tr class="head">
-                                <td width="25%">Total tarif</td>
-                                <td>:</td>
-                                <td width="74%"><?= $hasilgroupinginacbg['tarif'] ?></td>
+                                <td width="28%">Total tarif</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $hasilgroupinginacbg['tarif'] ?></td>
                             </tr>
                             <?php
                                 $diagnosa_inacbg = '';
@@ -1311,14 +1315,14 @@
                                 <?php $diagnosa_inacbg .= $barisdiagnosa_inacbg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_inacbg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Diagnosa INACBG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="28%">Diagnosa INACBG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_inacbg['kode_icd10'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -1331,22 +1335,22 @@
                                 <?php $prosedur_inacbg .= $barisprosedur_inacbg['kode_icd9'].'#'; ?>
                                 <?php if ($barisprosedur_inacbg['urut'] == '1'): ?>
                                     <tr class="head">
-                                        <td width="25%">Prosedur INACBG</td>
-                                        <td>:</td>
-                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?> (UTAMA)</td>
+                                        <td width="28%">Prosedur INACBG</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_inacbg['kode_icd9'] ?> (UTAMA)</td>
                                     </tr>
                                 <?php else: ?>
                                     <tr class="head">
-                                        <td colspan="2" width="25%"></td>
-                                        <td width="74%"><?= $barisprosedur_inacbg['kode_icd9'] ?></td>
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_inacbg['kode_icd9'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
                             <?php $prosedur_inacbg = mb_substr($prosedur_inacbg, 0, -1); ?>
                             <tr class="head">
-                                <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit INACBG]</a></td>
+                                <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=inacbg_stage1" ?>">[Edit INACBG]</a></td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php
                                 $data_special_procedure = [];
                                 $data_special_prosthesis = [];
@@ -1368,9 +1372,9 @@
                                 }
                             ?>
                             <tr class="head">
-                                <td width="41%">Special Procedure</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Special Procedure</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <select name="special_procedure" class="text" style="font-family: Tahoma">
                                         <?php foreach ($data_special_procedure as $data_cmg): ?>
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
@@ -1380,9 +1384,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Special Prosthesis</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Special Prosthesis</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <select name="special_prosthesis" class="text" style="font-family: Tahoma">
                                         <?php foreach ($data_special_prosthesis as $data_cmg): ?>
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
@@ -1392,9 +1396,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Special Investigation</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Special Investigation</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <select name="special_investigation" class="text" style="font-family: Tahoma">
                                         <?php foreach ($data_special_investigation as $data_cmg): ?>
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
@@ -1404,9 +1408,9 @@
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="41%">Special Drug</td>
-                                <td>:</td>
-                                <td width="57%">
+                                <td width="28%">Special Drug</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
                                     <select name="special_drug" class="text" style="font-family: Tahoma">
                                         <?php foreach ($data_special_drug as $data_cmg): ?>
                                             <option value="<?= $data_cmg['cmg_code'] ?>"><?= $data_cmg['cmg_code'].' - '.$data_cmg['cmg_description'] ?></option>
@@ -1415,7 +1419,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="head"><td colspan="3"><hr></td></tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php $judul = 'GROUPING INACBG STAGE2 & FINALISASI KLAIM'; ?>
                         <?php endif; ?>
                     </table>

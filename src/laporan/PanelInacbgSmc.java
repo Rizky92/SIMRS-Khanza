@@ -854,7 +854,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("inacbg_diagnosa_pasien_smc", null,
                         nosep, tabModeICD10.getValueAt(i, 1).toString(),
-                        tabModeICD10.getValueAt(i, 7).toString());
+                        tabModeICD10.getValueAt(i, 4).toString());
                 }
             }
             
@@ -875,9 +875,8 @@ public class PanelInacbgSmc extends widget.panelisi {
             for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                 if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
                     Sequel.menyimpanSmc("inacbg_prosedur_pasien_smc", null,
-                        nosep, tabModeICD9CM.getValueAt(i, 2).toString(),
-                        tabModeICD9CM.getValueAt(i, 1).toString(),
-                        tabModeICD9CM.getValueAt(i, 6).toString());
+                        nosep, tabModeICD9CM.getValueAt(i, 1).toString(),
+                        tabModeICD9CM.getValueAt(i, 4).toString());
                 }
             }
         }

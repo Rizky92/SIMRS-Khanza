@@ -1365,44 +1365,60 @@
         ];
     }
 
-    function ReeditInacbgSmc($nomor_sep)
+    function ReeditInacbgSmc($nomor_sep, $coder_nik)
     {
-        $request = [
-            'metadata' => [
-                'method' => 'inacbg_grouper_reedit',
-            ],
-            'data' => [
-                'nomor_sep' => $nomor_sep,
-            ],
-        ];
+        if (getOne("select top_up from inacbg_grouping_stage12 where no_sep = '$nomor_sep'") == 'Belum') {
+            try {
+                bukaquery2("delete from tempinacbg where coder_nik = '$coder_nik'");
+                bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+                bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+            } catch (\Exception $e) {
 
-        $msg = Request(json_encode($request));
-
-        if ($msg['metadata']['code'] != '200') {
-            $error = sprintf(
-                '[%s] method "inacbg_grouper_reedit": %s - %s',
-                $msg['metadata']['code'],
-                $msg['metadata']['error_no'],
-                $msg['metadata']['message']
-            );
-
-            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
-
+            }
+    
             return [
-                'success' => false,
-                'data' => null,
-                'error' => $error,
+                'success' => true,
+                'data' => 'Klaim berhasil diedit',
+                'error' => null,
+            ];
+        } else {
+            $request = [
+                'metadata' => [
+                    'method' => 'inacbg_grouper_reedit',
+                ],
+                'data' => [
+                    'nomor_sep' => $nomor_sep,
+                ],
+            ];
+    
+            $msg = Request(json_encode($request));
+    
+            if ($msg['metadata']['code'] != '200') {
+                $error = sprintf(
+                    '[%s] method "inacbg_grouper_reedit": %s - %s',
+                    $msg['metadata']['code'],
+                    $msg['metadata']['error_no'],
+                    $msg['metadata']['message']
+                );
+    
+                echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+    
+                return [
+                    'success' => false,
+                    'data' => null,
+                    'error' => $error,
+                ];
+            }
+    
+            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+    
+            return [
+                'success' => true,
+                'data' => 'Klaim berhasil diedit',
+                'error' => null,
             ];
         }
-
-        bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-
-        return [
-            'success' => true,
-            'data' => 'Klaim berhasil diedit',
-            'error' => null,
-        ];
     }
 
     function UpdateDataKlaimSmc(
@@ -1699,7 +1715,11 @@
                     .$dx['metadata']['error_no'].' - '.$dx['metadata']['message']
                     .'</span><br /><br />';
             }
-            bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
+            try {
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
+            } catch (\Exception $e) {
+                continue;
+            }
         }
 
         bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
@@ -1709,7 +1729,11 @@
                     .$p['metadata']['error_no'].' - '.$p['metadata']['message']
                     .'</span><br /><br />';
             }
-            bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
+            try {
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
+            } catch (\Exception $e) {
+                continue;
+            }
         }
 
         return [

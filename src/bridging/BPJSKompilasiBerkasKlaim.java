@@ -3034,19 +3034,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             aksi = "&sukses=true&action=selesai";
         }
 
-        // 2 INACBG Final
-        // 3 INACBG Grouping - artinya sudah digrouping INACBGnya. Namun disini ada 2 artian, bisa jadi ada top up, atau error ungroupable
-        // 4 IDRG Final - artinya sudah dikoding dan bisa final, sudah proses import ke INACBG, namun belum digrouping
-        // 5 IDRG Grouping - artinya sudah dikoding dan sudah bisa grouping, namun terdapat error ungroupable
         switch (flagklaim) {
             case 2:
+                grouper = "&grouper=inacbg_stage2";
+                break;
             case 3:
             case 4:
-                if (inacbgStage2) {
-                    grouper = "&grouper=inacbg_stage2";
-                } else {
-                    grouper = "&grouper=inacbg_stage1";
-                }
+                grouper = "&grouper=inacbg_stage1";
                 break;
             default:
                 grouper = "&grouper=idrg";
@@ -3079,40 +3073,42 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         String cekURL = engine.getLocation()
                             .replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "")
                             .toLowerCase();
-                        // Semua
-                        // Terkirim
-                        // INACBG Grouping Stage 2
-                        // INACBG Grouping
-                        // IDRG Final
-                        // IDRG Grouping
-                        // Belum Terkirim
-                        
-                        if (cekURL.contains("&action=reedit&grouper=idrg")) {
-                            SwingUtilities.invokeLater(() -> {
-                                tabMode.setValueAt("Belum Terkirim", tbKompilasi.getSelectedRow(), 10);
-                                tabMode.setValueAt(6, tbKompilasi.getSelectedRow(), 11);
-                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                getData();
-                            });
-                        } else if (cekURL.contains("&action=reedit&grouper=inacbg_stage1")) {
-                            SwingUtilities.invokeLater(() -> {
-                                tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
-                                tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
-                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                getData();
-                            });
+                        if (cekURL.contains("&grouper=idrg")) {
+                            if (cekURL.contains("&sukses=false")) {
+                                SwingUtilities.invokeLater(() -> {
+                                    tabMode.setValueAt("IDRG Grouping", tbKompilasi.getSelectedRow(), 10);
+                                    tabMode.setValueAt(5, tbKompilasi.getSelectedRow(), 11);
+                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                });
+                            } else {
+                                SwingUtilities.invokeLater(() -> {
+                                    tabMode.setValueAt("Belum Terkirim", tbKompilasi.getSelectedRow(), 10);
+                                    tabMode.setValueAt(6, tbKompilasi.getSelectedRow(), 11);
+                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                });
+                            }
                         } else if (cekURL.contains("&grouper=inacbg_stage1")) {
-                            // posisi IDRG sudah final, mau grouping INACBG
-                            SwingUtilities.invokeLater(() -> {
-                                tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
-                                tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
-                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                getData();
-                            });
+                            if (cekURL.contains("&sukses=false")) {
+                                SwingUtilities.invokeLater(() -> {
+                                    tabMode.setValueAt("INACBG Grouping", tbKompilasi.getSelectedRow(), 10);
+                                    tabMode.setValueAt(3, tbKompilasi.getSelectedRow(), 11);
+                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                });
+                            } else {
+                                SwingUtilities.invokeLater(() -> {
+                                    tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
+                                    tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
+                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                                    getData();
+                                });
+                            }
                         } else if (cekURL.contains("&grouper=inacbg_stage2")) {
-                            // posisi grouping stage 2 (statusklaim 2?)
+                            SwingUtilities.invokeLater(() -> {
+                                tabMode.setValueAt("INACBG Top Up", tbKompilasi.getSelectedRow(), 10);
+                                tabMode.setValueAt(2, tbKompilasi.getSelectedRow(), 11);
+                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                            });
                         } else if (cekURL.contains("&action=selesai")) {
-                            // posisi sudah terkirim (statusklaim 1)
                             SwingUtilities.invokeLater(() -> {
                                 tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 10);
                                 tabMode.setValueAt(1, tbKompilasi.getSelectedRow(), 11);
