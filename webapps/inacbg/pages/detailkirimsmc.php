@@ -15,7 +15,10 @@
             Klaim berhasil diproses!
         </div>
         <div class="entry" style="font-family: Tahoma; margin-top: 0.5rem; margin-left: 0.5rem">
-            <a href="?act=DetailKirimSmc&<?= $queryurl ?>">[Edit Klaim]</a>
+            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=idrg" ?>">[Edit Klaim IDRG]</a>
+            <br />
+            <br />
+            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=inacbg_stage1" ?>">[Edit Klaim INACBG]</a>
             <br />
             <br />
             <a href="?act=DetailKirimSmc&<?= $queryurl ?>&action=cetak">[Tarik ulang hasil cetak klaim]</a>
