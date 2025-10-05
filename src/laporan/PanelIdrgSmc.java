@@ -644,6 +644,8 @@ public class PanelIdrgSmc extends widget.panelisi {
     
     public void setNextFocusableComponent(JComponent component) {
         this.nextFocusableComponent = component;
+        Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
+        
     }
     
     public void setSEP(String nosep) {

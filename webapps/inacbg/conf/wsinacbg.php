@@ -1293,7 +1293,7 @@
         ];
     }
 
-    function ReeditKlaimSmc($nomor_sep)
+    function ReeditKlaimSmc($nomor_sep, $grouper = null, $coder_nik = null)
     {
         $request = [
             'metadata' => [
@@ -1323,7 +1323,21 @@
             ];
         }
 
-        return ReeditIdrgSmc($nomor_sep);
+        bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
+
+        if (!empty($grouper)) {
+            if ($grouper === 'idrg') {
+                return ReeditIdrgSmc($nomor_sep);
+            } else if ($grouper === 'inacbg_stage1') {
+                return ReeditInacbgSmc($nomor_sep, $coder_nik);
+            }
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil diedit!',
+            'error' => $null,
+        ];
     }
 
     function ReeditIdrgSmc($nomor_sep)
@@ -1350,13 +1364,17 @@
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
         }
 
-        bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
-        bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-        bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
+        try {
+            bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+        } catch (\Exception $e) {
+
+        }
 
         return [
             'success' => true,
@@ -1367,58 +1385,47 @@
 
     function ReeditInacbgSmc($nomor_sep, $coder_nik)
     {
-        if (getOne("select top_up from inacbg_grouping_stage12 where no_sep = '$nomor_sep'") == 'Belum') {
-            try {
-                bukaquery2("delete from tempinacbg where coder_nik = '$coder_nik'");
-                bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-                bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-            } catch (\Exception $e) {
+        $request = [
+            'metadata' => [
+                'method' => 'inacbg_grouper_reedit',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
 
-            }
-    
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "inacbg_grouper_reedit": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
             return [
-                'success' => true,
-                'data' => 'Klaim berhasil diedit',
-                'error' => null,
-            ];
-        } else {
-            $request = [
-                'metadata' => [
-                    'method' => 'inacbg_grouper_reedit',
-                ],
-                'data' => [
-                    'nomor_sep' => $nomor_sep,
-                ],
-            ];
-    
-            $msg = Request(json_encode($request));
-    
-            if ($msg['metadata']['code'] != '200') {
-                $error = sprintf(
-                    '[%s] method "inacbg_grouper_reedit": %s - %s',
-                    $msg['metadata']['code'],
-                    $msg['metadata']['error_no'],
-                    $msg['metadata']['message']
-                );
-    
-                echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
-    
-                return [
-                    'success' => false,
-                    'data' => null,
-                    'error' => $error,
-                ];
-            }
-    
-            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-    
-            return [
-                'success' => true,
-                'data' => 'Klaim berhasil diedit',
-                'error' => null,
+                'success' => false,
+                'data' => null,
+                'error' => $error,
             ];
         }
+
+        try {
+            bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+        } catch (\Exception $e) {
+
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil diedit',
+            'error' => null,
+        ];
     }
 
     function UpdateDataKlaimSmc(
@@ -1945,10 +1952,26 @@
 
         Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
 
-        ubahSmc('inacbg_grouping_stage12', sprintf("code_cbg = '%s', deskripsi = '%s', tarif = %s, top_up = 'Sudah'",
+        $top_up = 'Tidak Ada';
+
+        if (!empty($msg['response_inacbg']['special_cmg'])) {
+            $top_up = 'Sudah';
+            foreach ($msg['response_inacbg']['special_cmg'] as $special_cmg) {
+                InsertData2('inacbg_grouping_stage2_smc', sprintf("'%s', '%s', '%s', '%s', %s",
+                    $nomor_sep,
+                    $special_cmg['code'],
+                    $special_cmg['description'],
+                    $special_cmg['type'],
+                    $special_cmg['tariff']
+                ));
+            }
+        }
+
+        ubahSmc('inacbg_grouping_stage12', sprintf("code_cbg = '%s', deskripsi = '%s', tarif = %s, top_up = '%s'",
             $msg['response_inacbg']['cbg']['code'],
             $msg['response_inacbg']['cbg']['description'],
-            $msg['response_inacbg']['tariff']
+            $msg['response_inacbg']['tariff'],
+            $top_up
         ), "no_sep = '$nomor_sep'");
 
         return FinalInacbgSmc($nomor_sep, $coder_nik);

@@ -44,10 +44,11 @@ import java.util.Locale;
 import java.util.Map;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -62,6 +63,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
 import laporan.DlgBerkasRawat;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -87,8 +90,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final JFXPanel jfxPanelicare = new JFXPanel();
-    private final JFXPanel jfxinvoices = new JFXPanel();
+    private final JFXPanel jfxINACBG = new JFXPanel();
     private final DlgCariCaraBayar penjab = new DlgCariCaraBayar(null, false);
     private RMRiwayatPerawatan resume = null;
     private WebEngine engine;
@@ -99,7 +101,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private String finger = "", tanggalExport = "",
         KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
-    private boolean exportSukses = true, inacbgStage2 = false;
+    private boolean exportSukses = true;
     private int flagklaim = -1;
     private long KOMPILASIBERKASMAXMEMORY = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
@@ -125,6 +127,70 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 return false;
             }
         };
+        
+        Platform.runLater(() -> {
+            WebView view = new WebView();
+            engine = view.getEngine();
+            engine.setJavaScriptEnabled(true);
+            engine.setCreatePopupHandler((PopupFeatures p) -> view.getEngine());
+            engine.getLoadWorker().exceptionProperty()
+                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                    if (engine.getLoadWorker().getState() == FAILED) {
+                        SwingUtilities.invokeLater(() -> {
+                            JOptionPane.showMessageDialog(null,
+                                engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        });
+                    }
+                });
+            engine.locationProperty().addListener((observable, oldValue, newValue) -> {
+                System.out.println(newValue);
+                
+                String cekurl = newValue.replace(
+                    new StringBuilder().append("http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/inacbg/"), ""
+                ).trim().toLowerCase();
+                
+                if (cekurl.contains("grouper=idrg")) {
+                    if (cekurl.contains("sukses=false")) {
+                        tabMode.setValueAt("IDRG Grouping", tbKompilasi.getSelectedRow(), 10);
+                        tabMode.setValueAt(5, tbKompilasi.getSelectedRow(), 11);
+                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                    } else {
+                        tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
+                        tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
+                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                    }
+                } else if (cekurl.contains("grouper=inacbg_stage1")) {
+                    if (cekurl.contains("sukses=false")) {
+                        tabMode.setValueAt("INACBG Grouping", tbKompilasi.getSelectedRow(), 10);
+                        tabMode.setValueAt(3, tbKompilasi.getSelectedRow(), 11);
+                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                    } else {
+                        tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
+                        tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
+                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                    }
+                } else if (cekurl.contains("grouper=inacbg_stage2")) {
+                    tabMode.setValueAt("INACBG Top up", tbKompilasi.getSelectedRow(), 10);
+                    tabMode.setValueAt(2, tbKompilasi.getSelectedRow(), 11);
+                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+//                    if (cekurl.contains("sukses=false")) {
+//                    }
+                } else if (cekurl.contains("action=selesai")) {
+                    tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 10);
+                    tabMode.setValueAt(1, tbKompilasi.getSelectedRow(), 11);
+                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                }
+            });
+            ProgressBar progressBar = new ProgressBar(0);
+            progressBar.setMaxWidth(Double.MAX_VALUE);
+            progressBar.setPrefHeight(10);
+            progressBar.progressProperty().bind(engine.getLoadWorker().progressProperty());
+            BorderPane layout = new BorderPane(view);
+            layout.setTop(progressBar);
+            jfxINACBG.setScene(new Scene(layout));
+        });
+        PanelContentINACBG.add(jfxINACBG, BorderLayout.CENTER);
 
         tbKompilasi.setModel(tabMode);
         tbKompilasi.setPreferredScrollableViewportSize(new Dimension(500, 500));
@@ -145,7 +211,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tbKompilasi.getColumnModel().getColumn(11).setMaxWidth(0);
         tbKompilasi.getColumnModel().getColumn(12).setMinWidth(0);
         tbKompilasi.getColumnModel().getColumn(12).setMaxWidth(0);
-
         tbKompilasi.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -179,7 +244,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 return component;
             }
         });
-
+        
+        HTMLEditorKit kit = new HTMLEditorKit();
+        kit.getStyleSheet().addRule("body{width:100vw}table{width:100%;border:0px;margin:0px;padding:0px}tr,td{margin:2px 0px 2px 0px;padding:0px}td{font-family:Tahoma;font-size:10px;color:#111111}");
+        Document doc = kit.createDefaultDocument();
+        loadBillingHTML.setEditorKit(kit);
+        loadBillingHTML.setDocument(doc);
+        
+        panelIdrg.setNextFocusableComponent(BtnSimpanDiagnosa);
+        panelInacbg.setNextFocusableComponent(BtnSimpanDiagnosa);
+        
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -383,6 +457,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         tabPane1 = new widget.TabPane();
         panelInvoices = new widget.panelisi();
+        panelBiasa3 = new widget.PanelBiasa();
+        scrollPane2 = new widget.ScrollPane();
+        loadBillingHTML = new widget.editorpane();
         btnInvoice = new widget.Button();
         PanelContentINACBG = new widget.panelisi();
 
@@ -447,6 +524,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.setLayout(null);
 
         BtnCloseIn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnCloseIn8.setMnemonic('U');
         BtnCloseIn8.setText("Tutup");
         BtnCloseIn8.setToolTipText("Alt+U");
         BtnCloseIn8.setName("BtnCloseIn8"); // NOI18N
@@ -460,6 +538,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnCloseIn8.setBounds(489, 182, 86, 30);
 
         BtnSimpan8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan8.setMnemonic('S');
         BtnSimpan8.setText("Simpan");
         BtnSimpan8.setToolTipText("Alt+S");
         BtnSimpan8.setName("BtnSimpan8"); // NOI18N
@@ -476,7 +555,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025 08:37:58" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025 16:41:56" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -517,7 +596,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -591,6 +670,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame12.setLayout(null);
 
         BtnTutupPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnTutupPengaturan.setMnemonic('U');
         BtnTutupPengaturan.setText("Tutup");
         BtnTutupPengaturan.setToolTipText("Alt+U");
         BtnTutupPengaturan.setName("BtnTutupPengaturan"); // NOI18N
@@ -604,6 +684,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnTutupPengaturan.setBounds(514, 132, 86, 30);
 
         BtnBukaFolderExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnBukaFolderExport.setMnemonic('S');
         BtnBukaFolderExport.setText("Buka Folder Export");
         BtnBukaFolderExport.setToolTipText("Alt+S");
         BtnBukaFolderExport.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -654,6 +735,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         CmbPilihanTanggalExport.setBounds(140, 62, 180, 23);
 
         BtnSimpanPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanPengaturan.setMnemonic('S');
         BtnSimpanPengaturan.setText("Simpan");
         BtnSimpanPengaturan.setToolTipText("Alt+S");
         BtnSimpanPengaturan.setName("BtnSimpanPengaturan"); // NOI18N
@@ -666,6 +748,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnSimpanPengaturan.setBounds(10, 132, 86, 30);
 
         BtnPilihAplikasiPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPilihAplikasiPDF.setMnemonic('S');
         BtnPilihAplikasiPDF.setToolTipText("Alt+S");
         BtnPilihAplikasiPDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPilihAplikasiPDF.setName("BtnPilihAplikasiPDF"); // NOI18N
@@ -678,6 +761,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnPilihAplikasiPDF.setBounds(572, 32, 28, 23);
 
         BtnResetPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnResetPengaturan.setMnemonic('S');
         BtnResetPengaturan.setText("Reset");
         BtnResetPengaturan.setToolTipText("Alt+S");
         BtnResetPengaturan.setName("BtnResetPengaturan"); // NOI18N
@@ -758,6 +842,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(namaPJ);
 
         BtnPenjamin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPenjamin.setMnemonic('3');
         BtnPenjamin.setToolTipText("Alt+3");
         BtnPenjamin.setName("BtnPenjamin"); // NOI18N
         BtnPenjamin.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -783,6 +868,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('2');
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -798,6 +884,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('M');
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -825,6 +912,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(LCount);
 
         BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
+        BtnPengaturan.setMnemonic('T');
         BtnPengaturan.setText("Pengaturan");
         BtnPengaturan.setToolTipText("Alt+T");
         BtnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -840,6 +928,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(BtnPengaturan);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -868,7 +957,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -882,7 +971,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1043,6 +1132,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel25.setBounds(0, 150, 120, 16);
 
         btnResumeRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnResumeRanap.setMnemonic('1');
         btnResumeRanap.setText("Tidak ada");
         btnResumeRanap.setToolTipText("ALt+1");
         btnResumeRanap.setEnabled(false);
@@ -1065,6 +1155,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel27.setBounds(0, 130, 120, 16);
 
         btnAwalMedisIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnAwalMedisIGD.setMnemonic('1');
         btnAwalMedisIGD.setText("Tidak ada");
         btnAwalMedisIGD.setToolTipText("ALt+1");
         btnAwalMedisIGD.setEnabled(false);
@@ -1087,6 +1178,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel28.setBounds(0, 170, 120, 16);
 
         btnHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilLab.setMnemonic('1');
         btnHasilLab.setText("Tidak ada");
         btnHasilLab.setToolTipText("ALt+1");
         btnHasilLab.setEnabled(false);
@@ -1109,6 +1201,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel29.setBounds(0, 190, 120, 16);
 
         btnHasilRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilRad.setMnemonic('1');
         btnHasilRad.setText("Tidak ada");
         btnHasilRad.setToolTipText("ALt+1");
         btnHasilRad.setEnabled(false);
@@ -1131,6 +1224,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel30.setBounds(0, 250, 120, 16);
 
         btnSurkon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnSurkon.setMnemonic('1');
         btnSurkon.setText("Tidak ada");
         btnSurkon.setToolTipText("ALt+1");
         btnSurkon.setEnabled(false);
@@ -1153,6 +1247,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel31.setBounds(0, 230, 120, 16);
 
         btnSPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnSPRI.setMnemonic('1');
         btnSPRI.setText("Tidak ada");
         btnSPRI.setToolTipText("ALt+1");
         btnSPRI.setEnabled(false);
@@ -1181,6 +1276,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         lblStatusRawat.setBounds(120, 50, 240, 16);
 
         BtnSimpanDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanDiagnosa.setMnemonic('S');
         BtnSimpanDiagnosa.setText("Simpan");
         BtnSimpanDiagnosa.setToolTipText("Alt+S");
         BtnSimpanDiagnosa.setAlignmentY(0.0F);
@@ -1194,10 +1290,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 BtnSimpanDiagnosaActionPerformed(evt);
             }
         });
+        BtnSimpanDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSimpanDiagnosaKeyPressed(evt);
+            }
+        });
         panelBiasa1.add(BtnSimpanDiagnosa);
         BtnSimpanDiagnosa.setBounds(0, 740, 100, 30);
 
         BtnHapusDiagnosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapusDiagnosa.setMnemonic('H');
         BtnHapusDiagnosa.setText("Hapus");
         BtnHapusDiagnosa.setToolTipText("Alt+H");
         BtnHapusDiagnosa.setAlignmentY(0.0F);
@@ -1222,6 +1324,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel32.setBounds(0, 210, 120, 16);
 
         btnRiwayatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnRiwayatPasien.setMnemonic('1');
         btnRiwayatPasien.setText("Lihat");
         btnRiwayatPasien.setToolTipText("ALt+1");
         btnRiwayatPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1243,6 +1346,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel33.setBounds(0, 90, 120, 16);
 
         btnHasilKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilKlaim.setMnemonic('1');
         btnHasilKlaim.setText("Tidak ada");
         btnHasilKlaim.setToolTipText("ALt+1");
         btnHasilKlaim.setEnabled(false);
@@ -1265,6 +1369,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel34.setBounds(0, 110, 120, 16);
 
         btnTriaseIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnTriaseIGD.setMnemonic('1');
         btnTriaseIGD.setText("Tidak ada");
         btnTriaseIGD.setToolTipText("ALt+1");
         btnTriaseIGD.setEnabled(false);
@@ -1309,6 +1414,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa2.setLayout(new java.awt.BorderLayout());
 
         BtnKompilasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2.png"))); // NOI18N
+        BtnKompilasi.setMnemonic('T');
         BtnKompilasi.setText("Kompilasi");
         BtnKompilasi.setToolTipText("Alt+T");
         BtnKompilasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1340,6 +1446,21 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelInvoices.setPreferredSize(new java.awt.Dimension(55, 100));
         panelInvoices.setLayout(new java.awt.BorderLayout());
 
+        panelBiasa3.setName("panelBiasa3"); // NOI18N
+        panelBiasa3.setLayout(new java.awt.BorderLayout());
+
+        scrollPane2.setName("scrollPane2"); // NOI18N
+
+        loadBillingHTML.setEditable(false);
+        loadBillingHTML.setContentType("text/html"); // NOI18N
+        loadBillingHTML.setName("loadBillingHTML"); // NOI18N
+        scrollPane2.setViewportView(loadBillingHTML);
+
+        panelBiasa3.add(scrollPane2, java.awt.BorderLayout.CENTER);
+
+        panelInvoices.add(panelBiasa3, java.awt.BorderLayout.CENTER);
+
+        btnInvoice.setMnemonic('1');
         btnInvoice.setText("<html>\n<body>\n<a href=\"#\">Cetak</a>\n</body>\n</html>"); // NOI18N
         btnInvoice.setToolTipText("ALt+1");
         btnInvoice.setEnabled(false);
@@ -1427,6 +1548,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if (tabMode.getRowCount() != 0) {
                 try {
                     getData();
+                    tampilINACBG();
                     tabPane1.setSelectedIndex(0);
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -2681,12 +2803,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
+                    tampilINACBG();
                     tabPane1.setSelectedIndex(0);
                 } catch (java.lang.NullPointerException e) {
                 }
             }
         }
     }//GEN-LAST:event_tbKompilasiKeyReleased
+
+    private void BtnSimpanDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanDiagnosaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnSimpanDiagnosaActionPerformed(null);
+        }
+    }//GEN-LAST:event_BtnSimpanDiagnosaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
@@ -2780,6 +2909,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private widget.TextBox kodePJ;
     private widget.Label label19;
     private widget.Label lblCoderNIK;
@@ -2788,9 +2918,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.Label lblNoRawat;
     private widget.Label lblStatusRawat;
     private widget.Label lblTglSEP;
+    private widget.editorpane loadBillingHTML;
     private widget.TextBox namaPJ;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
+    private widget.PanelBiasa panelBiasa3;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
@@ -2801,29 +2933,31 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppRiwayatPerawatan;
     private javax.swing.JMenuItem ppUpdateTanggalPulangSEP;
     private widget.ScrollPane scrollPane1;
+    private widget.ScrollPane scrollPane2;
     private widget.TabPane tabPane1;
     private widget.TabPane tabPane2;
     private widget.Table tbKompilasi;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
+        tbKompilasi.clearSelection();
         Valid.tabelKosong(tabMode);
         String statusklaim = "";
         switch (CmbStatusKirim.getSelectedIndex()) {
             case 1:
-                statusklaim = "and inc.no_sep is not null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inc.no_sep is not null ";
                 break;
             case 2:
-                statusklaim = "and ing.no_sep is not null and ing.top_up = 'Belum' ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and ing.top_up = 'Belum' and inc.no_sep is null ";
                 break;
             case 3:
-                statusklaim = "and ing.no_sep is not null and ing.top_up = 'Tidak Ada' ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and ing.top_up = 'Tidak Ada' and inc.no_sep is null ";
                 break;
             case 4:
-                statusklaim = "and idf.no_sep is not null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is null and inc.no_sep is null ";
                 break;
             case 5:
-                statusklaim = "and idf.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is null and ing.no_sep is null and inc.no_sep is null ";
                 break;
             case 6:
                 statusklaim = "and idg.no_sep is null ";
@@ -2997,14 +3131,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSurkon, false);
             }
             flagklaim = (Integer) tabMode.getValueAt(tbKompilasi.getSelectedRow(), 11);
-            inacbgStage2 = ((Integer) tabMode.getValueAt(tbKompilasi.getSelectedRow(), 12)) == 1;
             flipStatus(btnHasilKlaim, flagklaim == 1);
+            tabPane2.setSelectedIndex(0);
             tabPane2.setEnabledAt(1, flagklaim < 5);
             panelIdrg.setSEP(btnSEP.getText());
             panelIdrg.tampilICD();
             panelInacbg.setSEP(btnSEP.getText());
             panelInacbg.tampilICD();
-            tampilINACBG();
+            // tampilINACBG();
             tampilBilling();
         }
     }
@@ -3033,135 +3167,106 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (btnHasilKlaim.isEnabled()) {
             aksi = "&sukses=true&action=selesai";
         }
-
+        
         switch (flagklaim) {
+            case 1:
+                aksi = "&action=selesai";
+                grouper = "";
+                break;
             case 2:
+                aksi = "&action=grouper";
                 grouper = "&grouper=inacbg_stage2";
                 break;
             case 3:
-            case 4:
+                aksi = "&action=grouper";
                 grouper = "&grouper=inacbg_stage1";
                 break;
+            case 4:
+                aksi = "&action=grouper";
+                grouper = "&grouper=inacbg_stage1";
+                break;
+            case 5:
+                aksi = "&action=grouper";
+                grouper = "&grouper=idrg";
+                break;
             default:
+                aksi = "&action=grouper";
                 grouper = "&grouper=idrg";
                 break;
         }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB())
+            .append("/inacbg/login.php?act=login&usere=").append(koneksiDB.USERHYBRIDWEB()).append("&passwordte=").append(koneksiDB.PASHYBRIDWEB())
+            .append("&page=DetailKirimSmc&nosep=").append(btnSEP.getText()).append("&codernik=").append(lblCoderNIK.getText())
+            .append("&corona=").append(corona).append(aksi).append(grouper);
+        
+        String url = sb.toString();
 
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() +
-             "/inacbg/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() +
-             "&page=DetailKirimSmc&nosep=" + btnSEP.getText() + "&codernik=" + lblCoderNIK.getText() + "&corona=" + corona + grouper + aksi;
         System.out.println(url);
+        
         Platform.runLater(() -> {
-            WebView view = new WebView();
-            engine = view.getEngine();
-            engine.setJavaScriptEnabled(true);
-            engine.setCreatePopupHandler((PopupFeatures p) -> view.getEngine());
-            engine.getLoadWorker().exceptionProperty()
-                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(null,
-                                engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        });
-                    }
-                });
-
-            engine.getLoadWorker().stateProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue == Worker.State.SUCCEEDED) {
-                        String cekURL = engine.getLocation()
-                            .replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "")
-                            .toLowerCase();
-                        if (cekURL.contains("&grouper=idrg")) {
-                            if (cekURL.contains("&sukses=false")) {
-                                SwingUtilities.invokeLater(() -> {
-                                    tabMode.setValueAt("IDRG Grouping", tbKompilasi.getSelectedRow(), 10);
-                                    tabMode.setValueAt(5, tbKompilasi.getSelectedRow(), 11);
-                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                });
-                            } else {
-                                SwingUtilities.invokeLater(() -> {
-                                    tabMode.setValueAt("Belum Terkirim", tbKompilasi.getSelectedRow(), 10);
-                                    tabMode.setValueAt(6, tbKompilasi.getSelectedRow(), 11);
-                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                });
-                            }
-                        } else if (cekURL.contains("&grouper=inacbg_stage1")) {
-                            if (cekURL.contains("&sukses=false")) {
-                                SwingUtilities.invokeLater(() -> {
-                                    tabMode.setValueAt("INACBG Grouping", tbKompilasi.getSelectedRow(), 10);
-                                    tabMode.setValueAt(3, tbKompilasi.getSelectedRow(), 11);
-                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                });
-                            } else {
-                                SwingUtilities.invokeLater(() -> {
-                                    tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
-                                    tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
-                                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                    getData();
-                                });
-                            }
-                        } else if (cekURL.contains("&grouper=inacbg_stage2")) {
-                            SwingUtilities.invokeLater(() -> {
-                                tabMode.setValueAt("INACBG Top Up", tbKompilasi.getSelectedRow(), 10);
-                                tabMode.setValueAt(2, tbKompilasi.getSelectedRow(), 11);
-                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                            });
-                        } else if (cekURL.contains("&action=selesai")) {
-                            SwingUtilities.invokeLater(() -> {
-                                tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 10);
-                                tabMode.setValueAt(1, tbKompilasi.getSelectedRow(), 11);
-                                tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                                getData();
-                            });
-                        }
-                    }
-                });
-            jfxPanelicare.setScene(new Scene(view));
             try {
                 engine.load(url);
-            } catch (Exception exception) {
-                engine.load(url);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
         });
-        PanelContentINACBG.add(jfxPanelicare, BorderLayout.CENTER);
     }
 
     private void tampilBilling() {
-        String norawat = lblNoRawat.getText();
         try {
-            norawat = URLEncoder.encode(norawat, "UTF-8");
-        } catch (Exception e) {
-            norawat = lblNoRawat.getText();
-        }
-
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() +
-             "/berkasrawat/loginlihatbilling.php?act=login&norawat=" + norawat + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB();
-
-        Platform.runLater(() -> {
-            WebView view = new WebView();
-            engine = view.getEngine();
-            engine.setJavaScriptEnabled(true);
-            engine.setCreatePopupHandler((PopupFeatures p) -> view.getEngine());
-            engine.getLoadWorker().exceptionProperty()
-                .addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(null,
-                                engine.getLocation() + "\n" + (value != null ? value.getMessage() : "Unexpected error!"),
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        });
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select b.no, b.nm_perawatan, b.pemisah, b.biaya, b.jumlah, " +
+                "b.tambahan, b.totalbiaya from billing b where b.no_rawat = ?"
+            )) {
+                ps.setString(1, lblNoRawat.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        int row = 0;
+                        double total = 0;
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("<html><body><table cellspacing=\"0\" cellpadding=\"0\">");
+                        do {
+                            total += rs.getDouble("totalbiaya");
+                            if (row++ < 6) {
+                                sb.append("<tr><td width=\"20%\">")
+                                    .append(rs.getString("no").trim())
+                                    .append("</td><td width=\"40%\" colspan=\"5\">")
+                                    .append(rs.getString("nm_perawatan").trim())
+                                    .append("</td></tr>");
+                            } else {
+                                if (rs.getString("no").isBlank() && rs.getDouble("biaya") == 0) {
+                                    sb.append("<tr><td width=\"20%\">")
+                                        .append(rs.getString("no").trim());
+                                    if (rs.getString("nm_perawatan").startsWith("Total")) {
+                                        sb.append("</td><td colspan=\"5\" align=\"right\">");
+                                    } else {
+                                        sb.append("</td><td colspan=\"5\">");
+                                    }
+                                    sb.append(rs.getString("nm_perawatan").trim()).append("</td></tr>");
+                                } else {
+                                    sb.append("<tr><td width=\"20%\">").append(rs.getString("no")).append("</td><td width=\"48%\">").append(rs.getString("nm_perawatan"))
+                                        .append("</td><td width=\"9%\" align=\"right\">").append(rs.getDouble("biaya") == 0 ? "" : Valid.SetAngka(rs.getDouble("biaya")))
+                                        .append("</td><td width=\"2%\" align=\"right\">").append(rs.getDouble("jumlah") == 0 ? "" : Valid.SetAngka(rs.getDouble("jumlah")))
+                                        .append("</td><td width=\"9%\" align=\"right\">").append(rs.getDouble("tambahan") == 0 ? "" : Valid.SetAngka(rs.getDouble("tambahan")))
+                                        .append("</td><td width=\"10%\" align=\"right\">").append(rs.getDouble("totalbiaya") == 0 ? "" : Valid.SetAngka(rs.getDouble("totalbiaya")))
+                                        .append("</td></tr>");
+                                }
+                            }
+                        } while (rs.next());
+                        sb.append("<tr><td width=\"20%\" style=\"font-weight: bold\">TOTAL BIAYA</td><td style=\"font-weight: bold\">:</td><td colspan=\"4\" style=\"font-weight: bold; text-align: right\">")
+                            .append(Valid.SetAngka(total))
+                            .append("</td></tr></table></body></html>");
+                        loadBillingHTML.setText(sb.toString());
+                    } else {
+                        loadBillingHTML.setText("");
                     }
-                });
-            jfxinvoices.setScene(new Scene(view));
-            try {
-                engine.load(url);
-            } catch (Exception exception) {
-                engine.load(url);
+                }
             }
-        });
-        panelInvoices.add(jfxinvoices, BorderLayout.CENTER);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
     private void exportPDF(String reportName, String savedFileName, Map reportParams) {

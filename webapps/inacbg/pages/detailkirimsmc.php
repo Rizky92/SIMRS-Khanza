@@ -4,13 +4,18 @@
     }
 ?>
 <div id="post">
+    <?php 
+        // sleep(10);
+        $codernik  = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
+        $corona    = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
+        $nosep     = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
+        $action    = isset($_GET['action']) ? validTeks($_GET['action']) : null;
+        $grouper   = isset($_GET['grouper']) ? validTeks($_GET['grouper']) : null;
+        $sukses    = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
+        $carabayar = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
+    ?>
     <?php if ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'selesai'): ?>
-        <?php
-            $codernik = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
-            $corona   = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
-            $nosep    = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
-            $queryurl = http_build_query(compact('codernik', 'nosep', 'corona'));
-        ?>
+        <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
         <div class="entry" style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #22c55e; margin-top: 0.5rem; margin-left: 0.5rem">
             Klaim berhasil diproses!
         </div>
@@ -24,34 +29,22 @@
             <a href="?act=DetailKirimSmc&<?= $queryurl ?>&action=cetak">[Tarik ulang hasil cetak klaim]</a>
         </div>
     <?php elseif ((isset($_GET['action']) ? validTeks($_GET['action']) : null) === 'cetak'): ?>
-        <?php
-            $codernik = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
-            $corona   = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
-            $nosep    = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
-            $action   = 'selesai';
-            $queryurl = http_build_query(compact('codernik', 'nosep', 'corona', 'action'));
-        ?>
+        <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
-            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>">
+            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>&action=selesai">
         <?php endif; ?>
     <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <div class="entry">
                 <?php
-                    $codernik  = isset($_GET['codernik']) ? validTeks($_GET['codernik']) : null;
-                    $corona    = isset($_GET['corona']) ? validTeks($_GET['corona']) : null;
-                    $nosep     = isset($_GET['nosep']) ? validTeks($_GET['nosep']) : null;
-                    $action    = isset($_GET['action']) ? validTeks($_GET['action']) : null;
-                    $grouper   = isset($_GET['grouper']) ? validTeks($_GET['grouper']) : null;
-                    $sukses    = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
-                    $carabayar = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
                     $judul     = 'SIMPAN & KIRIM KE EKLAIM';
 
                     if ($action === 'reedit') {
-                        if ($grouper === 'idrg') {
-                            ReeditIdrgSmc($nosep);
-                        } else if ($grouper === 'inacbg_stage1') {
-                            ReeditInacbgSmc($nosep, $codernik);
+                        if ($grouper === 'inacbg_stage2') {
+                            bukaquery2("delete from tempinacbg where coder_nik = '$codernik'");
+                            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nosep'");
+                        } else {
+                            ReeditKlaimSmc($nosep, $grouper);
                         }
                     }
 
@@ -81,19 +74,10 @@
                     <table width="100%" align="center">
                         <?php if ($grouper === 'idrg'): ?>
                             <?php
-                                $baris     = mysqli_fetch_array(bukaquery(<<<SQL
+                                $baris = mysqli_fetch_array(bukaquery(<<<SQL
                                     select
-                                        bridging_sep.no_sep,
-                                        bridging_sep.asal_rujukan,
-                                        bridging_sep.no_kartu,
-                                        date(bridging_sep.tglpulang) as tglpulang,
-                                        reg_periksa.*,
-                                        pasien.nm_pasien,
-                                        pasien.jk,
-                                        pasien.umur,
-                                        pasien.tgl_lahir,
-                                        dokter.nm_dokter,
-                                        poliklinik.nm_poli,
+                                        bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang) as tglpulang,
+                                        reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter, poliklinik.nm_poli,
                                         penjab.png_jawab
                                     from bridging_sep
                                     join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
@@ -129,7 +113,7 @@
 
                                 if ($status_lanjut == 'Ranap') {
                                     $jnsrawat = '1';
-                                    $tensi = explode('/', getOne("select tensi from pemeriksaan_ranap where no_rawat = '{$baris['no_rawat']}' order by tgl_perawatan desc, jam_rawat desc"));
+                                    $tensi = explode('/', getOne("(select tensi from pemeriksaan_ranap where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
                                     if (! empty($tensi[0])) {
                                         $sistole = $tensi[0];
                                     }
@@ -141,7 +125,7 @@
                                     }
                                 } else {
                                     $jnsrawat = '2';
-                                    $tensi = explode('/', getOne("select tensi from pemeriksaan_ralan where no_rawat = '{$baris['no_rawat']}' order by tgl_perawatan desc, jam_rawat desc"));
+                                    $tensi = explode('/', getOne("(select tensi from pemeriksaan_ralan where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
                                     if (! empty($tensi[0])) {
                                         $sistole = $tensi[0];
                                     }
@@ -1034,50 +1018,44 @@
 
                             <?php
                                 $diagnosa_idrg = '';
-                                $querydiagnosa_idrg = bukaquery("select kode_icd10, urut from idrg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
+                                $querydiagnosa_idrg = bukaquery("select i.kode_icd10, r.deskripsi, i.urut from idrg_diagnosa_pasien_smc i join idrg_referensi_icd10_smc r on i.kode_icd10 = r.code1 where i.no_sep = '$nosep' order by i.urut asc");
                             ?>
                             <?php while ($barisdiagnosa_idrg = mysqli_fetch_array($querydiagnosa_idrg)): ?>
-                                <?php $diagnosa_idrg .= $barisdiagnosa_idrg['kode_icd10'].'#'; ?>
                                 <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
+                                    <?php $diagnosa_idrg = $barisdiagnosa_idrg['kode_icd10']; ?>
                                     <tr class="head">
                                         <td width="28%">Diagnosa</td>
                                         <td width="1%">:</td>
-                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)</td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)<br /><?= $barisdiagnosa_idrg['deskripsi'] ?></td>
                                     </tr>
                                 <?php else: ?>
+                                    <?php $diagnosa_idrg .= '#'.$barisdiagnosa_idrg['kode_icd10']; ?>
                                     <tr class="head">
-                                        <td colspan="2" width="28%"></td>
-                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?></td>
+                                        <td colspan="2" width="29%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?><br /><?= $barisdiagnosa_idrg['deskripsi'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $diagnosa_idrg = mb_substr($diagnosa_idrg, 0, -1); ?>
                             <?php
                                 $prosedur_idrg = '';
-                                $queryprosedur_idrg = bukaquery("select kode_icd9, multiplicity, urut from idrg_prosedur_pasien_smc where no_sep = '$nosep' order by urut asc");
+                                $queryprosedur_idrg = bukaquery("select i.kode_icd9, r.deskripsi, i.multiplicity, i.urut from idrg_prosedur_pasien_smc i join idrg_referensi_icd9cm_smc r on i.kode_icd9 = r.code1 where i.no_sep = '$nosep' order by i.urut asc");
                             ?>
                             <?php while ($barisprosedur_idrg = mysqli_fetch_array($queryprosedur_idrg)): ?>
-                                <?php
-                                    if ($barisprosedur_idrg['multiplicity'] > 1) {
-                                        $prosedur_idrg .= $barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity'].'#';
-                                    } else {
-                                        $prosedur_idrg .= $barisprosedur_idrg['kode_icd9'].'#';
-                                    }
-                                ?>
                                 <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
+                                    <?php $prosedur_idrg = $barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity']; ?>
                                     <tr class="head">
                                         <td width="28%">Prosedur</td>
                                         <td width="1%">:</td>
-                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)</td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)<br /><?= $barisprosedur_idrg['deskripsi'] ?></td>
                                     </tr>
                                 <?php else: ?>
+                                    <?php $prosedur_idrg .= '#'.$barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity']; ?>
                                     <tr class="head">
                                         <td colspan="2" width="28%"></td>
-                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?></td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?><br /><?= $barisprosedur_idrg['deskripsi'] ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $prosedur_idrg = mb_substr($prosedur_idrg, 0, -1); ?>
                             <?php $judul = 'SIMPAN DATA KLAIM & GROUPING IDRG'; ?>
                         <?php elseif ($grouper === 'inacbg_stage1'): ?>
                             <tr class="head">
@@ -1089,7 +1067,7 @@
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
-                                        Hasil Grouping IDRG (FINAL)
+                                        Status Grouping IDRG (FINAL)
                                     </span>
                                 </td>
                             </tr>
@@ -1164,6 +1142,31 @@
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff1100; margin-top: 0.5rem">
+                                        Status Grouping INACBG (Belum Final)
+                                    </span>
+                                </td>
+                            </tr>
+                            <?php $hasilgroupinginacbg = mysqli_fetch_assoc(bukaquery("select * from inacbg_grouping_stage12 where no_sep = '$nosep'")); ?>
+                            <?php if ($hasilgroupinginacbg): ?>
+                                <tr class="head">
+                                    <td width="28%">Kode CBG</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $hasilgroupinginacbg['code_cbg'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Deskripsi</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $hasilgroupinginacbg['deskripsi'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Total tarif</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $hasilgroupinginacbg['tarif'] ?></td>
+                                </tr>
+                            <?php endif; ?>
                             <?php
                                 $diagnosa_inacbg = '';
                                 $querydiagnosa_inacbg = bukaquery("select kode_icd10, urut from inacbg_diagnosa_pasien_smc where no_sep = '$nosep' order by urut asc");
@@ -1613,8 +1616,6 @@
                                 HTML;
                         }
                     }
-
-
                 }
             ?>
         </form>
