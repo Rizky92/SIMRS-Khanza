@@ -102,7 +102,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
     private boolean exportSukses = true;
-    private int flagklaim = -1;
+    private int flagklaim = -1, flagInacbgTopup = 0, selectedRow = -1;
     private long KOMPILASIBERKASMAXMEMORY = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
     public BPJSKompilasiBerkasKlaim(java.awt.Frame parent, boolean modal) {
@@ -112,11 +112,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tabMode = new DefaultTableModel(null, new Object[] {
             "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Status Rawat",
             "Tgl. SEP", "Tgl. Pulang SEP", "Status Pulang", "Unit/Poli",
-            "DPJP", "Status Klaim", "statusklaim", "flag stage2 inacbg"
+            "DPJP", "Status Klaim", "statusklaim"
         }) {
             @Override
             public Class getColumnClass(int columnIndex) {
-                if (columnIndex == 11 || columnIndex == 12) {
+                if (columnIndex == 11) {
                     return java.lang.Integer.class;
                 }
                 return java.lang.String.class;
@@ -144,42 +144,42 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     }
                 });
             engine.locationProperty().addListener((observable, oldValue, newValue) -> {
-                System.out.println(newValue);
-                
-                String cekurl = newValue.replace(
-                    new StringBuilder().append("http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/inacbg/"), ""
-                ).trim().toLowerCase();
-                
-                if (cekurl.contains("grouper=idrg")) {
-                    if (cekurl.contains("sukses=false")) {
-                        tabMode.setValueAt("IDRG Grouping", tbKompilasi.getSelectedRow(), 10);
-                        tabMode.setValueAt(5, tbKompilasi.getSelectedRow(), 11);
-                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                    } else {
-                        tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
-                        tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
-                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
+                if (oldValue != null && !oldValue.toLowerCase().contains("login")) {
+                    getData();
+                    if (selectedRow >= 0) {
+                        switch (flagklaim) {
+                            case 1:
+                                tabMode.setValueAt("Selesai", selectedRow, 10);
+                                tabMode.setValueAt(1, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                            case 2:
+                                tabMode.setValueAt("INACBG Final", selectedRow, 10);
+                                tabMode.setValueAt(2, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                            case 3:
+                                tabMode.setValueAt("INACBG Grouping", selectedRow, 10);
+                                tabMode.setValueAt(3, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                            case 4:
+                                tabMode.setValueAt("IDRG Final", selectedRow, 10);
+                                tabMode.setValueAt(4, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                            case 5:
+                                tabMode.setValueAt("IDRG Grouping", selectedRow, 10);
+                                tabMode.setValueAt(5, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                            default:
+                                tabMode.setValueAt("Belum", selectedRow, 10);
+                                tabMode.setValueAt(6, selectedRow, 11);
+                                tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                break;
+                        }
                     }
-                } else if (cekurl.contains("grouper=inacbg_stage1")) {
-                    if (cekurl.contains("sukses=false")) {
-                        tabMode.setValueAt("INACBG Grouping", tbKompilasi.getSelectedRow(), 10);
-                        tabMode.setValueAt(3, tbKompilasi.getSelectedRow(), 11);
-                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                    } else {
-                        tabMode.setValueAt("IDRG Final", tbKompilasi.getSelectedRow(), 10);
-                        tabMode.setValueAt(4, tbKompilasi.getSelectedRow(), 11);
-                        tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-                    }
-                } else if (cekurl.contains("grouper=inacbg_stage2")) {
-                    tabMode.setValueAt("INACBG Top up", tbKompilasi.getSelectedRow(), 10);
-                    tabMode.setValueAt(2, tbKompilasi.getSelectedRow(), 11);
-                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
-//                    if (cekurl.contains("sukses=false")) {
-//                    }
-                } else if (cekurl.contains("action=selesai")) {
-                    tabMode.setValueAt("Terkirim", tbKompilasi.getSelectedRow(), 10);
-                    tabMode.setValueAt(1, tbKompilasi.getSelectedRow(), 11);
-                    tabMode.fireTableRowsUpdated(tbKompilasi.getSelectedRow(), tbKompilasi.getSelectedRow());
                 }
             });
             ProgressBar progressBar = new ProgressBar(0);
@@ -209,8 +209,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tbKompilasi.getColumnModel().getColumn(10).setPreferredWidth(100);
         tbKompilasi.getColumnModel().getColumn(11).setMinWidth(0);
         tbKompilasi.getColumnModel().getColumn(11).setMaxWidth(0);
-        tbKompilasi.getColumnModel().getColumn(12).setMinWidth(0);
-        tbKompilasi.getColumnModel().getColumn(12).setMaxWidth(0);
         tbKompilasi.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -555,7 +553,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025 16:41:56" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-10-2025 10:32:54" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -596,7 +594,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-10-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -957,7 +955,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -971,7 +969,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -995,7 +993,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel11.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass10.add(jLabel11);
 
-        CmbStatusKirim.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Terkirim", "INACBG Top Up", "INACBG Grouping", "IDRG Final", "IDRG Grouping", "Belum Terkirim" }));
+        CmbStatusKirim.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Selesai", "INACBG Final", "INACBG Grouping", "IDRG Final", "IDRG Grouping", "Belum" }));
         CmbStatusKirim.setLightWeightPopupEnabled(false);
         CmbStatusKirim.setMinimumSize(new java.awt.Dimension(75, 21));
         CmbStatusKirim.setName("CmbStatusKirim"); // NOI18N
@@ -1547,6 +1545,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         } else {
             if (tabMode.getRowCount() != 0) {
                 try {
+                    selectedRow = tbKompilasi.getSelectedRow();
                     getData();
                     tampilINACBG();
                     tabPane1.setSelectedIndex(0);
@@ -2122,6 +2121,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     } else if (flagklaim >= 5) {
                         JOptionPane.showMessageDialog(null, "Hasil grouping IDRG belum tersedia..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
+                    break;
                 default: return;
             }
             tampilINACBG();
@@ -2802,6 +2802,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         if (tabMode.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
+                    selectedRow = tbKompilasi.getSelectedRow();
                     getData();
                     tampilINACBG();
                     tabPane1.setSelectedIndex(0);
@@ -2909,7 +2910,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
     private widget.TextBox kodePJ;
     private widget.Label label19;
     private widget.Label lblCoderNIK;
@@ -2945,22 +2945,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         String statusklaim = "";
         switch (CmbStatusKirim.getSelectedIndex()) {
             case 1:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inc.no_sep is not null ";
+                statusklaim = "and inc.no_sep is not null ";
                 break;
             case 2:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and ing.top_up = 'Belum' and inc.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null and inc.no_sep is null ";
                 break;
             case 3:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and ing.top_up = 'Tidak Ada' and inc.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is null ";
                 break;
             case 4:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is null and inc.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is null ";
                 break;
             case 5:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is null and ing.no_sep is null and inc.no_sep is null ";
-                break;
-            case 6:
-                statusklaim = "and idg.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is null ";
                 break;
             default:
                 statusklaim = "";
@@ -2977,10 +2974,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select s.no_rawat, s.no_sep, r.no_rkm_medis, px.nm_pasien, r.status_lanjut, s.tglsep, date(s.tglpulang) as tglpulang, ki.stts_pulang, case when " +
             "r.status_lanjut = 'Ranap' then concat(ki.kd_kamar, ' ', b.nm_bangsal) when r.status_lanjut = 'Ralan' then p.nm_poli end as ruangan, d.nm_dokter, " +
-            "(ing.no_sep is not null and ing.top_up = 'Belum') as inacbg_stage2, case when inc.no_sep is not null then 1 when ing.no_sep is not null and " +
-            "ing.top_up = 'Belum' then 2 when ing.no_sep is not null and ing.top_up = 'Tidak Ada' then 3 when idf.no_sep is not null then 4 when idg.no_sep " +
-            "is not null then 5 else 6 end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join reg_periksa r on s.no_rawat = r.no_rawat join " +
-            "pasien px on r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join kamar_inap ki on r.no_rawat = ki.no_rawat and " +
+            "case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null " +
+            "and inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is null then 3 when " +
+            "idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is null then 4 when idg.no_sep is not null and idf.no_sep is null then 5 else 6 " +
+            "end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join reg_periksa r on s.no_rawat = r.no_rawat join pasien px on " +
+            "r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join kamar_inap ki on r.no_rawat = ki.no_rawat and " +
             "ki.stts_pulang != 'Pindah Kamar' left join kamar k on ki.kd_kamar = k.kd_kamar left join bangsal b on k.kd_bangsal = b.kd_bangsal left join " +
             "maping_dokter_dpjpvclaim md on s.kddpjp = md.kd_dokter_bpjs left join dokter d on md.kd_dokter = d.kd_dokter left join idrg_grouping_smc idg on " +
             "s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 ing on s.no_sep = ing.no_sep " +
@@ -3010,14 +3008,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
 
             try (ResultSet rs = ps.executeQuery()) {
-                String keterangan = "Belum Terkirim";
+                String keterangan = "Belum";
                 while (rs.next()) {
                     switch (rs.getInt("statusklaim")) {
                         case 1:
-                            keterangan = "Terkirim";
+                            keterangan = "Selesai";
                             break;
                         case 2:
-                            keterangan = "INACBG Top Up";
+                            keterangan = "INACBG Final";
                             break;
                         case 3:
                             keterangan = "INACBG Grouping";
@@ -3029,13 +3027,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             keterangan = "IDRG Grouping";
                             break;
                         default:
-                            keterangan = "Belum Terkirim";
+                            keterangan = "Belum";
                             break;
                     }
                     tabMode.addRow(new Object[] {
                         rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
                         rs.getString("status_lanjut"), rs.getString("tglsep"), rs.getString("tglpulang"), rs.getString("stts_pulang"),
-                        rs.getString("ruangan"), rs.getString("nm_dokter"), keterangan, rs.getInt("statusklaim"), rs.getInt("inacbg_stage2")
+                        rs.getString("ruangan"), rs.getString("nm_dokter"), keterangan, rs.getInt("statusklaim")
                     });
                 }
             }
@@ -3084,33 +3082,43 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void getData() {
-        if (tbKompilasi.getSelectedRow() >= 0) {
-            lblNoRawat.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 0).toString());
-            lblNoRM.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 2).toString());
-            lblNamaPasien.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 3).toString());
-            lblStatusRawat.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 4).toString());
-            lblTglSEP.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 5).toString());
+        if (selectedRow >= 0) {
+            lblNoRawat.setText(tabMode.getValueAt(selectedRow, 0).toString());
+            lblNoRM.setText(tabMode.getValueAt(selectedRow, 2).toString());
+            lblNamaPasien.setText(tabMode.getValueAt(selectedRow, 3).toString());
+            lblStatusRawat.setText(tabMode.getValueAt(selectedRow, 4).toString());
+            lblTglSEP.setText(tabMode.getValueAt(selectedRow, 5).toString());
             String noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_sep = ?", btnSEP.getText());
             if (noSuratKontrol.isBlank()) {
                 noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_rawat = ? and noskdp != ''", lblNoRawat.getText());
             }
-            btnSEP.setText(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 1).toString());
+            btnSEP.setText(tabMode.getValueAt(selectedRow, 1).toString());
             btnSEP.setEnabled(true);
             btnInvoice.setEnabled(true);
             try (PreparedStatement ps = koneksi.prepareStatement(
-                "select exists(select * from data_triase_igd where data_triase_igd.no_rawat = bridging_sep.no_rawat) as ada_triase, " +
+                "select case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and " +
+                "ing.no_sep is not null and inf.no_sep is not null and inc.no_sep is null then 2 when idg.no_sep is not null and " +
+                "idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is null then 3 when idg.no_sep is not null " +
+                "and idf.no_sep is not null and ing.no_sep is null then 4 when idg.no_sep is not null and idf.no_sep is null " +
+                "then 5 else 6 end as statusklaim, (ing.no_sep is not null and ing.top_up = 'Belum') as inacbg_stage2, " +
+                "exists(select * from data_triase_igd where data_triase_igd.no_rawat = bridging_sep.no_rawat) as ada_triase, " +
                 "exists(select * from resume_pasien_ranap where resume_pasien_ranap.no_rawat = bridging_sep.no_rawat) as ada_resume_ranap, " +
                 "exists(select * from penilaian_medis_igd where penilaian_medis_igd.no_rawat = bridging_sep.no_rawat) as ada_awal_medis_igd, " +
                 "exists(select * from periksa_lab where periksa_lab.no_rawat = bridging_sep.no_rawat) as ada_periksa_lab, " +
                 "exists(select * from periksa_radiologi where periksa_radiologi.no_rawat = bridging_sep.no_rawat) as ada_periksa_rad, " +
                 "exists(select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?) as ada_skdp, " +
                 "exists(select * from bridging_surat_pri_bpjs where bridging_surat_pri_bpjs.no_rawat = bridging_sep.no_rawat) as ada_spri, " +
-                "exists(select * from billing where billing.no_rawat = bridging_sep.no_rawat) as ada_billing from bridging_sep where bridging_sep.no_sep = ?"
+                "exists(select * from billing where billing.no_rawat = bridging_sep.no_rawat) as ada_billing from bridging_sep left join " +
+                "idrg_grouping_smc idg on bridging_sep.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on bridging_sep.no_sep = idf.no_sep " +
+                "left join inacbg_grouping_stage12 ing on bridging_sep.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on bridging_sep.no_sep = inf.no_sep " +
+                "left join inacbg_cetak_klaim inc on bridging_sep.no_sep = inc.no_sep where bridging_sep.no_sep = ?"
             )) {
                 ps.setString(1, noSuratKontrol);
                 ps.setString(2, btnSEP.getText());
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
+                        flagklaim = rs.getInt("statusklaim");
+                        flagInacbgTopup = rs.getInt("inacbg_stage2");
                         flipStatus(btnTriaseIGD, rs.getBoolean("ada_triase"));
                         flipStatus(btnAwalMedisIGD, rs.getBoolean("ada_awal_medis_igd"));
                         flipStatus(btnResumeRanap, rs.getBoolean("ada_resume_ranap"));
@@ -3122,6 +3130,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
+                flagklaim = 6;
+                flagInacbgTopup = -1;
                 flipStatus(btnTriaseIGD, false);
                 flipStatus(btnAwalMedisIGD, false);
                 flipStatus(btnResumeRanap, false);
@@ -3130,7 +3140,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSPRI, false);
                 flipStatus(btnSurkon, false);
             }
-            flagklaim = (Integer) tabMode.getValueAt(tbKompilasi.getSelectedRow(), 11);
             flipStatus(btnHasilKlaim, flagklaim == 1);
             tabPane2.setSelectedIndex(0);
             tabPane2.setEnabledAt(1, flagklaim < 5);
@@ -3164,10 +3173,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             corona = "PasienCorona";
         }
 
-        if (btnHasilKlaim.isEnabled()) {
-            aksi = "&sukses=true&action=selesai";
-        }
-        
         switch (flagklaim) {
             case 1:
                 aksi = "&action=selesai";
@@ -3175,19 +3180,23 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 break;
             case 2:
                 aksi = "&action=grouper";
-                grouper = "&grouper=inacbg_stage2";
+                grouper = "&grouper=final";
                 break;
             case 3:
                 aksi = "&action=grouper";
-                grouper = "&grouper=inacbg_stage1";
+                grouper = "&grouper=inacbg_final";
                 break;
             case 4:
                 aksi = "&action=grouper";
-                grouper = "&grouper=inacbg_stage1";
+                if (flagInacbgTopup == 1) {
+                    grouper = "&grouper=inacbg_stage2";
+                } else {
+                    grouper = "&grouper=inacbg_stage1";
+                }
                 break;
             case 5:
                 aksi = "&action=grouper";
-                grouper = "&grouper=idrg";
+                grouper = "&grouper=idrg_final";
                 break;
             default:
                 aksi = "&action=grouper";
@@ -3266,6 +3275,12 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        }
+    }
+    
+    private void cekStatusKlaim() {
+        if (tbKompilasi.getSelectedRow() >= 0) {
+            
         }
     }
 

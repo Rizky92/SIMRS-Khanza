@@ -1325,13 +1325,13 @@
 
         bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
 
-        if (!empty($grouper)) {
+        /* if (!empty($grouper)) {
             if ($grouper === 'idrg') {
                 return ReeditIdrgSmc($nomor_sep);
             } else if ($grouper === 'inacbg_stage1') {
                 return ReeditInacbgSmc($nomor_sep, $coder_nik);
             }
-        }
+        } */
 
         return [
             'success' => true,
@@ -1637,10 +1637,14 @@
             $msg['response_idrg']['drg_description']
         ));
 
-        return FinalIdrgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Grouping IDRG berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
-    function FinalIdrgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik)
+    function FinalIdrgSmc($nomor_sep, $coder_nik)
     {
         $request = [
             'metadata' => [
@@ -1672,10 +1676,14 @@
 
         InsertData2('idrg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
-        return ImportIdrgToInacbgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Grouping IDRG berhasil final!',
+            'error' => null,
+        ];
     }
 
-    function ImportIdrgToInacbgSmc($nomor_sep, $norawat, $status_rawat, $coder_nik)
+    function ImportIdrgToInacbgSmc($nomor_sep)
     {
         $request = [
             'metadata' => [
@@ -1705,25 +1713,20 @@
             ];
         }
 
-        $no_rkm_medis = getOne("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat = '$norawat'");
-
         $data_diagnosa = $msg['data']['diagnosa']['expanded'];
         $data_prosedur = $msg['data']['procedure']['expanded'];
 
         usort($data_diagnosa, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
         usort($data_prosedur, fn ($a, $b) => (int) $a['no'] <=> (int) $b['no']);
 
-        $_invalid = '';
-
         bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
         foreach ($data_diagnosa as $dx) {
+            $_error = '';
             if ($dx['metadata']['code'] != '200') {
-                $_invalid .= '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'
-                    .$dx['metadata']['error_no'].' - '.$dx['metadata']['message']
-                    .'</span><br /><br />';
+                $_error = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $dx['code'], $dx['no']));
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s')", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $_error));
             } catch (\Exception $e) {
                 continue;
             }
@@ -1731,13 +1734,12 @@
 
         bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
         foreach ($data_prosedur as $p) {
+            $_error = '';
             if ($p['metadata']['code'] != '200') {
-                $_invalid .= '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'
-                    .$p['metadata']['error_no'].' - '.$p['metadata']['message']
-                    .'</span><br /><br />';
+                $_error = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', %s)", $nomor_sep, $p['code'], $p['no']));
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s')", $nomor_sep, $p['code'], $p['display'], $p['no'], $_error));
             } catch (\Exception $e) {
                 continue;
             }
@@ -1748,8 +1750,20 @@
             'data' => 'Import koding ke INACBG berhasil!',
             'error' => null,
         ];
+    }
 
-        // return GroupingStage1InacbgSmc($nomor_sep, $coder_nik);
+    function HapusDiagnosaProsedurIDRGTidakBerlakuSmc($nomor_sep)
+    {
+        try {
+            bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep' and keterangan != ''");
+            bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep' and keterangan != ''");
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'data' => 'Terjadi kesalahan pada saat menghapus data diagnosa dan prosedur tidak berlaku dari IM!',
+                'error' => $e,
+            ];
+        }
     }
 
     function SetDiagnosaInacbgSmc($nomor_sep, $diagnosa)
@@ -1828,26 +1842,8 @@
         ];
     }
 
-    function GroupingStage1InacbgSmc($nomor_sep, $diagnosa, $prosedur, $coder_nik)
+    function GroupingStage1InacbgSmc($nomor_sep, $coder_nik)
     {
-        ['success' => $sukses_dx, 'data' => $data_dx, 'error' => $dx_err] = SetDiagnosaInacbgSmc($nomor_sep, $diagnosa);
-        ['success' => $sukses_p, 'data' => $data_p, 'error' => $p_err] = SetProsedurInacbgSmc($nomor_sep, $prosedur);
-
-        if (($sukses_dx === false) || ($sukses_p === false)) {
-            if ($sukses_dx === false) {
-                echo $diagnosa_error;
-            }
-            if ($sukses_p === false) {
-                echo $prosedur_error;
-            }
-
-            return [
-                'success' => false,
-                'data' => 'Diagnosa atau prosedur tidak valid..!!',
-                'error' => 'Diagnosa atau prosedur tidak valid..!!',
-            ];
-        }
-
         $request = [
             'metadata' => [
                 'method' => 'grouper',
@@ -1883,13 +1879,18 @@
             $tariff = $msg['response_inacbg']['tariff'];
         }
 
-        InsertData2('inacbg_grouping_stage12', sprintf("'%s', '%s', '%s', %s, '%s'",
-            $nomor_sep,
-            $msg['response_inacbg']['cbg']['code'],
-            $msg['response_inacbg']['cbg']['description'],
-            $tariff,
-            'Tidak Ada'
-        ));
+        try {
+            bukaquery2(sprintf(
+                "insert into inacbg_grouping_stage12 values ('%s', '%s', '%s', %s, '%s') on duplicate key update code_cbg = values(code_cbg), deskripsi = values(deskripsi), tarif = values(tarif), top_up = values(top_up)",
+                $nomor_sep,
+                $msg['response_inacbg']['cbg']['code'],
+                $msg['response_inacbg']['cbg']['description'],
+                $tariff,
+                'Tidak Ada'
+            ));
+        } catch (\Exception $e) {
+
+        }
 
         if (mb_substr($msg['response_inacbg']['cbg']['code'], 0, 1) === 'X') {
             return [
@@ -1914,7 +1915,11 @@
             ];
         }
 
-        return FinalInacbgSmc($nomor_sep, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Grouping INACBG berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
     function GroupingStage2InacbgSmc($nomor_sep, $coder_nik, $special_cmg)
@@ -1974,7 +1979,11 @@
             $top_up
         ), "no_sep = '$nomor_sep'");
 
-        return FinalInacbgSmc($nomor_sep, $coder_nik);
+        return [
+            'success' => true,
+            'data' => 'Top Up INACBG berhasil disimpan!',
+            'error' => null,
+        ];
     }
 
     function FinalInacbgSmc($nomor_sep, $coder_nik)
@@ -2009,13 +2018,11 @@
 
         InsertData2('inacbg_klaim_final_smc', "'$nomor_sep', '$coder_nik'");
 
-        return FinalisasiKlaimSmc($nomor_sep, $coder_nik);
-
-        /*return [
+        return [
             'success' => true,
             'data' => 'Grouping INACBG sudah final dan berhasil disimpan!',
             'error' => null,
-        ];*/
+        ];
     }
 
     function FinalisasiKlaimSmc($nomor_sep, $coder_nik)
@@ -2102,45 +2109,3 @@
             'error' => null,
         ];
     }
-
-    /*function MenghapusKlaimSmc($nomor_sep, $coder_nik)
-    {
-        $request = [
-            'metadata' => [
-                'method' => 'delete_claim',
-            ],
-            'data' => [
-                'nomor_sep' => $nomor_sep,
-                'coder_nik' => $coder_nik,
-            ],
-        ];
-
-        $msg = Request(json_encode($request));
-
-        if ($msg['metadata']['code'] != '200') {
-            $error = sprintf(
-                '[%s] method "delete_claim": %s - %s',
-                $msg['metadata']['code'],
-                $msg['metadata']['error_no'],
-                $msg['metadata']['message']
-            );
-
-            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
-
-            return [
-                'success' => false,
-                'data' => null,
-                'error' => $error,
-            ];
-        }
-
-        Hapus2("inacbg_grouping_stage_12", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-        Hapus2("inacbg_klaim_baru2", "no_sep='".$nomor_sep."'");
-
-        return [
-            'success' => true,
-            'data' => 'Klaim berhasil Dihapus!',
-            'error' => null,
-        ];
-    }*/
