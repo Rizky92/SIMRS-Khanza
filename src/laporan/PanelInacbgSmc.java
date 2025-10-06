@@ -621,13 +621,6 @@ public class PanelInacbgSmc extends widget.panelisi {
             JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        
-        if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1)
-            && tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")
-        ) {
-            JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
 
         return true;
     }
@@ -885,7 +878,7 @@ public class PanelInacbgSmc extends widget.panelisi {
         
         boolean updateDiagnosa = false, updateProsedur = false;
         
-        if (Sequel.cariExistsSmc("select * from inacbg_grouping_stage12_smc where no_sep = ? and top_up != 'Tidak Ada'")) {
+        if (Sequel.cariExistsSmc("select * from inacbg_grouping_stage12 where no_sep = ? and top_up != 'Tidak Ada'", nosep)) {
             if (tabModeICD10.getRowCount() > 0) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {

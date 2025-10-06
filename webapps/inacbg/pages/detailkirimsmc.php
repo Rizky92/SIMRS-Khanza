@@ -20,7 +20,7 @@
         </div>
         <div class="entry" style="font-family: Tahoma; margin-top: 0.5rem; margin-left: 0.5rem">
             <?php /* <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a> */ ?>
-            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit" ?>">[Edit Klaim]</a>
+            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=final" ?>">[Edit Klaim]</a>
             <br />
             <br />
             <?php /* <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=inacbg_stage1" ?>">[Edit INACBG]</a> */ ?>
@@ -1079,6 +1079,12 @@
                             <?php $judul = 'SIMPAN DATA KLAIM & GROUPING IDRG'; ?>
                         <?php elseif ($grouper === 'idrg_final'): ?>
                             <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
                                         Status Grouping IDRG
@@ -1150,6 +1156,12 @@
                             <?php endif; ?>
                             <?php $judul = 'FINAL IDRG & IMPORT KE INACBG'; ?>
                         <?php elseif ($grouper === 'inacbg_stage1'): ?>
+                            <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1276,16 +1288,6 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <tr class="head">
-                                <td width="28%">Hapus IM tidak berlaku</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="hapus_im" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="0">Tidak</Option>
-                                        <option value="1">Ya</Option>
-                                    </select>
-                                </td>
-                            </tr>
                             <?php $hasilgroupinginacbg = mysqli_fetch_assoc(bukaquery("select * from inacbg_grouping_stage12 where no_sep = '$nosep'")); ?>
                             <?php if ($hasilgroupinginacbg): ?>
                                 <tr class="head">
@@ -1306,6 +1308,12 @@
                             <?php endif; ?>
                             <?php $judul = 'GROUPING INACBG'; ?>
                         <?php elseif ($grouper === 'inacbg_stage2'): ?>
+                            <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1512,8 +1520,14 @@
                                     <td width="70%"><?= $hasilgroupinginacbg['tarif'] ?></td>
                                 </tr>
                             <?php endif; ?>
-                            <?php $judul = 'FINAL INACBG'; ?>
+                            <?php $judul = 'GROUPING INACBG'; ?>
                         <?php elseif ($grouper === 'inacbg_final'): ?>
+                            <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -1714,6 +1728,17 @@
                             <?php endif; ?>
                             <?php $judul = 'FINAL INACBG'; ?>
                         <?php elseif ($grouper === 'final'): ?>
+                            <?php
+                                if ($action === 'reedit') {
+                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nosep);
+                                }
+                            ?>
+                            <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
@@ -2083,13 +2108,8 @@
                                 HTML;
                         }
                     } else if ($grouper === 'inacbg_stage1') {
-                        $hapus_im = validTeks(trim($_POST['hapus_im']));
                         $success  = true;
                         $_error   = '';
-
-                        if ($hapus_im == '1') {
-
-                        }
 
                         $set_diagnosa = SetDiagnosaInacbgSmc($nosep, $diagnosa_inacbg);
                         $set_prosedur = SetProsedurInacbgSmc($nosep, $prosedur_inacbg);
@@ -2111,11 +2131,11 @@
                         if ($success === true) {
                             if ($response === 'inacbg_stage2') {
                                 echo <<<HTML
-                                    <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=inacbg_stage2">
+                                    <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=inacbg_stage2">
                                     HTML;
                             } else {
                                 echo <<<HTML
-                                    <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=selesai">
+                                    <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=inacbg_final">
                                     HTML;
                             }
                         } else {

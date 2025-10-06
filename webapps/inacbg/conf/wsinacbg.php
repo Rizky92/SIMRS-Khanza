@@ -1329,7 +1329,7 @@
         return [
             'success' => true,
             'data' => 'Klaim berhasil diedit!',
-            'error' => $null,
+            'error' => null,
         ];
     }
 
@@ -1624,7 +1624,7 @@
 
         try {
             bukaquery2(sprintf(
-                "insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s') on duplicate key update mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), dg_description = values(drg_description)",
+                "insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s') on duplicate key update mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), drg_description = values(drg_description)",
                 $nomor_sep,
                 $msg['response_idrg']['mdc_number'],
                 $msg['response_idrg']['mdc_description'],
@@ -1760,20 +1760,6 @@
             'data' => 'Import koding ke INACBG berhasil!',
             'error' => null,
         ];
-    }
-
-    function HapusDiagnosaProsedurIDRGTidakBerlakuSmc($nomor_sep)
-    {
-        try {
-            bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep' and keterangan != ''");
-            bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep' and keterangan != ''");
-        } catch (\Exception $e) {
-            return [
-                'success' => false,
-                'data' => 'Terjadi kesalahan pada saat menghapus data diagnosa dan prosedur tidak berlaku dari IM!',
-                'error' => $e,
-            ];
-        }
     }
 
     function SetDiagnosaInacbgSmc($nomor_sep, $diagnosa)

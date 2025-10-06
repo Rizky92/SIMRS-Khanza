@@ -226,17 +226,20 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                         component.setForeground(new Color(255, 255, 255));
                         break;
                     case 2:
-                        component.setBackground(new Color(100, 100, 255));
-                        component.setForeground(new Color(230, 230, 255));
-                        break;
-                    case 4:
-                        component.setBackground(new Color(200, 200, 255));
-                        component.setForeground(new Color(50, 50, 70));
-                        break;
-                    case 3:
-                    case 5:
                         component.setBackground(new Color(255, 50, 50));
                         component.setForeground(new Color(255, 230, 230));
+                        break;
+                    case 3:
+                        component.setBackground(new Color(180, 240, 70));
+                        component.setForeground(new Color(65, 60, 40));
+                        break;
+                    case 4:
+                        component.setBackground(new Color(38, 148, 234));
+                        component.setForeground(new Color(45, 35, 50));
+                        break;
+                    case 5:
+                        component.setBackground(new Color(30, 230, 255));
+                        component.setForeground(new Color(45, 40, 55));
                         break;
                 }
                 return component;
