@@ -63,6 +63,10 @@
                     <table width="100%" align="center">
                         <?php if ($grouper === 'idrg'): ?>
                             <?php
+                                if ($action === 'reedit') {
+                                    ReeditIdrgSmc($nosep);
+                                }
+
                                 $baris = mysqli_fetch_array(bukaquery(<<<SQL
                                     select bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang)
                                     as tglpulang, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter,
@@ -1220,6 +1224,11 @@
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <?php
+                                if ($action === 'reedit') {
+                                    ReeditInacbgSmc($nosep);
+                                }
+                            ?>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff1100; margin-top: 0.5rem">
@@ -2079,7 +2088,7 @@
                         $_error   = '';
 
                         if ($hapus_im == '1') {
-                            
+
                         }
 
                         $set_diagnosa = SetDiagnosaInacbgSmc($nosep, $diagnosa_inacbg);

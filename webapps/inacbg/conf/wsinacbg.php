@@ -1239,10 +1239,11 @@
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
-            return ReeditKlaimSmc($nomor_sep);
+            ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep);
+            if ($success === true) {
+                ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditIdrgSmc($nomor_sep);
+            }
         }
-
-        ReeditIdrgSmc($nomor_sep);
 
         return [
             'success' => true,
@@ -1325,14 +1326,6 @@
 
         bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
 
-        /* if (!empty($grouper)) {
-            if ($grouper === 'idrg') {
-                return ReeditIdrgSmc($nomor_sep);
-            } else if ($grouper === 'inacbg_stage1') {
-                return ReeditInacbgSmc($nomor_sep, $coder_nik);
-            }
-        } */
-
         return [
             'success' => true,
             'data' => 'Klaim berhasil diedit!',
@@ -1383,7 +1376,7 @@
         ];
     }
 
-    function ReeditInacbgSmc($nomor_sep, $coder_nik)
+    function ReeditInacbgSmc($nomor_sep)
     {
         $request = [
             'metadata' => [
@@ -1629,13 +1622,30 @@
             ];
         }
 
-        InsertData2('idrg_grouping_smc', sprintf("'%s', '%s', '%s', '%s', '%s'",
-            $nomor_sep,
-            $msg['response_idrg']['mdc_number'],
-            $msg['response_idrg']['mdc_description'],
-            $msg['response_idrg']['drg_code'],
-            $msg['response_idrg']['drg_description']
-        ));
+        try {
+            bukaquery2(sprintf(
+                "insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s') on duplicate key update mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), dg_description = values(drg_description)",
+                $nomor_sep,
+                $msg['response_idrg']['mdc_number'],
+                $msg['response_idrg']['mdc_description'],
+                $msg['response_idrg']['drg_code'],
+                $msg['response_idrg']['drg_description']
+            ));
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $e,
+            ];
+        }
+
+        if ($msg['response_idrg']['mdc_number'] == '36') {
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $msg['response_idrg']['drg_description'],
+            ];
+        }
 
         return [
             'success' => true,
