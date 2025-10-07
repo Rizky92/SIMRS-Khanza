@@ -1371,7 +1371,7 @@
 
         return [
             'success' => true,
-            'data' => 'Klaim berhasil diedit',
+            'data' => 'Klaim IDRG berhasil diedit',
             'error' => null,
         ];
     }
@@ -1416,7 +1416,7 @@
 
         return [
             'success' => true,
-            'data' => 'Klaim berhasil diedit',
+            'data' => 'Klaim INACBG berhasil diedit',
             'error' => null,
         ];
     }

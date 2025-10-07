@@ -64,7 +64,12 @@
                         <?php if ($grouper === 'idrg'): ?>
                             <?php
                                 if ($action === 'reedit') {
-                                    ReeditIdrgSmc($nosep);
+                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditIdrgSmc($nosep);
+                                    if ($success === true) {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg">
+                                            HTML;
+                                    }
                                 }
 
                                 $baris = mysqli_fetch_array(bukaquery(<<<SQL
@@ -91,7 +96,7 @@
                                 $almt_pj        = $baris['almt_pj'];
                                 $norawat        = $baris['no_rawat'];
                                 $tgl_registrasi = $baris['tgl_registrasi'];
-                                $tgl_keluar     = $baris['tglpulang'];
+                                $tgl_keluar     = $baris['tgl_registrasi'];
                                 $jam_reg        = $baris['jam_reg'];
                                 $nm_poli        = $baris['nm_poli'];
                                 $asalrujukan    = $baris['asal_rujukan'];
@@ -1156,6 +1161,16 @@
                             <?php endif; ?>
                             <?php $judul = 'FINAL IDRG & IMPORT KE INACBG'; ?>
                         <?php elseif ($grouper === 'inacbg_stage1'): ?>
+                            <?php
+                                if ($action === 'reedit') {
+                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditInacbgSmc($nosep);
+                                    if ($success === true) {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=inacbg_stage1">
+                                            HTML;
+                                    }
+                                }
+                            ?>
                             <tr class="head">
                                 <td width="28%">No. SEP</td>
                                 <td width="1%">:</td>
@@ -1236,11 +1251,6 @@
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
-                            <?php
-                                if ($action === 'reedit') {
-                                    ReeditInacbgSmc($nosep);
-                                }
-                            ?>
                             <tr class="head">
                                 <td colspan="3">
                                     <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #ff1100; margin-top: 0.5rem">
@@ -1731,6 +1741,11 @@
                             <?php
                                 if ($action === 'reedit') {
                                     ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nosep);
+                                    if ($success === true) {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=final">
+                                            HTML;
+                                    }
                                 }
                             ?>
                             <tr class="head">
