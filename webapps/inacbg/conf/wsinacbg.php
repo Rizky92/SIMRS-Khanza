@@ -2105,3 +2105,40 @@
             'error' => null,
         ];
     }
+
+    function KirimKlaimIndividualSmc($nomor_sep)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'send_claim_individual',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "claim_final": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Klaim berhasil dikirim online!',
+            'error' => null,
+        ];
+    }

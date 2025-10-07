@@ -19,17 +19,23 @@
             Klaim berhasil diproses!
         </div>
         <div class="entry" style="font-family: Tahoma; margin-top: 0.5rem; margin-left: 0.5rem">
-            <?php /* <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a> */ ?>
             <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=final" ?>">[Edit Klaim]</a>
             <br />
             <br />
-            <?php /* <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=inacbg_stage1" ?>">[Edit INACBG]</a> */ ?>
+            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=kirim_individual" ?>">[Kirim Klaim Individual ke DC]</a>
+            <br />
+            <br />
             <a href="?act=DetailKirimSmc&<?= $queryurl ?>&action=cetak">[Tarik ulang hasil cetak klaim]</a>
         </div>
     <?php elseif ($action === 'cetak'): ?>
         <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
         <?php if (CetakKlaimSmc($nosep)['success']): ?>
-            <meta http-equiv="refresh" content="2;URL=?act=DetailKirimSmc&<?= $queryurl ?>&action=selesai">
+            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&<?= $queryurl ?>&action=selesai">
+        <?php endif; ?>
+    <?php elseif ($action === 'kirim_individual'): ?>
+        <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
+        <?php if (KirimKlaimIndividualSmc($nosep)['success'] === true): ?>
+            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&<?= $queryurl ?>&action=selesai">
         <?php endif; ?>
     <?php else: ?>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
