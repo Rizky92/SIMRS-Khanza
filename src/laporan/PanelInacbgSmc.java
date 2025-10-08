@@ -26,6 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
@@ -774,7 +775,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        Diagnosa.setText("");
+                        SwingUtilities.invokeLater(() -> {
+                            Diagnosa.requestFocusInWindow();
+                            Diagnosa.selectAll();
+                        });
                         do {
                             if (icd.contains(rs.getString("code1"))) continue;
 
@@ -858,7 +862,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        Prosedur.setText("");
+                        SwingUtilities.invokeLater(() -> {
+                            Prosedur.requestFocusInWindow();
+                            Prosedur.selectAll();
+                        });
                         do {
                             if (icd.contains(rs.getString("code1"))) continue;
 
