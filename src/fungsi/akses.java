@@ -1447,7 +1447,7 @@ public final class akses {
                         akses.penilaian_awal_medis_ralan_urologi=rs2.getBoolean("penilaian_awal_medis_ralan_urologi");
                         akses.hasil_pemeriksaan_treadmill=rs2.getBoolean("hasil_pemeriksaan_treadmill");
                         akses.hasil_pemeriksaan_echo_pediatrik=rs2.getBoolean("hasil_pemeriksaan_echo_pediatrik");
-                        try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and tgl_selesai < now()")) {
+                        try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
                                 if (rsx.next()) {
