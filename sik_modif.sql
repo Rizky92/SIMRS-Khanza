@@ -257,6 +257,16 @@ CREATE TABLE IF NOT EXISTS `inacbg_klaim_final_smc`  (
   CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `no_sitb` varchar(30) NOT NULL,
+  `status_validasi` varchar(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_pasien_tb_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `inacbg_pasien_tb_smc_ibfk_2` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `inacbg_prosedur_pasien_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `kode_icd9` varchar(7) NOT NULL,

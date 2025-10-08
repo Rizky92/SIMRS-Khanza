@@ -80,12 +80,13 @@
 
                                 $baris = mysqli_fetch_array(bukaquery(<<<SQL
                                     select bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang)
-                                    as tglpulang, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, dokter.nm_dokter,
-                                    poliklinik.nm_poli, penjab.png_jawab from bridging_sep
-                                    join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
+                                    as tglpulang, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp,
+                                    ifnull(inacbg_pasien_tb_smc.no_sitb, '') as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
+                                    from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
                                     join dokter on maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter
                                     join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat
                                     join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
+                                    left join inacbg_pasien_tb_smc on reg_periksa.no_rkm_medis = inacbg_pasien_tb_smc.no_rkm_medis
                                     join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli
                                     join penjab on reg_periksa.kd_pj = penjab.kd_pj
                                     where bridging_sep.no_sep = '$nosep'
@@ -94,6 +95,8 @@
                                 $norawat        = $baris['no_rawat'];
                                 $no_rkm_medis   = $baris['no_rkm_medis'];
                                 $nokartu        = $baris['no_kartu'];
+                                $nik            = $baris['no_ktp'];
+                                $no_sitb        = $baris['no_sitb'];
                                 $nm_pasien      = $baris['nm_pasien'];
                                 $umurdaftar     = $baris['umurdaftar'];
                                 $sttsumur       = $baris['sttsumur'];
@@ -186,6 +189,11 @@
                                 <td width="28%">No. Kartu Peserta</td>
                                 <td width="1%">:</td>
                                 <td width="70%"><?= $nokartu ?></td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">No. KTP/Identitas</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nik ?></td>
                             </tr>
                             <tr class="head">
                                 <td width="28%">Nama Pasien</td>
@@ -421,6 +429,13 @@
                                         <option value="4">Meninggal</option>
                                         <option value="5">Lain-lain</option>
                                     </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">No. Regist SITB</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="no_sitb" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $no_sitb ?>" size="15" maxlength="15">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -1015,7 +1030,6 @@
                                     diskon_tarif_poli_eks.addEventListener('keydown', (e) => janganSubmitSaatEnter(e))
                                 })
                             </script>
-
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
                                 <td colspan="3">
@@ -1175,6 +1189,13 @@
                                             <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=inacbg_stage1">
                                             HTML;
                                     }
+                                } else if ($action === 'import') {
+                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ImportIdrgToInacbgSmc($nosep);
+                                    if ($success === false) {
+                                        echo <<<HTML
+                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=grouper&grouper=inacbg_stage1">
+                                            HTML;
+                                    }
                                 }
                             ?>
                             <tr class="head">
@@ -1255,6 +1276,9 @@
                             <?php endif; ?>
                             <tr class="head">
                                 <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=reedit&grouper=idrg" ?>">[Edit IDRG]</a></td>
+                            </tr>
+                            <tr class="head">
+                                <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=import&grouper=inacbg_stage1" ?>">[Import Ulang IDRG ke INACBG]</a></td>
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
@@ -2030,6 +2054,7 @@
                         $tarif_poli_eks            = validTeks(trim($_POST['tarif_poli_eks']));
                         $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
                         $dializer_single_use       = validTeks(trim($_POST['dializer_single_use']));
+                        $no_sitb                   = validTeks(trim($_POST['no_sitb']));
 
                         $totalbillingsementara
                             = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)
@@ -2069,7 +2094,7 @@
                                             $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang, $radiologi,
                                             $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                             $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole,
-                                            $dializer_single_use
+                                            $dializer_single_use, $no_rkm_medis, $no_sitb
                                         );
                                     }
 

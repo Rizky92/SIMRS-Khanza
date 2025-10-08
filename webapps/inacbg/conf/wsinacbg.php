@@ -1426,7 +1426,7 @@
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
         $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
         $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
-        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
+        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0", $nomor_rm, $nomor_sitb = ''
     ) {
         $request = [
             'metadata' => [
@@ -1487,7 +1487,7 @@
 
         $msg = Request(json_encode($request));
 
-        if ($msg['metadata']['code'] != "200") {
+        if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "set_claim_data": %s - %s',
                 $msg['metadata']['code'],
@@ -1504,12 +1504,58 @@
             ];
         }
 
+        if (!empty($nomor_sitb)) {
+            ValidasiRegistrasiSITBSmc($nomor_sep, $nomor_rm, $nomor_sitb);
+        }
+
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
 
         return [
             'success' => true,
             'data' => 'Data klaim berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
+    function ValidasiRegistrasiSITBSmc($nomor_sep, $nomor_rm, $nomor_sitb)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'sitb_validate',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'nomor_registrasi_sitb' => $nomor_sitb,
+            ],
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "sitb_validate": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        bukaquery2(sprintf("insert into inacbg_pasien_tb_smc values ('%s', '%s', '%s') on duplicate key update no_sitb = values(no_sitb), status_validasi = values(status_validasi)",
+            $nomor_rm, $nomor_sitb, $msg['response']['status'].' - '.$msg['response']['detail']
+        ));
+
+        return [
+            'success' => true,
+            'data' => $msg['response']['status'].' - '.$msg['response']['detail'],
             'error' => null,
         ];
     }
@@ -1528,7 +1574,7 @@
 
         $msg = Request(json_encode($request));
 
-        if ($msg['metadata']['code'] != "200") {
+        if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "idrg_diagnosa_set": %s - %s',
                 $msg['metadata']['code'],
@@ -1566,7 +1612,7 @@
 
         $msg = Request(json_encode($request));
 
-        if ($msg['metadata']['code'] != "200") {
+        if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "idrg_procedure_set": %s - %s',
                 $msg['metadata']['code'],
@@ -1776,7 +1822,7 @@
 
         $msg = Request(json_encode($request));
 
-        if ($msg['metadata']['code'] != "200") {
+        if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "inacbg_diagnosa_set": %s - %s',
                 $msg['metadata']['code'],
@@ -1814,7 +1860,7 @@
 
         $msg = Request(json_encode($request));
 
-        if ($msg['metadata']['code'] != "200") {
+        if ($msg['metadata']['code'] != '200') {
             $error = sprintf(
                 '[%s] method "inacbg_procedure_set": %s - %s',
                 $msg['metadata']['code'],
