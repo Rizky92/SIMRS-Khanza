@@ -23,9 +23,9 @@
 
 # Don't ignore these
 !sik_bersih.sql
+!sik_bridging_eklaim.sql
 !sik_bridging_lab.sql
 !sik_bridging_radiologi.sql
-!sik_eklaim_icd10.sql
+!sik_bridging_satusehat.sql
 !sik_modif.sql
-!sik_satu_sehat_referensi.sql
 !sik.sql

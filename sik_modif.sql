@@ -113,7 +113,7 @@ ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp
 
 CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
   `no_sep` varchar(40) NOT NULL,
-  `tgl_simpan` DATETIME NOT NULL,
+  `tgl_simpan` datetime NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
@@ -215,6 +215,8 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DE
 ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
+
+ALTER TABLE `maping_dokter_dpjpvclaim` ADD UNIQUE INDEX IF NOT EXISTS `maping_dokter_dpjpvclaim_unique`(`kd_dokter_bpjs`) USING BTREE;
 
 ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `harga` varchar(10) NULL DEFAULT NULL AFTER `nama_brng_apotek_bpjs`;
 
@@ -1202,9 +1204,9 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_snomed`  (
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
-  `code` varchar(30) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `code` varchar(30) NOT NULL,
   `display` varchar(200) NULL DEFAULT NULL,
-  `system` varchar(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `system` varchar(100) NOT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
   INDEX `satu_sehat_referensi_numerator_obat_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
