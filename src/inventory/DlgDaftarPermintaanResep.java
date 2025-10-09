@@ -3188,7 +3188,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                     apol.setLocationRelativeTo(internalFrame1);
                     apol.setNoRm(NoRawat, NoRM, Pasien, TglPeresepan + " " + JamPeresepan, NoResep);
-                    apol.tampilobat2(NoResep);
+                    apol.tampilobatSmc(NoResep);
                     apol.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
@@ -3735,7 +3735,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                         apol.setLocationRelativeTo(internalFrame1);
                         apol.setNoRm(NoRawat, NoRM, Pasien, Valid.SetTgl3(TglPeresepan) + " " + JamPeresepan, NoResep);
-                        apol.tampilobat2(NoResep);
+                        apol.tampilobatSmc(NoResep);
                         apol.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
