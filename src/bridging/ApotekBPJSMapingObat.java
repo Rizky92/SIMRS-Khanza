@@ -21,10 +21,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -816,34 +814,29 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try {
-            ps = koneksi.prepareStatement(
-                "select maping_obat_apotek_bpjs.kode_brng,databarang.nama_brng,maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,maping_obat_apotek_bpjs.harga,maping_obat_apotek_bpjs.restriksi " +
-                "from maping_obat_apotek_bpjs inner join databarang on maping_obat_apotek_bpjs.kode_brng=databarang.kode_brng where " +
-                "maping_obat_apotek_bpjs.kode_brng like ? or databarang.nama_brng like ? or maping_obat_apotek_bpjs.kode_brng_apotek_bpjs like ? or maping_obat_apotek_bpjs.nama_brng_apotek_bpjs like ? order by databarang.nama_brng");
-            try {
-                ps.setString(1, "%" + TCari.getText() + "%");
-                ps.setString(2, "%" + TCari.getText() + "%");
-                ps.setString(3, "%" + TCari.getText() + "%");
-                ps.setString(4, "%" + TCari.getText() + "%");
-                rs = ps.executeQuery();
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select m.kode_brng, o.nama_brng, m.kode_brng_apotek_bpjs, m.nama_brng_apotek_bpjs, m.harga, m.restriksi " +
+            "from maping_obat_apotek_bpjs m join databarang o on m.kode_brng = o.kode_brng " + (TCari.getText().isBlank() ? "" :
+            "where m.kode_brng like ? or o.nama_brng like ? or m.kode_brng_apotek_bpjs like ? or m.nama_brng_apotek_bpjs like ? ") +
+            "order by o.nama_brng"
+        )) {
+            int p = 0;
+            if (!TCari.getText().isBlank()) {
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tabMode.addRow(new Object[] {
-                        rs.getString("kode_brng"), rs.getString("nama_brng"), rs.getString("kode_brng_apotek_bpjs"), rs.getString("nama_brng_apotek_bpjs"), rs.getString("harga"), rs.getString("restriksi")
+                        rs.getString("kode_brng"), rs.getString("nama_brng"), rs.getString("kode_brng_apotek_bpjs"),
+                        rs.getString("nama_brng_apotek_bpjs"), rs.getString("harga"), rs.getString("restriksi")
                     });
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Ketersediaan : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
         }
         LCount.setText("" + tabMode.getRowCount());
     }
@@ -861,12 +854,12 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
     private void getData() {
         if (tbJnsPerawatan.getSelectedRow() != -1) {
-            kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString());
-            TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
-            KdObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString());
-            NmObatBPJS.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 3).toString());
-            HargaObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString());
-            Restriksi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 5).toString());
+            kdobat.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString());
+            TObat.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
+            KdObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString());
+            NmObatBPJS.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 3).toString());
+            HargaObat.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString());
+            Restriksi.setText(tabMode.getValueAt(tbJnsPerawatan.getSelectedRow(), 5).toString());
         }
     }
 

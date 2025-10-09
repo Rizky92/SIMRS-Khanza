@@ -678,7 +678,7 @@ public class koneksiDB {
     public static String URLAPIAPOTEKBPJS(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("URLAPIAPOTEKBPJS");
+            var=prop.getProperty("URLAPIAPOTEKBPJS", "");
         }catch(Exception e){
             var=""; 
         }

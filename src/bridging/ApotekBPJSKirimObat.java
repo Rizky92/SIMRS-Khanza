@@ -617,7 +617,7 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel8.setBounds(212, 130, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -691,14 +691,12 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel11.setBounds(205, 10, 45, 23);
 
         TPasien.setEditable(false);
-        TPasien.setText("PASIEN X");
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(TPasien);
         TPasien.setBounds(427, 10, 237, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setText("000001");
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.setPreferredSize(new java.awt.Dimension(207, 23));
         TNoRM.addActionListener(new java.awt.event.ActionListener() {
@@ -710,14 +708,13 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         TNoRM.setBounds(254, 10, 90, 23);
 
         LblNoRawat.setEditable(false);
-        LblNoRawat.setText("2025/09/24/000417");
         LblNoRawat.setName("LblNoRawat"); // NOI18N
         LblNoRawat.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(LblNoRawat);
         LblNoRawat.setBounds(78, 10, 123, 23);
 
         TanggalPelayanan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-09-2025 14:12:33" }));
+        TanggalPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025 13:27:11" }));
         TanggalPelayanan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPelayanan.setName("TanggalPelayanan"); // NOI18N
         TanggalPelayanan.setOpaque(false);
@@ -742,14 +739,12 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel20.setBounds(0, 130, 74, 23);
 
         NmPoli.setEditable(false);
-        NmPoli.setText("Penyakit Dalam");
         NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormInput.add(NmPoli);
         NmPoli.setBounds(481, 70, 183, 23);
 
         KdPoli.setEditable(false);
-        KdPoli.setText("INT");
         KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormInput.add(KdPoli);
@@ -766,14 +761,12 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel15.setBounds(0, 70, 74, 23);
 
         KdDPJP.setEditable(false);
-        KdDPJP.setText("2790");
         KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         FormInput.add(KdDPJP);
         KdDPJP.setBounds(78, 70, 75, 23);
 
         NmDPJP.setEditable(false);
-        NmDPJP.setText("dr. Carta A Gunawan, Sp. PD");
         NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         FormInput.add(NmDPJP);
@@ -810,7 +803,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel4.setBounds(172, 40, 60, 23);
 
         NoKartu.setEditable(false);
-        NoKartu.setText("0002299948514");
         NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.addActionListener(new java.awt.event.ActionListener() {
@@ -822,7 +814,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         NoKartu.setBounds(236, 40, 130, 23);
 
         NoSEP.setEditable(false);
-        NoSEP.setText("0302R1100925V000001");
         NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
         FormInput.add(NoSEP);
@@ -834,7 +825,6 @@ public final class ApotekBPJSKirimObat extends javax.swing.JDialog {
         jLabel18.setBounds(370, 40, 50, 23);
 
         Lahir.setEditable(false);
-        Lahir.setText("9999-12-31");
         Lahir.setHighlighter(null);
         Lahir.setName("Lahir"); // NOI18N
         Lahir.addKeyListener(new java.awt.event.KeyAdapter() {

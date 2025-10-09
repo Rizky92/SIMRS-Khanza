@@ -621,7 +621,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -638,7 +637,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('2');
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -655,7 +653,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(BtnAll);
 
         BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
-        BtnSeek5.setMnemonic('4');
         BtnSeek5.setToolTipText("Alt+4");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -672,7 +669,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(BtnSeek5);
 
         BtnTambah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        BtnTambah1.setMnemonic('3');
         BtnTambah1.setToolTipText("Alt+3");
         BtnTambah1.setName("BtnTambah1"); // NOI18N
         BtnTambah1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -684,7 +680,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(BtnTambah1);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -696,7 +691,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -712,7 +706,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         panelisi3.add(label13);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('5');
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -737,7 +730,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         jLabel10.setBounds(0, 10, 74, 23);
 
         LblNoRawat.setEditable(false);
-        LblNoRawat.setText("2025/12/31/999999");
         LblNoRawat.setName("LblNoRawat"); // NOI18N
         LblNoRawat.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(LblNoRawat);
@@ -749,7 +741,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         jLabel19.setBounds(0, 40, 74, 23);
 
         Lahir.setEditable(false);
-        Lahir.setText("9999-12-31");
         Lahir.setHighlighter(null);
         Lahir.setName("Lahir"); // NOI18N
         Lahir.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -766,7 +757,6 @@ public final class ApotekBPJSKirimObatEditObat extends javax.swing.JDialog {
         jLabel4.setBounds(172, 40, 60, 23);
 
         NoKartu.setEditable(false);
-        NoKartu.setText("0002299948514");
         NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.addActionListener(new java.awt.event.ActionListener() {
