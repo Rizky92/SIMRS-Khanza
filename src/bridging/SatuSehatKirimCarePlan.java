@@ -6,6 +6,8 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -584,60 +586,70 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         headers.add("Authorization", "Bearer "+api.TokenSatuSehat());
-                        json = "{" +
-                                    "\"resourceType\" : \"CarePlan\"," +
-                                    "\"identifier\" : {" +
-                                        "\"system\" : \"http://sys-ids.kemkes.go.id/careplan/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                        "\"value\" : \""+tbObat.getValueAt(i,2).toString()+"\"" +
-                                    "}," +
-                                    "\"title\" : \"Instruksi Medik dan Keperawatan Pasien\"," +
-                                    "\"status\" : \"active\"," +
-                                    (tbObat.getValueAt(i,12).toString().equals("Ralan")?
-                                        "\"category\" : [" +
-                                            "{" +
-                                                "\"coding\" : [" +
-                                                    "{" +
-                                                        "\"system\" : \"http://snomed.info/sct\"," +
-                                                        "\"code\" : \"736271009\"," +
-                                                        "\"display\" : \"Outpatient care plan\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "],":
-                                        "\"category\" : [" +
-                                            "{" +
-                                                "\"coding\" : [" +
-                                                    "{" +
-                                                        "\"system\" : \"http://snomed.info/sct\"," +
-                                                        "\"code\" : \"736353004\"," +
-                                                        "\"display\" : \"Inpatient care plan\"" +
-                                                    "}" +
-                                                "]" +
-                                            "}" +
-                                        "],"
-                                    )+
-                                    "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
-                                    "\"subject\" : {" +
-                                        "\"reference\" : \"Patient/"+idpasien+"\"," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
-                                    "}," +
-                                    "\"encounter\" : {" +
-                                        "\"reference\" : \"Encounter/"+tbObat.getValueAt(i,6).toString()+"\","+
-                                        "\"display\" : \"Kunjungan "+tbObat.getValueAt(i,4).toString()+" pada tanggal "+tbObat.getValueAt(i,1).toString()+" dengan nomor kunjungan "+tbObat.getValueAt(i,2).toString()+"\""+
-                                    "}," +
-                                    "\"created\" : \""+tbObat.getValueAt(i,10).toString().replaceAll(" ","T")+"+07:00\"," +
-                                    "\"author\" : {" +
-                                        "\"reference\" : \"Practitioner/"+idpraktisi+"\"," +
-                                        "\"display\" : \""+tbObat.getValueAt(i,8).toString()+"\"" +
-                                    "}" +
-                                "}";
+
+                        ObjectMapper mapper = new ObjectMapper();
+                        ObjectNode root = mapper.createObjectNode();
+
+                        root.put("resourceType", "CarePlan");
+
+                        ObjectNode identifier = root.putObject("identifier");
+                        identifier.put("system", "http://sys-ids.kemkes.go.id/careplan/" + koneksiDB.IDSATUSEHAT());
+                        identifier.put("value", tbObat.getValueAt(i, 2).toString());
+
+                        root.put("title", "Instruksi Medik dan Keperawatan Pasien");
+                        root.put("status", "active");
+
+                        // --- Category ---
+                        ArrayNode categoryArray = root.putArray("category");
+                        ObjectNode category = categoryArray.addObject();
+                        ArrayNode codingArray = category.putArray("coding");
+                        ObjectNode coding = codingArray.addObject();
+
+                        if (tbObat.getValueAt(i, 12).toString().equals("Ralan")) {
+                            coding.put("system", "http://snomed.info/sct");
+                            coding.put("code", "736271009");
+                            coding.put("display", "Outpatient care plan");
+                        } else {
+                            coding.put("system", "http://snomed.info/sct");
+                            coding.put("code", "736353004");
+                            coding.put("display", "Inpatient care plan");
+                        }
+
+                        root.put("intent", "plan");
+                        root.put("description", tbObat.getValueAt(i, 7).toString()
+                                .replaceAll("(\r\n|\r|\n|\n\r)", "<br>")
+                                .replaceAll("\t", " "));
+
+                        // --- Subject ---
+                        ObjectNode subject = root.putObject("subject");
+                        subject.put("reference", "Patient/" + idpasien);
+                        subject.put("display", tbObat.getValueAt(i, 4).toString());
+
+                        // --- Encounter ---
+                        ObjectNode encounter = root.putObject("encounter");
+                        encounter.put("reference", "Encounter/" + tbObat.getValueAt(i, 6).toString());
+                        encounter.put("display",
+                                "Kunjungan " + tbObat.getValueAt(i, 4).toString()
+                                + " pada tanggal " + tbObat.getValueAt(i, 1).toString()
+                                + " dengan nomor kunjungan " + tbObat.getValueAt(i, 2).toString());
+
+                        // --- Created ---
+                        root.put("created", tbObat.getValueAt(i, 10).toString().replaceAll(" ", "T") + "+07:00");
+
+                        // --- Author ---
+                        ObjectNode author = root.putObject("author");
+                        author.put("reference", "Practitioner/" + idpraktisi);
+                        author.put("display", tbObat.getValueAt(i, 8).toString());
+
+                        // --- Serialize ke string JSON valid ---
+                        String json = mapper.writeValueAsString(root);
+
                         System.out.println("URL : "+link+"/CarePlan");
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
                         json=api.getRest().exchange(link+"/CarePlan", HttpMethod.POST, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
-                        root = mapper.readTree(json);
+                        root = (ObjectNode) mapper.readTree(json);
                         response = root.path("id");
                         if(!response.asText().equals("")){
                             if(Sequel.menyimpantf2("satu_sehat_careplan","?,?,?,?,?","Rencana Perawatan",5,new String[]{
