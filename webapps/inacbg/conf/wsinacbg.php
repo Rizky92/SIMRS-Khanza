@@ -1848,6 +1848,10 @@
 
     function SetProsedurInacbgSmc($nomor_sep, $prosedur)
     {
+        if (empty($prosedur)) {
+            $prosedur = '#';
+        }
+
         $request = [
             'metadata' => [
                 'method' => 'inacbg_procedure_set',

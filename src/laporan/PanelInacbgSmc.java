@@ -500,9 +500,9 @@ public class PanelInacbgSmc extends widget.panelisi {
                 Sequel.AutoComitFalse();
 
                 for (int i = 0; i < tabModeDiagnosaPasien.getRowCount(); i++) {
-                    if (!Sequel.mengupdatetfSmc("inacbg_diagnosa_pasien_smc", "urut = ?", "no_sep = ? and kode_icd10 = ? and urut = ? and keterangan != ''",
+                    if (!Sequel.mengupdatetfSmc("inacbg_diagnosa_pasien_smc", "urut = ?", "no_sep = ? and kode_icd10 = ? and urut = ? and keterangan = ''",
                         String.valueOf(i + 1), nosep, tabModeDiagnosaPasien.getValueAt(i, 1).toString(),
-                        tabModeDiagnosaPasien.getValueAt(i, 5).toString()
+                        tabModeDiagnosaPasien.getValueAt(i, 4).toString()
                     )) {
                         sukses = false;
                     }
@@ -564,9 +564,9 @@ public class PanelInacbgSmc extends widget.panelisi {
                 Sequel.AutoComitFalse();
 
                 for (int i = 0; i < tabModeProsedurPasien.getRowCount(); i++) {
-                    if (!Sequel.mengupdatetfSmc("inacbg_prosedur_pasien_smc", "urut = ?", "no_sep = ? and kode_icd9 = ? and urut = ? and keterangan != ''",
+                    if (!Sequel.mengupdatetfSmc("inacbg_prosedur_pasien_smc", "urut = ?", "no_sep = ? and kode_icd9 = ? and urut = ? and keterangan = ''",
                         String.valueOf(i + 1), nosep, tabModeProsedurPasien.getValueAt(i, 1).toString(),
-                        tabModeProsedurPasien.getValueAt(i, 5).toString()
+                        tabModeProsedurPasien.getValueAt(i, 4).toString()
                     )) {
                         sukses = false;
                     }
