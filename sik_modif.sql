@@ -1691,4 +1691,34 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
+CREATE TABLE IF NOT EXISTS `pintu_smc`  (
+  `kd_pintu` char(5) NOT NULL DEFAULT '',
+  `nm_pintu` varchar(50) DEFAULT NULL,
+  `status` enum('0','1') NOT NULL,
+  PRIMARY KEY (`kd_pintu`),
+  KEY `nm_pintu` (`nm_pintu`)
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `set_pintu_smc`  (
+  `kd_pintu` char(5) NOT NULL DEFAULT '',
+  `kd_dokter` varchar(20) NOT NULL,
+  `kd_poli` char(5) NOT NULL,
+  PRIMARY KEY (`kd_pintu`, `kd_dokter`),
+  KEY `kd_dokter` (`kd_dokter`),
+  KEY `kd_poli` (`kd_poli`),
+  CONSTRAINT `set_pintu_ibfk_1` FOREIGN KEY (`kd_pintu`) REFERENCES `pintu_smc` (`kd_pintu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_pintu_ibfk_2` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_pintu_ibfk_3` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik` (`kd_poli`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `antripintu_smc` (
+  `kd_pintu` char(5) NOT NULL DEFAULT '',
+  `no_rawat` varchar(17) NOT NULL,
+  `status` enum('0','1') NOT NULL,
+  PRIMARY KEY (`kd_pintu`),
+  KEY `no_rawat` (`no_rawat`),
+  CONSTRAINT `antripintu_smc_ibfk_1` FOREIGN KEY (`kd_pintu`) REFERENCES `pintu_smc` (`kd_pintu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `antripintu_smc_ibfk_2` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 SET FOREIGN_KEY_CHECKS=1;
