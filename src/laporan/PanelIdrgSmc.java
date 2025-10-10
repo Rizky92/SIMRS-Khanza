@@ -64,11 +64,11 @@ public class PanelIdrgSmc extends widget.panelisi {
                 if (columnIndex == 0) {
                     return java.lang.Boolean.class;
                 }
-                
+
                 if (columnIndex == 7) {
                     return java.lang.Integer.class;
                 }
-                
+
                 return java.lang.String.class;
             }
         };
@@ -103,11 +103,11 @@ public class PanelIdrgSmc extends widget.panelisi {
                 if (columnIndex == 0) {
                     return java.lang.Boolean.class;
                 }
-                
+
                 if (columnIndex == 1 || columnIndex == 8) {
                     return java.lang.Integer.class;
                 }
-                
+
                 return java.lang.String.class;
             }
         };
@@ -157,11 +157,11 @@ public class PanelIdrgSmc extends widget.panelisi {
                 if (columnIndex == 0) {
                     return java.lang.Boolean.class;
                 }
-                
+
                 if (columnIndex == 4) {
                     return java.lang.Integer.class;
                 }
-                
+
                 return java.lang.String.class;
             }
         };
@@ -183,17 +183,17 @@ public class PanelIdrgSmc extends widget.panelisi {
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return colIndex == 0;
             }
-            
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 if (columnIndex == 0) {
                     return java.lang.Boolean.class;
                 }
-                
+
                 if (columnIndex == 2 || columnIndex == 5) {
                     return java.lang.Integer.class;
                 }
-                
+
                 return java.lang.String.class;
             }
         };
@@ -446,23 +446,20 @@ public class PanelIdrgSmc extends widget.panelisi {
     }//GEN-LAST:event_BtnCariProsedurActionPerformed
 
     private void tbICD9CMPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbICD9CMPropertyChange
-        if (tabModeICD9CM.getRowCount() > 0
-            && evt.getPropertyName().equals("tableCellEditor")
-            && (!tbICD9CM.isEditing())
-        ) {
+        if (tabModeICD9CM.getRowCount() > 0 &&
+             evt.getPropertyName().equals("tableCellEditor") &&
+             (!tbICD9CM.isEditing())) {
             if (tbICD9CM.getSelectedColumn() == 0) {
-                if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0)
-                    && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
-                ) {
+                if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0) &&
+                     cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
                     tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
                 } else {
                     tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
                     tabModeICD9CM.setValueAt(0, tbICD9CM.getSelectedRow(), 1);
                 }
             } else if (tbICD9CM.getSelectedColumn() == 1) {
-                if ((((Integer) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 1)) > 0)
-                    && cekValiditasICD9CM(tbICD9CM.getSelectedRow())
-                ) {
+                if ((((Integer) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 1)) > 0) &&
+                     cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
                     tabModeICD9CM.setValueAt(true, tbICD9CM.getSelectedRow(), 0);
                 } else {
                     tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
@@ -477,14 +474,12 @@ public class PanelIdrgSmc extends widget.panelisi {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void tbICD10PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbICD10PropertyChange
-        if (tabModeICD10.getRowCount() > 0
-            && evt.getPropertyName().equals("tableCellEditor")
-            && (!tbICD10.isEditing())
-            && tbICD10.getSelectedColumn() == 0
-        ) {
-            if ((Boolean) tabModeICD10.getValueAt(tbICD10.getSelectedRow(), 0)
-                && !cekValiditasICD10(tbICD10.getSelectedRow())
-            ) {
+        if (tabModeICD10.getRowCount() > 0 &&
+             evt.getPropertyName().equals("tableCellEditor") &&
+             (!tbICD10.isEditing()) &&
+             tbICD10.getSelectedColumn() == 0) {
+            if ((Boolean) tabModeICD10.getValueAt(tbICD10.getSelectedRow(), 0) &&
+                 !cekValiditasICD10(tbICD10.getSelectedRow())) {
                 tabModeICD10.setValueAt(false, tbICD10.getSelectedRow(), 0);
             }
         }
@@ -503,7 +498,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             try {
                 boolean sukses = true;
                 Sequel.AutoComitFalse();
-                
+
                 for (int i = 0; i < tabModeDiagnosaPasien.getRowCount(); i++) {
                     if (!Sequel.mengupdatetfSmc("idrg_diagnosa_pasien_smc", "urut = ?", "no_sep = ? and kode_icd10 = ? and urut = ?",
                         String.valueOf(i + 1), nosep, tabModeDiagnosaPasien.getValueAt(i, 1).toString(),
@@ -512,7 +507,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                         sukses = false;
                     }
                 }
-                
+
                 if (sukses) {
                     Sequel.Commit();
                 } else {
@@ -527,9 +522,9 @@ public class PanelIdrgSmc extends widget.panelisi {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            
+
             tampilDiagnosa();
-            
+
             fireDiagnosaIDRGBerubahListeners();
         }
     }//GEN-LAST:event_ppJadikanDiagnosaUtamaActionPerformed
@@ -566,7 +561,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             try {
                 boolean sukses = true;
                 Sequel.AutoComitFalse();
-                
+
                 for (int i = 0; i < tabModeProsedurPasien.getRowCount(); i++) {
                     if (!Sequel.mengupdatetfSmc("idrg_prosedur_pasien_smc", "urut = ?", "no_sep = ? and kode_icd9 = ? and urut = ?",
                         String.valueOf(i + 1), nosep, tabModeProsedurPasien.getValueAt(i, 1).toString(),
@@ -575,7 +570,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                         sukses = false;
                     }
                 }
-                
+
                 if (sukses) {
                     Sequel.Commit();
                 } else {
@@ -590,9 +585,9 @@ public class PanelIdrgSmc extends widget.panelisi {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            
+
             tampilProsedur();
-            
+
             fireProsedurIDRGBerubahListeners();
         }
     }//GEN-LAST:event_ppJadikanProsedurUtamaActionPerformed
@@ -646,23 +641,22 @@ public class PanelIdrgSmc extends widget.panelisi {
     private void fireProsedurIDRGBerubahListeners() {
         pListeners.forEach(ProsedurIDRGBerubahListener::urutanProsedurBerubah);
     }
-    
+
     private boolean cekValiditasICD10(int selectedRow) {
         if (tabModeICD10.getValueAt(selectedRow, 3).toString().equals("0")) {
             JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        
-        if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1)
-            && tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")
-        ) {
+
+        if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1) &&
+             tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")) {
             JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
 
         return true;
     }
-    
+
     private boolean cekValiditasICD9CM(int selectedRow) {
         if (tabModeICD9CM.getValueAt(selectedRow, 4).toString().equals("0")) {
             JOptionPane.showMessageDialog(null, "Kode prosedur tidak bisa digunakan untuk coding..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
@@ -671,13 +665,13 @@ public class PanelIdrgSmc extends widget.panelisi {
 
         return true;
     }
-    
+
     public void setNextFocusableComponent(JComponent component) {
         this.nextFocusableComponent = component;
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
-        
+
     }
-    
+
     public void setSEP(String nosep) {
         this.nosep = nosep;
     }
@@ -730,7 +724,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         try {
             ArrayList<String> icd = new ArrayList<>();
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
-            
+
             dx = 1;
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
@@ -751,20 +745,20 @@ public class PanelIdrgSmc extends widget.panelisi {
             } else {
                 pilihPertama = false;
             }
-            
+
             Valid.tabelKosong(tabModeICD10);
-            
+
             rows.forEach(r -> tabModeICD10.addRow(new Object[] {
                 r.get("p"), r.get("code1"), r.get("deskripsi"), r.get("validcode"),
                 r.get("accpdx"), r.get("asterisk"), r.get("im"), r.get("urut")
             }));
-            
+
             StringBuilder sb = new StringBuilder("select * from idrg_referensi_icd10_smc ");
-            
+
             String query = "(code1 like ? or code2 like ? or deskripsi like ?) ";
-            
+
             List<String> lists = null;
-            
+
             if (!Diagnosa.getText().isBlank()) {
                 lists = Arrays.asList(StringUtils.split(Diagnosa.getText().trim()));
                 int idx = 0, size = lists.size();
@@ -776,7 +770,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                     }
                 }
             }
-            
+
             try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 100").toString())) {
                 int p = 0;
                 if (lists != null) {
@@ -793,7 +787,9 @@ public class PanelIdrgSmc extends widget.panelisi {
                             Diagnosa.selectAll();
                         });
                         do {
-                            if (icd.contains(rs.getString("code1"))) continue;
+                            if (icd.contains(rs.getString("code1"))) {
+                                continue;
+                            }
 
                             tabModeICD10.addRow(new Object[] {
                                 pilihPertama, rs.getString("code1"), rs.getString("deskripsi"), rs.getString("validcode"),
@@ -816,11 +812,11 @@ public class PanelIdrgSmc extends widget.panelisi {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampilICD9CM(boolean pilihPertama) {
         try {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
-            
+
             px = 1;
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
@@ -839,20 +835,20 @@ public class PanelIdrgSmc extends widget.panelisi {
             } else {
                 pilihPertama = false;
             }
-            
+
             Valid.tabelKosong(tabModeICD9CM);
-            
+
             rows.forEach(r -> tabModeICD9CM.addRow(new Object[] {
                 r.get("p"), r.get("mtpx"), r.get("code1"), r.get("deskripsi"),
                 r.get("validcode"), r.get("im"), r.get("urut")
             }));
-            
+
             StringBuilder sb = new StringBuilder("select * from idrg_referensi_icd9cm_smc ");
-            
+
             String query = "(code1 like ? or code2 like ? or deskripsi like ?) ";
-            
+
             List<String> lists = null;
-            
+
             if (!Prosedur.getText().isBlank()) {
                 lists = Arrays.asList(StringUtils.split(Prosedur.getText().trim()));
                 int idx = 0, size = lists.size();
@@ -864,7 +860,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                     }
                 }
             }
-            
+
             try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 100").toString())) {
                 int p = 0;
                 if (lists != null) {
@@ -888,10 +884,10 @@ public class PanelIdrgSmc extends widget.panelisi {
 
                             if (pilihPertama) {
                                 pilihPertama = cekValiditasICD9CM(tabModeICD9CM.getRowCount() - 1);
-                                
+
                                 tabModeICD9CM.setValueAt(pilihPertama, tabModeICD9CM.getRowCount() - 1, 0);
                                 tabModeICD9CM.setValueAt(pilihPertama ? 1 : 0, tabModeICD9CM.getRowCount() - 1, 1);
-                                
+
                                 pilihPertama = false;
                             }
                         } while (rs.next());
@@ -936,27 +932,27 @@ public class PanelIdrgSmc extends widget.panelisi {
         if (TabRawat.getSelectedIndex() > 0) {
             return;
         }
-        
+
         if (Sequel.cariExistsSmc("select * from idrg_klaim_final_smc where no_sep = ?", nosep)) {
             JOptionPane.showMessageDialog(null, "Klaim IDRG sudah final..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         if (tabModeICD10.getRowCount() == 0 && tabModeICD9CM.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Tidak ada diagnosa/prosedur dipilih untuk disimpan..!!");
             return;
         }
-        
+
         boolean updateDiagnosa = false, updateProsedur = false;
-        
+
         int konfirmasiHapus = -1;
-        
+
         if (Sequel.cariExistsSmc("select * from idrg_grouping_smc where no_sep = ?", nosep)) {
             konfirmasiHapus = JOptionPane.showConfirmDialog(null, "Mengubah diagnosa/prosedur akan membatalkan status grouping IDRG, lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         } else {
             konfirmasiHapus = JOptionPane.YES_OPTION;
         }
-        
+
         if (konfirmasiHapus == JOptionPane.YES_OPTION) {
             Sequel.menghapustfSmc("idrg_grouping_smc", "no_sep = ?", nosep);
             if (tabModeICD10.getRowCount() > 0) {
@@ -1005,6 +1001,14 @@ public class PanelIdrgSmc extends widget.panelisi {
             }
 
             tampilICD();
+
+            if (updateDiagnosa) {
+                fireDiagnosaIDRGBerubahListeners();
+            }
+
+            if (updateProsedur) {
+                fireProsedurIDRGBerubahListeners();
+            }
         }
     }
 
@@ -1013,15 +1017,15 @@ public class PanelIdrgSmc extends widget.panelisi {
             JOptionPane.showMessageDialog(null, "Klaim IDRG sudah final..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         int konfirmasiHapus = -1;
-        
+
         if (Sequel.cariExistsSmc("select * from idrg_grouping_smc where no_sep = ?", nosep)) {
             konfirmasiHapus = JOptionPane.showConfirmDialog(null, "Mengubah diagnosa/prosedur akan membatalkan status grouping IDRG, lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         } else {
             konfirmasiHapus = JOptionPane.YES_OPTION;
         }
-        
+
         if (konfirmasiHapus == JOptionPane.YES_OPTION) {
             Sequel.menghapustfSmc("idrg_grouping_smc", "no_sep = ?", nosep);
             switch (TabRawat.getSelectedIndex()) {
@@ -1073,7 +1077,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data diagnosa IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
 
-                        tampilDiagnosa();
+                        fireDiagnosaIDRGBerubahListeners();
                     }
                     break;
                 case 2:
@@ -1122,7 +1126,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data prosedur IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
 
-                        tampilProsedur();
+                        fireProsedurIDRGBerubahListeners();
                     }
                     break;
                 default:
@@ -1152,12 +1156,12 @@ public class PanelIdrgSmc extends widget.panelisi {
     public JTabbedPane getTabbedPane() {
         return TabRawat;
     }
-    
+
     @FunctionalInterface
     public static interface DiagnosaIDRGBerubahListener {
         void urutanDiagnosaBerubah();
     }
-    
+
     @FunctionalInterface
     public static interface ProsedurIDRGBerubahListener {
         void urutanProsedurBerubah();
