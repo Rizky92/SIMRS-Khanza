@@ -1782,7 +1782,7 @@
                 $_error = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s')", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $_error));
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $_error, '1'));
             } catch (\Exception $e) {
                 continue;
             }
@@ -1795,7 +1795,7 @@
                 $_error = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s')", $nomor_sep, $p['code'], $p['display'], $p['no'], $_error));
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $p['code'], $p['display'], $p['no'], $_error, '1'));
             } catch (\Exception $e) {
                 continue;
             }
