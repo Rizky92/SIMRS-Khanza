@@ -80,6 +80,8 @@ ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_3`(`jnspel
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp`) USING BTREE;
 
+ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_5`(`tglsep`, `no_sep`) USING BTREE;
+
 CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
   `no_sep` varchar(40) NOT NULL,
   `tgl_simpan` datetime NOT NULL,
@@ -155,20 +157,146 @@ CREATE TABLE IF NOT EXISTS `dokter_ttdbasah`  (
   CONSTRAINT `dokter_ttdbasah_ibfk_1` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `eklaim_icd10`  (
-  `code` varchar(7) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 1,
-  PRIMARY KEY (`code`) USING BTREE
+ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
+
+CREATE TABLE IF NOT EXISTS `idrg_diagnosa_pasien_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `kode_icd10` varchar(7) NOT NULL,
+  `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `kode_icd10`) USING BTREE,
+  INDEX `idrg_dx_smc_icd10_im`(`kode_icd10`) USING BTREE,
+  CONSTRAINT `idrg_diagnosa_pasien_smc_ibfk_1` FOREIGN KEY (`kode_icd10`) REFERENCES `idrg_referensi_icd10_smc` (`code1`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `idrg_dx_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-ALTER TABLE `emergency_index` MODIFY COLUMN IF EXISTS `nama_emergency` varchar(200) NULL DEFAULT NULL AFTER `kode_emergency`;
+CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `mdc_number` varchar(4) NOT NULL,
+  `mdc_description` varchar(150) NULL DEFAULT NULL,
+  `drg_code` varchar(10) NOT NULL,
+  `drg_description` varchar(250) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `idrg_grouping_smc_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_klaim_final_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `nik` varchar(30) NOT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `idrg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_prosedur_pasien_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `kode_icd9` varchar(7) NOT NULL,
+  `multiplicity` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `kode_icd9`, `urut`) USING BTREE,
+  INDEX `idrg_pc_smc_icd9cm_im`(`kode_icd9`) USING BTREE,
+  CONSTRAINT `idrg_pc_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_referensi_icd9cm_smc`  (
+  `code1` varchar(7) NOT NULL,
+  `code2` varchar(7) NOT NULL DEFAULT '',
+  `deskripsi` varchar(300) NOT NULL DEFAULT '',
+  `validcode` enum('0','1') NOT NULL DEFAULT '0',
+  `im` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`code1`) USING BTREE,
+  INDEX `eklaim_icd9cm_smc_ibfk_1`(`code1`, `deskripsi`) USING BTREE,
+  INDEX `eklaim_icd9cm_smc_ibfk_2`(`validcode`, `im`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_referensi_icd10_smc`  (
+  `code1` varchar(7) NOT NULL,
+  `code2` varchar(7) NOT NULL DEFAULT '',
+  `deskripsi` varchar(300) NOT NULL DEFAULT '',
+  `validcode` enum('0','1') NOT NULL DEFAULT '0',
+  `accpdx` enum('Y','N') NOT NULL DEFAULT 'N',
+  `asterisk` enum('0','1') NOT NULL DEFAULT '0',
+  `im` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`code1`) USING BTREE,
+  INDEX `eklaim_icd10_smc_ibfk_1`(`code1`, `deskripsi`) USING BTREE,
+  INDEX `eklaim_icd10_smc_ibfk_2`(`validcode`, `accpdx`, `asterisk`, `im`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
   `no_sep` varchar(40) NOT NULL,
   `path` varchar(100) NULL DEFAULT NULL,
+  `kirim_ke_dc` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
   CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_diagnosa_pasien_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `kode_icd10` varchar(7) NOT NULL,
+  `deskripsi` varchar(250) NULL DEFAULT NULL,
+  `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `keterangan` varchar(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`, `kode_icd10`) USING BTREE,
+  INDEX `idrg_dx_smc_icd10_im`(`kode_icd10`) USING BTREE,
+  CONSTRAINT `inacbg_dx_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_grouping_stage2_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `cmg_code` varchar(10) NOT NULL,
+  `cmg_description` varchar(100) NULL DEFAULT NULL,
+  `cmg_type` varchar(50) NULL DEFAULT NULL,
+  `tariff` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `cmg_code`) USING BTREE,
+  CONSTRAINT `inacbg_grouping_stage2_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `inacbg_grouping_stage12` ADD COLUMN IF NOT EXISTS `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada' AFTER `tarif`;
+
+CREATE TABLE IF NOT EXISTS `inacbg_klaim_final_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `nik` varchar(30) NOT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `no_sitb` varchar(30) NOT NULL,
+  `status_validasi` varchar(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_pasien_tb_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `inacbg_pasien_tb_smc_ibfk_2` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_prosedur_pasien_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `kode_icd9` varchar(7) NOT NULL,
+  `deskripsi` varchar(250) NULL DEFAULT NULL,
+  `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `keterangan` varchar(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`, `kode_icd9`) USING BTREE,
+  INDEX `idrg_pc_smc_icd9cm_im`(`kode_icd9`) USING BTREE,
+  CONSTRAINT `inacbg_pc_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_referensi_icd9cm_smc`  (
+  `code1` varchar(7) NOT NULL,
+  `code2` varchar(7) NOT NULL DEFAULT '',
+  `deskripsi` varchar(300) NOT NULL DEFAULT '',
+  `validcode` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`code1`) USING BTREE,
+  INDEX `eklaim_icd9cm_smc_ibfk_1`(`code1`, `deskripsi`) USING BTREE,
+  INDEX `eklaim_icd9cm_smc_ibfk_2`(`validcode`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_referensi_icd10_smc`  (
+  `code1` varchar(7) NOT NULL,
+  `code2` varchar(7) NOT NULL DEFAULT '',
+  `deskripsi` varchar(300) NOT NULL DEFAULT '',
+  `validcode` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`code1`) USING BTREE,
+  INDEX `eklaim_icd10_smc_ibfk_1`(`code1`, `deskripsi`) USING BTREE,
+  INDEX `eklaim_icd10_smc_ibfk_2`(`validcode`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `industrifarmasi` MODIFY COLUMN IF EXISTS `alamat` varchar(200) NULL DEFAULT NULL AFTER `nama_industri`;
