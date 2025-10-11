@@ -1777,12 +1777,14 @@
 
         bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
         foreach ($data_diagnosa as $dx) {
-            $_error = '';
+            $keterangan = '';
+            $locked = '1';
             if ($dx['metadata']['code'] != '200') {
-                $_error = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
+                $keterangan = $dx['metadata']['error_no'].' - '.$dx['metadata']['message'];
+                $locked = '0';
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $_error, '1'));
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $keterangan, $locked));
             } catch (\Exception $e) {
                 continue;
             }
@@ -1790,12 +1792,14 @@
 
         bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
         foreach ($data_prosedur as $p) {
-            $_error = '';
+            $keterangan = '';
+            $locked = '1';
             if ($p['metadata']['code'] != '200') {
-                $_error = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
+                $keterangan = $p['metadata']['error_no'].' - '.$p['metadata']['message'];
+                $locked = '0';
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $p['code'], $p['display'], $p['no'], $_error, '1'));
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $p['code'], $p['display'], $p['no'], $keterangan, $locked));
             } catch (\Exception $e) {
                 continue;
             }
@@ -2146,7 +2150,7 @@
         file_put_contents($filename, base64_decode($encodedPDF));
 
         if (getOne("select exists(select * from inacbg_cetak_klaim where no_sep = '$nomor_sep')") == '0') {
-            InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf'");
+            InsertData('inacbg_cetak_klaim', "'{$nomor_sep}', 'pages/pdf/{$nomor_sep}.pdf', '0'");
         }
 
         return [
@@ -2185,6 +2189,8 @@
                 'error' => $error,
             ];
         }
+
+        bukaquery2("update inacbg_cetak_klaim set kirim_ke_dc = now() where no_sep = '$nomor_sep'");
 
         return [
             'success' => true,

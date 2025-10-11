@@ -40,8 +40,8 @@ public class PanelIdrgSmc extends widget.panelisi {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final List<DiagnosaIDRGBerubahListener> dxListeners = new ArrayList<>();
-    private final List<ProsedurIDRGBerubahListener> pListeners = new ArrayList<>();
+    private final ArrayList<DiagnosaIDRGBerubahListener> diagnosaListeners = new ArrayList<>();
+    private final ArrayList<ProsedurIDRGBerubahListener> prosedurListeners = new ArrayList<>();
     private String nosep = "";
     private int dx = 1, px = 1;
     private JComponent nextFocusableComponent;
@@ -447,11 +447,11 @@ public class PanelIdrgSmc extends widget.panelisi {
 
     private void tbICD9CMPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbICD9CMPropertyChange
         if (tabModeICD9CM.getRowCount() > 0 &&
-             evt.getPropertyName().equals("tableCellEditor") &&
-             (!tbICD9CM.isEditing())) {
+            evt.getPropertyName().equals("tableCellEditor") &&
+            (!tbICD9CM.isEditing())) {
             if (tbICD9CM.getSelectedColumn() == 0) {
                 if ((Boolean) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 0) &&
-                     cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
+                    cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
                     tabModeICD9CM.setValueAt(1, tbICD9CM.getSelectedRow(), 1);
                 } else {
                     tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
@@ -459,7 +459,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
             } else if (tbICD9CM.getSelectedColumn() == 1) {
                 if ((((Integer) tabModeICD9CM.getValueAt(tbICD9CM.getSelectedRow(), 1)) > 0) &&
-                     cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
+                    cekValiditasICD9CM(tbICD9CM.getSelectedRow())) {
                     tabModeICD9CM.setValueAt(true, tbICD9CM.getSelectedRow(), 0);
                 } else {
                     tabModeICD9CM.setValueAt(false, tbICD9CM.getSelectedRow(), 0);
@@ -475,11 +475,11 @@ public class PanelIdrgSmc extends widget.panelisi {
 
     private void tbICD10PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbICD10PropertyChange
         if (tabModeICD10.getRowCount() > 0 &&
-             evt.getPropertyName().equals("tableCellEditor") &&
-             (!tbICD10.isEditing()) &&
-             tbICD10.getSelectedColumn() == 0) {
+            evt.getPropertyName().equals("tableCellEditor") &&
+            (!tbICD10.isEditing()) &&
+            tbICD10.getSelectedColumn() == 0) {
             if ((Boolean) tabModeICD10.getValueAt(tbICD10.getSelectedRow(), 0) &&
-                 !cekValiditasICD10(tbICD10.getSelectedRow())) {
+                !cekValiditasICD10(tbICD10.getSelectedRow())) {
                 tabModeICD10.setValueAt(false, tbICD10.getSelectedRow(), 0);
             }
         }
@@ -525,7 +525,7 @@ public class PanelIdrgSmc extends widget.panelisi {
 
             tampilDiagnosa();
 
-            fireDiagnosaIDRGBerubahListeners();
+            fireUrutanDiagnosaBerubahEvent();
         }
     }//GEN-LAST:event_ppJadikanDiagnosaUtamaActionPerformed
 
@@ -588,7 +588,7 @@ public class PanelIdrgSmc extends widget.panelisi {
 
             tampilProsedur();
 
-            fireProsedurIDRGBerubahListeners();
+            fireUrutanProsedurBerubahEvent();
         }
     }//GEN-LAST:event_ppJadikanProsedurUtamaActionPerformed
 
@@ -619,27 +619,27 @@ public class PanelIdrgSmc extends widget.panelisi {
     // End of variables declaration//GEN-END:variables
 
     public void addDiagnosaBerubahListener(DiagnosaIDRGBerubahListener listener) {
-        dxListeners.add(listener);
+        diagnosaListeners.add(listener);
     }
 
     public void addProsedurBerubahListener(ProsedurIDRGBerubahListener listener) {
-        pListeners.add(listener);
+        prosedurListeners.add(listener);
     }
 
     public void removeDiagnosaIDRGBerubahListener(DiagnosaIDRGBerubahListener listener) {
-        dxListeners.remove(listener);
+        diagnosaListeners.remove(listener);
     }
 
     public void removeProsedurIDRGBerubahListener(ProsedurIDRGBerubahListener listener) {
-        pListeners.remove(listener);
+        prosedurListeners.remove(listener);
     }
 
-    private void fireDiagnosaIDRGBerubahListeners() {
-        dxListeners.forEach(DiagnosaIDRGBerubahListener::urutanDiagnosaBerubah);
+    private void fireUrutanDiagnosaBerubahEvent() {
+        diagnosaListeners.forEach(DiagnosaIDRGBerubahListener::urutanDiagnosaBerubah);
     }
 
-    private void fireProsedurIDRGBerubahListeners() {
-        pListeners.forEach(ProsedurIDRGBerubahListener::urutanProsedurBerubah);
+    private void fireUrutanProsedurBerubahEvent() {
+        prosedurListeners.forEach(ProsedurIDRGBerubahListener::urutanProsedurBerubah);
     }
 
     private boolean cekValiditasICD10(int selectedRow) {
@@ -649,7 +649,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         }
 
         if (((Integer) tabModeICD10.getValueAt(selectedRow, 7) == 1) &&
-             tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")) {
+            tabModeICD10.getValueAt(selectedRow, 4).toString().equals("N")) {
             JOptionPane.showMessageDialog(null, "Kode diagnosa tidak bisa dijadikan diagnosa utama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             return false;
         }
@@ -904,9 +904,12 @@ public class PanelIdrgSmc extends widget.panelisi {
     }
 
     public void tampilICD() {
-        TabRawat.setSelectedIndex(0);
         Diagnosa.setText("");
         Prosedur.setText("");
+        tbICD10.clearSelection();
+        tbICD9CM.clearSelection();
+        tbDiagnosaPasien.clearSelection();
+        tbProsedurPasien.clearSelection();
         tampilICD10(false);
         tampilICD9CM(false);
     }
@@ -921,7 +924,9 @@ public class PanelIdrgSmc extends widget.panelisi {
     }
 
     public void pilihTab() {
-        if (TabRawat.getSelectedIndex() == 1) {
+        if (TabRawat.getSelectedIndex() == 0) {
+            tampilICD();
+        } else if (TabRawat.getSelectedIndex() == 1) {
             tampilDiagnosa();
         } else if (TabRawat.getSelectedIndex() == 2) {
             tampilProsedur();
@@ -1003,11 +1008,11 @@ public class PanelIdrgSmc extends widget.panelisi {
             tampilICD();
 
             if (updateDiagnosa) {
-                fireDiagnosaIDRGBerubahListeners();
+                fireUrutanDiagnosaBerubahEvent();
             }
 
             if (updateProsedur) {
-                fireProsedurIDRGBerubahListeners();
+                fireUrutanProsedurBerubahEvent();
             }
         }
     }
@@ -1077,7 +1082,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data diagnosa IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
 
-                        fireDiagnosaIDRGBerubahListeners();
+                        fireUrutanDiagnosaBerubahEvent();
                     }
                     break;
                 case 2:
@@ -1126,7 +1131,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data prosedur IDRG..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
 
-                        fireProsedurIDRGBerubahListeners();
+                        fireUrutanProsedurBerubahEvent();
                     }
                     break;
                 default:
@@ -1155,6 +1160,22 @@ public class PanelIdrgSmc extends widget.panelisi {
 
     public JTabbedPane getTabbedPane() {
         return TabRawat;
+    }
+
+    public static interface DiagnosaIDRGListener {
+        void diagnosaDisimpan();
+
+        void diagnosaDihapus();
+
+        void urutanDiagnosaBerubah();
+    }
+
+    public static interface ProsedurIDRGListener {
+        void prosedurDisimpan();
+
+        void prosedurDihapus();
+
+        void urutanProsedurBerubah();
     }
 
     @FunctionalInterface

@@ -16,14 +16,16 @@
     ?>
     <?php if ($action === 'selesai'): ?>
         <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
-        <div class="entry" style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #22c55e; margin-top: 0.5rem; margin-left: 0.5rem">
-            Klaim berhasil diproses!
+
+        <div class="entry" style="font-family: Tahoma; font-size: 12pt; font-weight: 700; color: #22c55e; margin-top: 0.5rem; margin-left: 0.5rem">
+            Klaim berhasil disimpan!
         </div>
-        <div class="entry" style="font-family: Tahoma; margin-top: 0.5rem; margin-left: 0.5rem">
+        <div class="entry" style="font-family: Tahoma font-size: 10pt; margin-top: 0.5rem; margin-left: 0.5rem">
             <a href="?act=DetailKirimSmc&<?= $queryurl."&action=reedit&grouper=final" ?>">[Edit Klaim]</a>
             <br />
             <br />
-            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=kirim_individual" ?>">[Kirim Klaim Individual ke DC]</a>
+            <a href="?act=DetailKirimSmc&<?= $queryurl."&action=kirim_individual" ?>">[Kirim Klaim Individual ke DC]</a>&nbsp;
+            <span><?= getOne("select if(inacbg_cetak_klaim.kirim_ke_dc is null or inacbg_cetak_klaim.kirim_ke_dc = '0000-00-00 00:00:00.000', '', concat('Dikirim pada ', date_format(inacbg_cetak_klaim.kirim_ke_dc, '%d-%m-%Y %H:%i:%s'))) from inacbg_cetak_klaim where inacbg_cetak_klaim.no_sep = '$nosep'") ?></span>
             <br />
             <br />
             <a href="?act=DetailKirimSmc&<?= $queryurl ?>&action=cetak">[Tarik ulang hasil cetak klaim]</a>

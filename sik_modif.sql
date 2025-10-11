@@ -223,6 +223,7 @@ CREATE TABLE IF NOT EXISTS `idrg_referensi_icd10_smc`  (
 CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
   `no_sep` varchar(40) NOT NULL,
   `path` varchar(100) NULL DEFAULT NULL,
+  `kirim_ke_dc` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
   CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
