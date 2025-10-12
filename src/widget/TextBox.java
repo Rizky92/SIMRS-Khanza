@@ -1,4 +1,3 @@
-
 package widget;
 
 import java.awt.Color;
@@ -13,15 +12,15 @@ import usu.widget.glass.TextBoxGlass;
 public class TextBox extends TextBoxGlass {
     public TextBox() {
         super();
-        setFont(new java.awt.Font("Tahoma", 0, 11));        
-        setSelectionColor(new Color(255,252,252));
-        setSelectedTextColor(new Color(255,0,0));
-        setForeground(new Color(50,50,50));
-        setBackground(new Color(255,255,255));
+        setFont(new java.awt.Font("Tahoma", 0, 11));
+        setSelectionColor(new Color(190, 210, 215));
+        setSelectedTextColor(new Color(50, 50, 50));
+        setForeground(new Color(50, 50, 50));
+        setBackground(new Color(255, 255, 255));
         setHorizontalAlignment(LEFT);
-        setSize(WIDTH,23);
+        setSize(WIDTH, 23);
     }
-    
+
     @FunctionalInterface
     public interface CustomDocumentListener extends DocumentListener {
         void changed(DocumentEvent e);
