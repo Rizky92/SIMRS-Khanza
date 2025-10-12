@@ -151,7 +151,6 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnHapus = new widget.Button();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         panelisi1 = new widget.panelisi();
@@ -173,25 +172,9 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
         jLabel17 = new widget.Label();
+        BtnHapus = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
-
-        BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
-        BtnHapus.setText("Hapus");
-        BtnHapus.setToolTipText("Alt+H");
-        BtnHapus.setName("BtnHapus"); // NOI18N
-        BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnHapusActionPerformed(evt);
-            }
-        });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnHapusKeyPressed(evt);
-            }
-        });
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -308,7 +291,6 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -338,8 +320,24 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
         panelGlass6.add(jLabel17);
 
+        BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setText("Hapus");
+        BtnHapus.setToolTipText("Alt+H");
+        BtnHapus.setName("BtnHapus"); // NOI18N
+        BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusActionPerformed(evt);
+            }
+        });
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnHapusKeyPressed(evt);
+            }
+        });
+        panelGlass6.add(BtnHapus);
+
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -352,7 +350,6 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -458,7 +455,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if (tbKamar.getSelectedRow() != -1) {
-            if (!tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString().equals("")) {
+            if (!tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString().equals("")) {
                 String kode_apotek_bpjs2 = Sequel.cariIsi("select kode_brng_apotek_bpjs from maping_obat_apotek_bpjs where kode_brng='" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString() + "'");
                 try {
                     bodyWithDeleteRequestPerobat(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString(), kode_apotek_bpjs2, "N", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
