@@ -501,6 +501,11 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         Scroll1 = new widget.ScrollPane();
         HasilPeriksa = new widget.TextArea();
+        panelisi8 = new widget.panelisi();
+        jLabel5 = new widget.Label();
+        jLabel6 = new widget.Label();
+        DiagnosisKlinis = new widget.TextBox();
+        InformasiTambahan = new widget.TextBox();
         panelisi7 = new widget.panelisi();
         btnAmbilPhoto = new widget.Button();
 
@@ -753,7 +758,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         NmPtg.setBounds(546, 42, 249, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1081,6 +1086,34 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         Scroll1.setViewportView(HasilPeriksa);
 
         jPanel4.add(Scroll1, java.awt.BorderLayout.CENTER);
+
+        panelisi8.setBorder(null);
+        panelisi8.setName("panelisi8"); // NOI18N
+        panelisi8.setPreferredSize(new java.awt.Dimension(100, 69));
+        panelisi8.setLayout(null);
+
+        jLabel5.setText("Informasi Tambahan :");
+        jLabel5.setName("jLabel5"); // NOI18N
+        panelisi8.add(jLabel5);
+        jLabel5.setBounds(0, 10, 120, 23);
+
+        jLabel6.setText("Diagnosis Klinis :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        panelisi8.add(jLabel6);
+        jLabel6.setBounds(0, 40, 120, 23);
+
+        DiagnosisKlinis.setHighlighter(null);
+        DiagnosisKlinis.setName("DiagnosisKlinis"); // NOI18N
+        panelisi8.add(DiagnosisKlinis);
+        DiagnosisKlinis.setBounds(124, 40, 220, 23);
+
+        InformasiTambahan.setEditable(false);
+        InformasiTambahan.setHighlighter(null);
+        InformasiTambahan.setName("InformasiTambahan"); // NOI18N
+        panelisi8.add(InformasiTambahan);
+        InformasiTambahan.setBounds(124, 10, 220, 23);
+
+        jPanel4.add(panelisi8, java.awt.BorderLayout.PAGE_START);
 
         panelisi7.setBorder(null);
         panelisi7.setName("panelisi7"); // NOI18N
@@ -1613,8 +1646,10 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.ComboBox CmbDetik;
     private widget.ComboBox CmbJam;
     private widget.ComboBox CmbMenit;
+    private widget.TextBox DiagnosisKlinis;
     private javax.swing.JPanel FormInput;
     private widget.TextArea HasilPeriksa;
+    private widget.TextBox InformasiTambahan;
     private widget.TextBox Jk;
     private widget.TextBox KdPtg;
     private widget.TextBox KodePerujuk;
@@ -1646,6 +1681,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel3;
+    private widget.Label jLabel5;
+    private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1658,6 +1695,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
     private widget.panelisi panelisi7;
+    private widget.panelisi panelisi8;
     private widget.Table tbObat;
     private widget.Table tbPemeriksaan;
     // End of variables declaration//GEN-END:variables
@@ -2161,6 +2199,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     
     public void setOrder(String order,String norawat,String posisi){
         noorder=order;
+        InformasiTambahan.setText(Sequel.cariIsiSmc("select permintaan_radiologi.informasi_tambahan from permintaan_radiologi where permintaan_radiologi.noorder = ?", noorder));
+        DiagnosisKlinis.setText(Sequel.cariIsiSmc("select permintaan_radiologi.diagnosa_klinis from permintaan_radiologi where permintaan_radiologi.noorder = ?", noorder));
         TNoRw.setText(norawat);
         this.status=posisi;
         isRawat();
@@ -2170,6 +2210,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     
     public void setOrderFuji(String order,String norawat,String posisi){
         noorder=order;
+        InformasiTambahan.setText(Sequel.cariIsiSmc("select permintaan_radiologi.informasi_tambahan from permintaan_radiologi where permintaan_radiologi.noorder = ?", noorder));
+        DiagnosisKlinis.setText(Sequel.cariIsiSmc("select permintaan_radiologi.diagnosis_klinis from permintaan_radiologi where permintaan_radiologi.noorder = ?", noorder));
         TNoRw.setText(norawat);
         this.status=posisi;
         isRawat();
@@ -2307,9 +2349,9 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     }
 
                     if(!noorder.equals("")){
-                        Sequel.mengedit("permintaan_radiologi","noorder=?","tgl_hasil=?,jam_hasil=?",3,new String[]{
-                            Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),noorder
-                        });
+                        Sequel.mengupdateSmc("permintaan_radiologi", "tgl_hasil = ?, jam_hasil = ?, diagnosa_klinis = ?", "noorder = ?",
+                            Valid.getTglSmc(Tanggal), Valid.getJamSmc(CmbJam, CmbMenit, CmbDetik), DiagnosisKlinis.getText(), noorder
+                        );
                         if(status.equals("Ralan")){
                             Sequel.queryu("delete from antriradiologi2");
                             Sequel.queryu("insert into antriradiologi2 values('1')");

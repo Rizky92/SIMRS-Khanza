@@ -272,7 +272,8 @@ public class DlgUser extends javax.swing.JDialog {
                 "[L]Rekap Keluar Duta Parking","[P]Surat Keterangan Layak Terbang","[K]Bayar Beban Hutang Lain","[P]Surat Persetujuan Pemeriksaan HIV","[M]Skrining Instrumen ACRS",
                 "[P]Surat Pernyataan Memilih DPJP","[M]Skrining Instrumen Mental Emosional Anak","[B]Pelanggan Lab Kesehatan Lingkungan","[M]Check List Kriteria Masuk NICU",
                 "[M]Check List Kriteria Keluar NICU","[M]Pengkajian Awal Medis Ranap Psikiatri","[M]Check List Kriteria Masuk PICU","[M]Check List Kriteria Keluar PICU","[B]Master Sampel Lab Kesling",
-                "[M]Skrining Instrumen AMT","[B]Parameter Pengujian Lab Kesling"
+                "[M]Skrining Instrumen AMT","[B]Parameter Pengujian Lab Kesling","[B]Nilai Normal Baku Mutu Lab Kesling","[M]Skrining Pneumonia Severity Index","[B]Permintaan Pengujian Sampel Lab Kesling",
+                "[M]Pengkajian Awal Medis Ralan Jantung","[M]Pengkajian Awal Medis Ralan Urologi","[M]Hasil Pemeriksaan Treadmill","[M]Hasil Pemeriksaan ECHO Pediatrik"
         };
         
         tabMode=new DefaultTableModel(null,row){
@@ -585,6 +586,7 @@ public class DlgUser extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
              };
              @Override
@@ -598,7 +600,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 1155;i++) {
+        for (i = 0; i < 1162;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -3517,6 +3519,27 @@ public class DlgUser extends javax.swing.JDialog {
                 case 1154:
                     column.setPreferredWidth(181);
                     break;
+                case 1155:
+                    column.setPreferredWidth(192);
+                    break;
+                case 1156:
+                    column.setPreferredWidth(192);
+                    break;
+                case 1157:
+                    column.setPreferredWidth(225);
+                    break;
+                case 1158:
+                    column.setPreferredWidth(207);
+                    break;
+                case 1159:
+                    column.setPreferredWidth(203);
+                    break;
+                case 1160:
+                    column.setPreferredWidth(161);
+                    break;
+                case 1161:
+                    column.setPreferredWidth(190);
+                    break;
                 default:
                     column.setPreferredWidth(133);
                     break;
@@ -4000,7 +4023,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tabMode.addRow(new Object[]{
                     TKd.getText(),TNmUser.getText(),Jabatan.getText(),TPass.getText(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
@@ -4029,7 +4052,7 @@ public class DlgUser extends javax.swing.JDialog {
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
+                    false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
@@ -5231,7 +5254,14 @@ public class DlgUser extends javax.swing.JDialog {
                     "kriteria_keluar_picu='"+tbUser.getValueAt(i,1151).toString()+"',"+
                     "master_sampel_bakumutu='"+tbUser.getValueAt(i,1152).toString()+"',"+
                     "skrining_instrumen_amt='"+tbUser.getValueAt(i,1153).toString()+"',"+
-                    "parameter_pengujian_lab_kesehatan_lingkungan='"+tbUser.getValueAt(i,1154).toString()+"'")==true){
+                    "parameter_pengujian_lab_kesehatan_lingkungan='"+tbUser.getValueAt(i,1154).toString()+"',"+
+                    "nilai_normal_baku_mutu_lab_kesehatan_lingkungan='"+tbUser.getValueAt(i,1155).toString()+"',"+
+                    "skrining_pneumonia_severity_index='"+tbUser.getValueAt(i,1156).toString()+"',"+
+                    "permintaan_pengujian_sampel_lab_kesehatan_lingkungan='"+tbUser.getValueAt(i,1157).toString()+"',"+
+                    "penilaian_awal_medis_ralan_jantung='"+tbUser.getValueAt(i,1158).toString()+"',"+
+                    "penilaian_awal_medis_ralan_urologi='"+tbUser.getValueAt(i,1159).toString()+"',"+
+                    "hasil_pemeriksaan_treadmill='"+tbUser.getValueAt(i,1160).toString()+"',"+
+                    "hasil_pemeriksaan_echo_pediatrik='"+tbUser.getValueAt(i,1161).toString()+"'")==true){
                     emptTeks();
                 }
             }         
@@ -6603,7 +6633,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                         "kriteria_keluar_picu='"+tbUser.getValueAt(barisdicopy,1151).toString()+"',"+
                                         "master_sampel_bakumutu='"+tbUser.getValueAt(barisdicopy,1152).toString()+"',"+
                                         "skrining_instrumen_amt='"+tbUser.getValueAt(barisdicopy,1153).toString()+"',"+
-                                        "parameter_pengujian_lab_kesehatan_lingkungan='"+tbUser.getValueAt(barisdicopy,1154).toString()+"'");
+                                        "parameter_pengujian_lab_kesehatan_lingkungan='"+tbUser.getValueAt(barisdicopy,1154).toString()+"',"+
+                                        "nilai_normal_baku_mutu_lab_kesehatan_lingkungan='"+tbUser.getValueAt(barisdicopy,1155).toString()+"',"+
+                                        "skrining_pneumonia_severity_index='"+tbUser.getValueAt(barisdicopy,1156).toString()+"',"+
+                                        "permintaan_pengujian_sampel_lab_kesehatan_lingkungan='"+tbUser.getValueAt(barisdicopy,1157).toString()+"',"+
+                                        "penilaian_awal_medis_ralan_jantung='"+tbUser.getValueAt(barisdicopy,1158).toString()+"',"+
+                                        "penilaian_awal_medis_ralan_urologi='"+tbUser.getValueAt(barisdicopy,1159).toString()+"',"+
+                                        "hasil_pemeriksaan_treadmill='"+tbUser.getValueAt(barisdicopy,1160).toString()+"',"+
+                                        "hasil_pemeriksaan_echo_pediatrik='"+tbUser.getValueAt(barisdicopy,1161).toString()+"'");
                                 }
                                 userdicopy="";
                                 copyhakakses="";
@@ -6929,7 +6966,9 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             "user.dokter_asal_pasien_ranap,user.duta_parkir_rekap_keluar,user.surat_keterangan_layak_terbang,user.bayar_beban_hutang_lain,user.surat_persetujuan_pemeriksaan_hiv,"+
                             "user.skrining_instrumen_acrs,user.surat_pernyataan_memilih_dpjp,user.skrining_instrumen_mental_emosional,user.pelanggan_lab_kesehatan_lingkungan,user.kriteria_masuk_nicu,"+
                             "user.kriteria_keluar_nicu,user.penilaian_medis_ranap_psikiatrik,user.kriteria_masuk_picu,user.kriteria_keluar_picu,user.master_sampel_bakumutu,user.skrining_instrumen_amt,"+
-                            "user.parameter_pengujian_lab_kesehatan_lingkungan from user order by AES_DECRYPT(user.id_user,'nur')");
+                            "user.parameter_pengujian_lab_kesehatan_lingkungan,user.nilai_normal_baku_mutu_lab_kesehatan_lingkungan,user.skrining_pneumonia_severity_index,"+
+                            "user.permintaan_pengujian_sampel_lab_kesehatan_lingkungan,user.penilaian_awal_medis_ralan_jantung,user.penilaian_awal_medis_ralan_urologi,"+
+                            "user.hasil_pemeriksaan_treadmill,user.hasil_pemeriksaan_echo_pediatrik from user order by AES_DECRYPT(user.id_user,'nur')");
                         try {
                             rs=ps.executeQuery();
                             i=0;
@@ -8097,7 +8136,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                            rs.getBoolean("kriteria_keluar_picu"),
                                            rs.getBoolean("master_sampel_bakumutu"),
                                            rs.getBoolean("skrining_instrumen_amt"),
-                                           rs.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan")
+                                           rs.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan"),
+                                           rs.getBoolean("nilai_normal_baku_mutu_lab_kesehatan_lingkungan"),
+                                           rs.getBoolean("skrining_pneumonia_severity_index"),
+                                           rs.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan"),
+                                           rs.getBoolean("penilaian_awal_medis_ralan_jantung"),
+                                           rs.getBoolean("penilaian_awal_medis_ralan_urologi"),
+                                           rs.getBoolean("hasil_pemeriksaan_treadmill"),
+                                           rs.getBoolean("hasil_pemeriksaan_echo_pediatrik")
                                         };
                                         i++;
                                         SwingUtilities.invokeLater(() -> tabMode.addRow(row));
@@ -9255,7 +9301,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                        rs.getBoolean("kriteria_keluar_picu"),
                                        rs.getBoolean("master_sampel_bakumutu"),
                                        rs.getBoolean("skrining_instrumen_amt"),
-                                       rs.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan")
+                                       rs.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan"),
+                                       rs.getBoolean("nilai_normal_baku_mutu_lab_kesehatan_lingkungan"),
+                                       rs.getBoolean("skrining_pneumonia_severity_index"),
+                                       rs.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan"),
+                                       rs.getBoolean("penilaian_awal_medis_ralan_jantung"),
+                                       rs.getBoolean("penilaian_awal_medis_ralan_urologi"),
+                                       rs.getBoolean("hasil_pemeriksaan_treadmill"),
+                                       rs.getBoolean("hasil_pemeriksaan_echo_pediatrik")
                                     };
                                     i++;
                                     SwingUtilities.invokeLater(() -> tabMode.addRow(row));

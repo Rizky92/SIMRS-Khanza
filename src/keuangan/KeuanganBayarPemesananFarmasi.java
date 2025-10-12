@@ -852,9 +852,10 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbKamar.setName("tbKamar"); // NOI18N
+        tbKamar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbKamarMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbKamarMouseReleased(evt);
             }
         });
         tbKamar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -992,73 +993,77 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        try {
-            Sequel.AutoComitFalse();
-            sukses=true;  
-            if(Sequel.queryu2tf("delete from bayar_pemesanan where tgl_bayar=? and no_faktur=? and "+
-                    "nip=? and besar_bayar=? and keterangan=? and nama_bayar=? and no_bukti=?",7,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
-            })==true){
-                if(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())==Double.parseDouble(BesarBayar.getText())){
-                    Sequel.mengedit("pemesanan","no_faktur=?","status='Belum Dibayar'",1,new String[]{NoFaktur.getText()});
-                }else{
-                    Sequel.mengedit("pemesanan","no_faktur=?","status='Belum Lunas'",1,new String[]{NoFaktur.getText()});
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data masih kosong..!!");
+        } else if (tbKamar.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data dengan mengklik pada table..!!");
+        } else {
+            try {
+                Sequel.AutoComitFalse();
+                sukses = true;
+                if (Sequel.menghapustfSmc("bayar_pemesanan", "tgl_bayar = ? and no_faktur = ? and no_bukti = ?",
+                    tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(),
+                    tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString(),
+                    tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString()
+                )) {
+                    if (Sequel.cariDoubleSmc("select ifnull(round(sum(bayar_pemesanan.besar_bayar)), 0) from bayar_pemesanan where bayar_pemesanan.no_faktur = ?",
+                        tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()) <= 0
+                    ) {
+                        Sequel.mengupdateSmc("pemesanan", "status = 'Belum Dibayar'", "no_faktur = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString());
+                    } else {
+                        Sequel.mengupdateSmc("pemesanan", "status = 'Belum Lunas'", "no_faktur = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString());
+                    }
+                    
+                    koderekening = "";
+                    try (FileReader fr = new FileReader("./cache/akunbayarhutang.iyem")) {
+                        response = mapper.readTree(fr).path("akunbayarhutang");
+                        if (response.isArray()) {
+                            for (JsonNode list : response) {
+                                if (list.path("NamaAkun").asText("").equals(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString())) {
+                                    koderekening = list.path("KodeRek").asText();
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (koderekening.isBlank()) {
+                        sukses = false;
+                    } else {
+                        total = 0;
+                        if (koderekening.equals(Host_to_Host_Bank_Mandiri)) {
+                            total = Sequel.cariDoubleSmc("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode = metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString());
+                            Sequel.menghapusSmc("pembayaran_pihak_ke3_bankmandiri", "nomor_pembayaran = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString());
+                        }
+                        Sequel.deleteTampJurnal();
+                        if (total > 0) {
+                            Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
+                        }
+                        Sequel.insertTampJurnal(koderekening, tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)) + total, 0);
+                        Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", 0, (Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8));
+                        sukses = jur.simpanJurnal(NoBukti.getText(), "U", "BATAL BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR " + tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString() + ", OLEH " + akses.getkode());
+                    }
+                } else {
+                    sukses = false;
                 }
                 
-                koderekening="";
-                try {
-                    myObj = new FileReader("./cache/akunbayarhutang.iyem");
-                    root = mapper.readTree(myObj);
-                    response = root.path("akunbayarhutang");
-                    if(response.isArray()){
-                       for(JsonNode list:response){
-                           if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                                koderekening=list.path("KodeRek").asText();  
-                           }
-                       }
-                    }
-                    myObj.close();
-                } catch (Exception e) {
-                    sukses=false;
-                } 
-                
-                if(koderekening.equals("")){
-                    sukses=false; 
-                }else{
-                    total=0;
-                    if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
-                        total=Sequel.cariIsiAngka("select metode_pembayaran_bankmandiri.biaya_transaksi from metode_pembayaran_bankmandiri inner join pembayaran_pihak_ke3_bankmandiri on pembayaran_pihak_ke3_bankmandiri.kode_metode=metode_pembayaran_bankmandiri.kode_metode where pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
-                        Sequel.meghapus("pembayaran_pihak_ke3_bankmandiri","nomor_pembayaran",tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString());
-                    }
-                    Sequel.deleteTampJurnal();
-                    if(total>0){
-                        Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
-                    }
-                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), (Valid.SetAngka(BesarBayar.getText()) + total), 0);
-                    Sequel.insertTampJurnal(Bayar_Pemesanan_Obat, "HUTANG USAHA", "0", BesarBayar.getText());
-                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","BATAL BAYAR PELUNASAN HUTANG OBAT/BHP/ALKES NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode()); 
+                if (sukses) {
+                    Sequel.Commit();
+                } else {
+                    Sequel.RollBack();
                 }
-            }else{
-                sukses=false;
+                
+                Sequel.AutoComitTrue();
+                
+                if (sukses) {
+                    tabMode.removeRow(tbKamar.getSelectedRow());
+                    emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             }
-             
-            if(sukses==true){
-                Sequel.Commit();
-                tabMode.removeRow(tbKamar.getSelectedRow());
-                emptTeks();
-            }else{
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                Sequel.RollBack();
-            }
-            Sequel.AutoComitTrue();
-        }catch (Exception ex) {
-            System.out.println(ex);
         }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1144,15 +1149,6 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
             Valid.pindah(evt, TCari, BtnAll);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
-
-    private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
-}//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1481,6 +1477,16 @@ private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         kodetransaksibank.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPetugas1ActionPerformed
+
+    private void tbKamarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseReleased
+        tbKamar.changeSelection(tbKamar.rowAtPoint(evt.getPoint()), tbKamar.columnAtPoint(evt.getPoint()), false, false);
+        if (tabMode.getRowCount() != 0) {
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+        }
+    }//GEN-LAST:event_tbKamarMouseReleased
 
     /**
     * @param args the command line arguments
