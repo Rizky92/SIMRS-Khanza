@@ -569,8 +569,126 @@
                                                                         $jeniskunjungan = "4 (Rujukan Antar RS)";
                                                                     }
 
-                                                                    $querybooking = bukaquery2("insert into referensi_mobilejkn_bpjs values('$nobooking','$no_rawat', '".validTeks4($decode['nomorkartu'],20)."', '".validTeks4($decode['nik'],20)."','".validTeks4($decode['nohp'],20)."','".validTeks4($decode['kodepoli'],20)."','$statusdaftar','$datapeserta[no_rkm_medis]','".validTeks4($decode['tanggalperiksa'],20)."','".validTeks4($decode['kodedokter'],20)."','".validTeks4($decode['jampraktek'],20)."','".$jeniskunjungan."','".validTeks4($decode['nomorreferensi'],30)."','".$kdpoli."-".$noReg."','$noReg','".(strtotime(validTeks4($decode['tanggalperiksa'],20).' '.$jadwal['jam_mulai'].'+'.$dilayani.' minute')* 1000)."','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','".($jadwal['kuota']-$sisakuota-1)."','$jadwal[kuota]','Belum','0000-00-00 00:00:00','Sudah')");
-                                                                    if ($querybooking) {
+                                                                    $queryregistrasi = bukaquery2(sprintf("insert into reg_periksa values('%s', '%s', '%s', '%s', '%s', '%s', '%s',
+                                                                        '%s', '%s, %s, %s, %s, %s', '%s', '%s', 'Belum', '%s', 'Ralan', '%s', '%s', '%s', 'Belum Bayar', '%s')",
+                                                                        $noReg, $no_rawat, validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $kddokter,
+                                                                        $datapeserta['no_rkm_medis'], $kdpoli, $datapeserta['namakeluarga'], $datapeserta['alamatpj'],
+                                                                        $datapeserta['kelurahanpj'], $datapeserta['kecamatanpj'], $datapeserta['kabupatenpj'],
+                                                                        $datapeserta['propinsipj'], $datapeserta['keluarga'],
+                                                                        getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
+                                                                        str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)), CARABAYAR,
+                                                                        $umur, $sttsumur, $statuspoli
+                                                                    ));
+                                                                    if ($queryregistrasi) {
+                                                                        $querybooking = bukaquery2(sprintf("insert into referensi_mobilejkn_bpjs values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
+                                                                            '%s', '%s', '%s', '%s', '%s', '%s-%s', '%s', '%s', '%s', '%s', '%s', '%s', 'Belum', '0000-00-00 00:00:00.000', 'Sudah')",
+                                                                            $nobooking, $no_rawat, validTeks4($decode['nomorkartu'], 20), validTeks4($decode['nik'], 20), validTeks4($decode['nohp'], 20),
+                                                                            validTeks4($decode['kodepoli'], 20), $statusdaftar, $datapeserta['no_rkm_medis'], validTeks4($decode['tanggalperiksa'], 20),
+                                                                            validTeks4($decode['kodedokter'], 20), validTeks4($decode['jampraktek'], 20), $jeniskunjungan, validTeks4($decode['nomorreferensi'], 30),
+                                                                            $kdpoli, $noReg, $noReg, strtotime(sprintf('%s %s + %s minute', validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $dilayani)) * 1000,
+                                                                            ($jadwal['kuota'] - $sisakuota - 1), $jadwal['kuota'], ($jadwal['kuota'] - $sisakuota - 1), $jadwal['kuota']
+                                                                        ));
+                                                                        if ($querybooking) {
+                                                                            $response = [
+                                                                                'response' => [
+                                                                                    'nomorantrean'     => $kdpoli.'-'.$noReg,
+                                                                                    'angkaantrean'     => intval($noReg),
+                                                                                    'kodebooking'      => $nobooking,
+                                                                                    'pasienbaru'       => 0,
+                                                                                    'norm'             => $datapeserta['no_rkm_medis'],
+                                                                                    'namapoli'         => $jadwal['nm_poli'],
+                                                                                    'namadokter'       => $jadwal['nm_dokter'],
+                                                                                    'estimasidilayani' => strtotime(sprintf('%s %s + %s minute', validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $dilayani)) * 1000,
+                                                                                    'sisakuotajkn'     => intval($jadwal['kuota'] - $sisakuota - 1),
+                                                                                    'kuotajkn'         => intval($jadwal['kuota']),
+                                                                                    'sisakuotanonjkn'  => intval($jadwal['kuota'] - $sisakuota - 1),
+                                                                                    'kuotanonjkn'      => intval($jadwal['kuota']),
+                                                                                    'keterangan'       => 'Peserta harap 30 menit lebih awal guna pencatatan administrasi.'
+                                                                                ],
+                                                                                'metadata' => [
+                                                                                    'message' => 'Ok',
+                                                                                    'code' => 200
+                                                                                ],
+                                                                            ];
+                                                                            http_response_code(200);
+                                                                        } else {
+                                                                            bukaquery2("delete from reg_periksa where no_rawat = '$no_rawat' and no_rkm_medis = '$datapeserta[no_rkm_medis]'");
+                                                                            $response = [
+                                                                                'metadata' => [
+                                                                                    'code' => 401,
+                                                                                    'message' => 'Maaf terjadi kesalahan, hubungi administrator..',
+                                                                                ],
+                                                                            ];
+                                                                            http_response_code(401);
+                                                                        }
+                                                                    } else {
+                                                                        $noReg           = noRegPoliSmc($kdpoli, $kddokter, validTeks4($decode['tanggalperiksa'], 20));
+                                                                        $max             = norawatSmc(validTeks4($decode['tanggalperiksa'], 20));
+                                                                        $no_rawat        = str_replace("-","/",validTeks4($decode['tanggalperiksa'],20)."/").sprintf("%06s", $max);
+                                                                        $nobooking       = getOne2("select concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), lpad(ifnull(max(convert(right(referensi_mobilejkn_bpjs.nobooking, 6), signed)), 0) + 1, 6, '0')) from referensi_mobilejkn_bpjs where referensi_mobilejkn_bpjs.nobooking like concat(date_format('".validTeks4($decode['tanggalperiksa'], 20)."', '%Y%m%d'), '%')");
+                                                                        $queryregistrasi = bukaquery2(sprintf("insert into reg_periksa values('%s', '%s', '%s', '%s', '%s', '%s', '%s',
+                                                                            '%s', '%s, %s, %s, %s, %s', '%s', '%s', 'Belum', '%s', 'Ralan', '%s', '%s', '%s', 'Belum Bayar', '%s')",
+                                                                            $noReg, $no_rawat, validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $kddokter,
+                                                                            $datapeserta['no_rkm_medis'], $kdpoli, $datapeserta['namakeluarga'], $datapeserta['alamatpj'],
+                                                                            $datapeserta['kelurahanpj'], $datapeserta['kecamatanpj'], $datapeserta['kabupatenpj'],
+                                                                            $datapeserta['propinsipj'], $datapeserta['keluarga'],
+                                                                            getOne2("select registrasilama from poliklinik where kd_poli = '$kdpoli'"),
+                                                                            str_replace('0', 'Lama', str_replace('1', 'Baru', $statusdaftar)), CARABAYAR,
+                                                                            $umur, $sttsumur, $statuspoli
+                                                                        ));
+                                                                        if ($queryregistrasi) {
+                                                                            $querybooking = bukaquery2(sprintf("insert into referensi_mobilejkn_bpjs values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
+                                                                                '%s', '%s', '%s', '%s', '%s', '%s-%s', '%s', '%s', '%s', '%s', '%s', '%s', 'Belum', '0000-00-00 00:00:00.000', 'Sudah')",
+                                                                                $nobooking, $no_rawat, validTeks4($decode['nomorkartu'], 20), validTeks4($decode['nik'], 20), validTeks4($decode['nohp'], 20),
+                                                                                validTeks4($decode['kodepoli'], 20), $statusdaftar, $datapeserta['no_rkm_medis'], validTeks4($decode['tanggalperiksa'], 20),
+                                                                                validTeks4($decode['kodedokter'], 20), validTeks4($decode['jampraktek'], 20), $jeniskunjungan, validTeks4($decode['nomorreferensi'], 30),
+                                                                                $kdpoli, $noReg, $noReg, strtotime(sprintf('%s %s + %s minute', validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $dilayani)) * 1000,
+                                                                                ($jadwal['kuota'] - $sisakuota - 1), $jadwal['kuota'], ($jadwal['kuota'] - $sisakuota - 1), $jadwal['kuota']
+                                                                            ));
+                                                                            if ($querybooking) {
+                                                                                $response = [
+                                                                                    'response' => [
+                                                                                        'nomorantrean'     => $kdpoli.'-'.$noReg,
+                                                                                        'angkaantrean'     => intval($noReg),
+                                                                                        'kodebooking'      => $nobooking,
+                                                                                        'pasienbaru'       => 0,
+                                                                                        'norm'             => $datapeserta['no_rkm_medis'],
+                                                                                        'namapoli'         => $jadwal['nm_poli'],
+                                                                                        'namadokter'       => $jadwal['nm_dokter'],
+                                                                                        'estimasidilayani' => strtotime(sprintf('%s %s + %s minute', validTeks4($decode['tanggalperiksa'], 20), $jadwal['jam_mulai'], $dilayani)) * 1000,
+                                                                                        'sisakuotajkn'     => intval($jadwal['kuota'] - $sisakuota - 1),
+                                                                                        'kuotajkn'         => intval($jadwal['kuota']),
+                                                                                        'sisakuotanonjkn'  => intval($jadwal['kuota'] - $sisakuota - 1),
+                                                                                        'kuotanonjkn'      => intval($jadwal['kuota']),
+                                                                                        'keterangan'       => 'Peserta harap 30 menit lebih awal guna pencatatan administrasi.'
+                                                                                    ],
+                                                                                    'metadata' => [
+                                                                                        'message' => 'Ok',
+                                                                                        'code' => 200
+                                                                                    ],
+                                                                                ];
+                                                                                http_response_code(200);
+                                                                            } else {
+                                                                                bukaquery2("delete from reg_periksa where no_rawat = '$no_rawat' and no_rkm_medis = '$datapeserta[no_rkm_medis]'");
+                                                                                $response = [
+                                                                                    'metadata' => [
+                                                                                        'code' => 401,
+                                                                                        'message' => 'Maaf terjadi kesalahan, hubungi administrator..',
+                                                                                    ],
+                                                                                ];
+                                                                                http_response_code(401);
+                                                                            }
+                                                                        } else {
+                                                                            $response = [
+                                                                                'metadata' => [
+                                                                                    'code' => 401,
+                                                                                    'message' => 'Maaf terjadi kesalahan, hubungi administrator..',
+                                                                                ],
+                                                                            ];
+                                                                            http_response_code(401);
+                                                                        }
+                                                                    }
+                                                                    /*if ($querybooking) {
                                                                         $query = bukaquery2("insert into reg_periksa values('$noReg', '$no_rawat', '".validTeks4($decode['tanggalperiksa'],20)."','".$jadwal['jam_mulai']."', '$kddokter', '$datapeserta[no_rkm_medis]', '$kdpoli', '$datapeserta[namakeluarga]', '$datapeserta[alamatpj], $datapeserta[kelurahanpj], $datapeserta[kecamatanpj], $datapeserta[kabupatenpj], $datapeserta[propinsipj]', '$datapeserta[keluarga]', '".getOne2("select registrasilama from poliklinik where kd_poli='$kdpoli'")."', 'Belum','".str_replace("0","Lama",str_replace("1","Baru",$statusdaftar))."','Ralan', '".CARABAYAR."', '$umur','$sttsumur','Belum Bayar', '$statuspoli')");
                                                                         if ($query) {
                                                                             $response = array(
@@ -643,7 +761,7 @@
                                                                             )
                                                                         );
                                                                         http_response_code(401);
-                                                                    }
+                                                                    }*/
                                                                 }else{
                                                                     $response = array(
                                                                         'metadata' => array(
@@ -660,7 +778,6 @@
                                             }
                                         }
                                     }
-
                                 }else {
                                     $response = array(
                                         'metadata' => array(
@@ -1866,8 +1983,8 @@
             tampil();
         }
     }else{
-        // tampil();
-        echo 'coba';
+        tampil();
+        // echo 'coba';
     }
 
     function tampil(){
