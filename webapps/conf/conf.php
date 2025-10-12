@@ -1000,4 +1000,19 @@
         elseif ($x < 1000000000)
           return Terbilang($x / 1000000) . " juta" . Terbilang($x % 1000000);
     }
+
+    function formatDuitSmc($duit)
+    {
+        return (round((float) $duit, 0) <=> 0) === 0 ? '' : @number_format($duit, 0, ',', '.');
+    }
+
+    function ubahSmc($table, $attributes, $conditions)
+    {
+        if (empty($table) || empty($attributes) || empty($conditions)) {
+            echo '<span style="color: rgb(255, 0, 0); font-weight: bold">Terjadi kesalahan..!!</span><br /><br />';
+            return;
+        }
+
+        return bukaquery("UPDATE $table SET $attributes WHERE $conditions");
+    }
 ?>
