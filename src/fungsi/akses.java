@@ -3858,13 +3858,17 @@ public final class akses {
     public static boolean gethasil_pemeriksaan_treadmill(){return akses.hasil_pemeriksaan_treadmill;}
     public static boolean gethasil_pemeriksaan_echo_pediatrik(){return akses.hasil_pemeriksaan_echo_pediatrik;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
+    public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
         if (! akses.edit) {
             return;
         }
-
-        if (((new sekuel().cariTglSmc("select now()").getTime() - akses.tglSelesai) / 1000) > 0) {
-            akses.edit = false;
+        try {
+            if (((new sekuel().cariTglSmc("select now()").getTime() - akses.tglSelesai) / 1000) > 0) {
+                resetEdit();
+            }
+        } catch (Exception e) {
+            resetEdit();
         }
     }
 }
