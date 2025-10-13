@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -153,7 +154,18 @@ public class ApiADAMLABS
                 Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("payload").path("registrasi").path("no_lab").asText());
                 JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS ADAMLABS...!!!");
             } else {
-                JOptionPane.showMessageDialog(null, "Gagal kirim! Alasan: " + response.path("message").asText());
+                // StringBuilder concat = new StringBuilder();
+                ArrayList<String> messages = new ArrayList<>();
+                if (response.path("message").isArray()) {
+                    for (JsonNode error : response.path("message")) {
+                        messages.add(new StringBuilder("- ").append(error.path("msg")).toString());
+                    }
+                }
+                if (messages.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses order lab..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, messages.toArray(), "Gagal", JOptionPane.WARNING_MESSAGE);
+                }
             }
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             System.out.println(e.getResponseBodyAsString());
