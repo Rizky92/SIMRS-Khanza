@@ -153,14 +153,16 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        internalFrame1 = new widget.InternalFrame();
+        Scroll = new widget.ScrollPane();
+        tbKamar = new widget.Table();
+        panelisi2 = new widget.panelisi();
+        ChkAccor = new widget.CekBox();
         panelisi1 = new widget.panelisi();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new widget.Table();
         jScrollPane2 = new javax.swing.JScrollPane();
         table2 = new widget.Table();
-        internalFrame1 = new widget.InternalFrame();
-        Scroll = new widget.ScrollPane();
-        tbKamar = new widget.Table();
         panelGlass6 = new widget.panelisi();
         jLabel18 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
@@ -181,6 +183,46 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         jMenuItem1.setText("jMenuItem1");
         jMenuItem1.setName("jMenuItem1"); // NOI18N
         jPopupMenu1.add(jMenuItem1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(null);
+        setIconImages(null);
+        setUndecorated(true);
+        setResizable(false);
+
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        Scroll.setName("Scroll"); // NOI18N
+        Scroll.setOpaque(true);
+
+        tbKamar.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbKamar.setName("tbKamar"); // NOI18N
+        Scroll.setViewportView(tbKamar);
+
+        internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
+
+        panelisi2.setName("panelisi2"); // NOI18N
+        panelisi2.setLayout(new java.awt.BorderLayout());
+
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
+        ChkAccor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 255, 248)));
+        ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setFocusable(false);
+        ChkAccor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setName("ChkAccor"); // NOI18N
+        ChkAccor.setPreferredSize(new java.awt.Dimension(15, 20));
+        ChkAccor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkAccorActionPerformed(evt);
+            }
+        });
+        panelisi2.add(ChkAccor, java.awt.BorderLayout.LINE_START);
 
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setLayout(new javax.swing.BoxLayout(panelisi1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -221,24 +263,9 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
 
         panelisi1.add(jScrollPane2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(null);
-        setIconImages(null);
-        setUndecorated(true);
-        setResizable(false);
+        panelisi2.add(panelisi1, java.awt.BorderLayout.CENTER);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
-        internalFrame1.setName("internalFrame1"); // NOI18N
-        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
-
-        Scroll.setName("Scroll"); // NOI18N
-        Scroll.setOpaque(true);
-
-        tbKamar.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbKamar.setName("tbKamar"); // NOI18N
-        Scroll.setViewportView(tbKamar);
-
-        internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
+        internalFrame1.add(panelisi2, java.awt.BorderLayout.LINE_END);
 
         panelGlass6.setName("panelGlass6"); // NOI18N
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
@@ -250,7 +277,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(jLabel18);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -264,7 +291,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -291,6 +318,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -321,6 +349,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(jLabel17);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -338,6 +367,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(BtnHapus);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -350,6 +380,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         panelGlass6.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -527,6 +558,10 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TCariActionPerformed
 
+    private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
+        
+    }//GEN-LAST:event_ChkAccorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -548,6 +583,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
+    private widget.CekBox ChkAccor;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.Label LCount;
@@ -565,6 +601,7 @@ public final class ApotekBPJSDaftarPelayananObat2 extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private widget.panelisi panelGlass6;
     private widget.panelisi panelisi1;
+    private widget.panelisi panelisi2;
     private widget.Table table1;
     private widget.Table table2;
     private widget.Table tbKamar;
