@@ -234,6 +234,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_diagnosa_pasien_smc`  (
   `deskripsi` varchar(250) NULL DEFAULT NULL,
   `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `keterangan` varchar(100) NULL DEFAULT NULL,
+  `locked` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_sep`, `kode_icd10`) USING BTREE,
   INDEX `idrg_dx_smc_icd10_im`(`kode_icd10`) USING BTREE,
   CONSTRAINT `inacbg_dx_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -274,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_prosedur_pasien_smc`  (
   `deskripsi` varchar(250) NULL DEFAULT NULL,
   `urut` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `keterangan` varchar(100) NULL DEFAULT NULL,
+  `locked` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_sep`, `kode_icd9`) USING BTREE,
   INDEX `idrg_pc_smc_icd9cm_im`(`kode_icd9`) USING BTREE,
   CONSTRAINT `inacbg_pc_smc_no_sep` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE

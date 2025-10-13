@@ -3344,12 +3344,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
 
-    private void cekStatusKlaim() {
-        if (tbKompilasi.getSelectedRow() >= 0) {
-
-        }
-    }
-
     private void exportPDF(String reportName, String savedFileName, Map reportParams) {
         try {
             File dir = new File("./berkaspdf/" + tanggalExport);
