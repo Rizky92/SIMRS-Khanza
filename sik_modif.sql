@@ -75,32 +75,32 @@ ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tang
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
 
 CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs`  (
-  `no_sep` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `no_apotek` varchar(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `no_resep` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `no_sep` varchar(40) NOT NULL,
+  `no_apotek` varchar(40) NOT NULL,
+  `no_resep` varchar(5) NOT NULL,
   `tgl_resep` datetime(0) NOT NULL,
-  `tgl_pelayanan` date NULL DEFAULT NULL,
-  `jenis_obat` enum('1','2','3') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `iterasi` enum('0','1','2') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `kd_poli` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `nm_poli` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `kodedpjp` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `nmdpjp` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `user` varchar(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tgl_pelayanan` datetime NULL DEFAULT NULL,
+  `jenis_obat` enum('1','2','3') NULL DEFAULT NULL,
+  `iterasi` enum('0','1','2') NULL DEFAULT NULL,
+  `kd_poli` varchar(10) NULL DEFAULT NULL,
+  `nm_poli` varchar(100) NULL DEFAULT NULL,
+  `kodedpjp` varchar(10) NULL DEFAULT NULL,
+  `nmdpjp` varchar(100) NULL DEFAULT NULL,
+  `user` varchar(25) NULL DEFAULT NULL,
   INDEX `no_sep`(`no_sep`) USING BTREE,
   CONSTRAINT `bridging_apotek_bpjs_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep`(`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_obat`  (
-  `no_sep` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `no_resep` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `kd_obat` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `nm_obat` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `no_sep` varchar(40) NOT NULL,
+  `no_resep` varchar(5) NOT NULL,
+  `kd_obat` varchar(15) NOT NULL,
+  `nm_obat` varchar(150) NULL DEFAULT NULL,
   `jumlah` double NULL DEFAULT NULL,
-  `signa1` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `signa2` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `racikan` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `no_sjp` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `signa1` double NULL DEFAULT NULL,
+  `signa2` double NULL DEFAULT NULL,
+  `racikan` enum('0','1') NULL DEFAULT NULL,
+  `no_sjp` varchar(40) NOT NULL,
   INDEX `no_sep`(`no_sep`) USING BTREE,
   CONSTRAINT `bridging_apotek_bpjs_obat_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep`(`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -1413,6 +1413,8 @@ CREATE TABLE IF NOT EXISTS `set_filter_jenis_resep_obat_ranap`  (
 ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
+
+ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `pemberlakuan_2x24_jam`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 
