@@ -582,24 +582,17 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
         try {
             File file = new File("./cache/inventariskoleksi.iyem");
             file.createNewFile();
-            ObjectNode obj = mapper.createObjectNode();
             try (
                 FileWriter fw = new FileWriter(file);
                 ResultSet rs = koneksi.createStatement().executeQuery(
-                    "select inventaris.no_inventaris, inventaris_barang.kode_barang, inventaris_barang.nama_barang, " +
-                    "inventaris_produsen.nama_produsen, inventaris_merk.nama_merk, inventaris_barang.thn_produksi, " +
-                    "inventaris_barang.isbn, inventaris_kategori.nama_kategori, inventaris_jenis.nama_jenis, " +
-                    "inventaris.asal_barang, inventaris.tgl_pengadaan, inventaris.harga, inventaris.status_barang, " +
-                    "inventaris_ruang.nama_ruang, inventaris.no_rak, inventaris.no_box from inventaris join " +
-                    "inventaris_barang on inventaris_barang.kode_barang = inventaris.kode_barang join " +
-                    "inventaris_produsen on inventaris_barang.kode_produsen = inventaris_produsen.kode_produsen join " +
-                    "inventaris_ruang on inventaris.id_ruang = inventaris_ruang.id_ruang join " +
-                    "inventaris_jenis on inventaris_barang.id_jenis = inventaris_jenis.id_jenis join " +
-                    "inventaris_kategori on inventaris_barang.id_kategori = inventaris_kategori.id_kategori join " +
-                    "inventaris_merk on inventaris_barang.id_merk = inventaris_merk.id_merk order by " +
-                    "inventaris_barang.kode_barang, inventaris.no_inventaris"
+                    "select i.no_inventaris, b.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, b.thn_produksi, b.isbn, k.nama_kategori, " +
+                    "j.nama_jenis, i.asal_barang, i.tgl_pengadaan, i.harga, i.status_barang, r.nama_ruang, i.no_rak, i.no_box from inventaris i " +
+                    "join inventaris_barang b on i.kode_barang = b.kode_barang join inventaris_produsen p on b.kode_produsen = p.kode_produsen join " +
+                    "inventaris_ruang r on i.id_ruang = r.id_ruang join inventaris_jenis j on b.id_jenis = j.id_jenis join inventaris_kategori k on " +
+                    "b.id_kategori = k.id_kategori join inventaris_merk m on b.id_merk = m.id_merk order by b.kode_barang, i.no_inventaris"
                 );
             ) {
+                ObjectNode root = mapper.createObjectNode();
                 ArrayNode array = mapper.createArrayNode();
                 if (rs.next()) {
                     Map<String, Object> map;
@@ -630,8 +623,8 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                         });
                     } while (rs.next());
                 }
-                obj.set("inventariskoleksi", array);
-                fw.write(mapper.writeValueAsString(obj));
+                root.set("inventariskoleksi", array);
+                fw.write(root.toString());
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -642,7 +635,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     private void tampil2() {
         Valid.tabelKosong(tabMode);
         try (FileReader fr = new FileReader("./cache/inventariskoleksi.iyem")) {
-            response = mapper.readTree(fr).path("inventariskoleksi");
+            JsonNode response = mapper.readTree(fr).path("inventariskoleksi");
             if (response.isArray()) {
                 if (NmRuangan.getText().isBlank()) {
                     if (TCari.getText().isBlank()) {
@@ -657,7 +650,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                         }
                     } else {
                         for (JsonNode list : response) {
-                            if (root.toString().toLowerCase().contains(TCari.getText().toLowerCase().trim())) {
+                            if (list.toString().toLowerCase().contains(TCari.getText().toLowerCase().trim())) {
                                 tabMode.addRow(new Object[] {
                                     list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
                                     list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
@@ -671,7 +664,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 } else {
                     if (TCari.getText().isBlank()) {
                         for (JsonNode list : response) {
-                            if (list.path("Ruang").asText().toLowerCase().contains(NmRuangan.getText().trim().toLowerCase())) {
+                            if (list.path("Ruang").asText().toLowerCase().trim().contains(NmRuangan.getText().trim().toLowerCase())) {
                                 tabMode.addRow(new Object[] {
                                     list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
                                     list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
@@ -683,7 +676,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                         }
                     } else {
                         for (JsonNode list : response) {
-                            if (list.path("Ruang").asText().toLowerCase().contains(NmRuangan.getText().trim().toLowerCase())) {
+                            if (list.path("Ruang").asText().toLowerCase().trim().contains(NmRuangan.getText().trim().toLowerCase())) {
                                 if (list.toString().toLowerCase().contains(TCari.getText().toLowerCase().trim())) {
                                     tabMode.addRow(new Object[] {
                                         list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
