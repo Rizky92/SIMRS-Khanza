@@ -144,6 +144,8 @@ ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NO
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
+ALTER TABLE `detail_piutang_pasien` ADD INDEX IF NOT EXISTS `detail_piutang_pasien_ibfk_1`(`kd_pj`, `sisapiutang`) USING BTREE;
+
 ALTER TABLE `detailjurnal` ADD INDEX IF NOT EXISTS `detailjurnal_no_jurnal_kd_rek_idx`(`no_jurnal`, `kd_rek`) USING BTREE;
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAULT NULL AFTER `kd_dokter`;
@@ -265,6 +267,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (
   `no_sitb` varchar(30) NOT NULL,
   `status_validasi` varchar(50) NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
+  INDEX `inacbg_pasien_tb_smc_ibfk_2`(`no_rkm_medis`) USING BTREE,
   CONSTRAINT `inacbg_pasien_tb_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `inacbg_pasien_tb_smc_ibfk_2` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -1182,8 +1185,6 @@ ALTER TABLE `penjab` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NOT NULL DEF
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `png_jawab` varchar(50) NOT NULL AFTER `kd_pj`;
 
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(100) NOT NULL AFTER `png_jawab`;
-
-ALTER TABLE `penyakit` MODIFY COLUMN IF EXISTS `nm_penyakit` varchar(250) NULL DEFAULT NULL AFTER `kd_penyakit`;
 
 ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `email` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
