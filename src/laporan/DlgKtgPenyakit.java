@@ -117,7 +117,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
         TKd.requestFocus();
         try {
             ps=koneksi.prepareStatement("select * from kategori_penyakit where kd_ktg like ? or nm_kategori like ? or ciri_umum like ? order by kd_ktg");
@@ -398,7 +398,6 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         panelGlass2.add(jLabel4);
         jLabel4.setBounds(0, 42, 106, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -418,7 +417,6 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
         panelGlass2.add(TCiri);
         TCiri.setBounds(110, 42, 510, 23);
 
-        TNm.setHighlighter(null);
         TNm.setName("TNm"); // NOI18N
         TNm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -485,7 +483,7 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKtgPny.getRowCount();i++){ 
+        for(i=0;i<tbKtgPny.getRowCount();i++){
             if(tbKtgPny.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("kategori_penyakit","kd_ktg",tbKtgPny.getValueAt(i,1).toString());
             }
@@ -545,14 +543,14 @@ public final class DlgKtgPenyakit extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
                 Valid.MyReport("rptKtgPenyakit.jasper","report","::[ Data Kategori Penyakit ]::",param);
             }else if(! TCari.getText().trim().equals("")){

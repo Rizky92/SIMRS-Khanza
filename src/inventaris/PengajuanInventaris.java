@@ -135,7 +135,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -155,7 +155,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
                         NmPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                         btnPetugasPJ.requestFocus();
                     }
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -166,10 +166,10 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         Harga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -186,7 +186,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
                 isHitung();
             }
         });
-        
+
         Jumlah.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -626,7 +626,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         jLabel5.setBounds(0, 100, 95, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -654,7 +653,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         btnPetugas.setBounds(400, 40, 28, 23);
 
         NmPetugas.setEditable(false);
-        NmPetugas.setHighlighter(null);
         NmPetugas.setName("NmPetugas"); // NOI18N
         NmPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -713,7 +711,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 10, 95, 23);
 
-        NoPengajuan.setHighlighter(null);
         NoPengajuan.setName("NoPengajuan"); // NOI18N
         FormInput.add(NoPengajuan);
         NoPengajuan.setBounds(99, 10, 130, 23);
@@ -739,7 +736,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(396, 10, 84, 23);
 
-        NamaBarang.setHighlighter(null);
         NamaBarang.setName("NamaBarang"); // NOI18N
         NamaBarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -754,7 +750,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(219, 70, 50, 23);
 
-        Jumlah.setHighlighter(null);
         Jumlah.setName("Jumlah"); // NOI18N
         Jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -764,7 +759,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         FormInput.add(Jumlah);
         Jumlah.setBounds(273, 70, 55, 23);
 
-        Harga.setHighlighter(null);
         Harga.setName("Harga"); // NOI18N
         Harga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -785,7 +779,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         jLabel13.setBounds(516, 70, 90, 23);
 
         Total.setEditable(false);
-        Total.setHighlighter(null);
         Total.setName("Total"); // NOI18N
         FormInput.add(Total);
         Total.setBounds(610, 70, 160, 23);
@@ -795,7 +788,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(428, 150, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -811,7 +803,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         jLabel15.setBounds(430, 40, 50, 23);
 
         Bidang.setEditable(false);
-        Bidang.setHighlighter(null);
         Bidang.setName("Bidang"); // NOI18N
         Bidang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -827,7 +818,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         jLabel16.setBounds(586, 40, 80, 23);
 
         Departemen.setEditable(false);
-        Departemen.setHighlighter(null);
         Departemen.setName("Departemen"); // NOI18N
         Departemen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -843,7 +833,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         jLabel17.setBounds(0, 150, 95, 23);
 
         KdPetugasPJ.setEditable(false);
-        KdPetugasPJ.setHighlighter(null);
         KdPetugasPJ.setName("KdPetugasPJ"); // NOI18N
         KdPetugasPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -854,7 +843,6 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
         KdPetugasPJ.setBounds(99, 150, 110, 23);
 
         NmPetugasPJ.setEditable(false);
-        NmPetugasPJ.setHighlighter(null);
         NmPetugasPJ.setName("NmPetugasPJ"); // NOI18N
         NmPetugasPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -955,7 +943,7 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1047,14 +1035,14 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPengajuanInventaris.jasper","report","::[ Data Pengajuan Inventaris ]::",
                    "select pengajuan_inventaris.no_pengajuan,pengajuan_inventaris.tanggal,pengajuan_inventaris.nik,peg1.nama as namapengaju,"+
                    "peg1.bidang,peg1.departemen,pengajuan_inventaris.urgensi,pengajuan_inventaris.latar_belakang,pengajuan_inventaris.nama_barang,"+
@@ -1134,7 +1122,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_KdPetugasKeyPressed
@@ -1435,7 +1423,7 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     ps.setString(13,"%"+TCari.getText().trim()+"%");
                     ps.setString(14,"%"+TCari.getText().trim()+"%");
                     ps.setString(15,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 i=1;
                 total=0;
@@ -1506,16 +1494,16 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,205));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpengajuan_asetinventaris());
         BtnHapus.setEnabled(akses.getpengajuan_asetinventaris());
@@ -1528,14 +1516,14 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             btnPetugas.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
-        }  
+        }
     }
-    
+
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pengajuan_inventaris.no_pengajuan,3),signed)),0) from pengajuan_inventaris where pengajuan_inventaris.tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "PI"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan); 
+                "PI"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan);
     }
-    
+
     private void isHitung(){
         if((!Harga.getText().equals(""))&&(!Jumlah.getText().equals(""))){
             Total.setText(Valid.SetAngka(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())));

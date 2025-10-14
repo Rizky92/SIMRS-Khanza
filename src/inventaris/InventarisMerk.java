@@ -352,7 +352,6 @@ public class InventarisMerk extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(176, 12, 100, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -617,7 +616,7 @@ public class InventarisMerk extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getinventaris_merk());
        BtnHapus.setEnabled(akses.getinventaris_merk());

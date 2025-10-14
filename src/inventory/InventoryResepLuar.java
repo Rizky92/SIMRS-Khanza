@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -83,7 +83,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class
              };
@@ -117,11 +117,11 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                 column.setPreferredWidth(130);
             }else if(i==7){
                 column.setPreferredWidth(100);
-            }               
+            }
         }
         warna.kolom=0;
         tbResep.setDefaultRenderer(Object.class,warna);
-        
+
         tabModeResepRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik","Aturan Pakai","Keterangan"
             }){
@@ -133,7 +133,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -144,8 +144,8 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
         tbObatResepRacikan.setModel(tabModeResepRacikan);
         tbObatResepRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
-        tbObatResepRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
-        
+        tbObatResepRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         for (i = 0; i < 7; i++) {
             TableColumn column = tbObatResepRacikan.getColumnModel().getColumn(i);
             if(i==0){
@@ -168,7 +168,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
         warna2.kolom=4;
         tbObatResepRacikan.setDefaultRenderer(Object.class,warna2);
-        
+
         tabModeDetailResepRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Kode Barang","Nama Barang","Satuan","Jenis Obat","Kps","P1","/","P2","Kandungan","Jml","I.F.","Komposisi"
             }){
@@ -178,7 +178,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                     a=true;
                 }
                 return a;
-             }             
+             }
              Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,
@@ -194,8 +194,8 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
         tbDetailResepObatRacikan.setModel(tabModeDetailResepRacikan);
         tbDetailResepObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
-        tbDetailResepObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
-        
+        tbDetailResepObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         for (i = 0; i < 13; i++) {
             TableColumn column = tbDetailResepObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
@@ -229,7 +229,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
         warna3.kolom=9;
         tbDetailResepObatRacikan.setDefaultRenderer(Object.class,warna3);
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -253,7 +253,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         aturanpakai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -261,14 +261,14 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(aturanpakai.getTable().getSelectedRow()!= -1){  
+                if(aturanpakai.getTable().getSelectedRow()!= -1){
                     if(TabRawat.getSelectedIndex()==0){
                         tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),6);
                     }else if(TabRawat.getSelectedIndex()==1){
                         tbObatResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.getSelectedRow(),5);
                         tbObatResepRacikan.requestFocus();
-                    }   
-                }   
+                    }
+                }
                 tbResep.requestFocus();
             }
             @Override
@@ -280,7 +280,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -288,10 +288,10 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){        
+                if(dokter.getTable().getSelectedRow()!= -1){
                      KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                      NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdDokter.requestFocus();
             }
             @Override
@@ -303,7 +303,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         metoderacik.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -311,11 +311,11 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(metoderacik.getTable().getSelectedRow()!= -1){  
+                if(metoderacik.getTable().getSelectedRow()!= -1){
                     tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),1).toString(),tbObatResepRacikan.getSelectedRow(),2);
                     tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),2).toString(),tbObatResepRacikan.getSelectedRow(),3);
                     tbObatResepRacikan.requestFocus();
-                }  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -326,7 +326,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         metoderacik.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -338,10 +338,10 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         jam();
-    }    
-    
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -583,7 +583,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(440, 107));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -594,12 +593,10 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         TNoRw.setBounds(75, 12, 120, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(196, 12, 487, 23);
 
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -610,7 +607,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         KdDokter.setBounds(75, 72, 120, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         FormInput.add(NmDokter);
         NmDokter.setBounds(196, 72, 457, 23);
@@ -647,7 +643,6 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(455, 42, 70, 23);
 
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -856,7 +851,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan masukkan racikan..!!");
             }
-        }  
+        }
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -888,12 +883,12 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                     if(tbResep.getSelectedRow()!= -1){
                         tbResep.setValueAt("",tbResep.getSelectedRow(),i);
                     }
-                }   
+                }
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 i=tbResep.getSelectedColumn();
                 if(i!=7){
                     TCari.requestFocus();
-                }                
+                }
             }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 i=tbResep.getSelectedColumn();
                 if(i==6){
@@ -902,7 +897,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                     aturanpakai.setLocationRelativeTo(internalFrame1);
                     aturanpakai.setVisible(true);
                 }
-            }   
+            }
         }
 }//GEN-LAST:event_tbResepKeyPressed
 
@@ -919,7 +914,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
         barang.setLocationRelativeTo(internalFrame1);
         barang.setAlwaysOnTop(false);
         barang.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());           
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
 private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -929,7 +924,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 jmlobat++;
             }
         }
-        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){ 
+        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
             if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,10).toString())>0){
                 jmlobat++;
             }
@@ -945,8 +940,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             TCari.requestFocus();
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION) {                 
-                ChkJln.setSelected(false);    
+            if (reply == JOptionPane.YES_OPTION) {
+                ChkJln.setSelected(false);
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(Sequel.menyimpantf2("resep_luar","?,?,?,?,?,?,?","Nomer Resep",7,new String[]{
@@ -979,8 +974,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             sukses=false;
                         }
                     }
-                }                                               
-                
+                }
+
                 if(sukses==true){
                     Sequel.Commit();
                     for(i=0;i<tbResep.getRowCount();i++){
@@ -994,7 +989,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
                 Sequel.AutoComitTrue();
                 ChkJln.setSelected(true);
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1011,24 +1006,24 @@ private void BtnSeek5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
 private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
     if(TabRawat.getSelectedIndex()==0){
-        for(i=0;i<tbResep.getRowCount();i++){ 
+        for(i=0;i<tbResep.getRowCount();i++){
             tbResep.setValueAt("",i,0);
             tbResep.setValueAt("",i,6);
         }
     }else if(TabRawat.getSelectedIndex()==1){
-        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){ 
+        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
             tbDetailResepObatRacikan.setValueAt(1,i,6);
             tbDetailResepObatRacikan.setValueAt(1,i,8);
             tbDetailResepObatRacikan.setValueAt("",i,9);
             tbDetailResepObatRacikan.setValueAt(0,i,10);
         }
-    }  
+    }
 }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         TabRawatMouseClicked(null);
         emptTeksobat();
-            
+
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1110,17 +1105,17 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 tbDetailResepObatRacikan.setValueAt(Valid.SetAngka8(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),5).toString())*
                                     (Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),6).toString())/Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),8).toString())),1),
                                         tbDetailResepObatRacikan.getSelectedRow(),9);
-                            }                                
+                            }
                         }
                     } catch (Exception e) {
                         tbDetailResepObatRacikan.setValueAt(0,tbDetailResepObatRacikan.getSelectedRow(),9);
-                    }      
+                    }
                 }else if(i==9){
                     if(tbDetailResepObatRacikan.getValueAt(tbDetailResepObatRacikan.getSelectedRow(),9).toString().contains("%")){
                         getDatadetailresepracikan2();
                     }else{
                         getDatadetailresepracikan();
-                    }  
+                    }
                 }
             }
         }
@@ -1135,9 +1130,9 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                 }else{
                     getDatadetailresepracikan();
-                }  
+                }
             } catch (Exception e) {
-            }   
+            }
         }
     }//GEN-LAST:event_tbDetailResepObatRacikanPropertyChange
 
@@ -1296,14 +1291,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Table tbResep;
     // End of variables declaration//GEN-END:variables
 
-    public void tampilobat() {        
+    public void tampilobat() {
         z=0;
         for(i=0;i<tbResep.getRowCount();i++){
             if(!tbResep.getValueAt(i,0).toString().equals("")){
                 z++;
             }
-        }    
-        
+        }
+
         jumlah=null;
         jumlah=new double[z];
         kodebarang=null;
@@ -1315,19 +1310,19 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         letakbarang=null;
         letakbarang=new String[z];
         namajenis=null;
-        namajenis=new String[z];                   
+        namajenis=new String[z];
         aturan=null;
-        aturan=new String[z];           
+        aturan=new String[z];
         industri=null;
-        industri=new String[z];   
-        z=0;        
+        industri=new String[z];
+        z=0;
         for(i=0;i<tbResep.getRowCount();i++){
             if(!tbResep.getValueAt(i,0).toString().equals("")){
                 try {
                     jumlah[z]=Double.parseDouble(tbResep.getValueAt(i,0).toString());
                 } catch (Exception e) {
                     jumlah[z]=0;
-                }  
+                }
                 kodebarang[z]=tbResep.getValueAt(i,1).toString();
                 namabarang[z]=tbResep.getValueAt(i,2).toString();
                 kodesatuan[z]=tbResep.getValueAt(i,3).toString();
@@ -1338,15 +1333,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 z++;
             }
         }
-        
-        Valid.tabelKosong(tabModeResep);             
-        
+
+        Valid.tabelKosong(tabModeResep);
+
         for(i=0;i<z;i++){
             tabModeResep.addRow(new Object[] {
                 jumlah[i],kodebarang[i],namabarang[i],kodesatuan[i],letakbarang[i],namajenis[i],aturan[i],industri[i]
             });
         }
-        
+
         try {
             psresep=koneksi.prepareStatement(
                 "select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,"+
@@ -1378,37 +1373,37 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeksobat() {
         if(ChkRM.isSelected()==true){
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(resep_luar.no_resep,3),signed)),0) from resep_luar where resep_luar.tgl_perawatan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"' ",
-                "RL"+DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),3,NoResep);        
-        } 
+                "RL"+DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),3,NoResep);
+        }
     }
 
     public JTable getTable(){
         return tbResep;
     }
-    
+
     public Button getButton(){
         return BtnSimpan;
     }
-    
-    public void isCek(){   
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getresep_luar());
         TCari.requestFocus();
     }
-    
-    public void setNoRm(String norwt,String KodeDokter,String NamaDokter,String Pasien) {        
+
+    public void setNoRm(String norwt,String KodeDokter,String NamaDokter,String Pasien) {
         TNoRw.setText(norwt);
         TPasien.setText(Pasien);
         KdDokter.setText(KodeDokter);
         NmDokter.setText(NamaDokter);
         TCari.requestFocus();
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1463,15 +1458,15 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
-    public void tampildetailracikanresep() {        
+
+    public void tampildetailracikanresep() {
         z=0;
         for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
             if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,10).toString())>0){
                 z++;
             }
-        }    
-        
+        }
+
         jumlah=null;
         jumlah=new double[z];
         p1=null;
@@ -1489,58 +1484,58 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         no=null;
         no=new String[z];
         namajenis=null;
-        namajenis=new String[z];        
+        namajenis=new String[z];
         industri=null;
-        industri=new String[z];          
+        industri=new String[z];
         komposisi=null;
-        komposisi=new String[z];   
+        komposisi=new String[z];
         kapasitas=null;
-        kapasitas=new double[z];   
+        kapasitas=new double[z];
         kandungan=null;
         kandungan=new String[z];
-        z=0;        
+        z=0;
         for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
             if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,10).toString())>0){
                 no[z]=tbDetailResepObatRacikan.getValueAt(i,0).toString();
                 kodebarang[z]=tbDetailResepObatRacikan.getValueAt(i,1).toString();
                 namabarang[z]=tbDetailResepObatRacikan.getValueAt(i,2).toString();
-                kodesatuan[z]=tbDetailResepObatRacikan.getValueAt(i,3).toString();      
-                namajenis[z]=tbDetailResepObatRacikan.getValueAt(i,4).toString();           
+                kodesatuan[z]=tbDetailResepObatRacikan.getValueAt(i,3).toString();
+                namajenis[z]=tbDetailResepObatRacikan.getValueAt(i,4).toString();
                 try {
                     kapasitas[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,5).toString());
                 } catch (Exception e) {
                     kapasitas[z]=0;
-                }          
+                }
                 try {
                     p1[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,6).toString());
                 } catch (Exception e) {
                     p1[z]=0;
-                } 
+                }
                 try {
                     p2[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,8).toString());
                 } catch (Exception e) {
                     p2[z]=0;
-                } 
+                }
                 kandungan[z]=tbDetailResepObatRacikan.getValueAt(i,9).toString();
                 try {
                     jumlah[z]=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,10).toString());
                 } catch (Exception e) {
                     jumlah[z]=0;
-                }                 
+                }
                 industri[z]=tbDetailResepObatRacikan.getValueAt(i,11).toString();
                 komposisi[z]=tbDetailResepObatRacikan.getValueAt(i,12).toString();
                 z++;
             }
         }
-        
-        Valid.tabelKosong(tabModeDetailResepRacikan);             
-        
+
+        Valid.tabelKosong(tabModeDetailResepRacikan);
+
         for(i=0;i<z;i++){
             tabModeDetailResepRacikan.addRow(new Object[] {
                 no[i],kodebarang[i],namabarang[i],kodesatuan[i],namajenis[i],kapasitas[i],p1[i],"/",p2[i],kandungan[i],jumlah[i],industri[i],komposisi[i]
             });
         }
-        
+
         try {
             psresep=koneksi.prepareStatement(
                 "select databarang.kode_brng,databarang.nama_brng,jenis.nama,databarang.kode_sat,"+
@@ -1548,7 +1543,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 " from databarang inner join jenis inner join industrifarmasi "+
                 " on databarang.kdjns=jenis.kdjns and industrifarmasi.kode_industri=databarang.kode_industri "+
                 " where databarang.status='1' and (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ?) order by databarang.nama_brng");
-            try{ 
+            try{
                 psresep.setString(1,"%"+TCari.getText().trim()+"%");
                 psresep.setString(2,"%"+TCari.getText().trim()+"%");
                 psresep.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1559,7 +1554,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString(),
                         rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),rsobat.getString("kode_sat"),rsobat.getString("nama"),
                         rsobat.getDouble("kapasitas"),1,"/",1,"",0,rsobat.getString("nama_industri"),rsobat.getString("letak_barang")
-                    }); 
+                    });
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1570,10 +1565,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 if(psresep != null){
                     psresep.close();
                 }
-            }   
+            }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     private void getDatadetailresepracikan() {
@@ -1588,7 +1583,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             }
         }
     }
-    
+
     private void getDatadetailresepracikan2() {
         if(tbDetailResepObatRacikan.getSelectedRow()!= -1){
             try {
@@ -1597,7 +1592,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 jumlahracik=0;
                 persenracik=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,9).toString().replaceAll("%",""));
                 kapasitasracik=Double.parseDouble(tbDetailResepObatRacikan.getValueAt(r,5).toString());
-                for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){ 
+                for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
                     if(noracik==tbDetailResepObatRacikan.getValueAt(i,0).toString()){
                         if(!tbDetailResepObatRacikan.getValueAt(i,9).toString().contains("%")){
                             jumlahracik=jumlahracik+(Double.parseDouble(tbDetailResepObatRacikan.getValueAt(i,5).toString())*
@@ -1611,35 +1606,35 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             }
         }
     }
-    
-    
+
+
     private void simpandata() {
         try {
-            for(i=0;i<tbResep.getRowCount();i++){ 
-                if(Valid.SetAngka(tbResep.getValueAt(i,0).toString())>0){   
+            for(i=0;i<tbResep.getRowCount();i++){
+                if(Valid.SetAngka(tbResep.getValueAt(i,0).toString())>0){
                     if(Sequel.menyimpantf2("resep_luar_obat","?,?,?,?","data",4,new String[]{
                         NoResep.getText(),tbResep.getValueAt(i,1).toString(),
                         ""+(Double.parseDouble(tbResep.getValueAt(i,0).toString())),
                         tbResep.getValueAt(i,6).toString()
                     })==false){
                         sukses=false;
-                    }                  
+                    }
                 }
-            } 
+            }
 
-            for(i=0;i<tbObatResepRacikan.getRowCount();i++){ 
-                if(Valid.SetAngka(tbObatResepRacikan.getValueAt(i,4).toString())>0){ 
+            for(i=0;i<tbObatResepRacikan.getRowCount();i++){
+                if(Valid.SetAngka(tbObatResepRacikan.getValueAt(i,4).toString())>0){
                     if(Sequel.menyimpantf2("resep_luar_racikan","?,?,?,?,?,?,?","resep luar racikan",7,new String[]{
                        NoResep.getText(),tbObatResepRacikan.getValueAt(i,0).toString(),tbObatResepRacikan.getValueAt(i,1).toString(),
                        tbObatResepRacikan.getValueAt(i,2).toString(),tbObatResepRacikan.getValueAt(i,4).toString(),
                        tbObatResepRacikan.getValueAt(i,5).toString(),tbObatResepRacikan.getValueAt(i,6).toString()
                     })==false){
                         sukses=false;
-                    } 
+                    }
                 }
             }
 
-            for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){ 
+            for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
                 if(Valid.SetAngka(tbDetailResepObatRacikan.getValueAt(i,10).toString())>0){
                     if(Sequel.menyimpantf2("resep_luar_racikan_detail","?,?,?,?,?,?,?","resep luar racikan detail",7,new String[]{
                         NoResep.getText(),tbDetailResepObatRacikan.getValueAt(i,0).toString(),tbDetailResepObatRacikan.getValueAt(i,1).toString(),
@@ -1647,16 +1642,16 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         tbDetailResepObatRacikan.getValueAt(i,9).toString(),tbDetailResepObatRacikan.getValueAt(i,10).toString()
                     })==false){
                         sukses=false;
-                    } 
+                    }
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     public void MatikanJam(){
         ChkJln.setSelected(false);
     }
-    
+
 }

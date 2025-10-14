@@ -51,14 +51,14 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
     private int i=0;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private String TANGGALMUNDUR="yes";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPenilaianAwalMedisRanapPsikiatrik(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Kode Dokter","Nama Dokter","Tanggal","Anamnesis","Hubungan","Keluhan Utama","Riwayat Penyakit Sekarang","Riwayat Penyakit Dahulu",
             "Riwayat Penyakit Keluarga","Riwayat Napza","Riwayat Alergi","Penampilan","Pembicaraan","Psikomotor","Sikap","Mood","Fungsi Kognitif","Gangguan Persepsi","Proses Pikir",
@@ -68,7 +68,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -182,7 +182,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
         KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
@@ -217,7 +217,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
         Konsul.setDocument(new batasInput((int)500).getKata(Konsul));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -240,7 +240,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                 }
             });
         }
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -263,7 +263,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -281,7 +281,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -486,7 +486,6 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         });
         jPopupMenu1.add(MnPenilaianMedis);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -648,7 +647,6 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         FormInput.setPreferredSize(new java.awt.Dimension(870, 1133));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -659,13 +657,11 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -717,7 +713,6 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
@@ -728,7 +723,6 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         jLabel9.setBounds(0, 190, 126, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -1799,7 +1793,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                 }
             }
         }
-    
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1835,7 +1829,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }    
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1910,20 +1904,20 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f;            
-                BufferedWriter bw; 
+                File f;
+                BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 if(TCari.getText().trim().equals("")){
                     ps=koneksi.prepareStatement(
                             "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ranap_psikiatrik.tanggal,"+
@@ -1965,13 +1959,13 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                         ps.setString(5,"%"+TCari.getText()+"%");
                         ps.setString(6,"%"+TCari.getText()+"%");
                         ps.setString(7,"%"+TCari.getText()+"%");
-                    } 
+                    }
                     rs=ps.executeQuery();
                     String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
                                         "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.RM</td>"+
@@ -2082,24 +2076,24 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                                            "<td valign='top'>"+rs.getString("konsulrujuk")+"</td>"+
                                         "</tr>");
                                 }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("PenilaianAwalMedisRalanPsikiatrik.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
                                                 "<table width='4600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
@@ -2210,39 +2204,39 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                                            "<td valign='top'>"+rs.getString("konsulrujuk")+"</td>"+
                                         "</tr>");
                                 }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("PenilaianAwalMedisRalanPsikiatrik.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
                                                 "<table width='4600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Kode Dokter\";\"Nama Dokter\";\"Tanggal\";\"Anamnesis\";\"Hubungan\";\"Keluhan Utama\";\"Riwayat Penyakit Sekarang\";\"Riwayat Penyakit Dahulu\";\"Riwayat Penyakit Keluarga\";\"Riwayat Napza\";\"Riwayat Alergi\";\"Penampilan\";\"Pembicaraan\";\"Psikomotor\";\"Sikap\";\"Mood\";\"Fungsi Kognitif\";\"Gangguan Persepsi\";\"Proses Pikir\";\"Pengendalian Impuls\";\"Tilikan\";\"Reality Testing Ability\";\"Skala Penilaian Khusus\";\"Keadaan Umum\";\"GCS\";\"Kesadaran\";\"TD(mmHg)\";\"Nadi(x/menit)\";\"RR(x/menit)\";\"Suhu\";\"SpO2\";\"BB(Kg)\";\"TB(cm)\";\"Kepala\";\"Gigi & Mulut\";\"THT\";\"Thoraks\";\"Abdomen\";\"Genital & Anus\";\"Ekstremitas\";\"Kulit\";\"Keterangan Pemeriksaan Fisik\";\"Pemeriksaan Penunjang\";\"Diagnosis/Asesmen\";\"Tatalaksana\";\"Konsul/Rujuk\"\n"
-                                ); 
+                                );
                                 while(rs.next()){
                                     htmlContent.append(
                                         "\""+rs.getString("no_rawat")+"\";\" "+rs.getString("no_rkm_medis")+"\";\""+rs.getString("nm_pasien")+"\";\""+rs.getString("tgl_lahir")+"\";\""+rs.getString("jk")+"\";\""+rs.getString("kd_dokter")+"\";\""+rs.getString("nm_dokter")+"\";\""+rs.getString("tanggal")+"\";\""+rs.getString("anamnesis")+"\";\""+rs.getString("hubungan")+"\";\""+rs.getString("keluhan_utama")+"\";\""+rs.getString("rps")+"\";\""+rs.getString("rpd")+"\";\""+rs.getString("rpk")+"\";\""+rs.getString("rpo")+"\";\""+rs.getString("alergi")+"\";\""+rs.getString("penampilan")+"\";\""+rs.getString("pembicaraan")+"\";\""+rs.getString("psikomotor")+"\";\""+rs.getString("sikap")+"\";\""+rs.getString("mood")+"\";\""+rs.getString("fungsi_kognitif")+"\";\""+rs.getString("gangguan_persepsi")+"\";\""+rs.getString("proses_pikir")+"\";\""+rs.getString("pengendalian_impuls")+"\";\""+rs.getString("tilikan")+"\";\""+rs.getString("rta")+"\";\""+rs.getString("skala_penilaian_khusus")+"\";\""+rs.getString("keadaan")+"\";\""+rs.getString("gcs")+"\";\""+rs.getString("kesadaran")+"\";\""+rs.getString("td")+"\";\""+rs.getString("nadi")+"\";\""+rs.getString("rr")+"\";\""+rs.getString("suhu")+"\";\""+rs.getString("spo")+"\";\""+rs.getString("bb")+"\";\""+rs.getString("tb")+"\";\""+rs.getString("kepala")+"\";\""+rs.getString("gigi")+"\";\""+rs.getString("tht")+"\";\""+rs.getString("thoraks")+"\";\""+rs.getString("abdomen")+"\";\""+rs.getString("genital")+"\";\""+rs.getString("ekstremitas")+"\";\""+rs.getString("kulit")+"\";\""+rs.getString("ket_fisik")+"\";\""+rs.getString("penunjang")+"\";\""+rs.getString("diagnosis")+"\";\""+rs.getString("tata")+"\";\""+rs.getString("konsulrujuk")+"\"\n"
                                     );
                                 }
-                                f = new File("PenilaianAwalMedisRalanPsikiatrik.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("PenilaianAwalMedisRalanPsikiatrik.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }           
+                            break;
+                    }
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 } finally{
@@ -2257,7 +2251,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
-            
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -2343,11 +2337,11 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString())); 
-            
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+
             Valid.MyReportqry("rptCetakPenilaianAwalMedisRanapPsikiatrik.jasper","report","::[ Laporan Pengkajian Awal Medis Rawat Inap Psikiatrik ]::",
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ranap_psikiatrik.tanggal,"+
                 "penilaian_medis_ranap_psikiatrik.kd_dokter,penilaian_medis_ranap_psikiatrik.anamnesis,penilaian_medis_ranap_psikiatrik.hubungan,penilaian_medis_ranap_psikiatrik.keluhan_utama,penilaian_medis_ranap_psikiatrik.rps,penilaian_medis_ranap_psikiatrik.rpk,penilaian_medis_ranap_psikiatrik.rpd,penilaian_medis_ranap_psikiatrik.rpo,penilaian_medis_ranap_psikiatrik.penampilan,"+
@@ -2779,7 +2773,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                         "penilaian_medis_ranap_psikiatrik.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "penilaian_medis_ranap_psikiatrik.kd_dokter like ? or dokter.nm_dokter like ?) order by penilaian_medis_ranap_psikiatrik.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2792,7 +2786,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2814,7 +2808,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2868,15 +2862,15 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
         TglAsuhan.setDate(new Date());
         TabRawat.setSelectedIndex(0);
         Anamnesis.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Anamnesis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Hubungan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
@@ -2955,14 +2949,14 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_medis_ranap_psikiatrik());
         BtnHapus.setEnabled(akses.getpenilaian_medis_ranap_psikiatrik());
@@ -2976,8 +2970,8 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                 KdDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
             }
-        }   
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 TglAsuhan.setEditable(false);
@@ -2985,7 +2979,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
             }
         }
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
@@ -3066,7 +3060,7 @@ public final class RMPenilaianAwalMedisRanapPsikiatrik extends javax.swing.JDial
                TabRawat.setSelectedIndex(1);
         }
     }
-    
+
     private void simpan(){
         if(Sequel.menyimpantf("penilaian_medis_ranap_psikiatrik","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",46,new String[]{
                 TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),Anamnesis.getSelectedItem().toString(),Hubungan.getText(),

@@ -45,7 +45,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
     private int i=0;
     private String tgl,finger="";
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
-    
+
     /** Creates new form SuratKeteranganBebasTBC
      * @param parent
      * @param modal */
@@ -54,7 +54,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Surat","No.Rawat","No.R.M.","Nama Pasien","Tanggal","Kode Dokter","Dokter","Keperluan"
         }){
@@ -87,12 +87,12 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoSurat.setDocument(new batasInput((byte)17).getKata(NoSurat));
-        Keperluan.setDocument(new batasInput((byte)50).getKata(Keperluan));  
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));     
-        
+        Keperluan.setDocument(new batasInput((byte)50).getKata(Keperluan));
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -115,7 +115,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -126,7 +126,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KdDok.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KdDok.requestFocus();
             }
             @Override
@@ -138,14 +138,14 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
-        
-        
 
-    
+
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -473,7 +473,6 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(261, 40, 70, 23);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -493,7 +492,6 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -504,13 +502,11 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         TNoRw.setBounds(79, 10, 150, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(335, 10, 385, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(232, 10, 100, 23);
@@ -559,13 +555,11 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         jLabel8.setBounds(0, 70, 70, 23);
 
         KdDok.setEditable(false);
-        KdDok.setHighlighter(null);
         KdDok.setName("KdDok"); // NOI18N
         FormInput.add(KdDok);
         KdDok.setBounds(74, 70, 129, 23);
 
         TDokter.setEditable(false);
-        TDokter.setHighlighter(null);
         TDokter.setName("TDokter"); // NOI18N
         TDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -622,7 +616,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void NoSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSuratKeyPressed
        Valid.pindah(evt,TanggalSurat,Keperluan);
 }//GEN-LAST:event_NoSuratKeyPressed
@@ -631,16 +625,16 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,NoSurat);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(NoSurat.getText().trim().equals("")){
-            Valid.textKosong(NoSurat,"No.Surat Sakit");      
+            Valid.textKosong(NoSurat,"No.Surat Sakit");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"pasien");    
+            Valid.textKosong(TNoRw,"pasien");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(TDokter,"Dokter yang memeriksa");
         }else if(Keperluan.getText().trim().equals("")){
@@ -669,8 +663,8 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-        
+        isForm();
+
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -699,14 +693,14 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(NoSurat.getText().trim().equals("")){
-            Valid.textKosong(NoSurat,"No.Surat Sakit");      
+            Valid.textKosong(NoSurat,"No.Surat Sakit");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"pasien");    
+            Valid.textKosong(TNoRw,"pasien");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(TDokter,"Dokter yang memeriksa");
         }else if(Keperluan.getText().trim().equals("")){
             Valid.textKosong(Keperluan,"Keperluan");
-        }else{    
+        }else{
             if(tbObat.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("surat_bebas_tbc","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,kd_dokter=?,keperluan=?",6,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),KdDok.getText(),Keperluan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -749,19 +743,19 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             tgl=" surat_bebas_tbc.tanggalsurat between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptDataSuratBebasTBC.jasper","report","::[ Data Surat Bebas TBC ]::",
                      "select surat_bebas_tbc.no_surat,surat_bebas_tbc.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+                   
+                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+
                      "from surat_bebas_tbc inner join reg_periksa on surat_bebas_tbc.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "inner join dokter on surat_bebas_tbc.kd_dokter=dokter.kd_dokter "+
@@ -769,7 +763,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             }else{
                 Valid.MyReportqry("rptDataSuratBebasTBC.jasper","report","::[ Data Surat Bebas TBC ]::",
                      "select surat_bebas_tbc.no_surat,surat_bebas_tbc.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+                   
+                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+
                      "from surat_bebas_tbc inner join reg_periksa on surat_bebas_tbc.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "inner join dokter on surat_bebas_tbc.kd_dokter=dokter.kd_dokter "+
@@ -780,9 +774,9 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                      tgl+"and surat_bebas_tbc.tanggalsurat like '%"+TCari.getText().trim()+"%' "+
                      "order by surat_bebas_tbc.no_surat",param);
             }
-            
+
         }
-        this.setCursor(Cursor.getDefaultCursor());        
+        this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -828,8 +822,8 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, TPasien);
         }
 }//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+
+
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
@@ -865,10 +859,10 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdDok.getText());
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+TDokter.getText()+"\nID "+(finger.equals("")?KdDok.getText():finger)+"\n"+TanggalSurat.getSelectedItem());  
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+TDokter.getText()+"\nID "+(finger.equals("")?KdDok.getText():finger)+"\n"+TanggalSurat.getSelectedItem());
                 Valid.MyReportqry("rptSuratKeteranganBebasTBC.jasper","report","::[ Surat Keterangan Bebas TBC ]::",
                               " select surat_bebas_tbc.no_surat,DATE_FORMAT(surat_bebas_tbc.tanggalsurat,'%d-%m-%Y')as tanggalsurat,surat_bebas_tbc.keperluan,dokter.nm_dokter,pasien.jk," +
                               " pasien.nm_pasien,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y')as tgl_lahir,pasien.tmp_lahir,pasien.pekerjaan,dokter.kd_dokter,"+
@@ -877,7 +871,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                               " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and "+
                               " pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab and reg_periksa.no_rawat=surat_bebas_tbc.no_rawat "+
                               " where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
-                this.setCursor(Cursor.getDefaultCursor());  
+                this.setCursor(Cursor.getDefaultCursor());
        }
     }//GEN-LAST:event_MnCetakSuratBebasTBCActionPerformed
 
@@ -979,7 +973,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                      "select surat_bebas_tbc.no_surat,surat_bebas_tbc.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+                   
+                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+
                      "from surat_bebas_tbc inner join reg_periksa on surat_bebas_tbc.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "inner join dokter on surat_bebas_tbc.kd_dokter=dokter.kd_dokter "+
@@ -987,7 +981,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
             }else{
                 ps=koneksi.prepareStatement(
                      "select surat_bebas_tbc.no_surat,surat_bebas_tbc.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+                   
+                     "surat_bebas_tbc.tanggalsurat,surat_bebas_tbc.kd_dokter,dokter.nm_dokter,surat_bebas_tbc.keperluan "+
                      "from surat_bebas_tbc inner join reg_periksa on surat_bebas_tbc.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "inner join dokter on surat_bebas_tbc.kd_dokter=dokter.kd_dokter "+
@@ -998,7 +992,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                      tgl+"and surat_bebas_tbc.tanggalsurat like '%"+TCari.getText().trim()+"%' "+
                      "order by surat_bebas_tbc.no_surat");
             }
-                
+
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1006,7 +1000,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
                         rs.getString(1),rs.getString(2),rs.getString(3),
                         rs.getString(4),rs.getString(5),rs.getString(6),
                         rs.getString(7),rs.getString(8)
-                        
+
                     });
                 }
             } catch (Exception e) {
@@ -1037,7 +1031,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         NoSurat.requestFocus();
     }
 
- 
+
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             NoSurat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1058,7 +1052,7 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
-    
+
     public void setNoRm(String norwt,String norm,String namapasien,String kodedokter,String namadokter,Date tgl1, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1071,29 +1065,26 @@ public final class SuratKeteranganBebasTBC extends javax.swing.JDialog {
         ChkInput.setSelected(true);
         isForm();
     }
-    
-    
+
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,126));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-       
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_bebas_tbc());
         BtnHapus.setEnabled(akses.getsurat_bebas_tbc());
         BtnEdit.setEnabled(akses.getsurat_bebas_tbc());
     }
 }
-
-
-

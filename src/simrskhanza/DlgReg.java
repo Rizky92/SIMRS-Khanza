@@ -5554,7 +5554,6 @@ public final class DlgReg extends javax.swing.JDialog {
         panelBiasa3.add(BtnKeluar3);
         BtnKeluar3.setBounds(430, 110, 100, 30);
 
-        Kelurahan2.setHighlighter(null);
         Kelurahan2.setName("Kelurahan2"); // NOI18N
         Kelurahan2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5576,7 +5575,6 @@ public final class DlgReg extends javax.swing.JDialog {
         panelBiasa3.add(btnKel);
         btnKel.setBounds(460, 70, 28, 23);
 
-        Kecamatan2.setHighlighter(null);
         Kecamatan2.setName("Kecamatan2"); // NOI18N
         Kecamatan2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5598,7 +5596,6 @@ public final class DlgReg extends javax.swing.JDialog {
         panelBiasa3.add(btnKec);
         btnKec.setBounds(460, 40, 28, 23);
 
-        Kabupaten2.setHighlighter(null);
         Kabupaten2.setName("Kabupaten2"); // NOI18N
         Kabupaten2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5703,7 +5700,6 @@ public final class DlgReg extends javax.swing.JDialog {
         panelBiasa4.add(BtnKeluar4);
         BtnKeluar4.setBounds(430, 80, 100, 30);
 
-        NomorSurat.setHighlighter(null);
         NomorSurat.setName("NomorSurat"); // NOI18N
         panelBiasa4.add(NomorSurat);
         NomorSurat.setBounds(150, 10, 370, 23);
@@ -5737,7 +5733,6 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DlgSakit2.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
-        NoBalasan.setHighlighter(null);
         NoBalasan.setName("NoBalasan"); // NOI18N
 
         jPopupMenu2.setName("jPopupMenu2"); // NOI18N
@@ -6365,7 +6360,6 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DlgCatatan.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
-        kdpnj.setHighlighter(null);
         kdpnj.setName("kdpnj"); // NOI18N
         kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6422,12 +6416,10 @@ public final class DlgReg extends javax.swing.JDialog {
         buttonSimpanAntrian.setBounds(484, 63, 100, 30);
 
         textNoRawatAntrian.setEditable(false);
-        textNoRawatAntrian.setHighlighter(null);
         textNoRawatAntrian.setName("textNoRawatAntrian"); // NOI18N
         internalFrame8.add(textNoRawatAntrian);
         textNoRawatAntrian.setBounds(108, 22, 310, 23);
 
-        textNoAntrian.setHighlighter(null);
         textNoAntrian.setName("textNoAntrian"); // NOI18N
         textNoAntrian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6749,7 +6741,6 @@ public final class DlgReg extends javax.swing.JDialog {
         TDokter.setBounds(183, 102, 209, 23);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6796,7 +6787,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel20);
         jLabel20.setBounds(366, 42, 150, 23);
 
-        TPngJwb.setHighlighter(null);
         TPngJwb.setName("TPngJwb"); // NOI18N
         TPngJwb.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6806,7 +6796,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(TPngJwb);
         TPngJwb.setBounds(520, 42, 150, 23);
 
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6817,7 +6806,6 @@ public final class DlgReg extends javax.swing.JDialog {
         TNoRM.setBounds(520, 12, 110, 23);
 
         TNoReg.setText("999");
-        TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6867,7 +6855,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel7);
         jLabel7.setBounds(416, 12, 100, 23);
 
-        TAlmt.setHighlighter(null);
         TAlmt.setName("TAlmt"); // NOI18N
         TAlmt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6890,7 +6877,6 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPasien.setBounds(852, 12, 28, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(632, 12, 218, 23);
@@ -6900,7 +6886,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel22);
         jLabel22.setBounds(648, 42, 98, 23);
 
-        THbngn.setHighlighter(null);
         THbngn.setName("THbngn"); // NOI18N
         THbngn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6938,7 +6923,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(TBiaya);
         TBiaya.setBounds(298, 132, 94, 23);
 
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6960,7 +6944,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(BtnDokter);
         BtnDokter.setBounds(395, 102, 28, 23);
 
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6988,7 +6971,6 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel30.setBounds(686, 72, 60, 23);
 
         TStatus.setEditable(false);
-        TStatus.setHighlighter(null);
         TStatus.setName("TStatus"); // NOI18N
         FormInput.add(TStatus);
         TStatus.setBounds(750, 72, 130, 23);
@@ -7054,7 +7036,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel31);
         jLabel31.setBounds(691, 102, 43, 23);
 
-        NoKa.setHighlighter(null);
         NoKa.setName("NoKa"); // NOI18N
         NoKa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -7081,7 +7062,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(160, 12, 70, 23);
 
-        TNoAntrian.setHighlighter(null);
         TNoAntrian.setName("TNoAntrian"); // NOI18N
         TNoAntrian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

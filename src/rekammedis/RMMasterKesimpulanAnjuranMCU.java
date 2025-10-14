@@ -355,7 +355,6 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 40, 80, 23);
 
-        Kesimpulan.setHighlighter(null);
         Kesimpulan.setName("Kesimpulan"); // NOI18N
         Kesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -529,7 +528,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -549,7 +548,7 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -639,11 +638,11 @@ public class RMMasterKesimpulanAnjuranMCU extends javax.swing.JDialog {
             Anjuran.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getmaster_kesimpulan_anjuran_mcu());
        BtnHapus.setEnabled(akses.getmaster_kesimpulan_anjuran_mcu());

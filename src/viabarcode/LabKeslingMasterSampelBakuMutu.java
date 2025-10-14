@@ -99,7 +99,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
     /** This method is called from within the constructor to
@@ -354,7 +354,6 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(156, 10, 100, 23);
 
-        KodeSampel.setHighlighter(null);
         KodeSampel.setName("KodeSampel"); // NOI18N
         KodeSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -625,7 +624,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
                 if( rs != null){
                     rs.close();
                 }
-                
+
                 if( ps != null){
                     ps.close();
                 }
@@ -651,7 +650,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
             BakuMutu.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return KodeSampel;
     }
@@ -659,7 +658,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmaster_sampel_bakumutu());
         BtnHapus.setEnabled(akses.getmaster_sampel_bakumutu());

@@ -825,7 +825,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         Keterangan = new widget.TextBox();
         Suplesi = new widget.ComboBox();
 
-        TNm.setHighlighter(null);
         TNm.setName("TNm"); // NOI18N
         TNm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -865,7 +864,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             }
         });
 
-        TNoPeserta.setHighlighter(null);
         TNoPeserta.setName("TNoPeserta"); // NOI18N
         TNoPeserta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -880,7 +878,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             }
         });
 
-        NoRm.setHighlighter(null);
         NoRm.setName("NoRm"); // NOI18N
         NoRm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -888,7 +885,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             }
         });
 
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1005,7 +1001,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         });
         jPopupMenu1.add(ppStatusFinger);
 
-        NoBalasan.setHighlighter(null);
         NoBalasan.setName("NoBalasan"); // NOI18N
 
         kdsuku.setName("kdsuku"); // NOI18N
@@ -1039,7 +1034,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         kdjabatanpolri.setPreferredSize(new java.awt.Dimension(207, 23));
 
         kdperusahaan.setEditable(false);
-        kdperusahaan.setHighlighter(null);
         kdperusahaan.setName("kdperusahaan"); // NOI18N
         kdperusahaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1048,7 +1042,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         });
 
         kdcacat.setEditable(false);
-        kdcacat.setHighlighter(null);
         kdcacat.setName("kdcacat"); // NOI18N
         kdcacat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1057,19 +1050,15 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         });
 
         KdKec.setEditable(false);
-        KdKec.setHighlighter(null);
         KdKec.setName("KdKec"); // NOI18N
 
         KdProp.setEditable(false);
-        KdProp.setHighlighter(null);
         KdProp.setName("KdProp"); // NOI18N
 
         KdKel.setEditable(false);
-        KdKel.setHighlighter(null);
         KdKel.setName("KdKel"); // NOI18N
 
         KdKab.setEditable(false);
-        KdKab.setHighlighter(null);
         KdKab.setName("KdKab"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1356,7 +1345,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel12.setBounds(3, 115, 100, 23);
 
         Alamat.setText("ALAMAT");
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
         Alamat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1376,7 +1364,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanPasien.add(Alamat);
         Alamat.setBounds(534, 25, 375, 23);
 
-        TTlp.setHighlighter(null);
         TTlp.setName("TTlp"); // NOI18N
         TTlp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1388,7 +1375,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         TNo.setEditable(false);
         TNo.setBackground(new java.awt.Color(245, 250, 240));
-        TNo.setHighlighter(null);
         TNo.setName("TNo"); // NOI18N
         TNo.setOpaque(true);
         TNo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1438,7 +1424,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         Kdpnj.setEditable(false);
         Kdpnj.setText("-");
-        Kdpnj.setHighlighter(null);
         Kdpnj.setName("Kdpnj"); // NOI18N
         Kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1467,7 +1452,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         BtnPenjab.setBounds(407, 205, 28, 23);
 
         Kelurahan.setText("KELURAHAN");
-        Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
         Kelurahan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1488,7 +1472,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         Kelurahan.setBounds(534, 55, 156, 23);
 
         Kecamatan.setText("KECAMATAN");
-        Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
         Kecamatan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1509,7 +1492,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         Kecamatan.setBounds(723, 55, 156, 23);
 
         Kabupaten.setText("KABUPATEN");
-        Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
         Kabupaten.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1585,7 +1567,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel29.setBounds(430, 175, 100, 23);
 
         AlamatPj.setText("ALAMAT");
-        AlamatPj.setHighlighter(null);
         AlamatPj.setName("AlamatPj"); // NOI18N
         AlamatPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1606,7 +1587,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         AlamatPj.setBounds(534, 175, 375, 23);
 
         KecamatanPj.setText("KECAMATAN");
-        KecamatanPj.setHighlighter(null);
         KecamatanPj.setName("KecamatanPj"); // NOI18N
         KecamatanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1639,7 +1619,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         BtnKecamatanPj.setBounds(881, 205, 28, 23);
 
         KabupatenPj.setText("KABUPATEN");
-        KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
         KabupatenPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1684,7 +1663,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         BtnKelurahanPj.setBounds(692, 205, 28, 23);
 
         KelurahanPj.setText("KELURAHAN");
-        KelurahanPj.setHighlighter(null);
         KelurahanPj.setName("KelurahanPj"); // NOI18N
         KelurahanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1831,7 +1809,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanPasien.add(jLabel44);
         jLabel44.setBounds(690, 295, 84, 23);
 
-        NIP.setHighlighter(null);
         NIP.setName("NIP"); // NOI18N
         NIP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1846,7 +1823,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanPasien.add(jLabel45);
         jLabel45.setBounds(430, 295, 100, 23);
 
-        EMail.setHighlighter(null);
         EMail.setName("EMail"); // NOI18N
         EMail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1857,7 +1833,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         EMail.setBounds(534, 295, 161, 23);
 
         Propinsi.setText("PROPINSI");
-        Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
         Propinsi.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1890,7 +1865,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         BtnPropinsi.setBounds(881, 85, 28, 23);
 
         PropinsiPj.setText("PROPINSI");
-        PropinsiPj.setHighlighter(null);
         PropinsiPj.setName("PropinsiPj"); // NOI18N
         PropinsiPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -2188,7 +2162,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel4.setBounds(3, 25, 100, 23);
 
         TNoRw.setBackground(new java.awt.Color(245, 250, 240));
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         FormKelengkapanSEP.add(TNoRw);
         TNoRw.setBounds(107, 25, 190, 23);
@@ -2200,14 +2173,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdPPK.setEditable(false);
         KdPPK.setBackground(new java.awt.Color(245, 250, 240));
-        KdPPK.setHighlighter(null);
         KdPPK.setName("KdPPK"); // NOI18N
         FormKelengkapanSEP.add(KdPPK);
         KdPPK.setBounds(107, 55, 70, 23);
 
         NmPPK.setEditable(false);
         NmPPK.setBackground(new java.awt.Color(245, 250, 240));
-        NmPPK.setHighlighter(null);
         NmPPK.setName("NmPPK"); // NOI18N
         FormKelengkapanSEP.add(NmPPK);
         NmPPK.setBounds(179, 55, 306, 23);
@@ -2236,14 +2207,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdPpkRujukan.setEditable(false);
         KdPpkRujukan.setBackground(new java.awt.Color(245, 250, 240));
-        KdPpkRujukan.setHighlighter(null);
         KdPpkRujukan.setName("KdPpkRujukan"); // NOI18N
         FormKelengkapanSEP.add(KdPpkRujukan);
         KdPpkRujukan.setBounds(107, 115, 90, 23);
 
         NmPpkRujukan.setEditable(false);
         NmPpkRujukan.setBackground(new java.awt.Color(245, 250, 240));
-        NmPpkRujukan.setHighlighter(null);
         NmPpkRujukan.setName("NmPpkRujukan"); // NOI18N
         FormKelengkapanSEP.add(NmPpkRujukan);
         NmPpkRujukan.setBounds(199, 115, 255, 23);
@@ -2255,14 +2224,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdPenyakit.setEditable(false);
         KdPenyakit.setBackground(new java.awt.Color(245, 250, 240));
-        KdPenyakit.setHighlighter(null);
         KdPenyakit.setName("KdPenyakit"); // NOI18N
         FormKelengkapanSEP.add(KdPenyakit);
         KdPenyakit.setBounds(107, 145, 90, 23);
 
         NmPenyakit.setEditable(false);
         NmPenyakit.setBackground(new java.awt.Color(245, 250, 240));
-        NmPenyakit.setHighlighter(null);
         NmPenyakit.setName("NmPenyakit"); // NOI18N
         FormKelengkapanSEP.add(NmPenyakit);
         NmPenyakit.setBounds(199, 145, 255, 23);
@@ -2303,14 +2270,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         NmPoli.setEditable(false);
         NmPoli.setBackground(new java.awt.Color(245, 250, 240));
-        NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormKelengkapanSEP.add(NmPoli);
         NmPoli.setBounds(199, 175, 255, 23);
 
         KdPoli.setEditable(false);
         KdPoli.setBackground(new java.awt.Color(245, 250, 240));
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormKelengkapanSEP.add(KdPoli);
         KdPoli.setBounds(107, 175, 90, 23);
@@ -2325,7 +2290,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel5);
         jLabel5.setBounds(331, 25, 70, 23);
 
-        TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2347,14 +2311,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdDPJP.setEditable(false);
         KdDPJP.setBackground(new java.awt.Color(245, 250, 240));
-        KdDPJP.setHighlighter(null);
         KdDPJP.setName("KdDPJP"); // NOI18N
         FormKelengkapanSEP.add(KdDPJP);
         KdDPJP.setBounds(107, 205, 90, 23);
 
         NmDPJP.setEditable(false);
         NmDPJP.setBackground(new java.awt.Color(245, 250, 240));
-        NmDPJP.setHighlighter(null);
         NmDPJP.setName("NmDPJP"); // NOI18N
         FormKelengkapanSEP.add(NmDPJP);
         NmDPJP.setBounds(199, 205, 255, 23);
@@ -2392,7 +2354,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel51);
         jLabel51.setBounds(235, 85, 83, 23);
 
-        NoSKDP.setHighlighter(null);
         NoSKDP.setName("NoSKDP"); // NOI18N
         NoSKDP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2474,7 +2435,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel33);
         jLabel33.setBounds(3, 325, 100, 23);
 
-        Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
         Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2600,7 +2560,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         PenanggungJawab.setEditable(false);
         PenanggungJawab.setBackground(new java.awt.Color(245, 250, 240));
-        PenanggungJawab.setHighlighter(null);
         PenanggungJawab.setName("PenanggungJawab"); // NOI18N
         FormKelengkapanSEP.add(PenanggungJawab);
         PenanggungJawab.setBounds(325, 265, 160, 23);
@@ -2616,7 +2575,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel36.setBounds(495, 205, 90, 23);
 
         kddokter.setEditable(false);
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2666,14 +2624,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdPropinsi.setEditable(false);
         KdPropinsi.setBackground(new java.awt.Color(245, 250, 240));
-        KdPropinsi.setHighlighter(null);
         KdPropinsi.setName("KdPropinsi"); // NOI18N
         FormKelengkapanSEP.add(KdPropinsi);
         KdPropinsi.setBounds(589, 115, 70, 23);
 
         NmPropinsi.setEditable(false);
         NmPropinsi.setBackground(new java.awt.Color(245, 250, 240));
-        NmPropinsi.setHighlighter(null);
         NmPropinsi.setName("NmPropinsi"); // NOI18N
         FormKelengkapanSEP.add(NmPropinsi);
         NmPropinsi.setBounds(661, 115, 217, 23);
@@ -2716,14 +2672,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         NmKabupaten.setEditable(false);
         NmKabupaten.setBackground(new java.awt.Color(245, 250, 240));
-        NmKabupaten.setHighlighter(null);
         NmKabupaten.setName("NmKabupaten"); // NOI18N
         FormKelengkapanSEP.add(NmKabupaten);
         NmKabupaten.setBounds(661, 145, 217, 23);
 
         KdKabupaten.setEditable(false);
         KdKabupaten.setBackground(new java.awt.Color(245, 250, 240));
-        KdKabupaten.setHighlighter(null);
         KdKabupaten.setName("KdKabupaten"); // NOI18N
         FormKelengkapanSEP.add(KdKabupaten);
         KdKabupaten.setBounds(589, 145, 70, 23);
@@ -2740,14 +2694,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdKecamatan.setEditable(false);
         KdKecamatan.setBackground(new java.awt.Color(245, 250, 240));
-        KdKecamatan.setHighlighter(null);
         KdKecamatan.setName("KdKecamatan"); // NOI18N
         FormKelengkapanSEP.add(KdKecamatan);
         KdKecamatan.setBounds(589, 175, 70, 23);
 
         NmKecamatan.setEditable(false);
         NmKecamatan.setBackground(new java.awt.Color(245, 250, 240));
-        NmKecamatan.setHighlighter(null);
         NmKecamatan.setName("NmKecamatan"); // NOI18N
         FormKelengkapanSEP.add(NmKecamatan);
         NmKecamatan.setBounds(661, 175, 217, 23);
@@ -2834,14 +2786,12 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
 
         KdDPJPLayanan.setEditable(false);
         KdDPJPLayanan.setBackground(new java.awt.Color(245, 250, 240));
-        KdDPJPLayanan.setHighlighter(null);
         KdDPJPLayanan.setName("KdDPJPLayanan"); // NOI18N
         FormKelengkapanSEP.add(KdDPJPLayanan);
         KdDPJPLayanan.setBounds(589, 355, 90, 23);
 
         NmDPJPLayanan.setEditable(false);
         NmDPJPLayanan.setBackground(new java.awt.Color(245, 250, 240));
-        NmDPJPLayanan.setHighlighter(null);
         NmDPJPLayanan.setName("NmDPJPLayanan"); // NOI18N
         FormKelengkapanSEP.add(NmDPJPLayanan);
         NmDPJPLayanan.setBounds(681, 355, 197, 23);
@@ -2921,7 +2871,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel50.setBounds(680, 85, 85, 23);
 
         NoSEPSuplesi.setEditable(false);
-        NoSEPSuplesi.setHighlighter(null);
         NoSEPSuplesi.setName("NoSEPSuplesi"); // NOI18N
         NoSEPSuplesi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2948,7 +2897,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         FormKelengkapanSEP.add(btnSuplesi);
         btnSuplesi.setBounds(880, 85, 28, 23);
 
-        NoLP.setHighlighter(null);
         NoLP.setName("NoLP"); // NOI18N
         NoLP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2965,7 +2913,6 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         jLabel58.setBounds(764, 55, 50, 23);
 
         Keterangan.setEditable(false);
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -105,8 +105,8 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -114,10 +114,10 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
-                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());                                        
-                }   
+                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
+                }
                 NIK.requestFocus();
             }
             @Override
@@ -399,7 +399,6 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
         panelGlass7.add(BtnCariPegawai);
         BtnCariPegawai.setBounds(485, 10, 28, 23);
 
-        NIK.setHighlighter(null);
         NIK.setName("NIK"); // NOI18N
         NIK.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -415,7 +414,6 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
         jLabel3.setBounds(0, 12, 72, 23);
 
         Nama.setEditable(false);
-        Nama.setHighlighter(null);
         Nama.setName("Nama"); // NOI18N
         Nama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -660,7 +658,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }            
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -682,7 +680,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             CoderNIK.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return NIK;
     }
@@ -690,7 +688,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinacbg_coder_nik());
         BtnHapus.setEnabled(akses.getinacbg_coder_nik());

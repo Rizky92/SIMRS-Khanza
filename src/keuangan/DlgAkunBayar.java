@@ -66,7 +66,7 @@ public class DlgAkunBayar extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class                 
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -92,7 +92,7 @@ public class DlgAkunBayar extends javax.swing.JDialog {
                 column.setPreferredWidth(50);
             }
         }
-        
+
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         nama.setDocument(new batasInput((byte)50).getKata(nama));
@@ -119,8 +119,8 @@ public class DlgAkunBayar extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         rekening.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -129,17 +129,17 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgAkunBayar")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -151,7 +151,7 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -165,11 +165,11 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         emptTeks();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -436,7 +436,6 @@ public class DlgAkunBayar extends javax.swing.JDialog {
         jLabel10.setBounds(0, 42, 80, 23);
 
         nmrek.setEditable(false);
-        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -447,7 +446,6 @@ public class DlgAkunBayar extends javax.swing.JDialog {
         nmrek.setBounds(186, 42, 389, 23);
 
         kdrek.setEditable(false);
-        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         kdrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -545,11 +543,11 @@ public class DlgAkunBayar extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("akun_bayar","nama_bayar",tbJadwal.getValueAt(i,1).toString());
             }
-        } 
+        }
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -577,7 +575,7 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbJadwal.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -608,14 +606,14 @@ public class DlgAkunBayar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptAkunBayar.jasper","report","::[ Akun Bayar ]::","select akun_bayar.nama_bayar,akun_bayar.kd_rek,rekening.nm_rek,akun_bayar.ppn "+
                     "from akun_bayar inner join rekening on akun_bayar.kd_rek=rekening.kd_rek "+
                     "where akun_bayar.nama_bayar like '%"+TCari.getText().trim()+"%' or "+
@@ -693,7 +691,7 @@ private void kdrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdr
             Sequel.cariIsi("select rekening.nm_rek from rekening where rekening.kd_rek=?",nmrek,kdrek.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPoliActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,nama,BtnSimpan);
         }
 }//GEN-LAST:event_kdrekKeyPressed
@@ -817,5 +815,5 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             ppn.setText(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
 }

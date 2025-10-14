@@ -145,7 +145,6 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 10, 155, 23);
 
-        MakBuku.setHighlighter(null);
         MakBuku.setName("MakBuku"); // NOI18N
         MakBuku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -155,7 +154,6 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
         panelGlass7.add(MakBuku);
         MakBuku.setBounds(158, 10, 50, 23);
 
-        Lama.setHighlighter(null);
         Lama.setName("Lama"); // NOI18N
         Lama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -175,7 +173,6 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
         panelGlass7.add(jLabel6);
         jLabel6.setBounds(250, 10, 180, 23);
 
-        Denda.setHighlighter(null);
         Denda.setName("Denda"); // NOI18N
         Denda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -473,7 +470,7 @@ private void MakBukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_M
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{ 
+        try{
             ps=koneksi.prepareStatement("select * from perpustakaan_set_peminjaman ");
             try {
                 rs=ps.executeQuery();

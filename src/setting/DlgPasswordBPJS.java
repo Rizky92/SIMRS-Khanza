@@ -90,7 +90,7 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
         kdpj.setDocument(new batasInput((byte)3).getKata(kdpj));
         TKd.setDocument(new batasInput((byte)30).getKata(TKd));
         TPass.setDocument(new batasInput((byte)30).getKata(TPass));
-        
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -101,7 +101,7 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -113,7 +113,7 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -121,14 +121,14 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });        
-        
+        });
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -200,7 +200,6 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
         jLabel3.setBounds(1, 10, 75, 23);
 
         kdpj.setEditable(false);
-        kdpj.setHighlighter(null);
         kdpj.setName("kdpj"); // NOI18N
         kdpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -211,7 +210,6 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
         kdpj.setBounds(79, 10, 70, 23);
 
         nmpj.setEditable(false);
-        nmpj.setHighlighter(null);
         nmpj.setName("nmpj"); // NOI18N
         nmpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -243,7 +241,6 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(1, 42, 75, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -560,10 +557,10 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement(
                    "select password_asuransi.kd_pj,penjab.png_jawab,aes_decrypt(usere,'nur'),aes_decrypt(passworde,'windi') "+
-                   "from password_asuransi inner join penjab on password_asuransi.kd_pj=penjab.kd_pj"); 
+                   "from password_asuransi inner join penjab on password_asuransi.kd_pj=penjab.kd_pj");
             try{
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)
                     });
@@ -580,7 +577,7 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeks() {
@@ -600,10 +597,10 @@ public class DlgPasswordBPJS extends javax.swing.JDialog {
             TPass.setText(tabMode.getValueAt(row,3).toString());
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 
 }

@@ -43,12 +43,12 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
      private DlgCariRuangAuditKepatuhan ruang=new DlgCariRuangAuditKepatuhan(null,false);
     private double posisi_kepala=0,pengkajian_setiap_hari=0,hand_hygiene=0,oral_hygiene=0,suction_manajemen_sekresi=0,profilaksis_peptic_ulcer=0,dvt_profiklasisi=0,penggunaan_apd_sesuai=0,
                    ttlposisi_kepala=0,ttlpengkajian_setiap_hari=0,ttlhand_hygiene=0,ttloral_hygiene=0,ttlsuction_manajemen_sekresi=0,ttlprofilaksis_peptic_ulcer=0,ttldvt_profiklasisi=0,ttlpenggunaan_apd_sesuai=0,ttlpenilaian=0;
-    
-    
+
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -103,7 +103,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
 
         KdRuang.setDocument(new batasInput((byte)20).getKata(KdRuang));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -126,7 +126,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -134,10 +134,10 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){                   
+                if(ruang.getTable().getSelectedRow()!= -1){
                     KdRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                     NmRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdRuang.requestFocus();
             }
             @Override
@@ -148,10 +148,10 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         ChkInput.setSelected(false);
         isForm();
-        
+
         jam();
     }
 
@@ -692,7 +692,6 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
         jLabel18.setBounds(380, 10, 110, 23);
 
         KdRuang.setEditable(false);
-        KdRuang.setHighlighter(null);
         KdRuang.setName("KdRuang"); // NOI18N
         KdRuang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -746,7 +745,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -760,7 +759,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -780,8 +779,8 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -795,7 +794,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
             Valid.textKosong(btnPetugas,"Ruang/Unit");
-        }else{   
+        }else{
             Sequel.mengedit("audit_bundle_vap","id_ruang=? and tanggal=?","tanggal=?,id_ruang=?,posisi_kepala=?,pengkajian_setiap_hari=?,hand_hygiene=?,oral_hygiene=?,suction_manajemen_sekresi=?,profilaksis_peptic_ulcer=?,dvt_profiklasisi=?,penggunaan_apd_sesuai=?",12,new String[]{
                  Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),PosisiKepala.getSelectedItem().toString(),PengkajianSetiapHari.getSelectedItem().toString(),HandHygiene.getSelectedItem().toString(),
                 OralHygiene.getSelectedItem().toString(),Suction.getSelectedItem().toString(),Profilaksis.getSelectedItem().toString(),Dvt.getSelectedItem().toString(),PenggunaanApd.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -830,15 +829,15 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptAuditBundleVAP.jasper","report","::[ Data Audit Bundle VAP ]::",
                     "select audit_bundle_vap.id_ruang,ruang_audit_kepatuhan.nama_ruang,audit_bundle_vap.tanggal,audit_bundle_vap.posisi_kepala,"+
@@ -854,9 +853,9 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
                     "inner join ruang_audit_kepatuhan on audit_bundle_vap.id_ruang=ruang_audit_kepatuhan.id_ruang where audit_bundle_vap.tanggal between "+
                     "'"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
                     "and (audit_bundle_vap.id_ruang like '%"+TCari.getText().trim()+"%' or ruang_audit_kepatuhan.nama_ruang like '%"+TCari.getText().trim()+"%') order by audit_bundle_vap.tanggal",param);
-            }  
+            }
         }
-       
+
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -1068,7 +1067,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1088,7 +1087,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
                     "where audit_bundle_vap.tanggal between ? and ? "+
                     "and (audit_bundle_vap.id_ruang like ? or ruang_audit_kepatuhan.nama_ruang like ?) order by audit_bundle_vap.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().toString().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1099,7 +1098,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 ttlposisi_kepala=0;ttlpengkajian_setiap_hari=0;ttlhand_hygiene=0;ttloral_hygiene=0;ttlsuction_manajemen_sekresi=0;ttlprofilaksis_peptic_ulcer=0;ttldvt_profiklasisi=0;ttlpenggunaan_apd_sesuai=0;ttlpenilaian=0;
                 i=1;
@@ -1157,7 +1156,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
         }
         LCount.setText(""+i);
     }
-    
+
     public void emptTeks() {
         KdRuang.setText("");
         NmRuang.setText("");
@@ -1171,7 +1170,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
         Dvt.setSelectedIndex(0);
         PenggunaanApd.setSelectedIndex(0);
         PosisiKepala.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1190,7 +1189,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
@@ -1199,21 +1198,21 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
             }else{
                 PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-122));
             }
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         /*BtnSimpan.setEnabled(akses.getaudit_bundle_vap());
         BtnHapus.setEnabled(akses.getaudit_bundle_vap());
         BtnEdit.setEnabled(akses.getaudit_bundle_vap());
-        BtnPrint.setEnabled(akses.getaudit_bundle_vap());   */      
+        BtnPrint.setEnabled(akses.getaudit_bundle_vap());   */
     }
 
     private void jam(){
@@ -1225,7 +1224,7 @@ public final class DlgAuditBundleVAP extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang

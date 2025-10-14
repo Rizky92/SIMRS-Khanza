@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -119,12 +119,12 @@ public final class TokoMember extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -462,7 +462,6 @@ public final class TokoMember extends javax.swing.JDialog {
         FormInput.add(JK);
         JK.setBounds(237, 10, 100, 23);
 
-        NamaMember.setHighlighter(null);
         NamaMember.setName("NamaMember"); // NOI18N
         NamaMember.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -510,7 +509,6 @@ public final class TokoMember extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(545, 40, 45, 23);
 
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
         Alamat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -520,7 +518,6 @@ public final class TokoMember extends javax.swing.JDialog {
         FormInput.add(Alamat);
         Alamat.setBounds(424, 10, 300, 23);
 
-        NoTelp.setHighlighter(null);
         NoTelp.setName("NoTelp"); // NOI18N
         NoTelp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -530,7 +527,6 @@ public final class TokoMember extends javax.swing.JDialog {
         FormInput.add(NoTelp);
         NoTelp.setBounds(424, 40, 120, 23);
 
-        NoMember.setHighlighter(null);
         NoMember.setName("NoMember"); // NOI18N
         NoMember.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -540,7 +536,6 @@ public final class TokoMember extends javax.swing.JDialog {
         FormInput.add(NoMember);
         NoMember.setBounds(94, 10, 100, 23);
 
-        Email.setHighlighter(null);
         Email.setName("Email"); // NOI18N
         Email.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -619,7 +614,7 @@ public final class TokoMember extends javax.swing.JDialog {
             })==true){
                 emptTeks();
                 tampil();
-            }         
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -633,8 +628,8 @@ public final class TokoMember extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
-        emptTeks();        
+        isForm();
+        emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -663,14 +658,14 @@ public final class TokoMember extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();  
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptMemberToko.jasper","report","::[ Data Member Toko ]::",
                     "select no_member, nama, jk, tmp_lahir, tgl_lahir, alamat, no_telp, email from tokomember "+
                     "where no_member like '%"+TCari.getText().trim()+"%' or nama like '%"+TCari.getText().trim()+"%' "+
@@ -678,7 +673,7 @@ public final class TokoMember extends javax.swing.JDialog {
                     "or tgl_lahir like '%"+TCari.getText().trim()+"%' order by no_member",param);
                 this.setCursor(Cursor.getDefaultCursor());
         }
-        
+
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -728,8 +723,8 @@ public final class TokoMember extends javax.swing.JDialog {
                 })==true){
                     emptTeks();
                     tampil();
-                }  
-            }       
+                }
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -777,7 +772,7 @@ private void EmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ema
 }//GEN-LAST:event_EmailKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -791,7 +786,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }            
+            }
         }
     }//GEN-LAST:event_tbPetugasKeyReleased
 
@@ -953,21 +948,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbPetugas;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettoko_member());
         BtnHapus.setEnabled(akses.gettoko_member());

@@ -91,7 +91,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
 
-        
+
         Kode.setDocument(new batasInput((byte)5).getKata(Kode));
         Nama.setDocument(new batasInput((int)100).getKata(Nama));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -116,14 +116,14 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
-        isForm(); 
-        
+        isForm();
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -397,7 +397,6 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 12, 85, 23);
 
-        Kode.setHighlighter(null);
         Kode.setName("Kode"); // NOI18N
         Kode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -412,7 +411,6 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(210, 12, 100, 23);
 
-        Nama.setHighlighter(null);
         Nama.setName("Nama"); // NOI18N
         Nama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -495,13 +493,13 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
             Valid.textKosong(Kode,"Kode Insiden");
         }else if(Nama.getText().trim().equals("")){
             Valid.textKosong(Nama,"Nama Insiden");
-        }else{            
+        }else{
             if(Sequel.menyimpantf("insiden_keselamatan","?,?,?,?","Kode Insiden",4,new String[]{
                 Kode.getText(),Nama.getText(),Jenis.getSelectedItem().toString(),Dampak.getSelectedItem().toString()
             })==true){
                 tampil();
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -515,8 +513,8 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
-        emptTeks(); 
+        isForm();
+        emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -526,11 +524,11 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(z=0;z<tbPenyakit.getRowCount();z++){ 
+        for(z=0;z<tbPenyakit.getRowCount();z++){
             if(tbPenyakit.getValueAt(z,0).toString().equals("true")){
                 Sequel.meghapus("insiden_keselamatan","kode_insiden",tbPenyakit.getValueAt(z,1).toString());
             }
-        } 
+        }
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -548,7 +546,7 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
             Valid.textKosong(Kode,"Kode Insiden");
         }else if(Nama.getText().trim().equals("")){
             Valid.textKosong(Nama,"Nama Insiden");
-        }else{ 
+        }else{
             Valid.editTable(tabMode,"insiden_keselamatan","kode_insiden","?","kode_insiden=?,nama_insiden=?,jenis_insiden=?,dampak=?",5,new String[]{
                 Kode.getText(),Nama.getText(),Jenis.getSelectedItem().toString(),Dampak.getSelectedItem().toString(),tbPenyakit.getValueAt(tbPenyakit.getSelectedRow(),1).toString()
             });
@@ -580,15 +578,15 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){  
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));           
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptInsidenKeselamatan.jasper","report","::[ Master Insiden Kecelakaan ]::",
                 "select * from insiden_keselamatan where kode_insiden like '%"+TCari.getText().trim()+"%' or "+
                 "nama_insiden like '%"+TCari.getText().trim()+"%' or "+
@@ -659,17 +657,17 @@ public final class DlgInsidenKeselamatan extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }else if(evt.getKeyCode()==KeyEvent.VK_A){                
-                for(z=0;z<tbPenyakit.getRowCount();z++){ 
+            }else if(evt.getKeyCode()==KeyEvent.VK_A){
+                for(z=0;z<tbPenyakit.getRowCount();z++){
                     tbPenyakit.setValueAt(true,z,0);
                 }
             }
-            
+
         }
 }//GEN-LAST:event_tbPenyakitKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -790,21 +788,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTabel(){
         return tbPenyakit;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,98));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinsiden_keselamatan());
         BtnHapus.setEnabled(akses.getinsiden_keselamatan());

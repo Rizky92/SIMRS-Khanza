@@ -105,7 +105,7 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
                     }
                 }
             });
-        }         
+        }
         kamar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -113,10 +113,10 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     isKmr();
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -128,7 +128,7 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -140,9 +140,9 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });        
+        });
     }
-    
+
     private DlgKamar kamar=new DlgKamar(null,false);
 
     /** This method is called from within the constructor to
@@ -402,7 +402,6 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(217, 72, 150, 23);
 
-        NmBiaya.setHighlighter(null);
         NmBiaya.setName("NmBiaya"); // NOI18N
         NmBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -426,7 +425,6 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
         panelGlass7.add(jLabel12);
         jLabel12.setBounds(0, 12, 83, 23);
 
-        kdkamar.setHighlighter(null);
         kdkamar.setName("kdkamar"); // NOI18N
         kdkamar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -442,7 +440,6 @@ public class DlgBiayaHarian extends javax.swing.JDialog {
         TKdBngsal.setBounds(183, 12, 82, 23);
 
         TBangsal.setEditable(false);
-        TBangsal.setHighlighter(null);
         TBangsal.setName("TBangsal"); // NOI18N
         TBangsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -769,7 +766,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
             BiayaHarian.setText(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return NmBiaya;
     }
@@ -777,7 +774,7 @@ private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Ju
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     private void isKmr() {
         Sequel.cariIsi("select kd_bangsal from kamar where kd_kamar=? ",TKdBngsal,kdkamar.getText());
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=? ",TBangsal,TKdBngsal.getText());

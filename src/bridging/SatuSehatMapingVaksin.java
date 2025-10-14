@@ -38,7 +38,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgBarang barang=new DlgBarang(null,false);
 
@@ -91,18 +91,18 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        KodeBarang.setDocument(new batasInput((byte)15).getKata(KodeBarang)); 
-        VaksinCode.setDocument(new batasInput((byte)15).getKata(VaksinCode)); 
-        VaksinSystem.setDocument(new batasInput((byte)100).getKata(VaksinSystem)); 
-        VaksinDisplay.setDocument(new batasInput((byte)80).getKata(VaksinDisplay)); 
-        RouteCode.setDocument(new batasInput((byte)30).getKata(RouteCode)); 
-        RouteSystem.setDocument(new batasInput((byte)100).getKata(RouteSystem)); 
-        RouteDisplay.setDocument(new batasInput((byte)80).getKata(RouteDisplay)); 
-        DoseCode.setDocument(new batasInput((byte)15).getKata(DoseCode)); 
-        DoseUnit.setDocument(new batasInput((byte)15).getKata(DoseUnit)); 
-        DoseSystem.setDocument(new batasInput((byte)80).getKata(DoseSystem)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        KodeBarang.setDocument(new batasInput((byte)15).getKata(KodeBarang));
+        VaksinCode.setDocument(new batasInput((byte)15).getKata(VaksinCode));
+        VaksinSystem.setDocument(new batasInput((byte)100).getKata(VaksinSystem));
+        VaksinDisplay.setDocument(new batasInput((byte)80).getKata(VaksinDisplay));
+        RouteCode.setDocument(new batasInput((byte)30).getKata(RouteCode));
+        RouteSystem.setDocument(new batasInput((byte)100).getKata(RouteSystem));
+        RouteDisplay.setDocument(new batasInput((byte)80).getKata(RouteDisplay));
+        DoseCode.setDocument(new batasInput((byte)15).getKata(DoseCode));
+        DoseUnit.setDocument(new batasInput((byte)15).getKata(DoseUnit));
+        DoseSystem.setDocument(new batasInput((byte)80).getKata(DoseSystem));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -124,8 +124,8 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -133,7 +133,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                    
+                if(barang.getTable().getSelectedRow()!= -1){
                     KodeBarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     NamaBarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                 }
@@ -147,8 +147,8 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -156,12 +156,12 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -219,7 +219,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         VaksinSystem = new widget.TextBox();
 
         NamaBarang.setEditable(false);
-        NamaBarang.setHighlighter(null);
         NamaBarang.setName("NamaBarang"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -472,7 +471,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         jLabel4.setBounds(155, 10, 90, 23);
 
         KodeBarang.setEditable(false);
-        KodeBarang.setHighlighter(null);
         KodeBarang.setName("KodeBarang"); // NOI18N
         FormInput.add(KodeBarang);
         KodeBarang.setBounds(410, 10, 80, 23);
@@ -499,7 +497,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(0, 40, 81, 23);
 
-        RouteCode.setHighlighter(null);
         RouteCode.setName("RouteCode"); // NOI18N
         RouteCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -514,7 +511,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(0, 70, 81, 23);
 
-        DoseCode.setHighlighter(null);
         DoseCode.setName("DoseCode"); // NOI18N
         DoseCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -524,7 +520,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(DoseCode);
         DoseCode.setBounds(85, 70, 70, 23);
 
-        VaksinCode.setHighlighter(null);
         VaksinCode.setName("VaksinCode"); // NOI18N
         VaksinCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -544,7 +539,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(526, 10, 60, 23);
 
-        VaksinDisplay.setHighlighter(null);
         VaksinDisplay.setName("VaksinDisplay"); // NOI18N
         VaksinDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -559,7 +553,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(155, 40, 90, 23);
 
-        RouteSystem.setHighlighter(null);
         RouteSystem.setName("RouteSystem"); // NOI18N
         RouteSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -569,7 +562,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(RouteSystem);
         RouteSystem.setBounds(249, 40, 241, 23);
 
-        RouteDisplay.setHighlighter(null);
         RouteDisplay.setName("RouteDisplay"); // NOI18N
         RouteDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -594,7 +586,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(155, 70, 90, 23);
 
-        DoseSystem.setHighlighter(null);
         DoseSystem.setName("DoseSystem"); // NOI18N
         DoseSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -604,7 +595,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(DoseSystem);
         DoseSystem.setBounds(249, 70, 241, 23);
 
-        DoseUnit.setHighlighter(null);
         DoseUnit.setName("DoseUnit"); // NOI18N
         DoseUnit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -614,7 +604,6 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         FormInput.add(DoseUnit);
         DoseUnit.setBounds(590, 70, 70, 23);
 
-        VaksinSystem.setHighlighter(null);
         VaksinSystem.setName("VaksinSystem"); // NOI18N
         VaksinSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -677,7 +666,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -754,7 +743,7 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
                     tabMode.setValueAt(DoseUnit.getText(),tbJnsPerawatan.getSelectedRow(),9);
                     emptTeks();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -781,17 +770,17 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingVaksinSatuSehat.jasper","report","::[ Mapping Vaksin Satu Sehat Kemenkes ]::",param);            
+                Valid.MyReport("rptMapingVaksinSatuSehat.jasper","report","::[ Mapping Vaksin Satu Sehat Kemenkes ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1037,18 +1026,18 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
            DoseUnit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_vaksin());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_vaksin());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_vaksin());
         BtnPrint.setEnabled(akses.getsatu_sehat_mapping_vaksin());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }  
-    
+    }
+
     private void isForm() {
         if (ChkInput.isSelected() == true) {
             ChkInput.setVisible(false);

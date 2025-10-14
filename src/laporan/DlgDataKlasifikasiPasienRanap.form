@@ -445,9 +445,6 @@
                 <Component class="widget.TextBox" name="TNoRw">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNoRw" noResource="true"/>
                   </Properties>
                   <Events>
@@ -462,9 +459,6 @@
                 <Component class="widget.TextBox" name="TPasien">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TPasien" noResource="true"/>
                   </Properties>
                   <Events>
@@ -502,9 +496,6 @@
                 <Component class="widget.TextBox" name="TNoRM">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
                   </Properties>
                   <Events>
@@ -624,9 +615,6 @@
                 <Component class="widget.TextBox" name="Kamar">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Kamar" noResource="true"/>
                   </Properties>
                   <Events>

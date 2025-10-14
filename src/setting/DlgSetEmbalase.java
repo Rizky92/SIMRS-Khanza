@@ -77,7 +77,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -147,7 +147,6 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 120, 23);
 
-        Embalase.setHighlighter(null);
         Embalase.setName("Embalase"); // NOI18N
         Embalase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -157,7 +156,6 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         panelGlass7.add(Embalase);
         Embalase.setBounds(123, 12, 120, 23);
 
-        Tuslah.setHighlighter(null);
         Tuslah.setName("Tuslah"); // NOI18N
         Tuslah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -434,7 +432,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});

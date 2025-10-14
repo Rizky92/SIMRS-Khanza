@@ -116,9 +116,6 @@
             </Component>
             <Component class="widget.TextBox" name="Toleransi">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Toleransi" noResource="true"/>
               </Properties>
               <Events>
@@ -132,9 +129,6 @@
             </Component>
             <Component class="widget.TextBox" name="Terlambat1">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Terlambat1" noResource="true"/>
               </Properties>
               <Events>
@@ -194,9 +188,6 @@
             </Component>
             <Component class="widget.TextBox" name="Terlambat2">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Terlambat2" noResource="true"/>
               </Properties>
               <Events>

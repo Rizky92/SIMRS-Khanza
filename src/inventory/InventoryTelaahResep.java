@@ -54,7 +54,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private StringBuilder htmlContent;
     /** Creates new form DlgRujuk
@@ -169,7 +169,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         KetResepInteraksiObat.setDocument(new batasInput((byte)30).getKata(KetResepInteraksiObat));
         KetResepKontraIndikasiObat.setDocument(new batasInput((byte)30).getKata(KetResepKontraIndikasiObat));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -192,7 +192,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -200,10 +200,10 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     Nip.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Nip.requestFocus();
             }
             @Override
@@ -214,11 +214,11 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -234,7 +234,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
@@ -620,19 +620,16 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 75, 23);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         FormInput.add(TNoRw);
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(336, 10, 285, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(222, 10, 112, 23);
@@ -649,7 +646,6 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         jLabel18.setBounds(410, 40, 60, 23);
 
         Nip.setEditable(false);
-        Nip.setHighlighter(null);
         Nip.setName("Nip"); // NOI18N
         Nip.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -687,7 +683,6 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         jLabel8.setBounds(625, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1114,18 +1109,18 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             Valid.textKosong(Nip,"Petugas");
         }else{
             if(Sequel.menyimpantf("telaah_farmasi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",23,new String[]{
-                NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(), 
-                ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(), 
-                KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(), 
-                ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(), 
-                KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(), 
+                NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(),
+                ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(),
+                KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(),
+                ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(),
+                KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(),
                 ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ObatTepatPasien.getSelectedItem().toString(),
-                ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(), 
+                ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(),
                 ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText()
             })==true){
                 tampil();
                 emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1140,7 +1135,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1162,8 +1157,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }           
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1192,7 +1187,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1222,14 +1217,14 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>(); 
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
 
                 Valid.MyReportqry("rptDataTelaahResep.jasper","report","::[ Data Telaah Resep ]::",
                     "select telaah_farmasi.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,resep_obat.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -1255,18 +1250,18 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             }
         }else if(TabData.getSelectedIndex()==1){
             try {
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f = new File("VerifikasiResep.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));   
+                File f = new File("VerifikasiResep.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                 "<tr class='isi2'>"+
@@ -1274,7 +1269,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI RESEP<br>PERIODE "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA VERIFIKASI RESEP<br>PERIODE "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -1283,9 +1278,9 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            }  
+            }
         }
-            
+
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -1577,7 +1572,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1601,7 +1596,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 (TCari.getText().equals("")?"":"and (telaah_farmasi.no_resep like ? or resep_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                 "pasien.nm_pasien like ? or resep_obat.kd_dokter like ? or dokter.nm_dokter like ? or resep_obat.status like ? or telaah_farmasi.nip like ? or "+
                 "petugas.nama like ?) ")+"order by resep_obat.tgl_perawatan");
-                
+
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
@@ -1616,7 +1611,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                     ps.setString(11,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1646,7 +1641,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         ResepTepatIdentifikasiPasien.setSelectedIndex(0);
         KetResepTepatIdetifikasiPasien.setText("");
@@ -1670,7 +1665,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         ObatTepatCaraPemberian.setSelectedIndex(0);
         ObatTepatWaktuPemberian.setSelectedIndex(0);
         ResepTepatIdentifikasiPasien.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1716,7 +1711,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis=? ",Alamat,TNoRM.getText());
     }
-    
+
     public void setNoRm(String noresep,String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         NoResep.setText(noresep);
@@ -1728,7 +1723,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
@@ -1736,22 +1731,22 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 PanelInput.setPreferredSize(new Dimension(WIDTH,354));
             }else{
                 PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-230));
-            }   
-            FormInput.setVisible(true);      
+            }
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettelaah_resep());
         BtnHapus.setEnabled(akses.gettelaah_resep());
         BtnEdit.setEnabled(akses.gettelaah_resep());
-        BtnPrint.setEnabled(akses.gettelaah_resep()); 
+        BtnPrint.setEnabled(akses.gettelaah_resep());
         if(akses.getjml2()>=1){
             Nip.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1761,7 +1756,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 Nip.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }           
+        }
     }
 
     private void hapus() {
@@ -1779,13 +1774,13 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 "resep_tepat_dosis=?,resep_ket_tepat_dosis=?,resep_tepat_cara_pemberian=?,resep_ket_tepat_cara_pemberian=?,resep_tepat_waktu_pemberian=?,resep_ket_tepat_waktu_pemberian=?,"+
                 "resep_ada_tidak_duplikasi_obat=?,resep_ket_ada_tidak_duplikasi_obat=?,resep_interaksi_obat=?,resep_ket_interaksi_obat=?,resep_kontra_indikasi_obat=?,"+
                 "resep_ket_kontra_indikasi_obat=?,obat_tepat_pasien=?,obat_tepat_obat=?,obat_tepat_dosis=?,obat_tepat_cara_pemberian=?,obat_tepat_waktu_pemberian=?,nip=?",24,new String[]{
-                NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(), 
-                ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(), 
-                KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(), 
-                ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(), 
-                KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(), 
+                NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(),
+                ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(),
+                KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(),
+                ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(),
+                KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(),
                 ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ObatTepatPasien.getSelectedItem().toString(),
-                ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(), 
+                ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(),
                 ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
                tampil();
@@ -1797,7 +1792,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='9%'>No.Resep</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>Tgl.Resep</td>"+
@@ -1832,7 +1827,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    htmlContent.append( 
+                    htmlContent.append(
                         "<tr class='isi'>"+
                             "<td align='center'>"+rs.getString("no_resep")+"</td>"+
                             "<td align='center'>"+rs.getString("tgl_peresepan")+"</td>"+
@@ -1845,7 +1840,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             "<td align='center'>"+rs.getString("status").replace("r","R")+"</td>"+
                         "</tr>"
                     );
-                    htmlContent.append( 
+                    htmlContent.append(
                         "<tr class='isi'>"+
                             "<td align='left' valign='top'></td>"+
                             "<td align='left' valign='top' colspan='8'>"+
@@ -1868,7 +1863,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         ps2.setString(1,rs.getString("no_resep"));
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
-                            htmlContent.append( 
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td align='left'>"+rs2.getString("jml")+"</td>"+
                                     "<td align='center'>"+rs2.getString("kode_sat")+"</td>"+
@@ -1888,7 +1883,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(
                             "select resep_dokter_racikan.no_racik,resep_dokter_racikan.nama_racik,"+
                             "resep_dokter_racikan.kd_racik,metode_racik.nm_racik as metode,"+
@@ -1900,7 +1895,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         ps2.setString(1,rs.getString("no_resep"));
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
-                            htmlContent.append( 
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td align='left'>"+rs2.getString("jml_dr")+"</td>"+
                                     "<td align='center'>"+rs2.getString("metode")+"</td>"+
@@ -1917,7 +1912,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                                 ps3.setString(2,rs2.getString("no_racik"));
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
-                                    htmlContent.append( 
+                                    htmlContent.append(
                                         "<tr class='isi'>"+
                                             "<td align='left'>&nbsp;&nbsp;"+rs3.getString("jml")+"</td>"+
                                             "<td align='center'>&nbsp;&nbsp;"+rs3.getString("kode_sat")+"</td>"+
@@ -1948,13 +1943,13 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    htmlContent.append( 
+                    htmlContent.append(
                                 "</table>"+
                             "</td>"+
                         "</tr>"
                     );
-                    
-                    htmlContent.append( 
+
+                    htmlContent.append(
                         "<tr class='isi'>"+
                             "<td align='left' valign='top'></td>"+
                             "<td align='left' valign='top' colspan='8'>"+
@@ -1986,7 +1981,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         ps2.setString(6,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
-                            htmlContent.append( 
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td align='left'>"+rs2.getString("jml")+"</td>"+
                                     "<td align='center'>"+rs2.getString("kode_sat")+"</td>"+
@@ -2009,7 +2004,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2=koneksi.prepareStatement(
                             "select obat_racikan.no_racik,obat_racikan.nama_racik,"+
                             "obat_racikan.kd_racik,metode_racik.nm_racik as metode,"+
@@ -2024,7 +2019,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         ps2.setString(3,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
-                            htmlContent.append( 
+                            htmlContent.append(
                                 "<tr class='isi'>"+
                                     "<td align='left'>"+rs2.getString("jml_dr")+"</td>"+
                                     "<td align='center'>"+rs2.getString("metode")+"</td>"+
@@ -2033,7 +2028,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                                     "<td align='left'>"+rs2.getString("nama_racik")+"</td>"+
                                 "</tr>"
                             );
-                            
+
                             ps3=koneksi.prepareStatement(
                                 "select databarang.kode_brng,databarang.nama_brng,detail_pemberian_obat.jml,databarang.kode_sat,"+
                                 "detail_pemberian_obat.biaya_obat,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,detail_pemberian_obat.total from "+
@@ -2052,7 +2047,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                                 ps3.setString(4,rs2.getString("no_racik"));
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
-                                    htmlContent.append( 
+                                    htmlContent.append(
                                         "<tr class='isi'>"+
                                             "<td align='left'>&nbsp;&nbsp;"+rs3.getString("jml")+"</td>"+
                                             "<td align='center'>&nbsp;&nbsp;"+rs3.getString("kode_sat")+"</td>"+
@@ -2061,7 +2056,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                                             "<td align='left'>"+"&nbsp;&nbsp;"+rs3.getString("nama_brng")+"</td>"+
                                         "</tr>"
                                     );
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi Detail Racikan : "+e);
                             } finally{
@@ -2083,8 +2078,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
-                    htmlContent.append( 
+
+                    htmlContent.append(
                                 "</table>"+
                             "</td>"+
                         "</tr>"
@@ -2112,5 +2107,5 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
 }

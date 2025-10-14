@@ -53,7 +53,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String finger="";
     private StringBuilder htmlContent;
@@ -194,7 +194,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         SkorInterpretasi.setDocument(new batasInput((byte)40).getKata(SkorInterpretasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -217,7 +217,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -225,10 +225,10 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -239,11 +239,11 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -261,13 +261,13 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -463,7 +463,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -751,7 +750,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -762,7 +760,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -786,7 +783,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         Tanggal.setBounds(80, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -847,7 +843,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         jLabel18.setBounds(400, 40, 70, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         FormInput.add(KdPetugas);
         KdPetugas.setBounds(474, 40, 94, 23);
@@ -965,7 +960,6 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1712,7 +1706,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1740,7 +1734,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem())==true){
                     simpan();
                 }
-            } 
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1755,7 +1749,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         TotalNilai();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -1780,7 +1774,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1820,7 +1814,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1851,7 +1845,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
@@ -1929,7 +1923,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
@@ -1941,7 +1935,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                             "<td valign='top'>"+tbObat.getValueAt(i,29).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,30).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,31).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,33).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,34).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,35).toString()+"</td>"+
@@ -1970,7 +1964,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1985,8 +1979,8 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 );
                 bg.close();
 
-                File f = new File("DataSkriningPSI.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataSkriningPSI.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1995,12 +1989,12 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA SEKRINING PNEUMONIA SEVERITY INDEX<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA SEKRINING PNEUMONIA SEVERITY INDEX<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -2114,10 +2108,10 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningPSI.jasper","report","::[ Formulir Skrining Pneumonia Severity Index ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_pneumonia_severity_index.nip,petugas.nama,skrining_pneumonia_severity_index.tanggal,"+
                     "if(reg_periksa.sttsumur='Th',reg_periksa.umurdaftar,'0') as umur,skrining_pneumonia_severity_index.nilai_umur,skrining_pneumonia_severity_index.tinggal_di_panti_jompo,skrining_pneumonia_severity_index.nilai_tinggal_di_panti_jompo,"+
@@ -2552,7 +2546,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -2587,7 +2581,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                     "pasien.nm_pasien like ? or skrining_pneumonia_severity_index.nip like ? or petugas.nama like ? or skrining_pneumonia_severity_index.rekomendasi like ?) "+
                     "order by skrining_pneumonia_severity_index.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2603,7 +2597,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                     ps.setString(8,"%"+TCari.getText()+"%");
 
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2632,7 +2626,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         TinggalDiPanti.setSelectedIndex(0);
         NilaiTinggalDiPanti.setText("0");
@@ -2676,7 +2670,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
         Rekomendasi.setText("Rawat Jalan");
         Tanggal.setDate(new Date());
         Jk.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -2688,7 +2682,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(14,15));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString().substring(17,19));
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             NilaiUmur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             TinggalDiPanti.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
@@ -2734,7 +2728,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             Rekomendasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),50).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -2777,17 +2771,17 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
         TotalNilai();
     }
-    
+
     private void TotalNilai(){
         try{
             if((!NilaiUmur.getText().equals(""))&&(!NilaiTinggalDiPanti.getText().equals(""))&&(!NilaiGagalJantung.getText().equals(""))&&(!NilaiGinjalKronis.getText().equals(""))&&
@@ -2816,7 +2810,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                     Integer.parseInt(NilaiEfusiPleura.getText())
                 ));
             }
-                
+
             if((Integer.parseInt(Umur.getText())<50)&&(NilaiGagalJantung.getText().equals("0"))&&(NilaiGinjalKronis.getText().equals("0"))&&(NilaiPenyakitSerebrovaskular.getText().equals("0"))&&
                     (NilaiPenyakitHati.getText().equals("0"))&&(NilaiKankerNeoplasma.getText().equals("0"))&&(NilaiDisorentasiMental.getText().equals("0"))&&(NilaiTDSistolik.getText().equals("0"))&&
                     (NilaiNadi.getText().equals("0"))&&(NilaiFrekuensiNapas.getText().equals("0"))&&(NilaiSuhu.getText().equals("0"))){
@@ -2856,26 +2850,26 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_pneumonia_severity_index());
         BtnHapus.setEnabled(akses.getskrining_pneumonia_severity_index());
         BtnEdit.setEnabled(akses.getskrining_pneumonia_severity_index());
-        BtnPrint.setEnabled(akses.getskrining_pneumonia_severity_index()); 
+        BtnPrint.setEnabled(akses.getskrining_pneumonia_severity_index());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -2885,7 +2879,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }    
+        }
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -2908,7 +2902,7 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2958,11 +2952,11 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
                 "nilai_td_sistolik=?,suhu=?,nilai_suhu=?,nadi=?,nilai_nadi=?,ph_darah=?,nilai_ph_darah=?,natrium=?,nilai_natrium=?,bun=?,nilai_bun=?,pao=?,nilai_pao=?,glukosa=?,nilai_glukosa=?,efusi_pleura=?,nilai_efusi_pleura=?,hematokrit=?,"+
                 "nilai_hematokrit=?,total_skor=?,kelas=?,skor_interpretasi=?,mortalitas=?,rekomendasi=?,nip=?",46,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(), 
-                GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(), 
-                DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(), 
-                Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(), 
-                BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(), 
+                NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(),
+                GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(),
+                DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(),
+                Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(),
+                BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(),
                 Hematokrit.getSelectedItem().toString(),NilaiHematokrit.getText(),TotalSkorPSI.getText(),Kelas.getText(),SkorInterpretasi.getText(),Mortalitas.getText(),Rekomendasi.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
                tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
@@ -3031,28 +3025,28 @@ public final class RMSkriningPneumoniaSeverityIndex extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void simpan() {
         if(Sequel.menyimpantf("skrining_pneumonia_severity_index","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",45,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-            NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(), 
-            GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(), 
-            DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(), 
-            Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(), 
-            BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(), 
+            NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(),
+            GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(),
+            DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(),
+            Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(),
+            BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(),
             Hematokrit.getSelectedItem().toString(),NilaiHematokrit.getText(),TotalSkorPSI.getText(),Kelas.getText(),SkorInterpretasi.getText(),Mortalitas.getText(),Rekomendasi.getText(),KdPetugas.getText()
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                Umur.getText(),NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(), 
-                GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(), 
-                DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(), 
-                Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(), 
-                BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(), 
+                Umur.getText(),NilaiUmur.getText(),TinggalDiPanti.getSelectedItem().toString(),NilaiTinggalDiPanti.getText(),GagalJantung.getSelectedItem().toString(),NilaiGagalJantung.getText(),PenyakitHati.getSelectedItem().toString(),NilaiPenyakitHati.getText(),
+                GinjalKronis.getSelectedItem().toString(),NilaiGinjalKronis.getText(),KankerNeoplasma.getSelectedItem().toString(),NilaiKankerNeoplasma.getText(),PenyakitSerebrovaskular.getSelectedItem().toString(),NilaiPenyakitSerebrovaskular.getText(),
+                DisorentasiMental.getSelectedItem().toString(),NilaiDisorentasiMental.getText(),FrekuensiNapas.getSelectedItem().toString(),NilaiFrekuensiNapas.getText(),TDSistolik.getSelectedItem().toString(),NilaiTDSistolik.getText(),
+                Suhu.getSelectedItem().toString(),NilaiSuhu.getText(),Nadi.getSelectedItem().toString(),NilaiNadi.getText(),pHDarah.getSelectedItem().toString(),NilaipHDarah.getText(),Natrium.getSelectedItem().toString(),NilaiNatrium.getText(),
+                BUN.getSelectedItem().toString(),NilaiBUN.getText(),PaO.getSelectedItem().toString(),NilaiPaO.getText(),Glukosa.getSelectedItem().toString(),NilaiGlukosa.getText(),EfusiPleura.getSelectedItem().toString(),NilaiEfusiPleura.getText(),
                 Hematokrit.getSelectedItem().toString(),NilaiHematokrit.getText(),TotalSkorPSI.getText(),Kelas.getText(),SkorInterpretasi.getText(),Mortalitas.getText(),Rekomendasi.getText()
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
 }

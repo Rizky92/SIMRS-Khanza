@@ -43,7 +43,7 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
 
         Valid.loadCombo(kdsat1,"kode_sat","kodesatuan");
         Valid.loadCombo(kdsat2,"kode_sat","kodesatuan");
-        
+
     }
 
 
@@ -79,7 +79,6 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
         panelisi4.setPreferredSize(new java.awt.Dimension(100, 47));
         panelisi4.setLayout(null);
 
-        n1.setHighlighter(null);
         n1.setName("n1"); // NOI18N
         n1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +94,6 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
         n1.setBounds(12, 12, 50, 23);
 
         nmsat1.setEditable(false);
-        nmsat1.setHighlighter(null);
         nmsat1.setName("nmsat1"); // NOI18N
         panelisi4.add(nmsat1);
         nmsat1.setBounds(146, 12, 130, 23);
@@ -122,7 +120,6 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
         panelisi4.add(label11);
         label11.setBounds(277, 12, 20, 23);
 
-        n2.setHighlighter(null);
         n2.setName("n2"); // NOI18N
         n2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -143,7 +140,6 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
         kdsat2.setBounds(351, 12, 80, 23);
 
         nmsat2.setEditable(false);
-        nmsat2.setHighlighter(null);
         nmsat2.setName("nmsat2"); // NOI18N
         panelisi4.add(nmsat2);
         nmsat2.setBounds(433, 12, 130, 23);
@@ -260,13 +256,13 @@ private void kdsat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                             form.setVisible(true);
                             this.setCursor(Cursor.getDefaultCursor());
                             dispose();
-                        }                            
-                    }                    
+                        }
+                    }
                 } catch (SQLException ex) {
                     System.out.println(ex);
                 }
             }
-        }        
+        }
     }
 
 

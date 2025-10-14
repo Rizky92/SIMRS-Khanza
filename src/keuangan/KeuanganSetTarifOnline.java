@@ -72,7 +72,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
              Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class,java.lang.Double.class,java.lang.Double.class, 
+                java.lang.Double.class, java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class, java.lang.Object.class,java.lang.Object.class
              };
              @Override
@@ -120,8 +120,8 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -132,7 +132,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                } 
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -144,7 +144,7 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -157,9 +157,9 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
     }
-    
+
     private DlgJnsPerawatanRalan penjab=new DlgJnsPerawatanRalan(null,false);
 
     /** This method is called from within the constructor to
@@ -393,7 +393,6 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
         jLabel3.setBounds(0, 12, 90, 23);
 
         nmpj.setEditable(false);
-        nmpj.setHighlighter(null);
         nmpj.setName("nmpj"); // NOI18N
         nmpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -421,7 +420,6 @@ public final class KeuanganSetTarifOnline extends javax.swing.JDialog {
         BtnSeek.setBounds(490, 12, 28, 23);
 
         kdpj.setEditable(false);
-        kdpj.setHighlighter(null);
         kdpj.setName("kdpj"); // NOI18N
         kdpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -583,7 +581,7 @@ private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpj
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -595,7 +593,7 @@ private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpj
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -603,7 +601,7 @@ private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpj
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -663,7 +661,7 @@ private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpj
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
                        "jns_perawatan.material,jns_perawatan.bhp,jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen,"+
                        "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,penjab.png_jawab,poliklinik.nm_poli "+
@@ -681,7 +679,7 @@ private void kdpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpj
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{

@@ -625,7 +625,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel47.setBounds(0, 122, 120, 23);
 
         NoSuratKematian.setEditable(false);
-        NoSuratKematian.setHighlighter(null);
         NoSuratKematian.setName("NoSuratKematian"); // NOI18N
         NoSuratKematian.setPreferredSize(new java.awt.Dimension(130, 23));
         internalFrame11.add(NoSuratKematian);
@@ -651,7 +650,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel49);
         jLabel49.setBounds(0, 152, 120, 23);
 
-        NoLPManual.setHighlighter(null);
         NoLPManual.setName("NoLPManual"); // NOI18N
         NoLPManual.setPreferredSize(new java.awt.Dimension(130, 23));
         internalFrame11.add(NoLPManual);
@@ -663,19 +661,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel9.setBounds(0, 32, 78, 23);
 
         TNoRwPulang.setEditable(false);
-        TNoRwPulang.setHighlighter(null);
         TNoRwPulang.setName("TNoRwPulang"); // NOI18N
         internalFrame11.add(TNoRwPulang);
         TNoRwPulang.setBounds(81, 32, 180, 23);
 
         TNoRMPulang.setEditable(false);
-        TNoRMPulang.setHighlighter(null);
         TNoRMPulang.setName("TNoRMPulang"); // NOI18N
         internalFrame11.add(TNoRMPulang);
         TNoRMPulang.setBounds(81, 62, 130, 23);
 
         TPasienPulang.setEditable(false);
-        TPasienPulang.setHighlighter(null);
         TPasienPulang.setName("TPasienPulang"); // NOI18N
         internalFrame11.add(TPasienPulang);
         TPasienPulang.setBounds(214, 62, 361, 23);
@@ -686,7 +681,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel41.setBounds(0, 62, 78, 23);
 
         TNoSEPRanapPulang.setEditable(false);
-        TNoSEPRanapPulang.setHighlighter(null);
         TNoSEPRanapPulang.setName("TNoSEPRanapPulang"); // NOI18N
         internalFrame11.add(TNoSEPRanapPulang);
         TNoSEPRanapPulang.setBounds(395, 32, 180, 23);
@@ -752,7 +746,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel12.setBounds(0, 32, 136, 23);
 
         TPathAplikasiPDF.setEditable(false);
-        TPathAplikasiPDF.setHighlighter(null);
         TPathAplikasiPDF.setName("TPathAplikasiPDF"); // NOI18N
         internalFrame12.add(TPathAplikasiPDF);
         TPathAplikasiPDF.setBounds(274, 32, 294, 23);
@@ -810,7 +803,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame12.add(jLabel13);
         jLabel13.setBounds(0, 116, 610, 12);
 
-        TMaxMemory.setHighlighter(null);
         TMaxMemory.setName("TMaxMemory"); // NOI18N
         internalFrame12.add(TMaxMemory);
         TMaxMemory.setBounds(140, 92, 80, 23);

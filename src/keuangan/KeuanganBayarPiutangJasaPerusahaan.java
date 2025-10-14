@@ -252,7 +252,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         });
         Popup.add(ppNotaPiutang);
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -517,7 +516,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         FormInput.add(label32);
         label32.setBounds(0, 40, 75, 23);
 
-        NoPiutang.setHighlighter(null);
         NoPiutang.setName("NoPiutang"); // NOI18N
         NoPiutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -533,7 +531,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         FormInput.add(label36);
         label36.setBounds(0, 70, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -549,7 +546,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         FormInput.add(label35);
         label35.setBounds(301, 40, 79, 23);
 
-        Cicilan.setHighlighter(null);
         Cicilan.setName("Cicilan"); // NOI18N
         Cicilan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -598,7 +594,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         FormInput.add(label38);
         label38.setBounds(510, 40, 77, 23);
 
-        Sisa.setHighlighter(null);
         Sisa.setName("Sisa"); // NOI18N
         Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

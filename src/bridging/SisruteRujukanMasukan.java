@@ -171,7 +171,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -179,10 +179,10 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NoKTP.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),23).toString());
                     Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
-                }   
+                }
                 NoKTP.requestFocus();
             }
             @Override
@@ -194,7 +194,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -202,12 +202,12 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         try {
             link=koneksiDB.URLAPISISRUTE();
             alarm=koneksiDB.ALARMRSISRUTE();
@@ -216,13 +216,13 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             alarm="no";
             System.out.println("E : "+e);
         }
-        
+
         if(alarm.equals("yes")){
             jam();
         }
-        
+
         akses.setAktif(false);
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -306,7 +306,6 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         internalFrame5.add(jLabel4);
         jLabel4.setBounds(0, 52, 60, 23);
 
-        AlasanBalasan.setHighlighter(null);
         AlasanBalasan.setName("AlasanBalasan"); // NOI18N
         AlasanBalasan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -336,7 +335,6 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         internalFrame5.add(jLabel24);
         jLabel24.setBounds(0, 82, 60, 23);
 
-        NoKTP.setHighlighter(null);
         NoKTP.setName("NoKTP"); // NOI18N
         NoKTP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -583,7 +581,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));            
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     akses.setAktif(false);
     tampil();
     this.setCursor(Cursor.getDefaultCursor());
@@ -591,7 +589,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }else{
@@ -609,50 +607,50 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 try{
                     pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih cara registrasi..!!","Pilihan Registrasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Via Registrasi","Via IGD","Via Cek No.Kartu VClaim","Via Cek NIK VClaim","Via Cek Rujukan Kartu PCare di VClaim","Via Cek Rujukan Kartu RS di VClaim"},"Via Registrasi");
                     switch (pilihan) {
-                        case "Via Registrasi":  
+                        case "Via Registrasi":
                             if(SttsPasien.equals("Lama")){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgReg reg=new DlgReg(null,false);
-                                reg.emptTeks();    
+                                reg.emptTeks();
                                 reg.isCek();
                                 reg.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                                 reg.setLocationRelativeTo(internalFrame1);
                                 reg.SetPasien(NoRmRS,KodeAsal+NoRujuk,NamaFaskesAsal);
                                 reg.setVisible(true);
-                                this.setCursor(Cursor.getDefaultCursor()); 
+                                this.setCursor(Cursor.getDefaultCursor());
                             }else{
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgReg reg=new DlgReg(null,false);
-                                reg.emptTeks();    
+                                reg.emptTeks();
                                 reg.isCek();
                                 reg.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                                 reg.setLocationRelativeTo(internalFrame1);
                                 reg.setVisible(true);
                                 reg.setPasien(NamaPasien, Kontak, Alamat, TempatLahir, TglLahir, JK, NoKartuJKN, NIK,KodeAsal+NoRujuk,NamaFaskesAsal);
-                                this.setCursor(Cursor.getDefaultCursor()); 
+                                this.setCursor(Cursor.getDefaultCursor());
                             }
                             break;
                         case "Via IGD":
                             if(SttsPasien.equals("Lama")){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgIGD reg=new DlgIGD(null,false);
-                                reg.emptTeks();    
+                                reg.emptTeks();
                                 reg.isCek();
                                 reg.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                                 reg.setLocationRelativeTo(internalFrame1);
                                 reg.SetPasien(NoRmRS,KodeAsal+NoRujuk,NamaFaskesAsal);
                                 reg.setVisible(true);
-                                this.setCursor(Cursor.getDefaultCursor()); 
+                                this.setCursor(Cursor.getDefaultCursor());
                             }else{
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 DlgIGD reg=new DlgIGD(null,false);
-                                reg.emptTeks();    
+                                reg.emptTeks();
                                 reg.isCek();
                                 reg.setSize(internalFrame1.getWidth()-20, internalFrame1.getHeight()-20);
                                 reg.setLocationRelativeTo(internalFrame1);
                                 reg.setVisible(true);
                                 reg.setPasien(NamaPasien, Kontak, Alamat, TempatLahir, TglLahir, JK, NoKartuJKN, NIK,KodeAsal+NoRujuk,NamaFaskesAsal);
-                                this.setCursor(Cursor.getDefaultCursor()); 
+                                this.setCursor(Cursor.getDefaultCursor());
                             }
                             break;
                         case "Via Cek No.Kartu VClaim":
@@ -668,7 +666,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 form.SetNoRujuk(KodeAsal+NoRujuk);
                                 form.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
-                            }                                
+                            }
                             break;
                         case "Via Cek NIK VClaim":
                             if(NIK.equals("")){
@@ -683,7 +681,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 form.SetNoRujuk(KodeAsal+NoRujuk);
                                 form.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
-                            }     
+                            }
                             break;
                         case "Via Cek Rujukan Kartu PCare di VClaim":
                             if(NoKartuJKN.equals("")){
@@ -698,7 +696,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 form.SetNoRujuk(KodeAsal+NoRujuk);
                                 form.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
-                            }    
+                            }
                             break;
                         case "Via Cek Rujukan Kartu RS di VClaim":
                             if(NoKartuJKN.equals("")){
@@ -713,7 +711,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 form.SetNoRujuk(KodeAsal+NoRujuk);
                                 form.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
-                            } 
+                            }
                             break;
                         default:
                             akses.setAktif(false);
@@ -723,11 +721,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     akses.setAktif(false);
                 }
             }
-        }else{            
+        }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
             akses.setAktif(false);
             TCari.requestFocus();
-        }   
+        }
     }//GEN-LAST:event_BtnRegistActionPerformed
 
     private void BtnRegistKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnRegistKeyPressed
@@ -756,7 +754,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                     tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
                     tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
@@ -792,20 +790,20 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode.getValueAt(r,31).toString().replaceAll("'","`")+"','"+
                     tabMode.getValueAt(r,32).toString().replaceAll("'","`")+"','"+
                     tabMode.getValueAt(r,33).toString().replaceAll("'","`")+"','"+
-                    tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                    tabMode.getValueAt(r,34).toString().replaceAll("'","`")+"','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariSisruteRujukanMasuk.jasper","report","[ Pencarian Rujukan Masuk Sisrute ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        } 
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
@@ -829,18 +827,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(!No.equals("")){
             if(NoRujuk.trim().equals("")){
                 Valid.textKosong(TCari,"No.Rujukan");
-            }else{ 
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+            }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
                 WindowAmbilSampel.setVisible(true);
                 CmbTerima.requestFocus();
                 this.setCursor(Cursor.getDefaultCursor());
             }
-        }else{  
+        }else{
             akses.setAktif(false);
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
             TCari.requestFocus();
-        }  
+        }
     }//GEN-LAST:event_BtnJawabActionPerformed
 
     private void BtnJawabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnJawabKeyPressed
@@ -874,11 +872,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpan4ActionPerformed
         try {
-            URL = link+"/rujukan/jawab/"+NoRujuk;	
+            URL = link+"/rujukan/jawab/"+NoRujuk;
             headers = new HttpHeaders();
             headers.add("X-cons-id",idrs);
-	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-	    headers.add("X-signature",api.getHmac()); 
+	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+	    headers.add("X-signature",api.getHmac());
 	    headers.add("Content-type","application/json");
             requestJson ="{" +
                             "\"DITERIMA\":"+CmbTerima.getSelectedItem().toString().substring(0,1)+"," +
@@ -887,8 +885,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 "\"NIK\":\""+NoKTP.getText()+"\"," +
                                 "\"NAMA\":\""+Nama.getText()+"\"" +
                             "}" +
-                          "}";              
-	    headers.add("Content-length",Integer.toString(requestJson.length())); 
+                          "}";
+	    headers.add("Content-length",Integer.toString(requestJson.length()));
             System.out.println(Integer.toString(requestJson.length()));
             System.out.println(requestJson);
 	    requestEntity = new HttpEntity(requestJson,headers);
@@ -918,7 +916,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_CmbTerimaKeyPressed
 
     private void NoKTPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKTPKeyPressed
-        
+
     }//GEN-LAST:event_NoKTPKeyPressed
 
     private void BtnPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPegawaiActionPerformed
@@ -987,21 +985,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
+    public void tampil(){
         try {
             Valid.tabelKosong(tabMode);
             URL = link+"/rujukan?tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             headers = new HttpHeaders();
 	   headers.add("X-cons-id",idrs);
-	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-	   headers.add("X-signature",api.getHmac()); 
-	   headers.add("Content-type","application/json");             
-	   headers.add("Content-length",null); 
+	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+	   headers.add("X-signature",api.getHmac());
+	   headers.add("Content-type","application/json");
+	   headers.add("Content-length",null);
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("status");
             System.out.println("Result : "+root.path("status").asText());
-            if(nameNode.asText().equals("200")){                
+            if(nameNode.asText().equals("200")){
                 response = root.path("data");
                 if(response.isArray()){
                     i=1;
@@ -1051,14 +1049,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     list.path("PENUNJANG").path("TERAPI_ATAU_TINDAKAN").asText(),statuspasien,statusreg,norm
                                 });
                                 i++;
-                            }                                
-                        }                            
+                            }
+                        }
                     }
-                }    
+                }
                 LCount.setText(""+tabMode.getRowCount());
             }else {
-                JOptionPane.showMessageDialog(null,root.path("detail").asText());                 
-            }   
+                JOptionPane.showMessageDialog(null,root.path("detail").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -1069,7 +1067,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
-    
+
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
             if(aktif==true){
@@ -1098,7 +1096,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             } catch (Exception ex) {
                                 System.out.println(ex);
                             }
-                        }                                                
+                        }
                     }
                 }
             }
@@ -1106,17 +1104,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // Timer
         new Timer(1000, taskPerformer).start();
     }
-    
+
     public void isCek(){
-        if(akses.getjml2()>=1){            
+        if(akses.getjml2()>=1){
             Sequel.cariIsi("select pegawai.no_ktp from pegawai where pegawai.nik=?",Nama,akses.getkode());
             BtnPegawai.setEnabled(false);
             Nama.setText(pegawai.tampil3(akses.getkode()));
         }else{
             BtnPegawai.setEnabled(true);
-        }    
+        }
     }
-    
+
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
             No=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString();
@@ -1125,32 +1123,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Kontak=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),3).toString();
             Alamat=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString();
             TempatLahir=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),5).toString();
-            TglLahir=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString();            
+            TglLahir=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString();
             JK=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),7).toString();
             NoKartuJKN=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),8).toString();
             NIK=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),9).toString();
             NoRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),10).toString();
             KodeAsal=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),11).toString();
-            NamaFaskesAsal=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString();            
+            NamaFaskesAsal=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString();
             KodeTujuan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),13).toString();
             NamaFaskesTujuan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),14).toString();
             JenisRujukan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),15).toString();
             Alasan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),16).toString();
             AlasanLainnya=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),17).toString();
-            Status=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),18).toString();            
+            Status=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),18).toString();
             TglRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),19).toString();
             DignosaRujuk=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),20).toString();
             AnamnesisPemeriksaanFisik=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),21).toString();
-            Kesadaran=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),22).toString();            
+            Kesadaran=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),22).toString();
             Tensi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),23).toString();
             Nadi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),24).toString();
             Suhu=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),25).toString();
             Respirasi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),26).toString();
             Nyeri=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),27).toString();
             KeadaanUmum=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),28).toString();
-            Alergi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),29).toString();            
-            Laboratorium=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),30).toString();      
-            Radiologi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),31).toString();    
+            Alergi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),29).toString();
+            Laboratorium=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),30).toString();
+            Radiologi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),31).toString();
             TerapiTindakan=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),32).toString();
             SttsPasien=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),33).toString();
             SttsRegistrasi=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),34).toString();

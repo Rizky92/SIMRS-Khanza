@@ -2234,7 +2234,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         TtlSemua.setEditable(false);
         TtlSemua.setText("0");
         TtlSemua.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TtlSemua.setHighlighter(null);
         TtlSemua.setName("TtlSemua"); // NOI18N
         TtlSemua.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2247,7 +2246,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         TKembali.setEditable(false);
         TKembali.setText("0");
         TKembali.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TKembali.setHighlighter(null);
         TKembali.setName("TKembali"); // NOI18N
         panelBayar.add(TKembali);
         TKembali.setBounds(680, 380, 220, 23);
@@ -2267,7 +2265,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         TagihanPPn.setEditable(false);
         TagihanPPn.setText("0");
         TagihanPPn.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        TagihanPPn.setHighlighter(null);
         TagihanPPn.setName("TagihanPPn"); // NOI18N
         panelBayar.add(TagihanPPn);
         TagihanPPn.setBounds(680, 10, 220, 23);

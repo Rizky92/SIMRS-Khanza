@@ -1,11 +1,11 @@
 /*
-  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software 
+  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software
   ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -111,8 +111,8 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         kategori.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -124,7 +124,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                     KdKategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());
                     NmKategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),1).toString());
                     Sasaran.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 btnKategori.requestFocus();
             }
             @Override
@@ -136,7 +136,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kategori.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -144,13 +144,13 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     kategori.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -458,7 +458,6 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
         NmKategori.setBounds(136, 40, 267, 23);
 
         KdKategori.setEditable(false);
-        KdKategori.setHighlighter(null);
         KdKategori.setName("KdKategori"); // NOI18N
         panelGlass8.add(KdKategori);
         KdKategori.setBounds(64, 40, 70, 23);
@@ -514,7 +513,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
-            }           
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -571,7 +570,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                     tbBangsal.setValueAt(Sasaran.getText(),tbBangsal.getSelectedRow(),4);
                     emptTeks();
                 }
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -603,14 +602,14 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-            param.put("parameter","%"+TCari.getText().trim()+"%");     
+            param.put("parameter","%"+TCari.getText().trim()+"%");
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReport("rptSKPKriteriaPenilaian.jasper",param,"::[ Kriteria Pengkajian Pasien ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -668,7 +667,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-           
+
         }
 }//GEN-LAST:event_tbBangsalMouseClicked
 
@@ -683,7 +682,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-            
+
         }
 }//GEN-LAST:event_tbBangsalKeyPressed
 
@@ -785,7 +784,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -809,7 +808,7 @@ public final class SKPKriteriaPenilaian extends javax.swing.JDialog {
             Sasaran.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),4).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return Kode;
     }

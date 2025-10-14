@@ -1,11 +1,11 @@
 /*
-  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software 
+  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software
   ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -39,7 +39,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     private String tahun="",awalantahun="",bulan="",awalanbulan="",posisitahun="",pengurutan="",kdkel="",kdkec="",kdkab="",kdprop="",
             kdbahasa="",kdcacatfisik="",kdsuku="";
     public String KodePerusahaan="",TanggalMCU="",KodeCaraBayar="",status="";
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -177,9 +177,9 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         DTPDaftar.setDate(new Date());
-        
+
         try {
             ps=koneksi.prepareStatement("select set_urut_no_rkm_medis.urutan,set_urut_no_rkm_medis.tahun,set_urut_no_rkm_medis.bulan,set_urut_no_rkm_medis.posisi_tahun_bulan from set_urut_no_rkm_medis");
             try {
@@ -202,7 +202,7 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -273,7 +273,6 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
 
-        NoRm.setHighlighter(null);
         NoRm.setName("NoRm"); // NOI18N
         NoRm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -283,13 +282,11 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
 
         TNo.setEditable(false);
         TNo.setBackground(new java.awt.Color(245, 250, 240));
-        TNo.setHighlighter(null);
         TNo.setName("TNo"); // NOI18N
         TNo.setOpaque(true);
 
         TNoBooking.setEditable(false);
         TNoBooking.setBackground(new java.awt.Color(245, 250, 240));
-        TNoBooking.setHighlighter(null);
         TNoBooking.setName("TNoBooking"); // NOI18N
         TNoBooking.setOpaque(true);
 
@@ -436,12 +433,12 @@ public class DlgPasienBaruMCUPerusahaan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();  
+        dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
@@ -451,30 +448,30 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbDokter.getRowCount();i++){ 
+        for(i=0;i<tbDokter.getRowCount();i++){
             if(tbDokter.getValueAt(i,0).toString().equals("true")&&tbDokter.getValueAt(i,34).toString().equals("Menunggu Konfirmasi")){
                 Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,9).toString()});
                 kdkel=Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",tbDokter.getValueAt(i,9).toString());
-                
+
                 Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,10).toString()});
                 kdkec=Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",tbDokter.getValueAt(i,10).toString());
-                
+
                 Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,11).toString()});
                 kdkab=Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",tbDokter.getValueAt(i,11).toString());
-                
-                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,12).toString()}); 
+
+                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,12).toString()});
                 kdprop=Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?",tbDokter.getValueAt(i,12).toString());
-                
+
                 Sequel.queryu4("insert ignore into bahasa_pasien values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,30).toString()});
                 kdbahasa=Sequel.cariIsi("select bahasa_pasien.id from bahasa_pasien where bahasa_pasien.nama_bahasa=?",tbDokter.getValueAt(i,30).toString());
-                
+
                 Sequel.queryu4("insert ignore into cacat_fisik values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,31).toString()});
                 kdcacatfisik=Sequel.cariIsi("select cacat_fisik.id from cacat_fisik where cacat_fisik.nama_cacat=?",tbDokter.getValueAt(i,31).toString());
-                
+
                 Sequel.queryu4("insert ignore into suku_bangsa values(?,?)",2,new String[]{"0",tbDokter.getValueAt(i,29).toString()});
                 kdsuku=Sequel.cariIsi("select suku_bangsa.id from suku_bangsa where suku_bangsa.nama_suku_bangsa=?",tbDokter.getValueAt(i,29).toString());
                 autoNomor();
-                
+
                 if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",36,new String[]{
                     TNo.getText(),tbDokter.getValueAt(i,2).toString(),tbDokter.getValueAt(i,3).toString(),tbDokter.getValueAt(i,4).toString(),tbDokter.getValueAt(i,5).toString(),
                     tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,8).toString(),tbDokter.getValueAt(i,13).toString(),tbDokter.getValueAt(i,14).toString(),
@@ -513,7 +510,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 autoNomor();
                             }else{
                                 Sequel.queryu2("delete from set_no_rkm_medis");
-                                Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()}); 
+                                Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
                                 Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
                                 if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
                                     TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
@@ -528,7 +525,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }else{
                             Sequel.queryu2("delete from set_no_rkm_medis");
-                            Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()}); 
+                            Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
                             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
                             if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
                                 TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
@@ -543,7 +540,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                     }else{
                         Sequel.queryu2("delete from set_no_rkm_medis");
-                        Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()}); 
+                        Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
                         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
                         if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
                             TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
@@ -558,7 +555,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }else{
                     Sequel.queryu2("delete from set_no_rkm_medis");
-                    Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()}); 
+                    Sequel.queryu2("insert into set_no_rkm_medis values(?)",1,new String[]{TNo.getText()});
                     Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(booking_mcu_perusahaan.no_mcu,4),signed)),0)+1 from booking_mcu_perusahaan where booking_mcu_perusahaan.tanggal_mcu='"+tbDokter.getValueAt(i,17).toString()+"'","MCU",4,TNoBooking);
                     if(Sequel.menyimpantf2("booking_mcu_perusahaan","current_date(),current_time(),?,?,?,'Terdaftar',?","No.Booking",4,new String[]{
                         TNo.getText(),tbDokter.getValueAt(i,17).toString(),TNoBooking.getText(),KodePerusahaan
@@ -573,7 +570,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
             }
         }
-        
+
         if(tabMode.getRowCount()==0){
             status="Selesai";
             this.dispose();
@@ -613,7 +610,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnCari1KeyPressed
 
 private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-    for(i=0;i<tbDokter.getRowCount();i++){ 
+    for(i=0;i<tbDokter.getRowCount();i++){
         tbDokter.setValueAt(false,i,0);
     }
 }//GEN-LAST:event_ppBersihkanActionPerformed
@@ -639,7 +636,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_tbDokterMouseClicked
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        for(i=0;i<tbDokter.getRowCount();i++){ 
+        for(i=0;i<tbDokter.getRowCount();i++){
             if(tbDokter.getValueAt(i,0).toString().equals("true")&&tbDokter.getValueAt(i,34).toString().equals("Menunggu Konfirmasi")){
                 if(Sequel.meghapustf("booking_mcu_perusahaan_pasien_baru","no_pengajuan",tbDokter.getValueAt(i,1).toString())==true){
                     tabMode.removeRow(i);
@@ -647,16 +644,16 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             }
         }
-        
+
         LCount.setText(""+tabMode.getRowCount());
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-       Valid.pindah(evt,BtnSimpan,TCari); 
+       Valid.pindah(evt,BtnSimpan,TCari);
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void ppPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPilihActionPerformed
-        for(i=0;i<tbDokter.getRowCount();i++){ 
+        for(i=0;i<tbDokter.getRowCount();i++){
             tbDokter.setValueAt(true,i,0);
         }
     }//GEN-LAST:event_ppPilihActionPerformed
@@ -733,7 +730,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         "booking_mcu_perusahaan_pasien_baru.nm_pasien like ? or booking_mcu_perusahaan_pasien_baru.no_ktp like ? or booking_mcu_perusahaan_pasien_baru.status like ? or "+
                         "booking_mcu_perusahaan_pasien_baru.nip like ?) order by booking_mcu_perusahaan_pasien_baru.nip");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,KodePerusahaan);
@@ -746,7 +743,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -774,8 +771,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    private void autoNomor() {  
+
+    private void autoNomor() {
         if(tahun.equals("Yes")){
             awalantahun=DTPDaftar.getSelectedItem().toString().substring(8,10);
         }else{
@@ -811,7 +808,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 case "Middle":
                     Valid.autoNomer5("select ifnull(MAX(CONVERT(CONCAT(SUBSTRING(LEFT(set_no_rkm_medis.no_rkm_medis,6),3,2),SUBSTRING(LEFT(set_no_rkm_medis.no_rkm_medis,6),1,2),SUBSTRING(LEFT(set_no_rkm_medis.no_rkm_medis,6),5,2)),signed)),0) from set_no_rkm_medis","",6,NoRm);
                     break;
-            }            
+            }
         }
 
         if(posisitahun.equals("Depan")){
@@ -821,10 +818,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 TNo.setText(NoRm.getText()+"-"+awalanbulan+awalantahun);
             }else{
                 TNo.setText(NoRm.getText());
-            }            
+            }
         }
     }
-    
+
     public Button getSimpan(){
         return BtnSimpan;
     }

@@ -103,7 +103,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         pemeriksaan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -114,7 +114,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
                 if(pemeriksaan.getTable().getSelectedRow()!= -1){
                     kdpemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),0).toString());
                     nmpemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnPemeriksaan.requestFocus();
             }
             @Override
@@ -126,7 +126,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pemeriksaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -134,7 +134,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pemeriksaan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -403,7 +403,6 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(152, 40, 79, 23);
 
-        kdskala.setHighlighter(null);
         kdskala.setName("kdskala"); // NOI18N
         kdskala.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -428,7 +427,6 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
         jLabel5.setBounds(0, 10, 82, 23);
 
         kdpemeriksaan.setEditable(false);
-        kdpemeriksaan.setHighlighter(null);
         kdpemeriksaan.setName("kdpemeriksaan"); // NOI18N
         kdpemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -617,7 +615,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -637,7 +635,7 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -755,11 +753,11 @@ public class MasterTriaseSkala1 extends javax.swing.JDialog {
             namaskala.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),3).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getmaster_triase_skala1());
        BtnHapus.setEnabled(akses.getmaster_triase_skala1());

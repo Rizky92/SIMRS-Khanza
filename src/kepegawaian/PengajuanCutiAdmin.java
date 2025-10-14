@@ -131,7 +131,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -151,7 +151,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                         NmPetugasPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                         btnPetugasPJ.requestFocus();
                     }
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -162,7 +162,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -530,7 +530,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel5.setBounds(436, 70, 95, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         FormInput.add(KdPetugas);
         KdPetugas.setBounds(92, 40, 110, 23);
@@ -553,7 +552,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         btnPetugas.setBounds(391, 40, 28, 23);
 
         NmPetugas.setEditable(false);
-        NmPetugas.setHighlighter(null);
         NmPetugas.setName("NmPetugas"); // NOI18N
         FormInput.add(NmPetugas);
         NmPetugas.setBounds(204, 40, 185, 23);
@@ -585,7 +583,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 10, 88, 23);
 
-        NoPengajuan.setHighlighter(null);
         NoPengajuan.setName("NoPengajuan"); // NOI18N
         FormInput.add(NoPengajuan);
         NoPengajuan.setBounds(92, 10, 130, 23);
@@ -611,7 +608,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(250, 130, 120, 23);
 
-        Kepentingan.setHighlighter(null);
         Kepentingan.setName("Kepentingan"); // NOI18N
         Kepentingan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -626,7 +622,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(305, 100, 65, 23);
 
-        Jumlah.setHighlighter(null);
         Jumlah.setName("Jumlah"); // NOI18N
         Jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -642,7 +637,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel15.setBounds(423, 40, 50, 23);
 
         Bidang.setEditable(false);
-        Bidang.setHighlighter(null);
         Bidang.setName("Bidang"); // NOI18N
         Bidang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -658,7 +652,6 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel16.setBounds(581, 40, 70, 23);
 
         Departemen.setEditable(false);
-        Departemen.setHighlighter(null);
         Departemen.setName("Departemen"); // NOI18N
         Departemen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -674,13 +667,11 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         jLabel17.setBounds(0, 70, 88, 23);
 
         KdPetugasPJ.setEditable(false);
-        KdPetugasPJ.setHighlighter(null);
         KdPetugasPJ.setName("KdPetugasPJ"); // NOI18N
         FormInput.add(KdPetugasPJ);
         KdPetugasPJ.setBounds(92, 70, 110, 23);
 
         NmPetugasPJ.setEditable(false);
-        NmPetugasPJ.setHighlighter(null);
         NmPetugasPJ.setName("NmPetugasPJ"); // NOI18N
         FormInput.add(NmPetugasPJ);
         NmPetugasPJ.setBounds(204, 70, 185, 23);
@@ -836,7 +827,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -912,14 +903,14 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().equals("")){
                 Valid.MyReportqry("rptPengajuanCutiAdmin.jasper","report","::[ Data Pengajuan Cuti ]::",
                         "select pengajuan_cuti.no_pengajuan,pengajuan_cuti.tanggal,pengajuan_cuti.tanggal_awal,pengajuan_cuti.tanggal_akhir,"+
@@ -947,7 +938,7 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
                        "pengajuan_cuti.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and peg2.nama like '%"+TCari.getText().trim()+"%' or "+
                        "pengajuan_cuti.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and pengajuan_cuti.status like '%"+TCari.getText().trim()+"%' order by pengajuan_cuti.tanggal",param);
            }
-                
+
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1088,11 +1079,11 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }//GEN-LAST:event_StatusKeyPressed
 
     private void Tgl1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Tgl1ItemStateChanged
-        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah); 
+        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah);
     }//GEN-LAST:event_Tgl1ItemStateChanged
 
     private void Tgl2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Tgl2ItemStateChanged
-        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah); 
+        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah);
     }//GEN-LAST:event_Tgl2ItemStateChanged
 
     /**
@@ -1204,7 +1195,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                    "pengajuan_cuti.tanggal between ? and ? and pengajuan_cuti.status like ? "+
                    "order by pengajuan_cuti.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -1244,7 +1235,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                     ps.setString(32,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(33,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 total=0;
                 while(rs.next()){
@@ -1287,7 +1278,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         autoNomor();
         Urgensi.requestFocus();
     }
-    
+
         private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             NoPengajuan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
@@ -1311,26 +1302,26 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,185));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpengajuan_cuti());
         BtnHapus.setEnabled(akses.getpengajuan_cuti());
         BtnEdit.setEnabled(akses.getpengajuan_cuti());
     }
-    
+
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_pengajuan,3),signed)),0) from pengajuan_cuti where tanggal='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",
-                "PC"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan); 
+                "PC"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoPengajuan);
     }
-    
-    
+
+
 }

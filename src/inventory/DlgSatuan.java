@@ -55,7 +55,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
 
         Object[] row={"P","Kode Satuan","Nama Satuan"};
         tabMode=new DefaultTableModel(null,row){
-            @Override 
+            @Override
              public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
@@ -86,7 +86,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)4).getKata(Kd));
         Nm.setDocument(new batasInput((byte)30).getKata(Nm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -111,7 +111,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try {
             ps=koneksi.prepareStatement("select kode_sat,satuan  "+
                 " from kodesatuan where  kode_sat like ? or "+
@@ -197,7 +197,6 @@ public final class DlgSatuan extends javax.swing.JDialog {
         panelisi4.add(label34);
         label34.setBounds(0, 12, 85, 23);
 
-        Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -213,7 +212,6 @@ public final class DlgSatuan extends javax.swing.JDialog {
         panelisi4.add(label36);
         label36.setBounds(204, 12, 90, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -450,11 +448,11 @@ public final class DlgSatuan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
+        for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("kodesatuan","kode_sat",tbKamar.getValueAt(i,1).toString());
             }
-        } 
+        }
         BtnCariActionPerformed(evt);
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -505,14 +503,14 @@ public final class DlgSatuan extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){  
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());             
+                param.put("emailrs",akses.getemailrs());
             Valid.MyReportqry("rptSatuan.jasper","report","::[ Data Satuan ]::","select kode_sat, satuan "+
                 " from kodesatuan where  kode_sat like '%"+TCari.getText().trim()+"%' or "+
                 " satuan like '%"+TCari.getText().trim()+"%' order by kode_sat",param);
@@ -635,7 +633,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
@@ -653,7 +651,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public void emptTeks() {
         Kd.setText("");
         Nm.setText("");
-        Kd.requestFocus();        
+        Kd.requestFocus();
         Valid.autoNomer("kodesatuan","S",2,Kd);
     }
 
@@ -668,12 +666,12 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatuan_barang());
         BtnHapus.setEnabled(akses.getsatuan_barang());
         BtnEdit.setEnabled(akses.getsatuan_barang());
         BtnPrint.setEnabled(akses.getsatuan_barang());
     }
-    
+
 }

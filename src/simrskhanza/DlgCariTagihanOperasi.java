@@ -1558,7 +1558,6 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel6);
         jLabel6.setBounds(10, 65, 200, 23);
 
-        PreOp.setHighlighter(null);
         PreOp.setName("PreOp"); // NOI18N
         PreOp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1568,7 +1567,6 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7.add(PreOp);
         PreOp.setBounds(30, 90, 256, 23);
 
-        PostOp.setHighlighter(null);
         PostOp.setName("PostOp"); // NOI18N
         PostOp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1590,7 +1588,6 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel8);
         jLabel8.setBounds(10, 175, 200, 23);
 
-        Jaringan.setHighlighter(null);
         Jaringan.setName("Jaringan"); // NOI18N
         Jaringan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1622,7 +1619,6 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel10);
         jLabel10.setBounds(10, 285, 200, 23);
 
-        NomorImplant.setHighlighter(null);
         NomorImplant.setName("NomorImplant"); // NOI18N
         NomorImplant.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

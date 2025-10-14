@@ -128,7 +128,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         // HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
         // Saran.setDocument(new batasInput((int)200).getKata(Saran));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -151,7 +151,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -159,10 +159,10 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 NIP.requestFocus();
             }
             @Override
@@ -173,8 +173,8 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
         jam();
@@ -298,7 +298,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         });
         jPopupMenu1.add(MnPenilaianLanjutanRisikoJatuh);
 
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -585,7 +584,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 80, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -596,7 +594,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         TNoRw.setBounds(84, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -620,7 +617,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         Tanggal.setBounds(84, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -681,7 +677,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         jLabel18.setBounds(400, 40, 70, 23);
 
         NIP.setEditable(false);
-        NIP.setHighlighter(null);
         NIP.setName("NIP"); // NOI18N
         FormInput.add(NIP);
         NIP.setBounds(474, 40, 94, 23);
@@ -713,7 +708,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1071,7 +1065,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1093,7 +1087,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             if(Sequel.menyimpantf("penilaian_lanjutan_resiko_jatuh_lansia","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",18,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SkalaResiko1.getSelectedItem().toString(),NilaiResiko1.getText(),SkalaResiko2.getSelectedItem().toString(),NilaiResiko2.getText(),
-                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(), 
+                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(),
                 SkalaResiko5.getSelectedItem().toString(),NilaiResiko5.getText(),SkalaResiko6.getSelectedItem().toString(),NilaiResiko6.getText(),
                 NilaiResikoTotal.getText(),HasilSkrining.getText(),Saran.getText(),NIP.getText()
             })==true){
@@ -1105,7 +1099,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1120,7 +1114,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1142,7 +1136,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1204,14 +1198,14 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptLanjutanRisikoJatuhLansia.jasper","report","::[ Data Pengkajian Lanjutan Risiko Jatuh Lansia ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_lanjutan_resiko_jatuh_lansia.tanggal,"+
@@ -1246,7 +1240,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                     "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
                     "or penilaian_lanjutan_resiko_jatuh_lansia.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
                     "order by penilaian_lanjutan_resiko_jatuh_lansia.tanggal ",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1359,8 +1353,8 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),22).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),21).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirPenilaianLanjutanRisikoJatuhLansia.jasper","report","::[ Formulir Pengkajian Lanjutan Risiko Jatuh Lansia ]::",
@@ -1402,7 +1396,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         }else if(SkalaResiko2.getSelectedIndex()==2){
             NilaiResiko2.setText("14");
         }else{
-            NilaiResiko2.setText("14");    
+            NilaiResiko2.setText("14");
         }
         isTotalResikoJatuh();
     }//GEN-LAST:event_SkalaResiko2ItemStateChanged
@@ -1447,7 +1441,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         }else if(SkalaResiko5.getSelectedIndex()==1){
             NilaiResiko5.setText("1");
         }else if(SkalaResiko5.getSelectedIndex()==2){
-            NilaiResiko5.setText("2");   
+            NilaiResiko5.setText("2");
         }else{
             NilaiResiko5.setText("3");
         }
@@ -1596,7 +1590,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
     private widget.ScrollPane scrollPane2;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1632,7 +1626,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                     "penilaian_lanjutan_resiko_jatuh_lansia.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penilaian_lanjutan_resiko_jatuh_lansia.nip like ? or petugas.nama like ?) "+
                     "order by penilaian_lanjutan_resiko_jatuh_lansia.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().toString().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1646,7 +1640,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1672,7 +1666,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         SkalaResiko1.setSelectedIndex(0);
@@ -1691,11 +1685,11 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         Saran.setText("");
         HasilSkrining.setText("");
         SkalaResiko1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -1750,7 +1744,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1761,33 +1755,33 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             if(internalFrame1.getHeight()>668){
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,486));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
                 PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-                FormInput.setVisible(true);      
+                FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_lansia());
         BtnHapus.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_lansia());
         BtnEdit.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_lansia());
-        BtnPrint.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_lansia()); 
+        BtnPrint.setEnabled(akses.getpenilaian_lanjutan_resiko_jatuh_lansia());
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1797,7 +1791,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 NIP.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
 
     private void jam(){
@@ -1809,7 +1803,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1860,7 +1854,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 "penilaian_jatuhmorse_totalnilai=?,hasil_skrining=?,saran=?,nip=?",20,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 SkalaResiko1.getSelectedItem().toString(),NilaiResiko1.getText(),SkalaResiko2.getSelectedItem().toString(),NilaiResiko2.getText(),
-                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(), 
+                SkalaResiko3.getSelectedItem().toString(),NilaiResiko3.getText(),SkalaResiko4.getSelectedItem().toString(),NilaiResiko4.getText(),
                 SkalaResiko5.getSelectedItem().toString(),NilaiResiko5.getText(),SkalaResiko6.getSelectedItem().toString(),NilaiResiko6.getText(),
                 NilaiResikoTotal.getText(),HasilSkrining.getText(),Saran.getText(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -1903,7 +1897,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isTotalResikoJatuh(){
         try {
             if((Integer.parseInt(NilaiResiko5.getText())+Integer.parseInt(NilaiResiko6.getText()))<=3){
@@ -1974,5 +1968,5 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
                 "</html>"
             );
         }
-    } 
+    }
 }

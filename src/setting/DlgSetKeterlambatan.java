@@ -72,7 +72,7 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -148,7 +148,6 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(122, 12, 60, 23);
 
-        Toleransi.setHighlighter(null);
         Toleransi.setName("Toleransi"); // NOI18N
         Toleransi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -158,7 +157,6 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
         panelGlass7.add(Toleransi);
         Toleransi.setBounds(63, 12, 55, 23);
 
-        Terlambat1.setHighlighter(null);
         Terlambat1.setName("Terlambat1"); // NOI18N
         Terlambat1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -190,7 +188,6 @@ public class DlgSetKeterlambatan extends javax.swing.JDialog {
         panelGlass7.add(jLabel8);
         jLabel8.setBounds(485, 12, 50, 23);
 
-        Terlambat2.setHighlighter(null);
         Terlambat2.setName("Terlambat2"); // NOI18N
         Terlambat2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -476,7 +473,7 @@ private void ToleransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString(1)+" Menit",rs.getString(2)+" Menit",rs.getString(3)+" Menit"});

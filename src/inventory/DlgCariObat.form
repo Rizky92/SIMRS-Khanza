@@ -84,9 +84,6 @@
     </Container>
     <Component class="widget.TextBox" name="Kd2">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Kd2" noResource="true"/>
       </Properties>
       <Events>
@@ -95,33 +92,21 @@
     </Component>
     <Component class="widget.TextBox" name="TNoRw">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="TNoRw" noResource="true"/>
       </Properties>
     </Component>
     <Component class="widget.TextBox" name="Tanggal">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Tanggal" noResource="true"/>
       </Properties>
     </Component>
     <Component class="widget.TextBox" name="Jam">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Jam" noResource="true"/>
       </Properties>
     </Component>
     <Component class="widget.TextBox" name="KdPj">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="KdPj" noResource="true"/>
       </Properties>
     </Component>

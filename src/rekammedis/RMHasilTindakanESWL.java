@@ -54,21 +54,21 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private StringBuilder htmlContent;
     private String finger="";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMHasilTindakanESWL(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Kode Dokter","Nama Ahli Bedah","NIP","Nama Asisten/Perawat","Waktu Mulai","Waktu Selesai",
             "Diagnosa","Tindakan","Obat Analgesik/Anastesi","Obat Lain","Uraian Tindakan","Focus","Rate","Power","Shock","Diintegrasi","Kekurangan","Anjungan"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -124,7 +124,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Diagnosa.setDocument(new batasInput((int)50).getKata(Diagnosa));
         Tindakan.setDocument(new batasInput((int)50).getKata(Tindakan));
@@ -139,7 +139,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         Kekurangan.setDocument(new batasInput((int)50).getKata(Kekurangan));
         Anjungan.setDocument(new batasInput((int)50).getKata(Anjungan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -162,7 +162,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -185,7 +185,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -208,7 +208,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -337,7 +337,6 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnDokumenESWL);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -502,7 +501,6 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(750, 573));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -513,13 +511,11 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -566,13 +562,11 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(74, 40, 80, 23);
@@ -1009,7 +1003,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,BtnDokter);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1039,7 +1033,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                 }
             }
         }
-    
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1075,8 +1069,8 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }              
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1150,7 +1144,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.RM</b></td>"+
@@ -1200,7 +1194,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                         "</tr>");
@@ -1213,7 +1207,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1228,8 +1222,8 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataDokumentasiTindakanESWL.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataDokumentasiTindakanESWL.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='2300px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1238,12 +1232,12 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA DOKUMENTASI TINDAKAN ESWL<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA DOKUMENTASI TINDAKAN ESWL<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1350,11 +1344,11 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString())); 
-            
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()));
+
             Valid.MyReportqry("rptCetakDokumentasiTindakanESWL.jasper","report","::[ Laporan Dokumentasi Tindakan ESWL ]::",
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,hasil_tindakan_eswl.mulai,"+
                 "hasil_tindakan_eswl.selesai,hasil_tindakan_eswl.kd_dokter,hasil_tindakan_eswl.nip,hasil_tindakan_eswl.diagnosa,hasil_tindakan_eswl.tindakan,hasil_tindakan_eswl.obat_analgesik,"+
@@ -1556,7 +1550,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                         "hasil_tindakan_eswl.mulai between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "hasil_tindakan_eswl.diagnosa like ? or hasil_tindakan_eswl.tindakan like ?) order by hasil_tindakan_eswl.mulai");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1569,7 +1563,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1588,7 +1582,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1613,17 +1607,17 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         Anjungan.setText("");
         TabRawat.setSelectedIndex(0);
         Diagnosa.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
-            NIP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
-            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+            NIP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             Tindakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             ObatAnastesi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
@@ -1671,14 +1665,14 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gethasil_tindakan_eswl());
         BtnHapus.setEnabled(akses.gethasil_tindakan_eswl());
@@ -1693,9 +1687,9 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                 KdDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
             }
-        }            
+        }
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
@@ -1717,8 +1711,8 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
                 "obat_analgesik=?,obat_lain=?,uraian_tindakan=?,uraian_tindakan_focus=?,uraian_tindakan_rate=?,uraian_tindakan_power=?,uraian_tindakan_shock=?,"+
                 "diintegrasi=?,kekurangan=?,anjungan=?",19,new String[]{
                 TNoRw.getText(),Valid.SetTgl(WaktuMulai.getSelectedItem()+"")+" "+WaktuMulai.getSelectedItem().toString().substring(11,19),
-                Valid.SetTgl(WaktuSelesai.getSelectedItem()+"")+" "+WaktuSelesai.getSelectedItem().toString().substring(11,19),KdDokter.getText(), 
-                NIP.getText(),Diagnosa.getText(),Tindakan.getText(),ObatAnastesi.getText(),ObatLainLain.getText(),UraianTindakan.getText(), 
+                Valid.SetTgl(WaktuSelesai.getSelectedItem()+"")+" "+WaktuSelesai.getSelectedItem().toString().substring(11,19),KdDokter.getText(),
+                NIP.getText(),Diagnosa.getText(),Tindakan.getText(),ObatAnastesi.getText(),ObatLainLain.getText(),UraianTindakan.getText(),
                 Focus.getText(),Rate.getText(),Power.getText(),Shock.getText(),Diintegrasi.getText(),Kekurangan.getText(),Anjungan.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()
             })==true){
@@ -1753,8 +1747,8 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
     private void simpan() {
         if(Sequel.menyimpantf("hasil_tindakan_eswl","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat & Waktu Mulai",17,new String[]{
                 TNoRw.getText(),Valid.SetTgl(WaktuMulai.getSelectedItem()+"")+" "+WaktuMulai.getSelectedItem().toString().substring(11,19),
-                Valid.SetTgl(WaktuSelesai.getSelectedItem()+"")+" "+WaktuSelesai.getSelectedItem().toString().substring(11,19),KdDokter.getText(), 
-                NIP.getText(),Diagnosa.getText(),Tindakan.getText(),ObatAnastesi.getText(),ObatLainLain.getText(),UraianTindakan.getText(), 
+                Valid.SetTgl(WaktuSelesai.getSelectedItem()+"")+" "+WaktuSelesai.getSelectedItem().toString().substring(11,19),KdDokter.getText(),
+                NIP.getText(),Diagnosa.getText(),Tindakan.getText(),ObatAnastesi.getText(),ObatLainLain.getText(),UraianTindakan.getText(),
                 Focus.getText(),Rate.getText(),Power.getText(),Shock.getText(),Diintegrasi.getText(),Kekurangan.getText(),Anjungan.getText()
             })==true){
             tabMode.addRow(new Object[]{

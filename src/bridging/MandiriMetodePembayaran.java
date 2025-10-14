@@ -182,7 +182,6 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 45, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -452,7 +451,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -482,7 +481,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -636,11 +635,11 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
                 if(rs!=null){
                     rs.close();
                 }
-                
+
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -662,7 +661,7 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
         TCari.setText("");
         TKd.requestFocus();
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }

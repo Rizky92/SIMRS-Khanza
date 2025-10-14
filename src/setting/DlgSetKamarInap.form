@@ -118,9 +118,6 @@
             </Component>
             <Component class="widget.TextBox" name="Jam">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Jam" noResource="true"/>
               </Properties>
               <Events>
@@ -190,9 +187,6 @@
             </Component>
             <Component class="widget.TextBox" name="fee">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="fee" noResource="true"/>
               </Properties>
               <Events>
@@ -250,9 +244,6 @@
             </Component>
             <Component class="widget.TextBox" name="Bayi">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Bayi" noResource="true"/>
               </Properties>
               <Events>

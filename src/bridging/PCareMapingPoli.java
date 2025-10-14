@@ -44,11 +44,11 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private PCareCekReferensiPoli polipcare=new PCareCekReferensiPoli(null,false);
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -83,8 +83,8 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -106,8 +106,8 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -115,7 +115,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -129,8 +129,8 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -143,7 +143,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         polipcare.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -151,11 +151,11 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(polipcare.getTable().getSelectedRow()!= -1){                   
+                if(polipcare.getTable().getSelectedRow()!= -1){
                     KdPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),1).toString());
                     NmPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),2).toString());
                     KdPoliPCare.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -166,7 +166,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         polipcare.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -178,8 +178,8 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-    
+        });
+
     }
 
     /** This method is called from within the constructor to
@@ -449,13 +449,11 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 46, 23);
 
         kdpoli.setEditable(false);
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         FormInput.add(kdpoli);
         kdpoli.setBounds(49, 10, 70, 23);
 
         TPoli.setEditable(false);
-        TPoli.setHighlighter(null);
         TPoli.setName("TPoli"); // NOI18N
         FormInput.add(TPoli);
         TPoli.setBounds(121, 10, 190, 23);
@@ -483,7 +481,6 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         jLabel19.setBounds(353, 10, 70, 23);
 
         KdPoliPCare.setEditable(false);
-        KdPoliPCare.setHighlighter(null);
         KdPoliPCare.setName("KdPoliPCare"); // NOI18N
         FormInput.add(KdPoliPCare);
         KdPoliPCare.setBounds(426, 10, 70, 23);
@@ -513,14 +510,14 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPoliRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliRSActionPerformed
-        poli.isCek();        
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -534,7 +531,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -581,7 +578,7 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
                     emptTeks();
                     tampil();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -608,17 +605,17 @@ public final class PCareMapingPoli extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                param.put("parameter","%"+TCari.getText().trim()+"%");   
-                Valid.MyReport("rptMapingPoliPCare.jasper","report","::[ Mapping Poli RS & PCare ]::",param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptMapingPoliPCare.jasper","report","::[ Mapping Poli RS & PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -795,25 +792,25 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
 
-    
-   
-    
-    
+
+
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpcare_mapping_poli());
         BtnHapus.setEnabled(akses.getpcare_mapping_poli());
         BtnEdit.setEnabled(akses.getpcare_mapping_poli());
         BtnPrint.setEnabled(akses.getpcare_mapping_poli());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
-   
-    
-    
-    
 
-    
+
+
+
+
+
 }

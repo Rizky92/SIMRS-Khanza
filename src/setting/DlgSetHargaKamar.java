@@ -59,7 +59,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
@@ -120,7 +120,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         kamar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -128,11 +128,11 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     TKdBngsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),2).toString());
                     TBangsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString());
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -144,7 +144,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -156,8 +156,8 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -168,7 +168,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -180,7 +180,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -188,12 +188,12 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         try {
             ps=koneksi.prepareStatement(
                    "select set_harga_kamar.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,"+
@@ -201,12 +201,12 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
                    "from set_harga_kamar inner join kamar inner join bangsal inner join penjab "+
                    "on set_harga_kamar.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal "+
                    "and set_harga_kamar.kd_pj=penjab.kd_pj where set_harga_kamar.kd_kamar like ? "+
-                   "or bangsal.nm_bangsal like ? or penjab.png_jawab like ? order by set_harga_kamar.kd_pj"); 
+                   "or bangsal.nm_bangsal like ? or penjab.png_jawab like ? order by set_harga_kamar.kd_pj");
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private DlgKamar kamar=new DlgKamar(null,false);
 
     /** This method is called from within the constructor to
@@ -476,7 +476,6 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         panelGlass7.add(jLabel12);
         jLabel12.setBounds(1, 10, 75, 23);
 
-        kdkamar.setHighlighter(null);
         kdkamar.setName("kdkamar"); // NOI18N
         kdkamar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -492,7 +491,6 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         TKdBngsal.setBounds(172, 10, 76, 23);
 
         TBangsal.setEditable(false);
-        TBangsal.setHighlighter(null);
         TBangsal.setName("TBangsal"); // NOI18N
         TBangsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -519,7 +517,6 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(1, 40, 75, 23);
 
-        kdpj.setHighlighter(null);
         kdpj.setName("kdpj"); // NOI18N
         kdpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -530,7 +527,6 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
         kdpj.setBounds(79, 40, 50, 23);
 
         nmpj.setEditable(false);
-        nmpj.setHighlighter(null);
         nmpj.setName("nmpj"); // NOI18N
         nmpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -814,7 +810,7 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             ps.setString(3,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 tabMode.addRow(new Object[]{
                     rs.getString(1),rs.getString(2),rs.getString(3),
                     rs.getString(4),rs.getString(5),rs.getDouble(6)
@@ -846,10 +842,10 @@ private void BtnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Tarif.setText(tabMode.getValueAt(row,5).toString());
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 
 }
