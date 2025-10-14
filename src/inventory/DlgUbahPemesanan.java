@@ -858,6 +858,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 }else{
                                     sukses=false;
                                 }
+                                
+                                if (sukses) {
+                                    Sequel.Commit();
+                                } else {
+                                    Sequel.RollBack();
+                                }
+                                Sequel.AutoComitTrue();
 
                                 if(sukses==true){
                                     jml=tbDokter.getRowCount();
@@ -887,11 +894,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                                     Meterai.setText("0");
                                     getData();
-                                }else{
-                                    sukses=false;
-                                    Sequel.RollBack();
                                 }
-                                Sequel.AutoComitTrue();
                             }
                         }
                     } catch (Exception e) {
