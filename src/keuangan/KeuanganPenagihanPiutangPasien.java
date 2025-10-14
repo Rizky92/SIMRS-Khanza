@@ -19,6 +19,7 @@ import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -326,7 +327,7 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
     }
     
 
-     double sisapiutang=0,cicilan=0;
+     double sisapiutang=0, cicilan=0;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -1677,446 +1678,383 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Table tbBelumLunas;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){
-        try{
-            jml=0;
-            for(i=0;i<tbBelumLunas.getRowCount();i++){
-                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
-                    jml++;
-                }           
-            }
-
-            pilih=null;
-            pilih=new boolean[jml]; 
-            norawat=null;
-            norawat=new String[jml];
-            tglpiutang=null;
-            tglpiutang=new String[jml];
-            norm=null;
-            norm=new String[jml];
-            pasien=null;
-            pasien=new String[jml];
-            statusrawat=null;
-            statusrawat=new String[jml];
-            carabayar=null;
-            carabayar=new String[jml];
-            asalperusahaan=null;
-            asalperusahaan=new String[jml];
-            nonota=null;
-            nonota=new String[jml];
-            nokartu=null;
-            nokartu=new String[jml];
-            nip=null;
-            nip=new String[jml];
-            piutang=null;
-            piutang=new double[jml];
-
-            index=0;        
-            for(i=0;i<tbBelumLunas.getRowCount();i++){
-                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
-                    pilih[index]=true;
-                    norawat[index]=tbBelumLunas.getValueAt(i,1).toString();
-                    tglpiutang[index]=tbBelumLunas.getValueAt(i,2).toString();
-                    norm[index]=tbBelumLunas.getValueAt(i,3).toString();
-                    pasien[index]=tbBelumLunas.getValueAt(i,4).toString();
-                    statusrawat[index]=tbBelumLunas.getValueAt(i,5).toString();
-                    piutang[index]=Double.parseDouble(tbBelumLunas.getValueAt(i,6).toString());
-                    carabayar[index]=tbBelumLunas.getValueAt(i,7).toString();
-                    nokartu[index]=tbBelumLunas.getValueAt(i,8).toString();
-                    asalperusahaan[index]=tbBelumLunas.getValueAt(i,9).toString();
-                    nip[index]=tbBelumLunas.getValueAt(i,10).toString();
-                    nonota[index]=tbBelumLunas.getValueAt(i,11).toString();
-                    index++;
+    public void tampil() {
+        try {
+            ArrayList<String> norawat = new ArrayList<>();
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if ((Boolean) tabMode.getValueAt(i, 0)) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("norawat", tabMode.getValueAt(i, 1));
+                    item.put("tglpiutang", tabMode.getValueAt(i, 2));
+                    item.put("norm", tabMode.getValueAt(i, 3));
+                    item.put("pasien", tabMode.getValueAt(i, 4));
+                    item.put("statusrawat", tabMode.getValueAt(i, 5));
+                    item.put("piutang", tabMode.getValueAt(i, 6));
+                    item.put("carabayar", tabMode.getValueAt(i, 7));
+                    item.put("nokartu", tabMode.getValueAt(i, 8));
+                    item.put("asalperusahaan", tabMode.getValueAt(i, 9));
+                    item.put("nip", tabMode.getValueAt(i, 10));
+                    item.put("nonota", tabMode.getValueAt(i, 11));
+                    rows.add(item);
+                    norawat.add(tabMode.getValueAt(i, 1).toString());
                 }
-            } 
+            }
             
             Valid.tabelKosong(tabMode);
             
-            for(i=0;i<jml;i++){
+            rows.forEach(item -> {
                 tabMode.addRow(new Object[] {
-                    pilih[i],norawat[i],tglpiutang[i],norm[i],pasien[i],statusrawat[i],piutang[i],carabayar[i],nokartu[i],asalperusahaan[i],nip[i],nonota[i]
+                    true, item.get("norawat"), item.get("tglpiutang"), item.get("norm"), item.get("pasien"),
+                    item.get("statusrawat"), item.get("piutang"), item.get("carabayar"), item.get("nokartu"),
+                    item.get("asalperusahaan"), item.get("nip"), item.get("nonota")
                 });
-            }
+            });
             
-            sisapiutang=0;
-            if(cmbStatus.getSelectedItem().equals("Semua")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_jalan.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_jalan.no_nota like ?) "+
-                       " order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ralan",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+            sisapiutang = 0;
+            if (cmbStatus.getSelectedIndex() == 0) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_jalan n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
-                }
-                
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_inap.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_inap.no_nota like ?) "+
-                       " order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ranap",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                
+                                tabMode.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
-            }else if(cmbStatus.getSelectedItem().equals("Ralan")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_jalan.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_jalan.no_nota like ?) "+
-                       " order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ralan",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_inap n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
-            }else if(cmbStatus.getSelectedItem().equals("Ranap")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_inap.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_inap.no_nota like ?) "+
-                       " order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ranap",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+            } else if (cmbStatus.getSelectedIndex() == 1) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_jalan n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
-                    if(ps!=null){
-                        ps.close();
+                }
+            } else if (cmbStatus.getSelectedIndex() == 2) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_inap n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
             }
-                
-            LCountBelumDibayar1.setText(tabMode.getRowCount()+"");
-            LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
+        LCountBelumDibayar1.setText(tabMode.getRowCount() + "");
+        LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
     }
     
-    public void tampil2(){
-        try{
-            jml=0;
-            for(i=0;i<tbBelumDitagihkan.getRowCount();i++){
-                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
-                    jml++;
-                }           
-            }
-
-            pilih=null;
-            pilih=new boolean[jml]; 
-            norawat=null;
-            norawat=new String[jml];
-            tglpiutang=null;
-            tglpiutang=new String[jml];
-            norm=null;
-            norm=new String[jml];
-            pasien=null;
-            pasien=new String[jml];
-            statusrawat=null;
-            statusrawat=new String[jml];
-            carabayar=null;
-            carabayar=new String[jml];
-            asalperusahaan=null;
-            asalperusahaan=new String[jml];
-            nonota=null;
-            nonota=new String[jml];
-            nokartu=null;
-            nokartu=new String[jml];
-            nip=null;
-            nip=new String[jml];
-            piutang=null;
-            piutang=new double[jml];
-
-            index=0;        
-            for(i=0;i<tbBelumDitagihkan.getRowCount();i++){
-                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
-                    pilih[index]=true;
-                    norawat[index]=tbBelumDitagihkan.getValueAt(i,1).toString();
-                    tglpiutang[index]=tbBelumDitagihkan.getValueAt(i,2).toString();
-                    norm[index]=tbBelumDitagihkan.getValueAt(i,3).toString();
-                    pasien[index]=tbBelumDitagihkan.getValueAt(i,4).toString();
-                    statusrawat[index]=tbBelumDitagihkan.getValueAt(i,5).toString();
-                    piutang[index]=Double.parseDouble(tbBelumDitagihkan.getValueAt(i,6).toString());
-                    carabayar[index]=tbBelumDitagihkan.getValueAt(i,7).toString();
-                    nokartu[index]=tbBelumDitagihkan.getValueAt(i,8).toString();
-                    asalperusahaan[index]=tbBelumDitagihkan.getValueAt(i,9).toString();
-                    nip[index]=tbBelumDitagihkan.getValueAt(i,10).toString();
-                    nonota[index]=tbBelumDitagihkan.getValueAt(i,11).toString();
-                    index++;
+    public void tampil2() {
+        try {
+            ArrayList<String> norawat = new ArrayList<>();
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
+            for (int i = 0; i < tabMode2.getRowCount(); i++) {
+                if ((Boolean) tabMode2.getValueAt(i, 0)) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("norawat", tabMode2.getValueAt(i, 1));
+                    item.put("tglpiutang", tabMode2.getValueAt(i, 2));
+                    item.put("norm", tabMode2.getValueAt(i, 3));
+                    item.put("pasien", tabMode2.getValueAt(i, 4));
+                    item.put("statusrawat", tabMode2.getValueAt(i, 5));
+                    item.put("piutang", tabMode2.getValueAt(i, 6));
+                    item.put("carabayar", tabMode2.getValueAt(i, 7));
+                    item.put("nokartu", tabMode2.getValueAt(i, 8));
+                    item.put("asalperusahaan", tabMode2.getValueAt(i, 9));
+                    item.put("nip", tabMode2.getValueAt(i, 10));
+                    item.put("nonota", tabMode2.getValueAt(i, 11));
+                    rows.add(item);
+                    norawat.add(tabMode2.getValueAt(i, 1).toString());
                 }
-            } 
+            }
             
             Valid.tabelKosong(tabMode2);
             
-            for(i=0;i<jml;i++){
+            rows.forEach(item -> {
                 tabMode2.addRow(new Object[] {
-                    pilih[i],norawat[i],tglpiutang[i],norm[i],pasien[i],statusrawat[i],piutang[i],carabayar[i],nokartu[i],asalperusahaan[i],nip[i],nonota[i]
+                    true, item.get("norawat"), item.get("tglpiutang"), item.get("norm"), item.get("pasien"),
+                    item.get("statusrawat"), item.get("piutang"), item.get("carabayar"), item.get("nokartu"),
+                    item.get("asalperusahaan"), item.get("nip"), item.get("nonota")
                 });
-            }
+            });
             
-            sisapiutang=0;
-            if(cmbStatus.getSelectedItem().equals("Semua")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_jalan.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where piutang_pasien.no_rawat not in(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang) and detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_jalan.no_nota like ?) order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode2.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ralan",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+            sisapiutang = 0;
+            if (cmbStatus.getSelectedIndex() == 0) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_jalan n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "and not exists(select * from detail_penagihan_piutang di where di.no_rawat = dpp.no_rawat) " +
+                    "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
-                }
-                
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_inap.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where piutang_pasien.no_rawat not in(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang) and detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_inap.no_nota like ?) order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode2.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ranap",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                
+                                tabMode2.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
-            }else if(cmbStatus.getSelectedItem().equals("Ralan")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_jalan.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where piutang_pasien.no_rawat not in(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang) and detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_jalan.no_nota like ?) order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode2.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ralan",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_inap n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "and not exists(select * from detail_penagihan_piutang di where di.no_rawat = dpp.no_rawat) " +
+                    "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode2.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
-            }else if(cmbStatus.getSelectedItem().equals("Ranap")){
-                ps=koneksi.prepareStatement(
-                       "select piutang_pasien.no_rawat, piutang_pasien.tgl_piutang, piutang_pasien.no_rkm_medis,pasien.nm_pasien,penjab.png_jawab,pasien.no_peserta,"+
-                       "detail_piutang_pasien.totalpiutang,detail_piutang_pasien.sisapiutang,perusahaan_pasien.nama_perusahaan,nota_inap.no_nota,pasien.nip "+
-                       "from piutang_pasien inner join pasien on piutang_pasien.no_rkm_medis=pasien.no_rkm_medis "+
-                       "inner join reg_periksa on piutang_pasien.no_rawat=reg_periksa.no_rawat "+
-                       "inner join detail_piutang_pasien on piutang_pasien.no_rawat=detail_piutang_pasien.no_rawat "+
-                       "inner join penjab on detail_piutang_pasien.kd_pj=penjab.kd_pj "+
-                       "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
-                       "inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                       "where piutang_pasien.no_rawat not in(select detail_penagihan_piutang.no_rawat from detail_penagihan_piutang) and detail_piutang_pasien.sisapiutang>=1 and concat(detail_piutang_pasien.kd_pj,penjab.png_jawab) like ? and "+
-                       "(piutang_pasien.no_rawat like ? or piutang_pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or nota_inap.no_nota like ?) order by piutang_pasien.tgl_piutang");
-                try {
-                    ps.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-                    ps.setString(2,"%"+TCari.getText()+"%");
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,"%"+TCari.getText()+"%");
-                    ps.setString(5,"%"+TCari.getText()+"%");
-                    rs=ps.executeQuery();
-                    while(rs.next()){
-                        tabMode2.addRow(new Object[]{
-                            false,rs.getString("no_rawat"),rs.getString("tgl_piutang"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
-                            "Ranap",rs.getDouble("sisapiutang"),rs.getString("png_jawab"),rs.getString("no_peserta"),rs.getString("nama_perusahaan"),
-                            rs.getString("nip"),rs.getString("no_nota")
-                        });
-                        sisapiutang=sisapiutang+rs.getDouble("sisapiutang");
+            } else if (cmbStatus.getSelectedIndex() == 1) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_jalan n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "and not exists(select * from detail_penagihan_piutang di where di.no_rawat = dpp.no_rawat) " +
+                    "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode2.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
-                    if(ps!=null){
-                        ps.close();
+                }
+            } else if (cmbStatus.getSelectedIndex() == 2) {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select dpp.no_rawat, dpp.totalpiutang, dpp.sisapiutang, pp.tgl_piutang, pp.no_rkm_medis, px.nm_pasien, " +
+                    "pj.png_jawab, px.no_peserta, n.no_nota, px.nip, c.nama_perusahaan from detail_piutang_pasien dpp join " +
+                    "penjab pj on dpp.kd_pj = pj.kd_pj join piutang_pasien pp on dpp.no_rawat = pp.no_rawat join pasien px " +
+                    "on pp.no_rkm_medis = px.no_rkm_medis join perusahaan_pasien c on px.perusahaan_pasien = c.kode_perusahaan " +
+                    "join reg_periksa r on dpp.no_rawat = r.no_rawat join nota_inap n on dpp.no_rawat = n.no_rawat where " +
+                    "pj.kd_pj like ? and dpp.sisapiutang >= 1 " + (TCari.getText().isBlank() ? "" : "and (dpp.no_rawat like ? or " +
+                    "pp.no_rkm_medis like ? or px.nm_pasien like ? or px.no_peserta like ? or px.nip like ? or c.nama_perusahaan " +
+                    "like ? or n.no_nota like ?) ") + "and not exists(select * from detail_penagihan_piutang di where di.no_rawat = dpp.no_rawat) " +
+                    "order by pp.tgl_piutang, dpp.no_rawat"
+                )) {
+                    int p = 0;
+                    ps.setString(++p, kdpenjab.getText() + "%");
+                    if (!TCari.getText().isBlank()) {
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            do {
+                                if (norawat.contains(rs.getString("no_rawat"))) continue;
+                                tabMode2.addRow(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("tgl_piutang"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    "Ralan", rs.getDouble("sisapiutang"), rs.getString("png_jawab"), rs.getString("no_peserta"), rs.getString("nama_perusahaan"),
+                                    rs.getString("nip"), rs.getString("no_nota")
+                                });
+                                sisapiutang += rs.getDouble("sisapiutang");
+                            } while (rs.next());
+                        }
                     }
                 }
             }
-                
-            LCountBelumDibayar1.setText(tabMode2.getRowCount()+"");
-            LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
+        
+        LCountBelumDibayar1.setText(tabMode2.getRowCount() + "");
+        LCountBelumDibayar2.setText(Valid.SetAngka(sisapiutang));
     }
 
     private void getdata() {

@@ -745,8 +745,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if (reply == JOptionPane.YES_OPTION) {
                 try {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select p.no_faktur, p.tagihan, p.kd_bangsal, p.tgl_faktur, p.status, p.no_order, " +
-                        "p.ppn, (p.total2 + p.meterai) as total from pemesanan p where p.no_faktur = ?"
+                        "select p.*, (p.total2 + p.meterai) as total from pemesanan p where p.no_faktur = ? and p.status = 'Belum Dibayar' for update nowait"
                     )) {
                         ps.setString(1, NoFaktur2.getText());
                         try (ResultSet rs = ps.executeQuery()) {
@@ -784,50 +783,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 }
                                 
                                 if (sukses) {
-                                    if (Sequel.menghapustfSmc("pemesanan", "no_faktur = ?", NoFaktur2.getText())) {
-                                        if (Sequel.menyimpantfSmc("pemesanan", null,
-                                            NoFaktur.getText(), NoOrder.getText(), kdsup.getText(), kdptg.getText(), Valid.getTglSmc(TglPesan),
-                                            Valid.getTglSmc(TglFaktur), Valid.getTglSmc(TglTempo), "" + sbttl, "" + ttldisk, "" + ttl, "" + ppn,
-                                            "" + meterai, "" + (ttl + ppn + meterai), kdgudang.getText(), "Belum Dibayar"
-                                        )) {
-                                            jml = tbDokter.getRowCount();
-                                            for (int i = 0; i < jml; i++) {
-                                                setKonversi(i);
-                                                if (Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()) > 0) {
-                                                    if (Sequel.menyimpantfSmc("detailpesan", null, NoFaktur.getText(),
-                                                        tbDokter.getValueAt(i, 2).toString(), tbDokter.getValueAt(i, 1).toString(),
-                                                        tbDokter.getValueAt(i, 0).toString(), tbDokter.getValueAt(i, 7).toString(),
-                                                        tbDokter.getValueAt(i, 8).toString(), tbDokter.getValueAt(i, 9).toString(),
-                                                        tbDokter.getValueAt(i, 10).toString(), tbDokter.getValueAt(i, 11).toString(),
-                                                        tbDokter.getValueAt(i, 13).toString(), tbDokter.getValueAt(i, 12).toString(),
-                                                        Valid.getTglSmc(tbDokter.getValueAt(i, 6).toString())
-                                                    )) {
-                                                        if (aktifkanbatch.equals("yes")) {
-                                                            if (sukses) sukses = Trackobat.catatRiwayat(tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 12).toString()), 0, "Penerimaan", akses.getkode(), kdgudang.getText(), "Simpan", tbDokter.getValueAt(i, 13).toString(), NoFaktur.getText(), NoFaktur.getText() + " " + NoOrder.getText() + " " + nmsup.getText());
-                                                            if (sukses) sukses = Sequel.executeRawSmc("insert into gudangbarang values(?, ?, ?, ?, ?) on duplicate key update stok = stok + values(stok)", tbDokter.getValueAt(i, 2).toString(), kdgudang.getText(), tbDokter.getValueAt(i, 12).toString(), tbDokter.getValueAt(i, 13).toString(), NoFaktur.getText());
-                                                        } else {
-                                                            if (sukses) sukses = Trackobat.catatRiwayat(tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 12).toString()), 0, "Penerimaan", akses.getkode(), kdgudang.getText(), "Simpan", "", "", NoFaktur.getText() + " " + NoOrder.getText() + " " + nmsup.getText());
-                                                            if (sukses) sukses = Sequel.executeRawSmc("insert into gudangbarang values(?, ?, ?, '', '') on duplicate key update stok = stok + values(stok)", tbDokter.getValueAt(i, 2).toString(), kdgudang.getText(), tbDokter.getValueAt(i, 12).toString());
-                                                        }
-                                                        if (sukses) {
-                                                            sukses = simpanbatch(i);
-                                                        }
+                                    if (Sequel.mengupdatetfSmc("pemesanan", "no_faktur = ?, no_order = ?, kode_suplier = ?, nip = ?, tgl_pesan = ?, tgl_faktur = ?, tgl_tempo = ?, total1 = ?, potongan = ?, total2 = ?, ppn = ?, meterai = ?, tagihan = ?, kd_bangsal = ?",
+                                        "no_faktur = ? and status = 'Belum Dibayar'", NoFaktur.getText(), NoOrder.getText(), kdsup.getText(), kdptg.getText(), Valid.getTglSmc(TglPesan), Valid.getTglSmc(TglFaktur), Valid.getTglSmc(TglTempo), "" + sbttl, "" + ttldisk,
+                                        "" + ttl, "" + ppn, "" + meterai, "" + (ttl + ppn + meterai), kdgudang.getText(), NoFaktur2.getText()
+                                    )) {
+                                        jml = tbDokter.getRowCount();
+                                        for (int i = 0; i < jml; i++) {
+                                            setKonversi(i);
+                                            if (Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()) > 0) {
+                                                if (Sequel.menyimpantfSmc("detailpesan", null, NoFaktur.getText(),
+                                                    tbDokter.getValueAt(i, 2).toString(), tbDokter.getValueAt(i, 1).toString(),
+                                                    tbDokter.getValueAt(i, 0).toString(), tbDokter.getValueAt(i, 7).toString(),
+                                                    tbDokter.getValueAt(i, 8).toString(), tbDokter.getValueAt(i, 9).toString(),
+                                                    tbDokter.getValueAt(i, 10).toString(), tbDokter.getValueAt(i, 11).toString(),
+                                                    tbDokter.getValueAt(i, 13).toString(), tbDokter.getValueAt(i, 12).toString(),
+                                                    Valid.getTglSmc(tbDokter.getValueAt(i, 6).toString())
+                                                )) {
+                                                    if (aktifkanbatch.equals("yes")) {
+                                                        if (sukses) sukses = Trackobat.catatRiwayat(tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 12).toString()), 0, "Penerimaan", akses.getkode(), kdgudang.getText(), "Simpan", tbDokter.getValueAt(i, 13).toString(), NoFaktur.getText(), NoFaktur.getText() + " " + NoOrder.getText() + " " + nmsup.getText());
+                                                        if (sukses) sukses = Sequel.executeRawSmc("insert into gudangbarang values(?, ?, ?, ?, ?) on duplicate key update stok = stok + values(stok)", tbDokter.getValueAt(i, 2).toString(), kdgudang.getText(), tbDokter.getValueAt(i, 12).toString(), tbDokter.getValueAt(i, 13).toString(), NoFaktur.getText());
                                                     } else {
-                                                        sukses = false;
+                                                        if (sukses) sukses = Trackobat.catatRiwayat(tbDokter.getValueAt(i, 2).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 12).toString()), 0, "Penerimaan", akses.getkode(), kdgudang.getText(), "Simpan", "", "", NoFaktur.getText() + " " + NoOrder.getText() + " " + nmsup.getText());
+                                                        if (sukses) sukses = Sequel.executeRawSmc("insert into gudangbarang values(?, ?, ?, '', '') on duplicate key update stok = stok + values(stok)", tbDokter.getValueAt(i, 2).toString(), kdgudang.getText(), tbDokter.getValueAt(i, 12).toString());
                                                     }
+                                                    if (sukses) {
+                                                        sukses = simpanbatch(i);
+                                                    }
+                                                } else {
+                                                    sukses = false;
                                                 }
                                             }
-                                            if (sukses) {
-                                                Sequel.deleteTampJurnal();
-                                                Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", (ttl + meterai), 0);
-                                                if (ppn > 0) {
-                                                    Sequel.insertTampJurnal(Sequel.cariIsiSmc("select PPN_Masukan from set_akun"), "PPN Masukan Obat", ppn, 0);
-                                                }
-                                                Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", 0, (ttl + ppn + meterai));
-                                                sukses = jur.simpanJurnal(NoFaktur.getText(), "U", "PENERIMAAN BARANG DI " + nmgudang.getText().toUpperCase() + ", OLEH " + akses.getkode());
+                                        }
+                                        if (sukses) {
+                                            Sequel.deleteTampJurnal();
+                                            Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", (ttl + meterai), 0);
+                                            if (ppn > 0) {
+                                                Sequel.insertTampJurnal(Sequel.cariIsiSmc("select PPN_Masukan from set_akun"), "PPN Masukan Obat", ppn, 0);
                                             }
-                                        } else {
-                                            sukses = false;
+                                            Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", 0, (ttl + ppn + meterai));
+                                            sukses = jur.simpanJurnal(NoFaktur.getText(), "U", "PENERIMAAN BARANG DI " + nmgudang.getText().toUpperCase() + ", OLEH " + akses.getkode());
                                         }
                                     } else {
                                         sukses = false;
@@ -845,6 +839,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if (sukses) {
                                     JOptionPane.showMessageDialog(null, "Proses simpan selesai...!!");
                                     dispose();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!", "Gagal", JOptionPane.WARNING_MESSAGE);
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!", "Gagal", JOptionPane.WARNING_MESSAGE);
@@ -1501,10 +1497,11 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             (!tbDokter.getValueAt(row, 27).toString().equals(""))
         ) {
             if (!Sequel.menyimpantfSmc("data_batch", null,
-                tbDokter.getValueAt(row, 13).toString(), tbDokter.getValueAt(row, 2).toString(), Valid.getTglSmc(TglPesan), Valid.getTglSmc(tbDokter.getValueAt(row, 6).toString()), "Penerimaan", NoFaktur.getText(),
-                tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 24).toString(), tbDokter.getValueAt(row, 14).toString(), tbDokter.getValueAt(row, 15).toString(), tbDokter.getValueAt(row, 16).toString(),
-                tbDokter.getValueAt(row, 17).toString(), tbDokter.getValueAt(row, 18).toString(), tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(), tbDokter.getValueAt(row, 21).toString(),
-                tbDokter.getValueAt(row, 22).toString(), tbDokter.getValueAt(row, 23).toString(), tbDokter.getValueAt(row, 12).toString(), tbDokter.getValueAt(row, 12).toString()
+                tbDokter.getValueAt(row, 13).toString(), tbDokter.getValueAt(row, 2).toString(), Valid.getTglSmc(TglPesan), Valid.getTglSmc(tbDokter.getValueAt(row, 6).toString()),
+                "Penerimaan", NoFaktur.getText(), tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 24).toString(), tbDokter.getValueAt(row, 14).toString(),
+                tbDokter.getValueAt(row, 15).toString(), tbDokter.getValueAt(row, 16).toString(), tbDokter.getValueAt(row, 17).toString(), tbDokter.getValueAt(row, 18).toString(),
+                tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(), tbDokter.getValueAt(row, 21).toString(), tbDokter.getValueAt(row, 22).toString(),
+                tbDokter.getValueAt(row, 23).toString(), tbDokter.getValueAt(row, 12).toString(), tbDokter.getValueAt(row, 12).toString()
             )) {
                 sukses = false;
             }
@@ -1512,10 +1509,11 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if (sukses) {
             if (akses.getobat()) {
                 if (tbDokter.getValueAt(row, 5).toString().equals("true")) {
-                    if (!Sequel.mengupdatetfSmc("databarang", "expire = ?, h_beli = ?, ralan = ?, kelas1 = ?, kelas2 = ?, kelas3 = ?, utama = ?, vip = ?, vvip = ?, beliluar = ?, jualbebas = ?, karyawan = ?, dasar = ?",
-                        "kode_brng = ?", Valid.getTglSmc(tbDokter.getValueAt(row, 6).toString()), tbDokter.getValueAt(row, 24).toString(), tbDokter.getValueAt(row, 14).toString(), tbDokter.getValueAt(row, 15).toString(),
-                        tbDokter.getValueAt(row, 16).toString(), tbDokter.getValueAt(row, 17).toString(), tbDokter.getValueAt(row, 18).toString(), tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(),
-                        tbDokter.getValueAt(row, 21).toString(), tbDokter.getValueAt(row, 22).toString(), tbDokter.getValueAt(row, 23).toString(), tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 2).toString()
+                    if (!Sequel.mengupdatetfSmc("databarang", "expire = ?, h_beli = ?, ralan = ?, kelas1 = ?, kelas2 = ?, kelas3 = ?, utama = ?, vip = ?, vvip = ?, beliluar = ?, " +
+                        "jualbebas = ?, karyawan = ?, dasar = ?", "kode_brng = ?", Valid.getTglSmc(tbDokter.getValueAt(row, 6).toString()), tbDokter.getValueAt(row, 24).toString(),
+                        tbDokter.getValueAt(row, 14).toString(), tbDokter.getValueAt(row, 15).toString(), tbDokter.getValueAt(row, 16).toString(), tbDokter.getValueAt(row, 17).toString(),
+                        tbDokter.getValueAt(row, 18).toString(), tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(), tbDokter.getValueAt(row, 21).toString(),
+                        tbDokter.getValueAt(row, 22).toString(), tbDokter.getValueAt(row, 23).toString(), tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 2).toString()
                     )) {
                         sukses = false;
                     }
@@ -1524,6 +1522,32 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         
         return sukses;
+    }
+    
+    private void simpanbatch2(int row) {
+        if ((!tbDokter.getValueAt(row, 13).toString().equals("")) && (!tbDokter.getValueAt(row, 14).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 15).toString().equals("")) && (!tbDokter.getValueAt(row, 16).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 17).toString().equals("")) && (!tbDokter.getValueAt(row, 18).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 19).toString().equals("")) && (!tbDokter.getValueAt(row, 20).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 21).toString().equals("")) && (!tbDokter.getValueAt(row, 22).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 23).toString().equals("")) && (!tbDokter.getValueAt(row, 24).toString().equals("")) &&
+            (!tbDokter.getValueAt(row, 27).toString().equals(""))) {
+            Sequel.menyimpan2("data_batch", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Batch", 20, new String[] {
+                tbDokter.getValueAt(row, 13).toString(), tbDokter.getValueAt(row, 2).toString(), Valid.SetTgl(TglPesan.getSelectedItem() + ""), Valid.SetTgl(tbDokter.getValueAt(row, 6).toString()), "Penerimaan", NoFaktur.getText(),
+                tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 24).toString(), tbDokter.getValueAt(row, 14).toString(), tbDokter.getValueAt(row, 15).toString(), tbDokter.getValueAt(row, 16).toString(), tbDokter.getValueAt(row, 17).toString(),
+                tbDokter.getValueAt(row, 18).toString(), tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(), tbDokter.getValueAt(row, 21).toString(), tbDokter.getValueAt(row, 22).toString(), tbDokter.getValueAt(row, 23).toString(),
+                tbDokter.getValueAt(row, 12).toString(), tbDokter.getValueAt(row, 12).toString()
+            });
+        }
+        if (akses.getobat() == true) {
+            if (tbDokter.getValueAt(row, 5).toString().equals("true")) {
+                Sequel.mengedit("databarang", "kode_brng=?", "expire=?,h_beli=?,ralan=?,kelas1=?,kelas2=?,kelas3=?,utama=?,vip=?,vvip=?,beliluar=?,jualbebas=?,karyawan=?,dasar=?", 14, new String[] {
+                    Valid.SetTgl(tbDokter.getValueAt(row, 6).toString()), tbDokter.getValueAt(row, 24).toString(), tbDokter.getValueAt(row, 14).toString(), tbDokter.getValueAt(row, 15).toString(), tbDokter.getValueAt(row, 16).toString(), tbDokter.getValueAt(row, 17).toString(),
+                    tbDokter.getValueAt(row, 18).toString(), tbDokter.getValueAt(row, 19).toString(), tbDokter.getValueAt(row, 20).toString(), tbDokter.getValueAt(row, 21).toString(), tbDokter.getValueAt(row, 22).toString(), tbDokter.getValueAt(row, 23).toString(),
+                    tbDokter.getValueAt(row, 27).toString(), tbDokter.getValueAt(row, 2).toString()
+                });
+            }
+        }
     }
 
     private void simpanbatch(){
