@@ -1069,6 +1069,7 @@ import setting.DlgSetNota;
 import setting.DlgSetOtoLokasi;
 import setting.DlgSetOtoRalan;
 import setting.DlgSetPenjabLab;
+import setting.DlgSetPintuPoli;
 import setting.DlgSetRM;
 import setting.DlgSetTampilJenisObatResep;
 import setting.DlgSetTarif;
@@ -43516,6 +43517,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
         }
 
+        if(akses.getset_pintu_poli()==true){
+            Panelmenu.add(btnSetPintuPoliSmc);
+            jmlmenu++;
+        }
+
         if(akses.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTracker);
@@ -49217,7 +49223,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnHasilPemeriksaanECHOPediatrik.addActionListener(this::btnHasilPemeriksaanECHOPediatrikActionPerformed);
     }
 
-    private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep;
+    private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -49259,6 +49265,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSetTampilJenisObatResep.setName("btnSetTampilJenisObatResep");
         btnSetTampilJenisObatResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetTampilJenisObatResep.addActionListener(this::btnSetTampilJenisObatResepActionPerformed);
+
+        btnSetPintuPoliSmc = new widget.ButtonBig();
+        btnSetPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
+        btnSetPintuPoliSmc.setText("Set Pintu Poli");
+        btnSetPintuPoliSmc.setIconTextGap(0);
+        btnSetPintuPoliSmc.setName("btnSetPintuPoliSmc");
+        btnSetPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetPintuPoliSmc.addActionListener(this::btnSetPintuPoliSmcActionPerformed);
     }
 
     private void isComboSMC() {
@@ -49275,6 +49289,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         } else if (cmbMenu.getSelectedIndex() == 19) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }
+
+            if (akses.getset_pintu_poli()) {
+                Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
             }
 
@@ -49315,6 +49334,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnUserSmc);
             jmlmenu++;
         }
+
+        if (akses.getset_pintu_poli()) {
+            Panelmenu.add(btnSetPintuPoliSmc);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -49349,6 +49373,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if (akses.getuser()) {
             if (btnUserSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getset_pintu_poli()) {
+            if (btnSetPintuPoliSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
             }
         }
@@ -49429,6 +49460,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setAlwaysOnTop(false);
         aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSetPintuPoliSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetPintuPoli aplikasi = new DlgSetPintuPoli(this, false);
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
 }

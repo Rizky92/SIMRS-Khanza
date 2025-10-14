@@ -23,7 +23,7 @@ public final class akses {
     private static long tglSelesai = -1;
     private static String kode="",kdbangsal="",alamatip="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser="",kode_ppk="";
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean aktif=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
+    private static boolean aktif=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,set_pintu_poli=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
@@ -286,6 +286,7 @@ public final class akses {
                         akses.obat_penyakit=rs2.getBoolean("obat_penyakit");
                         akses.dokter=rs2.getBoolean("dokter");
                         akses.jadwal_praktek=rs2.getBoolean("jadwal_praktek");
+                        akses.set_pintu_poli=rs2.getBoolean("set_pintu_poli");
                         akses.petugas=rs2.getBoolean("petugas");
                         akses.pasien=rs2.getBoolean("pasien");
                         akses.registrasi=rs2.getBoolean("registrasi");
@@ -1488,6 +1489,7 @@ public final class akses {
         akses.obat_penyakit=isadmin;
         akses.dokter=isadmin;
         akses.jadwal_praktek=isadmin;
+        akses.set_pintu_poli=isadmin;
         akses.petugas=isadmin;
         akses.pasien=isadmin;
         akses.registrasi=isadmin;
@@ -2663,6 +2665,7 @@ public final class akses {
     public static boolean getobat_penyakit(){return akses.obat_penyakit;}
     public static boolean getdokter(){return akses.dokter;}
     public static boolean getjadwal_praktek(){return akses.jadwal_praktek;}
+    public static boolean getset_pintu_poli(){return akses.set_pintu_poli;}
     public static boolean getpetugas(){return akses.petugas;}
     public static boolean getpasien(){return akses.pasien;}
     public static boolean getregistrasi(){return akses.registrasi;}
