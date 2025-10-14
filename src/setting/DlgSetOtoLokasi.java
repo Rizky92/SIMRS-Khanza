@@ -43,7 +43,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);    
+    private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private int i, pilihan=0;
 
@@ -123,11 +123,11 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         tbRanap.setDefaultRenderer(Object.class, new WarnaTable());
 
         kdbangsal.setDocument(new batasInput((byte)5).getKata(kdbangsal));
-        KodePoli.setDocument(new batasInput((byte)5).getKata(KodePoli)); 
-        KodeDepoRalan.setDocument(new batasInput((byte)5).getKata(KodeDepoRalan)); 
-        KodeDepoRanap.setDocument(new batasInput((byte)5).getKata(KodeDepoRanap)); 
-        KodeBangsalRanap.setDocument(new batasInput((byte)5).getKata(KodeBangsalRanap)); 
-        
+        KodePoli.setDocument(new batasInput((byte)5).getKata(KodePoli));
+        KodeDepoRalan.setDocument(new batasInput((byte)5).getKata(KodeDepoRalan));
+        KodeDepoRanap.setDocument(new batasInput((byte)5).getKata(KodeDepoRanap));
+        KodeBangsalRanap.setDocument(new batasInput((byte)5).getKata(KodeBangsalRanap));
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -135,7 +135,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){  
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     if(pilihan==1){
                         kdbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                         nmbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
@@ -152,8 +152,8 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                         KodeDepoRanap.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                         NamaDepoRanap.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
                         KodeDepoRanap.requestFocus();
-                    }                        
-                }     
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -164,7 +164,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -172,11 +172,11 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){        
+                if(poli.getTable().getSelectedRow()!= -1){
                     KodePoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     KodePoli.requestFocus();
-                }     
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -186,11 +186,11 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
-        
+        });
+
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -380,7 +380,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 142, 23);
 
-        kdbangsal.setHighlighter(null);
         kdbangsal.setName("kdbangsal"); // NOI18N
         kdbangsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -473,7 +472,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         panelGlass8.add(jLabel6);
         jLabel6.setBounds(0, 12, 75, 23);
 
-        KodePoli.setHighlighter(null);
         KodePoli.setName("KodePoli"); // NOI18N
         KodePoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -515,7 +513,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         panelGlass8.add(jLabel7);
         jLabel7.setBounds(0, 42, 75, 23);
 
-        KodeDepoRalan.setHighlighter(null);
         KodeDepoRalan.setName("KodeDepoRalan"); // NOI18N
         KodeDepoRalan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -612,7 +609,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         panelGlass9.add(NamaBangsalRanap);
         NamaBangsalRanap.setBounds(175, 12, 302, 23);
 
-        KodeBangsalRanap.setHighlighter(null);
         KodeBangsalRanap.setName("KodeBangsalRanap"); // NOI18N
         KodeBangsalRanap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -632,7 +628,6 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel9);
         jLabel9.setBounds(0, 42, 95, 23);
 
-        KodeDepoRanap.setHighlighter(null);
         KodeDepoRanap.setName("KodeDepoRanap"); // NOI18N
         KodeDepoRanap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -735,7 +730,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-            
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -791,7 +786,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-            
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -910,7 +905,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 emptTeks();
             }
         }
-            
+
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
@@ -940,7 +935,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     }//GEN-LAST:event_NmPoliKeyPressed
 
     private void btnBangsal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsal1ActionPerformed
-        poli.isCek();        
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
@@ -967,7 +962,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-        }        
+        }
     }//GEN-LAST:event_tbRalanKeyPressed
 
     private void tbRanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRanapMouseClicked
@@ -987,7 +982,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-        }     
+        }
     }//GEN-LAST:event_tbRanapKeyPressed
 
     private void KodeDepoRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDepoRalanKeyPressed
@@ -1113,7 +1108,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement("select set_lokasi.kd_bangsal,nm_bangsal,asal_stok from set_lokasi "+
                        "inner join bangsal on set_lokasi.kd_bangsal=bangsal.kd_bangsal");
             try {
@@ -1130,7 +1125,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1161,12 +1156,12 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             KodeDepoRanap.setText("");
             NamaDepoRanap.setText("");
         }
-            
+
     }
 
     private void tampilralan() {
         Valid.tabelKosong(tabModeRalan);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select set_depo_ralan.kd_poli,poliklinik.nm_poli,set_depo_ralan.kd_bangsal,bangsal.nm_bangsal "+
                     "from set_depo_ralan inner join poliklinik inner join bangsal on set_depo_ralan.kd_poli=poliklinik.kd_poli "+
@@ -1185,7 +1180,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1193,7 +1188,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampilranap() {
         Valid.tabelKosong(tabModeRanap);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select set_depo_ranap.kd_bangsal,bangsal.nm_bangsal,set_depo_ranap.kd_depo "+
                     "from set_depo_ranap inner join bangsal on set_depo_ranap.kd_bangsal=bangsal.kd_bangsal "+
@@ -1215,7 +1210,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1230,7 +1225,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             NmDepoRalan.setText(tbRalan.getValueAt(row,3).toString());
         }
     }
-    
+
     private void getDataRanap() {
         int row=tbRanap.getSelectedRow();
         if(row!= -1){

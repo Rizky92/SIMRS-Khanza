@@ -134,12 +134,12 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         InputModalAwal.setDocument(new batasInput((byte)16).getOnlyAngka(InputModalAwal));
         Sequel.cariIsiAngka("select modal_awal from set_modal_payment",ModalAwal);
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -189,7 +189,6 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(null);
 
-        InputModalAwal.setHighlighter(null);
         InputModalAwal.setName("InputModalAwal"); // NOI18N
         InputModalAwal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -428,26 +427,26 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary_payment");
-            for(int r=0;r<tabMode.getRowCount();r++){  
+            for(int r=0;r<tabMode.getRowCount();r++){
                 Sequel.menyimpan("temporary_payment","'0',?,?,?,?,?,?,?,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''",7,new String[]{
                     tabMode.getValueAt(r,0).toString(),tabMode.getValueAt(r,1).toString(),
                     tabMode.getValueAt(r,2).toString(),tabMode.getValueAt(r,3).toString(),
                     tabMode.getValueAt(r,4).toString(),Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString())),
-                    tabMode.getValueAt(r,6).toString()                    
+                    tabMode.getValueAt(r,6).toString()
                 });
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("shift",CmbStatus.getSelectedItem().toString());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReport("rptPaymentPoint.jasper","report","::[ Payment Point ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -510,7 +509,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek4ActionPerformed
-        InputModalAwal.setText(Sequel.cariIsi("select modal_awal from set_modal_payment"));  
+        InputModalAwal.setText(Sequel.cariIsi("select modal_awal from set_modal_payment"));
         WindowModalAwal.setSize(500,80);
         WindowModalAwal.setLocationRelativeTo(ModalAwal);
         InputModalAwal.requestFocus();
@@ -604,9 +603,9 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Valid.tabelKosong(tabMode);
-        try{        
+        try{
             psjamshift=koneksi.prepareStatement("select * from closing_kasir");
             try {
                 rsjamshift=psjamshift.executeQuery();
@@ -615,13 +614,13 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                 siang=0;
                 sore=0;
                 malam=0;
-                while(rsjamshift.next()){ 
+                while(rsjamshift.next()){
                     ps= koneksi.prepareStatement(
                             "select no_nota,tgl_bayar,nama_pasien,jumlah_bayar,petugas from tagihan_sadewa "+
                             "where tgl_bayar between ? and ? and nama_pasien like ? or "+
                             "tgl_bayar between ? and ? and no_nota like ? order by tgl_bayar,no_nota");
                     try {
-                        ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" "+rsjamshift.getString("jam_masuk"));                        
+                        ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" "+rsjamshift.getString("jam_masuk"));
                         ps.setString(3,"%"+TCari.getText().trim()+"%");
                         ps.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" "+rsjamshift.getString("jam_masuk"));
                         if(rsjamshift.getString("shift").equals("Malam")){
@@ -635,7 +634,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                         ps.setString(6,"%"+TCari.getText().trim()+"%");
                         rs=ps.executeQuery();
                         i=1;
-                        while(rs.next()){                            
+                        while(rs.next()){
                             petugas=rs.getString("petugas")+" "+Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",rs.getString("petugas"));
                             if(CmbStatus.getSelectedItem().toString().equals("Semua")){
                                 nonota=Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_nota"));
@@ -659,7 +658,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                                     tabMode.addRow(new Object[]{
                                         i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),Math.round(rs.getDouble("jumlah_bayar")),petugas
                                     });
-                                }                                    
+                                }
                             }else if(rsjamshift.getString("shift").equals(CmbStatus.getSelectedItem().toString())){
                                 nonota=Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_nota"));
                                 if(nonota.equals("")){
@@ -682,9 +681,9 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                                     tabMode.addRow(new Object[]{
                                         i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),Math.round(rs.getDouble("jumlah_bayar")),petugas
                                     });
-                                }                                    
+                                }
                             }
-                            i++;                            
+                            i++;
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -695,7 +694,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                         if(ps!=null){
                             ps.close();
                         }
-                    }                
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -757,11 +756,11 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                 tabMode.addRow(new Object[]{
                         "",">> Total",":","","",(pagi+siang+sore+malam+Double.parseDouble(ModalAwal.getText())),""
                 });
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
-    }    
+    }
 
 }

@@ -52,7 +52,7 @@ import toko.TokoSuplier;
 public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi();    
+    private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
     private Connection koneksi=koneksiDB.condb();
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
@@ -79,9 +79,9 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, 
-                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
+                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class
             };
             @Override
@@ -127,13 +127,13 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoFaktur.setDocument(new batasInput((byte)20).getKata(NoFaktur));
         BesarBayar.setDocument(new batasInput((byte)15).getKata(BesarBayar));
         NoBukti.setDocument(new batasInput((byte)30).getKata(NoBukti));
         nip.setDocument(new batasInput((byte)20).getKata(nip));
         keterangan.setDocument(new batasInput((byte)100).getKata(keterangan));
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -156,15 +156,15 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         BesarBayar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
                 if(sisahutang>0){
                     SisaHutang.setText(Valid.SetAngka(sisahutang));
-                    if(!BesarBayar.getText().equals("")){                           
-                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));                           
+                    if(!BesarBayar.getText().equals("")){
+                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));
                     }
                 }
             }
@@ -172,8 +172,8 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             public void removeUpdate(DocumentEvent e) {
                 if(sisahutang>0){
                     SisaHutang.setText(Valid.SetAngka(sisahutang));
-                    if(!BesarBayar.getText().equals("")){                           
-                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));                           
+                    if(!BesarBayar.getText().equals("")){
+                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));
                     }
                 }
             }
@@ -181,13 +181,13 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             public void changedUpdate(DocumentEvent e) {
                 if(sisahutang>0){
                     SisaHutang.setText(Valid.SetAngka(sisahutang));
-                    if(!BesarBayar.getText().equals("")){                           
-                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));                           
+                    if(!BesarBayar.getText().equals("")){
+                         SisaHutang.setText(Valid.SetAngka(sisahutang-Double.parseDouble(BesarBayar.getText())));
                     }
                 }
             }
         });
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -195,10 +195,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     nip.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                    nama_petugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());                    
-                }                
+                    nama_petugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -209,7 +209,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         petugas.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -300,7 +300,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -358,19 +357,16 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         BtnSimpanMandiri.setBounds(10, 100, 100, 30);
 
         NoRekening.setEditable(false);
-        NoRekening.setHighlighter(null);
         NoRekening.setName("NoRekening"); // NOI18N
         panelBiasa2.add(NoRekening);
         NoRekening.setBounds(84, 10, 130, 23);
 
         RekeningAtasNama.setEditable(false);
-        RekeningAtasNama.setHighlighter(null);
         RekeningAtasNama.setName("RekeningAtasNama"); // NOI18N
         panelBiasa2.add(RekeningAtasNama);
         RekeningAtasNama.setBounds(217, 10, 200, 23);
 
         KotaAtasNamaRekening.setEditable(false);
-        KotaAtasNamaRekening.setHighlighter(null);
         KotaAtasNamaRekening.setName("KotaAtasNamaRekening"); // NOI18N
         panelBiasa2.add(KotaAtasNamaRekening);
         KotaAtasNamaRekening.setBounds(420, 10, 120, 23);
@@ -393,19 +389,16 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         jLabel102.setBounds(0, 40, 80, 23);
 
         BiayaTransaksi.setEditable(false);
-        BiayaTransaksi.setHighlighter(null);
         BiayaTransaksi.setName("BiayaTransaksi"); // NOI18N
         panelBiasa2.add(BiayaTransaksi);
         BiayaTransaksi.setBounds(399, 40, 110, 23);
 
         KodeMetode.setEditable(false);
-        KodeMetode.setHighlighter(null);
         KodeMetode.setName("KodeMetode"); // NOI18N
         panelBiasa2.add(KodeMetode);
         KodeMetode.setBounds(84, 40, 64, 23);
 
         MetodePembayaran.setEditable(false);
-        MetodePembayaran.setHighlighter(null);
         MetodePembayaran.setName("MetodePembayaran"); // NOI18N
         panelBiasa2.add(MetodePembayaran);
         MetodePembayaran.setBounds(151, 40, 245, 23);
@@ -416,19 +409,16 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         jLabel103.setBounds(0, 70, 80, 23);
 
         KodeBank.setEditable(false);
-        KodeBank.setHighlighter(null);
         KodeBank.setName("KodeBank"); // NOI18N
         panelBiasa2.add(KodeBank);
         KodeBank.setBounds(84, 70, 64, 23);
 
         BankTujuan.setEditable(false);
-        BankTujuan.setHighlighter(null);
         BankTujuan.setName("BankTujuan"); // NOI18N
         panelBiasa2.add(BankTujuan);
         BankTujuan.setBounds(151, 70, 245, 23);
 
         KodeTransaksi.setEditable(false);
-        KodeTransaksi.setHighlighter(null);
         KodeTransaksi.setName("KodeTransaksi"); // NOI18N
         panelBiasa2.add(KodeTransaksi);
         KodeTransaksi.setBounds(399, 70, 141, 23);
@@ -467,7 +457,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         label32.setBounds(0, 40, 70, 23);
 
         NoFaktur.setEditable(false);
-        NoFaktur.setHighlighter(null);
         NoFaktur.setName("NoFaktur"); // NOI18N
         NoFaktur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -483,7 +472,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         panelisi4.add(label36);
         label36.setBounds(294, 40, 90, 23);
 
-        NoBukti.setHighlighter(null);
         NoBukti.setName("NoBukti"); // NOI18N
         NoBukti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -505,7 +493,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         label35.setBounds(0, 70, 70, 23);
 
         BesarBayar.setText("0");
-        BesarBayar.setHighlighter(null);
         BesarBayar.setName("BesarBayar"); // NOI18N
         BesarBayar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -549,7 +536,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
 
         SisaHutang.setEditable(false);
         SisaHutang.setText("0");
-        SisaHutang.setHighlighter(null);
         SisaHutang.setName("SisaHutang"); // NOI18N
         SisaHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -585,7 +571,6 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         panelisi4.add(AkunBayar);
         AkunBayar.setBounds(388, 70, 292, 23);
 
-        keterangan.setHighlighter(null);
         keterangan.setName("keterangan"); // NOI18N
         keterangan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -889,8 +874,8 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             Valid.textKosong(AkunBayar,"Akun Bayar");
         }else if(NoBukti.getText().trim().equals("")){
             Valid.textKosong(NoBukti,"No.Bukti");
-        }else{            
-            try {   
+        }else{
+            try {
                 if(sisahutang>0){
                     koderekening="";
                     try {
@@ -900,7 +885,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                         if(response.isArray()){
                            for(JsonNode list:response){
                                if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                                    koderekening=list.path("KodeRek").asText();  
+                                    koderekening=list.path("KodeRek").asText();
                                }
                            }
                         }
@@ -908,12 +893,12 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     } catch (Exception e) {
                         koderekening="";
                     }
-                    
+
                     if(koderekening.equals("")){
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan akun bayar, silahkan hubungi administrator..!!");
                     }else{
                         if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
-                            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"' ",kodemcm+"14"+TglBayar.getSelectedItem().toString().replaceAll("-",""),6,NoBukti); 
+                            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(TglBayar.getSelectedItem()+"")+"' ",kodemcm+"14"+TglBayar.getSelectedItem().toString().replaceAll("-",""),6,NoBukti);
                             ps=koneksi.prepareStatement(
                                     "select tokosuplier.nama_suplier,tokosuplier.kota,tokosuplier.nama_bank,tokosuplier.rekening "+
                                     "from tokopemesanan inner join tokosuplier on tokopemesanan.kode_suplier=tokosuplier.kode_suplier "+
@@ -937,7 +922,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                                     ps.close();
                                 }
                             }
-                            
+
                             DlgBayarMandiri.setLocationRelativeTo(internalFrame1);
                             DlgBayarMandiri.setVisible(true);
                         }else{
@@ -979,11 +964,11 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 }else{
                     JOptionPane.showMessageDialog(rootPane,"Maaf sudah dilakukan pembayaran..!!!");
                     TCari.requestFocus();
-                }                   
-                
+                }
+
            }catch (Exception ex) {
                System.out.println(ex);
-           }           
+           }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -998,15 +983,15 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try {
             Sequel.AutoComitFalse();
-            sukses=true;   
+            sukses=true;
             if(Sequel.queryu2tf("delete from toko_bayar_pemesanan where tgl_bayar=? and no_faktur=? and "+
                     "nip=? and besar_bayar=? and keterangan=? and nama_bayar=? and no_bukti=?",7,new String[]{
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString(),       
-                tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),       
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString(),
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString(),
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString(),
+                tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(),
                 tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString()
             })==true){
                 if(Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())==Double.parseDouble(BesarBayar.getText())){
@@ -1014,7 +999,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 }else{
                     Sequel.mengedit("tokopemesanan","no_faktur=?","status='Belum Lunas'",1,new String[]{NoFaktur.getText()});
                 }
-                
+
                 koderekening="";
                 try {
                     myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -1023,17 +1008,17 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     if(response.isArray()){
                        for(JsonNode list:response){
                            if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                                koderekening=list.path("KodeRek").asText();  
+                                koderekening=list.path("KodeRek").asText();
                            }
                        }
                     }
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
-                } 
-                
+                }
+
                 if(koderekening.equals("")){
-                    sukses=false; 
+                    sukses=false;
                 }else{
                     total=0;
                     if(koderekening.equals(Host_to_Host_Bank_Mandiri)){
@@ -1046,12 +1031,12 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     }
                     Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), (Valid.SetAngka(BesarBayar.getText()) + total), 0);
                     Sequel.insertTampJurnal(akunhutang, "HUTANG USAHA", "0", BesarBayar.getText());
-                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","BATAL BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());   
-                } 
+                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","BATAL BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());
+                }
             }else{
                 sukses=false;
             }
-                
+
             if(sukses==true){
                 Sequel.Commit();
                 tabMode.removeRow(tbKamar.getSelectedRow());
@@ -1063,7 +1048,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             Sequel.AutoComitTrue();
         }catch (Exception ex) {
             System.out.println(ex);
-        }              
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1090,15 +1075,15 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();
-        }else if(tabMode.getRowCount()!=0){     
-                Map<String, Object> param = new HashMap<>(); 
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());        
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));   
+                param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBayarPemesananToko.jasper","report","::[ Bayar Pemesanan ]::",
                     "select toko_bayar_pemesanan.tgl_bayar,tokopemesanan.tgl_faktur,tokopemesanan.tgl_pesan,"+
                     "tokopemesanan.tgl_tempo, toko_bayar_pemesanan.no_faktur,"+
@@ -1219,7 +1204,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
                     tampil();
-                }      
+                }
                 kdsup.requestFocus();
             }
             @Override
@@ -1230,8 +1215,8 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {suplier.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1264,7 +1249,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         try {
             if(Valid.daysOld("./cache/akunbankmandiri.iyem")<30){
                 tampilAkunBankMandiri2();
@@ -1458,14 +1443,14 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kodetransaksibank.getTable().getSelectedRow()!= -1){                   
-                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());   
-                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());   
-                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());   
-                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());   
-                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());   
-                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());                  
-                }                
+                if(kodetransaksibank.getTable().getSelectedRow()!= -1){
+                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());
+                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());
+                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());
+                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());
+                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());
+                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1476,7 +1461,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kodetransaksibank.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1584,7 +1569,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{           
+        try{
             ps=koneksi.prepareStatement(
                     "select toko_bayar_pemesanan.tgl_bayar,tokopemesanan.tgl_faktur,tokopemesanan.tgl_pesan,tokopemesanan.tgl_tempo, toko_bayar_pemesanan.no_faktur,"+
                     "tokosuplier.nama_suplier,toko_bayar_pemesanan.nama_bayar,toko_bayar_pemesanan.no_bukti,toko_bayar_pemesanan.besar_bayar,toko_bayar_pemesanan.keterangan,"+
@@ -1595,7 +1580,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     (TCari.getText().trim().equals("")?"":"and (toko_bayar_pemesanan.no_faktur like ? or tokosuplier.nama_suplier like ? or "+
                     "toko_bayar_pemesanan.nama_bayar like ? or toko_bayar_pemesanan.no_bukti like ? or toko_bayar_pemesanan.keterangan like ? or "+
                     "petugas.nama like ?) ")+"order by toko_bayar_pemesanan.tgl_bayar");
-            try {            
+            try {
                 ps.setString(1,Valid.SetTgl(TglCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(TglCari2.getSelectedItem()+""));
                 ps.setString(3,"%"+nmsup.getText().trim()+"%");
@@ -1609,7 +1594,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 }
                 rs=ps.executeQuery();
                 total=0;
-                while(rs.next()){                
+                while(rs.next()){
                     total=total+rs.getDouble("besar_bayar");
                     tabMode.addRow(new Object[]{
                         rs.getString("tgl_bayar"),rs.getString("tgl_faktur"),rs.getString("tgl_pesan"),rs.getString("tgl_tempo"),rs.getString("no_faktur"),rs.getString("nama_suplier"),rs.getString("nama_bayar"),
@@ -1626,7 +1611,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1643,7 +1628,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
         TglBayar.setDate(new Date());
         TglBayar.requestFocus();
     }
-    
+
     public void setData(String nofaktur){
         NoFaktur.setText(nofaktur);
         TCari.setText(nofaktur);
@@ -1673,7 +1658,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettoko_bayar_pemesanan());
         BtnHapus.setEnabled(akses.gettoko_bayar_pemesanan());
@@ -1687,11 +1672,11 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             nip.setEditable(true);
             BtnPetugas.setEnabled(true);
             BtnSimpan.setEnabled(true);
-        }   
+        }
     }
-    
-    private void tampilAkunBayar() {         
-         try{      
+
+    private void tampilAkunBayar() {
+         try{
              file=new File("./cache/akunbayarhutang.iyem");
              file.createNewFile();
              fileWriter = new FileWriter(file);
@@ -1700,7 +1685,7 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
              try{
                  rs=ps.executeQuery();
                  AkunBayar.removeAllItems();
-                 while(rs.next()){    
+                 while(rs.next()){
                      AkunBayar.addItem(rs.getString(1).replaceAll("\"",""));
                      iyembuilder.append("{\"NamaAkun\":\"").append(rs.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rs.getString(2)).append("\"},");
                  }
@@ -1709,10 +1694,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
              } finally{
                  if(rs != null){
                      rs.close();
-                 } 
+                 }
                  if(ps != null){
                      ps.close();
-                 } 
+                 }
              }
 
              if (iyembuilder.length() > 0) {
@@ -1720,14 +1705,14 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 fileWriter.write("{\"akunbayarhutang\":["+iyembuilder+"]}");
                 fileWriter.flush();
              }
-            
+
              fileWriter.close();
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilAkunBayar2() {
         try {
             myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -1746,10 +1731,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+ex);
             }
         }
-    } 
-    
-    private void tampilAkunBankMandiri() { 
-        try{     
+    }
+
+    private void tampilAkunBankMandiri() {
+        try{
             ps=koneksi.prepareStatement(
                     "select set_akun_mandiri.kd_rek,set_akun_mandiri.kd_rek_biaya,set_akun_mandiri.kode_mcm,set_akun_mandiri.no_rekening from set_akun_mandiri");
             try {
@@ -1787,9 +1772,9 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
              norekening="";
         }
     }
-    
-    private void tampilAkunBankMandiri2() { 
-        try{      
+
+    private void tampilAkunBankMandiri2() {
+        try{
              myObj = new FileReader("./cache/akunbankmandiri.iyem");
              root = mapper.readTree(myObj);
              response = root.path("akunbankmandiri");

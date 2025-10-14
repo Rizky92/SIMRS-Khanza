@@ -44,13 +44,13 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariRuangAuditKepatuhan ruang=new DlgCariRuangAuditKepatuhan(null,false);
     private double menggunakan_apd_waktu_membuang_darah=0,komponen_darah_tidak_ada_dilantai=0,membuang_darah_pada_tempat_ditentukan=0,
                 pembersihan_areal_tumbahan_darah=0,apd_dibuang_di_limbah_infeksius=0,ttlmenggunakan_apd_waktu_membuang_darah=0,melakukan_kebersihan_tangan_setelah_prosedur=0,
                 ttlkomponen_darah_tidak_ada_dilantai=0,ttlmembuang_darah_pada_tempat_ditentukan=0,ttlpembersihan_areal_tumbahan_darah=0,ttlapd_dibuang_di_limbah_infeksius=0,
                 ttlmelakukan_kebersihan_tangan_setelah_prosedur=0,ttlpenilaian=0;
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -102,7 +102,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
 
         KdRuang.setDocument(new batasInput((byte)20).getKata(KdRuang));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -125,7 +125,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -133,10 +133,10 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){                   
+                if(ruang.getTable().getSelectedRow()!= -1){
                     KdRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                     NmRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdRuang.requestFocus();
             }
             @Override
@@ -147,10 +147,10 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         ChkInput.setSelected(false);
         isForm();
-        
+
         jam();
     }
 
@@ -528,7 +528,6 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
         jLabel18.setBounds(430, 10, 130, 23);
 
         KdRuang.setEditable(false);
-        KdRuang.setHighlighter(null);
         KdRuang.setName("KdRuang"); // NOI18N
         KdRuang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -697,7 +696,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -711,7 +710,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -731,8 +730,8 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -746,7 +745,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
             Valid.textKosong(btnPetugas,"Ruang/Unit");
-        }else{    
+        }else{
             Sequel.mengedit("audit_penanganan_darah","id_ruang=? and tanggal=?","tanggal=?,id_ruang=?,menggunakan_apd_waktu_membuang_darah=?,komponen_darah_tidak_ada_dilantai=?,membuang_darah_pada_tempat_ditentukan=?,"+
                 "pembersihan_areal_tumbahan_darah=?,apd_dibuang_di_limbah_infeksius=?,melakukan_kebersihan_tangan_setelah_prosedur=?",10,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),MenggunakanApdWaktuMembuangDarah.getSelectedItem().toString(),
@@ -783,15 +782,15 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptAuditPenangananDarah.jasper","report","::[ Data Audit Penanganan Darah ]::",
                     "select audit_penanganan_darah.id_ruang,ruang_audit_kepatuhan.nama_ruang,audit_penanganan_darah.tanggal,audit_penanganan_darah.menggunakan_apd_waktu_membuang_darah,"+
@@ -809,7 +808,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
                     "inner join ruang_audit_kepatuhan on audit_penanganan_darah.id_ruang=ruang_audit_kepatuhan.id_ruang where audit_penanganan_darah.tanggal between "+
                     "'"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
                     "and (audit_penanganan_darah.id_ruang like '%"+TCari.getText().trim()+"%' or ruang_audit_kepatuhan.nama_ruang like '%"+TCari.getText().trim()+"%') order by audit_penanganan_darah.tanggal",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1008,7 +1007,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1030,7 +1029,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
                     "where audit_penanganan_darah.tanggal between ? and ? "+
                     "and (audit_penanganan_darah.id_ruang like ? or ruang_audit_kepatuhan.nama_ruang like ?) order by audit_penanganan_darah.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().toString().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1041,7 +1040,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 ttlmenggunakan_apd_waktu_membuang_darah=0;ttlkomponen_darah_tidak_ada_dilantai=0;ttlmembuang_darah_pada_tempat_ditentukan=0;ttlpembersihan_areal_tumbahan_darah=0;ttlapd_dibuang_di_limbah_infeksius=0;
                 ttlmelakukan_kebersihan_tangan_setelah_prosedur=0;ttlpenilaian=0;
@@ -1101,7 +1100,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
         }
         LCount.setText(""+i);
     }
-    
+
     public void emptTeks() {
         KdRuang.setText("");
         NmRuang.setText("");
@@ -1113,7 +1112,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
         ApdDibuangdiLimbahInfeksius.setSelectedIndex(0);
         MelakukanKebersihanTanganSetelahProsedur.setSelectedIndex(0);
         MenggunakanApdWaktuMembuangDarah.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1130,26 +1129,26 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,154));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getaudit_penanganan_darah());
         BtnHapus.setEnabled(akses.getaudit_penanganan_darah());
         BtnEdit.setEnabled(akses.getaudit_penanganan_darah());
-        BtnPrint.setEnabled(akses.getaudit_penanganan_darah());         
+        BtnPrint.setEnabled(akses.getaudit_penanganan_darah());
     }
 
     private void jam(){
@@ -1161,7 +1160,7 @@ public final class DlgAuditPenangananDarah extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang

@@ -115,9 +115,6 @@
             </Component>
             <Component class="widget.TextBox" name="MakBuku">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="MakBuku" noResource="true"/>
               </Properties>
               <Events>
@@ -131,9 +128,6 @@
             </Component>
             <Component class="widget.TextBox" name="Lama">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Lama" noResource="true"/>
               </Properties>
               <Events>
@@ -169,9 +163,6 @@
             </Component>
             <Component class="widget.TextBox" name="Denda">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Denda" noResource="true"/>
               </Properties>
               <Events>

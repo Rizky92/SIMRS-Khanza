@@ -425,7 +425,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         });
         Popup.add(ppPetugasDokter);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
 
         TPasien.setFocusTraversalPolicyProvider(true);
@@ -478,7 +477,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         panelisi3.add(jLabel4);
 
         KdKtg.setEditable(false);
-        KdKtg.setHighlighter(null);
         KdKtg.setName("KdKtg"); // NOI18N
         KdKtg.setPreferredSize(new java.awt.Dimension(50, 23));
         KdKtg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -489,7 +487,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         panelisi3.add(KdKtg);
 
         NmKtg.setEditable(false);
-        NmKtg.setHighlighter(null);
         NmKtg.setName("NmKtg"); // NOI18N
         NmKtg.setPreferredSize(new java.awt.Dimension(140, 23));
         NmKtg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -631,7 +628,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(0, 10, 60, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -642,7 +638,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         kddokter.setBounds(63, 10, 100, 23);
 
         nmdokter.setEditable(false);
-        nmdokter.setHighlighter(null);
         nmdokter.setName("nmdokter"); // NOI18N
         FormInput.add(nmdokter);
         nmdokter.setBounds(165, 10, 367, 23);
@@ -669,7 +664,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.add(LblPetugas);
         LblPetugas.setBounds(0, 40, 60, 23);
 
-        KdPtg2.setHighlighter(null);
         KdPtg2.setName("KdPtg2"); // NOI18N
         KdPtg2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -680,7 +674,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         KdPtg2.setBounds(63, 40, 100, 23);
 
         NmPtg2.setEditable(false);
-        NmPtg2.setHighlighter(null);
         NmPtg2.setName("NmPtg2"); // NOI18N
         FormInput.add(NmPtg2);
         NmPtg2.setBounds(165, 40, 367, 23);

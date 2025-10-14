@@ -38,7 +38,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    /** Creates new form DlgPenyakit 
+    /** Creates new form DlgPenyakit
      *@param parent
      *@param modal */
     public DlgKonversi(java.awt.Frame parent, boolean modal) {
@@ -75,7 +75,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         n1.setDocument(new batasInput((byte)13).getKata(n1));
         n2.setDocument(new batasInput((byte)13).getKata(n2));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -103,7 +103,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
         }
         Valid.loadCombo(kdsat1,"kode_sat","kodesatuan");
         Valid.loadCombo(kdsat2,"kode_sat","kodesatuan");
-        
+
     }
 
 
@@ -241,7 +241,6 @@ public final class DlgKonversi extends javax.swing.JDialog {
         panelisi4.setPreferredSize(new java.awt.Dimension(100, 47));
         panelisi4.setLayout(null);
 
-        n1.setHighlighter(null);
         n1.setName("n1"); // NOI18N
         n1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -252,7 +251,6 @@ public final class DlgKonversi extends javax.swing.JDialog {
         n1.setBounds(12, 12, 50, 23);
 
         nmsat1.setEditable(false);
-        nmsat1.setHighlighter(null);
         nmsat1.setName("nmsat1"); // NOI18N
         panelisi4.add(nmsat1);
         nmsat1.setBounds(146, 12, 160, 23);
@@ -275,7 +273,6 @@ public final class DlgKonversi extends javax.swing.JDialog {
         panelisi4.add(label11);
         label11.setBounds(307, 12, 20, 23);
 
-        n2.setHighlighter(null);
         n2.setName("n2"); // NOI18N
         n2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -297,7 +294,6 @@ public final class DlgKonversi extends javax.swing.JDialog {
 
         nmsat2.setEditable(false);
         nmsat2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        nmsat2.setHighlighter(null);
         nmsat2.setName("nmsat2"); // NOI18N
         panelisi4.add(nmsat2);
         nmsat2.setBounds(463, 12, 160, 23);
@@ -555,15 +551,15 @@ public final class DlgKonversi extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){         
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptKonversi.jasper","report","::[ Konversi Satuan ]::","select nilai, kode_sat, nilai_konversi, sat_konversi  "+
                 " from konver_sat where  kode_sat like '%"+TCari.getText().trim()+"%' or "+
                 " sat_konversi like '%"+TCari.getText().trim()+"%' order by kode_sat",param);
@@ -719,7 +715,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
             sql="select nilai, kode_sat, nilai_konversi, sat_konversi  "+
                 " from konver_sat where  kode_sat like '%"+TCari.getText().trim()+"%' or "+
                 " sat_konversi like '%"+TCari.getText().trim()+"%' "+order;
-        } 
+        }
         prosesCari(sql);
     }
 
@@ -747,7 +743,7 @@ public final class DlgKonversi extends javax.swing.JDialog {
         n2.setText("");
         kdsat1.setSelectedItem("");
         kdsat2.setSelectedItem("");
-        n1.requestFocus();        
+        n1.requestFocus();
     }
 
     private void getData() {
@@ -759,12 +755,12 @@ public final class DlgKonversi extends javax.swing.JDialog {
             kdsat2.setSelectedItem(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getkonversi_satuan());
         BtnHapus.setEnabled(akses.getkonversi_satuan());
         BtnPrint.setEnabled(akses.getkonversi_satuan());
-               
+
         ppHapus.setEnabled(akses.getkonversi_satuan());
         ppCetak.setEnabled(akses.getkonversi_satuan());
         ppSimpan.setEnabled(akses.getkonversi_satuan());

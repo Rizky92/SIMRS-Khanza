@@ -81,7 +81,7 @@ public final class DlgRekening extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)15).getKata(Kd));
         Nm.setDocument(new batasInput((byte)100).getKata(Nm));
         KdSub.setDocument(new batasInput((byte)15).getKata(KdSub));
@@ -109,8 +109,8 @@ public final class DlgRekening extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
     }
 
 
@@ -177,7 +177,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -227,7 +226,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         internalFrame7.add(label35);
         label35.setBounds(0, 22, 105, 23);
 
-        KdSub.setHighlighter(null);
         KdSub.setName("KdSub"); // NOI18N
         KdSub.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -237,7 +235,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         internalFrame7.add(KdSub);
         KdSub.setBounds(108, 22, 120, 23);
 
-        NmSub.setHighlighter(null);
         NmSub.setName("NmSub"); // NOI18N
         NmSub.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -381,7 +378,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         internalFrame8.add(label40);
         label40.setBounds(0, 22, 105, 23);
 
-        KdSubInduk.setHighlighter(null);
         KdSubInduk.setName("KdSubInduk"); // NOI18N
         KdSubInduk.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -392,7 +388,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         KdSubInduk.setBounds(108, 22, 100, 23);
 
         NmSubInduk.setEditable(false);
-        NmSubInduk.setHighlighter(null);
         NmSubInduk.setName("NmSubInduk"); // NOI18N
         internalFrame8.add(NmSubInduk);
         NmSubInduk.setBounds(108, 52, 300, 23);
@@ -462,7 +457,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         panelisi4.add(label32);
         label32.setBounds(217, 12, 50, 23);
 
-        Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -478,7 +472,6 @@ public final class DlgRekening extends javax.swing.JDialog {
         panelisi4.add(label36);
         label36.setBounds(0, 42, 105, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -796,37 +789,37 @@ public final class DlgRekening extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tbKamar.getRowCount()!=0){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
-            Map<String, Object> param = new HashMap<>();                 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
-                
+
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 int row=tabMode.getRowCount();
-                for(int i=0;i<row;i++){  
+                for(int i=0;i<row;i++){
                     Sequel.menyimpan("temporary","'"+i+"','"+
                                     tabMode.getValueAt(i,2).toString()+"','"+
                                     tabMode.getValueAt(i,3).toString()+"','"+
                                     tabMode.getValueAt(i,4).toString()+"','"+
-                                    tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan"); 
+                                    tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Keuangan");
                 }
-                  
+
                 Valid.MyReportqry("rptRekening2.jasper","report","::[ Data Rekening ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }else{
                 Valid.MyReportqry("rptRekening.jasper","report","::[ Data Rekening ]::","select kd_rek, nm_rek, tipe, balance "+
                     " from rekening where kd_rek like '%"+TCari.getText().trim()+"%' or "+
                     " nm_rek like '%"+TCari.getText().trim()+"%' or "+
                     " tipe like '%"+TCari.getText().trim()+"%' or "+
-                    " balance like '%"+TCari.getText().trim()+"%' order by kd_rek",param);                
-            }         
+                    " balance like '%"+TCari.getText().trim()+"%' order by kd_rek",param);
+            }
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -852,7 +845,7 @@ public final class DlgRekening extends javax.swing.JDialog {
             tampil();
         }else{
             tampil2();
-        }   
+        }
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -926,7 +919,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     NmSub.getText()+"','"+
                     Tipe1.getSelectedItem().toString().substring(0,1) +"','"+
                     Balan1.getSelectedItem().toString().substring(0,1)+"','1'","Kode Rekening")==true){
-                Sequel.menyimpan("subrekening","'"+Kd.getText()+"','"+KdSub.getText()+"'");                
+                Sequel.menyimpan("subrekening","'"+Kd.getText()+"','"+KdSub.getText()+"'");
                 BtnCariActionPerformed(evt);
                 emptTeks2();
             }
@@ -964,7 +957,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             WindowSubRekening.setAlwaysOnTop(false);
             WindowSubRekening.setVisible(true);
         }
-            
+
     }//GEN-LAST:event_MnSubAkunActionPerformed
 
     private void MnJadikanSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanSubActionPerformed
@@ -997,14 +990,14 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         }else{
             Sequel.meghapus("subrekening","kd_rek2",Kd.getText());
             if(Sequel.menyimpantf2("subrekening","'"+KdSubInduk.getText()+"','"+Kd.getText()+"'","Sub Rekening")==true){
-                Sequel.mengedit("rekening","kd_rek='"+Kd.getText()+"'","level='1'");                
+                Sequel.mengedit("rekening","kd_rek='"+Kd.getText()+"'","level='1'");
             }else{
                 Sequel.mengedit("rekening","kd_rek='"+Kd.getText()+"'","level='0'");
-            }         
+            }
             WindowJadikanSub.dispose();
             BtnCariActionPerformed(evt);
             emptTeks2();
-            
+
         }
     }//GEN-LAST:event_BtnSimpan6ActionPerformed
 
@@ -1024,8 +1017,8 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     JOptionPane.showMessageDialog(rootPane,"Akun Rekening tidak ditemukan");
                 }
                 KdSubInduk.requestFocus();
-            } 
-        }            
+            }
+        }
     }//GEN-LAST:event_KdSubIndukKeyPressed
 
     private void MnJadikanUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnJadikanUtamaActionPerformed
@@ -1122,7 +1115,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     " level='0' and nm_rek like ? or "+
                     " level='0' and tipe like ? or "+
                     " level='0' and balance like ? order by kd_rek");
-            try {            
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1151,7 +1144,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{
                                 rs2.getString(1),rs2.getString(2)," "+rs2.getString(1)," "+rs2.getString(2),rs2.getString(3),rs2.getString(4)
-                            });         
+                            });
                             ps3=koneksi.prepareStatement("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance "+
                                 " from rekening inner join subrekening on rekening.kd_rek=subrekening.kd_rek2 "+
                                 " where subrekening.kd_rek=? and rekening.level='1' and rekening.kd_rek like ? or "+
@@ -1171,7 +1164,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                                 while(rs3.next()){
                                     tabMode.addRow(new Object[]{
                                         rs3.getString(1),rs3.getString(2),"  "+rs3.getString(1),"  "+rs3.getString(2),rs3.getString(3),rs3.getString(4)
-                                    });      
+                                    });
                                     ps4=koneksi.prepareStatement("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance "+
                                         " from rekening inner join subrekening on rekening.kd_rek=subrekening.kd_rek2 "+
                                         " where subrekening.kd_rek=? and rekening.level='1' and rekening.kd_rek like ? or "+
@@ -1191,7 +1184,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                                         while(rs4.next()){
                                             tabMode.addRow(new Object[]{
                                                 rs4.getString(1),rs4.getString(2),"   "+rs4.getString(1),"   "+rs4.getString(2),rs4.getString(3),rs4.getString(4)
-                                            });     
+                                            });
                                             ps5=koneksi.prepareStatement("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance "+
                                                 " from rekening inner join subrekening on rekening.kd_rek=subrekening.kd_rek2 "+
                                                 " where subrekening.kd_rek=? and rekening.level='1' and rekening.kd_rek like ? or "+
@@ -1211,7 +1204,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                                                 while(rs5.next()){
                                                     tabMode.addRow(new Object[]{
                                                         rs5.getString(1),rs5.getString(2),"    "+rs5.getString(1),"    "+rs5.getString(2),rs5.getString(3),rs5.getString(4)
-                                                    });  
+                                                    });
                                                     ps6=koneksi.prepareStatement("select rekening.kd_rek, rekening.nm_rek, rekening.tipe, rekening.balance "+
                                                         " from rekening inner join subrekening on rekening.kd_rek=subrekening.kd_rek2 "+
                                                         " where subrekening.kd_rek=? and rekening.level='1' and rekening.kd_rek like ? or "+
@@ -1449,7 +1442,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                                                                 if(ps7!=null){
                                                                     ps7.close();
                                                                 }
-                                                            }                                                            
+                                                            }
                                                         }
                                                     } catch (Exception e) {
                                                         System.out.println("Notif 2 : "+e);
@@ -1521,7 +1514,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void tampil2() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1530,7 +1523,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     " nm_rek like ? or "+
                     " tipe like ? or "+
                     " balance like ? order by kd_rek");
-            try {            
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1539,7 +1532,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)
-                    });                    
+                    });
                 }
             } catch (Exception e) {
                 System.out.println("Notif 1 : "+e);
@@ -1563,15 +1556,15 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         Nm.setText("");
         Tipe.setSelectedIndex(0);
         Balan.setSelectedIndex(0);
-        Kd.requestFocus();        
+        Kd.requestFocus();
     }
-    
+
     public void emptTeks2() {
         KdSub.setText(Kd.getText());
         NmSub.setText("");
         Tipe1.setSelectedIndex(0);
         Balan1.setSelectedIndex(0);
-        KdSub.requestFocus();        
+        KdSub.requestFocus();
     }
 
     private void getData() {
@@ -1591,7 +1584,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     Tipe.setSelectedIndex(2);
                     break;
             }
-            
+
             switch (tbKamar.getValueAt(row,5).toString()) {
                 case "D":
                     Balan.setSelectedIndex(0);
@@ -1600,7 +1593,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                     Balan.setSelectedIndex(1);
                     break;
             }
-            
+
         }
     }
 
@@ -1611,7 +1604,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTable getTabel(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getakun_rekening());
         BtnBatal.setEnabled(akses.getakun_rekening());
@@ -1619,5 +1612,5 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         BtnHapus.setEnabled(akses.getakun_rekening());
         BtnPrint.setEnabled(akses.getakun_rekening());
     }
-        
+
 }

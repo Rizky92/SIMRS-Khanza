@@ -57,8 +57,8 @@ public class PanelDiagnosa extends widget.panelisi {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class
              };
              @Override
@@ -93,7 +93,7 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         }
         tbDiagnosaPasien.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDiagnosa=new DefaultTableModel(null,new Object[]{
             "P","Kode","Nama Penyakit","Ciri-ciri Penyakit","Keterangan","Ktg.Penyakit","Ciri-ciri Umum"}){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -104,7 +104,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -135,7 +135,7 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         }
         tbDiagnosa.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeProsedur=new DefaultTableModel(null,new Object[]{
             "P","Kode","Deskripsi Panjang","Deskripsi Pendek"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -171,7 +171,7 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         }
         tbProsedur.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TabModeTindakanPasien=new DefaultTableModel(null,new Object[]{
             "P","Tgl.Rawat","No.Rawat","No.R.M.","Nama Pasien","Kode","Nama Prosedur","Status"}){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -182,7 +182,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -215,10 +215,10 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         }
         tbTindakanPasien.setDefaultRenderer(Object.class, new WarnaTable());
-           
+
         Diagnosa.setDocument(new batasInput((byte)100).getKata(Diagnosa));
         Prosedur.setDocument(new batasInput((byte)100).getKata(Prosedur));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             Diagnosa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -240,8 +240,8 @@ public class PanelDiagnosa extends widget.panelisi {
                     }
                 }
             });
-        } 
-        
+        }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             Prosedur.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -263,7 +263,7 @@ public class PanelDiagnosa extends widget.panelisi {
                     }
                 }
             });
-        } 
+        }
     }
 
     /**
@@ -351,7 +351,6 @@ public class PanelDiagnosa extends widget.panelisi {
         FormData.add(jLabel13);
         jLabel13.setBounds(0, 10, 68, 23);
 
-        Diagnosa.setHighlighter(null);
         Diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 DiagnosaKeyPressed(evt);
@@ -394,7 +393,6 @@ public class PanelDiagnosa extends widget.panelisi {
         FormData.add(jLabel15);
         jLabel15.setBounds(0, 211, 68, 23);
 
-        Prosedur.setHighlighter(null);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 ProsedurKeyPressed(evt);
@@ -472,7 +470,7 @@ public class PanelDiagnosa extends widget.panelisi {
 
     private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            tampildiagnosa();            
+            tampildiagnosa();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             if(akses.getpenyakit()==true){
                 btnTambahPenyakitActionPerformed(null);
@@ -579,7 +577,7 @@ public class PanelDiagnosa extends widget.panelisi {
     // End of variables declaration//GEN-END:variables
     public void tampil() {
         Valid.tabelKosong(TabModeDiagnosaPasien);
-        try{            
+        try{
             psdiagnosapasien=koneksi.prepareStatement("select reg_periksa.tgl_registrasi,diagnosa_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                     "diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit, diagnosa_pasien.status,diagnosa_pasien.status_penyakit "+
                     "from diagnosa_pasien inner join reg_periksa on diagnosa_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -593,23 +591,23 @@ public class PanelDiagnosa extends widget.panelisi {
             try {
                 psdiagnosapasien.setString(1,tanggal1);
                 psdiagnosapasien.setString(2,tanggal2);
-                psdiagnosapasien.setString(3,"%"+norm+"%"); 
+                psdiagnosapasien.setString(3,"%"+norm+"%");
                 if(!keyword.trim().equals("")){
-                    psdiagnosapasien.setString(4,"%"+keyword+"%");         
-                    psdiagnosapasien.setString(5,"%"+keyword+"%");         
-                    psdiagnosapasien.setString(6,"%"+keyword+"%");         
-                    psdiagnosapasien.setString(7,"%"+keyword+"%");         
-                    psdiagnosapasien.setString(8,"%"+keyword+"%");         
-                    psdiagnosapasien.setString(9,"%"+keyword+"%");          
-                    psdiagnosapasien.setString(10,"%"+keyword+"%");   
+                    psdiagnosapasien.setString(4,"%"+keyword+"%");
+                    psdiagnosapasien.setString(5,"%"+keyword+"%");
+                    psdiagnosapasien.setString(6,"%"+keyword+"%");
+                    psdiagnosapasien.setString(7,"%"+keyword+"%");
+                    psdiagnosapasien.setString(8,"%"+keyword+"%");
+                    psdiagnosapasien.setString(9,"%"+keyword+"%");
+                    psdiagnosapasien.setString(10,"%"+keyword+"%");
                 }
-                    
+
                 rs=psdiagnosapasien.executeQuery();
                 while(rs.next()){
                     TabModeDiagnosaPasien.addRow(new Object[]{
                         false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)
                     });
-                }            
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
@@ -624,7 +622,7 @@ public class PanelDiagnosa extends widget.panelisi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public int getRecord(){
         if(TabRawat.getSelectedIndex()==0){
             i=0;
@@ -635,7 +633,7 @@ public class PanelDiagnosa extends widget.panelisi {
         }
         return i;
     }
-    
+
     private void tampildiagnosa() {
         try{
             jml=0;
@@ -660,7 +658,7 @@ public class PanelDiagnosa extends widget.panelisi {
             cirium=null;
             cirium=new String[jml];
 
-            index=0; 
+            index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -706,7 +704,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 pspenyakit.setString(3,"%"+Diagnosa.getText().trim()+"%");
                 pspenyakit.setString(4,"%"+Diagnosa.getText().trim()+"%");
                 pspenyakit.setString(5,"%"+Diagnosa.getText().trim()+"%");
-                pspenyakit.setString(6,"%"+Diagnosa.getText().trim()+"%");  
+                pspenyakit.setString(6,"%"+Diagnosa.getText().trim()+"%");
                 rs=pspenyakit.executeQuery();
                 while(rs.next()){
                     tabModeDiagnosa.addRow(new Object[]{false,rs.getString(1),
@@ -715,7 +713,7 @@ public class PanelDiagnosa extends widget.panelisi {
                                    rs.getString(4),
                                    rs.getString(5),
                                    rs.getString(6)});
-                } 
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
@@ -725,12 +723,12 @@ public class PanelDiagnosa extends widget.panelisi {
                 if(pspenyakit!=null){
                     pspenyakit.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilprosedure() {
         try{
             jml=0;
@@ -749,7 +747,7 @@ public class PanelDiagnosa extends widget.panelisi {
             pendek=null;
             pendek=new String[jml];
 
-            index=0; 
+            index=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
                 if(tbProsedur.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -764,7 +762,7 @@ public class PanelDiagnosa extends widget.panelisi {
             for(i=0;i<jml;i++){
                 tabModeProsedur.addRow(new Object[] {pilih[i],kode2[i],panjang[i],pendek[i]});
             }
-            
+
             psprosedur=koneksi.prepareStatement("select * from icd9 where kode like ? or "+
                     " deskripsi_panjang like ? or  deskripsi_pendek like ? order by kode");
             try{
@@ -790,10 +788,10 @@ public class PanelDiagnosa extends widget.panelisi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         Valid.tabelKosong(TabModeTindakanPasien);
-        try{            
+        try{
             pstindakanpasien=koneksi.prepareStatement("select reg_periksa.tgl_registrasi,prosedur_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                     "prosedur_pasien.kode,icd9.deskripsi_panjang, prosedur_pasien.status "+
                     "from prosedur_pasien inner join reg_periksa on prosedur_pasien.no_rawat=reg_periksa.no_rawat "+
@@ -806,16 +804,16 @@ public class PanelDiagnosa extends widget.panelisi {
             try {
                 pstindakanpasien.setString(1,tanggal1);
                 pstindakanpasien.setString(2,tanggal2);
-                pstindakanpasien.setString(3,"%"+norm+"%");  
+                pstindakanpasien.setString(3,"%"+norm+"%");
                 if(!keyword.trim().equals("")){
-                    pstindakanpasien.setString(4,"%"+keyword+"%");       
-                    pstindakanpasien.setString(5,"%"+keyword+"%");        
-                    pstindakanpasien.setString(6,"%"+keyword+"%");         
-                    pstindakanpasien.setString(7,"%"+keyword+"%");         
-                    pstindakanpasien.setString(8,"%"+keyword+"%");          
-                    pstindakanpasien.setString(9,"%"+keyword+"%");  
+                    pstindakanpasien.setString(4,"%"+keyword+"%");
+                    pstindakanpasien.setString(5,"%"+keyword+"%");
+                    pstindakanpasien.setString(6,"%"+keyword+"%");
+                    pstindakanpasien.setString(7,"%"+keyword+"%");
+                    pstindakanpasien.setString(8,"%"+keyword+"%");
+                    pstindakanpasien.setString(9,"%"+keyword+"%");
                 }
-                     
+
                 rs=pstindakanpasien.executeQuery();
                 while(rs.next()){
                     TabModeTindakanPasien.addRow(new Object[]{false,rs.getString(1),
@@ -825,7 +823,7 @@ public class PanelDiagnosa extends widget.panelisi {
                                    rs.getString(5),
                                    rs.getString(6),
                                    rs.getString(7)});
-                }            
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
@@ -840,7 +838,7 @@ public class PanelDiagnosa extends widget.panelisi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void setRM(String norawat,String norm,String tanggal1,String tanggal2,String status,String keyword){
         this.norawat=norawat;
         this.norm=norm;
@@ -849,12 +847,12 @@ public class PanelDiagnosa extends widget.panelisi {
         this.status=status;
         this.keyword=keyword;
     }
-    
+
     public void simpan(){
         try {
             koneksi.setAutoCommit(false);
             index=1;
-            for(i=0;i<tbDiagnosa.getRowCount();i++){ 
+            for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                     if(Sequel.cariInteger(
                             "select count(diagnosa_pasien.kd_penyakit) from diagnosa_pasien "+
@@ -870,8 +868,8 @@ public class PanelDiagnosa extends widget.panelisi {
                             norawat,tbDiagnosa.getValueAt(i,1).toString(),status,
                             Sequel.cariIsi("select ifnull(MAX(diagnosa_pasien.prioritas)+1,1) from diagnosa_pasien where diagnosa_pasien.no_rawat=? and diagnosa_pasien.status='"+status+"'",norawat),"Baru"
                         });
-                    }  
-                    
+                    }
+
                     if(index==1){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_utama=?",2,new String[]{
@@ -881,7 +879,7 @@ public class PanelDiagnosa extends widget.panelisi {
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_utama=?",2,new String[]{
                                 tbDiagnosa.getValueAt(i,1).toString(),norawat
                             });
-                        }   
+                        }
                     }else if(index==2){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder=?",2,new String[]{
@@ -911,7 +909,7 @@ public class PanelDiagnosa extends widget.panelisi {
                             Sequel.mengedit("resume_pasien_ranap","no_rawat=?","kd_diagnosa_sekunder3=?",2,new String[]{
                                 tbDiagnosa.getValueAt(i,1).toString(),norawat
                             });
-                        }   
+                        }
                     }else if(index==5){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_diagnosa_sekunder4=?",2,new String[]{
@@ -923,12 +921,12 @@ public class PanelDiagnosa extends widget.panelisi {
                             });
                         }
                     }
-                        
+
                     index++;
-                }                    
+                }
             }
-            koneksi.setAutoCommit(true);  
-            for(i=0;i<tbDiagnosa.getRowCount();i++){ 
+            koneksi.setAutoCommit(true);
+            for(i=0;i<tbDiagnosa.getRowCount();i++){
                tbDiagnosa.setValueAt(false,i,0);
             }
         } catch (Exception ex) {
@@ -938,12 +936,12 @@ public class PanelDiagnosa extends widget.panelisi {
         try {
             koneksi.setAutoCommit(false);
             index=1;
-            for(i=0;i<tbProsedur.getRowCount();i++){ 
+            for(i=0;i<tbProsedur.getRowCount();i++){
                 if(tbProsedur.getValueAt(i,0).toString().equals("true")){
                     Sequel.menyimpan("prosedur_pasien","?,?,?,?","ICD 9",4,new String[]{
                         norawat,tbProsedur.getValueAt(i,1).toString(),status,Sequel.cariIsi("select ifnull(MAX(prosedur_pasien.prioritas)+1,1) from prosedur_pasien where prosedur_pasien.no_rawat=? and prosedur_pasien.status='"+status+"'",norawat)
                     });
-                    
+
                     if(index==1){
                         if(status.equals("Ralan")){
                             Sequel.mengedit("resume_pasien","no_rawat=?","kd_prosedur_utama=?",2,new String[]{
@@ -985,12 +983,12 @@ public class PanelDiagnosa extends widget.panelisi {
                             });
                         }
                     }
-                        
+
                     index++;
-                }                    
+                }
             }
-            koneksi.setAutoCommit(true);  
-            for(i=0;i<tbProsedur.getRowCount();i++){ 
+            koneksi.setAutoCommit(true);
+            for(i=0;i<tbProsedur.getRowCount();i++){
                tbProsedur.setValueAt(false,i,0);
             }
         } catch (Exception ex) {
@@ -1009,36 +1007,36 @@ public class PanelDiagnosa extends widget.panelisi {
             tampil2();
         }
     }
-    
+
     public void batal(){
         Diagnosa.setText("");
-        for(i=0;i<tbDiagnosa.getRowCount();i++){ 
+        for(i=0;i<tbDiagnosa.getRowCount();i++){
             tbDiagnosa.setValueAt(false,i,0);
         }
-        for(i=0;i<tbProsedur.getRowCount();i++){ 
+        for(i=0;i<tbProsedur.getRowCount();i++){
             tbProsedur.setValueAt(false,i,0);
         }
         Prosedur.setText("");
     }
-    
+
     public void hapus(){
         if(TabRawat.getSelectedIndex()==1){
             if(TabModeDiagnosaPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
-                for(i=0;i<tbDiagnosaPasien.getRowCount();i++){ 
+                for(i=0;i<tbDiagnosaPasien.getRowCount();i++){
                     if(tbDiagnosaPasien.getValueAt(i,0).toString().equals("true")){
                         Sequel.queryu2("delete from diagnosa_pasien where no_rawat=? and kd_penyakit=?",2,new String[]{
                             tbDiagnosaPasien.getValueAt(i,2).toString(),tbDiagnosaPasien.getValueAt(i,5).toString()
                         });
                     }
                 }
-            }                     
+            }
         }else if(TabRawat.getSelectedIndex()==2){
             if(TabModeTindakanPasien.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             }else{
-                for(i=0;i<tbTindakanPasien.getRowCount();i++){ 
+                for(i=0;i<tbTindakanPasien.getRowCount();i++){
                     if(tbTindakanPasien.getValueAt(i,0).toString().equals("true")){
                         Sequel.queryu2("delete from prosedur_pasien where no_rawat=? and kode=?",2,new String[]{
                             tbTindakanPasien.getValueAt(i,2).toString(),tbTindakanPasien.getValueAt(i,5).toString()
@@ -1049,7 +1047,7 @@ public class PanelDiagnosa extends widget.panelisi {
         }
         pilihTab();
     }
-    
+
     public void cetak(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(TabRawat.getSelectedIndex()==1){
@@ -1063,7 +1061,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptDiagnosa.jasper","report","::[ Data Diagnosa Pasien ]::",
                         "select reg_periksa.tgl_registrasi,diagnosa_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                         "diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit, diagnosa_pasien.status,diagnosa_pasien.status_penyakit "+
@@ -1091,7 +1089,7 @@ public class PanelDiagnosa extends widget.panelisi {
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptProsedur.jasper","report","::[ Data Prosedur Tindakan Pasien ]::",
                         "select reg_periksa.tgl_registrasi,prosedur_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                         "prosedur_pasien.kode,icd9.deskripsi_panjang, prosedur_pasien.status "+

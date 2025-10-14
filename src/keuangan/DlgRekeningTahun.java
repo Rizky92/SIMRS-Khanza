@@ -79,7 +79,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.RIGHT);
-        
+
         for (int i = 0; i < 9; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
@@ -107,7 +107,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)15).getKata(Kd));
         Saldo.setDocument(new batasInput((byte)15).getOnlyAngka(Saldo));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -132,8 +132,8 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         Valid.LoadTahun(Tahun);
     }
 
@@ -181,7 +181,6 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -233,7 +232,6 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         label32.setBounds(437, 12, 90, 23);
 
         Kd.setEditable(false);
-        Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -244,7 +242,6 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         Kd.setBounds(70, 12, 80, 23);
 
         Nm.setEditable(false);
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -270,7 +267,6 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         panelisi4.add(label33);
         label33.setBounds(407, 42, 100, 23);
 
-        Saldo.setHighlighter(null);
         Saldo.setName("Saldo"); // NOI18N
         Saldo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -300,13 +296,11 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         label35.setBounds(0, 42, 67, 23);
 
         Tipe.setEditable(false);
-        Tipe.setHighlighter(null);
         Tipe.setName("Tipe"); // NOI18N
         panelisi4.add(Tipe);
         Tipe.setBounds(70, 42, 80, 23);
 
         Balance.setEditable(false);
-        Balance.setHighlighter(null);
         Balance.setName("Balance"); // NOI18N
         panelisi4.add(Balance);
         Balance.setBounds(312, 42, 80, 23);
@@ -522,7 +516,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Tahun.requestFocus(); 
+            Tahun.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -615,7 +609,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int i=0;i<row;i++){  
+            for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -625,16 +619,16 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
                                 tabMode.getValueAt(i,5).toString()+"','"+
                                 tabMode.getValueAt(i,6).toString()+"','"+
                                 tabMode.getValueAt(i,7).toString()+"','"+
-                                tabMode.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekening Tahun"); 
+                                tabMode.getValueAt(i,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekening Tahun");
             }
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRekeningTahun.jasper","report","::[ Saldo Rekening ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -734,13 +728,13 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgRekeningTahun")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         Kd.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),0).toString());
                         Nm.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                         Tipe.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString());
                         Balance.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),5).toString());
                         Kd.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -752,7 +746,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -766,7 +760,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil();
         rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -828,7 +822,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{       
+        try{
             ps=koneksi.prepareStatement("select rekeningtahun.thn,rekening.kd_rek, rekening.nm_rek, rekening.tipe, "+
                 "rekening.balance,rekeningtahun.saldo_awal  "+
                 "from rekening inner join rekeningtahun on rekeningtahun.kd_rek=rekening.kd_rek "+
@@ -856,7 +850,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                         try {
                             ps2.setString(1,rs.getString(2));
                             ps2.setString(2,"%"+Tahun.getSelectedItem()+"%");
-                            rs2=ps2.executeQuery();                
+                            rs2=ps2.executeQuery();
                             if(rs2.next()){
                                 switch (rs.getString("balance")) {
                                     case "D":
@@ -887,13 +881,13 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                                  rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
                                  rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
                                  df2.format(md),df2.format(mk),"("+df2.format(saldoakhir*(-1))+")"
-                            });      
+                            });
                         }else{
                             tabMode.addRow(new Object[]{
                                  rs.getString(1).substring(0, 4),rs.getString(2),rs.getString(3),
                                  rs.getString(4),rs.getString(5),df2.format(rs.getDouble(6)),
                                  df2.format(md),df2.format(mk),df2.format(saldoakhir)
-                            }); 
+                            });
                         }
                     } else {
                         tabMode.addRow(new Object[] {
@@ -912,7 +906,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -927,7 +921,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
         Tipe.setText("");
         Saldo.setText("");
         // Tahun.setSelectedIndex(1);
-        Kd.requestFocus();        
+        Kd.requestFocus();
     }
 
     private void getData() {
@@ -946,7 +940,7 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTextField getTextField(){
         return Kd;
     }
-    
+
     public JTextField getSaldo(){
         return Saldo;
     }
@@ -954,13 +948,13 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     public JTable getTabel(){
         return tbKamar;
     }
-    
+
     public void isCek(){
-        asalform=akses.getform();       
+        asalform=akses.getform();
         BtnSimpan.setEnabled(akses.getrekening_tahun());
         BtnBatal.setEnabled(akses.getrekening_tahun());
         BtnEdit.setEnabled(akses.getrekening_tahun());
         BtnHapus.setEnabled(akses.getrekening_tahun());
-        BtnPrint.setEnabled(akses.getrekening_tahun());    
+        BtnPrint.setEnabled(akses.getrekening_tahun());
     }
 }

@@ -138,7 +138,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Antibiotik.setDocument(new batasInput((int)200).getKata(Antibiotik));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -161,7 +161,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -503,7 +503,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(447, 45, 40, 23);
 
-        CVL.setHighlighter(null);
         CVL.setName("CVL"); // NOI18N
         CVL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -519,7 +518,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(230, 75, 130, 23);
 
-        ETT.setHighlighter(null);
         ETT.setName("ETT"); // NOI18N
         ETT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -534,7 +532,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 71, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -545,7 +542,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         TNoRw.setBounds(75, 10, 130, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -574,7 +570,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         jLabel12.setBounds(362, 45, 35, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -604,7 +599,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(537, 45, 40, 23);
 
-        IVL.setHighlighter(null);
         IVL.setName("IVL"); // NOI18N
         IVL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -619,7 +613,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(627, 45, 50, 23);
 
-        UC.setHighlighter(null);
         UC.setName("UC"); // NOI18N
         UC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -634,7 +627,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(362, 80, 35, 23);
 
-        VAP.setHighlighter(null);
         VAP.setName("VAP"); // NOI18N
         VAP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -649,7 +641,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(447, 80, 40, 23);
 
-        IAD.setHighlighter(null);
         IAD.setName("IAD"); // NOI18N
         IAD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -664,7 +655,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(537, 80, 40, 23);
 
-        PLEB.setHighlighter(null);
         PLEB.setName("PLEB"); // NOI18N
         PLEB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -679,7 +669,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(627, 80, 50, 23);
 
-        ISK.setHighlighter(null);
         ISK.setName("ISK"); // NOI18N
         ISK.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -706,7 +695,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel18);
         jLabel18.setBounds(0, 100, 71, 23);
 
-        Sputum.setHighlighter(null);
         Sputum.setName("Sputum"); // NOI18N
         Sputum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -716,7 +704,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(Sputum);
         Sputum.setBounds(75, 100, 240, 23);
 
-        Urine.setHighlighter(null);
         Urine.setName("Urine"); // NOI18N
         Urine.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -731,7 +718,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel20);
         jLabel20.setBounds(0, 160, 71, 23);
 
-        Antibiotik.setHighlighter(null);
         Antibiotik.setName("Antibiotik"); // NOI18N
         Antibiotik.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -746,7 +732,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel22);
         jLabel22.setBounds(416, 145, 71, 23);
 
-        Darah.setHighlighter(null);
         Darah.setName("Darah"); // NOI18N
         Darah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -766,7 +751,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel24);
         jLabel24.setBounds(362, 110, 35, 23);
 
-        ILO.setHighlighter(null);
         ILO.setName("ILO"); // NOI18N
         ILO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -776,7 +760,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(ILO);
         ILO.setBounds(400, 110, 40, 23);
 
-        HAP.setHighlighter(null);
         HAP.setName("HAP"); // NOI18N
         HAP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -796,7 +779,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel26);
         jLabel26.setBounds(537, 110, 40, 23);
 
-        Tania.setHighlighter(null);
         Tania.setName("Tania"); // NOI18N
         Tania.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -811,7 +793,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         FormInput.add(jLabel27);
         jLabel27.setBounds(627, 110, 50, 23);
 
-        Scabies.setHighlighter(null);
         Scabies.setName("Scabies"); // NOI18N
         Scabies.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -822,7 +803,6 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Scabies.setBounds(680, 110, 40, 23);
 
         Kamar.setEditable(false);
-        Kamar.setHighlighter(null);
         Kamar.setName("Kamar"); // NOI18N
         Kamar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -874,7 +854,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             //Valid.pindah(evt,TTmpRujuk,TDiagnosa);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -919,7 +899,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
                 })==true){
                     tampil();
                     emptTeks();
-            }   
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -934,7 +914,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -953,8 +933,8 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -992,7 +972,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             Valid.textKosong(Tania,"Tania");
         }else if(Scabies.getText().trim().equals("")){
             Valid.textKosong(Scabies,"Scabies");
-        }else{         
+        }else{
             Sequel.mengedit("data_HAIs","tanggal=? and no_rawat=?","tanggal=?,no_rawat=?,ETT=?,CVL=?,IVL=?,UC=?,VAP=?,IAD=?,PLEB=?,ISK=?,ILO=?,DEKU=?,SPUTUM=?,DARAH=?,URINE=?,ANTIBIOTIK=?,HAP=?,Tinea=?,Scabies=?",21,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),ETT.getText(),CVL.getText(),
                 IVL.getText(),UC.getText(),VAP.getText(),IAD.getText(),PLEB.getText(),ISK.getText(),ILO.getText(),
@@ -1032,17 +1012,17 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));   
-                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));   
-                param.put("parameter","%"+TCari.getText().trim()+"%");   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptDataHAIs.jasper",param,"::[ Data HAIs Pasien ]::");
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1354,7 +1334,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         Tanggal.setDate(new Date());
     }
 
-   
+
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1390,14 +1370,14 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
-    
+
     public void setNoRm(String norwt, Date tgl1, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         isRawat();
-        isPsien();              
+        isPsien();
         ChkInput.setSelected(true);
         isForm();
         norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",TNoRw.getText());
@@ -1407,26 +1387,26 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,216));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdata_HAIs());
         BtnHapus.setEnabled(akses.getdata_HAIs());
         BtnPrint.setEnabled(akses.getdata_HAIs());
     }
 
-   
+
 }

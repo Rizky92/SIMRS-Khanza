@@ -53,7 +53,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String finger="";
     private StringBuilder htmlContent;
@@ -72,7 +72,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             "ACRS1","N.ACRS1","ACRS2","N.ACRS2","ACRS3","N.ACRS3","ACRS4","N.ACRS4","ACRS5","N.ACRS5",
             "ACRS6","N.ACRS6","ACRS7","N.ACRS7","ACRS8","N.ACRS8","ACRS9","N.ACRS9","ACRS10","N.ACRS10",
             "N.Total","Kesimpulan"
-            
+
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -152,7 +152,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         Kesimpulan.setDocument(new batasInput((int)100).getKata(Kesimpulan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -175,7 +175,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -183,10 +183,10 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -197,11 +197,11 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -219,13 +219,13 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -370,7 +370,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         Jk.setFocusTraversalPolicyProvider(true);
         Jk.setName("Jk"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -656,7 +655,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -667,7 +665,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -691,7 +688,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         Tanggal.setBounds(79, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -752,7 +748,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         jLabel18.setBounds(400, 40, 70, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -789,7 +784,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1015,7 +1009,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel130);
         jLabel130.setBounds(700, 90, 40, 23);
 
-        NilaiACRS1.setHighlighter(null);
         NilaiACRS1.setName("NilaiACRS1"); // NOI18N
         FormInput.add(NilaiACRS1);
         NilaiACRS1.setBounds(744, 90, 45, 23);
@@ -1065,47 +1058,38 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel149);
         jLabel149.setBounds(700, 360, 40, 23);
 
-        NilaiACRS2.setHighlighter(null);
         NilaiACRS2.setName("NilaiACRS2"); // NOI18N
         FormInput.add(NilaiACRS2);
         NilaiACRS2.setBounds(744, 120, 45, 23);
 
-        NilaiACRS3.setHighlighter(null);
         NilaiACRS3.setName("NilaiACRS3"); // NOI18N
         FormInput.add(NilaiACRS3);
         NilaiACRS3.setBounds(744, 150, 45, 23);
 
-        NilaiACRS4.setHighlighter(null);
         NilaiACRS4.setName("NilaiACRS4"); // NOI18N
         FormInput.add(NilaiACRS4);
         NilaiACRS4.setBounds(744, 180, 45, 23);
 
-        NilaiACRS5.setHighlighter(null);
         NilaiACRS5.setName("NilaiACRS5"); // NOI18N
         FormInput.add(NilaiACRS5);
         NilaiACRS5.setBounds(744, 210, 45, 23);
 
-        NilaiACRS6.setHighlighter(null);
         NilaiACRS6.setName("NilaiACRS6"); // NOI18N
         FormInput.add(NilaiACRS6);
         NilaiACRS6.setBounds(744, 240, 45, 23);
 
-        NilaiACRS7.setHighlighter(null);
         NilaiACRS7.setName("NilaiACRS7"); // NOI18N
         FormInput.add(NilaiACRS7);
         NilaiACRS7.setBounds(744, 270, 45, 23);
 
-        NilaiACRS8.setHighlighter(null);
         NilaiACRS8.setName("NilaiACRS8"); // NOI18N
         FormInput.add(NilaiACRS8);
         NilaiACRS8.setBounds(744, 300, 45, 23);
 
-        NilaiACRS9.setHighlighter(null);
         NilaiACRS9.setName("NilaiACRS9"); // NOI18N
         FormInput.add(NilaiACRS9);
         NilaiACRS9.setBounds(744, 330, 45, 23);
 
-        NilaiACRS10.setHighlighter(null);
         NilaiACRS10.setName("NilaiACRS10"); // NOI18N
         FormInput.add(NilaiACRS10);
         NilaiACRS10.setBounds(744, 360, 45, 23);
@@ -1121,7 +1105,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel161);
         jLabel161.setBounds(0, 440, 140, 23);
 
-        Kesimpulan.setHighlighter(null);
         Kesimpulan.setName("Kesimpulan"); // NOI18N
         Kesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1136,7 +1119,6 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         FormInput.add(jLabel162);
         jLabel162.setBounds(610, 390, 130, 23);
 
-        TotalNilai.setHighlighter(null);
         TotalNilai.setName("TotalNilai"); // NOI18N
         FormInput.add(TotalNilai);
         TotalNilai.setBounds(744, 390, 45, 23);
@@ -1235,7 +1217,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1259,7 +1241,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem())==true){
                     simpan();
                 }
-            } 
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1274,7 +1256,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1298,7 +1280,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1314,7 +1296,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else{ 
+        }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
@@ -1334,7 +1316,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1365,7 +1347,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
@@ -1442,7 +1424,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1457,8 +1439,8 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("DataSkriningInstrumenACRS.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataSkriningInstrumenACRS.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1467,12 +1449,12 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN ACRS<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SEKRINING INSTRUMEN ACRS<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1598,10 +1580,10 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningInstrumenACRS.jasper","report","::[ Formulir Skrining Instrumen ACRS ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_instrumen_acrs.nip,petugas.nama,skrining_instrumen_acrs.tanggal,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "skrining_instrumen_acrs.pernyataanacrs1,skrining_instrumen_acrs.nilai_acrs1,skrining_instrumen_acrs.pernyataanacrs2,skrining_instrumen_acrs.nilai_acrs2,skrining_instrumen_acrs.pernyataanacrs3,"+
@@ -1837,7 +1819,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1864,7 +1846,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                     "pasien.nm_pasien like ? or skrining_instrumen_acrs.nip like ? or petugas.nama like ?) "+
                     "order by skrining_instrumen_acrs.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1878,7 +1860,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1904,7 +1886,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         ACRS1.setSelectedIndex(0);
         NilaiACRS1.setText("0");
@@ -1930,7 +1912,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         Kesimpulan.setText("Kondisi Normal");
         Tanggal.setDate(new Date());
         ACRS1.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1964,10 +1946,10 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             NilaiACRS10.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
             TotalNilai.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             Kesimpulan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -2000,35 +1982,35 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_instrumen_acrs());
         BtnHapus.setEnabled(akses.getskrining_instrumen_acrs());
         BtnEdit.setEnabled(akses.getskrining_instrumen_acrs());
-        BtnPrint.setEnabled(akses.getskrining_instrumen_acrs()); 
+        BtnPrint.setEnabled(akses.getskrining_instrumen_acrs());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -2038,7 +2020,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }    
+        }
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -2061,7 +2043,7 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -2109,8 +2091,8 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
         if(Sequel.mengedittf("skrining_instrumen_acrs","no_rawat=?","no_rawat=?,tanggal=?,nip=?,pernyataanacrs1=?,nilai_acrs1=?,pernyataanacrs2=?,nilai_acrs2=?,pernyataanacrs3=?,nilai_acrs3=?,pernyataanacrs4=?,nilai_acrs4=?,pernyataanacrs5=?,nilai_acrs5=?,"+
                 "pernyataanacrs6=?,nilai_acrs6=?,pernyataanacrs7=?,nilai_acrs7=?,pernyataanacrs8=?,nilai_acrs8=?,pernyataanacrs9=?,nilai_acrs9=?,pernyataanacrs10=?,nilai_acrs10=?,nilai_total_acrs=?,kesimpulan=?",26,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
-                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
                 ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
                tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
@@ -2162,21 +2144,21 @@ public final class RMSkriningInstrumenACRS extends javax.swing.JDialog {
     private void simpan() {
         if(Sequel.menyimpantf("skrining_instrumen_acrs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",25,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
-            ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-            ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+            ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+            ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
             ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText()
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(), 
-                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(), 
+                ACRS1.getSelectedItem().toString(),NilaiACRS1.getText(),ACRS2.getSelectedItem().toString(),NilaiACRS2.getText(),ACRS3.getSelectedItem().toString(),NilaiACRS3.getText(),ACRS4.getSelectedItem().toString(),NilaiACRS4.getText(),
+                ACRS5.getSelectedItem().toString(),NilaiACRS5.getText(),ACRS6.getSelectedItem().toString(),NilaiACRS6.getText(),ACRS7.getSelectedItem().toString(),NilaiACRS7.getText(),ACRS8.getSelectedItem().toString(),NilaiACRS8.getText(),
                 ACRS9.getSelectedItem().toString(),NilaiACRS9.getText(),ACRS10.getSelectedItem().toString(),NilaiACRS10.getText(),TotalNilai.getText(),Kesimpulan.getText()
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
-    
+
     private void isTotal() {
         try {
             TotalNilai.setText(""+(

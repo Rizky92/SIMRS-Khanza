@@ -463,9 +463,6 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
                 </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdPpkRujukan1" noResource="true"/>
               </Properties>
               <Constraints>
@@ -479,9 +476,6 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="NmPpkRujukan1" noResource="true"/>
               </Properties>
@@ -559,9 +553,6 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
                 </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdPenyakit1" noResource="true"/>
               </Properties>
               <Constraints>
@@ -575,9 +566,6 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="NmPenyakit1" noResource="true"/>
               </Properties>
@@ -623,9 +611,6 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
                 </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdPoli1" noResource="true"/>
               </Properties>
               <Constraints>
@@ -639,9 +624,6 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                </Property>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="NmPoli1" noResource="true"/>
               </Properties>
@@ -716,9 +698,6 @@
             </Component>
             <Component class="widget.TextBox" name="Catatan1">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Catatan1" noResource="true"/>
               </Properties>
               <Events>

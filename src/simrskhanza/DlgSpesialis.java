@@ -99,7 +99,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -352,7 +352,6 @@ public class DlgSpesialis extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(176, 12, 110, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -597,7 +596,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
                 if( rs != null){
                     rs.close();
                 }
-                
+
                 if( ps != null){
                     ps.close();
                 }
@@ -623,7 +622,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
             TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -631,7 +630,7 @@ public class DlgSpesialis extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdokter());
         BtnHapus.setEnabled(akses.getdokter());

@@ -96,7 +96,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){                    
+                if(dokter.getTable().getSelectedRow()!= -1){
                     if(pilihan==1){
                         kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
@@ -122,7 +122,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                         TDokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         kddokter6.requestFocus();
                     }
-                }                
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -223,7 +223,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel13);
         jLabel13.setBounds(0, 12, 120, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -255,7 +254,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel14);
         jLabel14.setBounds(0, 42, 120, 23);
 
-        kddokter2.setHighlighter(null);
         kddokter2.setName("kddokter2"); // NOI18N
         kddokter2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -287,7 +285,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel15);
         jLabel15.setBounds(0, 72, 120, 23);
 
-        kddokter3.setHighlighter(null);
         kddokter3.setName("kddokter3"); // NOI18N
         kddokter3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -319,7 +316,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel16);
         jLabel16.setBounds(0, 102, 120, 23);
 
-        kddokter4.setHighlighter(null);
         kddokter4.setName("kddokter4"); // NOI18N
         kddokter4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -351,7 +347,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel17);
         jLabel17.setBounds(0, 132, 120, 23);
 
-        kddokter5.setHighlighter(null);
         kddokter5.setName("kddokter5"); // NOI18N
         kddokter5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -383,7 +378,6 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         panelGlass7.add(jLabel18);
         jLabel18.setBounds(0, 162, 120, 23);
 
-        kddokter6.setHighlighter(null);
         kddokter6.setName("kddokter6"); // NOI18N
         kddokter6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

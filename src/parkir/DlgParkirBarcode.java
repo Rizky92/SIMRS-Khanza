@@ -96,7 +96,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try {
             ps=koneksi.prepareStatement("select * from parkir_barcode where kode_barcode like ? or nomer_kartu like ? order by kode_barcode");
         } catch (Exception e) {
@@ -372,7 +372,6 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
         panelGlass7.add(jLabel3);
         jLabel3.setBounds(0, 12, 90, 23);
 
-        barcode.setHighlighter(null);
         barcode.setName("barcode"); // NOI18N
         barcode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -387,7 +386,6 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
         panelGlass7.add(jLabel5);
         jLabel5.setBounds(343, 12, 90, 23);
 
-        nomer_kartu.setHighlighter(null);
         nomer_kartu.setName("nomer_kartu"); // NOI18N
         nomer_kartu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -546,7 +544,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -716,7 +714,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 tabMode.addRow(new Object[]{
                     rs.getString(1),rs.getString(2)
                 });
@@ -745,7 +743,7 @@ public class DlgParkirBarcode extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getparkir_barcode());
        BtnHapus.setEnabled(akses.getparkir_barcode());

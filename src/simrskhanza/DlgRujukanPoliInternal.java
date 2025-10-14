@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -37,18 +37,18 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     public DlgRujukanPoliInternal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         try {
             aktifjadwal=koneksiDB.JADWALDOKTERDIREGISTRASI();
         } catch (Exception ex) {
-            aktifjadwal="";            
+            aktifjadwal="";
         }
-        
+
         setSize(755,156);
     }
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -101,7 +101,6 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         jLabel13.setBounds(0, 42, 70, 23);
 
         kddokter.setEditable(false);
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -146,7 +145,6 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         TPoli.setBounds(518, 42, 180, 23);
 
         kdpoli.setEditable(false);
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -167,7 +165,6 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         jLabel3.setBounds(0, 12, 70, 23);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -178,13 +175,11 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
         TNoRw.setBounds(73, 12, 153, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(228, 12, 110, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(340, 12, 389, 23);
@@ -243,7 +238,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRM,"Pasien");
@@ -251,13 +246,13 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
             Valid.textKosong(kdpoli,"poliklinik");
         }else if(kddokter.getText().trim().equals("")||TDokter.getText().trim().equals("")){
             Valid.textKosong(kddokter,"dokter");
-        }else{          
+        }else{
             if(Sequel.menyimpantf("rujukan_internal_poli","?,?,?","Rujukan Sama",3,new String[]{
                     TNoRw.getText(),kddokter.getText(),kdpoli.getText()
                 })==true){
                 BtnKeluarActionPerformed(evt);
-            }                      
-        }  
+            }
+        }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -286,7 +281,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
@@ -306,11 +301,11 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(dokter.getTable().getSelectedRow()!= -1){   
+                        if(dokter.getTable().getSelectedRow()!= -1){
                             kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                             TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                             kddokter.requestFocus();
-                        }                
+                        }
                     }
                     @Override
                     public void windowIconified(WindowEvent e) {}
@@ -335,7 +330,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(dokter2.getTable().getSelectedRow()!= -1){   
+                        if(dokter2.getTable().getSelectedRow()!= -1){
                             kddokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
                             TDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
                             kddokter.requestFocus();
@@ -367,11 +362,11 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){   
+                    if(dokter.getTable().getSelectedRow()!= -1){
                         kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         kddokter.requestFocus();
-                    }                
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -401,10 +396,10 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(poli.getTable().getSelectedRow()!= -1){   
+                        if(poli.getTable().getSelectedRow()!= -1){
                             kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                             TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                            kdpoli.requestFocus();                        
+                            kdpoli.requestFocus();
                         }
                     }
                     @Override
@@ -415,7 +410,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowActivated(WindowEvent e) {}
                     @Override
                     public void windowDeactivated(WindowEvent e) {}
-                });  
+                });
                 poli.isCek();
                 poli.setSize(lebar-20,tinggi-20);
                 poli.setLocationRelativeTo(internalFrame1);
@@ -429,11 +424,11 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(poli2.getTable().getSelectedRow()!= -1){  
+                        if(poli2.getTable().getSelectedRow()!= -1){
                             kdpoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),0).toString());
                             TPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),1).toString());
                             kdpoli.requestFocus();
-                        }        
+                        }
                     }
                     @Override
                     public void windowIconified(WindowEvent e) {}
@@ -443,7 +438,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                     public void windowActivated(WindowEvent e) {}
                     @Override
                     public void windowDeactivated(WindowEvent e) {}
-                });  
+                });
                 poli2.isCek();
                 poli2.tampil();
                 poli2.setSize(lebar-20,tinggi-20);
@@ -459,10 +454,10 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(poli.getTable().getSelectedRow()!= -1){   
+                    if(poli.getTable().getSelectedRow()!= -1){
                         kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                         TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                        kdpoli.requestFocus();                        
+                        kdpoli.requestFocus();
                     }
                 }
                 @Override
@@ -473,7 +468,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
                 public void windowActivated(WindowEvent e) {}
                 @Override
                 public void windowDeactivated(WindowEvent e) {}
-            });  
+            });
             poli.isCek();
             poli.setSize(lebar-20,tinggi-20);
             poli.setLocationRelativeTo(internalFrame1);
@@ -490,7 +485,7 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     }//GEN-LAST:event_kdpoliKeyPressed
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        
+
     }//GEN-LAST:event_TNoRwKeyPressed
 
     /**
@@ -529,15 +524,15 @@ public class DlgRujukanPoliInternal extends javax.swing.JDialog {
     private widget.TextBox kdpoli;
     private widget.panelisi panelGlass8;
     // End of variables declaration//GEN-END:variables
-    
+
     public void setNoRm(String norw,String norm,String namapasien,int lebar,int tinggi) {
         TNoRw.setText(norw);
         TNoRM.setText(norm);
-        TPasien.setText(namapasien);  
+        TPasien.setText(namapasien);
         this.lebar=lebar;
         this.tinggi=tinggi;
-    }  
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(true);
     }

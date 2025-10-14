@@ -244,7 +244,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         NilaiHutang = new widget.TextBox();
         label37 = new widget.Label();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -541,7 +540,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label32);
         label32.setBounds(0, 40, 75, 23);
 
-        NoHutang.setHighlighter(null);
         NoHutang.setName("NoHutang"); // NOI18N
         NoHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -557,7 +555,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label36);
         label36.setBounds(0, 70, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -663,7 +660,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(Tempo);
         Tempo.setBounds(224, 40, 90, 23);
 
-        NilaiHutang.setHighlighter(null);
         NilaiHutang.setName("NilaiHutang"); // NOI18N
         NilaiHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

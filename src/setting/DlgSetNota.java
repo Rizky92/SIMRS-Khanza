@@ -68,7 +68,7 @@ public class DlgSetNota extends javax.swing.JDialog {
         }
 
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{"Parameter","Nilai"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -86,7 +86,7 @@ public class DlgSetNota extends javax.swing.JDialog {
             }
         }
         tbAdmin2.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,new Object[]{"Parameter","Nilai"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -112,20 +112,20 @@ public class DlgSetNota extends javax.swing.JDialog {
         Nota1Ranap.setDocument(new batasInput((byte)11).getKata(Nota1Ranap));
         KwitansiRanap.setDocument(new batasInput((byte)11).getKata(KwitansiRanap));
         NotaApotek.setDocument(new batasInput((byte)11).getKata(NotaApotek));
-        NotaLab.setDocument(new batasInput((byte)11).getKata(NotaLab));      
-        NotaToko.setDocument(new batasInput((byte)11).getKata(NotaToko));        
+        NotaLab.setDocument(new batasInput((byte)11).getKata(NotaLab));
+        NotaToko.setDocument(new batasInput((byte)11).getKata(NotaToko));
         NamaService.setDocument(new batasInput((byte)100).getKata(NamaService));
         BesarBiaya.setDocument(new batasInput((byte)5).getKata(BesarBiaya));
         NamaService1.setDocument(new batasInput((byte)100).getKata(NamaService));
         BesarBiaya1.setDocument(new batasInput((byte)5).getKata(BesarBiaya));
-        
+
         ChkInput.setSelected(false);
         isForm();
         ChkInput2.setSelected(false);
         isForm2();
         ChkInput3.setSelected(false);
         isForm3();
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -458,7 +458,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel4.setBounds(0, 12, 165, 23);
         jLabel4.getAccessibleContext().setAccessibleName("");
 
-        NotaRalan.setHighlighter(null);
         NotaRalan.setName("NotaRalan"); // NOI18N
         NotaRalan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -496,7 +495,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel7.setBounds(0, 42, 165, 23);
         jLabel7.getAccessibleContext().setAccessibleName("");
 
-        KwitansiRalan.setHighlighter(null);
         KwitansiRalan.setName("KwitansiRalan"); // NOI18N
         KwitansiRalan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -518,7 +516,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel9.setBounds(0, 72, 165, 23);
         jLabel9.getAccessibleContext().setAccessibleName("");
 
-        Nota1Ranap.setHighlighter(null);
         Nota1Ranap.setName("Nota1Ranap"); // NOI18N
         Nota1Ranap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -540,7 +537,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel11.setBounds(0, 102, 165, 23);
         jLabel11.getAccessibleContext().setAccessibleName("");
 
-        Nota2Ranap.setHighlighter(null);
         Nota2Ranap.setName("Nota2Ranap"); // NOI18N
         Nota2Ranap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -562,7 +558,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel13.setBounds(0, 132, 165, 23);
         jLabel13.getAccessibleContext().setAccessibleName("");
 
-        KwitansiRanap.setHighlighter(null);
         KwitansiRanap.setName("KwitansiRanap"); // NOI18N
         KwitansiRanap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -584,7 +579,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel15.setBounds(0, 162, 165, 23);
         jLabel15.getAccessibleContext().setAccessibleName("");
 
-        NotaApotek.setHighlighter(null);
         NotaApotek.setName("NotaApotek"); // NOI18N
         NotaApotek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -606,7 +600,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         jLabel17.setBounds(0, 192, 165, 23);
         jLabel17.getAccessibleContext().setAccessibleName("");
 
-        NotaLab.setHighlighter(null);
         NotaLab.setName("NotaLab"); // NOI18N
         NotaLab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -902,7 +895,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput.add(jLabel44);
         jLabel44.setBounds(222, 222, 60, 23);
 
-        NotaToko.setHighlighter(null);
         NotaToko.setName("NotaToko"); // NOI18N
         NotaToko.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1015,7 +1007,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput2.add(jLabel31);
         jLabel31.setBounds(0, 12, 150, 23);
 
-        NamaService.setHighlighter(null);
         NamaService.setName("NamaService"); // NOI18N
         NamaService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1035,7 +1026,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput2.add(jLabel33);
         jLabel33.setBounds(0, 42, 150, 23);
 
-        BesarBiaya.setHighlighter(null);
         BesarBiaya.setName("BesarBiaya"); // NOI18N
         BesarBiaya.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1321,7 +1311,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput3.add(jLabel32);
         jLabel32.setBounds(0, 12, 150, 23);
 
-        NamaService1.setHighlighter(null);
         NamaService1.setName("NamaService1"); // NOI18N
         NamaService1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1341,7 +1330,6 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput3.add(jLabel36);
         jLabel36.setBounds(0, 42, 150, 23);
 
-        BesarBiaya1.setHighlighter(null);
         BesarBiaya1.setName("BesarBiaya1"); // NOI18N
         BesarBiaya1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1595,7 +1583,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                         "'"+cmbYesTombolNotaPenjualanToko.getSelectedItem()+"'","Set Nota")==true){
                     tampil();
                     emptTeks();
-                }                
+                }
             }else if(tabMode.getRowCount()>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Nota, Kwitansi, Verifikasi Penjualan...!!!!");
                 NotaRalan.requestFocus();
@@ -1725,7 +1713,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 NamaService.requestFocus();
             }
         }
-            
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1739,18 +1727,18 @@ public class DlgSetNota extends javax.swing.JDialog {
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         if(TabSetting.getSelectedIndex()==0){
             ChkInput.setSelected(true);
-            isForm(); 
+            isForm();
             emptTeks();
         }else if(TabSetting.getSelectedIndex()==1){
             ChkInput2.setSelected(true);
-            isForm2(); 
+            isForm2();
             emptTeks2();
         }else if(TabSetting.getSelectedIndex()==2){
             ChkInput3.setSelected(true);
-            isForm3(); 
+            isForm3();
             emptTeks3();
         }
-        
+
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1794,7 +1782,7 @@ public class DlgSetNota extends javax.swing.JDialog {
                 emptTeks3();
             }
         }
-            
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1900,7 +1888,7 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         "'"+cmbYesTombolNotaPenjualanToko.getSelectedItem()+"'","Set Nota")==true){
                     tampil();
                     emptTeks();
-                } 
+                }
             }
         }else if(TabSetting.getSelectedIndex()==1){
             if(NamaService.getText().trim().equals("")){
@@ -2023,7 +2011,7 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         }
-            
+
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
@@ -2478,7 +2466,7 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select * from set_nota ");
             try {
                 rs=ps.executeQuery();
@@ -2521,15 +2509,15 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         Valid.tabelKosong(tabMode2);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select * from set_service_ranap ");
             try {
                 rs=ps.executeQuery();
@@ -2562,15 +2550,15 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil3() {
         Valid.tabelKosong(tabMode3);
-        try{    
+        try{
             ps=koneksi.prepareStatement("select * from set_service_ranap_piutang ");
             try {
                 rs=ps.executeQuery();
@@ -2603,7 +2591,7 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2612,14 +2600,14 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void getData() {
         int row=tbAdmin.getSelectedRow();
         if(row!= -1){
-            NotaRalan.setText(tbAdmin.getValueAt(0,1).toString());            
-            KwitansiRalan.setText(tbAdmin.getValueAt(1,1).toString()); 
-            Nota1Ranap.setText(tbAdmin.getValueAt(2,1).toString()); 
-            Nota2Ranap.setText(tbAdmin.getValueAt(3,1).toString()); 
-            KwitansiRanap.setText(tbAdmin.getValueAt(4,1).toString()); 
+            NotaRalan.setText(tbAdmin.getValueAt(0,1).toString());
+            KwitansiRalan.setText(tbAdmin.getValueAt(1,1).toString());
+            Nota1Ranap.setText(tbAdmin.getValueAt(2,1).toString());
+            Nota2Ranap.setText(tbAdmin.getValueAt(3,1).toString());
+            KwitansiRanap.setText(tbAdmin.getValueAt(4,1).toString());
             NotaApotek.setText(tbAdmin.getValueAt(5,1).toString());
-            NotaLab.setText(tbAdmin.getValueAt(6,1).toString());  
-            NotaToko.setText(tbAdmin.getValueAt(7,1).toString());  
+            NotaLab.setText(tbAdmin.getValueAt(6,1).toString());
+            NotaToko.setText(tbAdmin.getValueAt(7,1).toString());
             cmbYesRalan.setSelectedItem(tbAdmin.getValueAt(8,1).toString());
             cmbYesRanap.setSelectedItem(tbAdmin.getValueAt(9,1).toString());
             cmbYesRincianRalan.setSelectedItem(tbAdmin.getValueAt(10,1).toString());
@@ -2642,12 +2630,12 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             cmbYesTombolNotaPenjualanToko.setSelectedItem(tbAdmin.getValueAt(27,1).toString());
         }
     }
-    
+
     private void getData2() {
         int row=tbAdmin2.getSelectedRow();
         if(row!= -1){
-            NamaService.setText(tbAdmin2.getValueAt(0,1).toString());            
-            BesarBiaya.setText(tbAdmin2.getValueAt(1,1).toString());    
+            NamaService.setText(tbAdmin2.getValueAt(0,1).toString());
+            BesarBiaya.setText(tbAdmin2.getValueAt(1,1).toString());
             if(tbAdmin2.getValueAt(3,1).toString().equals("Yes")){
                 chkLaborat.setSelected(true);
             }else if(tbAdmin2.getValueAt(3,1).toString().equals("No")){
@@ -2725,12 +2713,12 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         }
     }
-    
+
     private void getData3() {
         int row=tbAdmin3.getSelectedRow();
         if(row!= -1){
-            NamaService1.setText(tbAdmin3.getValueAt(0,1).toString());            
-            BesarBiaya1.setText(tbAdmin3.getValueAt(1,1).toString());    
+            NamaService1.setText(tbAdmin3.getValueAt(0,1).toString());
+            BesarBiaya1.setText(tbAdmin3.getValueAt(1,1).toString());
             if(tbAdmin3.getValueAt(3,1).toString().equals("Yes")){
                 chkLaborat1.setSelected(true);
             }else if(tbAdmin3.getValueAt(3,1).toString().equals("No")){
@@ -2831,12 +2819,12 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         cmbYesTombolNotaRanap.setSelectedItem("No");
         cmbYesTombolPenjualan.setSelectedItem("No");
         cmbYesTombolPenyerahanDarah.setSelectedItem("No");
-        cmbYesCetakPenjualan.setSelectedItem("No");        
-        cmbYesTombolNotaPenjualan.setSelectedItem("No");   
+        cmbYesCetakPenjualan.setSelectedItem("No");
+        cmbYesTombolNotaPenjualan.setSelectedItem("No");
         cmbYesCentangObatRalan.setSelectedItem("No");
         NotaRalan.requestFocus();
     }
-    
+
     public void emptTeks2() {
         NamaService.setText("");
         BesarBiaya.setText("");
@@ -2856,7 +2844,7 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         chkRetur.setSelected(false);
         chkResepPulang.setSelected(false);
     }
-    
+
     public void emptTeks3() {
         NamaService1.setText("");
         BesarBiaya1.setText("");
@@ -2876,45 +2864,45 @@ private void NotaRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         chkRetur1.setSelected(false);
         chkResepPulang1.setSelected(false);
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,300));
-            ScrollInput.setVisible(true);      
+            ScrollInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            ScrollInput.setVisible(false);      
+            ScrollInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void isForm2(){
         if(ChkInput2.isSelected()==true){
             ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,187));
-            FormInput2.setVisible(true);      
+            FormInput2.setVisible(true);
             ChkInput2.setVisible(true);
-        }else if(ChkInput2.isSelected()==false){           
-            ChkInput2.setVisible(false);            
+        }else if(ChkInput2.isSelected()==false){
+            ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput2.setVisible(false);      
+            FormInput2.setVisible(false);
             ChkInput2.setVisible(true);
         }
     }
-    
+
     private void isForm3(){
         if(ChkInput3.isSelected()==true){
             ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,187));
-            FormInput3.setVisible(true);      
+            FormInput3.setVisible(true);
             ChkInput3.setVisible(true);
-        }else if(ChkInput3.isSelected()==false){           
-            ChkInput3.setVisible(false);            
+        }else if(ChkInput3.isSelected()==false){
+            ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput3.setVisible(false);      
+            FormInput3.setVisible(false);
             ChkInput3.setVisible(true);
         }
     }

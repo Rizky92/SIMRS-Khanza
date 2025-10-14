@@ -66,7 +66,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
         AlternatifResiko.setDocument(new batasInput((int)200).getKata(AlternatifResiko));
         LainLain.setDocument(new batasInput((int)200).getKata(LainLain));
         Biaya.setDocument(new batasInput((byte)12).getOnlyAngka(Biaya));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -88,7 +88,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
                     }
                 }
             });
-        }             
+        }
     }
 
     /** This method is called from within the constructor to
@@ -431,7 +431,6 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
         FormInput.add(scrollPane15);
         scrollPane15.setBounds(14, 620, 680, 43);
 
-        Biaya.setHighlighter(null);
         Biaya.setName("Biaya"); // NOI18N
         Biaya.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -792,12 +791,12 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -821,7 +820,7 @@ public class MasterTemplatePersetujuanPenolakanTindakan extends javax.swing.JDia
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1046,13 +1045,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.gettemplate_persetujuan_penolakan_tindakan());
         BtnHapus.setEnabled(akses.gettemplate_persetujuan_penolakan_tindakan());
         BtnEdit.setEnabled(akses.gettemplate_persetujuan_penolakan_tindakan());
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }

@@ -310,7 +310,6 @@ public class PanelInacbgSmc extends widget.panelisi {
         FormData.add(jLabel13);
         jLabel13.setBounds(0, 10, 68, 23);
 
-        Diagnosa.setHighlighter(null);
         Diagnosa.setNextFocusableComponent(Prosedur);
         Diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -349,7 +348,6 @@ public class PanelInacbgSmc extends widget.panelisi {
         FormData.add(jLabel15);
         jLabel15.setBounds(0, 211, 68, 23);
 
-        Prosedur.setHighlighter(null);
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

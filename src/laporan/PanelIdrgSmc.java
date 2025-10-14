@@ -296,7 +296,6 @@ public class PanelIdrgSmc extends widget.panelisi {
         FormData.add(jLabel13);
         jLabel13.setBounds(0, 10, 68, 23);
 
-        Diagnosa.setHighlighter(null);
         Diagnosa.setNextFocusableComponent(Prosedur);
         Diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -307,7 +306,6 @@ public class PanelIdrgSmc extends widget.panelisi {
         Diagnosa.setBounds(71, 10, 687, 23);
 
         BtnCariPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCariPenyakit.setMnemonic('1');
         BtnCariPenyakit.setToolTipText("Alt+1");
         BtnCariPenyakit.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCariPenyakit.addActionListener(new java.awt.event.ActionListener() {
@@ -335,7 +333,6 @@ public class PanelIdrgSmc extends widget.panelisi {
         FormData.add(jLabel15);
         jLabel15.setBounds(0, 211, 68, 23);
 
-        Prosedur.setHighlighter(null);
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -346,7 +343,6 @@ public class PanelIdrgSmc extends widget.panelisi {
         Prosedur.setBounds(71, 211, 687, 23);
 
         BtnCariProsedur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCariProsedur.setMnemonic('1');
         BtnCariProsedur.setToolTipText("Alt+1");
         BtnCariProsedur.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCariProsedur.addActionListener(new java.awt.event.ActionListener() {

@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -45,16 +45,16 @@ public class DlgDataBatch extends javax.swing.JDialog {
     private int i = 0,row=0;
     private DlgBarang barang=new DlgBarang(null,false);
     private String pengaturanharga=Sequel.cariIsi("select set_harga_obat.setharga from set_harga_obat"),kodejenis="";
-    
+
     public DlgDataBatch(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        
+
         tabMode = new DefaultTableModel(null,new Object[]{
             "P", "Kode Barang", "Nama Barang", "No.Batch", "No.Faktur", "Tgl.Datang","Kadaluwarsa",
             "Hrg.Dasar(Rp)","Hrg.Beli(Rp)", "Ralan(Rp)", "Ranap K1(Rp)", "Ranap K2(Rp)", "Ranap K3(Rp)",
-            "Kelas Utama/BPJS(Rp)", "Ranap VIP(Rp)", "Ranap VVIP(Rp)", "Beli Luar(Rp)","Jual Bebas(Rp)", 
+            "Kelas Utama/BPJS(Rp)", "Ranap VIP(Rp)", "Ranap VVIP(Rp)", "Beli Luar(Rp)","Jual Bebas(Rp)",
             "Karyawan(Rp)","Asal Barang","Jml.Beli","Sisa"
         }) {
             @Override
@@ -66,13 +66,13 @@ public class DlgDataBatch extends javax.swing.JDialog {
                 return a;
             }
             Class[] types = new Class[]{
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Double.class,
                 java.lang.Double.class
             };
 
@@ -132,10 +132,10 @@ public class DlgDataBatch extends javax.swing.JDialog {
                 column.setPreferredWidth(55);
             }else if (i == 21) {
                 column.setPreferredWidth(55);
-            } 
+            }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());        
-            
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
 
         Kd.setDocument(new batasInput((byte) 15).getKata(Kd));
         Nm.setDocument(new batasInput((byte) 80).getKata(Nm));
@@ -181,7 +181,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -189,10 +189,10 @@ public class DlgDataBatch extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                    if(barang.getTable().getSelectedRow()!= -1){                   
-                        Kd.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                    if(barang.getTable().getSelectedRow()!= -1){
+                        Kd.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                         Nm.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                    }    
+                    }
                     Kd.requestFocus();
             }
             @Override
@@ -204,7 +204,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -212,7 +212,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -686,7 +686,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
         FormInput.add(label14);
         label14.setBounds(0, 102, 96, 23);
 
-        NoFaktur.setHighlighter(null);
         NoFaktur.setName("NoFaktur"); // NOI18N
         NoFaktur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -933,7 +932,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
         FormInput.add(AsalBarang);
         AsalBarang.setBounds(100, 72, 130, 23);
 
-        NoBatch.setHighlighter(null);
         NoBatch.setName("NoBatch"); // NOI18N
         NoBatch.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -984,7 +982,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
         FormInput.add(label19);
         label19.setBounds(0, 132, 96, 23);
 
-        JmlBeli.setHighlighter(null);
         JmlBeli.setName("JmlBeli"); // NOI18N
         JmlBeli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1000,7 +997,6 @@ public class DlgDataBatch extends javax.swing.JDialog {
         FormInput.add(label20);
         label20.setBounds(149, 132, 32, 23);
 
-        Sisa.setHighlighter(null);
         Sisa.setName("Sisa"); // NOI18N
         Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1191,7 +1187,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             if(tbDokter.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("data_batch","no_batch=? and kode_brng=? and no_faktur=?","no_batch=?,kode_brng=?,tgl_beli=?,tgl_kadaluarsa=?,asal=?,no_faktur=?,dasar=?,h_beli=?,ralan=?,kelas1=?,kelas2=?,kelas3=?,utama=?,vip=?,vvip=?,beliluar=?,jualbebas=?,karyawan=?,jumlahbeli=?,sisa=?",23,new String[]{
                         NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
-                        AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(), 
+                        AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
                         kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
                         JmlBeli.getText(),Sisa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
@@ -1200,8 +1196,8 @@ public class DlgDataBatch extends javax.swing.JDialog {
                             tampil();
                         }
                         emptTeks();
-                }   
-            }                
+                }
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -1229,7 +1225,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
             if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptDataBatch.jasper", "report", "::[ Data Batch ]::", 
+                Valid.MyReportqry("rptDataBatch.jasper", "report", "::[ Data Batch ]::",
                     "select data_batch.kode_brng, databarang.nama_brng,data_batch.no_faktur, "
                     + " data_batch.no_batch,data_batch.tgl_beli,data_batch.dasar,data_batch.h_beli,"
                     + " data_batch.ralan,data_batch.kelas1,data_batch.kelas2,data_batch.kelas3,"
@@ -1238,7 +1234,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                     + " from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng "
                     + " where data_batch.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by databarang.nama_brng", param);
             }else{
-                Valid.MyReportqry("rptDataBatch.jasper", "report", "::[ Data Batch ]::", 
+                Valid.MyReportqry("rptDataBatch.jasper", "report", "::[ Data Batch ]::",
                     "select data_batch.kode_brng, databarang.nama_brng,data_batch.no_faktur, "
                     + " data_batch.no_batch,data_batch.tgl_beli,data_batch.dasar,data_batch.h_beli,"
                     + " data_batch.ralan,data_batch.kelas1,data_batch.kelas2,data_batch.kelas3,"
@@ -1250,7 +1246,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
                     + " data_batch.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and data_batch.no_batch like '%" + TCari.getText().trim() + "%' or "
                     + " data_batch.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and data_batch.no_faktur like '%" + TCari.getText().trim() + "%' or "
                     + " data_batch.tgl_beli between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and data_batch.asal like '%" + TCari.getText().trim() + "%' order by databarang.nama_brng", param);
-            }   
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1328,13 +1324,13 @@ public class DlgDataBatch extends javax.swing.JDialog {
         } else {
             if(Sequel.menyimpantf("data_batch", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Kode Barang,No.Batch & No.Faktur", 20, new String[]{
                     NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
-                    AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(), 
+                    AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
                     kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
                     JmlBeli.getText(),Sisa.getText()
                 })==true){
                     tampil();
                     emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1432,7 +1428,7 @@ private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void beliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_beliKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            isHitung(); 
+            isHitung();
             ralan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             dasar.requestFocus();
@@ -1743,7 +1739,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     + " data_batch.tgl_beli between ? and ? and data_batch.no_faktur like ? or "
                     + " data_batch.tgl_beli between ? and ? and data_batch.asal like ? order by databarang.nama_brng");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -1765,7 +1761,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     ps.setString(14,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                     ps.setString(15, "%" + TCari.getText().trim() + "%");
                 }
-                    
+
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     tabMode.addRow(new Object[]{
@@ -1863,7 +1859,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }
 
-    private void isHitung() {   
+    private void isHitung() {
         if(this.isVisible()==true){
             try {
                 if (!beli.getText().equals("")) {
@@ -1956,15 +1952,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             break;
                         default:
                             JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp belum disetting..!!");
-                            break;                    
-                    }                    
-                }                               
+                            break;
+                    }
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : " + e);
             }
-        }            
+        }
     }
-            
+
     public void isCek() {
         TCari.requestFocus();
         BtnSimpan.setEnabled(akses.getdata_batch());

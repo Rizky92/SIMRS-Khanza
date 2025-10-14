@@ -259,7 +259,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         NoBukti = new widget.TextBox();
         label37 = new widget.Label();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -317,19 +316,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         BtnSimpanMandiri.setBounds(10, 100, 100, 30);
 
         NoRekening.setToolTipText("No.Rekening");
-        NoRekening.setHighlighter(null);
         NoRekening.setName("NoRekening"); // NOI18N
         panelBiasa2.add(NoRekening);
         NoRekening.setBounds(84, 10, 130, 23);
 
         RekeningAtasNama.setToolTipText("Rekening Atas Nama");
-        RekeningAtasNama.setHighlighter(null);
         RekeningAtasNama.setName("RekeningAtasNama"); // NOI18N
         panelBiasa2.add(RekeningAtasNama);
         RekeningAtasNama.setBounds(217, 10, 200, 23);
 
         KotaAtasNamaRekening.setToolTipText("Kota Atas Nama Rekening");
-        KotaAtasNamaRekening.setHighlighter(null);
         KotaAtasNamaRekening.setName("KotaAtasNamaRekening"); // NOI18N
         panelBiasa2.add(KotaAtasNamaRekening);
         KotaAtasNamaRekening.setBounds(420, 10, 120, 23);
@@ -352,19 +348,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         jLabel102.setBounds(0, 40, 80, 23);
 
         BiayaTransaksi.setEditable(false);
-        BiayaTransaksi.setHighlighter(null);
         BiayaTransaksi.setName("BiayaTransaksi"); // NOI18N
         panelBiasa2.add(BiayaTransaksi);
         BiayaTransaksi.setBounds(399, 40, 110, 23);
 
         KodeMetode.setEditable(false);
-        KodeMetode.setHighlighter(null);
         KodeMetode.setName("KodeMetode"); // NOI18N
         panelBiasa2.add(KodeMetode);
         KodeMetode.setBounds(84, 40, 64, 23);
 
         MetodePembayaran.setEditable(false);
-        MetodePembayaran.setHighlighter(null);
         MetodePembayaran.setName("MetodePembayaran"); // NOI18N
         panelBiasa2.add(MetodePembayaran);
         MetodePembayaran.setBounds(151, 40, 245, 23);
@@ -375,19 +368,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         jLabel103.setBounds(0, 70, 80, 23);
 
         KodeBank.setEditable(false);
-        KodeBank.setHighlighter(null);
         KodeBank.setName("KodeBank"); // NOI18N
         panelBiasa2.add(KodeBank);
         KodeBank.setBounds(84, 70, 64, 23);
 
         BankTujuan.setEditable(false);
-        BankTujuan.setHighlighter(null);
         BankTujuan.setName("BankTujuan"); // NOI18N
         panelBiasa2.add(BankTujuan);
         BankTujuan.setBounds(151, 70, 245, 23);
 
         KodeTransaksi.setEditable(false);
-        KodeTransaksi.setHighlighter(null);
         KodeTransaksi.setName("KodeTransaksi"); // NOI18N
         panelBiasa2.add(KodeTransaksi);
         KodeTransaksi.setBounds(399, 70, 141, 23);
@@ -651,7 +641,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label32);
         label32.setBounds(0, 40, 75, 23);
 
-        NoHutang.setHighlighter(null);
         NoHutang.setName("NoHutang"); // NOI18N
         NoHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -667,7 +656,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label36);
         label36.setBounds(0, 100, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -683,7 +671,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label35);
         label35.setBounds(301, 40, 79, 23);
 
-        Cicilan.setHighlighter(null);
         Cicilan.setName("Cicilan"); // NOI18N
         Cicilan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -732,7 +719,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label38);
         label38.setBounds(510, 40, 77, 23);
 
-        Sisa.setHighlighter(null);
         Sisa.setName("Sisa"); // NOI18N
         Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -794,7 +780,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(BtnAll1);
         BtnAll1.setBounds(682, 70, 28, 23);
 
-        NoBukti.setHighlighter(null);
         NoBukti.setName("NoBukti"); // NOI18N
         NoBukti.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

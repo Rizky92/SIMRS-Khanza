@@ -42,7 +42,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -70,11 +70,11 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kd.setDocument(new batasInput((byte)5).getKata(Kd));
         Nm.setDocument(new batasInput((byte)70).getKata(Nm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -96,7 +96,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -175,7 +175,6 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
         panelisi4.add(label35);
         label35.setBounds(129, 10, 58, 23);
 
-        Kd.setHighlighter(null);
         Kd.setName("Kd"); // NOI18N
         Kd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -185,7 +184,6 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
         panelisi4.add(Kd);
         Kd.setBounds(49, 10, 60, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -437,7 +435,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -464,7 +462,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            }            
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -493,14 +491,14 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptKategoriPiutangJasaPerusahaan.jasper","report","::[ Kategori Piutang Jasa Perusahaan ]::",
                     "select * from kategori_piutang_jasa_perusahaan "+(TCari.getText().trim().equals("")?"":"where kategori_piutang_jasa_perusahaan.kode_kategori like '%"+TCari.getText().trim()+"%' or "+
                     "kategori_piutang_jasa_perusahaan.nama_kategori like '%"+TCari.getText().trim()+"%'")+" order by kategori_piutang_jasa_perusahaan.kode_kategori",param);
@@ -628,10 +626,10 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                      "select * from kategori_piutang_jasa_perusahaan "+(TCari.getText().trim().equals("")?"":"where kategori_piutang_jasa_perusahaan.kode_kategori like ? or "+
-                     "kategori_piutang_jasa_perusahaan.nama_kategori like ?")+" order by kategori_piutang_jasa_perusahaan.kode_kategori");  
+                     "kategori_piutang_jasa_perusahaan.nama_kategori like ?")+" order by kategori_piutang_jasa_perusahaan.kode_kategori");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -642,7 +640,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2)
                     });
-                }   
+                }
             } catch (Exception e) {
                 System.out.println(e);
             }finally{
@@ -661,9 +659,9 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
 
     private void emptTeks() {
         Kd.setText("");
-        Nm.setText("");    
+        Nm.setText("");
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_kategori,3),signed)),0) from kategori_piutang_jasa_perusahaan  ","KP",3,Kd);
-        Kd.requestFocus();        
+        Kd.requestFocus();
     }
 
     private void getData() {
@@ -678,12 +676,12 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
     public JTable getTabel(){
         return tbKamar;
     }
-    
-    public void isCek(){      
+
+    public void isCek(){
         BtnSimpan.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
         BtnBatal.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
         BtnEdit.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
         BtnHapus.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
-        BtnPrint.setEnabled(akses.getkategori_piutang_jasa_perusahaan());     
+        BtnPrint.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
     }
 }

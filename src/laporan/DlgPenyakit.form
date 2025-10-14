@@ -402,9 +402,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TKd">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TKd" noResource="true"/>
                   </Properties>
                   <Events>
@@ -443,9 +440,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TNm">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNm" noResource="true"/>
                   </Properties>
                   <Events>
@@ -505,9 +499,6 @@
                 </Container>
                 <Component class="widget.TextBox" name="TKeterangan">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TKeterangan" noResource="true"/>
                   </Properties>
                   <Events>
@@ -551,9 +542,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="kd_ktg">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="kd_ktg" noResource="true"/>
                   </Properties>
                   <Events>

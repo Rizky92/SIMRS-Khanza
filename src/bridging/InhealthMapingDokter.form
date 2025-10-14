@@ -337,9 +337,6 @@
             <Component class="widget.TextBox" name="KdDokterRS">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdDokterRS" noResource="true"/>
               </Properties>
               <Constraints>
@@ -351,9 +348,6 @@
             <Component class="widget.TextBox" name="NmDokterRS">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NmDokterRS" noResource="true"/>
               </Properties>
               <Constraints>
@@ -394,9 +388,6 @@
             </Component>
             <Component class="widget.TextBox" name="KdDokterInhealth">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdDokterInhealth" noResource="true"/>
               </Properties>
               <Constraints>

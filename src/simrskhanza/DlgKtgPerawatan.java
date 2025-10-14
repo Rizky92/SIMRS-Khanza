@@ -108,7 +108,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                     }
                 }
             });
-        }         
+        }
     }
 
     /** This method is called from within the constructor to
@@ -360,7 +360,6 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
         panelGlass2.add(jLabel4);
         jLabel4.setBounds(197, 12, 100, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -429,14 +428,14 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKategori.getRowCount();i++){ 
+        for(i=0;i<tbKategori.getRowCount();i++){
             if(tbKategori.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.meghapustf("kategori_perawatan","kd_kategori",tbKategori.getValueAt(i,1).toString())==true){
                     tabMode.removeRow(i);
                     i--;
                 }
             }
-        } 
+        }
         LCount.setText(""+tabMode.getRowCount());
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -616,7 +615,7 @@ public final class DlgKtgPerawatan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

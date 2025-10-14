@@ -100,10 +100,10 @@ public final class DlgSetHargaObatRalan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
     }
-    
+
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
 
     /** This method is called from within the constructor to
@@ -345,7 +345,6 @@ public final class DlgSetHargaObatRalan extends javax.swing.JDialog {
         jLabel4.setBounds(0, 42, 80, 23);
 
         nmpj.setEditable(false);
-        nmpj.setHighlighter(null);
         nmpj.setName("nmpj"); // NOI18N
         nmpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -372,7 +371,6 @@ public final class DlgSetHargaObatRalan extends javax.swing.JDialog {
         panelGlass2.add(BtnSeek);
         BtnSeek.setBounds(490, 12, 28, 23);
 
-        kdpj.setHighlighter(null);
         kdpj.setName("kdpj"); // NOI18N
         kdpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -382,7 +380,6 @@ public final class DlgSetHargaObatRalan extends javax.swing.JDialog {
         panelGlass2.add(kdpj);
         kdpj.setBounds(83, 12, 100, 23);
 
-        harga.setHighlighter(null);
         harga.setName("harga"); // NOI18N
         harga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -558,7 +555,7 @@ private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_har
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -570,7 +567,7 @@ private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_har
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -578,7 +575,7 @@ private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_har
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}

@@ -44,10 +44,10 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgCariDokter poli=new DlgCariDokter(null,false);
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -80,9 +80,9 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        KdDokterInhealth.setDocument(new batasInput((byte)20).getKata(KdDokterInhealth));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        KdDokterInhealth.setDocument(new batasInput((byte)20).getKata(KdDokterInhealth));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -104,8 +104,8 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -113,7 +113,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     KdDokterRS.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmDokterRS.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -127,8 +127,8 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -141,8 +141,8 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
-    
+
+
     }
 
     /** This method is called from within the constructor to
@@ -390,13 +390,11 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 66, 23);
 
         KdDokterRS.setEditable(false);
-        KdDokterRS.setHighlighter(null);
         KdDokterRS.setName("KdDokterRS"); // NOI18N
         FormInput.add(KdDokterRS);
         KdDokterRS.setBounds(69, 10, 80, 23);
 
         NmDokterRS.setEditable(false);
-        NmDokterRS.setHighlighter(null);
         NmDokterRS.setName("NmDokterRS"); // NOI18N
         FormInput.add(NmDokterRS);
         NmDokterRS.setBounds(151, 10, 170, 23);
@@ -423,7 +421,6 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
         FormInput.add(jLabel19);
         jLabel19.setBounds(363, 10, 80, 23);
 
-        KdDokterInhealth.setHighlighter(null);
         KdDokterInhealth.setName("KdDokterInhealth"); // NOI18N
         FormInput.add(KdDokterInhealth);
         KdDokterInhealth.setBounds(446, 10, 70, 23);
@@ -436,14 +433,14 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPoliRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliRSActionPerformed
-        poli.isCek();        
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
 }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
+
 }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -457,7 +454,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }                
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -504,7 +501,7 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
                     emptTeks();
                     tampil();
                 }
-            }                
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -677,18 +674,18 @@ public final class InhealthMapingDokter extends javax.swing.JDialog {
            KdDokterInhealth.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
         }
     }
-    
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_dokter());
         BtnHapus.setEnabled(akses.getinhealth_mapping_dokter());
         BtnEdit.setEnabled(akses.getinhealth_mapping_dokter());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
-   
-    
+
+
 }

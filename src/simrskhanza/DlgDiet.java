@@ -100,7 +100,7 @@ public class DlgDiet extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
         try {
             ps=koneksi.prepareStatement("select kd_diet, nama_diet "+
                 " from diet where  kd_diet like ? or "+
@@ -359,7 +359,6 @@ public class DlgDiet extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(176, 12, 110, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -436,7 +435,7 @@ public class DlgDiet extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
-        } 
+        }
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -463,7 +462,7 @@ public class DlgDiet extends javax.swing.JDialog {
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau diganti...!!!!");
-            } 
+            }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
 
@@ -620,7 +619,7 @@ public class DlgDiet extends javax.swing.JDialog {
             TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTextField getTextField(){
         return TKd;
     }
@@ -628,7 +627,7 @@ public class DlgDiet extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdiet_pasien());
         BtnHapus.setEnabled(akses.getdiet_pasien());

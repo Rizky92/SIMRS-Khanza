@@ -334,7 +334,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         });
         jPopupMenu1.add(MnPenilaianLanjutanRisikoJatuh);
 
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
 
         LoadHTML.setBorder(null);
@@ -623,7 +622,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 80, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -634,7 +632,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         TNoRw.setBounds(84, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -658,7 +655,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         Tanggal.setBounds(84, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -719,7 +715,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         jLabel18.setBounds(400, 40, 70, 23);
 
         NIP.setEditable(false);
-        NIP.setHighlighter(null);
         NIP.setName("NIP"); // NOI18N
         FormInput.add(NIP);
         NIP.setBounds(474, 40, 94, 23);
@@ -751,7 +746,6 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);

@@ -43,12 +43,12 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariRuangAuditKepatuhan ruang=new DlgCariRuangAuditKepatuhan(null,false);
     private double pemasangan_sesuai_indikasi=0,hand_hygiene=0,menggunakan_apd_yang_tepat=0,pemasangan_menggunakan_alat_steril=0,segera_dilepas_setelah_tidak_diperlukan=0,pengisian_balon_sesuai_petunjuk=0,fiksasi_kateter_dengan_plester=0,urinebag_menggantung_tidak_menyentuh_lantai=0,
                 ttlpemasangan_sesuai_indikasi=0,ttlhand_hygiene=0,ttlmenggunakan_apd_yang_tepat=0,ttlpemasangan_menggunakan_alat_steril=0,ttlsegera_dilepas_setelah_tidak_diperlukan=0,ttlpengisian_balon_sesuai_petunjuk=0,ttlfiksasi_kateter_dengan_plester=0,ttlurinebag_menggantung_tidak_menyentuh_lantai=0,ttlpenilaian=0;
-    
-    
+
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -103,7 +103,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
 
         KdRuang.setDocument(new batasInput((byte)20).getKata(KdRuang));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -126,7 +126,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -134,10 +134,10 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){                   
+                if(ruang.getTable().getSelectedRow()!= -1){
                     KdRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                     NmRuang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdRuang.requestFocus();
             }
             @Override
@@ -148,10 +148,10 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         ChkInput.setSelected(false);
         isForm();
-        
+
         jam();
     }
 
@@ -667,7 +667,6 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
         jLabel18.setBounds(390, 10, 110, 23);
 
         KdRuang.setEditable(false);
-        KdRuang.setHighlighter(null);
         KdRuang.setName("KdRuang"); // NOI18N
         KdRuang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -740,7 +739,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }  
+            }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -754,7 +753,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
 }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -774,8 +773,8 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }            
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -789,7 +788,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(KdRuang.getText().trim().equals("")||NmRuang.getText().trim().equals("")){
             Valid.textKosong(btnPetugas,"Ruang/Unit");
-        }else{   
+        }else{
             Sequel.mengedit("audit_bundle_isk","id_ruang=? and tanggal=?","tanggal=?,id_ruang=?,pemasangan_sesuai_indikasi=?,hand_hygiene=?,menggunakan_apd_yang_tepat=?,pemasangan_menggunakan_alat_steril=?,segera_dilepas_setelah_tidak_diperlukan=?,pengisian_balon_sesuai_petunjuk=?,fiksasi_kateter_dengan_plester=?,urinebag_menggantung_tidak_menyentuh_lantai=?",12,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdRuang.getText(),PemasanganSesuaiIndikasi.getSelectedItem().toString(),HandHygiene.getSelectedItem().toString(),ApdYangTepat.getSelectedItem().toString(),
                 PetunjukProduk.getSelectedItem().toString(),LepasSetelahTidakDiperlukan.getSelectedItem().toString(),AlatSteril.getSelectedItem().toString(),FiksasiKateter.getSelectedItem().toString(),UrineBag.getSelectedItem().toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
@@ -824,15 +823,15 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptAuditBundleISK.jasper","report","::[ Data Audit Bundle ISK ]::",
                     "select audit_bundle_isk.id_ruang,ruang_audit_kepatuhan.nama_ruang,audit_bundle_isk.tanggal,audit_bundle_isk.pemasangan_sesuai_indikasi,"+
@@ -848,7 +847,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
                     "inner join ruang_audit_kepatuhan on audit_bundle_isk.id_ruang=ruang_audit_kepatuhan.id_ruang where audit_bundle_isk.tanggal between "+
                     "'"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
                     "and (audit_bundle_isk.id_ruang like '%"+TCari.getText().trim()+"%' or ruang_audit_kepatuhan.nama_ruang like '%"+TCari.getText().trim()+"%') order by audit_bundle_isk.tanggal",param);
-            }  
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1060,7 +1059,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     private void tampil() {
       Valid.tabelKosong(tabMode);
         try{
@@ -1080,7 +1079,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
                     "where audit_bundle_isk.tanggal between ? and ? "+
                     "and (audit_bundle_isk.id_ruang like ? or ruang_audit_kepatuhan.nama_ruang like ?) order by audit_bundle_isk.tanggal");
              }
-                
+
             try {
                 if(TCari.getText().toString().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1091,7 +1090,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 ttlpemasangan_sesuai_indikasi=0;ttlhand_hygiene=0;ttlmenggunakan_apd_yang_tepat=0;ttlpemasangan_menggunakan_alat_steril=0;ttlsegera_dilepas_setelah_tidak_diperlukan=0;ttlpengisian_balon_sesuai_petunjuk=0;ttlfiksasi_kateter_dengan_plester=0;ttlurinebag_menggantung_tidak_menyentuh_lantai=0;ttlpenilaian=0;
                 i=1;
@@ -1149,7 +1148,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
         }
         LCount.setText(""+i);
     }
-    
+
     public void emptTeks() {
         KdRuang.setText("");
         NmRuang.setText("");
@@ -1163,7 +1162,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
         FiksasiKateter.setSelectedIndex(0);
         UrineBag.setSelectedIndex(0);
         PemasanganSesuaiIndikasi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1182,26 +1181,26 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,184));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getaudit_bundle_isk());
         BtnHapus.setEnabled(akses.getaudit_bundle_isk());
         BtnEdit.setEnabled(akses.getaudit_bundle_isk());
-        BtnPrint.setEnabled(akses.getaudit_bundle_isk());        
+        BtnPrint.setEnabled(akses.getaudit_bundle_isk());
     }
 
     private void jam(){
@@ -1213,7 +1212,7 @@ public final class DlgAuditBundleISK extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang

@@ -101,7 +101,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try {
             ps=koneksi.prepareStatement("select * from parkir_jenis where kd_parkir like ? or jns_parkir like ? order by kd_parkir");
         } catch (Exception e) {
@@ -367,7 +367,6 @@ public class DlgParkirJenis extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 42, 74, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -392,7 +391,6 @@ public class DlgParkirJenis extends javax.swing.JDialog {
         jLabel5.setBounds(323, 12, 100, 23);
 
         TBiaya.setText("0");
-        TBiaya.setHighlighter(null);
         TBiaya.setName("TBiaya"); // NOI18N
         TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -576,7 +574,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -647,7 +645,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
-            while(rs.next()){                
+            while(rs.next()){
                 tabMode.addRow(new Object[]{
                     rs.getString(1),rs.getString(2),Valid.SetAngka(rs.getDouble(3)),rs.getString(4)
                 });
@@ -680,7 +678,7 @@ public class DlgParkirJenis extends javax.swing.JDialog {
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getparkir_jenis());
        BtnHapus.setEnabled(akses.getparkir_jenis());

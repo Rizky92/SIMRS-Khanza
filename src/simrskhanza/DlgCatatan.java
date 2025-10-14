@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -49,14 +49,14 @@ public class DlgCatatan extends javax.swing.JDialog {
 
         this.setLocation(8,1);
         setSize(885,674);
-        
-        //TCatatan.setText(TCatatan); 
+
+        //TCatatan.setText(TCatatan);
         TCatatan.setLineWrap(true);
         TCatatan.setWrapStyleWord(true);
     }
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -104,13 +104,11 @@ public class DlgCatatan extends javax.swing.JDialog {
         jLabel3.setBounds(0, 10, 65, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(70, 10, 130, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(25, 28));
         FormInput.add(TPasien);
@@ -218,16 +216,16 @@ public class DlgCatatan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRM,"No.Rekam Medis");
         }else if(TCatatan.getText().trim().equals("")){
             Valid.textKosong(TCatatan,"Catatan");
-        }else{          
+        }else{
             Sequel.menyimpan3("catatan_pasien","?,?",2,new String[]{TNoRM.getText(),TCatatan.getText()},"no_rkm_medis=?","catatan=?",2,new String[]{TCatatan.getText(),TNoRM.getText()});
-            BtnKeluarActionPerformed(evt);        
-        }  
+            BtnKeluarActionPerformed(evt);
+        }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -240,11 +238,11 @@ public class DlgCatatan extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
        Sequel.meghapus2("catatan_pasien","no_rkm_medis",TNoRM.getText());
-       BtnKeluarActionPerformed(evt);       
+       BtnKeluarActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        
+
 }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -262,7 +260,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         Valid.textKosong(TNoRM,"No.Rekam Medis");
     }else if(TCatatan.getText().trim().equals("")){
         Valid.textKosong(TCatatan,"Catatan");
-    }else{  
+    }else{
         Sequel.mengedit2("catatan_pasien","no_rkm_medis=?","catatan=?",2,new String[]{
             TCatatan.getText(),TNoRM.getText()
         });
@@ -311,25 +309,25 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label jLabel9;
     private widget.panelisi panelGlass8;
     // End of variables declaration//GEN-END:variables
-    
+
 
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
     }
 
     public void setNoRm(String norm) {
-        TNoRM.setText(norm);  
-        isPsien();   
-        Sequel.cariIsi("select catatan_pasien.catatan from catatan_pasien where catatan_pasien.no_rkm_medis=?",TCatatan,TNoRM.getText());       
+        TNoRM.setText(norm);
+        isPsien();
+        Sequel.cariIsi("select catatan_pasien.catatan from catatan_pasien where catatan_pasien.no_rkm_medis=?",TCatatan,TNoRM.getText());
     }
-    
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(true);
         BtnHapus.setEnabled(true);
         BtnEdit.setEnabled(true);
-       
-        
+
+
     }
 
 

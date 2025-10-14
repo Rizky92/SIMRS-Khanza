@@ -493,11 +493,9 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         Jk.setName("Jk"); // NOI18N
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         Alamat.setEditable(false);
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
 
         Popup.setName("Popup"); // NOI18N
@@ -741,19 +739,16 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         jLabel3.setBounds(0, 12, 92, 23);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         PanelInput.add(TNoRw);
         TNoRw.setBounds(95, 12, 128, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         PanelInput.add(TNoRM);
         TNoRM.setBounds(225, 12, 108, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         PanelInput.add(TPasien);
         TPasien.setBounds(335, 12, 379, 23);
@@ -773,7 +768,6 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         PanelInput.add(jLabel9);
         jLabel9.setBounds(0, 72, 92, 23);
 
-        Pemeriksaan.setHighlighter(null);
         Pemeriksaan.setName("Pemeriksaan"); // NOI18N
         Pemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -921,7 +915,6 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         btnTarif.setBounds(798, 102, 28, 23);
 
         NmDokterPj.setEditable(false);
-        NmDokterPj.setHighlighter(null);
         NmDokterPj.setName("NmDokterPj"); // NOI18N
         PanelInput.add(NmDokterPj);
         NmDokterPj.setBounds(177, 42, 193, 23);
@@ -940,7 +933,6 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         KodePerujuk.setBounds(95, 72, 80, 23);
 
         NmPerujuk.setEditable(false);
-        NmPerujuk.setHighlighter(null);
         NmPerujuk.setName("NmPerujuk"); // NOI18N
         PanelInput.add(NmPerujuk);
         NmPerujuk.setBounds(177, 72, 193, 23);
@@ -958,7 +950,6 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         btnDokterPj.setBounds(373, 42, 28, 23);
 
         TUmur.setEditable(false);
-        TUmur.setHighlighter(null);
         TUmur.setName("TUmur"); // NOI18N
         PanelInput.add(TUmur);
         TUmur.setBounds(716, 12, 110, 23);

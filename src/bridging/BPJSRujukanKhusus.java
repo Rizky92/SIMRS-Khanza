@@ -75,14 +75,14 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
     private ApiBPJS api=new ApiBPJS();
     private String URL="",link="",utc="",requestJson="",dx="",pros="",user="",idrujukan="";
 
-    /** Creates new form DlgResepObat 
+    /** Creates new form DlgResepObat
      *@param parent
      *@param modal*/
     public BPJSRujukanKhusus(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
-        setSize(628,674);        
+        setSize(628,674);
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rujukan","No.Peserta","Nama Pasien","Tgl.Ruj.Awal","Tgl.Ruj.Akhir"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -107,7 +107,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             }
         }
         tbProgramPRB.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{
             "P","Kode ICD X","Nama Penyakit"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -141,7 +141,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         tbDiagnosa.setDefaultRenderer(Object.class,warna);
         tbDiagnosa.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbDiagnosa.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         tabMode3=new DefaultTableModel(null,new Object[]{
             "P","Kode Prosedur","Nama Prosedur"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -180,7 +180,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         NoRujukan.setDocument(new batasInput((int)200).getKata(NoRujukan));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -202,16 +202,16 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             user=akses.getkode().replace(" ","").substring(0,9);
         } catch (Exception e) {
             user=akses.getkode();
         }
-        
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -511,13 +511,11 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(440, 403));
         FormInput.setLayout(null);
 
-        NoPeserta.setHighlighter(null);
         NoPeserta.setName("NoPeserta"); // NOI18N
         FormInput.add(NoPeserta);
         NoPeserta.setBounds(225, 10, 115, 23);
 
         NoRM.setEditable(false);
-        NoRM.setHighlighter(null);
         NoRM.setName("NoRM"); // NOI18N
         FormInput.add(NoRM);
         NoRM.setBounds(342, 10, 85, 23);
@@ -533,12 +531,10 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
         jLabel13.setBounds(0, 40, 79, 23);
 
         NmPasien.setEditable(false);
-        NmPasien.setHighlighter(null);
         NmPasien.setName("NmPasien"); // NOI18N
         FormInput.add(NmPasien);
         NmPasien.setBounds(429, 10, 194, 23);
 
-        NoRujukan.setHighlighter(null);
         NoRujukan.setName("NoRujukan"); // NOI18N
         NoRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -666,26 +662,26 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
                                 tabMode.getValueAt(r,2).toString()+"','"+
                                 tabMode.getValueAt(r,3).toString()+"','"+
-                                tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data"); 
+                                tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSRujukanKhusus.jasper","report","[ Data Rujukan Khusus BPJS ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        } 
+        }
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -720,7 +716,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil();        
+        tampil();
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -753,7 +749,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
 }//GEN-LAST:event_tbProgramPRBKeyPressed
 
 private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
+  isForm();
 }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -762,7 +758,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else{
             try{
                 dx="";
-                jml=0;        
+                jml=0;
                 for(i=0;i<tbDiagnosa.getRowCount();i++){
                     if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                         jml++;
@@ -775,9 +771,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
                 if(jml>0){
                     dx="["+dx.substring(0,dx.length()-1)+"]";
-                }   
-      
-                jml=0;  
+                }
+
+                jml=0;
                 pros="";
                 for(i=0;i<tbProsedur.getRowCount();i++){
                     if(tbProsedur.getValueAt(i,0).toString().equals("true")){
@@ -788,7 +784,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(jml>0){
                     pros="["+pros.substring(0,pros.length()-1)+"]";
                 }
-                    
+
                 headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                 headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -807,12 +803,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 requestEntity = new HttpEntity(requestJson,headers);
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                 nameNode = root.path("metaData");
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText()); 
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 if(nameNode.path("code").asText().equals("200")){
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                     Sequel.menyimpan("bridging_rujukan_bpjs_khusus","?,?,?,?,?",5,new String[]{
                         NoRujukan.getText(),NoPeserta.getText(),NmPasien.getText(),response.path("rujukan").path("tglrujukan_awal").asText(),response.path("rujukan").path("tglrujukan_berakhir").asText()
-                    }); 
+                    });
                     if(jml>0){
                         jml=0;
                         for(i=0;i<tbDiagnosa.getRowCount();i++){
@@ -821,11 +817,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 if(jml==1){
                                     Sequel.menyimpan("bridging_rujukan_bpjs_khusus_diagnosa","?,?,?,?",4,new String[]{
                                         NoRujukan.getText(),"P",tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
-                                    });  
+                                    });
                                 }else{
                                     Sequel.menyimpan("bridging_rujukan_bpjs_khusus_diagnosa","?,?,?,?",4,new String[]{
                                         NoRujukan.getText(),"S",tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
-                                    }); 
+                                    });
                                 }
                             }
                         }
@@ -833,13 +829,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             if(tbProsedur.getValueAt(i,0).toString().equals("true")){
                                 Sequel.menyimpan("bridging_rujukan_bpjs_khusus_prosedur","?,?,?",3,new String[]{
                                     NoRujukan.getText(),tbProsedur.getValueAt(i,1).toString(),tbProsedur.getValueAt(i,2).toString()
-                                });  
+                                });
                             }
                         }
                     }
                     emptTeks();
                     tampil();
-                }  
+                }
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -944,7 +940,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
                 requestEntity = new HttpEntity(headers);
-                URL = link+"/Rujukan/Khusus/List/Bulan/"+Integer.parseInt(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(5,7))+"/Tahun/"+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(0,4);	
+                URL = link+"/Rujukan/Khusus/List/Bulan/"+Integer.parseInt(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(5,7))+"/Tahun/"+tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),3).toString().substring(0,4);
                 System.out.println(URL);
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
                 nameNode = root.path("metaData");
@@ -960,8 +956,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         }
                     }
                 }else {
-                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-                }   
+                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+                }
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -1051,7 +1047,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{     
+        try{
             ps=koneksi.prepareStatement("SELECT * FROM bridging_rujukan_bpjs_khusus where tglrujukan_awal between ? and ? "+
                     (TCari.getText().trim().equals("")?"":"and (no_rujukan like ? or nokapst like ? or nmpst like ?)")+" order by tglrujukan_awal");
             try {
@@ -1081,17 +1077,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             LCount.setText(""+tabMode.getRowCount());
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }       
+        }
     }
 
     private void getData() {
         if(tbProgramPRB.getSelectedRow()!= -1){
-            NoRujukan.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString()); 
-            NoPeserta.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),1).toString()); 
+            NoRujukan.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
+            NoPeserta.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),1).toString());
             NmPasien.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),2).toString());
             Valid.tabelKosong(tabMode2);
             Valid.tabelKosong(tabMode3);
-            try{     
+            try{
                 ps=koneksi.prepareStatement("select * from bridging_rujukan_bpjs_khusus_diagnosa where no_rujukan=? order by status");
                 try {
                     ps.setString(1,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
@@ -1111,7 +1107,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         ps.close();
                     }
                 }
-                
+
                 ps=koneksi.prepareStatement("select * from bridging_rujukan_bpjs_khusus_prosedur where no_rujukan=?");
                 try {
                     ps.setString(1,tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
@@ -1133,10 +1129,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-            } 
+            }
         }
     }
-   
+
     public void setNoRm(String nokartu,String norm,String namapasien,String norujukan) {
         NoPeserta.setText(nokartu);
         NoRM.setText(norm);
@@ -1147,18 +1143,18 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isForm();
         tampil();
     }
-    
-    
+
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,270));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
@@ -1170,14 +1166,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(Valid.SetAngka(tbDiagnosa.getValueAt(i,0).toString())>0){
                     jml++;
                 }
-            }   
+            }
             pilih=null;
             pilih=new boolean[jml];
             kode=null;
             kode=new String[jml];
             nama=null;
             nama=new String[jml];
-            index=0; 
+            index=0;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -1185,14 +1181,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     nama[index]=tbDiagnosa.getValueAt(i,2).toString();
                 }
             }
-            
-            Valid.tabelKosong(tabMode2); 
+
+            Valid.tabelKosong(tabMode2);
             for(i=0;i<jml;i++){
                 tabMode2.addRow(new Object[] {
                     pilih[i],kode[i],nama[i]
                 });
             }
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -1215,8 +1211,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -1232,14 +1228,14 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(Valid.SetAngka(tbProsedur.getValueAt(i,0).toString())>0){
                     jml++;
                 }
-            }   
+            }
             pilih=null;
             pilih=new boolean[jml];
             kode=null;
             kode=new String[jml];
             nama=null;
             nama=new String[jml];
-            index=0; 
+            index=0;
             for(i=0;i<tbProsedur.getRowCount();i++){
                 if(tbProsedur.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -1247,15 +1243,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     nama[index]=tbProsedur.getValueAt(i,2).toString();
                 }
             }
-            
-            Valid.tabelKosong(tabMode3); 
-            
+
+            Valid.tabelKosong(tabMode3);
+
             for(i=0;i<jml;i++){
                 tabMode3.addRow(new Object[] {
                     pilih[i],kode[i],nama[i]
                 });
             }
-            
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -1264,7 +1260,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
-            URL = link+"/referensi/procedure/"+Prosedur.getText();	
+            URL = link+"/referensi/procedure/"+Prosedur.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
@@ -1278,8 +1274,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -1287,7 +1283,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
         }
     }
-    
+
     private void emptTeks() {
         NoRujukan.setText("");
         NoPeserta.setText("");
@@ -1299,7 +1295,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Valid.tabelKosong(tabMode3);
         NoRujukan.requestFocus();
     }
-    
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -1311,8 +1307,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             return "DELETE";
         }
     }
-       
-    
+
+
     @Test
     public void bodyWithDeleteRequest() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
@@ -1327,7 +1323,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -1339,9 +1335,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
-            URL = link+"/Rujukan/Khusus/delete";	
+            URL = link+"/Rujukan/Khusus/delete";
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -1357,7 +1353,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                     "\"user\": \""+user+"\"" +
                                 "}" +
                             "}" +
-                         "}";            
+                         "}";
             root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,new HttpEntity<String>(requestJson,headers), String.class).getBody());
             nameNode = root.path("metaData");
             System.out.println("code : "+nameNode.path("code").asText());
@@ -1369,7 +1365,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }
-        } catch (Exception e) {            
+        } catch (Exception e) {
         }
     }
 }

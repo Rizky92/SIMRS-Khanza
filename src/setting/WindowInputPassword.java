@@ -19,7 +19,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
     private final sekuel Sequel=new sekuel();
     private String user="",password="";
-    
+
     /**
      * Creates new form WindowInputPassword
      */
@@ -27,7 +27,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setSize(349,180);
-        
+
         PassLama.setDocument(new batasInput((byte)100).getKata(PassLama));
         Passbaru1.setDocument(new batasInput((byte)100).getKata(Passbaru1));
         PassBaru2.setDocument(new batasInput((byte)100).getKata(PassBaru2));
@@ -59,7 +59,6 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setLayout(null);
 
-        PassLama.setHighlighter(null);
         internalFrame6.add(PassLama);
         PassLama.setBounds(108, 30, 210, 23);
 
@@ -105,7 +104,6 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.add(jLabel10);
         jLabel10.setBounds(0, 60, 105, 23);
 
-        Passbaru1.setHighlighter(null);
         internalFrame6.add(Passbaru1);
         Passbaru1.setBounds(108, 60, 210, 23);
 
@@ -113,7 +111,6 @@ public class WindowInputPassword extends javax.swing.JDialog {
         internalFrame6.add(jLabel12);
         jLabel12.setBounds(0, 90, 105, 23);
 
-        PassBaru2.setHighlighter(null);
         internalFrame6.add(PassBaru2);
         PassBaru2.setBounds(108, 90, 210, 23);
 
@@ -166,7 +163,7 @@ public class WindowInputPassword extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -359,7 +359,6 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(147, 10, 100, 23);
 
-        KodeDenda.setHighlighter(null);
         KodeDenda.setName("KodeDenda"); // NOI18N
         KodeDenda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -383,7 +382,6 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
         panelGlass7.add(jLabel5);
         jLabel5.setBounds(2, 40, 77, 23);
 
-        BesarDenda.setHighlighter(null);
         BesarDenda.setName("BesarDenda"); // NOI18N
         BesarDenda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -551,7 +549,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -570,7 +568,7 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -666,11 +664,11 @@ public class PerpustakaanDenda extends javax.swing.JDialog {
             BesarDenda.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),2).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getdenda_perpustakaan());
        BtnHapus.setEnabled(akses.getdenda_perpustakaan());

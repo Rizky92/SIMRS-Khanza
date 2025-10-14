@@ -46,14 +46,14 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
     private int i=0;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private String TANGGALMUNDUR="yes";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPenilaianAwalMedisRalanUrologi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Kode Dokter","Nama Dokter","Tanggal","Anamnesis","Hubungan","Keluhan Utama","Riwayat Penyakit Sekarang","Riwayat Penyakit Keluarga","Riwayat Penyakit Dahulu",
             "Riwayat Penggunakan Obat","Riwayat Kebiasaan","Riwayat Operasi Urologi","Riwayat Alergi","TD(mmHg)","BB(Kg)","TB(Cm)","Suhu","Nadi(x/menit)","RR(x/menit)","Keadaan Umum","Nyeri","Status Nutrisi",
@@ -62,7 +62,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -168,7 +168,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         Hubungan.setDocument(new batasInput((int)30).getKata(Hubungan));
         KeluhanUtama.setDocument(new batasInput((int)2000).getKata(KeluhanUtama));
@@ -206,8 +206,8 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         Tindakan.setDocument(new batasInput((int)500).getKata(Tindakan));
         Edukasi.setDocument(new batasInput((int)500).getKata(Edukasi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
-        
+
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -230,7 +230,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                 }
             });
         }
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -253,7 +253,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -271,7 +271,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -469,7 +469,6 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         });
         jPopupMenu1.add(MnPenilaianMedis);
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -634,7 +633,6 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         FormInput.setPreferredSize(new java.awt.Dimension(870, 1043));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -645,13 +643,11 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -703,13 +699,11 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -1725,7 +1719,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,BtnDokter);
         }
 }//GEN-LAST:event_TNoRwKeyPressed
@@ -1757,7 +1751,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                 }
             }
         }
-    
+
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -1793,8 +1787,8 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }              
-            
+        }
+
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1870,7 +1864,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         }else if(tabMode.getRowCount()!=0){
             try{
                 StringBuilder htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>").append(
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -1945,7 +1939,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                             "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append( 
+                            "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").append(
@@ -1965,14 +1959,14 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                             "<td valign='top'>").append(tbObat.getValueAt(i,37).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,38).toString()).append("</td>").append(
                             "<td valign='top'>").append(tbObat.getValueAt(i,39).toString()).append("</td>").append(
-                            "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,44).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,45).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,46).toString()).append("</td>").append( 
-                            "<td valign='top'>").append(tbObat.getValueAt(i,47).toString()).append("</td>").append( 
+                            "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,44).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,45).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,46).toString()).append("</td>").append(
+                            "<td valign='top'>").append(tbObat.getValueAt(i,47).toString()).append("</td>").append(
                         "</tr>");
                 }
                 LoadHTML.setText(
@@ -1984,7 +1978,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                 );
                 htmlContent=null;
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1999,8 +1993,8 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                 );
                 bg.close();
 
-                File f = new File("DataPenilaianAwalMedisRalanUrologi.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataPenilaianAwalMedisRalanUrologi.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='4300px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -2009,12 +2003,12 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL MEDIS RAWAT JALAN UROLOGI<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL MEDIS RAWAT JALAN UROLOGI<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -2097,7 +2091,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
 }//GEN-LAST:event_tbObatKeyPressed
 
     private void KdDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdDokterKeyPressed
-        
+
     }//GEN-LAST:event_KdDokterKeyPressed
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
@@ -2132,11 +2126,11 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString())); 
-            
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
+
             Valid.MyReportqry("rptCetakPenilaianAwalMedisRalanUrologi.jasper","report","::[ Laporan Pengkajian Awal Medis Rawat Jalan Urologi ]::",
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan_urologi.tanggal,"+
                 "penilaian_medis_ralan_urologi.kd_dokter,penilaian_medis_ralan_urologi.anamnesis,penilaian_medis_ralan_urologi.hubungan,penilaian_medis_ralan_urologi.keluhan_utama,penilaian_medis_ralan_urologi.rps,"+
@@ -2522,7 +2516,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                         "penilaian_medis_ralan_urologi.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "penilaian_medis_ralan_urologi.kd_dokter like ? or dokter.nm_dokter like ?) order by penilaian_medis_ralan_urologi.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -2535,7 +2529,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2558,7 +2552,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2610,15 +2604,15 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
         TglAsuhan.setDate(new Date());
         TabRawat.setSelectedIndex(0);
         Anamnesis.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Anamnesis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Hubungan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
@@ -2695,14 +2689,14 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ralan_urologi());
         BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ralan_urologi());
@@ -2716,8 +2710,8 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
                 KdDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
             }
-        } 
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 TglAsuhan.setEditable(false);
@@ -2725,7 +2719,7 @@ public final class RMPenilaianAwalMedisRalanUrologi extends javax.swing.JDialog 
             }
         }
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }

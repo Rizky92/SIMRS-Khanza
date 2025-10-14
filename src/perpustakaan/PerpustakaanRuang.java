@@ -354,7 +354,6 @@ public class PerpustakaanRuang extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(176, 10, 100, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -521,7 +520,7 @@ public class PerpustakaanRuang extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }           
+            }
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -540,7 +539,7 @@ public class PerpustakaanRuang extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -627,11 +626,11 @@ public class PerpustakaanRuang extends javax.swing.JDialog {
             TNm.setText(tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),1).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbSpesialis;
     }
-    
+
     public void isCek(){
        BtnSimpan.setEnabled(akses.getruang_perpustakaan());
        BtnHapus.setEnabled(akses.getruang_perpustakaan());
