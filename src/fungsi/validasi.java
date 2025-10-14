@@ -147,14 +147,6 @@ public final class validasi {
     public String getTglSmc(Date tgl) {
         return getTglSmc(tgl, "dd-MM-yyyy");
     }
-    
-    public String getTglSmc(String tgl) {
-        return new StringBuilder()
-            .append(tgl.substring(6, 10))
-            .append("-").append(tgl.substring(3, 5))
-            .append("-").append(tgl.substring(0, 2))
-            .toString();
-    }
 
     public String setTglSmc(String tgl) {
         return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);

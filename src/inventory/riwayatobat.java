@@ -14,65 +14,80 @@ import java.sql.ResultSet;
  * @author khanzamedia
  */
 public class riwayatobat {
-    private final Connection koneksi = koneksiDB.condb();
-
-    public synchronized boolean catatRiwayat(
-        String kodebarang,
-        double masuk,
-        double keluar,
-        String posisi,
-        String petugas,
-        String kdbangsal,
-        String status,
-        String nobatch,
-        String nofaktur,
-        String keterangan
-    ) {
+    private final Connection koneksi=koneksiDB.condb(); 
+    private ResultSet rs,rsawal;
+    private PreparedStatement ps,psawal;
+    private double stokawal=0,stokakhir=0;
+    public synchronized void catatRiwayat(String kodebarang,double masuk,double keluar,String posisi,String petugas,String kdbangsal,String status,String nobatch,String nofaktur,String keterangan){        
         try {
-            double stokakhir = 0;
-            double stokawal = 0;
-            try (PreparedStatement ps = koneksi.prepareStatement("select g.stok from gudangbarang g where g.kode_brng = ? and g.kd_bangsal = ? and g.no_batch = ? and g.no_faktur = ?")) {
-                ps.setString(1, kodebarang);
-                ps.setString(2, kdbangsal);
-                ps.setString(3, nobatch);
-                ps.setString(4, nofaktur);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        stokawal = rs.getDouble("stok");
-                        stokakhir = stokawal + masuk - keluar;
-                    } else {
-                        stokawal = 0;
-                        stokakhir = stokawal + masuk - keluar;
-                    }
+            stokakhir=0;stokawal=0;            
+            psawal=koneksi.prepareStatement("select stok from gudangbarang where kode_brng=? and kd_bangsal=? and no_batch=? and no_faktur=?");
+            try {
+                psawal.setString(1,kodebarang);
+                psawal.setString(2,kdbangsal);
+                psawal.setString(3,nobatch);
+                psawal.setString(4,nofaktur);
+                rs=psawal.executeQuery();
+                if(rs.next()){
+                    stokawal=rs.getDouble("stok");
+                    stokakhir=stokawal+masuk-keluar;
+                }else{
+                    stokawal=0;
+                    stokakhir=stokawal+masuk-keluar;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Stok : "+e);
+            } finally{
+                if(rsawal!=null){
+                    rsawal.close();
+                }
+                if(psawal!=null){
+                    psawal.close();
                 }
             }
-            
-            try (PreparedStatement ps = koneksi.prepareStatement("insert into riwayat_barang_medis values(?, ?, ?, ?, ?, ?, current_date(), current_time(), ?, ?, ?, ?, ?, ?)")) {
-                int p = 0;
-                ps.setString(++p, kodebarang);
-                ps.setDouble(++p, stokawal);
-                ps.setDouble(++p, masuk);
-                if (posisi.equals("Opname")) {
-                    ps.setDouble(++p, 0);
-                    ps.setDouble(++p, masuk);
-                } else {
-                    ps.setDouble(++p, keluar);
-                    ps.setDouble(++p, stokakhir);
+                     
+            ps=koneksi.prepareStatement("insert into riwayat_barang_medis values(?,?,?,?,?,?,current_date(),current_time(),?,?,?,?,?,?)");
+            try {
+                if(posisi.equals("Opname")){
+                    ps.setString(1,kodebarang);
+                    ps.setDouble(2,stokawal);
+                    ps.setDouble(3,masuk);
+                    ps.setDouble(4,0);
+                    ps.setDouble(5,masuk);
+                    ps.setString(6,posisi);
+                    ps.setString(7,petugas);
+                    ps.setString(8,kdbangsal);
+                    ps.setString(9,status);
+                    ps.setString(10,nobatch);
+                    ps.setString(11,nofaktur);
+                    ps.setString(12,keterangan);
+                    ps.executeUpdate();
+                }else{
+                    ps.setString(1,kodebarang);
+                    ps.setDouble(2,stokawal);
+                    ps.setDouble(3,masuk);
+                    ps.setDouble(4,keluar);
+                    ps.setDouble(5,stokakhir);
+                    ps.setString(6,posisi);
+                    ps.setString(7,petugas);
+                    ps.setString(8,kdbangsal);
+                    ps.setString(9,status);
+                    ps.setString(10,nobatch);
+                    ps.setString(11,nofaktur);
+                    ps.setString(12,keterangan);
+                    ps.executeUpdate();
+                }                    
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(ps!=null){
+                    ps.close();
                 }
-                ps.setString(++p, posisi);
-                ps.setString(++p, petugas);
-                ps.setString(++p, kdbangsal);
-                ps.setString(++p, status);
-                ps.setString(++p, nobatch);
-                ps.setString(++p, nofaktur);
-                ps.setString(++p, keterangan);
-                if (ps.executeUpdate() > 0) {
-                    return true;
-                }
-            }
+            }          
         } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-        }
-        return false;
-    }
+            System.out.println("Notifikasi : "+ex);  
+        }            
+   }
 }
+    
+
