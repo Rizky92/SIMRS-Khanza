@@ -1747,25 +1747,25 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             if(statusberi.equals("Ranap")){
                 Sequel.deleteTampJurnal();
                 if(ttljual>0){
-                    Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual);
-                    Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0);
                 }
                 if(ttlhpp>0){
-                    Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
-                    Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0);
                 }
-                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
             }else if(statusberi.equals("Ralan")){
                 Sequel.deleteTampJurnal();
                 if(ttljual>0){
-                    Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual);
-                    Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0);
                 }
                 if(ttlhpp>0){
-                    Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
-                    Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0);
                 }
-                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
             }
 
             Sequel.queryu("delete from aturan_pakai where no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+

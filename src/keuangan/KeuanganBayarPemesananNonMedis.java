@@ -937,9 +937,9 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                             sukses=true;
 
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", BesarBayar.getText(), "0");
-                            Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", BesarBayar.getText());
-                            sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());
+                            if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", BesarBayar.getText(), "0");
+                            if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", BesarBayar.getText());
+                            if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());
 
                             if(sukses==true){
                                 if((sisahutang<=Double.parseDouble(BesarBayar.getText()))||(sisahutang<=-Double.parseDouble(BesarBayar.getText()))){
@@ -1031,10 +1031,10 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
                         }
                         Sequel.deleteTampJurnal();
                         if (total > 0) {
-                            Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, total);
                         }
-                        Sequel.insertTampJurnal(koderekening, tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)) + total, 0);
-                        Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", 0, ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)));
+                        if (sukses) sukses = Sequel.insertTampJurnal(koderekening, tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)) + total, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", 0, ((Double) tbKamar.getValueAt(tbKamar.getSelectedRow(), 8)));
                         sukses = jur.simpanJurnal(NoBukti.getText(), "U", "BATAL BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR " + tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString() + ", OLEH " + akses.getkode());
                     }
                 } else {
@@ -1378,11 +1378,11 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
 
                 Sequel.deleteTampJurnal();
                 if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                    Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                    if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                 }
-                Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", BesarBayar.getText(), "0");
-                Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(BesarBayar.getText())));
-                sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());
+                if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Non_Medis, "HUTANG USAHA", BesarBayar.getText(), "0");
+                if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(BesarBayar.getText())));
+                if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN BARANG NON MEDIS NO.FAKTUR "+NoFaktur.getText()+", OLEH "+akses.getkode());
 
                 if(sukses==true){
                     if((sisahutang<=Double.parseDouble(BesarBayar.getText()))||(sisahutang<=-Double.parseDouble(BesarBayar.getText()))){

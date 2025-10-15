@@ -4827,30 +4827,30 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
-                            Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
                         }
                         if(ttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
                         }
                         if(ttlkso>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
-                            Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
                         }
                         if(ttlmenejemen>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
                         }
                         if(ttljasasarana>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
                         }
                         if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
                         }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
                     }
 
                     if(sukses==true){
@@ -4931,30 +4931,30 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
-                            Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
                         }
                         if(ttljmperawat>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
                         }
                         if(ttlkso>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
-                            Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
                         }
                         if(ttlmenejemen>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
                         }
                         if(ttljasasarana>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
                         }
                         if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
                         }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
                     }
 
                     if(sukses==true){
@@ -5039,34 +5039,34 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
-                            Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
                         }
                         if(ttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
                         }
                         if(ttljmperawat>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
                         }
                         if(ttlkso>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
-                            Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
                         }
                         if(ttlmenejemen>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
                         }
                         if(ttljasasarana>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
                         }
                         if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
                         }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
                     }
 
                     if(sukses==true){
@@ -11064,28 +11064,28 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         })==true){
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                             }
                             if(Valid.SetAngka(JmDokter.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11129,28 +11129,28 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         })==true){
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                             }
                             if(Valid.SetAngka(JmPerawat.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11195,32 +11195,32 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         })==true){
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                             }
                             if(Valid.SetAngka(JmDokter.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
                             }
                             if(Valid.SetAngka(JmPerawat.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11394,58 +11394,58 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                        tmenejemen = Valid.setAngkaSmc(tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(), 15).toString());
                 Sequel.deleteTampJurnal();
                 if(tpendapatan>0){
-                    Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
-                    Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
                 }
                 if(tjmdokter>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, tjmdokter);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", tjmdokter, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, tjmdokter);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", tjmdokter, 0);
                 }
                 if(tkso>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
-                    Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
                 }
                 if(tmenejemen>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
                 }
                 if(tjasasarana>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
                 }
                 if(tbhp>0){
-                    Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
-                    Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
                 }
-                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN OLEH "+akses.getkode());
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(Valid.SetAngka(TTnd.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                     }
                     if(Valid.SetAngka(JmDokter.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
                     }
                     if(Valid.SetAngka(KSO.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                     }
                     if(Valid.SetAngka(BagianRS.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                     }
                     if(Valid.SetAngka(Bhp.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                     }
                     if(Valid.SetAngka(Menejemen.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                     }
-                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
                 }
             }else{
                 sukses=false;
@@ -11502,58 +11502,58 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                        tmenejemen = Valid.setAngkaSmc(tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(), 15).toString());
                 Sequel.deleteTampJurnal();
                 if(tpendapatan>0){
-                    Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
-                    Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
                 }
                 if(tjmperawat>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, tjmperawat);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", tjmperawat, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, tjmperawat);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", tjmperawat, 0);
                 }
                 if(tkso>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
-                    Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
                 }
                 if(tmenejemen>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
                 }
                 if(tjasasarana>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
                 }
                 if(tbhp>0){
-                    Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
-                    Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
                 }
-                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(Valid.SetAngka(TTnd.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                     }
                     if(Valid.SetAngka(JmPerawat.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
                     }
                     if(Valid.SetAngka(KSO.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                     }
                     if(Valid.SetAngka(BagianRS.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                     }
                     if(Valid.SetAngka(Bhp.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                     }
                     if(Valid.SetAngka(Menejemen.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                     }
-                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
                 }
             }else{
                 sukses=false;
@@ -11613,66 +11613,66 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
                 Sequel.deleteTampJurnal();
                 if(tpendapatan>0){
-                    Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
-                    Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, tpendapatan);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", tpendapatan, 0);
                 }
                 if(tjmdokter>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, tjmdokter);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", tjmdokter, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, tjmdokter);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", tjmdokter, 0);
                 }
                 if(tjmperawat>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, tjmperawat);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", tjmperawat, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, tjmperawat);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", tjmperawat, 0);
                 }
                 if(tkso>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
-                    Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, tkso);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", tkso, 0);
                 }
                 if(tmenejemen>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, tmenejemen);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", tmenejemen, 0);
                 }
                 if(tjasasarana>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, tjasasarana);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", tjasasarana, 0);
                 }
                 if(tbhp>0){
-                    Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
-                    Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, tbhp);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", tbhp, 0);
                 }
-                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(Valid.SetAngka(TTnd.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
                     }
                     if(Valid.SetAngka(JmDokter.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
                     }
                     if(Valid.SetAngka(JmPerawat.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
                     }
                     if(Valid.SetAngka(KSO.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
                     }
                     if(Valid.SetAngka(BagianRS.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
                     }
                     if(Valid.SetAngka(Bhp.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
                     }
                     if(Valid.SetAngka(Menejemen.getText())>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
                     }
-                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
                 }
             }else{
                 sukses=false;

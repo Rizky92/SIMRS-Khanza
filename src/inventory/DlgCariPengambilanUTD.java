@@ -407,9 +407,9 @@ public final class DlgCariPengambilanUTD extends javax.swing.JDialog {
 
             if(sukses==true){
                 Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Utd from set_akun"), "PENGAMBILAN BHP MEDIS UTD", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()));
-                Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0);
-                sukses=jur.simpanJurnal(DTPCari1.getSelectedItem().toString(),"U","PEMBATALAN PENGAMBILAN BHP MEDIS UTD DARI "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5)+", OLEH "+akses.getkode());
+                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Utd from set_akun"), "PENGAMBILAN BHP MEDIS UTD", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()));
+                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0);
+                if (sukses) sukses = jur.simpanJurnal(DTPCari1.getSelectedItem().toString(),"U","PEMBATALAN PENGAMBILAN BHP MEDIS UTD DARI "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5)+", OLEH "+akses.getkode());
             }
 
             if(sukses==true){

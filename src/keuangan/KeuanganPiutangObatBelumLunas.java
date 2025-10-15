@@ -682,17 +682,17 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
                             Diskon_Piutang,tabMode.getValueAt(i,13).toString(),Piutang_Tidak_Terbayar
                         })==true){
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(akunpiutang, "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunpiutang, "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
                             if(Double.parseDouble(tabMode.getValueAt(i,11).toString())>0){
-                                Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0");
+                                if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0");
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,12).toString())>0){
-                                Sequel.insertTampJurnal(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0");
+                                if (sukses) sukses = Sequel.insertTampJurnal(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0");
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,13).toString())>0){
-                                Sequel.insertTampJurnal(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0");
+                                if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0");
                             }
-                            sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            if (sukses) sukses = jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
                         }else{
                             sukses=false;
                         }

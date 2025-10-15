@@ -1148,8 +1148,8 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                                         Sequel.mengedit("tokopemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     }
                                     Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
@@ -1356,10 +1356,10 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                                 }else{
                                     Sequel.deleteTampJurnal();
                                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                                        Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                                        if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                                     }
-                                    Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Bayar_Pemesanan_Toko, "HUTANG BARANG TOKO", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG TOKO NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }

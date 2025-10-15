@@ -915,9 +915,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                     }
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Non_Medis from set_akun"), "RETUR BELI NON MEDIS", rs.getDouble("total"), 0);
-                    Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Non_Medis from set_akun"), "KONTA RETUR BELI NON MEDIS", 0, rs.getDouble("total"));
-                    sukses=jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG PENUNJANG/NON MEDIS"+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Non_Medis from set_akun"), "RETUR BELI NON MEDIS", rs.getDouble("total"), 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Non_Medis from set_akun"), "KONTA RETUR BELI NON MEDIS", 0, rs.getDouble("total"));
+                    if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG PENUNJANG/NON MEDIS"+", OLEH "+akses.getkode());
 
                     if(sukses==true){
                         Sequel.queryu2("delete from ipsrsreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});

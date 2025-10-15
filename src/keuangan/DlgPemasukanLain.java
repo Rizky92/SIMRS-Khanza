@@ -684,9 +684,9 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                         psakun.setString(1,KdKategori.getText());
                         rs=psakun.executeQuery();
                         if(rs.next()){
-                            Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), 0, Double.parseDouble(pemasukan.getText()));
-                            Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), Double.parseDouble(pemasukan.getText()), 0);
-                            sukses=jur.simpanJurnal(Nomor.getText(),"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), 0, Double.parseDouble(pemasukan.getText()));
+                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), Double.parseDouble(pemasukan.getText()), 0);
+                            if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
                         }
                     } catch (Exception e) {
                         sukses=false;
@@ -763,8 +763,8 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 Sequel.deleteTampJurnal();
-                                Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0);
-                                Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
+                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
                                 sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PEMASUKAN LAIN-LAIN OLEH " + akses.getkode());
                             } else {
                                 sukses = false;

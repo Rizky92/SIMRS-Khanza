@@ -1651,15 +1651,15 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     if(sukses){
                         Sequel.deleteTampJurnal();
                         if(ttljual>0){
-                            Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", ttljual, 0);
-                            Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", 0, ttljual);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", ttljual, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", 0, ttljual);
                         }
                         if(ttlhpp>0){
-                            Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", ttlhpp, 0);
-                            Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", 0, ttlhpp);
+                            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", ttlhpp, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", 0, ttlhpp);
                         }
                         if((ttljual>0)||(ttlhpp>0)){
-                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
                         }
                     }
 

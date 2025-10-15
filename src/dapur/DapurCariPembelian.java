@@ -818,12 +818,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
 
                       Sequel.deleteTampJurnal();
-                      Sequel.insertTampJurnal(akunpengadaan, "PEMBELIAN", 0, rs.getDouble("total"));
+                      if (sukses) sukses = Sequel.insertTampJurnal(akunpengadaan, "PEMBELIAN", 0, rs.getDouble("total"));
                       if(rs.getDouble("ppn")>0){
-                        Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Dapur", 0, rs.getDouble("ppn"));
+                        if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Dapur", 0, rs.getDouble("ppn"));
                       }
-                      Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", rs.getDouble("tagihan"), 0);
-                      sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PEMBELIAN BARANG DAPUR KERING & BASAH"+", OLEH "+akses.getkode());
+                      if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", rs.getDouble("tagihan"), 0);
+                      if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PEMBELIAN BARANG DAPUR KERING & BASAH"+", OLEH "+akses.getkode());
                       if(sukses==true){
                           Sequel.queryu2("delete from dapurpembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
                           Sequel.Commit();

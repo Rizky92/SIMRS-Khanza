@@ -1227,8 +1227,8 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                                         Sequel.mengedit("inventaris_pemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     }
                                     Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", tabMode.getValueAt(i,10).toString());
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }
@@ -1453,10 +1453,10 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
                                 }else{
                                     Sequel.deleteTampJurnal();
                                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                                        Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                                        if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                                     }
-                                    Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", tabMode.getValueAt(i,10).toString(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(tabMode.getValueAt(i,10).toString())));
                                     if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG ASET/INVENTARIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
                                         sukses=false;
                                     }

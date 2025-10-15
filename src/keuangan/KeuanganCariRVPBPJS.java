@@ -867,7 +867,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                             Sequel.menyimpan("tampjurnal_rvpbpjs","'"+Lebih_Bayar_Klaim_BPJS_RVP+"','LEBIH BAYAR BPJS','"+tabMode.getValueAt(i,13).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,13).toString()+"'","kd_rek='"+Lebih_Bayar_Klaim_BPJS_RVP+"'");
                         }
                         Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,82).toString()+"'");
-                        sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());
+                        if (sukses) sukses = jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());
                     }else if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())<100){
                         Sequel.queryu("delete from tampjurnal_rvpbpjs");
                         //tindakan ralan
@@ -1139,7 +1139,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                             Sequel.menyimpan("tampjurnal_rvpbpjs","'"+PPN_Keluaran+"','PPN KELUARAN','"+((Valid.SetAngka(tabMode.getValueAt(i,11).toString())/100) *Valid.SetAngka(tabMode.getValueAt(i,85).toString()))+"','0'","debet=debet+'"+((Valid.SetAngka(tabMode.getValueAt(i,11).toString())/100) *Valid.SetAngka(tabMode.getValueAt(i,85).toString()))+"'","kd_rek='"+PPN_Keluaran+"'");
                         }
                         //jurnal pembatalan RVP beban, utang, piutang, pendapatan
-                        sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS, OLEH "+akses.getkode());
+                        if (sukses) sukses = jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS, OLEH "+akses.getkode());
 
                         if(sukses==true){
                             Sequel.queryu("delete from tampjurnal_rvpbpjs");
@@ -1412,7 +1412,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
                                 Sequel.menyimpan("tampjurnal_rvpbpjs","'"+PPN_Keluaran+"','PPN KELUARAN','0','"+(Valid.SetAngka(tabMode.getValueAt(i,85).toString()))+"'","kredit=kredit+'"+(Valid.SetAngka(tabMode.getValueAt(i,85).toString()))+"'","kd_rek='"+PPN_Keluaran+"'");
                             }
                             //jurnal pembatalan RVU beban, utang, piutang, pendapatan
-                            sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS, OLEH "+akses.getkode());
+                            if (sukses) sukses = jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS, OLEH "+akses.getkode());
 
                             if(sukses==true){
                                 //jurnal kerugian
@@ -1458,7 +1458,7 @@ public final class KeuanganCariRVPBPJS extends javax.swing.JDialog {
 
                                 Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,83).toString()+"','PIUTANG BPJS','"+tabMode.getValueAt(i,10).toString()+"','0'","debet=debet+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,83).toString()+"'");
                                 Sequel.menyimpan("tampjurnal_rvpbpjs","'"+tabMode.getValueAt(i,82).toString()+"','Akun Bayar','0','"+tabMode.getValueAt(i,10).toString()+"'","kredit=kredit+'"+tabMode.getValueAt(i,10).toString()+"'","kd_rek='"+tabMode.getValueAt(i,82).toString()+"'");
-                                sukses=jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());
+                                if (sukses) sukses = jur.simpanJurnalRVPBPJS(tabMode.getValueAt(i,1).toString(),"U","PEMBATALAN RVP PIUTANG BPJS"+", OLEH "+akses.getkode());
 
                                 if(sukses==true){
                                     //update RVP Rawat jalan

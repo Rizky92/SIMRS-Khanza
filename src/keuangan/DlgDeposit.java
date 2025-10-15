@@ -298,9 +298,13 @@ public class DlgDeposit extends javax.swing.JDialog {
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
+        tbObat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbObatMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbObatMouseReleased(evt);
             }
         });
         tbObat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -452,7 +456,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -466,7 +470,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -557,7 +561,7 @@ public class DlgDeposit extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -824,9 +828,9 @@ public class DlgDeposit extends javax.swing.JDialog {
                            for(JsonNode list:response){
                                if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
                                     Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0);
-                                    Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()));
-                                    sukses=jur.simpanJurnal(Nomor.getText(),"U","DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0);
+                                    if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()));
+                                    if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
                                     if(sukses==true){
                                         sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','-','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','Uang Muka','"+BesarDeposit.getText()+"','"+BesarDeposit.getText()+"','Belum','"+akses.getkode()+"'","No.Deposit");
                                     }
@@ -906,9 +910,9 @@ public class DlgDeposit extends javax.swing.JDialog {
                         tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                     })==true){
                         Sequel.deleteTampJurnal();
-                        Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Double.parseDouble(BesarDeposit.getText()), 0);
-                        Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(BesarDeposit.getText()));
-                        sukses=jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),"U","PEMBATALAN DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
+                        if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Double.parseDouble(BesarDeposit.getText()), 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(BesarDeposit.getText()));
+                        if (sukses) sukses = jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),"U","PEMBATALAN DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
                         if(sukses==true){
                             sukses=Sequel.queryu2tf("delete from tagihan_sadewa where no_nota=?",1,new String[]{tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()});
                         }
@@ -1030,12 +1034,7 @@ public class DlgDeposit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
+        
     }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
@@ -1139,6 +1138,16 @@ public class DlgDeposit extends javax.swing.JDialog {
     private void DTPTglItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPTglItemStateChanged
         autoNomor();
     }//GEN-LAST:event_DTPTglItemStateChanged
+
+    private void tbObatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseReleased
+        if(tabMode.getRowCount()!=0){
+            try {
+                tbObat.changeSelection(tbObat.rowAtPoint(evt.getPoint()), tbObat.columnAtPoint(evt.getPoint()), false, false);
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+        }
+    }//GEN-LAST:event_tbObatMouseReleased
 
     /**
     * @param args the command line arguments

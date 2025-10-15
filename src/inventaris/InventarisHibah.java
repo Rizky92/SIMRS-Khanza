@@ -720,9 +720,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(akunaset, "JENIS ASET INVENTARIS", sbttl, 0);
-                    Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", 0, sbttl);
-                    sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN HIBAH ASET/INVENTARIS"+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(akunaset, "JENIS ASET INVENTARIS", sbttl, 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", 0, sbttl);
+                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN HIBAH ASET/INVENTARIS"+", OLEH "+akses.getkode());
                 }
 
                 if(sukses==true){
