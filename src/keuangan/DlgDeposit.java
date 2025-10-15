@@ -300,9 +300,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         tbObat.setName("tbObat"); // NOI18N
         tbObat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbObatMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbObatMouseReleased(evt);
             }
@@ -326,7 +323,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -344,7 +340,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -362,7 +357,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -380,7 +374,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.add(BtnHapus);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -398,7 +391,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -427,7 +419,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass8.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -456,7 +447,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -470,7 +461,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -492,7 +483,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('2');
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -517,7 +507,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('M');
         ChkInput.setText(".: Input Data");
         ChkInput.setBorderPainted(true);
         ChkInput.setBorderPaintedFlat(true);
@@ -561,7 +550,7 @@ public class DlgDeposit extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -635,7 +624,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         NamaPetugas.setBounds(195, 70, 213, 23);
 
         BtnSeekPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeekPetugas.setMnemonic('5');
         BtnSeekPetugas.setToolTipText("ALt+5");
         BtnSeekPetugas.setName("BtnSeekPetugas"); // NOI18N
         BtnSeekPetugas.addActionListener(new java.awt.event.ActionListener() {
@@ -763,7 +751,6 @@ public class DlgDeposit extends javax.swing.JDialog {
         jLabel14.setBounds(0, 130, 75, 23);
 
         BtnAll1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
-        BtnAll1.setMnemonic('M');
         BtnAll1.setToolTipText("Alt+M");
         BtnAll1.setName("BtnAll1"); // NOI18N
         BtnAll1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -882,6 +869,8 @@ public class DlgDeposit extends javax.swing.JDialog {
         cmbDtk.setSelectedItem(now.substring(17,19));
         DTPTgl.setDate(new Date());
         DTPTgl.requestFocus();
+        Keterangan.setText("");
+        tbObat.clearSelection();
         autoNomor();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -905,33 +894,30 @@ public class DlgDeposit extends javax.swing.JDialog {
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-
-                    if(Sequel.queryu2tf("delete from deposit where no_deposit=?", 1,new String[]{
-                        tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
-                    })==true){
+                    
+                    if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
                         Sequel.deleteTampJurnal();
-                        if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Double.parseDouble(BesarDeposit.getText()), 0);
-                        if (sukses) sukses = Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(BesarDeposit.getText()));
-                        if (sukses) sukses = jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),"U","PEMBATALAN DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
-                        if(sukses==true){
-                            sukses=Sequel.queryu2tf("delete from tagihan_sadewa where no_nota=?",1,new String[]{tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()});
-                        }
-                    }else{
-                        sukses=false;
+                        if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()));
+                        if (sukses) sukses = jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), "U", "PEMBATALAN DEPOSIT PASIEN " + TNoRw.getText() + " " + TNoRM.getText() + " " + TPasien.getText() + ", OLEH " + akses.getkode());
+                        if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
+                    } else {
+                        sukses = false;
                     }
-
-                    if(sukses==true){
+                    
+                    if (sukses) {
                         Sequel.Commit();
-                    }else{
-                        sukses=false;
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    } else {
                         Sequel.RollBack();
                     }
+                    
                     Sequel.AutoComitTrue();
-
-                    if(sukses==true){
+                    
+                    if (sukses) {
                         tampil();
-                        BtnBatalActionPerformed(evt);
+                        BtnBatalActionPerformed(null);
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     }
                 }
             }
@@ -1032,10 +1018,6 @@ public class DlgDeposit extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, TPasien);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
-
-    private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
-        
-    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){

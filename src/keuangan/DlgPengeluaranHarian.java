@@ -468,9 +468,10 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         tbResep.setAutoCreateRowSorter(true);
         tbResep.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbResep.setName("tbResep"); // NOI18N
+        tbResep.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbResep.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbResepMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbResepMouseReleased(evt);
             }
         });
         tbResep.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -622,7 +623,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -636,7 +637,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -775,7 +776,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         btnKategori.setBounds(409, 12, 28, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-10-2024 15:00:22" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2025 04:30:08" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -913,39 +914,39 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                     DlgBayarMandiri.setLocationRelativeTo(internalFrame1);
                     DlgBayarMandiri.setVisible(true);
                 }else{
-                    autoNomor();
+                    // autoNomor();
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    if(Sequel.menyimpantf2("pengeluaran_harian","?,?,?,?,?,?","Pengeluaran",6,new String[]{
-                        Nomor.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),
-                        KdKategori.getText(),Pengeluaran.getText(),KdPtg.getText(),Keterangan.getText()
-                    })==true){
+                    if (Sequel.menyimpantfSmc("pengeluaran_harian", null, Nomor.getText(), Valid.getTglJamSmc(Tanggal),
+                        KdKategori.getText(), Pengeluaran.getText(), KdPtg.getText(), Keterangan.getText())
+                    ) {
                         Sequel.deleteTampJurnal();
                         if (sukses) sukses = Sequel.insertTampJurnal(akun, "Akun", Pengeluaran.getText(), "0");
                         if (sukses) sukses = Sequel.insertTampJurnal(kontrakun, "Kontra", "0", Pengeluaran.getText());
-                        if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
-                    }else{
-                        sukses=false;
+                        if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN, OLEH "+akses.getkode());
+                    } else {
+                        sukses = false;
                     }
-
-                    if(sukses==true){
-                        if(!nopengajuanbiaya.equals("")){
-                            Sequel.queryu("update pengajuan_biaya set status='Divalidasi' where no_pengajuan='"+nopengajuanbiaya+"'");
+                    
+                    if (sukses) {
+                        if (!nopengajuanbiaya.isBlank()) {
+                            Sequel.mengupdateSmc("pengajuan_biaya", "status = 'Divalidasi'", "no_pengajuan = ?", nopengajuanbiaya);
                         }
                         Sequel.Commit();
-                    }else{
-                        sukses=false;
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    } else {
                         Sequel.RollBack();
                     }
-
+                    
                     Sequel.AutoComitTrue();
-                    if(sukses==true){
-                        tabMode.addRow(new Object[]{
-                            Nomor.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),KdKategori.getText()+" "+NmKategori.getText(),NmPtg.getText(),Valid.SetAngka(Pengeluaran.getText()),Keterangan.getText(),KdKategori.getText(),KdPtg.getText()
+                    
+                    if (sukses) {
+                        tabMode.addRow(new Object[] {
+                            Nomor.getText(), Valid.getTglJamSmc(Tanggal), KdKategori.getText() + " " + NmKategori.getText(), NmPtg.getText(), Valid.SetAngka(Pengeluaran.getText()), Keterangan.getText(), KdKategori.getText(), KdPtg.getText()
                         });
                         emptTeks();
                         hitung();
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     }
                 }
             }
@@ -1118,15 +1119,6 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
             Valid.pindah(evt, BtnCari, NmPtg);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
-
-    private void tbResepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
-    }//GEN-LAST:event_tbResepMouseClicked
 
     private void tbResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbResepKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1309,6 +1301,16 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
         autoNomor();
     }//GEN-LAST:event_TanggalItemStateChanged
+
+    private void tbResepMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResepMouseReleased
+        if(tabMode.getRowCount()!=0){
+            try {
+                tbResep.changeSelection(tbResep.rowAtPoint(evt.getPoint()), tbResep.columnAtPoint(evt.getPoint()), false, false);
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+        }
+    }//GEN-LAST:event_tbResepMouseReleased
 
     /**
     * @param args the command line arguments
