@@ -229,10 +229,6 @@
                                 "add_payment_pct": "'.$add_payment_pct.'",
                                 "birth_weight": "'.$birth_weight.'",
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -297,10 +293,6 @@
                                 "add_payment_pct": "'.$add_payment_pct.'",
                                 "birth_weight": "'.$birth_weight.'",
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -334,6 +326,8 @@
         //echo "Data : ".$request;
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage1($nomor_sep,$coder_nik,$diagnosa);
         }
     }
@@ -369,10 +363,6 @@
                             "add_payment_pct": "'.$add_payment_pct.'",
                             "birth_weight": "'.$birth_weight.'",
                             "discharge_status": "'.$discharge_status.'",
-                            "diagnosa": "'.$diagnosa.'",
-                            "procedure": "'.$procedure.'",
-                            "diagnosa_inagrouper": "'.$diagnosa.'",
-                            "procedure_inagrouper": "'.$procedure.'",
                             "tarif_rs": {
                                 "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                 "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -405,10 +395,38 @@
         //echo "Data : ".$request;
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
-            Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-            InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage12($nomor_sep,$coder_nik);
         }
+    }
+
+    function SetDiagnosaDRG($nomorsep,$diagnosa){
+        $request ='{
+                        "metadata": {
+                            "method": "idrg_diagnosa_set",
+                            "nomor_sep": "'.$nomorsep.'"
+                        },
+                        "data": {
+                            "diagnosa": "'.$diagnosa.'"
+                        }
+                   }';
+        $msg= Request($request);
+        echo $msg['metadata']['message']."";
+    }
+
+    function SetProsedurDRG($nomorsep,$prosedur){
+        $request ='{
+                        "metadata": {
+                            "method": "idrg_procedure_set",
+                            "nomor_sep": "'.$nomorsep.'"
+                        },
+                        "data": {
+                            "procedure": "'.$prosedur.'"
+                        }
+                   }';
+        $msg= Request($request);
+        echo $msg['metadata']['message']."";
     }
 
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
@@ -444,10 +462,6 @@
                             "add_payment_pct": "'.$add_payment_pct.'",
                             "birth_weight": "'.$birth_weight.'",
                             "discharge_status": "'.$discharge_status.'",
-                            "diagnosa": "'.$diagnosa.'",
-                            "procedure": "'.$procedure.'",
-                            "diagnosa_inagrouper": "'.$diagnosa.'",
-                            "procedure_inagrouper": "'.$procedure.'",
                             "tarif_rs": {
                                 "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                 "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -491,8 +505,8 @@
         //echo "Data : ".$request;
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
-            Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
-            InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage13($nomor_sep,$coder_nik);
         }
     }

@@ -314,10 +314,6 @@
                                 "sistole": '.$sistole.',
                                 "diastole": '.$diastole.',
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -384,10 +380,6 @@
                                 "sistole": '.$sistole.',
                                 "diastole": '.$diastole.',
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -424,6 +416,8 @@
         if($msg['metadata']['message']=="Ok"){
             Hapus2("inacbg_data_terkirim", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage1($nomor_sep,$coder_nik);
         }else{
             echo "\nRespon INACBG : ".$msg['metadata']['message'];
@@ -546,10 +540,6 @@
                                 "sistole": '.$sistole.',
                                 "diastole": '.$diastole.',
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -616,10 +606,6 @@
                                 "sistole": '.$sistole.',
                                 "diastole": '.$diastole.',
                                 "discharge_status": "'.$discharge_status.'",
-                                "diagnosa": "'.$diagnosa.'",
-                                "procedure": "'.$procedure.'",
-                                "diagnosa_inagrouper": "'.$diagnosa.'",
-                                "procedure_inagrouper": "'.$procedure.'",
                                 "tarif_rs": {
                                     "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                     "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -656,6 +642,8 @@
         if($msg['metadata']['message']=="Ok"){
             Hapus2("inacbg_data_terkirim_internal", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim_internal","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage1Internal($nomor_sep,$coder_nik);
         }else{
             echo "\nRespon INACBG : ".$msg['metadata']['message'];
@@ -695,10 +683,6 @@
                             "sistole": '.$sistole.',
                             "diastole": '.$diastole.',
                             "discharge_status": "'.$discharge_status.'",
-                            "diagnosa": "'.$diagnosa.'",
-                            "procedure": "'.$procedure.'",
-                            "diagnosa_inagrouper": "'.$diagnosa.'",
-                            "procedure_inagrouper": "'.$procedure.'",
                             "tarif_rs": {
                                 "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                 "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -734,6 +718,8 @@
         if($msg['metadata']['message']=="Ok"){
             Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage12($nomor_sep,$coder_nik);
             $respon="Berhasil";
         }else{
@@ -741,6 +727,34 @@
             echo "\nRespon INACBG : ".$msg['metadata']['message'];
         }
         return $respon;
+    }
+
+    function SetDiagnosaDRG($nomorsep,$diagnosa){
+        $request ='{
+                        "metadata": {
+                            "method": "idrg_diagnosa_set",
+                            "nomor_sep": "'.$nomorsep.'"
+                        },
+                        "data": {
+                            "diagnosa": "'.$diagnosa.'"
+                        }
+                   }';
+        $msg= Request($request);
+        echo $msg['metadata']['message']."";
+    }
+
+    function SetProsedurDRG($nomorsep,$prosedur){
+        $request ='{
+                        "metadata": {
+                            "method": "idrg_procedure_set",
+                            "nomor_sep": "'.$nomorsep.'"
+                        },
+                        "data": {
+                            "procedure": "'.$prosedur.'"
+                        }
+                   }';
+        $msg= Request($request);
+        echo $msg['metadata']['message']."";
     }
 
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
@@ -778,10 +792,6 @@
                             "sistole": '.$sistole.',
                             "diastole": '.$diastole.',
                             "discharge_status": "'.$discharge_status.'",
-                            "diagnosa": "'.$diagnosa.'",
-                            "procedure": "'.$procedure.'",
-                            "diagnosa_inagrouper": "'.$diagnosa.'",
-                            "procedure_inagrouper": "'.$procedure.'",
                             "tarif_rs": {
                                 "prosedur_non_bedah": "'.$prosedur_non_bedah.'",
                                 "prosedur_bedah": "'.$prosedur_bedah.'",
@@ -827,6 +837,8 @@
         if($msg['metadata']['message']=="Ok"){
             Hapus2("inacbg_data_terkirim2", "no_sep='".$nomor_sep."'");
             InsertData2("inacbg_data_terkirim2","'".$nomor_sep."','".$coder_nik."'");
+            SetDiagnosaDRG($nomor_sep, $diagnosa);
+            SetProsedurDRG($nomor_sep, $procedure);
             GroupingStage13($nomor_sep,$coder_nik);
         }else{
             echo "\nRespon INACBG : ".$msg['metadata']['message'];
