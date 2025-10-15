@@ -1028,9 +1028,9 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                 getdata();
             }
         }
-}//GEN-LAST:event_tbBelumLunasKeyPressed
+    }//GEN-LAST:event_tbBelumLunasKeyPressed
 
-private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
+    private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     if (TabRawat.getSelectedIndex() == 0) {
         if (tabMode.getRowCount() == 0) {
@@ -1096,7 +1096,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
     }
     this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_MnDetailPiutangActionPerformed
+    }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnPenjaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjaminActionPerformed
         penjab.isCek();

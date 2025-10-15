@@ -2423,11 +2423,11 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2435,7 +2435,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -2447,7 +2447,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbDokterMouseClicked
+    }//GEN-LAST:event_tbDokterMouseClicked
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -2459,11 +2459,11 @@ public class DlgIKBBayi extends javax.swing.JDialog {
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbDokterKeyPressed
+    }//GEN-LAST:event_tbDokterKeyPressed
 
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKeyPressed
         //Valid.pindah(evt,BtnClose,no_rm_ibu);
-}//GEN-LAST:event_KdKeyPressed
+    }//GEN-LAST:event_KdKeyPressed
 
     private void ProsesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProsesKeyPressed
          Valid.pindah(evt,PenyulitKehamilan,Anakke);
@@ -2527,7 +2527,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
                 Valid.MyReportqry("rptPasienbayi.jasper","report","::[ Data Bayi ]::",sql,param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2535,12 +2535,12 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,BtnEdit,BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2548,88 +2548,88 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         DlgBridgingLahir.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void LingkarKepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LingkarKepalaKeyPressed
          Valid.pindah(evt,LingkarDada,LingkarPerut);
     }//GEN-LAST:event_LingkarKepalaKeyPressed
 
-private void JKelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JKelKeyPressed
+    private void JKelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JKelKeyPressed
         Valid.pindah(evt,AlamatIbu,Panjang);
-}//GEN-LAST:event_JKelKeyPressed
+    }//GEN-LAST:event_JKelKeyPressed
 
-private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
+    private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
         Valid.pindah(evt,Keterangan,Ketuban);
-}//GEN-LAST:event_DiagnosaKeyPressed
+    }//GEN-LAST:event_DiagnosaKeyPressed
 
-private void NoRmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRmKeyPressed
+    private void NoRmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRmKeyPressed
     Valid.pindah(evt,TCari,NmBayi);
-}//GEN-LAST:event_NoRmKeyPressed
+    }//GEN-LAST:event_NoRmKeyPressed
 
-private void LahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LahirKeyPressed
+    private void LahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LahirKeyPressed
    Valid.pindah2(evt,LingkarPerut,jam);
-}//GEN-LAST:event_LahirKeyPressed
+    }//GEN-LAST:event_LahirKeyPressed
 
-private void cmbCrJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCrJkKeyPressed
+    private void cmbCrJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCrJkKeyPressed
    Valid.pindah(evt,BtnAll, DTPCari1);
-}//GEN-LAST:event_cmbCrJkKeyPressed
+    }//GEN-LAST:event_cmbCrJkKeyPressed
 
-private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed
+    private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed
    Valid.pindah(evt,Proses,Diagnosa);
-}//GEN-LAST:event_DTPCari1KeyPressed
+    }//GEN-LAST:event_DTPCari1KeyPressed
 
-private void DTPCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari2KeyPressed
+    private void DTPCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari2KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_DTPCari2KeyPressed
+    }//GEN-LAST:event_DTPCari2KeyPressed
 
-private void jamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jamKeyPressed
+    private void jamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jamKeyPressed
    Valid.pindah(evt,Lahir, menit);
-}//GEN-LAST:event_jamKeyPressed
+    }//GEN-LAST:event_jamKeyPressed
 
-private void menitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menitKeyPressed
+    private void menitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menitKeyPressed
    Valid.pindah(evt,jam,detik);
-}//GEN-LAST:event_menitKeyPressed
+    }//GEN-LAST:event_menitKeyPressed
 
-private void detikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_detikKeyPressed
+    private void detikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_detikKeyPressed
    Valid.pindah(evt,menit,UmurBayi);
-}//GEN-LAST:event_detikKeyPressed
+    }//GEN-LAST:event_detikKeyPressed
 
-private void BeratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BeratKeyPressed
+    private void BeratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BeratKeyPressed
    Valid.pindah(evt,Panjang,LingkarDada);
-}//GEN-LAST:event_BeratKeyPressed
+    }//GEN-LAST:event_BeratKeyPressed
 
-private void PanjangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PanjangKeyPressed
+    private void PanjangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PanjangKeyPressed
    Valid.pindah(evt,JKel,Berat);
-}//GEN-LAST:event_PanjangKeyPressed
+    }//GEN-LAST:event_PanjangKeyPressed
 
-private void DaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DaftarKeyPressed
+    private void DaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DaftarKeyPressed
    Valid.pindah2(evt,NoSKL,BtnPenjab);
-}//GEN-LAST:event_DaftarKeyPressed
+    }//GEN-LAST:event_DaftarKeyPressed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
    Valid.pindah(evt,BtnPenjab,Diagnosa);
-}//GEN-LAST:event_KeteranganKeyPressed
+    }//GEN-LAST:event_KeteranganKeyPressed
 
-private void LahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_LahirItemStateChanged
+    private void LahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_LahirItemStateChanged
     lahir = Lahir.getDate();
     birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     p = Period.between(birthday,today);
     p2 =ChronoUnit.DAYS.between(birthday,today);
     UmurBayi.setText(String.valueOf(p.getYears())+" Th "+String.valueOf(p.getMonths())+" Bl "+String.valueOf(p.getDays())+" Hr");
-}//GEN-LAST:event_LahirItemStateChanged
+    }//GEN-LAST:event_LahirItemStateChanged
 
-private void ppGrafikberatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatActionPerformed
+    private void ppGrafikberatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2640,9 +2640,9 @@ private void ppGrafikberatActionPerformed(java.awt.event.ActionEvent evt) {//GEN
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikberatActionPerformed
+    }//GEN-LAST:event_ppGrafikberatActionPerformed
 
-private void ppGrafikberatlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatlakiActionPerformed
+    private void ppGrafikberatlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatlakiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2654,9 +2654,9 @@ private void ppGrafikberatlakiActionPerformed(java.awt.event.ActionEvent evt) {/
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikberatlakiActionPerformed
+    }//GEN-LAST:event_ppGrafikberatlakiActionPerformed
 
-private void ppGrafikberatwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatwnActionPerformed
+    private void ppGrafikberatwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatwnActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2668,9 +2668,9 @@ private void ppGrafikberatwnActionPerformed(java.awt.event.ActionEvent evt) {//G
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikberatwnActionPerformed
+    }//GEN-LAST:event_ppGrafikberatwnActionPerformed
 
-private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikjkbayiActionPerformed
+    private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikjkbayiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2681,9 +2681,9 @@ private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GE
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikjkbayiActionPerformed
+    }//GEN-LAST:event_ppGrafikjkbayiActionPerformed
 
-private void ppGrafikpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangActionPerformed
+    private void ppGrafikpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2694,9 +2694,9 @@ private void ppGrafikpanjangActionPerformed(java.awt.event.ActionEvent evt) {//G
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikpanjangActionPerformed
+    }//GEN-LAST:event_ppGrafikpanjangActionPerformed
 
-private void ppGrafikpanjanglakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjanglakiActionPerformed
+    private void ppGrafikpanjanglakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjanglakiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2708,9 +2708,9 @@ private void ppGrafikpanjanglakiActionPerformed(java.awt.event.ActionEvent evt) 
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikpanjanglakiActionPerformed
+    }//GEN-LAST:event_ppGrafikpanjanglakiActionPerformed
 
-private void ppGrafikpanjangwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangwnActionPerformed
+    private void ppGrafikpanjangwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangwnActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2722,9 +2722,9 @@ private void ppGrafikpanjangwnActionPerformed(java.awt.event.ActionEvent evt) {/
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikpanjangwnActionPerformed
+    }//GEN-LAST:event_ppGrafikpanjangwnActionPerformed
 
-private void ppGrafiklahirtahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunActionPerformed
+    private void ppGrafiklahirtahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2735,9 +2735,9 @@ private void ppGrafiklahirtahunActionPerformed(java.awt.event.ActionEvent evt) {
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirtahunActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirtahunActionPerformed
 
-private void ppGrafiklahirtahunlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunlakiActionPerformed
+    private void ppGrafiklahirtahunlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunlakiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2748,9 +2748,9 @@ private void ppGrafiklahirtahunlakiActionPerformed(java.awt.event.ActionEvent ev
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirtahunlakiActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirtahunlakiActionPerformed
 
-private void ppGrafiklahirtahunwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunwnActionPerformed
+    private void ppGrafiklahirtahunwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunwnActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2761,9 +2761,9 @@ private void ppGrafiklahirtahunwnActionPerformed(java.awt.event.ActionEvent evt)
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirtahunwnActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirtahunwnActionPerformed
 
-private void ppGrafiklahirbulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanActionPerformed
+    private void ppGrafiklahirbulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2774,9 +2774,9 @@ private void ppGrafiklahirbulanActionPerformed(java.awt.event.ActionEvent evt) {
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirbulanActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirbulanActionPerformed
 
-private void ppGrafiklahirbulanlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanlakiActionPerformed
+    private void ppGrafiklahirbulanlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanlakiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2787,9 +2787,9 @@ private void ppGrafiklahirbulanlakiActionPerformed(java.awt.event.ActionEvent ev
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirbulanlakiActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirbulanlakiActionPerformed
 
-private void ppGrafiklahirbulanwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanwnActionPerformed
+    private void ppGrafiklahirbulanwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanwnActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2800,9 +2800,9 @@ private void ppGrafiklahirbulanwnActionPerformed(java.awt.event.ActionEvent evt)
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafiklahirbulanwnActionPerformed
+    }//GEN-LAST:event_ppGrafiklahirbulanwnActionPerformed
 
-private void ppGrafikproseslahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirActionPerformed
+    private void ppGrafikproseslahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2813,9 +2813,9 @@ private void ppGrafikproseslahirActionPerformed(java.awt.event.ActionEvent evt) 
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikproseslahirActionPerformed
+    }//GEN-LAST:event_ppGrafikproseslahirActionPerformed
 
-private void ppGrafikproseslahirlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirlakiActionPerformed
+    private void ppGrafikproseslahirlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirlakiActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2826,9 +2826,9 @@ private void ppGrafikproseslahirlakiActionPerformed(java.awt.event.ActionEvent e
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikproseslahirlakiActionPerformed
+    }//GEN-LAST:event_ppGrafikproseslahirlakiActionPerformed
 
-private void ppGrafikproseslahirwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirwnActionPerformed
+    private void ppGrafikproseslahirwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirwnActionPerformed
        String say="";
        String tgl="";
        if(ckTglCari.isSelected()==true){
@@ -2839,9 +2839,9 @@ private void ppGrafikproseslahirwnActionPerformed(java.awt.event.ActionEvent evt
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikproseslahirwnActionPerformed
+    }//GEN-LAST:event_ppGrafikproseslahirwnActionPerformed
 
-private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(NoRm.getText().trim().equals("")){
             Valid.textKosong(NoRm,"No.Rekam Medis");
         }else if(NmBayi.getText().trim().equals("")){
@@ -3031,27 +3031,27 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
-private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
+    private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,Mikonium,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
-private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
+    private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
-private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
+    private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
-private void BtnEditActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed1
+    private void BtnEditActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed1
         if(NoRm.getText().trim().equals("")){
             Valid.textKosong(NoRm,"No.Rekam Medis");
         }else if(NmBayi.getText().trim().equals("")){
@@ -3089,55 +3089,55 @@ private void BtnEditActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "obat_diberikan='"+ObatDiberikan.getText()+"',mikasi='"+Mikasi.getText()+"',mikonium='"+Mikonium.getText()+"'");
             if(tabMode.getRowCount()!=0){tampil();TabRawat.setSelectedIndex(1);}
         }
-}//GEN-LAST:event_BtnEditActionPerformed1
+    }//GEN-LAST:event_BtnEditActionPerformed1
 
-private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
+    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
            BtnEditActionPerformed1(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
-private void BtnHapusActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed1
+    private void BtnHapusActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed1
    Valid.hapusTable(tabMode,NoRm,"pasien_bayi","no_rkm_medis");
    Valid.hapusTable(tabMode,NoRm,"bridging_dukcapil","no_rkm_medis");
    tampil();
-}//GEN-LAST:event_BtnHapusActionPerformed1
+    }//GEN-LAST:event_BtnHapusActionPerformed1
 
-private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
+    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed1(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
-private void NmBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmBayiKeyPressed
+    private void NmBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmBayiKeyPressed
    Valid.pindah(evt, NoRm,Nmibu);
-}//GEN-LAST:event_NmBayiKeyPressed
+    }//GEN-LAST:event_NmBayiKeyPressed
 
-private void NmibuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmibuKeyPressed
+    private void NmibuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmibuKeyPressed
    Valid.pindah(evt, NmBayi,UmurIbu);
-}//GEN-LAST:event_NmibuKeyPressed
+    }//GEN-LAST:event_NmibuKeyPressed
 
-private void UmurIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurIbuKeyPressed
+    private void UmurIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurIbuKeyPressed
    Valid.pindah(evt, Nmibu,NmAyah);
-}//GEN-LAST:event_UmurIbuKeyPressed
+    }//GEN-LAST:event_UmurIbuKeyPressed
 
-private void NmAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAyahKeyPressed
+    private void NmAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAyahKeyPressed
    Valid.pindah(evt, Nmibu,UmurAyah);
-}//GEN-LAST:event_NmAyahKeyPressed
+    }//GEN-LAST:event_NmAyahKeyPressed
 
-private void UmurAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurAyahKeyPressed
+    private void UmurAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurAyahKeyPressed
     Valid.pindah(evt, NmAyah,AlamatIbu);
-}//GEN-LAST:event_UmurAyahKeyPressed
+    }//GEN-LAST:event_UmurAyahKeyPressed
 
-private void AlamatIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatIbuKeyPressed
+    private void AlamatIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatIbuKeyPressed
     Valid.pindah(evt, UmurAyah,JKel);
-}//GEN-LAST:event_AlamatIbuKeyPressed
+    }//GEN-LAST:event_AlamatIbuKeyPressed
 
-private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
+    private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             NoRm.requestFocus();
@@ -3157,7 +3157,7 @@ private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                    "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
                    "pasien.pnd, pasien.keluarga, pasien.namakeluarga from pasien where pasien.no_rkm_medis='"+NoRm.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnKartuActionPerformed
+    }//GEN-LAST:event_MnKartuActionPerformed
 
     private void MnInformasiBayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInformasiBayiActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

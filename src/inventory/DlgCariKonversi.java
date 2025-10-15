@@ -173,7 +173,7 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isHitung();
         }
-}//GEN-LAST:event_n1KeyPressed
+    }//GEN-LAST:event_n1KeyPressed
 
     private void n2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_n2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -191,21 +191,21 @@ public final class DlgCariKonversi extends javax.swing.JDialog {
        isHitung();
     }//GEN-LAST:event_kdsat2ItemStateChanged
 
-private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
+    private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
    dispose();
-}//GEN-LAST:event_BtnKeluar1ActionPerformed
+    }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
-private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
+    private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_BtnKeluar1KeyPressed
+    }//GEN-LAST:event_BtnKeluar1KeyPressed
 
-private void n1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n1ActionPerformed
+    private void n1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n1ActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_n1ActionPerformed
+    }//GEN-LAST:event_n1ActionPerformed
 
-private void kdsat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kdsat1ActionPerformed
+    private void kdsat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kdsat1ActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_kdsat1ActionPerformed
+    }//GEN-LAST:event_kdsat1ActionPerformed
 
     /**
     * @param args the command line arguments

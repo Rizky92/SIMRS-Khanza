@@ -1581,7 +1581,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             tbObat.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if(akses.getform().equals("tampil3")){
@@ -1589,7 +1589,7 @@ public class DlgBarang extends javax.swing.JDialog {
         }else{
             tampil();
         }
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1597,7 +1597,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if (tabMode.getRowCount() != 0) {
@@ -1606,7 +1606,7 @@ public class DlgBarang extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if (tabMode.getRowCount() != 0) {
@@ -1615,11 +1615,11 @@ public class DlgBarang extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
         Valid.pindah(evt,BtnIF, Letak);
-}//GEN-LAST:event_NmKeyPressed
+    }//GEN-LAST:event_NmKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         for (i = 0; i < tbObat.getRowCount(); i++) {
@@ -1631,7 +1631,7 @@ public class DlgBarang extends javax.swing.JDialog {
         }
         LCount.setText("" + tabMode.getRowCount());
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1639,7 +1639,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnHapus, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if (Kd.getText().trim().equals("")) {
@@ -1736,7 +1736,7 @@ public class DlgBarang extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1744,7 +1744,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1809,7 +1809,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1817,7 +1817,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnEdit, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -1826,7 +1826,7 @@ public class DlgBarang extends javax.swing.JDialog {
         }else{
             tampil();
         }
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1834,11 +1834,11 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1846,7 +1846,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnAll, TCari);
         }
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if (Kd.getText().trim().equals("")) {
@@ -1917,7 +1917,7 @@ public class DlgBarang extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1925,13 +1925,13 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, KdIF, BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
         isForm();
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -1941,7 +1941,7 @@ public class DlgBarang extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnSimpan, BtnHapus);
         }
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void kelas1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kelas1KeyPressed
         Valid.pindah(evt, ralan, kelas2);
@@ -1951,15 +1951,15 @@ public class DlgBarang extends javax.swing.JDialog {
         Valid.pindah(evt, kelas1, kelas3);
     }//GEN-LAST:event_kelas2KeyPressed
 
-private void LetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetakKeyPressed
+    private void LetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetakKeyPressed
     Valid.pindah(evt, Nm,BtnSatuanBesar);
-}//GEN-LAST:event_LetakKeyPressed
+    }//GEN-LAST:event_LetakKeyPressed
 
-private void ralanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ralanKeyPressed
+    private void ralanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ralanKeyPressed
     Valid.pindah(evt, beli, kelas1);
-}//GEN-LAST:event_ralanKeyPressed
+    }//GEN-LAST:event_ralanKeyPressed
 
-private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
+    private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
     i=1;
     akses.setform("DlgBarang");
     satuan.isCek();
@@ -1967,11 +1967,11 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     satuan.setLocationRelativeTo(internalFrame1);
     satuan.setAlwaysOnTop(false);
     satuan.setVisible(true);
-}//GEN-LAST:event_BtnSatuanActionPerformed
+    }//GEN-LAST:event_BtnSatuanActionPerformed
 
-private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok_minimalKeyPressed
+    private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok_minimalKeyPressed
     Valid.pindah(evt, karyawan, DTPExpired);
-}//GEN-LAST:event_stok_minimalKeyPressed
+    }//GEN-LAST:event_stok_minimalKeyPressed
 
     private void BtnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJenisActionPerformed
         akses.setform("DlgBarang");
@@ -2134,17 +2134,17 @@ private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
 
     }//GEN-LAST:event_ppBarcodeItemBtnPrintActionPerformed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
     isForm();
-}//GEN-LAST:event_ChkInputActionPerformed
+    }//GEN-LAST:event_ChkInputActionPerformed
 
-private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokBtnPrintActionPerformed
+    private void ppStokBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokBtnPrintActionPerformed
     tampil2();
-}//GEN-LAST:event_ppStokBtnPrintActionPerformed
+    }//GEN-LAST:event_ppStokBtnPrintActionPerformed
 
-private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KapasitasKeyPressed
+    private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KapasitasKeyPressed
     Valid.pindah(evt, Isi,BtnJenis);
-}//GEN-LAST:event_KapasitasKeyPressed
+    }//GEN-LAST:event_KapasitasKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(!akses.getform().equals("DlgReturJual")){

@@ -39,7 +39,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
     private boolean sukses=true;
     private String Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Piutang_Jasa_Perusahaan from set_akun2"),
                    Pendapatan_Piutang_Jasa_Perusahaan=Sequel.cariIsi("select set_akun2.Pendapatan_Piutang_Jasa_Perusahaan from set_akun2");
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -493,7 +493,7 @@ public class KeuanganCariPiutangJasaPerusahaan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerusahaanActionPerformed
@@ -768,7 +768,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppCetakNotaActionPerformed
 
-private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
+    private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
     if(tabMode.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
         TCari.requestFocus();
@@ -807,7 +807,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
         }
     }
-}//GEN-LAST:event_ppHapusActionPerformed
+    }//GEN-LAST:event_ppHapusActionPerformed
 
     private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailCicilanActionPerformed
         if(tabMode.getRowCount()==0){
@@ -1049,7 +1049,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         ppCetakNota.setEnabled(akses.getpiutang_jasa_perusahaan());
         ppHapus.setEnabled(akses.getpiutang_jasa_perusahaan());
     }
- 
+
     public void cariNoTagihan(String notagihan,Date Taggal){
         NoPiutang.setText(notagihan);
         TglPiutang1.setDate(Taggal);

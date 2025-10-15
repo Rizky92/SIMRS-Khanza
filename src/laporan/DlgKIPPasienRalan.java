@@ -272,7 +272,7 @@ public class DlgKIPPasienRalan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -331,21 +331,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     if(nmpenyakit.getText().trim().equals("")){
         JOptionPane.showMessageDialog(null,"Silahkan masukkan penyakit yang mau dicari terlebih dahulu..!!!");
     }else{
         prosesCari();
     }
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prosesCari();

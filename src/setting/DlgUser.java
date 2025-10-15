@@ -4057,7 +4057,7 @@ public class DlgUser extends javax.swing.JDialog {
                 LCount.setText(""+tabMode.getRowCount());
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -4065,7 +4065,7 @@ public class DlgUser extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TPass,BtnHapus);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tabMode.getRowCount()==0){
@@ -4082,7 +4082,7 @@ public class DlgUser extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -4090,7 +4090,7 @@ public class DlgUser extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnSimpan, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TKd.getText().trim().equals("")||TNmUser.getText().trim().equals("")){
@@ -5266,7 +5266,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         }
 
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -5274,25 +5274,25 @@ public class DlgUser extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,BtnKeluar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
         Valid.pindah(evt,BtnSimpan,TPass);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 
     private void TPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPassKeyPressed
         Valid.pindah(evt,TKd,BtnSimpan);
-}//GEN-LAST:event_TPassKeyPressed
+    }//GEN-LAST:event_TPassKeyPressed
 
     private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
         dlgdokter.emptTeks();
@@ -5300,11 +5300,11 @@ public class DlgUser extends javax.swing.JDialog {
         dlgdokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dlgdokter.setLocationRelativeTo(internalFrame1);
         dlgdokter.setVisible(true);
-}//GEN-LAST:event_BtnSeekActionPerformed
+    }//GEN-LAST:event_BtnSeekActionPerformed
 
     private void BtnSeekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeekKeyPressed
         Valid.pindah(evt,TKd,TPass);
-}//GEN-LAST:event_BtnSeekKeyPressed
+    }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek1ActionPerformed
         dlgpetugas.emptTeks();
@@ -5313,17 +5313,17 @@ public class DlgUser extends javax.swing.JDialog {
         dlgpetugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dlgpetugas.setLocationRelativeTo(internalFrame1);
         dlgpetugas.setVisible(true);
-}//GEN-LAST:event_BtnSeek1ActionPerformed
+    }//GEN-LAST:event_BtnSeek1ActionPerformed
 
     private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek1KeyPressed
         Valid.pindah(evt,TKd,TPass);
-}//GEN-LAST:event_BtnSeek1KeyPressed
+    }//GEN-LAST:event_BtnSeek1KeyPressed
 
     private void TNmUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmUserKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_TNmUserKeyPressed
 
-private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -5347,15 +5347,15 @@ private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.MyReportqry("rptUser.jasper","report","::[ Data User ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
-private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus,BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();

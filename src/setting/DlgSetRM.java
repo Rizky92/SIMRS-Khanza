@@ -1599,7 +1599,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             default:
                 break;
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1621,7 +1621,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                 Valid.pindah(evt,TampilkanTNI,BtnHapus);
             }
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         switch (TabRawat.getSelectedIndex()) {
@@ -1658,7 +1658,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                 break;
         }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1666,7 +1666,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnSimpan, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         if(tabMode.getRowCount()==0){
@@ -1675,13 +1675,13 @@ public class DlgSetRM extends javax.swing.JDialog {
         }else if(! (tabMode.getRowCount()==0)) {
             dispose();
         }
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnHapus,BtnSimpan);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbNoRMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoRMMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1690,7 +1690,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbNoRMMouseClicked
+    }//GEN-LAST:event_tbNoRMMouseClicked
 
     private void tbNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoRMKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1701,12 +1701,12 @@ public class DlgSetRM extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbNoRMKeyPressed
+    }//GEN-LAST:event_tbNoRMKeyPressed
 
-private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed
+    private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed
      Valid.pindah(evt, BtnKeluar,BtnSimpan);
 
-}//GEN-LAST:event_normKeyPressed
+    }//GEN-LAST:event_normKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(TabRawat.getSelectedIndex()==0){

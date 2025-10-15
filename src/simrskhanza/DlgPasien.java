@@ -4604,7 +4604,7 @@ public class DlgPasien extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPasienMouseClicked
+    private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPasienMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
                 getData();
@@ -4614,9 +4614,9 @@ private void tbPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbPasienMouseClicked
+    }//GEN-LAST:event_tbPasienMouseClicked
 
-private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyPressed
+    private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPasienKeyPressed
        if(tabMode.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
@@ -4635,9 +4635,9 @@ private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbPasienKeyPressed
+    }//GEN-LAST:event_tbPasienKeyPressed
 
-private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNo.getText().trim().equals("")){
             Valid.textKosong(TNo,"No.Rekam Medis");
         }else if(TNm.getText().trim().equals("")){
@@ -4910,9 +4910,9 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
-private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
+    private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -4921,21 +4921,21 @@ private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             BtnBatal.requestFocus();
         }
 
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
-private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
+    private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
     TabRawat.setSelectedIndex(0);
     emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
-private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
+    private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TabRawat.setSelectedIndex(0);
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
-private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+    private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
     switch (TabRawat.getSelectedIndex()) {
         case 1:
             for(z=0;z<tbPasien.getRowCount();z++){
@@ -4973,17 +4973,17 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         default:
             break;
     }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
-private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
+    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
-private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNo.getText().trim().equals("")){
             Valid.textKosong(TNo,"No.Rekam Medis");
         }else if(TNm.getText().trim().equals("")){
@@ -5176,17 +5176,17 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 TabRawat.setSelectedIndex(1);
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
-private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
+    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
-private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
@@ -5574,31 +5574,31 @@ private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
 
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
-private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
-private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         Carialamat.setText("");
         pilihantampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
-private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
-private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         kab.dispose();
         kec.dispose();
         kel.dispose();
@@ -5617,15 +5617,15 @@ private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         jabatanpolri.dispose();
         DlgDemografi.dispose();
     dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
-private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
+    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -5635,29 +5635,29 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbPasien.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     pilihantampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
-private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
+    private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
    Valid.pindah(evt,CMbGd,DTPLahir);
-}//GEN-LAST:event_TTmpKeyPressed
+    }//GEN-LAST:event_TTmpKeyPressed
 
-private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
+    private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
    Valid.pindah(evt,TNm,CMbGd);
-}//GEN-LAST:event_CmbJkKeyPressed
+    }//GEN-LAST:event_CmbJkKeyPressed
 
-private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
+    private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             TCari.setText(TNm.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -5677,21 +5677,21 @@ private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKe
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             TCari.requestFocus();
         }
-}//GEN-LAST:event_TNmKeyPressed
+    }//GEN-LAST:event_TNmKeyPressed
 
-private void CMbGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbGdKeyPressed
+    private void CMbGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbGdKeyPressed
    Valid.pindah(evt,CmbJk,TTmp);
-}//GEN-LAST:event_CMbGdKeyPressed
+    }//GEN-LAST:event_CMbGdKeyPressed
 
-private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
+    private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
     Valid.pindah(evt,BtnCacat,CmbStts);
-}//GEN-LAST:event_cmbAgamaKeyPressed
+    }//GEN-LAST:event_cmbAgamaKeyPressed
 
-private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
+    private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
    Valid.pindah(evt,cmbAgama,Kdpnj);
-}//GEN-LAST:event_CmbSttsKeyPressed
+    }//GEN-LAST:event_CmbSttsKeyPressed
 
-private void PekerjaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PekerjaanKeyPressed
+    private void PekerjaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PekerjaanKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(tampilkantni.equals("Yes")){
            if(Pekerjaan.getText().toLowerCase().contains("tni")){
@@ -5711,9 +5711,9 @@ private void PekerjaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
        TTlp.requestFocus();
    }
-}//GEN-LAST:event_PekerjaanKeyPressed
+    }//GEN-LAST:event_PekerjaanKeyPressed
 
-private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatKeyPressed
+    private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Alamat.getText().equals("")){
            Alamat.setText("ALAMAT");
@@ -5728,13 +5728,13 @@ private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Al
        }
        TKtp.requestFocus();
    }
-}//GEN-LAST:event_AlamatKeyPressed
+    }//GEN-LAST:event_AlamatKeyPressed
 
-private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlpKeyPressed
+    private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlpKeyPressed
    Valid.pindah(evt,EMail,Pekerjaan);
-}//GEN-LAST:event_TTlpKeyPressed
+    }//GEN-LAST:event_TTlpKeyPressed
 
-private void TNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoKeyPressed
+    private void TNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             TCari.setText(TNo.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -5744,9 +5744,9 @@ private void TNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoKe
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             TCari.requestFocus();
         }
-}//GEN-LAST:event_TNoKeyPressed
+    }//GEN-LAST:event_TNoKeyPressed
 
-private void TKtpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKtpKeyPressed
+    private void TKtpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKtpKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if(Alamat.getText().equals("ALAMAT")){
                 Alamat.setText("");
@@ -5755,25 +5755,25 @@ private void TKtpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKtp
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Pekerjaan.requestFocus();
         }
-}//GEN-LAST:event_TKtpKeyPressed
+    }//GEN-LAST:event_TKtpKeyPressed
 
-private void DTPDaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPDaftarKeyPressed
+    private void DTPDaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPDaftarKeyPressed
    Valid.pindah2(evt,Pekerjaan,BtnSimpan);
-}//GEN-LAST:event_DTPDaftarKeyPressed
+    }//GEN-LAST:event_DTPDaftarKeyPressed
 
-private void CMbPndKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbPndKeyPressed
+    private void CMbPndKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbPndKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        NmIbu.requestFocus();
    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
        TUmurTh.requestFocus();
    }
-}//GEN-LAST:event_CMbPndKeyPressed
+    }//GEN-LAST:event_CMbPndKeyPressed
 
-private void SaudaraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SaudaraKeyPressed
+    private void SaudaraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SaudaraKeyPressed
    Valid.pindah(evt,CmbKeluarga,PekerjaanPj);
-}//GEN-LAST:event_SaudaraKeyPressed
+    }//GEN-LAST:event_SaudaraKeyPressed
 
-private void MnKartuStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuStatusActionPerformed
+    private void MnKartuStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuStatusActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5797,18 +5797,18 @@ private void MnKartuStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_MnKartuStatusActionPerformed
+    }//GEN-LAST:event_MnKartuStatusActionPerformed
 
-private void DTPLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPLahirItemStateChanged
+    private void DTPLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPLahirItemStateChanged
     lahir = DTPLahir.getDate();
     birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     p = Period.between(birthday,today);
     TUmurTh.setText(String.valueOf(p.getYears()));
     TUmurBl.setText(String.valueOf(p.getMonths()));
     TUmurHr.setText(String.valueOf(p.getDays()));
-}//GEN-LAST:event_DTPLahirItemStateChanged
+    }//GEN-LAST:event_DTPLahirItemStateChanged
 
-private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdpnjKeyPressed
+    private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdpnjKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",nmpnj,Kdpnj.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -5816,18 +5816,18 @@ private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kdp
         }else{
             Valid.pindah(evt,CmbStts,TNoPeserta);
         }
-}//GEN-LAST:event_KdpnjKeyPressed
+    }//GEN-LAST:event_KdpnjKeyPressed
 
-private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
+    private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
         akses.setform("DlgPasien");
         penjab.isCek();
         penjab.onCari();
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setVisible(true);
-}//GEN-LAST:event_BtnPenjabActionPerformed
+    }//GEN-LAST:event_BtnPenjabActionPerformed
 
-private void MnKartu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu2ActionPerformed
+    private void MnKartu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu2ActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5851,16 +5851,16 @@ private void MnKartu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_MnKartu2ActionPerformed
+    }//GEN-LAST:event_MnKartu2ActionPerformed
 
-private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikjkbayiActionPerformed
+    private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikjkbayiActionPerformed
        grafikjkel kas=new grafikjkel("Grafik Jenis Kelamin Pasien "," ");
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikjkbayiActionPerformed
+    }//GEN-LAST:event_ppGrafikjkbayiActionPerformed
 
-private void MnLaporanRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRMActionPerformed
+    private void MnLaporanRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRMActionPerformed
       if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5885,9 +5885,9 @@ private void MnLaporanRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                    "inner join penjab inner join propinsi on pasien.kd_prop=propinsi.kd_prop and pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLaporanRMActionPerformed
+    }//GEN-LAST:event_MnLaporanRMActionPerformed
 
-private void MnLaporanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanIGDActionPerformed
+    private void MnLaporanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanIGDActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5909,9 +5909,9 @@ private void MnLaporanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLaporanIGDActionPerformed
+    }//GEN-LAST:event_MnLaporanIGDActionPerformed
 
-private void ppKelahiranBayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKelahiranBayiActionPerformed
+    private void ppKelahiranBayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKelahiranBayiActionPerformed
     if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TNo.requestFocus();
@@ -5929,9 +5929,9 @@ private void ppKelahiranBayiActionPerformed(java.awt.event.ActionEvent evt) {//G
             resume.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_ppKelahiranBayiActionPerformed
+    }//GEN-LAST:event_ppKelahiranBayiActionPerformed
 
-private void MnLembarKeluarMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarKeluarMasukActionPerformed
+    private void MnLembarKeluarMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarKeluarMasukActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5958,9 +5958,9 @@ private void MnLembarKeluarMasukActionPerformed(java.awt.event.ActionEvent evt) 
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_MnLembarKeluarMasukActionPerformed
+    }//GEN-LAST:event_MnLembarKeluarMasukActionPerformed
 
-private void MnLembarAnamNesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarAnamNesaActionPerformed
+    private void MnLembarAnamNesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarAnamNesaActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -5982,9 +5982,9 @@ private void MnLembarAnamNesaActionPerformed(java.awt.event.ActionEvent evt) {//
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLembarAnamNesaActionPerformed
+    }//GEN-LAST:event_MnLembarAnamNesaActionPerformed
 
-private void MnLembarGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarGrafikActionPerformed
+    private void MnLembarGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarGrafikActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -6007,9 +6007,9 @@ private void MnLembarGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GE
                    "on pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLembarGrafikActionPerformed
+    }//GEN-LAST:event_MnLembarGrafikActionPerformed
 
-private void MnLembarCatatanPerkembanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarCatatanPerkembanganActionPerformed
+    private void MnLembarCatatanPerkembanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarCatatanPerkembanganActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -6031,9 +6031,9 @@ private void MnLembarCatatanPerkembanganActionPerformed(java.awt.event.ActionEve
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and  pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLembarCatatanPerkembanganActionPerformed
+    }//GEN-LAST:event_MnLembarCatatanPerkembanganActionPerformed
 
-private void MnLembarCatatanKeperawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarCatatanKeperawatanActionPerformed
+    private void MnLembarCatatanKeperawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLembarCatatanKeperawatanActionPerformed
        if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -6055,9 +6055,9 @@ private void MnLembarCatatanKeperawatanActionPerformed(java.awt.event.ActionEven
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and  pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLembarCatatanKeperawatanActionPerformed
+    }//GEN-LAST:event_MnLembarCatatanKeperawatanActionPerformed
 
-private void MnLaporanAnestesiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanAnestesiaActionPerformed
+    private void MnLaporanAnestesiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanAnestesiaActionPerformed
      if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -6079,9 +6079,9 @@ private void MnLaporanAnestesiaActionPerformed(java.awt.event.ActionEvent evt) {
                    "inner join propinsi on pasien.kd_prop=propinsi.kd_prop and  pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
         }
-}//GEN-LAST:event_MnLaporanAnestesiaActionPerformed
+    }//GEN-LAST:event_MnLaporanAnestesiaActionPerformed
 
-private void CarialamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CarialamatKeyPressed
+    private void CarialamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CarialamatKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -6091,9 +6091,9 @@ private void CarialamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             BtnCariActionPerformed(null);
             TNo.requestFocus();
         }
-}//GEN-LAST:event_CarialamatKeyPressed
+    }//GEN-LAST:event_CarialamatKeyPressed
 
-private void MnKartu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu3ActionPerformed
+    private void MnKartu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu3ActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
             TNo.requestFocus();
@@ -6117,9 +6117,9 @@ private void MnKartu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
-}//GEN-LAST:event_MnKartu3ActionPerformed
+    }//GEN-LAST:event_MnKartu3ActionPerformed
 
-private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
+    private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kelurahan.getText().equals("")){
            Kelurahan.setText("KELURAHAN");
@@ -6148,9 +6148,9 @@ private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             kelurahanref.setVisible(true);
         }
    }
-}//GEN-LAST:event_KelurahanKeyPressed
+    }//GEN-LAST:event_KelurahanKeyPressed
 
-private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanKeyPressed
+    private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kecamatan.getText().equals("")){
            Kecamatan.setText("KECAMATAN");
@@ -6179,9 +6179,9 @@ private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             kecamatanref.setVisible(true);
         }
    }
-}//GEN-LAST:event_KecamatanKeyPressed
+    }//GEN-LAST:event_KecamatanKeyPressed
 
-private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenKeyPressed
+    private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kabupaten.getText().equals("")){
            Kabupaten.setText("KABUPATEN");
@@ -6210,53 +6210,53 @@ private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             kabupatenref.setVisible(true);
         }
    }
-}//GEN-LAST:event_KabupatenKeyPressed
+    }//GEN-LAST:event_KabupatenKeyPressed
 
-private void BtnKelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanActionPerformed
+    private void BtnKelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKelurahanActionPerformed
        akses.setform("DlgPasien");
        pilih=1;
         kel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         kel.setLocationRelativeTo(internalFrame1);
         kel.setVisible(true);
-}//GEN-LAST:event_BtnKelurahanActionPerformed
+    }//GEN-LAST:event_BtnKelurahanActionPerformed
 
-private void BtnKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanActionPerformed
+    private void BtnKecamatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKecamatanActionPerformed
         akses.setform("DlgPasien");
         pilih=1;
         kec.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         kec.setLocationRelativeTo(internalFrame1);
         kec.setVisible(true);
-}//GEN-LAST:event_BtnKecamatanActionPerformed
+    }//GEN-LAST:event_BtnKecamatanActionPerformed
 
-private void BtnKabupatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenActionPerformed
+    private void BtnKabupatenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKabupatenActionPerformed
         akses.setform("DlgPasien");
         pilih=1;
         kab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         kab.setLocationRelativeTo(internalFrame1);
         kab.setVisible(true);
-}//GEN-LAST:event_BtnKabupatenActionPerformed
+    }//GEN-LAST:event_BtnKabupatenActionPerformed
 
-private void ppGrafikDemografiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikDemografiActionPerformed
+    private void ppGrafikDemografiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikDemografiActionPerformed
         DlgDemografi.setSize(550,210);
         DlgDemografi.setLocationRelativeTo(internalFrame1);
         DlgDemografi.setVisible(true);
-}//GEN-LAST:event_ppGrafikDemografiActionPerformed
+    }//GEN-LAST:event_ppGrafikDemografiActionPerformed
 
-private void ppGrafikPerAgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPerAgamaActionPerformed
+    private void ppGrafikPerAgamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPerAgamaActionPerformed
        grafikpasienperagama kas=new grafikpasienperagama("Grafik Pasien Per Agama "," ");
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikPerAgamaActionPerformed
+    }//GEN-LAST:event_ppGrafikPerAgamaActionPerformed
 
-private void ppGrafikPerPekerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPerPekerjaanActionPerformed
+    private void ppGrafikPerPekerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPerPekerjaanActionPerformed
        grafikpasienperpekerjaaan kas=new grafikpasienperpekerjaaan("Grafik Pasien Per Pekerjaan "," ");
        kas.setSize(this.getWidth(), this.getHeight());
        kas.setLocationRelativeTo(this);
        kas.setVisible(true);
-}//GEN-LAST:event_ppGrafikPerPekerjaanActionPerformed
+    }//GEN-LAST:event_ppGrafikPerPekerjaanActionPerformed
 
-private void BtnPrint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint2ActionPerformed
+    private void BtnPrint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint2ActionPerformed
             if(!Kelurahan2.getText().equals("")){
                 DlgDemografi.dispose();
                 grafiksql kas=new grafiksql("::[ Data Demografi Per Area Kelurahan "+Kelurahan2.getText()+", Kecamatan "+Kecamatan2.getText()+", Kabupaten "+Kabupaten2.getText()+" ]::",
@@ -6302,13 +6302,13 @@ private void BtnPrint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 kas.setLocationRelativeTo(this);
                 kas.setVisible(true);
             }
-}//GEN-LAST:event_BtnPrint2ActionPerformed
+    }//GEN-LAST:event_BtnPrint2ActionPerformed
 
-private void BtnKeluar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar2ActionPerformed
+    private void BtnKeluar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar2ActionPerformed
    DlgDemografi.dispose();
-}//GEN-LAST:event_BtnKeluar2ActionPerformed
+    }//GEN-LAST:event_BtnKeluar2ActionPerformed
 
-private void BtnSeek8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek8ActionPerformed
+    private void BtnSeek8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek8ActionPerformed
    if(Kecamatan2.getText().equals("")){
        Valid.textKosong(Kecamatan2,"Kecamatan");
    }else{
@@ -6319,9 +6319,9 @@ private void BtnSeek8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         kel.setLocationRelativeTo(internalFrame1);
         kel.setVisible(true);
    }
-}//GEN-LAST:event_BtnSeek8ActionPerformed
+    }//GEN-LAST:event_BtnSeek8ActionPerformed
 
-private void BtnSeek9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek9ActionPerformed
+    private void BtnSeek9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek9ActionPerformed
    if(Kabupaten2.getText().equals("")){
        Valid.textKosong(Kabupaten2,"Kabupaten");
    }else{
@@ -6332,9 +6332,9 @@ private void BtnSeek9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         kec.setLocationRelativeTo(internalFrame1);
         kec.setVisible(true);
    }
-}//GEN-LAST:event_BtnSeek9ActionPerformed
+    }//GEN-LAST:event_BtnSeek9ActionPerformed
 
-private void BtnSeek10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek10ActionPerformed
+    private void BtnSeek10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek10ActionPerformed
     if(Propinsi2.getText().equals("")){
        Valid.textKosong(Propinsi2,"Propinsi");
     }else{
@@ -6345,9 +6345,9 @@ private void BtnSeek10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         kab.setLocationRelativeTo(internalFrame1);
         kab.setVisible(true);
     }
-}//GEN-LAST:event_BtnSeek10ActionPerformed
+    }//GEN-LAST:event_BtnSeek10ActionPerformed
 
-private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
+    private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint3ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -6441,59 +6441,59 @@ private void BtnPrint3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrint3ActionPerformed
+    }//GEN-LAST:event_BtnPrint3ActionPerformed
 
-private void ppRegistrasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRegistrasiBtnPrintActionPerformed
+    private void ppRegistrasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRegistrasiBtnPrintActionPerformed
      prosesCari2();
-}//GEN-LAST:event_ppRegistrasiBtnPrintActionPerformed
+    }//GEN-LAST:event_ppRegistrasiBtnPrintActionPerformed
 
-private void AlamatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseExited
+    private void AlamatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseExited
         if(Alamat.getText().equals("")){
             Alamat.setText("ALAMAT");
         }
-}//GEN-LAST:event_AlamatMouseExited
+    }//GEN-LAST:event_AlamatMouseExited
 
-private void KelurahanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseExited
+    private void KelurahanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseExited
         if(Kelurahan.getText().equals("")){
             Kelurahan.setText("KELURAHAN");
         }
-}//GEN-LAST:event_KelurahanMouseExited
+    }//GEN-LAST:event_KelurahanMouseExited
 
-private void KecamatanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseExited
+    private void KecamatanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseExited
         if(Kecamatan.getText().equals("")){
             Kecamatan.setText("KECAMATAN");
         }
-}//GEN-LAST:event_KecamatanMouseExited
+    }//GEN-LAST:event_KecamatanMouseExited
 
-private void KabupatenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseExited
+    private void KabupatenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseExited
        if(Kabupaten.getText().equals("")){
             Kabupaten.setText("KABUPATEN");
         }
-}//GEN-LAST:event_KabupatenMouseExited
+    }//GEN-LAST:event_KabupatenMouseExited
 
-private void AlamatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseMoved
+    private void AlamatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlamatMouseMoved
         if(Alamat.getText().equals("ALAMAT")){
             Alamat.setText("");
         }
-}//GEN-LAST:event_AlamatMouseMoved
+    }//GEN-LAST:event_AlamatMouseMoved
 
-private void KelurahanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseMoved
+    private void KelurahanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseMoved
         if(Kelurahan.getText().equals("KELURAHAN")){
             Kelurahan.setText("");
         }
-}//GEN-LAST:event_KelurahanMouseMoved
+    }//GEN-LAST:event_KelurahanMouseMoved
 
-private void KecamatanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseMoved
+    private void KecamatanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseMoved
         if(Kecamatan.getText().equals("KECAMATAN")){
             Kecamatan.setText("");
         }
-}//GEN-LAST:event_KecamatanMouseMoved
+    }//GEN-LAST:event_KecamatanMouseMoved
 
-private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseMoved
+    private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenMouseMoved
         if(Kabupaten.getText().equals("KABUPATEN")){
             Kabupaten.setText("");
         }
-}//GEN-LAST:event_KabupatenMouseMoved
+    }//GEN-LAST:event_KabupatenMouseMoved
 
     private void ChkDaftarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkDaftarItemStateChanged
         if(ChkDaftar.isSelected()==true){

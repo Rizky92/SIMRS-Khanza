@@ -3618,7 +3618,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                             }
                         } else {
                             sukses = false;
-                            JOptionPane.showMessageDialog(null, "Waktu keluar awal pindah kamar dengan waktu masuk kamar tujuan harus sama..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Tidak dapat menemukan kamar tujuan pindah dari kamar " + tabModeKamIn.getValueAt(r, 0).toString() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
                         if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +

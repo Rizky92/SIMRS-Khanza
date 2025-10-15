@@ -713,11 +713,11 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kddokter.requestFocus();
         }
-}//GEN-LAST:event_TCariTindakanKeyPressed
+    }//GEN-LAST:event_TCariTindakanKeyPressed
 
     private void BtnCariTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTindakanActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariTindakanActionPerformed
+    }//GEN-LAST:event_BtnCariTindakanActionPerformed
 
     private void BtnCariTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariTindakanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -725,12 +725,12 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCariTindakan, BtnAllTindakan);
         }
-}//GEN-LAST:event_BtnCariTindakanKeyPressed
+    }//GEN-LAST:event_BtnCariTindakanKeyPressed
 
     private void BtnAllTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllTindakanActionPerformed
         TCariTindakan.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllTindakanActionPerformed
+    }//GEN-LAST:event_BtnAllTindakanActionPerformed
 
     private void BtnAllTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllTindakanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -738,7 +738,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCariTindakan, TCariTindakan);
         }
-}//GEN-LAST:event_BtnAllTindakanKeyPressed
+    }//GEN-LAST:event_BtnAllTindakanKeyPressed
 
     private void tbTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTindakanMouseClicked
         if(tbTindakan.getRowCount()!=0){
@@ -746,7 +746,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbTindakanMouseClicked
+    }//GEN-LAST:event_tbTindakanMouseClicked
 
     private void tbTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTindakanKeyPressed
         if(tbTindakan.getRowCount()!=0){
@@ -769,7 +769,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                 TCariTindakan.requestFocus();
             }
         }
-}//GEN-LAST:event_tbTindakanKeyPressed
+    }//GEN-LAST:event_tbTindakanKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
              dispose();
@@ -788,7 +788,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahTindakanActionPerformed
 
-private void BtnSimpanTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanTindakanActionPerformed
+    private void BtnSimpanTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanTindakanActionPerformed
         if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")||nmdokter.getText().trim().equals("")){
             Valid.textKosong(TCariTindakan,"Dokter/Paramedis");
         }else{
@@ -995,15 +995,15 @@ private void BtnSimpanTindakanActionPerformed(java.awt.event.ActionEvent evt) {/
                 System.out.println(ex);
             }
         }
-}//GEN-LAST:event_BtnSimpanTindakanActionPerformed
+    }//GEN-LAST:event_BtnSimpanTindakanActionPerformed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             for(i=0;i<tbTindakan.getRowCount();i++){
                 tbTindakan.setValueAt(false,i,0);
             }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
+    private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             switch (pilihtable) {
                 case "rawat_jl_dr":
@@ -1023,9 +1023,9 @@ private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }else{
             Valid.pindah(evt,BtnKeluar,BtnSimpanTindakan);
         }
-}//GEN-LAST:event_kddokterKeyPressed
+    }//GEN-LAST:event_kddokterKeyPressed
 
-private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
+    private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
         switch (pilihtable) {
             case "rawat_jl_dr":
                 dokter.isCek();
@@ -1049,9 +1049,9 @@ private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 dokter.setVisible(true);
                 break;
         }
-}//GEN-LAST:event_btnDokterActionPerformed
+    }//GEN-LAST:event_btnDokterActionPerformed
 
-private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDokterActionPerformed
+    private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDokterActionPerformed
     ppBersihkanActionPerformed(evt);
     FormInput.setPreferredSize(new Dimension(WIDTH, 44));
     pilihtable="rawat_jl_dr";
@@ -1064,9 +1064,9 @@ private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     btnPetugas.setVisible(false);
     tampil();
 
-}//GEN-LAST:event_ppDokterActionPerformed
+    }//GEN-LAST:event_ppDokterActionPerformed
 
-private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
+    private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
     ppBersihkanActionPerformed(evt);
     FormInput.setPreferredSize(new Dimension(WIDTH, 44));
     pilihtable="rawat_jl_pr";
@@ -1078,7 +1078,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     NmPetugas2.setVisible(false);
     btnPetugas.setVisible(false);
     tampil();
-}//GEN-LAST:event_ppPetugasActionPerformed
+    }//GEN-LAST:event_ppPetugasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         TCariTindakan.requestFocus();

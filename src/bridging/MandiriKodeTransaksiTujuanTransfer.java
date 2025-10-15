@@ -498,11 +498,11 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         metodepembayaran.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         metodepembayaran.setLocationRelativeTo(internalFrame1);
         metodepembayaran.setVisible(true);
-}//GEN-LAST:event_btnMetodeActionPerformed
+    }//GEN-LAST:event_btnMetodeActionPerformed
 
     private void btnMetodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnMetodeKeyPressed
         Valid.pindah(evt,TCari,btnBank);
-}//GEN-LAST:event_btnMetodeKeyPressed
+    }//GEN-LAST:event_btnMetodeKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(KodeMetode.getText().trim().equals("")||MetodePembayaran.getText().trim().equals("")){
@@ -520,23 +520,23 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                 LCount.setText(""+tabMode.getRowCount());
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{Valid.pindah(evt,KodeTransaksi, BtnBatal);}
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow()!= -1){
@@ -552,7 +552,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus...!!!!");
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -560,7 +560,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(KodeMetode.getText().trim().equals("")||MetodePembayaran.getText().trim().equals("")){
@@ -583,7 +583,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -591,17 +591,17 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -621,7 +621,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                 Valid.MyReport("rptMandiriKodeTransaksiTujuanTransfer.jasper","report","::[ Kode Transaksi Bank Tujuan Transfer Bank Mandiri ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -629,7 +629,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -639,11 +639,11 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -651,12 +651,12 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -665,7 +665,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -674,7 +674,7 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -685,9 +685,9 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
                 }
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
-private void btnBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBankActionPerformed
+    private void btnBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBankActionPerformed
     MandiriCariBankTujuanTransfer banktujuan=new MandiriCariBankTujuanTransfer(null,false);
     banktujuan.addWindowListener(new WindowListener() {
         @Override
@@ -728,7 +728,7 @@ private void btnBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     banktujuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     banktujuan.setLocationRelativeTo(internalFrame1);
     banktujuan.setVisible(true);
-}//GEN-LAST:event_btnBankActionPerformed
+    }//GEN-LAST:event_btnBankActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         emptTeks();

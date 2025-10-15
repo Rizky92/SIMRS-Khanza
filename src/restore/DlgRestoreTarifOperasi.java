@@ -44,7 +44,7 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
     public DlgRestoreTarifOperasi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"P","Kode Paket","Nama Operasi","Kategori","Operator 1","Operator 2","Operator 3",
                       "Asisten Op 1","Asisten Op 2","Asisten Op 3","Instrumen","dr Anestesi","Asisten Anes 1","Asisten Anes 2","dr Anak",
                       "Perawat Resus","Bidan 1","Bidan 2","Bidan 3","Perawat Luar","Alat","Sewa OK/VK",
@@ -59,14 +59,14 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.String.class, java.lang.String.class
              };
              @Override
@@ -99,7 +99,7 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -122,10 +122,10 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
-       
-    
+        }
+
+
+
     }
 
     /** This method is called from within the constructor to
@@ -299,13 +299,13 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(i,1).toString()+"'","status='1'");
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -313,16 +313,16 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,BtnHapus,BtnKeluar);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+        for(i=0;i<tbJnsPerawatan.getRowCount();i++){
             if(tbJnsPerawatan.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("paket_operasi","kode_paket",tbJnsPerawatan.getValueAt(i,1).toString());
             }
-        }        
+        }
         BtnCariActionPerformed(evt);
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -330,17 +330,17 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnSimpan);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -350,11 +350,11 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -362,12 +362,12 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -376,7 +376,7 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnHapus);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -440,7 +440,7 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
                        "paket_operasi.status='0' and paket_operasi.nm_perawatan like ? or "+
                        "paket_operasi.status='0' and paket_operasi.kelas like ? or "+
                        "paket_operasi.status='0' and penjab.png_jawab like ? order by paket_operasi.kode_paket ");
-            try {  
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -449,35 +449,35 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new Object[]{false,rs.getString("kode_paket"),
                                    rs.getString("nm_perawatan"),
-                                   rs.getString("kategori"), 
-                                   rs.getDouble("operator1"), 
-                                   rs.getDouble("operator2"), 
-                                   rs.getDouble("operator3"), 
-                                   rs.getDouble("asisten_operator1"), 
-                                   rs.getDouble("asisten_operator2"), 
-                                   rs.getDouble("asisten_operator3"), 
-                                   rs.getDouble("instrumen"), 
-                                   rs.getDouble("dokter_anestesi"), 
+                                   rs.getString("kategori"),
+                                   rs.getDouble("operator1"),
+                                   rs.getDouble("operator2"),
+                                   rs.getDouble("operator3"),
+                                   rs.getDouble("asisten_operator1"),
+                                   rs.getDouble("asisten_operator2"),
+                                   rs.getDouble("asisten_operator3"),
+                                   rs.getDouble("instrumen"),
+                                   rs.getDouble("dokter_anestesi"),
                                    rs.getDouble("asisten_anestesi"),
-                                   rs.getDouble("asisten_anestesi2"), 
-                                   rs.getDouble("dokter_anak"), 
-                                   rs.getDouble("perawaat_resusitas"), 
-                                   rs.getDouble("bidan"), 
-                                   rs.getDouble("bidan2"), 
-                                   rs.getDouble("bidan3"), 
-                                   rs.getDouble("perawat_luar"), 
-                                   rs.getDouble("alat"), 
-                                   rs.getDouble("sewa_ok"), 
-                                   rs.getDouble("akomodasi"), 
-                                   rs.getDouble("bagian_rs"), 
-                                   rs.getDouble("omloop"), 
-                                   rs.getDouble("omloop2"), 
-                                   rs.getDouble("omloop3"), 
-                                   rs.getDouble("omloop4"), 
-                                   rs.getDouble("omloop5"), 
-                                   rs.getDouble("sarpras"), 
-                                   rs.getDouble("dokter_pjanak"), 
-                                   rs.getDouble("dokter_umum"), 
+                                   rs.getDouble("asisten_anestesi2"),
+                                   rs.getDouble("dokter_anak"),
+                                   rs.getDouble("perawaat_resusitas"),
+                                   rs.getDouble("bidan"),
+                                   rs.getDouble("bidan2"),
+                                   rs.getDouble("bidan3"),
+                                   rs.getDouble("perawat_luar"),
+                                   rs.getDouble("alat"),
+                                   rs.getDouble("sewa_ok"),
+                                   rs.getDouble("akomodasi"),
+                                   rs.getDouble("bagian_rs"),
+                                   rs.getDouble("omloop"),
+                                   rs.getDouble("omloop2"),
+                                   rs.getDouble("omloop3"),
+                                   rs.getDouble("omloop4"),
+                                   rs.getDouble("omloop5"),
+                                   rs.getDouble("sarpras"),
+                                   rs.getDouble("dokter_pjanak"),
+                                   rs.getDouble("dokter_umum"),
                                    rs.getDouble("jumlah"),
                                    rs.getString("png_jawab"),
                                    rs.getString("kelas")
@@ -498,5 +498,5 @@ public final class DlgRestoreTarifOperasi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
 }

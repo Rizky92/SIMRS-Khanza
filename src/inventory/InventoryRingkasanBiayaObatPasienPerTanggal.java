@@ -34,7 +34,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs; 
+    private ResultSet rs;
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private DlgCariJenis jenis = new DlgCariJenis(null, false);
     private DlgCariKategori kategori = new DlgCariKategori(null, false);
@@ -44,8 +44,8 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
     private double total=0;
     private String statusobat="",carabayar="",bangsal="",jenisbarang="",kategoribarang="",golonganbarang="",unit="",pilihan="";
     private StringBuilder htmlContent;
-    
-    /** 
+
+    /**
      * @param parent
      * @param modal */
     public InventoryRingkasanBiayaObatPasienPerTanggal(java.awt.Frame parent, boolean modal) {
@@ -55,7 +55,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.","Tanggal","No.Rawat","No.RM","Nama Pasien","Alamat","Cara Bayar","Unit/Layanan","Total"
             }){
-            @Override 
+            @Override
             public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[]{
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
@@ -94,8 +94,8 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
                 column.setPreferredWidth(90);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());  
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -106,7 +106,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -117,8 +117,8 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -131,7 +131,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         asalstok.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -139,10 +139,10 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(asalstok.getTable().getSelectedRow()!= -1){                   
-                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());                    
+                if(asalstok.getTable().getSelectedRow()!= -1){
+                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());
                     nmasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdasal.requestFocus();
             }
             @Override
@@ -154,7 +154,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         asalstok.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -162,12 +162,12 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     asalstok.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -189,7 +189,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -213,7 +213,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kategori.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -237,7 +237,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -260,13 +260,13 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
-     
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -686,7 +686,7 @@ public class InventoryRingkasanBiayaObatPasienPerTanggal extends javax.swing.JDi
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -723,17 +723,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         prosesCari();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, status, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void Tgl1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl1KeyPressed
         Valid.pindah(evt, BtnKeluar, Tgl2);
@@ -969,7 +969,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         System.out.println("tesss");
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         int row=tabMode.getRowCount();
-                        for(i=0;i<row;i++){  
+                        for(i=0;i<row;i++){
                             Sequel.menyimpan("temporary","'"+i+"','"+
                                             tabMode.getValueAt(i,0).toString().replaceAll("'","`")+"','"+
                                             tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
@@ -980,7 +980,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                             tabMode.getValueAt(i,6).toString().replaceAll("'","`")+"','"+
                                             tabMode.getValueAt(i,7).toString().replaceAll("'","`")+"','"+
                                             Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+
-                                    "','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data"); 
+                                    "','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
                         }
 
                         Map<String, Object> param = new HashMap<>();
@@ -989,8 +989,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         param.put("kotars",akses.getkabupatenrs());
                         param.put("propinsirs",akses.getpropinsirs());
                         param.put("kontakrs",akses.getkontakrs());
-                        param.put("emailrs",akses.getemailrs());   
-                        param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                         Valid.MyReportqry("rptRingkasanBiayaObatPasienPertanggal.jasper","report","[ Ringkasan Biaya Obat Pasien Per Tanggal ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
@@ -1068,9 +1068,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    private void prosesCari() {             
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+    private void prosesCari() {
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosong(tabMode);
             statusobat="";
             if(status.getSelectedIndex()==1){
@@ -1151,25 +1151,25 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }
-                
-            this.setCursor(Cursor.getDefaultCursor());             
+
+            this.setCursor(Cursor.getDefaultCursor());
         }catch(Exception e){
             System.out.println("Catatan  "+e);
-        }        
+        }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,96));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
 }

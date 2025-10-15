@@ -2854,15 +2854,15 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,Tgl1,NoRM);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void NoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRMKeyPressed
+    private void NoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRMKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPasien();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -2874,9 +2874,9 @@ private void NoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRM
             isPasien();
             BtnPrint.requestFocus();
         }
-}//GEN-LAST:event_NoRMKeyPressed
+    }//GEN-LAST:event_NoRMKeyPressed
 
-private void BtnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPasienActionPerformed
+    private void BtnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPasienActionPerformed
     if(akses.getpasien()==true){
         DlgCariPasien pasien=new DlgCariPasien(null,true);
         pasien.addWindowListener(new WindowListener() {
@@ -2932,11 +2932,11 @@ private void BtnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         pasien.setLocationRelativeTo(internalFrame1);
         pasien.setVisible(true);
     }
-}//GEN-LAST:event_BtnPasienActionPerformed
+    }//GEN-LAST:event_BtnPasienActionPerformed
 
-private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPasienKeyPressed
+    private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPasienKeyPressed
     //Valid.pindah(evt,Tgl2,TKd);
-}//GEN-LAST:event_BtnPasienKeyPressed
+    }//GEN-LAST:event_BtnPasienKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(NoRM.getText().trim().equals("")||NmPasien.getText().equals("")){

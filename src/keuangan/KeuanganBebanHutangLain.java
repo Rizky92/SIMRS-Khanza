@@ -865,7 +865,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
    Valid.pindah(evt,KdPemberiHutang,NilaiHutang);
     }//GEN-LAST:event_KeteranganKeyPressed
 
@@ -890,7 +890,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
-private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPemberiHutangActionPerformed
+    private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPemberiHutangActionPerformed
         kontraakun="";
         namakontraakun="";
         DlgCariPemberiHutang peminjam=new DlgCariPemberiHutang(null,false);

@@ -66,7 +66,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
                 "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
                 "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
-                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "no_rawat"
+                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "No.Rawat"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -165,8 +165,14 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==27){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                if (BOOKINGLANGSUNGREGISTRASI) {
+                    column.setPreferredWidth(110);
+                    column.setMinWidth(0);
+                    column.setMaxWidth(Integer.MAX_VALUE);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             }else{
                 column.setWidth(180);
             }

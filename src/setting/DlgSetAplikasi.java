@@ -529,11 +529,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
         Valid.pindah(evt,BtnSimpan,Almt);
-}//GEN-LAST:event_NmKeyPressed
+    }//GEN-LAST:event_NmKeyPressed
 
     private void AlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlmtKeyPressed
         Valid.pindah(evt,Nm,Kota);
-}//GEN-LAST:event_AlmtKeyPressed
+    }//GEN-LAST:event_AlmtKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -542,7 +542,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -553,7 +553,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
     private void KotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KotaKeyPressed
         Valid.pindah(evt,Almt,Propinsi);

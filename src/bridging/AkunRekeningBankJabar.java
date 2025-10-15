@@ -182,6 +182,9 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbSpesialisMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbSpesialisMouseReleased(evt);
+            }
         });
         tbSpesialis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -202,11 +205,13 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         jLabel3.setBounds(1, 10, 65, 23);
 
         kdrek.setEditable(false);
+        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         panelGlass7.add(kdrek);
         kdrek.setBounds(70, 10, 93, 23);
 
         nmrek.setEditable(false);
+        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -217,7 +222,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         nmrek.setBounds(166, 10, 230, 23);
 
         BtnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnPenjab.setMnemonic('1');
         BtnPenjab.setToolTipText("Alt+1");
         BtnPenjab.setName("BtnPenjab"); // NOI18N
         BtnPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +241,8 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(431, 10, 45, 23);
+
+        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -253,7 +259,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -271,7 +276,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass8.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -289,7 +293,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass8.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -307,7 +310,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass8.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -325,7 +327,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass8.add(BtnEdit);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -466,12 +467,7 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
+        
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
@@ -481,6 +477,15 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     private void BtnPenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPenjabKeyPressed
         Valid.pindah(evt,BtnKeluar,TKd);
     }//GEN-LAST:event_BtnPenjabKeyPressed
+
+    private void tbSpesialisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseReleased
+        if(tabMode.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+        }
+    }//GEN-LAST:event_tbSpesialisMouseReleased
 
     /**
     * @param args the command line arguments

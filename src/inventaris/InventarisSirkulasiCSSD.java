@@ -762,7 +762,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(inventaris_ambil_cssd.no_sirkulasi,3),signed)),0) from inventaris_ambil_cssd where DATE_FORMAT(inventaris_ambil_cssd.tgl_ambil, '%Y-%m-%d')='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","AC"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),3,NoSirkulasi);
         WindowInput.setAlwaysOnTop(false);
         WindowInput.setVisible(true);
-}//GEN-LAST:event_BtnInActionPerformed
+    }//GEN-LAST:event_BtnInActionPerformed
 
     private void BtnInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnInKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -770,7 +770,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TCari,BtnSteril);
         }
-}//GEN-LAST:event_BtnInKeyPressed
+    }//GEN-LAST:event_BtnInKeyPressed
 
     private void BtnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOutActionPerformed
         if(tabMode.getRowCount()==0){
@@ -797,7 +797,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnOutActionPerformed
+    }//GEN-LAST:event_BtnOutActionPerformed
 
     private void BtnOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOutKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -805,7 +805,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,BtnSteril,BtnHapus);
         }
-}//GEN-LAST:event_BtnOutKeyPressed
+    }//GEN-LAST:event_BtnOutKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
        if(tabMode.getRowCount()==0){
@@ -820,7 +820,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 LCount.setText(""+tabMode.getRowCount());
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -828,19 +828,19 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnOut,BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         WindowInput.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1042,7 +1042,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1050,7 +1050,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1060,11 +1060,11 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1072,12 +1072,12 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1085,7 +1085,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnIn);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnCloseInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseInActionPerformed
         WindowInput.dispose();
@@ -1162,11 +1162,11 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
 
     private void TglPinjam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglPinjam1KeyPressed
         Valid.pindah(evt,TCari,TglPinjam2);
-}//GEN-LAST:event_TglPinjam1KeyPressed
+    }//GEN-LAST:event_TglPinjam1KeyPressed
 
     private void TglPinjam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglPinjam2KeyPressed
         Valid.pindah(evt,TglPinjam1,TCari);
-}//GEN-LAST:event_TglPinjam2KeyPressed
+    }//GEN-LAST:event_TglPinjam2KeyPressed
 
     private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1177,7 +1177,7 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
 
 
         }
-}//GEN-LAST:event_tbKamInMouseClicked
+    }//GEN-LAST:event_tbKamInMouseClicked
 
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1185,13 +1185,13 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamInKeyPressed
+    }//GEN-LAST:event_tbKamInKeyPressed
 
-private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     tampil();
-}//GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoInventarisKeyPressed
+    private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoInventarisKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         BtnCloseIn.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1200,13 +1200,13 @@ private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
     } else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnInvActionPerformed(null);
     }
-}//GEN-LAST:event_NoInventarisKeyPressed
+    }//GEN-LAST:event_NoInventarisKeyPressed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
         Valid.pindah(evt,NoSirkulasi,btnPtg);
-}//GEN-LAST:event_KeteranganKeyPressed
+    }//GEN-LAST:event_KeteranganKeyPressed
 
-private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
+    private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
     InventarisCariBarangCSSD inventaris=new InventarisCariBarangCSSD(null,false);
     inventaris.addWindowListener(new WindowListener() {
         @Override
@@ -1251,9 +1251,9 @@ private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     inventaris.setLocationRelativeTo(internalFrame1);
     inventaris.setAlwaysOnTop(false);
     inventaris.setVisible(true);
-}//GEN-LAST:event_btnInvActionPerformed
+    }//GEN-LAST:event_btnInvActionPerformed
 
-private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKeyPressed
+    private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         NamaPetugas.setText(petugas.tampil3(NIP.getText()));
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1265,23 +1265,23 @@ private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKe
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnPtgActionPerformed(null);
     }
-}//GEN-LAST:event_NIPKeyPressed
+    }//GEN-LAST:event_NIPKeyPressed
 
-private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
+    private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
     petugas.isCek();
     petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     petugas.setLocationRelativeTo(internalFrame1);
     petugas.setAlwaysOnTop(false);
     petugas.setVisible(true);
-}//GEN-LAST:event_btnPtgActionPerformed
+    }//GEN-LAST:event_btnPtgActionPerformed
 
-private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
+    private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
     Valid.pindah(evt,btnInv,NoSirkulasi);
-}//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_TanggalKeyPressed
 
-private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSirkulasiKeyPressed
+    private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSirkulasiKeyPressed
     Valid.pindah(evt,Tanggal,Keterangan);
-}//GEN-LAST:event_NoSirkulasiKeyPressed
+    }//GEN-LAST:event_NoSirkulasiKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased
         if(tabMode.getRowCount()!=0){

@@ -731,7 +731,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             }
         }
 
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -739,17 +739,17 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,nmbangsal,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -787,7 +787,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             }
         }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -795,7 +795,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         if(tabMode.getRowCount()==0){
@@ -804,13 +804,13 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         }else if(! (tabMode.getRowCount()==0)) {
             dispose();
         }
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnBatal,BtnKeluar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -819,7 +819,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -830,9 +830,9 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
-private void kdbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbangsalKeyPressed
+    private void kdbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbangsalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?", nmbangsal,kdbangsal.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -840,23 +840,23 @@ private void kdbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }else{
             Valid.pindah(evt, kdbangsal,cmbstok);
         }
-}//GEN-LAST:event_kdbangsalKeyPressed
+    }//GEN-LAST:event_kdbangsalKeyPressed
 
-private void nmbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmbangsalKeyPressed
+    private void nmbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmbangsalKeyPressed
         Valid.pindah(evt,kdbangsal,BtnSimpan);
-}//GEN-LAST:event_nmbangsalKeyPressed
+    }//GEN-LAST:event_nmbangsalKeyPressed
 
-private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
+    private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
         pilihan=1;
         bangsal.isCek();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setVisible(true);
-}//GEN-LAST:event_btnBangsalActionPerformed
+    }//GEN-LAST:event_btnBangsalActionPerformed
 
-private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
+    private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
         Valid.pindah(evt,kdbangsal,BtnSimpan);
-}//GEN-LAST:event_btnBangsalKeyPressed
+    }//GEN-LAST:event_btnBangsalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();

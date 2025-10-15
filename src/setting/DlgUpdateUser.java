@@ -532,11 +532,11 @@ public class DlgUpdateUser extends javax.swing.JDialog {
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
         Valid.pindah(evt,BtnSimpan,TPass);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 
     private void TPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPassKeyPressed
         Valid.pindah(evt,TKd,BtnSimpan);
-}//GEN-LAST:event_TPassKeyPressed
+    }//GEN-LAST:event_TPassKeyPressed
 
     private void TNmUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmUserKeyPressed
         // TODO add your handling code here:

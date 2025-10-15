@@ -945,7 +945,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbObat.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if (!load) {
@@ -975,7 +975,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Silahkan masukkan racikan..!!");
             }
         }
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -983,13 +983,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         buatcacheberiobat();
         BtnCariActionPerformed(evt);
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -997,7 +997,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tbObat.getRowCount()!=0){
@@ -1011,7 +1011,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(kdgudang.getText().equals("")){
@@ -1087,7 +1087,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -1105,7 +1105,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
-private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(VALIDASIULANGBERIOBAT.equals("yes")){
             lanjut = true;
             for(i=0;i<tbObat.getRowCount();i++){
@@ -1485,56 +1485,56 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
-private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek5ActionPerformed
+    private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek5ActionPerformed
     DlgCariKonversi carikonversi=new DlgCariKonversi(null,false);
     carikonversi.setLocationRelativeTo(internalFrame1);
     carikonversi.setVisible(true);
-}//GEN-LAST:event_BtnSeek5ActionPerformed
+    }//GEN-LAST:event_BtnSeek5ActionPerformed
 
-private void BtnSeek5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek5KeyPressed
+    private void BtnSeek5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek5KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_BtnSeek5KeyPressed
+    }//GEN-LAST:event_BtnSeek5KeyPressed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
     for(i=0;i<tbObat.getRowCount();i++){
         tbObat.setValueAt("",i,1);
         tbObat.setValueAt(0,i,10);
         tbObat.setValueAt(0,i,9);
         tbObat.setValueAt(0,i,8);
     }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void JeniskelasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JeniskelasItemStateChanged
+    private void JeniskelasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JeniskelasItemStateChanged
     if(this.isVisible()==true){
         tampilcacheberiobat();
     }
-}//GEN-LAST:event_JeniskelasItemStateChanged
+    }//GEN-LAST:event_JeniskelasItemStateChanged
 
-private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JeniskelasKeyPressed
+    private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JeniskelasKeyPressed
         Valid.pindah(evt, cmbDtk,TCari);
-}//GEN-LAST:event_JeniskelasKeyPressed
+    }//GEN-LAST:event_JeniskelasKeyPressed
 
-private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
+    private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
        Valid.pindah(evt,BtnKeluar,cmbJam);
-}//GEN-LAST:event_DTPTglKeyPressed
+    }//GEN-LAST:event_DTPTglKeyPressed
 
-private void cmbJamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJamKeyPressed
+    private void cmbJamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJamKeyPressed
         Valid.pindah(evt,DTPTgl,cmbMnt);
-}//GEN-LAST:event_cmbJamKeyPressed
+    }//GEN-LAST:event_cmbJamKeyPressed
 
-private void cmbMntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMntKeyPressed
+    private void cmbMntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMntKeyPressed
         Valid.pindah(evt,cmbJam,cmbDtk);
-}//GEN-LAST:event_cmbMntKeyPressed
+    }//GEN-LAST:event_cmbMntKeyPressed
 
-private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
+    private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
         Valid.pindah(evt,cmbMnt,Jeniskelas);
-}//GEN-LAST:event_cmbDtkKeyPressed
+    }//GEN-LAST:event_cmbDtkKeyPressed
 
-private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
+    private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_ChkJlnActionPerformed
+    }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(TabRawat.getSelectedIndex()==0){

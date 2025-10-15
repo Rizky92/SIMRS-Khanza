@@ -996,39 +996,39 @@ public class DlgDokter extends javax.swing.JDialog {
 
     private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
         Valid.pindah(evt,CMbGd,DTPLahir);
-}//GEN-LAST:event_TTmpKeyPressed
+    }//GEN-LAST:event_TTmpKeyPressed
 
     private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
         Valid.pindah(evt,TNm,CMbGd);
-}//GEN-LAST:event_CmbJkKeyPressed
+    }//GEN-LAST:event_CmbJkKeyPressed
 
     private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
         Valid.pindah(evt,TKd,CmbJk);
-}//GEN-LAST:event_TNmKeyPressed
+    }//GEN-LAST:event_TNmKeyPressed
 
     private void CMbGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbGdKeyPressed
         Valid.pindah(evt,CmbJk,TTmp);
-}//GEN-LAST:event_CMbGdKeyPressed
+    }//GEN-LAST:event_CMbGdKeyPressed
 
     private void DTPLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPLahirKeyPressed
         Valid.pindah(evt,TTmp,TNoi);
-}//GEN-LAST:event_DTPLahirKeyPressed
+    }//GEN-LAST:event_DTPLahirKeyPressed
 
     private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
         Valid.pindah(evt,DTPLahir,CmbStts);
-}//GEN-LAST:event_cmbAgamaKeyPressed
+    }//GEN-LAST:event_cmbAgamaKeyPressed
 
     private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
         Valid.pindah(evt,cmbAgama,TAlmt);
-}//GEN-LAST:event_CmbSttsKeyPressed
+    }//GEN-LAST:event_CmbSttsKeyPressed
 
     private void TAlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlmtKeyPressed
         Valid.pindah(evt,CmbStts,TTlp);
-}//GEN-LAST:event_TAlmtKeyPressed
+    }//GEN-LAST:event_TAlmtKeyPressed
 
     private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlpKeyPressed
         Valid.pindah(evt,TAlmt,KdSps);
-}//GEN-LAST:event_TTlpKeyPressed
+    }//GEN-LAST:event_TTlpKeyPressed
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -1036,15 +1036,15 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TCari,TNm);
         }
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 
     private void TNoiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoiKeyPressed
         Valid.pindah(evt,DTPLahir,cmbAgama);
-}//GEN-LAST:event_TNoiKeyPressed
+    }//GEN-LAST:event_TNoiKeyPressed
 
     private void TAlumniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlumniKeyPressed
         Valid.pindah(evt,KdSps,BtnSimpan);
-}//GEN-LAST:event_TAlumniKeyPressed
+    }//GEN-LAST:event_TAlumniKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TKd.getText().trim().equals("")){
@@ -1084,7 +1084,7 @@ public class DlgDokter extends javax.swing.JDialog {
                 System.out.println("Notif : "+ex);
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1092,19 +1092,19 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TAlumni,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
         isForm();
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try {
@@ -1115,7 +1115,7 @@ public class DlgDokter extends javax.swing.JDialog {
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1123,7 +1123,7 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1159,7 +1159,7 @@ public class DlgDokter extends javax.swing.JDialog {
 
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1167,17 +1167,17 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         CmbCrStts.setSelectedIndex(0);
@@ -1185,7 +1185,7 @@ public class DlgDokter extends javax.swing.JDialog {
         CmbCrGd.setSelectedIndex(0);
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1193,7 +1193,7 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TKd.getText().trim().equals("")){
@@ -1224,7 +1224,7 @@ public class DlgDokter extends javax.swing.JDialog {
                 return;
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1232,7 +1232,7 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1242,11 +1242,11 @@ public class DlgDokter extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1254,23 +1254,23 @@ public class DlgDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void cmbCrJkItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCrJkItemStateChanged
         tampil();
-}//GEN-LAST:event_cmbCrJkItemStateChanged
+    }//GEN-LAST:event_cmbCrJkItemStateChanged
 
     private void cmbCrJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCrJkKeyPressed
         Valid.pindah(evt,BtnAll, CmbCrGd);
-}//GEN-LAST:event_cmbCrJkKeyPressed
+    }//GEN-LAST:event_cmbCrJkKeyPressed
 
     private void CmbCrGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbCrGdKeyPressed
         Valid.pindah(evt,cmbCrJk, CmbCrStts);
-}//GEN-LAST:event_CmbCrGdKeyPressed
+    }//GEN-LAST:event_CmbCrGdKeyPressed
 
     private void CmbCrSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbCrSttsKeyPressed
         Valid.pindah(evt,CmbCrGd,TCari);
-}//GEN-LAST:event_CmbCrSttsKeyPressed
+    }//GEN-LAST:event_CmbCrSttsKeyPressed
 
     private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1289,9 +1289,9 @@ public class DlgDokter extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbDokterMouseClicked
+    }//GEN-LAST:event_tbDokterMouseClicked
 
-private void KdSpsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdSpsKeyPressed
+    private void KdSpsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdSpsKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select spesialis.nm_sps from spesialis where spesialis.kd_sps=?",TSpesialis,KdSps.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -1299,19 +1299,19 @@ private void KdSpsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdS
         }else{
             Valid.pindah(evt,TTlp,TAlumni);
         }
-}//GEN-LAST:event_KdSpsKeyPressed
+    }//GEN-LAST:event_KdSpsKeyPressed
 
-private void btnSpesialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpesialActionPerformed
+    private void btnSpesialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpesialActionPerformed
         spesial.emptTeks();
         spesial.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         spesial.setLocationRelativeTo(internalFrame1);
         spesial.setAlwaysOnTop(false);
         spesial.setVisible(true);
-}//GEN-LAST:event_btnSpesialActionPerformed
+    }//GEN-LAST:event_btnSpesialActionPerformed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
   isForm();
-}//GEN-LAST:event_ChkInputActionPerformed
+    }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnCariPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariPegawaiActionPerformed
         pegawai.emptTeks();

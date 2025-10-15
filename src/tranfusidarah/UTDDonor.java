@@ -1455,7 +1455,7 @@ public final class UTDDonor extends javax.swing.JDialog {
 
     private void NomorDonorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorDonorKeyPressed
       Valid.pindah(evt,TCari,Tanggal);
-}//GEN-LAST:event_NomorDonorKeyPressed
+    }//GEN-LAST:event_NomorDonorKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         emptTeks();

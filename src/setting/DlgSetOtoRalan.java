@@ -959,11 +959,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
 
     private void nmdokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmdokterKeyPressed
         //Valid.pindah(evt,TCari,cmbBangsal);
-}//GEN-LAST:event_nmdokterKeyPressed
+    }//GEN-LAST:event_nmdokterKeyPressed
 
     private void nmtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmtindakanKeyPressed
         //Valid.pindah(evt,TKd,BtnSimpan);
-}//GEN-LAST:event_nmtindakanKeyPressed
+    }//GEN-LAST:event_nmtindakanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -1009,7 +1009,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1023,7 +1023,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 Valid.pindah(evt,kdtindakan3,BtnBatal);
             }
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -1033,13 +1033,13 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==2){
             emptTeks3();
         }
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -1077,7 +1077,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             }
         }
 
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1085,7 +1085,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1113,7 +1113,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                    " order by dokter.nm_dokter",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1121,22 +1121,22 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,BtnSimpan);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1144,7 +1144,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1154,11 +1154,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1166,7 +1166,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
         dokter.isCek();
@@ -1174,22 +1174,22 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnSeekActionPerformed
+    }//GEN-LAST:event_BtnSeekActionPerformed
 
     private void BtnSeekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeekKeyPressed
         Valid.pindah(evt,kddokter,kdtindakan);
-}//GEN-LAST:event_BtnSeekKeyPressed
+    }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek1ActionPerformed
         datatindakan.isCek();
         datatindakan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         datatindakan.setLocationRelativeTo(internalFrame1);
         datatindakan.setVisible(true);
-}//GEN-LAST:event_BtnSeek1ActionPerformed
+    }//GEN-LAST:event_BtnSeek1ActionPerformed
 
     private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek1KeyPressed
         Valid.pindah(evt,kdtindakan,BtnSimpan);
-}//GEN-LAST:event_BtnSeek1KeyPressed
+    }//GEN-LAST:event_BtnSeek1KeyPressed
 
     private void Table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1MouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1198,7 +1198,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_Table1MouseClicked
+    }//GEN-LAST:event_Table1MouseClicked
 
     private void Table1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table1KeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1209,23 +1209,23 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_Table1KeyPressed
+    }//GEN-LAST:event_Table1KeyPressed
 
-private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
+    private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
              nmdokter.setText(dokter.tampil3(kddokter.getText()));
         }else{
              Valid.pindah(evt,TCari,kdtindakan);
         }
-}//GEN-LAST:event_kddokterKeyPressed
+    }//GEN-LAST:event_kddokterKeyPressed
 
-private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdtindakanKeyPressed
+    private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdtindakanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
              Sequel.cariIsi("select nm_perawatan from jns_perawatan where kd_jenis_prw=? ",nmtindakan,kdtindakan.getText());
         }else{
              Valid.pindah(evt,kddokter,kdpj);
         }
-}//GEN-LAST:event_kdtindakanKeyPressed
+    }//GEN-LAST:event_kdtindakanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();

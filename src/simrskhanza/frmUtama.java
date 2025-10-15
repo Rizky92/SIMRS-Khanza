@@ -8568,29 +8568,29 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnToolKamnapActionPerformed
 
-private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
      isTutup();
      DlgHome.dispose();
      DlgAbout About=new DlgAbout(this,true);
      About.setSize(PanelWall.getWidth(), PanelWall.getHeight());
      About.setLocationRelativeTo(PanelWall);
      About.setVisible(true);
-}//GEN-LAST:event_jMenu4MouseClicked
+    }//GEN-LAST:event_jMenu4MouseClicked
 
-private void jMenu4MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu4MenuSelected
+    private void jMenu4MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu4MenuSelected
     isTutup();
     DlgHome.dispose();
     DlgAbout About=new DlgAbout(this,true);
     About.setSize(PanelWall.getWidth(), PanelWall.getHeight());
     About.setLocationRelativeTo(PanelWall);
     About.setVisible(true);
-}//GEN-LAST:event_jMenu4MenuSelected
+    }//GEN-LAST:event_jMenu4MenuSelected
 
-private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edAdminKeyPressed
+    private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edAdminKeyPressed
         Valid.pindah(evt,BtnCancel, edPwd);
-}//GEN-LAST:event_edAdminKeyPressed
+    }//GEN-LAST:event_edAdminKeyPressed
 
-private void edPwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPwdKeyPressed
+    private void edPwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edPwdKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnLoginActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -8598,9 +8598,9 @@ private void edPwdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edP
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnLogin.requestFocus();
         }
-}//GEN-LAST:event_edPwdKeyPressed
+    }//GEN-LAST:event_edPwdKeyPressed
 
-private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     isTutup();
     DlgHome.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
@@ -8614,9 +8614,9 @@ private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         isTampil();
     }
     this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnMenuActionPerformed
+    }//GEN-LAST:event_BtnMenuActionPerformed
 
-private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolKasirActionPerformed
+    private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolKasirActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         kasirralan.isCek();
@@ -8626,9 +8626,9 @@ private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         kasirralan.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnToolKasirActionPerformed
+    }//GEN-LAST:event_BtnToolKasirActionPerformed
 
-private void BtnToolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolRegActionPerformed
+    private void BtnToolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolRegActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         reg.emptTeks();
@@ -8637,15 +8637,15 @@ private void BtnToolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         reg.setLocationRelativeTo(PanelUtama);
         reg.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnToolRegActionPerformed
+    }//GEN-LAST:event_BtnToolRegActionPerformed
 
-private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
     if(this.getState()==1){
         isTutup();
     }
-}//GEN-LAST:event_formWindowStateChanged
+    }//GEN-LAST:event_formWindowStateChanged
 
-private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGantiPasswordBtnLogActionPerformed
+    private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGantiPasswordBtnLogActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     isTutup();
     WindowInputPassword barcode=new WindowInputPassword(this,true);
@@ -8655,7 +8655,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     DlgHome.dispose();
     this.setCursor(Cursor.getDefaultCursor());
 
-}//GEN-LAST:event_MnGantiPasswordBtnLogActionPerformed
+    }//GEN-LAST:event_MnGantiPasswordBtnLogActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         DlgHome.dispose();

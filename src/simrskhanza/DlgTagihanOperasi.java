@@ -2006,21 +2006,21 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         form.setLocationRelativeTo(internalFrame1);
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
             dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,TCariPaket,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -2031,7 +2031,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-private void kdoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator1KeyPressed
+    private void kdoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmoperator1.setText(dokter.tampil3(kdoperator1.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2039,60 +2039,60 @@ private void kdoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
         }else{
             Valid.pindah(evt,tgl,kdoperator2);
         }
-}//GEN-LAST:event_kdoperator1KeyPressed
+    }//GEN-LAST:event_kdoperator1KeyPressed
 
-private void BtnOperator1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOperator1ActionPerformed
+    private void BtnOperator1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOperator1ActionPerformed
         pilihan=1;
         dokter.emptTeks();
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnOperator1ActionPerformed
+    }//GEN-LAST:event_BtnOperator1ActionPerformed
 
-private void tglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tglKeyPressed
+    private void tglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tglKeyPressed
         Valid.pindah(evt,jenis,BtnOperator1);
-}//GEN-LAST:event_tglKeyPressed
+    }//GEN-LAST:event_tglKeyPressed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             int row2=tabMode.getRowCount();
             for(int r=0;r<row2;r++){
                 tabMode.setValueAt("",r,0);
             }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
+    private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select concat(pasien.no_rkm_medis,', ',pasien.nm_pasien) from reg_periksa inner join pasien "+
                         " on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",TPasien,TNoRw.getText());
         }else{
             Valid.pindah(evt,TCari,kdoperator1);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
-private void jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jenisKeyPressed
+    private void jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jenisKeyPressed
     Valid.pindah(evt,Kategori,tgl);
-}//GEN-LAST:event_jenisKeyPressed
+    }//GEN-LAST:event_jenisKeyPressed
 
-private void kdasistoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator1KeyPressed
+    private void kdasistoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnAsis1ActionPerformed(null);
         }else{
             Valid.pindah(evt,kdInstrumen,kdasistoperator2);
         }
 
-}//GEN-LAST:event_kdasistoperator1KeyPressed
+    }//GEN-LAST:event_kdasistoperator1KeyPressed
 
-private void btnAsis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis1ActionPerformed
+    private void btnAsis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis1ActionPerformed
    pilihan=1;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnAsis1ActionPerformed
+    }//GEN-LAST:event_btnAsis1ActionPerformed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -2100,34 +2100,34 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCari1ActionPerformed
+    }//GEN-LAST:event_BtnCari1ActionPerformed
 
-private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCari1ActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCari1KeyPressed
+    }//GEN-LAST:event_BtnCari1KeyPressed
 
-private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil2();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
-private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
-private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
+    private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgObatOperasi produsen=new DlgObatOperasi(null,false);
         produsen.emptTeks();
@@ -2135,9 +2135,9 @@ private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         produsen.setLocationRelativeTo(internalFrame1);
         produsen.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnTambahActionPerformed
+    }//GEN-LAST:event_BtnTambahActionPerformed
 
-private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
+    private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tbObat.getRowCount()!=0){
             try {
                 getData();
@@ -2145,9 +2145,9 @@ private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
             }
         }
         LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
-private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
+    private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tbObat.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
@@ -2172,9 +2172,9 @@ private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb
             }
         }
         LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
-private void TCariPaketKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPaketKeyPressed
+    private void TCariPaketKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPaketKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCari2ActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -2182,26 +2182,26 @@ private void TCariPaketKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariPaketKeyPressed
+    }//GEN-LAST:event_TCariPaketKeyPressed
 
-private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+    private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
    tampil();
-}//GEN-LAST:event_BtnCari2ActionPerformed
+    }//GEN-LAST:event_BtnCari2ActionPerformed
 
-private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
+    private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_BtnCari2KeyPressed
+    }//GEN-LAST:event_BtnCari2KeyPressed
 
-private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+    private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
   TCariPaket.setText("");
   tampil();
-}//GEN-LAST:event_BtnAll1ActionPerformed
+    }//GEN-LAST:event_BtnAll1ActionPerformed
 
-private void BtnAll1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAll1KeyPressed
+    private void BtnAll1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAll1KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_BtnAll1KeyPressed
+    }//GEN-LAST:event_BtnAll1KeyPressed
 
-private void BtnTambahOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahOperasiActionPerformed
+    private void BtnTambahOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahOperasiActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJnsPerawatanOperasi produsen=new DlgJnsPerawatanOperasi(null,false);
         produsen.emptTeks();
@@ -2210,9 +2210,9 @@ private void BtnTambahOperasiActionPerformed(java.awt.event.ActionEvent evt) {//
         produsen.setLocationRelativeTo(internalFrame1);
         produsen.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnTambahOperasiActionPerformed
+    }//GEN-LAST:event_BtnTambahOperasiActionPerformed
 
-private void tbtindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbtindakanMouseClicked
+    private void tbtindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbtindakanMouseClicked
        if(tbtindakan.getRowCount()!=0){
             try {
                 getData2();
@@ -2222,9 +2222,9 @@ private void tbtindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
         }
 
         LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
-}//GEN-LAST:event_tbtindakanMouseClicked
+    }//GEN-LAST:event_tbtindakanMouseClicked
 
-private void tbtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbtindakanKeyPressed
+    private void tbtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbtindakanKeyPressed
     if(tbtindakan.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 try {
@@ -2247,9 +2247,9 @@ private void tbtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
     }
     LTotal.setText("Total Biaya : "+Valid.SetAngka(biayaobat+biayatindakan));
-}//GEN-LAST:event_tbtindakanKeyPressed
+    }//GEN-LAST:event_tbtindakanKeyPressed
 
-private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator2KeyPressed
+    private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator2KeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmoperator2.setText(dokter.tampil3(kdoperator2.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2257,18 +2257,18 @@ private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
         }else{
             Valid.pindah(evt,kdoperator1,kdoperator3);
         }
-}//GEN-LAST:event_kdoperator2KeyPressed
+    }//GEN-LAST:event_kdoperator2KeyPressed
 
-private void BtnOperator2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOperator2ActionPerformed
+    private void BtnOperator2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOperator2ActionPerformed
       pilihan=2;
         dokter.emptTeks();
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnOperator2ActionPerformed
+    }//GEN-LAST:event_BtnOperator2ActionPerformed
 
-private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator3KeyPressed
+    private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator3KeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmoperator3.setText(dokter.tampil3(kdoperator3.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2276,18 +2276,18 @@ private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
         }else{
             Valid.pindah(evt,kdoperator2,kdanestesi);
         }
-}//GEN-LAST:event_kdoperator3KeyPressed
+    }//GEN-LAST:event_kdoperator3KeyPressed
 
-private void btnOperator3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOperator3ActionPerformed
+    private void btnOperator3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOperator3ActionPerformed
   pilihan=3;
         dokter.emptTeks();
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_btnOperator3ActionPerformed
+    }//GEN-LAST:event_btnOperator3ActionPerformed
 
-private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdanestesiKeyPressed
+    private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdanestesiKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmanestesi.setText(dokter.tampil3(kdanestesi.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2295,18 +2295,18 @@ private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else{
             Valid.pindah(evt,kdoperator3,kddranak);
         }
-}//GEN-LAST:event_kdanestesiKeyPressed
+    }//GEN-LAST:event_kdanestesiKeyPressed
 
-private void BtnAnastesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnastesiActionPerformed
+    private void BtnAnastesiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnastesiActionPerformed
         pilihan=4;
         dokter.emptTeks();
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnAnastesiActionPerformed
+    }//GEN-LAST:event_BtnAnastesiActionPerformed
 
-private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddranakKeyPressed
+    private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddranakKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmdranak.setText(dokter.tampil3(kddranak.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2314,44 +2314,44 @@ private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }else{
             Valid.pindah(evt,kdanestesi,kdbidan);
         }
-}//GEN-LAST:event_kddranakKeyPressed
+    }//GEN-LAST:event_kddranakKeyPressed
 
-private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnakActionPerformed
+    private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnakActionPerformed
         pilihan=5;
         dokter.emptTeks();
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_btnAnakActionPerformed
+    }//GEN-LAST:event_btnAnakActionPerformed
 
-private void btnAsis2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis2ActionPerformed
+    private void btnAsis2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis2ActionPerformed
    pilihan=2;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnAsis2ActionPerformed
+    }//GEN-LAST:event_btnAsis2ActionPerformed
 
-private void kdasistoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator2KeyPressed
+    private void kdasistoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnAsis2ActionPerformed(null);
         }else{
             Valid.pindah(evt,kdasistoperator1,kdasistoperator3);
         }
-}//GEN-LAST:event_kdasistoperator2KeyPressed
+    }//GEN-LAST:event_kdasistoperator2KeyPressed
 
-private void btnAsis3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis3ActionPerformed
+    private void btnAsis3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsis3ActionPerformed
   pilihan=3;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnAsis3ActionPerformed
+    }//GEN-LAST:event_btnAsis3ActionPerformed
 
-private void kdInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdInstrumenKeyPressed
+    private void kdInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdInstrumenKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip='"+kdInstrumen.getText()+"'",nminstrumen);
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -2359,75 +2359,75 @@ private void kdInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
         }else{
             Valid.pindah(evt,kdprwluar,kdasistoperator1);
         }
-}//GEN-LAST:event_kdInstrumenKeyPressed
+    }//GEN-LAST:event_kdInstrumenKeyPressed
 
-private void btnPrwResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrwResActionPerformed
+    private void btnPrwResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrwResActionPerformed
     pilihan=5;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnPrwResActionPerformed
+    }//GEN-LAST:event_btnPrwResActionPerformed
 
-private void kdprwresustKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwresustKeyPressed
+    private void kdprwresustKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwresustKeyPressed
     Valid.pindah(evt,kdasistanestesi2,kdonloop1);
-}//GEN-LAST:event_kdprwresustKeyPressed
+    }//GEN-LAST:event_kdprwresustKeyPressed
 
-private void kdasistanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistanestesiKeyPressed
+    private void kdasistanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistanestesiKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnAsnesActionPerformed(null);
         }else{
             Valid.pindah(evt,kdasistoperator3,kdasistanestesi2);
         }
-}//GEN-LAST:event_kdasistanestesiKeyPressed
+    }//GEN-LAST:event_kdasistanestesiKeyPressed
 
-private void BtnAsnesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAsnesActionPerformed
+    private void BtnAsnesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAsnesActionPerformed
    pilihan=4;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_BtnAsnesActionPerformed
+    }//GEN-LAST:event_BtnAsnesActionPerformed
 
-private void kdbidanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbidanKeyPressed
+    private void kdbidanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbidanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnBidanActionPerformed(null);
         }else{
             Valid.pindah(evt,kddranak,kdbidan2);
         }
-}//GEN-LAST:event_kdbidanKeyPressed
+    }//GEN-LAST:event_kdbidanKeyPressed
 
-private void btnBidanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidanActionPerformed
+    private void btnBidanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidanActionPerformed
     pilihan=7;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnBidanActionPerformed
+    }//GEN-LAST:event_btnBidanActionPerformed
 
-private void kdprwluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwluarKeyPressed
+    private void kdprwluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPrwLuarActionPerformed(null);
         }else{
             Valid.pindah(evt,kdbidan3,kdInstrumen);
         }
-}//GEN-LAST:event_kdprwluarKeyPressed
+    }//GEN-LAST:event_kdprwluarKeyPressed
 
-private void btnPrwLuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrwLuarActionPerformed
+    private void btnPrwLuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrwLuarActionPerformed
    pilihan=6;
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnPrwLuarActionPerformed
+    }//GEN-LAST:event_btnPrwLuarActionPerformed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
    isForm();
-}//GEN-LAST:event_ChkInputActionPerformed
+    }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KategoriKeyPressed
         Valid.pindah(evt,TCariPaket,jenis);

@@ -1875,7 +1875,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnCari5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari5ActionPerformed
@@ -2066,7 +2066,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_tbDokterMouseClicked
 
-private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanOperasiActionPerformed
+    private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanOperasiActionPerformed
     if(tbDokter.getSelectedRow()>-1){
         if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
             if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
@@ -2163,9 +2163,9 @@ private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data, klik pada No.Rawat ..!!");
         }
     }
-}//GEN-LAST:event_MnHapusTagihanOperasiActionPerformed
+    }//GEN-LAST:event_MnHapusTagihanOperasiActionPerformed
 
-private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusObatOperasiActionPerformed
+    private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusObatOperasiActionPerformed
     if(tbDokter.getSelectedRow()>-1){
         if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().equals("")){
             if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString())>0){
@@ -2216,7 +2216,7 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data, klik pada No.Rawat ..!!");
         }
     }
-}//GEN-LAST:event_MnHapusObatOperasiActionPerformed
+    }//GEN-LAST:event_MnHapusObatOperasiActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();

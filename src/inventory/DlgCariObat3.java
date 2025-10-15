@@ -454,7 +454,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
-private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(Jeniskelas,"Data");
         }else if(kdgudang.getText().equals("")){
@@ -803,15 +803,15 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
-private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
+    private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_DOWN){
         tbObat.requestFocus();
     }else{
         Valid.pindah(evt,BtnKeluar,btnCetak);
     }
-}//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_TanggalKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
