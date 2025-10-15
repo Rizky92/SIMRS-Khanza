@@ -3,6 +3,8 @@ package inventory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -21,6 +23,9 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -1314,12 +1319,12 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(tampikan==true){
             try {
-                if(Valid.daysOld("./cache/penerimaanobat.iyem")<8){
-                    tampil2();
-                }else{
-                    tampil();
-                    tampil2();
-                }
+//                if(Valid.daysOld("./cache/penerimaanobat.iyem")<8){
+//                    tampil2();
+//                }else{
+//                }
+                tampil();
+                tampil2();
             } catch (Exception e) {
             }
         }            
@@ -1513,205 +1518,142 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        try{
-            file=new File("./cache/penerimaanobat.iyem");
+        try {
+            File file = new File("./cache/penerimaanobat.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,databarang.kode_sat, databarang.h_beli, "+
-                " ifnull(date_format(databarang.expire,'%d-%m-%Y'),'00-00-0000'),databarang.kode_satbesar,databarang.isi, "+
-                " (databarang.h_beli*databarang.isi) as hargabesar from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
-                " where databarang.status='1' order by databarang.nama_brng");
-            try {
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    iyembuilder.append("{\"SatuanBeli\":\"").append(rs.getString(6)).append("\",\"KodeBarang\":\"").append(rs.getString(1)).append("\",\"NamaBarang\":\"").append(rs.getString(2).replaceAll("\"","")).append("\",\"Satuan\":\"").append(rs.getString(3)).append("\",\"Kadaluwarsa\":\"").append(rs.getString(5)).append("\",\"Harga\":\"").append(rs.getString(8)).append("\",\"Isi\":\"").append(rs.getString(7)).append("\"},");
-                }                                           
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select b.kode_brng, b.nama_brng, b.kode_sat, b.h_beli, ifnull(date_format(b.expire, '%d-%m-%Y'), '00-00-0000'), " +
+                "b.kode_satbesar, b.isi, (b.h_beli * b.isi) as hargabesar from databarang b join jenis j on b.kdjns = j.kdjns " +
+                "where b.status = '1' order by b.nama_brng"
+            )) {
+                ObjectNode root = mapper.createObjectNode();
+                ArrayNode penerimaanobat = mapper.createArrayNode();
+                if (rs.next()) {
+                    ObjectNode item;
+                    do {
+                        item = mapper.createObjectNode();
+                        item.put("SatuanBeli", rs.getString(6));
+                        item.put("KodeBarang", rs.getString(1));
+                        item.put("NamaBarang", rs.getString(2));
+                        item.put("Satuan", rs.getString(3));
+                        item.put("Kadaluwarsa", rs.getString(5));
+                        item.put("Harga", rs.getString(8));
+                        item.put("Isi", rs.getString(7));
+                        penerimaanobat.add(item);
+                    } while (rs.next());
                 }
-                if(ps!=null){
-                    ps.close();
-                }
-            }   
-            
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"penerimaanobat\":["+iyembuilder+"]}");
-                fileWriter.flush();
+                root.set("penerimaanobat", penerimaanobat);
+                fw.write(mapper.writeValueAsString(root));
+                fw.flush();
             }
-            
-            fileWriter.close();
-            iyembuilder=null;
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }        
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
     
     private void tampil2() {
-        try{
-            String[] kodebarang,namabarang,satuan,satuanbeli,kadaluwarsa,nobatch;
-            boolean[] ganti;
-            double[] harga,jumlah,subtotal,diskon,besardiskon,jmltotal,jmlstok,hpp,isi,jmlbesar,
-                     ralan,kelas1,kelas2,kelas3,utama,vip,vvip,beliluar,jualbebas,karyawan,dasar;
-            row=tbDokter.getRowCount();
-            jml=0;
-            for(i=0;i<row;i++){
-                try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                        jml++;
-                    }
-                } catch (Exception e) {
-                    jml=jml+0;
-                }            
-            }
-
-            kodebarang=new String[jml];
-            namabarang=new String[jml];
-            satuan=new String[jml];
-            satuanbeli=new String[jml];
-            kadaluwarsa=new String[jml];
-            nobatch=new String[jml];
-            harga=new double[jml];
-            jumlah=new double[jml];
-            subtotal=new double[jml];
-            diskon=new double[jml];
-            besardiskon=new double[jml];
-            jmltotal=new double[jml];
-            jmlstok=new double[jml];
-            hpp=new double[jml];
-            ralan=new double[jml];
-            kelas1=new double[jml];
-            kelas2=new double[jml];
-            kelas3=new double[jml];
-            utama=new double[jml];
-            vip=new double[jml];
-            vvip=new double[jml];
-            beliluar=new double[jml];
-            jualbebas=new double[jml];
-            karyawan=new double[jml]; 
-            isi=new double[jml]; 
-            jmlbesar=new double[jml];
-            dasar=new double[jml];  
-            ganti=new boolean[jml];        
-
-            index=0;        
-            for(i=0;i<row;i++){
-                try {
-                    if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                        jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
-                        satuanbeli[index]=tbDokter.getValueAt(i,1).toString();
-                        kodebarang[index]=tbDokter.getValueAt(i,2).toString();
-                        namabarang[index]=tbDokter.getValueAt(i,3).toString();
-                        satuan[index]=tbDokter.getValueAt(i,4).toString();
-                        ganti[index]=Boolean.parseBoolean(tbDokter.getValueAt(i,5).toString());
-                        kadaluwarsa[index]=tbDokter.getValueAt(i,6).toString();
-                        harga[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
-                        subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
-                        diskon[index]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
-                        besardiskon[index]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
-                        jmltotal[index]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
-                        jmlstok[index]=Double.parseDouble(tbDokter.getValueAt(i,12).toString());
-                        nobatch[index]=tbDokter.getValueAt(i,13).toString();
-                        ralan[index]=Double.parseDouble(tbDokter.getValueAt(i,14).toString());
-                        kelas1[index]=Double.parseDouble(tbDokter.getValueAt(i,15).toString());
-                        kelas2[index]=Double.parseDouble(tbDokter.getValueAt(i,16).toString());
-                        kelas3[index]=Double.parseDouble(tbDokter.getValueAt(i,17).toString());
-                        utama[index]=Double.parseDouble(tbDokter.getValueAt(i,18).toString());
-                        vip[index]=Double.parseDouble(tbDokter.getValueAt(i,19).toString());
-                        vvip[index]=Double.parseDouble(tbDokter.getValueAt(i,20).toString());
-                        beliluar[index]=Double.parseDouble(tbDokter.getValueAt(i,21).toString());
-                        jualbebas[index]=Double.parseDouble(tbDokter.getValueAt(i,22).toString());
-                        karyawan[index]=Double.parseDouble(tbDokter.getValueAt(i,23).toString());
-                        hpp[index]=Double.parseDouble(tbDokter.getValueAt(i,24).toString());
-                        isi[index]=Double.parseDouble(tbDokter.getValueAt(i,25).toString());
-                        jmlbesar[index]=Double.parseDouble(tbDokter.getValueAt(i,26).toString());
-                        dasar[index]=Double.parseDouble(tbDokter.getValueAt(i,27).toString());
-                        index++;
-                    }
-                } catch (Exception e) {
-                    System.out.println("e "+e);
+        try {
+            ArrayList<Map<String, Object>> rows = new ArrayList();
+            
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()) > 0) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("jml", tbDokter.getValueAt(i, 0));
+                    item.put("satuanbeli", tbDokter.getValueAt(i, 1));
+                    item.put("kodebarang", tbDokter.getValueAt(i, 2));
+                    item.put("namabarang", tbDokter.getValueAt(i, 3));
+                    item.put("satuan", tbDokter.getValueAt(i, 4));
+                    item.put("ganti", tbDokter.getValueAt(i, 5));
+                    item.put("kadaluwarsa", tbDokter.getValueAt(i, 6));
+                    item.put("harga", tbDokter.getValueAt(i, 7));
+                    item.put("subtotal", tbDokter.getValueAt(i, 8));
+                    item.put("diskon", tbDokter.getValueAt(i, 9));
+                    item.put("besardiskon", tbDokter.getValueAt(i, 10));
+                    item.put("jmltotal", tbDokter.getValueAt(i, 11));
+                    item.put("jmlstok", tbDokter.getValueAt(i, 12));
+                    item.put("nobatch", tbDokter.getValueAt(i, 13));
+                    item.put("ralan", tbDokter.getValueAt(i, 14));
+                    item.put("kelas1", tbDokter.getValueAt(i, 15));
+                    item.put("kelas2", tbDokter.getValueAt(i, 16));
+                    item.put("kelas3", tbDokter.getValueAt(i, 17));
+                    item.put("utama", tbDokter.getValueAt(i, 18));
+                    item.put("vip", tbDokter.getValueAt(i, 19));
+                    item.put("vvip", tbDokter.getValueAt(i, 20));
+                    item.put("beliluar", tbDokter.getValueAt(i, 21));
+                    item.put("jualbebas", tbDokter.getValueAt(i, 22));
+                    item.put("karyawan", tbDokter.getValueAt(i, 23));
+                    item.put("hpp", tbDokter.getValueAt(i, 24));
+                    item.put("isi", tbDokter.getValueAt(i, 25));
+                    item.put("jmlbesar", tbDokter.getValueAt(i, 26));
+                    item.put("dasar", tbDokter.getValueAt(i, 27));
+                    rows.add(item);
                 }
             }
+            
             Valid.tabelKosong(tabMode);
-            for(i=0;i<jml;i++){
-                tabMode.addRow(new Object[]{
-                    jumlah[i],satuanbeli[i],kodebarang[i],namabarang[i],satuan[i],ganti[i],kadaluwarsa[i],harga[i],subtotal[i],diskon[i],besardiskon[i],jmltotal[i],
-                    jmlstok[i],nobatch[i],ralan[i],kelas1[i],kelas2[i],kelas3[i],utama[i],vip[i],vvip[i],beliluar[i],jualbebas[i],karyawan[i],hpp[i],isi[i],jmlbesar[i],dasar[i]
-                });
-            }
             
-            kodebarang=null;
-            namabarang=null;
-            satuan=null;
-            satuanbeli=null;
-            kadaluwarsa=null;
-            nobatch=null;
-            harga=null;
-            jumlah=null;
-            subtotal=null;
-            diskon=null;
-            besardiskon=null;
-            jmltotal=null;
-            jmlstok=null;
-            hpp=null;
-            ralan=null;
-            kelas1=null;
-            kelas2=null;
-            kelas3=null;
-            utama=null;
-            vip=null;
-            vvip=null;
-            beliluar=null;
-            jualbebas=null;
-            karyawan=null;
-            ganti=null;
+            rows.forEach(row -> tabMode.addRow(new Object[] {
+                row.get("jml"), row.get("satuanbeli"), row.get("kodebarang"), row.get("namabarang"), row.get("satuan"),
+                row.get("ganti"), row.get("kadaluwarsa"), row.get("harga"), row.get("subtotal"), row.get("diskon"),
+                row.get("besardiskon"), row.get("jmltotal"), row.get("jmlstok"), row.get("nobatch"), row.get("ralan"),
+                row.get("kelas1"), row.get("kelas2"), row.get("kelas3"), row.get("utama"), row.get("vip"), row.get("vvip"),
+                row.get("beliluar"), row.get("jualbebas"), row.get("karyawan"), row.get("hpp"), row.get("isi"),
+                row.get("jmlbesar"), row.get("dasar"),
+            }));
             
-            myObj = new FileReader("./cache/penerimaanobat.iyem");
-            root = mapper.readTree(myObj);
-            response = root.path("penerimaanobat");
-            if(response.isArray()){
-                if(aktifkanbatch.equals("yes")){
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            tabMode.addRow(new Object[]{
-                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),true,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
-                            });
-                        }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                tabMode.addRow(new Object[]{
-                                    "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),true,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
+            try (FileReader fr = new FileReader("./cache/penerimaanobat.iyem")) {
+                JsonNode array = mapper.readTree(fr).path("penerimaanobat");
+                if (array.isArray()) {
+                    if (aktifkanbatch.equals("yes")) {
+                        if (TCari.getText().isBlank()) {
+                            for (JsonNode row : array) {
+                                tabMode.addRow(new Object[] {
+                                    "", row.path("SatuanBeli").asText(), row.path("KodeBarang").asText(), row.path("NamaBarang").asText(),
+                                    row.path("Satuan").asText(), true, row.path("Kadaluwarsa").asText(), row.path("Harga").asDouble(),
+                                    0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, row.path("Isi").asDouble(), 1, 0
                                 });
                             }
+                        } else {
+                            for (JsonNode row : array) {
+                                if (row.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                                    row.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                                ) {
+                                    tabMode.addRow(new Object[] {
+                                        "", row.path("SatuanBeli").asText(), row.path("KodeBarang").asText(), row.path("NamaBarang").asText(),
+                                        row.path("Satuan").asText(), true, row.path("Kadaluwarsa").asText(), row.path("Harga").asDouble(),
+                                        0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, row.path("Isi").asDouble(), 1, 0
+                                    });
+                                }
+                            }
                         }
-                    }
-                }else{
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            tabMode.addRow(new Object[]{
-                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),false,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
-                            });
-                        }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                tabMode.addRow(new Object[]{
-                                    "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),false,list.path("Kadaluwarsa").asText(),list.path("Harga").asDouble(),0,0,0,0,0,"",0,0,0,0,0,0,0,0,0,0,0,list.path("Isi").asDouble(),1,0
+                    } else {
+                        if (TCari.getText().isBlank()) {
+                            for (JsonNode row : array) {
+                                tabMode.addRow(new Object[] {
+                                    "", row.path("SatuanBeli").asText(), row.path("KodeBarang").asText(), row.path("NamaBarang").asText(),
+                                    row.path("Satuan").asText(), false, row.path("Kadaluwarsa").asText(), row.path("Harga").asDouble(),
+                                    0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, row.path("Isi").asDouble(), 1, 0
                                 });
+                            }
+                        } else {
+                            for (JsonNode row : array) {
+                                if (row.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                                    row.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                                ) {
+                                    tabMode.addRow(new Object[] {
+                                        "", row.path("SatuanBeli").asText(), row.path("KodeBarang").asText(), row.path("NamaBarang").asText(),
+                                        row.path("Satuan").asText(), false, row.path("Kadaluwarsa").asText(), row.path("Harga").asDouble(),
+                                        0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, row.path("Isi").asDouble(), 1, 0
+                                    });
+                                }
                             }
                         }
                     }
                 }
             }
-            myObj.close();
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }        
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
     private void getData(){        

@@ -3,6 +3,8 @@ package inventory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -21,6 +23,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -935,12 +938,8 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(tampilkan==true){
             try {
-                if(Valid.daysOld("./cache/suratpemesananobat.iyem")<8){
-                    tampil2();
-                }else{
-                    tampil();
-                    tampil2();
-                }
+                tampil();
+                tampil2();
             } catch (Exception e) {
             }
         }            
@@ -1462,140 +1461,96 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       try{
-            file=new File("./cache/suratpemesananobat.iyem");
+        try {
+            File file = new File("./cache/suratpemesananobat.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,databarang.kode_satbesar, "+
-                " (databarang.h_beli*databarang.isi) as harga,databarang.kode_sat,databarang.isi "+
-                " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
-                " where databarang.status='1' order by databarang.nama_brng");
-            try {  
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    iyembuilder.append("{\"SatuanBeli\":\"").append(rs.getString("kode_satbesar")).append("\",\"KodeBarang\":\"").append(rs.getString("kode_brng")).append("\",\"NamaBarang\":\"").append(rs.getString("nama_brng").replaceAll("\"","")).append("\",\"Satuan\":\"").append(rs.getString("kode_sat")).append("\",\"Harga\":\"").append(rs.getString("harga")).append("\",\"Isi\":\"").append(rs.getString("isi")).append("\"},");
-                }        
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select b.kode_brng, b.nama_brng, b.kode_satbesar, (b.h_beli * b.isi) as harga, b.kode_sat, b.isi " +
+                "from databarang b join jenis j on b.kdjns = j.kdjns where b.status = '1' order by b.nama_brng"
+            )) {
+                ObjectNode suratpemesananobat = mapper.createObjectNode();
+                ArrayNode array = mapper.createArrayNode();
+                if (rs.next()) {
+                    ObjectNode item;
+                    do {
+                        item = mapper.createObjectNode();
+                        item.put("SatuanBeli", rs.getString("kode_satbesar"));
+                        item.put("KodeBarang", rs.getString("kode_brng"));
+                        item.put("NamaBarang", rs.getString("nama_brng"));
+                        item.put("Satuan", rs.getString("kode_sat"));
+                        item.put("Harga", rs.getString("harga"));
+                        item.put("Isi", rs.getString("isi"));
+                        array.add(item);
+                    } while (rs.next());
                 }
-                if(ps!=null){
-                    ps.close();
-                }
-            }  
-            
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"suratpemesananobat\":["+iyembuilder+"]}");
-                fileWriter.flush();
+                suratpemesananobat.set("suratpemesananobat", array);
+                fw.write(mapper.writeValueAsString(suratpemesananobat));
+                fw.flush();
             }
-            
-            fileWriter.close();
-            iyembuilder=null;
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        
     }
     
     private void tampil2() {
-        try{
-            row=tbDokter.getRowCount();
-            jml=0;
-            for(i=0;i<row;i++){
-                try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                        jml++;
-                    }
-                } catch (Exception e) {
-                    jml=jml+0;
-                }            
-            }
-
-            kodebarang=new String[jml];
-            namabarang=new String[jml];
-            satuan=new String[jml];
-            satuanbeli=new String[jml];
-            harga=new double[jml];
-            jumlah=new double[jml];
-            subtotal=new double[jml];
-            diskon=new double[jml];
-            besardiskon=new double[jml];
-            jmltotal=new double[jml];
-            jmlstok=new double[jml];
-            isi=new double[jml];
-            isibesar=new double[jml];
-            index=0;        
-            for(i=0;i<row;i++){
-                try {
-                    if(Double.parseDouble(tbDokter.getValueAt(i,0).toString())>0){
-                        jumlah[index]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
-                        satuanbeli[index]=tbDokter.getValueAt(i,1).toString();
-                        kodebarang[index]=tbDokter.getValueAt(i,2).toString();
-                        namabarang[index]=tbDokter.getValueAt(i,3).toString();
-                        satuan[index]=tbDokter.getValueAt(i,4).toString();
-                        harga[index]=Double.parseDouble(tbDokter.getValueAt(i,5).toString());
-                        subtotal[index]=Double.parseDouble(tbDokter.getValueAt(i,6).toString());
-                        diskon[index]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
-                        besardiskon[index]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
-                        jmltotal[index]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
-                        jmlstok[index]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
-                        isi[index]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
-                        isibesar[index]=Double.parseDouble(tbDokter.getValueAt(i,12).toString());
-                        index++;
-                    }
-                } catch (Exception e) {
+        try {
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (Valid.SetAngka(tabMode.getValueAt(i, 0).toString()) > 0) {
+                    Map<String, Object> row = new HashMap<>();
+                    row.put("jumlah", tabMode.getValueAt(i, 0));
+                    row.put("satuanbeli", tabMode.getValueAt(i, 1));
+                    row.put("kodebarang", tabMode.getValueAt(i, 2));
+                    row.put("namabarang", tabMode.getValueAt(i, 3));
+                    row.put("satuan", tabMode.getValueAt(i, 4));
+                    row.put("harga", tabMode.getValueAt(i, 5));
+                    row.put("subtotal", tabMode.getValueAt(i, 6));
+                    row.put("diskon", tabMode.getValueAt(i, 7));
+                    row.put("besardiskon", tabMode.getValueAt(i, 8));
+                    row.put("jmltotal", tabMode.getValueAt(i, 9));
+                    row.put("jmlstok", tabMode.getValueAt(i, 10));
+                    row.put("isi", tabMode.getValueAt(i, 11));
+                    row.put("isibesar", tabMode.getValueAt(i, 12));
+                    rows.add(row);
                 }
             }
             Valid.tabelKosong(tabMode);
-            for(i=0;i<jml;i++){
-                tabMode.addRow(new Object[]{jumlah[i],satuanbeli[i],kodebarang[i],namabarang[i],satuan[i],harga[i],subtotal[i],diskon[i],besardiskon[i],jmltotal[i],jmlstok[i],isi[i],isibesar[i]});
-            }
-            
-            kodebarang=null;
-            namabarang=null;
-            satuan=null;
-            satuanbeli=null;
-            harga=null;
-            jumlah=null;
-            subtotal=null;
-            diskon=null;
-            besardiskon=null;
-            jmltotal=null;
-            jmlstok=null;
-            isi=null;
-            isibesar=null;
-            
-            myObj = new FileReader("./cache/suratpemesananobat.iyem");
-            root = mapper.readTree(myObj);
-            response = root.path("suratpemesananobat");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),list.path("Harga").asDouble(),0,0,0,0,0,list.path("Isi").asDouble(),1
-                        });
-                    }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                            tabMode.addRow(new Object[]{
-                                "",list.path("SatuanBeli").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),list.path("Harga").asDouble(),0,0,0,0,0,list.path("Isi").asDouble(),1
+            rows.forEach(row -> {
+                tabMode.addRow(new Object[] {
+                    row.get("jumlah"), row.get("satuanbeli"), row.get("kodebarang"), row.get("namabarang"), row.get("satuan"),
+                    row.get("harga"), row.get("subtotal"), row.get("diskon"), row.get("besardiskon"), row.get("jmltotal"),
+                    row.get("jmlstok"), row.get("isi"), row.get("isibesar")
+                });
+            });
+            try (FileReader fr = new FileReader("./cache/suratpemesananobat.iyem")) {
+                JsonNode array = mapper.readTree(fr).path("suratpemesananobat");
+                if (array.isArray()) {
+                    if (TCari.getText().isBlank()) {
+                        for (JsonNode row : array) {
+                            tabMode.addRow(new Object[] {
+                                "", row.path("SatuanBeli").asText(), row.path("KodeBarang").asText(), row.path("NamaBarang").asText(),
+                                row.path("Satuan").asText(), row.path("Harga").asDouble(), 0, 0, 0, 0, 0, row.path("Isi").asDouble(), 1
                             });
+                        }
+                    } else {
+                        for (JsonNode item : array) {
+                            if (item.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                                item.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            ) {
+                                tabMode.addRow(new Object[] {
+                                    "", item.path("SatuanBeli").asText(), item.path("KodeBarang").asText(), item.path("NamaBarang").asText(),
+                                    item.path("Satuan").asText(), item.path("Harga").asDouble(), 0, 0, 0, 0, 0, item.path("Isi").asDouble(), 1
+                                });
+                            }
                         }
                     }
                 }
             }
-            myObj.close(); 
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        
     }
-    
+
     private void getData(){        
         row=tbDokter.getSelectedRow();
         if(row!= -1){  
