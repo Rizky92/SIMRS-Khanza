@@ -740,8 +740,8 @@
         }
         return $respon;
     }
-    
-    function SetDiagnosaDRG($nomorsep,$diagnosa){	
+
+    function SetDiagnosaDRG($nomorsep,$diagnosa){
         if($diagnosa!=""){
             $request ='{
                             "metadata": {
@@ -766,8 +766,8 @@
             echo "\n<br>Respon Set Diagnosa DRG : ".$msg['metadata']['message'];
         }
     }
-    
-    function SetProsedurDRG($nomorsep,$prosedur){	
+
+    function SetProsedurDRG($nomorsep,$prosedur){
         if($prosedur!=""){
             $request ='{
                             "metadata": {
@@ -913,8 +913,8 @@
         $msg= Request($request);
         echo "\n<br>Respon Hapus Prosedur : ".$msg['metadata']['message'];
     }
-    
-    function HapusSemuaDiagnosa($nomor_sep,$coder_nik){	
+
+    function HapusSemuaDiagnosa($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method": "set_claim_data",
@@ -928,8 +928,8 @@
         $msg= Request($request);
         echo "\n<br>Respon Hapus Diangnosa : ".$msg['metadata']['message'];
     }
-    
-    function GroupingDRG($nomor_sep){	
+
+    function GroupingDRG($nomor_sep){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -958,8 +958,8 @@
         }
         return $pesan;
     }
-    
-    function GroupingStage1($nomor_sep,$coder_nik){	
+
+    function GroupingStage1($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"grouper",
@@ -1000,8 +1000,8 @@
             echo "\n<br>Respon Grouping INACBG : ".$msg['metadata']['message'];
         }
     }
-    
-    function InacBGToDRG($nomor_sep){	
+
+    function InacBGToDRG($nomor_sep){
         $request ='{
                     "metadata": {
                         "method": "idrg_to_inacbg_import"
@@ -1040,7 +1040,7 @@
                 $msg= Request($request);
                 echo "\n<br>Respon Set Diagnosa CBG : ".$msg['metadata']['message'];
             }
-                
+
             $prosedur="";
             if(isset($msg['data']['procedure']['string'])){
                 $prosedur=$msg['data']['procedure']['string'];
@@ -1129,8 +1129,8 @@
         echo $msg['metadata']['message']."";
         echo "\n<br>Respon Grouping INACBG : ".$msg['metadata']['message'];
     }
-    
-    function FinalisasiKlaim($nomor_sep,$coder_nik){	
+
+    function FinalisasiKlaim($nomor_sep,$coder_nik){
         $request ='{
                         "metadata": {
                             "method":"inacbg_grouper_final"
@@ -1689,9 +1689,9 @@
             ];
         }
 
-        if (!empty($nomor_sitb)) {
+        /* if (!empty($nomor_sitb)) {
             ValidasiRegistrasiSITBSmc($nomor_sep, $nomor_rm, $nomor_sitb);
-        }
+        } */
 
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");

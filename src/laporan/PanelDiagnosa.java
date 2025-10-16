@@ -866,12 +866,12 @@ public class PanelDiagnosa extends widget.panelisi {
             urut=null;
             if (GUNAKANDIAGNOSAEKLAIM) {
                 pspenyakit = koneksi.prepareStatement(
-                    "select penyakit.kd_penyakit, penyakit.nm_penyakit, penyakit.ciri_ciri, penyakit.keterangan, " +
-                    "kategori_penyakit.nm_kategori, kategori_penyakit.ciri_umum from kategori_penyakit " +
+                    "select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan,kategori_penyakit.nm_kategori,"+
+                    "kategori_penyakit.ciri_umum,penyakit.validcode,penyakit.accpdx,penyakit.asterisk,penyakit.im from kategori_penyakit " +
                     "inner join penyakit on penyakit.kd_ktg = kategori_penyakit.kd_ktg " +
-                    "where exists(select * from inacbg_referensi_icd10_smc where inacbg_referensi_icd10_smc.code1 = penyakit.kd_penyakit) and " +
-                    "penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or penyakit.ciri_ciri like ? or " +
-                    "penyakit.keterangan like ? or kategori_penyakit.nm_kategori like ? or kategori_penyakit.ciri_umum like ? " +
+                    "where exists(select * from inacbg_referensi_icd10_smc where inacbg_referensi_icd10_smc.code1 = penyakit.kd_penyakit) " +
+                    (Diagnosa.getText().isBlank() ? "" : "and (penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or penyakit.ciri_ciri like ? or " +
+                    "penyakit.keterangan like ? or kategori_penyakit.nm_kategori like ? or kategori_penyakit.ciri_umum like ?) ") +
                     "order by penyakit.kd_penyakit LIMIT 1000");
             } else {
                 pspenyakit=koneksi.prepareStatement(

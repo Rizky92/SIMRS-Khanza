@@ -59,7 +59,7 @@
                                 $baris = mysqli_fetch_array(bukaquery(<<<SQL
                                     select bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang)
                                     as tglpulang, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp,
-                                    ifnull(inacbg_pasien_tb_smc.no_sitb, '') as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
+                                    '' as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
                                     from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
                                     join dokter on maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter
                                     join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat
@@ -86,7 +86,7 @@
                                 $tgl_keluar     = $baris['tgl_registrasi'];
                                 $jam_reg        = $baris['jam_reg'];
                                 $nm_poli        = $baris['nm_poli'];
-                                $asalrujukan    = $baris['asal_rujukan'];
+                                $asalrujukan    = mb_substr($baris['asal_rujukan'], 0, 1);
                                 $nm_dokter      = $baris['nm_dokter'];
                                 $status_lanjut  = $baris['status_lanjut'];
                                 $png_jawab      = $baris['png_jawab'];
@@ -103,9 +103,7 @@
                                     if (! empty($tensi[1])) {
                                         $diastole = $tensi[1];
                                     }
-                                    if (empty($tgl_keluar)) {
-                                        $tgl_keluar = getOne("select tgl_keluar from kamar_inap where no_rawat = '$norawat' order by tgl_keluar desc limit 1");
-                                    }
+                                    $tgl_keluar = getOne("select tgl_keluar from kamar_inap where no_rawat = '$norawat' order by tgl_keluar desc limit 1");
                                 } else {
                                     $jnsrawat = '2';
                                     $tensi = explode('/', getOne("(select tensi from pemeriksaan_ralan where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
@@ -237,8 +235,8 @@
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 95%">
-                                        <option <?= $asalrujukan === '1' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
-                                        <option <?= $asalrujukan === '2' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
+                                        <option <?= $asalrujukan == '1' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
+                                        <option <?= $asalrujukan == '2' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
                                         <option value="mp">Rujukan Spesialis</option>
                                         <option value="outp">Dari Rawat Jalan</option>
                                         <option value="inp">Dari Rawat Inap</option>
@@ -409,13 +407,15 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="head">
+							<?php
+							/* <tr class="head">
                                 <td width="28%">No. Regist SITB</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
-                                    <input name="no_sitb" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $no_sitb ?>" size="15" maxlength="15">
+                                    <input name="no_sitb" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $no_sitb ?>" size="20" maxlength="20">
                                 </td>
-                            </tr>
+                            </tr> */
+							?>
                             <tr class="head">
                                 <td width="28%">Dializer Single Use</td>
                                 <td width="1%">:</td>

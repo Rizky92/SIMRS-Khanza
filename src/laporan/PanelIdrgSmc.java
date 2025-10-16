@@ -44,6 +44,7 @@ public class PanelIdrgSmc extends widget.panelisi {
     private final ArrayList<ProsedurIDRGBerubahListener> prosedurListeners = new ArrayList<>();
     private String nosep = "";
     private int dx = 1, px = 1;
+    private boolean hapusOtomatis = false;
     private JComponent nextFocusableComponent;
 
     /**
@@ -668,8 +669,9 @@ public class PanelIdrgSmc extends widget.panelisi {
 
     }
 
-    public void setSEP(String nosep) {
+    public void setSEP(String nosep, boolean hapusOtomatis) {
         this.nosep = nosep;
+        this.hapusOtomatis = hapusOtomatis;
     }
 
     public void tampilDiagnosa() {
@@ -722,6 +724,10 @@ public class PanelIdrgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             dx = 1;
+            if (hapusOtomatis) {
+                dx = Sequel.cariIntegerSmc("select max(idrg_diagnosa_pasien_smc.urut) from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
+            }
+            
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -814,6 +820,10 @@ public class PanelIdrgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             px = 1;
+            if (hapusOtomatis) {
+                px = Sequel.cariIntegerSmc("select max(idrg_prosedur_pasien_smc.urut) from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
+            }
+            
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
@@ -907,7 +917,9 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbDiagnosaPasien.clearSelection();
         tbProsedurPasien.clearSelection();
         tampilICD10(false);
+        tampilDiagnosa();
         tampilICD9CM(false);
+        tampilProsedur();
     }
 
     public void pilihTab(int tab) {
@@ -957,16 +969,18 @@ public class PanelIdrgSmc extends widget.panelisi {
         if (konfirmasiHapus == JOptionPane.YES_OPTION) {
             Sequel.menghapustfSmc("idrg_grouping_smc", "no_sep = ?", nosep);
             if (tabModeICD10.getRowCount() > 0) {
-                for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
-                    if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
-                        updateDiagnosa = true;
-                        break;
+                if (hapusOtomatis) {
+                    for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
+                        if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
+                            updateDiagnosa = true;
+                            break;
 
+                        }
                     }
-                }
 
-                if (updateDiagnosa) {
-                    Sequel.menghapusSmc("idrg_diagnosa_pasien_smc", "no_sep = ?", nosep);
+                    if (updateDiagnosa) {
+                        Sequel.menghapusSmc("idrg_diagnosa_pasien_smc", "no_sep = ?", nosep);
+                    }
                 }
 
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
@@ -980,15 +994,17 @@ public class PanelIdrgSmc extends widget.panelisi {
             }
 
             if (tabModeICD9CM.getRowCount() > 0) {
-                for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
-                    if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
-                        updateProsedur = true;
-                        break;
+                if (hapusOtomatis) {
+                    for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
+                        if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
+                            updateProsedur = true;
+                            break;
+                        }
                     }
-                }
-
-                if (updateProsedur) {
-                    Sequel.menghapusSmc("idrg_prosedur_pasien_smc", "no_sep = ?", nosep);
+                    
+                    if (updateProsedur) {
+                        Sequel.menghapusSmc("idrg_prosedur_pasien_smc", "no_sep = ?", nosep);
+                    }
                 }
 
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
