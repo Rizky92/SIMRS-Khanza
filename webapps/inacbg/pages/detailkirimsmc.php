@@ -13,6 +13,7 @@
         $sukses    = isset($_GET['sukses']) ? validTeks($_GET['sukses']) : null;
         $carabayar = isset($_GET['carabayar']) ? validTeks(str_replace('_', ' ', $_GET['carabayar'])) : null;
         $judul     = null;
+        $BtnSimpan = $_POST['BtnSimpan'] ?? null;
     ?>
     <?php if ($action === 'selesai'): ?>
         <?php $queryurl = http_build_query(compact('codernik', 'nosep', 'corona')); ?>
@@ -1181,7 +1182,7 @@
                                     }
                                 } else if ($action === 'import') {
                                     ['success' => $success, 'data' => $response, 'error' => $_error] = ImportIdrgToInacbgSmc($nosep);
-                                    if ($success === false) {
+                                    if ($success === true) {
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=grouper&grouper=inacbg_stage1">
                                             HTML;
@@ -1967,10 +1968,11 @@
                 </div>
             </div>
             <div align="center">
-                <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="<?= $judul ?>">
+                <?php if (!$BtnSimpan): ?>
+                    <input name="BtnSimpan" type="submit" style="padding: 1rem 0.75rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="<?= $judul ?>">
+                <?php endif; ?>
             </div>
             <?php
-                $BtnSimpan = $_POST['BtnSimpan'] ?? null;
                 if (isset($BtnSimpan)) {
                     if ($grouper === 'idrg') {
                         $validasi                  = 0;

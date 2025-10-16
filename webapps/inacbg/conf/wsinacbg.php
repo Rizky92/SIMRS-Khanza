@@ -1969,7 +1969,7 @@
                 $locked = '0';
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $dx['code'], $dx['display'], $dx['no'], $keterangan, $locked));
+                bukaquery2(sprintf("insert into inacbg_diagnosa_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $dx['code'], cleankar($dx['display']), $dx['no'], $keterangan, $locked));
             } catch (\Exception $e) {
                 continue;
             }
@@ -1984,7 +1984,7 @@
                 $locked = '0';
             }
             try {
-                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $p['code'], $p['display'], $p['no'], $keterangan, $locked));
+                bukaquery2(sprintf("insert into inacbg_prosedur_pasien_smc values ('%s', '%s', '%s', %s, '%s', %s)", $nomor_sep, $p['code'], cleankar($p['display']), $p['no'], $keterangan, $locked));
             } catch (\Exception $e) {
                 continue;
             }
