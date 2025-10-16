@@ -788,8 +788,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         SwingUtilities.invokeLater(() -> {
-                            Diagnosa.requestFocusInWindow();
-                            Diagnosa.selectAll();
+                            if (!Diagnosa.getText().isBlank()) {
+                                Diagnosa.requestFocusInWindow();
+                                Diagnosa.selectAll();
+                            }
                         });
                         do {
                             if (icd.contains(rs.getString("code1"))) {
@@ -881,8 +883,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         SwingUtilities.invokeLater(() -> {
-                            Prosedur.requestFocusInWindow();
-                            Prosedur.selectAll();
+                            if (!Prosedur.getText().isBlank()) {
+                                Prosedur.requestFocusInWindow();
+                                Prosedur.selectAll();
+                            }
                         });
                         do {
                             if (icd.contains(rs.getString("code1"))) {
@@ -918,7 +922,10 @@ public class PanelInacbgSmc extends widget.panelisi {
         tbDiagnosaPasien.clearSelection();
         tbProsedurPasien.clearSelection();
         tampilICD10(false);
+        tampilDiagnosa();
         tampilICD9CM(false);
+        tampilProsedur();
+        Diagnosa.requestFocus();
     }
 
     public void pilihTab(int tab) {

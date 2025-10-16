@@ -3064,7 +3064,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 ps.setString(++p, "%" + TCari.getText() + "%");
                 ps.setString(++p, "%" + TCari.getText() + "%");
             }
-            System.out.println(ps.toString());
             try (ResultSet rs = ps.executeQuery()) {
                 String keterangan = "Belum";
                 while (rs.next()) {
