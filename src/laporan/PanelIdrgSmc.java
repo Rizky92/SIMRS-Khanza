@@ -520,7 +520,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 System.out.println("Notif : " + e);
             }
 
-            tampilDiagnosa();
+            pilihTab();
 
             fireUrutanDiagnosaBerubahEvent();
         }
@@ -583,7 +583,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 System.out.println("Notif : " + e);
             }
 
-            tampilProsedur();
+            pilihTab();
 
             fireUrutanProsedurBerubahEvent();
         }
@@ -724,7 +724,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             dx = 1;
-            if (hapusOtomatis) {
+            if (!hapusOtomatis) {
                 dx = Sequel.cariIntegerSmc("select max(idrg_diagnosa_pasien_smc.urut) from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
             }
             
@@ -820,7 +820,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             px = 1;
-            if (hapusOtomatis) {
+            if (!hapusOtomatis) {
                 px = Sequel.cariIntegerSmc("select max(idrg_prosedur_pasien_smc.urut) from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
             }
             
@@ -1017,7 +1017,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
             }
 
-            tampilICD();
+            pilihTab(0);
 
             if (updateDiagnosa) {
                 fireUrutanDiagnosaBerubahEvent();
@@ -1149,7 +1149,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 default:
                     break;
             }
-            pilihTab();
+            pilihTab(0);
         }
     }
 
@@ -1172,22 +1172,6 @@ public class PanelIdrgSmc extends widget.panelisi {
 
     public JTabbedPane getTabbedPane() {
         return TabRawat;
-    }
-
-    public static interface DiagnosaIDRGListener {
-        void diagnosaDisimpan();
-
-        void diagnosaDihapus();
-
-        void urutanDiagnosaBerubah();
-    }
-
-    public static interface ProsedurIDRGListener {
-        void prosedurDisimpan();
-
-        void prosedurDihapus();
-
-        void urutanProsedurBerubah();
     }
 
     @FunctionalInterface

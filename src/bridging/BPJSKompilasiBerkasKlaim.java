@@ -101,7 +101,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private String finger = "", tanggalExport = "",
         KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
-    private boolean exportSukses = true, hapusOtomatis = false;
+    private boolean exportSukses = true, KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long KOMPILASIBERKASMAXMEMORY = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
@@ -1579,7 +1579,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKompilasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKompilasiMouseClicked
-        if (evt.getClickCount() >= 2) {
+        if (evt != null && evt.getClickCount() >= 2) {
             evt.consume();
         } else {
             if (tabMode.getRowCount() != 0) {
@@ -2734,7 +2734,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
         cekPengaturanKompilasi();
-        WindowPengaturan.setSize(610, 172);
+        WindowPengaturan.setSize(610, 202);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
     }//GEN-LAST:event_BtnPengaturanActionPerformed
@@ -2754,6 +2754,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void BtnSimpanPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanPengaturanActionPerformed
         try {
             String aplikasipdf = "", tanggalexport = "registrasi", maxmemory = TMaxMemory.getText().trim();
+            boolean hapusotomatis = CekAktifkanHapusOtomatis.isSelected();
             switch (CmbPilihanAplikasiPDF.getSelectedIndex()) {
                 case 1:
                     aplikasipdf = "chrome";
@@ -2793,13 +2794,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
                 pengaturan.put("tanggalexport", tanggalexport);
                 pengaturan.put("maxmemory", maxmemory);
-                pengaturan.put("hapusotomatis", hapusOtomatis);
+                pengaturan.put("hapusotomatis", hapusotomatis);
                 ObjectNode root = mapper.createObjectNode();
                 root.set("pengaturan", pengaturan);
                 fw.write(root.toString());
                 KOMPILASIBERKASAPLIKASIPDF = aplikasipdf;
                 KOMPILASIBERKASGUNAKANTANGGALEXPORT = tanggalexport;
                 KOMPILASIBERKASMAXMEMORY = Integer.parseInt(maxmemory);
+                KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR = hapusotomatis;
+                if (tbKompilasi.getSelectedRow() >= 0) {
+                    tbKompilasiMouseClicked(null);
+                }
                 fw.flush();
                 JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil disimpan..!!");
                 WindowPengaturan.dispose();
@@ -3183,6 +3188,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 flipStatus(btnSPRI, false);
                 flipStatus(btnSurkon, false);
             }
+            panelInacbg.getTabbedPane().setSelectedIndex(0);
             tampilBilling();
         }
     }
@@ -3247,9 +3253,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 BtnHapusKoding.setEnabled(false);
             }
         }
-        panelIdrg.setSEP(btnSEP.getText(), hapusOtomatis);
+        panelIdrg.setSEP(btnSEP.getText(), KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR);
         panelIdrg.tampilICD();
-        panelInacbg.setSEP(btnSEP.getText(), hapusOtomatis);
+        panelInacbg.setSEP(btnSEP.getText(), KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR);
         panelInacbg.tampilICD();
     }
 
@@ -4643,7 +4649,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
                 
                 if (root.hasNonNull("hapusotomatis")) {
-                    hapusOtomatis = root.path("hapusotomatis").asBoolean();
+                    KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR = root.path("hapusotomatis").asBoolean();
                 }
             } catch (Exception e) {
                 System.out.println("Notif : Tidak bisa membaca pengaturan kompilasi! Menggunakan pengaturan default...");
@@ -4651,13 +4657,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
                 KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT();
                 KOMPILASIBERKASMAXMEMORY = koneksiDB.KOMPILASIBERKASMAXMEMORY();
-                hapusOtomatis = false;
+                KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR = false;
             }
         } else {
             KOMPILASIBERKASAPLIKASIPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
             KOMPILASIBERKASGUNAKANTANGGALEXPORT = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT();
             KOMPILASIBERKASMAXMEMORY = koneksiDB.KOMPILASIBERKASMAXMEMORY();
-            hapusOtomatis = false;
+            KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR = false;
         }
 
         switch (KOMPILASIBERKASAPLIKASIPDF) {
@@ -4707,6 +4713,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         TMaxMemory.setText(String.valueOf(KOMPILASIBERKASMAXMEMORY));
         
-        CekAktifkanHapusOtomatis.setSelected(hapusOtomatis);
+        CekAktifkanHapusOtomatis.setSelected(KOMPILASIBERKASHAPUSOTOMATISDIAGNOSAPROSEDUR);
     }
 }

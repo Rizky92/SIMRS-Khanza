@@ -529,7 +529,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                     System.out.println("Notif : " + e);
                 }
 
-                tampilDiagnosa();
+                pilihTab();
 
                 fireUrutanDiagnosaBerubahEvent();
             }
@@ -597,7 +597,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                     System.out.println("Notif : " + e);
                 }
 
-                tampilProsedur();
+                pilihTab();
 
                 fireUrutanProsedurBerubahEvent();
             }
@@ -730,7 +730,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             dx = 1;
-            if (hapusOtomatis) {
+            if (!hapusOtomatis) {
                 dx = Sequel.cariIntegerSmc("select max(inacbg_diagnosa_pasien_smc.urut) from inacbg_diagnosa_pasien_smc where inacbg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
             }
             
@@ -823,7 +823,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             px = 1;
-            if (hapusOtomatis) {
+            if (!hapusOtomatis) {
                 px = Sequel.cariIntegerSmc("select max(inacbg_prosedur_pasien_smc.urut) from inacbg_prosedur_pasien_smc where inacbg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
             }
             
@@ -1079,7 +1079,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 }
             }
 
-            tampilICD();
+            pilihTab(0);
         }
     }
 
