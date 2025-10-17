@@ -3016,6 +3016,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 break;
             case 6:
                 statusklaim = "and (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) ";
+                break;
             default:
                 statusklaim = "";
                 break;
