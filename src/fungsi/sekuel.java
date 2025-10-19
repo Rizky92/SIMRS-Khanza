@@ -736,6 +736,7 @@ public final class sekuel {
 
     public boolean insertTampJurnal(String kdRek, String nmRek, double d, double k) {
         if (d == 0 && k == 0) {
+            System.out.println("Notif : Debet dan kredit 0");
             return false;
         }
         try (PreparedStatement ps = connect.prepareStatement("insert into tampjurnal_smc (kd_rek, nm_rek, debet, kredit, user_id, ip) values (?, ?, ?, ?, ?, ?)")) {
@@ -749,6 +750,8 @@ public final class sekuel {
             SimpanTrack(track.substring(track.indexOf("insert")));
             if (ps.executeUpdate() > 0) {
                 return true;
+            } else {
+                System.out.println("Notif : tidak ada debet/kredit yang disimpan");
             }
         } catch (SQLException e) {
             System.out.println("Notif: " + e);
@@ -763,6 +766,7 @@ public final class sekuel {
 
     public boolean insertOrUpdateTampJurnal(String kdRek, String nmRek, double d, double k) {
         if (d == 0 && k == 0) {
+            System.out.println("Notif : Debet dan kredit 0");
             return false;
         }
         try (PreparedStatement ps = connect.prepareStatement("insert into tampjurnal_smc (kd_rek, nm_rek, debet, kredit, user_id, ip) values (?, ?, ?, ?, ?, ?)")) {
@@ -776,6 +780,8 @@ public final class sekuel {
             SimpanTrack(track.substring(track.indexOf("insert")));
             if (ps.executeUpdate() > 0) {
                 return true;
+            } else {
+                System.out.println("Notif : tidak ada debet/kredit yang disimpan");
             }
         } catch (SQLException e) {
             try (PreparedStatement ps = connect.prepareStatement("update tampjurnal_smc set debet = debet + ?, kredit = kredit + ? where kd_rek = ? and user_id = ? and ip = ?")) {
@@ -788,10 +794,12 @@ public final class sekuel {
                 SimpanTrack(track.substring(track.indexOf("update")));
                 if (ps.executeUpdate() > 0) {
                     return true;
+                } else {
+                    System.out.println("Notif : tidak ada debet/kredit yang disimpan");
                 }
             } catch (SQLException ex) {
                 System.out.println("Notif : " + ex);
-                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!\nKemungkinan ada rekening yang sama dimasukkan sebelumnya!");
+                JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
             }
         }
         return false;
