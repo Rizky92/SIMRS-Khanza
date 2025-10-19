@@ -3006,16 +3006,17 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null and inc.no_sep is null ";
                 break;
             case 3:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and inf.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and inf.no_sep is null and inc.no_sep is null ";
                 break;
             case 4:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg, 1) = 'X'))) ";
+                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null ";
                 break;
             case 5:
-                statusklaim = "and idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null ";
+                statusklaim = "and idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
                 break;
             case 6:
-                statusklaim = "and (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) ";
+                statusklaim = "and (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
+                break;
             default:
                 statusklaim = "";
                 break;
@@ -3033,15 +3034,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             "r.status_lanjut = 'Ranap' then concat(ki.kd_kamar, ' ', b.nm_bangsal) when r.status_lanjut = 'Ralan' then p.nm_poli end as ruangan, d.nm_dokter, " +
             "case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null " +
             "and inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and " +
-            "inf.no_sep is null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg," +
-            "1) = 'X'))) then 4 when idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null then 5 when (idg.no_sep is null or (idg.no_sep is not null " +
-            "and idg.mdc_number = '36')) then 6 end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join reg_periksa r on s.no_rawat = r.no_rawat " +
-            "join pasien px on r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join kamar_inap ki on r.no_rawat = ki.no_rawat and " +
-            "ki.stts_pulang != 'Pindah Kamar' left join kamar k on ki.kd_kamar = k.kd_kamar left join bangsal b on k.kd_bangsal = b.kd_bangsal left join " +
-            "maping_dokter_dpjpvclaim md on s.kddpjp = md.kd_dokter_bpjs left join dokter d on md.kd_dokter = d.kd_dokter left join idrg_grouping_smc idg on " +
-            "s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 ing on s.no_sep = ing.no_sep " +
-            "left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep where s.no_sep like ? and " +
-            "s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut and " +
+            "inf.no_sep is null and inc.no_sep is null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null " +
+            "and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null then 4 when idg.no_sep is not null and idg.mdc_number != '36' and " +
+            "idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 5 when (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) " +
+            "and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 6 end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join " +
+            "reg_periksa r on s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join " +
+            "kamar_inap ki on r.no_rawat = ki.no_rawat and ki.stts_pulang != 'Pindah Kamar' left join kamar k on ki.kd_kamar = k.kd_kamar left join bangsal b " +
+            "on k.kd_bangsal = b.kd_bangsal left join maping_dokter_dpjpvclaim md on s.kddpjp = md.kd_dokter_bpjs left join dokter d on md.kd_dokter = d.kd_dokter " +
+            "left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 " +
+            "ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep " +
+            "where s.no_sep like ? and s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut and " +
             "r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? "" :
             "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
             "b.nm_bangsal) like ? or d.nm_dokter like ?) ") + "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"

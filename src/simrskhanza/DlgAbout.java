@@ -101,7 +101,7 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 1");
+        jLabel18.setText("Patch 3");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
         jLabel18.setBounds(107, 28, 90, 17);
@@ -192,6 +192,7 @@ public class DlgAbout extends javax.swing.JDialog {
         panelGlass5.setBounds(0, 280, 330, 70);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Close");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setIconTextGap(3);
