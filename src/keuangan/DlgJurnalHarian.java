@@ -1,4 +1,5 @@
 package keuangan;
+
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -56,7 +57,7 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
              };
              @Override
              public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
              }
         };
         tbDokter.setModel(tabMode);
@@ -83,6 +84,7 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         NoJur.setDocument(new batasInput((byte)8).getKata(NoJur));
+        NoBukti.setDocument(new batasInput((byte)25).getKata(NoBukti));
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -753,12 +755,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 @Override
                 protected Void doInBackground() {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select j.no_jurnal, j.no_bukti, j.tgl_jurnal, j.keterangan, dj.kd_rek, dj.debet, dj.kredit, r.nm_rek, j.jam_jurnal " +
-                        "from jurnal j join detailjurnal dj on j.no_jurnal = dj.no_jurnal join rekening r on dj.kd_rek = r.kd_rek where " +
-                        "j.tgl_jurnal between ? and ? " + (NoJur.getText().isBlank() ? "" : "and j.no_jurnal like ? ") + (NoBukti.getText().isBlank() ? "" :
-                        "and j.no_bukti like ? ") + (kdrek.getText().isBlank() ? "" : "and dj.kd_rek like ? ") + (TCari.getText().isBlank() ? "" :
-                        "and (j.no_jurnal like ? or j.no_bukti like ? or j.keterangan like ? or dj.kd_rek like ? or r.nm_rek like ?) ") +
-                        "order by j.tgl_jurnal asc, j.jam_jurnal asc, j.no_jurnal asc, dj.debet desc, dj.kredit desc"
+                        "select j.no_jurnal, j.no_bukti, j.tgl_jurnal, j.keterangan, dj.kd_rek, dj.debet, dj.kredit, r.nm_rek, j.jam_jurnal from jurnal j join " +
+                        "detailjurnal dj on j.no_jurnal = dj.no_jurnal join rekening r on dj.kd_rek = r.kd_rek where j.tgl_jurnal between ? and ? " +
+                        (NoJur.getText().isBlank() ? "" : "and j.no_jurnal like ? ") + (NoBukti.getText().isBlank() ? "" : "and j.no_bukti like ? ") +
+                        (kdrek.getText().isBlank() ? "" : "and dj.kd_rek like ? ") + (TCari.getText().isBlank() ? "" : "and (j.no_jurnal like ? or " +
+                        "j.no_bukti like ? or j.keterangan like ? or dj.kd_rek like ? or r.nm_rek like ?) ") + "order by j.tgl_jurnal asc, " +
+                        "j.jam_jurnal asc, j.no_jurnal asc, dj.debet desc, dj.kredit desc"
                     )) {
                         int p = 0;
                         ps.setString(++p, Valid.getTglSmc(TglJurnal1));
@@ -812,7 +814,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    
                     return null;
                 }
 
