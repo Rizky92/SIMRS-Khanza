@@ -203,9 +203,9 @@
 
     function UpdateDataKlaim($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){
-
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
+        
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
         if($prosedur_non_bedah==""){
@@ -422,7 +422,7 @@
             SetDiagnosaDRG($nomor_sep, $diagnosa);
             SetProsedurDRG($nomor_sep, $procedure);
             if(GroupingDRG($nomor_sep)=="Ok"){
-                InacBGToDRG($nomor_sep);
+                InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg);
                 GroupingStage1($nomor_sep,$coder_nik);
             }
         }else{
@@ -432,9 +432,9 @@
 
     function UpdateDataKlaimInternal($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){
-
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
+        
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
         if($prosedur_non_bedah==""){
@@ -651,7 +651,7 @@
             SetDiagnosaDRG($nomor_sep, $diagnosa);
             SetProsedurDRG($nomor_sep, $procedure);
             if(GroupingDRG($nomor_sep)=="Ok"){
-                InacBGToDRG($nomor_sep);
+                InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg);
                 GroupingStage1Internal($nomor_sep,$coder_nik);
             }
         }else{
@@ -661,7 +661,7 @@
 
     function UpdateDataKlaim2($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
@@ -730,7 +730,7 @@
             SetDiagnosaDRG($nomor_sep, $diagnosa);
             SetProsedurDRG($nomor_sep, $procedure);
             if(GroupingDRG($nomor_sep)=="Ok"){
-                InacBGToDRG($nomor_sep);
+                InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg);
                 GroupingStage12($nomor_sep,$coder_nik);
             }
             $respon="Berhasil";
@@ -795,7 +795,7 @@
 
     function UpdateDataKlaim3($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
                             $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
@@ -876,7 +876,7 @@
             SetDiagnosaDRG($nomor_sep, $diagnosa);
             SetProsedurDRG($nomor_sep, $procedure);
             if(GroupingDRG($nomor_sep)=="Ok"){
-                InacBGToDRG($nomor_sep);
+                InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg);
                 GroupingStage13($nomor_sep,$coder_nik);
             }
         }else{
@@ -1000,8 +1000,8 @@
             echo "\n<br>Respon Grouping INACBG : ".$msg['metadata']['message'];
         }
     }
-
-    function InacBGToDRG($nomor_sep){
+    
+    function InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg){	
         $request ='{
                     "metadata": {
                         "method": "idrg_to_inacbg_import"
@@ -1013,11 +1013,7 @@
         $msg= Request($request);
         echo "\n<br>Respon Import DRG To CBG : ".$msg['metadata']['message'];
         if($msg['metadata']['message']=="Ok"){
-            $diagnosa="";
-            if(isset($msg['data']['diagnosa']['string'])){
-                $diagnosa=$msg['data']['diagnosa']['string'];
-            }
-            if($diagnosa!=""){
+            if($diagnosainacbg!=""){
                 $request ='{
                                 "metadata": {
                                     "method": "inacbg_diagnosa_set",
@@ -1034,18 +1030,14 @@
                                     "nomor_sep": "'.$nomor_sep.'"
                                 },
                                 "data": {
-                                    "diagnosa": "'.$diagnosa.'"
+                                    "diagnosa": "'.$diagnosainacbg.'"
                                 }
                            }';
                 $msg= Request($request);
                 echo "\n<br>Respon Set Diagnosa CBG : ".$msg['metadata']['message'];
             }
-
-            $prosedur="";
-            if(isset($msg['data']['procedure']['string'])){
-                $prosedur=$msg['data']['procedure']['string'];
-            }
-            if($prosedur!=""){
+               
+            if($procedureinacbg!=""){
                 $request ='{
                                 "metadata": {
                                     "method": "inacbg_procedure_set",
@@ -1062,7 +1054,7 @@
                                     "nomor_sep": "'.$nomor_sep.'"
                                 },
                                 "data": {
-                                    "procedure": "'.$prosedur.'"
+                                    "procedure": "'.$procedureinacbg.'"
                                 }
                            }';
                 $msg= Request($request);
