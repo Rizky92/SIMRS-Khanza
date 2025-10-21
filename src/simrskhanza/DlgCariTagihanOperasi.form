@@ -1998,9 +1998,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="PreOp">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="PreOp" noResource="true"/>
                   </Properties>
                   <Events>
@@ -2014,9 +2011,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="PostOp">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="PostOp" noResource="true"/>
                   </Properties>
                   <Events>
@@ -2054,9 +2048,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Jaringan">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Jaringan" noResource="true"/>
                   </Properties>
                   <Events>
@@ -2113,9 +2104,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NomorImplant">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NomorImplant" noResource="true"/>
                   </Properties>
                   <Events>

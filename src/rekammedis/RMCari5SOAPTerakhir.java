@@ -99,7 +99,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             });
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -255,11 +255,11 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -267,12 +267,12 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -280,7 +280,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -407,10 +407,10 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    private void emptTeks() {   
+    private void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRM(String norm,String nip,String status){
         this.norm=norm;
         this.nip=nip;
@@ -421,5 +421,5 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
 }

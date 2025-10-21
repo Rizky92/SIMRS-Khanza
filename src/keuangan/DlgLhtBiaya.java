@@ -57,9 +57,9 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -92,7 +92,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
-      
+
     private double all=0,y=0;
     private int i=0;
 
@@ -252,10 +252,10 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 biaya="";
                 try{
                     biaya=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,3).toString()));
@@ -284,22 +284,22 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
                     tabMode.getValueAt(r,1).toString()+"','"+tabMode.getValueAt(r,2).toString()+"','"+
                     biaya+"','"+jml+"','"+tambahan+"','"+totalx+"','','','','','','','','','','','',"+
                     "'','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran"
-                );         
+                );
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("tagihan",LCount.getText());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("tagihan",LCount.getText());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRTagihanMasuk.jasper","report","::[ Rekap Tagihan Masuk ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -307,29 +307,29 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnKeluar, BtnCari);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnCari,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnKeluar);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -370,21 +370,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void tampil(){
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             pstampil=koneksi.prepareStatement(
                    "select billing.no,billing.nm_perawatan, if(billing.biaya<>0,billing.biaya,null) as satu, "+
                    "if(billing.jumlah<>0,billing.jumlah,null) as dua,"+
                    "if(billing.tambahan<>0,billing.tambahan,null) as tiga, "+
                    "if(billing.totalbiaya<>0,billing.totalbiaya,null) as empat,billing.pemisah "+
                    "from billing where billing.no_rawat not in(select piutang_pasien.no_rawat from piutang_pasien group by piutang_pasien.no_rawat) "+
-                   "and billing.tgl_byr between ? and ?  order by billing.no_rawat,billing.noindex"); 
+                   "and billing.tgl_byr between ? and ?  order by billing.no_rawat,billing.noindex");
             try {
                 pstampil.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstampil.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 rstampil=pstampil.executeQuery();
                 while(rstampil.next()){
                     if((!rstampil.getString("no").contains("Tagihan + PPN"))&&(!rstampil.getString("no").contains("Total Tagihan"))){
-                        if(rstampil.getString("no").contains("No.Nota")){                        
+                        if(rstampil.getString("no").contains("No.Nota")){
                             tabMode.addRow(new Object[]{"","","",null,null,null,null});
                             tabMode.addRow(new Object[]{rstampil.getString("no"),
                                                 rstampil.getString("nm_perawatan"),
@@ -406,13 +406,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
                 //rs.close();
                 all=0;y=0;
-                for(i=0;i<tabMode.getRowCount();i++){ 
-                    try {                
-                        y=Double.parseDouble(tabMode.getValueAt(i,6).toString());  
+                for(i=0;i<tabMode.getRowCount();i++){
+                    try {
+                        y=Double.parseDouble(tabMode.getValueAt(i,6).toString());
                      } catch (Exception e) {
-                         y=0; 
+                         y=0;
                      }
-                     all=all+y;  
+                     all=all+y;
                 }
                 LCount.setText(Valid.SetAngka(all));
             } catch (Exception e) {

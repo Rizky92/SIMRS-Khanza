@@ -991,9 +991,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="KondisiTidakAman">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KondisiTidakAman" noResource="true"/>
                           </Properties>
                           <Events>
@@ -1249,9 +1246,6 @@
                         <Component class="widget.TextBox" name="KdJenisPekerjaan">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdJenisPekerjaan" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1533,9 +1527,6 @@
                         <Component class="widget.TextBox" name="KdLokasiKejadian">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdLokasiKejadian" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1634,9 +1625,6 @@
                         <Component class="widget.TextBox" name="KdPenyebab">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdPenyebab" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1689,9 +1677,6 @@
                         <Component class="widget.TextBox" name="NIKKorban">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="NIKKorban" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1744,9 +1729,6 @@
                         <Component class="widget.TextBox" name="Bidang">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Bidang" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1769,9 +1751,6 @@
                         <Component class="widget.TextBox" name="Departemen">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Departemen" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1794,9 +1773,6 @@
                         <Component class="widget.TextBox" name="JK">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="JK" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1808,9 +1784,6 @@
                         <Component class="widget.TextBox" name="Usia">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Usia" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1844,9 +1817,6 @@
                         <Component class="widget.TextBox" name="Jabatan">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Jabatan" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1901,9 +1871,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="LT">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="LT" noResource="true"/>
                           </Properties>
                           <Events>
@@ -1929,9 +1896,6 @@
                         <Component class="widget.TextBox" name="KdJenisCidera">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdJenisCidera" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1984,9 +1948,6 @@
                         <Component class="widget.TextBox" name="KdJenisLuka">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdJenisLuka" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2039,9 +2000,6 @@
                         <Component class="widget.TextBox" name="KdBagianTubuh">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdBagianTubuh" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2140,9 +2098,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="NoLaporan">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="NoLaporan" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2167,9 +2122,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="TindakanTidakAman">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="TindakanTidakAman" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2194,9 +2146,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="Pribadi">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Pribadi" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2233,9 +2182,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="Pekerjaan">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Pekerjaan" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2261,9 +2207,6 @@
                         <Component class="widget.TextBox" name="KdDampak">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="KdDampak" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2347,9 +2290,6 @@
                         <Component class="widget.TextBox" name="NIKPelapor">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="NIKPelapor" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2402,9 +2342,6 @@
                         <Component class="widget.TextBox" name="BidangPelapor">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="BidangPelapor" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2427,9 +2364,6 @@
                         <Component class="widget.TextBox" name="DepartemenPelapor">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="DepartemenPelapor" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2573,9 +2507,6 @@
                         </Component>
                         <Component class="widget.TextBox" name="Wewenang">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Wewenang" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2646,9 +2577,6 @@
                         <Component class="widget.TextBox" name="NIKK3">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="NIKK3" noResource="true"/>
                           </Properties>
                           <Constraints>

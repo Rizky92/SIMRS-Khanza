@@ -44,7 +44,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0,tot_belum=0,tot_selesai=0,jkn_capaian_angka=0,mjkn_capaian_angka=0;
     private double jkn_capaian,mjkn_capaian,jkn_belum,jkn_selesai,mjkn_belum,mjkn_selesai,umum_belum,umum_selesai,sep;
     private ApiMobileJKN api=new ApiMobileJKN();
@@ -115,7 +115,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
             link=koneksiDB.URLAPIMOBILEJKN();
         } catch (Exception e) {
@@ -450,13 +450,13 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         emptTeks();
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
        dispose();
@@ -539,8 +539,8 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
             dialog.setVisible(true);
         });
     }
-    
-    
+
+
     private void emptTeks(){
         SEPTerbit.setText("");
         TotBelum.setText("");
@@ -625,7 +625,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
                         headers.add("x-signature",api.getHmac(utc));
                         headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
                         requestEntity = new HttpEntity(headers);
-                        URL = link+"/antrean/pendaftaran/tanggal/"+rs.getString("tgl_registrasi");	
+                        URL = link+"/antrean/pendaftaran/tanggal/"+rs.getString("tgl_registrasi");
                         System.out.println("URL : "+URL);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
                         nameNode = root.path("metadata");
@@ -670,8 +670,8 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
                                 }
                             }
                         }else {
-                            System.out.println("Notif : "+nameNode.path("message").asText());               
-                        }   
+                            System.out.println("Notif : "+nameNode.path("message").asText());
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -692,7 +692,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
 
         sep = Sequel.cariInteger("select count(bridging_sep.no_rawat) from bridging_sep where bridging_sep.tglsep between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and bridging_sep.jnspelayanan = '2' and bridging_sep.kdpolitujuan <> 'IGD'")+
                 Sequel.cariInteger("select count(bridging_sep_internal.no_rawat) from bridging_sep_internal where bridging_sep_internal.tglsep between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and bridging_sep_internal.jnspelayanan = '2' and bridging_sep_internal.kdpolitujuan <> 'IGD'");

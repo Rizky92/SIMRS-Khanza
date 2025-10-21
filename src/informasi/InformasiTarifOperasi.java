@@ -67,7 +67,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                 column.setPreferredWidth(130);
             }
         }
-        tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());        
+        tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -90,10 +90,10 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        }        
-    
+        }
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -231,11 +231,11 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -243,7 +243,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -303,7 +303,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             pstampil=koneksi.prepareStatement("select paket_operasi.kode_paket, paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
                            "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.instrumen+"+
                            "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
@@ -316,7 +316,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                            "where paket_operasi.status='1' and paket_operasi.kode_paket like ? or "+
                            "paket_operasi.status='1' and paket_operasi.nm_perawatan like ? or "+
                            "paket_operasi.status='1' and penjab.png_jawab like ? order by paket_operasi.kode_paket ");
-            try{                
+            try{
                 pstampil.setString(1,"%"+TCari.getText()+"%");
                 pstampil.setString(2,"%"+TCari.getText()+"%");
                 pstampil.setString(3,"%"+TCari.getText()+"%");
@@ -337,7 +337,7 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
                 if(pstampil!=null){
                     pstampil.close();
                 }
-            }  
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -345,5 +345,5 @@ public final class InformasiTarifOperasi extends javax.swing.JDialog {
     }
 
 
-    
+
 }

@@ -169,9 +169,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Diagnosa">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="Prosedur"/>
                     </Property>
@@ -243,9 +240,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Prosedur">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="this.nextFocusableComponent" type="code"/>
                     </Property>

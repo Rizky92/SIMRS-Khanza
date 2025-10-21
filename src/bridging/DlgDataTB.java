@@ -68,7 +68,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
     private DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
     private String id_tb_03="",kdwasor="",idrs="",URL="",requestJson="",PaduanOATHasil="",tidakada="";
     private FileReader myObj;
-    
+
     /** Creates new form DlgJnsPerawatan
      * @param parent
      * @param modal */
@@ -220,7 +220,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         KdProp.setDocument(new batasInput((byte)10).getOnlyAngka(KdProp));
         KdKec.setDocument(new batasInput((byte)10).getOnlyAngka(KdKec));
@@ -255,8 +255,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         propinsi.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -264,11 +264,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(propinsi.getTable().getSelectedRow()!= -1){                   
+                if(propinsi.getTable().getSelectedRow()!= -1){
                     KdProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                     Propinsi.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),2).toString().toUpperCase());
                     KdProp.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -279,7 +279,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         propinsi.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -291,8 +291,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         kabupaten.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -300,11 +300,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kabupaten.getTable().getSelectedRow()!= -1){                   
+                if(kabupaten.getTable().getSelectedRow()!= -1){
                     KdKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),1).toString());
                     Kabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),2).toString().toUpperCase());
                     KdKab.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -315,7 +315,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kabupaten.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -327,8 +327,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         kecamatan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -336,11 +336,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kecamatan.getTable().getSelectedRow()!= -1){                   
+                if(kecamatan.getTable().getSelectedRow()!= -1){
                     KdKec.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),1).toString());
                     Kecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),2).toString().toUpperCase());
                     KdKec.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -351,7 +351,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kecamatan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -364,7 +364,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         kelurahan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -372,11 +372,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kelurahan.getTable().getSelectedRow()!= -1){                   
+                if(kelurahan.getTable().getSelectedRow()!= -1){
                     KdKel.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),1).toString());
                     Kelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),2).toString().toUpperCase());
                     KdKel.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -387,7 +387,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kelurahan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -400,7 +400,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         penyakit.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -408,10 +408,10 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -423,7 +423,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         try {
             kdwasor = koneksiDB.KABUPATENSITT();
             idrs=koneksiDB.IDSITT();
@@ -431,9 +431,9 @@ public final class DlgDataTB extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-    
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -841,7 +841,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel3.setBounds(0, 10, 61, 23);
 
         TNoRw.setEditable(false);
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -852,19 +851,16 @@ public final class DlgDataTB extends javax.swing.JDialog {
         TNoRw.setBounds(64, 10, 140, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(206, 10, 100, 23);
 
         TNmPasien.setEditable(false);
-        TNmPasien.setHighlighter(null);
         TNmPasien.setName("TNmPasien"); // NOI18N
         FormInput.add(TNmPasien);
         TNmPasien.setBounds(308, 10, 300, 23);
 
         JK.setEditable(false);
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
         FormInput.add(JK);
         JK.setBounds(610, 10, 95, 23);
@@ -875,7 +871,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel4.setBounds(0, 40, 61, 23);
 
         Tanggal.setEditable(false);
-        Tanggal.setHighlighter(null);
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -891,7 +886,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel5.setBounds(179, 40, 50, 23);
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
         Umur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -913,7 +907,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel9.setBounds(330, 40, 55, 23);
 
         NoKartu.setEditable(false);
-        NoKartu.setHighlighter(null);
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -929,7 +922,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel10.setBounds(517, 40, 40, 23);
 
         NIK.setEditable(false);
-        NIK.setHighlighter(null);
         NIK.setName("NIK"); // NOI18N
         NIK.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -978,7 +970,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
         Alamat.setEditable(false);
         Alamat.setText("ALAMAT");
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
         Alamat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -1000,7 +991,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
         Kelurahan.setEditable(false);
         Kelurahan.setText("KELURAHAN");
-        Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
         Kelurahan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1024,7 +1014,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
         Kecamatan.setEditable(false);
         Kecamatan.setText("KECAMATAN");
-        Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
         Kecamatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1060,7 +1049,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
         Propinsi.setEditable(false);
         Propinsi.setText("PROPINSI");
-        Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
         Propinsi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1084,7 +1072,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
         Kabupaten.setEditable(false);
         Kabupaten.setText("KABUPATEN");
-        Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
         Kabupaten.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1113,7 +1100,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         BtnCari1.setBounds(646, 130, 28, 23);
 
         KdProp.setEditable(false);
-        KdProp.setHighlighter(null);
         KdProp.setName("KdProp"); // NOI18N
         KdProp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1142,7 +1128,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         BtnCari2.setBounds(309, 100, 28, 23);
 
         KdKel.setEditable(false);
-        KdKel.setHighlighter(null);
         KdKel.setName("KdKel"); // NOI18N
         KdKel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1153,7 +1138,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         KdKel.setBounds(64, 100, 60, 23);
 
         KdKec.setEditable(false);
-        KdKec.setHighlighter(null);
         KdKec.setName("KdKec"); // NOI18N
         KdKec.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1164,7 +1148,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         KdKec.setBounds(401, 100, 60, 23);
 
         KdKab.setEditable(false);
-        KdKab.setHighlighter(null);
         KdKab.setName("KdKab"); // NOI18N
         KdKab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1230,7 +1213,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(0, 190, 100, 23);
 
-        KeteranganRujukan.setHighlighter(null);
         KeteranganRujukan.setName("KeteranganRujukan"); // NOI18N
         KeteranganRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1382,7 +1364,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(SumberObat);
         SumberObat.setBounds(365, 280, 115, 23);
 
-        KeteranganSO.setHighlighter(null);
         KeteranganSO.setName("KeteranganSO"); // NOI18N
         KeteranganSO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1474,7 +1455,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(jLabel36);
         jLabel36.setBounds(230, 380, 50, 23);
 
-        PemeriksaanLaboratBulan2NoReg.setHighlighter(null);
         PemeriksaanLaboratBulan2NoReg.setName("PemeriksaanLaboratBulan2NoReg"); // NOI18N
         PemeriksaanLaboratBulan2NoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1484,7 +1464,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(PemeriksaanLaboratBulan2NoReg);
         PemeriksaanLaboratBulan2NoReg.setBounds(283, 380, 65, 23);
 
-        PemeriksaanLaboratBulan3NoReg.setHighlighter(null);
         PemeriksaanLaboratBulan3NoReg.setName("PemeriksaanLaboratBulan3NoReg"); // NOI18N
         PemeriksaanLaboratBulan3NoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1546,7 +1525,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(230, 430, 50, 23);
 
-        PemeriksaanLaboratBulan5NoReg.setHighlighter(null);
         PemeriksaanLaboratBulan5NoReg.setName("PemeriksaanLaboratBulan5NoReg"); // NOI18N
         PemeriksaanLaboratBulan5NoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1556,7 +1534,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(PemeriksaanLaboratBulan5NoReg);
         PemeriksaanLaboratBulan5NoReg.setBounds(283, 430, 65, 23);
 
-        PemeriksaanLaboratAkhirNoReg.setHighlighter(null);
         PemeriksaanLaboratAkhirNoReg.setName("PemeriksaanLaboratAkhirNoReg"); // NOI18N
         PemeriksaanLaboratAkhirNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1798,7 +1775,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         FormInput.add(jLabel56);
         jLabel56.setBounds(0, 580, 100, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1814,7 +1790,6 @@ public final class DlgDataTB extends javax.swing.JDialog {
         jLabel57.setBounds(300, 580, 48, 23);
 
         kdpenyakit.setEditable(false);
-        kdpenyakit.setHighlighter(null);
         kdpenyakit.setName("kdpenyakit"); // NOI18N
         kdpenyakit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1907,7 +1882,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             PaduanOATHasil = PaduanOAT.getSelectedItem().toString();
         }
-        
+
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KdKel.getText().trim().equals("")||Kelurahan.getText().trim().equals("")){
@@ -1940,8 +1915,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 if(HasilAkhirPengobatan.getSelectedItem().equals("Belum")){
                     headers = new HttpHeaders();
                 headers.add("X-rs-id",idrs);
-                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                headers.add("X-pass",koneksiDB.PASSSITT()); 
+                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                headers.add("X-pass",koneksiDB.PASSSITT());
                 headers.add("Content-Type","application/json");
                 requestJson ="{" +
                     "\"id_tb_03\":\"\"," +
@@ -1981,8 +1956,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                }else{
                 headers = new HttpHeaders();
                 headers.add("X-rs-id",idrs);
-                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                headers.add("X-pass",koneksiDB.PASSSITT()); 
+                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                headers.add("X-pass",koneksiDB.PASSSITT());
                 headers.add("Content-Type","application/json");
                 requestJson ="{" +
                     "\"id_tb_03\":\"\"," +
@@ -2029,16 +2004,16 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 }
             }
             if(Sequel.menyimpantf("data_tb","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",50,new String[]{
-                    TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19), 
+                    TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
                     Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
                     KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
-                    SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""), 
+                    SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
                     PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
-                    SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(), 
+                    SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
                     PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
                     PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
-                    Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""), 
-                    Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(), 
+                    Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
+                    Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
                     TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
                     ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText()
                 })==true){
@@ -2046,7 +2021,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     tampil();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2054,18 +2029,18 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,btnBangsal,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        emptTeks();       
-        TabRawat.setSelectedIndex(0); 
-}//GEN-LAST:event_BtnBatalActionPerformed
+        emptTeks();
+        TabRawat.setSelectedIndex(0);
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow()>-1){
@@ -2073,7 +2048,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             emptTeks();
             tampil();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2081,7 +2056,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(PaduanOAT.getSelectedItem().equals("Belum")){
@@ -2121,8 +2096,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 try {
                     headers = new HttpHeaders();
                     headers.add("X-rs-id",idrs);
-                    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                    headers.add("X-pass",koneksiDB.PASSSITT()); 
+                    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                    headers.add("X-pass",koneksiDB.PASSSITT());
                     headers.add("Content-Type","application/json");
                     if(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),59).toString().equals("")){
                         requestJson ="{" +
@@ -2206,16 +2181,16 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     }
                 }
                 if(Sequel.mengedittf("data_tb","no_rawat=?","no_rawat=?,id_tb_03=?,id_periode_laporan=?,tanggal_buat_laporan=?,tahun_buat_laporan=?,kd_wasor=?,noregkab=?,id_propinsi=?,kd_kabupaten=?,id_kecamatan=?,id_kelurahan=?,nama_rujukan=?,sebutkan1=?,tipe_diagnosis=?,klasifikasi_lokasi_anatomi=?,klasifikasi_riwayat_pengobatan=?,klasifikasi_status_hiv=?,total_skoring_anak=?,konfirmasiSkoring5=?,konfirmasiSkoring6=?,tanggal_mulai_pengobatan=?,paduan_oat=?,sumber_obat=?,sebutkan=?,sebelum_pengobatan_hasil_mikroskopis=?,sebelum_pengobatan_hasil_tes_cepat=?,sebelum_pengobatan_hasil_biakan=?,noreglab_bulan_2=?,hasil_mikroskopis_bulan_2=?,noreglab_bulan_3=?,hasil_mikroskopis_bulan_3=?,noreglab_bulan_5=?,hasil_mikroskopis_bulan_5=?,akhir_pengobatan_noreglab=?,akhir_pengobatan_hasil_mikroskopis=?,tanggal_hasil_akhir_pengobatan=?,hasil_akhir_pengobatan=?,tanggal_dianjurkan_tes=?,tanggal_tes_hiv=?,hasil_tes_hiv=?,ppk=?,art=?,tb_dm=?,terapi_dm=?,pindah_ro=?,status_pengobatan=?,foto_toraks=?,toraks_tdk_dilakukan=?,keterangan=?,kode_icd_x=?",51,new String[]{
-                        TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19), 
+                        TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
                         Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
                         KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
-                        SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""), 
+                        SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
                         PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
-                        SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(), 
+                        SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
                         PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
                         PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
-                        Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""), 
-                        Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(), 
+                        Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
+                        Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
                         TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
                         ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
                     })==true){
@@ -2225,8 +2200,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 }
             }
         }
-        
-}//GEN-LAST:event_BtnEditActionPerformed
+
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2234,40 +2209,40 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("periode",DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem());   
-            param.put("logo",Sequel.cariGambar("select logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
             param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-            param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59"); 
-            param.put("parameter","%"+TCari.getText().trim()+"%"); 
+            param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+            param.put("parameter","%"+TCari.getText().trim()+"%");
             Valid.MyReport("rptDataTB.jasper","report","::[ Data Pasien Teridentifikasi TB ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2275,7 +2250,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -2285,11 +2260,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2297,12 +2272,12 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2311,7 +2286,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -2319,12 +2294,12 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 getData();
                 if(evt.getClickCount()==2){
                     TabRawat.setSelectedIndex(0);
-                   
+
                 }
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -2339,13 +2314,13 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     TabRawat.setSelectedIndex(0);
                 } catch (java.lang.NullPointerException e) {
                 }
-            }else if(evt.getKeyCode()==KeyEvent.VK_A){                
-                for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+            }else if(evt.getKeyCode()==KeyEvent.VK_A){
+                for(i=0;i<tbJnsPerawatan.getRowCount();i++){
                     tbJnsPerawatan.setValueAt(true,i,0);
                 }
-            } 
+            }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==1){
@@ -2520,7 +2495,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             kabupaten.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             kabupaten.setLocationRelativeTo(internalFrame1);
             kabupaten.setVisible(true);
-        }   
+        }
     }//GEN-LAST:event_BtnKabupatenActionPerformed
 
     private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenKeyPressed
@@ -3034,7 +3009,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                 "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,if(reg_periksa.sttsumur='Th',reg_periksa.umurdaftar,0) as umur,"+
                 "pasien.no_peserta,pasien.no_ktp,pasien.alamat,data_tb.id_kelurahan,kelurahan.nm_kel,data_tb.id_kecamatan,kecamatan.nm_kec,data_tb.kd_kabupaten,kabupaten.nm_kab,"+
@@ -3102,7 +3077,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 ps.setString(38,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
                 ps.setString(39,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){   
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("jk"),rs.getDate("tgl_lahir"),
                         rs.getString("umur")+"Th",rs.getString("no_peserta"),rs.getString("no_ktp"),rs.getString("alamat"),rs.getString("id_kelurahan"),
@@ -3120,7 +3095,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
                         rs.getString("terapi_dm"),rs.getString("pindah_ro"),rs.getString("status_pengobatan"),rs.getString("foto_toraks"),
                         rs.getString("toraks_tdk_dilakukan"),rs.getString("keterangan"),rs.getString("kode_icd_x"),rs.getString("nm_penyakit"),rs.getString("id_tb_03")
                     });
-                }  
+                }
             } catch(Exception e){
                 System.out.println(e);
             } finally{
@@ -3230,7 +3205,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             nmpenyakit.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),58).toString());
         }
     }
-    
+
     public void isCek(){
         TabRawat.setSelectedIndex(1);
         tampil();
@@ -3239,7 +3214,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getkemenkes_sitt());
         BtnPrint.setEnabled(akses.getkemenkes_sitt());
     }
-    
+
     public void setNoRM(String norawat){
         TabRawat.setSelectedIndex(0);
         TNoRw.setText(norawat);
@@ -3268,15 +3243,15 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     }
                     NoKartu.setText(rs.getString("no_peserta"));
                     NIK.setText(rs.getString("no_ktp"));
-                    Alamat.setText(rs.getString("alamat"));    
-                    KdKel.setText(rs.getString("kd_kel"));  
-                    Kelurahan.setText(rs.getString("nm_kel"));  
-                    KdKec.setText(rs.getString("kd_kec"));    
-                    Kecamatan.setText(rs.getString("nm_kec"));  
-                    KdKab.setText(rs.getString("kd_kab"));    
-                    Kabupaten.setText(rs.getString("nm_kab"));  
-                    KdProp.setText(rs.getString("kd_prop"));    
-                    Propinsi.setText(rs.getString("nm_prop"));    
+                    Alamat.setText(rs.getString("alamat"));
+                    KdKel.setText(rs.getString("kd_kel"));
+                    Kelurahan.setText(rs.getString("nm_kel"));
+                    KdKec.setText(rs.getString("kd_kec"));
+                    Kecamatan.setText(rs.getString("nm_kec"));
+                    KdKab.setText(rs.getString("kd_kab"));
+                    Kabupaten.setText(rs.getString("nm_kab"));
+                    KdProp.setText(rs.getString("kd_prop"));
+                    Propinsi.setText(rs.getString("nm_prop"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -3293,5 +3268,5 @@ public final class DlgDataTB extends javax.swing.JDialog {
         }
     }
 
-    
+
 }

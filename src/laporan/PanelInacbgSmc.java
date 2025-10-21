@@ -44,6 +44,7 @@ public class PanelInacbgSmc extends widget.panelisi {
     private final ArrayList<ProsedurINACBGListener> prosedurListeners = new ArrayList<>();
     private String nosep = "";
     private int dx = 1, px = 1;
+    private boolean hapusOtomatis = false;
     private JComponent nextFocusableComponent;
 
     /**
@@ -310,7 +311,6 @@ public class PanelInacbgSmc extends widget.panelisi {
         FormData.add(jLabel13);
         jLabel13.setBounds(0, 10, 68, 23);
 
-        Diagnosa.setHighlighter(null);
         Diagnosa.setNextFocusableComponent(Prosedur);
         Diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -349,7 +349,6 @@ public class PanelInacbgSmc extends widget.panelisi {
         FormData.add(jLabel15);
         jLabel15.setBounds(0, 211, 68, 23);
 
-        Prosedur.setHighlighter(null);
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -530,7 +529,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                     System.out.println("Notif : " + e);
                 }
 
-                tampilDiagnosa();
+                pilihTab();
 
                 fireUrutanDiagnosaBerubahEvent();
             }
@@ -598,7 +597,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                     System.out.println("Notif : " + e);
                 }
 
-                tampilProsedur();
+                pilihTab();
 
                 fireUrutanProsedurBerubahEvent();
             }
@@ -678,8 +677,9 @@ public class PanelInacbgSmc extends widget.panelisi {
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
     }
 
-    public void setSEP(String nosep) {
+    public void setSEP(String nosep, boolean hapusOtomatis) {
         this.nosep = nosep;
+        this.hapusOtomatis = hapusOtomatis;
     }
 
     public void tampilDiagnosa() {
@@ -730,6 +730,10 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             dx = 1;
+            if (!hapusOtomatis) {
+                dx = Sequel.cariIntegerSmc("select max(inacbg_diagnosa_pasien_smc.urut) from inacbg_diagnosa_pasien_smc where inacbg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
+            }
+            
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -784,8 +788,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         SwingUtilities.invokeLater(() -> {
-                            Diagnosa.requestFocusInWindow();
-                            Diagnosa.selectAll();
+                            if (!Diagnosa.getText().isBlank()) {
+                                Diagnosa.requestFocusInWindow();
+                                Diagnosa.selectAll();
+                            }
                         });
                         do {
                             if (icd.contains(rs.getString("code1"))) {
@@ -819,6 +825,10 @@ public class PanelInacbgSmc extends widget.panelisi {
             ArrayList<Map<String, Object>> rows = new ArrayList<>();
 
             px = 1;
+            if (!hapusOtomatis) {
+                px = Sequel.cariIntegerSmc("select max(inacbg_prosedur_pasien_smc.urut) from inacbg_prosedur_pasien_smc where inacbg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
+            }
+            
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
@@ -873,8 +883,10 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         SwingUtilities.invokeLater(() -> {
-                            Prosedur.requestFocusInWindow();
-                            Prosedur.selectAll();
+                            if (!Prosedur.getText().isBlank()) {
+                                Prosedur.requestFocusInWindow();
+                                Prosedur.selectAll();
+                            }
                         });
                         do {
                             if (icd.contains(rs.getString("code1"))) {
@@ -910,7 +922,10 @@ public class PanelInacbgSmc extends widget.panelisi {
         tbDiagnosaPasien.clearSelection();
         tbProsedurPasien.clearSelection();
         tampilICD10(false);
+        tampilDiagnosa();
         tampilICD9CM(false);
+        tampilProsedur();
+        Diagnosa.requestFocus();
     }
 
     public void pilihTab(int tab) {
@@ -965,16 +980,18 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try {
                     Sequel.AutoComitFalse();
                     boolean sukses = true;
-
-                    for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
-                        if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
-                            updateDiagnosa = true;
-                            break;
+                    
+                    if (hapusOtomatis) {
+                        for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
+                            if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
+                                updateDiagnosa = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if (updateDiagnosa) {
-                        Sequel.menghapusSmc("inacbg_diagnosa_pasien_smc", "no_sep = ? and locked = 0", nosep);
+                        if (updateDiagnosa) {
+                            Sequel.menghapusSmc("inacbg_diagnosa_pasien_smc", "no_sep = ? and locked = 0", nosep);
+                        }
                     }
 
                     for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
@@ -1018,16 +1035,18 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try {
                     Sequel.AutoComitFalse();
                     boolean sukses = true;
-
-                    for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
-                        if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
-                            updateProsedur = true;
-                            break;
+                    
+                    if (hapusOtomatis) {
+                        for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
+                            if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
+                                updateProsedur = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if (updateProsedur) {
-                        Sequel.menghapusSmc("inacbg_prosedur_pasien_smc", "no_sep = ? and locked = 0", nosep);
+                        if (updateProsedur) {
+                            Sequel.menghapusSmc("inacbg_prosedur_pasien_smc", "no_sep = ? and locked = 0", nosep);
+                        }
                     }
 
                     for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
@@ -1067,7 +1086,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 }
             }
 
-            tampilICD();
+            pilihTab(0);
         }
     }
 

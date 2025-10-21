@@ -43,7 +43,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
         initComponents();
 
         KdDokter.setDocument(new batasInput((byte)20).getKata(KdDokter));
-                
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -54,7 +54,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdDokter.requestFocus();
             }
             @Override
@@ -66,7 +66,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         carabayar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -77,7 +77,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
                 if(carabayar.getTable().getSelectedRow()!= -1){
                     KdCaraBayar.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
                     NmCaraBayar.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
-                }     
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -87,8 +87,8 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {carabayar.onCari();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         carabayar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -101,10 +101,10 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-     
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         LoadHTML.setEditable(true);
         LoadHTML2.setEditable(true);
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -122,7 +122,7 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
         LoadHTML.setDocument(doc);
         LoadHTML2.setDocument(doc);
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -551,14 +551,14 @@ public class KeuanganJasaTindakan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(TabRawat.getSelectedIndex()==0){
-            try {            
-                File g = new File("jasatindakan.css");            
+            try {
+                File g = new File("jasatindakan.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -569,8 +569,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f = new File("JasaTindakanPasien.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("JasaTindakanPasien.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"jasatindakan.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                 "<tr class='isi2'>"+
@@ -578,19 +578,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JASA TINDAKAN PASIEN<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JASA TINDAKAN PASIEN<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            } 
+            }
         }else if(TabRawat.getSelectedIndex()==1){
-            try {            
-                File g = new File("jasatindakan.css");            
+            try {
+                File g = new File("jasatindakan.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -601,8 +601,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f = new File("JasaTindakanPasien.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("JasaTindakanPasien.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML2.getText().replaceAll("<head>","<head><link href=\"jasatindakan.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                 "<tr class='isi2'>"+
@@ -610,16 +610,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>JASA TINDAKAN PASIEN<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>JASA TINDAKAN PASIEN<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-            } 
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -662,19 +662,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     prosesCari();
     this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, KdDokter, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         htmlContent = new StringBuilder();
@@ -816,17 +816,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.ScrollPane scrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,95));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
@@ -876,7 +876,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -990,7 +990,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1081,9 +1081,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if(ps!=null){
                         ps.close();
                     }
-                }   
+                }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1196,7 +1196,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1297,7 +1297,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1394,7 +1394,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1424,7 +1424,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -1542,7 +1542,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1637,7 +1637,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1752,7 +1752,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1855,7 +1855,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -1954,7 +1954,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1984,7 +1984,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -2102,7 +2102,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2197,7 +2197,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2312,7 +2312,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2415,7 +2415,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2514,7 +2514,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -2544,7 +2544,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -2661,7 +2661,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2755,7 +2755,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2869,7 +2869,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -2971,7 +2971,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3069,7 +3069,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3099,7 +3099,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -3215,7 +3215,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3309,7 +3309,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3422,7 +3422,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3523,7 +3523,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3620,7 +3620,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3632,7 +3632,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void prosesCariSemua2() {
         try{
             htmlContent = new StringBuilder();
@@ -3650,7 +3650,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -3764,7 +3764,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3855,9 +3855,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if(ps!=null){
                         ps.close();
                     }
-                }   
+                }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -3970,7 +3970,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4071,7 +4071,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4168,7 +4168,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML2.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -4198,7 +4198,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -4316,7 +4316,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4411,7 +4411,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4526,7 +4526,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4629,7 +4629,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4728,7 +4728,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML2.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -4758,7 +4758,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -4876,7 +4876,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -4971,7 +4971,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5086,7 +5086,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5189,7 +5189,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5288,7 +5288,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML2.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -5318,7 +5318,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -5435,7 +5435,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5529,7 +5529,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5643,7 +5643,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5745,7 +5745,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -5843,7 +5843,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML2.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -5873,7 +5873,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%'>Total</td>"+
                 "</tr>"
             );
-            
+
             ttljasasarana=0;ttljasamedis=0;ttljasamenejemen=0;ttlbhp=0;ttltotal=0;
             if(chkRalan.isSelected()==true){
                 ps=koneksi.prepareStatement(
@@ -5989,7 +5989,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-                
+
             if(chkRanap.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -6083,7 +6083,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkOperasi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -6196,7 +6196,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkLaborat.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -6297,7 +6297,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }
                 }
             }
-            
+
             if(chkRadiologi.isSelected()==true){
                 subjasasarana=0;subjasamedis=0;subjasamenejemen=0;subbhp=0;subtotal=0;
                 ps=koneksi.prepareStatement(
@@ -6394,7 +6394,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "</tr>"
                 );
             }
-            
+
             LoadHTML2.setText(
                 "<html>"+
                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -6406,5 +6406,5 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
 }

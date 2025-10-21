@@ -100,7 +100,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPKApol.setDocument(new batasInput((byte)15).getKata(kdPPKApol));
     }
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-    private javax.swing.JFileChooser jfc = new JFileChooser();    
+    private javax.swing.JFileChooser jfc = new JFileChooser();
     private javax.swing.JFileChooser jfc2 = new JFileChooser();
     private FileFilter jpgFilter = new FileNameExtensionFilter("Gambar JPEG", "jpg");
     private FileFilter gifFilter = new FileNameExtensionFilter("Gambar GIF", "gif");
@@ -278,7 +278,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         panelGlass1.add(label35);
         label35.setBounds(0, 10, 70, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -552,11 +551,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
         Valid.pindah(evt,BtnSimpan,Almt);
-}//GEN-LAST:event_NmKeyPressed
+    }//GEN-LAST:event_NmKeyPressed
 
     private void AlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlmtKeyPressed
         Valid.pindah(evt,Nm,Kota);
-}//GEN-LAST:event_AlmtKeyPressed
+    }//GEN-LAST:event_AlmtKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -565,7 +564,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -576,7 +575,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
     private void KotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KotaKeyPressed
         Valid.pindah(evt,Almt,Propinsi);
@@ -881,7 +880,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private void getData() {
         int row = tbAdmin.getSelectedRow();
         if (row != -1) {
-            // Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "Kontak", "Email", 
+            // Object[] row = {"Faskes", "Alamat", "Kota", "Propinsi", "Kontak", "Email",
             // "Custom Wallpaper", "Pemberlakuan 2x24 Jam", "Kode PPK BPJS", "Kode PPK Apotek BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "wp", "logo"};
             Nm.setText(tabMode.getValueAt(row, 0).toString());
             Almt.setText(tabMode.getValueAt(row, 1).toString());
@@ -924,8 +923,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         ELogo.setText("");
         Nm.requestFocus();
     }
-    
-    
+
+
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }
@@ -933,14 +932,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private String folder;
 
     public class Painter extends Canvas {
-        
+
         BufferedImage image;
-        
+
         public void setImage(String file) throws IOException {
             image = ImageIO.read(new File(file));
             repaint();
         }
-        
+
         public void setBufferedImage(byte[] bytes) throws IOException {
             try (ByteArrayInputStream bits = new ByteArrayInputStream(bytes)) {
                 image = ImageIO.read(bits);
@@ -963,9 +962,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void cetak(String str) {
         System.out.println(str);
     }
-    
+
 }

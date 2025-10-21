@@ -22,15 +22,15 @@ public class DlgRL13KetersediaanTempatTidur extends javax.swing.JDialog {
     private ResultSet rs;
     private StringBuilder htmlContent;
     private int tersedia=0,terpakai=0,totaltersedia=0,totalterpakai=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgRL13KetersediaanTempatTidur(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -149,31 +149,31 @@ public class DlgRL13KetersediaanTempatTidur extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("rl13ketersediaankamar.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("rl13ketersediaankamar.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"));
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -229,24 +229,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='400px' colspan='2'>Jenis Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px' align='center'>Jumlah Tempat Tidur Tersedia</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px' align='center'>Jumlah Tempat Tidur Terpakai</td>"+
                 "</tr>"
-            ); 
-            try{   
+            );
+            try{
                 ps=koneksi.prepareStatement("select bangsal.kd_bangsal,bangsal.nm_bangsal from bangsal where bangsal.status='1' and bangsal.kd_bangsal in (select kamar.kd_bangsal from kamar group by kamar.kd_bangsal) order by bangsal.nm_bangsal");
                 try {
                      rs=ps.executeQuery();
                      totaltersedia=0;totalterpakai=0;
-                     while(rs.next()){    
+                     while(rs.next()){
                         tersedia=Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=?",rs.getString("kd_bangsal"));
                         totaltersedia=totaltersedia+tersedia;
                         terpakai=Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI' ",rs.getString("kd_bangsal"));
                         totalterpakai=totalterpakai+terpakai;
-                        htmlContent.append(                             
+                        htmlContent.append(
                             "<tr class='isi'>"+
                                 "<td valign='middle' bgcolor='#FFFCFC' colspan='2'>"+rs.getString("nm_bangsal")+"</td>"+
                                 "<td valign='middle' bgcolor='#FFFCFC' align='center'>"+tersedia+"</td>"+
@@ -288,8 +288,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "<td valign='middle' width='100px' align='center'>"+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kelas='Kelas VVIP' and kamar.kd_bangsal=?",rs.getString("kd_bangsal"))+"</td>"+
                                 "<td valign='middle' width='100px' align='center'>"+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kelas='Kelas VVIP' and kamar.kd_bangsal=? and kamar.status='ISI' ",rs.getString("kd_bangsal"))+"</td>"+
                             "</tr>"
-                        ); 
-                     }    
+                        );
+                     }
                  } catch (Exception e) {
                      System.out.println(e);
                  } finally{
@@ -299,17 +299,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(ps!=null){
                         ps.close();
                     }
-                }          
+                }
             }catch(Exception e){
                  System.out.println("Notifikasi : "+e);
             }
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='400px' colspan='2'>Jumlah Total</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px' align='center'>"+totaltersedia+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px' align='center'>"+totalterpakai+"</td>"+
                 "</tr>"
-            ); 
+            );
             LoadHTML.setText(
                     "<html>"+
                       "<table width='600px' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -318,11 +318,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getrl1_3_ketersediaan_kamar());
     }

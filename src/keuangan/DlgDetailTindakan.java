@@ -51,7 +51,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private double material=0,bhp=0,jmdokter=0,jmpetugas=0,jmperujuk=0,kso=0,
-            menejemen=0,total=0,biayaoperator1=0,biayaoperator2=0, 
+            menejemen=0,total=0,biayaoperator1=0,biayaoperator2=0,
             biayaoperator3=0,biayaasisten_operator1=0,biayaasisten_operator2=0,
             biayaasisten_operator3=0,biayainstrumen=0,biayadokter_anak=0,
             biayaperawaat_resusitas=0,biayadokter_anestesi=0,biayaasisten_anestesi=0,
@@ -71,7 +71,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
+
         tabModeRalanDokter=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","Kode Dokter",
             "Dokter Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -135,7 +135,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRalanParamedis=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","NIP",
             "Paramedis Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -199,7 +199,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRalanDokterParamedis=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","Kode Dokter",
             "Dokter Yg Menangani","NIP","Paramedis Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -270,7 +270,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanDokterParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapDokter=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","Kode Dokter",
             "Dokter Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -334,7 +334,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapParamedis=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","NIP",
             "Paramedis Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -398,7 +398,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapDokterParamedis=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Tnd","Perawatan/Tindakan","Kode Dokter",
             "Dokter Yg Menangani","NIP","Paramedis Yg Menangani","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -469,7 +469,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapDokterParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRadiologi=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Prk","Pemeriksaan","Kode P.J.",
             "Dokter P.J.Rad","NIP","Petugas Rad","Kode Perujuk","Dokter Perujuk","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -547,7 +547,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbRadiologi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeLaborat=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kd.Prk","Pemeriksaan","Kode P.J.",
             "Dokter P.J.Lab","NIP","Petugas Lab","Kode Perujuk","Dokter Perujuk","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -625,7 +625,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbLaborat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailLaborat=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Id","Pemeriksaan","Kode P.J.",
             "Dokter P.J.Lab","NIP","Petugas Lab","Kode Perujuk","Dokter Perujuk","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -703,7 +703,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbDetailLaborat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeOperasi=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Kode Paket",
             "Paket Operasi/VK","Tanggal","Jam","Cara Bayar","Ruangan",
@@ -717,7 +717,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             "Perawat Luar","JM P.L.","Onloop 1","JM Onloop 1","Onloop 2","JM Onloop 2",
             "Onloop 3","JM Onloop 3", "Onloop 4","JM Onloop 4", "Onloop 5","JM Onloop 5",
             "Dokter P.J. Anak","JM dr P.J. Anak","Dokter Umum", "JM dr Umum",
-            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total" 
+            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
@@ -881,9 +881,9 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             }
         }
         tbOperasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -936,7 +936,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -946,8 +946,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -960,7 +960,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -1013,7 +1013,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1023,8 +1023,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         petugas.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1037,7 +1037,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -1065,7 +1065,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1076,7 +1076,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -1139,7 +1139,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1149,8 +1149,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1163,8 +1163,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
-            
+
+
         ChkInput.setSelected(false);
         isForm();
         ChkInput1.setSelected(false);
@@ -1185,11 +1185,11 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         isForm9();
         ChkInput10.setSelected(false);
         isForm10();
-        
+
         Valid.SetTgl2(Tgl1,format.format(new Date())+" 00:00:00");
         Valid.SetTgl2(Tgl2,format.format(new Date())+" 23:59:59");
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2933,13 +2933,13 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,Tgl1,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2954,7 +2954,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                 CetakRalanDokterParamedis();
                 break;
             case 3:
-                CetakOperasi();   
+                CetakOperasi();
                 break;
             case 4:
                 CetakRanapDokter();
@@ -2985,7 +2985,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1KeyPressed
 
     private void Tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl2KeyPressed
-        
+
     }//GEN-LAST:event_Tgl2KeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -3008,7 +3008,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             case 5: statusbayar = "and reg_periksa.status_bayar = 'Belum Bayar' "; break;
             default: statusbayar = ""; break;
         }
-        
+
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 tampil();
@@ -3545,7 +3545,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     private widget.Table tbRanapParamedis;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){     
+    public void tampil(){
         Valid.tabelKosong(tabModeRalanDokter);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_jl_dr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_jl_dr.kd_jenis_prw, jns_perawatan.nm_perawatan, " +
@@ -3603,7 +3603,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         }
     }
 
-    public void tampil2(){     
+    public void tampil2(){
         Valid.tabelKosong(tabModeRalanParamedis);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_jl_pr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_jl_pr.kd_jenis_prw, jns_perawatan.nm_perawatan, " +
@@ -3661,8 +3661,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil3(){     
+
+    public void tampil3(){
         Valid.tabelKosong(tabModeRalanDokterParamedis);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_jl_drpr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_jl_drpr.kd_jenis_prw, jns_perawatan.nm_perawatan, " +
@@ -3725,8 +3725,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil4(){     
+
+    public void tampil4(){
         Valid.tabelKosong(tabModeOperasi);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select operasi.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, operasi.kode_paket, paket_operasi.nm_perawatan, operasi.tgl_operasi, " +
@@ -3816,7 +3816,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                         + rs.getDouble("biaya_omloop5") + rs.getDouble("biaya_dokter_pjanak") + rs.getDouble("biaya_dokter_umum") + rs.getDouble("biayaalat")
                         + rs.getDouble("biayasewaok") + rs.getDouble("akomodasi") + rs.getDouble("bagian_rs") + rs.getDouble("biayasarpras");
                     total += ttl;
-                    
+
                     tabModeOperasi.addRow(new Object[] {
                         i++, rs.getString("no_rawat"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("kode_paket"),
                         rs.getString("nm_perawatan"), rs.getString("tgl_operasi").substring(0, 10), rs.getString("tgl_operasi").substring(11, 19),
@@ -3856,8 +3856,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil5(){     
+
+    public void tampil5(){
         Valid.tabelKosong(tabModeRanapDokter);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_inap_dr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_inap_dr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, " +
@@ -3911,8 +3911,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil6(){     
+
+    public void tampil6(){
         Valid.tabelKosong(tabModeRanapParamedis);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_inap_pr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_inap_pr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, " +
@@ -3965,8 +3965,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil7(){     
+
+    public void tampil7(){
         Valid.tabelKosong(tabModeRanapDokterParamedis);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select rawat_inap_drpr.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, rawat_inap_drpr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, " +
@@ -4027,7 +4027,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
         }
     }
 
-    public void tampil8(){     
+    public void tampil8(){
         Valid.tabelKosong(tabModeRadiologi);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select periksa_radiologi.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, periksa_radiologi.kd_jenis_prw, jns_perawatan_radiologi.nm_perawatan, " +
@@ -4095,8 +4095,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil9(){     
+
+    public void tampil9(){
         Valid.tabelKosong(tabModeLaborat);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, periksa_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, " +
@@ -4164,8 +4164,8 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
-    public void tampil10(){     
+
+    public void tampil10(){
         Valid.tabelKosong(tabModeDetailLaborat);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select detail_periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, detail_periksa_lab.id_template, template_laboratorium.Pemeriksaan, " +
@@ -4234,143 +4234,143 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void isForm2(){
         if(ChkInput1.isSelected()==true){
             ChkInput1.setVisible(false);
             PanelInput1.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput1.setVisible(true);      
+            FormInput1.setVisible(true);
             ChkInput1.setVisible(true);
-        }else if(ChkInput1.isSelected()==false){           
-            ChkInput1.setVisible(false);            
+        }else if(ChkInput1.isSelected()==false){
+            ChkInput1.setVisible(false);
             PanelInput1.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput1.setVisible(false);      
+            FormInput1.setVisible(false);
             ChkInput1.setVisible(true);
         }
     }
-    
+
     private void isForm3(){
         if(ChkInput2.isSelected()==true){
             ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,95));
-            FormInput2.setVisible(true);      
+            FormInput2.setVisible(true);
             ChkInput2.setVisible(true);
-        }else if(ChkInput2.isSelected()==false){           
-            ChkInput2.setVisible(false);            
+        }else if(ChkInput2.isSelected()==false){
+            ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput2.setVisible(false);      
+            FormInput2.setVisible(false);
             ChkInput2.setVisible(true);
         }
     }
-    
+
     private void isForm4(){
         if(ChkInput3.isSelected()==true){
             ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput3.setVisible(true);      
+            FormInput3.setVisible(true);
             ChkInput3.setVisible(true);
-        }else if(ChkInput3.isSelected()==false){           
-            ChkInput3.setVisible(false);            
+        }else if(ChkInput3.isSelected()==false){
+            ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput3.setVisible(false);      
+            FormInput3.setVisible(false);
             ChkInput3.setVisible(true);
         }
     }
-    
+
     private void isForm5(){
         if(ChkInput4.isSelected()==true){
             ChkInput4.setVisible(false);
             PanelInput4.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput4.setVisible(true);      
+            FormInput4.setVisible(true);
             ChkInput4.setVisible(true);
-        }else if(ChkInput4.isSelected()==false){           
-            ChkInput4.setVisible(false);            
+        }else if(ChkInput4.isSelected()==false){
+            ChkInput4.setVisible(false);
             PanelInput4.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput4.setVisible(false);      
+            FormInput4.setVisible(false);
             ChkInput4.setVisible(true);
         }
     }
-    
+
     private void isForm6(){
         if(ChkInput5.isSelected()==true){
             ChkInput5.setVisible(false);
             PanelInput5.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput5.setVisible(true);      
+            FormInput5.setVisible(true);
             ChkInput5.setVisible(true);
-        }else if(ChkInput5.isSelected()==false){           
-            ChkInput5.setVisible(false);            
+        }else if(ChkInput5.isSelected()==false){
+            ChkInput5.setVisible(false);
             PanelInput5.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput5.setVisible(false);      
+            FormInput5.setVisible(false);
             ChkInput5.setVisible(true);
         }
     }
-    
+
     private void isForm7(){
         if(ChkInput7.isSelected()==true){
             ChkInput7.setVisible(false);
             PanelInput7.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput7.setVisible(true);      
+            FormInput7.setVisible(true);
             ChkInput7.setVisible(true);
-        }else if(ChkInput7.isSelected()==false){           
-            ChkInput7.setVisible(false);            
+        }else if(ChkInput7.isSelected()==false){
+            ChkInput7.setVisible(false);
             PanelInput7.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput7.setVisible(false);      
+            FormInput7.setVisible(false);
             ChkInput7.setVisible(true);
         }
     }
-    
+
     private void isForm8(){
         if(ChkInput8.isSelected()==true){
             ChkInput8.setVisible(false);
             PanelInput8.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput8.setVisible(true);      
+            FormInput8.setVisible(true);
             ChkInput8.setVisible(true);
-        }else if(ChkInput8.isSelected()==false){           
-            ChkInput8.setVisible(false);            
+        }else if(ChkInput8.isSelected()==false){
+            ChkInput8.setVisible(false);
             PanelInput8.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput8.setVisible(false);      
+            FormInput8.setVisible(false);
             ChkInput8.setVisible(true);
         }
     }
-    
+
     private void isForm9(){
         if(ChkInput9.isSelected()==true){
             ChkInput9.setVisible(false);
             PanelInput9.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput9.setVisible(true);      
+            FormInput9.setVisible(true);
             ChkInput9.setVisible(true);
-        }else if(ChkInput9.isSelected()==false){           
-            ChkInput9.setVisible(false);            
+        }else if(ChkInput9.isSelected()==false){
+            ChkInput9.setVisible(false);
             PanelInput9.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput9.setVisible(false);      
+            FormInput9.setVisible(false);
             ChkInput9.setVisible(true);
         }
     }
-    
+
     private void isForm10(){
         if(ChkInput10.isSelected()==true){
             ChkInput10.setVisible(false);
             PanelInput10.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput10.setVisible(true);      
+            FormInput10.setVisible(true);
             ChkInput10.setVisible(true);
-        }else if(ChkInput10.isSelected()==false){           
-            ChkInput10.setVisible(false);            
+        }else if(ChkInput10.isSelected()==false){
+            ChkInput10.setVisible(false);
             PanelInput10.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput10.setVisible(false);      
+            FormInput10.setVisible(false);
             ChkInput10.setVisible(true);
         }
     }
@@ -4386,7 +4386,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());                  
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("userid", akses.getkode());
             param.put("ipaddress", akses.getalamatip());
@@ -4471,7 +4471,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("userid", akses.getkode());
             param.put("ipaddress", akses.getalamatip());
             Sequel.deleteTemporaryBesar();
@@ -4519,7 +4519,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             Sequel.deleteTemporaryBesar();
             Sequel.temporaryBesarBatch(tabModeRanapDokterParamedis, 3000);
             Valid.reportSmc("rptDetailTindakanRanapDokterParamedisSMC.jasper", "report", "::[ Detail Tindakan Ranap yang Ditangani Dokter/Paramedis ]::", param);
-        }   
+        }
     }
 
     private void CetakRadiologi() {
@@ -4540,7 +4540,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             Sequel.deleteTemporaryBesar();
             Sequel.temporaryBesarBatch(tabModeRadiologi, 1000);
             Valid.reportSmc("rptDetailRadiologiSMC.jasper", "report", "::[ Detail Pemeriksaan Radiologi ]::", param);
-        }   
+        }
     }
 
     private void CetakLab() {
@@ -4557,7 +4557,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("userid", akses.getkode());
             param.put("ipaddress", akses.getalamatip());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Sequel.deleteTemporaryBesar();
             Sequel.temporaryBesarBatch(tabModeLaborat, 1000);
             Valid.reportSmc("rptDetailLaboratSMC.jasper", "report", "::[ Detail Pemeriksaan Laborat ]::", param);
@@ -4582,6 +4582,6 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             Sequel.deleteTemporaryBesar();
             Sequel.temporaryBesarBatch(tabModeDetailLaborat, 4000);
             Valid.reportSmc("rptDetailDetailLaboratSMC.jasper", "report", "::[ Detail Detail Pemeriksaan Laborat ]::", param);
-        }   
+        }
     }
 }

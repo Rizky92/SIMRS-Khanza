@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -111,7 +111,7 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         spesialis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -119,11 +119,11 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(spesialis.getTable().getSelectedRow()!= -1){                   
+                if(spesialis.getTable().getSelectedRow()!= -1){
                     KdSpesialis.setText(spesialis.getTable().getValueAt(spesialis.getTable().getSelectedRow(),1).toString());
                     NmSpesialis.setText(spesialis.getTable().getValueAt(spesialis.getTable().getSelectedRow(),2).toString());
                     KdSpesialis.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -134,7 +134,7 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         spesialis.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -146,8 +146,8 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         sarana.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -155,11 +155,11 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(sarana.getTable().getSelectedRow()!= -1){                   
+                if(sarana.getTable().getSelectedRow()!= -1){
                     KdSarana.setText(sarana.getTable().getValueAt(sarana.getTable().getSelectedRow(),1).toString());
                     NmSarana.setText(sarana.getTable().getValueAt(sarana.getTable().getSelectedRow(),2).toString());
                     KdSarana.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -170,7 +170,7 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         sarana.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -182,8 +182,8 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
@@ -191,10 +191,10 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-              
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -330,7 +330,6 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
         panelGlass7.add(jLabel19);
 
         KdSpesialis.setEditable(false);
-        KdSpesialis.setHighlighter(null);
         KdSpesialis.setName("KdSpesialis"); // NOI18N
         KdSpesialis.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass7.add(KdSpesialis);
@@ -358,7 +357,6 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
         panelGlass7.add(jLabel20);
 
         KdSarana.setEditable(false);
-        KdSarana.setHighlighter(null);
         KdSarana.setName("KdSarana"); // NOI18N
         KdSarana.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass7.add(KdSarana);
@@ -428,7 +426,7 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
                     tabMode.getValueAt(r,10).toString()+"','"+
                     tabMode.getValueAt(r,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -510,15 +508,15 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String spesialistik,String sarana,String tanggal) {        
+    public void tampil(String spesialistik,String sarana,String tanggal) {
         try {
-            URL = link+"/spesialis/rujuk/subspesialis/"+spesialistik+"/sarana/"+sarana+"/tglEstRujuk/"+tanggal;	
+            URL = link+"/spesialis/rujuk/subspesialis/"+spesialistik+"/sarana/"+sarana+"/tglEstRujuk/"+tanggal;
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-timestamp",utc);            
+	    headers.add("X-timestamp",utc);
 	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
@@ -547,8 +545,8 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }  
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -567,8 +565,8 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
         }
-    } 
-    
+    }
+
     public void setCari(String kodespesialis,String namaspesialis,String kodesarana, String namasarana,Date tanggal){
         KdSpesialis.setText(kodespesialis);
         NmSpesialis.setText(namaspesialis);
@@ -579,24 +577,24 @@ public final class PCareCekFaskesSubspesialis extends javax.swing.JDialog {
 
     public JTable getTable(){
         return tbKamar;
-    }   
-    
+    }
+
     public String KodeSpesialis(){
         return KdSpesialis.getText();
     }
-    
+
     public String NamaSpesialis(){
         return NmSpesialis.getText();
     }
-    
+
     public String KodeSarana(){
         return KdSarana.getText();
     }
-    
+
     public String NamaSarana(){
         return NmSarana.getText();
     }
-    
+
     public Date TanggalRujuk(){
         return Tanggal.getDate();
     }

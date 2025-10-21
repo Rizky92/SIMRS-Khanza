@@ -736,18 +736,18 @@ public class KeuanganPiutangJasaPerusahaan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
-private void NoPiutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPiutangKeyPressed
+    private void NoPiutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPiutangKeyPressed
         Valid.pindah(evt, BtnSimpan, KdPerusahaan);
-}//GEN-LAST:event_NoPiutangKeyPressed
+    }//GEN-LAST:event_NoPiutangKeyPressed
 
-private void TanggalPiutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalPiutangKeyPressed
+    private void TanggalPiutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalPiutangKeyPressed
         Valid.pindah(evt,NoPiutang,KdPerusahaan);
-}//GEN-LAST:event_TanggalPiutangKeyPressed
+    }//GEN-LAST:event_TanggalPiutangKeyPressed
 
-private void KdPerusahaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPerusahaanKeyPressed
+    private void KdPerusahaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPerusahaanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             NoPiutang.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -755,13 +755,13 @@ private void KdPerusahaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPerusahaanActionPerformed(null);
         }
-}//GEN-LAST:event_KdPerusahaanKeyPressed
+    }//GEN-LAST:event_KdPerusahaanKeyPressed
 
-private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
+    private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
 
-}//GEN-LAST:event_KdPetugasKeyPressed
+    }//GEN-LAST:event_KdPetugasKeyPressed
 
-private void BtnPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerusahaanActionPerformed
+    private void BtnPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerusahaanActionPerformed
         DlgCariPerusahaan perusahaan=new DlgCariPerusahaan(null,false);
         perusahaan.addWindowListener(new WindowListener() {
             @Override
@@ -802,15 +802,15 @@ private void BtnPerusahaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         perusahaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         perusahaan.setLocationRelativeTo(internalFrame1);
         perusahaan.setVisible(true);
-}//GEN-LAST:event_BtnPerusahaanActionPerformed
+    }//GEN-LAST:event_BtnPerusahaanActionPerformed
 
-private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
     petugas.emptTeks();
     petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     petugas.setLocationRelativeTo(internalFrame1);
     petugas.setAlwaysOnTop(false);
     petugas.setVisible(true);
-}//GEN-LAST:event_btnPetugasActionPerformed
+    }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
@@ -1045,9 +1045,9 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
-                    Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
-                    sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
+                    if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){
                     Sequel.Commit();
@@ -1521,7 +1521,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(piutang_jasa_perusahaan.no_piutang,3),signed)),0) from piutang_jasa_perusahaan where piutang_jasa_perusahaan.tgl_piutang='"+Valid.SetTgl(TanggalPiutang.getSelectedItem()+"")+"' ",
-                "PJP"+TanggalPiutang.getSelectedItem().toString().substring(6,10)+TanggalPiutang.getSelectedItem().toString().substring(3,5)+TanggalPiutang.getSelectedItem().toString().substring(0,2),3,NoPiutang); 
+                "PJP"+TanggalPiutang.getSelectedItem().toString().substring(6,10)+TanggalPiutang.getSelectedItem().toString().substring(3,5)+TanggalPiutang.getSelectedItem().toString().substring(0,2),3,NoPiutang);
     }
 
     public DefaultTableModel tabMode(){

@@ -394,7 +394,7 @@
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Diagnosa</td><td width="">:</td>
+                <td width="41%" >Diagnosa IDRG</td><td width="">:</td>
                 <td width="57%">
                     <input name="diagnosa" class="text" type=text class="inputbox" 
                            value="<?php  
@@ -414,18 +414,58 @@
                 </td>
             </tr>
             <tr class="head">
-                <td width="41%" >Prosedur</td><td width="">:</td>
+                <td width="41%" >Prosedur IDRG</td><td width="">:</td>
                 <td width="57%">
                     <input name="procedure" class="text" type=text class="inputbox" 
                         value="<?php  
                                     $prosedur="";
                                     $a=1;
-                                    $hasilprosedur=bukaquery("select prosedur_pasien.kode from prosedur_pasien where prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
+                                    $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien where prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
                                     while($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
                                         if($a==1){
-                                            $prosedur=$barisprosedur["kode"];
+                                            $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                         }else{
-                                            $prosedur=$prosedur."#".$barisprosedur["kode"];
+                                            $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
+                                        }                
+                                        $a++;
+                                    } 
+                                    echo $prosedur;
+                              ?>" size="60" maxlength="100">
+                </td>
+            </tr>
+            <tr class="head">
+                <td width="41%" >Diagnosa INACBG</td><td width="">:</td>
+                <td width="57%">
+                    <input name="diagnosainacbg" class="text" type=text class="inputbox" 
+                           value="<?php  
+                                        $penyakit="";
+                                        $a=1;
+                                        $hasilpenyakit=bukaquery("select diagnosa_pasien.kd_penyakit from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where penyakit.im='0' and diagnosa_pasien.no_rawat='".$norawat."' order by diagnosa_pasien.prioritas asc");
+                                        while($barispenyakit = mysqli_fetch_array($hasilpenyakit)) {
+                                            if($a==1){
+                                                $penyakit=$barispenyakit["kd_penyakit"];
+                                            }else{
+                                                $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
+                                            }                
+                                            $a++;
+                                        }
+                                        echo $penyakit;
+                                  ?>" size="60" maxlength="100">
+                </td>
+            </tr>
+            <tr class="head">
+                <td width="41%" >Prosedur INACBG</td><td width="">:</td>
+                <td width="57%">
+                    <input name="procedureinacbg" class="text" type=text class="inputbox" 
+                        value="<?php  
+                                    $prosedur="";
+                                    $a=1;
+                                    $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien inner join icd9 on prosedur_pasien.kode=icd9.kode where icd9.im='0' and prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
+                                    while($barisprosedur = mysqli_fetch_array($hasilprosedur)) {
+                                        if($a==1){
+                                            $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
+                                        }else{
+                                            $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                         }                
                                         $a++;
                                     } 
@@ -805,6 +845,8 @@
                 $discharge_status  = validTeks(trim($_POST['discharge_status']));
                 $diagnosa          = validTeks2(trim($_POST['diagnosa']));
                 $procedure         = validTeks2(trim($_POST['procedure']));
+                $diagnosainacbg    = validTeks2(trim($_POST['diagnosainacbg']));
+                $procedureinacbg   = validTeks2(trim($_POST['procedureinacbg']));
                 $prosedur_non_bedah = validTeks(trim($_POST['prosedur_non_bedah']));
                 $prosedur_bedah    = validTeks(trim($_POST['prosedur_bedah']));
                 $konsultasi        = validTeks(trim($_POST['konsultasi']));
@@ -859,12 +901,13 @@
                     $episodes                   = ($episodes1==0?"":"1;$episodes1#").($episodes2==0?"":"2;$episodes2#").($episodes3==0?"":"3;$episodes3#").($episodes4==0?"":"4;$episodes4#").($episodes5==0?"":"5;$episodes5#").($episodes6==0?"":"6;$episodes6#");  
                     $episodes                   = substr($episodes, 0, -1); 
                     
-                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))&&(!empty($nomor_kartu_t))) {                        
+                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))&&(!empty($nomor_kartu_t))) {        
+                        MenghapusKlaim($nosep,$codernik);
                         BuatKlaimBaru2($nokartu,$nosep,$no_rkm_medis,$nm_pasien,$tgl_lahir." 00:00:00", $gender,$norawat);
                         EditUlangKlaim($nosep);
                         UpdateDataKlaim3($nosep,$nokartu,$tgl_registrasi,$keluar,$jnsrawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure, 
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg, 
                             $tarif_poli_eks,$nama_dokter,getKelasRS(),"71","COVID-19","#",$codernik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
@@ -876,13 +919,13 @@
                         echo 'Semua field harus isi..!!!';
                     }
                 }else{
-                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))) {                        
+                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))) {    
                         BuatKlaimBaru2($nokartu,$nosep,$no_rkm_medis,$nm_pasien,$tgl_lahir." 00:00:00", $gender,$norawat);
                         EditUlangKlaim($nosep);
                         if(UpdateDataKlaim2(
                                 $nosep,$nokartu,$tgl_registrasi,$keluar,$jnsrawat,$kelas_rawat,$adl_sub_acute,
                                 $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                                $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure, 
+                                $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,  
                                 $tarif_poli_eks,$nama_dokter,getKelasRS(),"3","JKN","#",$codernik,
                                 $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                                 $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,

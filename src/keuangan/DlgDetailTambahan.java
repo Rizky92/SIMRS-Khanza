@@ -66,8 +66,8 @@ public class DlgDetailTambahan extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         try {
             ps=koneksi.prepareStatement("select reg_periksa.tgl_registrasi from reg_periksa inner join tambahan_biaya on reg_periksa.no_rawat=tambahan_biaya.no_rawat "+
                     "where reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.tgl_registrasi");
@@ -77,9 +77,9 @@ public class DlgDetailTambahan extends javax.swing.JDialog {
             pstambahan=koneksi.prepareStatement("select nama_biaya,besar_biaya from tambahan_biaya where no_rawat=?");
         } catch (SQLException e) {
             System.out.println(e);
-        }     
+        }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -236,7 +236,7 @@ public class DlgDetailTambahan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -245,10 +245,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 jml="";
                 try {
                     jml=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,4).toString()));
@@ -260,20 +260,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(r,1).toString()+"','"+
                                 tabMode.getValueAt(r,2).toString()+"','"+
                                 tabMode.getValueAt(r,3).toString()+"','"+
-                                jml+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                jml+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRTambahan.jasper","report","[ Rekap Tambahan Biaya ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -294,17 +294,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,TglBeli1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         prosesCari();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TglBeli2,BtnPrint);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         TglBeli1.requestFocus();
@@ -352,8 +352,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void prosesCari() {
         try {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);   
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
             ps.setString(1,Valid.SetTgl(TglBeli1.getSelectedItem()+""));
             ps.setString(2,Valid.SetTgl(TglBeli2.getSelectedItem()+""));
             rs=ps.executeQuery();
@@ -363,7 +363,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 tabMode.addRow(new Object[]{i+".",rs.getString("tgl_registrasi"),"","",null});
                 pspasien.setString(1,rs.getString("tgl_registrasi"));
                 rspasien=pspasien.executeQuery();
-                while(rspasien.next()){                    
+                while(rspasien.next()){
                     pstambahan.setString(1,rspasien.getString("no_rawat"));
                     rstambahan=pstambahan.executeQuery();
                     a=1;
@@ -375,18 +375,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                         jumlah=jumlah+rstambahan.getDouble("besar_biaya");
                         a++;
-                    }                    
+                    }
                 }
                 i++;
             }
             if(jumlah>0){
                 tabMode.addRow(new Object[]{">>","Total :","","",jumlah});
-            }            
-            this.setCursor(Cursor.getDefaultCursor());              
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         } catch (Exception e) {
             System.out.println(e);
-        }               
+        }
     }
-    
-    
+
+
 }

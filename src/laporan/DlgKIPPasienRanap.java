@@ -38,15 +38,15 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
                 stth5s14l="",stth5s14p="",stth15s24l="",stth15s24p="",stth25s44l="",stth25s44p="",stth45s64l="",stth45s64p="",
                 stlbth65l="",stlbth65p="",stmatilb48="",stmatikr48="",stpulang="",staps="",stlari="",strujuk="",diagnosa="",
                 tglkeluar="",lamainap="";
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgKIPPasienRanap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -62,10 +62,10 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML1.setDocument(doc);
-        
+
         kdpenyakit.setDocument(new batasInput((byte)30).getKata(kdpenyakit));
-        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit)); 
-        
+        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit));
+
         penyakit.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -73,10 +73,10 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -148,7 +148,6 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
         panelisi1.add(jLabel4);
 
         kdpenyakit.setEditable(false);
-        kdpenyakit.setHighlighter(null);
         kdpenyakit.setName("kdpenyakit"); // NOI18N
         kdpenyakit.setPreferredSize(new java.awt.Dimension(50, 23));
         kdpenyakit.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -308,24 +307,24 @@ public class DlgKIPPasienRanap extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("kipranap.html");            
+
+            File f = new File("kipranap.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(TabRawat.getSelectedIndex()==0){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -336,7 +335,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                         "<font size='2' face='Tahoma'>KARTU INDEKS PENYAKIT PASIEN RAWAT INAP PERIODE "+Tgl1.getSelectedItem()+" S.D. "+Tgl2.getSelectedItem()+"<br>"+
-                                        "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+        
+                                        "Diagnosa : "+nmpenyakit.getText()+"<br>Kode ICD X : "+kdpenyakit.getText()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -350,18 +349,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA KEADAAN MORBIDITAS PASIEN RAWAT INAP RUMAH SAKIT PENYEBAB KECELAKAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA KEADAAN MORBIDITAS PASIEN RAWAT INAP RUMAH SAKIT PENYEBAB KECELAKAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
-            }                
+            }
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -383,7 +382,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     if(nmpenyakit.getText().trim().equals("")){
         JOptionPane.showMessageDialog(null,"Silahkan masukkan penyakit yang mau dicari terlebih dahulu..!!!");
     }else{
@@ -393,15 +392,15 @@ private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             prosesCari2();
         }
     }
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prosesCari();
@@ -483,7 +482,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>NO.</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='3'>NO.R.M.</td>"+
@@ -534,7 +533,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>&rsaquo;&nbsp;48&nbsp;JAM</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>&lsaquo;&nbsp;48&nbsp;JAM</td>"+
                 "</tr>"
-            );   
+            );
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk "+
                     "from reg_periksa inner join diagnosa_pasien on reg_periksa.no_rawat=diagnosa_pasien.no_rawat "+
@@ -638,9 +637,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             }
                         }
                     }
-                    
+
                     diagnosa="";
-                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");    
+                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");
                     try {
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
@@ -660,14 +659,14 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
+                    }
                     if(diagnosa.endsWith(",")){
                         diagnosa = diagnosa.substring(0,diagnosa.length() - 1);
                     }
-                    
+
                     jamdiff=0;
                     stmatilb48="";stmatikr48="";stpulang="";staps="";stlari="";strujuk="";tglkeluar="";lamainap="";
-                    ps2=koneksi.prepareStatement("select kamar_inap.tgl_keluar,kamar_inap.jam_keluar,kamar_inap.stts_pulang,sum(kamar_inap.lama) as lama from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_keluar desc limit 1");    
+                    ps2=koneksi.prepareStatement("select kamar_inap.tgl_keluar,kamar_inap.jam_keluar,kamar_inap.stts_pulang,sum(kamar_inap.lama) as lama from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_keluar desc limit 1");
                     try {
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
@@ -733,8 +732,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         if(ps2!=null){
                             ps2.close();
                         }
-                    } 
-                    
+                    }
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -783,7 +782,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             if((i-1)>0){
                 htmlContent.append(
                     "<tr class='isi'>"+
@@ -815,7 +814,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' align='center'>"+matikr48+"</td>"+
                     "</tr>");
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -824,15 +823,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif 5 : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());        
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>NO.</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='4%' rowspan='3'>NO.R.M.</td>"+
@@ -883,7 +882,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>&rsaquo;&nbsp;48&nbsp;JAM</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>&lsaquo;&nbsp;48&nbsp;JAM</td>"+
                 "</tr>"
-            );   
+            );
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.no_ktp,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk "+
                     "from reg_periksa inner join diagnosa_pasien on reg_periksa.no_rawat=diagnosa_pasien.no_rawat "+
@@ -989,10 +988,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             }
                         }
                     }
-                    
+
                     diagnosa="";
-                    
-                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");    
+
+                    ps2=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas>1 and diagnosa_pasien.no_rawat=?");
                     try {
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
@@ -1012,15 +1011,15 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
-                    
+                    }
+
                     if(diagnosa.endsWith(",")){
                         diagnosa = diagnosa.substring(0,diagnosa.length() - 1);
                     }
-                    
+
                     jamdiff=0;
                     stmatilb48="";stmatikr48="";stpulang="";staps="";stlari="";strujuk="";tglkeluar="";lamainap="";
-                    ps2=koneksi.prepareStatement("select kamar_inap.tgl_keluar,kamar_inap.jam_keluar,kamar_inap.stts_pulang,sum(kamar_inap.lama) as lama from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_keluar desc limit 1");    
+                    ps2=koneksi.prepareStatement("select kamar_inap.tgl_keluar,kamar_inap.jam_keluar,kamar_inap.stts_pulang,sum(kamar_inap.lama) as lama from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_keluar desc limit 1");
                     try {
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
@@ -1086,8 +1085,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         if(ps2!=null){
                             ps2.close();
                         }
-                    } 
-                    
+                    }
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -1136,7 +1135,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             if((i-1)>0){
                 htmlContent.append(
                     "<tr class='isi'>"+
@@ -1168,7 +1167,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' align='center'>"+matikr48+"</td>"+
                     "</tr>");
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1177,14 +1176,14 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif 5 : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());   
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    
-    
+
+
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getkip_pasien_ranap());
     }
-    
+
 }

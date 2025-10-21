@@ -54,14 +54,14 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
         Object[] row = {"Kode Poliklinik", "Nama Poliklinik", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"},
                  row2 = {"Kode Unit Kamar", "Nama Unit Kamar", "Kode Cara Bayar", "Nama Cara Bayar", "Kode Jenis Obat", "Nama Jenis Obat"};
-        
+
         tabModeRalan = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
-        
+
         tbRalan.setModel(tabModeRalan);
         tbRalan.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbRalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -72,14 +72,14 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRalan.getColumnModel().getColumn(4).setPreferredWidth(90);
         tbRalan.getColumnModel().getColumn(5).setPreferredWidth(140);
         tbRalan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanap = new DefaultTableModel(null, row2) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
-        
+
         tbRanap.setModel(tabModeRanap);
         tbRanap.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbRanap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -93,7 +93,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
 
         TCariRalan.setDocument(new batasInput((int) 100).getKata(TCariRalan));
         TCariRanap.setDocument(new batasInput((int) 100).getKata(TCariRanap));
-        
+
         carabayar.addWindowListener(new WindowAdapter() {
             @Override
             public void windowDeactivated(WindowEvent e) {
@@ -108,7 +108,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         carabayar.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -117,7 +117,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         jenis.addWindowListener(new WindowAdapter() {
             @Override
             public void windowDeactivated(WindowEvent e) {
@@ -132,7 +132,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         jenis.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -141,7 +141,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         poli.addWindowListener(new WindowAdapter() {
             @Override
             public void windowDeactivated(WindowEvent e) {
@@ -153,7 +153,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         poli.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -162,7 +162,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         bangsal.addWindowListener(new WindowAdapter() {
             @Override
             public void windowDeactivated(WindowEvent e) {
@@ -174,7 +174,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         bangsal.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -281,7 +281,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         jLabel12.setBounds(0, 72, 80, 23);
 
         pngjawabRalan.setEditable(false);
-        pngjawabRalan.setHighlighter(null);
         pngjawabRalan.setName("pngjawabRalan"); // NOI18N
         pngjawabRalan.setNextFocusableComponent(BtnPilihCaraBayarRalan);
         panelGlass4.add(pngjawabRalan);
@@ -301,21 +300,18 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         BtnPilihCaraBayarRalan.setBounds(493, 42, 28, 23);
 
         kdpjRalan.setEditable(false);
-        kdpjRalan.setHighlighter(null);
         kdpjRalan.setName("kdpjRalan"); // NOI18N
         kdpjRalan.setNextFocusableComponent(pngjawabRalan);
         panelGlass4.add(kdpjRalan);
         kdpjRalan.setBounds(83, 42, 100, 23);
 
         kdjnsRalan.setEditable(false);
-        kdjnsRalan.setHighlighter(null);
         kdjnsRalan.setName("kdjnsRalan"); // NOI18N
         kdjnsRalan.setNextFocusableComponent(nmjnsRalan);
         panelGlass4.add(kdjnsRalan);
         kdjnsRalan.setBounds(83, 72, 100, 23);
 
         nmjnsRalan.setEditable(false);
-        nmjnsRalan.setHighlighter(null);
         nmjnsRalan.setName("nmjnsRalan"); // NOI18N
         nmjnsRalan.setNextFocusableComponent(BtnPilihJenisObatRalan);
         panelGlass4.add(nmjnsRalan);
@@ -340,14 +336,12 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         jLabel13.setBounds(0, 12, 80, 23);
 
         kdpoli.setEditable(false);
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         kdpoli.setNextFocusableComponent(nmpoli);
         panelGlass4.add(kdpoli);
         kdpoli.setBounds(83, 12, 100, 23);
 
         nmpoli.setEditable(false);
-        nmpoli.setHighlighter(null);
         nmpoli.setName("nmpoli"); // NOI18N
         nmpoli.setNextFocusableComponent(BtnPilihPoli);
         panelGlass4.add(nmpoli);
@@ -479,7 +473,6 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         jLabel4.setBounds(0, 72, 80, 23);
 
         pngjawabRanap.setEditable(false);
-        pngjawabRanap.setHighlighter(null);
         pngjawabRanap.setName("pngjawabRanap"); // NOI18N
         pngjawabRanap.setNextFocusableComponent(BtnPilihCaraBayarRanap);
         panelGlass2.add(pngjawabRanap);
@@ -499,21 +492,18 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         BtnPilihCaraBayarRanap.setBounds(493, 42, 28, 23);
 
         kdpjRanap.setEditable(false);
-        kdpjRanap.setHighlighter(null);
         kdpjRanap.setName("kdpjRanap"); // NOI18N
         kdpjRanap.setNextFocusableComponent(pngjawabRanap);
         panelGlass2.add(kdpjRanap);
         kdpjRanap.setBounds(83, 42, 100, 23);
 
         kdjnsRanap.setEditable(false);
-        kdjnsRanap.setHighlighter(null);
         kdjnsRanap.setName("kdjnsRanap"); // NOI18N
         kdjnsRanap.setNextFocusableComponent(nmjnsRanap);
         panelGlass2.add(kdjnsRanap);
         kdjnsRanap.setBounds(83, 72, 100, 23);
 
         nmjnsRanap.setEditable(false);
-        nmjnsRanap.setHighlighter(null);
         nmjnsRanap.setName("nmjnsRanap"); // NOI18N
         nmjnsRanap.setNextFocusableComponent(BtnPilihJenisObatRanap);
         panelGlass2.add(nmjnsRanap);
@@ -538,14 +528,12 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         jLabel14.setBounds(0, 12, 80, 23);
 
         kdbangsal.setEditable(false);
-        kdbangsal.setHighlighter(null);
         kdbangsal.setName("kdbangsal"); // NOI18N
         kdbangsal.setNextFocusableComponent(nmbangsal);
         panelGlass2.add(kdbangsal);
         kdbangsal.setBounds(83, 12, 100, 23);
 
         nmbangsal.setEditable(false);
-        nmbangsal.setHighlighter(null);
         nmbangsal.setName("nmbangsal"); // NOI18N
         nmbangsal.setNextFocusableComponent(BtnPilihUnitKamar);
         panelGlass2.add(nmbangsal);
@@ -1125,7 +1113,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             "select set_filter_jenis_resep_obat_ralan.kd_poli, poliklinik.nm_poli, set_filter_jenis_resep_obat_ralan.kd_pj, penjab.png_jawab, " +
             "set_filter_jenis_resep_obat_ralan.kdjns, jenis.nama from set_filter_jenis_resep_obat_ralan join poliklinik on " +
             "set_filter_jenis_resep_obat_ralan.kd_poli = poliklinik.kd_poli join penjab on set_filter_jenis_resep_obat_ralan.kd_pj = " +
-            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ralan.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" : 
+            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ralan.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" :
             "where set_filter_jenis_resep_obat_ralan.kd_poli like ? or poliklinik.nm_poli like ? or set_filter_jenis_resep_obat_ralan.kd_pj " +
             "like ? or penjab.png_jawab like ? or set_filter_jenis_resep_obat_ralan.kdjns like ? or jenis.nama like ?")
         )) {
@@ -1148,14 +1136,14 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabModeRanap);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select set_filter_jenis_resep_obat_ranap.kd_bangsal, bangsal.nm_bangsal, set_filter_jenis_resep_obat_ranap.kd_pj, penjab.png_jawab, " +
             "set_filter_jenis_resep_obat_ranap.kdjns, jenis.nama from set_filter_jenis_resep_obat_ranap join bangsal on " +
             "set_filter_jenis_resep_obat_ranap.kd_bangsal = bangsal.kd_bangsal join penjab on set_filter_jenis_resep_obat_ranap.kd_pj = " +
-            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ranap.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" : 
+            "penjab.kd_pj join jenis on set_filter_jenis_resep_obat_ranap.kdjns = jenis.kdjns " + (TCariRalan.getText().isBlank() ? "" :
             "where set_filter_jenis_resep_obat_ranap.kd_bangsal like ? or bangsal.nm_bangsal like ? or set_filter_jenis_resep_obat_ranap.kd_pj " +
             "like ? or penjab.png_jawab like ? or set_filter_jenis_resep_obat_ranap.kdjns like ? or jenis.nama like ?")
         )) {
@@ -1178,7 +1166,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void emptTeks() {
         TCariRalan.setText("");
         TCariRanap.setText("");
@@ -1197,7 +1185,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         tbRalan.clearSelection();
         tbRanap.clearSelection();
     }
-    
+
     private void getData() {
         if (tabPane1.getSelectedIndex() == 0) {
             if (tbRalan.getSelectedRow() != -1) {
@@ -1219,7 +1207,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void tampilCaraBayar() {
         carabayar.isCek();
         carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1227,7 +1215,7 @@ public final class DlgSetTampilJenisObatResep extends javax.swing.JDialog {
         carabayar.setAlwaysOnTop(false);
         carabayar.setVisible(true);
     }
-    
+
     private void tampilJenis() {
         jenis.isCek();
         jenis.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);

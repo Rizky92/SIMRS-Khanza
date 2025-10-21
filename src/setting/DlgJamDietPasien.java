@@ -84,7 +84,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -106,9 +106,9 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -419,15 +419,15 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             tbJadwal.requestFocus();
         }
-}//GEN-LAST:event_cmbWaktuKeyPressed
+    }//GEN-LAST:event_cmbWaktuKeyPressed
 
     private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
         Valid.pindah(evt,cmbWaktu,cmbMnt1);
-}//GEN-LAST:event_cmbJam1KeyPressed
+    }//GEN-LAST:event_cmbJam1KeyPressed
 
     private void cmbMnt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt1KeyPressed
         Valid.pindah(evt,cmbJam1,BtnSimpan);
-}//GEN-LAST:event_cmbMnt1KeyPressed
+    }//GEN-LAST:event_cmbMnt1KeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         Sequel.menyimpan("jam_diet_pasien","?,?","Waktu",2,new String[]{
@@ -435,7 +435,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         });
         tampil();
         emptTeks();
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -443,29 +443,29 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,cmbMnt1,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 if(Sequel.queryutf2("delete from jam_diet_pasien where waktu='"+tbJadwal.getValueAt(i,1).toString()+"'")==false){
-                    JOptionPane.showMessageDialog(null,"Maaf, Tidak bisa dihapus karena data digunakan...!!!!");     
+                    JOptionPane.showMessageDialog(null,"Maaf, Tidak bisa dihapus karena data digunakan...!!!!");
                 }
             }
-        } 
+        }
         tampil();
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -473,15 +473,15 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        Sequel.mengedit("jam_diet_pasien","waktu=?","jam=?",2,new String[]{            
+        Sequel.mengedit("jam_diet_pasien","waktu=?","jam=?",2,new String[]{
             cmbJam1.getSelectedItem()+":"+cmbMnt1.getSelectedItem(),cmbWaktu.getSelectedItem().toString()
         });
         tampil();
         emptTeks();
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -489,17 +489,17 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -510,19 +510,19 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptJamDietPasien.jasper","report","::[ Jam Diet Pasien ]::",
-                        "select * from jam_diet_pasien where waktu like '%"+TCari.getText().trim()+"%' order by waktu",param);            
+                        "select * from jam_diet_pasien where waktu like '%"+TCari.getText().trim()+"%' order by waktu",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -530,7 +530,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -542,11 +542,11 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbJadwal.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -554,12 +554,12 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         tampil();
         TCari.setText("");
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -568,7 +568,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari,cmbWaktu);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -577,7 +577,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJadwalMouseClicked
+    }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -588,7 +588,7 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbJadwalKeyPressed
+    }//GEN-LAST:event_tbJadwalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -682,13 +682,13 @@ public class DlgJamDietPasien extends javax.swing.JDialog {
             cmbMnt1.setSelectedItem(tabMode.getValueAt(row,2).toString().substring(3,5));
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getjam_diet_pasien());
         BtnHapus.setEnabled(akses.getjam_diet_pasien());
         BtnEdit.setEnabled(akses.getjam_diet_pasien());
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }

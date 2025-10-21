@@ -118,10 +118,10 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         kd_ruang.setDocument(new batasInput((byte)5).getKata(kd_ruang));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
-        
+
         ChkInput.setSelected(false);
-        isForm(); 
-        
+        isForm();
+
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -129,14 +129,14 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){    
+                if(barang.getTable().getSelectedRow()!= -1){
                     kode_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                     judul_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
                     nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),4).toString());
                     nm_kategori.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
                     nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
-                }   
+                }
                 kode_buku.requestFocus();
             }
             @Override
@@ -149,7 +149,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -157,12 +157,12 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-              
+
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -170,16 +170,16 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     if(pilihan==1){
-                        kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());                    
+                        kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                         nm_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                         kd_ruang.requestFocus();
                     }else if(pilihan==2){
                         nm_ruangcari.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                         TCari.requestFocus();
-                    }                    
-                }                   
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -191,7 +191,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -199,12 +199,12 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -228,8 +228,8 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             });
         }
     }
-    private PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false); 
-    private PerpustakaanRuang ruang=new PerpustakaanRuang(null,false); 
+    private PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false);
+    private PerpustakaanRuang ruang=new PerpustakaanRuang(null,false);
     private double nilai_inven=0;
     private int pilihan=0;
 
@@ -849,9 +849,9 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                     tampil();
                     emptTeks();
             }
-            
+
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -859,25 +859,25 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,no_rak,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         Valid.hapusTable(tabMode,no_inventaris,"perpustakaan_inventaris","no_inventaris");
         BtnCariActionPerformed(evt);
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -885,7 +885,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(no_inventaris.getText().trim().equals("")){
@@ -909,7 +909,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -917,17 +917,17 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -938,14 +938,14 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 if(TCari.getText().equals("")&&nm_ruangcari.getText().equals("")){
                     Valid.MyReportqry("rptInventarisPerpustakaan.jasper","report","::[ Data Inventaris Perpustakaan ]::","select perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
                        "perpustakaan_buku.judul_buku, perpustakaan_pengarang.nama_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn, "+
@@ -982,10 +982,10 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                         "or perpustakaan_ruang.nm_ruang like '%"+nm_ruangcari.getText().trim()+"%' and perpustakaan_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' "+
                         "or perpustakaan_ruang.nm_ruang like '%"+nm_ruangcari.getText().trim()+"%' and perpustakaan_jenis_buku.nama_jenis like '%"+TCari.getText().trim()+"%' order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris",param);
                 }
-                    
+
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -993,7 +993,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1005,11 +1005,11 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbJnsPerawatan.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1017,7 +1017,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -1026,7 +1026,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             nm_ruangcari.setText("");
         }
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1035,16 +1035,16 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint,BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1053,17 +1053,17 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
-}//GEN-LAST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+  isForm();
+    }//GEN-LAST:event_ChkInputActionPerformed
 
-private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
+    private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
         Valid.pindah(evt,kd_ruang,tgl_pengadaan);
-}//GEN-LAST:event_no_inventarisKeyPressed
+    }//GEN-LAST:event_no_inventarisKeyPressed
 
-private void kode_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_bukuKeyPressed
+    private void kode_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_bukuKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         isBarang();
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
@@ -1075,19 +1075,19 @@ private void kode_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnBarangActionPerformed(null);
     }
-}//GEN-LAST:event_kode_bukuKeyPressed
+    }//GEN-LAST:event_kode_bukuKeyPressed
 
-private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
+    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
     barang.isCek();
     barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     barang.setLocationRelativeTo(internalFrame1);
     barang.setAlwaysOnTop(false);
     barang.setVisible(true);
-}//GEN-LAST:event_btnBarangActionPerformed
+    }//GEN-LAST:event_btnBarangActionPerformed
 
-private void kd_ruangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kd_ruangKeyPressed
+    private void kd_ruangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kd_ruangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select perpustakaan_ruang.nm_ruang from perpustakaan_ruang where perpustakaan_ruang.kd_ruang=?",nm_ruang,kd_ruang.getText());        
+        Sequel.cariIsi("select perpustakaan_ruang.nm_ruang from perpustakaan_ruang where perpustakaan_ruang.kd_ruang=?",nm_ruang,kd_ruang.getText());
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         btnBarang.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1095,54 +1095,54 @@ private void kd_ruangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnRuangActionPerformed(null);
     }
-}//GEN-LAST:event_kd_ruangKeyPressed
+    }//GEN-LAST:event_kd_ruangKeyPressed
 
-private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuangActionPerformed
+    private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuangActionPerformed
     pilihan=1;
     ruang.isCek();
     ruang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     ruang.setLocationRelativeTo(internalFrame1);
     ruang.setAlwaysOnTop(false);
     ruang.setVisible(true);
-}//GEN-LAST:event_btnRuangActionPerformed
+    }//GEN-LAST:event_btnRuangActionPerformed
 
-private void tgl_pengadaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl_pengadaanKeyPressed
+    private void tgl_pengadaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl_pengadaanKeyPressed
     Valid.pindah(evt,no_inventaris,harga);
-}//GEN-LAST:event_tgl_pengadaanKeyPressed
+    }//GEN-LAST:event_tgl_pengadaanKeyPressed
 
-private void status_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_status_bukuKeyPressed
+    private void status_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_status_bukuKeyPressed
     Valid.pindah(evt,asal_buku,btnBarang);
-}//GEN-LAST:event_status_bukuKeyPressed
+    }//GEN-LAST:event_status_bukuKeyPressed
 
-private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyPressed
+    private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyPressed
     Valid.pindah(evt,tgl_pengadaan,asal_buku);
-}//GEN-LAST:event_hargaKeyPressed
+    }//GEN-LAST:event_hargaKeyPressed
 
-private void asal_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_asal_bukuKeyPressed
+    private void asal_bukuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_asal_bukuKeyPressed
     Valid.pindah(evt,harga,status_buku);
-}//GEN-LAST:event_asal_bukuKeyPressed
+    }//GEN-LAST:event_asal_bukuKeyPressed
 
-private void no_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_boxKeyPressed
+    private void no_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_boxKeyPressed
     Valid.pindah(evt,no_rak,BtnSimpan);
-}//GEN-LAST:event_no_boxKeyPressed
+    }//GEN-LAST:event_no_boxKeyPressed
 
-private void no_rakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_rakKeyPressed
+    private void no_rakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_rakKeyPressed
     Valid.pindah(evt,kd_ruang,no_box);
-}//GEN-LAST:event_no_rakKeyPressed
+    }//GEN-LAST:event_no_rakKeyPressed
 
-private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed
+    private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BtnCariActionPerformed(evt);
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs()); 
+            param.put("kontakrs",akses.getkontakrs());
             if(TCari.getText().equals("")&&nm_ruangcari.getText().equals("")){
                 Valid.MyReportqry("rptBarcodePerpustakaan.jasper","report","::[ Data Barang ]::","select perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
                        "perpustakaan_buku.judul_buku, perpustakaan_pengarang.nama_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn, "+
@@ -1153,7 +1153,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                        "on perpustakaan_buku.kode_buku=perpustakaan_buku.kode_buku and perpustakaan_buku.kode_pengarang=perpustakaan_pengarang.kode_pengarang "+
                        "and perpustakaan_buku.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_buku.id_jenis=perpustakaan_jenis_buku.id_jenis "+
                        "and perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_inventaris.kd_ruang=perpustakaan_ruang.kd_ruang "+
-                       "order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris",param);           
+                       "order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris",param);
             }else{
                 Valid.MyReportqry("rptBarcodePerpustakaan.jasper","report","::[ Data Barang ]::","select perpustakaan_inventaris.no_inventaris,perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
                        "perpustakaan_buku.judul_buku, perpustakaan_pengarang.nama_pengarang, perpustakaan_buku.thn_terbit, perpustakaan_buku.isbn, "+
@@ -1177,11 +1177,11 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                         "or perpustakaan_buku.thn_terbit like '%"+TCari.getText().trim()+"%' "+
                         "or perpustakaan_buku.isbn like '%"+TCari.getText().trim()+"%' "+
                         "or perpustakaan_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' "+
-                        "or perpustakaan_jenis_buku.nama_jenis like '%"+TCari.getText().trim()+"%' order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris",param);           
-            }    
+                        "or perpustakaan_jenis_buku.nama_jenis like '%"+TCari.getText().trim()+"%' order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris",param);
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_ppBarcodeBtnPrintActionPerformed
+    }//GEN-LAST:event_ppBarcodeBtnPrintActionPerformed
 
     private void btnRuang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuang1ActionPerformed
         pilihan=2;
@@ -1318,8 +1318,8 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                          "or perpustakaan_ruang.nm_ruang like ? and perpustakaan_kategori.nama_kategori like ? "+
                          "or perpustakaan_ruang.nm_ruang like ? and perpustakaan_jenis_buku.nama_jenis like ? order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris");
             }
-                
-            try{ 
+
+            try{
                 if(TCari.getText().equals("")&&nm_ruangcari.getText().equals("")){}else{
                     ps.setString(1,"%"+nm_ruangcari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -1350,7 +1350,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                     ps.setString(27,"%"+nm_ruangcari.getText().trim()+"%");
                     ps.setString(28,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 nilai_inven=0;
                 while(rs.next()){
@@ -1376,7 +1376,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
             LCount.setText(tabMode.getRowCount()+" | "+Valid.SetAngka(nilai_inven));
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
@@ -1417,37 +1417,37 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                 Sequel.cariIsi("select perpustakaan_inventaris.kd_ruang from perpustakaan_inventaris where perpustakaan_inventaris.no_inventaris='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()+"'",kd_ruang);
                 nm_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
                 no_rak.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
-                no_box.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());        
+                no_box.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());
           }
     }
 
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,155));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinventaris_perpustakaan());
         BtnHapus.setEnabled(akses.getinventaris_perpustakaan());
         BtnEdit.setEnabled(akses.getinventaris_perpustakaan());
         TCari.requestFocus();
     }
-    
+
     private void isBarang(){
-        try {                    
+        try {
             ps=koneksi.prepareStatement(
                "select perpustakaan_buku.kode_buku, perpustakaan_buku.judul_buku, "+
                "perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang,"+
@@ -1488,7 +1488,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
         } catch (Exception ex) {
             System.out.println(ex);
         }
-    }   
+    }
 
-    
+
 }

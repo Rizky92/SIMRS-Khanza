@@ -5,9 +5,6 @@
     <Component class="widget.TextBox" name="NamaBarang">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="NamaBarang" noResource="true"/>
       </Properties>
     </Component>
@@ -418,9 +415,6 @@
                 <Component class="widget.TextBox" name="KodeBarang">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KodeBarang" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -461,9 +455,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="RouteCode">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="RouteCode" noResource="true"/>
                   </Properties>
                   <Events>
@@ -488,9 +479,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="DoseCode">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="DoseCode" noResource="true"/>
                   </Properties>
                   <Events>
@@ -504,9 +492,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="VaksinCode">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="VaksinCode" noResource="true"/>
                   </Properties>
                   <Events>
@@ -542,9 +527,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="VaksinDisplay">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="VaksinDisplay" noResource="true"/>
                   </Properties>
                   <Events>
@@ -569,9 +551,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="RouteSystem">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="RouteSystem" noResource="true"/>
                   </Properties>
                   <Events>
@@ -585,9 +564,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="RouteDisplay">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="RouteDisplay" noResource="true"/>
                   </Properties>
                   <Events>
@@ -634,9 +610,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="DoseSystem">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="DoseSystem" noResource="true"/>
                   </Properties>
                   <Events>
@@ -650,9 +623,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="DoseUnit">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="DoseUnit" noResource="true"/>
                   </Properties>
                   <Events>
@@ -666,9 +636,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="VaksinSystem">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="VaksinSystem" noResource="true"/>
                   </Properties>
                   <Events>

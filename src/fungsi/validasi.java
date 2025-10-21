@@ -438,15 +438,20 @@ public final class validasi {
     }
 
     public double setAngkaSmc(String value) {
-        if (value.isBlank()) {
+        if (value == null || value.isBlank() || value.trim().equals("0")) {
             return 0;
         }
+        
+        try {
+            DecimalFormat df = new DecimalFormat("#,##0.00");
+            return df.parse(value).doubleValue();
+        } catch (Exception e) {}
 
         try {
             return Double.parseDouble(value);
-        } catch (Exception e) {
-            return 0;
-        }
+        } catch (Exception e) {}
+        
+        return 0;
     }
 
     public boolean umurcacheSmc(String path, int hari) {
