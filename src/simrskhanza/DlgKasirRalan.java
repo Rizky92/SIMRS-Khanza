@@ -271,6 +271,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",tampildiagnosa="",finger="",norawatdipilih="",normdipilih="",
             variabel="";
     private String perJenisAsuransi = "";
+    private String kdPintu = "";
     public DlgBilingRalan billing=new DlgBilingRalan(null,false);
     private int i=0,pilihan=0,sudah=0,jmlparsial=0;
     public DlgKamarInap kamarinap=new DlgKamarInap(null,false);
@@ -11180,9 +11181,17 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             tbKasirRalan.requestFocus();
         }else{
             if(tbKasirRalan.getSelectedRow()!= -1){
-                Sequel.queryu("delete from antripoli where kd_dokter='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString()+"' and kd_poli='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString()+"'");
-                Sequel.queryu("insert into antripoli values('"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString()+"','"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString()+"','1','"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),11).toString()+"')");
-                Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000' on duplicate key update status = value(status), diterima = value(diterima)", TNoRw.getText());
+                kdPintu = Sequel.cariIsi("select set_pintu_smc.kd_pintu from set_pintu_smc where set_pintu_smc.kd_dokter='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString()+"' and set_pintu_smc.kd_poli='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString()+"'");
+                if(kdPintu.equals("")){
+                    JOptionPane.showMessageDialog(null,"Pintu SMC untuk "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),4).toString()+" dan dokter "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString()+" belum disetting..!!");
+                }else{
+                    if(Sequel.cariInteger("select count(antripintu_smc.no_rawat) from antripintu_smc where antripintu_smc.no_rawat='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),11).toString()+"'")>0){
+                        Sequel.queryu("update antripintu_smc set status='1',waktu_panggil=now() where no_rawat='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),11).toString()+"'");
+                    }else{
+                        Sequel.queryu("insert into antripintu_smc values(?, '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),11).toString()+"', '1', now())", kdPintu);
+                        Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000' on duplicate key update status = value(status), diterima = value(diterima)", TNoRw.getText());
+                    }
+                }
             }
         }
     }//GEN-LAST:event_ppMasukPoliBtnPrintActionPerformed

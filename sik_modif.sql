@@ -1716,4 +1716,6 @@ CREATE TABLE IF NOT EXISTS `antripintu_smc` (
   `status` enum('0','1') NOT NULL,
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `set_pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `pendapatan_per_akun`;
+
 SET FOREIGN_KEY_CHECKS=1;
