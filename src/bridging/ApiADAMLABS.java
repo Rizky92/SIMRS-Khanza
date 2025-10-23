@@ -158,7 +158,7 @@ public class ApiADAMLABS
                 ArrayList<String> messages = new ArrayList<>();
                 if (response.path("message").isArray()) {
                     for (JsonNode error : response.path("message")) {
-                        messages.add(new StringBuilder("- ").append(error.path("msg")).toString());
+                        messages.add(new StringBuilder("- ").append(error.path("msg").asText()).toString());
                     }
                 }
                 if (messages.isEmpty()) {
