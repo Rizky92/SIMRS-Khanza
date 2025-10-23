@@ -79,6 +79,11 @@ public class ApiApotekBPJS {
         return millis/1000;
     }
     
+    public String getUTCDateTime() {
+        millis = System.currentTimeMillis();
+        return String.valueOf(millis / 1000);
+    }
+    
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         System.out.println(data);
         mykey = ApiBPJSEnc.generateKey(Consid+Key+utc);

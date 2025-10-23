@@ -1450,7 +1450,6 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
     }
     
     public void menyimpan(String table,String value,String sama,JTextField AlmGb,JTextField AlmPhoto){
@@ -2812,7 +2811,7 @@ public final class sekuel {
             
     }
     
-    private void SimpanTrack(String sql){
+    public void SimpanTrack(String sql){
         if(AKTIFKANTRACKSQL.equals("yes")){
             try {
                 ps=connect.prepareStatement("insert into trackersql values(now(),?,?)");

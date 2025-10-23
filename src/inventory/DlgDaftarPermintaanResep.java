@@ -1,4 +1,5 @@
 package inventory;
+import bridging.ApotekBPJSKirimObat;
 import bridging.BPJSDataSEP;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -544,6 +545,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnInformasiObat = new widget.Button();
         BtnSEPBPJS = new widget.Button();
         BtnObat23HariBPJS = new widget.Button();
+        BtnKirimResepApotekBPJS = new widget.Button();
         BtnKirimWAPengerjaan = new widget.Button();
         BtnKirimWASelesai = new widget.Button();
 
@@ -562,7 +564,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.setLayout(null);
 
         BtnCloseIn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnCloseIn4.setMnemonic('U');
         BtnCloseIn4.setText("Tutup");
         BtnCloseIn4.setToolTipText("Alt+U");
         BtnCloseIn4.setName("BtnCloseIn4"); // NOI18N
@@ -575,7 +576,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnCloseIn4.setBounds(410, 30, 100, 30);
 
         BtnSimpan4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan4.setMnemonic('S');
         BtnSimpan4.setText("Simpan");
         BtnSimpan4.setToolTipText("Alt+S");
         BtnSimpan4.setName("BtnSimpan4"); // NOI18N
@@ -592,7 +592,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025 14:26:32" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-09-2025 14:31:57" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -802,7 +802,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -816,7 +816,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -829,7 +829,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel12);
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum Terlayani", "Menunggu Penyerahan", "Sudah Terlayani" }));
-        cmbStatus.setSelectedIndex(1);
         cmbStatus.setName("cmbStatus"); // NOI18N
         cmbStatus.setPreferredSize(new java.awt.Dimension(130, 23));
         panelisi2.add(cmbStatus);
@@ -849,7 +848,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -866,7 +864,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('M');
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -889,7 +886,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
-        BtnTambah.setMnemonic('S');
         BtnTambah.setText("Validasi");
         BtnTambah.setToolTipText("Alt+S");
         BtnTambah.setName("BtnTambah"); // NOI18N
@@ -907,7 +903,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnTambah);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('U');
         BtnEdit.setText("Ubah");
         BtnEdit.setToolTipText("Alt+U");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -925,7 +920,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnEdit);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -943,7 +937,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnHapus);
 
         BtnPenyerahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
-        BtnPenyerahan.setMnemonic('H');
         BtnPenyerahan.setText("Penyerahan");
         BtnPenyerahan.setToolTipText("Alt+H");
         BtnPenyerahan.setName("BtnPenyerahan"); // NOI18N
@@ -961,7 +954,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnPenyerahan);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -979,7 +971,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnPrint);
 
         BtnRekap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/preview-16x16.png"))); // NOI18N
-        BtnRekap.setMnemonic('R');
         BtnRekap.setText("Rekap");
         BtnRekap.setToolTipText("Alt+R");
         BtnRekap.setName("BtnRekap"); // NOI18N
@@ -997,7 +988,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(BtnRekap);
 
         BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
-        BtnPengaturan.setMnemonic('T');
         BtnPengaturan.setText("Pengaturan");
         BtnPengaturan.setToolTipText("Alt+T");
         BtnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1024,7 +1014,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi1.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -1137,7 +1126,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelGlass8.add(CrDokter);
 
         BtnSeek3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek3.setMnemonic('6');
         BtnSeek3.setToolTipText("ALt+6");
         BtnSeek3.setName("BtnSeek3"); // NOI18N
         BtnSeek3.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1159,7 +1147,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelGlass8.add(CrPoli);
 
         BtnSeek4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek4.setMnemonic('5');
         BtnSeek4.setToolTipText("ALt+5");
         BtnSeek4.setName("BtnSeek4"); // NOI18N
         BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1356,7 +1343,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelGlass9.add(CrDokter2);
 
         BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek5.setMnemonic('6');
         BtnSeek5.setToolTipText("ALt+6");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1378,7 +1364,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelGlass9.add(Kamar);
 
         BtnSeek6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek6.setMnemonic('5');
         BtnSeek6.setToolTipText("ALt+5");
         BtnSeek6.setName("BtnSeek6"); // NOI18N
         BtnSeek6.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1397,7 +1382,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
         PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
         PanelAccor.setName("PanelAccor"); // NOI18N
-        PanelAccor.setPreferredSize(new java.awt.Dimension(155, 43));
+        PanelAccor.setPreferredSize(new java.awt.Dimension(180, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout());
 
         ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
@@ -1421,12 +1406,13 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         ScrollMenu.setBorder(null);
         ScrollMenu.setName("ScrollMenu"); // NOI18N
         ScrollMenu.setOpaque(true);
+        ScrollMenu.setPreferredSize(new java.awt.Dimension(160, 230));
 
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(137, 230));
-        FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
+        FormMenu.setPreferredSize(new java.awt.Dimension(160, 230));
+        FormMenu.setLayout(new javax.swing.BoxLayout(FormMenu, javax.swing.BoxLayout.Y_AXIS));
 
         BtnRiwayat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnRiwayat.setText("Riwayat Pasien");
@@ -1435,8 +1421,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnRiwayat.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnRiwayat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnRiwayat.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnRiwayat.setMaximumSize(null);
+        BtnRiwayat.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnRiwayat.setName("BtnRiwayat"); // NOI18N
-        BtnRiwayat.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnRiwayat.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnRiwayat.setRoundRect(false);
         BtnRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1452,8 +1440,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnPemberianObat.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnPemberianObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPemberianObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPemberianObat.setMaximumSize(null);
+        BtnPemberianObat.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnPemberianObat.setName("BtnPemberianObat"); // NOI18N
-        BtnPemberianObat.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnPemberianObat.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnPemberianObat.setRoundRect(false);
         BtnPemberianObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1469,8 +1459,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnPiutangObat.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnPiutangObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnPiutangObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPiutangObat.setMaximumSize(null);
+        BtnPiutangObat.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnPiutangObat.setName("BtnPiutangObat"); // NOI18N
-        BtnPiutangObat.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnPiutangObat.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnPiutangObat.setRoundRect(false);
         BtnPiutangObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1486,8 +1478,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnResepAwal.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnResepAwal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResepAwal.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnResepAwal.setMaximumSize(null);
+        BtnResepAwal.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnResepAwal.setName("BtnResepAwal"); // NOI18N
-        BtnResepAwal.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnResepAwal.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnResepAwal.setRoundRect(false);
         BtnResepAwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1503,8 +1497,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnResepLuar.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnResepLuar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnResepLuar.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnResepLuar.setMaximumSize(null);
+        BtnResepLuar.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnResepLuar.setName("BtnResepLuar"); // NOI18N
-        BtnResepLuar.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnResepLuar.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnResepLuar.setRoundRect(false);
         BtnResepLuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1520,8 +1516,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnKonselingFarmasi.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnKonselingFarmasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKonselingFarmasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKonselingFarmasi.setMaximumSize(null);
+        BtnKonselingFarmasi.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnKonselingFarmasi.setName("BtnKonselingFarmasi"); // NOI18N
-        BtnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnKonselingFarmasi.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnKonselingFarmasi.setRoundRect(false);
         BtnKonselingFarmasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1537,8 +1535,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnInformasiObat.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnInformasiObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnInformasiObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnInformasiObat.setMaximumSize(null);
+        BtnInformasiObat.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnInformasiObat.setName("BtnInformasiObat"); // NOI18N
-        BtnInformasiObat.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnInformasiObat.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnInformasiObat.setRoundRect(false);
         BtnInformasiObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1554,8 +1554,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnSEPBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnSEPBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSEPBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnSEPBPJS.setMaximumSize(null);
+        BtnSEPBPJS.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnSEPBPJS.setName("BtnSEPBPJS"); // NOI18N
-        BtnSEPBPJS.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnSEPBPJS.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnSEPBPJS.setRoundRect(false);
         BtnSEPBPJS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1565,14 +1567,16 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         FormMenu.add(BtnSEPBPJS);
 
         BtnObat23HariBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnObat23HariBPJS.setText("Obat 23 Hari BPJS");
+        BtnObat23HariBPJS.setText("SEP Apotek BPJS");
         BtnObat23HariBPJS.setFocusPainted(false);
         BtnObat23HariBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnObat23HariBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnObat23HariBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnObat23HariBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnObat23HariBPJS.setMaximumSize(null);
+        BtnObat23HariBPJS.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnObat23HariBPJS.setName("BtnObat23HariBPJS"); // NOI18N
-        BtnObat23HariBPJS.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnObat23HariBPJS.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnObat23HariBPJS.setRoundRect(false);
         BtnObat23HariBPJS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1581,6 +1585,25 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         });
         FormMenu.add(BtnObat23HariBPJS);
 
+        BtnKirimResepApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimResepApotekBPJS.setText("Kirim Resep Apotek BPJS");
+        BtnKirimResepApotekBPJS.setFocusPainted(false);
+        BtnKirimResepApotekBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimResepApotekBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimResepApotekBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimResepApotekBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimResepApotekBPJS.setMaximumSize(null);
+        BtnKirimResepApotekBPJS.setMinimumSize(new java.awt.Dimension(158, 23));
+        BtnKirimResepApotekBPJS.setName("BtnKirimResepApotekBPJS"); // NOI18N
+        BtnKirimResepApotekBPJS.setPreferredSize(new java.awt.Dimension(158, 23));
+        BtnKirimResepApotekBPJS.setRoundRect(false);
+        BtnKirimResepApotekBPJS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimResepApotekBPJSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnKirimResepApotekBPJS);
+
         BtnKirimWAPengerjaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKirimWAPengerjaan.setText("Kirim WA Pengerjaan");
         BtnKirimWAPengerjaan.setFocusPainted(false);
@@ -1588,8 +1611,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnKirimWAPengerjaan.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnKirimWAPengerjaan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKirimWAPengerjaan.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimWAPengerjaan.setMaximumSize(null);
+        BtnKirimWAPengerjaan.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnKirimWAPengerjaan.setName("BtnKirimWAPengerjaan"); // NOI18N
-        BtnKirimWAPengerjaan.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnKirimWAPengerjaan.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnKirimWAPengerjaan.setRoundRect(false);
         BtnKirimWAPengerjaan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1605,8 +1630,10 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnKirimWASelesai.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnKirimWASelesai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKirimWASelesai.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimWASelesai.setMaximumSize(null);
+        BtnKirimWASelesai.setMinimumSize(new java.awt.Dimension(158, 23));
         BtnKirimWASelesai.setName("BtnKirimWASelesai"); // NOI18N
-        BtnKirimWASelesai.setPreferredSize(new java.awt.Dimension(135, 23));
+        BtnKirimWASelesai.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnKirimWASelesai.setRoundRect(false);
         BtnKirimWASelesai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3148,7 +3175,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSEPBPJSActionPerformed
 
     private void BtnObat23HariBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObat23HariBPJSActionPerformed
-        // TODO add your handling code here:
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tabMode.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                    TCari.requestFocus();
+                } else if (NoRawat.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data pasien yang mau dibuatkan resep luar..!!");
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    ApotekBPJSKirimObat apol = new ApotekBPJSKirimObat(null, false);
+                    apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    apol.setLocationRelativeTo(internalFrame1);
+                    apol.setNoRm(NoRawat, NoRM, Pasien, TglPeresepan + " " + JamPeresepan, NoResep);
+                    apol.tampilobatSmc(NoResep);
+                    apol.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        }
     }//GEN-LAST:event_BtnObat23HariBPJSActionPerformed
 
     private void BtnResepLuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResepLuarActionPerformed
@@ -3675,6 +3720,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         refreshPilihanPrinter(CmbPrinterLembarObat);
     }//GEN-LAST:event_BtnRefreshPrinterLembarObatActionPerformed
 
+    private void BtnKirimResepApotekBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimResepApotekBPJSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (akses.getbpjs_kirim_obat_smc()) {
+                    if (tabMode.getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                        TCari.requestFocus();
+                    } else if (NoRawat.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep dokter yang mau dikirim ke Apotek Online BPJS..!!");
+                    } else {
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        ApotekBPJSKirimObat apol = new ApotekBPJSKirimObat(null, false);
+                        apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        apol.setLocationRelativeTo(internalFrame1);
+                        apol.setNoRm(NoRawat, NoRM, Pasien, Valid.SetTgl3(TglPeresepan) + " " + JamPeresepan, NoResep);
+                        apol.tampilobatSmc(NoResep);
+                        apol.setVisible(true);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                }
+            } else if (TabRawatJalan.getSelectedIndex() == 1) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan buka Daftar Resep...!!!!");
+                TCari.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_BtnKirimResepApotekBPJSActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3700,6 +3772,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnInformasiObat;
     private widget.Button BtnKeluar;
     private widget.Button BtnKeluarPengaturan;
+    private widget.Button BtnKirimResepApotekBPJS;
     private widget.Button BtnKirimWAPengerjaan;
     private widget.Button BtnKirimWASelesai;
     private widget.Button BtnKonselingFarmasi;
@@ -5632,7 +5705,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(155,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(180,HEIGHT));
             FormMenu.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){
