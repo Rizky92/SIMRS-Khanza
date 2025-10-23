@@ -212,7 +212,11 @@ public final class sekuel {
             }
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getString(1);
+                    String output = rs.getString(1);
+                    if (output == null) {
+                        return "";
+                    }
+                    return output;
                 }
             }
         } catch (Exception e) {
