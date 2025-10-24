@@ -481,24 +481,6 @@ public final class sekuel {
             }
         }
     }
-    
-    public void menghapusIgnoreSmc(String table, String where, String... values) {
-        String sql = "delete from " + table + " where " + where;
-        if (where == null || where.isBlank()) {
-            sql = "delete from " + table;
-        }
-
-        try (PreparedStatement ps = connect.prepareStatement(sql)) {
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-            }
-            track = ps.toString();
-            SimpanTrack(track.substring(track.indexOf("delete")));
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-    }
 
     public void menghapusSmc(String table) {
         menghapusSmc(table, null);
