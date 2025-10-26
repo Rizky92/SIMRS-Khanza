@@ -108,6 +108,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
+    private String TANGGALMUNDUR="yes";
     private Map<String, Object> map;
     private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
@@ -490,6 +491,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        
+        try {
+            TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
+        } catch (Exception e) {
+            TANGGALMUNDUR="yes";
         }
 
         tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
@@ -3526,6 +3533,18 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getobat());
         TCari.requestFocus();
         BtnGudang.setEnabled(akses.getakses_depo_obat());
+        
+        if(TANGGALMUNDUR.equals("no")){
+            if(!akses.getkode().equals("Admin Utama")){
+                DTPTgl.setEditable(false);
+                DTPTgl.setEnabled(false);
+                ChkJln.setEnabled(false);
+                cmbJam.setEnabled(false);
+                cmbMnt.setEnabled(false);
+                cmbDtk.setEnabled(false);
+                ChkNoResep.setEnabled(false);
+            }
+        }
     }
 
     public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam) {

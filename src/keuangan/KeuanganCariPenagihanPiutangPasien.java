@@ -620,7 +620,7 @@ public class KeuanganCariPenagihanPiutangPasien extends javax.swing.JDialog {
         FormInput.add(label14);
         label14.setBounds(0, 70, 92, 23);
 
-        Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Proses Penagihan", "Sudah Dibayar" }));
+        Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Proses Penagihan", "Sudah Dibayar", "Belum Lunas" }));
         Status.setName("Status"); // NOI18N
         Status.setPreferredSize(new java.awt.Dimension(40, 23));
         FormInput.add(Status);

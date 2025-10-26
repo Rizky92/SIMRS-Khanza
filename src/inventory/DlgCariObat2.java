@@ -92,6 +92,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
+    private String TANGGALMUNDUR="yes";
     private Map<String, Object> map;
     private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
@@ -390,7 +391,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }
 
         try {
-            psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
+            psrekening=koneksi.prepareStatement(
+               "select set_akun_ranap.Suspen_Piutang_Obat_Ranap,set_akun_ranap.Obat_Ranap,set_akun_ranap.HPP_Obat_Rawat_Inap,set_akun_ranap.Persediaan_Obat_Rawat_Inap from set_akun_ranap"
+            );
             try {
                 rsrekening=psrekening.executeQuery();
                 while(rsrekening.next()){
@@ -411,6 +414,12 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        
+        try {
+            TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
+        } catch (Exception e) {
+            TANGGALMUNDUR="yes";
         }
     }
 
@@ -2610,7 +2619,19 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             }
             nmgudang.setText(caribangsal.tampil3(kdgudang.getText()));
         }
-
+             
+        if(TANGGALMUNDUR.equals("no")){
+            if(!akses.getkode().equals("Admin Utama")){
+                DTPTgl.setEditable(false);
+                DTPTgl.setEnabled(false);
+                ChkJln.setEnabled(false);
+                cmbJam.setEnabled(false);
+                cmbMnt.setEnabled(false);
+                cmbDtk.setEnabled(false);
+                ChkNoResep.setEnabled(false);
+            }
+        }
+        
         BtnTambah.setEnabled(akses.getobat());
         TCari.requestFocus();
         BtnGudang.setEnabled(akses.getakses_depo_obat());

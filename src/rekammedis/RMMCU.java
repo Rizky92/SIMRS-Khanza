@@ -2877,7 +2877,7 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel140.setBounds(0, 950, 149, 23);
 
         jLabel141.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel141.setText("3. Mamae");
+        jLabel141.setText("3. Mammae");
         jLabel141.setName("jLabel141"); // NOI18N
         FormInput.add(jLabel141);
         jLabel141.setBounds(64, 980, 100, 23);
@@ -2885,7 +2885,7 @@ public final class RMMCU extends javax.swing.JDialog {
         jLabel142.setText(":");
         jLabel142.setName("jLabel142"); // NOI18N
         FormInput.add(jLabel142);
-        jLabel142.setBounds(0, 980, 118, 23);
+        jLabel142.setBounds(0, 980, 127, 23);
 
         Mamae.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Tidak Normal", "-" }));
         Mamae.setName("Mamae"); // NOI18N
@@ -2895,7 +2895,7 @@ public final class RMMCU extends javax.swing.JDialog {
             }
         });
         FormInput.add(Mamae);
-        Mamae.setBounds(122, 980, 114, 23);
+        Mamae.setBounds(131, 980, 114, 23);
 
         KeteranganMamae.setFocusTraversalPolicyProvider(true);
         KeteranganMamae.setName("KeteranganMamae"); // NOI18N
@@ -2905,7 +2905,7 @@ public final class RMMCU extends javax.swing.JDialog {
             }
         });
         FormInput.add(KeteranganMamae);
-        KeteranganMamae.setBounds(239, 980, 615, 23);
+        KeteranganMamae.setBounds(248, 980, 606, 23);
 
         jLabel143.setText(":");
         jLabel143.setName("jLabel143"); // NOI18N
