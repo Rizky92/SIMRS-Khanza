@@ -578,7 +578,8 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='110px'>Tanggal</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px'>Shift</td>").append(
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Nota</td>").append(
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Bukti</td>").append(
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Nota</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Nama Pasien</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>");
@@ -669,6 +670,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rsjamshift.getString("shift")).append("</td>").append(
+                                            "<td valign='middle' align='center'>").append(rs.getString("no_nota")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(nonota).append("</td>").append(
                                             "<td valign='middle' align='left'>").append(rs.getString("nama_pasien")).append("</td>").append(
                                             "<td valign='middle' align='right'>").append(Valid.SetAngka(rs.getDouble("jumlah_bayar"))).append("</td>").append(
@@ -742,6 +744,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rsjamshift.getString("shift")).append("</td>").append(
+                                            "<td valign='middle' align='center'>").append(rs.getString("no_nota")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(nonota).append("</td>").append(
                                             "<td valign='middle' align='left'>").append(rs.getString("nama_pasien")).append("</td>").append(
                                             "<td valign='middle' align='right'>").append(Valid.SetAngka(rs.getDouble("jumlah_bayar"))).append("</td>").append(
@@ -804,6 +807,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                     "<td valign='middle' align='right'>Total :</td>").append(
                     "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='center'></td>").append(
+                    "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='left'></td>").append(
                     "<td valign='middle' align='right'>").append(Valid.SetAngka(all)).append("</td>").append(
                     "<td valign='middle' align='left'></td>");
@@ -845,7 +849,8 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='110px'>Tanggal</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='50px'>Shift</td>").append(
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Nota</td>").append(
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Bukti</td>").append(
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Nota</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Nama Pasien</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>").append(
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>");
@@ -936,6 +941,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rsjamshift.getString("shift")).append("</td>").append(
+                                            "<td valign='middle' align='center'>").append(rs.getString("no_nota")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(nonota).append("</td>").append(
                                             "<td valign='middle' align='left'>").append(rs.getString("nama_pasien")).append("</td>").append(
                                             "<td valign='middle' align='right'>").append(Math.round(rs.getDouble("jumlah_bayar"))).append("</td>").append(
@@ -1009,6 +1015,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                                             "<td valign='middle' align='center'>").append(no).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rs.getString("tgl_bayar")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(rsjamshift.getString("shift")).append("</td>").append(
+                                            "<td valign='middle' align='center'>").append(rs.getString("no_nota")).append("</td>").append(
                                             "<td valign='middle' align='center'>").append(nonota).append("</td>").append(
                                             "<td valign='middle' align='left'>").append(rs.getString("nama_pasien")).append("</td>").append(
                                             "<td valign='middle' align='right'>").append(Math.round(rs.getDouble("jumlah_bayar"))).append("</td>").append(
@@ -1069,6 +1076,7 @@ public final class DlgPembayaranPerAKunBayar extends javax.swing.JDialog {
                 "<tr class='isi'>").append(
                     "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='right'>Total :</td>").append(
+                    "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='center'></td>").append(
                     "<td valign='middle' align='left'></td>").append(

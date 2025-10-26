@@ -16,6 +16,8 @@ package keuangan;
 import bridging.ApiBRI;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
 import fungsi.batasInput;
@@ -51,8 +53,17 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import simrskhanza.DlgCariCaraBayar;
 import simrskhanza.DlgCariPeriksaLabMB;
 import simrskhanza.DlgCariPeriksaLabPA;
@@ -402,29 +413,26 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TotalObat.setDocument(new batasInput((byte)17).getOnlyAngka(TotalObat));
 
-        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){
+        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)", "Keterangan"}){
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==2)) {
-                    a=true;
-                }
-                return a;
+                return colIndex == 2
+                    || colIndex == 5;
             }
             Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             @Override
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         };
         tbAkunBayar.setModel(tabModeAkunBayar);
         tbAkunBayar.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbAkunBayar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             TableColumn column = tbAkunBayar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(345);
@@ -438,6 +446,31 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }else if(i==4){
                 column.setPreferredWidth(90);
+            }else if(i==5){
+                column.setPreferredWidth(120);
+                DefaultCellEditor editor = (DefaultCellEditor) column.getCellEditor();
+                if (editor == null) {
+                    editor = (DefaultCellEditor) tbAkunBayar.getDefaultEditor(String.class);
+                }
+                JTextField txt = (JTextField) editor.getComponent();
+                ((AbstractDocument) txt.getDocument()).setDocumentFilter(new DocumentFilter() {
+                    @Override
+                    public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                        if (text == null) return;
+                        if (fb.getDocument().getLength() + text.length() <= 30) {
+                            super.replace(fb, offset, length, text, attrs);
+                        }
+                    }
+
+                    @Override
+                    public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                        if (string == null) return;
+                        if (fb.getDocument().getLength() + string.length() <= 30) {
+                            super.insertString(fb, offset, string, attr);
+                        }
+                    }
+                });
+                column.setCellEditor(editor);
             }
         }
         warna.kolom=2;
@@ -6838,137 +6871,99 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             Host_to_Host_Bank_Mandiri="";
         }
     }
-
+    
     private void tampilAkunBayar() {
-        try{
+        try {
             Valid.tabelKosong(tabModeAkunBayar);
-            file=new File("./cache/akunbayar.iyem");
+            File file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
-            try{
-                rsakunbayar=psakunbayar.executeQuery();
-                while(rsakunbayar.next()){
-                    tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),"",rsakunbayar.getDouble(3),""});
-                    iyembuilder.append("{\"NamaAkun\":\"").append(rsakunbayar.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rsakunbayar.getString(2)).append("\",\"PPN\":\"").append(rsakunbayar.getDouble(3)).append("\"},");
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by akun_bayar.nama_bayar")) {
+                ArrayNode array = mapper.createArrayNode();
+                while (rs.next()) {
+                    tabModeAkunBayar.addRow(new Object[] {rs.getString(1), rs.getString(2), "", rs.getDouble(3), "", ""});
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("NamaAkun", rs.getString(1));
+                    item.put("KodeRek", rs.getString(2));
+                    item.put("PPN", rs.getDouble(3));
+                    array.add(mapper.valueToTree(item));
                 }
-            }catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rsakunbayar != null){
-                    rsakunbayar.close();
-                }
-                if(psakunbayar != null){
-                    psakunbayar.close();
-                }
+                ObjectNode root = mapper.createObjectNode();
+                root.set("akunbayar", array);
+                fw.write(mapper.writeValueAsString(root));
+                fw.flush();
             }
-
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-
-            fileWriter.close();
-            iyembuilder=null;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notif : " + e);
         }
     }
 
     private void tampilAkunBayar2() {
-        try{
-            jml=0;
-            for(z=0;z<tbAkunBayar.getRowCount();z++){
-                if(!tbAkunBayar.getValueAt(z,2).toString().equals("")){
+        try {
+            jml = 0;
+            ArrayList<Map<String, Object>> rows = new ArrayList<>();
+            ArrayList<String> akunbayardipilih = new ArrayList<>();
+            for (int i = 0; i < tabModeAkunBayar.getRowCount(); i++) {
+                if (!tabModeAkunBayar.getValueAt(i, 2).toString().isBlank()) {
                     jml++;
+                    Map<String, Object> row = new HashMap<>();
+                    row.put("namaakunbayar", tabModeAkunBayar.getValueAt(i, 0));
+                    row.put("koderekbayar", tabModeAkunBayar.getValueAt(i, 1));
+                    row.put("bayar", tabModeAkunBayar.getValueAt(i, 2));
+                    row.put("ppnpersen", tabModeAkunBayar.getValueAt(i, 3));
+                    row.put("ppnbesar", tabModeAkunBayar.getValueAt(i, 4));
+                    row.put("keterangan", tabModeAkunBayar.getValueAt(i, 5));
+                    rows.add(row);
+                    akunbayardipilih.add(tabModeAkunBayar.getValueAt(i, 0).toString());
                 }
             }
-
-            Nama_Akun_Bayar=new String[jml];
-            Kode_Rek_Bayar=new String[jml];
-            Bayar=new String[jml];
-            PPN_Persen=new String[jml];
-            PPN_Besar=new String[jml];
-
-            jml=0;
-            for(z=0;z<tbAkunBayar.getRowCount();z++){
-                if(!tbAkunBayar.getValueAt(z,2).toString().equals("")){
-                    Nama_Akun_Bayar[jml]=tbAkunBayar.getValueAt(z,0).toString();
-                    Kode_Rek_Bayar[jml]=tbAkunBayar.getValueAt(z,1).toString();
-                    Bayar[jml]=tbAkunBayar.getValueAt(z,2).toString();
-                    PPN_Persen[jml]=tbAkunBayar.getValueAt(z,3).toString();
-                    PPN_Besar[jml]=tbAkunBayar.getValueAt(z,4).toString();
-                    jml++;
-                }
-            }
-
             Valid.tabelKosong(tabModeAkunBayar);
-
-            for(z=0;z<jml;z++){
+            rows.forEach(row -> {
                 tabModeAkunBayar.addRow(new Object[] {
-                    Nama_Akun_Bayar[z],Kode_Rek_Bayar[z],Bayar[z],PPN_Persen[z],PPN_Besar[z]
+                    row.get("namaakunbayar"), row.get("koderekbayar"), row.get("bayar"),
+                    row.get("ppnpersen"), row.get("ppnbesar"), row.get("keterangan")
                 });
-            }
-
-            Nama_Akun_Bayar=null;
-            Kode_Rek_Bayar=null;
-            Bayar=null;
-            PPN_Persen=null;
-            PPN_Besar=null;
-
-            myObj = new FileReader("./cache/akunbayar.iyem");
-            root = mapper.readTree(myObj);
-            response = root.path("akunbayar");
-            if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaAkun").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                        tabModeAkunBayar.addRow(new Object[]{
-                            list.path("NamaAkun").asText(),list.path("KodeRek").asText(),"",list.path("PPN").asText(),""
-                        });
+            });
+            try (FileReader fr = new FileReader("./cache/akunbayar.iyem")) {
+                response = mapper.readTree(fr).path("akunbayar");
+                if (response.isArray()) {
+                    for (JsonNode list : response) {
+                        if (akunbayardipilih.contains(list.path("NamaAkun").asText())) {
+                            continue;
+                        }
+                        if (list.path("NamaAkun").asText().toLowerCase().contains(TCari.getText().toLowerCase())) {
+                            tabModeAkunBayar.addRow(new Object[] {
+                                list.path("NamaAkun").asText(), list.path("KodeRek").asText(), "", list.path("PPN").asText(), "", ""
+                            });
+                        }
                     }
                 }
             }
-            myObj.close();
-        }catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
-
+    
     private void tampilAkunBayar3() {
-        try{
-            file=new File("./cache/akunbayar.iyem");
+        try {
+            File file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            psakunbayar=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
-            try{
-                rsakunbayar=psakunbayar.executeQuery();
-                while(rsakunbayar.next()){
-                    iyembuilder.append("{\"NamaAkun\":\"").append(rsakunbayar.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rsakunbayar.getString(2)).append("\",\"PPN\":\"").append(rsakunbayar.getDouble(3)).append("\"},");
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by akun_bayar.nama_bayar")) {
+                ArrayNode array = mapper.createArrayNode();
+                Map<String, Object> map;
+                while (rs.next()) {
+                    map = new HashMap<>();
+                    map.put("NamaAkun", rs.getString(1));
+                    map.put("KodeRek", rs.getString(2));
+                    map.put("PPN", rs.getDouble(3));
+                    array.add(mapper.valueToTree(map));
                 }
-            }catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rsakunbayar != null){
-                    rsakunbayar.close();
-                }
-                if(psakunbayar != null){
-                    psakunbayar.close();
-                }
+                ObjectNode root = mapper.createObjectNode();
+                root.set("akunbayar", array);
+                fw.write(mapper.writeValueAsString(root));
+                fw.flush();
             }
-
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-
-            fileWriter.close();
-            iyembuilder=null;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notif : " + e);
         }
     }
 
@@ -6977,14 +6972,17 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             Valid.tabelKosong(tabModeAkunBayar);
             psakunbayar=koneksi.prepareStatement(
                     "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_inap.besar_bayar,"+
-                     "akun_bayar.ppn,detail_nota_inap.besarppn from akun_bayar inner join detail_nota_inap "+
+                     "akun_bayar.ppn,detail_nota_inap.besarppn, detail_nota_inap.keterangan from akun_bayar inner join detail_nota_inap "+
                      "on akun_bayar.nama_bayar=detail_nota_inap.nama_bayar where detail_nota_inap.no_rawat=? and akun_bayar.nama_bayar like ? order by nama_bayar");
             try{
                 psakunbayar.setString(1,TNoRw.getText());
                 psakunbayar.setString(2,"%"+TCari.getText()+"%");
                 rsakunbayar=psakunbayar.executeQuery();
                 while(rsakunbayar.next()){
-                    tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),rsakunbayar.getString(3),rsakunbayar.getString(4),rsakunbayar.getString(5)});
+                    tabModeAkunBayar.addRow(new Object[] {
+                        rsakunbayar.getString(1), rsakunbayar.getString(2), rsakunbayar.getString(3),
+                        rsakunbayar.getString(4), rsakunbayar.getString(5), rsakunbayar.getString(6)
+                    });
                 }
              }catch (Exception e) {
                 System.out.println("Notifikasi Akun Bayar Tersimpan : "+e);
@@ -7302,9 +7300,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                         }
 
                         if(countbayar>1){
-                            if(Sequel.menyimpantf2("detail_nota_inap","?,?,?,?","Akun bayar",4,new String[]{
-                                TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
-                            })==true){
+                            if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
                                 if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
 
                                 if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
@@ -7349,9 +7345,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                             }
                         }else if(countbayar==1){
                             if(piutang<=0){
-                                if(Sequel.menyimpantf2("detail_nota_inap","?,?,?,?","Akun bayar",4,new String[]{
-                                    TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar-kekurangan)
-                                })==true){
+                                if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar - kekurangan), tbAkunBayar.getValueAt(r, 5).toString())) {
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar - kekurangan, 0);
 
                                     if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
@@ -7395,9 +7389,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }else{
-                                if(Sequel.menyimpantf2("detail_nota_inap","?,?,?,?","Akun bayar",4,new String[]{
-                                    TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
-                                })==true){
+                                if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
 
                                     if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
