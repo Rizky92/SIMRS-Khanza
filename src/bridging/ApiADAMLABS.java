@@ -1,4 +1,4 @@
-spackage bridging;
+package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -161,7 +161,7 @@ public class ApiADAMLABS
                         messages.add(new StringBuilder("- ").append(error.path("msg").asText()).toString());
                     }
                 } else {
-                    messagees.add(response.path("message").asText());
+                    messages.add(response.path("message").asText());
                 }
                 if (messages.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses order lab..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
